@@ -1,0 +1,115 @@
+.css_anio_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_anio_grid_line {vertical-align: top;text-align: center;}
+.css_periodo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_periodo_grid_line {vertical-align: top;text-align: center;}
+.css_zona_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_zona_grid_line {vertical-align: top;text-align: right;}
+.css_barrio_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_barrio_grid_line {vertical-align: top;text-align: right;}
+.css_fechaven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fechaven_grid_line {vertical-align: middle;text-align: center;}
+.css_numero2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero2_grid_line {vertical-align: middle;text-align: right;}
+.css_idcli_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idcli_grid_line {vertical-align: middle;text-align: right;}
+.css_direccion2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion2_grid_line {vertical-align: top;text-align: right;}
+.css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_total_grid_line {vertical-align: middle;text-align: right;}
+.css_total_sub_tot {text-align: right;}
+.css_total_tot_ger {text-align: right;}
+.css_a4_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_a4_grid_line {text-align: right;}
+.css_numcontrato_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numcontrato_grid_line {vertical-align: middle;text-align: right;}
+.css_nc_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_nc_grid_line {text-align: center;}
+.css_pdf_nc_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_pdf_nc_grid_line {text-align: center;}
+.css_avisos_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_avisos_grid_line {text-align: center;}
+.css_ing_terceros_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ing_terceros_grid_line {vertical-align: top;text-align: right;}
+.css_idfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idfacven_grid_line {vertical-align: top;text-align: right;}
+.css_numfacven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numfacven_grid_line {vertical-align: middle;text-align: center;}
+.css_credito_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_credito_grid_line {vertical-align: middle;text-align: center;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: top;text-align: center;}
+.css_subtotal_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_subtotal_grid_line {vertical-align: top;text-align: right;}
+.css_subtotal_sub_tot {text-align: right;}
+.css_subtotal_tot_ger {text-align: right;}
+.css_valoriva_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valoriva_grid_line {vertical-align: top;text-align: right;}
+.css_valoriva_sub_tot {text-align: right;}
+.css_valoriva_tot_ger {text-align: right;}
+.css_pagada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_pagada_grid_line {vertical-align: top;text-align: right;}
+.css_asentada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_asentada_grid_line {vertical-align: top;text-align: center;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: right;}
+.css_saldo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_saldo_grid_line {vertical-align: top;text-align: right;}
+.css_adicional_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_adicional_grid_line {vertical-align: top;text-align: right;}
+.css_adicional_sub_tot {text-align: right;}
+.css_adicional_tot_ger {text-align: right;}
+.css_adicional2_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_adicional2_grid_line {vertical-align: top;text-align: right;}
+.css_adicional3_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_adicional3_grid_line {vertical-align: top;text-align: right;}
+.css_resolucion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_resolucion_grid_line {vertical-align: top;text-align: center;}
+.css_vendedor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_vendedor_grid_line {vertical-align: top;text-align: right;}
+.css_creado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_creado_grid_line {vertical-align: top;text-align: right;}
+.css_editado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_editado_grid_line {vertical-align: top;text-align: right;}
+.css_usuario_crea_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_usuario_crea_grid_line {vertical-align: top;text-align: right;}
+.css_inicio_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_inicio_grid_line {vertical-align: top;text-align: center;}
+.css_fin_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fin_grid_line {vertical-align: top;text-align: center;}
+.css_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_banco_grid_line {vertical-align: top;text-align: center;}
+.css_dias_decredito_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dias_decredito_grid_line {vertical-align: top;text-align: right;}
+.css_tipo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_grid_line {vertical-align: middle;text-align: right;}
+.css_cod_cuenta_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cod_cuenta_grid_line {vertical-align: top;text-align: right;}
+.css_base_iva_19_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_base_iva_19_grid_line {vertical-align: top;text-align: right;}
+.css_base_iva_19_sub_tot {text-align: right;}
+.css_base_iva_19_tot_ger {text-align: right;}
+.css_valor_iva_19_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_iva_19_grid_line {vertical-align: top;text-align: right;}
+.css_valor_iva_19_sub_tot {text-align: right;}
+.css_valor_iva_19_tot_ger {text-align: right;}
+.css_base_iva_5_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_base_iva_5_grid_line {vertical-align: top;text-align: right;}
+.css_base_iva_5_sub_tot {text-align: right;}
+.css_base_iva_5_tot_ger {text-align: right;}
+.css_valor_iva_5_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_iva_5_grid_line {vertical-align: top;text-align: right;}
+.css_valor_iva_5_sub_tot {text-align: right;}
+.css_valor_iva_5_tot_ger {text-align: right;}
+.css_excento_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_excento_grid_line {vertical-align: top;text-align: right;}
+.css_excento_sub_tot {text-align: right;}
+.css_excento_tot_ger {text-align: right;}
+.css_editarpos_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_editarpos_grid_line {text-align: right;}
+.css_existeentns_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_existeentns_grid_line {text-align: right;}
+.css_imprimir_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_imprimir_grid_line {text-align: right;}
+.css_imprimircopia_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_imprimircopia_grid_line {text-align: right;}
+.css_detalleventa_grid_line {text-align: center;}

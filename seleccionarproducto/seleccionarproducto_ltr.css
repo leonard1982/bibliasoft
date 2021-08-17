@@ -1,0 +1,33 @@
+.css_producto_label { }
+.css_producto_line {width:300px;}
+.css_producto_obj {width:300px;}
+.css_cantidad_label { }
+.css_cantidad_line {font-weight:bold;vertical-align:middle;}
+.css_cantidad_obj {text-align:center;vertical-align:middle;}
+.css_precio_label { }
+.css_precio_line {text-align:left;vertical-align:middle;}
+.css_precio_obj {text-align:center;}
+.css_stock_label { }
+.css_stock_line { }
+.css_stock_obj { }
+.css_iva_label { }
+.css_iva_line { }
+.css_iva_obj {text-align:right;}
+.css_descuento_label { }
+.css_descuento_line {text-align:center;vertical-align:middle;}
+.css_descuento_obj { }
+.css_sidescuento_label { }
+.css_sidescuento_line { }
+.css_sidescuento_obj {text-align:right;}
+.css_tdescuento_label { }
+.css_tdescuento_line {text-align:center;}
+.css_tdescuento_obj {text-align:center;}
+.css_tiva_label { }
+.css_tiva_line { }
+.css_tiva_obj { }
+.css_subtotal_label {font-size:14px;font-weight:bold;}
+.css_subtotal_line {font-size:14px;font-weight:bold;vertical-align:middle;}
+.css_subtotal_obj {font-size:18px;color:#33FF33;background-color:#666666;font-weight:bold;text-align:center;height:45px;}
+.css_ahorro_label {font-size:14px;font-weight:bold;}
+.css_ahorro_line {font-size:18px;font-weight:bold;vertical-align:middle;}
+.css_ahorro_obj {font-size:18px;color:#33FF33;background-color:#666666;font-weight:bold;text-align:center;height:45px;}

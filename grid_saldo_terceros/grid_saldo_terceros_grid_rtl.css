@@ -1,0 +1,16 @@
+.css_documento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_documento_grid_line {vertical-align: top;text-align: right;}
+.css_nombres_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombres_grid_line {vertical-align: top;text-align: right;}
+.css_saldo_a_cobrar_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_saldo_a_cobrar_grid_line {vertical-align: top;text-align: right;}
+.css_saldo_a_cobrar_sub_tot {text-align: right;}
+.css_saldo_a_cobrar_tot_ger {text-align: right;}
+.css_saldo_a_pagar_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_saldo_a_pagar_grid_line {vertical-align: top;text-align: right;}
+.css_saldo_a_pagar_sub_tot {text-align: right;}
+.css_saldo_a_pagar_tot_ger {text-align: right;}
+.css_diferencia_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_diferencia_grid_line {vertical-align: top;text-align: right;}
+.css_idtercero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idtercero_grid_line {vertical-align: top;text-align: right;}

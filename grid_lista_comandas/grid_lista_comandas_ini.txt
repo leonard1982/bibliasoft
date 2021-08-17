@@ -1,0 +1,7 @@
+index.php
+FACILWEBv2
+grid_lista_comandas
+NAO
+cons
+grid_lista_comandas
+LigMd5

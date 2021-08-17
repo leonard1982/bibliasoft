@@ -1,0 +1,72 @@
+.css_id_caso_label { }
+.css_id_caso_line {text-align:left;}
+.css_id_caso_obj {text-align:left;}
+.css_fecha_label {width:100px;}
+.css_fecha_line {width:100px;}
+.css_fecha_obj {text-align:center;width:100px;}
+.css_numero_label { }
+.css_numero_line {text-align:left;width:70px;}
+.css_numero_obj {text-align:right;}
+.css_codigo_cliente_label {width:100px;}
+.css_codigo_cliente_line {width:150px;}
+.css_codigo_cliente_obj {text-align:center;width:100px;}
+.css_estado_label { }
+.css_estado_line {width:150px;}
+.css_estado_obj {width:150px;}
+.css_prioridad_label { }
+.css_prioridad_line {width:150px;}
+.css_prioridad_obj {width:150px;}
+.css_tipo_caso_label { }
+.css_tipo_caso_line {width:150px;}
+.css_tipo_caso_obj {width:150px;}
+.css_medio_label { }
+.css_medio_line { }
+.css_medio_obj { }
+.css_observaciones_label { }
+.css_observaciones_line {width:450px;}
+.css_observaciones_obj {width:450px;}
+.css_asignado_tercero_label { }
+.css_asignado_tercero_line { }
+.css_asignado_tercero_obj { }
+.css_fecha_asignacion_label { }
+.css_fecha_asignacion_line {width:100px;}
+.css_fecha_asignacion_obj {text-align:center;width:100px;}
+.css_fecha_cierre_label { }
+.css_fecha_cierre_line {width:100px;}
+.css_fecha_cierre_obj {text-align:center;width:100px;}
+.css_valor_label { }
+.css_valor_line {text-align:left;}
+.css_valor_obj {text-align:left;}
+.css_cedula_tercero_label { }
+.css_cedula_tercero_line {width:150px;}
+.css_cedula_tercero_obj { }
+.css_notificado_label { }
+.css_notificado_line { }
+.css_notificado_obj { }
+.css_hora_label { }
+.css_hora_line { }
+.css_hora_obj {text-align:center;width:60px;}
+.css_hora_asignacion_label {text-align:right;}
+.css_hora_asignacion_line {text-align:left;}
+.css_hora_asignacion_obj {text-align:center;width:60px;}
+.css_hora_cierre_label {text-align:right;}
+.css_hora_cierre_line {text-align:left;}
+.css_hora_cierre_obj {text-align:center;width:60px;}
+.css_factura_label { }
+.css_factura_line {text-align:left;}
+.css_factura_obj {text-align:left;}
+.css_detalle_label { }
+.css_detalle_line { }
+.css_detalle_obj { }
+.css_color1_label {width:10px;}
+.css_color1_line { }
+.css_color1_obj { }
+.css_color2_label {width:10px;}
+.css_color2_line { }
+.css_color2_obj { }
+.css_tercero_nom_label { }
+.css_tercero_nom_line { }
+.css_tercero_nom_obj { }
+.css_fac_num_label { }
+.css_fac_num_line {font-weight:bold;}
+.css_fac_num_obj { }

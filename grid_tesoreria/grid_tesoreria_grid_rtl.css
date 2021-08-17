@@ -1,0 +1,26 @@
+.css_documento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_documento_grid_line {vertical-align: middle;text-align: center;}
+.css_nombres_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nombres_grid_line {vertical-align: middle;text-align: right;}
+.css_direccion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_direccion_grid_line {vertical-align: middle;text-align: right;}
+.css_telefonos_prov_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_telefonos_prov_grid_line {vertical-align: middle;text-align: center;}
+.css_saldoapagar_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_saldoapagar_grid_line {vertical-align: middle;text-align: right;}
+.css_fechultcomp_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechultcomp_grid_line {vertical-align: middle;text-align: center;}
+.css_autoretenedor_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_autoretenedor_grid_line {vertical-align: middle;text-align: center;}
+.css_email_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_email_grid_line {vertical-align: middle;text-align: right;}
+.css_url_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_url_grid_line {vertical-align: middle;text-align: right;}
+.css_obligaciones_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_obligaciones_grid_line {vertical-align: middle;text-align: center;}
+.css_idtercero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idtercero_grid_line {vertical-align: top;text-align: right;}
+.css_tel_cel_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tel_cel_grid_line {vertical-align: top;text-align: right;}
+.css_nacimiento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nacimiento_grid_line {vertical-align: top;text-align: center;}

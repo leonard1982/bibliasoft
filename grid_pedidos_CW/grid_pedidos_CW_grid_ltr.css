@@ -1,0 +1,39 @@
+.css_prefijo_ped_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_prefijo_ped_grid_line {vertical-align: middle;text-align: center;}
+.css_numpedido_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_numpedido_grid_line {vertical-align: middle;text-align: center;}
+.css_asentada_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_asentada_grid_line {color:#000033;font-family:Courier New, Courier, mono;font-size:14px;font-weight:bold;vertical-align: middle;text-align: center;}
+.css_facturado_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_facturado_grid_line {text-align: center;}
+.css_idcli_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_idcli_grid_line {vertical-align: middle;text-align: left;}
+.css_fechaven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechaven_grid_line {vertical-align: middle;text-align: center;}
+.css_creado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_creado_grid_line {vertical-align: middle;text-align: center;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: middle;text-align: center;}
+.css_total_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_total_grid_line {vertical-align: middle;text-align: right;}
+.css_total_sub_tot {text-align: right;}
+.css_total_tot_ger {text-align: right;}
+.css_vendedor_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_vendedor_grid_line {font-family:Arial;font-size:10px;vertical-align: middle;text-align: left;}
+.css_imprimir_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_imprimir_grid_line {}
+.css_pos_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_pos_grid_line {text-align: left;}
+.css_cobrar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_cobrar_grid_line {text-align: center;}
+.css_observaciones_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_observaciones_grid_line {font-family:Arial;font-size:10px;vertical-align: middle;text-align: left;}
+.css_idpedido_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_idpedido_grid_line {color:#9999CC;font-size:6px;background-color:#9999CC;vertical-align: middle;text-align: center;}
+.css_numfacven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_numfacven_grid_line {vertical-align: middle;text-align: right;}
+.css_nremision_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nremision_grid_line {vertical-align: middle;text-align: right;}
+.css_credito_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_credito_grid_line {vertical-align: middle;text-align: center;}
+.css_detalle_grid_line {text-align: center;}

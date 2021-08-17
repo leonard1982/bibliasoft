@@ -1,0 +1,7 @@
+index.php
+FACILWEBv2
+imprimir_comanda
+NAO
+blank
+imprimir_comanda
+LigMd5

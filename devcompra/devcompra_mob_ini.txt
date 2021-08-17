@@ -1,0 +1,7 @@
+devcompra_mob.php
+FACILWEBv2
+devcompra_mob
+NAO
+contr
+devcompra
+LigMd5

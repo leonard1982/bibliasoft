@@ -1,0 +1,30 @@
+.css_documento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_documento_grid_line {vertical-align: middle;text-align: center;}
+.css_dv_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_dv_grid_line {vertical-align: middle;text-align: center;}
+.css_nombres_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombres_grid_line {vertical-align: middle;text-align: right;}
+.css_nombrecompleto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombrecompleto_grid_line {vertical-align: top;text-align: right;}
+.css_idmuni_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idmuni_grid_line {vertical-align: middle;text-align: right;}
+.css_tel_cel_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_tel_cel_grid_line {vertical-align: middle;text-align: right;}
+.css_urlmail_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_urlmail_grid_line {color:#0000FF;font-weight:bold;vertical-align: middle;text-align: right;}
+.css_saldo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_saldo_grid_line {vertical-align: middle;text-align: right;}
+.css_facturas_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_facturas_grid_line {text-align: center;}
+.css_loatiende_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_loatiende_grid_line {vertical-align: middle;text-align: right;}
+.css_historial_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_historial_grid_line {vertical-align: middle;text-align: center;}
+.css_direccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion_grid_line {vertical-align: middle;text-align: right;}
+.css_nacimiento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nacimiento_grid_line {vertical-align: middle;text-align: center;}
+.css_fechault_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechault_grid_line {vertical-align: middle;text-align: center;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: middle;text-align: right;}

@@ -1,0 +1,33 @@
+.css_titulo_grid_line {color:#000099;font-size:20px;vertical-align: middle;text-align: right;}
+.css_tmp_grid_line {vertical-align: middle;text-align: right;}
+.css_numfacom_label {text-align:left;}
+.css_numfacom_grid_line {vertical-align: middle;width: 2px;}
+.css_fechacom_label {text-align:left;}
+.css_fechacom_grid_line {vertical-align: middle;width: 2px;}
+.css_fechavenc_label {text-align:left;}
+.css_fechavenc_grid_line {vertical-align: middle;width: 2px;}
+.css_formapago_label {text-align:left;}
+.css_formapago_grid_line {vertical-align: top;width: 1px;}
+.css_pagada_label {text-align:left;}
+.css_pagada_grid_line {vertical-align: middle;width: 1px;}
+.css_idprov_label {text-align:left;}
+.css_idprov_grid_line {vertical-align: middle;width: 5px;}
+.css_subtotal_label {text-align:left;}
+.css_subtotal_grid_line {vertical-align: top;}
+.css_valoriva_label {text-align:left;}
+.css_valoriva_grid_line {vertical-align: top;}
+.css_total_label {text-align:left;}
+.css_total_grid_line {font-weight:bold;vertical-align: middle;width: 1px;}
+.css_iva_0_label {text-align:left;}
+.css_iva_0_grid_line {color:#3300CC;font-weight:bold;}
+.css_base5_label {text-align:left;}
+.css_base5_grid_line {color:#3300CC;font-weight:bold;}
+.css_iva_5_label {text-align:left;}
+.css_iva_5_grid_line {color:#3300CC;font-weight:bold;}
+.css_base19_label {text-align:left;}
+.css_base19_grid_line {color:#3300CC;font-weight:bold;}
+.css_iva_19_label {text-align:left;}
+.css_iva_19_grid_line {color:#3300CC;font-weight:bold;}
+.css_observaciones_label {text-align:left;}
+.css_observaciones_grid_line {vertical-align: middle;width: 5px;}
+.css_detalle_grid_line {text-align: right;}

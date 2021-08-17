@@ -1,0 +1,36 @@
+.css_numfacven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numfacven_grid_line {vertical-align: middle;text-align: center;}
+.css_resolucion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_resolucion_grid_line {vertical-align: top;text-align: center;}
+.css_credito_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_credito_grid_line {vertical-align: middle;text-align: center;}
+.css_idcli_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idcli_grid_line {vertical-align: middle;text-align: left;}
+.css_direccion2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion2_grid_line {vertical-align: top;text-align: left;}
+.css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_total_grid_line {vertical-align: middle;text-align: right;}
+.css_total_sub_tot {text-align: right;}
+.css_total_tot_ger {text-align: right;}
+.css_copiar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_copiar_grid_line {text-align: center;}
+.css_fechaven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fechaven_grid_line {vertical-align: middle;text-align: center;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: top;text-align: center;}
+.css_subtotal_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_subtotal_grid_line {vertical-align: top;text-align: right;}
+.css_subtotal_sub_tot {text-align: right;}
+.css_subtotal_tot_ger {text-align: right;}
+.css_valoriva_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valoriva_grid_line {vertical-align: top;text-align: right;}
+.css_valoriva_sub_tot {text-align: right;}
+.css_valoriva_tot_ger {text-align: right;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: left;}
+.css_vendedor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_vendedor_grid_line {vertical-align: top;text-align: left;}
+.css_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_banco_grid_line {vertical-align: top;text-align: center;}
+.css_dias_decredito_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dias_decredito_grid_line {vertical-align: top;text-align: right;}

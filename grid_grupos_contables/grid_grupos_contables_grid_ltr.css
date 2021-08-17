@@ -1,0 +1,16 @@
+.css_codigo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigo_grid_line {vertical-align: top;text-align: left;}
+.css_descripcion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_descripcion_grid_line {vertical-align: top;text-align: left;}
+.css_puc_inventario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_inventario_grid_line {vertical-align: top;text-align: center;}
+.css_puc_devolucion_compra_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_devolucion_compra_grid_line {vertical-align: top;text-align: center;}
+.css_puc_ingresos_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_ingresos_grid_line {vertical-align: top;text-align: center;}
+.css_puc_devolucion_ventas_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_devolucion_ventas_grid_line {vertical-align: top;text-align: center;}
+.css_puc_costo_ventas_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_costo_ventas_grid_line {vertical-align: top;text-align: center;}
+.css_id_grupo_contable_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_grupo_contable_grid_line {vertical-align: top;text-align: right;}

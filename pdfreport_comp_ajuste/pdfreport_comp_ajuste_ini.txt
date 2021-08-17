@@ -1,0 +1,7 @@
+index.php
+FACILWEBv2
+pdfreport_comp_ajuste
+NAO
+reportpdf
+pdfreport_comp_ajuste
+LigMd5

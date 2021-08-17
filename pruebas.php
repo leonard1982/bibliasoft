@@ -1,0 +1,22 @@
+<?php
+ini_set("zlib.output_compression", "Off");
+function callback($buffer)
+{
+  // reemplazar todas las manzanas por naranjas
+  return (str_replace("manzanas", "naranjas", $buffer));
+}
+ob_start('callback');
+?>
+<html>
+<body>
+<p>Es como comparar manzanas con naranjas.</p>
+</body>
+</html>
+<?php
+
+ob_end_flush();
+?>
+
+
+
+

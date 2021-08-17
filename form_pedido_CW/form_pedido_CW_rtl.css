@@ -1,0 +1,63 @@
+.css_idpedido_label { }
+.css_idpedido_line {text-align:left;}
+.css_idpedido_obj {text-align:left;}
+.css_numfacven_label {color:#FFFFFF;}
+.css_numfacven_line {color:#FFFFFF;background-color:#34495E;font-weight:bold;text-align:center;width:70px;}
+.css_numfacven_obj {text-align:center;}
+.css_credito_label { }
+.css_credito_line {text-align:left;}
+.css_credito_obj {text-align:left;}
+.css_fechaven_label { }
+.css_fechaven_line { }
+.css_fechaven_obj {text-align:center;width:80px;}
+.css_fechavenc_label { }
+.css_fechavenc_line {width:80px;}
+.css_fechavenc_obj {text-align:center;width:80px;}
+.css_idcli_label { }
+.css_idcli_line { }
+.css_idcli_obj {text-align:left;width:400px;}
+.css_subtotal_label {color:#FFFFFF;}
+.css_subtotal_line {color:#FFFFFF;background-color:#34495e;font-weight:bold;text-align:center;vertical-align:middle;}
+.css_subtotal_obj {text-align:center;width:120px;}
+.css_valoriva_label {color:#FFFFFF;text-align:center;vertical-align:middle;}
+.css_valoriva_line {color:#FFFFFF;background-color:#34495e;text-align:center;}
+.css_valoriva_obj {text-align:center;width:120px;}
+.css_total_label {color:#FFFFFF;font-weight:bold;text-align:center;vertical-align:middle;}
+.css_total_line {font-size:18px;color:#FFFFFF;background-color:#34495e;font-weight:bold;text-align:center;vertical-align:middle;}
+.css_total_obj {font-size:18px;font-weight:bold;text-align:center;width:120px;}
+.css_facturado_label { }
+.css_facturado_line { }
+.css_facturado_obj { }
+.css_asentada_label { }
+.css_asentada_line {text-align:left;}
+.css_asentada_obj {text-align:left;}
+.css_observaciones_label { }
+.css_observaciones_line { }
+.css_observaciones_obj {text-align:left;vertical-align:middle;}
+.css_saldo_label {color:#FFFFFF;text-align:center;vertical-align:middle;}
+.css_saldo_line {color:#FFFFFF;background-color:#34495e;text-align:center;vertical-align:middle;}
+.css_saldo_obj {font-weight:bold;text-align:center;width:120px;}
+.css_adicional_label {color:#FFFFFF;text-align:center;vertical-align:middle;width:120px;}
+.css_adicional_line {font-size:18px;color:#FFFFFF;background-color:#34495e;font-weight:bold;text-align:center;vertical-align:middle;}
+.css_adicional_obj {font-size:18px;font-weight:bold;text-align:center;width:120px;}
+.css_vendedor_label { }
+.css_vendedor_line {text-align:left;}
+.css_vendedor_obj {text-align:left;width:400px;}
+.css_dircliente_label { }
+.css_dircliente_line {text-align:left;}
+.css_dircliente_obj {text-align:left;width:400px;}
+.css_numpedido_label { }
+.css_numpedido_line {font-size:14px;font-weight:bold;}
+.css_numpedido_obj {text-align:center;}
+.css_prefijo_ped_label { }
+.css_prefijo_ped_line {text-align:left;}
+.css_prefijo_ped_obj {text-align:left;}
+.css_cupo_label {color:#FFFFFF;}
+.css_cupo_line {font-family:Geneva, Arial, sans-serif;font-size:16px;color:#00FF00;background-color:#34495e;text-align:center;}
+.css_cupo_obj {font-size:14px;background-color:#00066;text-align:right;}
+.css_cupodis_label {color:#FFFFFF;}
+.css_cupodis_line {font-family:Geneva, Arial, sans-serif;font-size:16px;color:#00FF00;background-color:#34495e;font-weight:bold;text-align:center;}
+.css_cupodis_obj {font-size:14px;color:#000066;font-weight:bold;text-align:center;}
+.css_detallepedidos_label { }
+.css_detallepedidos_line { }
+.css_detallepedidos_obj { }

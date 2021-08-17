@@ -1,0 +1,24 @@
+.css_idprov_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idprov_grid_line {vertical-align: middle;text-align: left;}
+.css_numfacom_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numfacom_grid_line {vertical-align: top;text-align: left;}
+.css_formapago_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_formapago_grid_line {vertical-align: top;text-align: left;}
+.css_fechacom_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechacom_grid_line {vertical-align: top;text-align: center;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: top;text-align: center;}
+.css_pagada_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_pagada_grid_line {vertical-align: middle;text-align: center;}
+.css_total_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_total_grid_line {vertical-align: middle;text-align: right;}
+.css_saldo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_saldo_grid_line {color:#CC0000;background-color:#FFFF00;font-weight:bold;vertical-align: middle;text-align: right;}
+.css_saldo_sub_tot {text-align: right;}
+.css_saldo_tot_ger {text-align: right;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: left;}
+.css_seleccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:normal;}
+.css_seleccion_grid_line {color:#FFFFFF;font-size:6px;vertical-align: top;text-align: left;}
+.css_idfaccom_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idfaccom_grid_line {vertical-align: top;text-align: right;}

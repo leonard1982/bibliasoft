@@ -1,0 +1,36 @@
+.css_id_pago_label { }
+.css_id_pago_line {text-align:left;}
+.css_id_pago_obj {text-align:left;}
+.css_prefijo_label { }
+.css_prefijo_line { }
+.css_prefijo_obj { }
+.css_numero_label { }
+.css_numero_line {text-align:left;}
+.css_numero_obj {text-align:center;}
+.css_fecha_label { }
+.css_fecha_line { }
+.css_fecha_obj { }
+.css_concepto_label { }
+.css_concepto_line { }
+.css_concepto_obj { }
+.css_pagado_a_label { }
+.css_pagado_a_line {text-align:left;}
+.css_pagado_a_obj {text-align:left;}
+.css_pagador_label { }
+.css_pagador_line {text-align:left;}
+.css_pagador_obj {text-align:left;}
+.css_total_label {text-align:left;}
+.css_total_line {text-align:right;}
+.css_total_obj {text-align:right;}
+.css_descuento_label {text-align:left;}
+.css_descuento_line {text-align:right;}
+.css_descuento_obj {text-align:right;}
+.css_neto_label {text-align:left;}
+.css_neto_line {text-align:right;}
+.css_neto_obj {text-align:right;}
+.css_usuario_label { }
+.css_usuario_line {text-align:left;}
+.css_usuario_obj {text-align:left;}
+.css_detalle_label { }
+.css_detalle_line { }
+.css_detalle_obj { }

@@ -1,0 +1,25 @@
+.css_idpro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idpro_grid_line {vertical-align: middle;text-align: right;}
+.css_descripcion_ampliada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_descripcion_ampliada_grid_line {vertical-align: top;text-align: right;}
+.css_idbod_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_idbod_grid_line {vertical-align: middle;text-align: center;}
+.css_cantidad_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: middle;text-align: center;}
+.css_cantidad_tot_ger {text-align: center;}
+.css_presentacion_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_presentacion_grid_line {text-align: right;}
+.css_valorunit_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_valorunit_grid_line {vertical-align: middle;text-align: right;}
+.css_valorpar_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_valorpar_grid_line {vertical-align: middle;text-align: right;}
+.css_iva_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_iva_grid_line {vertical-align: middle;text-align: right;}
+.css_iva_tot_ger {text-align: right;}
+.css_descuento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_descuento_grid_line {vertical-align: middle;text-align: right;}
+.css_descuento_tot_ger {text-align: right;}
+.css_iddet_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_iddet_grid_line {vertical-align: top;text-align: right;}
+.css_numfac_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numfac_grid_line {vertical-align: top;text-align: right;}

@@ -1,0 +1,52 @@
+.css_numero_contrato_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_numero_contrato_grid_line {vertical-align: middle;text-align: right;}
+.css_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cliente_grid_line {vertical-align: top;text-align: left;}
+.css_direccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion_grid_line {vertical-align: top;text-align: left;}
+.css_fecha_inicio_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_inicio_grid_line {vertical-align: top;text-align: center;}
+.css_saldoactual_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_saldoactual_grid_line {vertical-align: top;text-align: right;}
+.css_zona_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_zona_grid_line {vertical-align: top;text-align: left;}
+.css_barrio_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_barrio_grid_line {vertical-align: top;text-align: left;}
+.css_codigo_cli_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigo_cli_grid_line {vertical-align: top;text-align: left;}
+.css_activo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_activo_grid_line {vertical-align: top;text-align: left;}
+.css_id_ter_cont_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_ter_cont_grid_line {vertical-align: top;text-align: right;}
+.css_fecha_contrato_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_contrato_grid_line {vertical-align: top;text-align: center;}
+.css_fecha_corte_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_corte_grid_line {vertical-align: top;text-align: center;}
+.css_estado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_estado_grid_line {vertical-align: top;text-align: left;}
+.css_telefono_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_telefono_grid_line {vertical-align: top;text-align: left;}
+.css_motivo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_motivo_grid_line {vertical-align: top;text-align: left;}
+.css_fecha_limitepago_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_limitepago_grid_line {vertical-align: top;text-align: center;}
+.css_fecha_ultimopago_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_ultimopago_grid_line {vertical-align: top;text-align: center;}
+.css_valorpagado_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valorpagado_grid_line {vertical-align: top;text-align: right;}
+.css_saldoanterior_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_saldoanterior_grid_line {vertical-align: top;text-align: right;}
+.css_mesultimafactura_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_mesultimafactura_grid_line {vertical-align: top;text-align: left;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: left;}
+.css_valor_ultimafactura_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_ultimafactura_grid_line {vertical-align: top;text-align: right;}
+.css_mensualidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_mensualidad_grid_line {vertical-align: top;text-align: right;}
+.css_precinto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_precinto_grid_line {vertical-align: top;text-align: left;}
+.css_correo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_correo_grid_line {vertical-align: top;text-align: left;}
+.css_fecha_factura_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_factura_grid_line {vertical-align: top;text-align: center;}

@@ -1,0 +1,7 @@
+detalleventa_pos_mob.php
+FACILWEBv2
+detalleventa_pos_mob
+NAO
+form
+detalleventa_pos
+LigMd5

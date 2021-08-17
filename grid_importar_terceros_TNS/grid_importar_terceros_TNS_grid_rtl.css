@@ -1,0 +1,202 @@
+.css_nit_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nit_grid_line {vertical-align: top;text-align: right;}
+.css_nittri_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nittri_grid_line {vertical-align: top;text-align: right;}
+.css_nombre_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre_grid_line {vertical-align: top;text-align: right;}
+.css_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cliente_grid_line {vertical-align: top;text-align: right;}
+.css_proveed_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_proveed_grid_line {vertical-align: top;text-align: right;}
+.css_empleado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_empleado_grid_line {vertical-align: top;text-align: right;}
+.css_otro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_otro_grid_line {vertical-align: top;text-align: right;}
+.css_puc_deudores_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_deudores_grid_line {vertical-align: top;text-align: right;}
+.css_puc_retcli_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_retcli_grid_line {vertical-align: top;text-align: right;}
+.css_puc_proveedores_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_proveedores_grid_line {vertical-align: top;text-align: right;}
+.css_puc_retpro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_puc_retpro_grid_line {vertical-align: top;text-align: right;}
+.css_inactivo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_inactivo_grid_line {vertical-align: top;text-align: right;}
+.css_estado_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_estado_grid_line {text-align: center;}
+.css_terid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_terid_grid_line {vertical-align: top;text-align: right;}
+.css_tipodociden_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipodociden_grid_line {vertical-align: top;text-align: right;}
+.css_ciudadrexp_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ciudadrexp_grid_line {vertical-align: top;text-align: right;}
+.css_direcc1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direcc1_grid_line {vertical-align: top;text-align: right;}
+.css_direcc2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direcc2_grid_line {vertical-align: top;text-align: right;}
+.css_zona1_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_zona1_grid_line {vertical-align: top;text-align: right;}
+.css_zona2_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_zona2_grid_line {vertical-align: top;text-align: right;}
+.css_ciudad_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ciudad_grid_line {vertical-align: top;text-align: right;}
+.css_telef1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_telef1_grid_line {vertical-align: top;text-align: right;}
+.css_telef2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_telef2_grid_line {vertical-align: top;text-align: right;}
+.css_repleg_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_repleg_grid_line {vertical-align: top;text-align: right;}
+.css_vended_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_vended_grid_line {vertical-align: top;text-align: right;}
+.css_cobra_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cobra_grid_line {vertical-align: top;text-align: right;}
+.css_observ_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observ_grid_line {vertical-align: top;text-align: right;}
+.css_email_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_email_grid_line {vertical-align: top;text-align: right;}
+.css_beeper_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_beeper_grid_line {vertical-align: top;text-align: right;}
+.css_empbeeper_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_empbeeper_grid_line {vertical-align: top;text-align: right;}
+.css_celular_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_celular_grid_line {vertical-align: top;text-align: right;}
+.css_empcelular_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_empcelular_grid_line {vertical-align: top;text-align: right;}
+.css_fechcreac_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechcreac_grid_line {vertical-align: top;text-align: center;}
+.css_fechact_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechact_grid_line {vertical-align: top;text-align: center;}
+.css_fechultcom_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechultcom_grid_line {vertical-align: top;text-align: center;}
+.css_vrultcom_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_vrultcom_grid_line {vertical-align: top;text-align: right;}
+.css_nroultcom_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nroultcom_grid_line {vertical-align: top;text-align: right;}
+.css_fechultven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechultven_grid_line {vertical-align: top;text-align: center;}
+.css_vrultven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_vrultven_grid_line {vertical-align: top;text-align: right;}
+.css_nroultven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nroultven_grid_line {vertical-align: top;text-align: right;}
+.css_clasificaid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_clasificaid_grid_line {vertical-align: top;text-align: right;}
+.css_maxcredcxp_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_maxcredcxp_grid_line {vertical-align: top;text-align: right;}
+.css_maxcredcxc_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_maxcredcxc_grid_line {vertical-align: top;text-align: right;}
+.css_porreten_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_porreten_grid_line {vertical-align: top;text-align: right;}
+.css_ctacli_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ctacli_grid_line {vertical-align: top;text-align: right;}
+.css_ctapro_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ctapro_grid_line {vertical-align: top;text-align: right;}
+.css_ctaretcli_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ctaretcli_grid_line {vertical-align: top;text-align: right;}
+.css_ctaretpro_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ctaretpro_grid_line {vertical-align: top;text-align: right;}
+.css_ctaretscli_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ctaretscli_grid_line {vertical-align: top;text-align: right;}
+.css_ctaretspro_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ctaretspro_grid_line {vertical-align: top;text-align: right;}
+.css_fecnaci_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecnaci_grid_line {vertical-align: top;text-align: center;}
+.css_codrecip_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codrecip_grid_line {vertical-align: top;text-align: right;}
+.css_porcrecip_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_porcrecip_grid_line {vertical-align: top;text-align: right;}
+.css_conductor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_conductor_grid_line {vertical-align: top;text-align: right;}
+.css_tomador_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tomador_grid_line {vertical-align: top;text-align: right;}
+.css_propietario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_propietario_grid_line {vertical-align: top;text-align: right;}
+.css_inmpropietario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_inmpropietario_grid_line {vertical-align: top;text-align: right;}
+.css_inminquilino_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_inminquilino_grid_line {vertical-align: top;text-align: right;}
+.css_ciudaneid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ciudaneid_grid_line {vertical-align: top;text-align: right;}
+.css_ciudadexp_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ciudadexp_grid_line {vertical-align: top;text-align: right;}
+.css_fiador_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fiador_grid_line {vertical-align: top;text-align: right;}
+.css_nomregtri_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nomregtri_grid_line {vertical-align: top;text-align: right;}
+.css_tarjetapuntos_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tarjetapuntos_grid_line {vertical-align: top;text-align: right;}
+.css_porcretven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_porcretven_grid_line {vertical-align: top;text-align: right;}
+.css_nombre1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre1_grid_line {vertical-align: top;text-align: right;}
+.css_nombre2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre2_grid_line {vertical-align: top;text-align: right;}
+.css_apellido1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_apellido1_grid_line {vertical-align: top;text-align: right;}
+.css_apellido2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_apellido2_grid_line {vertical-align: top;text-align: right;}
+.css_motivodevid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_motivodevid_grid_line {vertical-align: top;text-align: right;}
+.css_fechinactivo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechinactivo_grid_line {vertical-align: top;text-align: center;}
+.css_maxcreddias_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_maxcreddias_grid_line {vertical-align: top;text-align: right;}
+.css_nittriofi_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nittriofi_grid_line {vertical-align: top;text-align: right;}
+.css_acteconomicaid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_acteconomicaid_grid_line {vertical-align: top;text-align: right;}
+.css_mesa_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_mesa_grid_line {vertical-align: top;text-align: right;}
+.css_mostrador_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_mostrador_grid_line {vertical-align: top;text-align: right;}
+.css_porcrivac_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_porcrivac_grid_line {vertical-align: top;text-align: right;}
+.css_porcrivav_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_porcrivav_grid_line {vertical-align: top;text-align: right;}
+.css_porcricac_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_porcricac_grid_line {vertical-align: top;text-align: right;}
+.css_porcricav_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_porcricav_grid_line {vertical-align: top;text-align: right;}
+.css_natjuridica_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_natjuridica_grid_line {vertical-align: top;text-align: right;}
+.css_barrioinid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_barrioinid_grid_line {vertical-align: top;text-align: right;}
+.css_fecafilia_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecafilia_grid_line {vertical-align: top;text-align: center;}
+.css_porcrcreev_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_porcrcreev_grid_line {vertical-align: top;text-align: right;}
+.css_porcrcreec_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_porcrcreec_grid_line {vertical-align: top;text-align: right;}
+.css_tipocreev_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_tipocreev_grid_line {vertical-align: top;text-align: right;}
+.css_tipocreec_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_tipocreec_grid_line {vertical-align: top;text-align: right;}
+.css_numcue_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numcue_grid_line {vertical-align: top;text-align: right;}
+.css_tipcue_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipcue_grid_line {vertical-align: top;text-align: right;}
+.css_actcomerid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_actcomerid_grid_line {vertical-align: top;text-align: right;}
+.css_fecultenvio_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecultenvio_grid_line {vertical-align: top;text-align: center;}
+.css_consecterws_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_consecterws_grid_line {vertical-align: top;text-align: right;}
+.css_feclegal_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_feclegal_grid_line {vertical-align: top;text-align: center;}
+.css_emailemp_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_emailemp_grid_line {vertical-align: top;text-align: right;}
+.css_pagweb_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_pagweb_grid_line {vertical-align: top;text-align: right;}
+.css_eterritorial_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_eterritorial_grid_line {vertical-align: top;text-align: right;}
+.css_listaprecioid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_listaprecioid_grid_line {vertical-align: top;text-align: right;}
+.css_extlocal_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_extlocal_grid_line {vertical-align: top;text-align: right;}
+.css_pep_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_pep_grid_line {vertical-align: top;text-align: right;}
+.css_nomempresa_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nomempresa_grid_line {vertical-align: top;text-align: right;}
+.css_fechaexp_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechaexp_grid_line {vertical-align: top;text-align: center;}
+.css_ocupid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ocupid_grid_line {vertical-align: top;text-align: right;}

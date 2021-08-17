@@ -1,0 +1,532 @@
+#divLoading {
+position: fixed; top: 300px; left: 400px; height: 100px; width: 100px;
+border: 1px; z-index:10; visibility:hidden; font-size :30pt;
+color : #928C8C;
+}
+.BakcBilling
+{
+background:#F0F5F5;
+}
+.container_fluid {
+	padding-right: 120px;
+	padding-left: 120px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.divButtons div {
+	cursor: pointer;
+}
+
+.divButtons {
+	margin-right: 1% !important;
+}
+
+.shadow {
+	-moz-box-shadow: 3px 3px 4px #111;
+	-webkit-box-shadow: 3px 3px 4px #111;
+	box-shadow: 3px 3px 4px #111; /* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#111111')"; /* IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#111111');
+}
+
+.shadox_container {
+	background-image: url(Images/shadow.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 7px;
+	width: 607px;
+	margin: 0 auto;
+}
+
+.banner_text {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #424242;
+	padding-top: 7px;
+	text-align: center;
+}
+
+.icon_advert {
+	float: left;
+	height: 32px;
+	width: 32px;
+	padding-left: 9px;
+	padding-right: 9px;
+	padding-top: 7px;
+	background-image: url(Images/NoOnline.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.banner {
+	height: 45px;
+	width: 607px;
+	background-color: #fffacd;
+	border: 1px solid #ffd03c;
+	margin: 0 auto;
+}
+
+.bannerBlue {
+	border: 1px solid #CCCCCC;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	position: relative;
+	width: 923px;
+	height: 38px;
+	margin: 2px auto 0px auto;
+	background-image: url('Images/HeaderBlue.gif');
+	background-repeat: repeat;
+	height: auto;
+}
+
+.text_banner {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: center;
+	padding-left: 1px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.text_bannerWhite {
+	font-family: Arial, Helvetica, sans-serif;
+	color: White;
+	font-size: 12px;
+	text-align: left;
+	padding: 5px;
+}
+
+.banner_TextGreen {
+	color: #256e38;
+}
+
+.shadowbanner {
+	background-repeat: no-repeat;
+	height: 7px;
+	width: 930px;
+	background-image: url(Images/WFBannershadow.png);
+	background-position: center;
+	margin: 0px auto 2px auto;
+}
+
+.text_contact {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.BlackText {
+	color: Black;
+	border: 0px;
+	padding: 0px;
+}
+
+.BlueText {
+	color: #0000FF;
+	border: 0px;
+	padding: 0px;
+}
+
+.Commentbutton {
+	background-color: #C8C8C8;
+	color: #FFFFFF;
+	margin-right: 20px;
+	margin-bottom: 5px;
+}
+
+.container_Shadow {
+	text-align: center;
+	background-image: none;
+	background-attachment: scroll;
+	background-repeat: repeat;
+	background-position-x: 0%;
+	background-position-y: 0%;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: rgb(255, 255, 255);
+}
+
+.Baselink, .Baselink :visited, .Baselink :link, .Baselink :active {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #3B5998;
+	font-weight: normal;
+	text-decoration: none;
+	font-size: 10px;
+}
+
+	.Baselink :hover /* Elemento impar de la lista*/ {
+		font-family: Arial, Helvetica, sans-serif;
+		color: #3B5998;
+		font-weight: normal;
+		text-decoration: underline;
+		font-size: 10px;
+	}
+
+.Accept {
+	width: 161px;
+	height: 27px;
+	-moz-box-shadow: 0px 0px 1px #000000;
+	-webkit-box-shadow: 0px 0px 1px #000000;
+	box-shadow: 0px 0px 1px #000000;
+	background-color: #8DC540;
+	text-align: center;
+	vertical-align: middle;
+	color: #FFF;
+	font-size: 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-top: 10px;
+	cursor: pointer;
+}
+
+	.Accept:hover {
+		width: 161px;
+		height: 27px;
+		-moz-box-shadow: 0px 0px 3px #000000;
+		-webkit-box-shadow: 0px 0px 3px #000000;
+		box-shadow: 0px 0px 3px #000000;
+		background-color: #8DC540;
+		text-align: center;
+		vertical-align: middle;
+		color: #FFF;
+		font-size: 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		padding-top: 10px;
+		cursor: pointer;
+	}
+
+.Send {
+	width: 161px;
+	height: 27px;
+	-moz-box-shadow: 0px 0px 1px #000000;
+	-webkit-box-shadow: 0px 0px 1px #000000;
+	box-shadow: 0px 0px 1px #000000;
+	background-color: #00AAFF;
+	text-align: center;
+	vertical-align: middle;
+	color: #FFF;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-top: 10px;
+}
+
+	.Send:hover {
+		width: 161px;
+		height: 27px;
+		-moz-box-shadow: 0px 0px 3px #000000;
+		-webkit-box-shadow: 0px 0px 3px #000000;
+		box-shadow: 0px 0px 3px #000000;
+		background-color: #4CC3FF;
+		text-align: center;
+		vertical-align: middle;
+		color: #FFF;
+		font-size: 14px;
+		font-family: Arial, Helvetica, sans-serif;
+		padding-top: 10px;
+	}
+
+.Foward {
+	width: 100px;
+	height: 27px;
+	-moz-box-shadow: 0px 0px 1px #000000;
+	-webkit-box-shadow: 0px 0px 1px #000000;
+	box-shadow: 0px 0px 1px #000000;
+	background-color: #00AAFF;
+	text-align: center;
+	vertical-align: middle;
+	color: #FFF;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-top: 10px;
+}
+
+	.Foward:hover {
+		width: 100px;
+		height: 27px;
+		-moz-box-shadow: 0px 0px 3px #000000;
+		-webkit-box-shadow: 0px 0px 3px #000000;
+		box-shadow: 0px 0px 3px #000000;
+		background-color: #4CC3FF;
+		text-align: center;
+		vertical-align: middle;
+		color: #FFF;
+		font-size: 14px;
+		font-family: Arial, Helvetica, sans-serif;
+		padding-top: 10px;
+	}
+
+.Print {
+	width: 180px;
+	height: 27px;
+	-moz-box-shadow: 0px 0px 1px #000000;
+	-webkit-box-shadow: 0px 0px 1px #000000;
+	box-shadow: 0px 0px 1px #000000;
+	background-color: #00AAFF;
+	text-align: center;
+	vertical-align: middle;
+	color: #FFF;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-top: 10px;
+}
+
+	.Print:hover {
+		width: 200px;
+		height: 27px;
+		-moz-box-shadow: 0px 0px 3px #000000;
+		-webkit-box-shadow: 0px 0px 3px #000000;
+		box-shadow: 0px 0px 3px #000000;
+		background-color: #4CC3FF;
+		text-align: center;
+		vertical-align: middle;
+		color: #FFF;
+		font-size: 14px;
+		font-family: Arial, Helvetica, sans-serif;
+		padding-top: 10px;
+	}
+
+.BackGroundInvoiceBanner {
+	background-color: White !important;
+}
+
+
+.cssInvoiceBanner {
+	display: inline-block;
+	background-color: White;
+	width: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.cssActionBanner {
+	background-color: White;
+	display: table;
+	width: 100%;
+}
+
+.container-invoice {
+	margin: 0 auto !important;
+}
+
+.divS {
+	overflow: hidden;
+}
+
+.DropDownCell {
+	width: auto;
+}
+
+.downloadLink:hover{
+	text-decoration: none;
+}
+
+.circle {
+	border: 3px solid #F8F8EC;
+	border-radius: 50%;
+	display: inline-block;
+}
+.circle img {
+	border-radius: 50%;
+	display: block;
+} 
+.SplitTd
+{
+	padding-top:0px;       
+	border-top-color: #cdcdcd; 
+	border-top-width: 2px; 
+	border-top-style: solid;
+}   
+
+.TableCommentContainer
+{
+	background-color:#F0F0F0;margin-left:auto; margin-right:auto;border: #B8B8B8 1px solid;
+}
+.trTableCommentContainer
+{
+	background-color: White;
+	padding-top: 10px;
+}
+.cssComments
+{
+   /* display: table-cell;/*
+}
+
+ .shadow {
+	-moz-box-shadow: 2px 2px 4px #111 !important;
+	-webkit-box-shadow: 2px 2px 4px #111 !important;
+	box-shadow: 2px 2px 4px #111 !important;
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#111111')";
+	/* IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#111111');
+}
+.commentTd
+{
+	padding-top: 8px; 
+	color: black; 
+	font-size: 11px;
+	font-weight:normal;
+}
+.commentTdUser
+{
+	padding-top: 8px; 
+	color: black; 
+	font-size: 11px;
+	font-weight:normal;
+}
+.aAuthor
+{
+	font-size: 11px;
+	font-family: Arial;
+	font-weight: bold; 
+	color: #3B5998;
+}
+
+.aAuthor a
+{
+	font-size: 11px;
+	font-family: Arial;
+	font-weight: bold; 
+	color: #3B5998;
+}
+
+.box1
+{
+	height: 51px;
+	padding: 5px;
+	min-width: 208px;
+	margin-right: 3px;
+	-moz-box-shadow: 0px 0px 1px #000000;
+	-webkit-box-shadow: 0px 0px 1px #000000;
+	box-shadow: 0px 0px 1px #838383;
+}
+.box2
+{
+	height: 51px;
+	background-color: #D8EBFA;
+	padding: 5px;
+	min-width: 208px;
+	margin-right: 3px;
+	-moz-box-shadow: 0px 0px 1px #000000;
+	-webkit-box-shadow: 0px 0px 1px #000000;
+	box-shadow: 0px 0px 1px #838383;
+}
+.box3
+{
+	height: 51px;
+	background-color: #F0F0F0;
+	padding: 5px;
+	min-width: 70px;
+	margin-right: 3px;
+	-moz-box-shadow: 0px 0px 1px #000000;
+	-webkit-box-shadow: 0px 0px 1px #000000;
+	box-shadow: 0px 0px 1px #838383;
+}
+.text1
+{
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+}
+.text2
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	padding-left: 7px;
+	padding-top: 0px;        
+	text-align: right;
+	float:right;
+}
+.text3
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	padding-left: 7px;
+	padding-top: 15px;
+}
+.PadT
+{
+	padding-top: 3px;
+}
+.N-H
+{
+	color: #969696;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	padding-left: 7px;
+	padding-top: 15px;
+}
+.Gray
+{
+	background-color: #F0F0F0;
+}
+.tblAccountTotal
+{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.File_Uploader_es-es {
+	background: url('Images/LoadFile.png') no-repeat;
+	height: 16px;
+}
+
+	.File_Uploader_es-es:hover {
+		background: url('Images/LoadFile_hover.png') no-repeat;
+		height: 16px;
+	}
+
+.File_Uploader_en-us {
+	background: url('Images/LoadFile.png') no-repeat;
+	height: 16px;
+}
+
+	.File_Uploader_en-us:hover {
+		background: url('Images/LoadFile_hover.png') no-repeat;
+		height: 16px;
+	}
+.tdAttachmentSpace
+{
+	
+}
+.imgURL
+{
+	cursor: pointer;
+}
+
+.tdAttachment a
+{
+	overflow: hidden;
+	white-space: nowrap;
+	display: block; 
+	width: 157px;
+	text-overflow: ellipsis;
+}
+.tdAttachment
+{
+	border: 1px solid #cecece;
+	vertical-align: middle;
+	text-indent: 25px; 
+	background-repeat: no-repeat;
+	height: 24px;
+	background-size: contain;
+}
+.txtUrlFile
+{
+	display: none;
+}
+.image-upload > input
+{
+	display: none;
+}
+
+.image-upload img
+{
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+} 

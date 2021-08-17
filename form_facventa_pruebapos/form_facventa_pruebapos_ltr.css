@@ -1,0 +1,51 @@
+.css_numfacven_label { }
+.css_numfacven_line {text-align:center;vertical-align:middle;width:120px;}
+.css_numfacven_obj {text-align:left;}
+.css_credito_label { }
+.css_credito_line {text-align:left;}
+.css_credito_obj {text-align:left;}
+.css_fechaven_label { }
+.css_fechaven_line { }
+.css_fechaven_obj { }
+.css_fechavenc_label { }
+.css_fechavenc_line { }
+.css_fechavenc_obj { }
+.css_idcli_label { }
+.css_idcli_line {width:300px;}
+.css_idcli_obj {text-align:left;width:290px;}
+.css_subtotal_label { }
+.css_subtotal_line {font-weight:bold;text-align:center;vertical-align:middle;}
+.css_subtotal_obj {text-align:center;vertical-align:middle;width:120px;}
+.css_valoriva_label { }
+.css_valoriva_line {text-align:center;vertical-align:middle;}
+.css_valoriva_obj {text-align:center;vertical-align:middle;width:120px;}
+.css_total_label { }
+.css_total_line {font-size:18px;font-weight:bold;text-align:center;vertical-align:middle;}
+.css_total_obj {font-weight:bold;text-align:center;vertical-align:middle;width:140px;}
+.css_pagada_label { }
+.css_pagada_line { }
+.css_pagada_obj { }
+.css_asentada_label { }
+.css_asentada_line {text-align:left;}
+.css_asentada_obj {text-align:left;}
+.css_observaciones_label { }
+.css_observaciones_line { }
+.css_observaciones_obj { }
+.css_saldo_label { }
+.css_saldo_line {text-align:left;}
+.css_saldo_obj {text-align:left;}
+.css_adicional_label { }
+.css_adicional_line {font-size:18px;background-color:#CCFF33;font-weight:bold;text-align:center;vertical-align:middle;}
+.css_adicional_obj {font-weight:bold;text-align:center;vertical-align:middle;width:140px;}
+.css_adicional2_label { }
+.css_adicional2_line {text-align:center;}
+.css_adicional2_obj {font-weight:bold;text-align:center;}
+.css_adicional3_label { }
+.css_adicional3_line {text-align:center;}
+.css_adicional3_obj {text-align:center;}
+.css_inicio_label { }
+.css_inicio_line {border-color:#FFFFFF;width:1px;}
+.css_inicio_obj {border-color:#FFFFFF;width:1px;}
+.css_detalle_label { }
+.css_detalle_line { }
+.css_detalle_obj { }

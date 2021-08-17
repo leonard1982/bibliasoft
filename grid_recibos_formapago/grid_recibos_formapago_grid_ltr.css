@@ -1,0 +1,15 @@
+.css_id_formapago_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_formapago_grid_line {vertical-align: top;text-align: left;}
+.css_numero_cheque_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero_cheque_grid_line {vertical-align: top;text-align: left;}
+.css_nombre_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre_banco_grid_line {vertical-align: top;text-align: left;}
+.css_id_banco_caja_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_banco_caja_grid_line {vertical-align: top;text-align: center;}
+.css_monto_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_monto_grid_line {vertical-align: top;text-align: right;}
+.css_monto_tot_ger {text-align: right;}
+.css_id_recibos_formapago_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_recibos_formapago_grid_line {vertical-align: top;text-align: right;}
+.css_fecha_cheque_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_cheque_grid_line {vertical-align: top;text-align: center;}

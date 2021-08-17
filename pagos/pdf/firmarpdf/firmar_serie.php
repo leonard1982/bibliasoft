@@ -1,0 +1,33 @@
+<?php
+require_once('fpdf/fpdf.php');
+require_once('fpdi/fpdi.php');
+require('clase.php');
+
+$path="./dir/";
+$dir = opendir($path);
+
+while ($elemento = readdir($dir)){
+	if( $elemento != "." && $elemento != ".."){
+		$partes = explode(".", $elemento);
+		// initiate FPDI
+		$pdf = new PDF_EAN13();
+
+		$sourceFileName = $path.$elemento;
+		$pagecount = $pdf->setSourceFile($sourceFileName);
+		$i = 1;
+		do {
+    		$pdf->AddPage();
+    		$tplidx = $pdf->ImportPage($i); 
+    	        $pdf->useTemplate($tplidx, 10, 10, 200);
+    	 	$pdf->SetFont('Arial');
+    	 	$pdf->SetTextColor(0,0,0);
+    	 	$pdf->SetFontSize(14);          
+    	 	$pdf->EAN13(140,265,$partes[0]);
+    	 	$i++;
+		} while($i <= $pagecount);
+		$pdf->Output($sourceFileName, "F");
+
+		unset($pdf);
+	}
+}
+?>

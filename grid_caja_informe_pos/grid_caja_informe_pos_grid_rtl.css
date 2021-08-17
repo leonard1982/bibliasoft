@@ -1,0 +1,18 @@
+.css_banco_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_banco_grid_line {vertical-align: top;text-align: right;}
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_cantidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: top;text-align: right;}
+.css_efectivo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_efectivo_grid_line {text-align: right;}
+.css_tarjeta_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_tarjeta_grid_line {text-align: right;}
+.css_cheques_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_cheques_grid_line {text-align: right;}
+.css_formas_pago_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_formas_pago_grid_line {text-align: right;}
+.css_detalle_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_detalle_grid_line {vertical-align: top;text-align: right;}
+.css_nota_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nota_grid_line {vertical-align: top;text-align: right;}

@@ -1,0 +1,7 @@
+autoriza_borrado_mob.php
+FACILWEBv2
+autoriza_borrado_mob
+NAO
+contr
+autoriza_borrado
+LigMd5

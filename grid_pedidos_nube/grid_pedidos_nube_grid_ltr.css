@@ -1,0 +1,29 @@
+.css_prefijo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_prefijo_grid_line {vertical-align: top;text-align: center;}
+.css_numpedido_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numpedido_grid_line {vertical-align: top;text-align: right;}
+.css_fechaven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fechaven_grid_line {vertical-align: top;text-align: center;}
+.css_cod_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cod_cliente_grid_line {vertical-align: top;text-align: left;}
+.css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_total_grid_line {vertical-align: top;text-align: right;}
+.css_asentada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_asentada_grid_line {vertical-align: top;text-align: center;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: left;}
+.css_vendedor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_vendedor_grid_line {vertical-align: top;text-align: left;}
+.css_descargado_nube_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_descargado_nube_grid_line {vertical-align: top;text-align: center;}
+.css_idpedido_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idpedido_grid_line {vertical-align: top;text-align: right;}
+.css_numfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numfacven_grid_line {vertical-align: top;text-align: right;}
+.css_nremision_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_nremision_grid_line {vertical-align: top;text-align: right;}
+.css_credito_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_credito_grid_line {vertical-align: top;text-align: right;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: top;text-align: center;}
+.css_detalle_grid_line {text-align: center;}

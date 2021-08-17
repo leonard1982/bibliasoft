@@ -1,0 +1,60 @@
+.css_resolucion_label { }
+.css_resolucion_line { }
+.css_resolucion_obj {width:100px;}
+.css_rangofac_label { }
+.css_rangofac_line { }
+.css_rangofac_obj {width:150px;}
+.css_fecha_label { }
+.css_fecha_line { }
+.css_fecha_obj {text-align:center;width:80px;}
+.css_prefijo_label { }
+.css_prefijo_line { }
+.css_prefijo_obj {text-align:center;width:50px;}
+.css_primerfactura_label { }
+.css_primerfactura_line {text-align:left;}
+.css_primerfactura_obj {text-align:center;width:100px;}
+.css_nombre_pc_label { }
+.css_nombre_pc_line { }
+.css_nombre_pc_obj {width:200px;}
+.css_nombre_impre_label { }
+.css_nombre_impre_line { }
+.css_nombre_impre_obj {width:200px;}
+.css_fec_vencimiento_label { }
+.css_fec_vencimiento_line { }
+.css_fec_vencimiento_obj {text-align:center;}
+.css_prefijo_fe_label { }
+.css_prefijo_fe_line { }
+.css_prefijo_fe_obj { }
+.css_pref_factura_label { }
+.css_pref_factura_line { }
+.css_pref_factura_obj { }
+.css_pref_ncr_label { }
+.css_pref_ncr_line { }
+.css_pref_ncr_obj { }
+.css_pref_ndb_label { }
+.css_pref_ndb_line { }
+.css_pref_ndb_obj { }
+.css_ultima_fac_label { }
+.css_ultima_fac_line {text-align:left;}
+.css_ultima_fac_obj {text-align:center;width:100px;}
+.css_vigencia_label { }
+.css_vigencia_line {text-align:left;}
+.css_vigencia_obj {text-align:right;}
+.css_tipo_label { }
+.css_tipo_line { }
+.css_tipo_obj { }
+.css_activa_label { }
+.css_activa_line { }
+.css_activa_obj { }
+.css_desde_label { }
+.css_desde_line {text-align:center;}
+.css_desde_obj {text-align:center;}
+.css_contador_pruebas_label { }
+.css_contador_pruebas_line { }
+.css_contador_pruebas_obj { }
+.css_texto_encabezado_label { }
+.css_texto_encabezado_line { }
+.css_texto_encabezado_obj { }
+.css_texto_pie_pagina_label { }
+.css_texto_pie_pagina_line { }
+.css_texto_pie_pagina_obj { }

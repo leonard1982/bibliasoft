@@ -1,0 +1,32 @@
+<?php
+require_once('fpdf/fpdf.php');
+require_once('fpdi/fpdi.php');
+
+$pdf =& new FPDI();
+
+
+//$sourceFileName = 'Cirqular-2011_details.pdf';
+$sourceFileName = 'parashe.pdf';
+//Set the source PDF file
+$pagecount = $pdf->setSourceFile($sourceFileName);
+$i = 1;
+do {
+	$pdf->AddPage();
+	//Import the first page of the file
+	$tpl = $pdf->importPage($i++);
+	//Use this page as template
+	$pdf->useTemplate($tpl);
+} while($i <= $pagecount);
+
+#Print Hello World at the bottom of the page
+
+//Go to 1.5 cm from bottom
+$pdf->SetY(-15);
+//Select Arial italic 8
+$pdf->SetFont('Arial','I',8);
+//Print centered cell with a text in it
+$pdf->Cell(0, 10, "Hello World - " . $pagecount, 0, 0, 'C');
+
+
+$pdf->Output(time().'-'.$sourceFileName, "F");
+?>

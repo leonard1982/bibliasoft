@@ -1,0 +1,1218 @@
+<?php
+if(isset($_GET['idempresa']) and isset($_GET['id']))
+{
+if(!empty($_GET['idempresa']) and $_GET['id']>0)
+{
+date_default_timezone_set('America/Bogota');
+setlocale(LC_ALL, 'es_CO');
+setlocale(LC_MONETARY, 'es_CO');
+	
+$vidempresa = $_GET['idempresa'];
+$vid        = $_GET['id'];
+$nombre_razonsocial = "";
+$ccnit      = "";
+$direccion  = ""; 
+$celular    = ""; 
+$ciudad     = ""; 
+$correo     = "";
+$pagina_web = "";
+$vlogo      = "";
+$vactividad = "";
+$vregimen   = "";
+
+//variables de la factura
+$vnfactura   = "";
+$vfechayhora = "";
+$vvalidacion = "";
+$vvencimiento= "";
+$vnit_cliente= "";
+$vnombre_cliente="";
+$vdireccion_cliente="";
+$vtelefono_cliente ="";
+$vciudad_cliente="";
+$vobservaciones ="";
+$vtotal = 0;
+$vbase  = 0;
+$viva   = 0;
+$vfpago = "CONTADO";
+$vcufe  = "";
+$vsn_pjfe = "";
+$vpie_pagina = "";
+$vidres = "1";
+$vtipo_resolucion = "";
+$vdireccion2_cliente = "";
+$vtelefono2_cliente = "";
+$vurlmail = "";
+$vdepartamento = "";
+
+//traemos las librerias
+include_once 'php/baseDeDatos.php';
+include_once 'php/CifrasEnLetras.php';
+include_once 'php/qr/qrlib.php';
+
+$conexion = new dbMysql("127.0.0.1","root",".facilweb2020",$vidempresa,3311);
+
+$vsql = "select razonsoc,concat(nit,'-',dv) as nit,direccion,telefono,ciudad,correo,'' as pagina_web,ruta_logo,codigos_ciiu as actividad_principal,regimen,'' as pie_pagina from datosemp";
+$consulta = $conexion->consulta($vsql);
+if($r1 = mysqli_fetch_array($consulta))
+{
+	$nombre_razonsocial = $r1[0];
+	$ccnit      = $r1[1];
+	$direccion  = $r1[2]; 
+	$celular    = $r1[3]; 
+	$ciudad     = $r1[4]; 
+	$correo     = $r1[5];
+	$pagina_web = $r1[6];
+	$vlogo      = $r1[7];
+	$vactividad = $r1[8];
+	$vregimen   = $r1[9];
+	if($vregimen==0)
+	{
+		$vregimen = "No responsable de IVA";
+	}
+	else
+	{
+		$vregimen = "Responsable de IVA";
+	}
+	
+	$vpie_pagina = $r1[10];
+	
+	if(file_exists($_SERVER['DOCUMENT_ROOT'].'/scriptcase/file/img/logos/'.$vidempresa.'/'.$vlogo))
+	{
+		$vlogo = '../../../file/img/logos/'.$vidempresa.'/'.$vlogo;
+	}
+	
+	if(file_exists($_SERVER['DOCUMENT_ROOT'].'/_lib/file/img/logos/'.$vidempresa.'/'.$vlogo))
+	{
+		$vlogo = '../_lib/file/img/logos/'.$vidempresa.'/'.$vlogo;
+	}
+}
+
+$vsql3 = "select k.qr_base64 as qr,t.nombres,t.documento,t.direccion,t.tel_cel,t.ciudad,concat(r.prefijo,'-',k.numfacven) as numfe,
+k.fechaven,k.fecha_validacion as sn_fe_validacion,k.fechavenc,k.observaciones,total as neto,k.subtotal as vrbase,k.valoriva as vriva,
+k.formapago as fpago,k.cufe,r.prefijo,k.resolucion,r.prefijo_fe,if(k.credito=2,'CONTADO','CRÉDITO') as formapago,(dr.direc) as direccion2,(dr.telefono) as telefono2,(dr.ciudad) as ciudad2, t.urlmail,(select dp.departamento from departamento dp where dp.iddep=dr.iddepar limit 1) as dep
+from facturaven k left join terceros t on k.idcli=t.idtercero left join resdian r on k.resolucion=r.Idres left join direccion dr on dr.iddireccion=k.dircliente where k.idfacven='".$vid."'";
+
+//conexion a tns
+$consulta3 = $conexion->consulta($vsql3);
+$contador=1;
+$vqr = "";
+if($r3 = mysqli_fetch_array($consulta3))
+{
+	$vnfactura= $r3[6];
+	$vruta    = getcwd();
+	$vrutaqr  = $vruta.'/qr/'.$vnfactura.'.png';
+	$vqr      = $r3[0];
+	if(file_exists($vrutaqr))
+	{
+		QRcode::png($vqr,$vrutaqr,QR_ECLEVEL_H,12,5);
+		
+		//convertimos a base64 y guardamos en bd
+		// Nombre de la imagen
+		$path = $vrutaqr;
+
+		// Extensión de la imagen
+		$type = pathinfo($path, PATHINFO_EXTENSION);
+		
+		// Cargando la imagen
+		if(file_exists($vrutaqr))
+		{
+			$data = file_get_contents($path);
+
+			// Decodificando la imagen en base64
+			$base64 = 'data:image/' .$type.';base64,'.base64_encode($data);
+			$vqr    = $base64;
+		}
+	}
+	else
+	{
+		QRcode::png($vqr,$vrutaqr,QR_ECLEVEL_H,12,5);
+		
+		//convertimos a base64 y guardamos en bd
+		// Nombre de la imagen
+		$path = $vrutaqr;
+
+		// Extensión de la imagen
+		$type = pathinfo($path, PATHINFO_EXTENSION);
+
+		// Cargando la imagen
+		if(file_exists($vrutaqr))
+		{
+			$data = file_get_contents($path);
+
+			// Decodificando la imagen en base64
+			$base64 = 'data:image/' .$type.';base64,'.base64_encode($data);
+			$vqr    = $base64;
+		}
+	}
+	
+	$vfechayhora        = $r3[7];
+	//$vfechayhora = date_create($vfechayhora);
+	//$fechayhora  = date_format($vfechayhora,'d-m-Y');
+	$vvalidacion        = $r3[8];
+	$vvencimiento       = $r3[9];
+	$vnit_cliente       = $r3[2];
+	$vnombre_cliente    = $r3[1];
+	$vdireccion_cliente = $r3[3];
+	$vtelefono_cliente  = $r3[4];
+	$vciudad_cliente    = $r3[5];
+	$vobservaciones     = $r3[10];
+	$vtotal             = floatval($r3[11]);
+	$vbase              = number_format(floatval($r3[12]),2);
+	$viva               = number_format(floatval($r3[13]),2);
+	//$vfpago             = $r3[14];
+	$vcufe              = $r3[15];
+	$vsn_pjfe           = $r3[16];
+	$vidres             = $r3[17];
+	$vtipo_resolucion   = $r3[18];
+	$vfpago             = $r3[19];
+	$vdireccion2_cliente= $r3[20];
+	$vtelefono2_cliente = $r3[21];
+	if(!empty($r3[22]))
+	{
+		$vciudad_cliente = $r3[22];
+	}
+	$vurlmail = $r3[23];
+	$vdepartamento = $r3[24];
+}
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%; " class="">
+<head id="Head1">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link href="js/General.css" rel="stylesheet" type="text/css">
+<link href="js/uploadify.css" rel="stylesheet" type="text/css">
+<link href="js/jquery.css" rel="stylesheet" type="text/css">
+<link href="js/fileuploader.css" rel="stylesheet" type="text/css">
+<link href="js/jquery_002.css" rel="stylesheet" type="text/css">
+<link href="js/fileupload.css" rel="stylesheet" type="text/css">
+<link href="js/dd.css" rel="stylesheet" type="text/css">
+<link href="js/style.css" rel="stylesheet" type="text/css">
+<link href="js/StyleLayout.css" rel="stylesheet">
+<script language="javascript" type="text/javascript" src="js/jquery-1.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery-ui.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery_002.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="js/autoresize.js"></script>    
+<script language="javascript" src="js/GeneralScript.js" type="text/javascript"></script>
+<script language="javascript" src="js/Comments.js" type="text/javascript"></script>
+<script language="javascript" src="js/script.js" type="text/javascript"></script>
+<link id="CSS" href="js/Styles.css" rel="stylesheet">
+<link id="CSSGeneric" href="js/StylesBase.css" rel="stylesheet">
+<link id="CSS" href="js/estilos.css" rel="stylesheet">
+<link id="CSSGeneric" href="js/StylesBase.css" rel="stylesheet"> 
+
+<title>	FACILWEB FE</title>
+<style type="text/css">.fancybox-margin{margin-right:17px;}</style>
+</head>
+<body id="bodMain" class="BakcBilling" style="height: 100%; overflow: auto;">
+<script src="js/WebResource.js" type="text/javascript"></script>
+
+<script src="js/Skin.js" type="text/javascript"></script>
+
+<div id="divLoading" class="divLoading" style="width: 100%; visibility: hidden;">
+	<table>
+		<tbody><tr>
+			<td>
+				<div style="text-align:center;">                        
+					<img src="js/loading.gif" alt="Loading">
+					<div style=" text-align:left">&nbsp;</div>
+				</div>
+			</td>
+		</tr>            
+	 </tbody></table>
+</div>
+<script language="javascript" type="text/javascript">
+addLoadListener(Loading);
+var divLoading = document.getElementById('divLoading');
+if (divLoading != null) {
+  divLoading.style.visibility = 'visible';
+}
+function Loading() {
+  if (divLoading != null) {
+	  divLoading.style.visibility = 'hidden';
+  }
+}
+</script>
+
+<style>
+@media all {
+   div.saltopagina{
+      display: none;
+   }
+}
+   
+@media print{
+   div.saltopagina{
+      display:block;
+      page-break-before:always;
+   }
+} 
+</style>
+
+<div id="divTopInvoice" style="height: 35px;">
+    <span id="ctl15_lblTopMessage">
+	<table style="padding-right: 120px;  padding-left: 120px;  margin-right: auto; margin-left: auto;" bgcolor="#dcdcdc">
+	<tbody>
+	<tr>
+	<td style="padding-right: 0px; padding-left: 0px; padding-bottom: 5px; padding-top: 5px; text-align:center;" width="850">
+		<div align="center"> <span style="color: Black; font-family: Tahoma, Geneva, sans-serif; font-size:11px;">Factura elaborada con <span style="font-size:11px;">FACILWEB.</span>   Adquiere la facturación electrónica con nosotros, Contáctanos dando <a href="https://www.solucionesnavarro.net/sn/index.php/contactenos/" target="_blank" style="text-decoration: underline;font-family: Tahoma, Geneva, sans-serif;font-size: 11px;color: Blue;">Click aquí.</a></span>
+		</div>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</span>
+</div>
+
+<div id="dvwrap" class="dvwrap">
+  <table width="100%" cellspacing="0" cellpadding="0" border="0">
+  <tbody>
+  <tr>
+  <td>
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+	<tr valign="top" align="left">
+    <td id="ctl15_LeftPane" class="LeftPane" style="width:auto">
+    </td>
+	<td id="ctl15_CenterPane" class="ContentPane" style="width:100%">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+		<tbody>
+		<tr>
+		<td></td>
+		</tr>
+		<tr>
+		<td>
+			<span id="ctl15_ucControlPane0_ContainerControl">
+
+<div id="container_fluid" class="container_fluid">
+    <div id="ctl15_ucControlPane0_ctl00_ContentDiv">
+        <div id="ctl15_ucControlPane0_ctl00_divButtons" class="divButtons" style="padding-top: 5px;">
+            <table align="center">
+			<tbody><tr>
+			<td style="padding-left: 5px;">                        
+				<div id="ctl15_ucControlPane0_ctl00_btnPDF" value="Download PDF" onclick="javascript:__doPostBack('ctl15$ucControlPane0$ctl00$lnkPDF','')" class="Print" style="display:none">Imprimir o descargar pdf</div>
+				<div id="btnPDFclient" onclick="printPDF(); return false;" class="Print">Imprimir o Descargar</div>
+			</td>
+			</tr>
+			</tbody>
+			</table>
+        </div>
+
+        </div>
+        <div id="divS" class="shadow divS" style="background: white">
+            <div id="ctl15_ucControlPane0_ctl00_divContent" class="container_Shadow"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE"><title>Factura - Facilweb FE</title>
+				<style type="text/css">
+				  /**
+				  * 12.309.872 - iSiigo. Ajustar el uso de estilos en las plantillas de facturacion ERP
+				  * Se crean una serie de clases de estilos en las plantillas, con el fin de eliminar los estilos que se inyectan desde el código.
+				  */
+				  .TableDocumentDetail {
+				  border-spacing: 0;
+				  padding: 0;
+				  width: 100%;
+				  color: #000;
+				  border: 1px solid #ccc;
+				  font-size: 12px;
+				  
+				  }
+
+				  .TableDocumentDetail tr:nth-child(even) {
+				  background-color: whitesmoke;
+				  font-size: 12px;
+				  }
+
+				  .TableDocumentDetail thead th {
+				  /*ItemHeader*/
+				  font-weight:bold;
+				  text-align:center;
+				  /*padItem*/
+				  padding:5px;
+				  border-right: 1px solid #ccc;
+				  border-bottom: 1px solid #ccc;
+				  background-color: #E3E3E3;
+				  font-size:12px;
+				  }
+
+				  /*Aplica a todas las celdas, excepto la ultima*/
+				  .TableDocumentDetail tbody tr td{
+				  /*padItem*/
+				  padding:5px;
+				  border-right: 1px solid #ccc;
+				  border-bottom: 1px solid #ccc;
+				  font-size:12px;
+				  }
+
+				  /*Aplica para la ultima celda*/
+				  .TableDocumentDetail tbody tr td:last-child{
+				  /*PadColumnFinal*/
+				  padding:5px;
+				  border-bottom: 1px solid #ccc;
+				  border-right: none !important;
+				  font-size:12px;
+				  }
+
+				  /*Aplica para la ultima celda de la ultima fila*/
+				  .TableDocumentDetail tbody tr:last-child td:last-child{
+				  /*Pad*/
+				  padding:5px;
+				  font-size:12px;
+				  }
+
+				  /*Aplica para la ultima fila*/
+				  .TableDocumentDetail tbody tr:last-child{
+				  /*PadItemFinal*/
+				  padding:5px;
+				  border-right: 1px solid #ccc;
+				  border-bottom: none !important;
+				  font-size:12px;
+				  }
+
+				  /*Aplica para la ultima fila, elimina el border inferior*/
+				  .TableDocumentDetail tbody tr:last-child td{
+				  border-bottom: none !important;
+				  font-size:12px;
+				  }
+
+
+				  /*El operador >, (mayor que) que obtiene el hijo directo, al crear el archivo codifica lo cual no lo toma el estilo.*/
+				  .TableDocumentDetail tbody td tr:last-child, .TableDocumentDetail tbody td table td, .TableDocumentDetail tbody td tr:last-child td:last-child {
+				  padding: 1px !important;
+				  border-right: none !important;
+				  border-bottom: none !important;
+				  font-size:12px;
+				  }
+
+				  @charset "UTF-8";
+				  body{
+				  font-family: Arial, Helvetica, sans-serif;
+				  font-size:12px;
+				  }
+				  .invoice-container {
+				  padding: 0px !important;
+				  margin: 0px auto !important;
+				  position: static !important;
+				  -webkit-box-shadow: none !important;
+				  z-index: 0;
+				  height:100%;
+				  margin-right: auto;
+				  margin-left: auto;
+				  }
+				  .container-invoice {
+				  width: 960px;
+				  margin: 0 0;
+				  }
+				  .rounded-container{
+				  -o-border-radius:5px;
+				  -webkit-border-radius:5px;
+				  -moz-border-radius:5px;
+				  border-radius:5px;
+				  border:1px solid #ccc;
+				  position:relative;
+				  margin-bottom:20px;
+				  }
+				  .UserDetails{
+				  font-family: Arial, Helvetica, sans-serif;
+				  font-size: 12px;
+				  color: #000;
+				  font-weight: normal;
+				  float: left;
+				  text-align:center;
+				  }
+				  .CustomerDetails{
+				  font-family: Arial, Helvetica, sans-serif;
+				  font-size: 12px;
+				  color: #000;
+				  font-weight: normal;
+				  float: right;
+				  text-align:center;
+				  margin-right:0px;
+				  margin-top:10px;
+				  width: 304px;
+				  }
+				  .CustomerDetails3{
+				  font-family: Arial, Helvetica, sans-serif;
+				  font-size: 12px;
+				  color: #000;
+				  font-weight: normal;
+				  float: left;
+				  text-align:left;
+				  width: 597px;
+				  border: 1px solid #ccc;
+
+				  }
+				  .CustomerDetails4{
+				  font-family: Arial, Helvetica, sans-serif;
+				  font-size: 12px;
+				  color: #000;
+				  font-weight: normal;
+				  float: right;
+				  text-align:center;
+				  width: 304px;
+				  border: 1px solid #ccc;
+				  padding: 0px;
+
+				  }
+
+				  .ItemHeader{
+				  background-color: #E3E3E3;
+				  font-weight:bold;          
+				  font-size:12px;
+				  }
+				  .ItemHeader2{
+				  background-color: #E3E3E3;
+				  font-weight:bold;
+				  text-align:center;
+				  }
+				  .TableITemA{
+				  border-right: 1px solid #ccc;
+				  }
+				  .TableITemB{
+				  border-bottom: 1px solid #ccc;
+				  }
+				  .TableITemC{
+				  border-left: 1px solid #ccc;
+				  }
+				  .TableITemD{
+				  border-top: 1px solid #ccc;
+				  }
+				  .TableDetails{
+				  color: #000;
+				  border: 1px solid #ccc;
+				  }
+				  .Pad{
+				  padding:5px;
+				  }
+				  .Pad1{
+				  padding:1px;
+				  }
+				  .Pad3{
+				  padding:3px;
+				  }
+				  .Pad5{
+				  padding:15px;
+				  padding-bottom: 0px;
+				  }
+				  .Pad6{
+				  padding:15px;
+				  padding-top: 0px;
+				  font-size: 14px;
+				  font-weight: bolder;
+				  }
+				  .Pad7{
+				  padding:10px;
+				  padding-top: 0px;
+				  }
+				  .Padtop{
+				  padding-top: 10px;
+				  padding-bottom: 14px;
+				  }
+				  .Padtb{
+				  padding-top: 3px;
+				  padding-bottom: 3px;
+				  }
+				  .Container{
+				  margin-right: 0px;
+				  margin-left: 0px;
+				  margin-bottom: 5px;
+				  margin-top: 10px;
+				  min-height:180px;
+				  }
+				  .Total{
+				  margin-right: 0px;
+				  margin-left: 0px;
+				  margin-bottom: 10px;
+				  margin-top: 10px;
+				  min-height:100px;
+				  }
+				  .invcomments {
+				  font-family: Arial, Helvetica, sans-serif;
+				  font-size: 12pt;
+				  color: #000;
+				  padding: 80px 20px 21px;
+				  text-align: left;
+				  }
+				  .invfooter {
+				  background-color: #E3E3E3;
+				  padding-left: 20px;
+				  padding-right: 20px;
+				  padding-top: 10px;
+				  padding-bottom: 10px;
+				  margin-bottom: 10px;
+				  }
+				  .invfooter .text {
+				  font-family: Arial, Helvetica, sans-serif;
+				  font-size: 7pt;
+				  color: #333;
+				  text-align: center;
+				  padding:5px;
+				  }
+				  .padItem
+				  {
+				  padding:5px;
+				  border-right: 1px solid #ccc;
+				  border-bottom: 1px solid #ccc;
+				  }
+				  .PadItemFinal{
+				  padding:5px;
+				  border-right: 1px solid #ccc;
+				  }
+				  .PadColumnFinal{
+				  padding:5px;
+				  border-bottom: 1px solid #ccc;
+				  }
+				  .Numeric{
+				  text-align:right; font-size:12px;
+				  }
+				  .Alphanumeric
+				  {
+				  font-size:12px;
+				  }
+				  .AlternateItemAlphaNumeric{
+				  background-color:whitesmoke;
+				  }
+				  .mainColumn{
+				  width:170px;
+				  text-align:center;
+				  }
+				  .invoice-box {
+				  display: table;
+				  width: 100%;
+				  height:100%;
+				  }
+				  .invoice-container-left {
+				  width: 99%;
+				  height:inherit;
+				  display: table-cell;
+				  }
+				  .invoice-container-right {
+				  width: 1%;
+				  height:inherit;
+				  vertical-align: middle;
+				  display: table-cell;
+				  }
+				  /*Mostrar alto fijo*/
+				  .dvERPDocumentItems
+				  {
+				  border: 1px #cccccc solid;
+				  min-height: 540px;
+
+				  }
+
+				  .Total
+				  {
+				  position:relative;
+				  min-height: 350px;
+				  }
+
+				  .TotalContent
+				  {
+
+				  top: 0;
+				  left:0;
+				  width:100%;
+
+
+				  }
+				</style>
+				
+				<!--SALTO DE PAGINA-->
+				<!--<div style="page-break-before:always;"><br></div>-->
+				
+				<!--INICIA FACTURA -->
+				<div class="invoice-container rounded-container">
+				<div class="invoice-box">
+				<div class="invoice-container-left">
+				<table width="100%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+				<tr>
+				<td width="93px" valign="top">
+				<div>
+					<img src="js/invoceERP_ribbon_empty.png" width="93" height="165">
+				</div>
+				</td>
+				<td>
+				<strong>
+				<div class="UserLogo">
+					<img style="max-height: 92px;" src="<?php if(isset($_GET['idempresa'])){echo $vlogo;} ?>" >
+				</div>
+				</strong>
+				</td>
+				<td>
+				<strong>
+				<div class="UserDetails">
+				<span style="color:#000; font-size:12px;">
+					<span style="font-weight:bold; font-size:12px;"><?php echo $nombre_razonsocial; ?></span>
+					<br>
+					NIT <?php echo $ccnit; ?>
+					<br>
+					<?php echo $vregimen; ?>
+					<br>
+					<?php echo $direccion; ?>
+					<br>
+					Tel: <?php echo $celular; ?>
+					<br>
+					<?php echo $correo; ?>
+					<br>
+					<?php echo $pagina_web; ?>
+					<br>
+					<?php echo $ciudad; ?>
+					<br>
+					<?php
+					if(!empty($vcufe))
+					{
+						echo "Representación impresa de Factura Electrónica de Venta";
+					}
+					?>
+				</span>
+				</div>
+				</strong>
+				</td>
+				<td>
+					<div>
+						<?php 
+							if(!empty($vqr))
+							{
+								if(file_exists($vrutaqr))
+								{
+									echo "<img src='".$vqr."' alt='QR' width='150px'/>";
+								}
+							}	
+						?>
+					</div>
+				</td>
+				<td width="280px">
+					<div class="CustomerDetails">
+						<table class="TableDetails" width="100%" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+						<tr>
+						<td class="Pad5" style="text-align:center; font-size:16px;" width="100%">
+							<?php
+								switch($vtipo_resolucion)
+								{
+									case 'FE':
+										echo "Factura Electrónica de Venta";
+									break;
+									case 'FC':
+										echo "Factura de Venta por Computador";
+									break;
+									case 'FP':
+										echo "Factura de Venta POS";
+									break;
+									case 'NF':
+										echo "Nota de Entrega";
+									break;
+								}
+							?>
+						</td>
+						</tr>
+						<tr>
+						<td class="Pad6" style="text-align:center; font-size:14px; font-weight:bold" width="100%">
+							No. <?php echo $vnfactura; ?>
+						</td>
+						</tr>
+						</tbody>
+						</table>
+					</div>
+				</td>
+				</tr>
+				</tbody>
+				</table>
+
+				<table style="margin-left: 10px" width="99%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+				<tr>
+				<td>
+				<div class="CustomerDetails3" style="margin-right: 45px">
+				<table width="100%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+				<tr>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;" width="20%">Señores</td>
+				<td class="Pad3 TableITemB" colspan="3" style="color:#000; font-size:12px;" width="30%"><?php echo $vnombre_cliente; ?></td>
+				</tr>
+				<tr>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">NIT</td>
+				<td class="Pad3 TableITemB" style="color:#000; font-size:12px;"><?php echo $vnit_cliente; ?></td>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Teléfono</td>
+				<td class="Pad3 TableITemB" style="color:#000; font-size:12px;" width="30%">
+				<?php 
+					if(!empty($vtelefono2_cliente))
+					{
+						echo $vtelefono2_cliente;
+					}
+					else
+					{
+						echo $vtelefono_cliente;
+					}
+				?>
+				</td>
+				</tr>
+				<tr>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Dirección</td>
+				<td class="Pad3 TableITemB" style="color:#000; font-size:12px;">
+				<?php 
+					if(!empty($vdireccion2_cliente))
+					{
+						echo $vdireccion2_cliente;
+					}
+					else
+					{
+						echo $vdireccion_cliente; 
+					}
+				?>
+				</td>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Ciudad</td>
+				<td class="Pad3 TableITemB" style="color:#000; font-size:12px;"><?php echo $vciudad_cliente; ?></td>
+				</tr>
+				
+				<tr>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Correo</td>
+				<td class="Pad3" style="color:#000; font-size:12px;" >
+				<?php 
+					if(!empty($vurlmail))
+					{
+						echo $vurlmail;
+					}
+				?>
+				</td>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Departamento</td>
+				<td class="Pad3" style="color:#000; font-size:12px;"><?php if(!empty($vdepartamento)){echo $vdepartamento;} ?></td>
+				</tr>
+				
+				<tr style="visibility:collapse; display:none;">
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Order Reference / Orden de Compra Prefijo</td>
+				<td class="Pad3" style="color:#000; font-size:12px; border-top: 1px solid #ccc;">
+				[strOrderReferencePrefix]
+				</td>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Número</td>
+				<td class="Pad3" style="color:#000; font-size:12px; border-top: 1px solid #ccc;">
+				[strOrderReferenceNumber]
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				</div>
+				</td>
+				<td>
+				<div class="CustomerDetails4">
+				<table style="visibility:visible;" width="100%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+				<tr>
+				<td class="Pad TableITemA TableITemB ItemHeader" style="text-align:center; font-size:12px;" colspan="2" width="33%">Fecha y hora Factura</td>
+				</tr>
+				<tr>
+				<td class="Pad TableITemA TableITemB ItemHeader" style="text-align:center; font-size:12px; border-bottom: 1px solid #fff;" width="33%">Expedición</td>
+				<td class="Pad TableITemA" style="text-align:center; font-size:12px;">
+				<span style="text-align:center; color:#000; font-size:12px;">
+				<?php echo $vfechayhora; ?>
+				</span>
+				</td>
+				</tr>
+				<tr>
+				<td class="Pad TableITemA TableITemB ItemHeader" style="text-align:center; font-size:12px; border-bottom: 1px solid #fff;" width="33%">Validación</td>
+				<td class="Pad TableITemA" style="text-align:center; font-size:12px;">
+				<span style="text-align:center; color:#000; font-size:12px;">
+				<?php echo $vvalidacion; ?>
+				</span>
+				</td>
+				</tr>
+				<tr>
+				<td class="Pad TableITemA TableITemB ItemHeader" style="text-align:center; font-size:12px; border-bottom: 1px solid #fff;" width="33%">Vencimiento</td>
+				<td class="Pad TableITemA" style="text-align:center; font-size:12px;">
+				<span style="text-align:center; color:#000; font-size:12px;">
+				<?php echo $vvencimiento; ?>
+				</span>
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				<table style="visibility:collapse; display:none;" width="100%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+				<tr>
+				<td class="Pad TableITemA TableITemB ItemHeader" style="text-align:center; font-size:12px;" width="33%">Fecha de Factura</td>
+				<td class="Pad TableITemB ItemHeader" style="text-align:center; font-size:12px;" width="33%">Fecha de Vencimiento</td>
+				</tr>
+				<tr>
+				<td class="Pad TableITemA Padtop" style="text-align:center; font-size:12px;">
+				<span style="text-align:center; color:#000; font-size:12px;">vfecha</span>
+				</td>
+				<td class="Pad Padtop" style="text-align:center; font-size:12px;">
+				<span style="text-align:center; color:#000; font-size:12px;">vvencimiento</span>
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				</div>
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				<table style="padding: 10px;" width="100%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+				<tr align="right">
+				<td></td>
+				<td></td>
+				</tr>
+				</tbody>
+				</table>
+				<div class="Container" style="margin-left: 10px">
+				<div class="dvERPDocumentItems">
+				<table class="TableDocumentDetail">
+				<thead>
+				<tr>
+				<th>
+				Ítem
+				</th>
+				<th>
+				<div>Descripción</div>
+				</th>
+				<?php if($vregimen=="Responsable de IVA"){ ?>
+				<th>
+				IVA
+				</th>
+				<?php }?>
+				<th>
+				Cantidad
+				</th>
+				<th>
+				Bodega
+				</th>
+				<th>
+				Vr. Unitario
+				</th>
+				<th>
+				Vr. Total
+				</th>
+				</tr>
+				</thead>
+				<thead>
+				</thead>
+				<?php
+				//conexion facilweb
+				$vdescripcion = "";
+				$vporciva = "";
+				$vcanlista= 0;
+				$vpreciou = 0;
+				$vprecioiva = 0;
+				$vparcvta = 0;
+				$vnota = "";
+				$vbodega = "";
+				
+				$vsql4 = "select 
+				m.nompro,d.adicional,d.cantidad,d.valorunit,d.iva,d.valorpar,d.obs,b.bodega
+				from facturaven k inner join detalleventa d on d.numfac=k.idfacven inner join productos m on d.idpro=m.idprod inner join bodegas b on d.idbod=b.idbodega where k.idfacven='".$vid."'";
+				$consulta4 = $conexion->consulta($vsql4);
+				$contador2=1;
+				while ($r4 = mysqli_fetch_array($consulta4))
+				{
+					$vdescripcion = $r4[0];
+					$vporciva     = $r4[1];
+					$vcanlista    = floatval($r4[2]);
+					$vpreciou     = floatval($r4[3]);
+					$vprecioiva   = floatval($r4[4]);
+					$vparcvta     = floatval($r4[5]);
+					$vnota        = $r4[6];
+					$vbodega      = $r4[7];
+				?>
+
+				<!--EL DETALLE DE LA FACTURA-->
+				<tbody>
+				<tr>
+				<!--Item-->
+				<td style="text-align: center;" width="10">
+				<?php echo $contador2; ?>
+				</td>
+				
+				<!--Descripción-->
+				<td class="Alphanumeric" title="" width="40%">
+				<table style="width: 100%;table-layout: fixed;border:0; " cellspacing="0" cellpadding="0">
+				<tbody>
+				<tr>
+				<td style="word-wrap: break-word;">
+				<?php 
+					echo $vdescripcion; 
+					//si hay una nota la ponemos
+					if(!empty($vnota))
+					{
+						echo "<br><p style='font-style:italic;margin-top:1px;text-align:justify;text-justify:inter-word;font-size:10px;'>".$vnota."</p>";
+					}
+				?>
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				</td>
+				<!--IVA-->
+				<?php if($vregimen=="Responsable de IVA"){ ?>
+				<td class="Numeric" title="" width="64px">
+				<table width="100%">
+				<tbody>
+				<tr>
+				<td>
+				</td>
+				<td style="word-wrap:normal; white-space:nowrap;" width="99%" align="right"><?php echo $vporciva; ?></td>
+				</tr>
+				</tbody>
+				</table>
+				</td>
+				<?php }?>
+				<!--Cantidad-->
+				<td class="Numeric" title="" width="36px">
+				<?php echo $vcanlista; ?>
+				</td>
+				<td class="Numeric" title="" width="36px">
+				<?php echo $vbodega; ?>
+				</td>
+				<td class="Numeric" title="" width="64px">
+				<table width="100%">
+				<tbody>
+				<tr>
+				<td>
+				<!--Precio Unitario con IVA-->
+				</td>
+				<td style="word-wrap:normal; white-space:nowrap;" width="99%" align="right"><?php echo number_format($vpreciou,2); ?></td>
+				</tr>
+				</tbody>
+				</table>
+				</td>
+				<td class="Numeric" title="" width="64px">
+				<table width="100%">
+				<tbody>
+				<tr>
+				<td>
+				<!--Total Línea-->
+				</td>
+				<td style="word-wrap:normal; white-space:nowrap;" width="99%" align="right"><?php echo number_format($vparcvta,2); ?></td>
+				</tr>
+				</tbody>
+				</table>
+				</td>
+				</tr>
+				</tbody>
+				<?php
+					$contador2++;
+				}
+				?>
+				<!--FIN EL DETALLE DE LA FACTURA-->
+
+				</table>
+				</div>
+				<div class="Total">
+				<div class="TotalContent">
+				<table width="100%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+				<tr>
+				<td rowspan="4" width="44%">
+					<table width="100%" cellspacing="0" cellpadding="0" border="0">
+					<tbody>
+					<tr>
+					<td style="text-align:left; font-size:12px;">
+						<table width="100%" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+						<tr>
+						<td>
+							<strong>Valor en Letras: </strong>
+							<br>
+						</td>
+						</tr>
+						<tr>
+						<td style="padding-left:10px;">
+							<?php echo strtoupper(CifrasEnLetras::convertirCifrasEnLetras($vtotal)); ?> PESOS M/CTE
+							<br>
+							<br>
+						</td>
+						</tr>
+						<tr>
+						<td>
+							<strong>Forma de Pago: </strong>
+							<br>
+						</td>
+						</tr>
+						<tr>
+						<td style="padding-left:10px;">
+							<table style="width:90%">
+							<tbody>
+							<tr>
+							<td><?php echo $vfpago; ?></td>
+							<td></td>
+							<td></td>
+							<td style="width:10px"></td>
+							<td style="text-align:right;width:120px;"></td>
+							</tr>
+							</tbody>
+							</table>
+							<br>
+							<br>
+						</td>
+						</tr>
+						<tr>
+						<td>
+							<strong>Observaciones: </strong>
+							<br>
+						</td>
+						</tr>
+						<tr>
+						<td style="padding-left:10px;">
+							<?php echo $vobservaciones; ?>
+						</td>
+						</tr>
+						</tbody>
+						</table>
+					</td>
+					</tr>
+					</tbody>
+					</table>
+				</td>
+				<td width="21%" valign="top">
+					<table width="100%" cellspacing="0" cellpadding="0" border="0">
+					<tbody>
+					
+					<tr>
+					<td class="Pad TableITemA TableITemB TableITemD TableITemC" style="font-size:12px; font-weight:bold" width="50%">Subtotal</td>
+					<td class="Pad TableITemA TableITemB TableITemD" style="text-align:right; font-size:12px;" width="50%">
+						<table width="100%"><tbody><tr><td></td><td style="word-wrap:normal; white-space:nowrap;" width="99%" align="right"><?php echo $vbase; ?></td>
+						</tr>
+						</tbody>
+						</table>
+					</td>
+					</tr>   
+					
+					<?php if($vregimen=="Responsable de IVA"){ ?>
+					<tr>
+					<td class="Pad TableITemA TableITemB TableITemD TableITemC" style="font-size:12px; font-weight:bold" width="50%">IVA</td>
+					<td class="Pad TableITemA TableITemB TableITemD" style="text-align:right; font-size:12px;" width="50%">
+						<table width="100%"><tbody><tr><td></td><td style="word-wrap:normal; white-space:nowrap;" width="99%" align="right"><?php echo $viva; ?></td>
+						</tr>
+						</tbody>
+						</table>
+					</td>
+					</tr>  
+					<?php }?>
+					<tr>
+					<td class="Pad ItemHeader TableITemA TableITemB TableITemC" style="font-size:12px">Total Factura </td>
+					<td class="Pad ItemHeader TableITemA TableITemB" style="text-align:right; font-size:12px;">
+						<table width="100%">
+						<tbody>
+						<tr>
+						<td>
+						</td>
+						<td style="word-wrap:normal; white-space:nowrap;" width="99%" align="right"><?php echo number_format($vtotal,2); ?></td>
+						</tr>
+						</tbody>
+						</table>
+					</td>
+					</tr>
+					</tbody>
+					</table>
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				</div>
+				</div>
+				</div>
+				<div class="invfooter" style="margin-left: 10px">
+				<div class="text" style=" font-size:11px">
+				<?php if(!empty($vpie_pagina)){echo $vpie_pagina;} ?>
+				<hr>
+				A esta factura de venta aplican las normas relativas a
+				la letra de cambio (artículo 5 Ley 1231 de 2008). Con esta el Comprador
+				declara haber recibido real y materialmente las mercancías o prestación
+				de servicios descritos en este título - Valor.
+				
+				<?php
+				$vsql5 = "select resolucion,fecha,primerfactura,ultima_fac,vigencia,tipo,desde from resdian where Idres='".$vidres."'";
+				$resolucion = "";
+				$fecha = "";
+				$inicial = "";
+				$final = "";
+				$vigencia = "";
+				$tipo_resolucion = "";
+				$desde = "";
+				$consulta5 = $conexion->consulta($vsql5);
+				if($r5 = mysqli_fetch_array($consulta5))
+				{
+					$resolucion = $r5[0];
+					$fecha = $r5[1];
+					$inicial = $r5[2];
+					$final = $r5[3];
+					$vigencia = $r5[4];
+					$tipo_resolucion = $r5[5];
+					$desde = $r5[6];
+				}
+				?>
+
+				<strong>Resolución No <?php echo $resolucion; ?> - Fecha <?php echo $fecha; ?> - <?php echo $tipo_resolucion; ?> Del <?php echo $vsn_pjfe." ".$desde; ?> al <?php echo $vsn_pjfe." ".$final; ?> - Vigencia: <?php echo $vigencia; ?> MESES</strong>
+				<br>
+				Actividad Económica <?php echo $vactividad; ?>&nbsp;
+				<br>
+					  
+				<?php 
+					if(!empty($vcufe))
+					{
+						echo "<strong>CUFE: </strong>".$vcufe;
+					}
+				?>
+				<br>
+				</div>
+				</div>
+				</div>
+
+				<div class="invoice-container-right">
+				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+				<tr>
+				<td>
+				<img src="js/elaborado.png">
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				</div>
+				</div>
+				</div>
+				<!--FINALIZA FACTURA -->
+<!--************************************-->
+</div>
+</div>
+<br>
+<div id="ctl15_ucControlPane0_ctl00_divLaw" class="invfooter">
+	<span id="ctl15_ucControlPane0_ctl00_lblLaw" class="text-label">
+	<?php 
+		if(!empty($vcufe))
+		{
+			echo "Dando cumplimiento al Art. 86 de la Ley 1676 de 2013, si pasados tres (3) días hábiles siguientes a la recepción de la factura, y ésta no ha sido rechazada, se dará por aceptada.";
+		}
+	?>
+	</span>
+</div> 
+</div>
+	
+</div>
+</span>
+	  </td>	
+  </tr>
+</tbody>
+</table>
+</td>
+
+</tbody>
+</table>
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+  
+</form>
+</body>
+</html>
+<?php
+}
+}
+?>

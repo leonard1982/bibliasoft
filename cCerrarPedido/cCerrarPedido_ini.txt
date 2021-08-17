@@ -1,0 +1,7 @@
+index.php
+FACILWEBv2
+cCerrarPedido
+NAO
+blank
+cCerrarPedido
+LigMd5

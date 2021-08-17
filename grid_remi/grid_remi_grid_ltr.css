@@ -1,0 +1,31 @@
+.css_resolucion_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_resolucion_grid_line {vertical-align: middle;text-align: right;}
+.css_nremision_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_nremision_grid_line {vertical-align: middle;text-align: right;}
+.css_numfacven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_numfacven_grid_line {vertical-align: middle;text-align: center;}
+.css_idcli_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_idcli_grid_line {font-size:11px;vertical-align: middle;text-align: left;}
+.css_fechaven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechaven_grid_line {vertical-align: middle;text-align: center;}
+.css_total_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_total_grid_line {font-weight:bold;vertical-align: middle;text-align: center;}
+.css_total_sub_tot {text-align: center;}
+.css_total_tot_ger {text-align: center;}
+.css_pagada_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_pagada_grid_line {vertical-align: middle;text-align: center;}
+.css_asentada_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_asentada_grid_line {vertical-align: middle;text-align: center;}
+.css_credito_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_credito_grid_line {vertical-align: middle;text-align: center;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: middle;text-align: center;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: middle;text-align: left;}
+.css_vendedor_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_vendedor_grid_line {font-size:10px;vertical-align: middle;text-align: left;}
+.css_imprimir_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_imprimir_grid_line {}
+.css_idfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idfacven_grid_line {vertical-align: top;text-align: right;}
+.css_det_grid_line {text-align: center;}

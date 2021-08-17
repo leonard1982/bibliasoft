@@ -1,0 +1,22 @@
+.css_fecha_hora_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fecha_hora_grid_line {vertical-align: top;text-align: center;}
+.css_gps_llegada_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_gps_llegada_grid_line {text-align: left;}
+.css_fecha_hora_salida_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fecha_hora_salida_grid_line {vertical-align: top;text-align: center;}
+.css_gps_salida_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_gps_salida_grid_line {text-align: left;}
+.css_usuario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_usuario_grid_line {vertical-align: top;text-align: left;}
+.css_nombre_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre_cliente_grid_line {vertical-align: top;text-align: left;}
+.css_concepto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_concepto_grid_line {vertical-align: top;text-align: center;}
+.css_observacion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observacion_grid_line {vertical-align: top;text-align: left;}
+.css_id_visitas_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_visitas_grid_line {vertical-align: top;text-align: right;}
+.css_codigo_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigo_cliente_grid_line {vertical-align: top;text-align: left;}
+.css_latitude_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_latitude_grid_line {vertical-align: top;text-align: left;}

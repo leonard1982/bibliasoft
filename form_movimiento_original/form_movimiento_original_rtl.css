@@ -1,0 +1,36 @@
+.css_idtipotran_label { }
+.css_idtipotran_line {text-align:left;}
+.css_idtipotran_obj {text-align:left;}
+.css_fecha_label { }
+.css_fecha_line { }
+.css_fecha_obj { }
+.css_idpro_label { }
+.css_idpro_line { }
+.css_idpro_obj {text-align:left;width:120px;}
+.css_cantidad_label { }
+.css_cantidad_line { }
+.css_cantidad_obj {font-weight:bold;text-align:right;}
+.css_idbodorig_label { }
+.css_idbodorig_line { }
+.css_idbodorig_obj {text-align:left;width:280px;}
+.css_idboddes_label { }
+.css_idboddes_line { }
+.css_idboddes_obj {text-align:left;width:280px;}
+.css_colores_label { }
+.css_colores_line {text-align:left;}
+.css_colores_obj {text-align:left;}
+.css_tallas_label { }
+.css_tallas_line {text-align:left;}
+.css_tallas_obj {text-align:left;}
+.css_sabor_label { }
+.css_sabor_line {text-align:left;}
+.css_sabor_obj {text-align:left;}
+.css_presentacion_label { }
+.css_presentacion_line {font-size:16px;color:#33FF00;font-weight:bold;text-align:center;}
+.css_presentacion_obj {font-size:16px;background-color:#33FF00;font-weight:bold;text-align:center;}
+.css_stckdestino_label {text-align:center;vertical-align:middle;}
+.css_stckdestino_line {background-color:#FFFF66;text-align:center;vertical-align:middle;}
+.css_stckdestino_obj {text-align:right;}
+.css_stockorigen_label {text-align:center;vertical-align:middle;}
+.css_stockorigen_line {background-color:#CCFFCC;text-align:center;}
+.css_stockorigen_obj {text-align:right;}

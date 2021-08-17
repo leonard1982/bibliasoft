@@ -1,0 +1,23 @@
+.css_periodo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_periodo_grid_line {vertical-align: top;text-align: right;}
+.css_creado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_creado_grid_line {vertical-align: top;text-align: center;}
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_tipo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_grid_line {vertical-align: top;text-align: center;}
+.css_prefijo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_prefijo_grid_line {vertical-align: top;text-align: center;}
+.css_numero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero_grid_line {vertical-align: top;text-align: right;}
+.css_total_debito_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_total_debito_grid_line {vertical-align: top;text-align: right;}
+.css_total_debito_sub_tot {text-align: right;}
+.css_total_debito_tot_ger {text-align: right;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: right;}
+.css_importado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_importado_grid_line {vertical-align: top;text-align: center;}
+.css_idcomprobante_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idcomprobante_grid_line {vertical-align: top;text-align: right;}
+.css_detalle_grid_line {text-align: center;}

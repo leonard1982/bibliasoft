@@ -1,0 +1,36 @@
+.css_numfacven_label { }
+.css_numfacven_line {font-size:20px;font-weight:bold;text-align:center;}
+.css_numfacven_obj {font-size:20px;font-weight:bold;text-align:center;width:120px;}
+.css_fechaven_label { }
+.css_fechaven_line {font-size:20px;font-weight:bold;text-align:center;}
+.css_fechaven_obj {text-align:center;}
+.css_idcli_label { }
+.css_idcli_line {text-align:left;}
+.css_idcli_obj {text-align:left;}
+.css_total_label { }
+.css_total_line { }
+.css_total_obj {font-size:20px;color:#33FF33;background-color:#666666;text-align:center;}
+.css_pagada_label { }
+.css_pagada_line { }
+.css_pagada_obj { }
+.css_asentada_label { }
+.css_asentada_line {text-align:left;}
+.css_asentada_obj {text-align:left;}
+.css_adicional_label {font-weight:bold;text-align:center;}
+.css_adicional_line { }
+.css_adicional_obj {font-size:20px;color:#33FF33;background-color:#666666;text-align:center;}
+.css_adicional2_label {font-weight:bold;}
+.css_adicional2_line { }
+.css_adicional2_obj {font-size:22px;color:#0000CC;background-color:#FFFF00;font-weight:bold;text-align:right;}
+.css_adicional3_label { }
+.css_adicional3_line { }
+.css_adicional3_obj {font-size:22px;color:#0000CC;background-color:#FFFF00;font-weight:bold;text-align:center;}
+.css_obspago_label { }
+.css_obspago_line { }
+.css_obspago_obj { }
+.css_resolucion_label { }
+.css_resolucion_line {font-size:20px;font-weight:bold;text-align:center;}
+.css_resolucion_obj {text-align:left;}
+.css_detallepag_label { }
+.css_detallepag_line { }
+.css_detallepag_obj { }

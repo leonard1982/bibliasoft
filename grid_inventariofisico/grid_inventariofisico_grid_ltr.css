@@ -1,0 +1,17 @@
+.css_titulo_grid_line {font-size:20px;font-weight:bold;vertical-align: middle;text-align: left;}
+.css_prefijo_grid_line {font-size:14px;font-weight:bold;vertical-align: middle;text-align: left;}
+.css_numero_grid_line {font-size:14px;font-weight:bold;vertical-align: middle;text-align: left;}
+.css_fecha_nota_grid_line {font-size:14px;font-weight:bold;vertical-align: middle;text-align: left;}
+.css_t_conc_grid_line {font-size:15px;font-weight:bold;vertical-align: middle;text-align: left;}
+.css_concepto_grid_line {font-family:Courier New, Courier, mono;font-size:14px;vertical-align: middle;text-align: left;}
+.css_r1_grid_line {text-align: left;}
+.css_r2_grid_line {text-align: left;}
+.css_t_obs_grid_line {font-size:15px;font-weight:bold;text-align: left;}
+.css_obs_grid_line {font-family:Courier New, Courier, mono;font-size:14px;text-align: left;}
+.css_r3_grid_line {text-align: left;}
+.css_r4_grid_line {text-align: left;}
+.css_t_ubi_grid_line {font-size:15px;font-weight:bold;text-align: left;}
+.css_ubicacion_grid_line {font-family:Courier New, Courier, mono;font-size:14px;text-align: left;}
+.css_r5_grid_line {text-align: left;}
+.css_r6_grid_line {text-align: left;}
+.css_detalle_nota_grid_line {vertical-align: middle;text-align: left;}

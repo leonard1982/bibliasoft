@@ -1,0 +1,49 @@
+.css_codigoprod_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigoprod_grid_line {vertical-align: top;text-align: center;}
+.css_codigobar_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigobar_grid_line {vertical-align: top;text-align: center;}
+.css_idpro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idpro_grid_line {vertical-align: middle;text-align: right;}
+.css_colores_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_colores_grid_line {vertical-align: middle;text-align: center;}
+.css_tallas_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tallas_grid_line {vertical-align: middle;text-align: center;}
+.css_sabor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_sabor_grid_line {vertical-align: middle;text-align: center;}
+.css_cantidad_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: middle;text-align: right;}
+.css_cantidad_tot_ger {text-align: right;}
+.css_valorunit_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valorunit_grid_line {vertical-align: middle;text-align: right;}
+.css_descuento_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_descuento_grid_line {vertical-align: top;text-align: right;}
+.css_valorpar_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valorpar_grid_line {vertical-align: middle;text-align: right;}
+.css_valorpar_tot_ger {text-align: right;}
+.css_iva_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_iva_grid_line {vertical-align: middle;text-align: right;}
+.css_iva_tot_ger {text-align: right;}
+.css_unidad_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_unidad_grid_line {text-align: right;}
+.css_estado_comanda_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_estado_comanda_grid_line {vertical-align: top;text-align: right;}
+.css_hora_inicio_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_hora_inicio_grid_line {vertical-align: top;text-align: center;}
+.css_hora_final_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_hora_final_grid_line {vertical-align: top;text-align: center;}
+.css_observ_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observ_grid_line {vertical-align: top;text-align: right;}
+.css_cerrado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cerrado_grid_line {vertical-align: top;text-align: right;}
+.css_iddet_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_iddet_grid_line {vertical-align: top;text-align: right;}
+.css_idpedid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idpedid_grid_line {vertical-align: top;text-align: right;}
+.css_numfac_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numfac_grid_line {vertical-align: top;text-align: right;}
+.css_remision_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_remision_grid_line {vertical-align: top;text-align: right;}
+.css_unidadmayor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_unidadmayor_grid_line {vertical-align: top;text-align: right;}
+.css_costop_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_costop_grid_line {vertical-align: top;text-align: right;}

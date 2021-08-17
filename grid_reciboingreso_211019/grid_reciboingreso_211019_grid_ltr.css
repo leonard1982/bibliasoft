@@ -1,0 +1,30 @@
+.css_nurecibo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nurecibo_grid_line {vertical-align: middle;text-align: right;}
+.css_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cliente_grid_line {vertical-align: middle;text-align: left;}
+.css_fecharecibo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecharecibo_grid_line {vertical-align: middle;text-align: center;}
+.css_monto_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_monto_grid_line {vertical-align: middle;text-align: right;}
+.css_monto_tot_ger {text-align: right;}
+.css_banco_id_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_banco_id_grid_line {vertical-align: top;text-align: center;}
+.css_id_concepto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_concepto_grid_line {vertical-align: top;text-align: left;}
+.css_obser_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_obser_grid_line {vertical-align: middle;text-align: left;}
+.css_asentado_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_asentado_grid_line {vertical-align: middle;text-align: center;}
+.css_imprimir_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_imprimir_grid_line {vertical-align: middle;text-align: center;}
+.css_idrecibo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idrecibo_grid_line {vertical-align: top;text-align: right;}
+.css_nufac_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nufac_grid_line {vertical-align: middle;text-align: right;}
+.css_saldofac_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_saldofac_grid_line {vertical-align: middle;text-align: right;}
+.css_formapago_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_formapago_grid_line {vertical-align: middle;text-align: left;}
+.css_resolucion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_resolucion_grid_line {vertical-align: middle;text-align: right;}
+.css_detalle_grid_line {text-align: center;}

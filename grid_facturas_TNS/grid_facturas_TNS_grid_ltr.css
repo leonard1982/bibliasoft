@@ -1,0 +1,23 @@
+.css_factura_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_factura_grid_line {vertical-align: top;text-align: left;}
+.css_k_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_k_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_c_nit_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_c_nit_grid_line {vertical-align: top;text-align: left;}
+.css_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cliente_grid_line {vertical-align: top;text-align: left;}
+.css_asentada_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_asentada_grid_line {vertical-align: top;text-align: center;}
+.css_k_total_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_k_total_grid_line {vertical-align: top;text-align: right;}
+.css_cufe_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cufe_grid_line {vertical-align: top;text-align: left;}
+.css_estado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_estado_grid_line {vertical-align: top;text-align: left;}
+.css_enlace_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_enlace_grid_line {vertical-align: top;text-align: left;}
+.css_consulta_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_consulta_grid_line {text-align: left;}
+.css_pdf_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_pdf_grid_line {text-align: left;}
+.css_detalle_grid_line {text-align: center;}

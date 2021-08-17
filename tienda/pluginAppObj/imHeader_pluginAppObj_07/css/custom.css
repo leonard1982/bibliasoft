@@ -1,0 +1,244 @@
+
+
+#menuoverlay_imHeader_pluginAppObj_07 {
+    z-index: 10702;
+    box-sizing: border-box;
+}
+
+body.menuoverlay_overflow_imHeader_pluginAppObj_07 {
+    /*overflow: hidden;*/
+}
+
+#imHeader_pluginAppObj_07 .hamburger-button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0;   
+    background-color: rgba(194, 212, 78, 1);
+    background-size: contain;
+    background-image: none;
+    border-color: rgba(243, 243, 243, 1);
+    border-style: solid;
+    border-width: 0px 0px 0px 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: .3s;
+    
+}
+
+.imHeader_pluginAppObj_07_menuoverlay .imHeader_pluginAppObj_07-overlay-close.show {
+    opacity: 1;
+	visibility: visible;
+	-webkit-transition: opacity 800ms;
+	transition: opacity 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay .imHeader_pluginAppObj_07-overlay-close.hide{
+    opacity: 0;
+    visibility: hidden;
+	-webkit-transition: opacity 800ms, visibility 0s 800ms;
+	transition: opacity 800ms, visibility 0s 800ms;
+}
+
+
+#imHeader_pluginAppObj_07 .hamburger-button > div {
+    display: table;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+#imHeader_pluginAppObj_07 .hamburger-button > div > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#imHeader_pluginAppObj_07 .hamburger-button > div > div .hamburger-bar {
+    margin: 4px auto;
+    width: 65%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 1);
+    display: block;
+    transition: .3s;
+    
+}
+
+#imHeader_pluginAppObj_07 .hamburger-button.hide {
+    background-color: rgb(174,192,98);
+}
+
+#imHeader_pluginAppObj_07 .hamburger-button.hide > div > div .hamburger-bar:first-child{
+    transform: translateY(15px);
+    opacity: 0;
+  }
+
+#imHeader_pluginAppObj_07 .hamburger-button.hide > div > div .hamburger-bar:nth-child(2){
+    transform: rotate(180deg);
+  }
+
+#imHeader_pluginAppObj_07 .hamburger-button.hide > div > div .hamburger-bar:last-child{
+    transform: translateY(-15px);
+    opacity: 0;
+}
+
+
+
+
+/* Overlay style */
+.imHeader_pluginAppObj_07_menuoverlay {
+    z-index: 10702;
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Overlay style */
+.imHeader_pluginAppObj_07_menuoverlay_back {
+	position: absolute;
+	bottom: 0;
+	top: 0;
+    left: 0;
+    right: 0;
+    background:  rgba(194,212,78,0.95);
+    
+    opacity: 0.95;
+}
+
+
+.imHeader_pluginAppObj_07_menuoverlay.open {
+	opacity: 1;
+}
+
+/* Overlay closing cross */
+.imHeader_pluginAppObj_07_menuoverlay .imHeader_pluginAppObj_07-overlay-close {
+    width: 58.52px;
+    height: 58.52px;
+	position: absolute;
+	right: 40px;
+	top: 40px;
+	overflow: hidden;
+	z-index: 100;
+    cursor: pointer;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay .imHeader_pluginAppObj_07-overlay-close svg {
+	position: absolute;
+	right: 0;
+	top: 0;
+    left: 0;
+    right: 0;
+	z-index: 100;
+    fill: rgba(255, 255, 255, 1);
+    -webkit-transition: 0.4s ease-out;
+    -moz-transition:  0.4s ease-out;
+    transition:  0.4s ease-out;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay .imHeader_pluginAppObj_07-overlay-close svg:hover {
+    fill: rgba(67, 67, 67, 1);
+    -webkit-transform: rotateZ(180deg);
+    -moz-transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
+}
+
+/* Menu style */
+.imHeader_pluginAppObj_07_menuoverlay nav {
+	text-align: center;
+	position: relative;
+    top: 50%;
+	transform: translateY(-50%);
+    overflow: auto;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay nav.scrollingshadows {
+    background: 
+    /* Shadow covers */
+    linear-gradient(transparent 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), transparent 70%) 0 100%, 
+    /* Shadows */
+    radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 0px, 100% 16px;
+    /* Opera doesn't support this in the shorthand */
+    background-attachment: local, local, scroll, scroll;
+    background-position-x: center;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay nav.disable-scrollbars::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* Chrome/Safari/Webkit */
+}
+
+.imHeader_pluginAppObj_07_menuoverlay nav.disable-scrollbars {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.imHeader_pluginAppObj_07_menuoverlay nav.plus-eight {
+    height: 80%;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay nav.plus-five {
+    height: 70%;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay nav.plus-three {
+   height: 60%;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay nav.max-three {
+   height: 50%;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay ul {
+    list-style: none;
+	padding: 0;
+	margin: 0 auto;
+	display: inline-block;
+	height: 100%;
+	position: relative;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay ul li {
+    min-height: 58.52px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay ul li a {
+	display: block;
+	transition: color 0.2s;
+    text-decoration: none;
+    font-family: Poppins;
+    font-size: 22pt;
+    font-weight: normal;
+    font-style: normal;
+	color: rgba(255, 255, 255, 1);
+    ;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay ul li:not(.pwNotHover) a:hover, .imHeader_pluginAppObj_07_menuoverlay ul li.pwHover a {
+	transition: color 0.2s;
+    font-weight: normal;
+    font-style: italic;
+    text-decoration: none;
+	color: rgba(67, 67, 67, 1);
+    ;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay ul li.imMnMnCurrent a {
+	transition: color 0.2s;
+    font-weight: normal;
+    font-style: italic;
+    text-decoration: none;
+	color: rgba(67, 67, 67, 1);
+}

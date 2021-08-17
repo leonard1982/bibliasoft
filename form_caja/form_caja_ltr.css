@@ -1,0 +1,27 @@
+.css_idcaja_label { }
+.css_idcaja_line {text-align:left;}
+.css_idcaja_obj {text-align:left;}
+.css_fecha_label { }
+.css_fecha_line { }
+.css_fecha_obj { }
+.css_detalle_label { }
+.css_detalle_line {width:200px;}
+.css_detalle_obj {width:200px;}
+.css_cantidad_label { }
+.css_cantidad_line {text-align:left;}
+.css_cantidad_obj {text-align:right;}
+.css_documento_label { }
+.css_documento_line { }
+.css_documento_obj { }
+.css_cierredia_label { }
+.css_cierredia_line { }
+.css_cierredia_obj { }
+.css_hora_label { }
+.css_hora_line {text-align:left;}
+.css_hora_obj {text-align:left;}
+.css_banco_label { }
+.css_banco_line {text-align:left;width:200px;}
+.css_banco_obj {text-align:left;width:200px;}
+.css_usuario_label { }
+.css_usuario_line {text-align:left;width:200px;}
+.css_usuario_obj {text-align:left;width:200px;}

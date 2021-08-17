@@ -1,0 +1,32 @@
+<?php 
+require_once 'terceros/dropbox/vendor/autoload.php';
+use Kunnu\Dropbox\Dropbox;
+use Kunnu\Dropbox\DropboxApp;
+
+$dropboxKey ="f1zpna1678tu7ru";
+$dropboxSecret ="mcoiwre11mb85ar";
+$dropboxToken="97kALA6LoI4AAAAAAAAAAVWlsUVgZ_FyouSfln01-z_hIb5uybopQmCoAN75ov6o";
+
+
+$app = new DropboxApp($dropboxKey,$dropboxSecret,$dropboxToken);
+$dropbox = new Dropbox($app);
+
+if(!empty($_FILES)){
+    $nombre = uniqid();
+    $tempfile = $_FILES['file']['tmp_name'];
+    $ext = explode(".",$_FILES['file']['name']);
+    $ext = end($ext);
+    $nombredropbox = "/" .$nombre . "." .$ext;
+
+   try{
+        $file = $dropbox->simpleUpload( $tempfile,$nombredropbox, ['autorename' => false]);
+        echo "archivo subido";
+   }catch(\exception $e){
+        print_r($e);
+        
+   }
+
+
+
+}
+?>

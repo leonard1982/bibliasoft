@@ -1,0 +1,27 @@
+str@NMF@SC_Save_Name@NMF@agrupar_fecha@NMF@
+str@NMF@SC_Ind_Groupby@NMF@fecha@NMF@
+arr@NMF@field_order@NMF@a:27:{i:0;s:10:"resolucion";i:1;s:9:"numfacven";i:2;s:5:"idcli";i:3;s:8:"fechaven";i:4;s:5:"total";i:5;s:6:"pagada";i:6;s:8:"asentada";i:7;s:7:"credito";i:8;s:8:"vendedor";i:9;s:8:"imprimir";i:10;s:14:"imprmirtirilla";i:11;s:9:"fechavenc";i:12;s:8:"idfacven";i:13;s:8:"subtotal";i:14;s:8:"valoriva";i:15;s:13:"observaciones";i:16;s:5:"saldo";i:17;s:9:"adicional";i:18;s:10:"adicional2";i:19;s:10:"adicional3";i:20;s:6:"pedido";i:21;s:11:"base_iva_19";i:22;s:12:"valor_iva_19";i:23;s:10:"base_iva_5";i:24;s:11:"valor_iva_5";i:25;s:7:"excento";i:26;s:5:"print";}@NMF@
+arr@NMF@field_order_orig@NMF@a:27:{i:0;s:10:"resolucion";i:1;s:9:"numfacven";i:2;s:5:"idcli";i:3;s:8:"fechaven";i:4;s:5:"total";i:5;s:6:"pagada";i:6;s:8:"asentada";i:7;s:7:"credito";i:8;s:9:"fechavenc";i:9;s:8:"vendedor";i:10;s:8:"imprimir";i:11;s:14:"imprmirtirilla";i:12;s:8:"idfacven";i:13;s:8:"subtotal";i:14;s:8:"valoriva";i:15;s:13:"observaciones";i:16;s:5:"saldo";i:17;s:9:"adicional";i:18;s:10:"adicional2";i:19;s:10:"adicional3";i:20;s:6:"pedido";i:21;s:11:"base_iva_19";i:22;s:12:"valor_iva_19";i:23;s:10:"base_iva_5";i:24;s:11:"valor_iva_5";i:25;s:7:"excento";i:26;s:5:"print";}@NMF@
+arr@NMF@usr_cmp_sel@NMF@a:16:{s:9:"fechavenc";s:3:"off";s:8:"idfacven";s:3:"off";s:8:"subtotal";s:3:"off";s:8:"valoriva";s:3:"off";s:13:"observaciones";s:3:"off";s:5:"saldo";s:3:"off";s:9:"adicional";s:3:"off";s:10:"adicional2";s:3:"off";s:10:"adicional3";s:3:"off";s:6:"pedido";s:3:"off";s:11:"base_iva_19";s:3:"off";s:12:"valor_iva_19";s:3:"off";s:10:"base_iva_5";s:3:"off";s:11:"valor_iva_5";s:3:"off";s:7:"excento";s:3:"off";s:5:"print";s:3:"off";}@NMF@
+arr@NMF@ordem_select@NMF@a:1:{s:8:"idfacven";s:4:"DESC";}@NMF@
+arr@NMF@ordem_quebra@NMF@a:1:{s:8:"fechaven";s:3:"asc";}@NMF@
+str@NMF@where_pesq_filtro@NMF@ ( fechaven between '2019-03-01' and '2019-03-31')@NMF@
+str@NMF@where_pesq@NMF@ where ( ( fechaven between '2019-03-01' and '2019-03-31'))@NMF@
+str@NMF@cond_pesq@NMF@Fecha Entre 01/03/2019 y 31/03/2019##*@@and@NMF@
+arr@NMF@campos_busca@NMF@a:26:{s:12:"fechaven_dia";s:2:"01";s:12:"fechaven_mes";s:2:"03";s:12:"fechaven_ano";s:4:"2019";s:20:"fechaven_input_2_dia";s:2:"31";s:20:"fechaven_input_2_mes";s:2:"03";s:20:"fechaven_input_2_ano";s:4:"2019";s:13:"fechaven_cond";s:2:"bw";s:10:"resolucion";s:0:"";s:15:"resolucion_cond";s:2:"eq";s:9:"numfacven";s:0:"";s:14:"numfacven_cond";s:2:"qp";s:5:"idcli";s:0:"";s:10:"idcli_cond";s:2:"qp";s:8:"vendedor";s:0:"";s:13:"vendedor_cond";s:2:"qp";s:13:"observaciones";s:0:"";s:18:"observaciones_cond";s:2:"qp";s:8:"asentada";s:0:"";s:13:"asentada_cond";s:2:"eq";s:6:"pagada";s:0:"";s:11:"pagada_cond";s:2:"eq";s:7:"credito";s:0:"";s:12:"credito_cond";s:2:"eq";s:11:"NM_operador";s:3:"and";s:8:"fechaven";s:10:"2019-03-01";s:16:"fechaven_input_2";s:10:"2019-03-31";}@NMF@
+str@NMF@ordem_grid@NMF@@NMF@
+str@NMF@ordem_ant@NMF@@NMF@
+str@NMF@ordem_desc@NMF@@NMF@
+str@NMF@ordem_cmp@NMF@@NMF@
+arr@NMF@summarizing_fields_order@NMF@a:9:{i:0;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:4;i:5;i:5;i:6;i:6;i:7;i:7;i:8;i:8;i:9;}@NMF@
+arr@NMF@summarizing_fields_display@NMF@a:9:{i:1;a:2:{s:5:"label";s:9:"Registros";s:7:"display";b:1;}i:2;a:2:{s:5:"label";s:17:"Total Venta(Suma)";s:7:"display";b:1;}i:3;a:2:{s:5:"label";s:14:"SubTotal(Suma)";s:7:"display";b:1;}i:4;a:2:{s:5:"label";s:9:"IVA(Suma)";s:7:"display";b:1;}i:5;a:2:{s:5:"label";s:17:"Base Iva 19(Suma)";s:7:"display";b:1;}i:6;a:2:{s:5:"label";s:18:"Valor Iva 19(Suma)";s:7:"display";b:1;}i:7;a:2:{s:5:"label";s:16:"Base Iva 5(Suma)";s:7:"display";b:1;}i:8;a:2:{s:5:"label";s:17:"Valor Iva 5(Suma)";s:7:"display";b:1;}i:9;a:2:{s:5:"label";s:13:"Excento(Suma)";s:7:"display";b:1;}}@NMF@
+arr@NMF@tot_geral@NMF@a:10:{i:0;s:11:"Total venta";i:1;s:3:"865";i:2;s:10:"4367600.00";i:3;s:10:"4367600.00";i:4;s:4:"0.00";i:5;s:4:"0.00";i:6;s:4:"0.00";i:7;s:4:"0.00";i:8;s:4:"0.00";i:9;s:10:"4367600.00";}@NMF@
+arr@NMF@pivot_group_by@NMF@a:1:{i:0;s:5:"Fecha";}@NMF@
+arr@NMF@pivot_x_axys@NMF@a:0:{}@NMF@
+arr@NMF@pivot_y_axys@NMF@a:1:{i:0;i:0;}@NMF@
+arr@NMF@pivot_fill@NMF@a:1:{i:0;b:1;}@NMF@
+arr@NMF@pivot_order@NMF@a:1:{i:0;s:5:"value";}@NMF@
+arr@NMF@pivot_order_col@NMF@i:0;@NMF@
+arr@NMF@pivot_order_level@NMF@i:0;@NMF@
+arr@NMF@pivot_order_sort@NMF@s:0:"";@NMF@
+arr@NMF@pivot_tabular@NMF@b:1;@NMF@

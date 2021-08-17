@@ -1,0 +1,17 @@
+.css_titulo_grid_line {font-weight:bold;text-align: left;}
+.css_numero_rc_label {text-align:left;}
+.css_numero_rc_grid_line {vertical-align: middle;}
+.css_fecha_rc_label {text-align:left;}
+.css_fecha_rc_grid_line {vertical-align: top;}
+.css_monto_rc_label {text-align:left;}
+.css_monto_rc_grid_line {vertical-align: top;}
+.css_contrato_label {text-align:left;}
+.css_contrato_grid_line {vertical-align: top;}
+.css_tercero_label {text-align:left;}
+.css_tercero_grid_line {vertical-align: top;}
+.css_barr_label {text-align:left;}
+.css_barr_grid_line {}
+.css_blk_3 {}
+.css_blk_4 {}
+.css_detalle1_grid_line {text-align: left;}
+.css_detalle2_grid_line {text-align: left;}

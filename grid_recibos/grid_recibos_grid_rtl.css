@@ -1,0 +1,19 @@
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_num_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_num_grid_line {vertical-align: top;text-align: right;}
+.css_id_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_cliente_grid_line {vertical-align: top;text-align: right;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: right;}
+.css_asentado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_asentado_grid_line {vertical-align: top;text-align: right;}
+.css_monto_a_pagar_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_monto_a_pagar_grid_line {vertical-align: top;text-align: right;}
+.css_monto_a_pagar_tot_ger {text-align: right;}
+.css_prefijo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_prefijo_grid_line {vertical-align: top;text-align: right;}
+.css_numero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numero_grid_line {vertical-align: top;text-align: right;}
+.css_concepto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_concepto_grid_line {vertical-align: top;text-align: right;}

@@ -1,0 +1,15 @@
+.css_documento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_documento_grid_line {vertical-align: top;text-align: left;}
+.css_concepto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_concepto_grid_line {vertical-align: top;text-align: left;}
+.css_detalle_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_detalle_grid_line {vertical-align: top;text-align: left;}
+.css_valor_a_pagar_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_a_pagar_grid_line {vertical-align: top;text-align: right;}
+.css_valor_a_pagar_tot_ger {text-align: right;}
+.css_id_recibo_detalle_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_recibo_detalle_grid_line {vertical-align: top;text-align: right;}
+.css_saldo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_saldo_grid_line {vertical-align: top;text-align: right;}
+.css_id_recibo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_recibo_grid_line {vertical-align: top;text-align: right;}

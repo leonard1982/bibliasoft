@@ -1,0 +1,34 @@
+.css_f_idfacven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_f_idfacven_grid_line {vertical-align: top;text-align: center;}
+.css_fecha_inicial_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_inicial_grid_line {vertical-align: top;text-align: center;}
+.css_devolucion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_devolucion_grid_line {vertical-align: top;text-align: right;}
+.css_referencia_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_referencia_grid_line {vertical-align: top;text-align: right;}
+.css_descripcion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_descripcion_grid_line {vertical-align: top;text-align: right;}
+.css_cantidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: top;text-align: right;}
+.css_cantidad_sub_tot {text-align: right;}
+.css_cantidad_tot_ger {text-align: right;}
+.css_precioventa_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_precioventa_grid_line {vertical-align: top;text-align: right;}
+.css_valor_parcial_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_parcial_grid_line {vertical-align: top;text-align: right;}
+.css_valor_parcial_sub_tot {text-align: right;}
+.css_valor_parcial_tot_ger {text-align: right;}
+.css_costop_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_costop_grid_line {vertical-align: top;text-align: right;}
+.css_costop_sub_tot {text-align: right;}
+.css_costop_tot_ger {text-align: right;}
+.css_gananciap_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_gananciap_grid_line {vertical-align: top;text-align: right;}
+.css_gananciap_sub_tot {text-align: right;}
+.css_gananciap_tot_ger {text-align: right;}
+.css_b_codigo_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_b_codigo_banco_grid_line {vertical-align: top;text-align: center;}
+.css_f_pagada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_f_pagada_grid_line {vertical-align: top;text-align: right;}
+.css_remision_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_remision_grid_line {vertical-align: top;text-align: right;}

@@ -1,0 +1,7 @@
+index.php
+FACILWEBv2
+frm_pos_buscarcodbarra
+NAO
+blank
+frm_pos_buscarcodbarra
+LigMd5

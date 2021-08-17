@@ -1,0 +1,15 @@
+.css_prefijo_label { }
+.css_prefijo_line { }
+.css_prefijo_obj { }
+.css_numero_label { }
+.css_numero_line { }
+.css_numero_obj {text-align:right;}
+.css_factura_label { }
+.css_factura_line {font-weight:bold;text-align:center;vertical-align:middle;}
+.css_factura_obj { }
+.css_fecha_nota_label { }
+.css_fecha_nota_line {text-align:center;vertical-align:middle;}
+.css_fecha_nota_obj { }
+.css_obs_label {font-weight:bold;}
+.css_obs_line {vertical-align:middle;}
+.css_obs_obj { }

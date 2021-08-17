@@ -1,0 +1,48 @@
+.css_montocan__label { }
+.css_montocan__line { }
+.css_montocan__obj {text-align:right;}
+.css_ret__label { }
+.css_ret__line { }
+.css_ret__obj {text-align:right;}
+.css_descuent__label { }
+.css_descuent__line {text-align:left;}
+.css_descuent__obj {text-align:right;}
+.css_docapagar__label { }
+.css_docapagar__line {text-align:left;}
+.css_docapagar__obj {text-align:left;}
+.css_saldodocumento__label { }
+.css_saldodocumento__line {text-align:center;}
+.css_saldodocumento__obj {text-align:right;}
+.css_conc__label { }
+.css_conc__line { }
+.css_conc__obj { }
+.css_obs__label { }
+.css_obs__line { }
+.css_obs__obj { }
+.css_porc_ret__label { }
+.css_porc_ret__line {text-align:left;}
+.css_porc_ret__obj {text-align:left;}
+.css_val_ica__label { }
+.css_val_ica__line {text-align:left;}
+.css_val_ica__obj {text-align:right;}
+.css_porc_ica__label { }
+.css_porc_ica__line {text-align:left;}
+.css_porc_ica__obj {text-align:left;}
+.css_porc_reteiva__label { }
+.css_porc_reteiva__line {text-align:left;}
+.css_porc_reteiva__obj {text-align:right;}
+.css_val_reteiva__label { }
+.css_val_reteiva__line {text-align:left;}
+.css_val_reteiva__obj {text-align:right;}
+.css_id_concepto__label { }
+.css_id_concepto__line {text-align:left;}
+.css_id_concepto__obj {text-align:left;}
+.css_valor_base__label { }
+.css_valor_base__line { }
+.css_valor_base__obj {text-align:right;}
+.css_valor_iva__label { }
+.css_valor_iva__line { }
+.css_valor_iva__obj {text-align:right;}
+.css_valpagar__label {text-align:center;}
+.css_valpagar__line {font-size:22px;color:#33FF00;font-weight:bold;text-align:center;}
+.css_valpagar__obj {font-size:20px;color:#33FF00;font-weight:bold;text-align:center;}

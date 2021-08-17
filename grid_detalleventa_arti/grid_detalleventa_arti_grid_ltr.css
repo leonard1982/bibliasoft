@@ -1,0 +1,16 @@
+.css_fecha_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_fecha_grid_line {text-align: center;}
+.css_idpro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idpro_grid_line {vertical-align: middle;text-align: left;}
+.css_idbod_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_idbod_grid_line {vertical-align: middle;text-align: center;}
+.css_cantidad_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: middle;text-align: center;}
+.css_cantidad_sub_tot {text-align: center;}
+.css_cantidad_tot_ger {text-align: center;}
+.css_iddet_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_iddet_grid_line {vertical-align: top;text-align: right;}
+.css_numfac_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numfac_grid_line {vertical-align: top;text-align: right;}
+.css_valorunit_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_valorunit_grid_line {vertical-align: middle;text-align: right;}

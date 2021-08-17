@@ -1,0 +1,128 @@
+.css_documento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_documento_grid_line {vertical-align: middle;text-align: center;}
+.css_dv_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_dv_grid_line {vertical-align: middle;text-align: center;}
+.css_nombres_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nombres_grid_line {vertical-align: middle;text-align: left;}
+.css_direccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion_grid_line {vertical-align: middle;text-align: left;}
+.css_idmuni_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idmuni_grid_line {vertical-align: middle;text-align: left;}
+.css_tel_cel_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_tel_cel_grid_line {vertical-align: middle;text-align: left;}
+.css_cliente_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_cliente_grid_line {background-color:#CCFFFF;vertical-align: middle;text-align: center;}
+.css_proveedor_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_proveedor_grid_line {background-color:#FF9900;vertical-align: middle;text-align: center;}
+.css_empleado_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_empleado_grid_line {background-color:#FFFFCC;vertical-align: middle;text-align: center;}
+.css_idtercero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idtercero_grid_line {vertical-align: top;text-align: right;}
+.css_nacimiento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nacimiento_grid_line {vertical-align: middle;text-align: center;}
+.css_sexo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_sexo_grid_line {vertical-align: middle;text-align: center;}
+.css_urlmail_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_urlmail_grid_line {color:#0000FF;font-weight:bold;vertical-align: middle;text-align: left;}
+.css_fechault_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechault_grid_line {vertical-align: middle;text-align: center;}
+.css_saldo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_saldo_grid_line {vertical-align: middle;text-align: left;}
+.css_afiliacion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_afiliacion_grid_line {vertical-align: middle;text-align: center;}
+.css_regimen_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_regimen_grid_line {vertical-align: top;text-align: left;}
+.css_tipo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_grid_line {vertical-align: top;text-align: left;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: middle;text-align: left;}
+.css_loatiende_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_loatiende_grid_line {vertical-align: middle;text-align: right;}
+.css_contacto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_contacto_grid_line {vertical-align: top;text-align: left;}
+.css_credito_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_credito_grid_line {vertical-align: top;text-align: left;}
+.css_cupo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_cupo_grid_line {vertical-align: top;text-align: right;}
+.css_listaprecios_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_listaprecios_grid_line {vertical-align: top;text-align: right;}
+.css_con_actual_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_con_actual_grid_line {vertical-align: top;text-align: center;}
+.css_efec_retencion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_efec_retencion_grid_line {vertical-align: top;text-align: left;}
+.css_urlmail_1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_urlmail_1_grid_line {vertical-align: top;text-align: left;}
+.css_nombre1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre1_grid_line {vertical-align: top;text-align: left;}
+.css_nombre2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre2_grid_line {vertical-align: top;text-align: left;}
+.css_apellido1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_apellido1_grid_line {vertical-align: top;text-align: left;}
+.css_apellido2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_apellido2_grid_line {vertical-align: top;text-align: left;}
+.css_sucur_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_sucur_cliente_grid_line {vertical-align: top;text-align: left;}
+.css_representante_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_representante_grid_line {vertical-align: top;text-align: left;}
+.css_es_restaurante_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_es_restaurante_grid_line {vertical-align: top;text-align: left;}
+.css_dias_credito_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dias_credito_grid_line {vertical-align: top;text-align: right;}
+.css_dias_mora_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dias_mora_grid_line {vertical-align: top;text-align: right;}
+.css_cupo_vendedor_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_cupo_vendedor_grid_line {vertical-align: top;text-align: right;}
+.css_codigo_ter_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigo_ter_grid_line {vertical-align: top;text-align: left;}
+.css_es_cajero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_es_cajero_grid_line {vertical-align: top;text-align: left;}
+.css_autorizado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_autorizado_grid_line {vertical-align: top;text-align: left;}
+.css_zona_clientes_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_zona_clientes_grid_line {vertical-align: top;text-align: right;}
+.css_clasificacion_clientes_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_clasificacion_clientes_grid_line {vertical-align: top;text-align: right;}
+.css_creado_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_creado_grid_line {vertical-align: top;text-align: center;}
+.css_disponible_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_disponible_grid_line {vertical-align: top;text-align: left;}
+.css_id_pedido_tmp_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_pedido_tmp_grid_line {vertical-align: top;text-align: right;}
+.css_n_pedido_tmp_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_n_pedido_tmp_grid_line {vertical-align: top;text-align: left;}
+.css_total_pedido_tmp_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_total_pedido_tmp_grid_line {vertical-align: top;text-align: right;}
+.css_obs_pedido_tmp_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_obs_pedido_tmp_grid_line {vertical-align: top;text-align: left;}
+.css_vend_pedido_tmp_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_vend_pedido_tmp_grid_line {vertical-align: top;text-align: left;}
+.css_ciudad_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ciudad_grid_line {vertical-align: top;text-align: left;}
+.css_codigo_postal_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigo_postal_grid_line {vertical-align: top;text-align: left;}
+.css_lenguaje_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_lenguaje_grid_line {vertical-align: top;text-align: left;}
+.css_nombre_comercil_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre_comercil_grid_line {vertical-align: top;text-align: left;}
+.css_notificar_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_notificar_grid_line {vertical-align: top;text-align: left;}
+.css_puc_auxiliar_deudores_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_puc_auxiliar_deudores_grid_line {vertical-align: top;text-align: right;}
+.css_puc_retefuente_ventas_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_puc_retefuente_ventas_grid_line {vertical-align: top;text-align: right;}
+.css_puc_retefuente_servicios_clie_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_puc_retefuente_servicios_clie_grid_line {vertical-align: top;text-align: right;}
+.css_puc_auxiliar_proveedores_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_puc_auxiliar_proveedores_grid_line {vertical-align: top;text-align: right;}
+.css_puc_retefuente_compras_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_puc_retefuente_compras_grid_line {vertical-align: top;text-align: right;}
+.css_puc_retefuente_servicios_prov_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_puc_retefuente_servicios_prov_grid_line {vertical-align: top;text-align: right;}
+.css_nube_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nube_grid_line {vertical-align: top;text-align: left;}
+.css_tipo_documento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_documento_grid_line {vertical-align: top;text-align: left;}
+.css_facturas_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_facturas_grid_line {text-align: center;}
+.css_sc_asigna_vendedor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_sc_asigna_vendedor_grid_line {text-align: left;}

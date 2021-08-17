@@ -1,0 +1,16 @@
+.css_descr_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_descr_grid_line {vertical-align: top;text-align: left;}
+.css_cantidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: top;text-align: right;}
+.css_cantidad_tot_ger {text-align: right;}
+.css_valor_mensualidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_mensualidad_grid_line {vertical-align: top;text-align: right;}
+.css_valor_mensualidad_tot_ger {text-align: right;}
+.css_id_detalle_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_detalle_grid_line {vertical-align: top;text-align: right;}
+.css_id_contrato_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_contrato_grid_line {vertical-align: top;text-align: right;}
+.css_id_producto_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_producto_grid_line {vertical-align: top;text-align: right;}
+.css_valorunit_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valorunit_grid_line {vertical-align: top;text-align: right;}

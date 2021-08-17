@@ -1,0 +1,15 @@
+.css_inicio_label {vertical-align:middle; font-weight:bold;text-align:left;}
+.css_inicio_grid_line {vertical-align: top;}
+.css_pedido_label {vertical-align:middle; font-weight:bold;text-align:left;}
+.css_pedido_grid_line {vertical-align: top;}
+.css_cliente_label {vertical-align:middle; font-weight:bold;text-align:left;}
+.css_cliente_grid_line {vertical-align: top;}
+.css_producto_label {vertical-align:middle; font-weight:bold;text-align:left;}
+.css_producto_grid_line {color:#FFFFFF;font-family:Arial, sans-serif;font-size:16px;background-color:#990099;font-weight:bold;vertical-align: top;}
+.css_cantidad_label {vertical-align:middle; font-weight:normal;text-align:left;}
+.css_cantidad_grid_line {vertical-align: top;}
+.css_observacion_label {vertical-align:middle; font-weight:normal;text-align:left;}
+.css_observacion_grid_line {vertical-align: top;}
+.css_estado_label {vertical-align:middle; font-weight:bold;text-align:left;}
+.css_estado_grid_line {vertical-align: top;}
+.css_img_grid_line {vertical-align: middle;text-align: center;}

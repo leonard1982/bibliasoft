@@ -1,0 +1,14 @@
+.css_fecha_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_ingresos_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ingresos_grid_line {vertical-align: top;text-align: right;}
+.css_ingresos_sub_tot {text-align: right;}
+.css_ingresos_tot_ger {text-align: right;}
+.css_egresos_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_egresos_grid_line {vertical-align: top;text-align: right;}
+.css_egresos_sub_tot {text-align: right;}
+.css_egresos_tot_ger {text-align: right;}
+.css_diferencia_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_diferencia_grid_line {vertical-align: top;text-align: right;}
+.css_diferencia_sub_tot {text-align: right;}
+.css_diferencia_tot_ger {text-align: right;}

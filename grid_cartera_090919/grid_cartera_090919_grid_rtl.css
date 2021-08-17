@@ -1,0 +1,32 @@
+.css_idcli_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idcli_grid_line {vertical-align: middle;text-align: right;}
+.css_resolucion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_resolucion_grid_line {vertical-align: middle;text-align: right;}
+.css_numfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numfacven_grid_line {vertical-align: middle;text-align: right;}
+.css_nremision_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_nremision_grid_line {vertical-align: middle;text-align: right;}
+.css_credito_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_credito_grid_line {vertical-align: middle;text-align: center;}
+.css_fechaven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechaven_grid_line {vertical-align: middle;text-align: center;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: middle;text-align: center;}
+.css_total_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_total_grid_line {vertical-align: middle;text-align: right;}
+.css_pagada_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_pagada_grid_line {vertical-align: middle;text-align: center;}
+.css_saldo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_saldo_grid_line {background-color:#FFFF00;font-weight:bold;vertical-align: middle;text-align: right;}
+.css_saldo_sub_tot {text-align: right;}
+.css_saldo_tot_ger {text-align: right;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: right;}
+.css_idfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idfacven_grid_line {vertical-align: top;text-align: right;}
+.css_valoriva_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valoriva_grid_line {vertical-align: top;text-align: right;}
+.css_asentada_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_asentada_grid_line {vertical-align: top;text-align: right;}
+.css_prefijo_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_prefijo_grid_line {text-align: right;}

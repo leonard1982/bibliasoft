@@ -1,0 +1,18 @@
+.css_producto_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_producto_grid_line {vertical-align: middle;text-align: left;}
+.css_colores_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_colores_grid_line {vertical-align: top;text-align: right;}
+.css_tallas_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_tallas_grid_line {vertical-align: top;text-align: right;}
+.css_sabor_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_sabor_grid_line {vertical-align: top;text-align: right;}
+.css_destino_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_destino_grid_line {vertical-align: middle;text-align: left;}
+.css_cantidad_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: middle;text-align: right;}
+.css_presentacion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_presentacion_grid_line {vertical-align: middle;text-align: center;}
+.css_idnota_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idnota_grid_line {vertical-align: top;text-align: right;}
+.css_idmovi_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_idmovi_grid_line {vertical-align: middle;text-align: right;}

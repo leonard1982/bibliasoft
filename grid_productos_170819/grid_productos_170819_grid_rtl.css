@@ -1,0 +1,48 @@
+.css_codigobar_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigobar_grid_line {vertical-align: middle;text-align: right;}
+.css_nompro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nompro_grid_line {vertical-align: middle;text-align: right;}
+.css_imagenprod_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_imagenprod_grid_line {vertical-align: middle;text-align: center;}
+.css_stockmen_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_stockmen_grid_line {color:#FFFFFF;font-size:14px;background-color:#34495E;font-weight:bold;vertical-align: middle;text-align: center;}
+.css_unimay_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_unimay_grid_line {vertical-align: top;text-align: right;}
+.css_preciofull_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_preciofull_grid_line {vertical-align: top;text-align: right;}
+.css_existencia_menor_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_existencia_menor_grid_line {vertical-align: top;text-align: right;}
+.css_existencia_menor_sub_tot {text-align: right;}
+.css_existencia_menor_tot_ger {text-align: right;}
+.css_unimen_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_unimen_grid_line {vertical-align: middle;text-align: center;}
+.css_preciomen_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_preciomen_grid_line {vertical-align: middle;text-align: right;}
+.css_otro_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_otro_grid_line {vertical-align: middle;text-align: center;}
+.css_otro2_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_otro2_grid_line {vertical-align: middle;text-align: center;}
+.css_btn_stock_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_btn_stock_grid_line {background-color:#34495E;text-align: center;}
+.css_stock_fv_lot_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_stock_fv_lot_grid_line {vertical-align: middle;text-align: center;}
+.css_escombo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_escombo_grid_line {vertical-align: top;text-align: right;}
+.css_agregarnotainv_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_agregarnotainv_grid_line {text-align: center;}
+.css_idprod_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idprod_grid_line {vertical-align: top;text-align: right;}
+.css_costomen_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_costomen_grid_line {vertical-align: top;text-align: right;}
+.css_recmayamen_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_recmayamen_grid_line {vertical-align: top;text-align: right;}
+.css_stockmay_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_stockmay_grid_line {vertical-align: top;text-align: right;}
+.css_idgrup_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idgrup_grid_line {vertical-align: middle;text-align: right;}
+.css_idpro1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idpro1_grid_line {vertical-align: middle;text-align: right;}
+.css_idpro2_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idpro2_grid_line {vertical-align: top;text-align: right;}
+.css_idiva_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idiva_grid_line {vertical-align: top;text-align: right;}

@@ -1,0 +1,60 @@
+.css_idfaccom_label {text-align:right;}
+.css_idfaccom_line {text-align:left;}
+.css_idfaccom_obj {text-align:left;}
+.css_idpro_label {text-align:left;vertical-align:middle;}
+.css_idpro_line {text-align:left;}
+.css_idpro_obj {text-align:left;width:315px;}
+.css_idbod_label {text-align:center;}
+.css_idbod_line {text-align:left;}
+.css_idbod_obj {text-align:center;width:150px;}
+.css_cantidad_label {text-align:center;}
+.css_cantidad_line {text-align:left;width:70px;}
+.css_cantidad_obj {text-align:center;width:130px;}
+.css_valorunit_label {text-align:center;}
+.css_valorunit_line {text-align:left;}
+.css_valorunit_obj {text-align:right;width:130px;}
+.css_valorpar_label {text-align:center;}
+.css_valorpar_line {width:130px;}
+.css_valorpar_obj {text-align:right;width:130px;}
+.css_iva_label {text-align:left;}
+.css_iva_line {text-align:left;}
+.css_iva_obj {text-align:right;width:130px;}
+.css_descuento_label {text-align:center;}
+.css_descuento_line {text-align:left;}
+.css_descuento_obj {text-align:center;}
+.css_tasaiva_label {text-align:left;}
+.css_tasaiva_line { }
+.css_tasaiva_obj {text-align:center;width:130px;}
+.css_tasadesc_label {text-align:right;}
+.css_tasadesc_line {text-align:left;}
+.css_tasadesc_obj {text-align:left;}
+.css_devuelto_label {text-align:right;}
+.css_devuelto_line {text-align:left;}
+.css_devuelto_obj {text-align:left;}
+.css_colores_label { }
+.css_colores_line {text-align:left;}
+.css_colores_obj {text-align:left;width:150px;}
+.css_tallas_label { }
+.css_tallas_line {text-align:left;}
+.css_tallas_obj {text-align:left;width:150px;}
+.css_sabor_label { }
+.css_sabor_line {text-align:left;}
+.css_sabor_obj {text-align:left;width:150px;}
+.css_vencimiento_label {text-align:left;}
+.css_vencimiento_line {text-align:left;}
+.css_vencimiento_obj {text-align:center;width:130px;}
+.css_lote_label {text-align:left;}
+.css_lote_line {text-align:left;width:130px;}
+.css_lote_obj {width:130px;}
+.css_presentacion_label { }
+.css_presentacion_line {text-align:left;}
+.css_presentacion_obj {background-color:#66FF66;text-align:center;width:130px;}
+.css_autocompletar_label { }
+.css_autocompletar_line { }
+.css_autocompletar_obj {width:450px;}
+.css_codbarra_label { }
+.css_codbarra_line { }
+.css_codbarra_obj {width:290px;}
+.css_mensaje_label { }
+.css_mensaje_line {font-size:18px;color:#FF0000;font-weight:bold;}
+.css_mensaje_obj {width:450px;}

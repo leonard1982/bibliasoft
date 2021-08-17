@@ -1,0 +1,36 @@
+.css_zona_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_zona_grid_line {vertical-align: top;text-align: left;}
+.css_numero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero_grid_line {vertical-align: top;text-align: right;}
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_codigo_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigo_cliente_grid_line {vertical-align: top;text-align: right;}
+.css_estado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_estado_grid_line {vertical-align: top;text-align: left;}
+.css_prioridad_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_prioridad_grid_line {vertical-align: top;text-align: left;}
+.css_valor_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_grid_line {vertical-align: top;text-align: right;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: left;}
+.css_factura_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_factura_grid_line {vertical-align: top;text-align: left;}
+.css_notificar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_notificar_grid_line {text-align: center;}
+.css_imprimir_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_imprimir_grid_line {text-align: center;}
+.css_id_caso_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_caso_grid_line {vertical-align: top;text-align: right;}
+.css_tipo_caso_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_caso_grid_line {vertical-align: top;text-align: left;}
+.css_medio_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_medio_grid_line {vertical-align: top;text-align: left;}
+.css_asignado_tercero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_asignado_tercero_grid_line {vertical-align: top;text-align: left;}
+.css_fecha_asignacion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_asignacion_grid_line {vertical-align: top;text-align: center;}
+.css_fecha_cierre_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_cierre_grid_line {vertical-align: top;text-align: center;}
+.css_cedula_tercero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cedula_tercero_grid_line {vertical-align: top;text-align: left;}

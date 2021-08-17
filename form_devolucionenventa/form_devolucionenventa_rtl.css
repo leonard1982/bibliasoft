@@ -1,0 +1,39 @@
+.css_numerodev_label { }
+.css_numerodev_line {font-size:22px;font-weight:bold;}
+.css_numerodev_obj {font-size:22px;font-weight:bold;}
+.css_fecha_label { }
+.css_fecha_line { }
+.css_fecha_obj {text-align:center;}
+.css_numfacven_label { }
+.css_numfacven_line {text-align:left;}
+.css_numfacven_obj {text-align:right;}
+.css_vunit_label { }
+.css_vunit_line {text-align:left;}
+.css_vunit_obj {text-align:right;}
+.css_vparc_label { }
+.css_vparc_line {text-align:left;}
+.css_vparc_obj {text-align:right;}
+.css_viva_label { }
+.css_viva_line {text-align:left;}
+.css_viva_obj {text-align:right;}
+.css_vdesc_label { }
+.css_vdesc_line {text-align:left;}
+.css_vdesc_obj {text-align:right;}
+.css_costopro_label { }
+.css_costopro_line {text-align:center;vertical-align:middle;width:10px;}
+.css_costopro_obj {background-color:#66FF66;border-color:#FFFFFF;text-align:center;width:10px;}
+.css_observa_label { }
+.css_observa_line { }
+.css_observa_obj { }
+.css_resolucion_label { }
+.css_resolucion_line {text-align:left;}
+.css_resolucion_obj {text-align:left;}
+.css_fechafactura_label {text-align:center;vertical-align:middle;}
+.css_fechafactura_line {text-align:center;vertical-align:middle;}
+.css_fechafactura_obj { }
+.css_detalle_label { }
+.css_detalle_line { }
+.css_detalle_obj { }
+.css_actualiza_label {color:#FF0000;font-weight:bold;text-align:center;vertical-align:middle;}
+.css_actualiza_line {text-align:center;vertical-align:middle;}
+.css_actualiza_obj {text-align:center;}

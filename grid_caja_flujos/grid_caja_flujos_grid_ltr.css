@@ -1,0 +1,20 @@
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_tipo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_grid_line {vertical-align: top;text-align: left;}
+.css_documento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_documento_grid_line {vertical-align: top;text-align: left;}
+.css_valor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valor_grid_line {vertical-align: top;text-align: right;}
+.css_valor_sub_tot {text-align: right;}
+.css_valor_tot_ger {text-align: right;}
+.css_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_banco_grid_line {vertical-align: top;text-align: left;}
+.css_tercero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tercero_grid_line {vertical-align: top;text-align: left;}
+.css_usuario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_usuario_grid_line {vertical-align: top;text-align: left;}
+.css_ie_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ie_grid_line {vertical-align: top;text-align: left;}
+.css_idcaja_flujo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idcaja_flujo_grid_line {vertical-align: top;text-align: right;}

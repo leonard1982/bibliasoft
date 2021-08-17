@@ -1,0 +1,90 @@
+.css_idrecibo_label { }
+.css_idrecibo_line {text-align:left;}
+.css_idrecibo_obj {text-align:left;}
+.css_nurecibo_label {text-align:center;}
+.css_nurecibo_line {text-align:center;}
+.css_nurecibo_obj {text-align:left;}
+.css_nufac_label { }
+.css_nufac_line {text-align:left;}
+.css_nufac_obj {text-align:left;}
+.css_cliente_label { }
+.css_cliente_line {text-align:left;}
+.css_cliente_obj {text-align:left;}
+.css_fecharecibo_label { }
+.css_fecharecibo_line { }
+.css_fecharecibo_obj {text-align:center;}
+.css_monto_label { }
+.css_monto_line {text-align:center;vertical-align:middle;}
+.css_monto_obj {text-align:center;}
+.css_son_label { }
+.css_son_line { }
+.css_son_obj { }
+.css_saldofac_label { }
+.css_saldofac_line {text-align:center;}
+.css_saldofac_obj {text-align:center;}
+.css_numcheque_label { }
+.css_numcheque_line { }
+.css_numcheque_obj { }
+.css_banco_label { }
+.css_banco_line { }
+.css_banco_obj { }
+.css_numtarjeta_label { }
+.css_numtarjeta_line { }
+.css_numtarjeta_obj { }
+.css_nombreobanco_label { }
+.css_nombreobanco_line { }
+.css_nombreobanco_obj { }
+.css_obser_label { }
+.css_obser_line { }
+.css_obser_obj { }
+.css_concepto_label { }
+.css_concepto_line { }
+.css_concepto_obj { }
+.css_resolucion_label { }
+.css_resolucion_line {text-align:center;}
+.css_resolucion_obj {text-align:center;}
+.css_rete_label { }
+.css_rete_line { }
+.css_rete_obj {text-align:right;}
+.css_descu_label { }
+.css_descu_line {text-align:left;}
+.css_descu_obj {text-align:right;}
+.css_asentado_label {font-size:14px;color:#000000;background-color:#6699FF;font-weight:bold;}
+.css_asentado_line { }
+.css_asentado_obj {background-color:#FF9900;}
+.css_porc_rete_label { }
+.css_porc_rete_line {text-align:left;}
+.css_porc_rete_obj {text-align:left;}
+.css_val_ica_label { }
+.css_val_ica_line {text-align:left;}
+.css_val_ica_obj {text-align:right;}
+.css_por_ica_label { }
+.css_por_ica_line {text-align:left;}
+.css_por_ica_obj {text-align:left;}
+.css_por_retiva_label { }
+.css_por_retiva_line {text-align:left;}
+.css_por_retiva_obj {text-align:right;}
+.css_val_retiva_label { }
+.css_val_retiva_line {text-align:left;}
+.css_val_retiva_obj {text-align:right;}
+.css_banco_id_label { }
+.css_banco_id_line {text-align:center;}
+.css_banco_id_obj {text-align:center;}
+.css_id_concepto_label { }
+.css_id_concepto_line {text-align:left;}
+.css_id_concepto_obj {text-align:left;}
+.css_detallepagos_label { }
+.css_detallepagos_line { }
+.css_detallepagos_obj { }
+.css_valcobrar_label {text-align:center;}
+.css_valcobrar_line {font-size:20px;color:#33FF00;font-weight:bold;text-align:center;}
+.css_valcobrar_obj {font-size:20px;color:#33FF00;font-weight:bold;text-align:center;}
+.css_valor_base_label { }
+.css_valor_base_line {text-align:left;}
+.css_valor_base_obj {text-align:left;}
+.css_valor_iva_label {text-align:center;}
+.css_valor_iva_line {text-align:center;}
+.css_valor_iva_obj {text-align:center;}
+.css_relleno_label { }
+.css_relleno_line { }
+.css_relleno_obj { }

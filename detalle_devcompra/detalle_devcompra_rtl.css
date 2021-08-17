@@ -1,0 +1,69 @@
+.css_iddet__label {text-align:right;}
+.css_iddet__line {text-align:left;}
+.css_iddet__obj {text-align:left;}
+.css_idfaccom__label {text-align:right;}
+.css_idfaccom__line {text-align:left;}
+.css_idfaccom__obj {text-align:left;}
+.css_idpro__label {text-align:left;vertical-align:middle;}
+.css_idpro__line {text-align:left;}
+.css_idpro__obj {text-align:left;width:200px;}
+.css_idbod__label {text-align:center;}
+.css_idbod__line {text-align:left;}
+.css_idbod__obj {text-align:center;}
+.css_cantidad__label {text-align:center;}
+.css_cantidad__line {text-align:left;width:70px;}
+.css_cantidad__obj {text-align:center;width:50px;}
+.css_valorunit__label {text-align:center;}
+.css_valorunit__line {text-align:left;}
+.css_valorunit__obj {text-align:center;width:80px;}
+.css_valorpar__label {text-align:center;}
+.css_valorpar__line { }
+.css_valorpar__obj {text-align:center;}
+.css_iva__label {text-align:center;}
+.css_iva__line {text-align:right;}
+.css_iva__obj {text-align:center;}
+.css_descuento__label {text-align:center;}
+.css_descuento__line {text-align:left;}
+.css_descuento__obj {text-align:center;}
+.css_tasaiva__label {text-align:right;}
+.css_tasaiva__line {text-align:left;}
+.css_tasaiva__obj {text-align:left;}
+.css_tasadesc__label {text-align:right;}
+.css_tasadesc__line {text-align:left;}
+.css_tasadesc__obj {text-align:left;}
+.css_devuelto__label {text-align:right;}
+.css_devuelto__line {text-align:left;}
+.css_devuelto__obj {text-align:left;}
+.css_colores__label { }
+.css_colores__line {text-align:left;}
+.css_colores__obj {text-align:left;}
+.css_tallas__label { }
+.css_tallas__line {text-align:left;}
+.css_tallas__obj {text-align:left;}
+.css_sabor__label { }
+.css_sabor__line {text-align:left;}
+.css_sabor__obj {text-align:left;}
+.css_vencimiento__label { }
+.css_vencimiento__line {text-align:center;vertical-align:middle;}
+.css_vencimiento__obj {text-align:center;width:60px;}
+.css_lote__label { }
+.css_lote__line { }
+.css_lote__obj {width:60px;}
+.css_serial_codbarra__label { }
+.css_serial_codbarra__line { }
+.css_serial_codbarra__obj { }
+.css_porc_desc__label { }
+.css_porc_desc__line {text-align:left;}
+.css_porc_desc__obj {text-align:center;}
+.css_num_ndevolucion__label { }
+.css_num_ndevolucion__line {text-align:left;}
+.css_num_ndevolucion__obj {text-align:left;}
+.css_cod_barras__label {text-align:right;}
+.css_cod_barras__line {text-align:right;}
+.css_cod_barras__obj {text-align:right;}
+.css_presentacion__label { }
+.css_presentacion__line {background-color:#66ff66;text-align:center;}
+.css_presentacion__obj {background-color:#66FF66;text-align:center;}
+.css_ver__label { }
+.css_ver__line { }
+.css_ver__obj { }

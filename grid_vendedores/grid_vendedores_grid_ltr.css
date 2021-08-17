@@ -1,0 +1,18 @@
+.css_documento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_documento_grid_line {vertical-align: middle;text-align: left;}
+.css_nombres_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombres_grid_line {vertical-align: middle;text-align: left;}
+.css_direccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion_grid_line {vertical-align: middle;text-align: left;}
+.css_tel_cel_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tel_cel_grid_line {vertical-align: middle;text-align: left;}
+.css_urlmail_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_urlmail_grid_line {color:#0000CC;vertical-align: middle;text-align: left;}
+.css_fechault_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechault_grid_line {vertical-align: middle;text-align: center;}
+.css_nacimiento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_nacimiento_grid_line {vertical-align: middle;text-align: center;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: middle;text-align: left;}
+.css_idtercero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idtercero_grid_line {vertical-align: top;text-align: right;}

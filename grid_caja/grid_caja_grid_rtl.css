@@ -1,0 +1,52 @@
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_tipo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_grid_line {vertical-align: top;text-align: right;}
+.css_doc_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_doc_grid_line {vertical-align: top;text-align: right;}
+.css_nota_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nota_grid_line {vertical-align: top;text-align: right;}
+.css_doc_pagado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_doc_pagado_grid_line {vertical-align: top;text-align: right;}
+.css_id_tercero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_tercero_grid_line {vertical-align: top;text-align: right;}
+.css_cantidad_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: middle;text-align: right;}
+.css_cantidad_sub_tot {text-align: right;}
+.css_cantidad_tot_ger {text-align: right;}
+.css_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_banco_grid_line {vertical-align: top;text-align: center;}
+.css_creado_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_creado_grid_line {vertical-align: top;text-align: center;}
+.css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_total_grid_line {font-weight:bold;vertical-align: middle;text-align: right;}
+.css_idcaja_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idcaja_grid_line {vertical-align: top;text-align: right;}
+.css_jornada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_jornada_grid_line {vertical-align: top;text-align: right;}
+.css_detalle_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_detalle_grid_line {vertical-align: top;text-align: right;}
+.css_documento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_documento_grid_line {vertical-align: middle;text-align: center;}
+.css_cierredia_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cierredia_grid_line {vertical-align: top;text-align: right;}
+.css_totaldia_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_totaldia_grid_line {vertical-align: top;text-align: right;}
+.css_arqueo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_arqueo_grid_line {vertical-align: top;text-align: right;}
+.css_saldo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_saldo_grid_line {vertical-align: top;text-align: right;}
+.css_resolucion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_resolucion_grid_line {vertical-align: middle;text-align: center;}
+.css_idrc_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idrc_grid_line {vertical-align: top;text-align: right;}
+.css_idrp_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idrp_grid_line {vertical-align: top;text-align: right;}
+.css_ie_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ie_grid_line {vertical-align: top;text-align: right;}
+.css_creado_inicio_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_creado_inicio_grid_line {vertical-align: top;text-align: center;}
+.css_creado_fin_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_creado_fin_grid_line {vertical-align: top;text-align: center;}
+.css_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cliente_grid_line {vertical-align: top;text-align: right;}

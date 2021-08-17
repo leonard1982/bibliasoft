@@ -1,0 +1,22 @@
+.css_m_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_m_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_numero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero_grid_line {vertical-align: top;text-align: right;}
+.css_m_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_m_observaciones_grid_line {vertical-align: top;text-align: right;}
+.css_producto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_producto_grid_line {vertical-align: top;text-align: right;}
+.css_b_bodega_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_b_bodega_grid_line {vertical-align: top;text-align: right;}
+.css_d_cantidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_d_cantidad_grid_line {vertical-align: top;text-align: right;}
+.css_d_cantidad_sub_tot {text-align: right;}
+.css_d_cantidad_tot_ger {text-align: right;}
+.css_d_presentacion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_d_presentacion_grid_line {vertical-align: top;text-align: right;}
+.css_vence_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_vence_grid_line {vertical-align: top;text-align: center;}
+.css_d_lote_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_d_lote_grid_line {vertical-align: top;text-align: right;}
+.css_m_idmov_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_m_idmov_grid_line {vertical-align: top;text-align: right;}

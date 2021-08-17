@@ -1,0 +1,33 @@
+.css_producto__label { }
+.css_producto__line {text-align:left;}
+.css_producto__obj {text-align:left;}
+.css_destino__label { }
+.css_destino__line {text-align:left;}
+.css_destino__obj {text-align:left;}
+.css_cantidad__label { }
+.css_cantidad__line {text-align:right;}
+.css_cantidad__obj {text-align:right;}
+.css_presentacion__label { }
+.css_presentacion__line {text-align:center;}
+.css_presentacion__obj {text-align:center;}
+.css_colores__label { }
+.css_colores__line {text-align:left;}
+.css_colores__obj {text-align:left;}
+.css_tallas__label { }
+.css_tallas__line {text-align:left;}
+.css_tallas__obj {text-align:left;}
+.css_sabor__label { }
+.css_sabor__line {text-align:left;}
+.css_sabor__obj {text-align:left;}
+.css_fechavenc__label { }
+.css_fechavenc__line {text-align:center;}
+.css_fechavenc__obj {text-align:center;}
+.css_lote__label { }
+.css_lote__line {text-align:right;}
+.css_lote__obj {text-align:right;}
+.css_codigobar__label { }
+.css_codigobar__line {text-align:center;}
+.css_codigobar__obj {text-align:center;}
+.css_stock__label {text-align:center;vertical-align:middle;}
+.css_stock__line {background-color:#66FF33;text-align:center;vertical-align:middle;}
+.css_stock__obj {background-color:#66FF33;text-align:center;}

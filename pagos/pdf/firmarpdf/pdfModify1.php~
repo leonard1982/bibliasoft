@@ -1,0 +1,39 @@
+<?php
+require_once('fpdf/fpdf.php');
+require_once('fpdi/fpdi.php');
+
+// initiate FPDI
+$pdf = new FPDI();
+
+// set the sourcefile
+$sourceFileName = 'presupuesto.pdf';
+
+//Set the source PDF file
+$pagecount = $pdf->setSourceFile($sourceFileName);
+
+$i = 1;
+do {
+    // add a page
+    $pdf->AddPage();
+    // import page
+    $tplidx = $pdf->ImportPage($i); 
+
+     $pdf->useTemplate($tplidx, 10, 10, 200);
+     
+     $pdf->SetFont('Arial');
+     $pdf->SetTextColor(0,0,0);
+     $pdf->SetFontSize(14);
+
+     $pdf->SetXY(40, 265);
+     $pdf->Write(1, "Download from www.bdcom.com");
+     $pdf->SetXY(140, 265);
+     $pdf->Write(1, "Date: " . date("d/m/Y"));
+     
+     //$pdf->Image('image-1.jpg',120,240,20,20);
+     //$pdf->Image('image-2.jpg',120,260,20,20);
+
+     $i++;
+
+} while($i <= $pagecount);
+$pdf->Output(time().'-'.$sourceFileName, "D");
+?>

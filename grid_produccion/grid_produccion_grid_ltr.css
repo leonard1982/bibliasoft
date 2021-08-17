@@ -1,0 +1,19 @@
+.css_numero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero_grid_line {vertical-align: middle;text-align: right;}
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: middle;text-align: center;}
+.css_id_bodega_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_bodega_grid_line {vertical-align: middle;text-align: left;}
+.css_observ_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observ_grid_line {vertical-align: middle;text-align: left;}
+.css_vtotal_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_vtotal_grid_line {vertical-align: middle;text-align: right;}
+.css_vtotal_sub_tot {text-align: right;}
+.css_vtotal_tot_ger {text-align: right;}
+.css_imprimir_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_imprimir_grid_line {}
+.css_idmat_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idmat_grid_line {vertical-align: top;text-align: right;}
+.css_asentada_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_asentada_grid_line {vertical-align: top;text-align: right;}
+.css_detalle_grid_line {text-align: center;}

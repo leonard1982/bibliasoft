@@ -1,0 +1,7 @@
+detallecompra2_mob.php
+FACILWEBv2
+detallecompra2_mob
+NAO
+form
+detallecompra2
+LigMd5

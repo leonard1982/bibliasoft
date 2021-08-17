@@ -1,0 +1,33 @@
+.css_id_escala__label {text-align:right;}
+.css_id_escala__line {text-align:left;}
+.css_id_escala__obj {text-align:left;}
+.css_id_producto__label {text-align:right;}
+.css_id_producto__line {text-align:left;}
+.css_id_producto__obj {text-align:left;}
+.css_factor__label {text-align:center;}
+.css_factor__line {text-align:center;}
+.css_factor__obj {text-align:center;}
+.css_stock_unidad__label {text-align:right;}
+.css_stock_unidad__line {text-align:center;}
+.css_stock_unidad__obj {text-align:center;}
+.css_precio_full__label {text-align:center;vertical-align:middle;}
+.css_precio_full__line {text-align:left;}
+.css_precio_full__obj {text-align:right;}
+.css_precio_medio__label {text-align:center;vertical-align:middle;}
+.css_precio_medio__line {text-align:left;}
+.css_precio_medio__obj {text-align:right;}
+.css_precio_minimo__label {text-align:center;vertical-align:middle;}
+.css_precio_minimo__line {text-align:left;}
+.css_precio_minimo__obj {text-align:right;}
+.css_descripcion_prod__label { }
+.css_descripcion_prod__line { }
+.css_descripcion_prod__obj { }
+.css_representacion_factor__label { }
+.css_representacion_factor__line {text-align:center;}
+.css_representacion_factor__obj {font-size:16px;font-weight:bold;text-align:center;}
+.css_factor_base__label { }
+.css_factor_base__line {text-align:center;}
+.css_factor_base__obj {text-align:center;}
+.css_unidad_base__label { }
+.css_unidad_base__line {text-align:center;}
+.css_unidad_base__obj {text-align:center;}

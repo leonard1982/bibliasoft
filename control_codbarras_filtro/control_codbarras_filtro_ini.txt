@@ -1,0 +1,7 @@
+index.php
+FACILWEBv2
+control_codbarras_filtro
+NAO
+contr
+control_codbarras_filtro
+LigMd5

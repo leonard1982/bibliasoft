@@ -1,0 +1,20 @@
+.css_usuario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_usuario_grid_line {vertical-align: top;text-align: right;}
+.css_password_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_password_grid_line {vertical-align: top;text-align: right;}
+.css_nombre_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre_grid_line {vertical-align: top;text-align: right;}
+.css_correo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_correo_grid_line {vertical-align: top;text-align: right;}
+.css_telefono_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_telefono_grid_line {vertical-align: top;text-align: right;}
+.css_tercero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tercero_grid_line {vertical-align: top;text-align: right;}
+.css_resolucion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_resolucion_grid_line {vertical-align: top;text-align: center;}
+.css_activo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_activo_grid_line {vertical-align: top;text-align: right;}
+.css_idusuarios_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idusuarios_grid_line {vertical-align: top;text-align: right;}
+.css_creacion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_creacion_grid_line {vertical-align: top;text-align: center;}

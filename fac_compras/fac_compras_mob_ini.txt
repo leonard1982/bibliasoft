@@ -1,0 +1,7 @@
+fac_compras_mob.php
+FACILWEBv2
+fac_compras_mob
+NAO
+form
+fac_compras
+LigMd5

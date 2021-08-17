@@ -1,0 +1,12 @@
+.css_plan_cuenta_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_plan_cuenta_grid_line {vertical-align: top;text-align: left;}
+.css_valor_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_grid_line {vertical-align: top;text-align: right;}
+.css_tipo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_grid_line {vertical-align: top;text-align: left;}
+.css_tercero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tercero_grid_line {vertical-align: top;text-align: left;}
+.css_iddetalle_comprobante_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_iddetalle_comprobante_grid_line {vertical-align: top;text-align: right;}
+.css_comprobante_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_comprobante_grid_line {vertical-align: top;text-align: right;}

@@ -1,0 +1,16 @@
+.css_id_tarea_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_tarea_grid_line {vertical-align: top;text-align: right;}
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_asesor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_asesor_grid_line {vertical-align: top;text-align: right;}
+.css_descripcion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_descripcion_grid_line {vertical-align: top;text-align: right;}
+.css_cambiar_estado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cambiar_estado_grid_line {text-align: center;}
+.css_creado_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_creado_grid_line {vertical-align: top;text-align: center;}
+.css_editado_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_editado_grid_line {vertical-align: top;text-align: center;}
+.css_estado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_estado_grid_line {vertical-align: top;text-align: right;}

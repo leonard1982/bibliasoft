@@ -1,0 +1,11 @@
+.css_total_label {vertical-align:middle; font-weight:bold;text-align:center;}
+.css_total_grid_line {vertical-align: middle;}
+.css_mesa_label {vertical-align:middle; font-weight:bold;text-align:center;}
+.css_mesa_grid_line {vertical-align: middle;}
+.css_idcli_label {vertical-align:middle; font-weight:bold;text-align:center;}
+.css_idcli_grid_line {vertical-align: middle;width: 150px;}
+.css_vendedor_label {vertical-align:middle; font-weight:bold;text-align:center;}
+.css_vendedor_grid_line {font-family:Arial;font-size:10px;vertical-align: middle;width: 150px;}
+.css_cambiar_cliente_grid_line {}
+.css_imprimir_grid_line {}
+.css_copiar_a_fv_grid_line {}

@@ -1,0 +1,46 @@
+scriptcase__NM__ico__NM__favicon.ico
+scriptcase__NM__ajax_load.gif
+scriptcase__NM__icnMensagemAlerta.png
+grp__NM__menu_img__NM__PRODUCTOS.png
+grp__NM__menu_img__NM__CLIENTES.png
+grp__NM__menu_img__NM__VENTAS.png
+grp__NM__menu_img__NM__COMPRAS.png
+grp__NM__menu_img__NM__COPIAS DE SGURIDAD.png
+grp__NM__menu_img__NM__DATOS EMPRESA.png
+grp__NM__menu_img__NM__POR PAGAR.png
+grp__NM__menu_img__NM__POR COBRAR.png
+grp__NM__menu_img__NM__NOTAS CREDITO.png
+grp__NM__menu_img__NM__CONTRATOS.png
+grp__NM__menu_img__NM__AGENDA.png
+grp__NM__menu_img__NM__INDICES.png
+grp__NM__menu_img__NM__ROTACION INVENTARIO.png
+grp__NM__menu_img__NM__GESTION DOCUMENTOS.png
+nm_te.gif
+nm_top.gif
+nm_td.gif
+nm_esq.gif
+nm_dir.gif
+scriptcase__NM__nm_transparent.gif
+scriptcase__NM__ico__NM__favicon.ico
+scriptcase__NM__ajax_load.gif
+scriptcase__NM__icnMensagemAlerta.png
+grp__NM__menu_img__NM__PRODUCTOS.png
+grp__NM__menu_img__NM__CLIENTES.png
+grp__NM__menu_img__NM__VENTAS.png
+grp__NM__menu_img__NM__COMPRAS.png
+grp__NM__menu_img__NM__COPIAS DE SGURIDAD.png
+grp__NM__menu_img__NM__DATOS EMPRESA.png
+grp__NM__menu_img__NM__POR PAGAR.png
+grp__NM__menu_img__NM__POR COBRAR.png
+grp__NM__menu_img__NM__NOTAS CREDITO.png
+grp__NM__menu_img__NM__CONTRATOS.png
+grp__NM__menu_img__NM__AGENDA.png
+grp__NM__menu_img__NM__INDICES.png
+grp__NM__menu_img__NM__ROTACION INVENTARIO.png
+grp__NM__menu_img__NM__GESTION DOCUMENTOS.png
+nm_te.gif
+nm_top.gif
+nm_td.gif
+nm_esq.gif
+nm_dir.gif
+scriptcase__NM__nm_transparent.gif

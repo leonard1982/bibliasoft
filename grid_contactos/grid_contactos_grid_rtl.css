@@ -1,0 +1,24 @@
+.css_nombres_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombres_grid_line {vertical-align: top;text-align: right;}
+.css_direccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion_grid_line {vertical-align: top;text-align: right;}
+.css_inactivo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_inactivo_grid_line {vertical-align: top;text-align: center;}
+.css_ultimo_contacto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ultimo_contacto_grid_line {vertical-align: top;text-align: center;}
+.css_numero_contactos_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero_contactos_grid_line {vertical-align: top;text-align: right;}
+.css_asesor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_asesor_grid_line {vertical-align: top;text-align: right;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: top;text-align: right;}
+.css_pais_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_pais_grid_line {vertical-align: top;text-align: right;}
+.css_ciudad_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ciudad_grid_line {vertical-align: top;text-align: right;}
+.css_clasificacion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_clasificacion_grid_line {vertical-align: top;text-align: right;}
+.css_creado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_creado_grid_line {vertical-align: top;text-align: center;}
+.css_editado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_editado_grid_line {vertical-align: top;text-align: center;}

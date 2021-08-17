@@ -1,0 +1,22 @@
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_cantidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: top;text-align: right;}
+.css_presentacion_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_presentacion_grid_line {text-align: right;}
+.css_idpro_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idpro_grid_line {vertical-align: top;text-align: right;}
+.css_colores_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_colores_grid_line {vertical-align: top;text-align: right;}
+.css_tallas_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_tallas_grid_line {vertical-align: top;text-align: right;}
+.css_sabor_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_sabor_grid_line {vertical-align: top;text-align: right;}
+.css_costo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_costo_grid_line {vertical-align: top;text-align: right;}
+.css_valorparcial_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valorparcial_grid_line {vertical-align: top;text-align: right;}
+.css_devo_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_devo_grid_line {text-align: center;}
+.css_idinv_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idinv_grid_line {vertical-align: top;text-align: right;}

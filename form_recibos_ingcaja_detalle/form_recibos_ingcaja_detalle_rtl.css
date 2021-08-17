@@ -1,0 +1,21 @@
+.css_id_detalle__label {text-align:right;}
+.css_id_detalle__line {text-align:left;}
+.css_id_detalle__obj {text-align:left;}
+.css_id_recibo__label {text-align:right;}
+.css_id_recibo__line {text-align:left;}
+.css_id_recibo__obj {text-align:left;}
+.css_factura__label {text-align:right;}
+.css_factura__line {text-align:left;}
+.css_factura__obj {text-align:left;}
+.css_valor_factura__label {text-align:center;}
+.css_valor_factura__line {text-align:center;}
+.css_valor_factura__obj {text-align:right;}
+.css_valor_pagado__label {text-align:right;}
+.css_valor_pagado__line {text-align:center;}
+.css_valor_pagado__obj {text-align:right;}
+.css_saldo_factura__label {text-align:right;}
+.css_saldo_factura__line {text-align:left;}
+.css_saldo_factura__obj {text-align:right;}
+.css_documento__label { }
+.css_documento__line { }
+.css_documento__obj {text-align:center;}

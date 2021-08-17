@@ -1,0 +1,12 @@
+.css_desde_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_desde_grid_line {vertical-align: top;text-align: center;}
+.css_hasta_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_hasta_grid_line {vertical-align: top;text-align: center;}
+.css_porcentaje_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_porcentaje_grid_line {vertical-align: top;text-align: right;}
+.css_usuario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_usuario_grid_line {vertical-align: top;text-align: right;}
+.css_activo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_activo_grid_line {vertical-align: top;text-align: right;}
+.css_id_programar_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_programar_grid_line {vertical-align: top;text-align: right;}

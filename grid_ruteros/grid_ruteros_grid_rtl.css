@@ -1,0 +1,18 @@
+.css_dia_semana_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_dia_semana_grid_line {vertical-align: top;text-align: right;}
+.css_asesor_zona_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_asesor_zona_grid_line {vertical-align: top;text-align: right;}
+.css_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cliente_grid_line {vertical-align: top;text-align: right;}
+.css_nom_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nom_cliente_grid_line {vertical-align: top;text-align: right;}
+.css_direccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion_grid_line {vertical-align: top;text-align: right;}
+.css_barrio_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_barrio_grid_line {vertical-align: top;text-align: right;}
+.css_razon_social_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_razon_social_grid_line {vertical-align: top;text-align: right;}
+.css_telefono_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_telefono_grid_line {vertical-align: top;text-align: right;}
+.css_id_rutero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_rutero_grid_line {vertical-align: top;text-align: right;}

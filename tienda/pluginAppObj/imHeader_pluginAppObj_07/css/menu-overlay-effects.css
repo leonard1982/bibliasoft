@@ -1,0 +1,232 @@
+/*
+  #####################
+  ###### Effects ######
+  #####################
+*/
+
+
+/* noeffect */
+.imHeader_pluginAppObj_07_menuoverlay.overlay-noeffect {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-noeffect.open {
+    visibility: visible;
+}
+
+/****************/
+/*     fade     */
+/****************/
+.imHeader_pluginAppObj_07_menuoverlay.overlay-fade {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: opacity 800ms, visibility 0s 800ms;
+	transition: opacity 800ms, visibility 0s 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-fade.open {
+    visibility: visible;
+	-webkit-transition: opacity 800ms;
+	transition: opacity 800ms;
+}
+
+/****************/
+/*     huge     */
+/****************/
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: opacity 800ms, visibility 0s 800ms;
+	transition: opacity 800ms, visibility 0s 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge.open {
+	visibility: visible;
+	-webkit-transition: opacity 800ms;
+	transition: opacity 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge .imHeader_pluginAppObj_07-overlay-close,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge nav {
+	-webkit-perspective: 1200px;
+	perspective: 1200px;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge .imHeader_pluginAppObj_07-overlay-close,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge nav ul {
+	opacity: 0.4;
+	-webkit-transform: translateY(-25%) rotateX(35deg);
+	transform: translateY(-25%) rotateX(35deg);
+	-webkit-transition: -webkit-transform 800ms, opacity 800ms;
+	transition: transform 800ms, opacity 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge.open .imHeader_pluginAppObj_07-overlay-close,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge.open nav ul {
+	opacity: 1;
+	-webkit-transform: rotateX(0deg);
+	transform: rotateX(0deg);
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge.close .imHeader_pluginAppObj_07-overlay-close,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-huge.close nav ul {
+	-webkit-transform: translateY(25%) rotateX(-35deg);
+	transform: translateY(25%) rotateX(-35deg);
+}
+
+/****************/
+/*     corner   */
+/****************/
+.imHeader_pluginAppObj_07_menuoverlay.overlay-corner {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transform: translateY(50px) translateX(50px);
+	transform: translateY(70%) translateX(70%);
+	-webkit-transition: opacity 800ms, -webkit-transform 800ms, visibility 0s 800ms;
+	transition: opacity 800ms, transform 800ms, visibility 0s 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-corner.open {
+	visibility: visible;
+	-webkit-transform: translateY(0%);
+	transform: translateY(0%);
+	-webkit-transition: opacity 800ms, -webkit-transform 800ms;
+	transition: opacity 800ms, transform 800ms;
+}
+
+
+/****************/
+/*   slidedown  */
+/****************/
+.imHeader_pluginAppObj_07_menuoverlay.overlay-slidedown {
+    opacity: 1;
+	visibility: hidden;
+	-webkit-transform: translateY(-100%);
+	transform: translateY(-100%);
+	-webkit-transition: opacity 800ms, -webkit-transform 0.4s ease-in-out, visibility 0s 800ms;
+	transition: opacity 800ms, transform 800ms ease-in-out, visibility 0s 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-slidedown.open {
+	visibility: visible;
+	-webkit-transform: translateY(0%);
+	transform: translateY(0%);
+	-webkit-transition: -webkit-transform 800ms ease-in-out;
+	transition: transform 800ms ease-in-out;
+}
+
+
+/****************/
+/*  simplegenie */
+/****************/
+.imHeader_pluginAppObj_07_menuoverlay.overlay-simplegenie {
+    opacity: 1;
+	visibility: hidden;
+	-webkit-transform: translateY(60%) scale(0);
+	transform: translateY(60%) scale(0);
+	-webkit-transition: opacity 800ms, -webkit-transform 800ms, visibility 0s 800ms;
+	transition: opacity 800ms, transform 800ms, visibility 0s 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-simplegenie.open {
+	visibility: visible;
+	-webkit-transform: translateY(0%) scale(1);
+	transform: translateY(0%) scale(1);
+	-webkit-transition: -webkit-transform 800ms;
+	transition: transform 800ms;
+}
+
+/****************/
+/* corner shape */
+/****************/
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape .imHeader_pluginAppObj_07_menuoverlay_back,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape {
+    opacity: 1;
+	background: transparent;
+	visibility: hidden;
+	-webkit-transition: opacity 800ms, visibility 0s 800ms;
+	transition: opacity 800ms, visibility 0s 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.open .imHeader_pluginAppObj_07_menuoverlay_back,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.open {
+    opacity: 0.95;
+	visibility: visible;
+	-webkit-transition: none;
+	transition: none;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.open {
+    opacity: 1;
+	visibility: visible;
+	-webkit-transition: none;
+	transition: none;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape > svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape .overlay-path {
+	fill: rgba(194, 212, 78, 1);
+    
+    opacity: 0.95;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape .imHeader_pluginAppObj_07-overlay-close,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape nav,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape .overlay-close {
+	opacity: 0;
+	-webkit-transition: opacity 640ms 640ms;
+	transition: opacity 640ms 640ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.open .imHeader_pluginAppObj_07-overlay-close,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.open nav,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.open .overlay-close {
+	opacity: 1;
+	-webkit-transition-delay: 640ms;
+	transition-delay: 640ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.close .imHeader_pluginAppObj_07_menuoverlay_back,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.close nav,
+.imHeader_pluginAppObj_07_menuoverlay.overlay-cornershape.close .overlay-close {
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+}
+
+
+/*****************/
+/* content scale */
+/*****************/
+#imPageExtContainer.menu-overlay-contentscale, #imPage.menu-overlay-contentscale {
+	-webkit-transition: -webkit-transform 800ms;
+	transition: transform 800ms;
+}
+
+#imPageExtContainer.menu-overlay-contentscale.overlay-open, #imPage.menu-overlay-contentscale.overlay-open {
+	-webkit-transform: scale(0.5);
+	transform: scale(0.5);
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-contentscale {
+    opacity: 1;
+	visibility: hidden;
+	-webkit-transform: translateY(100%);
+	transform: translateY(100%);
+	-webkit-transition: opacity 800ms, -webkit-transform 800ms, visibility 0s 800ms;
+	transition: opacity 800ms, transform 800ms, visibility 0s 800ms;
+}
+
+.imHeader_pluginAppObj_07_menuoverlay.overlay-contentscale.open {
+    opacity: 1;
+	visibility: visible;
+	-webkit-transform: translateY(0%);
+	transform: translateY(0%);
+	-webkit-transition: -webkit-transform 800ms;
+	transition: transform 800ms;
+}

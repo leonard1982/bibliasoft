@@ -1,0 +1,125 @@
+﻿<HEAD>
+    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" >
+    <TITLE>Captura de Variaveis</TITLE>
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"_style.css\" />
+    <link rel="stylesheet" type="text/css" href="files/js/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="files/js/xsearch.css" />
+    <link rel="stylesheet" type="text/css" href="files/js/style.css" />
+        
+    <style>
+        /* Style for text */
+        a:link {
+        font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        color: #000000;
+        background-color: #ffffff;
+        text-decoration: none;
+        }
+        a:visited {
+        font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        color: #000000;
+        background-color: #ffffff;
+        text-decoration: none;
+        }
+        a:hover{
+        font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        color: #FFa750;
+        background-color: #ffffff;
+        text-decoration: none;
+        }
+        a:active{
+        font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        color: #000000;
+        background-color: #c0c0c0;
+        text-decoration: none;
+        }
+    </style>
+        
+    <script language="javascript" type="text/javascript" src="files/js/nm_xsearch.js"></script>
+    <script language="Javascript" src="files/js/sprintf.js"></script>
+    <script language="Javascript" src="palavras.js"></script>
+    <script language="Javascript" src="indices.js"></script>
+    <script language="javascript" type="text/javascript" src="files/js/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="files/js/jquery-ui.js"></script>    
+    <script language="javascript" type="text/javascript" src="files/js/manual.js"></script>    
+</HEAD>
+<BODY leftmargin=2 topmargin=0 marginwidth=0 marginheight=0>
+    <script>
+        $(function () {
+            $( "#tabs" ).tabs();
+            
+            var _url = top.document.location.href.split('facilweb.htm?item=');
+            if(_url.length == 2 && _url[1] != '')
+            {
+                    if(_url[1] == 'home')
+                    {
+                            $('#id_bodyContent').attr('src', document.location.origin + (document.location.pathname).replace(/\\/g, "/").replace(/\/[^\/]*\/?$/, "") + '/_home.htm');
+                    }
+                    else if($("a[data-rel='"+_url[1]+"']").length == 0)
+                    {
+                            $.jstree.reference('#id_menu').open_all();
+                            $('#id_bodyContent').attr('src',document.location.origin + (document.location.pathname).replace(/\\/g, "/").replace(/\/[^\/]*\/?$/, "") + '/'+ _url[1]);
+                            window.open(document.location.origin + (document.location.pathname).replace(/\\/g, "/").replace(/\/[^\/]*\/?$/, "") + '/'+ _url[1], "bodyContent");
+
+                            $("a[data-rel='"+_url[1]+"']").click();
+                            var ids = $.jstree.reference('#id_menu').get_selected(true)[0].parents;
+                            $.jstree.reference('#id_menu').close_all();
+                            for(var i = ids.length -1; i>=0;i--)
+                            {
+                                    if(ids[i] == '#') continue;
+                                    $('#'+ids[i] + ' > a').click();
+
+                            }
+                            $("a[data-rel='"+_url[1]+"']").click();
+                    }
+                    else
+                    {
+                            window.open(document.location.origin + (document.location.pathname).replace(/\\/g, "/").replace(/\/[^\/]*\/?$/, "") + '/'+ _url[1], "bodyContent");
+                    }
+            }
+        });
+    </script>
+    <div id="search">
+        <div id="search_content">
+                <script language="Javascript">
+                    /* Parametros de configuracao */
+
+                    searchname = 'facilwebindice.htm'
+
+                    usebannercode=true
+
+                    /* Textos */
+                    lang_searchbtn	= "Search"
+                    lang_results	= '<h4>Results <b>%s - %s</b> of <b>%s</b> para <b>"%s"</b></h4>';
+                    lang_notfound	= "<h3><font color=green>No results found for <b>'%s'</b></font></h3>"+
+                                            "<p>Your search - <b>%s</b> - wasn't found on our database.</p>"+
+                                            "<LI>Check if the words were typed correctly.</li>"+
+                                            "<LI>Try using fewer words.</li>"+
+                                            "<LI>Try using keywords.</li>"+
+                                            "<LI>Try using other words</li></span>"+
+                                            "</p>";
+
+                    lang_prevpage	= 'Previous page';
+                    lang_nextpage	= 'Next page';
+                    lang_searchfor	= 'Search for:';
+
+                    function templateBody() {
+                            document.write('<html><head><title></title><'+
+                            'script language="Javascript">'+
+                            '<'+'/'+'script'+'></head><body bgcolor="#ffffff" text="#000000" link="#000099" vlink="#996699" alink="#996699"><font face="Arial" size="3"><table border=0 style=" width: 100%; height: 100%; "><tr><td style="vertical-align:top;width:250px;">');
+                    }
+                    function templateEnd() {
+                            document.write('</td></tr></table></font></center></body></html>');
+                    }
+                    function bannerCode() {
+                    }
+                    /* fim dos parametros de confiuracao */
+                    initXsearch();
+            </script>
+        </div>
+    </div>
+</BODY>
+</HTML>

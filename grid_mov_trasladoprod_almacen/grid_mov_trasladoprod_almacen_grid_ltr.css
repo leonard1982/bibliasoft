@@ -1,0 +1,15 @@
+.css_prefijonota_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_prefijonota_grid_line {vertical-align: middle;text-align: center;}
+.css_numeronota_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_numeronota_grid_line {vertical-align: middle;text-align: right;}
+.css_idtipotran_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_idtipotran_grid_line {vertical-align: middle;text-align: left;}
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: middle;text-align: center;}
+.css_observaciones_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: middle;text-align: left;}
+.css_imprimir_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_imprimir_grid_line {}
+.css_idmov_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idmov_grid_line {vertical-align: middle;text-align: right;}
+.css_detalle_grid_line {text-align: center;}

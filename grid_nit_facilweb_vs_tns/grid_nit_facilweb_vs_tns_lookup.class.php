@@ -1,0 +1,5 @@
+<?php
+class grid_nit_facilweb_vs_tns_lookup
+{
+}
+?>

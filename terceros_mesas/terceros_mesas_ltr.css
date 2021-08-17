@@ -1,0 +1,57 @@
+.css_documento__label { }
+.css_documento__line { }
+.css_documento__obj { }
+.css_nombres__label { }
+.css_nombres__line { }
+.css_nombres__obj { }
+.css_direccion__label { }
+.css_direccion__line { }
+.css_direccion__obj { }
+.css_sexo__label { }
+.css_sexo__line { }
+.css_sexo__obj { }
+.css_idmuni__label { }
+.css_idmuni__line {text-align:left;}
+.css_idmuni__obj {text-align:left;}
+.css_observaciones__label { }
+.css_observaciones__line {background-color:#FFFF99;}
+.css_observaciones__obj {text-align:left;}
+.css_regimen__label { }
+.css_regimen__line { }
+.css_regimen__obj { }
+.css_tipo__label { }
+.css_tipo__line { }
+.css_tipo__obj { }
+.css_cliente__label { }
+.css_cliente__line {background-color:#DFFFFF;text-align:center;}
+.css_cliente__obj {text-align:center;}
+.css_tipo_documento__label { }
+.css_tipo_documento__line { }
+.css_tipo_documento__obj { }
+.css_dv__label { }
+.css_dv__line {text-align:center;}
+.css_dv__obj {text-align:left;}
+.css_nombre1__label { }
+.css_nombre1__line { }
+.css_nombre1__obj { }
+.css_nombre2__label { }
+.css_nombre2__line { }
+.css_nombre2__obj { }
+.css_apellido1__label { }
+.css_apellido1__line { }
+.css_apellido1__obj { }
+.css_apellido2__label { }
+.css_apellido2__line { }
+.css_apellido2__obj { }
+.css_representante__label { }
+.css_representante__line { }
+.css_representante__obj { }
+.css_imagenter__label {vertical-align:middle;}
+.css_imagenter__line {vertical-align:middle;}
+.css_imagenter__obj { }
+.css_es_restaurante__label { }
+.css_es_restaurante__line {background-color:#66FF99;text-align:center;}
+.css_es_restaurante__obj {text-align:center;}
+.css_departamento__label { }
+.css_departamento__line { }
+.css_departamento__obj { }

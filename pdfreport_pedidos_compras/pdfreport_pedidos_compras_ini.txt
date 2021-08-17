@@ -1,0 +1,7 @@
+index.php
+FACILWEBv2
+pdfreport_pedidos_compras
+NAO
+reportpdf
+pdfreport_pedidos_compras
+LigMd5

@@ -1,0 +1,7 @@
+index.php
+FACILWEBv2
+reporte_detallecompra
+NAO
+cons
+reporte_detallecompra
+LigMd5

@@ -1,0 +1,77 @@
+.css_num_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_num_grid_line {vertical-align: top;text-align: left;}
+.css_idcli_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idcli_grid_line {vertical-align: middle;text-align: left;}
+.css_factura_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_factura_grid_line {text-align: left;}
+.css_fechaven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechaven_grid_line {vertical-align: middle;text-align: center;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: middle;text-align: left;}
+.css_total_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_total_grid_line {font-weight:bold;vertical-align: middle;text-align: center;}
+.css_total_sub_tot {text-align: center;}
+.css_total_tot_ger {text-align: center;}
+.css_pagada_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_pagada_grid_line {vertical-align: middle;text-align: center;}
+.css_asentada_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_asentada_grid_line {vertical-align: middle;text-align: center;}
+.css_pdf2_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_pdf2_grid_line {text-align: left;}
+.css_enviar_propio_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_enviar_propio_grid_line {text-align: left;}
+.css_idfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idfacven_grid_line {vertical-align: top;text-align: right;}
+.css_numfacven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_numfacven_grid_line {vertical-align: middle;text-align: center;}
+.css_credito_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_credito_grid_line {vertical-align: middle;text-align: center;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: middle;text-align: center;}
+.css_subtotal_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_subtotal_grid_line {vertical-align: top;text-align: right;}
+.css_subtotal_sub_tot {text-align: right;}
+.css_subtotal_tot_ger {text-align: right;}
+.css_valoriva_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valoriva_grid_line {vertical-align: top;text-align: right;}
+.css_valoriva_sub_tot {text-align: right;}
+.css_valoriva_tot_ger {text-align: right;}
+.css_saldo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_saldo_grid_line {vertical-align: top;text-align: right;}
+.css_adicional_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_adicional_grid_line {vertical-align: top;text-align: right;}
+.css_adicional2_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_adicional2_grid_line {vertical-align: top;text-align: right;}
+.css_adicional3_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_adicional3_grid_line {vertical-align: top;text-align: right;}
+.css_vendedor_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_vendedor_grid_line {font-size:10px;vertical-align: middle;text-align: left;}
+.css_pedido_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_pedido_grid_line {vertical-align: top;text-align: right;}
+.css_resolucion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_resolucion_grid_line {vertical-align: middle;text-align: center;}
+.css_base_iva_19_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_base_iva_19_grid_line {vertical-align: top;text-align: right;}
+.css_base_iva_19_sub_tot {text-align: right;}
+.css_base_iva_19_tot_ger {text-align: right;}
+.css_valor_iva_19_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valor_iva_19_grid_line {vertical-align: top;text-align: right;}
+.css_valor_iva_19_sub_tot {text-align: right;}
+.css_valor_iva_19_tot_ger {text-align: right;}
+.css_base_iva_5_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_base_iva_5_grid_line {vertical-align: top;text-align: right;}
+.css_base_iva_5_sub_tot {text-align: right;}
+.css_base_iva_5_tot_ger {text-align: right;}
+.css_valor_iva_5_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valor_iva_5_grid_line {vertical-align: top;text-align: right;}
+.css_valor_iva_5_sub_tot {text-align: right;}
+.css_valor_iva_5_tot_ger {text-align: right;}
+.css_excento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_excento_grid_line {vertical-align: top;text-align: right;}
+.css_excento_sub_tot {text-align: right;}
+.css_excento_tot_ger {text-align: right;}
+.css_imprimir_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_imprimir_grid_line {}
+.css_print_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_print_grid_line {text-align: left;}
+.css_detalleventa_grid_line {text-align: center;}

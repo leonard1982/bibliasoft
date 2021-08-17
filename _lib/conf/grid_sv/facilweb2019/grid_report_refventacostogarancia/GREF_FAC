@@ -1,0 +1,29 @@
+str@NMF@SC_Save_Name@NMF@GREF_FAC@NMF@
+str@NMF@SC_Ind_Groupby@NMF@sc_free_group_by@NMF@
+arr@NMF@SC_Gb_Free_cmp@NMF@a:1:{s:10:"referencia";s:11:"p.codigobar";}@NMF@
+arr@NMF@SC_Gb_Free_sql@NMF@a:1:{s:11:"p.codigobar";s:3:"asc";}@NMF@
+arr@NMF@field_order@NMF@a:17:{i:0;s:10:"referencia";i:1;s:11:"descripcion";i:2;s:8:"cantidad";i:3;s:11:"precioventa";i:4;s:13:"valor_parcial";i:5;s:5:"costo";i:6;s:16:"ganancia_parcial";i:7;s:10:"f_idfacven";i:8;s:8:"f_pagada";i:9;s:10:"devolucion";i:10;s:8:"remision";i:11;s:13:"costo_parcial";i:12;s:8:"ganancia";i:13;s:20:"precio_full_unitario";i:14;s:19:"precio_full_parcial";i:15;s:23:"ganancia_pfull_unitario";i:16;s:22:"ganancia_pfull_parcial";}@NMF@
+arr@NMF@field_order_orig@NMF@a:17:{i:0;s:10:"referencia";i:1;s:11:"descripcion";i:2;s:8:"cantidad";i:3;s:11:"precioventa";i:4;s:13:"valor_parcial";i:5;s:5:"costo";i:6;s:13:"costo_parcial";i:7;s:8:"ganancia";i:8;s:16:"ganancia_parcial";i:9;s:20:"precio_full_unitario";i:10;s:19:"precio_full_parcial";i:11;s:23:"ganancia_pfull_unitario";i:12;s:22:"ganancia_pfull_parcial";i:13;s:10:"f_idfacven";i:14;s:8:"f_pagada";i:15;s:10:"devolucion";i:16;s:8:"remision";}@NMF@
+arr@NMF@usr_cmp_sel@NMF@a:6:{s:13:"costo_parcial";s:3:"off";s:8:"ganancia";s:3:"off";s:20:"precio_full_unitario";s:3:"off";s:19:"precio_full_parcial";s:3:"off";s:23:"ganancia_pfull_unitario";s:3:"off";s:22:"ganancia_pfull_parcial";s:3:"off";}@NMF@
+arr@NMF@ordem_select@NMF@a:1:{s:10:"f_idfacven";s:3:"asc";}@NMF@
+arr@NMF@ordem_quebra@NMF@a:1:{s:11:"p.codigobar";s:3:"asc";}@NMF@
+str@NMF@where_pesq_filtro@NMF@ ( f.fechaven >= '2018-12-01' and  f.fechaven <= '2018-12-31')@NMF@
+str@NMF@where_pesq@NMF@ where  f.fechaven >= '2018-12-01' and  f.fechaven <= '2018-12-31'@NMF@
+str@NMF@cond_pesq@NMF@Fecha desde Mayor o igual que 01/12/2018##*@@Fecha hasta Menor o igual que 31/12/2018##*@@and@NMF@
+arr@NMF@campos_busca@NMF@a:21:{s:10:"referencia";s:0:"";s:15:"referencia_cond";s:2:"qp";s:11:"descripcion";s:0:"";s:16:"descripcion_cond";s:2:"qp";s:17:"fecha_inicial_dia";s:2:"01";s:17:"fecha_inicial_mes";s:2:"12";s:17:"fecha_inicial_ano";s:4:"2018";s:18:"fecha_inicial_cond";s:2:"ge";s:15:"fecha_final_dia";s:2:"31";s:15:"fecha_final_mes";s:2:"12";s:15:"fecha_final_ano";s:4:"2018";s:16:"fecha_final_cond";s:2:"le";s:10:"devolucion";N;s:15:"devolucion_cond";s:2:"eq";s:8:"remision";N;s:13:"remision_cond";s:2:"eq";s:6:"numfac";s:0:"";s:11:"numfac_cond";s:2:"eq";s:11:"NM_operador";s:3:"and";s:13:"fecha_inicial";s:10:"2018-12-01";s:11:"fecha_final";s:10:"2018-12-31";}@NMF@
+str@NMF@ordem_grid@NMF@@NMF@
+str@NMF@ordem_ant@NMF@@NMF@
+str@NMF@ordem_desc@NMF@@NMF@
+str@NMF@ordem_cmp@NMF@@NMF@
+arr@NMF@summarizing_fields_order@NMF@a:5:{i:0;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:4;i:5;}@NMF@
+arr@NMF@summarizing_fields_display@NMF@a:5:{i:1;a:2:{s:5:"label";s:9:"Registros";s:7:"display";b:1;}i:2;a:2:{s:5:"label";s:14:"Cantidad(Suma)";s:7:"display";b:1;}i:3;a:2:{s:5:"label";s:19:"Valor Parcial(Suma)";s:7:"display";b:1;}i:4;a:2:{s:5:"label";s:19:"Costo Parcial(Suma)";s:7:"display";b:1;}i:5;a:2:{s:5:"label";s:22:"Ganancia Parcial(Suma)";s:7:"display";b:1;}}@NMF@
+arr@NMF@tot_geral@NMF@a:6:{i:0;s:5:"Total";i:1;s:4:"1434";i:2;s:7:"2407.00";i:3;s:17:"61079800.00000000";i:4;s:11:"37588745.00";i:5;s:17:"23491055.00000000";}@NMF@
+arr@NMF@pivot_group_by@NMF@a:1:{i:0;s:10:"Referencia";}@NMF@
+arr@NMF@pivot_x_axys@NMF@a:0:{}@NMF@
+arr@NMF@pivot_y_axys@NMF@a:1:{i:0;i:0;}@NMF@
+arr@NMF@pivot_fill@NMF@a:1:{i:0;b:0;}@NMF@
+arr@NMF@pivot_order@NMF@a:1:{i:0;s:5:"label";}@NMF@
+arr@NMF@pivot_order_col@NMF@i:0;@NMF@
+arr@NMF@pivot_order_level@NMF@i:0;@NMF@
+arr@NMF@pivot_order_sort@NMF@s:0:"";@NMF@
+arr@NMF@pivot_tabular@NMF@b:1;@NMF@

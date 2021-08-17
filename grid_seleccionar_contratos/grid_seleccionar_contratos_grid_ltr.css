@@ -1,0 +1,12 @@
+.css_numero_contrato_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_numero_contrato_grid_line {vertical-align: middle;text-align: center;}
+.css_cliente_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_cliente_grid_line {vertical-align: middle;text-align: left;}
+.css_id_ter_cont_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_ter_cont_grid_line {vertical-align: top;text-align: right;}
+.css_fecha_contrato_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_contrato_grid_line {vertical-align: top;text-align: center;}
+.css_fecha_inicio_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_inicio_grid_line {vertical-align: top;text-align: center;}
+.css_fecha_corte_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_corte_grid_line {vertical-align: top;text-align: center;}

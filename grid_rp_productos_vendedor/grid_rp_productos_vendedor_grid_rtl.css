@@ -1,0 +1,18 @@
+.css_periodo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_periodo_grid_line {vertical-align: top;text-align: center;}
+.css_f_fechaven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_f_fechaven_grid_line {vertical-align: top;text-align: center;}
+.css_v_nombres_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_v_nombres_grid_line {vertical-align: top;text-align: right;}
+.css_grupo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_grupo_grid_line {vertical-align: top;text-align: right;}
+.css_p_nompro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_p_nompro_grid_line {vertical-align: top;text-align: right;}
+.css_cantidad_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: top;text-align: right;}
+.css_cantidad_sub_tot {text-align: right;}
+.css_cantidad_tot_ger {text-align: right;}
+.css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_total_grid_line {vertical-align: top;text-align: right;}
+.css_total_sub_tot {text-align: right;}
+.css_total_tot_ger {text-align: right;}

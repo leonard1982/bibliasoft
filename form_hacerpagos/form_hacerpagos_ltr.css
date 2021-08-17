@@ -1,0 +1,87 @@
+.css_idpago_label { }
+.css_idpago_line {text-align:left;}
+.css_idpago_obj {text-align:left;}
+.css_numpago_label {font-size:18px;width:235px;}
+.css_numpago_line {font-size:18px;text-align:left;}
+.css_numpago_obj {font-size:18px;text-align:left;}
+.css_client_label { }
+.css_client_line {text-align:left;}
+.css_client_obj {text-align:left;}
+.css_fecpago_label { }
+.css_fecpago_line {text-align:center;}
+.css_fecpago_obj {text-align:center;}
+.css_montocan_label { }
+.css_montocan_line { }
+.css_montocan_obj {text-align:right;}
+.css_ret_label { }
+.css_ret_line { }
+.css_ret_obj {text-align:right;}
+.css_descuent_label { }
+.css_descuent_line {text-align:left;}
+.css_descuent_obj {text-align:right;}
+.css_docapagar_label { }
+.css_docapagar_line { }
+.css_docapagar_obj {text-align:center;}
+.css_iddocapagar_label { }
+.css_iddocapagar_line {text-align:left;}
+.css_iddocapagar_obj {text-align:left;}
+.css_saldodocumento_label { }
+.css_saldodocumento_line {text-align:center;}
+.css_saldodocumento_obj {text-align:right;}
+.css_conc_label { }
+.css_conc_line { }
+.css_conc_obj { }
+.css_obs_label { }
+.css_obs_line { }
+.css_obs_obj { }
+.css_asent_label {font-size:14px;color:#000000;background-color:#6699FF;font-weight:bold;}
+.css_asent_line { }
+.css_asent_obj {background-color:#FF9900;}
+.css_porc_ret_label { }
+.css_porc_ret_line {text-align:left;}
+.css_porc_ret_obj {text-align:left;}
+.css_val_ica_label { }
+.css_val_ica_line {text-align:left;}
+.css_val_ica_obj {text-align:right;}
+.css_porc_ica_label { }
+.css_porc_ica_line {text-align:left;}
+.css_porc_ica_obj {text-align:left;}
+.css_porc_reteiva_label { }
+.css_porc_reteiva_line {text-align:left;}
+.css_porc_reteiva_obj {text-align:right;}
+.css_val_reteiva_label { }
+.css_val_reteiva_line {text-align:left;}
+.css_val_reteiva_obj {text-align:right;}
+.css_banco_label { }
+.css_banco_line {text-align:left;}
+.css_banco_obj {text-align:left;}
+.css_id_concepto_label { }
+.css_id_concepto_line {text-align:left;}
+.css_id_concepto_obj {text-align:left;}
+.css_ncuenta_tercero_label { }
+.css_ncuenta_tercero_line {width:200px;}
+.css_ncuenta_tercero_obj {text-align:center;width:150px;}
+.css_cod_cuenta_label { }
+.css_cod_cuenta_line { }
+.css_cod_cuenta_obj { }
+.css_detallepagos_label { }
+.css_detallepagos_line { }
+.css_detallepagos_obj { }
+.css_titulo_label {font-size:18px;width:1px;}
+.css_titulo_line {font-size:18px;text-align:right;}
+.css_titulo_obj {font-size:18px;text-align:right;}
+.css_total_cuenta_label { }
+.css_total_cuenta_line { }
+.css_total_cuenta_obj { }
+.css_valor_base_label { }
+.css_valor_base_line { }
+.css_valor_base_obj {text-align:right;}
+.css_valor_iva_label { }
+.css_valor_iva_line { }
+.css_valor_iva_obj {text-align:right;}
+.css_valpagar_label {text-align:center;}
+.css_valpagar_line {font-size:22px;color:#33FF00;font-weight:bold;text-align:center;}
+.css_valpagar_obj {font-size:20px;color:#33FF00;font-weight:bold;text-align:center;}
+.css_archivos_label { }
+.css_archivos_line { }
+.css_archivos_obj { }

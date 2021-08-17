@@ -1,0 +1,24 @@
+.css_dp_idrc_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dp_idrc_grid_line {background-color:#00FF66;vertical-align: top;text-align: right;}
+.css_rc_fecharecibo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_rc_fecharecibo_grid_line {vertical-align: top;text-align: center;}
+.css_dp_id_pago_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dp_id_pago_grid_line {background-color:#FF0000;vertical-align: top;text-align: right;}
+.css_p_fecpago_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_p_fecpago_grid_line {vertical-align: top;text-align: center;}
+.css_dp_idfp_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dp_idfp_grid_line {vertical-align: top;text-align: right;}
+.css_dp_monto_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dp_monto_grid_line {vertical-align: top;text-align: right;}
+.css_dp_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_dp_banco_grid_line {vertical-align: top;text-align: right;}
+.css_dp_numcheque_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_dp_numcheque_grid_line {vertical-align: top;text-align: right;}
+.css_dp_fechacob_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_dp_fechacob_grid_line {vertical-align: top;text-align: center;}
+.css_dp_iddetall_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dp_iddetall_grid_line {vertical-align: top;text-align: right;}
+.css_dp_idfact_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_dp_idfact_grid_line {vertical-align: top;text-align: right;}
+.css_prefijo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_prefijo_grid_line {vertical-align: middle;text-align: center;}

@@ -1,0 +1,21 @@
+.css_idpro_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_idpro_grid_line {vertical-align: middle;text-align: right;}
+.css_presentacion_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_presentacion_grid_line {text-align: right;}
+.css_cantidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_cantidad_grid_line {vertical-align: top;text-align: right;}
+.css_cantidad_tot_ger {text-align: right;}
+.css_costo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_costo_grid_line {vertical-align: top;text-align: right;}
+.css_valorparcial_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valorparcial_grid_line {vertical-align: top;text-align: right;}
+.css_valorparcial_tot_ger {text-align: right;}
+.css_costoultimo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_costoultimo_grid_line {color:#3300FF;font-weight:bold;vertical-align: middle;text-align: right;}
+.css_valor_par_ultimo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_valor_par_ultimo_grid_line {color:#3300FF;font-weight:bold;vertical-align: middle;text-align: right;}
+.css_valor_par_ultimo_tot_ger {text-align: right;}
+.css_idinv_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idinv_grid_line {vertical-align: top;text-align: right;}
+.css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}

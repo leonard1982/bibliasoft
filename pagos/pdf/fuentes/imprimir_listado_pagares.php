@@ -1,0 +1,241 @@
+<?php
+include ("../../clases/class.vencimientos.php");
+include ("../../clases/class.proveedores.php");
+include ("../../funciones/fechas.php");
+include ("../../funciones/lib_fecha_letras.php");
+include ("../../funciones/aletras.php");
+function DameMes($mes){
+  
+  switch ($mes) {
+    
+    case "01":
+        $mes="Enero";
+      break;
+    case "02":
+        $mes="Febrero";
+      break;
+    case "03":
+        $mes="Marzo";
+      break;
+    case "04":
+        $mes="Abril";
+      break;
+    case "05":
+        $mes="Mayo";
+      break;
+    case "06":
+        $mes="Junio";
+      break;
+    case "07":
+        $mes="Julio";
+      break;
+    case "08":
+        $mes="Agosto";
+      break;
+    case "09":
+        $mes="Septiembre";
+      break;
+    case "10":
+        $mes="Octubre";
+      break;
+    case "11":
+        $mes="Noviembre";
+      break;
+    case "12":
+        $mes="Diciembre";
+      break;
+
+    default:
+      break;
+  }
+    return $mes;
+}
+
+function DameDia($dia){
+  
+  switch ($dia) {
+    
+    case "1":
+        $dia="Uno";
+      break;
+    case "2":
+        $dia="Dos";
+      break;
+    case "3":
+        $dia="Tres";
+      break;
+    case "4":
+        $dia="Cuatro";
+      break;
+    case "5":
+        $dia="Cinco";
+      break;
+    case "6":
+        $dia="Seis";
+      break;
+    case "7":
+        $dia="Siete";
+      break;
+    case "8":
+        $dia="Ocho";
+      break;
+    case "9":
+        $dia="Nueve";
+      break;
+    case "10":
+        $dia="Diez";
+      break;
+    case "11":
+        $dia="Once";
+      break;
+    case "12":
+        $dia="Doce";
+      break;
+    case "13":
+        $dia="Trece";
+      break;
+    case "14":
+        $dia="Catorce";
+      break;
+    case "15":
+        $dia="Quince";
+      break;
+    case "16":
+        $dia="Dieciseis";
+      break;
+    case "17":
+        $dia="Diecisiete";
+      break;
+    case "18":
+        $dia="Dieciocho";
+      break;
+    case "19":
+        $dia="Diecinueve";
+      break;
+    case "20":
+        $dia="Veinte";
+      break;
+    case "21":
+        $dia="Veintiuno";
+      break;
+    case "22":
+        $dia="Veintidos";
+      break;
+    case "23":
+        $dia="Veintitres";
+      break;
+    case "24":
+        $dia="Veinticuatro";
+      break;
+    case "25":
+        $dia="Veinticinco";
+      break;
+    case "26":
+        $dia="Veintiseis";
+      break;
+    case "27":
+        $dia="Veintisiete";
+      break;
+    case "28":
+        $dia="Veintiocho";
+      break;
+    case "29":
+        $dia="Veintinueve";
+      break;
+    case "30":
+        $dia="Treinta";
+      break;
+    case "31":
+        $dia="Treinta y uno";
+      break;
+
+    default:
+      break;
+  }
+    return $dia;
+}
+$vencimientos = new vencimientos;
+$proveedores = new proveedores;
+$V = new EnLetras();
+
+$cadena_fechas = "";
+if ((($_GET["fechaini"]) == "01/01/1970") && ($_GET["fechafin"] == "31/12/2050")) {
+    $cadena_fechas = "Todas las fechas";
+}
+if ((($_GET["fechaini"]) == "01/01/1970") && ($_GET["fechafin"] != "31/12/2050")) {
+    $cadena_fechas = "Hasta " . $_GET["fechafin"];
+}
+if ((($_GET["fechaini"]) != "01/01/1970") && ($_GET["fechafin"] == "31/12/2050")) {
+    $cadena_fechas = "Desde " . $_GET["fechaini"];
+}
+if ((($_GET["fechaini"]) != "01/01/1970") && ($_GET["fechafin"] != "31/12/2050")) {
+    $cadena_fechas = "Desde " . $_GET["fechaini"] . " hasta " . $_GET["fechafin"];
+}
+
+
+$fechaini = explota($_GET["fechaini"]);
+$fechafin = explota($_GET["fechafin"]);
+$idproveedor = $_GET["idproveedor"];
+$situacion = $_GET["situacion"];
+
+$rsvencimientos = $vencimientos->imprimir_pagares($idproveedor, $fechaini, $fechafin, $situacion);
+?>
+<style>
+    #pagare {
+        height: 100%; /* tamaño en altura del pagaré en milímetros*/
+        /* margin-top: 15mm; /* distancia al borde de arriba del papel*/
+        margin-left: 30mm; /* distancia al borde izquierdo del papel*/
+    }
+    #prov2 {
+        margin-left: -20px;
+    }
+    #prov {
+        margin-left: -20px;
+    }
+    #importe {
+        margin-left: -10px;
+        width: 150mm;
+        height:10mm;
+    }
+</style>
+<page backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm">
+    <?php
+    while ($row = mysql_fetch_row($rsvencimientos)) {  
+        $dia="  ".substr(implota($row[1]),0,2);
+        //$mes="  ".nombremes(substr(implota($row[1]),3,2));
+        $mes=DameMes(substr(implota($row[1]),3,2));
+        $anyo="   ".substr(implota($row[1]),6,4);
+         ?>
+       <div id="pagare">
+ 	<br>
+        <br>
+        <br>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 10%"><?=$dia?></td>
+                <td style="width: 20%"><?=$mes?></td>
+                <td style="width: 45%"><?=$anyo?></td>
+		<td style="width: 30%">***<?= number_format($row[0], 2,',', '.') ?>#</td>
+            </tr>
+        </table>
+        <br>
+	<br>
+        <div id="prov">&nbsp;&nbsp;&nbsp;<?=strtoupper($row[2])?></div>
+        <div id="importe"><?=strtoupper($V->ValorEnLetras($row[0], "euros"))?></div>
+        <?php
+            $hoy=date("d/m/Y");
+            $dia = substr($hoy, 0, 2);
+            $mes=DameMes(substr($hoy, 3, 2));
+            $anyo = substr($hoy, 6, 4);
+            ?>
+            <div id="prov2"><table style="width: 100%">
+                <tr>
+                    <td style="width: 40%">Tias a </td>
+                    <td style="width: 20%"><?= DameDia($dia) ?></td>
+                    <td style="width: 32%"><?= $mes ?></td>
+                    <td style="width: 1%"><?= $anyo ?></td>
+                </tr>
+            </table></div>
+    </div>
+    <?php } ?>
+</page>

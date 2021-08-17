@@ -1,0 +1,2143 @@
+<?php
+
+class grid_pedidos_CW_xml
+{
+   var $Db;
+   var $Erro;
+   var $Ini;
+   var $Lookup;
+   var $nm_data;
+
+   var $Arquivo;
+   var $Arquivo_view;
+   var $Tit_doc;
+   var $sc_proc_grid; 
+   var $NM_cmp_hidden = array();
+   var $count_ger;
+   var $sum_total;
+   var $sum_valoriva;
+   var $sum_saldo;
+
+   //---- 
+   function __construct()
+   {
+      $this->nm_data   = new nm_data("es");
+   }
+
+   //---- 
+   function monta_xml()
+   {
+      $this->inicializa_vars();
+      $this->grava_arquivo();
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'])
+      {
+          if ($this->Ini->sc_export_ajax)
+          {
+              $this->Arr_result['file_export']  = NM_charset_to_utf8($this->Xml_f);
+              $this->Arr_result['title_export'] = NM_charset_to_utf8($this->Tit_doc);
+              $Temp = ob_get_clean();
+              if ($Temp !== false && trim($Temp) != "")
+              {
+                  $this->Arr_result['htmOutput'] = NM_charset_to_utf8($Temp);
+              }
+              $oJson = new Services_JSON();
+              echo $oJson->encode($this->Arr_result);
+              exit;
+          }
+          else
+          {
+              $this->progress_bar_end();
+          }
+      }
+      else
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['opcao'] = "";
+      }
+   }
+
+   //----- 
+   function inicializa_vars()
+   {
+      global $nm_lang;
+      if (isset($GLOBALS['nmgp_parms']) && !empty($GLOBALS['nmgp_parms'])) 
+      { 
+          $GLOBALS['nmgp_parms'] = str_replace("@aspass@", "'", $GLOBALS['nmgp_parms']);
+          $todox = str_replace("?#?@?@?", "?#?@ ?@?", $GLOBALS["nmgp_parms"]);
+          $todo  = explode("?@?", $todox);
+          foreach ($todo as $param)
+          {
+               $cadapar = explode("?#?", $param);
+               if (1 < sizeof($cadapar))
+               {
+                   if (substr($cadapar[0], 0, 11) == "SC_glo_par_")
+                   {
+                       $cadapar[0] = substr($cadapar[0], 11);
+                       $cadapar[1] = $_SESSION[$cadapar[1]];
+                   }
+                   if (isset($GLOBALS['sc_conv_var'][$cadapar[0]]))
+                   {
+                       $cadapar[0] = $GLOBALS['sc_conv_var'][$cadapar[0]];
+                   }
+                   elseif (isset($GLOBALS['sc_conv_var'][strtolower($cadapar[0])]))
+                   {
+                       $cadapar[0] = $GLOBALS['sc_conv_var'][strtolower($cadapar[0])];
+                   }
+                   nm_limpa_str_grid_pedidos_CW($cadapar[1]);
+                   nm_protect_num_grid_pedidos_CW($cadapar[0], $cadapar[1]);
+                   if ($cadapar[1] == "@ ") {$cadapar[1] = trim($cadapar[1]); }
+                   $Tmp_par   = $cadapar[0];
+                   $$Tmp_par = $cadapar[1];
+                   if ($Tmp_par == "nmgp_opcao")
+                   {
+                       $_SESSION['sc_session'][$script_case_init]['grid_pedidos_CW']['opcao'] = $cadapar[1];
+                   }
+               }
+          }
+      }
+      if (isset($gidtercero)) 
+      {
+          $_SESSION['gidtercero'] = $gidtercero;
+          nm_limpa_str_grid_pedidos_CW($_SESSION["gidtercero"]);
+      }
+      $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
+      $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
+      $this->New_Format  = true;
+      $this->Xml_tag_label = false;
+      $this->Tem_xml_res = false;
+      $this->Xml_password = "";
+      if (isset($_REQUEST['nm_xml_tag']) && !empty($_REQUEST['nm_xml_tag']))
+      {
+          $this->New_Format = ($_REQUEST['nm_xml_tag'] == "tag") ? true : false;
+      }
+      if (isset($_REQUEST['nm_xml_label']) && !empty($_REQUEST['nm_xml_label']))
+      {
+          $this->Xml_tag_label = ($_REQUEST['nm_xml_label'] == "S") ? true : false;
+      }
+      $this->Tem_xml_res  = true;
+      if (isset($_REQUEST['SC_module_export']) && $_REQUEST['SC_module_export'] != "")
+      { 
+          $this->Tem_xml_res = (strpos(" " . $_REQUEST['SC_module_export'], "resume") !== false) ? true : false;
+      } 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['SC_Ind_Groupby'] == "_NM_SC_")
+      {
+          $this->Tem_xml_res  = false;
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['SC_Gb_Free_cmp']))
+      {
+          $this->Tem_xml_res  = false;
+      }
+      if (!is_file($this->Ini->root . $this->Ini->path_link . "grid_pedidos_CW/grid_pedidos_CW_res_xml.class.php"))
+      {
+          $this->Tem_xml_res  = false;
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'] && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_label']))
+      {
+          $this->Xml_tag_label = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_label'];
+          $this->New_Format    = true;
+      }
+      $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
+      require_once($this->Ini->path_aplicacao . "grid_pedidos_CW_total.class.php"); 
+      $this->Tot      = new grid_pedidos_CW_total($this->Ini->sc_page);
+      $this->prep_modulos("Tot");
+      $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['SC_Ind_Groupby'];
+      if (method_exists($this->Tot,$Gb_geral))
+      {
+          $this->Tot->$Gb_geral();
+          $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['tot_geral'][1];
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['SC_Ind_Groupby'] == "prefijo")
+          {
+              $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['tot_geral'][2];
+              $this->sum_valoriva = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['tot_geral'][3];
+              $this->sum_saldo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['tot_geral'][4];
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['SC_Ind_Groupby'] == "vendedor")
+          {
+              $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['tot_geral'][2];
+              $this->sum_valoriva = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['tot_geral'][3];
+              $this->sum_saldo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['tot_geral'][4];
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['SC_Ind_Groupby'] == "_NM_SC_")
+          {
+              $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['tot_geral'][2];
+          }
+      }
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'] && !$this->Ini->sc_export_ajax) {
+          require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
+          $this->pb = new scProgressBar();
+          $this->pb->setRoot($this->Ini->root);
+          $this->pb->setDir($_SESSION['scriptcase']['grid_pedidos_CW']['glo_nm_path_imag_temp'] . "/");
+          $this->pb->setProgressbarMd5($_GET['pbmd5']);
+          $this->pb->initialize();
+          $this->pb->setReturnUrl("./");
+          $this->pb->setReturnOption($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_return']);
+          if ($this->Tem_xml_res) {
+              $PB_plus = intval ($this->count_ger * 0.04);
+              $PB_plus = ($PB_plus < 2) ? 2 : $PB_plus;
+          }
+          else {
+              $PB_plus = intval ($this->count_ger * 0.02);
+              $PB_plus = ($PB_plus < 1) ? 1 : $PB_plus;
+          }
+          $PB_tot = $this->count_ger + $PB_plus;
+          $this->PB_dif = $PB_tot - $this->count_ger;
+          $this->pb->setTotalSteps($PB_tot);
+      }
+      $this->nm_data    = new nm_data("es");
+      $this->Arquivo      = "sc_xml";
+      $this->Arquivo     .= "_" . date("YmdHis") . "_" . rand(0, 1000);
+      $this->Arq_zip      = $this->Arquivo . "_grid_pedidos_CW.zip";
+      $this->Arquivo     .= "_grid_pedidos_CW";
+      $this->Arquivo_view = $this->Arquivo . "_view.xml";
+      $this->Arquivo     .= ".xml";
+      $this->Tit_doc      = "grid_pedidos_CW.xml";
+      $this->Tit_zip      = "grid_pedidos_CW.zip";
+      $this->Grava_view   = false;
+      if (strtolower($_SESSION['scriptcase']['charset']) != strtolower($_SESSION['scriptcase']['charset_html']))
+      {
+          $this->Grava_view = true;
+      }
+   }
+
+   //---- 
+   function prep_modulos($modulo)
+   {
+      $this->$modulo->Ini    = $this->Ini;
+      $this->$modulo->Db     = $this->Db;
+      $this->$modulo->Erro   = $this->Erro;
+      $this->$modulo->Lookup = $this->Lookup;
+   }
+
+   //----- 
+   function grava_arquivo()
+   {
+      global $nm_lang;
+      global $nm_nada, $nm_lang;
+
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->sc_proc_grid = false; 
+      $nm_raiz_img  = ""; 
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_pedidos_CW']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_pedidos_CW']['field_display']))
+      {
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_pedidos_CW']['field_display'] as $NM_cada_field => $NM_cada_opc)
+          {
+              $this->NM_cmp_hidden[$NM_cada_field] = $NM_cada_opc;
+          }
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['usr_cmp_sel']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['usr_cmp_sel']))
+      {
+          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['usr_cmp_sel'] as $NM_cada_field => $NM_cada_opc)
+          {
+              $this->NM_cmp_hidden[$NM_cada_field] = $NM_cada_opc;
+          }
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['php_cmp_sel']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['php_cmp_sel']))
+      {
+          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['php_cmp_sel'] as $NM_cada_field => $NM_cada_opc)
+          {
+              $this->NM_cmp_hidden[$NM_cada_field] = $NM_cada_opc;
+          }
+      }
+      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_orig'];
+      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_pesq'];
+      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_pesq_filtro'];
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['campos_busca']))
+      { 
+          $Busca_temp = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['campos_busca'];
+          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+          {
+              $Busca_temp = NM_conv_charset($Busca_temp, $_SESSION['scriptcase']['charset'], "UTF-8");
+          }
+          $this->fechaven = $Busca_temp['fechaven']; 
+          $tmp_pos = strpos($this->fechaven, "##@@");
+          if ($tmp_pos !== false && !is_array($this->fechaven))
+          {
+              $this->fechaven = substr($this->fechaven, 0, $tmp_pos);
+          }
+          $this->fechaven_2 = $Busca_temp['fechaven_input_2']; 
+          $this->numpedido = $Busca_temp['numpedido']; 
+          $tmp_pos = strpos($this->numpedido, "##@@");
+          if ($tmp_pos !== false && !is_array($this->numpedido))
+          {
+              $this->numpedido = substr($this->numpedido, 0, $tmp_pos);
+          }
+          $this->numfacven = $Busca_temp['numfacven']; 
+          $tmp_pos = strpos($this->numfacven, "##@@");
+          if ($tmp_pos !== false && !is_array($this->numfacven))
+          {
+              $this->numfacven = substr($this->numfacven, 0, $tmp_pos);
+          }
+          $this->nremision = $Busca_temp['nremision']; 
+          $tmp_pos = strpos($this->nremision, "##@@");
+          if ($tmp_pos !== false && !is_array($this->nremision))
+          {
+              $this->nremision = substr($this->nremision, 0, $tmp_pos);
+          }
+          $this->creado_inicio = $Busca_temp['creado_inicio']; 
+          $tmp_pos = strpos($this->creado_inicio, "##@@");
+          if ($tmp_pos !== false && !is_array($this->creado_inicio))
+          {
+              $this->creado_inicio = substr($this->creado_inicio, 0, $tmp_pos);
+          }
+          $this->creado_fin = $Busca_temp['creado_fin']; 
+          $tmp_pos = strpos($this->creado_fin, "##@@");
+          if ($tmp_pos !== false && !is_array($this->creado_fin))
+          {
+              $this->creado_fin = substr($this->creado_fin, 0, $tmp_pos);
+          }
+      } 
+      $this->nm_where_dinamico = "";
+      $_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'on';
+  $vsql = "select modificainvpedido from configuraciones order by idconfiguraciones desc limit 1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiModificaInv = array();
+      $this->vsimodificainv = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiModificaInv[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsimodificainv[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiModificaInv = false;
+          $this->vSiModificaInv_erro = $this->Db->ErrorMsg();
+          $this->vsimodificainv = false;
+          $this->vsimodificainv_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+if(isset($this->vsimodificainv[0][0]))
+{
+	if($this->vsimodificainv[0][0]=="SI")
+	{
+		$this->NM_cmp_hidden["cobrar"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['php_cmp_sel']["cobrar"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["cobrar"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['php_cmp_sel']["cobrar"] = "off"; }
+	}
+}
+$this->nmgp_botoes["new"] = "off";;
+$_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'off'; 
+      if  (!empty($this->nm_where_dinamico)) 
+      {   
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_pesq'] .= $this->nm_where_dinamico;
+      }   
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name']))
+      {
+          $Pos = strrpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name'], ".");
+          if ($Pos === false) {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name'] .= ".xml";
+          }
+          $this->Arquivo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name'];
+          $this->Arq_zip = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name'];
+          $this->Tit_doc = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name'];
+          $Pos = strrpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name'], ".");
+          if ($Pos !== false) {
+              $this->Arq_zip = substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name'], 0, $Pos);
+          }
+          $this->Arq_zip .= ".zip";
+          $this->Tit_zip  = $this->Arq_zip;
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_name']);
+      }
+      if (!$this->Grava_view)
+      {
+          $this->Arquivo_view = $this->Arquivo;
+      }
+      $this->arr_export = array('label' => array(), 'lines' => array());
+      $this->arr_span   = array();
+
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'])
+      { 
+          $xml_charset = $_SESSION['scriptcase']['charset'];
+          $this->Xml_f = $this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arquivo;
+          $this->Zip_f = $this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arq_zip;
+          $xml_f = fopen($this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arquivo, "w");
+          fwrite($xml_f, "<?xml version=\"1.0\" encoding=\"$xml_charset\" ?>\r\n");
+          fwrite($xml_f, "<root>\r\n");
+          if ($this->Grava_view)
+          {
+              $xml_charset_v = $_SESSION['scriptcase']['charset_html'];
+              $xml_v         = fopen($this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arquivo_view, "w");
+              fwrite($xml_v, "<?xml version=\"1.0\" encoding=\"$xml_charset_v\" ?>\r\n");
+              fwrite($xml_v, "<root>\r\n");
+          }
+      }
+      $this->nm_field_dinamico = array();
+      $this->nm_order_dinamico = array();
+      $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nmgp_select = "SELECT prefijo_ped, numpedido, asentada, idcli, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), fechadocu as creado, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), total, vendedor, observaciones, idpedido, numfacven, nremision, credito, valoriva, saldo, creado_en_movil, disponible_en_movil from " . $this->Ini->nm_tabela; 
+      } 
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+      { 
+          $nmgp_select = "SELECT prefijo_ped, numpedido, asentada, idcli, fechaven, fechadocu as creado, fechavenc, total, vendedor, observaciones, idpedido, numfacven, nremision, credito, valoriva, saldo, creado_en_movil, disponible_en_movil from " . $this->Ini->nm_tabela; 
+      } 
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+       $nmgp_select = "SELECT prefijo_ped, numpedido, asentada, idcli, convert(char(23),fechaven,121), fechadocu as creado, convert(char(23),fechavenc,121), total, vendedor, observaciones, idpedido, numfacven, nremision, credito, valoriva, saldo, creado_en_movil, disponible_en_movil from " . $this->Ini->nm_tabela; 
+      } 
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+      { 
+          $nmgp_select = "SELECT prefijo_ped, numpedido, asentada, idcli, fechaven, fechadocu as creado, fechavenc, total, vendedor, observaciones, idpedido, numfacven, nremision, credito, valoriva, saldo, creado_en_movil, disponible_en_movil from " . $this->Ini->nm_tabela; 
+      } 
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+      { 
+          $nmgp_select = "SELECT prefijo_ped, numpedido, asentada, idcli, EXTEND(fechaven, YEAR TO DAY), fechadocu as creado, EXTEND(fechavenc, YEAR TO DAY), total, vendedor, observaciones, idpedido, numfacven, nremision, credito, valoriva, saldo, creado_en_movil, disponible_en_movil from " . $this->Ini->nm_tabela; 
+      } 
+      else 
+      { 
+          $nmgp_select = "SELECT prefijo_ped, numpedido, asentada, idcli, fechaven, fechadocu as creado, fechavenc, total, vendedor, observaciones, idpedido, numfacven, nremision, credito, valoriva, saldo, creado_en_movil, disponible_en_movil from " . $this->Ini->nm_tabela; 
+      } 
+      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_pesq'];
+      $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_pesq'];
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_resumo'])) 
+      { 
+          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_pesq'])) 
+          { 
+              $nmgp_select .= " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_resumo']; 
+              $nmgp_select_count .= " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_resumo']; 
+          } 
+          else
+          { 
+              $nmgp_select .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_resumo'] . ")"; 
+              $nmgp_select_count .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['where_resumo'] . ")"; 
+          } 
+      } 
+      $nmgp_order_by = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['order_grid'];
+      $nmgp_select .= $nmgp_order_by; 
+      if (!empty($this->Ini->nm_col_dinamica)) 
+      {
+          foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+          {
+              $nmgp_select = str_replace($nm_cada_col, $nm_nova_col, $nmgp_select); 
+          }
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select_count;
+      $rt = $this->Db->Execute($nmgp_select_count);
+      if ($rt === false && !$rt->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1)
+      {
+         $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+         exit;
+      }
+      $this->count_ger = $rt->fields[0];
+      $rt->Close();
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select;
+      $rs = $this->Db->Execute($nmgp_select);
+      if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1)
+      {
+         $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+         exit;
+      }
+      $this->SC_seq_register = 0;
+      $this->xml_registro = "";
+      $PB_tot = (isset($this->count_ger) && $this->count_ger > 0) ? "/" . $this->count_ger : "";
+      while (!$rs->EOF)
+      {
+         $this->SC_seq_register++;
+         if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'] && !$this->Ini->sc_export_ajax) {
+             $Mens_bar = NM_charset_to_utf8($this->Ini->Nm_lang['lang_othr_prcs']);
+             $this->pb->setProgressbarMessage($Mens_bar . ": " . $this->SC_seq_register . $PB_tot);
+             $this->pb->addSteps(1);
+         }
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'])
+         { 
+             $this->xml_registro .= "<" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida_tit'] . ">\r\n";
+         }
+         elseif ($this->New_Format)
+         {
+             $this->xml_registro = "<grid_pedidos_CW>\r\n";
+         }
+         else
+         {
+             $this->xml_registro = "<grid_pedidos_CW";
+         }
+         $this->prefijo_ped = $rs->fields[0] ;  
+         $this->numpedido = $rs->fields[1] ;  
+         $this->asentada = $rs->fields[2] ;  
+         $this->asentada = (string)$this->asentada;
+         $this->idcli = $rs->fields[3] ;  
+         $this->idcli = (string)$this->idcli;
+         $this->fechaven = $rs->fields[4] ;  
+         $this->creado = $rs->fields[5] ;  
+         $this->fechavenc = $rs->fields[6] ;  
+         $this->total = $rs->fields[7] ;  
+         $this->total =  str_replace(",", ".", $this->total);
+         $this->total = (strpos(strtolower($this->total), "e")) ? (float)$this->total : $this->total; 
+         $this->total = (string)$this->total;
+         $this->vendedor = $rs->fields[8] ;  
+         $this->vendedor = (string)$this->vendedor;
+         $this->observaciones = $rs->fields[9] ;  
+         $this->idpedido = $rs->fields[10] ;  
+         $this->idpedido = (string)$this->idpedido;
+         $this->numfacven = $rs->fields[11] ;  
+         $this->numfacven = (string)$this->numfacven;
+         $this->nremision = $rs->fields[12] ;  
+         $this->nremision = (string)$this->nremision;
+         $this->credito = $rs->fields[13] ;  
+         $this->credito = (string)$this->credito;
+         $this->valoriva = $rs->fields[14] ;  
+         $this->valoriva =  str_replace(",", ".", $this->valoriva);
+         $this->valoriva = (strpos(strtolower($this->valoriva), "e")) ? (float)$this->valoriva : $this->valoriva; 
+         $this->valoriva = (string)$this->valoriva;
+         $this->saldo = $rs->fields[15] ;  
+         $this->saldo =  str_replace(",", ".", $this->saldo);
+         $this->saldo = (strpos(strtolower($this->saldo), "e")) ? (float)$this->saldo : $this->saldo; 
+         $this->saldo = (string)$this->saldo;
+         $this->creado_en_movil = $rs->fields[16] ;  
+         $this->disponible_en_movil = $rs->fields[17] ;  
+         $this->Orig_prefijo_ped = $this->prefijo_ped;
+         $this->Orig_numpedido = $this->numpedido;
+         $this->Orig_asentada = $this->asentada;
+         $this->Orig_idcli = $this->idcli;
+         $this->Orig_fechaven = $this->fechaven;
+         $this->Orig_creado = $this->creado;
+         $this->Orig_fechavenc = $this->fechavenc;
+         $this->Orig_total = $this->total;
+         $this->Orig_vendedor = $this->vendedor;
+         $this->Orig_observaciones = $this->observaciones;
+         $this->Orig_idpedido = $this->idpedido;
+         $this->Orig_numfacven = $this->numfacven;
+         $this->Orig_nremision = $this->nremision;
+         $this->Orig_credito = $this->credito;
+         $this->Orig_valoriva = $this->valoriva;
+         $this->Orig_saldo = $this->saldo;
+         $this->Orig_creado_en_movil = $this->creado_en_movil;
+         $this->Orig_disponible_en_movil = $this->disponible_en_movil;
+         //----- lookup - prefijo_ped
+         $this->look_prefijo_ped = $this->prefijo_ped; 
+         $this->Lookup->lookup_prefijo_ped($this->look_prefijo_ped, $this->prefijo_ped) ; 
+         $this->look_prefijo_ped = ($this->look_prefijo_ped == "&nbsp;") ? "" : $this->look_prefijo_ped; 
+         //----- lookup - asentada
+         $this->look_asentada = $this->asentada; 
+         $this->Lookup->lookup_asentada($this->look_asentada); 
+         $this->look_asentada = ($this->look_asentada == "&nbsp;") ? "" : $this->look_asentada; 
+         //----- lookup - idcli
+         $this->look_idcli = $this->idcli; 
+         $this->Lookup->lookup_idcli($this->look_idcli, $this->idcli) ; 
+         $this->look_idcli = ($this->look_idcli == "&nbsp;") ? "" : $this->look_idcli; 
+         //----- lookup - vendedor
+         $this->look_vendedor = $this->vendedor; 
+         $this->Lookup->lookup_vendedor($this->look_vendedor, $this->vendedor) ; 
+         $this->look_vendedor = ($this->look_vendedor == "&nbsp;") ? "" : $this->look_vendedor; 
+         //----- lookup - numfacven
+         $this->look_numfacven = $this->numfacven; 
+         $this->Lookup->lookup_numfacven($this->look_numfacven, $this->numfacven) ; 
+         $this->look_numfacven = ($this->look_numfacven == "&nbsp;") ? "" : $this->look_numfacven; 
+         //----- lookup - nremision
+         $this->look_nremision = $this->nremision; 
+         $this->Lookup->lookup_nremision($this->look_nremision, $this->nremision) ; 
+         $this->look_nremision = ($this->look_nremision == "&nbsp;") ? "" : $this->look_nremision; 
+         //----- lookup - credito
+         $this->look_credito = $this->credito; 
+         $this->Lookup->lookup_credito($this->look_credito); 
+         $this->look_credito = ($this->look_credito == "&nbsp;") ? "" : $this->look_credito; 
+         $this->sc_proc_grid = true; 
+         //----- lookup - facturado
+         $this->Lookup->lookup_facturado($this->facturado, $this->numfacven, $this->array_facturado); 
+         $this->facturado = str_replace("<br>", " ", $this->facturado); 
+         $this->facturado = ($this->facturado == "&nbsp;") ? "" : $this->facturado; 
+         $_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'on';
+  if($this->asentada =="1")
+{
+	
+	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
+}
+
+    $this->pos  = "<a href='../frm_pos_impresion_pedidos_html/index.php?idfactura=".$this->idpedido ."' target='_blank'><img src='../_lib/img/usr__NM__bg__NM__apps_printer_15747.png' /></a>";
+
+if($this->saldo ==0){
+	
+	$this->NM_field_style["cobrar"] = "background-color:#9999cc;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
+}
+
+ 
+      $nm_select = "select modificainvpedido from configuraciones where idconfiguraciones='1'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vsiModificaInv = array();
+      $this->vsimodificainv = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vsiModificaInv[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsimodificainv[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vsiModificaInv = false;
+          $this->vsiModificaInv_erro = $this->Db->ErrorMsg();
+          $this->vsimodificainv = false;
+          $this->vsimodificainv_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+if(isset($this->vsimodificainv[0][0]))
+	{
+	if($this->vsimodificainv[0][0]=="SI")
+		{
+		$this->NM_field_style["imprimir"] = "background-color:#b9b9b8;";
+		}
+	}
+
+if($this->facturado >0)
+	{
+	$this->facturado ='SI';
+	$this->NM_field_style["facturado"] = "background-color:#58c964;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
+	}
+
+				
+if($this->disponible_en_movil =="NO"){
+	
+	$this->NM_field_style["creado_en_movil"] = "background-color:#ffa0a3;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
+}
+$_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'off'; 
+         foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['field_order'] as $Cada_col)
+         { 
+            if (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off")
+            { 
+                $NM_func_exp = "NM_export_" . $Cada_col;
+                $this->$NM_func_exp();
+            } 
+         } 
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'])
+         { 
+             $this->xml_registro .= "</" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida_tit'] . ">\r\n";
+         }
+         elseif ($this->New_Format)
+         {
+             $this->xml_registro .= "</grid_pedidos_CW>\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " />\r\n";
+         }
+         if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'])
+         { 
+             fwrite($xml_f, $this->xml_registro);
+             if ($this->Grava_view)
+             {
+                fwrite($xml_v, $this->xml_registro);
+             }
+         }
+         $rs->MoveNext();
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'])
+      { 
+          if (!$this->New_Format)
+          {
+              $this->xml_registro = "";
+          }
+          $_SESSION['scriptcase']['export_return'] = $this->xml_registro;
+      }
+      else
+      { 
+          fwrite($xml_f, "</root>");
+          fclose($xml_f);
+          if ($this->Grava_view)
+          {
+             fwrite($xml_v, "</root>");
+             fclose($xml_v);
+          }
+          if ($this->Tem_xml_res)
+          { 
+              if (!$this->Ini->sc_export_ajax) {
+                  $this->PB_dif = intval ($this->PB_dif / 2);
+                  $Mens_bar  = NM_charset_to_utf8($this->Ini->Nm_lang['lang_othr_prcs']);
+                  $Mens_smry = NM_charset_to_utf8($this->Ini->Nm_lang['lang_othr_smry_titl']);
+                  $this->pb->setProgressbarMessage($Mens_bar . ": " . $Mens_smry);
+                  $this->pb->addSteps($this->PB_dif);
+              }
+              require_once($this->Ini->path_aplicacao . "grid_pedidos_CW_res_xml.class.php");
+              $this->Res = new grid_pedidos_CW_res_xml();
+              $this->prep_modulos("Res");
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_res_grid'] = true;
+              $this->Res->monta_xml();
+          } 
+          if (!$this->Ini->sc_export_ajax) {
+              $Mens_bar = NM_charset_to_utf8($this->Ini->Nm_lang['lang_btns_export_finished']);
+              $this->pb->setProgressbarMessage($Mens_bar);
+              $this->pb->addSteps($this->PB_dif);
+          }
+          if ($this->Xml_password != "" || $this->Tem_xml_res)
+          { 
+              $str_zip    = "";
+              $Parm_pass  = ($this->Xml_password != "") ? " -p" : "";
+              $Zip_f      = (FALSE !== strpos($this->Zip_f, ' ')) ? " \"" . $this->Zip_f . "\"" :  $this->Zip_f;
+              $Arq_input  = (FALSE !== strpos($this->Xml_f, ' ')) ? " \"" . $this->Xml_f . "\"" :  $this->Xml_f;
+              if (is_file($Zip_f)) {
+                  unlink($Zip_f);
+              }
+              if (FALSE !== strpos(strtolower(php_uname()), 'windows')) 
+              {
+                  chdir($this->Ini->path_third . "/zip/windows");
+                  $str_zip = "zip.exe " . strtoupper($Parm_pass) . " -j " . $this->Xml_password . " " . $Zip_f . " " . $Arq_input;
+              }
+              elseif (FALSE !== strpos(strtolower(php_uname()), 'linux')) 
+              {
+                  if (FALSE !== strpos(strtolower(php_uname()), 'i686')) 
+                  {
+                      chdir($this->Ini->path_third . "/zip/linux-i386/bin");
+                  }
+                  else
+                  {
+                      chdir($this->Ini->path_third . "/zip/linux-amd64/bin");
+                  }
+                  $str_zip = "./7za " . $Parm_pass . $this->Xml_password . " a " . $Zip_f . " " . $Arq_input;
+              }
+              elseif (FALSE !== strpos(strtolower(php_uname()), 'darwin'))
+              {
+                  chdir($this->Ini->path_third . "/zip/mac/bin");
+                  $str_zip = "./7za " . $Parm_pass . $this->Xml_password . " a " . $Zip_f . " " . $Arq_input;
+              }
+              if (!empty($str_zip)) {
+                  exec($str_zip);
+              }
+              // ----- ZIP log
+              $fp = @fopen(trim(str_replace(array(".zip",'"'), array(".log",""), $Zip_f)), 'w');
+              if ($fp)
+              {
+                  @fwrite($fp, $str_zip . "\r\n\r\n");
+                  @fclose($fp);
+              }
+              unlink($Arq_input);
+              $this->Arquivo = $this->Arq_zip;
+              $this->Xml_f   = $this->Zip_f;
+              $this->Tit_doc = $this->Tit_zip;
+              if ($this->Tem_xml_res)
+              { 
+                  $str_zip   = "";
+                  $Arq_res   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_res_file']['xml'];
+                  $Arq_input = (FALSE !== strpos($Arq_res, ' ')) ? " \"" . $Arq_res . "\"" :  $Arq_res;
+                  if (FALSE !== strpos(strtolower(php_uname()), 'windows')) 
+                  {
+                      $str_zip = "zip.exe " . strtoupper($Parm_pass) . " -j -u " . $this->Xml_password . " " . $Zip_f . " " . $Arq_input;
+                  }
+                  elseif (FALSE !== strpos(strtolower(php_uname()), 'linux')) 
+                  {
+                      $str_zip = "./7za " . $Parm_pass . $this->Xml_password . " a " . $Zip_f . " " . $Arq_input;
+                  }
+                  elseif (FALSE !== strpos(strtolower(php_uname()), 'darwin'))
+                  {
+                      $str_zip = "./7za " . $Parm_pass . $this->Xml_password . " a " . $Zip_f . " " . $Arq_input;
+                  }
+                  if (!empty($str_zip)) {
+                      exec($str_zip);
+                  }
+                  // ----- ZIP log
+                  $fp = @fopen(trim(str_replace(array(".zip",'"'), array(".log",""), $Zip_f)), 'a');
+                  if ($fp)
+                  {
+                      @fwrite($fp, $str_zip . "\r\n\r\n");
+                      @fclose($fp);
+                  }
+                  unlink($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_res_file']['xml']);
+              }
+              if ($this->Grava_view)
+              {
+                  $str_zip    = "";
+                  $xml_view_f = $this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arquivo_view;
+                  $zip_view_f = str_replace(".zip", "_view.zip", $this->Zip_f);
+                  $zip_arq_v  = str_replace(".zip", "_view.zip", $this->Arq_zip);
+                  $Zip_f      = (FALSE !== strpos($zip_view_f, ' ')) ? " \"" . $zip_view_f . "\"" :  $zip_view_f;
+                  $Arq_input  = (FALSE !== strpos($xml_view_ff, ' ')) ? " \"" . $xml_view_f . "\"" :  $xml_view_f;
+                  if (is_file($Zip_f)) {
+                      unlink($Zip_f);
+                  }
+                  if (FALSE !== strpos(strtolower(php_uname()), 'windows')) 
+                  {
+                      chdir($this->Ini->path_third . "/zip/windows");
+                      $str_zip = "zip.exe " . strtoupper($Parm_pass) . " -j " . $this->Xml_password . " " . $Zip_f . " " . $Arq_input;
+                  }
+                  elseif (FALSE !== strpos(strtolower(php_uname()), 'linux')) 
+                  {
+                      if (FALSE !== strpos(strtolower(php_uname()), 'i686')) 
+                      {
+                          chdir($this->Ini->path_third . "/zip/linux-i386/bin");
+                      }
+                      else
+                      {
+                          chdir($this->Ini->path_third . "/zip/linux-amd64/bin");
+                      }
+                      $str_zip = "./7za " . $Parm_pass . $this->Xml_password . " a " . $Zip_f . " " . $Arq_input;
+                  }
+                  elseif (FALSE !== strpos(strtolower(php_uname()), 'darwin'))
+                  {
+                      chdir($this->Ini->path_third . "/zip/mac/bin");
+                      $str_zip = "./7za " . $Parm_pass . $this->Xml_password . " a " . $Zip_f . " " . $Arq_input;
+                  }
+                  if (!empty($str_zip)) {
+                      exec($str_zip);
+                  }
+                  // ----- ZIP log
+                  $fp = @fopen(trim(str_replace(array(".zip",'"'), array(".log",""), $Zip_f)), 'a');
+                  if ($fp)
+                  {
+                      @fwrite($fp, $str_zip . "\r\n\r\n");
+                      @fclose($fp);
+                  }
+                  unlink($Arq_input);
+                  $this->Arquivo_view = $zip_arq_v;
+                  if ($this->Tem_xml_res)
+                  { 
+                      $str_zip   = "";
+                      $Arq_res   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_res_file']['view'];
+                      $Arq_input = (FALSE !== strpos($Arq_res, ' ')) ? " \"" . $Arq_res . "\"" :  $Arq_res;
+                      if (FALSE !== strpos(strtolower(php_uname()), 'windows')) 
+                      {
+                          $str_zip = "zip.exe " . strtoupper($Parm_pass) . " -j -u " . $this->Xml_password . " " . $Zip_f . " " . $Arq_input;
+                      }
+                      elseif (FALSE !== strpos(strtolower(php_uname()), 'linux')) 
+                      {
+                          $str_zip = "./7za " . $Parm_pass . $this->Xml_password . " a " . $Zip_f . " " . $Arq_input;
+                      }
+                      elseif (FALSE !== strpos(strtolower(php_uname()), 'darwin'))
+                      {
+                          $str_zip = "./7za " . $Parm_pass . $this->Xml_password . " a " . $Zip_f . " " . $Arq_input;
+                      }
+                      if (!empty($str_zip)) {
+                          exec($str_zip);
+                      }
+                      // ----- ZIP log
+                      $fp = @fopen(trim(str_replace(array(".zip",'"'), array(".log",""), $Zip_f)), 'a');
+                      if ($fp)
+                      {
+                          @fwrite($fp, $str_zip . "\r\n\r\n");
+                          @fclose($fp);
+                      }
+                      unlink($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_res_file']['view']);
+                  }
+              } 
+              else 
+              {
+                  $this->Arquivo_view = $this->Arq_zip;
+              } 
+              unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_res_grid']);
+          } 
+      }
+      if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['export_sel_columns']['field_order']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['field_order'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['export_sel_columns']['field_order'];
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['export_sel_columns']['field_order']);
+      }
+      if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['export_sel_columns']['usr_cmp_sel']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['usr_cmp_sel'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['export_sel_columns']['usr_cmp_sel'];
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['export_sel_columns']['usr_cmp_sel']);
+      }
+      $rs->Close();
+   }
+   //----- prefijo_ped
+   function NM_export_prefijo_ped()
+   {
+         nmgp_Form_Num_Val($this->look_prefijo_ped, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_prefijo_ped))
+         {
+             $this->look_prefijo_ped = sc_convert_encoding($this->look_prefijo_ped, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['prefijo_ped'])) ? $this->New_label['prefijo_ped'] : "PJ"; 
+         }
+         else
+         {
+             $SC_Label = "prefijo_ped"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_prefijo_ped) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_prefijo_ped) . "\"";
+         }
+   }
+   //----- numpedido
+   function NM_export_numpedido()
+   {
+             $conteudo = str_replace($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['decimal_db'], "", $conteudo); 
+             $this->nm_gera_mask($this->numpedido, "xxx"); 
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->numpedido))
+         {
+             $this->numpedido = sc_convert_encoding($this->numpedido, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['numpedido'])) ? $this->New_label['numpedido'] : "Número"; 
+         }
+         else
+         {
+             $SC_Label = "numpedido"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->numpedido) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->numpedido) . "\"";
+         }
+   }
+   //----- asentada
+   function NM_export_asentada()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_asentada))
+         {
+             $this->look_asentada = sc_convert_encoding($this->look_asentada, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['asentada'])) ? $this->New_label['asentada'] : "Asentado"; 
+         }
+         else
+         {
+             $SC_Label = "asentada"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_asentada) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_asentada) . "\"";
+         }
+   }
+   //----- facturado
+   function NM_export_facturado()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->facturado))
+         {
+             $this->facturado = sc_convert_encoding($this->facturado, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['facturado'])) ? $this->New_label['facturado'] : "Facturado"; 
+         }
+         else
+         {
+             $SC_Label = "facturado"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->facturado) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->facturado) . "\"";
+         }
+   }
+   //----- idcli
+   function NM_export_idcli()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_idcli))
+         {
+             $this->look_idcli = sc_convert_encoding($this->look_idcli, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['idcli'])) ? $this->New_label['idcli'] : "Cliente"; 
+         }
+         else
+         {
+             $SC_Label = "idcli"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_idcli) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_idcli) . "\"";
+         }
+   }
+   //----- fechaven
+   function NM_export_fechaven()
+   {
+             $conteudo_x =  $this->fechaven;
+             nm_conv_limpa_dado($conteudo_x, "YYYY-MM-DD");
+             if (is_numeric($conteudo_x) && strlen($conteudo_x) > 0) 
+             { 
+                 $this->nm_data->SetaData($this->fechaven, "YYYY-MM-DD  ");
+                 $this->fechaven = $this->nm_data->FormataSaida("d/m/y");
+             } 
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['fechaven'])) ? $this->New_label['fechaven'] : "Fecha"; 
+         }
+         else
+         {
+             $SC_Label = "fechaven"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->fechaven) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->fechaven) . "\"";
+         }
+   }
+   //----- creado
+   function NM_export_creado()
+   {
+             $conteudo_x =  $this->creado;
+             nm_conv_limpa_dado($conteudo_x, "");
+             if (is_numeric($conteudo_x) && $conteudo_x > 0) 
+             { 
+                 $this->nm_data->SetaData($this->creado, "");
+                 $this->creado = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DH", "ddmmaaaa;hhii"));
+             } 
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->creado))
+         {
+             $this->creado = sc_convert_encoding($this->creado, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['creado'])) ? $this->New_label['creado'] : "Creado"; 
+         }
+         else
+         {
+             $SC_Label = "creado"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->creado) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->creado) . "\"";
+         }
+   }
+   //----- fechavenc
+   function NM_export_fechavenc()
+   {
+             $conteudo_x =  $this->fechavenc;
+             nm_conv_limpa_dado($conteudo_x, "YYYY-MM-DD");
+             if (is_numeric($conteudo_x) && strlen($conteudo_x) > 0) 
+             { 
+                 $this->nm_data->SetaData($this->fechavenc, "YYYY-MM-DD  ");
+                 $this->fechavenc = $this->nm_data->FormataSaida("d/m/y");
+             } 
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['fechavenc'])) ? $this->New_label['fechavenc'] : "Vence"; 
+         }
+         else
+         {
+             $SC_Label = "fechavenc"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->fechavenc) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->fechavenc) . "\"";
+         }
+   }
+   //----- total
+   function NM_export_total()
+   {
+             nmgp_Form_Num_Val($this->total, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "2", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['total'])) ? $this->New_label['total'] : "Total"; 
+         }
+         else
+         {
+             $SC_Label = "total"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->total) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->total) . "\"";
+         }
+   }
+   //----- vendedor
+   function NM_export_vendedor()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_vendedor))
+         {
+             $this->look_vendedor = sc_convert_encoding($this->look_vendedor, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['vendedor'])) ? $this->New_label['vendedor'] : "Vendedor"; 
+         }
+         else
+         {
+             $SC_Label = "vendedor"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_vendedor) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_vendedor) . "\"";
+         }
+   }
+   //----- imprimir
+   function NM_export_imprimir()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->imprimir))
+         {
+             $this->imprimir = sc_convert_encoding($this->imprimir, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['imprimir'])) ? $this->New_label['imprimir'] : "Imprimir"; 
+         }
+         else
+         {
+             $SC_Label = "imprimir"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->imprimir) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->imprimir) . "\"";
+         }
+   }
+   //----- pos
+   function NM_export_pos()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->pos))
+         {
+             $this->pos = sc_convert_encoding($this->pos, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['pos'])) ? $this->New_label['pos'] : "POS"; 
+         }
+         else
+         {
+             $SC_Label = "pos"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->pos) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->pos) . "\"";
+         }
+   }
+   //----- cobrar
+   function NM_export_cobrar()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->cobrar))
+         {
+             $this->cobrar = sc_convert_encoding($this->cobrar, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['cobrar'])) ? $this->New_label['cobrar'] : "Cobrar"; 
+         }
+         else
+         {
+             $SC_Label = "cobrar"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->cobrar) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->cobrar) . "\"";
+         }
+   }
+   //----- observaciones
+   function NM_export_observaciones()
+   {
+             if ($this->observaciones !== "&nbsp;") 
+             { 
+                 $this->observaciones = sc_strtoupper($this->observaciones); 
+             } 
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->observaciones))
+         {
+             $this->observaciones = sc_convert_encoding($this->observaciones, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Observaciones"; 
+         }
+         else
+         {
+             $SC_Label = "observaciones"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->observaciones) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->observaciones) . "\"";
+         }
+   }
+   //----- idpedido
+   function NM_export_idpedido()
+   {
+             nmgp_Form_Num_Val($this->idpedido, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['idpedido'])) ? $this->New_label['idpedido'] : "Asentar Ped."; 
+         }
+         else
+         {
+             $SC_Label = "idpedido"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->idpedido) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->idpedido) . "\"";
+         }
+   }
+   //----- numfacven
+   function NM_export_numfacven()
+   {
+         nmgp_Form_Num_Val($this->look_numfacven, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_numfacven))
+         {
+             $this->look_numfacven = sc_convert_encoding($this->look_numfacven, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['numfacven'])) ? $this->New_label['numfacven'] : "Fac. No."; 
+         }
+         else
+         {
+             $SC_Label = "numfacven"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_numfacven) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_numfacven) . "\"";
+         }
+   }
+   //----- nremision
+   function NM_export_nremision()
+   {
+         nmgp_Form_Num_Val($this->look_nremision, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_nremision))
+         {
+             $this->look_nremision = sc_convert_encoding($this->look_nremision, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['nremision'])) ? $this->New_label['nremision'] : "Remisión #"; 
+         }
+         else
+         {
+             $SC_Label = "nremision"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_nremision) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_nremision) . "\"";
+         }
+   }
+   //----- credito
+   function NM_export_credito()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_credito))
+         {
+             $this->look_credito = sc_convert_encoding($this->look_credito, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['credito'])) ? $this->New_label['credito'] : "Crédito"; 
+         }
+         else
+         {
+             $SC_Label = "credito"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_credito) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_credito) . "\"";
+         }
+   }
+
+   //----- 
+   function trata_dados($conteudo)
+   {
+      $str_temp =  $conteudo;
+      $str_temp =  str_replace("<br />", "",  $str_temp);
+      $str_temp =  str_replace("&", "&amp;",  $str_temp);
+      $str_temp =  str_replace("<", "&lt;",   $str_temp);
+      $str_temp =  str_replace(">", "&gt;",   $str_temp);
+      $str_temp =  str_replace("'", "&apos;", $str_temp);
+      $str_temp =  str_replace('"', "&quot;",  $str_temp);
+      $str_temp =  str_replace('(', "_",  $str_temp);
+      $str_temp =  str_replace(')', "",  $str_temp);
+      return ($str_temp);
+   }
+
+   function clear_tag(&$conteudo)
+   {
+      $out = (is_numeric(substr($conteudo, 0, 1)) || substr($conteudo, 0, 1) == "") ? "_" : "";
+      $str_temp = "abcdefghijklmnopqrstuvwxyz0123456789";
+      for ($i = 0; $i < strlen($conteudo); $i++)
+      {
+          $char = substr($conteudo, $i, 1);
+          $ok = false;
+          for ($z = 0; $z < strlen($str_temp); $z++)
+          {
+              if (strtolower($char) == substr($str_temp, $z, 1))
+              {
+                  $ok = true;
+                  break;
+              }
+          }
+          $out .= ($ok) ? $char : "_";
+      }
+      $conteudo = $out;
+   }
+
+   function nm_conv_data_db($dt_in, $form_in, $form_out)
+   {
+       $dt_out = $dt_in;
+       if (strtoupper($form_in) == "DB_FORMAT") {
+           if ($dt_out == "null" || $dt_out == "")
+           {
+               $dt_out = "";
+               return $dt_out;
+           }
+           $form_in = "AAAA-MM-DD";
+       }
+       if (strtoupper($form_out) == "DB_FORMAT") {
+           if (empty($dt_out))
+           {
+               $dt_out = "null";
+               return $dt_out;
+           }
+           $form_out = "AAAA-MM-DD";
+       }
+       if (strtoupper($form_out) == "SC_FORMAT_REGION") {
+           $this->nm_data->SetaData($dt_in, strtoupper($form_in));
+           $prep_out  = (strpos(strtolower($form_in), "dd") !== false) ? "dd" : "";
+           $prep_out .= (strpos(strtolower($form_in), "mm") !== false) ? "mm" : "";
+           $prep_out .= (strpos(strtolower($form_in), "aa") !== false) ? "aaaa" : "";
+           $prep_out .= (strpos(strtolower($form_in), "yy") !== false) ? "aaaa" : "";
+           return $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DT", $prep_out));
+       }
+       else {
+           nm_conv_form_data($dt_out, $form_in, $form_out);
+           return $dt_out;
+       }
+   }
+   function progress_bar_end()
+   {
+      unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_file']);
+      if (is_file($this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arquivo))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_file'] = $this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arquivo;
+      }
+      $path_doc_md5 = md5($this->Ini->path_imag_temp . "/" . $this->Arquivo);
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW'][$path_doc_md5][0] = $this->Ini->path_imag_temp . "/" . $this->Arquivo;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW'][$path_doc_md5][1] = $this->Tit_doc;
+      $Mens_bar = $this->Ini->Nm_lang['lang_othr_file_msge'];
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8") {
+          $Mens_bar = sc_convert_encoding($Mens_bar, "UTF-8", $_SESSION['scriptcase']['charset']);
+      }
+      $this->pb->setProgressbarMessage($Mens_bar);
+      $this->pb->setDownloadLink($this->Ini->path_imag_temp . "/" . $this->Arquivo);
+      $this->pb->setDownloadMd5($path_doc_md5);
+      $this->pb->completed();
+   }
+   //---- 
+   function monta_html()
+   {
+      global $nm_url_saida, $nm_lang;
+      include($this->Ini->path_btn . $this->Ini->Str_btn_grid);
+      unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_file']);
+      if (is_file($this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arquivo))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_file'] = $this->Ini->root . $this->Ini->path_imag_temp . "/" . $this->Arquivo;
+      }
+      $path_doc_md5 = md5($this->Ini->path_imag_temp . "/" . $this->Arquivo);
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW'][$path_doc_md5][0] = $this->Ini->path_imag_temp . "/" . $this->Arquivo;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW'][$path_doc_md5][1] = $this->Tit_doc;
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+<HEAD>
+ <TITLE>Lista de pedidos :: XML</TITLE>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
+?>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+}
+?>
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
+  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+ <?php
+ if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts))
+ {
+ ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->str_google_fonts ?>" />
+ <?php
+ }
+ ?>
+  <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_css ?>" /> 
+</HEAD>
+<BODY class="scExportPage">
+<?php echo $this->Ini->Ajax_result_set ?>
+<table style="border-collapse: collapse; border-width: 0; height: 100%; width: 100%"><tr><td style="padding: 0; text-align: center; vertical-align: middle">
+ <table class="scExportTable" align="center">
+  <tr>
+   <td class="scExportTitle" style="height: 25px">XML</td>
+  </tr>
+  <tr>
+   <td class="scExportLine" style="width: 100%">
+    <table style="border-collapse: collapse; border-width: 0; width: 100%"><tr><td class="scExportLineFont" style="padding: 3px 0 0 0" id="idMessage">
+    <?php echo $this->Ini->Nm_lang['lang_othr_file_msge'] ?>
+    </td><td class="scExportLineFont" style="text-align:right; padding: 3px 0 0 0">
+     <?php echo nmButtonOutput($this->arr_buttons, "bexportview", "document.Fview.submit()", "document.Fview.submit()", "idBtnView", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+ ?>
+     <?php echo nmButtonOutput($this->arr_buttons, "bdownload", "document.Fdown.submit()", "document.Fdown.submit()", "idBtnDown", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+ ?>
+     <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.F0.submit()", "document.F0.submit()", "idBtnBack", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+ ?>
+    </td></tr></table>
+   </td>
+  </tr>
+ </table>
+</td></tr></table>
+<form name="Fview" method="get" action="<?php echo $this->Ini->path_imag_temp . "/" . $this->Arquivo_view ?>" target="_blank" style="display: none"> 
+</form>
+<form name="Fdown" method="get" action="grid_pedidos_CW_download.php" target="_blank" style="display: none"> 
+<input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
+<input type="hidden" name="nm_tit_doc" value="grid_pedidos_CW"> 
+<input type="hidden" name="nm_name_doc" value="<?php echo $path_doc_md5 ?>"> 
+</form>
+<FORM name="F0" method=post action="./" style="display: none"> 
+<INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
+<INPUT type="hidden" name="nmgp_opcao" value="<?php echo NM_encode_input($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['xml_return']); ?>"> 
+</FORM> 
+</BODY>
+</HTML>
+<?php
+   }
+   function nm_gera_mask(&$nm_campo, $nm_mask)
+   { 
+      $trab_campo = $nm_campo;
+      $trab_mask  = $nm_mask;
+      $tam_campo  = strlen($nm_campo);
+      $trab_saida = "";
+      $str_highlight_ini = "";
+      $str_highlight_fim = "";
+      if(substr($nm_campo, 0, 23) == '<div class="highlight">' && substr($nm_campo, -6) == '</div>')
+      {
+           $str_highlight_ini = substr($nm_campo, 0, 23);
+           $str_highlight_fim = substr($nm_campo, -6);
+
+           $trab_campo = substr($nm_campo, 23, -6);
+           $tam_campo  = strlen($trab_campo);
+      }      $mask_num = false;
+      for ($x=0; $x < strlen($trab_mask); $x++)
+      {
+          if (substr($trab_mask, $x, 1) == "#")
+          {
+              $mask_num = true;
+              break;
+          }
+      }
+      if ($mask_num )
+      {
+          $ver_duas = explode(";", $trab_mask);
+          if (isset($ver_duas[1]) && !empty($ver_duas[1]))
+          {
+              $cont1 = count(explode("#", $ver_duas[0])) - 1;
+              $cont2 = count(explode("#", $ver_duas[1])) - 1;
+              if ($cont2 >= $tam_campo)
+              {
+                  $trab_mask = $ver_duas[1];
+              }
+              else
+              {
+                  $trab_mask = $ver_duas[0];
+              }
+          }
+          $tam_mask = strlen($trab_mask);
+          $xdados = 0;
+          for ($x=0; $x < $tam_mask; $x++)
+          {
+              if (substr($trab_mask, $x, 1) == "#" && $xdados < $tam_campo)
+              {
+                  $trab_saida .= substr($trab_campo, $xdados, 1);
+                  $xdados++;
+              }
+              elseif ($xdados < $tam_campo)
+              {
+                  $trab_saida .= substr($trab_mask, $x, 1);
+              }
+          }
+          if ($xdados < $tam_campo)
+          {
+              $trab_saida .= substr($trab_campo, $xdados);
+          }
+          $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
+          return;
+      }
+      for ($ix = strlen($trab_mask); $ix > 0; $ix--)
+      {
+           $char_mask = substr($trab_mask, $ix - 1, 1);
+           if ($char_mask != "x" && $char_mask != "z")
+           {
+               $trab_saida = $char_mask . $trab_saida;
+           }
+           else
+           {
+               if ($tam_campo != 0)
+               {
+                   $trab_saida = substr($trab_campo, $tam_campo - 1, 1) . $trab_saida;
+                   $tam_campo--;
+               }
+               else
+               {
+                   $trab_saida = "0" . $trab_saida;
+               }
+           }
+      }
+      if ($tam_campo != 0)
+      {
+          $trab_saida = substr($trab_campo, 0, $tam_campo) . $trab_saida;
+          $trab_mask  = str_repeat("z", $tam_campo) . $trab_mask;
+      }
+   
+      $iz = 0; 
+      for ($ix = 0; $ix < strlen($trab_mask); $ix++)
+      {
+           $char_mask = substr($trab_mask, $ix, 1);
+           if ($char_mask != "x" && $char_mask != "z")
+           {
+               if ($char_mask == "." || $char_mask == ",")
+               {
+                   $trab_saida = substr($trab_saida, 0, $iz) . substr($trab_saida, $iz + 1);
+               }
+               else
+               {
+                   $iz++;
+               }
+           }
+           elseif ($char_mask == "x" || substr($trab_saida, $iz, 1) != "0")
+           {
+               $ix = strlen($trab_mask) + 1;
+           }
+           else
+           {
+               $trab_saida = substr($trab_saida, 0, $iz) . substr($trab_saida, $iz + 1);
+           }
+      }
+      $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
+   } 
+function fGestionaStock($iddet, $tipo=2)
+{
+$_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'on';
+  
+if(!empty($iddet))
+{	
+	if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+	
+	$vsqldetalle = "select 
+					cantidad,
+					idpro,
+					costop,
+					valorpar,
+					idbod,
+					idpedid,
+					unidadmayor,
+					factor,
+					(select p.fechaven from pedidos p where p.idpedido=idpedid) as fecha
+					from 
+					detallepedido
+					where 
+					iddet='".$iddet."'
+					";
+	
+	 
+      $nm_select = $vsqldetalle; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDatosDetalle = array();
+      $this->vdatosdetalle = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDatosDetalle[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdatosdetalle[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDatosDetalle = false;
+          $this->vDatosDetalle_erro = $this->Db->ErrorMsg();
+          $this->vdatosdetalle = false;
+          $this->vdatosdetalle_erro = $this->Db->ErrorMsg();
+      } 
+;
+	
+	if(isset($this->vdatosdetalle[0][0]))
+	{
+		$vcantidad = $this->vdatosdetalle[0][0];
+		$vidpro    = $this->vdatosdetalle[0][1];
+		$vcosto    = $this->vdatosdetalle[0][2];
+		$vvalorpar = $this->vdatosdetalle[0][3];
+		$vidbod    = $this->vdatosdetalle[0][4];
+		$vnumfac   = $this->vdatosdetalle[0][5];
+		$vtipo     = $tipo;
+		$vdetalle  = "Venta-Pedido";
+		$vidmov    = 1;
+		$vfecha    = $this->vdatosdetalle[0][8];
+		$vunidadmayor = $this->vdatosdetalle[0][6];
+		$vfactor   = $this->vdatosdetalle[0][7];
+		
+		if($vunidadmayor!="SI" and $vfactor > 0)
+		{
+			$vcantidad = $vcantidad/$vfactor;
+		}
+	}
+	
+	
+	if($tipo==2)
+	{
+		$vsqlinv = "INSERT 
+			  inventario 
+			  SET 
+			  fecha		   ='".$vfecha."', 
+			  cantidad	   =(".$vcantidad."*-1), 
+			  idpro		   ='".$vidpro."', 
+			  costo		   ='".$vcosto."',
+			  valorparcial ='".$vvalorpar."', 
+			  idbod        ='".$vidbod."', 
+			  tipo		   ='".$vtipo."', 
+			  detalle	   ='".$vdetalle."', 
+			  idmov		   ='".$vidmov."',
+			  idped 	   ='".$vnumfac."', 
+			  iddetalle	   ='".$iddet."'
+			  ";
+
+		
+     $nm_select = $vsqlinv; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+		$vsqlstock="UPDATE 
+			   productos 
+			   SET 
+			   stockmen = stockmen-$vcantidad
+			   WHERE 
+			   idprod='".$vidpro."'
+			   ";
+
+		
+     $nm_select = $vsqlstock; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+		
+		 
+      $nm_select = "select escombo from productos where idprod='".$vidpro."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiEsCombo = array();
+      $this->vsiescombo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiEsCombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiescombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiEsCombo = false;
+          $this->vSiEsCombo_erro = $this->Db->ErrorMsg();
+          $this->vsiescombo = false;
+          $this->vsiescombo_erro = $this->Db->ErrorMsg();
+      } 
+;
+		
+		if(isset($this->vsiescombo[0][0]))
+		{
+			$vescombo = $this->vsiescombo[0][0];
+			
+			if($vescombo=='SI')
+			{
+				 
+      $nm_select = "select idproducto,sum(cantidad) as cantidad,sum(precio) as precio from detallecombos where idcombo='".$vidpro."' group by idproducto"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vItemsCombo = array();
+      $this->vitemscombo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vItemsCombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vitemscombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vItemsCombo = false;
+          $this->vItemsCombo_erro = $this->Db->ErrorMsg();
+          $this->vitemscombo = false;
+          $this->vitemscombo_erro = $this->Db->ErrorMsg();
+      } 
+;
+				if(isset($this->vitemscombo[0][0]))
+				{
+					for($i=0;$i<count($this->vitemscombo );$i++)
+					{
+						$vidpro2    = $this->vitemscombo[$i][0];
+						$vcantidad2 = $this->vitemscombo[$i][1];
+						$vprecio2   = $this->vitemscombo[$i][2];
+						
+						$sqlcostoprod = "select costomen from productos where idprod='".$vidpro2."'";
+						 
+      $nm_select = $sqlcostoprod; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vcostoprod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vcostoprod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vcostoprod = false;
+          $this->vcostoprod_erro = $this->Db->ErrorMsg();
+      } 
+;
+						
+						if(isset($this->vcostoprod[0][0]))
+						{
+							$vsqlinv2 = "INSERT 
+								  inventario 
+								  SET 
+								  fecha		   ='".$vfecha."', 
+								  cantidad	   =(($vcantidad2*$vcantidad)*-1), 
+								  idpro		   ='".$vidpro2."', 
+								  costo		   ='".$this->vcostoprod[0][0]."',
+								  valorparcial ='".$vprecio2."', 
+								  idbod        ='".$vidbod."', 
+								  tipo		   ='".$vtipo."', 
+								  detalle	   ='".$vdetalle."', 
+								  idmov		   ='".$vidmov."',
+								  idped  	   ='".$vnumfac."', 
+								  iddetalle	   ='".$iddet."',
+								  idcombo      ='".$vidpro."'
+								  ";
+
+							
+     $nm_select = $vsqlinv2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+							$vsqlstock2="UPDATE 
+								   productos 
+								   SET 
+								   stockmen = (stockmen-($vcantidad2*$vcantidad))
+								   WHERE 
+								   idprod='".$vidpro2."'
+								   ";
+
+							
+     $nm_select = $vsqlstock2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	if($tipo==1)
+	{
+		 
+      $nm_select = "select escombo from productos where idprod='".$vidpro."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiEsCombo = array();
+      $this->vsiescombo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiEsCombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiescombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiEsCombo = false;
+          $this->vSiEsCombo_erro = $this->Db->ErrorMsg();
+          $this->vsiescombo = false;
+          $this->vsiescombo_erro = $this->Db->ErrorMsg();
+      } 
+;
+		
+		if(isset($this->vsiescombo[0][0]))
+		{
+			$vescombo = $this->vsiescombo[0][0];
+			
+			if($vescombo=='SI')
+			{
+				 
+      $nm_select = "select idproducto,sum(cantidad) as cantidad,sum(precio) as precio from detallecombos where idcombo='".$vidpro."'  group by idproducto"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vItemsCombo = array();
+      $this->vitemscombo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vItemsCombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vitemscombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vItemsCombo = false;
+          $this->vItemsCombo_erro = $this->Db->ErrorMsg();
+          $this->vitemscombo = false;
+          $this->vitemscombo_erro = $this->Db->ErrorMsg();
+      } 
+;
+				if(isset($this->vitemscombo[0][0]))
+				{
+					for($i=0;$i<count($this->vitemscombo );$i++)
+					{
+						$vidpro2    = $this->vitemscombo[$i][0];
+						$vcantidad2 = $this->vitemscombo[$i][1];
+						$vprecio2   = $this->vitemscombo[$i][2];
+						
+						$vsqlinv2="delete 
+								  from 
+								  inventario 
+								  where 
+									  idpro='".$vidpro2."' 
+								  and idped='".$vnumfac."' 
+								  and detalle like '%Venta%' 
+								  and iddetalle='".$iddet."'
+								  and idcombo='".$vidpro."'
+								  ";
+
+						
+     $nm_select = $vsqlinv2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+						$vsqlstock2="UPDATE 
+							   productos 
+							   SET 
+							   stockmen = stockmen+($vcantidad*$vcantidad2) 
+							   WHERE 
+							   idprod='".$vidpro2."'
+							   ";
+
+						
+     $nm_select = $vsqlstock2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					}
+				}
+			}
+		}
+		
+		
+		$vsqlinv="delete 
+				  from 
+				  inventario 
+				  where 
+				      idpro='".$vidpro."' 
+				  and idped='".$vnumfac."' 
+				  and detalle like '%Venta%' 
+				  and iddetalle='".$iddet."'
+				  ";
+		
+		
+     $nm_select = $vsqlinv; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+		
+		$vsqlstock="UPDATE 
+			   productos 
+			   SET 
+			   stockmen = stockmen+$vcantidad 
+			   WHERE 
+			   idprod='".$vidpro."'
+			   ";
+
+		
+     $nm_select = $vsqlstock; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}
+	
+	if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+}
+$_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'off';
+}
+}
+
+?>

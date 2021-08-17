@@ -1,0 +1,8181 @@
+<?php
+
+class grid_facturaven_pos_pesq
+{
+   var $Db;
+   var $Erro;
+   var $Ini;
+   var $Lookup;
+   var $cmp_formatado;
+   var $nm_data;
+   var $Campos_Mens_erro;
+
+   var $comando;
+   var $comando_sum;
+   var $comando_filtro;
+   var $comando_ini;
+   var $comando_fim;
+   var $NM_operador;
+   var $NM_data_qp;
+   var $NM_path_filter;
+   var $NM_curr_fil;
+   var $nm_location;
+   var $NM_ajax_opcao;
+   var $nmgp_botoes = array();
+   var $NM_fil_ant = array();
+
+   /**
+    * @access  public
+    */
+   function __construct()
+   {
+   }
+
+   /**
+    * @access  public
+    * @global  string  $bprocessa  
+    */
+   function monta_busca()
+   {
+      global $bprocessa;
+      include("../_lib/css/" . $this->Ini->str_schema_filter . "_filter.php");
+      $this->Ini->Str_btn_filter = "scriptcase9_BlueBerry/scriptcase9_BlueBerry" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
+      $this->Str_btn_filter_css  = "scriptcase9_BlueBerry/scriptcase9_BlueBerry.css";
+      $this->Ini->str_google_fonts = (isset($str_google_fonts) && !empty($str_google_fonts))?$str_google_fonts:'';
+      include($this->Ini->path_btn . $this->Ini->Str_btn_filter);
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['path_libs_php'] = $this->Ini->path_lib_php;
+      $this->Img_sep_filter = "/" . trim($str_toolbar_separator);
+      $this->Block_img_col  = trim($str_block_col);
+      $this->Block_img_exp  = trim($str_block_exp);
+      $this->Bubble_tail    = trim($str_bubble_tail);
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_config_btn.php", "F", "nmButtonOutput"); 
+      $this->NM_case_insensitive = false;
+      $this->init();
+      if ($this->NM_ajax_flag)
+      {
+          ob_start();
+          $this->Arr_result = array();
+          $this->processa_ajax();
+          $Temp = ob_get_clean();
+          $oJson = new Services_JSON();
+          echo $oJson->encode($this->Arr_result);
+          if ($this->Db)
+          {
+              $this->Db->Close(); 
+          }
+          exit;
+      }
+      if (isset($bprocessa) && "pesq" == $bprocessa)
+      {
+         $this->processa_busca();
+      }
+      else
+      {
+         $this->monta_formulario();
+      }
+   }
+
+   /**
+    * @access  public
+    */
+   function monta_formulario()
+   {
+      $this->monta_html_ini();
+      $this->monta_cabecalho();
+      $this->monta_form();
+      $this->monta_html_fim();
+   }
+
+   /**
+    * @access  public
+    */
+   function init()
+   {
+      global $bprocessa;
+      $_SESSION['scriptcase']['sc_tab_meses']['int'] = array(
+                                  $this->Ini->Nm_lang['lang_mnth_janu'],
+                                  $this->Ini->Nm_lang['lang_mnth_febr'],
+                                  $this->Ini->Nm_lang['lang_mnth_marc'],
+                                  $this->Ini->Nm_lang['lang_mnth_apri'],
+                                  $this->Ini->Nm_lang['lang_mnth_mayy'],
+                                  $this->Ini->Nm_lang['lang_mnth_june'],
+                                  $this->Ini->Nm_lang['lang_mnth_july'],
+                                  $this->Ini->Nm_lang['lang_mnth_augu'],
+                                  $this->Ini->Nm_lang['lang_mnth_sept'],
+                                  $this->Ini->Nm_lang['lang_mnth_octo'],
+                                  $this->Ini->Nm_lang['lang_mnth_nove'],
+                                  $this->Ini->Nm_lang['lang_mnth_dece']);
+      $_SESSION['scriptcase']['sc_tab_meses']['abr'] = array(
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_janu'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_febr'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_marc'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_apri'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_mayy'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_june'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_july'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_augu'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_sept'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_octo'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_nove'],
+                                  $this->Ini->Nm_lang['lang_shrt_mnth_dece']);
+      $_SESSION['scriptcase']['sc_tab_dias']['int'] = array(
+                                  $this->Ini->Nm_lang['lang_days_sund'],
+                                  $this->Ini->Nm_lang['lang_days_mond'],
+                                  $this->Ini->Nm_lang['lang_days_tued'],
+                                  $this->Ini->Nm_lang['lang_days_wend'],
+                                  $this->Ini->Nm_lang['lang_days_thud'],
+                                  $this->Ini->Nm_lang['lang_days_frid'],
+                                  $this->Ini->Nm_lang['lang_days_satd']);
+      $_SESSION['scriptcase']['sc_tab_dias']['abr'] = array(
+                                  $this->Ini->Nm_lang['lang_shrt_days_sund'],
+                                  $this->Ini->Nm_lang['lang_shrt_days_mond'],
+                                  $this->Ini->Nm_lang['lang_shrt_days_tued'],
+                                  $this->Ini->Nm_lang['lang_shrt_days_wend'],
+                                  $this->Ini->Nm_lang['lang_shrt_days_thud'],
+                                  $this->Ini->Nm_lang['lang_shrt_days_frid'],
+                                  $this->Ini->Nm_lang['lang_shrt_days_satd']);
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_functions.php", "", "") ; 
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_api.php", "", "") ; 
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_data.class.php", "C", "nm_data") ; 
+      $this->nm_data = new nm_data("es");
+      $pos_path = strrpos($this->Ini->path_prod, "/");
+      $this->NM_path_filter = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/filters/";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] = "igual";
+    if (!$this->NM_ajax_flag && (!isset($bprocessa) || $bprocessa != "pesq"))
+    {
+      global $tipo_cond, $tipo,
+             $fechaven_cond, $fechaven, $fechaven_dia, $fechaven_mes, $fechaven_ano, $fechaven_input_2_dia, $fechaven_input_2_mes, $fechaven_input_2_ano,
+             $idcli_cond, $idcli, $idcli_autocomp,
+             $asentada_cond, $asentada,
+             $banco_cond, $banco,
+             $resolucion_cond, $resolucion,
+             $vendedor_cond, $vendedor;
+      $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  $fechaven  = date("Y-m-d");
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
+      if (isset($fechaven_day))
+      {
+          $fechaven_dia = $fechaven_day; 
+      }
+      if (isset($fechaven_month))
+      {
+          $fechaven_mes = $fechaven_month; 
+      }
+      if (isset($fechaven_year))
+      {
+          $fechaven_ano = $fechaven_year; 
+      }
+      if (isset($fechaven))
+      {
+          $fechaven = str_replace("0000", "", $fechaven);
+          $fechaven = str_replace("-00", "-", $fechaven);
+          $fechavenXX = explode("-", $fechaven);
+          if (isset($fechavenXX[2]))
+          {
+              $fechaven_dia = $fechavenXX[2]; 
+          }
+          if (isset($fechavenXX[1]))
+          {
+              $fechaven_mes = $fechavenXX[1]; 
+          }
+          if (isset($fechavenXX[0]))
+          {
+              $fechaven_ano = $fechavenXX[0]; 
+          }
+      }
+      if (isset($fechaven_input_2_day))
+      {
+          $fechaven_input_2_dia = $fechaven_input_2_day; 
+      }
+      if (isset($fechaven_input_2_month))
+      {
+          $fechaven_input_2_mes = $fechaven_input_2_month; 
+      }
+      if (isset($fechaven_input_2_year))
+      {
+          $fechaven_input_2_ano = $fechaven_input_2_year; 
+      }
+      if (isset($fechaven_2))
+      {
+          $fechaven_2 = str_replace("0000", "", $fechaven_2);
+          $fechaven_2 = str_replace("-00", "-", $fechaven_2);
+          $fechavenXX = explode("-", $fechaven_2);
+          if (isset($fechavenXX[2]))
+          {
+              $fechaven_input_2_dia = $fechavenXX[2]; 
+          }
+          if (isset($fechavenXX[1]))
+          {
+              $fechaven_input_2_mes = $fechavenXX[1]; 
+          }
+          if (isset($fechavenXX[0]))
+          {
+              $fechaven_input_2_ano = $fechavenXX[0]; 
+          }
+      }
+    }
+   }
+
+   function processa_ajax()
+   {
+      global $NM_filters, $NM_filters_del, $nmgp_save_name, $nmgp_save_option, $NM_fields_refresh, $NM_parms_refresh, $Campo_bi, $Opc_bi, $NM_operador, $nmgp_save_origem;
+//-- ajax metodos ---
+      if ($this->NM_ajax_opcao == "ajax_filter_save")
+      {
+          ob_end_clean();
+          ob_end_clean();
+          $this->salva_filtro($nmgp_save_origem);
+          $this->NM_fil_ant = $this->gera_array_filtros();
+          $Nome_filter = "";
+          $Opt_filter  = "<option value=\"\"></option>\r\n";
+          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
+          {
+              if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+              {
+                  $Tipo_filter[1] = sc_convert_encoding($Tipo_filter[1], "UTF-8", $_SESSION['scriptcase']['charset']);
+              }
+              if ($Tipo_filter[1] != $Nome_filter)
+              {
+                  $Nome_filter = $Tipo_filter[1];
+                  $Opt_filter .= "<option value=\"\">" . grid_facturaven_pos_pack_protect_string($Nome_filter) . "</option>\r\n";
+              }
+              $Opt_filter .= "<option value=\"" . grid_facturaven_pos_pack_protect_string($Tipo_filter[0]) . "\">.." . grid_facturaven_pos_pack_protect_string($Cada_filter) .  "</option>\r\n";
+          }
+          $Ajax_select  = "<SELECT id=\"sel_recup_filters_bot\" name=\"NM_filters_bot\" onChange=\"nm_submit_filter(this, 'bot');\" size=\"1\">\r\n";
+          $Ajax_select .= $Opt_filter;
+          $Ajax_select .= "</SELECT>\r\n";
+          $this->Arr_result['setValue'][] = array('field' => "idAjaxSelect_NM_filters_bot", 'value' => $Ajax_select);
+          $Ajax_select = "<SELECT id=\"sel_filters_del_bot\" class=\"scFilterToolbar_obj\" name=\"NM_filters_del_bot\" size=\"1\">\r\n";
+          $Ajax_select .= $Opt_filter;
+          $Ajax_select .= "</SELECT>\r\n";
+          $this->Arr_result['setValue'][] = array('field' => "idAjaxSelect_NM_filters_del_bot", 'value' => $Ajax_select);
+      }
+
+      if ($this->NM_ajax_opcao == "ajax_filter_delete")
+      {
+          ob_end_clean();
+          ob_end_clean();
+          $this->apaga_filtro();
+          $this->NM_fil_ant = $this->gera_array_filtros();
+          $Nome_filter = "";
+          $Opt_filter  = "<option value=\"\"></option>\r\n";
+          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
+          {
+              if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+              {
+                  $Tipo_filter[1] = sc_convert_encoding($Tipo_filter[1], "UTF-8", $_SESSION['scriptcase']['charset']);
+              }
+              if ($Tipo_filter[1] != $Nome_filter)
+              {
+                  $Nome_filter  = $Tipo_filter[1];
+                  $Opt_filter .= "<option value=\"\">" .  grid_facturaven_pos_pack_protect_string($Nome_filter) . "</option>\r\n";
+              }
+              $Opt_filter .= "<option value=\"" . grid_facturaven_pos_pack_protect_string($Tipo_filter[0]) . "\">.." . grid_facturaven_pos_pack_protect_string($Cada_filter) .  "</option>\r\n";
+          }
+          $Ajax_select  = "<SELECT id=\"sel_recup_filters_bot\" class=\"scFilterToolbar_obj\" style=\"display:". (count($this->NM_fil_ant)>0?'':'none') .";\" name=\"NM_filters_bot\" onChange=\"nm_submit_filter(this, 'bot');\" size=\"1\">\r\n";
+          $Ajax_select .= $Opt_filter;
+          $Ajax_select .= "</SELECT>\r\n";
+          $this->Arr_result['setValue'][] = array('field' => "idAjaxSelect_NM_filters_bot", 'value' => $Ajax_select);
+          $Ajax_select = "<SELECT id=\"sel_filters_del_bot\" class=\"scFilterToolbar_obj\" name=\"NM_filters_del_bot\" size=\"1\">\r\n";
+          $Ajax_select .= $Opt_filter;
+          $Ajax_select .= "</SELECT>\r\n";
+          $this->Arr_result['setValue'][] = array('field' => "idAjaxSelect_NM_filters_del_bot", 'value' => $Ajax_select);
+      }
+      if ($this->NM_ajax_opcao == "ajax_filter_select")
+      {
+          ob_end_clean();
+          ob_end_clean();
+          $this->Arr_result = $this->recupera_filtro($NM_filters);
+      }
+
+      if ($this->NM_ajax_opcao == 'autocomp_idcli')
+      {
+          $idcli = ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($_GET['q'])) ? sc_convert_encoding($_GET['q'], $_SESSION['scriptcase']['charset'], "UTF-8") : $_GET['q'];
+          $nmgp_def_dados = $this->lookup_ajax_idcli($idcli);
+          ob_end_clean();
+          ob_end_clean();
+          $count_aut_comp = 0;
+          $resp_aut_comp  = array();
+          foreach ($nmgp_def_dados as $Ind => $Lista)
+          {
+             if (is_array($Lista))
+             {
+                 foreach ($Lista as $Cod => $Valor)
+                 {
+                     if ($_GET['cod_desc'] == "S")
+                     {
+                         $Valor = $Cod . " - " . $Valor;
+                     }
+                     $resp_aut_comp[] = array('label' => $Valor , 'value' => $Cod);
+                     $count_aut_comp++;
+                 }
+             }
+             if ($count_aut_comp == $_GET['max_itens'])
+             {
+                 break;
+             }
+          }
+          $oJson = new Services_JSON();
+          echo $oJson->encode($resp_aut_comp);
+          $this->Db->Close(); 
+          exit;
+      }
+   }
+   function lookup_ajax_idcli($idcli)
+   {
+      $idcli = substr($this->Db->qstr($idcli), 1, -1);
+            $idcli_look = substr($this->Db->qstr($idcli), 1, -1); 
+      $nmgp_def_dados = array(); 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select idtercero, nombres from terceros where   CAST (nombres AS TEXT)  like '%" . $idcli . "%' order by nombres"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select idtercero, nombres from terceros where   CAST (nombres AS VARCHAR)  like '%" . $idcli . "%' order by nombres"; 
+      }
+      else
+      {
+          $nm_comando = "select idtercero, nombres from terceros where  nombres like '%" . $idcli . "%' order by nombres"; 
+      }
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
+            $cmp2 = NM_charset_to_utf8(trim($rs->fields[1]));
+            $nmgp_def_dados[] = array($cmp1 => $cmp2); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+
+      return $nmgp_def_dados;
+   }
+   
+
+   /**
+    * @access  public
+    */
+   function processa_busca()
+   {
+      $this->inicializa_vars();
+      $this->trata_campos();
+      if (!empty($this->Campos_Mens_erro)) 
+      {
+          $this->monta_formulario();
+      }
+      else
+      {
+          $this->finaliza_resultado();
+      }
+   }
+
+   /**
+    * @access  public
+    */
+   function and_or()
+   {
+      $posWhere = strpos(strtolower($this->comando), "where");
+      if (FALSE === $posWhere)
+      {
+         $this->comando     .= " where (";
+         $this->comando_sum .= " and (";
+         $this->comando_fim  = " ) ";
+      }
+      if ($this->comando_ini == "ini")
+      {
+          if (FALSE !== $posWhere)
+          {
+              $this->comando     .= " and ( ";
+              $this->comando_sum .= " and ( ";
+              $this->comando_fim  = " ) ";
+          }
+         $this->comando_ini  = "";
+      }
+      elseif ("or" == $this->NM_operador)
+      {
+         $this->comando        .= " or ";
+         $this->comando_sum    .= " or ";
+         $this->comando_filtro .= " or ";
+      }
+      else
+      {
+         $this->comando        .= " and ";
+         $this->comando_sum    .= " and ";
+         $this->comando_filtro .= " and ";
+      }
+   }
+
+   /**
+    * @access  public
+    * @param  string  $nome  
+    * @param  string  $condicao  
+    * @param  mixed  $campo  
+    * @param  mixed  $campo2  
+    * @param  string  $nome_campo  
+    * @param  string  $tp_campo  
+    * @global  array  $nmgp_tab_label  
+    */
+   function monta_condicao($nome, $condicao, $campo, $campo2 = "", $nome_campo="", $tp_campo="")
+   {
+      global $nmgp_tab_label;
+      $condicao   = strtoupper($condicao);
+      $nm_aspas   = "'";
+      $nm_aspas1  = "'";
+      $Nm_numeric = array();
+      $nm_esp_postgres = array();
+      $nm_ini_lower = "";
+      $nm_fim_lower = "";
+      $Nm_numeric[] = "idfacven";$Nm_numeric[] = "numfacven";$Nm_numeric[] = "credito";$Nm_numeric[] = "idcli";$Nm_numeric[] = "subtotal";$Nm_numeric[] = "valoriva";$Nm_numeric[] = "total";$Nm_numeric[] = "asentada";$Nm_numeric[] = "saldo";$Nm_numeric[] = "adicional";$Nm_numeric[] = "adicional2";$Nm_numeric[] = "adicional3";$Nm_numeric[] = "resolucion";$Nm_numeric[] = "vendedor";$Nm_numeric[] = "usuario_crea";$Nm_numeric[] = "banco";$Nm_numeric[] = "dias_decredito";$Nm_numeric[] = "pedido";$Nm_numeric[] = "dircliente";
+      $campo_join = strtolower(str_replace(".", "_", $nome));
+      if (in_array($campo_join, $Nm_numeric))
+      {
+          if ($condicao == "EP" || $condicao == "NE")
+          {
+              return;
+          }
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['decimal_db'] == ".")
+         {
+            $nm_aspas  = "";
+            $nm_aspas1 = "";
+         }
+         if ($condicao != "IN")
+         {
+            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['decimal_db'] == ".")
+            {
+               $campo  = str_replace(",", ".", $campo);
+               $campo2 = str_replace(",", ".", $campo2);
+            }
+            if ($campo == "")
+            {
+               $campo = 0;
+            }
+            if ($campo2 == "")
+            {
+               $campo2 = 0;
+            }
+         }
+      }
+      $Nm_datas[] = "fechaven";$Nm_datas[] = "fechaven";$Nm_datas[] = "fechavenc";$Nm_datas[] = "fechavenc";$Nm_datas[] = "creado";$Nm_datas[] = "creado";$Nm_datas[] = "editado";$Nm_datas[] = "editado";$Nm_datas[] = "inicio";$Nm_datas[] = "inicio";$Nm_datas[] = "fin";$Nm_datas[] = "fin";$Nm_datas[] = "fecha_validacion";$Nm_datas[] = "fecha_validacion";
+      if (in_array($campo_join, $Nm_datas))
+      {
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+          {
+             $nm_aspas  = "#";
+             $nm_aspas1 = "#";
+          }
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_sep_date']))
+          {
+              $nm_aspas  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_sep_date'];
+              $nm_aspas1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_sep_date1'];
+          }
+      }
+      if ($campo == "" && $condicao != "NU" && $condicao != "NN" && $condicao != "EP" && $condicao != "NE")
+      {
+         return;
+      }
+      else
+      {
+         $tmp_pos = strpos($campo, "##@@");
+         if ($tmp_pos === false)
+         {
+             $res_lookup = $campo;
+         }
+         else
+         {
+             $res_lookup = substr($campo, $tmp_pos + 4);
+             $campo = substr($campo, 0, $tmp_pos);
+             if ($campo == "" && $condicao != "NU" && $condicao != "NN" && $condicao != "EP" && $condicao != "NE")
+             {
+                 return;
+             }
+         }
+         $tmp_pos = strpos($this->cmp_formatado[$nome_campo], "##@@");
+         if ($tmp_pos !== false)
+         {
+             $this->cmp_formatado[$nome_campo] = substr($this->cmp_formatado[$nome_campo], $tmp_pos + 4);
+         }
+         $this->and_or();
+         $campo  = substr($this->Db->qstr($campo), 1, -1);
+         $campo2 = substr($this->Db->qstr($campo2), 1, -1);
+         $nome_sum = "facturaven.$nome";
+         if ($tp_campo == "TIMESTAMP")
+         {
+             $tp_campo = "DATETIME";
+         }
+         if (in_array($campo_join, $Nm_numeric) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && ($condicao == "II" || $condicao == "QP" || $condicao == "NP"))
+         {
+             $nome     = "CAST ($nome AS TEXT)";
+             $nome_sum = "CAST ($nome_sum AS TEXT)";
+         }
+         if (in_array($campo_join, $nm_esp_postgres) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+         {
+             $nome     = "CAST ($nome AS TEXT)";
+             $nome_sum = "CAST ($nome_sum AS TEXT)";
+         }
+         if (substr($tp_campo, 0, 8) == "DATETIME" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && !$this->Date_part)
+         {
+             if (in_array($condicao, array('II','QP','NP','IN','EP','NE'))) {
+                 $nome     = "to_char ($nome, 'YYYY-MM-DD hh24:mi:ss')";
+                 $nome_sum = "to_char ($nome_sum, 'YYYY-MM-DD hh24:mi:ss')";
+             }
+         }
+         elseif (substr($tp_campo, 0, 4) == "DATE" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && !$this->Date_part)
+         {
+             if (in_array($condicao, array('II','QP','NP','IN','EP','NE'))) {
+                 $nome     = "to_char ($nome, 'YYYY-MM-DD')";
+                 $nome_sum = "to_char ($nome_sum, 'YYYY-MM-DD')";
+             }
+         }
+         elseif (substr($tp_campo, 0, 4) == "TIME" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && !$this->Date_part)
+         {
+             if (in_array($condicao, array('II','QP','NP','IN','EP','NE'))) {
+                 $nome     = "to_char ($nome, 'hh24:mi:ss')";
+                 $nome_sum = "to_char ($nome_sum, 'hh24:mi:ss')";
+             }
+         }
+         if (in_array($campo_join, $Nm_numeric) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase) && ($condicao == "II" || $condicao == "QP" || $condicao == "NP"))
+         {
+             $nome     = "CAST ($nome AS VARCHAR)";
+             $nome_sum = "CAST ($nome_sum AS VARCHAR)";
+         }
+         if ($tp_campo == "DATE" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql) && !$this->Date_part)
+         {
+             if (in_array($condicao, array('II','QP','NP','IN','EP','NE'))) {
+                 $nome     = "convert(char(10),$nome,121)";
+                 $nome_sum = "convert(char(10),$nome_sum,121)";
+             }
+         }
+         if ($tp_campo == "DATETIME" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql) && !$this->Date_part)
+         {
+             if (in_array($condicao, array('II','QP','NP','IN','EP','NE'))) {
+                 $nome     = "convert(char(19),$nome,121)";
+                 $nome_sum = "convert(char(19),$nome_sum,121)";
+             }
+         }
+         if (substr($tp_campo, 0, 8) == "DATETIME" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle) && !$this->Date_part)
+         {
+             $nome     = "TO_DATE(TO_CHAR($nome, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss')";
+             $nome_sum = "TO_DATE(TO_CHAR($nome_sum, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss')";
+             $tp_campo = "DATETIME";
+         }
+         if (substr($tp_campo, 0, 8) == "DATETIME" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix) && !$this->Date_part)
+         {
+             $nome     = "EXTEND($nome, YEAR TO FRACTION)";
+             $nome_sum = "EXTEND($nome_sum, YEAR TO FRACTION)";
+         }
+         elseif (substr($tp_campo, 0, 4) == "DATE" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix) && !$this->Date_part)
+         {
+             $nome     = "EXTEND($nome, YEAR TO DAY)";
+             $nome_sum = "EXTEND($nome_sum, YEAR TO DAY)";
+         }
+         if (in_array($campo_join, $Nm_numeric) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress) && ($condicao == "II" || $condicao == "QP" || $condicao == "NP"))
+         {
+             $nome     = "CAST ($nome AS VARCHAR(255))";
+             $nome_sum = "CAST ($nome_sum AS VARCHAR(255))";
+         }
+         if (substr($tp_campo, 0, 8) == "DATETIME" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress) && !$this->Date_part)
+         {
+             if (in_array($condicao, array('II','QP','NP','IN','EP','NE'))) {
+                 $nome     = "to_char ($nome, 'YYYY-MM-DD hh24:mi:ss')";
+                 $nome_sum = "to_char ($nome_sum, 'YYYY-MM-DD hh24:mi:ss')";
+             }
+         }
+         if (substr($tp_campo, 0, 4) == "DATE" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress) && !$this->Date_part)
+         {
+             if (in_array($condicao, array('II','QP','NP','IN','EP','NE'))) {
+                 $nome     = "to_char ($nome, 'YYYY-MM-DD')";
+                 $nome_sum = "to_char ($nome_sum, 'YYYY-MM-DD')";
+             }
+         }
+         switch ($condicao)
+         {
+            case "EQ":     // 
+               $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " = " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+               $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . " = " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+               $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower. " = " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+            break;
+            case "II":     // 
+               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && $this->NM_case_insensitive)
+               {
+                   $op_all       = " ilike ";
+                   $nm_ini_lower = "";
+                   $nm_fim_lower = "";
+               }
+               else
+               {
+                   $op_all = " like ";
+               }
+               $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . $op_all . $nm_ini_lower . "'" . $campo . "%'" . $nm_fim_lower;
+               $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . $op_all . $nm_ini_lower . "'" . $campo . "%'" . $nm_fim_lower;
+               $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower . $op_all . $nm_ini_lower . "'" . $campo . "%'" . $nm_fim_lower;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_strt'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+            break;
+             case "QP";     // 
+             case "NP";     // 
+                $concat = " " . $this->NM_operador . " ";
+                if ($condicao == "QP")
+                {
+                    $op_all    = " #sc_like_# ";
+                    $lang_like = $this->Ini->Nm_lang['lang_srch_like'];
+                }
+                else
+                {
+                    $op_all    = " not #sc_like_# ";
+                    $lang_like = $this->Ini->Nm_lang['lang_srch_not_like'];
+                }
+               $NM_cond    = "";
+               $NM_cmd     = "";
+               $NM_cmd_sum = "";
+               if (substr($tp_campo, 0, 4) == "DATE" && $this->Date_part)
+               {
+                   if ($this->NM_data_qp['ano'] != "____")
+                   {
+                       $NM_cond    .= (empty($NM_cmd)) ? "" : " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " ";
+                       $NM_cond    .= $this->Ini->Nm_lang['lang_srch_year'] . " " . $this->Lang_date_part . " " . $this->NM_data_qp['ano'];
+                       $NM_cmd     .= (empty($NM_cmd)) ? "" : $concat;
+                       $NM_cmd_sum .= (empty($NM_cmd_sum)) ? "" : $concat;
+                       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+                       {
+                           $NM_cmd     .= "strftime('%Y', " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           $NM_cmd_sum .= "strftime('%Y', " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+                       {
+                           $NM_cmd     .= "extract(year from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(year from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'YYYY') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'YYYY') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= $this->Ini_date_char . "extract('year' from " . $nome . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                               $NM_cmd_sum .= $this->Ini_date_char . "extract('year' from " . $nome_sum . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           }
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+                       {
+                           $NM_cmd     .= "extract(year from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(year from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+                       {
+                           $NM_cmd     .= "TO_CHAR(" . $nome . ", 'YYYY')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           $NM_cmd_sum .= "TO_CHAR(" . $nome_sum . ", 'YYYY')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+                       {
+                           $NM_cmd     .= "DATEPART(year, " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           $NM_cmd_sum .= "DATEPART(year, " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'YYYY') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'YYYY') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= "year (" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                               $NM_cmd_sum .= "year (" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           }
+                       }
+                       else
+                       {
+                           $NM_cmd     .= "year(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                           $NM_cmd_sum .= "year(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['ano'] . $this->End_date_part;
+                       }
+                   }
+                   if ($this->NM_data_qp['mes'] != "__")
+                   {
+                       $NM_cond    .= (empty($NM_cmd)) ? "" : " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " ";
+                       $NM_cond    .= $this->Ini->Nm_lang['lang_srch_mnth'] . " " . $this->Lang_date_part . " " . $this->NM_data_qp['mes'];
+                       $NM_cmd     .= (empty($NM_cmd)) ? "" : $concat;
+                       $NM_cmd_sum .= (empty($NM_cmd_sum)) ? "" : $concat;
+                       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+                       {
+                           $NM_cmd     .= "strftime('%m', " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           $NM_cmd_sum .= "strftime('%m', " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+                       {
+                           $NM_cmd     .= "extract(month from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(month from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'MM') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'MM') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= $this->Ini_date_char . "extract('month' from " . $nome . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                               $NM_cmd_sum .= $this->Ini_date_char . "extract('month' from " . $nome_sum . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           }
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+                       {
+                           $NM_cmd     .= "extract(month from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(month from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+                       {
+                           $NM_cmd     .= "TO_CHAR(" . $nome . ", 'MM')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           $NM_cmd_sum .= "TO_CHAR(" . $nome_sum . ", 'MM')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+                       {
+                           $NM_cmd     .= "DATEPART(month, " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           $NM_cmd_sum .= "DATEPART(month, " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'MM') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'MM') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= "month (" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                               $NM_cmd_sum .= "month (" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           }
+                       }
+                       else
+                       {
+                           $NM_cmd     .= "month(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                           $NM_cmd_sum .= "month(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['mes'] . $this->End_date_part;
+                       }
+                   }
+                   if ($this->NM_data_qp['dia'] != "__")
+                   {
+                       $NM_cond    .= (empty($NM_cmd)) ? "" : " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " ";
+                       $NM_cond    .= $this->Ini->Nm_lang['lang_srch_days'] . " " . $this->Lang_date_part . " " . $this->NM_data_qp['dia'];
+                       $NM_cmd     .= (empty($NM_cmd)) ? "" : $concat;
+                       $NM_cmd_sum .= (empty($NM_cmd_sum)) ? "" : $concat;
+                       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+                       {
+                           $NM_cmd     .= "strftime('%d', " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           $NM_cmd_sum .= "strftime('%d', " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+                       {
+                           $NM_cmd     .= "extract(day from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(day from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'DD') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'DD') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= $this->Ini_date_char . "extract('day' from " . $nome . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                               $NM_cmd_sum .= $this->Ini_date_char . "extract('day' from " . $nome_sum . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           }
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+                       {
+                           $NM_cmd     .= "extract(day from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(day from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+                       {
+                           $NM_cmd     .= "TO_CHAR(" . $nome . ", 'DD')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           $NM_cmd_sum .= "TO_CHAR(" . $nome_sum . ", 'DD')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+                       {
+                           $NM_cmd     .= "DATEPART(day, " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           $NM_cmd_sum .= "DATEPART(day, " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'DD') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'DD') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= "DAYOFMONTH(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                               $NM_cmd_sum .= "DAYOFMONTH(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           }
+                       }
+                       else
+                       {
+                           $NM_cmd     .= "day(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                           $NM_cmd_sum .= "day(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['dia'] . $this->End_date_part;
+                       }
+                   }
+               }
+               if (strpos($tp_campo, "TIME") !== false && $this->Date_part)
+               {
+                   if ($this->NM_data_qp['hor'] != "__")
+                   {
+                       $NM_cond    .= (empty($NM_cmd)) ? "" : " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " ";
+                       $NM_cond    .= $this->Ini->Nm_lang['lang_srch_time'] . " " . $this->Lang_date_part . " " . $this->NM_data_qp['hor'];
+                       $NM_cmd     .= (empty($NM_cmd)) ? "" : $concat;
+                       $NM_cmd_sum .= (empty($NM_cmd_sum)) ? "" : $concat;
+                       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+                       {
+                           $NM_cmd     .= "strftime('%H', " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           $NM_cmd_sum .= "strftime('%H', " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+                       {
+                           $NM_cmd     .= "extract(hour from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(hour from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'hh24') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'hh24') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= $this->Ini_date_char . "extract('hour' from " . $nome . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                               $NM_cmd_sum .= $this->Ini_date_char . "extract('hour' from " . $nome_sum . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           }
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+                       {
+                           $NM_cmd     .= "extract(hour from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(hour from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+                       {
+                           $NM_cmd     .= "TO_CHAR(" . $nome . ", 'HH24')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           $NM_cmd_sum .= "TO_CHAR(" . $nome_sum . ", 'HH24')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+                       {
+                           $NM_cmd     .= "DATEPART(hour, " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           $NM_cmd_sum .= "DATEPART(hour, " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'hh24') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'hh24') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= "hour(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                               $NM_cmd_sum .= "hour(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           }
+                       }
+                       else
+                       {
+                           $NM_cmd     .= "hour(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                           $NM_cmd_sum .= "hour(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['hor'] . $this->End_date_part;
+                       }
+                   }
+                   if ($this->NM_data_qp['min'] != "__")
+                   {
+                       $NM_cond    .= (empty($NM_cmd)) ? "" : " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " ";
+                       $NM_cond    .= $this->Ini->Nm_lang['lang_srch_mint'] . " " . $this->Lang_date_part . " " . $this->NM_data_qp['min'];
+                       $NM_cmd     .= (empty($NM_cmd)) ? "" : $concat;
+                       $NM_cmd_sum .= (empty($NM_cmd_sum)) ? "" : $concat;
+                       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+                       {
+                           $NM_cmd     .= "strftime('%M', " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           $NM_cmd_sum .= "strftime('%M', " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+                       {
+                           $NM_cmd     .= "extract(minute from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(minute from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'mi') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'mi') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= $this->Ini_date_char . "extract('minute' from " . $nome . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                               $NM_cmd_sum .= $this->Ini_date_char . "extract('minute' from " . $nome_sum . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           }
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+                       {
+                           $NM_cmd     .= "extract(minute from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(minute from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+                       {
+                           $NM_cmd     .= "TO_CHAR(" . $nome . ", 'MI')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           $NM_cmd_sum .= "TO_CHAR(" . $nome_sum . ", 'MI')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+                       {
+                           $NM_cmd     .= "DATEPART(minute, " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           $NM_cmd_sum .= "DATEPART(minute, " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'mi') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'mi') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= "minute(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                               $NM_cmd_sum .= "minute(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           }
+                       }
+                       else
+                       {
+                           $NM_cmd     .= "minute(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                           $NM_cmd_sum .= "minute(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['min'] . $this->End_date_part;
+                       }
+                   }
+                   if ($this->NM_data_qp['seg'] != "__")
+                   {
+                       $NM_cond    .= (empty($NM_cmd)) ? "" : " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " ";
+                       $NM_cond    .= $this->Ini->Nm_lang['lang_srch_scnd'] . " " . $this->Lang_date_part . " " . $this->NM_data_qp['seg'];
+                       $NM_cmd     .= (empty($NM_cmd)) ? "" : $concat;
+                       $NM_cmd_sum .= (empty($NM_cmd_sum)) ? "" : $concat;
+                       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+                       {
+                           $NM_cmd     .= "strftime('%S', " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           $NM_cmd_sum .= "strftime('%S', " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+                       {
+                           $NM_cmd     .= "extract(second from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(second from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'ss') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'ss') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= $this->Ini_date_char . "extract('second' from " . $nome . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                               $NM_cmd_sum .= $this->Ini_date_char . "extract('second' from " . $nome_sum . ")" . $this->End_date_char . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           }
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+                       {
+                           $NM_cmd     .= "extract(second from " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           $NM_cmd_sum .= "extract(second from " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+                       {
+                           $NM_cmd     .= "TO_CHAR(" . $nome . ", 'SS')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           $NM_cmd_sum .= "TO_CHAR(" . $nome_sum . ", 'SS')" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+                       {
+                           $NM_cmd     .= "DATEPART(second, " . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           $NM_cmd_sum .= "DATEPART(second, " . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                       }
+                       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress))
+                       {
+                           if (trim($this->Operador_date_part) == "like" || trim($this->Operador_date_part) == "not like")
+                           {
+                               $NM_cmd     .= "to_char (" . $nome . ", 'ss') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                               $NM_cmd_sum .= "to_char (" . $nome_sum . ", 'ss') " . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           }
+                           else
+                           {
+                               $NM_cmd     .= "second(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                               $NM_cmd_sum .= "second(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           }
+                       }
+                       else
+                       {
+                           $NM_cmd     .= "second(" . $nome . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                           $NM_cmd_sum .= "second(" . $nome_sum . ")" . $this->Operador_date_part . $this->Ini_date_part . $this->NM_data_qp['seg'] . $this->End_date_part;
+                       }
+                   }
+               }
+               if ($this->Date_part)
+               {
+                   if (!empty($NM_cmd))
+                   {
+                       $NM_cmd     = " (" . $NM_cmd . ")";
+                       $NM_cmd_sum = " (" . $NM_cmd_sum . ")";
+                       $this->comando        .= $NM_cmd;
+                       $this->comando_sum    .= $NM_cmd_sum;
+                       $this->comando_filtro .= $NM_cmd;
+                       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . ": " . $NM_cond . "##*@@";
+                   }
+               }
+               else
+               {
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && $this->NM_case_insensitive)
+                   {
+                       $op_all       = str_replace("#sc_like_#", "ilike", $op_all);
+                       $nm_ini_lower = "";
+                       $nm_fim_lower = "";
+                   }
+                   else
+                   {
+                       $op_all = str_replace("#sc_like_#", "like", $op_all);
+                   }
+                   $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . $op_all . $nm_ini_lower . "'%" . $campo . "%'" . $nm_fim_lower;
+                   $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . $op_all . $nm_ini_lower . "'%" . $campo . "%'" . $nm_fim_lower;
+                   $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower . $op_all . $nm_ini_lower . "'%" . $campo . "%'" . $nm_fim_lower;
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $lang_like . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+               }
+            break;
+            case "DF":     // 
+               $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " <> " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+               $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . " <> " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+               $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower . " <> " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_diff'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+            break;
+            case "GT":     // 
+               $this->comando        .= " $nome > " . $nm_aspas . $campo . $nm_aspas1;
+               $this->comando_sum    .= " $nome_sum > " . $nm_aspas . $campo . $nm_aspas1;
+               $this->comando_filtro .= " $nome > " . $nm_aspas . $campo . $nm_aspas1;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_grtr'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+            break;
+            case "GE":     // 
+               $this->comando        .= " $nome >= " . $nm_aspas . $campo . $nm_aspas1;
+               $this->comando_sum    .= " $nome_sum >= " . $nm_aspas . $campo . $nm_aspas1;
+               $this->comando_filtro .= " $nome >= " . $nm_aspas . $campo . $nm_aspas1;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_grtr_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+            break;
+            case "LT":     // 
+               $this->comando        .= " $nome < " . $nm_aspas . $campo . $nm_aspas1;
+               $this->comando_sum    .= " $nome_sum < " . $nm_aspas . $campo . $nm_aspas1;
+               $this->comando_filtro .= " $nome < " . $nm_aspas . $campo . $nm_aspas1;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_less'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+            break;
+            case "LE":     // 
+               $this->comando        .= " $nome <= " . $nm_aspas . $campo . $nm_aspas1;
+               $this->comando_sum    .= " $nome_sum <= " . $nm_aspas . $campo . $nm_aspas1;
+               $this->comando_filtro .= " $nome <= " . $nm_aspas . $campo . $nm_aspas1;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_less_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+            break;
+            case "BW":     // 
+               $this->comando        .= " $nome between " . $nm_aspas . $campo . $nm_aspas1 . " and " . $nm_aspas . $campo2 . $nm_aspas1;
+               $this->comando_sum    .= " $nome_sum between " . $nm_aspas . $campo . $nm_aspas1 . " and " . $nm_aspas . $campo2 . $nm_aspas1;
+               $this->comando_filtro .= " $nome between " . $nm_aspas . $campo . $nm_aspas1 . " and " . $nm_aspas . $campo2 . $nm_aspas1;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_betw'] . " " . $this->cmp_formatado[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " " . $this->cmp_formatado[$nome_campo . "_input_2"] . "##*@@";
+            break;
+            case "IN":     // 
+               $nm_sc_valores = explode(",", $campo);
+               $cond_str  = "";
+               $nm_cond   = "";
+               if (!empty($nm_sc_valores))
+               {
+                   foreach ($nm_sc_valores as $nm_sc_valor)
+                   {
+                      if (in_array($campo_join, $Nm_numeric) && substr_count($nm_sc_valor, ".") > 1)
+                      {
+                         $nm_sc_valor = str_replace(".", "", $nm_sc_valor);
+                      }
+                      if ("" != $cond_str)
+                      {
+                         $cond_str .= ",";
+                         $nm_cond  .= " " . $this->Ini->Nm_lang['lang_srch_orr_cond'] . " ";
+                      }
+                      $cond_str .= $nm_ini_lower . $nm_aspas . $nm_sc_valor . $nm_aspas1 . $nm_fim_lower;
+                      $nm_cond  .= $nm_aspas . $nm_sc_valor . $nm_aspas1;
+                   }
+               }
+               $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " in (" . $cond_str . ")";
+               $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . " in (" . $cond_str . ")";
+               $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower . " in (" . $cond_str . ")";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_like'] . " " . $nm_cond . "##*@@";
+            break;
+            case "NU":     // 
+               $this->comando        .= " $nome IS NULL ";
+               $this->comando_sum    .= " $nome_sum IS NULL ";
+               $this->comando_filtro .= " $nome IS NULL ";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_null'] . "##*@@";
+            break;
+            case "NN":     // 
+               $this->comando        .= " $nome IS NOT NULL ";
+               $this->comando_sum    .= " $nome_sum IS NOT NULL ";
+               $this->comando_filtro .= " $nome IS NOT NULL ";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_nnul'] . "##*@@";
+            break;
+            case "EP":     // 
+               $this->comando        .= " $nome = '' ";
+               $this->comando_sum    .= " $nome_sum = '' ";
+               $this->comando_filtro .= " $nome = '' ";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_empty'] . "##*@@";
+            break;
+            case "NE":     // 
+               $this->comando        .= " $nome <> '' ";
+               $this->comando_sum    .= " $nome_sum <> '' ";
+               $this->comando_filtro .= " $nome <> '' ";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_nempty'] . "##*@@";
+            break;
+         }
+      }
+   }
+
+   function nm_prep_date(&$val, $tp, $tsql, &$cond, $format_nd, $tp_nd)
+   {
+       $fill_dt = false;
+       if ($tsql == "TIMESTAMP")
+       {
+           $tsql = "DATETIME";
+       }
+       $cond = strtoupper($cond);
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access) && $tp != "ND")
+       {
+           if ($cond == "EP")
+           {
+               $cond = "NU";
+           }
+           if ($cond == "NE")
+           {
+               $cond = "NN";
+           }
+       }
+       if ($cond == "NU" || $cond == "NN" || $cond == "EP" || $cond == "NE")
+       {
+           $val    = array();
+           $val[0] = "";
+           return;
+       }
+       if ($cond != "II" && $cond != "QP" && $cond != "NP")
+       {
+           $fill_dt = true;
+       }
+       if ($fill_dt)
+       {
+           $val[0]['dia'] = (!empty($val[0]['dia']) && strlen($val[0]['dia']) == 1) ? "0" . $val[0]['dia'] : $val[0]['dia'];
+           $val[0]['mes'] = (!empty($val[0]['mes']) && strlen($val[0]['mes']) == 1) ? "0" . $val[0]['mes'] : $val[0]['mes'];
+           if ($tp == "DH")
+           {
+               $val[0]['hor'] = (!empty($val[0]['hor']) && strlen($val[0]['hor']) == 1) ? "0" . $val[0]['hor'] : $val[0]['hor'];
+               $val[0]['min'] = (!empty($val[0]['min']) && strlen($val[0]['min']) == 1) ? "0" . $val[0]['min'] : $val[0]['min'];
+               $val[0]['seg'] = (!empty($val[0]['seg']) && strlen($val[0]['seg']) == 1) ? "0" . $val[0]['seg'] : $val[0]['seg'];
+           }
+           if ($cond == "BW")
+           {
+               $val[1]['dia'] = (!empty($val[1]['dia']) && strlen($val[1]['dia']) == 1) ? "0" . $val[1]['dia'] : $val[1]['dia'];
+               $val[1]['mes'] = (!empty($val[1]['mes']) && strlen($val[1]['mes']) == 1) ? "0" . $val[1]['mes'] : $val[1]['mes'];
+               if ($tp == "DH")
+               {
+                   $val[1]['hor'] = (!empty($val[1]['hor']) && strlen($val[1]['hor']) == 1) ? "0" . $val[1]['hor'] : $val[1]['hor'];
+                   $val[1]['min'] = (!empty($val[1]['min']) && strlen($val[1]['min']) == 1) ? "0" . $val[1]['min'] : $val[1]['min'];
+                   $val[1]['seg'] = (!empty($val[1]['seg']) && strlen($val[1]['seg']) == 1) ? "0" . $val[1]['seg'] : $val[1]['seg'];
+               }
+           }
+       }
+       if ($cond == "BW")
+       {
+           $this->NM_data_1 = array();
+           $this->NM_data_1['ano'] = (isset($val[0]['ano']) && !empty($val[0]['ano'])) ? $val[0]['ano'] : "____";
+           $this->NM_data_1['mes'] = (isset($val[0]['mes']) && !empty($val[0]['mes'])) ? $val[0]['mes'] : "__";
+           $this->NM_data_1['dia'] = (isset($val[0]['dia']) && !empty($val[0]['dia'])) ? $val[0]['dia'] : "__";
+           $this->NM_data_1['hor'] = (isset($val[0]['hor']) && !empty($val[0]['hor'])) ? $val[0]['hor'] : "__";
+           $this->NM_data_1['min'] = (isset($val[0]['min']) && !empty($val[0]['min'])) ? $val[0]['min'] : "__";
+           $this->NM_data_1['seg'] = (isset($val[0]['seg']) && !empty($val[0]['seg'])) ? $val[0]['seg'] : "__";
+           $this->data_menor($this->NM_data_1);
+           $this->NM_data_2 = array();
+           $this->NM_data_2['ano'] = (isset($val[1]['ano']) && !empty($val[1]['ano'])) ? $val[1]['ano'] : "____";
+           $this->NM_data_2['mes'] = (isset($val[1]['mes']) && !empty($val[1]['mes'])) ? $val[1]['mes'] : "__";
+           $this->NM_data_2['dia'] = (isset($val[1]['dia']) && !empty($val[1]['dia'])) ? $val[1]['dia'] : "__";
+           $this->NM_data_2['hor'] = (isset($val[1]['hor']) && !empty($val[1]['hor'])) ? $val[1]['hor'] : "__";
+           $this->NM_data_2['min'] = (isset($val[1]['min']) && !empty($val[1]['min'])) ? $val[1]['min'] : "__";
+           $this->NM_data_2['seg'] = (isset($val[1]['seg']) && !empty($val[1]['seg'])) ? $val[1]['seg'] : "__";
+           $this->data_maior($this->NM_data_2);
+           $val = array();
+           if ($tp == "ND")
+           {
+               $out_dt1 = $format_nd;
+               $out_dt1 = str_replace("yyyy", $this->NM_data_1['ano'], $out_dt1);
+               $out_dt1 = str_replace("mm",   $this->NM_data_1['mes'], $out_dt1);
+               $out_dt1 = str_replace("dd",   $this->NM_data_1['dia'], $out_dt1);
+               $out_dt1 = str_replace("hh",   "", $out_dt1);
+               $out_dt1 = str_replace("ii",   "", $out_dt1);
+               $out_dt1 = str_replace("ss",   "", $out_dt1);
+               $out_dt2 = $format_nd;
+               $out_dt2 = str_replace("yyyy", $this->NM_data_2['ano'], $out_dt2);
+               $out_dt2 = str_replace("mm",   $this->NM_data_2['mes'], $out_dt2);
+               $out_dt2 = str_replace("dd",   $this->NM_data_2['dia'], $out_dt2);
+               $out_dt2 = str_replace("hh",   "", $out_dt2);
+               $out_dt2 = str_replace("ii",   "", $out_dt2);
+               $out_dt2 = str_replace("ss",   "", $out_dt2);
+               $val[0] = $out_dt1;
+               $val[1] = $out_dt2;
+               return;
+           }
+           if ($tsql == "TIME")
+           {
+               $val[0] = $this->NM_data_1['hor'] . ":" . $this->NM_data_1['min'] . ":" . $this->NM_data_1['seg'];
+               $val[1] = $this->NM_data_2['hor'] . ":" . $this->NM_data_2['min'] . ":" . $this->NM_data_2['seg'];
+           }
+           elseif (substr($tsql, 0, 4) == "DATE")
+           {
+               $val[0] = $this->NM_data_1['ano'] . "-" . $this->NM_data_1['mes'] . "-" . $this->NM_data_1['dia'];
+               $val[1] = $this->NM_data_2['ano'] . "-" . $this->NM_data_2['mes'] . "-" . $this->NM_data_2['dia'];
+               if (strpos($tsql, "TIME") !== false)
+               {
+                   $val[0] .= " " . $this->NM_data_1['hor'] . ":" . $this->NM_data_1['min'] . ":" . $this->NM_data_1['seg'];
+                   $val[1] .= " " . $this->NM_data_2['hor'] . ":" . $this->NM_data_2['min'] . ":" . $this->NM_data_2['seg'];
+               }
+           }
+           return;
+       }
+       $this->NM_data_qp = array();
+       $this->NM_data_qp['ano'] = (isset($val[0]['ano']) && $val[0]['ano'] != "") ? $val[0]['ano'] : "____";
+       $this->NM_data_qp['mes'] = (isset($val[0]['mes']) && $val[0]['mes'] != "") ? $val[0]['mes'] : "__";
+       $this->NM_data_qp['dia'] = (isset($val[0]['dia']) && $val[0]['dia'] != "") ? $val[0]['dia'] : "__";
+       $this->NM_data_qp['hor'] = (isset($val[0]['hor']) && $val[0]['hor'] != "") ? $val[0]['hor'] : "__";
+       $this->NM_data_qp['min'] = (isset($val[0]['min']) && $val[0]['min'] != "") ? $val[0]['min'] : "__";
+       $this->NM_data_qp['seg'] = (isset($val[0]['seg']) && $val[0]['seg'] != "") ? $val[0]['seg'] : "__";
+       if ($tp != "ND" && ($cond == "LE" || $cond == "LT" || $cond == "GE" || $cond == "GT"))
+       {
+           $count_fill = 0;
+           foreach ($this->NM_data_qp as $x => $tx)
+           {
+               if (substr($tx, 0, 2) != "__")
+               {
+                   $count_fill++;
+               }
+           }
+           if ($count_fill > 1)
+           {
+               if ($cond == "LE" || $cond == "GT")
+               {
+                   $this->data_maior($this->NM_data_qp);
+               }
+               else
+               {
+                   $this->data_menor($this->NM_data_qp);
+               }
+               if ($tsql == "TIME")
+               {
+                   $val[0] = $this->NM_data_qp['hor'] . ":" . $this->NM_data_qp['min'] . ":" . $this->NM_data_qp['seg'];
+               }
+               elseif (substr($tsql, 0, 4) == "DATE")
+               {
+                   $val[0] = $this->NM_data_qp['ano'] . "-" . $this->NM_data_qp['mes'] . "-" . $this->NM_data_qp['dia'];
+                   if (strpos($tsql, "TIME") !== false)
+                   {
+                       $val[0] .= " " . $this->NM_data_qp['hor'] . ":" . $this->NM_data_qp['min'] . ":" . $this->NM_data_qp['seg'];
+                   }
+               }
+               return;
+           }
+       }
+       foreach ($this->NM_data_qp as $x => $tx)
+       {
+           if (substr($tx, 0, 2) == "__" && ($x == "dia" || $x == "mes" || $x == "ano"))
+           {
+               if (substr($tsql, 0, 4) == "DATE")
+               {
+                   $this->Date_part = true;
+                   break;
+               }
+           }
+           if (substr($tx, 0, 2) == "__" && ($x == "hor" || $x == "min" || $x == "seg"))
+           {
+               if (strpos($tsql, "TIME") !== false && ($tp == "DH" || ($tp == "DT" && $cond != "LE" && $cond != "LT" && $cond != "GE" && $cond != "GT")))
+               {
+                   $this->Date_part = true;
+                   break;
+               }
+           }
+       }
+       if ($this->Date_part)
+       {
+           $this->Ini_date_part = "";
+           $this->End_date_part = "";
+           $this->Ini_date_char = "";
+           $this->End_date_char = "";
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+           {
+               $this->Ini_date_part = "'";
+               $this->End_date_part = "'";
+           }
+           if ($tp != "ND")
+           {
+               if ($cond == "EQ")
+               {
+                   $this->Operador_date_part = " = ";
+                   $this->Lang_date_part = $this->Ini->Nm_lang['lang_srch_equl'];
+               }
+               elseif ($cond == "II")
+               {
+                   $this->Operador_date_part = " like ";
+                   $this->Ini_date_part = "'";
+                   $this->End_date_part = "%'";
+                   $this->Lang_date_part = $this->Ini->Nm_lang['lang_srch_strt'];
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                   {
+                       $this->Ini_date_char = "CAST (";
+                       $this->End_date_char = " AS TEXT)";
+                   }
+               }
+               elseif ($cond == "DF")
+               {
+                   $this->Operador_date_part = " <> ";
+                   $this->Lang_date_part = $this->Ini->Nm_lang['lang_srch_diff'];
+               }
+               elseif ($cond == "GT")
+               {
+                   $this->Operador_date_part = " > ";
+                   $this->Lang_date_part = $this->Ini->Nm_lang['pesq_cond_maior'];
+               }
+               elseif ($cond == "GE")
+               {
+                   $this->Lang_date_part = $this->Ini->Nm_lang['lang_srch_grtr_equl'];
+                   $this->Operador_date_part = " >= ";
+               }
+               elseif ($cond == "LT")
+               {
+                   $this->Operador_date_part = " < ";
+                   $this->Lang_date_part = $this->Ini->Nm_lang['lang_srch_less'];
+               }
+               elseif ($cond == "LE")
+               {
+                   $this->Operador_date_part = " <= ";
+                   $this->Lang_date_part = $this->Ini->Nm_lang['lang_srch_less_equl'];
+               }
+               elseif ($cond == "NP")
+               {
+                   $this->Operador_date_part = " not like ";
+                   $this->Lang_date_part = $this->Ini->Nm_lang['lang_srch_diff'];
+                   $this->Ini_date_part = "'%";
+                   $this->End_date_part = "%'";
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                   {
+                       $this->Ini_date_char = "CAST (";
+                       $this->End_date_char = " AS TEXT)";
+                   }
+               }
+               else
+               {
+                   $this->Operador_date_part = " like ";
+                   $this->Lang_date_part = $this->Ini->Nm_lang['lang_srch_equl'];
+                   $this->Ini_date_part = "'%";
+                   $this->End_date_part = "%'";
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+                   {
+                       $this->Ini_date_char = "CAST (";
+                       $this->End_date_char = " AS TEXT)";
+                   }
+               }
+           }
+           if ($cond == "DF")
+           {
+               $cond = "NP";
+           }
+           if ($cond != "NP")
+           {
+               $cond = "QP";
+           }
+       }
+       $val = array();
+       if ($tp != "ND" && ($cond == "QP" || $cond == "NP"))
+       {
+           $val[0] = "";
+           if (substr($tsql, 0, 4) == "DATE")
+           {
+               $val[0] .= $this->NM_data_qp['ano'] . "-" . $this->NM_data_qp['mes'] . "-" . $this->NM_data_qp['dia'];
+               if (strpos($tsql, "TIME") !== false)
+               {
+                   $val[0] .= " ";
+               }
+           }
+           if (strpos($tsql, "TIME") !== false)
+           {
+               $val[0] .= $this->NM_data_qp['hor'] . ":" . $this->NM_data_qp['min'] . ":" . $this->NM_data_qp['seg'];
+           }
+           return;
+       }
+       if ($cond == "II" || $cond == "DF" || $cond == "EQ" || $cond == "LT" || $cond == "GE")
+       {
+           $this->data_menor($this->NM_data_qp);
+       }
+       else
+       {
+           $this->data_maior($this->NM_data_qp);
+       }
+       if ($tsql == "TIME")
+       {
+           $val[0] = $this->NM_data_qp['hor'] . ":" . $this->NM_data_qp['min'] . ":" . $this->NM_data_qp['seg'];
+           return;
+       }
+       $format_sql = "";
+       if (substr($tsql, 0, 4) == "DATE")
+       {
+           $format_sql .= $this->NM_data_qp['ano'] . "-" . $this->NM_data_qp['mes'] . "-" . $this->NM_data_qp['dia'];
+           if (strpos($tsql, "TIME") !== false)
+           {
+               $format_sql .= " ";
+           }
+       }
+       if (strpos($tsql, "TIME") !== false)
+       {
+           $format_sql .=  $this->NM_data_qp['hor'] . ":" . $this->NM_data_qp['min'] . ":" . $this->NM_data_qp['seg'];
+       }
+       if ($tp != "ND")
+       {
+           $val[0] = $format_sql;
+           return;
+       }
+       if ($tp == "ND")
+       {
+           $format_nd = str_replace("yyyy", $this->NM_data_qp['ano'], $format_nd);
+           $format_nd = str_replace("mm",   $this->NM_data_qp['mes'], $format_nd);
+           $format_nd = str_replace("dd",   $this->NM_data_qp['dia'], $format_nd);
+           $format_nd = str_replace("hh",   $this->NM_data_qp['hor'], $format_nd);
+           $format_nd = str_replace("ii",   $this->NM_data_qp['min'], $format_nd);
+           $format_nd = str_replace("ss",   $this->NM_data_qp['seg'], $format_nd);
+           $val[0] = $format_nd;
+           return;
+       }
+   }
+   function data_menor(&$data_arr)
+   {
+       $data_arr["ano"] = ("____" == $data_arr["ano"]) ? "0001" : $data_arr["ano"];
+       $data_arr["mes"] = ("__" == $data_arr["mes"])   ? "01" : $data_arr["mes"];
+       $data_arr["dia"] = ("__" == $data_arr["dia"])   ? "01" : $data_arr["dia"];
+       $data_arr["hor"] = ("__" == $data_arr["hor"])   ? "00" : $data_arr["hor"];
+       $data_arr["min"] = ("__" == $data_arr["min"])   ? "00" : $data_arr["min"];
+       $data_arr["seg"] = ("__" == $data_arr["seg"])   ? "00" : $data_arr["seg"];
+   }
+
+   function data_maior(&$data_arr)
+   {
+       $data_arr["ano"] = ("____" == $data_arr["ano"]) ? "9999" : $data_arr["ano"];
+       $data_arr["mes"] = ("__" == $data_arr["mes"])   ? "12" : $data_arr["mes"];
+       $data_arr["hor"] = ("__" == $data_arr["hor"])   ? "23" : $data_arr["hor"];
+       $data_arr["min"] = ("__" == $data_arr["min"])   ? "59" : $data_arr["min"];
+       $data_arr["seg"] = ("__" == $data_arr["seg"])   ? "59" : $data_arr["seg"];
+       if ("__" == $data_arr["dia"])
+       {
+           $data_arr["dia"] = "31";
+           if ($data_arr["mes"] == "04" || $data_arr["mes"] == "06" || $data_arr["mes"] == "09" || $data_arr["mes"] == "11")
+           {
+               $data_arr["dia"] = 30;
+           }
+           elseif ($data_arr["mes"] == "02")
+           { 
+                if  ($data_arr["ano"] % 4 == 0)
+                {
+                     $data_arr["dia"] = 29;
+                }
+                else 
+                {
+                     $data_arr["dia"] = 28;
+                }
+           }
+       }
+   }
+
+   /**
+    * @access  public
+    * @param  string  $nm_data_hora  
+    */
+   function limpa_dt_hor_pesq(&$nm_data_hora)
+   {
+      $nm_data_hora = str_replace("Y", "", $nm_data_hora); 
+      $nm_data_hora = str_replace("M", "", $nm_data_hora); 
+      $nm_data_hora = str_replace("D", "", $nm_data_hora); 
+      $nm_data_hora = str_replace("H", "", $nm_data_hora); 
+      $nm_data_hora = str_replace("I", "", $nm_data_hora); 
+      $nm_data_hora = str_replace("S", "", $nm_data_hora); 
+      $tmp_pos = strpos($nm_data_hora, "--");
+      if ($tmp_pos !== FALSE)
+      {
+          $nm_data_hora = str_replace("--", "-", $nm_data_hora); 
+      }
+      $tmp_pos = strpos($nm_data_hora, "::");
+      if ($tmp_pos !== FALSE)
+      {
+          $nm_data_hora = str_replace("::", ":", $nm_data_hora); 
+      }
+   }
+
+   /**
+    * @access  public
+    */
+   function retorna_pesq()
+   {
+      global $nm_apl_dependente;
+   $NM_retorno = "./";
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML>
+<HEAD>
+ <TITLE>Venta Rápida</TITLE>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
+?>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+}
+?>
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+</HEAD>
+<BODY class="scGridPage">
+<FORM style="display:none;" name="form_ok" method="POST" action="<?php echo $NM_retorno; ?>" target="_self">
+<INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
+<INPUT type="hidden" name="nmgp_opcao" value="pesq"> 
+</FORM>
+<SCRIPT type="text/javascript">
+ document.form_ok.submit();
+</SCRIPT>
+</BODY>
+</HTML>
+<?php
+}
+
+   /**
+    * @access  public
+    */
+   function monta_html_ini()
+   {
+       header("X-XSS-Protection: 1; mode=block");
+       header("X-Frame-Options: SAMEORIGIN");
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+<HEAD>
+ <TITLE>Venta Rápida</TITLE>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
+?>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+}
+?>
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
+ <META http-equiv="Last-Modified" content="<?php echo gmdate('D, d M Y H:i:s') ?> GMT" />
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
+ <META http-equiv="Pragma" content="no-cache" />
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
+ <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></script>
+ <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
+ <script type="text/javascript" src="../_lib/lib/js/scInput.js"></script>
+ <script type="text/javascript" src="../_lib/lib/js/jquery.scInput.js"></script>
+ <script type="text/javascript" src="../_lib/lib/js/jquery.scInput2.js"></script>
+ <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/css/select2.min.css" type="text/css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/select2/js/select2.full.min.js"></SCRIPT>
+ <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_error.css" /> 
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_error<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+ <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Str_btn_filter_css ?>" /> 
+ <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery/css/smoothness/jquery-ui.css" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/font-awesome/css/all.min.css" type="text/css" media="screen" />
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_filter.css" /> 
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_filter<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+  <?php 
+  if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts)) 
+  { 
+  ?> 
+  <link href="<?php echo $this->Ini->str_google_fonts ?>" rel="stylesheet" /> 
+  <?php 
+  } 
+  ?> 
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>grid_facturaven_pos/grid_facturaven_pos_fil_<?php echo strtolower($_SESSION['scriptcase']['reg_conf']['css_dir']) ?>.css" />
+</HEAD>
+<?php
+$vertical_center = '';
+?>
+<BODY class="scFilterPage" style="<?php echo $vertical_center ?>">
+<?php echo $this->Ini->Ajax_result_set ?>
+<SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_js . "/browserSniffer.js" ?>"></SCRIPT>
+        <script type="text/javascript">
+          var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+          var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+          var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+        </script>
+ <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
+ <script type="text/javascript" src="grid_facturaven_pos_ajax_search.js"></script>
+ <script type="text/javascript" src="grid_facturaven_pos_ajax.js"></script>
+ <script type="text/javascript">
+   function sc_session_redir(url_redir)
+   {
+       if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')
+       {
+           window.parent.sc_session_redir(url_redir);
+       }
+       else
+       {
+           if (window.opener && typeof window.opener.sc_session_redir === 'function')
+           {
+               window.close();
+               window.opener.sc_session_redir(url_redir);
+           }
+           else
+           {
+               window.location = url_redir;
+           }
+       }
+   }
+   var sc_ajaxBg = '<?php echo $this->Ini->Color_bg_ajax ?>';
+   var sc_ajaxBordC = '<?php echo $this->Ini->Border_c_ajax ?>';
+   var sc_ajaxBordS = '<?php echo $this->Ini->Border_s_ajax ?>';
+   var sc_ajaxBordW = '<?php echo $this->Ini->Border_w_ajax ?>';
+ </script>
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_calendar.css" />
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_calendar<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+<script type="text/javascript" src="grid_facturaven_pos_message.js"></script>
+<link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_sweetalert.css" />
+<script type="text/javascript" src="<?php echo $_SESSION['scriptcase']['grid_facturaven_pos']['glo_nm_path_prod']; ?>/third/sweetalert/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="<?php echo $_SESSION['scriptcase']['grid_facturaven_pos']['glo_nm_path_prod']; ?>/third/sweetalert/polyfill.min.js"></script>
+<script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
+<?php
+$confirmButtonClass = '';
+$cancelButtonClass  = '';
+$confirmButtonText  = $this->Ini->Nm_lang['lang_btns_cfrm'];
+$cancelButtonText   = $this->Ini->Nm_lang['lang_btns_cncl'];
+$confirmButtonFA    = '';
+$cancelButtonFA     = '';
+$confirmButtonFAPos = '';
+$cancelButtonFAPos  = '';
+if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['style']) && '' != $this->arr_buttons['bsweetalert_ok']['style']) {
+    $confirmButtonClass = 'scButton_' . $this->arr_buttons['bsweetalert_ok']['style'];
+}
+if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['style']) && '' != $this->arr_buttons['bsweetalert_cancel']['style']) {
+    $cancelButtonClass = 'scButton_' . $this->arr_buttons['bsweetalert_cancel']['style'];
+}
+if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['value']) && '' != $this->arr_buttons['bsweetalert_ok']['value']) {
+    $confirmButtonText = $this->arr_buttons['bsweetalert_ok']['value'];
+}
+if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['value']) && '' != $this->arr_buttons['bsweetalert_cancel']['value']) {
+    $cancelButtonText = $this->arr_buttons['bsweetalert_cancel']['value'];
+}
+if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['fontawesomeicon']) && '' != $this->arr_buttons['bsweetalert_ok']['fontawesomeicon']) {
+    $confirmButtonFA = $this->arr_buttons['bsweetalert_ok']['fontawesomeicon'];
+}
+if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']) && '' != $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']) {
+    $cancelButtonFA = $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon'];
+}
+if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['display_position']) && 'img_right' != $this->arr_buttons['bsweetalert_ok']['display_position']) {
+    $confirmButtonFAPos = 'text_right';
+}
+if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['display_position']) && 'img_right' != $this->arr_buttons['bsweetalert_cancel']['display_position']) {
+    $cancelButtonFAPos = 'text_right';
+}
+?>
+<script type="text/javascript">
+  var scSweetAlertConfirmButton = "<?php echo $confirmButtonClass ?>";
+  var scSweetAlertCancelButton = "<?php echo $cancelButtonClass ?>";
+  var scSweetAlertConfirmButtonText = "<?php echo $confirmButtonText ?>";
+  var scSweetAlertCancelButtonText = "<?php echo $cancelButtonText ?>";
+  var scSweetAlertConfirmButtonFA = "<?php echo $confirmButtonFA ?>";
+  var scSweetAlertCancelButtonFA = "<?php echo $cancelButtonFA ?>";
+  var scSweetAlertConfirmButtonFAPos = "<?php echo $confirmButtonFAPos ?>";
+  var scSweetAlertCancelButtonFAPos = "<?php echo $cancelButtonFAPos ?>";
+</script>
+<script type="text/javascript">
+$(function() {
+<?php
+if (count($this->nm_mens_alert) || count($this->Ini->nm_mens_alert)) {
+   if (isset($this->Ini->nm_mens_alert) && !empty($this->Ini->nm_mens_alert))
+   {
+       if (isset($this->nm_mens_alert) && !empty($this->nm_mens_alert))
+       {
+           $this->nm_mens_alert   = array_merge($this->Ini->nm_mens_alert, $this->nm_mens_alert);
+           $this->nm_params_alert = array_merge($this->Ini->nm_params_alert, $this->nm_params_alert);
+       }
+       else
+       {
+           $this->nm_mens_alert   = $this->Ini->nm_mens_alert;
+           $this->nm_params_alert = $this->Ini->nm_params_alert;
+       }
+   }
+   if (isset($this->nm_mens_alert) && !empty($this->nm_mens_alert))
+   {
+       foreach ($this->nm_mens_alert as $i_alert => $mensagem)
+       {
+           $alertParams = array();
+           if (isset($this->nm_params_alert[$i_alert]))
+           {
+               foreach ($this->nm_params_alert[$i_alert] as $paramName => $paramValue)
+               {
+                   if (in_array($paramName, array('title', 'timer', 'confirmButtonText', 'confirmButtonFA', 'confirmButtonFAPos', 'cancelButtonText', 'cancelButtonFA', 'cancelButtonFAPos', 'footer', 'width', 'padding')))
+                   {
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+                   elseif (in_array($paramName, array('showConfirmButton', 'showCancelButton', 'toast')) && in_array($paramValue, array(true, false)))
+                   {
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+                   elseif ('position' == $paramName && in_array($paramValue, array('top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', 'bottom-end')))
+                   {
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+                   elseif ('type' == $paramName && in_array($paramValue, array('warning', 'error', 'success', 'info', 'question')))
+                   {
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+                   elseif ('background' == $paramName)
+                   {
+                       $image_param = $paramValue;
+                       preg_match_all('/url\(([\s])?(["|\'])?(.*?)(["|\'])?([\s])?\)/i', $paramValue, $matches, PREG_PATTERN_ORDER);
+                       if (isset($matches[3])) {
+                           foreach ($matches[3] as $match) {
+                               if ('http:' != substr($match, 0, 5) && 'https:' != substr($match, 0, 6) && '/' != substr($match, 0, 1)) {
+                                   $image_param = str_replace($match, "{$this->Ini->path_img_global}/{$match}", $image_param);
+                               }
+                           }
+                       }
+                       $paramValue = $image_param;
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+               }
+           }
+           $jsonParams = json_encode($alertParams);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['ajax_nav'])
+           { 
+               $this->Ini->Arr_result['AlertJS'][] = NM_charset_to_utf8($mensagem);
+               $this->Ini->Arr_result['AlertJSParam'][] = $alertParams;
+           } 
+           else 
+           { 
+?>
+       scJs_alert('<?php echo $mensagem ?>', <?php echo $jsonParams ?>);
+<?php
+           } 
+       }
+   }
+}
+?>
+});
+</script>
+<?php
+if ('' != $this->Campos_Mens_erro) {
+?>
+<script type="text/javascript">
+$(function() {
+	_nmAjaxShowMessage({title: "<?php echo $this->Ini->Nm_lang['lang_errm_errt']; ?>", message: "<?php echo $this->Campos_Mens_erro ?>", isModal: false, timeout: "", showButton: true, buttonLabel: "", topPos: "", leftPos: "", width: "", height: "", redirUrl: "", redirTarget: "", redirParam: "", showClose: false, showBodyIcon: false, isToast: false, toastPos: "", type: "error"});
+});
+</script>
+<?php
+}
+?>
+<script type="text/javascript" src="grid_facturaven_pos_message.js"></script>
+ <SCRIPT type="text/javascript">
+
+<?php
+if (is_file($this->Ini->root . $this->Ini->path_link . "_lib/js/tab_erro_" . $this->Ini->str_lang . ".js"))
+{
+    $Tb_err_js = file($this->Ini->root . $this->Ini->path_link . "_lib/js/tab_erro_" . $this->Ini->str_lang . ".js");
+    foreach ($Tb_err_js as $Lines)
+    {
+        if (NM_is_utf8($Lines) && $_SESSION['scriptcase']['charset'] != "UTF-8")
+        {
+            $Lines = sc_convert_encoding($Lines, $_SESSION['scriptcase']['charset'], "UTF-8");
+        }
+        echo $Lines;
+    }
+}
+ $Msg_Inval = "Inv�lido";
+ if (NM_is_utf8($Lines) && $_SESSION['scriptcase']['charset'] != "UTF-8")
+ {
+    $Msg_Inval = sc_convert_encoding($Msg_Inval, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+var SC_crit_inv = "<?php echo $Msg_Inval ?>";
+var nmdg_Form = "F1";
+
+function scJQCalendarAdd() {
+  $("#sc_fechaven_jq").datepicker({
+    beforeShow: function(input, inst) {
+          var_dt_ini  = document.getElementById('SC_fechaven_dia').value + '/';
+          var_dt_ini += document.getElementById('SC_fechaven_mes').value + '/';
+          var_dt_ini += document.getElementById('SC_fechaven_ano').value;
+          document.getElementById('sc_fechaven_jq').value = var_dt_ini;
+    },
+    onClose: function(dateText, inst) {
+          aParts  = dateText.split("/");
+          document.getElementById('SC_fechaven_dia').value = aParts[0];
+          document.getElementById('SC_fechaven_mes').value = aParts[1];
+          document.getElementById('SC_fechaven_ano').value = aParts[2];
+    },
+    showWeek: true,
+    numberOfMonths: 1,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: 'c-5:c+5',
+    dayNames: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    dayNamesMin: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sem"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>",
+    firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
+    dateFormat: "<?php echo $this->jqueryCalendarDtFormat("ddmmyyyy", "/"); ?>",
+    showOtherMonths: true,
+    showOn: "button",
+    buttonImage: "<?php echo $this->Ini->path_botoes . "/" . $this->arr_buttons['bcalendario']['image']; ?>",
+    buttonImageOnly: true
+  });
+
+  $("#sc_fechaven_jq2").datepicker({
+    beforeShow: function(input, inst) {
+          var_dt_ini  = document.getElementById('SC_fechaven_input_2_dia').value + '/';
+          var_dt_ini += document.getElementById('SC_fechaven_input_2_mes').value + '/';
+          var_dt_ini += document.getElementById('SC_fechaven_input_2_ano').value;
+          document.getElementById('sc_fechaven_jq2').value = var_dt_ini;
+    },
+    onClose: function(dateText, inst) {
+          aParts  = dateText.split("/");
+          document.getElementById('SC_fechaven_input_2_dia').value = aParts[0];
+          document.getElementById('SC_fechaven_input_2_mes').value = aParts[1];
+          document.getElementById('SC_fechaven_input_2_ano').value = aParts[2];
+    },
+    showWeek: true,
+    numberOfMonths: 1,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: 'c-5:c+5',
+    dayNames: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    dayNamesMin: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sem"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>",
+    firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
+    dateFormat: "<?php echo $this->jqueryCalendarDtFormat("ddmmyyyy", "/"); ?>",
+    showOtherMonths: true,
+    showOn: "button",
+    buttonImage: "<?php echo $this->Ini->path_botoes . "/" . $this->arr_buttons['bcalendario']['image']; ?>",
+    buttonImageOnly: true
+  });
+
+} // scJQCalendarAdd
+
+
+ $(function() {
+
+   SC_carga_evt_jquery();
+   scLoadScInput('input:text.sc-js-input');
+   scJQCalendarAdd('');
+   Sc_carga_select2('all');
+ });
+ function nm_campos_between(nm_campo, nm_cond, nm_nome_obj)
+ {
+  if (nm_cond.value == "bw")
+  {
+   nm_campo.style.display = "";
+  }
+  else
+  {
+    if (nm_campo)
+    {
+      nm_campo.style.display = "none";
+    }
+  }
+  if (document.getElementById('id_hide_' + nm_nome_obj))
+  {
+      if (nm_cond.value == "nu" || nm_cond.value == "nn" || nm_cond.value == "ep" || nm_cond.value == "ne")
+      {
+          document.getElementById('id_hide_' + nm_nome_obj).style.display = 'none';
+      }
+      else
+      {
+          document.getElementById('id_hide_' + nm_nome_obj).style.display = '';
+      }
+  }
+ }
+ function nm_save_form(pos)
+ {
+  if (pos == 'top' && document.F1.nmgp_save_name_top.value == '')
+  {
+      return;
+  }
+  if (pos == 'bot' && document.F1.nmgp_save_name_bot.value == '')
+  {
+      return;
+  }
+  if (pos == 'fields' && document.F1.nmgp_save_name_fields.value == '')
+  {
+      return;
+  }
+  var str_out = "";
+  str_out += 'SC_tipo_cond#NMF#' + search_get_sel_txt('SC_tipo_cond') + '@NMF@';
+  str_out += 'SC_tipo#NMF#' + search_get_select('SC_tipo') + '@NMF@';
+  str_out += 'SC_fechaven_cond#NMF#' + search_get_sel_txt('SC_fechaven_cond') + '@NMF@';
+  str_out += 'SC_fechaven_dia#NMF#' + search_get_sel_txt('SC_fechaven_dia') + '@NMF@';
+  str_out += 'SC_fechaven_mes#NMF#' + search_get_sel_txt('SC_fechaven_mes') + '@NMF@';
+  str_out += 'SC_fechaven_ano#NMF#' + search_get_sel_txt('SC_fechaven_ano') + '@NMF@';
+  str_out += 'SC_fechaven_input_2_dia#NMF#' + search_get_sel_txt('SC_fechaven_input_2_dia') + '@NMF@';
+  str_out += 'SC_fechaven_input_2_mes#NMF#' + search_get_sel_txt('SC_fechaven_input_2_mes') + '@NMF@';
+  str_out += 'SC_fechaven_input_2_ano#NMF#' + search_get_sel_txt('SC_fechaven_input_2_ano') + '@NMF@';
+  str_out += 'SC_idcli_cond#NMF#' + search_get_sel_txt('SC_idcli_cond') + '@NMF@';
+  str_out += 'SC_idcli#NMF#' + search_get_text('SC_idcli') + '@NMF@';
+  str_out += 'id_ac_idcli#NMF#' + search_get_text('id_ac_idcli') + '@NMF@';
+  str_out += 'SC_asentada_cond#NMF#' + search_get_sel_txt('SC_asentada_cond') + '@NMF@';
+  str_out += 'SC_asentada#NMF#' + search_get_select('SC_asentada') + '@NMF@';
+  str_out += 'SC_banco_cond#NMF#' + search_get_sel_txt('SC_banco_cond') + '@NMF@';
+  str_out += 'SC_banco#NMF#' + search_get_select('SC_banco') + '@NMF@';
+  str_out += 'SC_resolucion_cond#NMF#' + search_get_sel_txt('SC_resolucion_cond') + '@NMF@';
+  str_out += 'SC_resolucion#NMF#' + search_get_select('SC_resolucion') + '@NMF@';
+  str_out += 'SC_vendedor_cond#NMF#' + search_get_sel_txt('SC_vendedor_cond') + '@NMF@';
+  str_out += 'SC_vendedor#NMF#' + search_get_select('SC_vendedor') + '@NMF@';
+  str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
+  str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
+  str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
+  str_out  = str_out.replace(/[%]/g, "__NM_PRC__");
+  var save_name = search_get_text('SC_nmgp_save_name_' + pos);
+  var save_opt  = search_get_sel_txt('SC_nmgp_save_option_' + pos);
+  ajax_save_filter(save_name, save_opt, str_out, pos);
+ }
+ function nm_submit_filter(obj_sel, pos)
+ {
+  index = obj_sel.selectedIndex;
+  if (index == -1 || obj_sel.options[index].value == "") 
+  {
+      return false;
+  }
+  ajax_select_filter(obj_sel.options[index].value);
+ }
+ function nm_submit_filter_del(pos)
+ {
+  obj_sel = document.F1.elements['NM_filters_del_' + pos];
+  index   = obj_sel.selectedIndex;
+  if (index == -1 || obj_sel.options[index].value == "") 
+  {
+      return false;
+  }
+  parm = obj_sel.options[index].value;
+  ajax_delete_filter(parm);
+ }
+ function search_get_select(obj_id)
+ {
+    var index = document.getElementById(obj_id).selectedIndex;
+    if (index != -1) {
+        return document.getElementById(obj_id).options[index].value;
+    }
+    else {
+        return '';
+    }
+ }
+ function search_get_selmult(obj_id)
+ {
+    var obj = document.getElementById(obj_id);
+    var val = "_NM_array_";
+    for (iSelect = 0; iSelect < obj.length; iSelect++)
+    {
+        if (obj[iSelect].selected)
+        {
+            val += "#NMARR#" + obj[iSelect].value;
+        }
+    }
+    return val;
+ }
+ function search_get_Dselelect(obj_id)
+ {
+    var obj = document.getElementById(obj_id);
+    var val = "_NM_array_";
+    for (iSelect = 0; iSelect < obj.length; iSelect++)
+    {
+         val += "#NMARR#" + obj[iSelect].value;
+    }
+    return val;
+ }
+ function search_get_radio(obj_id)
+ {
+    var val  = "";
+    if (document.getElementById(obj_id)) {
+       var Nobj = document.getElementById(obj_id).name;
+       var obj  = document.getElementsByName(Nobj);
+       for (iRadio = 0; iRadio < obj.length; iRadio++) {
+           if (obj[iRadio].checked) {
+               val = obj[iRadio].value;
+           }
+       }
+    }
+    return val;
+ }
+ function search_get_checkbox(obj_id)
+ {
+    var val  = "_NM_array_";
+    if (document.getElementById(obj_id)) {
+       var Nobj = document.getElementById(obj_id).name;
+       var obj  = document.getElementsByName(Nobj);
+       if (!obj.length) {
+           if (obj.checked) {
+               val += "#NMARR#" + obj.value;
+           }
+       }
+       else {
+           for (iCheck = 0; iCheck < obj.length; iCheck++) {
+               if (obj[iCheck].checked) {
+                   val += "#NMARR#" + obj[iCheck].value;
+               }
+           }
+       }
+    }
+    return val;
+ }
+ function search_get_text(obj_id)
+ {
+    var obj = document.getElementById(obj_id);
+    return (obj) ? obj.value : '';
+ }
+ function search_get_title(obj_id)
+ {
+    var obj = document.getElementById(obj_id);
+    return (obj) ? obj.title : '';
+ }
+ function search_get_sel_txt(obj_id)
+ {
+    var val = "";
+    obj_part  = document.getElementById(obj_id);
+    if (obj_part && obj_part.type.substr(0, 6) == 'select')
+    {
+        val = search_get_select(obj_id);
+    }
+    else
+    {
+        val = (obj_part) ? obj_part.value : '';
+    }
+    return val;
+ }
+ function search_get_html(obj_id)
+ {
+    var obj = document.getElementById(obj_id);
+    return obj.innerHTML;
+ }
+function nm_open_popup(parms)
+{
+    NovaJanela = window.open (parms, '', 'resizable, scrollbars');
+}
+ </SCRIPT>
+<script type="text/javascript">
+ $(function() {
+   scClass = $("#id_ac_idcli").attr('class').split(' ');
+   scClass = scClass[ scClass.length-1 ];
+   $("#id_ac_idcli").autocomplete({
+     minLength: 1,
+     classes: { 'ui-autocomplete': scClass + 'Ac' },
+     source: function (request, response) {
+     $.ajax({
+       url: "index.php",
+       dataType: "json",
+       data: {
+          q: request.term,
+          nmgp_opcao: "ajax_autocomp",
+          nmgp_parms: "NM_ajax_opcao?#?autocomp_idcli",
+          max_itens: "10",
+          cod_desc: "N",
+          script_case_init: <?php echo $this->Ini->sc_page ?>
+        },
+       success: function (data) {
+         if (data == "ss_time_out") {
+             nm_move();
+         }
+         response(data);
+       }
+      });
+    },
+     select: function (event, ui) {
+       $("#SC_idcli").val(ui.item.value);
+       $(this).val(ui.item.label);
+       event.preventDefault();
+     },
+     focus: function (event, ui) {
+       $("#SC_idcli").val(ui.item.value);
+       $(this).val(ui.item.label);
+       event.preventDefault();
+     },
+     change: function (event, ui) {
+       if (null == ui.item) {
+          $("#SC_idcli").val( $(this).val() );
+       }
+     }
+   });
+ });
+</script>
+ <FORM name="F1" action="./" method="post" target="_self"> 
+ <INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
+ <INPUT type="hidden" name="nmgp_opcao" value="busca"> 
+ <div id="idJSSpecChar" style="display:none;"></div>
+ <div id="id_div_process" style="display: none; position: absolute"><table class="scFilterTable"><tr><td class="scFilterLabelOdd"><?php echo $this->Ini->Nm_lang['lang_othr_prcs']; ?>...</td></tr></table></div>
+ <div id="id_fatal_error" class="scFilterFieldOdd" style="display:none; position: absolute"></div>
+<TABLE id="main_table" align="center" valign="top" >
+<tr>
+<td>
+<div class="scFilterBorder">
+  <div id="id_div_process_block" style="display: none; margin: 10px; whitespace: nowrap"><span class="scFormProcess"><img border="0" src="<?php echo $this->Ini->path_icones ?>/scriptcase__NM__ajax_load.gif" align="absmiddle" />&nbsp;<?php echo $this->Ini->Nm_lang['lang_othr_prcs'] ?>...</span></div>
+<table cellspacing=0 cellpadding=0 width='100%'>
+<?php
+   }
+
+   /**
+    * @access  public
+    * @global  string  $bprocessa  
+    */
+   /**
+    * @access  public
+    */
+   function monta_cabecalho()
+   {
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['compact_mode'])
+      {
+          return;
+      }
+      $Str_date = strtolower($_SESSION['scriptcase']['reg_conf']['date_format']);
+      $Lim   = strlen($Str_date);
+      $Ult   = "";
+      $Arr_D = array();
+      for ($I = 0; $I < $Lim; $I++)
+      {
+          $Char = substr($Str_date, $I, 1);
+          if ($Char != $Ult)
+          {
+              $Arr_D[] = $Char;
+          }
+          $Ult = $Char;
+      }
+      $Prim = true;
+      $Str  = "";
+      foreach ($Arr_D as $Cada_d)
+      {
+          $Str .= (!$Prim) ? $_SESSION['scriptcase']['reg_conf']['date_sep'] : "";
+          $Str .= $Cada_d;
+          $Prim = false;
+      }
+      $Str = str_replace("a", "Y", $Str);
+      $Str = str_replace("y", "Y", $Str);
+      $nm_data_fixa = date($Str); 
+?>
+ <TR align="center">
+  <TD class="scFilterTableTd">
+<style>
+#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
+#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
+</style>
+
+<div style="width: 100%">
+ <div class="scFilterHeader" style="height:11px; display: block; border-width:0px; "></div>
+ <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
+ 	<table style="width:100%; border-collapse:collapse; padding:0;">
+    	<tr>
+        	<td id="lin1_col1" class="scFilterHeaderFont"><span>Venta Rápida</span></td>
+            <td id="lin1_col2" class="scFilterHeaderFont"><span></span></td>
+        </tr>
+    </table>		 
+ </div>
+</div>
+  </TD>
+ </TR>
+<?php
+   }
+
+   /**
+    * @access  public
+    * @global  string  $nm_url_saida  $this->Ini->Nm_lang['pesq_global_nm_url_saida']
+    * @global  integer  $nm_apl_dependente  $this->Ini->Nm_lang['pesq_global_nm_apl_dependente']
+    * @global  string  $nmgp_parms  
+    * @global  string  $bprocessa  $this->Ini->Nm_lang['pesq_global_bprocessa']
+    */
+   function monta_form()
+   {
+      global 
+             $tipo_cond, $tipo,
+             $fechaven_cond, $fechaven, $fechaven_dia, $fechaven_mes, $fechaven_ano, $fechaven_input_2_dia, $fechaven_input_2_mes, $fechaven_input_2_ano,
+             $idcli_cond, $idcli, $idcli_autocomp,
+             $asentada_cond, $asentada,
+             $banco_cond, $banco,
+             $resolucion_cond, $resolucion,
+             $vendedor_cond, $vendedor,
+             $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
+      $Script_BI = "";
+      $this->nmgp_botoes['clear'] = "on";
+      $this->nmgp_botoes['save'] = "on";
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['btn_display']))
+      {
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
+          {
+              $this->nmgp_botoes[$NM_cada_btn] = $NM_cada_opc;
+          }
+      }
+      $this->aba_iframe = false;
+      if (isset($_SESSION['scriptcase']['sc_aba_iframe']))
+      {
+          foreach ($_SESSION['scriptcase']['sc_aba_iframe'] as $aba => $apls_aba)
+          {
+              if (in_array("grid_facturaven_pos", $apls_aba))
+              {
+                  $this->aba_iframe = true;
+                  break;
+              }
+          }
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['iframe_menu'] && (!isset($_SESSION['scriptcase']['menu_mobile']) || empty($_SESSION['scriptcase']['menu_mobile'])))
+      {
+          $this->aba_iframe = true;
+      }
+      $nmgp_tab_label = "";
+      $delimitador = "##@@";
+      if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && $bprocessa != "recarga" && $bprocessa != "save_form" && $bprocessa != "filter_save" && $bprocessa != "filter_delete")
+      {
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && $bprocessa != "recarga" && $bprocessa != "save_form" && $bprocessa != "filter_save" && $bprocessa != "filter_delete")
+      { 
+          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
+          }
+          $tipo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['tipo']; 
+          $tipo_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['tipo_cond']; 
+          $fechaven_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_dia']; 
+          $fechaven_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_mes']; 
+          $fechaven_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_ano']; 
+          $fechaven_input_2_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_input_2_dia']; 
+          $fechaven_input_2_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_input_2_mes']; 
+          $fechaven_input_2_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_input_2_ano']; 
+          $fechaven_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_cond']; 
+          $idcli = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['idcli']; 
+          $idcli_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['idcli_cond']; 
+          $asentada = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['asentada']; 
+          $asentada_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['asentada_cond']; 
+          $banco = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['banco']; 
+          $banco_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['banco_cond']; 
+          $resolucion = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['resolucion']; 
+          $resolucion_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['resolucion_cond']; 
+          $vendedor = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor']; 
+          $vendedor_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor_cond']; 
+          $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['NM_operador']; 
+      } 
+      if (!isset($tipo_cond) || empty($tipo_cond))
+      {
+         $tipo_cond = "eq";
+      }
+      if (!isset($fechaven_cond) || empty($fechaven_cond))
+      {
+         $fechaven_cond = "bw";
+      }
+      if (!isset($idcli_cond) || empty($idcli_cond))
+      {
+         $idcli_cond = "qp";
+      }
+      if (!isset($asentada_cond) || empty($asentada_cond))
+      {
+         $asentada_cond = "eq";
+      }
+      if (!isset($banco_cond) || empty($banco_cond))
+      {
+         $banco_cond = "eq";
+      }
+      if (!isset($resolucion_cond) || empty($resolucion_cond))
+      {
+         $resolucion_cond = "eq";
+      }
+      if (!isset($vendedor_cond) || empty($vendedor_cond))
+      {
+         $vendedor_cond = "eq";
+      }
+      $display_aberto  = "style=display:";
+      $display_fechado = "style=display:none";
+      $opc_hide_input = array("nu","nn","ep","ne");
+      $str_hide_tipo = (in_array($tipo_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_fechaven = (in_array($fechaven_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_idcli = (in_array($idcli_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_asentada = (in_array($asentada_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_banco = (in_array($banco_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_resolucion = (in_array($resolucion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_vendedor = (in_array($vendedor_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+
+      $str_display_tipo = ('bw' == $tipo_cond) ? $display_aberto : $display_fechado;
+      $str_display_fechaven = ('bw' == $fechaven_cond) ? $display_aberto : $display_fechado;
+      $str_display_idcli = ('bw' == $idcli_cond) ? $display_aberto : $display_fechado;
+      $str_display_asentada = ('bw' == $asentada_cond) ? $display_aberto : $display_fechado;
+      $str_display_banco = ('bw' == $banco_cond) ? $display_aberto : $display_fechado;
+      $str_display_resolucion = ('bw' == $resolucion_cond) ? $display_aberto : $display_fechado;
+      $str_display_vendedor = ('bw' == $vendedor_cond) ? $display_aberto : $display_fechado;
+
+      if (!isset($tipo) || $tipo == "")
+      {
+          $tipo = "";
+      }
+      if (isset($tipo) && !empty($tipo))
+      {
+         $tmp_pos = strpos($tipo, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $tipo = substr($tipo, 0, $tmp_pos);
+         }
+      }
+      if (!isset($fechaven) || $fechaven == "")
+      {
+          $fechaven = "";
+      }
+      if (isset($fechaven) && !empty($fechaven))
+      {
+         $tmp_pos = strpos($fechaven, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $fechaven = substr($fechaven, 0, $tmp_pos);
+         }
+      }
+      if (!isset($idcli) || $idcli == "")
+      {
+          $idcli = "";
+      }
+      if (isset($idcli) && !empty($idcli))
+      {
+         $tmp_pos = strpos($idcli, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $idcli = substr($idcli, 0, $tmp_pos);
+         }
+      }
+      if (!isset($asentada) || $asentada == "")
+      {
+          $asentada = "";
+      }
+      if (isset($asentada) && !empty($asentada))
+      {
+         $tmp_pos = strpos($asentada, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $asentada = substr($asentada, 0, $tmp_pos);
+         }
+      }
+      if (!isset($banco) || $banco == "")
+      {
+          $banco = "";
+      }
+      if (isset($banco) && !empty($banco))
+      {
+         $tmp_pos = strpos($banco, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $banco = substr($banco, 0, $tmp_pos);
+         }
+      }
+      if (!isset($resolucion) || $resolucion == "")
+      {
+          $resolucion = "";
+      }
+      if (isset($resolucion) && !empty($resolucion))
+      {
+         $tmp_pos = strpos($resolucion, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $resolucion = substr($resolucion, 0, $tmp_pos);
+         }
+      }
+      if (!isset($vendedor) || $vendedor == "")
+      {
+          $vendedor = "";
+      }
+      if (isset($vendedor) && !empty($vendedor))
+      {
+         $tmp_pos = strpos($vendedor, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $vendedor = substr($vendedor, 0, $tmp_pos);
+         }
+      }
+?>
+ <TR align="center">
+  <TD class="scFilterTableTd">
+   <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
+   <TR valign="top" >
+  <TD width="100%" height="">
+   <TABLE class="scFilterTable" id="hidden_bloco_0" valign="top" width="100%" style="height: 100%;">
+   <tr>
+
+
+
+   
+      <INPUT type="hidden" id="SC_tipo_cond" name="tipo_cond" value="eq">
+
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['tipo'])) ? $this->New_label['tipo'] : "Tipo";
+ $nmgp_tab_label .= "tipo?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<?php echo $SC_Label ?><br><span id="id_hide_tipo"  <?php echo $str_hide_tipo?>> 
+<?php
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['tipo'] = array();
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['tipo'][] = "RS";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['tipo'][] = "FV";
+ ?>
+
+ <SELECT class="scFilterObjectOdd" id="SC_tipo"  name="tipo"  size="1">
+ <OPTION value="">TODO</option>
+ <OPTION value="RS##@@REMISION"<?php if ($tipo == "RS") { echo " selected" ;} ?>>REMISION</option>
+ <OPTION value="FV##@@FACTURA"<?php if ($tipo == "FV") { echo " selected" ;} ?>>FACTURA</option>
+ </SELECT>
+ </TD>
+   
+   
+      <INPUT type="hidden" id="SC_fechaven_cond" name="fechaven_cond" value="bw">
+
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['fechaven'])) ? $this->New_label['fechaven'] : "Fecha";
+ $nmgp_tab_label .= "fechaven?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<?php echo $SC_Label ?><br><span id="id_hide_fechaven"  <?php echo $str_hide_fechaven?>>
+<?php
+  $Form_base = "ddmmyyyy";
+  $date_format_show = "";
+  $Str_date = str_replace("a", "y", strtolower($_SESSION['scriptcase']['reg_conf']['date_format']));
+  $Lim   = strlen($Str_date);
+  $Str   = "";
+  $Ult   = "";
+  $Arr_D = array();
+  for ($I = 0; $I < $Lim; $I++)
+  {
+      $Char = substr($Str_date, $I, 1);
+      if ($Char != $Ult && "" != $Str)
+      {
+          $Arr_D[] = $Str;
+          $Str     = $Char;
+      }
+      else
+      {
+          $Str    .= $Char;
+      }
+      $Ult = $Char;
+  }
+  $Arr_D[] = $Str;
+  $Prim = true;
+  foreach ($Arr_D as $Cada_d)
+  {
+      if (strpos($Form_base, $Cada_d) !== false)
+      {
+          $date_format_show .= (!$Prim) ? $_SESSION['scriptcase']['reg_conf']['date_sep'] : "";
+          $date_format_show .= $Cada_d;
+          $Prim = false;
+      }
+  }
+  $Arr_format = $Arr_D;
+  $date_format_show = str_replace("dd",   $this->Ini->Nm_lang['lang_othr_date_days'], $date_format_show);
+  $date_format_show = str_replace("mm",   $this->Ini->Nm_lang['lang_othr_date_mnth'], $date_format_show);
+  $date_format_show = str_replace("yyyy", $this->Ini->Nm_lang['lang_othr_date_year'], $date_format_show);
+  $date_format_show = str_replace("aaaa", $this->Ini->Nm_lang['lang_othr_date_year'], $date_format_show);
+  $date_format_show = str_replace("hh",   $this->Ini->Nm_lang['lang_othr_date_hour'], $date_format_show);
+  $date_format_show = str_replace("ii",   $this->Ini->Nm_lang['lang_othr_date_mint'], $date_format_show);
+  $date_format_show = str_replace("ss",   $this->Ini->Nm_lang['lang_othr_date_scnd'], $date_format_show);
+  $date_format_show = "" . $date_format_show .  "";
+
+?>
+
+         <?php
+
+foreach ($Arr_format as $Part_date)
+{
+?>
+<?php
+  if (substr($Part_date, 0,1) == "d")
+  {
+?>
+<span id='id_date_part_fechaven_DD' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fechaven_dia" name="fechaven_dia" value="<?php echo NM_encode_input($fechaven_dia); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "m")
+  {
+?>
+<span id='id_date_part_fechaven_MM' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fechaven_mes" name="fechaven_mes" value="<?php echo NM_encode_input($fechaven_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "y")
+  {
+?>
+<span id='id_date_part_fechaven_AAAA' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fechaven_ano" name="fechaven_ano" value="<?php echo NM_encode_input($fechaven_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
+ <INPUT type="hidden" id="sc_fechaven_jq">
+</span>
+
+<?php
+  }
+?>
+
+<?php
+
+}
+
+?>
+        <SPAN id="id_css_fechaven"  class="scFilterFieldFontOdd">
+ <?php echo $date_format_show ?>         </SPAN>
+                  <br />
+        <SPAN id="id_vis_fechaven"  <?php echo $str_display_fechaven; ?> class="scFilterFieldFontOdd">
+         <?php echo $date_sep_bw ?> 
+         <BR>
+         
+         <?php
+
+foreach ($Arr_format as $Part_date)
+{
+?>
+<?php
+  if (substr($Part_date, 0,1) == "d")
+  {
+?>
+<span id='id_date_part_fechaven_input_2_DD' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fechaven_input_2_dia" name="fechaven_input_2_dia" value="<?php echo NM_encode_input($fechaven_input_2_dia); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "m")
+  {
+?>
+<span id='id_date_part_fechaven_input_2_MM' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fechaven_input_2_mes" name="fechaven_input_2_mes" value="<?php echo NM_encode_input($fechaven_input_2_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "y")
+  {
+?>
+<span id='id_date_part_fechaven_input_2_AAAA' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fechaven_input_2_ano" name="fechaven_input_2_ano" value="<?php echo NM_encode_input($fechaven_input_2_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
+ <INPUT type="hidden" id="sc_fechaven_jq2">
+</span>
+
+<?php
+  }
+?>
+
+<?php
+
+}
+
+?>
+         </SPAN>
+          </TD>
+   
+
+
+
+   </tr>
+   </TABLE>
+  </TD>
+   </TR>
+   </TABLE>
+   </TD></TR><TR><TD class="scFilterTableTd">
+   <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
+   <TR valign="top" >
+  <TD width="100%" height="">
+   <TABLE class="scFilterTable" id="hidden_bloco_1" valign="top" width="100%" style="height: 100%;">
+   <tr>
+
+
+
+   
+      <INPUT type="hidden" id="SC_idcli_cond" name="idcli_cond" value="qp">
+
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['idcli'])) ? $this->New_label['idcli'] : "Cliente";
+ $nmgp_tab_label .= "idcli?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<?php echo $SC_Label ?><br><span id="id_hide_idcli"  <?php echo $str_hide_idcli?>><?php
+      if ($idcli != "")
+      {
+      $idcli_look = substr($this->Db->qstr($idcli), 1, -1); 
+      $nmgp_def_dados = array(); 
+   if (is_numeric($idcli))
+   { 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select idtercero, nombres from terceros where idtercero = $idcli_look order by nombres"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select idtercero, nombres from terceros where idtercero = $idcli_look order by nombres"; 
+      }
+      else
+      {
+          $nm_comando = "select idtercero, nombres from terceros where idtercero = $idcli_look order by nombres"; 
+      }
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = trim($rs->fields[0]);
+            $cmp2 = trim($rs->fields[1]);
+            $nmgp_def_dados[] = array($cmp1 => $cmp2); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+   } 
+      }
+      if (isset($nmgp_def_dados[0][$idcli]))
+      {
+          $sAutocompValue = $nmgp_def_dados[0][$idcli];
+      }
+      else
+      {
+          $sAutocompValue = $idcli;
+      }
+?>
+<INPUT  type="text" id="SC_idcli" name="idcli" value="<?php echo NM_encode_input($idcli) ?>"  size=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
+<input class="sc-js-input scFilterObjectOdd" type="text" id="id_ac_idcli" name="idcli_autocomp" size="60"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'text', maxLength: 60, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}">
+
+ </TD>
+   
+
+
+
+   </tr>
+   </TABLE>
+  </TD>
+   </TR>
+   </TABLE>
+   </TD></TR><TR><TD class="scFilterTableTd">
+   <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
+   <TR valign="top" >
+  <TD width="100%" height="">
+   <TABLE class="scFilterTable" id="hidden_bloco_2" valign="top" width="100%" style="height: 100%;">
+   <tr>
+
+
+
+
+
+      <TD id='SC_asentada_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['asentada'])) ? $this->New_label['asentada'] : "Asentada"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_asentada_cond" name="asentada_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_asentada" <?php echo $str_hide_asentada?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['asentada'])) ? $this->New_label['asentada'] : "Asentada";
+ $nmgp_tab_label .= "asentada?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+ 
+<?php
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['asentada'] = array();
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['asentada'][] = "1";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['asentada'][] = "0";
+ ?>
+
+ <SELECT class="scFilterObjectOdd" id="SC_asentada"  name="asentada"  size="1">
+ <OPTION value="">SELECCIONE</option>
+ <OPTION value="1##@@SI"<?php if ($asentada == "1") { echo " selected" ;} ?>>SI</option>
+ <OPTION value="0##@@NO"<?php if ($asentada == "0") { echo " selected" ;} ?>>NO</option>
+ </SELECT>
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+      <TD id='SC_banco_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['banco'])) ? $this->New_label['banco'] : "Caja"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_banco_cond" name="banco_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_banco" <?php echo $str_hide_banco?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['banco'])) ? $this->New_label['banco'] : "Caja";
+ $nmgp_tab_label .= "banco?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+
+<?php
+      $banco_look = substr($this->Db->qstr($banco), 1, -1); 
+      $nmgp_def_dados = "" ; 
+      $nm_comando = "SELECT idcaja_vta, codigo_banco  FROM bancos  ORDER BY codigo_banco"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['banco'] = array();
+         while (!$rs->EOF) 
+         { 
+            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['banco'][] = trim($rs->fields[0]);
+            $nmgp_def_dados .= trim($rs->fields[1]) . "?#?" ; 
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?N?@?" ; 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+?>
+   <span id="idAjaxSelect_banco">
+      <SELECT class="scFilterObjectOdd" id="SC_banco" name="banco"  size="1">
+       <OPTION value="">SELECCIONE</OPTION>
+<?php
+      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
+      $nm_opcoes  = explode("?@?", $nm_opcoesx);
+      foreach ($nm_opcoes as $nm_opcao)
+      {
+         if (!empty($nm_opcao))
+         {
+            $temp_bug_list = explode("?#?", $nm_opcao);
+            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
+            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
+            if ("" != $banco)
+            {
+                    $banco_sel = ($nm_opc_cod === $banco) ? "selected" : "";
+            }
+            else
+            {
+               $banco_sel = ("S" == $nm_opc_sel) ? "selected" : "";
+            }
+            $nm_sc_valor = $nm_opc_val;
+            $nm_opc_val = $nm_sc_valor;
+?>
+       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $banco_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
+<?php
+         }
+      }
+?>
+      </SELECT>
+   </span>
+<?php
+?>
+        
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_resolucion_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['resolucion'])) ? $this->New_label['resolucion'] : "PJ"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_resolucion_cond" name="resolucion_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldEven">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_resolucion" <?php echo $str_hide_resolucion?> valign="top">
+        <TD class="scFilterFieldFontEven">
+           <?php
+ $SC_Label = (isset($this->New_label['resolucion'])) ? $this->New_label['resolucion'] : "PJ";
+ $nmgp_tab_label .= "resolucion?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+
+<?php
+      $resolucion_look = substr($this->Db->qstr($resolucion), 1, -1); 
+      $nmgp_def_dados = "" ; 
+      $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE fecha>0 and activa='SI' ORDER BY prefijo"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['resolucion'] = array();
+         while (!$rs->EOF) 
+         { 
+            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['resolucion'][] = trim($rs->fields[0]);
+            $nmgp_def_dados .= trim($rs->fields[1]) . "?#?" ; 
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?N?@?" ; 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+?>
+   <span id="idAjaxSelect_resolucion">
+      <SELECT class="scFilterObjectEven" id="SC_resolucion" name="resolucion"  size="1">
+       <OPTION value="">SELECCIONE</OPTION>
+<?php
+      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
+      $nm_opcoes  = explode("?@?", $nm_opcoesx);
+      foreach ($nm_opcoes as $nm_opcao)
+      {
+         if (!empty($nm_opcao))
+         {
+            $temp_bug_list = explode("?#?", $nm_opcao);
+            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
+            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
+            if ("" != $resolucion)
+            {
+                    $resolucion_sel = ($nm_opc_cod === $resolucion) ? "selected" : "";
+            }
+            else
+            {
+               $resolucion_sel = ("S" == $nm_opc_sel) ? "selected" : "";
+            }
+            $nm_sc_valor = $nm_opc_val;
+            $nm_opc_val = $nm_sc_valor;
+?>
+       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $resolucion_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
+<?php
+         }
+      }
+?>
+      </SELECT>
+   </span>
+<?php
+?>
+        
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+      <TD id='SC_vendedor_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['vendedor'])) ? $this->New_label['vendedor'] : " Vendedor"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_vendedor_cond" name="vendedor_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldEven">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_vendedor" <?php echo $str_hide_vendedor?> valign="top">
+        <TD class="scFilterFieldFontEven">
+           <?php
+ $SC_Label = (isset($this->New_label['vendedor'])) ? $this->New_label['vendedor'] : " Vendedor";
+ $nmgp_tab_label .= "vendedor?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+
+<?php
+      $vendedor_look = substr($this->Db->qstr($vendedor), 1, -1); 
+      $nmgp_def_dados = "" ; 
+      $nm_comando = "SELECT idtercero, nombres  FROM terceros  WHERE empleado='SI' ORDER BY nombres"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['vendedor'] = array();
+         while (!$rs->EOF) 
+         { 
+            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['vendedor'][] = trim($rs->fields[0]);
+            $nmgp_def_dados .= trim($rs->fields[1]) . "?#?" ; 
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?N?@?" ; 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+?>
+   <span id="idAjaxSelect_vendedor">
+      <SELECT class="scFilterObjectEven" id="SC_vendedor" name="vendedor"  size="1">
+       <OPTION value="">SELECCIONE</OPTION>
+<?php
+      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
+      $nm_opcoes  = explode("?@?", $nm_opcoesx);
+      foreach ($nm_opcoes as $nm_opcao)
+      {
+         if (!empty($nm_opcao))
+         {
+            $temp_bug_list = explode("?#?", $nm_opcao);
+            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
+            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
+            if ("" != $vendedor)
+            {
+                    $vendedor_sel = ($nm_opc_cod === $vendedor) ? "selected" : "";
+            }
+            else
+            {
+               $vendedor_sel = ("S" == $nm_opc_sel) ? "selected" : "";
+            }
+            $nm_sc_valor = $nm_opc_val;
+            $nm_opc_val = $nm_sc_valor;
+?>
+       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $vendedor_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
+<?php
+         }
+      }
+?>
+      </SELECT>
+   </span>
+<?php
+?>
+        
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr>
+   </TABLE>
+  </TD>
+ </TR>
+ </TABLE>
+ </TD>
+ </TR>
+ <TR>
+  <TD class="scFilterTableTd" align="center">
+<INPUT type="hidden" id="SC_NM_operador" name="NM_operador" value="and">  </TD>
+ </TR>
+   <INPUT type="hidden" name="nmgp_tab_label" value="<?php echo NM_encode_input($nmgp_tab_label); ?>"> 
+   <INPUT type="hidden" name="bprocessa" value="pesq"> 
+ <?php
+     if ($_SESSION['scriptcase']['proc_mobile'])
+     {
+     ?>
+ <TR align="center">
+  <TD class="scFilterTableTd">
+   <table width="100%" class="scFilterToolbar"><tr>
+    <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
+    </td>
+    <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
+   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   if ($this->nmgp_botoes['clear'] == "on")
+   {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+?>
+<?php
+   if (!isset($this->nmgp_botoes['save']) || $this->nmgp_botoes['save'] == "on")
+   {
+       $this->NM_fil_ant = $this->gera_array_filtros();
+?>
+     <span id="idAjaxSelect_NM_filters_bot">
+       <SELECT class="scFilterToolbar_obj" id="sel_recup_filters_bot" name="NM_filters_bot" onChange="nm_submit_filter(this, 'bot');" size="1">
+           <option value=""></option>
+<?php
+          $Nome_filter = "";
+          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
+          {
+              $Select = "";
+              if ($Cada_filter == $this->NM_curr_fil)
+              {
+                  $Select = "selected";
+              }
+              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
+              {
+                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
+                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
+              }
+              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
+              {
+                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
+                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
+              }
+              if ($Tipo_filter[1] != $Nome_filter)
+              {
+                  $Nome_filter = $Tipo_filter[1];
+                  echo "           <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
+              }
+?>
+           <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
+<?php
+          }
+?>
+       </SELECT>
+     </span>
+<?php
+   }
+?>
+<?php
+   if ($this->nmgp_botoes['save'] == "on")
+   {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "bedit_filter", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "Ativa_save_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+?>
+<?php
+   if (is_file("grid_facturaven_pos_help.txt"))
+   {
+      $Arq_WebHelp = file("grid_facturaven_pos_help.txt"); 
+      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
+      {
+          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
+          $Tmp = explode(";", $Arq_WebHelp[0]); 
+          foreach ($Tmp as $Cada_help)
+          {
+              $Tmp1 = explode(":", $Cada_help); 
+              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
+              {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+              }
+          }
+      }
+   }
+?>
+<?php
+   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['start'] == 'filter' && $nm_apl_dependente != 1)
+   {
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   else
+   {
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+?>
+    </td>
+    <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
+    </td>
+   </tr></table>
+<?php
+   if ($this->nmgp_botoes['save'] == "on")
+   {
+?>
+    </TD></TR><TR><TD>
+    <DIV id="Salvar_filters_bot" style="display:none;z-index:9999;">
+     <TABLE align="center" class="scFilterTable">
+      <TR>
+       <TD class="scFilterBlock">
+        <table style="border-width: 0px; border-collapse: collapse" width="100%">
+         <tr>
+          <td style="padding: 0px" valign="top" class="scFilterBlockFont"><?php echo $this->Ini->Nm_lang['lang_othr_srch_head'] ?></td>
+          <td style="padding: 0px" align="right" valign="top">
+           <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "Cancel_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+          </td>
+         </tr>
+        </table>
+       </TD>
+      </TR>
+      <TR>
+       <TD class="scFilterFieldOdd">
+        <table style="border-width: 0px; border-collapse: collapse" width="100%">
+         <tr>
+          <td style="padding: 0px" valign="top">
+           <input class="scFilterObjectOdd" type="text" id="SC_nmgp_save_name_bot" name="nmgp_save_name_bot" value="">
+          </td>
+          <td style="padding: 0px" align="right" valign="top">
+           <?php echo nmButtonOutput($this->arr_buttons, "bsalvar_appdiv", "nm_save_form('bot');", "nm_save_form('bot');", "Save_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+          </td>
+         </tr>
+        </table>
+       </TD>
+      </TR>
+      <TR>
+       <TD class="scFilterFieldEven">
+       <DIV id="Apaga_filters_bot" style="display:''">
+        <table style="border-width: 0px; border-collapse: collapse" width="100%">
+         <tr>
+          <td style="padding: 0px" valign="top">
+          <div id="idAjaxSelect_NM_filters_del_bot">
+           <SELECT class="scFilterObjectOdd" id="sel_filters_del_bot" name="NM_filters_del_bot" size="1">
+            <option value=""></option>
+<?php
+          $Nome_filter = "";
+          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
+          {
+              $Select = "";
+              if ($Cada_filter == $this->NM_curr_fil)
+              {
+                  $Select = "selected";
+              }
+              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
+              {
+                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
+                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
+              }
+              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
+              {
+                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
+                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
+              }
+              if ($Tipo_filter[1] != $Nome_filter)
+              {
+                  $Nome_filter = $Tipo_filter[1];
+                  echo "            <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
+              }
+?>
+            <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
+<?php
+          }
+?>
+           </SELECT>
+          </div>
+          </td>
+          <td style="padding: 0px" align="right" valign="top">
+           <?php echo nmButtonOutput($this->arr_buttons, "bexcluir_appdiv", "nm_submit_filter_del('bot');", "nm_submit_filter_del('bot');", "Exc_filtro_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+          </td>
+         </tr>
+        </table>
+       </DIV>
+       </TD>
+      </TR>
+     </TABLE>
+    </DIV> 
+<?php
+   }
+?>
+  </TD>
+ </TR>
+     <?php
+     }
+     else
+     {
+     ?>
+ <TR align="center">
+  <TD class="scFilterTableTd">
+   <table width="100%" class="scFilterToolbar"><tr>
+    <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
+    </td>
+    <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
+<?php
+   if (is_file("grid_facturaven_pos_help.txt"))
+   {
+      $Arq_WebHelp = file("grid_facturaven_pos_help.txt"); 
+      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
+      {
+          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
+          $Tmp = explode(";", $Arq_WebHelp[0]); 
+          foreach ($Tmp as $Cada_help)
+          {
+              $Tmp1 = explode(":", $Cada_help); 
+              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
+              {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+              }
+          }
+      }
+   }
+?>
+<?php
+   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['start'] == 'filter' && $nm_apl_dependente != 1)
+   {
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   else
+   {
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+?>
+<?php
+   if ($this->nmgp_botoes['clear'] == "on")
+   {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+?>
+<?php
+   if (!isset($this->nmgp_botoes['save']) || $this->nmgp_botoes['save'] == "on")
+   {
+       $this->NM_fil_ant = $this->gera_array_filtros();
+?>
+     <span id="idAjaxSelect_NM_filters_bot">
+       <SELECT class="scFilterToolbar_obj" id="sel_recup_filters_bot" name="NM_filters_bot" onChange="nm_submit_filter(this, 'bot');" size="1">
+           <option value=""></option>
+<?php
+          $Nome_filter = "";
+          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
+          {
+              $Select = "";
+              if ($Cada_filter == $this->NM_curr_fil)
+              {
+                  $Select = "selected";
+              }
+              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
+              {
+                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
+                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
+              }
+              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
+              {
+                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
+                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
+              }
+              if ($Tipo_filter[1] != $Nome_filter)
+              {
+                  $Nome_filter = $Tipo_filter[1];
+                  echo "           <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
+              }
+?>
+           <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
+<?php
+          }
+?>
+       </SELECT>
+     </span>
+<?php
+   }
+?>
+<?php
+   if ($this->nmgp_botoes['save'] == "on")
+   {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "bedit_filter", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "Ativa_save_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+    </td>
+    <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
+    </td>
+   </tr></table>
+<?php
+   if ($this->nmgp_botoes['save'] == "on")
+   {
+?>
+    </TD></TR><TR><TD>
+    <DIV id="Salvar_filters_bot" style="display:none;z-index:9999;">
+     <TABLE align="center" class="scFilterTable">
+      <TR>
+       <TD class="scFilterBlock">
+        <table style="border-width: 0px; border-collapse: collapse" width="100%">
+         <tr>
+          <td style="padding: 0px" valign="top" class="scFilterBlockFont"><?php echo $this->Ini->Nm_lang['lang_othr_srch_head'] ?></td>
+          <td style="padding: 0px" align="right" valign="top">
+           <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "Cancel_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+          </td>
+         </tr>
+        </table>
+       </TD>
+      </TR>
+      <TR>
+       <TD class="scFilterFieldOdd">
+        <table style="border-width: 0px; border-collapse: collapse" width="100%">
+         <tr>
+          <td style="padding: 0px" valign="top">
+           <input class="scFilterObjectOdd" type="text" id="SC_nmgp_save_name_bot" name="nmgp_save_name_bot" value="">
+          </td>
+          <td style="padding: 0px" align="right" valign="top">
+           <?php echo nmButtonOutput($this->arr_buttons, "bsalvar_appdiv", "nm_save_form('bot');", "nm_save_form('bot');", "Save_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+          </td>
+         </tr>
+        </table>
+       </TD>
+      </TR>
+      <TR>
+       <TD class="scFilterFieldEven">
+       <DIV id="Apaga_filters_bot" style="display:''">
+        <table style="border-width: 0px; border-collapse: collapse" width="100%">
+         <tr>
+          <td style="padding: 0px" valign="top">
+          <div id="idAjaxSelect_NM_filters_del_bot">
+           <SELECT class="scFilterObjectOdd" id="sel_filters_del_bot" name="NM_filters_del_bot" size="1">
+            <option value=""></option>
+<?php
+          $Nome_filter = "";
+          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
+          {
+              $Select = "";
+              if ($Cada_filter == $this->NM_curr_fil)
+              {
+                  $Select = "selected";
+              }
+              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
+              {
+                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
+                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
+              }
+              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
+              {
+                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
+                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
+              }
+              if ($Tipo_filter[1] != $Nome_filter)
+              {
+                  $Nome_filter = $Tipo_filter[1];
+                  echo "            <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
+              }
+?>
+            <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
+<?php
+          }
+?>
+           </SELECT>
+          </div>
+          </td>
+          <td style="padding: 0px" align="right" valign="top">
+           <?php echo nmButtonOutput($this->arr_buttons, "bexcluir_appdiv", "nm_submit_filter_del('bot');", "nm_submit_filter_del('bot');", "Exc_filtro_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+          </td>
+         </tr>
+        </table>
+       </DIV>
+       </TD>
+      </TR>
+     </TABLE>
+    </DIV> 
+<?php
+   }
+?>
+  </TD>
+ </TR>
+     <?php
+     }
+ ?>
+<?php
+   }
+
+   function monta_html_fim()
+   {
+       global $bprocessa, $nm_url_saida, $Script_BI;
+?>
+
+</TABLE>
+   <INPUT type="hidden" name="form_condicao" value="3">
+</FORM> 
+<?php
+   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['start'] == 'filter')
+   {
+?>
+   <FORM style="display:none;" name="form_cancel"  method="POST" action="<?php echo $nm_url_saida; ?>" target="_self"> 
+<?php
+   }
+   else
+   {
+?>
+   <FORM style="display:none;" name="form_cancel"  method="POST" action="./" target="_self"> 
+<?php
+   }
+?>
+   <INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
+<?php
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['orig_pesq'] == "grid")
+   {
+       $Ret_cancel_pesq = "volta_grid";
+   }
+   else
+   {
+       $Ret_cancel_pesq = "resumo";
+   }
+?>
+   <INPUT type="hidden" name="nmgp_opcao" value="<?php echo $Ret_cancel_pesq; ?>"> 
+   </FORM> 
+<SCRIPT type="text/javascript">
+<?php
+   if (empty($this->NM_fil_ant))
+   {
+       if ($_SESSION['scriptcase']['proc_mobile'])
+       {
+?>
+      document.getElementById('Apaga_filters_bot').style.display = 'none';
+      document.getElementById('sel_recup_filters_bot').style.display = 'none';
+<?php
+       }
+       else
+       {
+?>
+      document.getElementById('Apaga_filters_bot').style.display = 'none';
+      document.getElementById('sel_recup_filters_bot').style.display = 'none';
+<?php
+       }
+   }
+?>
+ function nm_move()
+ {
+     document.form_cancel.target = "_self"; 
+     document.form_cancel.action = "./"; 
+     document.form_cancel.submit(); 
+ }
+ function nm_submit_form()
+ {
+    document.F1.submit();
+ }
+ function limpa_form()
+ {
+   document.F1.reset();
+   if (document.F1.NM_filters)
+   {
+       document.F1.NM_filters.selectedIndex = -1;
+   }
+   document.getElementById('Salvar_filters_bot').style.display = 'none';
+   document.F1.tipo_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_tipo'), document.F1.tipo_cond, 'tipo');
+   document.F1.fechaven_cond.value = 'bw';
+   nm_campos_between(document.getElementById('id_vis_fechaven'), document.F1.fechaven_cond, 'fechaven');
+   document.F1.fechaven_dia.value = "";
+   document.F1.fechaven_mes.value = "";
+   document.F1.fechaven_ano.value = "";
+   document.F1.fechaven_input_2_dia.value = "";
+   document.F1.fechaven_input_2_mes.value = "";
+   document.F1.fechaven_input_2_ano.value = "";
+   document.F1.idcli_cond.value = 'qp';
+   nm_campos_between(document.getElementById('id_vis_idcli'), document.F1.idcli_cond, 'idcli');
+   document.F1.idcli.value = "";
+   document.F1.idcli_autocomp.value = "";
+   document.F1.asentada_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_asentada'), document.F1.asentada_cond, 'asentada');
+   document.F1.banco_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_banco'), document.F1.banco_cond, 'banco');
+   document.F1.banco.value = "";
+   document.F1.resolucion_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_resolucion'), document.F1.resolucion_cond, 'resolucion');
+   document.F1.resolucion.value = "";
+   document.F1.vendedor_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_vendedor'), document.F1.vendedor_cond, 'vendedor');
+   document.F1.vendedor.value = "";
+   Sc_carga_select2('all');
+ }
+ function Sc_carga_select2(Field)
+ {
+    if (Field == 'all' || Field == 'asentada') {
+       Sc_carga_select2_asentada();
+    }
+    if (Field == 'all' || Field == 'resolucion') {
+       Sc_carga_select2_resolucion();
+    }
+    if (Field == 'all' || Field == 'vendedor') {
+       Sc_carga_select2_vendedor();
+    }
+    if (Field == 'all' || Field == 'banco') {
+       Sc_carga_select2_banco();
+    }
+    if (Field == 'all' || Field == 'tipo') {
+       Sc_carga_select2_tipo();
+    }
+ }
+ function Sc_carga_select2_asentada()
+ {
+  $("#SC_asentada").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_resolucion()
+ {
+  $("#SC_resolucion").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_vendedor()
+ {
+  $("#SC_vendedor").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_banco()
+ {
+  $("#SC_banco").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_tipo()
+ {
+  $("#SC_tipo").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function SC_carga_evt_jquery()
+ {
+    $('#SC_fechaven_dia').bind('change', function() {sc_grid_facturaven_pos_valida_dia(this)});
+    $('#SC_fechaven_input_2_dia').bind('change', function() {sc_grid_facturaven_pos_valida_dia(this)});
+    $('#SC_fechaven_input_2_mes').bind('change', function() {sc_grid_facturaven_pos_valida_mes(this)});
+    $('#SC_fechaven_mes').bind('change', function() {sc_grid_facturaven_pos_valida_mes(this)});
+ }
+ function sc_grid_facturaven_pos_valida_dia(obj)
+ {
+     if (obj.value != "" && (obj.value < 1 || obj.value > 31))
+     {
+         if (confirm (Nm_erro['lang_jscr_ivdt'] +  " " + Nm_erro['lang_jscr_iday'] +  " " + Nm_erro['lang_jscr_wfix']))
+         {
+            Xfocus = setTimeout(function() { obj.focus(); }, 10);
+         }
+     }
+ }
+ function sc_grid_facturaven_pos_valida_mes(obj)
+ {
+     if (obj.value != "" && (obj.value < 1 || obj.value > 12))
+     {
+         if (confirm (Nm_erro['lang_jscr_ivdt'] +  " " + Nm_erro['lang_jscr_mnth'] +  " " + Nm_erro['lang_jscr_wfix']))
+         {
+            Xfocus = setTimeout(function() { obj.focus(); }, 10);
+         }
+     }
+ }
+<?php
+   if (isset($this->redir_modal) && !empty($this->redir_modal))
+   {
+       echo $this->redir_modal;
+   }
+?>
+</SCRIPT>
+</BODY>
+</HTML>
+<?php
+   }
+
+   function gera_array_filtros()
+   {
+       $this->NM_fil_ant = array();
+       $NM_patch   = "FACILWEBv2/grid_facturaven_pos";
+       if (is_dir($this->NM_path_filter . $NM_patch))
+       {
+           $NM_dir = @opendir($this->NM_path_filter . $NM_patch);
+           while (FALSE !== ($NM_arq = @readdir($NM_dir)))
+           {
+             if (@is_file($this->NM_path_filter . $NM_patch . "/" . $NM_arq))
+             {
+                 $Sc_v6 = false;
+                 $NMcmp_filter = file($this->NM_path_filter . $NM_patch . "/" . $NM_arq);
+                 $NMcmp_filter = explode("@NMF@", $NMcmp_filter[0]);
+                 if (substr($NMcmp_filter[0], 0, 6) == "SC_V6_" || substr($NMcmp_filter[0], 0, 6) == "SC_V8_")
+                 {
+                     $Name_filter = substr($NMcmp_filter[0], 6);
+                     if (!empty($Name_filter))
+                     {
+                         $nmgp_save_name = str_replace('/', ' ', $Name_filter);
+                         $nmgp_save_name = str_replace('\\', ' ', $nmgp_save_name);
+                         $nmgp_save_name = str_replace('.', ' ', $nmgp_save_name);
+                         $this->NM_fil_ant[$Name_filter][0] = $NM_patch . "/" . $nmgp_save_name;
+                         $this->NM_fil_ant[$Name_filter][1] = "" . $this->Ini->Nm_lang['lang_srch_public'] . "";
+                         $Sc_v6 = true;
+                     }
+                 }
+                 if (!$Sc_v6)
+                 {
+                     $this->NM_fil_ant[$NM_arq][0] = $NM_patch . "/" . $NM_arq;
+                     $this->NM_fil_ant[$NM_arq][1] = "" . $this->Ini->Nm_lang['lang_srch_public'] . "";
+                 }
+             }
+           }
+       }
+       return $this->NM_fil_ant;
+   }
+   /**
+    * @access  public
+    * @param  string  $NM_operador  $this->Ini->Nm_lang['pesq_global_NM_operador']
+    * @param  array  $nmgp_tab_label  
+    */
+   function inicializa_vars()
+   {
+      global $NM_operador, $nmgp_tab_label;
+
+      $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/");  
+      $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1);  
+      $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz;
+      $this->Campos_Mens_erro = ""; 
+      $this->nm_data = new nm_data("es");
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] = "";
+      if (!empty($nmgp_tab_label))
+      {
+         $nm_tab_campos = explode("?@?", $nmgp_tab_label);
+         $nmgp_tab_label = array();
+         foreach ($nm_tab_campos as $cada_campo)
+         {
+             $parte_campo = explode("?#?", $cada_campo);
+             $nmgp_tab_label[$parte_campo[0]] = $parte_campo[1];
+         }
+      }
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig'] = "";
+      }
+      $this->comando        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig'];
+      $this->comando_sum    = "";
+      $this->comando_filtro = "";
+      $this->comando_ini    = "ini";
+      $this->comando_fim    = "";
+      $this->NM_operador    = (isset($NM_operador) && ("and" == strtolower($NM_operador) || "or" == strtolower($NM_operador))) ? $NM_operador : "and";
+   }
+
+   function salva_filtro($nmgp_save_origem)
+   {
+      global $NM_filters_save, $nmgp_save_name, $nmgp_save_option, $script_case_init;
+          $NM_filters_save = str_replace("__NM_PLUS__", "+", $NM_filters_save);
+          $NM_str_filter  = "SC_V8_" . $nmgp_save_name . "@NMF@";
+          $nmgp_save_name = str_replace('/', ' ', $nmgp_save_name);
+          $nmgp_save_name = str_replace('\\', ' ', $nmgp_save_name);
+          $nmgp_save_name = str_replace('.', ' ', $nmgp_save_name);
+          if (!NM_is_utf8($nmgp_save_name))
+          {
+              $nmgp_save_name = sc_convert_encoding($nmgp_save_name, "UTF-8", $_SESSION['scriptcase']['charset']);
+          }
+          $NM_str_filter  .= $NM_filters_save;
+          $NM_patch = $this->NM_path_filter;
+          if (!is_dir($NM_patch))
+          {
+              $NMdir = mkdir($NM_patch, 0755);
+          }
+          $NM_patch .= "FACILWEBv2/";
+          if (!is_dir($NM_patch))
+          {
+              $NMdir = mkdir($NM_patch, 0755);
+          }
+          $NM_patch .= "grid_facturaven_pos/";
+          if (!is_dir($NM_patch))
+          {
+              $NMdir = mkdir($NM_patch, 0755);
+          }
+          $Parms_usr  = "";
+          $NM_filter = fopen ($NM_patch . $nmgp_save_name, 'w');
+          if (!NM_is_utf8($NM_str_filter))
+          {
+              $NM_str_filter = sc_convert_encoding($NM_str_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
+          }
+          fwrite($NM_filter, $NM_str_filter);
+          fclose($NM_filter);
+   }
+   function recupera_filtro($NM_filters)
+   {
+      global $NM_operador, $script_case_init;
+      $NM_patch = $this->NM_path_filter . "/" . $NM_filters;
+      if (!is_file($NM_patch))
+      {
+          $NM_filters = sc_convert_encoding($NM_filters, "UTF-8", $_SESSION['scriptcase']['charset']);
+          $NM_patch = $this->NM_path_filter . "/" . $NM_filters;
+      }
+      $return_fields = array();
+      $tp_fields     = array();
+      $tb_fields_esp = array();
+      $old_bi_opcs   = array("TP","HJ","OT","U7","SP","US","MM","UM","AM","PS","SS","P3","PM","P7","CY","LY","YY","M6","M3","M18","M24");
+      $tp_fields['SC_tipo_cond'] = 'cond';
+      $tp_fields['SC_tipo'] = 'select';
+      $tp_fields['SC_fechaven_cond'] = 'cond';
+      $tp_fields['SC_fechaven_dia'] = 'text';
+      $tp_fields['SC_fechaven_mes'] = 'text';
+      $tp_fields['SC_fechaven_ano'] = 'text';
+      $tp_fields['SC_fechaven_input_2_dia'] = 'text';
+      $tp_fields['SC_fechaven_input_2_mes'] = 'text';
+      $tp_fields['SC_fechaven_input_2_ano'] = 'text';
+      $tp_fields['SC_idcli_cond'] = 'cond';
+      $tp_fields['SC_idcli'] = 'text_aut';
+      $tp_fields['id_ac_idcli'] = 'text_aut';
+      $tp_fields['SC_asentada_cond'] = 'cond';
+      $tp_fields['SC_asentada'] = 'select';
+      $tp_fields['SC_banco_cond'] = 'cond';
+      $tp_fields['SC_banco'] = 'select';
+      $tp_fields['SC_resolucion_cond'] = 'cond';
+      $tp_fields['SC_resolucion'] = 'select';
+      $tp_fields['SC_vendedor_cond'] = 'cond';
+      $tp_fields['SC_vendedor'] = 'select';
+      $tp_fields['SC_NM_operador'] = 'text';
+      if (is_file($NM_patch))
+      {
+          $SC_V8    = false;
+          $NMfilter = file($NM_patch);
+          $NMcmp_filter = explode("@NMF@", $NMfilter[0]);
+          if (substr($NMcmp_filter[0], 0, 5) == "SC_V8")
+          {
+              $SC_V8 = true;
+          }
+          if (substr($NMcmp_filter[0], 0, 5) == "SC_V6" || substr($NMcmp_filter[0], 0, 5) == "SC_V8")
+          {
+              unset($NMcmp_filter[0]);
+          }
+          foreach ($NMcmp_filter as $Cada_cmp)
+          {
+              $Cada_cmp = explode("#NMF#", $Cada_cmp);
+              if (isset($tb_fields_esp[$Cada_cmp[0]]))
+              {
+                  $Cada_cmp[0] = $tb_fields_esp[$Cada_cmp[0]];
+              }
+              if (!$SC_V8 && substr($Cada_cmp[0], 0, 11) != "div_ac_lab_" && substr($Cada_cmp[0], 0, 6) != "id_ac_")
+              {
+                  $Cada_cmp[0] = "SC_" . $Cada_cmp[0];
+              }
+              if (!isset($tp_fields[$Cada_cmp[0]]))
+              {
+                  continue;
+              }
+              $list   = array();
+              $list_a = array();
+              if (substr($Cada_cmp[1], 0, 10) == "_NM_array_")
+              {
+                  if (substr($Cada_cmp[1], 0, 17) == "_NM_array_#NMARR#")
+                  {
+                      $Sc_temp = explode("#NMARR#", substr($Cada_cmp[1], 17));
+                      foreach ($Sc_temp as $Cada_val)
+                      {
+                          $list[]   = $Cada_val;
+                          $tmp_pos  = strpos($Cada_val, "##@@");
+                          $val_a    = ($tmp_pos !== false) ?  substr($Cada_val, $tmp_pos + 4) : $Cada_val;
+                          $list_a[] = array('opt' => $Cada_val, 'value' => $val_a);
+                      }
+                  }
+              }
+              elseif ($tp_fields[$Cada_cmp[0]] == 'dselect')
+              {
+                  $list[]   = $Cada_cmp[1];
+                  $tmp_pos  = strpos($Cada_cmp[1], "##@@");
+                  $val_a    = ($tmp_pos !== false) ?  substr($Cada_cmp[1], $tmp_pos + 4) : $Cada_cmp[1];
+                  $list_a[] = array('opt' => $Cada_cmp[1], 'value' => $val_a);
+              }
+              else
+              {
+                  $list[0] = $Cada_cmp[1];
+              }
+              if ($tp_fields[$Cada_cmp[0]] == 'select2_aut')
+              {
+                  if (!isset($list[0]))
+                  {
+                      $list[0] = "";
+                  }
+                  $return_fields['set_select2_aut'][] = array('field' => $Cada_cmp[0], 'value' => $list[0]);
+              }
+              elseif ($tp_fields[$Cada_cmp[0]] == 'dselect')
+              {
+                  $return_fields['set_dselect'][] = array('field' => $Cada_cmp[0], 'value' => $list_a);
+              }
+              elseif ($tp_fields[$Cada_cmp[0]] == 'fil_order')
+              {
+                  $return_fields['set_fil_order'][] = array('field' => $Cada_cmp[0], 'value' => $list);
+              }
+              elseif ($tp_fields[$Cada_cmp[0]] == 'selmult')
+              {
+                  if (count($list) == 1 && $list[0] == "")
+                  {
+                      continue;
+                  }
+                  $return_fields['set_selmult'][] = array('field' => $Cada_cmp[0], 'value' => $list);
+              }
+              elseif ($tp_fields[$Cada_cmp[0]] == 'ddcheckbox')
+              {
+                  $return_fields['set_ddcheckbox'][] = array('field' => $Cada_cmp[0], 'value' => $list);
+              }
+              elseif ($tp_fields[$Cada_cmp[0]] == 'checkbox')
+              {
+                  $return_fields['set_checkbox'][] = array('field' => $Cada_cmp[0], 'value' => $list);
+              }
+              else
+              {
+                  if (!isset($list[0]))
+                  {
+                      $list[0] = "";
+                  }
+                  if ($tp_fields[$Cada_cmp[0]] == 'html')
+                  {
+                      $return_fields['set_html'][] = array('field' => $Cada_cmp[0], 'value' => $list[0]);
+                  }
+                  elseif ($tp_fields[$Cada_cmp[0]] == 'radio')
+                  {
+                      $return_fields['set_radio'][] = array('field' => $Cada_cmp[0], 'value' => $list[0]);
+                  }
+                  elseif ($tp_fields[$Cada_cmp[0]] == 'cond' && in_array($list[0], $old_bi_opcs))
+                  {
+                      $Cada_cmp[1] = "bi_" . $list[0];
+                      $return_fields['set_val'][] = array('field' => $Cada_cmp[0], 'value' => $Cada_cmp[1]);
+                  }
+                  else
+                  {
+                      $return_fields['set_val'][] = array('field' => $Cada_cmp[0], 'value' => $list[0]);
+                  }
+              }
+          }
+          $this->NM_curr_fil = $NM_filters;
+      }
+      return $return_fields;
+   }
+   function apaga_filtro()
+   {
+      global $NM_filters_del;
+      if (isset($NM_filters_del) && !empty($NM_filters_del))
+      { 
+          $NM_patch = $this->NM_path_filter . "/" . $NM_filters_del;
+          if (!is_file($NM_patch))
+          {
+              $NM_filters_del = sc_convert_encoding($NM_filters_del, "UTF-8", $_SESSION['scriptcase']['charset']);
+              $NM_patch = $this->NM_path_filter . "/" . $NM_filters_del;
+          }
+          if (is_file($NM_patch))
+          {
+              @unlink($NM_patch);
+          }
+          if ($NM_filters_del == $this->NM_curr_fil)
+          {
+              $this->NM_curr_fil = "";
+          }
+      }
+   }
+   /**
+    * @access  public
+    */
+   function trata_campos()
+   {
+      global $tipo_cond, $tipo,
+             $fechaven_cond, $fechaven, $fechaven_dia, $fechaven_mes, $fechaven_ano, $fechaven_input_2_dia, $fechaven_input_2_mes, $fechaven_input_2_ano,
+             $idcli_cond, $idcli, $idcli_autocomp,
+             $asentada_cond, $asentada,
+             $banco_cond, $banco,
+             $resolucion_cond, $resolucion,
+             $vendedor_cond, $vendedor, $nmgp_tab_label;
+
+      $C_formatado = true;
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_conv_dados.php", "F", "nm_conv_limpa_dado") ; 
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_edit.php", "F", "nmgp_Form_Num_Val") ; 
+      if (!empty($idcli_autocomp) && empty($idcli))
+      {
+          $idcli = $idcli_autocomp;
+      }
+      $tipo_cond_salva = $tipo_cond; 
+      if (!isset($tipo_input_2) || $tipo_input_2 == "")
+      {
+          $tipo_input_2 = $tipo;
+      }
+      $fechaven_cond_salva = $fechaven_cond; 
+      if (!isset($fechaven_input_2_dia) || $fechaven_input_2_dia == "")
+      {
+          $fechaven_input_2_dia = $fechaven_dia;
+      }
+      if (!isset($fechaven_input_2_mes) || $fechaven_input_2_mes == "")
+      {
+          $fechaven_input_2_mes = $fechaven_mes;
+      }
+      if (!isset($fechaven_input_2_ano) || $fechaven_input_2_ano == "")
+      {
+          $fechaven_input_2_ano = $fechaven_ano;
+      }
+      $idcli_cond_salva = $idcli_cond; 
+      if (!isset($idcli_input_2) || $idcli_input_2 == "")
+      {
+          $idcli_input_2 = $idcli;
+      }
+      $asentada_cond_salva = $asentada_cond; 
+      if (!isset($asentada_input_2) || $asentada_input_2 == "")
+      {
+          $asentada_input_2 = $asentada;
+      }
+      $banco_cond_salva = $banco_cond; 
+      if (!isset($banco_input_2) || $banco_input_2 == "")
+      {
+          $banco_input_2 = $banco;
+      }
+      $resolucion_cond_salva = $resolucion_cond; 
+      if (!isset($resolucion_input_2) || $resolucion_input_2 == "")
+      {
+          $resolucion_input_2 = $resolucion;
+      }
+      $vendedor_cond_salva = $vendedor_cond; 
+      if (!isset($vendedor_input_2) || $vendedor_input_2 == "")
+      {
+          $vendedor_input_2 = $vendedor;
+      }
+      $tmp_pos = strpos($tipo, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $tipo;
+      }
+      else {
+          $L_lookup = substr($tipo, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['tipo'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Tipo : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      $tmp_pos = strpos($asentada, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $asentada;
+      }
+      else {
+          $L_lookup = substr($asentada, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['asentada'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Asentada : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      $tmp_pos = strpos($banco, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $banco;
+      }
+      else {
+          $L_lookup = substr($banco, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['banco'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Caja : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      $tmp_pos = strpos($resolucion, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $resolucion;
+      }
+      else {
+          $L_lookup = substr($resolucion, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['resolucion'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "PJ : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      $tmp_pos = strpos($vendedor, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $vendedor;
+      }
+      else {
+          $L_lookup = substr($vendedor, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['vendedor'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= " Vendedor : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['tipo'] = $tipo; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['tipo_cond'] = $tipo_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_dia'] = $fechaven_dia; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_mes'] = $fechaven_mes; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_ano'] = $fechaven_ano; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_input_2_dia'] = $fechaven_input_2_dia; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_input_2_mes'] = $fechaven_input_2_mes; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_input_2_ano'] = $fechaven_input_2_ano; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_cond'] = $fechaven_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['idcli'] = $idcli; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['idcli_cond'] = $idcli_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['asentada'] = $asentada; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['asentada_cond'] = $asentada_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['banco'] = $banco; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['banco_cond'] = $banco_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['resolucion'] = $resolucion; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['resolucion_cond'] = $resolucion_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor'] = $vendedor; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor_cond'] = $vendedor_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['NM_operador'] = $this->NM_operador; 
+      if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca'] = $Temp_Busca;
+      }
+      if ($idcli_cond != "in" && $idcli_cond != "bw" && !empty($idcli) && !is_numeric($idcli))
+      {
+          if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Cliente";
+      }
+      if ($idcli_cond == "bw" && ((!empty($idcli) && !is_numeric($idcli)) || (!empty($idcli_input_2) && !is_numeric($idcli_input_2)) ))
+      {
+          if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Cliente";
+      }
+      if (!empty($this->Campos_Mens_erro)) 
+      {
+          return;
+      }
+      $Conteudo = $tipo;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['tipo'] = $Conteudo;
+      $nmgp_def_dados = array();
+    if ($idcli != '') {
+      $idcli_look = substr($this->Db->qstr($idcli), 1, -1); 
+      $nmgp_def_dados = array(); 
+   if (is_numeric($idcli))
+   { 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select idtercero, nombres from terceros where idtercero = $idcli_look order by nombres"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select idtercero, nombres from terceros where idtercero = $idcli_look order by nombres"; 
+      }
+      else
+      {
+          $nm_comando = "select idtercero, nombres from terceros where idtercero = $idcli_look order by nombres"; 
+      }
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
+            $cmp2 = NM_charset_to_utf8(trim($rs->fields[1]));
+            $nmgp_def_dados[] = array($cmp1 => $cmp2); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+   } 
+
+    }
+      if (!empty($nmgp_def_dados) && isset($cmp2) && !empty($cmp2))
+      {
+          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+          {
+             $cmp2 = NM_conv_charset($cmp2, $_SESSION['scriptcase']['charset'], "UTF-8");
+          }
+          $this->cmp_formatado['idcli'] = $cmp2;
+      }
+      elseif (!empty($nmgp_def_dados) && isset($cmp1) && !empty($cmp1))
+      {
+          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+          {
+             $cmp1 = NM_conv_charset($cmp1, $_SESSION['scriptcase']['charset'], "UTF-8");
+          }
+          $this->cmp_formatado['idcli'] = $cmp1;
+      }
+      else
+      {
+          $this->cmp_formatado['idcli'] = $idcli;
+      }
+      $Conteudo = $asentada;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['asentada'] = $Conteudo;
+      $Conteudo = $banco;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['banco'] = $Conteudo;
+      $Conteudo = $resolucion;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['resolucion'] = $Conteudo;
+      $Conteudo = $vendedor;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['vendedor'] = $Conteudo;
+
+      //----- $tipo
+      $this->Date_part = false;
+      if (isset($tipo))
+      {
+         $this->monta_condicao("tipo", $tipo_cond, $tipo, "", "tipo");
+      }
+
+      //----- $fechaven
+      $this->Date_part = false;
+      if ($fechaven_cond != "bi_TP")
+      {
+          $fechaven_cond = strtoupper($fechaven_cond);
+          $Dtxt = "";
+          $val  = array();
+          $Dtxt .= $fechaven_ano;
+          $Dtxt .= $fechaven_mes;
+          $Dtxt .= $fechaven_dia;
+          $val[0]['ano'] = $fechaven_ano;
+          $val[0]['mes'] = $fechaven_mes;
+          $val[0]['dia'] = $fechaven_dia;
+          if ($fechaven_cond == "BW")
+          {
+              $val[1]['ano'] = $fechaven_input_2_ano;
+              $val[1]['mes'] = $fechaven_input_2_mes;
+              $val[1]['dia'] = $fechaven_input_2_dia;
+          }
+          $this->Operador_date_part = "";
+          $this->Lang_date_part     = "";
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+          {
+              $this->nm_prep_date($val, "DT", "DATETIME", $fechaven_cond, "", "data");
+          }
+          else
+          {
+              $this->nm_prep_date($val, "DT", "DATE", $fechaven_cond, "", "data");
+          }
+          if (!$this->Date_part) {
+              $val[0] = $this->Ini->sc_Date_Protect($val[0]);
+          }
+          $fechaven = $val[0];
+          $this->cmp_formatado['fechaven'] = $val[0];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven'] = $val[0];
+          $this->nm_data->SetaData($this->cmp_formatado['fechaven'], "YYYY-MM-DD");
+          $this->cmp_formatado['fechaven'] = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DT", "dmY"));
+          if ($fechaven_cond == "BW")
+          {
+              if (!$this->Date_part) {
+                  $val[1] = $this->Ini->sc_Date_Protect($val[1]);
+              }
+              $fechaven_input_2     = $val[1];
+              $this->cmp_formatado['fechaven_input_2'] = $val[1];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fechaven_input_2'] = $val[1];
+              $this->nm_data->SetaData($this->cmp_formatado['fechaven_input_2'], "YYYY-MM-DD");
+              $this->cmp_formatado['fechaven_input_2'] = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DT", "dmY"));
+          }
+          if (!empty($Dtxt) || $fechaven_cond == "NU" || $fechaven_cond == "NN"|| $fechaven_cond == "EP"|| $fechaven_cond == "NE")
+          {
+              $this->monta_condicao("fechaven", $fechaven_cond, $fechaven, $fechaven_input_2, 'fechaven', 'DATE');
+          }
+      }
+
+      //----- $idcli
+      $this->Date_part = false;
+      if (isset($idcli) || $idcli_cond == "nu" || $idcli_cond == "nn" || $idcli_cond == "ep" || $idcli_cond == "ne")
+      {
+         $this->monta_condicao("idcli", $idcli_cond, $idcli, "", "idcli");
+      }
+
+      //----- $asentada
+      $this->Date_part = false;
+      if (isset($asentada))
+      {
+         $this->monta_condicao("asentada", $asentada_cond, $asentada, "", "asentada");
+      }
+
+      //----- $banco
+      $this->Date_part = false;
+      if (isset($banco))
+      {
+         $this->monta_condicao("banco", $banco_cond, $banco, "", "banco");
+      }
+
+      //----- $resolucion
+      $this->Date_part = false;
+      if (isset($resolucion))
+      {
+         $this->monta_condicao("resolucion", $resolucion_cond, $resolucion, "", "resolucion");
+      }
+
+      //----- $vendedor
+      $this->Date_part = false;
+      if (isset($vendedor))
+      {
+         $this->monta_condicao("vendedor", $vendedor_cond, $vendedor, "", "vendedor");
+      }
+   }
+
+   /**
+    * @access  public
+    */
+   function finaliza_resultado()
+   {
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast'] = "";
+      unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['fast_search']);
+      if ("" == $this->comando_filtro)
+      {
+          $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && $_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca'], "UTF-8", $_SESSION['scriptcase']['charset']);
+      }
+
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_lookup']  = $this->comando_sum . $this->comando_fim;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']         = $this->comando . $this->comando_fim;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao']              = "pesq";
+      if ("" == $this->comando_filtro)
+      {
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro'] = "";
+      }
+      else
+      {
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro'] = " (" . $this->comando_filtro . ")";
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'] != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_ant'])
+      {
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] .= $this->NM_operador;
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['contr_array_resumo'] = "NAO";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['contr_total_geral']  = "NAO";
+         unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral']);
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'];
+
+      $this->retorna_pesq();
+   }
+   function jqueryCalendarDtFormat($sFormat, $sSep)
+   {
+       $sFormat = chunk_split(str_replace('yyyy', 'yy', $sFormat), 2, $sSep);
+
+       if ($sSep == substr($sFormat, -1))
+       {
+           $sFormat = substr($sFormat, 0, -1);
+       }
+
+       return $sFormat;
+   } // jqueryCalendarDtFormat
+
+   function jqueryCalendarWeekInit($sDay)
+   {
+       switch ($sDay) {
+           case 'MO': return 1; break;
+           case 'TU': return 2; break;
+           case 'WE': return 3; break;
+           case 'TH': return 4; break;
+           case 'FR': return 5; break;
+           case 'SA': return 6; break;
+           default  : return 7; break;
+       }
+   } // jqueryCalendarWeekInit
+
+   function nmgp_redireciona_form($nm_apl_dest, $nm_apl_retorno, $nm_apl_parms, $nm_target="", $alt_modal=0, $larg_modal=0, $opc="")
+   {
+      if (is_array($nm_apl_parms))
+      {
+          $tmp_parms = "";
+          foreach ($nm_apl_parms as $par => $val)
+          {
+              $par = trim($par);
+              $val = trim($val);
+              $tmp_parms .= str_replace(".", "_", $par) . "?#?";
+              if (substr($val, 0, 1) == "$")
+              {
+                  $tmp_parms .= $$val;
+              }
+              elseif (substr($val, 0, 1) == "{")
+              {
+                  $val        = substr($val, 1, -1);
+                  $tmp_parms .= $this->$val;
+              }
+              elseif (substr($val, 0, 1) == "[")
+              {
+                  $tmp_parms .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][substr($val, 1, -1)];
+              }
+              else
+              {
+                  $tmp_parms .= $val;
+              }
+              $tmp_parms .= "?@?";
+          }
+          $nm_apl_parms = $tmp_parms;
+      }
+      $target = (empty($nm_target)) ? "_self" : $nm_target;
+      if (strtolower(substr($nm_apl_dest, 0, 7)) == "http://" || strtolower(substr($nm_apl_dest, 0, 8)) == "https://" || strtolower(substr($nm_apl_dest, 0, 3)) == "../")
+      {
+          echo "<SCRIPT language=\"javascript\">";
+          if (strtolower($target) == "_blank")
+          {
+              echo "window.open ('" . $nm_apl_dest . "');";
+              echo "</SCRIPT>";
+              return;
+          }
+          else
+          {
+              echo "window.location='" . $nm_apl_dest . "';";
+              echo "</SCRIPT>";
+              exit;
+          }
+      }
+      $dir = explode("/", $nm_apl_dest);
+      if (count($dir) == 1)
+      {
+          $nm_apl_dest = str_replace(".php", "", $nm_apl_dest);
+          $nm_apl_dest = $this->Ini->path_link . $nm_apl_dest . "/" . $nm_apl_dest . ".php";
+      }
+      if ($nm_target == "modal")
+      {
+          if (!empty($nm_apl_parms))
+          {
+              $nm_apl_parms = str_replace("?#?", "*scin", $nm_apl_parms);
+              $nm_apl_parms = str_replace("?@?", "*scout", $nm_apl_parms);
+              $nm_apl_parms = "nmgp_parms=" . $nm_apl_parms . "&";
+          }
+          $par_modal = "?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_outra_jan=true&nmgp_url_saida=modal&NMSC_modal=ok&";
+           if ((isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida_form_full']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida_form_full']) || (isset($this->grid_emb_form_full) && $this->grid_emb_form_full))
+           {
+              $this->redir_modal = "$(function() { parent.tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
+           }
+           else
+           {
+              $this->redir_modal = "$(function() { tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
+           }
+          return;
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['iframe_print']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['iframe_print'] )
+      {
+          $target = "_parent";
+      }
+      if (!isset($this->SC_redir_btn) || !$this->SC_redir_btn)
+      {
+   ?>
+     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+      <HTML>
+      <HEAD>
+      <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
+?>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0," />
+<?php
+}
+?>
+       <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+       <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+       <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+       <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+       <META http-equiv="Pragma" content="no-cache"/>
+      </HEAD>
+      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+      <BODY>
+   <?php
+      }
+   ?>
+   <form name="Fredir" method="post" 
+                     target="_self"> 
+     <input type="hidden" name="nmgp_parms" value="<?php echo NM_encode_input($nm_apl_parms) ?>"/>
+<?php
+   if ($target == "_blank")
+   {
+?>
+       <input type="hidden" name="nmgp_outra_jan" value="true"/> 
+<?php
+   }
+   else
+   {
+?>
+     <input type="hidden" name="nmgp_url_saida" value="<?php echo NM_encode_input($nm_apl_retorno) ?>">
+     <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page) ?>"/> 
+<?php
+   }
+?>
+   </form> 
+      <SCRIPT type="text/javascript">
+          window.onload = function(){
+             submit_Fredir();
+          };
+          function submit_Fredir()
+          {
+              document.Fredir.target = "<?php echo $target ?>"; 
+              document.Fredir.action = "<?php echo $nm_apl_dest ?>";
+              document.Fredir.submit();
+          }
+      </SCRIPT>
+   <?php
+      if (!isset($this->SC_redir_btn) || !$this->SC_redir_btn)
+      {
+   ?>
+      </BODY>
+      </HTML>
+   <?php
+      }
+      if ($target != "_blank")
+      {
+          exit;
+      }
+   }
+   
+   function css_obj_select_ajax($Obj)
+   {
+      switch ($Obj)
+      {
+         case "banco" : return ('class="scFilterObjectOdd"'); break;
+         case "resolucion" : return ('class="scFilterObjectEven"'); break;
+         case "vendedor" : return ('class="scFilterObjectEven"'); break;
+         default       : return ("");
+      }
+   }
+   function nm_gera_mask(&$nm_campo, $nm_mask)
+   { 
+      $trab_campo = $nm_campo;
+      $trab_mask  = $nm_mask;
+      $tam_campo  = strlen($nm_campo);
+      $trab_saida = "";
+      $str_highlight_ini = "";
+      $str_highlight_fim = "";
+      if(substr($nm_campo, 0, 23) == '<div class="highlight">' && substr($nm_campo, -6) == '</div>')
+      {
+           $str_highlight_ini = substr($nm_campo, 0, 23);
+           $str_highlight_fim = substr($nm_campo, -6);
+
+           $trab_campo = substr($nm_campo, 23, -6);
+           $tam_campo  = strlen($trab_campo);
+      }      $mask_num = false;
+      for ($x=0; $x < strlen($trab_mask); $x++)
+      {
+          if (substr($trab_mask, $x, 1) == "#")
+          {
+              $mask_num = true;
+              break;
+          }
+      }
+      if ($mask_num )
+      {
+          $ver_duas = explode(";", $trab_mask);
+          if (isset($ver_duas[1]) && !empty($ver_duas[1]))
+          {
+              $cont1 = count(explode("#", $ver_duas[0])) - 1;
+              $cont2 = count(explode("#", $ver_duas[1])) - 1;
+              if ($cont2 >= $tam_campo)
+              {
+                  $trab_mask = $ver_duas[1];
+              }
+              else
+              {
+                  $trab_mask = $ver_duas[0];
+              }
+          }
+          $tam_mask = strlen($trab_mask);
+          $xdados = 0;
+          for ($x=0; $x < $tam_mask; $x++)
+          {
+              if (substr($trab_mask, $x, 1) == "#" && $xdados < $tam_campo)
+              {
+                  $trab_saida .= substr($trab_campo, $xdados, 1);
+                  $xdados++;
+              }
+              elseif ($xdados < $tam_campo)
+              {
+                  $trab_saida .= substr($trab_mask, $x, 1);
+              }
+          }
+          if ($xdados < $tam_campo)
+          {
+              $trab_saida .= substr($trab_campo, $xdados);
+          }
+          $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
+          return;
+      }
+      for ($ix = strlen($trab_mask); $ix > 0; $ix--)
+      {
+           $char_mask = substr($trab_mask, $ix - 1, 1);
+           if ($char_mask != "x" && $char_mask != "z")
+           {
+               $trab_saida = $char_mask . $trab_saida;
+           }
+           else
+           {
+               if ($tam_campo != 0)
+               {
+                   $trab_saida = substr($trab_campo, $tam_campo - 1, 1) . $trab_saida;
+                   $tam_campo--;
+               }
+               else
+               {
+                   $trab_saida = "0" . $trab_saida;
+               }
+           }
+      }
+      if ($tam_campo != 0)
+      {
+          $trab_saida = substr($trab_campo, 0, $tam_campo) . $trab_saida;
+          $trab_mask  = str_repeat("z", $tam_campo) . $trab_mask;
+      }
+   
+      $iz = 0; 
+      for ($ix = 0; $ix < strlen($trab_mask); $ix++)
+      {
+           $char_mask = substr($trab_mask, $ix, 1);
+           if ($char_mask != "x" && $char_mask != "z")
+           {
+               if ($char_mask == "." || $char_mask == ",")
+               {
+                   $trab_saida = substr($trab_saida, 0, $iz) . substr($trab_saida, $iz + 1);
+               }
+               else
+               {
+                   $iz++;
+               }
+           }
+           elseif ($char_mask == "x" || substr($trab_saida, $iz, 1) != "0")
+           {
+               $ix = strlen($trab_mask) + 1;
+           }
+           else
+           {
+               $trab_saida = substr($trab_saida, 0, $iz) . substr($trab_saida, $iz + 1);
+           }
+      }
+      $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
+   } 
+   function nm_conv_data_db($dt_in, $form_in, $form_out)
+   {
+       $dt_out = $dt_in;
+       if (strtoupper($form_in) == "DB_FORMAT") {
+           if ($dt_out == "null" || $dt_out == "")
+           {
+               $dt_out = "";
+               return $dt_out;
+           }
+           $form_in = "AAAA-MM-DD";
+       }
+       if (strtoupper($form_out) == "DB_FORMAT") {
+           if (empty($dt_out))
+           {
+               $dt_out = "null";
+               return $dt_out;
+           }
+           $form_out = "AAAA-MM-DD";
+       }
+       if (strtoupper($form_out) == "SC_FORMAT_REGION") {
+           $this->nm_data->SetaData($dt_in, strtoupper($form_in));
+           $prep_out  = (strpos(strtolower($form_in), "dd") !== false) ? "dd" : "";
+           $prep_out .= (strpos(strtolower($form_in), "mm") !== false) ? "mm" : "";
+           $prep_out .= (strpos(strtolower($form_in), "aa") !== false) ? "aaaa" : "";
+           $prep_out .= (strpos(strtolower($form_in), "yy") !== false) ? "aaaa" : "";
+           return $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DT", $prep_out));
+       }
+       else {
+           nm_conv_form_data($dt_out, $form_in, $form_out);
+           return $dt_out;
+       }
+   }
+function fActualizarTotalFactura($idfac)
+{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+if(!empty($idfac))
+{
+	$vsqltotal = "update 
+		  facturaven 
+		  set 
+		  total=(select coalesce(sum(d.tneto),0) from detalleventa d where d.numfac='".$idfac."'),
+		  saldo=(select coalesce(sum(d.tneto),0) from detalleventa d where d.numfac='".$idfac."'),
+		  valoriva=round((select coalesce(sum(d.iva),0) from detalleventa d where d.numfac='".$idfac."')), 
+		  subtotal=round((select coalesce(sum(d.tbase),0) from detalleventa d where d.numfac='".$idfac."')) 
+		  where 
+		  idfacven='".$idfac."'
+		  ";
+
+	
+     $nm_select = $vsqltotal; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+function fAlinearTexto($texto, $titulo, $retorno, $distancia, $alineacion='izquierda')
+{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+if(!empty($texto) or !empty($titulo))
+{	
+	if($alineacion=="centro")
+	{	
+		$distancia = (42-strlen($texto))/2;
+	}
+	
+	$linea  = str_pad($titulo,$distancia," ").$texto;
+	
+	if(!empty($retornos) and $retornos > 0)
+	{
+		for($i=1;$i<=$retornos;$i++)
+		{
+			$linea .= "\n";
+		}
+	}
+	
+	return $linea;
+}
+else
+{
+	echo "NO SE RECIBIO PARAMETRO.";	
+}
+
+
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+function fGestionaStock($iddet, $tipo=2)
+{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+if(!empty($iddet))
+{	
+	$idgrupo = "";
+	$vsicb   = "";
+	$vsqldetalle = "select 
+					v.cantidad,
+					v.idpro,
+					v.costop,
+					v.valorpar,
+					v.idbod,
+					v.numfac,
+					v.unidadmayor,
+					v.factor,
+					v.vencimiento,
+					v.lote,
+					v.serial_codbarra,
+					(select f.fechaven from facturaven f where f.idfacven=v.numfac) as fechaven,
+					p.idgrup,
+					p.escombo
+					from 
+					detalleventa v
+					inner join productos p on v.idpro=p.idprod 
+					where 
+					iddet='".$iddet."'
+					";
+	
+	 
+      $nm_select = $vsqldetalle; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatosDetalle = array();
+      $vdatosdetalle = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatosDetalle[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatosdetalle[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatosDetalle = false;
+          $vDatosDetalle_erro = $this->Db->ErrorMsg();
+          $vdatosdetalle = false;
+          $vdatosdetalle_erro = $this->Db->ErrorMsg();
+      } 
+;
+	
+	if(isset($vdatosdetalle[0][0]))
+	{
+		$vcantidad = $vdatosdetalle[0][0];
+		$vidpro    = $vdatosdetalle[0][1];
+		$vcosto    = $vdatosdetalle[0][2];
+		$vvalorpar = $vdatosdetalle[0][3];
+		$vidbod    = $vdatosdetalle[0][4];
+		$vnumfac   = $vdatosdetalle[0][5];
+		$vtipo     = $tipo;
+		$vdetalle  = "Venta";
+		$vidmov    = 1;
+		$vunidadmayor = $vdatosdetalle[0][6];
+		$vfactor   = $vdatosdetalle[0][7];
+		$vvence    = $vdatosdetalle[0][8];
+		$vlote     = $vdatosdetalle[0][9];
+		$vserial   = $vdatosdetalle[0][10];
+		$vfecha    = $vdatosdetalle[0][11];
+		$idgrupo   = $vdatosdetalle[0][12];
+		$vsicb     = $vdatosdetalle[0][13];
+		
+		if($vvence>0)
+			{
+				$vvence = " ,fechavenc='".$vvence."' ";
+			}
+			else
+			{
+				$vvence = " ,fechavenc=null ";
+			}
+			
+			if(!empty($vlote))
+			{
+				$vlote = " ,lote2='".$vlote."' ";
+			}
+			else
+			{
+				$vlote = " ,lote2=null ";
+			}
+			
+			if(!empty($vserial))
+			{
+				$vserial = " ,codigobar='".$vserial."' ";
+			}
+			else
+			{
+				$vserial = " ,codigobar=null ";
+		}
+		
+		if($vunidadmayor!="SI" and $vfactor > 0)
+		{
+			$vcantidad = $vcantidad/$vfactor;
+		}
+	}
+	
+	
+	if($tipo==2)
+	{
+		if($idgrupo != 1)
+		{
+			if($vsicb=="SI")
+			{
+				$vsqlinv = "INSERT 
+					  inventario 
+					  SET 
+					  fecha		   ='".$vfecha."', 
+					  cantidad	   =(".$vcantidad."*-1), 
+					  idpro		   ='".$vidpro."', 
+					  costo		   ='0',
+					  valorparcial ='0', 
+					  idbod        ='".$vidbod."', 
+					  tipo		   ='".$vtipo."', 
+					  detalle	   ='".$vdetalle."', 
+					  idmov		   ='".$vidmov."',
+					  nufacvta	   ='".$vnumfac."', 
+					  valorpar_combo='".$vvalorpar."',
+					  iddetalle	   ='".$iddet."'
+					  ".$vvence."
+					  ".$vlote."
+					  ".$vserial."
+					  ";
+			}
+			else
+			{
+				$vsqlinv = "INSERT 
+					  inventario 
+					  SET 
+					  fecha		   ='".$vfecha."', 
+					  cantidad	   =(".$vcantidad."*-1), 
+					  idpro		   ='".$vidpro."', 
+					  costo		   ='".$vcosto."',
+					  valorparcial ='".$vvalorpar."', 
+					  idbod        ='".$vidbod."', 
+					  tipo		   ='".$vtipo."', 
+					  detalle	   ='".$vdetalle."', 
+					  idmov		   ='".$vidmov."',
+					  nufacvta	   ='".$vnumfac."', 
+					  valorpar_combo='0',
+					  iddetalle	   ='".$iddet."'
+					  ".$vvence."
+					  ".$vlote."
+					  ".$vserial."
+					  ";
+			}
+
+			if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+			
+     $nm_select = $vsqlinv; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+			$vsqlstock="UPDATE 
+				   productos 
+				   SET 
+				   stockmen = stockmen-$vcantidad
+				   WHERE 
+				   idprod='".$vidpro."'
+				   ";
+
+			if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+			
+     $nm_select = $vsqlstock; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+		}
+
+		 
+      $nm_select = "select escombo from productos where idprod='".$vidpro."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiEsCombo = array();
+      $vsiescombo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiEsCombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsiescombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiEsCombo = false;
+          $vSiEsCombo_erro = $this->Db->ErrorMsg();
+          $vsiescombo = false;
+          $vsiescombo_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+		if(isset($vsiescombo[0][0]))
+		{
+			$vescombo = $vsiescombo[0][0];
+
+			if($vescombo=='SI')
+			{
+				 
+      $nm_select = "select idproducto,cantidad,precio,(select p.idgrup from productos p where p.idprod=dc.idproducto limit 1) as idgrup from detallecombos dc where idcombo='".$vidpro."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vItemsCombo = array();
+      $vitemscombo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vItemsCombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vitemscombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vItemsCombo = false;
+          $vItemsCombo_erro = $this->Db->ErrorMsg();
+          $vitemscombo = false;
+          $vitemscombo_erro = $this->Db->ErrorMsg();
+      } 
+;
+				if(isset($vitemscombo[0][0]))
+				{
+
+					for($i=0;$i<count($vitemscombo );$i++)
+					{
+						if($vitemscombo[$i][3]!= 1)
+						{
+							$vidpro2    = $vitemscombo[$i][0];
+							$vcantidad2 = $vitemscombo[$i][1];
+							$vprecio2   = $vitemscombo[$i][2];
+
+							$vsqlinv2 = "INSERT 
+								  inventario 
+								  SET 
+								  fecha		   ='".$vfecha."', 
+								  cantidad	   =(($vcantidad2*$vcantidad)*-1), 
+								  idpro		   ='".$vidpro2."', 
+								  costo		   =($vprecio2/$vcantidad2),
+								  valorparcial =($vprecio2*$vcantidad), 
+								  idbod        ='".$vidbod."', 
+								  tipo		   ='".$vtipo."', 
+								  detalle	   ='".$vdetalle."', 
+								  idmov		   ='".$vidmov."',
+								  nufacvta	   ='".$vnumfac."', 
+								  iddetalle	   ='".$iddet."',
+								  idcombo      ='".$vidpro."'
+								  ";
+
+							if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+							
+     $nm_select = $vsqlinv2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+							$vsqlstock2="UPDATE 
+								   productos 
+								   SET 
+								   stockmen = stockmen-($vcantidad2*$vcantidad)
+								   WHERE 
+								   idprod='".$vidpro2."'
+								   ";
+
+							if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+							
+     $nm_select = $vsqlstock2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	if($tipo==1)
+	{
+		 
+      $nm_select = "select escombo from productos where idprod='".$vidpro."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiEsCombo = array();
+      $vsiescombo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiEsCombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsiescombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiEsCombo = false;
+          $vSiEsCombo_erro = $this->Db->ErrorMsg();
+          $vsiescombo = false;
+          $vsiescombo_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+		if(isset($vsiescombo[0][0]))
+		{
+			$vescombo = $vsiescombo[0][0];
+
+			if($vescombo=='SI')
+			{
+				 
+      $nm_select = "select idproducto,cantidad,precio,(select p.idgrup from productos p where p.idprod=dc.idproducto limit 1) as idgrup from detallecombos dc where idcombo='".$vidpro."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vItemsCombo = array();
+      $vitemscombo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vItemsCombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vitemscombo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vItemsCombo = false;
+          $vItemsCombo_erro = $this->Db->ErrorMsg();
+          $vitemscombo = false;
+          $vitemscombo_erro = $this->Db->ErrorMsg();
+      } 
+;
+				if(isset($vitemscombo[0][0]))
+				{
+					for($i=0;$i<count($vitemscombo );$i++)
+					{
+						if($vitemscombo[$i][3]!= 1)
+						{
+							$vidpro2    = $vitemscombo[$i][0];
+							$vcantidad2 = $vitemscombo[$i][1];
+							$vprecio2   = $vitemscombo[$i][2];
+
+							$vsqlinv2="delete 
+									  from 
+									  inventario 
+									  where 
+										  idpro='".$vidpro2."' 
+									  and nufacvta='".$vnumfac."' 
+									  and detalle like '%Venta%' 
+									  and iddetalle='".$iddet."'
+									  and idcombo='".$vidpro."'
+									  ";
+
+							if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+							
+     $nm_select = $vsqlinv2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+							$vsqlstock2="UPDATE 
+								   productos 
+								   SET 
+								   stockmen = stockmen+($vcantidad*$vcantidad2) 
+								   WHERE 
+								   idprod='".$vidpro2."'
+								   ";
+
+							if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+							
+     $nm_select = $vsqlstock2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+						}
+					}
+				}
+			}
+		}
+
+		
+		if($idgrupo != 1)
+		{
+			$vsqlinv="delete 
+					  from 
+					  inventario 
+					  where 
+						  idpro='".$vidpro."' 
+					  and nufacvta='".$vnumfac."' 
+					  and detalle like '%Venta%' 
+					  and iddetalle='".$iddet."'
+					  ";
+
+			if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+			
+     $nm_select = $vsqlinv; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+			$vsqlstock="UPDATE 
+				   productos 
+				   SET 
+				   stockmen = stockmen+$vcantidad 
+				   WHERE 
+				   idprod='".$vidpro."'
+				   ";
+
+			if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+			
+     $nm_select = $vsqlstock; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+		}
+	}
+}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+function fPagarFacVen($idfactura,$formapago=1,$retorno=true,$vidrecibo=0,$sipropina="NO")
+{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+	$estado     = 1;
+	$tot        = "";
+	$resolucion = "";
+	$numero     = "";
+	$vfecha      = "";
+	$res        = "";
+	$vvendedor  = "";
+	$vbanco     = 1;
+	$vporcentaje_propina_tercero = 0;
+
+	if(!empty($idfactura))
+	{
+		 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+      }
+      else
+      { 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatos = array();
+      $vdatos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
+                 $SCrx->fields[4] = str_replace(',', '.', $SCrx->fields[4]);
+                 $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
+                 $SCrx->fields[10] = str_replace(',', '.', $SCrx->fields[10]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
+                 $SCrx->fields[3] = (string)$SCrx->fields[3];
+                 $SCrx->fields[4] = (strpos(strtolower($SCrx->fields[4]), "e")) ? (float)$SCrx->fields[4] : $SCrx->fields[4];
+                 $SCrx->fields[4] = (string)$SCrx->fields[4];
+                 $SCrx->fields[9] = (strpos(strtolower($SCrx->fields[9]), "e")) ? (float)$SCrx->fields[9] : $SCrx->fields[9];
+                 $SCrx->fields[9] = (string)$SCrx->fields[9];
+                 $SCrx->fields[10] = (strpos(strtolower($SCrx->fields[10]), "e")) ? (float)$SCrx->fields[10] : $SCrx->fields[10];
+                 $SCrx->fields[10] = (string)$SCrx->fields[10];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatos = false;
+          $vDatos_erro = $this->Db->ErrorMsg();
+          $vdatos = false;
+          $vdatos_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+		if(isset($vdatos[0][0]))
+		{
+
+			$vfecha      = $vdatos[0][5]; 
+			$tot        = round($vdatos[0][0]);
+			$resolucion = $vdatos[0][1];
+			$res        = $vdatos[0][1];
+			$numero     = $vdatos[0][2];
+			$vvendedor  = $vdatos[0][3];
+			$vbanco     = $vdatos[0][4];
+			$vcreado    = $vdatos[0][6];
+			$vtipo      = $vdatos[0][7];
+			$vpj        = $vdatos[0][8];
+			$vidcli     = $vdatos[0][9];
+			$vporcentaje_propina_tercero = $vdatos[0][10];
+			
+			$vdoc       = $vpj."/".$numero;
+			$vsql1      = "";
+			$vsql2      = "";
+
+			switch($formapago)
+			{
+				case 	2:
+				
+					$vdetalle = "FAC. CONTADO";
+					$vnota    = "VENTA";
+					$vsqlrc   = "";
+				
+					if($vidrecibo>0)
+					{
+						$vdetalle = "R. CAJA";
+						$vnota    = "FACTURA VENTA CONTADO";
+						$vsqlrc   = " ,idrc='".$vidrecibo."'";
+					}
+
+					$vsql1 = "insert into caja  set fecha='".$vfecha."', detalle='".$vdetalle."',  nota='".$vnota."', documento='".$numero."', cantidad='".$tot."',  cierredia='NO', resolucion='".$res."', banco='".$vbanco."',creado='".$vcreado."', usuario='".$vvendedor."',tipodoc='".$vtipo."',doc='".$vdoc."',id_tercero='".$vidcli."' ".$vsqlrc;
+					
+					
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					
+					$vsql2 = "update facturaven set pagada='SI', saldo='0',valor_propina='0',porcentaje_propina_sugerida='0',aplica_propina='NO' where idfacven='".$idfactura."'";
+					
+					$vporcentaje_propina_sugerida = 0;
+					
+					if($sipropina=="SI")
+					{
+
+						 
+      $nm_select = "SELECT valor_propina_sugerida FROM configuraciones order by idconfiguraciones desc limit 1"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vConfiguraciones = array();
+      $vconfiguraciones = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vConfiguraciones[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vconfiguraciones[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vConfiguraciones = false;
+          $vConfiguraciones_erro = $this->Db->ErrorMsg();
+          $vconfiguraciones = false;
+          $vconfiguraciones_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+						if(isset($vconfiguraciones[0][0]))
+						{
+							$vporcentaje_propina_sugerida = $vconfiguraciones[0][0];
+							
+							if($vporcentaje_propina_tercero>0)
+							{
+								$vporcentaje_propina_sugerida = $vporcentaje_propina_tercero;
+							}
+							
+							if($vporcentaje_propina_sugerida>0)
+							{
+								$vvalor_propina = $tot * ($vporcentaje_propina_sugerida/100);
+								$vvalor_propina = $vvalor_propina/100;
+								$vvalor_propina = ceil($vvalor_propina);
+								$vvalor_propina = $vvalor_propina*100;
+								
+								$vsql2 = "update facturaven set pagada='SI', saldo='0',valor_propina='".$vvalor_propina."',porcentaje_propina_sugerida='".$vporcentaje_propina_sugerida."',aplica_propina='SI'	where idfacven='".$idfactura."'";
+							}
+						}
+					}
+					
+					
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				
+					$estado = 2; 
+						
+				break;
+
+				case 1:
+				
+					$estado = 2;
+
+				break;
+
+			}
+		}
+	}
+	
+	if($retorno)
+	{
+		echo  json_encode(
+			
+			array(
+				
+				"funcion"=>"fPagarFacVen",
+				"estado"=>$estado,
+				"idfactura"=>$idfactura,
+				"formapago"=>$formapago,
+				"numerofac"=>$numero,
+				"fecha"=>$vfecha,
+				"resolucion"=>$resolucion,
+				"total"=>$tot,
+				"vsql1"=>$vsql1,
+				"vsql2"=>$vsql2,
+				"vendedor"=>$vvendedor,
+				"banco"=>$vbanco
+			)
+		);
+	}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+function fAsentar($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true,$retorno_mensajes=false)
+{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+	$tot        = "";
+	$vfecha      = "";
+	$idtercero  = "";
+	$estado     = 1;
+	$vsql1      = "";
+	$vsql2      = "";
+	$vsql3      = "";
+	$resolucion = "";
+	$res        = "";
+	
+	$vtotal     = 0;
+	$vidcli     = "";
+	$vfechaven  = "";
+	$vestado    = 1;
+	$vcupo      = 0;
+	$vsaldo     = 0;
+	$vdias_credito = 0;
+	$vsaldo_disponible = 0;
+	$vcredito   = "";
+	$vasentada  = "";
+	$vsicomprobante = "NO";
+	$vpucdeudores = "";
+	$vpucbanco    = "";
+	$vmensajes    = "";
+	$sipucdetalle = true;
+	$vnomcli = "";
+	$vnumfac = "";
+	
+	 
+      $nm_select = "select habilitar_comprobantes from configuraciones order by idconfiguraciones desc limit 1"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiGenerarComprobante = array();
+      $vsigenerarcomprobante = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiGenerarComprobante[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsigenerarcomprobante[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiGenerarComprobante = false;
+          $vSiGenerarComprobante_erro = $this->Db->ErrorMsg();
+          $vsigenerarcomprobante = false;
+          $vsigenerarcomprobante_erro = $this->Db->ErrorMsg();
+      } 
+;
+	
+	if(isset($vsigenerarcomprobante[0][0]))
+	{
+		$vsicomprobante = $vsigenerarcomprobante[0][0];
+		
+		if($vsicomprobante=="SI")
+		{
+			 
+      $nm_select = "select p.codigobar,p.nompro,gc.puc_ingresos from productos p left join grupos_contables gc on p.cod_cuenta=gc.codigo left join detalleventa d on d.idpro=p.idprod where d.numfac='".$idfactura."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiPUCProducto = array();
+      $vsipucproducto = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiPUCProducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsipucproducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiPUCProducto = false;
+          $vSiPUCProducto_erro = $this->Db->ErrorMsg();
+          $vsipucproducto = false;
+          $vsipucproducto_erro = $this->Db->ErrorMsg();
+      } 
+;
+			
+			if(isset($vsipucproducto[0][0]))
+			{
+				for($i=0;$i<count($vsipucproducto );$i++)
+				{
+					if(empty(trim($vsipucproducto[$i][2])))
+					{
+						$vmensajes .= "Debe parametrizar la cuenta contable del producto: ".$vsipucproducto[$i][0]." - ".$vsipucproducto[$i][1]."<br>";
+						
+						$sipucdetalle = false;
+					}
+				}
+			}
+		}
+	}
+	
+	
+	 
+      $nm_select = "select f.total,f.fechaven,f.idcli,f.numfacven,f.resolucion,f.credito,f.asentada,f.observaciones,(select t.puc_auxiliar_deudores from terceros t where t.idtercero=f.idcli) as puc_auxiliar_deudores,(select b.puc from bancos b where b.idcaja_vta=f.banco) as puc_caja,(select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,concat(f.tipo,'/',(select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numf  from facturaven f where f.idfacven='".$idfactura."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatos = array();
+      $vdatos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatos = false;
+          $vDatos_erro = $this->Db->ErrorMsg();
+          $vdatos = false;
+          $vdatos_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if(isset($vdatos[0][0]))
+	{
+		$tot        = $vdatos[0][0];
+		$vfecha      = $vdatos[0][1];
+		$idtercero  = $vdatos[0][2];
+		$numero     = $vdatos[0][3];
+		$resolucion = $vdatos[0][4];
+		$res        = $vdatos[0][4];
+		$vcredito   = $vdatos[0][5];
+		$vasentada  = $vdatos[0][6];
+		$vobserv    = $vdatos[0][7];
+		$vpucdeudores = $vdatos[0][8];
+		$vpucbanco    = $vdatos[0][9];
+		$vnomcli = $vdatos[0][10];
+		$vnumfac = $vdatos[0][11];
+		
+	
+		
+		if($asentar=="SI" and $vasentada==0)
+		{
+			if($vcredito==2)
+			{
+				if($vsicomprobante=="SI")
+				{
+					if(!empty($vpucbanco) and $sipucdetalle)
+					{
+						$vsql1 = "update facturaven set asentada='1', adicional2='".$pagado."',	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
+						
+						if($pagado==0)
+						{
+							$vsql1 = "update facturaven set asentada='1', adicional2=total,	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
+						}
+
+						
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+						if($vobserv=="TEMPORAL")
+						{
+						
+     $nm_select = "update facturaven set observaciones=null where idfacven='".$idfactura."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+
+
+						$vsql2 = "update terceros set fechultcomp='".$vfecha."' where idtercero='".$idtercero."'";
+
+						
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+						$estado = 2;
+					}
+					else
+					{
+						$vmensajes .= "Debe configurar la cuenta de caja.<br>";
+					}
+				}
+				else
+				{
+					$vsql1 = "update facturaven set asentada='1', adicional2='".$pagado."',	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
+					
+					if($pagado==0)
+					{
+						$vsql1 = "update facturaven set asentada='1', adicional2=total,	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
+					}
+					
+					
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+					if($vobserv=="TEMPORAL")
+					{
+						
+     $nm_select = "update facturaven set observaciones=null where idfacven='".$idfactura."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					}
+					$vsql2 = "update terceros set fechultcomp='".$vfecha."' where idtercero='".$idtercero."'";
+					
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					$estado = 2;
+				}
+			}
+			
+			if($vcredito==1) 
+			{
+				if($vsicomprobante=="SI")
+				{
+					if(!empty($vpucdeudores)  and $sipucdetalle)
+					{
+
+						 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select total,idcli,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20) from facturaven where idfacven='".$idfactura."'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_select = "select total,idcli,convert(char(23),fechaven,121) from facturaven where idfacven='".$idfactura."'"; 
+      }
+      else
+      { 
+          $nm_select = "select total,idcli,fechaven from facturaven where idfacven='".$idfactura."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSaldoCliente = array();
+      $vsaldocliente = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSaldoCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsaldocliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSaldoCliente = false;
+          $vSaldoCliente_erro = $this->Db->ErrorMsg();
+          $vsaldocliente = false;
+          $vsaldocliente_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+						if(isset($vsaldocliente[0][0]))
+						{
+							$vtotal    = $vsaldocliente[0][0];
+							$vidcli    = $vsaldocliente[0][1];
+							$vfechaven = $vsaldocliente[0][2];
+
+							 
+      $nm_select = "select cupo,saldo,dias_credito,credito from terceros where idtercero='".$vidcli."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatosCliente = array();
+      $vdatoscliente = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatosCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatoscliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatosCliente = false;
+          $vDatosCliente_erro = $this->Db->ErrorMsg();
+          $vdatoscliente = false;
+          $vdatoscliente_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+							if(isset($vdatoscliente[0][0]))
+							{
+								$vcupo  = $vdatoscliente[0][0];
+								$vsaldo = $vdatoscliente[0][1];
+								$vdias_credito = $vdatoscliente[0][2];
+								$vcredito = $vdatoscliente[0][3];
+
+								if($vcredito == "SI")
+								{
+									if($vcupo > 0)
+									{
+										$vsaldo_disponible = $vcupo - $vsaldo;
+
+										if($vsaldo_disponible < $vtotal)
+										{
+											$vestado = 3; 
+											$vmensajes .= "El cliente: $vnomcli no tiene cupo disponible, documento: $vnumfac.<br>";
+										}
+										else
+										{
+											
+     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+											
+     $nm_select = "UPDATE facturaven set asentada=1 where idfacven=$idfactura"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										}
+									}
+									else 
+									{
+										
+     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										
+     $nm_select = "UPDATE facturaven set asentada=1 where idfacven=$idfactura"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									}
+								}
+								else
+								{
+									$vestado = 2;
+									$vmensajes .= "El cliente: $vnomcli no tiene crédito configurado, documento: $vnumfac.<br>";
+								}
+							}
+						}
+					}
+					else
+					{
+						$vmensajes .= "Debe configurar la cuenta del tercero/cliente: $vnomcli.<br>";
+					}
+				}
+				else
+				{
+					 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select total,idcli,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20) from facturaven where idfacven='".$idfactura."'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_select = "select total,idcli,convert(char(23),fechaven,121) from facturaven where idfacven='".$idfactura."'"; 
+      }
+      else
+      { 
+          $nm_select = "select total,idcli,fechaven from facturaven where idfacven='".$idfactura."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSaldoCliente = array();
+      $vsaldocliente = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSaldoCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsaldocliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSaldoCliente = false;
+          $vSaldoCliente_erro = $this->Db->ErrorMsg();
+          $vsaldocliente = false;
+          $vsaldocliente_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+					if(isset($vsaldocliente[0][0]))
+					{
+						$vtotal    = $vsaldocliente[0][0];
+						$vidcli    = $vsaldocliente[0][1];
+						$vfechaven = $vsaldocliente[0][2];
+
+						 
+      $nm_select = "select cupo,saldo,dias_credito,credito from terceros where idtercero='".$vidcli."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatosCliente = array();
+      $vdatoscliente = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatosCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatoscliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatosCliente = false;
+          $vDatosCliente_erro = $this->Db->ErrorMsg();
+          $vdatoscliente = false;
+          $vdatoscliente_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+						if(isset($vdatoscliente[0][0]))
+						{
+							$vcupo  = $vdatoscliente[0][0];
+							$vsaldo = $vdatoscliente[0][1];
+							$vdias_credito = $vdatoscliente[0][2];
+							$vcredito = $vdatoscliente[0][3];
+
+							if($vcredito == "SI")
+							{
+								if($vcupo > 0)
+								{
+									$vsaldo_disponible = $vcupo - $vsaldo;
+
+									if($vsaldo_disponible < $vtotal)
+									{
+										$vestado = 3; 
+										$vmensajes .= "El cliente: $vnomcli no tiene cupo disponible, documento: $vnumfac.<br>";
+									}
+									else
+									{
+										
+     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										
+     $nm_select = "UPDATE facturaven set asentada=1 where idfacven=$idfactura"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									}
+								}
+								else 
+								{
+									
+     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									
+     $nm_select = "UPDATE facturaven set asentada=1 where idfacven=$idfactura"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+								}
+							}
+							else
+							{
+								$vestado = 2;
+								$vmensajes .= "El cliente: $vnomcli no tiene crédito configurado, documento: $vnumfac.<br>";
+							}
+						}
+					}
+				}
+			}
+
+		}
+		else if($asentar=="NO" and $vasentada==1)
+		{
+
+			if($vcredito==2)
+			{
+				$vsql1 = "update 
+						facturaven 
+						set 
+						asentada='0', 
+						adicional2='".$pagado."',
+						adicional3='".$vueltos."',
+						pagada='NO', 
+						saldo=total
+						where 
+						idfacven='".$idfactura."'";
+
+				
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vsql3 = "delete from caja where resolucion=".$res." and documento='".$numero."'";
+				
+     $nm_select = $vsql3; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vsql2 = "update 
+						  terceros 
+						  set 
+						  fechultcomp=(select f.fechaven from facturaven f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1)  
+						  where idtercero='".$idtercero."'";
+
+				
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$estado = 2;
+			}
+			else
+			{
+				$vsql1 = "update 
+						facturaven 
+						set 
+						asentada='0'
+						where 
+						idfacven='".$idfactura."'";
+
+				
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vsql2 = "update 
+						  terceros 
+						  set 
+						  fechultcomp=(select f.fechaven from facturaven f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1),
+						  saldo = (saldo+$tot)
+						  where idtercero='".$idtercero."'";
+
+				
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$estado = 2;
+			}
+		}
+	}
+	
+	if($retorno_mensajes)
+	{
+		echo $vmensajes;
+	}
+	
+	
+	if($retorno)
+	{
+		echo json_encode(
+			
+			array(
+				
+				"funcion"=>"fAsentar",
+				"estado"=>$estado,
+				"idfactura"=>$idfactura,
+				"asentar"=>$asentar,
+				"pagado"=>$pagado,
+				"vueltos"=>$vueltos,
+				"total"=>$tot,
+				"fecha"=>$vfecha,
+				"idtercero"=>$idtercero,
+				"numerofac"=>$numero,
+				"resolucion"=>$resolucion,
+				"vsql1"=>$vsql1,
+				"vsql2"=>$vsql2,
+				"vsql3"=>$vsql3,
+				"total"=>$vtotal,
+				"idcli"=>$vidcli,
+				"fechaven"=>$vfechaven,
+				"estado"=>$estado,
+				"descrip_estado"=>"1 ok, 2 no tiene configurado credito, 3 no tiene cupo disponible.",
+				"cupo"=>$vcupo,
+				"saldo"=>$vsaldo,
+				"dias_credito"=>$vdias_credito,
+				"saldo_disponible"=>number_format($vsaldo_disponible),
+				"credito"=>$vcredito,
+				"mensajes"=>$vmensajes
+			)
+		);
+	}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+function fAsentarContratos($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true,$retorno_mensajes=false)
+{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+	$tot        = "";
+	$vfecha      = "";
+	$idtercero  = "";
+	$estado     = 1;
+	$vsql1      = "";
+	$vsql2      = "";
+	$vsql3      = "";
+	$resolucion = "";
+	$res        = "";
+	
+	$vtotal     = 0;
+	$vidcli     = "";
+	$vfechaven  = "";
+	$vestado    = 1;
+	$vcupo      = 0;
+	$vsaldo     = 0;
+	$vdias_credito = 0;
+	$vsaldo_disponible = 0;
+	$vcredito   = "";
+	$vasentada  = "";
+	$vsicomprobante = "NO";
+	$vpucdeudores = "";
+	$vpucbanco    = "";
+	$vmensajes    = "";
+	$sipucdetalle = true;
+	$vnomcli = "";
+	$vnumfac = "";
+	
+	 
+      $nm_select = "select habilitar_comprobantes from configuraciones order by idconfiguraciones desc limit 1"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiGenerarComprobante = array();
+      $vsigenerarcomprobante = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiGenerarComprobante[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsigenerarcomprobante[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiGenerarComprobante = false;
+          $vSiGenerarComprobante_erro = $this->Db->ErrorMsg();
+          $vsigenerarcomprobante = false;
+          $vsigenerarcomprobante_erro = $this->Db->ErrorMsg();
+      } 
+;
+	
+	if(isset($vsigenerarcomprobante[0][0]))
+	{
+		$vsicomprobante = $vsigenerarcomprobante[0][0];
+		
+		if($vsicomprobante=="SI")
+		{
+			 
+      $nm_select = "select p.codigobar,p.nompro,gc.puc_ingresos from productos p left join grupos_contables gc on p.cod_cuenta=gc.codigo left join detalleventa d on d.idpro=p.idprod where d.numfac='".$idfactura."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiPUCProducto = array();
+      $vsipucproducto = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiPUCProducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsipucproducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiPUCProducto = false;
+          $vSiPUCProducto_erro = $this->Db->ErrorMsg();
+          $vsipucproducto = false;
+          $vsipucproducto_erro = $this->Db->ErrorMsg();
+      } 
+;
+			
+			if(isset($vsipucproducto[0][0]))
+			{
+				for($i=0;$i<count($vsipucproducto );$i++)
+				{
+					if(empty(trim($vsipucproducto[$i][2])))
+					{
+						$vmensajes .= "Debe parametrizar la cuenta contable del producto: ".$vsipucproducto[$i][0]." - ".$vsipucproducto[$i][1]."<br>";
+						
+						$sipucdetalle = false;
+					}
+				}
+			}
+		}
+	}
+	
+	
+	 
+      $nm_select = "select f.total,f.fechaven,f.idcli,f.numfacven,f.resolucion,f.credito,f.asentada,f.observaciones,(select t.puc_auxiliar_deudores from terceros t where t.idtercero=f.idcli) as puc_auxiliar_deudores,(select b.puc from bancos b where b.idcaja_vta=f.banco) as puc_caja,(select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,concat(f.tipo,'/',(select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numf  from facturaven_contratos f where f.idfacven='".$idfactura."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatos = array();
+      $vdatos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatos = false;
+          $vDatos_erro = $this->Db->ErrorMsg();
+          $vdatos = false;
+          $vdatos_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if(isset($vdatos[0][0]))
+	{
+		$tot        = $vdatos[0][0];
+		$vfecha      = $vdatos[0][1];
+		$idtercero  = $vdatos[0][2];
+		$numero     = $vdatos[0][3];
+		$resolucion = $vdatos[0][4];
+		$res        = $vdatos[0][4];
+		$vcredito   = $vdatos[0][5];
+		$vasentada  = $vdatos[0][6];
+		$vobserv    = $vdatos[0][7];
+		$vpucdeudores = $vdatos[0][8];
+		$vpucbanco    = $vdatos[0][9];
+		$vnomcli = $vdatos[0][10];
+		$vnumfac = $vdatos[0][11];
+		
+	
+		
+		if($asentar=="SI" and $vasentada==0)
+		{
+			if($vcredito==2)
+			{
+				if($vsicomprobante=="SI")
+				{
+					if(!empty($vpucbanco) and $sipucdetalle)
+					{
+						$vsql1 = "update facturaven_contratos set asentada='1', adicional2='".$pagado."',	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
+						
+						if($pagado==0)
+						{
+							$vsql1 = "update facturaven_contratos set asentada='1', adicional2=total,	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
+						}
+
+						
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+						if($vobserv=="TEMPORAL")
+						{
+						
+     $nm_select = "update facturaven_contratos set observaciones=null where idfacven='".$idfactura."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+
+
+						$vsql2 = "update terceros set fechultcomp='".$vfecha."' where idtercero='".$idtercero."'";
+
+						
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+						$estado = 2;
+					}
+					else
+					{
+						$vmensajes .= "Debe configurar la cuenta de caja.<br>";
+					}
+				}
+				else
+				{
+					$vsql1 = "update facturaven_contratos set asentada='1', adicional2='".$pagado."',	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
+					
+					if($pagado==0)
+					{
+						$vsql1 = "update facturaven_contratos set asentada='1', adicional2=total,	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
+					}
+					
+					
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+					if($vobserv=="TEMPORAL")
+					{
+						
+     $nm_select = "update facturaven_contratos set observaciones=null where idfacven='".$idfactura."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					}
+					$vsql2 = "update terceros set fechultcomp='".$vfecha."' where idtercero='".$idtercero."'";
+					
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					$estado = 2;
+				}
+			}
+			
+			if($vcredito==1) 
+			{
+				if($vsicomprobante=="SI")
+				{
+					if(!empty($vpucdeudores)  and $sipucdetalle)
+					{
+
+						 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select total,idcli,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20) from facturaven_contratos where idfacven='".$idfactura."'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_select = "select total,idcli,convert(char(23),fechaven,121) from facturaven_contratos where idfacven='".$idfactura."'"; 
+      }
+      else
+      { 
+          $nm_select = "select total,idcli,fechaven from facturaven_contratos where idfacven='".$idfactura."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSaldoCliente = array();
+      $vsaldocliente = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSaldoCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsaldocliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSaldoCliente = false;
+          $vSaldoCliente_erro = $this->Db->ErrorMsg();
+          $vsaldocliente = false;
+          $vsaldocliente_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+						if(isset($vsaldocliente[0][0]))
+						{
+							$vtotal    = $vsaldocliente[0][0];
+							$vidcli    = $vsaldocliente[0][1];
+							$vfechaven = $vsaldocliente[0][2];
+
+							 
+      $nm_select = "select cupo,saldo,dias_credito,credito from terceros where idtercero='".$vidcli."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatosCliente = array();
+      $vdatoscliente = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatosCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatoscliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatosCliente = false;
+          $vDatosCliente_erro = $this->Db->ErrorMsg();
+          $vdatoscliente = false;
+          $vdatoscliente_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+							if(isset($vdatoscliente[0][0]))
+							{
+								$vcupo  = $vdatoscliente[0][0];
+								$vsaldo = $vdatoscliente[0][1];
+								$vdias_credito = $vdatoscliente[0][2];
+								$vcredito = $vdatoscliente[0][3];
+
+								if($vcredito == "SI")
+								{
+									if($vcupo > 0)
+									{
+										$vsaldo_disponible = $vcupo - $vsaldo;
+
+										if($vsaldo_disponible < $vtotal)
+										{
+											$vestado = 3; 
+											$vmensajes .= "El cliente: $vnomcli no tiene cupo disponible, documento: $vnumfac.<br>";
+										}
+										else
+										{
+											
+     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+											
+     $nm_select = "UPDATE facturaven_contratos set asentada=1 where idfacven=$idfactura"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										}
+									}
+									else 
+									{
+										
+     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										
+     $nm_select = "UPDATE facturaven_contratos set asentada=1 where idfacven=$idfactura"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									}
+								}
+								else
+								{
+									$vestado = 2;
+									$vmensajes .= "El cliente: $vnomcli no tiene crédito configurado, documento: $vnumfac.<br>";
+								}
+							}
+						}
+					}
+					else
+					{
+						$vmensajes .= "Debe configurar la cuenta del tercero/cliente: $vnomcli.<br>";
+					}
+				}
+				else
+				{
+					 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select total,idcli,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20) from facturaven_contratos where idfacven='".$idfactura."'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_select = "select total,idcli,convert(char(23),fechaven,121) from facturaven_contratos where idfacven='".$idfactura."'"; 
+      }
+      else
+      { 
+          $nm_select = "select total,idcli,fechaven from facturaven_contratos where idfacven='".$idfactura."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSaldoCliente = array();
+      $vsaldocliente = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSaldoCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsaldocliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSaldoCliente = false;
+          $vSaldoCliente_erro = $this->Db->ErrorMsg();
+          $vsaldocliente = false;
+          $vsaldocliente_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+					if(isset($vsaldocliente[0][0]))
+					{
+						$vtotal    = $vsaldocliente[0][0];
+						$vidcli    = $vsaldocliente[0][1];
+						$vfechaven = $vsaldocliente[0][2];
+
+						 
+      $nm_select = "select cupo,saldo,dias_credito,credito from terceros where idtercero='".$vidcli."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatosCliente = array();
+      $vdatoscliente = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatosCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatoscliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatosCliente = false;
+          $vDatosCliente_erro = $this->Db->ErrorMsg();
+          $vdatoscliente = false;
+          $vdatoscliente_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+						if(isset($vdatoscliente[0][0]))
+						{
+							$vcupo  = $vdatoscliente[0][0];
+							$vsaldo = $vdatoscliente[0][1];
+							$vdias_credito = $vdatoscliente[0][2];
+							$vcredito = $vdatoscliente[0][3];
+
+							if($vcredito == "SI")
+							{
+								if($vcupo > 0)
+								{
+									$vsaldo_disponible = $vcupo - $vsaldo;
+
+									if($vsaldo_disponible < $vtotal)
+									{
+										$vestado = 3; 
+										$vmensajes .= "El cliente: $vnomcli no tiene cupo disponible, documento: $vnumfac.<br>";
+									}
+									else
+									{
+										
+     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										
+     $nm_select = "UPDATE facturaven_contratos set asentada=1 where idfacven=$idfactura"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									}
+								}
+								else 
+								{
+									
+     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									
+     $nm_select = "UPDATE facturaven_contratos set asentada=1 where idfacven=$idfactura"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+								}
+							}
+							else
+							{
+								$vestado = 2;
+								$vmensajes .= "El cliente: $vnomcli no tiene crédito configurado, documento: $vnumfac.<br>";
+							}
+						}
+					}
+				}
+			}
+
+		}
+		else if($asentar=="NO" and $vasentada==1)
+		{
+
+			if($vcredito==2)
+			{
+				$vsql1 = "update 
+						facturaven_contratos 
+						set 
+						asentada='0', 
+						adicional2='".$pagado."',
+						adicional3='".$vueltos."',
+						pagada='NO', 
+						saldo=total
+						where 
+						idfacven='".$idfactura."'";
+
+				
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vsql3 = "delete from caja where resolucion=".$res." and documento='".$numero."'";
+				
+     $nm_select = $vsql3; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vsql2 = "update 
+						  terceros 
+						  set 
+						  fechultcomp=(select f.fechaven from facturaven_contratos f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1)  
+						  where idtercero='".$idtercero."'";
+
+				
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$estado = 2;
+			}
+			else
+			{
+				$vsql1 = "update 
+						facturaven_contratos 
+						set 
+						asentada='0'
+						where 
+						idfacven='".$idfactura."'";
+
+				
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vsql2 = "update 
+						  terceros 
+						  set 
+						  fechultcomp=(select f.fechaven from facturaven f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1),
+						  saldo = (saldo+$tot)
+						  where idtercero='".$idtercero."'";
+
+				
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$estado = 2;
+			}
+		}
+	}
+	
+	if($retorno_mensajes)
+	{
+		echo $vmensajes;
+	}
+	
+	
+	if($retorno)
+	{
+		echo json_encode(
+			
+			array(
+				
+				"funcion"=>"fAsentar",
+				"estado"=>$estado,
+				"idfactura"=>$idfactura,
+				"asentar"=>$asentar,
+				"pagado"=>$pagado,
+				"vueltos"=>$vueltos,
+				"total"=>$tot,
+				"fecha"=>$vfecha,
+				"idtercero"=>$idtercero,
+				"numerofac"=>$numero,
+				"resolucion"=>$resolucion,
+				"vsql1"=>$vsql1,
+				"vsql2"=>$vsql2,
+				"vsql3"=>$vsql3,
+				"total"=>$vtotal,
+				"idcli"=>$vidcli,
+				"fechaven"=>$vfechaven,
+				"estado"=>$estado,
+				"descrip_estado"=>"1 ok, 2 no tiene configurado credito, 3 no tiene cupo disponible.",
+				"cupo"=>$vcupo,
+				"saldo"=>$vsaldo,
+				"dias_credito"=>$vdias_credito,
+				"saldo_disponible"=>number_format($vsaldo_disponible),
+				"credito"=>$vcredito,
+				"mensajes"=>$vmensajes
+			)
+		);
+	}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+function fPagarPedido($id,$formapago=1,$retorno=true)
+{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+	$estado     = 1;
+	$tot        = "";
+	$resolucion = "";
+	$numero     = "";
+	$vfecha      = "";
+	$res        = "";
+
+	if(!empty($id))
+	{
+		 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select p.total,p.prefijo_ped,p.numpedido,str_replace (convert(char(10),p.fechaven,102), '.', '-') + ' ' + convert(char(8),p.fechaven,20),p.fechadocu,r.prefijo,p.idcli from pedidos p inner join resdian r on  p.prefijo_ped=r.Idres where p.idpedido='".$id."'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_select = "select p.total,p.prefijo_ped,p.numpedido,convert(char(23),p.fechaven,121),p.fechadocu,r.prefijo,p.idcli from pedidos p inner join resdian r on  p.prefijo_ped=r.Idres where p.idpedido='".$id."'"; 
+      }
+      else
+      { 
+          $nm_select = "select p.total,p.prefijo_ped,p.numpedido,p.fechaven,p.fechadocu,r.prefijo,p.idcli from pedidos p inner join resdian r on  p.prefijo_ped=r.Idres where p.idpedido='".$id."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatos = array();
+      $vdatos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[6] = str_replace(',', '.', $SCrx->fields[6]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 $SCrx->fields[6] = (strpos(strtolower($SCrx->fields[6]), "e")) ? (float)$SCrx->fields[6] : $SCrx->fields[6];
+                 $SCrx->fields[6] = (string)$SCrx->fields[6];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatos = false;
+          $vDatos_erro = $this->Db->ErrorMsg();
+          $vdatos = false;
+          $vdatos_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+		if(isset($vdatos[0][0]))
+		{
+
+			$vfecha      = $vdatos[0][3]; 
+			$tot        = $vdatos[0][0];
+			$resolucion = $vdatos[0][1];
+			$res        = $vdatos[0][1];
+			$numero     = $vdatos[0][2];
+			$vcreado    = $vdatos[0][4];
+			$vdoc       = $vdatos[0][5];
+			$vidcli     = $vdatos[0][6];
+			$vdoc       = $vdoc."/".$numero;
+			$vsql1      = "";
+			$vsql2      = "";
+
+			switch($formapago)
+			{
+				case 	2:
+
+					$vsql1 = "insert into caja 
+							  set 
+							  fecha='".$vfecha."',
+							  detalle='FAC. CONTADO',
+							  nota='VENTA',
+							  cantidad='".$tot."',
+							  cierredia='NO',
+							  resolucion='".$res."',
+							  idpedido='".$id."',
+							  creado='".$vcreado."',
+							  tipodoc='PV',
+							  doc='".$vdoc."',
+							  id_tercero='".$vidcli."'
+							  ";
+
+					
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				
+					$vsql2 = "update 
+							pedidos
+							set 
+							saldo='0'
+							where 
+							idpedido='".$id."'";
+
+					
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				
+					$estado = 2; 
+						
+				break;
+
+				case 1:
+				
+					$estado = 2;
+
+				break;
+
+			}
+		}
+	}
+	
+	if($retorno)
+	{
+		echo  json_encode(
+			
+			array(
+				
+				"funcion"=>"fPagarPedido",
+				"estado"=>$estado,
+				"idpedido"=>$id,
+				"formapago"=>$formapago,
+				"numerofac"=>$numero,
+				"fecha"=>$vfecha,
+				"resolucion"=>$resolucion,
+				"total"=>$tot,
+				"vsql1"=>$vsql1,
+				"vsql2"=>$vsql2
+			)
+		);
+	}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+function fAsentarPedido($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true)
+{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+	
+	$tot        = "";
+	$vfecha      = "";
+	$idtercero  = "";
+	$estado     = 1;
+	$vsql1      = "";
+	$vsql2      = "";
+	$vsql3      = "";
+	$resolucion = "";
+	$res        = "";
+	
+	 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select total,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20),idcli,numpedido,prefijo_ped from pedidos where idpedido='".$idfactura."'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_select = "select total,convert(char(23),fechaven,121),idcli,numpedido,prefijo_ped from pedidos where idpedido='".$idfactura."'"; 
+      }
+      else
+      { 
+          $nm_select = "select total,fechaven,idcli,numpedido,prefijo_ped from pedidos where idpedido='".$idfactura."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatos = array();
+      $vdatos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
+                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
+                 $SCrx->fields[4] = str_replace(',', '.', $SCrx->fields[4]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
+                 $SCrx->fields[2] = (string)$SCrx->fields[2];
+                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
+                 $SCrx->fields[3] = (string)$SCrx->fields[3];
+                 $SCrx->fields[4] = (strpos(strtolower($SCrx->fields[4]), "e")) ? (float)$SCrx->fields[4] : $SCrx->fields[4];
+                 $SCrx->fields[4] = (string)$SCrx->fields[4];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatos = false;
+          $vDatos_erro = $this->Db->ErrorMsg();
+          $vdatos = false;
+          $vdatos_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if(isset($vdatos[0][0]))
+	{
+		$tot        = $vdatos[0][0];
+		$vfecha      = $vdatos[0][1];
+		$idtercero  = $vdatos[0][2];
+		$numero     = $vdatos[0][3];
+		$resolucion = $vdatos[0][4];
+		$res        = $vdatos[0][4];
+		
+		if($asentar=="SI")
+		{
+
+			$vsql1 = "update 
+					pedidos 
+					set 
+					asentada='1', 
+					adicional2='".$pagado."',
+					adicional3='".$vueltos."'
+					where 
+					idpedido='".$idfactura."'";
+
+			
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+			$vsql2 = "update 
+					  terceros 
+					  set 
+					  fechultcomp='".$vfecha."' 
+					  where idtercero='".$idtercero."'";
+
+			
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+			$estado = 2;
+
+		}
+		else
+		{
+
+			$vsql1 = "update 
+					pedidos
+					set 
+					asentada='0', 
+					adicional2='".$pagado."',
+					adicional3='".$vueltos."',
+					saldo=total
+					where 
+					idfacven='".$idfactura."'";
+
+			
+     $nm_select = $vsql1; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+			$vsql3 = "delete from caja where resolucion=".$res." and idpedido='".$idfactura."'";
+			
+     $nm_select = $vsql3; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+			$vsql2 = "update 
+					  terceros 
+					  set 
+					  fechultcomp=(select f.fechaven from facturaven f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1)  
+					  where idtercero='".$idtercero."'";
+
+			
+     $nm_select = $vsql2; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+			$estado = 2;
+		}
+	}
+	
+	if($retorno)
+	{
+		echo json_encode(
+			
+			array(
+				
+				"funcion"=>"fAsentar",
+				"estado"=>$estado,
+				"idpedido"=>$idfactura,
+				"asentar"=>$asentar,
+				"pagado"=>$pagado,
+				"vueltos"=>$vueltos,
+				"total"=>$tot,
+				"fecha"=>$vfecha,
+				"idtercero"=>$idtercero,
+				"numerofac"=>$numero,
+				"resolucion"=>$resolucion,
+				"vsql1"=>$vsql1,
+				"vsql2"=>$vsql2,
+				"vsql3"=>$vsql3
+			)
+		);
+	}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+function fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle,$vretenciones)
+								{
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+									$documento = array();
+									$items = array();
+									$numbering = array();
+									$notes = array();
+									$retentions = array();
+
+									$documento['actions']['send_dian']  = $vparametros["send_dian"];
+									$documento['actions']['send_email'] = $vparametros["send_email"];
+									$documento['invoice']['invoice_type_code'] = $vparametros["invoice_type_code"];
+
+									if($vparametros["modo"] == 1)
+									{	
+									  $documento['invoice']['env'] = 'PRUEBAS';
+									}
+									else
+									{
+									  $documento['invoice']['env'] = 'PRODUCCION';
+									}	
+
+									$documento['invoice']['dataico_account_id'] = $vparametros["dataico_account_id"];
+
+
+
+									$documento['invoice']['issue_date']   = $vencabezado["fecha"];   
+									$documento['invoice']['payment_date'] = $vencabezado["fecha_pago"];   
+									$documento['invoice']['number']       = $vencabezado["numero"];  
+
+									$documento['invoice']['payment_means_type'] = $vencabezado["forma_pago"];
+
+									$documento['invoice']['payment_means'] = $vencabezado["medio_pago"];
+
+									if(!empty($vencabezado["observacion"]))
+									{
+										$documento['invoice']['notes'] = array($vencabezado["observacion"]);
+									}
+
+									$numbering['resolution_number'] = $vencabezado["resolucion"];  
+									$numbering['prefix'] = $vencabezado["prefijo"];	
+									$numbering['flexible'] = true;
+
+									for($i=0;$i<count($vdetalle);$i++)
+									{
+										if(isset($vdetalle[$i]["tax_amount"]))
+										{
+											$impuestos = array( 
+												"tax_amount" =>  $vdetalle[$i]["tax_amount"],
+												"tax_category" =>  $vdetalle[$i]["tax_category"],
+											);
+										}
+										else
+										{
+											$impuestos = array( 
+												"tax_rate" =>  $vdetalle[$i]["tax_rate"],
+												"tax_category" =>  $vdetalle[$i]["tax_category"],
+											);
+										}
+										
+										if(isset($vdetalle[$i]["mandante_identification"]))
+										{
+											$item = array(
+												'sku' =>  $vdetalle[$i]["codigo"],
+												'quantity' => $vdetalle[$i]["cantidad"] ,
+												'description' => $vdetalle[$i]["descripcion"],
+												'price' => $vdetalle[$i]["precio"],
+												'original_price' => $vdetalle[$i]["precio"],
+												'mandante_identification' => $vdetalle[$i]["mandante_identification"],
+												'mandante_identification_type' => $vdetalle[$i]["mandante_identification_type"],
+ 												'taxes' => array($impuestos)
+												);
+										}
+										else
+										{
+											$item = array(
+												'sku' =>  $vdetalle[$i]["codigo"],
+												'quantity' => $vdetalle[$i]["cantidad"] ,
+												'description' => $vdetalle[$i]["descripcion"],
+												'price' => $vdetalle[$i]["precio"],
+												'original_price' => $vdetalle[$i]["precio"],
+												'taxes' => array($impuestos)
+												);
+										}
+										
+										$items[$i] = $item;
+									}
+
+									if(count($vretenciones)>0)
+									{
+										$documento['invoice']['retentions'] = $vretenciones; 
+									}
+
+									$documento['invoice']['numbering'] = $numbering;
+									$documento['invoice']['customer']  = $vcliente;
+									$documento['invoice']['items']     = $items;
+									
+
+									$documento = json_encode($documento, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+									
+									$vnomarchivo = "dataico_factura.json";
+									$varchivo = fopen($vnomarchivo,"w+");
+									fwrite($varchivo,$documento);
+
+									$vcufe = "";
+									$venlace_pdf = "";
+									$venlace_xml = "";
+									$vqr_code = "";
+									$vfechavalidacion = date("Y-m-d H:i:s");
+									$vuuid = "";
+									
+									$opciones = array(
+									  'http'=>array(
+										'method'=>"GET",
+										'header'=>"auth-token:".$vparametros["dataico_auth"]
+									  )
+									);
+
+									$contexto = stream_context_create($opciones);
+									$vurl_consulta = $vparametros["url"];
+									$vurl_consulta .= "?number=".$vencabezado["prefijo"].$vencabezado["numero"];
+									
+
+									
+									$vvalidacion = false;
+									$vretorno    = "";
+									$headers = array('auth-token:'.$vparametros["dataico_auth"],'Content-Type: application/json');
+
+									$ch = curl_init($vurl_consulta);
+									curl_setopt($ch, CURLOPT_POST, false);
+									curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+									curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+									curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+									$json = curl_exec($ch);
+									if($json === false)
+									{
+										   echo 'Hubo un error al enviar la petición, inténtelo nuevamente.<br>' . curl_error($ch);
+									}
+									else
+									{
+										$vretorno = json_decode($json);
+										if(isset($vretorno->errors))
+										{
+											$vvalidacion = true;
+										}
+									}
+									curl_close($ch);
+									
+									$vnomarchivo2 = "dataico_respuesta.json";
+									$varchivo2 = fopen($vnomarchivo2,"w+");
+									fwrite($varchivo2,$json);
+									
+									if(isset($vretorno->invoice->dian_status))
+									{
+
+										if($vretorno->invoice->dian_status=="DIAN_ACEPTADO")
+										{
+
+										}
+
+										if($vretorno->invoice->dian_status=="DIAN_NO_ENVIADO")
+										{
+
+										}
+
+										if(isset($vretorno->invoice->cufe))
+										{
+											if(!empty($vretorno->invoice->cufe))
+											{
+												$vcufe   = $vretorno->invoice->cufe;
+											}
+										}
+
+										if(isset($vretorno->invoice->pdf_url))
+										{
+											if(!empty($vretorno->invoice->pdf_url))
+											{
+												$venlace_pdf = stripslashes($vretorno->invoice->pdf_url);
+											}
+										}
+
+										if(isset($vretorno->invoice->xml_url))
+										{
+											if(!empty($vretorno->invoice->xml_url))
+											{
+												$venlace_xml = stripslashes($vretorno->invoice->xml_url);
+											}
+										}
+
+										if(isset($vretorno->invoice->qrcode))
+										{
+											if(!empty($vretorno->invoice->qrcode))
+											{
+												$vqr_code = "data:image/png;base64,".base64_encode($vretorno->invoice->qrcode);
+											}
+										}
+
+										if(isset($vretorno->invoice->issue_date))
+										{
+											if(!empty($vretorno->invoice->issue_date))
+											{
+												$vfechavalidacion  = $vencabezado["fecha_pago"];
+											}
+										}
+
+										if(isset($vretorno->invoice->uuid))
+										{
+											if(!empty($vretorno->invoice->uuid))
+											{
+												$vuuid = $vretorno->invoice->uuid;
+											}
+										}
+									}
+									else
+									{
+
+										$parms = array('data'  => $documento);
+										$parms = http_build_query($parms);
+
+										$response = sc_webservice("curl", $vparametros["url"] , 80, "POST", $documento, array(CURLOPT_RETURNTRANSFER => true, CURLOPT_SSL_VERIFYPEER=>false, CURLOPT_HTTPHEADER => array(
+												'Content-Type: application/json', 'auth-token: ' . $vparametros["dataico_auth"]  ),), 30);
+
+										$vrespuesta = json_decode($response);
+
+										if(isset($vrespuesta->uuid))
+										{
+											if(!empty($vrespuesta->uuid))
+											{
+												$vuuid = $vrespuesta->uuid;
+											}
+										}
+
+										if(isset($vrespuesta->cufe))
+										{
+											if(!empty($vrespuesta->cufe))
+											{
+												$vcufe = $vrespuesta->cufe;
+											}
+										}
+
+										if(!empty($vcufe))
+										{
+											if(isset($vrespuesta->dian_status))
+											{
+												echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'>ESTADO DIAN: ".$vrespuesta->dian_status."</div>";
+											}
+
+											if(isset($vrespuesta->qrcode))
+											{
+												if(!empty($vrespuesta->qrcode))
+												{
+													$vqr_code = "data:image/png;base64,".base64_encode($vrespuesta->qrcode);
+												}
+											}
+
+											if(isset($vrespuesta->xml_url))
+											{
+												if(!empty($vrespuesta->xml_url))
+												{
+													echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vrespuesta->xml_url)."' target='_blank' style='color:white;'>Ver XML</a></div>";
+
+													$venlace_xml = $vrespuesta->xml_url;
+												}
+											}
+
+											if(isset($vrespuesta->pdf_url))
+											{
+												if(!empty($vrespuesta->pdf_url))
+												{
+													echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vrespuesta->pdf_url)."' target='_blank' style='color:white;'>Ver PDF</a></div>";
+
+													$venlace_pdf = $vrespuesta->pdf_url;
+												}
+											}
+
+										}
+										else
+										{
+
+											if(isset($vrespuesta->errors) or isset($vrespuesta->error))
+											{
+												print_r($vrespuesta);
+											}
+										}
+									}
+
+									return json_encode(array(
+
+										"cufe"=>$vcufe,
+										"enlace_xml"=>$venlace_xml,
+										"enlace_pdf"=>$venlace_pdf,
+										"qr"=>$vqr_code,
+										"fecha_validacion"=>$vfechavalidacion,
+										"uuid" => $vuuid
+									));
+								
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
+}
+}
+
+?>

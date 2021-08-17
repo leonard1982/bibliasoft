@@ -1,0 +1,18 @@
+.css_s_fechaven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_s_fechaven_grid_line {vertical-align: top;text-align: center;}
+.css_d_hora_inicio_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_d_hora_inicio_grid_line {vertical-align: top;text-align: center;}
+.css_numero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero_grid_line {vertical-align: top;text-align: right;}
+.css_mesacliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_mesacliente_grid_line {vertical-align: top;text-align: right;}
+.css_producto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_producto_grid_line {font-size:26px;font-weight:bold;vertical-align: top;text-align: right;}
+.css_d_cantidad_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_d_cantidad_grid_line {vertical-align: top;text-align: center;}
+.css_d_observ_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_d_observ_grid_line {vertical-align: top;text-align: right;}
+.css_atendio_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_atendio_grid_line {vertical-align: top;text-align: right;}
+.css_d_estado_comanda_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_d_estado_comanda_grid_line {color:#FFFFFF;font-size:24px;font-weight:bold;vertical-align: top;text-align: right;}
