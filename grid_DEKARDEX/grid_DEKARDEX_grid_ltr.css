@@ -1,0 +1,34 @@
+.css_matid_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_matid_grid_line {vertical-align: top;text-align: left;}
+.css_bodid_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_bodid_grid_line {vertical-align: top;text-align: center;}
+.css_tipund_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipund_grid_line {vertical-align: top;text-align: center;}
+.css_porciva_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_porciva_grid_line {vertical-align: top;text-align: center;}
+.css_descuento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_descuento_grid_line {vertical-align: top;text-align: center;}
+.css_canlista_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_canlista_grid_line {vertical-align: top;text-align: right;}
+.css_precioneto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_precioneto_grid_line {vertical-align: top;text-align: right;}
+.css_base_linea_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_base_linea_grid_line {vertical-align: top;text-align: right;}
+.css_base_linea_sub_tot {text-align: right;}
+.css_base_linea_tot_ger {text-align: right;}
+.css_iva_linea_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_iva_linea_grid_line {vertical-align: top;text-align: right;}
+.css_iva_linea_sub_tot {text-align: right;}
+.css_iva_linea_tot_ger {text-align: right;}
+.css_parcvta_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_parcvta_grid_line {vertical-align: top;text-align: right;}
+.css_parcvta_sub_tot {text-align: right;}
+.css_parcvta_tot_ger {text-align: right;}
+.css_seriales_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_seriales_grid_line {text-align: left;}
+.css_preciovta_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_preciovta_grid_line {vertical-align: top;text-align: right;}
+.css_preciobase_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_preciobase_grid_line {vertical-align: top;text-align: right;}
+.css_precioiva_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_precioiva_grid_line {vertical-align: top;text-align: right;}

@@ -1,0 +1,5 @@
+<?php
+class grid_cloud_codigos_ciiu_lookup
+{
+}
+?>

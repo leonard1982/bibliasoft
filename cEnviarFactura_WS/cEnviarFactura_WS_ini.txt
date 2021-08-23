@@ -1,0 +1,7 @@
+index.php
+FACILWEB_FE_73
+cEnviarFactura_WS
+NAO
+blank
+cEnviarFactura_WS
+LigMd5

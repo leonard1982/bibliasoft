@@ -1,0 +1,28 @@
+.css_num_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_num_grid_line {vertical-align: top;text-align: left;}
+.css_enviar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_enviar_grid_line {text-align: center;}
+.css_fecha_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_numfe_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_numfe_grid_line {text-align: center;}
+.css_nombre_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nombre_grid_line {vertical-align: top;text-align: left;}
+.css_email_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_email_grid_line {}
+.css_ico_cliente_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_ico_cliente_grid_line {text-align: center;}
+.css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_total_grid_line {vertical-align: top;text-align: right;}
+.css_detalle_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_detalle_grid_line {text-align: center;}
+.css_pdf_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_pdf_grid_line {text-align: center;}
+.css_avisos_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_avisos_grid_line {text-align: center;}
+.css_adjuntos_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_adjuntos_grid_line {text-align: center;}
+.css_sc_field_0_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_sc_field_0_grid_line {text-align: center;}
+.css_kardexid_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_kardexid_grid_line {vertical-align: top;text-align: right;}

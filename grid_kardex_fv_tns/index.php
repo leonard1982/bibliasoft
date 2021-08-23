@@ -234,8 +234,8 @@ class grid_kardex_fv_tns_ini
       $this->nm_dt_criacao   = "20191101"; 
       $this->nm_hr_criacao   = "092744"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20201129"; 
-      $this->nm_hr_ult_alt   = "145114"; 
+      $this->nm_dt_ult_alt   = "20210727"; 
+      $this->nm_hr_ult_alt   = "105322"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1033,22 +1033,14 @@ class grid_kardex_fv_tns_ini
       $this->arr_buttons_usr['btn_consultar_folios']['image']            = "scriptcase__NM__ico__NM__folder3_mail_32.png";
 
       $this->arr_buttons_usr['btn_consultar_estado']['hint']             = "Consultar Estado";
-      $this->arr_buttons_usr['btn_consultar_estado']['type']             = "image";
+      $this->arr_buttons_usr['btn_consultar_estado']['type']             = "button";
       $this->arr_buttons_usr['btn_consultar_estado']['value']            = "Consultar Estado";
-      $this->arr_buttons_usr['btn_consultar_estado']['display']          = "only_img";
+      $this->arr_buttons_usr['btn_consultar_estado']['display']          = "text_fontawesomeicon";
       $this->arr_buttons_usr['btn_consultar_estado']['display_position'] = "text_right";
-      $this->arr_buttons_usr['btn_consultar_estado']['style']            = "";
+      $this->arr_buttons_usr['btn_consultar_estado']['style']            = "danger";
       $this->arr_buttons_usr['btn_consultar_estado']['image']            = "scriptcase__NM__ico__NM__mail_server_warning_32.png";
-
-      $this->arr_buttons_usr['btn_recargar']['hint']             = "";
-      $this->arr_buttons_usr['btn_recargar']['type']             = "button";
-      $this->arr_buttons_usr['btn_recargar']['value']            = "Recargar";
-      $this->arr_buttons_usr['btn_recargar']['display']          = "text_fontawesomeicon";
-      $this->arr_buttons_usr['btn_recargar']['display_position'] = "text_right";
-      $this->arr_buttons_usr['btn_recargar']['style']            = "default";
-      $this->arr_buttons_usr['btn_recargar']['image']            = "";
-      $this->arr_buttons_usr['btn_recargar']['has_fa']            = "true";
-      $this->arr_buttons_usr['btn_recargar']['fontawesomeicon']            = "fas fa-sync";
+      $this->arr_buttons_usr['btn_consultar_estado']['has_fa']            = "true";
+      $this->arr_buttons_usr['btn_consultar_estado']['fontawesomeicon']            = "fas fa-thermometer-half";
 
       $this->arr_buttons_usr['btn_soporte']['hint']             = "¿Desea enviar un correo de soporte?";
       $this->arr_buttons_usr['btn_soporte']['type']             = "image";
@@ -1059,6 +1051,36 @@ class grid_kardex_fv_tns_ini
       $this->arr_buttons_usr['btn_soporte']['image']            = "scriptcase__NM__ico__NM__user_headphones_32.png";
       $this->arr_buttons_usr['btn_soporte']['has_fa']            = "true";
       $this->arr_buttons_usr['btn_soporte']['fontawesomeicon']            = "";
+
+      $this->arr_buttons_usr['btn_generar_proveedor']['hint']             = "";
+      $this->arr_buttons_usr['btn_generar_proveedor']['type']             = "button";
+      $this->arr_buttons_usr['btn_generar_proveedor']['value']            = "Generar Proveedor";
+      $this->arr_buttons_usr['btn_generar_proveedor']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons_usr['btn_generar_proveedor']['display_position'] = "text_right";
+      $this->arr_buttons_usr['btn_generar_proveedor']['style']            = "default";
+      $this->arr_buttons_usr['btn_generar_proveedor']['image']            = "";
+      $this->arr_buttons_usr['btn_generar_proveedor']['has_fa']            = "true";
+      $this->arr_buttons_usr['btn_generar_proveedor']['fontawesomeicon']            = "";
+
+      $this->arr_buttons_usr['btn_regenerar_propio']['hint']             = "Regenerar CUFE de Documentos Enviados";
+      $this->arr_buttons_usr['btn_regenerar_propio']['type']             = "button";
+      $this->arr_buttons_usr['btn_regenerar_propio']['value']            = "Regenerar CUFE ";
+      $this->arr_buttons_usr['btn_regenerar_propio']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons_usr['btn_regenerar_propio']['display_position'] = "text_right";
+      $this->arr_buttons_usr['btn_regenerar_propio']['style']            = "default";
+      $this->arr_buttons_usr['btn_regenerar_propio']['image']            = "";
+      $this->arr_buttons_usr['btn_regenerar_propio']['has_fa']            = "true";
+      $this->arr_buttons_usr['btn_regenerar_propio']['fontawesomeicon']            = "fas fa-retweet";
+
+      $this->arr_buttons_usr['btn_volver']['hint']             = "";
+      $this->arr_buttons_usr['btn_volver']['type']             = "button";
+      $this->arr_buttons_usr['btn_volver']['value']            = "Volver";
+      $this->arr_buttons_usr['btn_volver']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons_usr['btn_volver']['display_position'] = "text_right";
+      $this->arr_buttons_usr['btn_volver']['style']            = "paypal";
+      $this->arr_buttons_usr['btn_volver']['image']            = "";
+      $this->arr_buttons_usr['btn_volver']['has_fa']            = "true";
+      $this->arr_buttons_usr['btn_volver']['fontawesomeicon']            = "far fa-hand-point-left";
       $this->str_google_fonts= isset($str_google_fonts)?$str_google_fonts:'';
       $this->regionalDefault();
       $this->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
@@ -1167,15 +1189,13 @@ class grid_kardex_fv_tns_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_kardex_fv_tns']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_kardex_fv_tns']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKH9FGHANKVWJwHgrKZSNiDWFYHIX7D9BiZ1F7Z1vOD5JeDMveHEJqDWFqHINUHQJKH9X7D1BeD5JsHgrwV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQNwDQFaZ1BYHuraDMBOVIBsDWBmDoXGHQBiZkBiHIBeHQFaHgrKZSJqDWrGVoFGDcXGDQFaHANOHQJwHgrwVcFeDuB7DoXGHQXGZSBqZ1NOHQJsHgBYHArsDurmDoF7D9XsDQJsDSBYV5FGHgNKDkBsDurGVEBiHQBiZ1X7D1NaZMB/HgNKDkB/H5X/VoFGHQJKH9FUHAvOVWXGHgrwDkBsH5B7DoXGHQNwVINUHIBeHQJsDMveHEJqDWB3VoFGHQXODQBqD1veHQJsDMBYVcFeDuFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsDcBiDQBqD1BeHuJwDMvOVIBsDurGDoXGHQXOVIJsDSrYHuX7HgvsHArCV5B3VoFGHQJKH9BiHAN7HuFUDMNODkBsDWBmDoXGHQBiZ1BOHANOHQFGDMvCHErCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQJKZ9F7DSvCV5JwDMBOVcrsDWJeVoraDcJUH9FaHAN7D5NUDEBOHAFKDWF/HINUD9JKDQX7HIBeD5JwHuzGZSJ3V5X7HIX7DcJUZ1FaD1rKHuBODMBYHEXeHEFaVoB/HQXGZSFGHAvCVWBqDMrwVcFCDWXCDoX7D9XOZ1BiHIBOD5JeHgvCZSJGDuFaZuBqD9NmZSFGHANOV5JwHuNODkFCH5B3VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwHQXGH9BqZ1BeHuBqDMvCHArCH5FYHIF7HQNmZSBiZ1N7HuraDMBODkBsV5F/HMBiD9BsVIraD1rwV5X7HgBeHEFiH5FYDoBOHQJKZ9F7HArYHuBqHgrKDkB/DWF/HIXGD9BsH9B/HArYHuFUHgBOVkJqDuXKDoBOHQFYZ9XGHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7DSrwV5FUHuzGVIBOH5XCDoraD9XGZ1X7Z1BeV5BqDEvsVkJqV5FaZuFaD9XsH9FGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcrsH5XCVEFGD9XOZSBOHIBOZMJeDEBeZSJ3DWFqHIJeD9NmZSFUHAvOV5XGHgvOVcFKDuX7HMBiD9BsVIraD1rwV5X7HgBeHEBUDWF/VoB/DcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOVcBUDWXKVoX7HQNmVINUDSrYHQJwDEBODkFeH5FYVoFGHQJKDQJsD1BeV5FUDMrYV9FeH5FqHMFUDcJUZ1FaHIBeV5FGDMvCVkJ3DuJeDoXGHQXsDQFaHABYVWBODMzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDQFaHAvmV5XGDMBYDkFCHEFYHMXGD9XGZ1FGHABYHuJwDEBOHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQXOZ1FGZ1rYHQBiHgNOVkJ3DWB3VoFGHQNmDuBqHIrwHuJwDMzGDkB/DWrmDoXGDcFYZ1FGHAN7HuFaDMvCHErCDuX/VoFGHQFYH9BiZ1N7HuB/DMvsV9BUDurGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DurmZuJsHQNmDQB/D1BOVWJsDMrYZSJqH5B7DoXGHQJmZSBOHAzGZMBODMvCZSJ3H5X/VoFGHQXOZ9XGHIrwHuB/HgvOVcB/DWBmDoXGHQNwZ1BiD1rKHuB/HgvsHErCDuXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiDcNmZ1BiD1rwHQFaHgveVkJ3DurmVoFGHQNwZ9F7DSBYHQF7DMBYV9FeV5BmDoXGHQJmZSBqHANOHQNUHgBOZSJ3DWB3VoFGHQNmDQFUHAN7HurqHgrwVcFeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQJmVIJsDSvmD5FaHgNOHEBUDWr/DoB/DcBwZSFGHANOV5FUHuNOV9FiDWXCHMFaD9JmZ1B/HIrwV5FaDErKDkBsV5FaHMJeDcBwDQFGD1veHQXGHgvsVcBOHEX7DoraHQFYH9FaHAvmZMJeHgvCHEJGDWF/VoJeD9NwDQBqHINaV5BqDMrwDkFCDuX7VEF7D9BiH9FaHAN7D5FaDEBOZSJGH5BmDoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUHQFYZSBiZ1rwHQJeHgrwV9FeH5FqHMBqHQBiH9BqZ1NOHQBiHgNOZSJ3V5XCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFYHIXGHQBiZ1F7D1rwV5XGHgveZSJ3HEFqVoX7HQBiDQFGD1BOV5BqHuBOVcXKDuX7HMrqHQXOZ1FGZ1BeHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9B/DSBeD5NUDErKVkXeH5F/VoB/D9FYDQB/Z1rwD5JeHuBYVIB/V5X7VENUD9BsZSFaD1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsDWFqDoF7D9JKH9X7HIrwHQBqHuNOVcBUDWB3VorqDcFYVINUHIveZMFaHgveVkJqH5F/VoJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVorqDcJUZ1BOZ1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQXOZ9F7HAvmVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuX7DMvCHArsDWr/VoBiDcJeZSFUHINaVWXGHuvmVIBOH5XCVoX7D9BsZSFaHANOHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_kardex_fv_tns']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_kardex_fv_tns']['initialize'])  
       { 
           $this->conectDB();
           $this->conectExtra();
           $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
-if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
-if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
 if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
 if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
 if (!isset($_SESSION['gservidorfacturas'])) {$_SESSION['gservidorfacturas'] = "";}
@@ -1184,19 +1204,39 @@ if (!isset($_SESSION['gfacturaonline'])) {$_SESSION['gfacturaonline'] = "";}
 if (!isset($this->sc_temp_gfacturaonline)) {$this->sc_temp_gfacturaonline = (isset($_SESSION['gfacturaonline'])) ? $_SESSION['gfacturaonline'] : "";}
 if (!isset($_SESSION['gautotercero'])) {$_SESSION['gautotercero'] = "";}
 if (!isset($this->sc_temp_gautotercero)) {$this->sc_temp_gautotercero = (isset($_SESSION['gautotercero'])) ? $_SESSION['gautotercero'] : "";}
- ;
-;
-;
-;
-;
-;
-
-$this->sc_temp_gautotercero      = 'NO';
-$this->sc_temp_gfacturaonline    = 'NO';
-$this->sc_temp_gservidorfacturas = '';
-$this->sc_temp_gproveedor        = 'HKA';
-
-$vsql = "select conf_auto_tercero,enviar_documento_online,servidor_facturas, proveedor from cloud_empresas where id_empresa='".$this->sc_temp_gidempresa."'";
+if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
+if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
+  if(empty($this->sc_temp_gidempresa))
+{
+?>
+<script>
+if(confirm('Se cerrará el sistema por inactividad.'))
+{
+   parent.location.href = "../blank_inicio?iniciar=si";
+}
+else
+{
+	parent.location.href = "../blank_inicio?iniciar=si";
+}
+</script>
+<?php
+}
+
+;
+;
+;
+;
+;
+;
+
+$this->sc_temp_gautotercero      = 'NO';
+$this->sc_temp_gfacturaonline    = 'NO';
+$this->sc_temp_gservidorfacturas = '';
+$this->sc_temp_gproveedor        = 'HKA';
+
+$vsql = "select conf_auto_tercero,enviar_documento_online,servidor_facturas, proveedor from cloud_empresas where id_empresa='".$this->sc_temp_gidempresa."'";
+
+
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1226,20 +1266,20 @@ $vsql = "select conf_auto_tercero,enviar_documento_online,servidor_facturas, pro
           $this->vautotercero = false;
           $this->vautotercero_erro = $this->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-if(isset($this->vautotercero[0][0]))
-{
-	$this->sc_temp_gautotercero      = $this->vautotercero[0][0];
-	$this->sc_temp_gfacturaonline    = $this->vautotercero[0][1];
-	$this->sc_temp_gservidorfacturas = $this->vautotercero[0][2];
-	$this->sc_temp_gproveedor        = $this->vautotercero[0][3];
+;
+
+if(isset($this->vautotercero[0][0]))
+{
+	$this->sc_temp_gautotercero      = $this->vautotercero[0][0];
+	$this->sc_temp_gfacturaonline    = $this->vautotercero[0][1];
+	$this->sc_temp_gservidorfacturas = $this->vautotercero[0][2];
+	$this->sc_temp_gproveedor        = $this->vautotercero[0][3];
 }
+if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 if (isset($this->sc_temp_gautotercero)) {$_SESSION['gautotercero'] = $this->sc_temp_gautotercero;}
 if (isset($this->sc_temp_gfacturaonline)) {$_SESSION['gfacturaonline'] = $this->sc_temp_gfacturaonline;}
 if (isset($this->sc_temp_gservidorfacturas)) {$_SESSION['gservidorfacturas'] = $this->sc_temp_gservidorfacturas;}
 if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
-if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
           $_SESSION['sc_session'][$this->sc_page]['grid_kardex_fv_tns']['initialize'] = false;
           $this->Db->Close(); 
@@ -1408,10 +1448,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['grid_kardex_fv_tns']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['grid_kardex_fv_tns']['embutida_init']) 
       {
-          if (!isset($_SESSION['gprefijos'])) 
-          {
-              $this->nm_falta_var .= "gprefijos; ";
-          }
           if (!isset($_SESSION['gidempresa'])) 
           {
               $this->nm_falta_var .= "gidempresa; ";
@@ -2264,11 +2300,6 @@ class grid_kardex_fv_tns_apl
                    }
               }
           } 
-          if (isset($gprefijos)) 
-          {
-              $_SESSION['gprefijos'] = $gprefijos;
-              nm_limpa_str_grid_kardex_fv_tns($_SESSION["gprefijos"]);
-          }
           if (isset($gidempresa)) 
           {
               $_SESSION['gidempresa'] = $gidempresa;
@@ -2757,6 +2788,19 @@ class grid_kardex_fv_tns_apl
           'style'            => "default",
       );
 
+      $this->arr_buttons['group_group_3']= array(
+          'value'            => "Opciones",
+          'hint'             => "",
+          'type'             => "button",
+          'display'          => "text_fontawesomeicon",
+          'display_position' => "text_right",
+          'image'            => "fas fa-cog",
+          'fontawesomeicon'  => "fas fa-cog",
+          'has_fa'           => true,
+          'content_icons'    => false,
+          'style'            => "default",
+      );
+
       $this->arr_buttons['group_group_1']= array(
           'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
           'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
@@ -2770,14 +2814,14 @@ class grid_kardex_fv_tns_apl
           'style'            => "default",
       );
 
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
+      $this->arr_buttons['group_group_3']= array(
+          'value'            => "Opciones",
+          'hint'             => "",
           'type'             => "button",
-          'display'          => "text_img",
+          'display'          => "text_fontawesomeicon",
           'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
+          'image'            => "fas fa-cog",
+          'fontawesomeicon'  => "fas fa-cog",
           'has_fa'           => true,
           'content_icons'    => false,
           'style'            => "default",
@@ -2842,7 +2886,6 @@ class grid_kardex_fv_tns_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['field_order'][] = "adjuntos";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['field_order'][] = "sc_field_0";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['field_order'][] = "kardexid";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['field_order'];
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['usr_cmp_sel']))
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['usr_cmp_sel'] = array();
@@ -3181,13 +3224,17 @@ class grid_kardex_fv_tns_apl
           { 
               $this->btn_consultar_estado();
           } 
-          if ($nm_call_php == "btn_recargar")
-          { 
-              $this->btn_recargar();
-          } 
           if ($nm_call_php == "btn_soporte")
           { 
               $this->btn_soporte();
+          } 
+          if ($nm_call_php == "btn_generar_proveedor")
+          { 
+              $this->btn_generar_proveedor();
+          } 
+          if ($nm_call_php == "btn_regenerar_propio")
+          { 
+              $this->btn_regenerar_propio();
           } 
           $this->Db->Close(); 
           $this->Ini->nm_db_conn_mysql->Close(); 
@@ -3610,6 +3657,10 @@ class grid_kardex_fv_tns_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
+                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    {
+                        chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
+                    }
                     else
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/linux-amd64");
@@ -3802,7 +3853,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 }
 ?>
-        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery/js/jquery.js"></script>
+        <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
         <script type="text/javascript">
           var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
@@ -3847,49 +3898,54 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['s
        $this->sn_cufe = $this->rs_grid->fields[14] ;  
        $this->sn_enlacepdf = $this->rs_grid->fields[15] ;  
        $this->sn_enlacexml = $this->rs_grid->fields[16] ;  
-       $this->cliente = $this->rs_grid->fields[17] ;  
+       $this->sn_fe_validacion = $this->rs_grid->fields[17] ;  
+       $this->sn_proveedor = $this->rs_grid->fields[18] ;  
+       $this->sn_token_emp = $this->rs_grid->fields[19] ;  
+       $this->sn_token_pass = $this->rs_grid->fields[20] ;  
+       $this->sn_servidor = $this->rs_grid->fields[21] ;  
+       $this->cliente = $this->rs_grid->fields[22] ;  
        $this->cliente = (string)$this->cliente;
-       $this->ndoc = $this->rs_grid->fields[18] ;  
+       $this->ndoc = $this->rs_grid->fields[23] ;  
       $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
- ?>
-<style>
-	html{
-		
-		background:white;
-	}
-	body{
-		background:white;
-		width:90%;
-		border:0px;
-	}
-	table{
-		
-		width:100%;
-	}
-	input{
-		
-		border-radius:10px;
-		padding:10px;
-		color:white;
-		background:#024674;
-		cursor:pointer;
-	}
-	input:hover{
-		
-		border-radius:10px;
-		padding:10px;
-		color:#024674;
-		background:white;
-		cursor:pointer;
-	}
-</style>
-<?php
-$TokenEnterprise   = '';
-$TokenAutorizacion = '';
-$vServidor    = '';
-$vpjfe = "";
+  ?>
+<style>
+	html{
+		
+		background:white;
+	}
+	body{
+		background:white;
+		width:90%;
+		border:0px;
+	}
+	table{
+		
+		width:100%;
+	}
+	input{
+		
+		border-radius:10px;
+		padding:10px;
+		color:white;
+		background:#024674;
+		cursor:pointer;
+	}
+	input:hover{
+		
+		border-radius:10px;
+		padding:10px;
+		color:#024674;
+		background:white;
+		cursor:pointer;
+	}
+</style>
+<?php
+$TokenEnterprise   = '';
+$TokenAutorizacion = '';
+$vServidor    = '';
+$vpjfe = "";
  
       $nm_select = "select prefijo from cloud_prefijos where tipo='FV' and cod_prefijo='".$this->codprefijo  ."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3919,72 +3975,72 @@ $vpjfe = "";
           $this->vpjfe2 = false;
           $this->vpjfe2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-if(isset($this->vpjfe2[0][0]))
-{
-	$vpjfe = $this->vpjfe2[0][0];
-}
-$vmunicipio   = 'CUCUTA';
-$vcodmunicipio= "";
-$vcod_departamento = "";
-$vdepartamento= "";
-$vcodmu_codep = "";
-$vcodepart    = '54';
-$vkardexid    = 0;
-$vconsecutivo = $this->numero ;
-$vtotal       = $this->total ;
-$vemail  = "servicio@solucionesnavarro.com";
+;
+
+if(isset($this->vpjfe2[0][0]))
+{
+	$vpjfe = $this->vpjfe2[0][0];
+}
+$vmunicipio   = 'CUCUTA';
+$vcodmunicipio= "";
+$vcod_departamento = "";
+$vdepartamento= "";
+$vcodmu_codep = "";
+$vcodepart    = '54';
+$vkardexid    = 0;
+$vconsecutivo = $this->numero ;
+$vtotal       = $this->total ;
+$vemail  = "servicio@solucionesnavarro.com";
 $vaccion = "Enviar";
-$vnit    = "";
-$vtelef1 = "";
-$vcodImp = "";
-$vdirecc1= "";
-$vpostal = "";
-$vnomregtri = "";
-$vnombre = "";
-$vtipodociden = "";
-$vobligaciones= array();
-$vnatjuridica = "";
-$vregimen     = "";
-$vdv = "";
-$vbasetotal  = 0;
-$vtotalitems = 0;
-
-$cant	="";
-$codbp	="";
-$desc	="";
-$codest	="";
-$base	="";
-$codImp	="";
-$Timp	="";
-$Timp	="";
-$eliva	="";
-$tot	="";
-$tot	="";
-$valun	="";
-$valun	="";
-$sec	="";
-
-
-$max    = "";
-
-$decoded = '';
-$vcufe	 = '';	
-$vestado = '';
-$vavisos = '';
-$eldesc	 = 0;
-$t		 = 0;
-$elmonto = 0;
-$bas_br	 = 0;
-
-$t_reg	 ='';
-$vEsfac	 ='NO';
-$vrango  = $vpjfe."-1";
-$lafechadevencimiento = '';
-$vvalida = false;
-$vmensaje= "";
-
+$vnit    = "";
+$vtelef1 = "";
+$vcodImp = "";
+$vdirecc1= "";
+$vpostal = "";
+$vnomregtri = "";
+$vnombre = "";
+$vtipodociden = "";
+$vobligaciones= array();
+$vnatjuridica = "";
+$vregimen     = "";
+$vdv = "";
+$vbasetotal  = 0;
+$vtotalitems = 0;
+
+$cant	="";
+$codbp	="";
+$desc	="";
+$codest	="";
+$base	="";
+$codImp	="";
+$Timp	="";
+$Timp	="";
+$eliva	="";
+$tot	="";
+$tot	="";
+$valun	="";
+$valun	="";
+$sec	="";
+
+
+$max    = "";
+
+$decoded = '';
+$vcufe	 = '';	
+$vestado = '';
+$vavisos = '';
+$eldesc	 = 0;
+$t		 = 0;
+$elmonto = 0;
+$bas_br	 = 0;
+
+$t_reg	 ='';
+$vEsfac	 ='NO';
+$vrango  = $vpjfe."-1";
+$lafechadevencimiento = '';
+$vvalida = false;
+$vmensaje= "";
+
  
       $nm_select = "select servidor1, servidor2, tokenempresa, tokenpassword from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4010,43 +4066,43 @@ $vmensaje= "";
           $this->ds_fv = false;
           $this->ds_fv_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-if(isset($this->ds_fv[0][0]) and (isset($this->ds_fv[0][1])) and (isset($this->ds_fv[0][2])) and (isset($this->ds_fv[0][3])))
-{
-	if(!empty(($this->ds_fv[0][0])) and (!empty($this->ds_fv[0][1])) and (!empty($this->ds_fv[0][2])) and (!empty($this->ds_fv[0][3])))
-	{
-		error_reporting(E_ERROR);
-		$WebService     = new WebService();
-		$factura        = new FacturaGeneral();
-		$this->cliente        = new Cliente();
-		$destinatario   = new Destinatario();
-		$direccion      = new Direccion();
-		$det_tributario = new Tributos();
-		$emaildest      = new Strings();
-		$vServidor      = $this->ds_fv[0][0];
-
-		$options = array('exceptions' => true, 'trace' => true);
-
-		$params;
-		$TokenEnterprise   = $this->ds_fv[0][2];
-		$TokenAutorizacion = $this->ds_fv[0][3];
-		$enviarAdjunto     = false;
-		$vvalida           = true;
-	}
-	else
-	{
-		$vmensaje .= "No se encuentra la información del WebService";
-	}
-}
-else
-{
-	$vmensaje .= "No se encuentra la información del WebService";
-}
-
-if($vvalida)
-{
-	$vsql_cliente = "select nit,iif(tipodociden='C','13','31') as tipoiden,nombre,nomregtri,direcc1,telef1,email,iif(natjuridica='N',2,1) as naturaleza from terceros where nit='".$this->nit_tercero ."'";
+;
+
+if(isset($this->ds_fv[0][0]) and (isset($this->ds_fv[0][1])) and (isset($this->ds_fv[0][2])) and (isset($this->ds_fv[0][3])))
+{
+	if(!empty(($this->ds_fv[0][0])) and (!empty($this->ds_fv[0][1])) and (!empty($this->ds_fv[0][2])) and (!empty($this->ds_fv[0][3])))
+	{
+		error_reporting(E_ERROR);
+		$WebService     = new WebService();
+		$factura        = new FacturaGeneral();
+		$this->cliente        = new Cliente();
+		$destinatario   = new Destinatario();
+		$direccion      = new Direccion();
+		$det_tributario = new Tributos();
+		$emaildest      = new Strings();
+		$vServidor      = $this->ds_fv[0][0];
+
+		$options = array('exceptions' => true, 'trace' => true);
+
+		$params;
+		$TokenEnterprise   = $this->ds_fv[0][2];
+		$TokenAutorizacion = $this->ds_fv[0][3];
+		$enviarAdjunto     = false;
+		$vvalida           = true;
+	}
+	else
+	{
+		$vmensaje .= "No se encuentra la información del WebService";
+	}
+}
+else
+{
+	$vmensaje .= "No se encuentra la información del WebService";
+}
+
+if($vvalida)
+{
+	$vsql_cliente = "select nit,iif(tipodociden='C','13','31') as tipoiden,nombre,nomregtri,direcc1,telef1,email,iif(natjuridica='N',2,1) as naturaleza from terceros where nit='".$this->nit_tercero ."'";
 	 
       $nm_select = $vsql_cliente; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4072,52 +4128,52 @@ if($vvalida)
           $this->ds_fe = false;
           $this->ds_fe_erro = $this->Db->ErrorMsg();
       } 
-;	
-	
-	if(isset($this->ds_fe[0][0]) and !empty($this->ds_fe[0][0]))
-	{
-		$vnit = $this->ds_fe[0][0];
-		
-		$vv  = explode("-",$vnit);
-		$vv2 = $vv[0];
-		$vnit= $vv2;
-		
-		$vdv = fObtenerDigitoV($vv2);
-		
-		$vtipodociden = $this->ds_fe[0][1];
-		$vnombre      = $this->ds_fe[0][2];
-		if(empty($vnombre))
-		{
-			$vvalida   = false;
-			$vmensaje .= "El tercero no tiene nombre en TNS: ".$this->nit_tercero .".<br>";
-		}
-		$vnomregtri   = $this->ds_fe[0][3];
-		if(empty($vnomregtri))
-		{
-			$vvalida   = false;
-			$vmensaje .= "El tercero no tiene nombre tributario en TNS: ".$this->nit_tercero .".<br>";
-		}
-		$vdirecc1     = $this->ds_fe[0][4];
-		if(empty($vdirecc1))
-		{
-			$vvalida   = false;
-			$vmensaje .= "El tercero no tiene dirección en TNS: ".$this->nit_tercero .".<br>";
-		}
-		$vtelef1      = $this->ds_fe[0][5];
-		if(empty($vtelef1))
-		{
-			$vvalida   = false;
-			$vmensaje .= "El tercero no tiene telefono en TNS: ".$this->nit_tercero .".<br>";
-		}
-		$vemail       = $this->ds_fe[0][6];
-		if(empty($vemail))
-		{
-			$vvalida   = false;
-			$vmensaje .= "El tercero no tiene correo electrónico en TNS: ".$this->nit_tercero .".<br>";
-		}
-		$vnatjuridica = $this->ds_fe[0][7];
-		
-		
+;	
+	
+	if(isset($this->ds_fe[0][0]) and !empty($this->ds_fe[0][0]))
+	{
+		$vnit = $this->ds_fe[0][0];
+		
+		$vv  = explode("-",$vnit);
+		$vv2 = $vv[0];
+		$vnit= $vv2;
+		
+		$vdv = fObtenerDigitoV($vv2);
+		
+		$vtipodociden = $this->ds_fe[0][1];
+		$vnombre      = $this->ds_fe[0][2];
+		if(empty($vnombre))
+		{
+			$vvalida   = false;
+			$vmensaje .= "El tercero no tiene nombre en TNS: ".$this->nit_tercero .".<br>";
+		}
+		$vnomregtri   = $this->ds_fe[0][3];
+		if(empty($vnomregtri))
+		{
+			$vvalida   = false;
+			$vmensaje .= "El tercero no tiene nombre tributario en TNS: ".$this->nit_tercero .".<br>";
+		}
+		$vdirecc1     = $this->ds_fe[0][4];
+		if(empty($vdirecc1))
+		{
+			$vvalida   = false;
+			$vmensaje .= "El tercero no tiene dirección en TNS: ".$this->nit_tercero .".<br>";
+		}
+		$vtelef1      = $this->ds_fe[0][5];
+		if(empty($vtelef1))
+		{
+			$vvalida   = false;
+			$vmensaje .= "El tercero no tiene telefono en TNS: ".$this->nit_tercero .".<br>";
+		}
+		$vemail       = $this->ds_fe[0][6];
+		if(empty($vemail))
+		{
+			$vvalida   = false;
+			$vmensaje .= "El tercero no tiene correo electrónico en TNS: ".$this->nit_tercero .".<br>";
+		}
+		$vnatjuridica = $this->ds_fe[0][7];
+		
+		
 		 
       $nm_select = "select m.municipio,m.codigo_mu,t.detalle_tributario,t.cod_postal,t.responsabilidades_fiscales,t.cod_regimen,t.cod_departamento,dp.departamento,concat(t.cod_departamento,t.cod_municipio) as codmu_codep from cloud_terceros t inner join cloud_municipio m on t.cod_municipio=m.codigo_mu inner join cloud_departamento dp on t.cod_departamento=dp.codigo where t.documento='".$this->nit_tercero  ."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4150,209 +4206,209 @@ if($vvalida)
           $this->vinfo2 = false;
           $this->vinfo2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-		
-		if(isset($this->vinfo2[0][0]))
-		{
-			$vmunicipio    = $this->vinfo2[0][0];
-			if(empty($vmunicipio))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene municipio en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-			$vcodmunicipio = $this->vinfo2[0][1];
-			if(empty($vcodmunicipio))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene codmunicipio en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-			$codImp		   = $this->vinfo2[0][2];
-			if(empty($codImp))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene responsabilidades rut en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-			$vpostal       = $this->vinfo2[0][3];
-			if(empty($vpostal))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene codigo postal en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-			$vobligaciones = $this->vinfo2[0][4];
-			if(empty($vobligaciones))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene especificado el detalle tributario en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-			$vregimen      = $this->vinfo2[0][5];
-			if(empty($vregimen))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene especificado el régimen en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-			
-			$vcod_departamento = $this->vinfo2[0][6];
-			if(empty($vcod_departamento))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene el codigo del departamento en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-
-			$vdepartamento = $this->vinfo2[0][7];
-			if(empty($vdepartamento))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene el departamento en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-
-			$vcodmu_codep  = $this->vinfo2[0][8];
-			if(empty($vcodmu_codep))
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no tiene codigo departamento + codigo municipio en FACILWEB: ".$this->nit_tercero .".<br>";
-			}
-		}
-		else
-		{
-			$vvalida   = false;
-			$vmensaje .= "El tercero no existe en FACILWEB: ".$this->nit_tercero .".<br>";
-		}
-		
-	}
-	else
-	{
-		$vvalida   = false;
-		$vmensaje .= "El tercero no existe en TNS: ".$this->nit_tercero .".<br>";
-	}
-}
-
-if($vvalida)
-{
-	$factura = new FacturaGeneral();
-    $factura->cliente = new Cliente();
-	$factura->cantidadDecimales = "2";
-	
-	$destinatarios = new Destinatario();	
-	$destinatarios->canalDeEntrega = "0";
-	
-	$correodestinatario = new strings();	 
-	$correodestinatario->string = $vemail;
-	
-	$destinatarios->email = $correodestinatario;
-	$destinatarios->nitProveedorReceptor = $vnit;
-	$destinatarios->telefono = $vtelef1;	
-	
-	$factura->cliente->destinatario[0] = $destinatarios;
-	
-	$tributos1 = new Tributos();	
+;
+		
+		if(isset($this->vinfo2[0][0]))
+		{
+			$vmunicipio    = $this->vinfo2[0][0];
+			if(empty($vmunicipio))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene municipio en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+			$vcodmunicipio = $this->vinfo2[0][1];
+			if(empty($vcodmunicipio))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene codmunicipio en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+			$codImp		   = $this->vinfo2[0][2];
+			if(empty($codImp))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene responsabilidades rut en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+			$vpostal       = $this->vinfo2[0][3];
+			if(empty($vpostal))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene codigo postal en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+			$vobligaciones = $this->vinfo2[0][4];
+			if(empty($vobligaciones))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene especificado el detalle tributario en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+			$vregimen      = $this->vinfo2[0][5];
+			if(empty($vregimen))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene especificado el régimen en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+			
+			$vcod_departamento = $this->vinfo2[0][6];
+			if(empty($vcod_departamento))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene el codigo del departamento en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+
+			$vdepartamento = $this->vinfo2[0][7];
+			if(empty($vdepartamento))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene el departamento en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+
+			$vcodmu_codep  = $this->vinfo2[0][8];
+			if(empty($vcodmu_codep))
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no tiene codigo departamento + codigo municipio en FACILWEB: ".$this->nit_tercero .".<br>";
+			}
+		}
+		else
+		{
+			$vvalida   = false;
+			$vmensaje .= "El tercero no existe en FACILWEB: ".$this->nit_tercero .".<br>";
+		}
+		
+	}
+	else
+	{
+		$vvalida   = false;
+		$vmensaje .= "El tercero no existe en TNS: ".$this->nit_tercero .".<br>";
+	}
+}
+
+if($vvalida)
+{
+	$factura = new FacturaGeneral();
+    $factura->cliente = new Cliente();
+	$factura->cantidadDecimales = "2";
+	
+	$destinatarios = new Destinatario();	
+	$destinatarios->canalDeEntrega = "0";
+	
+	$correodestinatario = new strings();	 
+	$correodestinatario->string = $vemail;
+	
+	$destinatarios->email = $correodestinatario;
+	$destinatarios->nitProveedorReceptor = $vnit;
+	$destinatarios->telefono = $vtelef1;	
+	
+	$factura->cliente->destinatario[0] = $destinatarios;
+	
+	$tributos1 = new Tributos();	
 	$tributos1->codigoImpuesto = $codImp;
-	$factura->cliente->detallesTributarios[0] = $tributos1;
-		
-	$extensible1 = new Extensibles();
-	$extensible1->controlInterno1 = "";
-	$extensible1->controlInterno2 = "";
-	$extensible1->nombre = "";
-	$extensible1->valor = "";
-		
-	$tributos1->extras[0] = $extensible1;
-	
-	$DireccionFiscal = new Direccion();	
-	$DireccionFiscal->aCuidadoDe = "";
-	$DireccionFiscal->aLaAtencionDe = "";
-	$DireccionFiscal->bloque = "";
-	$DireccionFiscal->buzon = "";
-	$DireccionFiscal->calle = "";
-	$DireccionFiscal->calleAdicional = "";
-	$DireccionFiscal->ciudad = $vmunicipio;
-	$DireccionFiscal->codigoDepartamento = $vcod_departamento;
-	$DireccionFiscal->correccionHusoHorario = "";
-	$DireccionFiscal->departamento = $vdepartamento;
-	$DireccionFiscal->departamentoOrg = "";
-	$DireccionFiscal->habitacion = "";
-	$DireccionFiscal->distrito = $vdirecc1;
-	$DireccionFiscal->lenguaje = "es";
-	$DireccionFiscal->municipio = $vcodmu_codep;
-	$DireccionFiscal->nombreEdificio = "";
-	$DireccionFiscal->numeroParcela = "";
-	$DireccionFiscal->pais = "CO";
-	$DireccionFiscal->piso = "";
-	$DireccionFiscal->region = "";
-	$DireccionFiscal->subDivision = "";
-	$DireccionFiscal->ubicacion = "";
-	$DireccionFiscal->zonaPostal = $vpostal;	
-	
-	$factura->cliente->direccionFiscal = $DireccionFiscal;
-	
-    $factura->cliente->email = $vemail;
-	
-	
-	$InfoLegalCliente = new InformacionLegalCliente();
-	$InfoLegalCliente->codigoEstablecimiento = "00001";
-	$InfoLegalCliente->nombreRegistroRUT = $vnombre;
-	$InfoLegalCliente->numeroIdentificacion = $vnit;
-	$InfoLegalCliente->numeroIdentificacionDV = $vdv;
-	$InfoLegalCliente->tipoIdentificacion = $vtipodociden;	
-	
-	$factura->cliente->informacionLegalCliente = $InfoLegalCliente;
-	
-	
-    $factura->cliente->nombreRazonSocial  = $vnombre;
-    $factura->cliente->notificar = "SI";
-    $factura->cliente->numeroDocumento = $vnit;
-	$factura->cliente->numeroIdentificacionDV = $vdv;
-    
-	$obligacionesCliente = new Obligaciones();
+	$factura->cliente->detallesTributarios[0] = $tributos1;
+		
+	$extensible1 = new Extensibles();
+	$extensible1->controlInterno1 = "";
+	$extensible1->controlInterno2 = "";
+	$extensible1->nombre = "";
+	$extensible1->valor = "";
+		
+	$tributos1->extras[0] = $extensible1;
+	
+	$DireccionFiscal = new Direccion();	
+	$DireccionFiscal->aCuidadoDe = "";
+	$DireccionFiscal->aLaAtencionDe = "";
+	$DireccionFiscal->bloque = "";
+	$DireccionFiscal->buzon = "";
+	$DireccionFiscal->calle = "";
+	$DireccionFiscal->calleAdicional = "";
+	$DireccionFiscal->ciudad = $vmunicipio;
+	$DireccionFiscal->codigoDepartamento = $vcod_departamento;
+	$DireccionFiscal->correccionHusoHorario = "";
+	$DireccionFiscal->departamento = $vdepartamento;
+	$DireccionFiscal->departamentoOrg = "";
+	$DireccionFiscal->habitacion = "";
+	$DireccionFiscal->distrito = $vdirecc1;
+	$DireccionFiscal->lenguaje = "es";
+	$DireccionFiscal->municipio = $vcodmu_codep;
+	$DireccionFiscal->nombreEdificio = "";
+	$DireccionFiscal->numeroParcela = "";
+	$DireccionFiscal->pais = "CO";
+	$DireccionFiscal->piso = "";
+	$DireccionFiscal->region = "";
+	$DireccionFiscal->subDivision = "";
+	$DireccionFiscal->ubicacion = "";
+	$DireccionFiscal->zonaPostal = $vpostal;	
+	
+	$factura->cliente->direccionFiscal = $DireccionFiscal;
+	
+    $factura->cliente->email = $vemail;
+	
+	
+	$InfoLegalCliente = new InformacionLegalCliente();
+	$InfoLegalCliente->codigoEstablecimiento = "00001";
+	$InfoLegalCliente->nombreRegistroRUT = $vnombre;
+	$InfoLegalCliente->numeroIdentificacion = $vnit;
+	$InfoLegalCliente->numeroIdentificacionDV = $vdv;
+	$InfoLegalCliente->tipoIdentificacion = $vtipodociden;	
+	
+	$factura->cliente->informacionLegalCliente = $InfoLegalCliente;
+	
+	
+    $factura->cliente->nombreRazonSocial  = $vnombre;
+    $factura->cliente->notificar = "SI";
+    $factura->cliente->numeroDocumento = $vnit;
+	$factura->cliente->numeroIdentificacionDV = $vdv;
+    
+	$obligacionesCliente = new Obligaciones();
 	$obligacionesCliente->obligaciones = $vobligaciones;
 	$obligacionesCliente->regimen = $vregimen;
-	
-    $factura->cliente->responsabilidadesRut[0] = $obligacionesCliente;
-	
-    $factura->cliente->tipoIdentificacion = $vtipodociden;
-    $factura->cliente->tipoPersona = $vnatjuridica;
-	
-	$vfechaemision     = substr($this->fecha , 0, -9);
-	$vfechaemision     = $vfechaemision.date(' H:i:s');
-	$vfechaemision     = date_create($vfechaemision);
-	$vfechaemision     = date_format($vfechaemision,'Y-m-d H:i:s');	
-		
-	$factura->fechaEmision = $vfechaemision;
-	
-	if($this->formapago =='CR')
-	{
-		$lafechadevencimiento	 = $this->fecvence ;
-		$lafechadevencimiento	 = date_create($lafechadevencimiento);
-		$lafechadevencimiento	 = date_format($lafechadevencimiento, 'Y-m-d');
-		
-		$factura->fechaVencimiento = $lafechadevencimiento;
-		
-		$pagos = new MediosDePago();
-		$pagos->medioPago = "ZZZ";
+	
+    $factura->cliente->responsabilidadesRut[0] = $obligacionesCliente;
+	
+    $factura->cliente->tipoIdentificacion = $vtipodociden;
+    $factura->cliente->tipoPersona = $vnatjuridica;
+	
+	$vfechaemision     = substr($this->fecha , 0, -9);
+	$vfechaemision     = $vfechaemision.date(' H:i:s');
+	$vfechaemision     = date_create($vfechaemision);
+	$vfechaemision     = date_format($vfechaemision,'Y-m-d H:i:s');	
+		
+	$factura->fechaEmision = $vfechaemision;
+	
+	if($this->formapago =='CR')
+	{
+		$lafechadevencimiento	 = $this->fecvence ;
+		$lafechadevencimiento	 = date_create($lafechadevencimiento);
+		$lafechadevencimiento	 = date_format($lafechadevencimiento, 'Y-m-d');
+		
+		$factura->fechaVencimiento = $lafechadevencimiento;
+		
+		$pagos = new MediosDePago();
+		$pagos->medioPago = "ZZZ";
 		$pagos->metodoDePago = "2";
-		$pagos->numeroDeReferencia = "01";
+		$pagos->numeroDeReferencia = "01";
 		$pagos->fechaDeVencimiento = $lafechadevencimiento;
-	}
-	else
-	{
-		$pagos = new MediosDePago();
-		$pagos->medioPago = "10";
+	}
+	else
+	{
+		$pagos = new MediosDePago();
+		$pagos->medioPago = "10";
 		$pagos->metodoDePago = "1";
-		$pagos->numeroDeReferencia = "01";	
-	}
-		
-	$factura->mediosDePago[0] = $pagos;
-	$factura->moneda = "COP";
-	$factura->redondeoAplicado = "0.00"	;
-    $factura->rangoNumeracion = $vrango;
-    $factura->tipoOperacion = "05";
-    
-	
-	$factura->tipoDocumento="01";
-	
-	$factura->consecutivoDocumento = $vconsecutivo;
-	
-	$vsql_detalle = "select d.canlista, p.codigo, p.descrip, p.codigo as codigo2, (d.preciobase*d.canlista) as preciobase, (iif(d.porciva='08','02','01')) as codigoimpuesto, d.porciva, (d.precioiva*d.canlista) as precioiva, d.descuento, (d.preciobase*d.canlista) as bas_br,dekardexid FROM dekardex d inner join material p on d.matid=p.matid where d.kardexid='".$this->kardexid ."'";
-	
-	
+		$pagos->numeroDeReferencia = "01";	
+	}
+		
+	$factura->mediosDePago[0] = $pagos;
+	$factura->moneda = "COP";
+	$factura->redondeoAplicado = "0.00"	;
+    $factura->rangoNumeracion = $vrango;
+    $factura->tipoOperacion = "05";
+    
+	
+	$factura->tipoDocumento="01";
+	
+	$factura->consecutivoDocumento = $vconsecutivo;
+	
+	$vsql_detalle = "select d.canlista, p.codigo, p.descrip, p.codigo as codigo2, (d.preciobase*d.canlista) as preciobase, (iif(d.porciva='08','02','01')) as codigoimpuesto, d.porciva, (d.precioiva*d.canlista) as precioiva, d.descuento, (d.preciobase*d.canlista) as bas_br,dekardexid FROM dekardex d inner join material p on d.matid=p.matid where d.kardexid='".$this->kardexid ."'";
+	
+	
 	 
       $nm_select = $vsql_detalle; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4382,35 +4438,35 @@ if($vvalida)
           $this->vdetalle = false;
           $this->vdetalle_erro = $this->Db->ErrorMsg();
       } 
-;
-	
-	if(isset($this->vdetalle[0][0]))
-	{
-				
+;
+	
+	if(isset($this->vdetalle[0][0]))
+	{
+				
 		for($i=0;$i<count($this->vdetalle );$i++)
-		{
-			$cant	=$this->vdetalle[$i][0];
-			$codbp	=$this->vdetalle[$i][1];
-			$desc	=$this->vdetalle[$i][2];
-			$codest	=$this->vdetalle[$i][3];
-			$base	=$this->vdetalle[$i][4];
-			$codImp	=$this->vdetalle[$i][5];
-			$Timp	=$this->vdetalle[$i][6];
-			$Timp	=$Timp;
-			$eliva	=$this->vdetalle[$i][7];
-			$eldesc	=$this->vdetalle[$i][8];
-			$bas_br	=$this->vdetalle[$i][9];
-			$tot	=$base+$eliva;
-			$tot	=strval ($tot);
-			$valun	=round(($base/$cant), 3);
-			$sec=$i+1;
-			$sec=strval($sec);
-			$vdekardexid = $this->vdetalle[$i][10];
-			
-			$vtotal      += $tot;
-			$vbasetotal  += $base;
-			$vtotalitems++;
-			$this->vseriales = "";
+		{
+			$cant	=$this->vdetalle[$i][0];
+			$codbp	=$this->vdetalle[$i][1];
+			$desc	=$this->vdetalle[$i][2];
+			$codest	=$this->vdetalle[$i][3];
+			$base	=$this->vdetalle[$i][4];
+			$codImp	=$this->vdetalle[$i][5];
+			$Timp	=$this->vdetalle[$i][6];
+			$Timp	=$Timp;
+			$eliva	=$this->vdetalle[$i][7];
+			$eldesc	=$this->vdetalle[$i][8];
+			$bas_br	=$this->vdetalle[$i][9];
+			$tot	=$base+$eliva;
+			$tot	=strval ($tot);
+			$valun	=round(($base/$cant), 3);
+			$sec=$i+1;
+			$sec=strval($sec);
+			$vdekardexid = $this->vdetalle[$i][10];
+			
+			$vtotal      += $tot;
+			$vbasetotal  += $base;
+			$vtotalitems++;
+			$this->vseriales = "";
 			 
       $nm_select = "select seriales from dekardexself where dekardexid='".$vdekardexid."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4436,79 +4492,79 @@ if($vvalida)
           $this->vseriales = false;
           $this->vseriales_erro = $this->Db->ErrorMsg();
       } 
-;
-
-			if(isset($this->vseriales[0][0]))
-			{
-				$this->vseriales = $this->vseriales[0][0];
-				if(!empty($this->vseriales))
-				{
-					$desc = $desc." -- S/N: ".$this->vseriales; 
-				}
-			}
-			
-					
-					
-			$factDetalle[$i] = new FacturaDetalle();
-			$factDetalle[$i]->cantidadPorEmpaque = "1";
-			$factDetalle[$i]->cantidadReal = $cant;
+;
+
+			if(isset($this->vseriales[0][0]))
+			{
+				$this->vseriales = $this->vseriales[0][0];
+				if(!empty($this->vseriales))
+				{
+					$desc = $desc." -- S/N: ".$this->vseriales; 
+				}
+			}
+			
+					
+					
+			$factDetalle[$i] = new FacturaDetalle();
+			$factDetalle[$i]->cantidadPorEmpaque = "1";
+			$factDetalle[$i]->cantidadReal = $cant;
 			$factDetalle[$i]->cantidadRealUnidadMedida = "WSD"; 
-			$factDetalle[$i]->cantidadUnidades = $cant;
-			$factDetalle[$i]->codigoProducto = $codbp;
+			$factDetalle[$i]->cantidadUnidades = $cant;
+			$factDetalle[$i]->codigoProducto = $codbp;
 			$factDetalle[$i]->descripcion = $desc;
 			$factDetalle[$i]->descripcionTecnica = $desc;
-			$factDetalle[$i]->estandarCodigo = "999";
-			$factDetalle[$i]->estandarCodigoProducto = $codest;
-		
-			if($eldesc>0)
-			{
-				$elmonto	= round($bas_br*(round(($eldesc/100), 2)), 2);
-				$eldesc		= round($eldesc+0, 2);
-
-				$descuentos[$t] = new cargosDescuentos();
-						$descuentos[$t]->descripcion = "DESCUENTO COMERCIAL";
-						$descuentos[$t]->indicador = 0;
+			$factDetalle[$i]->estandarCodigo = "999";
+			$factDetalle[$i]->estandarCodigoProducto = $codest;
+		
+			if($eldesc>0)
+			{
+				$elmonto	= round($bas_br*(round(($eldesc/100), 2)), 2);
+				$eldesc		= round($eldesc+0, 2);
+
+				$descuentos[$t] = new cargosDescuentos();
+						$descuentos[$t]->descripcion = "DESCUENTO COMERCIAL";
+						$descuentos[$t]->indicador = 0;
 						$descuentos[$t]->monto = $elmonto;
 						$descuentos[$t]->montoBase = round($bas_br, 2);
 						$descuentos[$t]->porcentaje = $eldesc;
 						$descuentos[$t]->secuencia = $t+1;
-
-				$factDetalle[$i]->cargosDescuentos[0] = $descuentos[$t];
-				$t=$t+1;
-			}
-		
-			$impdet[$i] = new FacturaImpuestos;
-			$impdet[$i]->baseImponibleTOTALImp = $base;
-			$impdet[$i]->codigoTOTALImp = $codImp;
-			$impdet[$i]->controlInterno = "";
-			$impdet[$i]->porcentajeTOTALImp = $Timp;
-			$impdet[$i]->unidadMedida = "";
-			$impdet[$i]->unidadMedidaTributo = "";
-			$impdet[$i]->valorTOTALImp = $eliva;
-			$impdet[$i]->valorTributoUnidad = "";
-			$factDetalle[$i]->impuestosDetalles[0] = $impdet[$i];
-
-
-			$impTot[$i] = new ImpuestosTotales;
-			$impTot[$i]->codigoTOTALImp = $codImp;
-			$impTot[$i]->montoTotal = $eliva;
-			$factDetalle[$i]->impuestosTotales[0] = $impTot[$i];
-
-			$factDetalle[$i]->marca = "HKA";
-			$factDetalle[$i]->muestraGratis = "0";
-			$factDetalle[$i]->precioTotal = $tot;
-			$factDetalle[$i]->precioTotalSinImpuestos = $base;
-			$factDetalle[$i]->precioVentaUnitario = $valun;
-			$factDetalle[$i]->secuencia = $sec;
-			$factDetalle[$i]->unidadMedida = "WSD";		
-
+
+				$factDetalle[$i]->cargosDescuentos[0] = $descuentos[$t];
+				$t=$t+1;
+			}
+		
+			$impdet[$i] = new FacturaImpuestos;
+			$impdet[$i]->baseImponibleTOTALImp = $base;
+			$impdet[$i]->codigoTOTALImp = $codImp;
+			$impdet[$i]->controlInterno = "";
+			$impdet[$i]->porcentajeTOTALImp = $Timp;
+			$impdet[$i]->unidadMedida = "";
+			$impdet[$i]->unidadMedidaTributo = "";
+			$impdet[$i]->valorTOTALImp = $eliva;
+			$impdet[$i]->valorTributoUnidad = "";
+			$factDetalle[$i]->impuestosDetalles[0] = $impdet[$i];
+
+
+			$impTot[$i] = new ImpuestosTotales;
+			$impTot[$i]->codigoTOTALImp = $codImp;
+			$impTot[$i]->montoTotal = $eliva;
+			$factDetalle[$i]->impuestosTotales[0] = $impTot[$i];
+
+			$factDetalle[$i]->marca = "HKA";
+			$factDetalle[$i]->muestraGratis = "0";
+			$factDetalle[$i]->precioTotal = $tot;
+			$factDetalle[$i]->precioTotalSinImpuestos = $base;
+			$factDetalle[$i]->precioVentaUnitario = $valun;
+			$factDetalle[$i]->secuencia = $sec;
+			$factDetalle[$i]->unidadMedida = "WSD";		
+
 			$factura->detalleDeFactura [$i] = $factDetalle[$i]; 
-					
+					
 		}
-	}
-	
-    		
-	$vsql_tipo_impuesto = "select sum(preciobase*canmat) as base, iif(porciva='08','02','01') as codigoimpuesto, porciva as porcentaje, sum(precioiva*canlista) as iva from dekardex where kardexid='".$this->kardexid ."' group by porciva";
+	}
+	
+    		
+	$vsql_tipo_impuesto = "select sum(preciobase*canmat) as base, iif(porciva='08','02','01') as codigoimpuesto, porciva as porcentaje, sum(precioiva*canlista) as iva from dekardex where kardexid='".$this->kardexid ."' group by porciva";
 	 
       $nm_select = $vsql_tipo_impuesto; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4534,35 +4590,35 @@ if($vvalida)
           $this->dt_impfac = false;
           $this->dt_impfac_erro = $this->Db->ErrorMsg();
       } 
-;
-			
-	if(isset($this->dt_impfac[0][0]))
-	{								
-		for($t=0;$t<count($this->dt_impfac );$t++)
-		{		
-			$base		=$this->dt_impfac[$t][0];
-			$base		=strval($base);
-			$codImp		=$this->dt_impfac[$t][1];
-			$codImp		=strval($codImp);
-			$Timp		=$this->dt_impfac[$t][2];
-			$Timp		=$Timp;
-			$eliva		=$this->dt_impfac[$t][3];
-					
-			$objImpGen[$t] = new FacturaImpuestos;
-					
-			$objImpGen[$t]->baseImponibleTOTALImp = $base;
-			$objImpGen[$t]->codigoTOTALImp = $codImp;
-			$objImpGen[$t]->controlInterno = "";
-			$objImpGen[$t]->porcentajeTOTALImp = $Timp;
-			$objImpGen[$t]->unidadMedida = "";
-			$objImpGen[$t]->unidadMedidaTributo = "";
-			$objImpGen[$t]->valorTOTALImp = $eliva;
-			$objImpGen[$t]->valorTributoUnidad = "0.00";
-   
-   			$factura->impuestosGenerales[$t] = $objImpGen[$t];
-		}
-	}
-	
+;
+			
+	if(isset($this->dt_impfac[0][0]))
+	{								
+		for($t=0;$t<count($this->dt_impfac );$t++)
+		{		
+			$base		=$this->dt_impfac[$t][0];
+			$base		=strval($base);
+			$codImp		=$this->dt_impfac[$t][1];
+			$codImp		=strval($codImp);
+			$Timp		=$this->dt_impfac[$t][2];
+			$Timp		=$Timp;
+			$eliva		=$this->dt_impfac[$t][3];
+					
+			$objImpGen[$t] = new FacturaImpuestos;
+					
+			$objImpGen[$t]->baseImponibleTOTALImp = $base;
+			$objImpGen[$t]->codigoTOTALImp = $codImp;
+			$objImpGen[$t]->controlInterno = "";
+			$objImpGen[$t]->porcentajeTOTALImp = $Timp;
+			$objImpGen[$t]->unidadMedida = "";
+			$objImpGen[$t]->unidadMedidaTributo = "";
+			$objImpGen[$t]->valorTOTALImp = $eliva;
+			$objImpGen[$t]->valorTributoUnidad = "0.00";
+   
+   			$factura->impuestosGenerales[$t] = $objImpGen[$t];
+		}
+	}
+	
 	 
       $nm_select = "select (iif(porciva='08','02','01')) as codigoimpuesto, sum(precioiva*canlista) as iva, sum(preciobase*canlista) as base from dekardex where kardexid='".$this->kardexid  ."' group by iif(porciva='08','02','01')"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4601,70 +4657,70 @@ if($vvalida)
           $this->dt_imptfac_erro = $this->Db->ErrorMsg();
       } 
      } 
-;
-	
-	if(isset($this->dt_imptfac[0][0]))
-	{
-		$codImp	= $this->dt_imptfac[0][0];
-		$codImp	= strval($codImp);
-		$eliva	= $this->dt_imptfac[0][1];
-		$base	= $this->dt_imptfac[0][2];
-		$tot	= $base+$eliva;
-
-		$impTot[0] = new ImpuestosTotales;
-		$impTot[0]->codigoTOTALImp = $codImp;
-		$impTot[0]->montoTotal = $eliva;
-		$factura->impuestosTotales[0] = $impTot[0];
-	}	
-	
-	$factura->totalBaseImponible = $base;
-    $factura->totalBrutoConImpuesto = $tot;
-    $factura->totalMonto =$tot;
-    $factura->totalProductos=$vtotalitems;
-	$factura->totalSinImpuestos=$base;
-	
-
-	$adjuntos="0";
-	$params = array(
-         'tokenEmpresa' =>  $TokenEnterprise,
-         'tokenPassword' =>$TokenAutorizacion,
-         'factura' => $factura ,
-         'adjuntos' => $adjuntos
-	);
-	
-	
-	$resultado = $WebService->enviar($vServidor,$options,$params);
-	
-	
-	 echo "<div style='width:100%;padding:50px;'>";
-	 echo "<h1>Resultado de la Emisión</h1>";
-	if($resultado["codigo"]==200 or $resultado["codigo"]==201)
-	{
-			echo "<div style='padding:15px;border-radius:10px;margin-bottom:10px;background:#adcbdf;border:1px solid #adcbdf;font-size:18px;width:90%;'>La factura: ", $vpjfe."-".$vconsecutivo, " se ha enviado con éxito!</div>";
-		
-		error_reporting(E_ERROR);
-		$WebService2 = new WebService();
-		$options2 = array('exceptions' => true, 'trace' => true);
-
-		$params2 = array (
-						'tokenEmpresa'	=>$TokenEnterprise,
-						'tokenPassword'	=>$TokenAutorizacion,
-						'documento'		=>$vpjfe.$vconsecutivo);
-
-		$descargas = $WebService2->Descargas($vServidor,$options2,$params2,'pdf');
-		
-		if($descargas["codigo"]==200 or $descargas["codigo"]==201)
-		{
-			$decoded 	= $descargas["documento"];
-			$decoded	= $decoded;
-			$vcufe		= $resultado["cufe"];
-			$vcufe		=  strval($vcufe);
-			$vestado	= $resultado["codigo"];
-			$vestado	=  strval($vestado);
-			$vavisos	=  implode(";", $resultado);
-			
-			$sql="insert into cloud_kardex SET cufe = '".$vcufe."', enlace_pdf='".$decoded."', estado='".$vestado."', avisos='".$vavisos."', id_empresa='".$this->sc_temp_gidempresa."',tipo='FV',prefijo='".$this->codprefijo ."',numero='".$this->numero ."',tercero='".$this->nit_tercero ."'";
-			
+;
+	
+	if(isset($this->dt_imptfac[0][0]))
+	{
+		$codImp	= $this->dt_imptfac[0][0];
+		$codImp	= strval($codImp);
+		$eliva	= $this->dt_imptfac[0][1];
+		$base	= $this->dt_imptfac[0][2];
+		$tot	= $base+$eliva;
+
+		$impTot[0] = new ImpuestosTotales;
+		$impTot[0]->codigoTOTALImp = $codImp;
+		$impTot[0]->montoTotal = $eliva;
+		$factura->impuestosTotales[0] = $impTot[0];
+	}	
+	
+	$factura->totalBaseImponible = $base;
+    $factura->totalBrutoConImpuesto = $tot;
+    $factura->totalMonto =$tot;
+    $factura->totalProductos=$vtotalitems;
+	$factura->totalSinImpuestos=$base;
+	
+
+	$adjuntos="0";
+	$params = array(
+         'tokenEmpresa' =>  $TokenEnterprise,
+         'tokenPassword' =>$TokenAutorizacion,
+         'factura' => $factura ,
+         'adjuntos' => $adjuntos
+	);
+	
+	
+	$resultado = $WebService->enviar($vServidor,$options,$params);
+	
+	
+	 echo "<div style='width:100%;padding:50px;'>";
+	 echo "<h1>Resultado de la Emisión</h1>";
+	if($resultado["codigo"]==200 or $resultado["codigo"]==201)
+	{
+			echo "<div style='padding:15px;border-radius:10px;margin-bottom:10px;background:#adcbdf;border:1px solid #adcbdf;font-size:18px;width:90%;'>La factura: ", $vpjfe."-".$vconsecutivo, " se ha enviado con éxito!</div>";
+		
+		error_reporting(E_ERROR);
+		$WebService2 = new WebService();
+		$options2 = array('exceptions' => true, 'trace' => true);
+
+		$params2 = array (
+						'tokenEmpresa'	=>$TokenEnterprise,
+						'tokenPassword'	=>$TokenAutorizacion,
+						'documento'		=>$vpjfe.$vconsecutivo);
+
+		$descargas = $WebService2->Descargas($vServidor,$options2,$params2,'pdf');
+		
+		if($descargas["codigo"]==200 or $descargas["codigo"]==201)
+		{
+			$decoded 	= $descargas["documento"];
+			$decoded	= $decoded;
+			$vcufe		= $resultado["cufe"];
+			$vcufe		=  strval($vcufe);
+			$vestado	= $resultado["codigo"];
+			$vestado	=  strval($vestado);
+			$vavisos	=  implode(";", $resultado);
+			
+			$sql="insert into cloud_kardex SET cufe = '".$vcufe."', enlace_pdf='".$decoded."', estado='".$vestado."', avisos='".$vavisos."', id_empresa='".$this->sc_temp_gidempresa."',tipo='FV',prefijo='".$this->codprefijo ."',numero='".$this->numero ."',tercero='".$this->nit_tercero ."'";
+			
 			 
       if (in_array(strtolower($this->Ini->nm_con_conn_mysql['tpbanco']), $this->Ini->nm_bases_sybase))
       { 
@@ -4710,13 +4766,13 @@ if($vvalida)
           $this->vsi = false;
           $this->vsi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-			
-			if(isset($this->vsi[0][0]))
-			{
-				$sql="update cloud_kardex SET cufe = '".$vcufe."', enlace_pdf='".$decoded."', estado='".$vestado."', avisos='".$vavisos."' where id_empresa='".$this->sc_temp_gidempresa."' and tipo='FV' and prefijo='".$this->codprefijo ."' and numero='".$this->numero ."'";
-			}
-			
+;
+			
+			if(isset($this->vsi[0][0]))
+			{
+				$sql="update cloud_kardex SET cufe = '".$vcufe."', enlace_pdf='".$decoded."', estado='".$vestado."', avisos='".$vavisos."' where id_empresa='".$this->sc_temp_gidempresa."' and tipo='FV' and prefijo='".$this->codprefijo ."' and numero='".$this->numero ."'";
+			}
+			
 			
      $nm_select = $sql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4728,47 +4784,47 @@ if($vvalida)
              exit;
          }
          $rf->Close();
-      ;
-			
-			$vdoc64  = $decoded;
-			$decoded = base64_decode($vdoc64);
-			$file    = "../blank_generar_pdf_fe/".$this->codprefijo .$this->numero .'.pdf';
-			file_put_contents($file, $decoded);
-		}
-	}
-	else
-	{
-		
-			if($resultado["codigo"]==101)
-			{
-				echo "La factura", $vpjfe."-".$vconsecutivo, " no se puede enviar porque ya ha sido enviada.";
-				
-			}
-			else
-			{
-				print_r("Código: " .$resultado["codigo"] ."</br>Mensaje:  " .$resultado["mensaje"] ."</br>Fecha de Respuesta:  " .$resultado["fechaRespuesta"] ."</br>Mensaje Validación:  " );
-				for($i = 0; $i < $max;$i++)
-				{
-					print_r("</br>" .$resultado["mensajesValidacion"]->string[$i]  );
-				}
-				
-				echo "<br><br>";
-				print_r($resultado);
-			}
-	}
-	echo "</div>";
-	
-}
-
-if(!$vvalida)
-{
-	echo $vmensaje;
+      ;
+			
+			$vdoc64  = $decoded;
+			$decoded = base64_decode($vdoc64);
+			$file    = "../blank_generar_pdf_fe/".$this->codprefijo .$this->numero .'.pdf';
+			file_put_contents($file, $decoded);
+		}
+	}
+	else
+	{
+		
+			if($resultado["codigo"]==101)
+			{
+				echo "La factura", $vpjfe."-".$vconsecutivo, " no se puede enviar porque ya ha sido enviada.";
+				
+			}
+			else
+			{
+				print_r("Código: " .$resultado["codigo"] ."</br>Mensaje:  " .$resultado["mensaje"] ."</br>Fecha de Respuesta:  " .$resultado["fechaRespuesta"] ."</br>Mensaje Validación:  " );
+				for($i = 0; $i < $max;$i++)
+				{
+					print_r("</br>" .$resultado["mensajesValidacion"]->string[$i]  );
+				}
+				
+				echo "<br><br>";
+				print_r($resultado);
+			}
+	}
+	echo "</div>";
+	
+}
+
+if(!$vvalida)
+{
+	echo $vmensaje;
 }
 if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
     }  
     $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
- 
+  
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
 }  
     $this->NM_buffer = ob_get_contents();
@@ -4829,7 +4885,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 }
 ?>
-        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery/js/jquery.js"></script>
+        <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
         <script type="text/javascript">
           var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
@@ -4846,8 +4902,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       <table class="scGridTabela" align="center"><tr><td>
 <?php
       $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
- error_reporting(E_ERROR);
-	
+  error_reporting(E_ERROR);
+	
  
       $nm_select = "select tokenempresa,tokenpassword,servidor1 from cloud_webservicefe order by idwebservicefe desc limit 1"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4877,32 +4933,32 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           $vtoken = false;
           $vtoken_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-	
-if(isset($vtoken[0][0]))
-{
-	$vtokenempresa = $vtoken[0][0];
-	$vtokenpassword= $vtoken[0][1];
-	$vservidor1    = $vtoken[0][2];
-		
-	$WebService = new WebService();
-	
-	$options = array('exceptions' => true, 'trace' => true);
-	$params;
-		
-	$params = array('tokenEmpresa' =>  $vtokenempresa,'tokenPassword' => $vtokenpassword);
-
-	if($resultado = $WebService->foliosrestantes($vservidor1,$options,$params))
-	{
-		if($resultado["codigo"]==200)
-		{
-			echo "Folios Restantes: ".$resultado["foliosRestantes"].":<br>";	
-		}
-		else
-		{
-			echo json_encode($resultado);
-		}
-	}
+;
+	
+if(isset($vtoken[0][0]))
+{
+	$vtokenempresa = $vtoken[0][0];
+	$vtokenpassword= $vtoken[0][1];
+	$vservidor1    = $vtoken[0][2];
+		
+	$WebService = new WebService();
+	
+	$options = array('exceptions' => true, 'trace' => true);
+	$params;
+		
+	$params = array('tokenEmpresa' =>  $vtokenempresa,'tokenPassword' => $vtokenpassword);
+
+	if($resultado = $WebService->foliosrestantes($vservidor1,$options,$params))
+	{
+		if($resultado["codigo"]==200)
+		{
+			echo "Folios Restantes: ".$resultado["foliosRestantes"].":<br>";	
+		}
+		else
+		{
+			echo json_encode($resultado);
+		}
+	}
 }
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
 ?>
@@ -4943,7 +4999,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 }
 ?>
-        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery/js/jquery.js"></script>
+        <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
         <script type="text/javascript">
           var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
@@ -4988,61 +5044,67 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['s
        $this->sn_cufe = $this->rs_grid->fields[14] ;  
        $this->sn_enlacepdf = $this->rs_grid->fields[15] ;  
        $this->sn_enlacexml = $this->rs_grid->fields[16] ;  
-       $this->cliente = $this->rs_grid->fields[17] ;  
+       $this->sn_fe_validacion = $this->rs_grid->fields[17] ;  
+       $this->sn_proveedor = $this->rs_grid->fields[18] ;  
+       $this->sn_token_emp = $this->rs_grid->fields[19] ;  
+       $this->sn_token_pass = $this->rs_grid->fields[20] ;  
+       $this->sn_servidor = $this->rs_grid->fields[21] ;  
+       $this->cliente = $this->rs_grid->fields[22] ;  
        $this->cliente = (string)$this->cliente;
-       $this->ndoc = $this->rs_grid->fields[18] ;  
+       $this->ndoc = $this->rs_grid->fields[23] ;  
       $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
- ?>
-<style>
-	html{
-		
-		background:white;
-		padding:10px;
-	}
-	body{
-		background:white;
-		width:100%;
-		border:0px;
-		text-align:center;
-		border-radius:10px;
-	}
-	table{
-		
-		width:100%;
-	}
-	input{
-		
-		border-radius:10px;
-		padding:10px;
-		color:white;
-		background:#024674;
-		cursor:pointer;
-	}
-	input:hover{
-		
-		border-radius:10px;
-		padding:10px;
-		color:#024674;
-		background:white;
-		cursor:pointer;
-	}
-</style>
-<?php
-
-$TokenEnterprise   = '';
-$TokenAutorizacion = '';
-$vPFe     = 'FE';
-$vPref    = '';
-$vtipotns = "FV";
-$vtipofe  = "FV";
-$vservidor= "";
-$vpjprueba= "";
-$vmodo    = "DESARROLLO";
-$vmen     = ""; 
-
-$vsql =  "select prefijo,prefijo_prueba from cloud_prefijos where tipo='".$vtipofe."' and cod_prefijo='".$this->codprefijo ."'";
+  ?>
+<style>
+	html{
+		
+		background:white;
+		padding:10px;
+	}
+	body{
+		background:white;
+		width:100%;
+		border:0px;
+		text-align:center;
+		border-radius:10px;
+	}
+	table{
+		
+		width:100%;
+	}
+	input{
+		
+		border-radius:10px;
+		padding:10px;
+		color:white;
+		background:#024674;
+		cursor:pointer;
+	}
+	input:hover{
+		
+		border-radius:10px;
+		padding:10px;
+		color:#024674;
+		background:white;
+		cursor:pointer;
+	}
+</style>
+<?php
+
+$TokenEnterprise   = '';
+$TokenAutorizacion = '';
+$vPFe     = 'FE';
+$vPref    = '';
+$vtipotns = "FV";
+$vtipofe  = "FV";
+$vservidor= "";
+$vpjprueba= "";
+$vmodo    = "DESARROLLO";
+$vmen     = ""; 
+$vproveedor = "";
+
+$vsql =  "select prefijo,prefijo_prueba from cloud_prefijos where tipo='".$vtipofe."' and cod_prefijo='".$this->codprefijo ."'";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -5072,22 +5134,22 @@ $vsql =  "select prefijo,prefijo_prueba from cloud_prefijos where tipo='".$vtipo
           $this->vpjfe2 = false;
           $this->vpjfe2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-if(isset($this->vpjfe2[0][0]))
-{
-	$vPref = $this->vpjfe2[0][0];
-	$vpjprueba = $this->vpjfe2[0][1];
-}
-else
-{
-	$vPFe  = "";
-}
-
-if($vPFe=='FE')
-{
-	$vsql = "select if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword,if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,modo from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."'";
-	
+;
+
+if(isset($this->vpjfe2[0][0]))
+{
+	$vPref = $this->vpjfe2[0][0];
+	$vpjprueba = $this->vpjfe2[0][1];
+}
+else
+{
+	$vPFe  = "";
+}
+
+if($vPFe=='FE')
+{
+	$vsql = "select if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword,if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,modo,proveedor from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."'";
+	
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -5113,55 +5175,59 @@ if($vPFe=='FE')
           $this->ds_fv = false;
           $this->ds_fv_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-	if(isset($this->ds_fv[0][0]) and (isset($this->ds_fv[0][1])) and (isset($this->ds_fv[0][2])))
-	{
-		if(!empty(($this->ds_fv[0][0])) and (!empty($this->ds_fv[0][1])) and (!empty($this->ds_fv[0][2])))
-		{
-			error_reporting(E_ERROR);
-			$WebService = new WebService();
-			$options = array('exceptions' => true, 'trace' => true);
-
-			$params;
-			$vservidor = $this->ds_fv[0][2];
-			$TokenEnterprise = $this->ds_fv[0][0];
-			$TokenAutorizacion = $this->ds_fv[0][1];
-			$vmodo = $this->ds_fv[0][3];
-			
-			if($vmodo=="DESARROLLO")
-			{
-				$vPref = $vpjprueba;
-			}
-			
-			$params = array (
-						'tokenEmpresa'	=>$TokenEnterprise,
-						'tokenPassword'	=>$TokenAutorizacion,
-						'documento'		=>$vPref.intval($this->numero ));
-
-			$resultado = $WebService->getEstadoDocumento($vservidor,$options,$params);
-
-
-			if($resultado["codigo"]==200)
-			{
-				$vmen = "<center style='margin-bottom:10px;'>Documento ".$vPref."/".intval($this->numero )." Se ha aceptado y procesado con éxito!"."</center><br>";
-				
-				$vcufe    = $resultado["cufe"];
-				$vfecha   = $this->fecha ;
-				$vfecha   = substr($vfecha, 0, -9);
-				$vfecha   = date_create($vfecha);
-				$vfecha   = date_format($vfecha,'Y-m-d');
-				$vestado  = $resultado["codigo"];
-				$vavisos  = json_encode($resultado);
-				$vnumero  = $vPref.intval($this->numero );
-				$vtercero =$this->nit_tercero ;
-				$vqr      = $resultado["cadenaCodigoQR"];
-				
-
-				$vfechavalidacion = $resultado["fechaDocumento"];
-				$vfechavalidacion = substr($vfechavalidacion, 0, 18);
-
-				$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vPref."',sn_fe_validacion='".$vfechavalidacion."' where kardexid='".$this->kardexid ."'";
-				
+;
+	if(isset($this->ds_fv[0][0]) and (isset($this->ds_fv[0][1])) and (isset($this->ds_fv[0][2])))
+	{
+		if(!empty(($this->ds_fv[0][0])) and (!empty($this->ds_fv[0][1])) and (!empty($this->ds_fv[0][2])))
+		{
+			error_reporting(E_ERROR);
+			$WebService = new WebService();
+			$options = array('exceptions' => true, 'trace' => true);
+
+			$params;
+			$vservidor = $this->ds_fv[0][2];
+			$TokenEnterprise = $this->ds_fv[0][0];
+			$TokenAutorizacion = $this->ds_fv[0][1];
+			$vmodo = $this->ds_fv[0][3];
+			$vproveedor = $this->ds_fv[0][4];
+			
+			if($vmodo=="DESARROLLO")
+			{
+				$vPref = $vpjprueba;
+			}
+			
+			switch($vproveedor)
+			{
+				case 'HKA':
+					$params = array (
+								'tokenEmpresa'	=>$TokenEnterprise,
+								'tokenPassword'	=>$TokenAutorizacion,
+								'documento'		=>$vPref.intval($this->numero ));
+
+					$resultado = $WebService->getEstadoDocumento($vservidor,$options,$params);
+
+
+					if($resultado["codigo"]==200)
+					{
+						$vmen = "<center style='margin-bottom:10px;'>Documento ".$vPref."/".intval($this->numero )." Se ha aceptado y procesado con éxito!"."</center><br>";
+
+						$vcufe    = $resultado["cufe"];
+						$vfecha   = $this->fecha ;
+						$vfecha   = substr($vfecha, 0, -9);
+						$vfecha   = date_create($vfecha);
+						$vfecha   = date_format($vfecha,'Y-m-d');
+						$vestado  = $resultado["codigo"];
+						$vavisos  = json_encode($resultado);
+						$vnumero  = $vPref.intval($this->numero );
+						$vtercero =$this->nit_tercero ;
+						$vqr      = $resultado["cadenaCodigoQR"];
+
+
+						$vfechavalidacion = $resultado["fechaDocumento"];
+						$vfechavalidacion = substr($vfechavalidacion, 0, 18);
+
+						$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vPref."',sn_fe_validacion='".$vfechavalidacion."' where kardexid='".$this->kardexid ."'";
+						
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -5177,38 +5243,38 @@ if($vPFe=='FE')
              exit;
          }
          $rf->Close();
-      ;
-
-				$vruta = $_SERVER["DOCUMENT_ROOT"];
-
-				if (!file_exists($vruta.'/qr'))
-				{
-					mkdir($vruta.'/qr', 0777, true);
-				}
-				
-				sc_include_library("prj", "qr", "qrlib.php", true, true);
-				sc_include_library("prj", "php-image-magician", "php_image_magician.php", true, true);
-
-				$vrutaqr  = $vruta.'/qr/'.$vPref.intval($this->numero ).'.png';
-				$vrutaqr2 = $vruta.'/qr/'.$vPref.intval($this->numero ).'.bmp';
-
-				if(!empty($vcufe))
-				{
-					QRcode::png($vqr,$vrutaqr,QR_ECLEVEL_H,12,5);
-
-					$magicianObj = new imageLib($vrutaqr);
-					$magicianObj -> saveImage($vrutaqr2);  
-
-					$path = $vrutaqr;
-
-					$type = pathinfo($path, PATHINFO_EXTENSION);
-
-					$data = file_get_contents($path);
-
-					$base64 = 'data:image/' .$type.';base64,'.base64_encode($data);
-
-					$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr2."',sn_qr_base64='".$base64."' where kardexid='".$this->kardexid ."'";
-					
+      ;
+
+						$vruta = $_SERVER["DOCUMENT_ROOT"];
+
+						if (!file_exists($vruta.'/qr'))
+						{
+							mkdir($vruta.'/qr', 0777, true);
+						}
+
+						sc_include_library("prj", "qr", "qrlib.php", true, true);
+						sc_include_library("prj", "php-image-magician", "php_image_magician.php", true, true);
+
+						$vrutaqr  = $vruta.'/qr/'.$vPref.intval($this->numero ).'.png';
+						$vrutaqr2 = $vruta.'/qr/'.$vPref.intval($this->numero ).'.bmp';
+
+						if(!empty($vcufe))
+						{
+							QRcode::png($vqr,$vrutaqr,QR_ECLEVEL_H,12,5);
+
+							$magicianObj = new imageLib($vrutaqr);
+							$magicianObj -> saveImage($vrutaqr2);  
+
+							$path = $vrutaqr;
+
+							$type = pathinfo($path, PATHINFO_EXTENSION);
+
+							$data = file_get_contents($path);
+
+							$base64 = 'data:image/' .$type.';base64,'.base64_encode($data);
+
+							$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr2."',sn_qr_base64='".$base64."',sn_proveedor='".$vproveedor."',sn_token_emp='".$TokenEnterprise."',sn_token_pass='".$TokenAutorizacion."',sn_servidor='".$vservidor."' where kardexid='".$this->kardexid ."'";
+							
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -5224,11 +5290,11 @@ if($vPFe=='FE')
              exit;
          }
          $rf->Close();
-      ;
-
-					$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."', id_empresa='".$this->sc_temp_gidempresa."',tipo='FV',prefijo='".$this->codprefijo ."',numero='".intval($this->numero )."',tercero='".$vtercero."',fecha_factura='".$vfecha."',horacrea='".$this->horacrea ."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$base64."'";
-
-					 
+      ;
+
+							$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."', id_empresa='".$this->sc_temp_gidempresa."',tipo='FV',prefijo='".$this->codprefijo ."',numero='".intval($this->numero )."',tercero='".$vtercero."',fecha_factura='".$vfecha."',horacrea='".$this->horacrea ."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$base64."'";
+
+							 
       if (in_array(strtolower($this->Ini->nm_con_conn_mysql['tpbanco']), $this->Ini->nm_bases_sybase))
       { 
           $nm_select = "select * from cloud_kardex where id_empresa='".$this->sc_temp_gidempresa."' and tipo='FV' and prefijo='".$this->codprefijo  ."' and numero='".intval($this->numero  )."'"; 
@@ -5273,14 +5339,14 @@ if($vPFe=='FE')
           $this->vsi = false;
           $this->vsi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-					if(isset($this->vsi[0][0]))
-					{
-						$sql="update cloud_kardex SET cufe = '".$vcufe."', numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."',qr_base64='".$base64."' where id_empresa='".$this->sc_temp_gidempresa."' and tipo='FV' and prefijo='".$this->codprefijo ."' and numero='".intval($this->numero )."'";
-					}
-
-					
+;
+
+							if(isset($this->vsi[0][0]))
+							{
+								$sql="update cloud_kardex SET cufe = '".$vcufe."', numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."',qr_base64='".$base64."' where id_empresa='".$this->sc_temp_gidempresa."' and tipo='FV' and prefijo='".$this->codprefijo ."' and numero='".intval($this->numero )."'";
+							}
+
+							
      $nm_select = $sql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -5291,10 +5357,168 @@ if($vPFe=='FE')
              exit;
          }
          $rf->Close();
-      ;
-
-					$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
-
+      ;
+
+							$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
+
+							 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiCUFETNS = array();
+      $this->vsicufetns = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiCUFETNS[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsicufetns[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiCUFETNS = false;
+          $this->vSiCUFETNS_erro = $this->Db->ErrorMsg();
+          $this->vsicufetns = false;
+          $this->vsicufetns_erro = $this->Db->ErrorMsg();
+      } 
+;
+							if(isset($this->vsicufetns[0][0]))
+							{
+								$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
+
+								 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiCUFETNS2 = array();
+      $this->vsicufetns2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiCUFETNS2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsicufetns2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiCUFETNS2 = false;
+          $this->vSiCUFETNS2_erro = $this->Db->ErrorMsg();
+          $this->vsicufetns2 = false;
+          $this->vsicufetns2_erro = $this->Db->ErrorMsg();
+      } 
+;
+								if(isset($this->vsicufetns2[0][0]))
+								{
+									$vsql_update = "update kardex set cufe='".$vcufe."',estadodian='EXITOSA' where kardexid='".$this->kardexid ."'";
+									
+     $nm_select = $vsql_update; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+								}
+							}
+
+							$options = array('exceptions' => true, 'trace' => true);
+							$params;
+
+							$params = array('tokenEmpresa' => $TokenEnterprise,'tokenPassword' => $TokenAutorizacion,'documento' => $vPref.intval($this->numero ));
+
+							if($resultado = $WebService->Descargas($vservidor,$options,$params,'xml'))
+							{
+								if(!empty($resultado["documento"]))
+								{
+									$decoded = base64_decode($resultado["documento"]);
+									$decoded2= $resultado["documento"];
+
+									$file = $vPref.intval($this->numero ).'.xml';
+									$vsql = "update cloud_kardex set xml='".$decoded2."' where numero_fe='".$vPref.intval($this->numero )."' and numero_fe is not null and numero_fe <> '' and id_empresa='".$this->sc_temp_gidempresa."'";
+									
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Ini->nm_db_conn_mysql->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_mysql->ErrorMsg());
+             exit;
+         }
+         $rf->Close();
+      ;
+
+									$vruta_file  = $_SERVER["DOCUMENT_ROOT"].'/xmls/'.$file;
+									$vruta_file2 = $_SERVER["DOCUMENT_ROOT"].'/blank_generar_pdf_fe/'.$file;
+									file_put_contents($vruta_file, $decoded);
+									file_put_contents($vruta_file2, $decoded);
+								}
+							}
+						 }
+
+						
+
+					}
+					else
+					{
+						$vmen = "<center style='margin-bottom:10px;'>Documento ".$vPref."/".intval($this->numero )." No se ha envido y/o aceptado con éxito!"."</center><br>";
+					}
+
+					$fh = fopen("mensaje.txt", 'w') or die("Se produjo un error al crear el archivo log.");
+
+					$texto = json_encode($resultado);
+
+					fwrite($fh, $texto) or die("No se pudo escribir en el archivo log.");
+					fclose($fh);
+
+					if(!empty($resultado["xml"]))
+					{
+						$vdecoded = base64_decode($resultado["xml"]);
+						$vfile = 'xml.xml';
+						file_put_contents($vfile, $vdecoded);
+
+						$vmen .= "<a href='../cEnviarFactura/xml.xml' target='_blank'>Ver XML</a><br>";
+					}
+
+					$vmen .= "<a href='../grid_kardex_fv_tns/mensaje.txt' target='_blank'>Ver log</a><br><br>";
+
+					echo $vmen;
+					
+				break;
+					
+				case 'FACILWEB':
+					
+					$sihay = false;
+
+					$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
+
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -5324,12 +5548,19 @@ if($vPFe=='FE')
           $this->vsicufetns = false;
           $this->vsicufetns_erro = $this->Db->ErrorMsg();
       } 
-;
-					if(isset($this->vsicufetns[0][0]))
-					{
-						$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
-
-						 
+;
+					if(isset($this->vsicufetns[0][0]))
+					{
+						$sihay = true;
+					}
+					else
+					{
+						$sihay = false;
+					}
+
+					$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
+
+					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -5358,11 +5589,26 @@ if($vPFe=='FE')
           $this->vsicufetns2 = false;
           $this->vsicufetns2_erro = $this->Db->ErrorMsg();
       } 
-;
-						if(isset($this->vsicufetns2[0][0]))
-						{
-							$vsql_update = "update kardex set cufe='".$vcufe."',estadodian='EXITOSA' where kardexid='".$this->kardexid ."'";
-							
+;
+					if(isset($this->vsicufetns2[0][0]))
+					{
+						$sihay = true;
+					}
+					else
+					{
+						$sihay = false;
+					}
+
+					if($sihay)
+					{
+						$vsql_update = "update kardex set cufe=sn_cufe,estadodian='EXITOSA' where kardexid='".$this->kardexid ."'";
+						if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+						
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -5378,86 +5624,33 @@ if($vPFe=='FE')
              exit;
          }
          $rf->Close();
-      ;
-						}
-					}
-					
-					$options = array('exceptions' => true, 'trace' => true);
-					$params;
-
-					$params = array('tokenEmpresa' => $TokenEnterprise,'tokenPassword' => $TokenAutorizacion,'documento' => $vPref.intval($this->numero ));
-
-					if($resultado = $WebService->Descargas($vservidor,$options,$params,'xml'))
-					{
-						if(!empty($resultado["documento"]))
-						{
-							$decoded = base64_decode($resultado["documento"]);
-							$decoded2= $resultado["documento"];
-
-							$file = $vPref.intval($this->numero ).'.xml';
-							$vsql = "update cloud_kardex set xml='".$decoded2."' where numero_fe='".$vPref.intval($this->numero )."' and numero_fe is not null and numero_fe <> '' and id_empresa='".$this->sc_temp_gidempresa."'";
-							
-     $nm_select = $vsql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Ini->nm_db_conn_mysql->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_mysql->ErrorMsg());
-             exit;
-         }
-         $rf->Close();
-      ;
-
-							$vruta_file  = $_SERVER["DOCUMENT_ROOT"].'/xmls/'.$file;
-							$vruta_file2 = $_SERVER["DOCUMENT_ROOT"].'/blank_generar_pdf_fe/'.$file;
-							file_put_contents($vruta_file, $decoded);
-							file_put_contents($vruta_file2, $decoded);
-						}
-					}
-				 }
-
-				
-				
-			}
-			else
-			{
-				$vmen = "<center style='margin-bottom:10px;'>Documento ".$vPref."/".intval($this->numero )." No se ha envido y/o aceptado con éxito!"."</center><br>";
-			}
-			
-			$fh = fopen("mensaje.txt", 'w') or die("Se produjo un error al crear el archivo log.");
-
-			$texto = json_encode($resultado);
-
-			fwrite($fh, $texto) or die("No se pudo escribir en el archivo log.");
-			fclose($fh);
-
-			if(!empty($resultado["xml"]))
-			{
-				$vdecoded = base64_decode($resultado["xml"]);
-				$vfile = 'xml.xml';
-				file_put_contents($vfile, $vdecoded);
-
-				$vmen .= "<a href='../cEnviarFactura/xml.xml' target='_blank'>Ver XML</a><br>";
-			}
-
-			$vmen .= "<a href='../grid_kardex_fv_tns/mensaje.txt' target='_blank'>Ver log</a><br><br>";
-
-			echo $vmen;
-		}
-	
-	}
-	
-}
-else
-{
-	echo "Documento ".$this->codprefijo ."/".intval($this->numero )." No contiene resolución de F. Electrónica!"."<br>";
+      ;
+						if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+					}
+					
+					echo "Estado consultado.";
+					
+				break;
+			}
+		}
+	
+	}
+	
+}
+else
+{
+	echo "Documento ".$this->codprefijo ."/".intval($this->numero )." No contiene resolución de F. Electrónica!"."<br>";
 }
 if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
     }  
     $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
- 
+  
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
 }  
     $this->NM_buffer = ob_get_contents();
@@ -5496,79 +5689,10 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
            $this->redir_modal = "";
        }
    }
-   function btn_recargar() 
-   {
-      global 
-      $nm_apl_dependente;
-      $this->SC_redir_btn = true;
-      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_orig'];
-      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq'];
-      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq_filtro'];
-      $nm_f_saida = "./";
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['contr_array_resumo'] = "NAO";
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['contr_total_geral']  = "NAO";
-      unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['tot_geral']);
-?>
-     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-      <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
-      <head>
-       <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
-<?php
-if ($_SESSION['scriptcase']['proc_mobile'])
-{
-?>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<?php
-}
-?>
-        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery/js/jquery.js"></script>
-        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
-        <script type="text/javascript">
-          var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
-          var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
-          var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
-        </script>
-        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
-        <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
-        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
-      </head>
-      <body class="scGridPage">
-      <table class="scGridTabela" align="center"><tr><td>
-<?php
-      $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
-  if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
- {
-$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('grid_kardex_fv_tns') . "/", $this->nm_location, "","_self", 440, 630);
- };
-$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
-?>
-      </td></tr><tr><td align="center">
-      <form name="F4" method="post" 
-                        action="<?php echo $nm_f_saida ?>" 
-                        target="_self">
-      <input type=hidden name="nmgp_opcao" value="volta_grid"/>
-      <input type=hidden name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page);?>"/>
-      <input type=submit name="nmgp_bok" value="<?php echo $this->Ini->Nm_lang['lang_btns_cfrm'] ?>"/>
-      </form>
-      </td></tr></table>
-      </body>
-      </html>
-<?php
-       if (isset($this->redir_modal) && !empty($this->redir_modal))
-       {
-           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
-           $this->redir_modal = "";
-       }
-      $this->SC_redir_btn = false;
-   }
    function btn_soporte() 
    {
       global 
       $nm_apl_dependente;
-      $this->SC_redir_btn = true;
       $nm_f_saida = "./";
 ?>
      <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -5584,7 +5708,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 }
 ?>
-        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery/js/jquery.js"></script>
+        <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
         <script type="text/javascript">
           var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
@@ -5629,14 +5753,19 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['s
        $this->sn_cufe = $this->rs_grid->fields[14] ;  
        $this->sn_enlacepdf = $this->rs_grid->fields[15] ;  
        $this->sn_enlacexml = $this->rs_grid->fields[16] ;  
-       $this->cliente = $this->rs_grid->fields[17] ;  
+       $this->sn_fe_validacion = $this->rs_grid->fields[17] ;  
+       $this->sn_proveedor = $this->rs_grid->fields[18] ;  
+       $this->sn_token_emp = $this->rs_grid->fields[19] ;  
+       $this->sn_token_pass = $this->rs_grid->fields[20] ;  
+       $this->sn_servidor = $this->rs_grid->fields[21] ;  
+       $this->cliente = $this->rs_grid->fields[22] ;  
        $this->cliente = (string)$this->cliente;
-       $this->ndoc = $this->rs_grid->fields[18] ;  
+       $this->ndoc = $this->rs_grid->fields[23] ;  
       $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
- $vsql = "select smtp_servidor,smtp_usuario,smtp_password,smtp_puerto,smtp_tipo,asunto,mensaje,correo_para_prueba,nombre_razonsocial,contacto_nombre,contacto_cargo,contacto_correo,contacto_celular,servidor_facturas from cloud_empresas where id_empresa='".$this->sc_temp_gidempresa."'";
-
+  $vsql = "select smtp_servidor,smtp_usuario,smtp_password,smtp_puerto,smtp_tipo,asunto,mensaje,correo_para_prueba,nombre_razonsocial,contacto_nombre,contacto_cargo,contacto_correo,contacto_celular,servidor_facturas from cloud_empresas where id_empresa='".$this->sc_temp_gidempresa."'";
+
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -5666,33 +5795,33 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $this->vmail = false;
           $this->vmail_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-if(isset($this->vmail[0][0]))
-{
-	$vserver   = trim($this->vmail[0][0]);
-	$vusuario  = trim($this->vmail[0][1]);
-	$vpassword = trim($this->vmail[0][2]);
-	$vpuerto   = trim($this->vmail[0][3]);
-	$vtipo     = trim($this->vmail[0][4]);
-	$vasunto   = trim($this->vmail[0][5]);
-	$vreceptor = trim($this->vmail[0][7]); 
-	$vempresa  = trim($this->vmail[0][8]);
-	$vcontacto = trim($this->vmail[0][9]); 
-	$vcargo    = trim($this->vmail[0][10]);
-	$vcorreo   = trim($this->vmail[0][11]);
-	$vcelular  = trim($this->vmail[0][12]); 
-	$vserverfv = trim($this->vmail[0][13]); 
-	$vserverdoc= explode("7332",$vserverfv);
-	$vserverfv = $vserverdoc[0];
-	$vkid = $this->kardexid ;
-	$videmp = $this->sc_temp_gidempresa;
-	
-	$vasunto   = 'Soporte Fe a '.$vempresa;
-	$vmen      = "Se generó un correo de soporte con la siguiente dirección del xml: <br><br>";
-	$vmen     .= "<a href='".$vserverfv."7332/cEnviarFactura/?kardexid=".$vkid."&idempresa=".$videmp."' target='_blank' >Ver el XML</a>";
-	
-	
+;
+
+if(isset($this->vmail[0][0]))
+{
+	$vserver   = trim($this->vmail[0][0]);
+	$vusuario  = trim($this->vmail[0][1]);
+	$vpassword = trim($this->vmail[0][2]);
+	$vpuerto   = trim($this->vmail[0][3]);
+	$vtipo     = trim($this->vmail[0][4]);
+	$vasunto   = trim($this->vmail[0][5]);
+	$vreceptor = trim($this->vmail[0][7]); 
+	$vempresa  = trim($this->vmail[0][8]);
+	$vcontacto = trim($this->vmail[0][9]); 
+	$vcargo    = trim($this->vmail[0][10]);
+	$vcorreo   = trim($this->vmail[0][11]);
+	$vcelular  = trim($this->vmail[0][12]); 
+	$vserverfv = trim($this->vmail[0][13]); 
+	$vserverdoc= explode("7332",$vserverfv);
+	$vserverfv = $vserverdoc[0];
+	$vkid = $this->kardexid ;
+	$videmp = $this->sc_temp_gidempresa;
+	
+	$vasunto   = 'Soporte Fe a '.$vempresa;
+	$vmen      = "Se generó un correo de soporte con la siguiente dirección del xml: <br><br>";
+	$vmen     .= "<a href='".$vserverfv."7332/cEnviarFactura/?kardexid=".$vkid."&idempresa=".$videmp."' target='_blank' >Ver el XML</a>";
+	
+	
 	    include_once($this->Ini->path_third . "/swift/swift_required.php");
     $sc_mail_port     = "$vpuerto";
     $sc_mail_tp_port  = "N";
@@ -5748,25 +5877,25 @@ if(isset($this->vmail[0][0]))
         $this->sc_mail_erro = $Err_mail;
         $this->sc_mail_ok   = false;
     }
-;
-	
-	if ($this->sc_mail_ok )
-	{
-		echo "Se envió un correo de soporte.";
-	}
-	else
-	{
+;
+	
+	if ($this->sc_mail_ok )
+	{
+		echo "Se envió un correo de soporte.";
+	}
+	else
+	{
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->sc_mail_erro ;
-;
-	}
+;
+	}
 }
 if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
     }  
     $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
- 
+  
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
 }  
     $this->NM_buffer = ob_get_contents();
@@ -5804,155 +5933,1061 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
            echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
            $this->redir_modal = "";
        }
-      $this->SC_redir_btn = false;
    }
-   function nmgp_redireciona_form($nm_apl_dest, $nm_apl_retorno, $nm_apl_parms, $nm_target="", $alt_modal=0, $larg_modal=0, $opc="")
+   function btn_generar_proveedor() 
    {
-      if (is_array($nm_apl_parms))
-      {
-          $tmp_parms = "";
-          foreach ($nm_apl_parms as $par => $val)
-          {
-              $par = trim($par);
-              $val = trim($val);
-              $tmp_parms .= str_replace(".", "_", $par) . "?#?";
-              if (substr($val, 0, 1) == "$")
-              {
-                  $tmp_parms .= $$val;
-              }
-              elseif (substr($val, 0, 1) == "{")
-              {
-                  $val        = substr($val, 1, -1);
-                  $tmp_parms .= $this->$val;
-              }
-              elseif (substr($val, 0, 1) == "[")
-              {
-                  $tmp_parms .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns'][substr($val, 1, -1)];
-              }
-              else
-              {
-                  $tmp_parms .= $val;
-              }
-              $tmp_parms .= "?@?";
-          }
-          $nm_apl_parms = $tmp_parms;
-      }
-      $target = (empty($nm_target)) ? "_self" : $nm_target;
-      if (strtolower(substr($nm_apl_dest, 0, 7)) == "http://" || strtolower(substr($nm_apl_dest, 0, 8)) == "https://" || strtolower(substr($nm_apl_dest, 0, 3)) == "../")
-      {
-          echo "<SCRIPT language=\"javascript\">";
-          if (strtolower($target) == "_blank")
-          {
-              echo "window.open ('" . $nm_apl_dest . "');";
-              echo "</SCRIPT>";
-              return;
-          }
-          else
-          {
-              echo "window.location='" . $nm_apl_dest . "';";
-              echo "</SCRIPT>";
-              exit;
-          }
-      }
-      $dir = explode("/", $nm_apl_dest);
-      if (count($dir) == 1)
-      {
-          $nm_apl_dest = str_replace(".php", "", $nm_apl_dest);
-          $nm_apl_dest = $this->Ini->path_link . $nm_apl_dest . "/" . $nm_apl_dest . ".php";
-      }
-      if ($nm_target == "modal")
-      {
-          if (!empty($nm_apl_parms))
-          {
-              $nm_apl_parms = str_replace("?#?", "*scin", $nm_apl_parms);
-              $nm_apl_parms = str_replace("?@?", "*scout", $nm_apl_parms);
-              $nm_apl_parms = "nmgp_parms=" . $nm_apl_parms . "&";
-          }
-          $par_modal = "?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_outra_jan=true&nmgp_url_saida=modal&NMSC_modal=ok&";
-           if ((isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida_form_full']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida_form_full']) || (isset($this->grid_emb_form_full) && $this->grid_emb_form_full))
-           {
-              $this->redir_modal = "$(function() { parent.tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
-           }
-           else
-           {
-              $this->redir_modal = "$(function() { tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
-           }
-          return;
-      }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['iframe_print']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['iframe_print'] )
-      {
-          $target = "_parent";
-      }
-      if (!isset($this->SC_redir_btn) || !$this->SC_redir_btn)
-      {
-   ?>
+      global 
+      $nm_apl_dependente;
+      $nm_f_saida = "./";
+?>
      <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-      <HTML>
-      <HEAD>
-      <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+      <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+      <head>
+       <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0," />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <?php
 }
 ?>
-       <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
-       <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
-       <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
-       <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
-       <META http-equiv="Pragma" content="no-cache"/>
-      </HEAD>
-      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
-      <BODY>
-   <?php
-      }
-   ?>
-   <form name="Fredir" method="post" 
-                     target="_self"> 
-     <input type="hidden" name="nmgp_parms" value="<?php echo NM_encode_input($nm_apl_parms) ?>"/>
+        <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
+        <script type="text/javascript">
+          var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+          var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+          var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+        </script>
+        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
+        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+      </head>
+      <body class="scGridPage">
+      <table class="scGridTabela" align="center"><tr><td>
 <?php
-   if ($target == "_blank")
+ob_start();
+$NM_cont_reg  = 0;
+$NM_index_reg = (isset($_POST['nm_run_opt_sel'])) ? explode(";", $_POST['nm_run_opt_sel']) : array();
+if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_sql_btn_run']))
+{
+    foreach ($NM_index_reg as $Run_register)
+    {
+       if (!is_numeric($Run_register)) { continue; }
+       $this->rs_grid->fields = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_sql_btn_run'][$Run_register];
+       $this->num = $this->rs_grid->fields[0] ;  
+       $this->fecha = $this->rs_grid->fields[1] ;  
+       $this->nombre = $this->rs_grid->fields[2] ;  
+       $this->email2 = $this->rs_grid->fields[3] ;  
+       $this->total = $this->rs_grid->fields[4] ;  
+       $this->total =  str_replace(",", ".", $this->total);
+       $this->total = (string)$this->total;
+       $this->kardexid = $this->rs_grid->fields[5] ;  
+       $this->kardexid = (string)$this->kardexid;
+       $this->codcomp = $this->rs_grid->fields[6] ;  
+       $this->codprefijo = $this->rs_grid->fields[7] ;  
+       $this->numero = $this->rs_grid->fields[8] ;  
+       $this->periodo = $this->rs_grid->fields[9] ;  
+       $this->formapago = $this->rs_grid->fields[10] ;  
+       $this->fecvence = $this->rs_grid->fields[11] ;  
+       $this->horacrea = $this->rs_grid->fields[12] ;  
+       $this->nit_tercero = $this->rs_grid->fields[13] ;  
+       $this->sn_cufe = $this->rs_grid->fields[14] ;  
+       $this->sn_enlacepdf = $this->rs_grid->fields[15] ;  
+       $this->sn_enlacexml = $this->rs_grid->fields[16] ;  
+       $this->sn_fe_validacion = $this->rs_grid->fields[17] ;  
+       $this->sn_proveedor = $this->rs_grid->fields[18] ;  
+       $this->sn_token_emp = $this->rs_grid->fields[19] ;  
+       $this->sn_token_pass = $this->rs_grid->fields[20] ;  
+       $this->sn_servidor = $this->rs_grid->fields[21] ;  
+       $this->cliente = $this->rs_grid->fields[22] ;  
+       $this->cliente = (string)$this->cliente;
+       $this->ndoc = $this->rs_grid->fields[23] ;  
+      $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
+if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
+if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
+if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
+  $vsql19 = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'SN_PROVEEDOR'";
+
+ 
+      $nm_select = $vsql19; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiExiste19 = array();
+      $this->vsiexiste19 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiExiste19[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiexiste19[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiExiste19 = false;
+          $this->vSiExiste19_erro = $this->Db->ErrorMsg();
+          $this->vsiexiste19 = false;
+          $this->vsiexiste19_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(!isset($this->vsiexiste19[0][0]))
+{
+	
+     $nm_select = "ALTER TABLE KARDEX ADD SN_PROVEEDOR VARCHAR(40)"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+}
+
+$vsql20 = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'SN_TOKEN_EMP'";
+
+ 
+      $nm_select = $vsql20; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiExiste20 = array();
+      $this->vsiexiste20 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiExiste20[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiexiste20[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiExiste20 = false;
+          $this->vSiExiste20_erro = $this->Db->ErrorMsg();
+          $this->vsiexiste20 = false;
+          $this->vsiexiste20_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(!isset($this->vsiexiste20[0][0]))
+{
+	
+     $nm_select = "ALTER TABLE KARDEX ADD SN_TOKEN_EMP VARCHAR(150)"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+}
+
+$vsql21 = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'SN_TOKEN_PASS'";
+
+ 
+      $nm_select = $vsql21; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiExiste21 = array();
+      $this->vsiexiste21 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiExiste21[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiexiste21[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiExiste21 = false;
+          $this->vSiExiste21_erro = $this->Db->ErrorMsg();
+          $this->vsiexiste21 = false;
+          $this->vsiexiste21_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(!isset($this->vsiexiste21[0][0]))
+{
+	
+     $nm_select = "ALTER TABLE KARDEX ADD SN_TOKEN_PASS VARCHAR(150)"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+}
+
+$vsql22 = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'SN_SERVIDOR'";
+
+ 
+      $nm_select = $vsql22; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiExiste22 = array();
+      $this->vsiexiste22 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiExiste22[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiexiste22[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiExiste22 = false;
+          $this->vSiExiste22_erro = $this->Db->ErrorMsg();
+          $this->vsiexiste22 = false;
+          $this->vsiexiste22_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(!isset($this->vsiexiste22[0][0]))
+{
+	
+     $nm_select = "ALTER TABLE KARDEX ADD SN_SERVIDOR VARCHAR(300)"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+}
+
+$vmensaje = "EL DOCUMENTO NO HA SIDO VALIDADO ELECTRÓNICAMENTE: ".$this->num ;
+if(!empty($this->sn_fe_validacion ))
+{
+	$vmensaje = "Registro ya gestionado: ".$this->num ;
+
+	$vsql = "SELECT IIF(SN_PROVEEDOR='',0,IIF(SN_PROVEEDOR IS NULL,0,SN_PROVEEDOR)) FROM KARDEX WHERE KARDEXID='".$this->kardexid ."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vVal1 = array();
+      $this->vval1 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vVal1[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vval1[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vVal1 = false;
+          $this->vVal1_erro = $this->Db->ErrorMsg();
+          $this->vval1 = false;
+          $this->vval1_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vval1[0][0]))
+	{
+		if($this->vval1[0][0]=="0")
+		{
+			$vsql = "UPDATE KARDEX SET SN_PROVEEDOR='".$this->sc_temp_gproveedor."' WHERE KARDEXID='".$this->kardexid ."'";
+			
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+			$vmensaje = "Proveedor generado, ";
+		}
+	}
+
+
+	$vsql = "SELECT IIF(SN_TOKEN_EMP='',0,IIF(SN_TOKEN_EMP IS NULL,0,SN_TOKEN_EMP)) FROM KARDEX WHERE KARDEXID='".$this->kardexid ."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vVal2 = array();
+      $this->vval2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vVal2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vval2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vVal2 = false;
+          $this->vVal2_erro = $this->Db->ErrorMsg();
+          $this->vval2 = false;
+          $this->vval2_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vval2[0][0]))
+	{
+		if($this->vval2[0][0]=="0")
+		{
+			$vsql = "select tokenempresa from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."' and proveedor='".$this->sc_temp_gproveedor."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vT2 = array();
+      $this->vt2 = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vT2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vt2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vT2 = false;
+          $this->vT2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $this->vt2 = false;
+          $this->vt2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+			if(isset($this->vt2[0][0]))
+			{
+				$vsql = "UPDATE KARDEX SET SN_TOKEN_EMP='".$this->vt2[0][0]."' WHERE KARDEXID='".$this->kardexid ."'";
+				
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vmensaje .= "Token generado, ";
+			}
+		}
+	}
+
+
+	$vsql = "SELECT IIF(SN_TOKEN_PASS='',0,IIF(SN_TOKEN_PASS IS NULL,0,SN_TOKEN_PASS)) FROM KARDEX WHERE KARDEXID='".$this->kardexid ."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vVal3 = array();
+      $this->vval3 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vVal3[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vval3[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vVal3 = false;
+          $this->vVal3_erro = $this->Db->ErrorMsg();
+          $this->vval3 = false;
+          $this->vval3_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vval3[0][0]))
+	{
+		if($this->vval3[0][0]=="0")
+		{
+			$vsql = "select tokenpassword from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."' and proveedor='".$this->sc_temp_gproveedor."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vT3 = array();
+      $this->vt3 = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vT3[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vt3[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vT3 = false;
+          $this->vT3_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $this->vt3 = false;
+          $this->vt3_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+			if(isset($this->vt3[0][0]))
+			{
+				$vsql = "UPDATE KARDEX SET SN_TOKEN_PASS='".$this->vt3[0][0]."' WHERE KARDEXID='".$this->kardexid ."'";
+				
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vmensaje .= "Password generado, ";
+			}
+		}
+	}
+
+	$vsql = "SELECT IIF(SN_SERVIDOR='',0,IIF(SN_SERVIDOR IS NULL,0,SN_SERVIDOR)) FROM KARDEX WHERE KARDEXID='".$this->kardexid ."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vVal4 = array();
+      $this->vval4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vVal4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vval4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vVal4 = false;
+          $this->vVal4_erro = $this->Db->ErrorMsg();
+          $this->vval4 = false;
+          $this->vval4_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vval4[0][0]))
+	{
+		if($this->vval4[0][0]=="0")
+		{
+			$vsql = "select servidor1 from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."' and proveedor='".$this->sc_temp_gproveedor."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vT4 = array();
+      $this->vt4 = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vT4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vt4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vT4 = false;
+          $this->vT4_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $this->vt4 = false;
+          $this->vt4_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+			if(isset($this->vt4[0][0]))
+			{
+				$vsql = "UPDATE KARDEX SET SN_SERVIDOR='".$this->vt4[0][0]."' WHERE KARDEXID='".$this->kardexid ."'";
+				
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+				$vmensaje .= "Servidor generado";
+			}
+		}
+	}
+}
+
+echo $vmensaje."<br><br>";
+if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
+if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
+    }  
+    $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+  
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
+}  
+    $this->NM_buffer = ob_get_contents();
+    if (!empty($this->NM_buffer))
+    {
+        ob_end_flush();
+    }
+?>
+      </td></tr><tr><td align="center">
+      <form name="F4" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value="volta_grid"/>
+      <input type=hidden name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page);?>"/>
+<?php
+    if (!empty($this->NM_buffer))
+    {
+        echo "<input type=submit name=\"nmgp_bok\" value=\"" . $this->Ini->Nm_lang['lang_btns_cfrm'] . "\"/>";
+        echo "</form>";
+    }
+    else
+    {
+        echo "</form>";
+        echo "<script type=\"text/javascript\">";
+        echo "document.F4.submit();";
+        echo "</script>";
+    }
+?>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
+   }
+   function btn_regenerar_propio() 
    {
+      global 
+      $nm_apl_dependente;
+      $nm_f_saida = "./";
 ?>
-       <input type="hidden" name="nmgp_outra_jan" value="true"/> 
+     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+      <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+      <head>
+       <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
-   }
-   else
-   {
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
 ?>
-     <input type="hidden" name="nmgp_url_saida" value="<?php echo NM_encode_input($nm_apl_retorno) ?>">
-     <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page) ?>"/> 
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <?php
-   }
+}
 ?>
-   </form> 
-      <SCRIPT type="text/javascript">
-          window.onload = function(){
-             submit_Fredir();
-          };
-          function submit_Fredir()
-          {
-              document.Fredir.target = "<?php echo $target ?>"; 
-              document.Fredir.action = "<?php echo $nm_apl_dest ?>";
-              document.Fredir.submit();
-          }
-      </SCRIPT>
-   <?php
-      if (!isset($this->SC_redir_btn) || !$this->SC_redir_btn)
-      {
-   ?>
-      </BODY>
-      </HTML>
-   <?php
-      }
-      if ($target != "_blank")
-      {
-          exit;
-      }
+        <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
+        <script type="text/javascript">
+          var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+          var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+          var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+        </script>
+        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
+        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+      </head>
+      <body class="scGridPage">
+      <table class="scGridTabela" align="center"><tr><td>
+<?php
+ob_start();
+$NM_cont_reg  = 0;
+$NM_index_reg = (isset($_POST['nm_run_opt_sel'])) ? explode(";", $_POST['nm_run_opt_sel']) : array();
+if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_sql_btn_run']))
+{
+    foreach ($NM_index_reg as $Run_register)
+    {
+       if (!is_numeric($Run_register)) { continue; }
+       $this->rs_grid->fields = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_sql_btn_run'][$Run_register];
+       $this->num = $this->rs_grid->fields[0] ;  
+       $this->fecha = $this->rs_grid->fields[1] ;  
+       $this->nombre = $this->rs_grid->fields[2] ;  
+       $this->email2 = $this->rs_grid->fields[3] ;  
+       $this->total = $this->rs_grid->fields[4] ;  
+       $this->total =  str_replace(",", ".", $this->total);
+       $this->total = (string)$this->total;
+       $this->kardexid = $this->rs_grid->fields[5] ;  
+       $this->kardexid = (string)$this->kardexid;
+       $this->codcomp = $this->rs_grid->fields[6] ;  
+       $this->codprefijo = $this->rs_grid->fields[7] ;  
+       $this->numero = $this->rs_grid->fields[8] ;  
+       $this->periodo = $this->rs_grid->fields[9] ;  
+       $this->formapago = $this->rs_grid->fields[10] ;  
+       $this->fecvence = $this->rs_grid->fields[11] ;  
+       $this->horacrea = $this->rs_grid->fields[12] ;  
+       $this->nit_tercero = $this->rs_grid->fields[13] ;  
+       $this->sn_cufe = $this->rs_grid->fields[14] ;  
+       $this->sn_enlacepdf = $this->rs_grid->fields[15] ;  
+       $this->sn_enlacexml = $this->rs_grid->fields[16] ;  
+       $this->sn_fe_validacion = $this->rs_grid->fields[17] ;  
+       $this->sn_proveedor = $this->rs_grid->fields[18] ;  
+       $this->sn_token_emp = $this->rs_grid->fields[19] ;  
+       $this->sn_token_pass = $this->rs_grid->fields[20] ;  
+       $this->sn_servidor = $this->rs_grid->fields[21] ;  
+       $this->cliente = $this->rs_grid->fields[22] ;  
+       $this->cliente = (string)$this->cliente;
+       $this->ndoc = $this->rs_grid->fields[23] ;  
+      $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
+if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
+  
+
+$vcufe = "";
+$vpjfe = "";
+$vfechavalidacion = "";
+$venlace_pdf = "";
+$venlace_xml = "";
+$vproveedor  = "";
+$TokenEnterprise   = "";
+$TokenAutorizacion = "";
+$vServidor = "";
+$vrutaqr3  = "";
+$vnombre_pc_red = "";
+
+$vsql = "select cufe,numero_fe,fecha_validacion,enlace_pdf,xml,qr_base64 from cloud_kardex where tipo='FV' and prefijo='".$this->codprefijo ."' and numero='".$this->numero ."'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDat = array();
+      $this->vdat = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDat[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdat[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDat = false;
+          $this->vDat_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $this->vdat = false;
+          $this->vdat_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+if(isset($this->vdat[0][0]))
+{
+	$vcufe = $this->vdat[0][0];
+	$vpjfe = $this->vdat[0][1];
+	$vfechavalidacion = $this->vdat[0][2];
+	$venlace_pdf = $this->vdat[0][3];
+	$venlace_xml = $this->vdat[0][4];
+	$vqr_code    = $this->vdat[0][5];
+	
+	$vsql = "select smtp_servidor,smtp_usuario,smtp_password,smtp_puerto,smtp_tipo,asunto,mensaje,correo_para_prueba,nombre_razonsocial,contacto_nombre,contacto_cargo,contacto_correo,contacto_celular,servidor_facturas,enviar_documento_online,correo_copia,nombre_pc_red,proveedor,nit,razon_social,correo_copia,correo,logo,validar_codcliente_tns from cloud_empresas where id_empresa='".$this->sc_temp_gidempresa."'";
+
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vMail = array();
+      $this->vmail = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vMail[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vmail[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vMail = false;
+          $this->vMail_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $this->vmail = false;
+          $this->vmail_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+	if(isset($this->vmail[0][17]))
+	{
+		$vserver   = trim($this->vmail[0][0]);
+		$vusuario  = trim($this->vmail[0][1]);
+		$vpassword = trim($this->vmail[0][2]);
+		$vpuerto   = trim($this->vmail[0][3]);
+		$vtipo     = trim($this->vmail[0][4]);
+		$vasunto   = trim($this->vmail[0][5]);
+		$vempresa  = trim($this->vmail[0][19]);
+		$vcontacto = trim($this->vmail[0][9]); 
+		$vcargo    = trim($this->vmail[0][10]);
+		$vcorreo   = trim($this->vmail[0][11]);
+		$vcelular  = trim($this->vmail[0][12]); 
+		$vserverfv = trim($this->vmail[0][13]); 
+		$vsionline = trim($this->vmail[0][14]);
+		$vnombre_pc_red = trim($this->vmail[0][16]);
+		$vproveedor= $this->vmail[0][17];
+		$vcorreo_copia = $this->vmail[0][20];
+		$vcorreo_suc   = $this->vmail[0][21];
+		$vlogo_suc     = $this->vmail[0][22];
+		$vvalidar_codcliente_tns = $this->vmail[0][23];
+	}
+	
+	$vsql = "select if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,if(modo='DESARROLLO',servidor2_pruebas,servidor2) as servidor2,if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword, if(modo='DESARROLLO',1,0) as modos from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."'";
+
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_fv = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds_fv[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_fv = false;
+          $this->ds_fv_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+	if(isset($this->ds_fv[0][0]) and (isset($this->ds_fv[0][1])) and (isset($this->ds_fv[0][2])) and (isset($this->ds_fv[0][3])))
+	{
+		if(!empty(($this->ds_fv[0][0])) and (!empty($this->ds_fv[0][1])) and (!empty($this->ds_fv[0][2])) and (!empty($this->ds_fv[0][3])))
+		{
+			$vServidor         = $this->ds_fv[0][0];
+			$vServidor2    	   = $this->ds_fv[0][1];
+			$TokenEnterprise   = $this->ds_fv[0][2];
+			$TokenAutorizacion = $this->ds_fv[0][3];
+			$vmodo             = $this->ds_fv[0][4];
+		}
+	}
+	
+	$vruta = $_SERVER["DOCUMENT_ROOT"];
+
+	if (!file_exists($vruta.'/qr'))
+	{
+		mkdir($vruta.'/qr', 0777, true);
+	}
+
+	$vrutaqr1        = $vruta.'/qr/';
+	$vnombrearchivo  = $vpjfe.intval($this->numero ).'.jpg';
+	$vrutaqr3        = '';
+
+	if(!empty($vnombre_pc_red))
+	{
+		$vrutaqr3 = '\\\\'.$vnombre_pc_red.'\\qr\\'.$vpjfe.intval($this->numero ).'.jpg';
+	}
+
+	try
+	{
+		$this->fCrearQR($vnombrearchivo,$vqr_code,$vrutaqr1);
+	}
+	catch (Exception $e)
+	{
+	}
+	
+	$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."',sn_enlacepdf='".$venlace_pdf."',sn_enlacexml='".$venlace_xml."',sn_proveedor='".$vproveedor."',sn_token_emp='".$TokenEnterprise."',sn_token_pass='".$TokenAutorizacion."',sn_servidor='".$vServidor."',sn_rutaqr='".$vrutaqr3."' where kardexid='".$this->kardexid ."'";
+	
+	echo "DATOS DEL DOCUMENTO ".$this->num ." REGENERADOS CON ÉXITO.<BR>";
+	
+	if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+	
+     $nm_select = $vsql_update; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+}
+else
+{
+	echo "NO HAY DATOS DEL DOCUMENTO ".$this->num .".<BR>";
+}
+if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
+    }  
+    $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+  
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
+}  
+    $this->NM_buffer = ob_get_contents();
+    if (!empty($this->NM_buffer))
+    {
+        ob_end_flush();
+    }
+?>
+      </td></tr><tr><td align="center">
+      <form name="F4" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value="volta_grid"/>
+      <input type=hidden name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page);?>"/>
+<?php
+    if (!empty($this->NM_buffer))
+    {
+        echo "<input type=submit name=\"nmgp_bok\" value=\"" . $this->Ini->Nm_lang['lang_btns_cfrm'] . "\"/>";
+        echo "</form>";
+    }
+    else
+    {
+        echo "</form>";
+        echo "<script type=\"text/javascript\">";
+        echo "document.F4.submit();";
+        echo "</script>";
+    }
+?>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
    }
+function fCrearQR($vnombrearchivo,$vcontenido='Prueba qr',$vdirectorio='',$vmargin=0,$vtamanio=2,$vcalidad=20)
+{
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+  
+	sc_include_library("prj", "qr", "qrlib.php", true, true);
+	
+	$tempDir       = $vdirectorio;
+	$fileName      = $vnombrearchivo;
+	$outerFrame    = $vmargin;
+	$pixelPerPoint = $vtamanio;
+	$jpegQuality   = $vcalidad;
+	$codeContents  = $vcontenido;
+
+	$frame = QRcode::text($codeContents, false, QR_ECLEVEL_M);
+
+	$h = count($frame);
+	$w = strlen($frame[0]);
+
+	$imgW = $w + 2*$outerFrame;
+	$imgH = $h + 2*$outerFrame;
+
+	$base_image = imagecreate($imgW, $imgH);
+
+	$col[0] = imagecolorallocate($base_image,255,255,255); 
+	$col[1] = imagecolorallocate($base_image,0,0,0);     
+
+	imagefill($base_image, 0, 0, $col[0]);
+
+	for($y=0; $y<$h; $y++) {
+		for($x=0; $x<$w; $x++) {
+			if ($frame[$y][$x] == '1') {
+				imagesetpixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
+			}
+		}
+	}
+
+	$target_image = imagecreate($imgW * $pixelPerPoint, $imgH * $pixelPerPoint);
+	imagecopyresized(
+		$target_image, 
+		$base_image, 
+		0, 0, 0, 0, 
+		$imgW * $pixelPerPoint, $imgH * $pixelPerPoint, $imgW, $imgH
+	);
+	imagedestroy($base_image);
+	imagejpeg($target_image, $tempDir.$fileName, $jpegQuality);
+	imagedestroy($target_image);
+
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
+}
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
        $dt_out = $dt_in;
@@ -6029,33 +7064,9 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       $sv_data = $data_search;
       foreach ($fields as $field) {
-          if ($field == "SC_all_Cmp") 
+          if ($field == "SC_all_Cmp" || $field == "num") 
           {
               $this->SC_monta_condicao($comando, "NUM", $arg_search, $data_search);
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "CODPREFIJO", $arg_search, $data_search);
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "NUMERO", $arg_search, $data_search);
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "NIT_TERCERO", $arg_search, $data_search);
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $data_lookup = $this->SC_lookup_cliente($arg_search, $data_search);
-              if (is_array($data_lookup) && !empty($data_lookup)) 
-              {
-                  $this->SC_monta_condicao($comando, "CLIENTE", $arg_search, $data_lookup);
-              }
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "OBSERV", $arg_search, $data_search);
           }
       }
       if (empty($comando)) 
@@ -6220,91 +7231,6 @@ if ($_SESSION['scriptcase']['proc_mobile'])
             break;
          }
    }
-   function SC_lookup_cliente($condicao, $campo)
-   {
-       $result     = array();
-       $campo_orig = $campo;
-       $campo      = substr($this->Db->qstr($campo), 1, -1);
-       $nm_comando = "SELECT NOMBRE, TERID FROM TERCEROS WHERE (NOMBRE LIKE '%$campo%')" ; 
-       if ($condicao == "ii")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
-       }
-       if ($condicao == "df" || $condicao == "np")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
-       }
-       if ($condicao == "gt")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
-       }
-       if ($condicao == "ge")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
-       }
-       if ($condicao == "lt")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
-       }
-       if ($condicao == "le")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
-       }
-       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-       if ($rx = $this->Db->Execute($nm_comando)) 
-       { 
-           $campo = $campo_orig;
-           while (!$rx->EOF) 
-           { 
-               $chave = (isset($rx->fields[1])) ? $rx->fields[1] : $rx->fields[0];
-               $label = $rx->fields[0];
-               if ($condicao == "eq" && $campo == $label)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "qp" && strstr($label, $campo))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "np" && !strstr($label, $campo))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "df" && $campo != $label)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "gt" && $label > $campo )
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "ge" && $label >= $campo)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "lt" && $label < $campo)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "le" && $label <= $campo)
-               {
-                   $result[] = $chave;
-               }
-               $rx->MoveNext() ;
-           }  
-           return $result;
-       }  
-       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
-       { 
-           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-           exit; 
-       } 
-   }
   function html_doc_word($nm_arquivo_doc_word, $nmgp_password)
   {
       global $nm_url_saida;
@@ -6404,7 +7330,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           echo $oJson->encode($this->Arr_result);
           exit;
       }
-      if (strpos(" " . $this->Ini->SC_module_export, "grid") !== false)
+      if (strpos(" " . $this->Ini->SC_module_export, "grid") !== false || strpos(" " . $this->Ini->SC_module_export, "resume") !== false)
       {
           $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
@@ -6801,10 +7727,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns'][$path_doc_md5
    {
        $nmgp_parms = "";
    }
-   if (isset($gprefijos)) 
-   {
-       $_SESSION['gprefijos'] = $gprefijos;
-   }
    if (isset($gidempresa)) 
    {
        $_SESSION['gidempresa'] = $gidempresa;
@@ -6945,11 +7867,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns'][$path_doc_md5
                     $Tmp_par   = $cadapar[0];
                     $$Tmp_par = $cadapar[1];
                 }
-           }
-           if (isset($gprefijos)) 
-           {
-               $_SESSION['gprefijos'] = $gprefijos;
-               nm_limpa_str_grid_kardex_fv_tns($_SESSION["gprefijos"]);
            }
            if (isset($gidempresa)) 
            {
@@ -7218,20 +8135,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns'][$path_doc_md5
        { 
            $_SESSION['sc_session'][$script_case_init]['grid_kardex_fv_tns']['opcao'] = $nmgp_opcao ;  
        }   
-       if (isset($_POST["gprefijos"])) 
-       {
-           $_SESSION["gprefijos"] = $_POST["gprefijos"];
-           nm_limpa_str_grid_kardex_fv_tns($_SESSION["gprefijos"]);
-       }
-       if (isset($_GET["gprefijos"])) 
-       {
-           $_SESSION["gprefijos"] = $_GET["gprefijos"];
-           nm_limpa_str_grid_kardex_fv_tns($_SESSION["gprefijos"]);
-       }
-       if (!isset($_SESSION["gprefijos"])) 
-       {
-           $_SESSION["gprefijos"] = "";
-       }
        if (isset($_POST["gidempresa"])) 
        {
            $_SESSION["gidempresa"] = $_POST["gidempresa"];
@@ -7438,27 +8341,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns'][$path_doc_md5
           $_SESSION['sc_session'][$script_case_init]['grid_kardex_fv_tns']['opcao'] = "busca";
           $contr_grid_kardex_fv_tns->NM_ajax_flag = true;
           $contr_grid_kardex_fv_tns->NM_ajax_opcao = $NM_ajax_opcao;
-      }
-      if ('ajax_filter_save' == $nmgp_opcao)
-      {
-          $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_kardex_fv_tns']['opcao'] = "busca";
-          $contr_grid_kardex_fv_tns->NM_ajax_flag = true;
-          $contr_grid_kardex_fv_tns->NM_ajax_opcao = "ajax_filter_save";
-      }
-      if ('ajax_filter_delete' == $nmgp_opcao)
-      {
-          $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_kardex_fv_tns']['opcao'] = "busca";
-          $contr_grid_kardex_fv_tns->NM_ajax_flag = true;
-          $contr_grid_kardex_fv_tns->NM_ajax_opcao = "ajax_filter_delete";
-      }
-      if ('ajax_filter_select' == $nmgp_opcao)
-      {
-          $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_kardex_fv_tns']['opcao'] = "busca";
-          $contr_grid_kardex_fv_tns->NM_ajax_flag = true;
-          $contr_grid_kardex_fv_tns->NM_ajax_opcao = "ajax_filter_select";
       }
        $contr_grid_kardex_fv_tns->controle();
    } 

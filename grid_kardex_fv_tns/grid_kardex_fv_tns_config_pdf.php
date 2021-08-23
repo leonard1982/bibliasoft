@@ -227,7 +227,7 @@ if ((isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['p
  </head>
 <body class="scGridPage" style="margin: 0px; overflow-x: hidden">
 
-<script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/jquery/js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/jquery/js/jquery-ui.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/tigra_color_picker/picker.js"></script>
 
@@ -777,13 +777,13 @@ function ajusta_window()
     bFixed = true;
     if (navigator.userAgent.indexOf("Chrome/") > 0)
     {
-      self.parent.tb_resize(altura + 180, largura + 50);
+      if (self.parent.tb_resize) self.parent.tb_resize(altura + 180, largura + 50);
       setTimeout("ajusta_window()", 50);
       return;
     }
   }
   mt.width( largura );
-  self.parent.tb_resize(altura + 180, largura + 50);
+  if (self.parent.tb_resize) self.parent.tb_resize(altura + 180, largura + 50);
 }
 
 $('#tabs > ul > li').click(function() {

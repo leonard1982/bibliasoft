@@ -143,15 +143,14 @@ class grid_kardex_fv_tns_pesq
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opcao'] = "igual";
     if (!$this->NM_ajax_flag && (!isset($bprocessa) || $bprocessa != "pesq"))
     {
-      global $codcomp_cond, $codcomp,
+      global $fecha_cond, $fecha, $fecha_dia, $fecha_mes, $fecha_ano, $fecha_hor, $fecha_min, $fecha_seg, $fecha_input_2_dia, $fecha_input_2_mes, $fecha_input_2_ano, $fecha_input_2_min, $fecha_input_2_hor, $fecha_input_2_seg,
              $codprefijo_cond, $codprefijo,
-             $numero_cond, $numero, $numero_autocomp,
+             $numero_cond, $numero,
              $periodo_cond, $periodo,
-             $fecha_cond, $fecha, $fecha_dia, $fecha_mes, $fecha_ano, $fecha_hor, $fecha_min, $fecha_seg, $fecha_input_2_dia, $fecha_input_2_mes, $fecha_input_2_ano, $fecha_input_2_min, $fecha_input_2_hor, $fecha_input_2_seg,
-             $cliente_cond, $cliente, $cliente_autocomp,
-             $fecasentad_cond, $fecasentad, $fecasentad_dia, $fecasentad_mes, $fecasentad_ano, $fecasentad_hor, $fecasentad_min, $fecasentad_seg;
+             $fecasentad_cond, $fecasentad, $fecasentad_dia, $fecasentad_mes, $fecasentad_ano, $fecasentad_hor, $fecasentad_min, $fecasentad_seg,
+             $cliente_cond, $cliente, $cliente_autocomp;
       $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
- $periodo  = date("m");
+  $periodo  = date("m");
 
 $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off'; 
       if (isset($fecha_day))
@@ -302,106 +301,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
    {
       global $NM_filters, $NM_filters_del, $nmgp_save_name, $nmgp_save_option, $NM_fields_refresh, $NM_parms_refresh, $Campo_bi, $Opc_bi, $NM_operador, $nmgp_save_origem;
 //-- ajax metodos ---
-      if ($this->NM_ajax_opcao == "ajax_filter_save")
-      {
-          ob_end_clean();
-          ob_end_clean();
-          $this->salva_filtro($nmgp_save_origem);
-          $this->NM_fil_ant = $this->gera_array_filtros();
-          $Nome_filter = "";
-          $Opt_filter  = "<option value=\"\"></option>\r\n";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              if ($_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Tipo_filter[1] = sc_convert_encoding($Tipo_filter[1], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  $Opt_filter .= "<option value=\"\">" . grid_kardex_fv_tns_pack_protect_string($Nome_filter) . "</option>\r\n";
-              }
-              $Opt_filter .= "<option value=\"" . grid_kardex_fv_tns_pack_protect_string($Tipo_filter[0]) . "\">.." . grid_kardex_fv_tns_pack_protect_string($Cada_filter) .  "</option>\r\n";
-          }
-          $Ajax_select  = "<SELECT id=\"sel_recup_filters_bot\" name=\"NM_filters_bot\" onChange=\"nm_submit_filter(this, 'bot');\" size=\"1\">\r\n";
-          $Ajax_select .= $Opt_filter;
-          $Ajax_select .= "</SELECT>\r\n";
-          $this->Arr_result['setValue'][] = array('field' => "idAjaxSelect_NM_filters_bot", 'value' => $Ajax_select);
-          $Ajax_select = "<SELECT id=\"sel_filters_del_bot\" class=\"scFilterToolbar_obj\" name=\"NM_filters_del_bot\" size=\"1\">\r\n";
-          $Ajax_select .= $Opt_filter;
-          $Ajax_select .= "</SELECT>\r\n";
-          $this->Arr_result['setValue'][] = array('field' => "idAjaxSelect_NM_filters_del_bot", 'value' => $Ajax_select);
-      }
-
-      if ($this->NM_ajax_opcao == "ajax_filter_delete")
-      {
-          ob_end_clean();
-          ob_end_clean();
-          $this->apaga_filtro();
-          $this->NM_fil_ant = $this->gera_array_filtros();
-          $Nome_filter = "";
-          $Opt_filter  = "<option value=\"\"></option>\r\n";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              if ($_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Tipo_filter[1] = sc_convert_encoding($Tipo_filter[1], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter  = $Tipo_filter[1];
-                  $Opt_filter .= "<option value=\"\">" .  grid_kardex_fv_tns_pack_protect_string($Nome_filter) . "</option>\r\n";
-              }
-              $Opt_filter .= "<option value=\"" . grid_kardex_fv_tns_pack_protect_string($Tipo_filter[0]) . "\">.." . grid_kardex_fv_tns_pack_protect_string($Cada_filter) .  "</option>\r\n";
-          }
-          $Ajax_select  = "<SELECT id=\"sel_recup_filters_bot\" class=\"scFilterToolbar_obj\" style=\"display:". (count($this->NM_fil_ant)>0?'':'none') .";\" name=\"NM_filters_bot\" onChange=\"nm_submit_filter(this, 'bot');\" size=\"1\">\r\n";
-          $Ajax_select .= $Opt_filter;
-          $Ajax_select .= "</SELECT>\r\n";
-          $this->Arr_result['setValue'][] = array('field' => "idAjaxSelect_NM_filters_bot", 'value' => $Ajax_select);
-          $Ajax_select = "<SELECT id=\"sel_filters_del_bot\" class=\"scFilterToolbar_obj\" name=\"NM_filters_del_bot\" size=\"1\">\r\n";
-          $Ajax_select .= $Opt_filter;
-          $Ajax_select .= "</SELECT>\r\n";
-          $this->Arr_result['setValue'][] = array('field' => "idAjaxSelect_NM_filters_del_bot", 'value' => $Ajax_select);
-      }
-      if ($this->NM_ajax_opcao == "ajax_filter_select")
-      {
-          ob_end_clean();
-          ob_end_clean();
-          $this->Arr_result = $this->recupera_filtro($NM_filters);
-      }
-
-      if ($this->NM_ajax_opcao == 'autocomp_numero')
-      {
-          $numero = ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($_GET['q'])) ? sc_convert_encoding($_GET['q'], $_SESSION['scriptcase']['charset'], "UTF-8") : $_GET['q'];
-          $nmgp_def_dados = $this->lookup_ajax_numero($numero);
-          ob_end_clean();
-          ob_end_clean();
-          $count_aut_comp = 0;
-          $resp_aut_comp  = array();
-          foreach ($nmgp_def_dados as $Ind => $Lista)
-          {
-             if (is_array($Lista))
-             {
-                 foreach ($Lista as $Cod => $Valor)
-                 {
-                     if ($_GET['cod_desc'] == "S")
-                     {
-                         $Valor = $Cod . " - " . $Valor;
-                     }
-                     $resp_aut_comp[] = array('label' => $Valor , 'value' => $Cod);
-                     $count_aut_comp++;
-                 }
-             }
-             if ($count_aut_comp == $_GET['max_itens'])
-             {
-                 break;
-             }
-          }
-          $oJson = new Services_JSON();
-          echo $oJson->encode($resp_aut_comp);
-          $this->Db->Close(); 
-          exit;
-      }
       if ($this->NM_ajax_opcao == 'autocomp_cliente')
       {
           $cliente = ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($_GET['q'])) ? sc_convert_encoding($_GET['q'], $_SESSION['scriptcase']['charset'], "UTF-8") : $_GET['q'];
@@ -435,59 +334,23 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
           exit;
       }
    }
-   function lookup_ajax_numero($numero)
-   {
-      $numero = substr($this->Db->qstr($numero), 1, -1);
-            $numero_look = substr($this->Db->qstr($numero), 1, -1); 
-      $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct NUMERO from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp where  NUMERO like '%" . $numero . "%'"; 
-      unset($cmp1,$cmp2);
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Db->Execute($nm_comando)) 
-      { 
-         while (!$rs->EOF) 
-         { 
-            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
-            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
-            $rs->MoveNext() ; 
-         } 
-         $rs->Close() ; 
-      } 
-      else  
-      {  
-         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-         exit; 
-      } 
-
-      return $nmgp_def_dados;
-   }
-   
    function lookup_ajax_cliente($cliente)
    {
       $cliente = substr($this->Db->qstr($cliente), 1, -1);
             $cliente_look = substr($this->Db->qstr($cliente), 1, -1); 
       $nmgp_def_dados = array(); 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_comando = "select TERID, NIT + ' - ' + NOMBRE from TERCEROS where  NIT + ' - ' + NOMBRE like '%" . $cliente . "%' order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-      { 
-          $nm_comando = "select TERID, concat(NIT,' - ',NOMBRE) from TERCEROS where  concat(NIT,' - ',NOMBRE) like '%" . $cliente . "%' order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-      { 
-          $nm_comando = "select TERID, NIT&' - '&NOMBRE from TERCEROS where  NIT&' - '&NOMBRE like '%" . $cliente . "%' order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-      { 
-          $nm_comando = "select TERID, NIT||' - '||NOMBRE from TERCEROS where   CAST (NIT||' - '||NOMBRE AS TEXT)  like '%" . $cliente . "%' order by NIT, NOMBRE" ; 
-      } 
-      else 
-      { 
-          $nm_comando = "select TERID, NIT||' - '||NOMBRE from TERCEROS where  NIT||' - '||NOMBRE like '%" . $cliente . "%' order by NIT, NOMBRE" ; 
-      } 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where   CAST (NOMBRE AS TEXT)  like '%" . $cliente . "%' order by NIT, NOMBRE"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where   CAST (NOMBRE AS VARCHAR)  like '%" . $cliente . "%' order by NIT, NOMBRE"; 
+      }
+      else
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where  NOMBRE like '%" . $cliente . "%' order by NIT, NOMBRE"; 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -1596,7 +1459,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
 </HEAD>
-<BODY class="scGridPage">
+<BODY id="grid_search" class="scGridPage">
 <FORM style="display:none;" name="form_ok" method="POST" action="<?php echo $NM_retorno; ?>" target="_self">
 <INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
 <INPUT type="hidden" name="nmgp_opcao" value="pesq"> 
@@ -1637,7 +1500,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
  <META http-equiv="Pragma" content="no-cache" />
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
- <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery/js/jquery.js"></script>
+ <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
  <script type="text/javascript" src="../_lib/lib/js/scInput.js"></script>
@@ -1664,7 +1527,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 $vertical_center = '';
 ?>
-<BODY class="scFilterPage" style="<?php echo $vertical_center ?>">
+<BODY id="grid_search" class="scFilterPage" style="<?php echo $vertical_center ?>">
 <?php echo $this->Ini->Ajax_result_set ?>
 <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_js . "/browserSniffer.js" ?>"></SCRIPT>
         <script type="text/javascript">
@@ -1707,6 +1570,50 @@ $vertical_center = '';
 <script type="text/javascript" src="<?php echo $_SESSION['scriptcase']['grid_kardex_fv_tns']['glo_nm_path_prod']; ?>/third/sweetalert/sweetalert2.all.min.js"></script>
 <script type="text/javascript" src="<?php echo $_SESSION['scriptcase']['grid_kardex_fv_tns']['glo_nm_path_prod']; ?>/third/sweetalert/polyfill.min.js"></script>
 <script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
+<?php
+$confirmButtonClass = '';
+$cancelButtonClass  = '';
+$confirmButtonText  = $this->Ini->Nm_lang['lang_btns_cfrm'];
+$cancelButtonText   = $this->Ini->Nm_lang['lang_btns_cncl'];
+$confirmButtonFA    = '';
+$cancelButtonFA     = '';
+$confirmButtonFAPos = '';
+$cancelButtonFAPos  = '';
+if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['style']) && '' != $this->arr_buttons['bsweetalert_ok']['style']) {
+    $confirmButtonClass = 'scButton_' . $this->arr_buttons['bsweetalert_ok']['style'];
+}
+if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['style']) && '' != $this->arr_buttons['bsweetalert_cancel']['style']) {
+    $cancelButtonClass = 'scButton_' . $this->arr_buttons['bsweetalert_cancel']['style'];
+}
+if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['value']) && '' != $this->arr_buttons['bsweetalert_ok']['value']) {
+    $confirmButtonText = $this->arr_buttons['bsweetalert_ok']['value'];
+}
+if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['value']) && '' != $this->arr_buttons['bsweetalert_cancel']['value']) {
+    $cancelButtonText = $this->arr_buttons['bsweetalert_cancel']['value'];
+}
+if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['fontawesomeicon']) && '' != $this->arr_buttons['bsweetalert_ok']['fontawesomeicon']) {
+    $confirmButtonFA = $this->arr_buttons['bsweetalert_ok']['fontawesomeicon'];
+}
+if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']) && '' != $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']) {
+    $cancelButtonFA = $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon'];
+}
+if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['display_position']) && 'img_right' != $this->arr_buttons['bsweetalert_ok']['display_position']) {
+    $confirmButtonFAPos = 'text_right';
+}
+if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['display_position']) && 'img_right' != $this->arr_buttons['bsweetalert_cancel']['display_position']) {
+    $cancelButtonFAPos = 'text_right';
+}
+?>
+<script type="text/javascript">
+  var scSweetAlertConfirmButton = "<?php echo $confirmButtonClass ?>";
+  var scSweetAlertCancelButton = "<?php echo $cancelButtonClass ?>";
+  var scSweetAlertConfirmButtonText = "<?php echo $confirmButtonText ?>";
+  var scSweetAlertCancelButtonText = "<?php echo $cancelButtonText ?>";
+  var scSweetAlertConfirmButtonFA = "<?php echo $confirmButtonFA ?>";
+  var scSweetAlertCancelButtonFA = "<?php echo $cancelButtonFA ?>";
+  var scSweetAlertConfirmButtonFAPos = "<?php echo $confirmButtonFAPos ?>";
+  var scSweetAlertCancelButtonFAPos = "<?php echo $cancelButtonFAPos ?>";
+</script>
 <script type="text/javascript">
 $(function() {
 <?php
@@ -1784,21 +1691,17 @@ if (count($this->nm_mens_alert) || count($this->Ini->nm_mens_alert)) {
 });
 </script>
 <?php
-$displayError = ' style="display: none"';
 if ('' != $this->Campos_Mens_erro) {
-	$displayError = '';
+?>
+<script type="text/javascript">
+$(function() {
+	_nmAjaxShowMessage({title: "<?php echo $this->Ini->Nm_lang['lang_errm_errt']; ?>", message: "<?php echo $this->Campos_Mens_erro ?>", isModal: false, timeout: "", showButton: true, buttonLabel: "", topPos: "", leftPos: "", width: "", height: "", redirUrl: "", redirTarget: "", redirParam: "", showClose: false, showBodyIcon: false, isToast: false, toastPos: "", type: "error"});
+});
+</script>
+<?php
 }
 ?>
-<div<?php echo $displayError; ?>>
-	<table class="scErrorTable" cellspacing="0" cellpadding="0" align="center">
-		<tr>
-			<td class="scErrorTitle" align="left"><?php echo $this->Ini->Nm_lang['lang_errm_errt']; ?></td>
-		</tr>
-		<tr>
-			<td class="scErrorMessage" align="center"><?php echo $this->Campos_Mens_erro; ?></td>
-		</tr>
-	</table>
-</div>
+<script type="text/javascript" src="grid_kardex_fv_tns_message.js"></script>
  <SCRIPT type="text/javascript">
 
 <?php
@@ -1814,9 +1717,10 @@ if (is_file($this->Ini->root . $this->Ini->path_link . "_lib/js/tab_erro_" . $th
         echo $Lines;
     }
 }
+ $Msg_Inval = "Inv�lido";
  if (NM_is_utf8($Lines) && $_SESSION['scriptcase']['charset'] != "UTF-8")
  {
-    $Msg_Inval = sc_convert_encoding("Inv�lido", $_SESSION['scriptcase']['charset'], "UTF-8");
+    $Msg_Inval = sc_convert_encoding($Msg_Inval, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
 var SC_crit_inv = "<?php echo $Msg_Inval ?>";
@@ -1917,184 +1821,6 @@ function scJQCalendarAdd() {
       }
   }
  }
- function nm_save_form(pos)
- {
-  if (pos == 'top' && document.F1.nmgp_save_name_top.value == '')
-  {
-      return;
-  }
-  if (pos == 'bot' && document.F1.nmgp_save_name_bot.value == '')
-  {
-      return;
-  }
-  if (pos == 'fields' && document.F1.nmgp_save_name_fields.value == '')
-  {
-      return;
-  }
-  var str_out = "";
-  str_out += 'SC_codcomp_cond#NMF#' + search_get_sel_txt('SC_codcomp_cond') + '@NMF@';
-  str_out += 'SC_codcomp#NMF#' + search_get_select('SC_codcomp') + '@NMF@';
-  str_out += 'SC_codprefijo_cond#NMF#' + search_get_sel_txt('SC_codprefijo_cond') + '@NMF@';
-  str_out += 'SC_codprefijo#NMF#' + search_get_select('SC_codprefijo') + '@NMF@';
-  str_out += 'SC_numero_cond#NMF#' + search_get_sel_txt('SC_numero_cond') + '@NMF@';
-  str_out += 'SC_numero#NMF#' + search_get_text('SC_numero') + '@NMF@';
-  str_out += 'id_ac_numero#NMF#' + search_get_text('id_ac_numero') + '@NMF@';
-  str_out += 'SC_periodo_cond#NMF#' + search_get_sel_txt('SC_periodo_cond') + '@NMF@';
-  str_out += 'SC_periodo#NMF#' + search_get_select('SC_periodo') + '@NMF@';
-  str_out += 'SC_fecha_cond#NMF#' + search_get_sel_txt('SC_fecha_cond') + '@NMF@';
-  str_out += 'SC_fecha_dia#NMF#' + search_get_sel_txt('SC_fecha_dia') + '@NMF@';
-  str_out += 'SC_fecha_mes#NMF#' + search_get_sel_txt('SC_fecha_mes') + '@NMF@';
-  str_out += 'SC_fecha_ano#NMF#' + search_get_sel_txt('SC_fecha_ano') + '@NMF@';
-  str_out += 'SC_fecha_input_2_dia#NMF#' + search_get_sel_txt('SC_fecha_input_2_dia') + '@NMF@';
-  str_out += 'SC_fecha_input_2_mes#NMF#' + search_get_sel_txt('SC_fecha_input_2_mes') + '@NMF@';
-  str_out += 'SC_fecha_input_2_ano#NMF#' + search_get_sel_txt('SC_fecha_input_2_ano') + '@NMF@';
-  str_out += 'SC_fecha_hor#NMF#' + search_get_sel_txt('SC_fecha_hor') + '@NMF@';
-  str_out += 'SC_fecha_min#NMF#' + search_get_sel_txt('SC_fecha_min') + '@NMF@';
-  str_out += 'SC_fecha_seg#NMF#' + search_get_sel_txt('SC_fecha_seg') + '@NMF@';
-  str_out += 'SC_fecha_input_2_hor#NMF#' + search_get_sel_txt('SC_fecha_input_2_hor') + '@NMF@';
-  str_out += 'SC_fecha_input_2_min#NMF#' + search_get_sel_txt('SC_fecha_input_2_min') + '@NMF@';
-  str_out += 'SC_fecha_input_2_seg#NMF#' + search_get_sel_txt('SC_fecha_input_2_seg') + '@NMF@';
-  str_out += 'SC_cliente_cond#NMF#' + search_get_sel_txt('SC_cliente_cond') + '@NMF@';
-  str_out += 'SC_cliente#NMF#' + search_get_text('SC_cliente') + '@NMF@';
-  str_out += 'id_ac_cliente#NMF#' + search_get_text('id_ac_cliente') + '@NMF@';
-  str_out += 'SC_fecasentad_cond#NMF#' + search_get_sel_txt('SC_fecasentad_cond') + '@NMF@';
-  str_out += 'SC_fecasentad_dia#NMF#' + search_get_sel_txt('SC_fecasentad_dia') + '@NMF@';
-  str_out += 'SC_fecasentad_mes#NMF#' + search_get_sel_txt('SC_fecasentad_mes') + '@NMF@';
-  str_out += 'SC_fecasentad_ano#NMF#' + search_get_sel_txt('SC_fecasentad_ano') + '@NMF@';
-  str_out += 'SC_fecasentad_input_2_dia#NMF#' + search_get_sel_txt('SC_fecasentad_input_2_dia') + '@NMF@';
-  str_out += 'SC_fecasentad_input_2_mes#NMF#' + search_get_sel_txt('SC_fecasentad_input_2_mes') + '@NMF@';
-  str_out += 'SC_fecasentad_input_2_ano#NMF#' + search_get_sel_txt('SC_fecasentad_input_2_ano') + '@NMF@';
-  str_out += 'SC_fecasentad_hor#NMF#' + search_get_sel_txt('SC_fecasentad_hor') + '@NMF@';
-  str_out += 'SC_fecasentad_min#NMF#' + search_get_sel_txt('SC_fecasentad_min') + '@NMF@';
-  str_out += 'SC_fecasentad_seg#NMF#' + search_get_sel_txt('SC_fecasentad_seg') + '@NMF@';
-  str_out += 'SC_fecasentad_input_2_hor#NMF#' + search_get_sel_txt('SC_fecasentad_input_2_hor') + '@NMF@';
-  str_out += 'SC_fecasentad_input_2_min#NMF#' + search_get_sel_txt('SC_fecasentad_input_2_min') + '@NMF@';
-  str_out += 'SC_fecasentad_input_2_seg#NMF#' + search_get_sel_txt('SC_fecasentad_input_2_seg') + '@NMF@';
-  str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
-  str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
-  str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
-  str_out  = str_out.replace(/[%]/g, "__NM_PRC__");
-  var save_name = search_get_text('SC_nmgp_save_name_' + pos);
-  var save_opt  = search_get_sel_txt('SC_nmgp_save_option_' + pos);
-  ajax_save_filter(save_name, save_opt, str_out, pos);
- }
- function nm_submit_filter(obj_sel, pos)
- {
-  index = obj_sel.selectedIndex;
-  if (index == -1 || obj_sel.options[index].value == "") 
-  {
-      return false;
-  }
-  ajax_select_filter(obj_sel.options[index].value);
- }
- function nm_submit_filter_del(pos)
- {
-  obj_sel = document.F1.elements['NM_filters_del_' + pos];
-  index   = obj_sel.selectedIndex;
-  if (index == -1 || obj_sel.options[index].value == "") 
-  {
-      return false;
-  }
-  parm = obj_sel.options[index].value;
-  ajax_delete_filter(parm);
- }
- function search_get_select(obj_id)
- {
-    var index = document.getElementById(obj_id).selectedIndex;
-    if (index != -1) {
-        return document.getElementById(obj_id).options[index].value;
-    }
-    else {
-        return '';
-    }
- }
- function search_get_selmult(obj_id)
- {
-    var obj = document.getElementById(obj_id);
-    var val = "_NM_array_";
-    for (iSelect = 0; iSelect < obj.length; iSelect++)
-    {
-        if (obj[iSelect].selected)
-        {
-            val += "#NMARR#" + obj[iSelect].value;
-        }
-    }
-    return val;
- }
- function search_get_Dselelect(obj_id)
- {
-    var obj = document.getElementById(obj_id);
-    var val = "_NM_array_";
-    for (iSelect = 0; iSelect < obj.length; iSelect++)
-    {
-         val += "#NMARR#" + obj[iSelect].value;
-    }
-    return val;
- }
- function search_get_radio(obj_id)
- {
-    var val  = "";
-    if (document.getElementById(obj_id)) {
-       var Nobj = document.getElementById(obj_id).name;
-       var obj  = document.getElementsByName(Nobj);
-       for (iRadio = 0; iRadio < obj.length; iRadio++) {
-           if (obj[iRadio].checked) {
-               val = obj[iRadio].value;
-           }
-       }
-    }
-    return val;
- }
- function search_get_checkbox(obj_id)
- {
-    var val  = "_NM_array_";
-    if (document.getElementById(obj_id)) {
-       var Nobj = document.getElementById(obj_id).name;
-       var obj  = document.getElementsByName(Nobj);
-       if (!obj.length) {
-           if (obj.checked) {
-               val += "#NMARR#" + obj.value;
-           }
-       }
-       else {
-           for (iCheck = 0; iCheck < obj.length; iCheck++) {
-               if (obj[iCheck].checked) {
-                   val += "#NMARR#" + obj[iCheck].value;
-               }
-           }
-       }
-    }
-    return val;
- }
- function search_get_text(obj_id)
- {
-    var obj = document.getElementById(obj_id);
-    return (obj) ? obj.value : '';
- }
- function search_get_title(obj_id)
- {
-    var obj = document.getElementById(obj_id);
-    return (obj) ? obj.title : '';
- }
- function search_get_sel_txt(obj_id)
- {
-    var val = "";
-    obj_part  = document.getElementById(obj_id);
-    if (obj_part && obj_part.type.substr(0, 6) == 'select')
-    {
-        val = search_get_select(obj_id);
-    }
-    else
-    {
-        val = (obj_part) ? obj_part.value : '';
-    }
-    return val;
- }
- function search_get_html(obj_id)
- {
-    var obj = document.getElementById(obj_id);
-    return obj.innerHTML;
- }
 function nm_open_popup(parms)
 {
     NovaJanela = window.open (parms, '', 'resizable, scrollbars');
@@ -2102,46 +1828,11 @@ function nm_open_popup(parms)
  </SCRIPT>
 <script type="text/javascript">
  $(function() {
-   $("#id_ac_numero").autocomplete({
-     minLength: 1,
-     source: function (request, response) {
-     $.ajax({
-       url: "index.php",
-       dataType: "json",
-       data: {
-          q: request.term,
-          nmgp_opcao: "ajax_autocomp",
-          nmgp_parms: "NM_ajax_opcao?#?autocomp_numero",
-          max_itens: "10",
-          cod_desc: "N",
-          script_case_init: <?php echo $this->Ini->sc_page ?>
-        },
-       success: function (data) {
-         if (data == "ss_time_out") {
-             nm_move();
-         }
-         response(data);
-       }
-      });
-    },
-     select: function (event, ui) {
-       $("#SC_numero").val(ui.item.value);
-       $(this).val(ui.item.label);
-       event.preventDefault();
-     },
-     focus: function (event, ui) {
-       $("#SC_numero").val(ui.item.value);
-       $(this).val(ui.item.label);
-       event.preventDefault();
-     },
-     change: function (event, ui) {
-       if (null == ui.item) {
-          $("#SC_numero").val( $(this).val() );
-       }
-     }
-   });
+   scClass = $("#id_ac_cliente").attr('class').split(' ');
+   scClass = scClass[ scClass.length-1 ];
    $("#id_ac_cliente").autocomplete({
-     minLength: 1,
+     minLength: 3,
+     classes: { 'ui-autocomplete': scClass + 'Ac' },
      source: function (request, response) {
      $.ajax({
        url: "index.php",
@@ -2266,13 +1957,12 @@ function nm_open_popup(parms)
    function monta_form()
    {
       global 
-             $codcomp_cond, $codcomp,
-             $codprefijo_cond, $codprefijo,
-             $numero_cond, $numero, $numero_autocomp,
-             $periodo_cond, $periodo,
              $fecha_cond, $fecha, $fecha_dia, $fecha_mes, $fecha_ano, $fecha_hor, $fecha_min, $fecha_seg, $fecha_input_2_dia, $fecha_input_2_mes, $fecha_input_2_ano, $fecha_input_2_min, $fecha_input_2_hor, $fecha_input_2_seg,
-             $cliente_cond, $cliente, $cliente_autocomp,
+             $codprefijo_cond, $codprefijo,
+             $numero_cond, $numero,
+             $periodo_cond, $periodo,
              $fecasentad_cond, $fecasentad, $fecasentad_dia, $fecasentad_mes, $fecasentad_ano, $fecasentad_hor, $fecasentad_min, $fecasentad_seg,
+             $cliente_cond, $cliente, $cliente_autocomp,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2311,14 +2001,6 @@ function nm_open_popup(parms)
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
           }
-          $codcomp = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codcomp']; 
-          $codcomp_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codcomp_cond']; 
-          $codprefijo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codprefijo']; 
-          $codprefijo_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codprefijo_cond']; 
-          $numero = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['numero']; 
-          $numero_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['numero_cond']; 
-          $periodo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['periodo']; 
-          $periodo_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['periodo_cond']; 
           $fecha_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_dia']; 
           $fecha_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_mes']; 
           $fecha_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_ano']; 
@@ -2332,8 +2014,12 @@ function nm_open_popup(parms)
           $fecha_input_2_min = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_input_2_min']; 
           $fecha_input_2_seg = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_input_2_seg']; 
           $fecha_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_cond']; 
-          $cliente = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['cliente']; 
-          $cliente_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['cliente_cond']; 
+          $codprefijo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codprefijo']; 
+          $codprefijo_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codprefijo_cond']; 
+          $numero = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['numero']; 
+          $numero_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['numero_cond']; 
+          $periodo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['periodo']; 
+          $periodo_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['periodo_cond']; 
           $fecasentad_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_dia']; 
           $fecasentad_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_mes']; 
           $fecasentad_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_ano']; 
@@ -2341,11 +2027,13 @@ function nm_open_popup(parms)
           $fecasentad_min = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_min']; 
           $fecasentad_seg = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_seg']; 
           $fecasentad_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_cond']; 
+          $cliente = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['cliente']; 
+          $cliente_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['cliente_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['NM_operador']; 
       } 
-      if (!isset($codcomp_cond) || empty($codcomp_cond))
+      if (!isset($fecha_cond) || empty($fecha_cond))
       {
-         $codcomp_cond = "eq";
+         $fecha_cond = "bw";
       }
       if (!isset($codprefijo_cond) || empty($codprefijo_cond))
       {
@@ -2359,49 +2047,43 @@ function nm_open_popup(parms)
       {
          $periodo_cond = "eq";
       }
-      if (!isset($fecha_cond) || empty($fecha_cond))
-      {
-         $fecha_cond = "bw";
-      }
-      if (!isset($cliente_cond) || empty($cliente_cond))
-      {
-         $cliente_cond = "qp";
-      }
       if (!isset($fecasentad_cond) || empty($fecasentad_cond))
       {
          $fecasentad_cond = "nn";
       }
+      if (!isset($cliente_cond) || empty($cliente_cond))
+      {
+         $cliente_cond = "eq";
+      }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
-      $str_hide_codcomp = (in_array($codcomp_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_fecha = (in_array($fecha_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_codprefijo = (in_array($codprefijo_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_numero = (in_array($numero_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_periodo = (in_array($periodo_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
-      $str_hide_fecha = (in_array($fecha_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
-      $str_hide_cliente = (in_array($cliente_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_fecasentad = (in_array($fecasentad_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_cliente = (in_array($cliente_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
-      $str_display_codcomp = ('bw' == $codcomp_cond) ? $display_aberto : $display_fechado;
+      $str_display_fecha = ('bw' == $fecha_cond) ? $display_aberto : $display_fechado;
       $str_display_codprefijo = ('bw' == $codprefijo_cond) ? $display_aberto : $display_fechado;
       $str_display_numero = ('bw' == $numero_cond) ? $display_aberto : $display_fechado;
       $str_display_periodo = ('bw' == $periodo_cond) ? $display_aberto : $display_fechado;
-      $str_display_fecha = ('bw' == $fecha_cond) ? $display_aberto : $display_fechado;
-      $str_display_cliente = ('bw' == $cliente_cond) ? $display_aberto : $display_fechado;
       $str_display_fecasentad = ('bw' == $fecasentad_cond) ? $display_aberto : $display_fechado;
+      $str_display_cliente = ('bw' == $cliente_cond) ? $display_aberto : $display_fechado;
 
-      if (!isset($codcomp) || $codcomp == "")
+      if (!isset($fecha) || $fecha == "")
       {
-          $codcomp = "";
+          $fecha = "";
       }
-      if (isset($codcomp) && !empty($codcomp))
+      if (isset($fecha) && !empty($fecha))
       {
-         $tmp_pos = strpos($codcomp, "##@@");
+         $tmp_pos = strpos($fecha, "##@@");
          if ($tmp_pos === false)
          { }
          else
          {
-         $codcomp = substr($codcomp, 0, $tmp_pos);
+         $fecha = substr($fecha, 0, $tmp_pos);
          }
       }
       if (!isset($codprefijo) || $codprefijo == "")
@@ -2446,18 +2128,18 @@ function nm_open_popup(parms)
          $periodo = substr($periodo, 0, $tmp_pos);
          }
       }
-      if (!isset($fecha) || $fecha == "")
+      if (!isset($fecasentad) || $fecasentad == "")
       {
-          $fecha = "";
+          $fecasentad = "";
       }
-      if (isset($fecha) && !empty($fecha))
+      if (isset($fecasentad) && !empty($fecasentad))
       {
-         $tmp_pos = strpos($fecha, "##@@");
+         $tmp_pos = strpos($fecasentad, "##@@");
          if ($tmp_pos === false)
          { }
          else
          {
-         $fecha = substr($fecha, 0, $tmp_pos);
+         $fecasentad = substr($fecasentad, 0, $tmp_pos);
          }
       }
       if (!isset($cliente) || $cliente == "")
@@ -2474,20 +2156,6 @@ function nm_open_popup(parms)
          $cliente = substr($cliente, 0, $tmp_pos);
          }
       }
-      if (!isset($fecasentad) || $fecasentad == "")
-      {
-          $fecasentad = "";
-      }
-      if (isset($fecasentad) && !empty($fecasentad))
-      {
-         $tmp_pos = strpos($fecasentad, "##@@");
-         if ($tmp_pos === false)
-         { }
-         else
-         {
-         $fecasentad = substr($fecasentad, 0, $tmp_pos);
-         }
-      }
 ?>
  <TR align="center">
   <TD class="scFilterTableTd">
@@ -2495,245 +2163,28 @@ function nm_open_popup(parms)
    <TR valign="top" >
   <TD width="100%" height="">
    <TABLE class="scFilterTable" id="hidden_bloco_0" valign="top" width="100%" style="height: 100%;">
-   <tr>
-
-
-
-   
-      <INPUT type="hidden" id="SC_codcomp_cond" name="codcomp_cond" value="eq">
-
-    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
- $SC_Label = (isset($this->New_label['codcomp'])) ? $this->New_label['codcomp'] : "TIPO";
- $nmgp_tab_label .= "codcomp?#?" . $SC_Label . "?@?";
- $date_sep_bw = " ";
- if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
- {
-     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
- }
-?>
-<?php echo $SC_Label ?><br><span id="id_hide_codcomp"  <?php echo $str_hide_codcomp?>> 
 <?php
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['codcomp'] = array();
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['codcomp'][] = "FV";
- ?>
-
- <SELECT class="scFilterObjectOdd" id="SC_codcomp"  name="codcomp"  size="1">
- <OPTION value="FV##@@FACTURA"<?php if ($codcomp == "FV") { echo " selected" ;} ?>>FACTURA</option>
- </SELECT>
- </TD>
-   
-   
-      <INPUT type="hidden" id="SC_codprefijo_cond" name="codprefijo_cond" value="eq">
-
-    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
- $SC_Label = (isset($this->New_label['codprefijo'])) ? $this->New_label['codprefijo'] : "PJ/TNS";
- $nmgp_tab_label .= "codprefijo?#?" . $SC_Label . "?@?";
- $date_sep_bw = " ";
- if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
- {
-     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
- }
+     $Img_tit_blk_i = "";
+     $Img_tit_blk_f = "";
 ?>
-<?php echo $SC_Label ?><br><span id="id_hide_codprefijo"  <?php echo $str_hide_codprefijo?>>
-<?php
-      $codprefijo_look = substr($this->Ini->nm_db_conn_mysql->qstr($codprefijo), 1, -1); 
-      $nmgp_def_dados = "" ; 
-      $nm_comando = "SELECT DISTINCT cod_prefijo FROM cloud_prefijos  WHERE tipo='FV' and id_empresa='" . $_SESSION['gidempresa'] . "' ORDER BY cod_prefijo"; 
-      unset($cmp1,$cmp2);
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Ini->nm_db_conn_mysql->Execute($nm_comando)) 
-      { 
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['codprefijo'] = array();
-         while (!$rs->EOF) 
-         { 
-            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['codprefijo'][] = trim($rs->fields[0]);
-            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?" ; 
-            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?N?@?" ; 
-            $rs->MoveNext() ; 
-         } 
-         $rs->Close() ; 
-      } 
-      else  
-      {  
-         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_mysql->ErrorMsg()); 
-         exit; 
-      } 
-?>
-   <span id="idAjaxSelect_codprefijo">
-      <SELECT class="scFilterObjectOdd" id="SC_codprefijo" name="codprefijo"  size="1">
-<?php
-      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
-      $nm_opcoes  = explode("?@?", $nm_opcoesx);
-      foreach ($nm_opcoes as $nm_opcao)
-      {
-         if (!empty($nm_opcao))
-         {
-            $temp_bug_list = explode("?#?", $nm_opcao);
-            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
-            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
-            if ("" != $codprefijo)
-            {
-                    $codprefijo_sel = ($nm_opc_cod === $codprefijo) ? "selected" : "";
-            }
-            else
-            {
-               $codprefijo_sel = ("S" == $nm_opc_sel) ? "selected" : "";
-            }
-            $nm_sc_valor = $nm_opc_val;
-            $nm_opc_val = $nm_sc_valor;
-?>
-       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $codprefijo_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
-<?php
-         }
-      }
-?>
-      </SELECT>
-   </span>
-<?php
-?>
-         </TD>
-   
-   
-      <INPUT type="hidden" id="SC_numero_cond" name="numero_cond" value="eq">
 
-    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
- $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "#";
- $nmgp_tab_label .= "numero?#?" . $SC_Label . "?@?";
- $date_sep_bw = " ";
- if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
- {
-     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
- }
-?>
-<?php echo $SC_Label ?><br><span id="id_hide_numero"  <?php echo $str_hide_numero?>><?php
-      if ($numero != "")
-      {
-      $numero_look = substr($this->Db->qstr($numero), 1, -1); 
-      $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct NUMERO from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp where NUMERO = '$numero_look'"; 
-      unset($cmp1,$cmp2);
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Db->Execute($nm_comando)) 
-      { 
-         while (!$rs->EOF) 
-         { 
-            $cmp1 = trim($rs->fields[0]);
-            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
-            $rs->MoveNext() ; 
-         } 
-         $rs->Close() ; 
-      } 
-      else  
-      {  
-         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-         exit; 
-      } 
-      }
-      if (isset($nmgp_def_dados[0][$numero]))
-      {
-          $sAutocompValue = $nmgp_def_dados[0][$numero];
-      }
-      else
-      {
-          $sAutocompValue = $numero;
-      }
-?>
-<INPUT  type="text" id="SC_numero" name="numero" value="<?php echo NM_encode_input($numero) ?>"  size=8 alt="{datatype: 'text', maxLength: 8, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
-<input class="sc-js-input scFilterObjectOdd" type="text" id="id_ac_numero" name="numero_autocomp" size="8"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'text', maxLength: 8, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}">
-
- </TD>
-   
-
-
-
-   </tr>
-   </TABLE>
-  </TD>
-   </TR>
-   </TABLE>
-   </TD></TR><TR><TD class="scFilterTableTd">
-   <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
-   <TR valign="top" >
-  <TD width="100%" height="">
-   <TABLE class="scFilterTable" id="hidden_bloco_1" valign="top" width="100%" style="height: 100%;">
-   <tr>
-
-
-
-
-
-      <TD id='SC_periodo_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "PERIODO"; ?></TD>
-      
-      <INPUT type="hidden" id="SC_periodo_cond" name="periodo_cond" value="eq">
- 
-     <TD colspan=2 class="scFilterFieldOdd">
-      <TABLE  border="0" cellpadding="0" cellspacing="0">
-       <TR id="id_hide_periodo" <?php echo $str_hide_periodo?> valign="top">
-        <TD class="scFilterFieldFontOdd">
-           <?php
- $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "PERIODO";
- $nmgp_tab_label .= "periodo?#?" . $SC_Label . "?@?";
- $date_sep_bw = " ";
- if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
- {
-     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
- }
-?>
- 
-<?php
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'] = array();
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "01";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "02";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "03";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "04";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "05";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "06";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "07";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "08";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "09";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "10";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "11";
-  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "12";
- ?>
-
- <SELECT class="scFilterObjectOdd" id="SC_periodo"  name="periodo"  size="1">
- <OPTION value="">TODOS</option>
- <OPTION value="01##@@ENERO"<?php if ($periodo == "01") { echo " selected" ;} ?>>ENERO</option>
- <OPTION value="02##@@FEBRERO"<?php if ($periodo == "02") { echo " selected" ;} ?>>FEBRERO</option>
- <OPTION value="03##@@MARZO"<?php if ($periodo == "03") { echo " selected" ;} ?>>MARZO</option>
- <OPTION value="04##@@ABRIL"<?php if ($periodo == "04") { echo " selected" ;} ?>>ABRIL</option>
- <OPTION value="05##@@MAYO"<?php if ($periodo == "05") { echo " selected" ;} ?>>MAYO</option>
- <OPTION value="06##@@JUNIO"<?php if ($periodo == "06") { echo " selected" ;} ?>>JUNIO</option>
- <OPTION value="07##@@JULIO"<?php if ($periodo == "07") { echo " selected" ;} ?>>JULIO</option>
- <OPTION value="08##@@AGOSTO"<?php if ($periodo == "08") { echo " selected" ;} ?>>AGOSTO</option>
- <OPTION value="09##@@SEPTIEMBRE"<?php if ($periodo == "09") { echo " selected" ;} ?>>SEPTIEMBRE</option>
- <OPTION value="10##@@OCTUBRE"<?php if ($periodo == "10") { echo " selected" ;} ?>>OCTUBRE</option>
- <OPTION value="11##@@NOVIEMBRE"<?php if ($periodo == "11") { echo " selected" ;} ?>>NOVIEMBRE</option>
- <OPTION value="12##@@DICIEMBRE"<?php if ($periodo == "12") { echo " selected" ;} ?>>DICIEMBRE</option>
- </SELECT>
-
-        </TD>
+    <TR>
+     <TD colspan="4" height="20" class="scFilterBlockBack">
+      <TABLE border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+       <TR>
+        <TD class="scFilterBlockFont css_blk_0"><?php echo $Img_tit_blk_i ?>BUSCAR<?php echo $Img_tit_blk_f ?></TD>
+         
        </TR>
       </TABLE>
-     </TD>
-
-   </tr><tr>
-
+     </TD>
+    </TR>   <tr>
 
 
 
-
-      <TD id='SC_fecha_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "FECHA"; ?></TD>
-      
+   
       <INPUT type="hidden" id="SC_fecha_cond" name="fecha_cond" value="bw">
- 
-     <TD colspan=2 class="scFilterFieldEven">
-      <TABLE  border="0" cellpadding="0" cellspacing="0">
-       <TR id="id_hide_fecha" <?php echo $str_hide_fecha?> valign="top">
-        <TD class="scFilterFieldFontEven">
-           <?php
+
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
  $SC_Label = (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "FECHA";
  $nmgp_tab_label .= "fecha?#?" . $SC_Label . "?@?";
  $date_sep_bw = " ";
@@ -2742,7 +2193,7 @@ function nm_open_popup(parms)
      $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
-
+<?php echo $SC_Label ?><br><span id="id_hide_fecha"  <?php echo $str_hide_fecha?>>
 <?php
   $Form_base = "ddmmyyyy";
   $date_format_show = "";
@@ -2829,7 +2280,7 @@ foreach ($Arr_format as $Part_date)
   {
 ?>
 <span id='id_date_part_fecha_DD' style='display: inline-block'>
-<INPUT class="sc-js-input scFilterObjectEven" type="text" id="SC_fecha_dia" name="fecha_dia" value="<?php echo NM_encode_input($fecha_dia); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_dia" name="fecha_dia" value="<?php echo NM_encode_input($fecha_dia); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
 </span>
 
 <?php
@@ -2840,7 +2291,7 @@ foreach ($Arr_format as $Part_date)
   {
 ?>
 <span id='id_date_part_fecha_MM' style='display: inline-block'>
-<INPUT class="sc-js-input scFilterObjectEven" type="text" id="SC_fecha_mes" name="fecha_mes" value="<?php echo NM_encode_input($fecha_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_mes" name="fecha_mes" value="<?php echo NM_encode_input($fecha_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
 </span>
 
 <?php
@@ -2851,7 +2302,7 @@ foreach ($Arr_format as $Part_date)
   {
 ?>
 <span id='id_date_part_fecha_AAAA' style='display: inline-block'>
-<INPUT class="sc-js-input scFilterObjectEven" type="text" id="SC_fecha_ano" name="fecha_ano" value="<?php echo NM_encode_input($fecha_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_ano" name="fecha_ano" value="<?php echo NM_encode_input($fecha_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
  <INPUT type="hidden" id="sc_fecha_jq">
 </span>
 
@@ -2864,13 +2315,11 @@ foreach ($Arr_format as $Part_date)
 }
 
 ?>
-        <SPAN id="id_css_fecha"  class="scFilterFieldFontEven">
+        <SPAN id="id_css_fecha"  class="scFilterFieldFontOdd">
  <?php echo $date_format_show ?>         </SPAN>
-                 </TD>
-       </TR>
-       <TR valign="top">
-        <TD id="id_vis_fecha"  <?php echo $str_display_fecha; ?> class="scFilterFieldFontEven">
-         <?php echo $date_sep_bw ?>
+                  <br />
+        <SPAN id="id_vis_fecha"  <?php echo $str_display_fecha; ?> class="scFilterFieldFontOdd">
+         <?php echo $date_sep_bw ?> 
          <BR>
          
          <?php
@@ -2883,7 +2332,7 @@ foreach ($Arr_format as $Part_date)
   {
 ?>
 <span id='id_date_part_fecha_input_2_DD' style='display: inline-block'>
-<INPUT class="sc-js-input scFilterObjectEven" type="text" id="SC_fecha_input_2_dia" name="fecha_input_2_dia" value="<?php echo NM_encode_input($fecha_input_2_dia); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_input_2_dia" name="fecha_input_2_dia" value="<?php echo NM_encode_input($fecha_input_2_dia); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
 </span>
 
 <?php
@@ -2894,7 +2343,7 @@ foreach ($Arr_format as $Part_date)
   {
 ?>
 <span id='id_date_part_fecha_input_2_MM' style='display: inline-block'>
-<INPUT class="sc-js-input scFilterObjectEven" type="text" id="SC_fecha_input_2_mes" name="fecha_input_2_mes" value="<?php echo NM_encode_input($fecha_input_2_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_input_2_mes" name="fecha_input_2_mes" value="<?php echo NM_encode_input($fecha_input_2_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
 </span>
 
 <?php
@@ -2905,7 +2354,7 @@ foreach ($Arr_format as $Part_date)
   {
 ?>
 <span id='id_date_part_fecha_input_2_AAAA' style='display: inline-block'>
-<INPUT class="sc-js-input scFilterObjectEven" type="text" id="SC_fecha_input_2_ano" name="fecha_input_2_ano" value="<?php echo NM_encode_input($fecha_input_2_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_input_2_ano" name="fecha_input_2_ano" value="<?php echo NM_encode_input($fecha_input_2_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
  <INPUT type="hidden" id="sc_fecha_jq2">
 </span>
 
@@ -2918,119 +2367,151 @@ foreach ($Arr_format as $Part_date)
 }
 
 ?>
+         </SPAN>
+          </TD>
+   
+   
+      <INPUT type="hidden" id="SC_codprefijo_cond" name="codprefijo_cond" value="eq">
 
-        </TD>
-       </TR>
-      </TABLE>
-     </TD>
-
-   </tr><tr>
-
-
-
-
-
-      <TD id='SC_cliente_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['cliente'])) ? $this->New_label['cliente'] : "CLIENTE"; ?></TD>
-      
-      <INPUT type="hidden" id="SC_cliente_cond" name="cliente_cond" value="qp">
- 
-     <TD colspan=2 class="scFilterFieldOdd">
-      <TABLE  border="0" cellpadding="0" cellspacing="0">
-       <TR id="id_hide_cliente" <?php echo $str_hide_cliente?> valign="top">
-        <TD class="scFilterFieldFontOdd">
-           <?php
- $SC_Label = (isset($this->New_label['cliente'])) ? $this->New_label['cliente'] : "CLIENTE";
- $nmgp_tab_label .= "cliente?#?" . $SC_Label . "?@?";
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['codprefijo'])) ? $this->New_label['codprefijo'] : "PJ/TNS";
+ $nmgp_tab_label .= "codprefijo?#?" . $SC_Label . "?@?";
  $date_sep_bw = " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
  {
      $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
+<?php echo $SC_Label ?><br><span id="id_hide_codprefijo"  <?php echo $str_hide_codprefijo?>>
 <?php
-      if ($cliente != "")
-      {
-      $cliente_look = substr($this->Db->qstr($cliente), 1, -1); 
-      $nmgp_def_dados = array(); 
-   if (is_numeric($cliente))
-   { 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_comando = "select TERID, NIT + ' - ' + NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-      { 
-          $nm_comando = "select TERID, concat(NIT,' - ',NOMBRE) from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-      { 
-          $nm_comando = "select TERID, NIT&' - '&NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-      { 
-          $nm_comando = "select TERID, NIT||' - '||NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
-      else 
-      { 
-          $nm_comando = "select TERID, NIT||' - '||NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
+      $codprefijo_look = substr($this->Ini->nm_db_conn_mysql->qstr($codprefijo), 1, -1); 
+      $nmgp_def_dados = "" ; 
+      $nm_comando = "SELECT DISTINCT cod_prefijo FROM cloud_prefijos  WHERE tipo='FV' and id_empresa='" . $_SESSION['gidempresa'] . "' ORDER BY cod_prefijo"; 
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Db->Execute($nm_comando)) 
+      if ($rs = $this->Ini->nm_db_conn_mysql->Execute($nm_comando)) 
       { 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['codprefijo'] = array();
          while (!$rs->EOF) 
          { 
-            $cmp1 = trim($rs->fields[0]);
-            $cmp2 = trim($rs->fields[1]);
-            $nmgp_def_dados[] = array($cmp1 => $cmp2); 
+            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['codprefijo'][] = trim($rs->fields[0]);
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?" ; 
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?N?@?" ; 
             $rs->MoveNext() ; 
          } 
          $rs->Close() ; 
       } 
       else  
       {  
-         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_mysql->ErrorMsg()); 
          exit; 
       } 
-   } 
-      }
-      if (isset($nmgp_def_dados[0][$cliente]))
+?>
+   <span id="idAjaxSelect_codprefijo">
+      <SELECT class="scFilterObjectOdd" id="SC_codprefijo" name="codprefijo"  size="1">
+<?php
+      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
+      $nm_opcoes  = explode("?@?", $nm_opcoesx);
+      foreach ($nm_opcoes as $nm_opcao)
       {
-          $sAutocompValue = $nmgp_def_dados[0][$cliente];
-      }
-      else
-      {
-          $sAutocompValue = $cliente;
+         if (!empty($nm_opcao))
+         {
+            $temp_bug_list = explode("?#?", $nm_opcao);
+            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
+            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
+            if ("" != $codprefijo)
+            {
+                    $codprefijo_sel = ($nm_opc_cod === $codprefijo) ? "selected" : "";
+            }
+            else
+            {
+               $codprefijo_sel = ("S" == $nm_opc_sel) ? "selected" : "";
+            }
+            $nm_sc_valor = $nm_opc_val;
+            $nm_opc_val = $nm_sc_valor;
+?>
+       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $codprefijo_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
+<?php
+         }
       }
 ?>
-<INPUT  type="text" id="SC_cliente" name="cliente" value="<?php echo NM_encode_input($cliente) ?>"  size=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
-<input class="sc-js-input scFilterObjectOdd" type="text" id="id_ac_cliente" name="cliente_autocomp" size="60"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'text', maxLength: 60, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}">
+      </SELECT>
+   </span>
+<?php
+?>
+         </TD>
+   
+   
+      <INPUT type="hidden" id="SC_numero_cond" name="numero_cond" value="eq">
+
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "#";
+ $nmgp_tab_label .= "numero?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<?php echo $SC_Label ?><br><span id="id_hide_numero"  <?php echo $str_hide_numero?>><INPUT  type="text" id="SC_numero" name="numero" value="<?php echo NM_encode_input($numero) ?>"  size=8 alt="{datatype: 'text', maxLength: 8, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" class="sc-js-input scFilterObjectOdd">
+ </TD>
+   
+   
+      <INPUT type="hidden" id="SC_periodo_cond" name="periodo_cond" value="eq">
+
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "PERIODO";
+ $nmgp_tab_label .= "periodo?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<?php echo $SC_Label ?><br><span id="id_hide_periodo"  <?php echo $str_hide_periodo?>> 
+<?php
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'] = array();
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "01";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "02";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "03";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "04";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "05";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "06";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "07";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "08";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "09";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "10";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "11";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['periodo'][] = "12";
+ ?>
+
+ <SELECT class="scFilterObjectOdd" id="SC_periodo"  name="periodo"  size="1">
+ <OPTION value="">TODOS</option>
+ <OPTION value="01##@@ENERO"<?php if ($periodo == "01") { echo " selected" ;} ?>>ENERO</option>
+ <OPTION value="02##@@FEBRERO"<?php if ($periodo == "02") { echo " selected" ;} ?>>FEBRERO</option>
+ <OPTION value="03##@@MARZO"<?php if ($periodo == "03") { echo " selected" ;} ?>>MARZO</option>
+ <OPTION value="04##@@ABRIL"<?php if ($periodo == "04") { echo " selected" ;} ?>>ABRIL</option>
+ <OPTION value="05##@@MAYO"<?php if ($periodo == "05") { echo " selected" ;} ?>>MAYO</option>
+ <OPTION value="06##@@JUNIO"<?php if ($periodo == "06") { echo " selected" ;} ?>>JUNIO</option>
+ <OPTION value="07##@@JULIO"<?php if ($periodo == "07") { echo " selected" ;} ?>>JULIO</option>
+ <OPTION value="08##@@AGOSTO"<?php if ($periodo == "08") { echo " selected" ;} ?>>AGOSTO</option>
+ <OPTION value="09##@@SEPTIEMBRE"<?php if ($periodo == "09") { echo " selected" ;} ?>>SEPTIEMBRE</option>
+ <OPTION value="10##@@OCTUBRE"<?php if ($periodo == "10") { echo " selected" ;} ?>>OCTUBRE</option>
+ <OPTION value="11##@@NOVIEMBRE"<?php if ($periodo == "11") { echo " selected" ;} ?>>NOVIEMBRE</option>
+ <OPTION value="12##@@DICIEMBRE"<?php if ($periodo == "12") { echo " selected" ;} ?>>DICIEMBRE</option>
+ </SELECT>
+ </TD>
+   
 
 
-        </TD>
-       </TR>
-      </TABLE>
-     </TD>
 
    </tr><tr>
 
 
 
-
-
-      <TD id='SC_fecasentad_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['fecasentad'])) ? $this->New_label['fecasentad'] : "ASENTADAS"; ?></TD>
-     <TD class="scFilterFieldEven"> 
-      <SELECT class="scFilterObjectEven" id="SC_fecasentad_cond" name="fecasentad_cond" onChange="nm_campos_between(document.getElementById('id_vis_fecasentad'), this, 'fecasentad')">
-       <OPTION value="nn" <?php if ("nn" == $fecasentad_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_nnul'] ?></OPTION>
-       <OPTION value="nu" <?php if ("nu" == $fecasentad_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_null'] ?></OPTION>
-      </SELECT>
-       </TD>
-     <TD  class="scFilterFieldEven">
-      <TABLE  border="0" cellpadding="0" cellspacing="0">
-       <TR id="id_hide_fecasentad" <?php echo $str_hide_fecasentad?> valign="top">
-        <TD class="scFilterFieldFontEven">
-           <?php
+   
+    <TD nowrap class="scFilterLabelEven" style="vertical-align: top" > <?php
  $SC_Label = (isset($this->New_label['fecasentad'])) ? $this->New_label['fecasentad'] : "ASENTADAS";
  $nmgp_tab_label .= "fecasentad?#?" . $SC_Label . "?@?";
  $date_sep_bw = " ";
@@ -3039,7 +2520,12 @@ foreach ($Arr_format as $Part_date)
      $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
-
+<?php echo $SC_Label ?><br>
+      <SELECT class="scFilterObjectEven" id="SC_fecasentad_cond" name="fecasentad_cond" onChange="nm_campos_between(document.getElementById('id_vis_fecasentad'), this, 'fecasentad')">
+       <OPTION value="nn" <?php if ("nn" == $fecasentad_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_nnul'] ?></OPTION>
+       <OPTION value="nu" <?php if ("nu" == $fecasentad_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_null'] ?></OPTION>
+      </SELECT>
+      <br><span id="id_hide_fecasentad"  <?php echo $str_hide_fecasentad?>>
 <?php
   $Form_base = "ddmmyyyyhhiiss";
   $date_format_show = "";
@@ -3195,7 +2681,112 @@ foreach ($Arr_format as $Part_date)
 ?>
         <SPAN id="id_css_fecasentad"  class="scFilterFieldFontEven">
  <?php echo $date_format_show ?>         </SPAN>
+          </TD>
+   
+
+
+
+
+    <TD class="scFilterLabelEven" colspan="3" >&nbsp;</TD>   </tr>
+   </TABLE>
+  </TD>
+   </TR>
+   </TABLE>
+   </TD></TR><TR><TD class="scFilterTableTd">
+   <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
+   <TR valign="top" >
+  <TD width="100%" height="">
+   <TABLE class="scFilterTable" id="hidden_bloco_1" valign="top" width="100%" style="height: 100%;">
+<?php
+     $Img_tit_blk_i = "";
+     $Img_tit_blk_f = "";
+?>
+
+    <TR>
+     <TD colspan="3" height="20" class="scFilterBlockBack">
+      <TABLE border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+       <TR>
+        <TD class="scFilterBlockFont css_blk_1"><?php echo $Img_tit_blk_i ?>CLIENTE<?php echo $Img_tit_blk_f ?></TD>
          
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>   <tr>
+
+
+
+
+
+      <TD id='SC_cliente_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['cliente'])) ? $this->New_label['cliente'] : "CLIENTE"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_cliente_cond" name="cliente_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_cliente" <?php echo $str_hide_cliente?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['cliente'])) ? $this->New_label['cliente'] : "CLIENTE";
+ $nmgp_tab_label .= "cliente?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<?php
+      if ($cliente != "")
+      {
+      $cliente_look = substr($this->Db->qstr($cliente), 1, -1); 
+      $nmgp_def_dados = array(); 
+   if (is_numeric($cliente))
+   { 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE"; 
+      }
+      else
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE"; 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = trim($rs->fields[0]);
+            $cmp2 = trim($rs->fields[1]);
+            $nmgp_def_dados[] = array($cmp1 => $cmp2); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+   } 
+      }
+      if (isset($nmgp_def_dados[0][$cliente]))
+      {
+          $sAutocompValue = $nmgp_def_dados[0][$cliente];
+      }
+      else
+      {
+          $sAutocompValue = $cliente;
+      }
+?>
+<INPUT  type="text" id="SC_cliente" name="cliente" value="<?php echo NM_encode_input($cliente) ?>"  size=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
+<input class="sc-js-input scFilterObjectOdd" type="text" id="id_ac_cliente" name="cliente_autocomp" size="60"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'text', maxLength: 60, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}">
+
+
         </TD>
        </TR>
       </TABLE>
@@ -3222,66 +2813,11 @@ foreach ($Arr_format as $Part_date)
   <TD class="scFilterTableTd">
    <table width="100%" class="scFilterToolbar"><tr>
     <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
-    </td>
-    <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
-   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
 <?php
-   if ($this->nmgp_botoes['clear'] == "on")
+      if ( isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_modal'])
    {
 ?>
-          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-<?php
-   if (!isset($this->nmgp_botoes['save']) || $this->nmgp_botoes['save'] == "on")
-   {
-       $this->NM_fil_ant = $this->gera_array_filtros();
-?>
-     <span id="idAjaxSelect_NM_filters_bot">
-       <SELECT class="scFilterToolbar_obj" id="sel_recup_filters_bot" name="NM_filters_bot" onChange="nm_submit_filter(this, 'bot');" size="1">
-           <option value=""></option>
-<?php
-          $Nome_filter = "";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              $Select = "";
-              if ($Cada_filter == $this->NM_curr_fil)
-              {
-                  $Select = "selected";
-              }
-              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
-              }
-              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  echo "           <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
-              }
-?>
-           <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
-<?php
-          }
-?>
-       </SELECT>
-     </span>
-<?php
-   }
-?>
-<?php
-   if ($this->nmgp_botoes['save'] == "on")
-   {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bedit_filter", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "Ativa_save_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }
@@ -3308,138 +2844,8 @@ foreach ($Arr_format as $Part_date)
       }
    }
 ?>
-<?php
-   if ($nm_apl_dependente == 1 || (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opc_psq'] && !$this->aba_iframe))
-   {
-       if ($nm_apl_dependente == 1) 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-       elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dashboard_info']['under_dashboard'])
-       { }
-       else 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-   }
-   elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opc_psq'])
-   {
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_modal'])
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove();", "self.parent.tb_remove();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-       else
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-   }
-?>
-    </td>
-    <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
     </td>
    </tr></table>
-<?php
-   if ($this->nmgp_botoes['save'] == "on")
-   {
-?>
-    </TD></TR><TR><TD>
-    <DIV id="Salvar_filters_bot" style="display:none;z-index:9999;">
-     <TABLE align="center" class="scFilterTable">
-      <TR>
-       <TD class="scFilterBlock">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top" class="scFilterBlockFont"><?php echo $this->Ini->Nm_lang['lang_othr_srch_head'] ?></td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "Cancel_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </TD>
-      </TR>
-      <TR>
-       <TD class="scFilterFieldOdd">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top">
-           <input class="scFilterObjectOdd" type="text" id="SC_nmgp_save_name_bot" name="nmgp_save_name_bot" value="">
-          </td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bsalvar_appdiv", "nm_save_form('bot');", "nm_save_form('bot');", "Save_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </TD>
-      </TR>
-      <TR>
-       <TD class="scFilterFieldEven">
-       <DIV id="Apaga_filters_bot" style="display:''">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top">
-          <div id="idAjaxSelect_NM_filters_del_bot">
-           <SELECT class="scFilterObjectOdd" id="sel_filters_del_bot" name="NM_filters_del_bot" size="1">
-            <option value=""></option>
-<?php
-          $Nome_filter = "";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              $Select = "";
-              if ($Cada_filter == $this->NM_curr_fil)
-              {
-                  $Select = "selected";
-              }
-              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
-              }
-              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  echo "            <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
-              }
-?>
-            <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
-<?php
-          }
-?>
-           </SELECT>
-          </div>
-          </td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bexcluir_appdiv", "nm_submit_filter_del('bot');", "nm_submit_filter_del('bot');", "Exc_filtro_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </DIV>
-       </TD>
-      </TR>
-     </TABLE>
-    </DIV> 
-<?php
-   }
-?>
   </TD>
  </TR>
      <?php
@@ -3453,6 +2859,19 @@ foreach ($Arr_format as $Part_date)
     <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
     </td>
     <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
+    </td>
+    <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
+<?php
+   if ($this->nmgp_botoes['clear'] == "on")
+   {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", "Limpiar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
 <?php
    if (is_file("grid_kardex_fv_tns_help.txt"))
    {
@@ -3475,200 +2894,8 @@ foreach ($Arr_format as $Part_date)
       }
    }
 ?>
-<?php
-   if ($nm_apl_dependente == 1 || (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opc_psq'] && !$this->aba_iframe))
-   {
-       if ($nm_apl_dependente == 1) 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-       elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dashboard_info']['under_dashboard'])
-       { }
-       else 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-   }
-   elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opc_psq'])
-   {
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['sc_modal'])
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove();", "self.parent.tb_remove();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-       else
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-   }
-?>
-<?php
-   if ($this->nmgp_botoes['clear'] == "on")
-   {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-<?php
-   if (!isset($this->nmgp_botoes['save']) || $this->nmgp_botoes['save'] == "on")
-   {
-       $this->NM_fil_ant = $this->gera_array_filtros();
-?>
-     <span id="idAjaxSelect_NM_filters_bot">
-       <SELECT class="scFilterToolbar_obj" id="sel_recup_filters_bot" name="NM_filters_bot" onChange="nm_submit_filter(this, 'bot');" size="1">
-           <option value=""></option>
-<?php
-          $Nome_filter = "";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              $Select = "";
-              if ($Cada_filter == $this->NM_curr_fil)
-              {
-                  $Select = "selected";
-              }
-              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
-              }
-              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  echo "           <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
-              }
-?>
-           <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
-<?php
-          }
-?>
-       </SELECT>
-     </span>
-<?php
-   }
-?>
-<?php
-   if ($this->nmgp_botoes['save'] == "on")
-   {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bedit_filter", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "Ativa_save_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-    </td>
-    <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
     </td>
    </tr></table>
-<?php
-   if ($this->nmgp_botoes['save'] == "on")
-   {
-?>
-    </TD></TR><TR><TD>
-    <DIV id="Salvar_filters_bot" style="display:none;z-index:9999;">
-     <TABLE align="center" class="scFilterTable">
-      <TR>
-       <TD class="scFilterBlock">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top" class="scFilterBlockFont"><?php echo $this->Ini->Nm_lang['lang_othr_srch_head'] ?></td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "Cancel_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </TD>
-      </TR>
-      <TR>
-       <TD class="scFilterFieldOdd">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top">
-           <input class="scFilterObjectOdd" type="text" id="SC_nmgp_save_name_bot" name="nmgp_save_name_bot" value="">
-          </td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bsalvar_appdiv", "nm_save_form('bot');", "nm_save_form('bot');", "Save_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </TD>
-      </TR>
-      <TR>
-       <TD class="scFilterFieldEven">
-       <DIV id="Apaga_filters_bot" style="display:''">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top">
-          <div id="idAjaxSelect_NM_filters_del_bot">
-           <SELECT class="scFilterObjectOdd" id="sel_filters_del_bot" name="NM_filters_del_bot" size="1">
-            <option value=""></option>
-<?php
-          $Nome_filter = "";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              $Select = "";
-              if ($Cada_filter == $this->NM_curr_fil)
-              {
-                  $Select = "selected";
-              }
-              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
-              }
-              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  echo "            <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
-              }
-?>
-            <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
-<?php
-          }
-?>
-           </SELECT>
-          </div>
-          </td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bexcluir_appdiv", "nm_submit_filter_del('bot');", "nm_submit_filter_del('bot');", "Exc_filtro_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </DIV>
-       </TD>
-      </TR>
-     </TABLE>
-    </DIV> 
-<?php
-   }
-?>
   </TD>
  </TR>
      <?php
@@ -3700,25 +2927,6 @@ foreach ($Arr_format as $Part_date)
    <INPUT type="hidden" name="nmgp_opcao" value="<?php echo $Ret_cancel_pesq; ?>"> 
    </FORM> 
 <SCRIPT type="text/javascript">
-<?php
-   if (empty($this->NM_fil_ant))
-   {
-       if ($_SESSION['scriptcase']['proc_mobile'])
-       {
-?>
-      document.getElementById('Apaga_filters_bot').style.display = 'none';
-      document.getElementById('sel_recup_filters_bot').style.display = 'none';
-<?php
-       }
-       else
-       {
-?>
-      document.getElementById('Apaga_filters_bot').style.display = 'none';
-      document.getElementById('sel_recup_filters_bot').style.display = 'none';
-<?php
-       }
-   }
-?>
  function nm_move()
  {
      document.form_cancel.target = "_self"; 
@@ -3732,24 +2940,6 @@ foreach ($Arr_format as $Part_date)
  function limpa_form()
  {
    document.F1.reset();
-   if (document.F1.NM_filters)
-   {
-       document.F1.NM_filters.selectedIndex = -1;
-   }
-   document.getElementById('Salvar_filters_bot').style.display = 'none';
-   document.F1.codcomp_cond.value = 'eq';
-   nm_campos_between(document.getElementById('id_vis_codcomp'), document.F1.codcomp_cond, 'codcomp');
-   document.F1.codcomp.value = "";
-   document.F1.codprefijo_cond.value = 'eq';
-   nm_campos_between(document.getElementById('id_vis_codprefijo'), document.F1.codprefijo_cond, 'codprefijo');
-   document.F1.codprefijo.value = "";
-   document.F1.numero_cond.value = 'eq';
-   nm_campos_between(document.getElementById('id_vis_numero'), document.F1.numero_cond, 'numero');
-   document.F1.numero.value = "";
-   document.F1.numero_autocomp.value = "";
-   document.F1.periodo_cond.value = 'eq';
-   nm_campos_between(document.getElementById('id_vis_periodo'), document.F1.periodo_cond, 'periodo');
-   document.F1.periodo.value = "";
    document.F1.fecha_cond.value = 'bw';
    nm_campos_between(document.getElementById('id_vis_fecha'), document.F1.fecha_cond, 'fecha');
    document.F1.fecha_dia.value = "";
@@ -3758,10 +2948,14 @@ foreach ($Arr_format as $Part_date)
    document.F1.fecha_input_2_dia.value = "";
    document.F1.fecha_input_2_mes.value = "";
    document.F1.fecha_input_2_ano.value = "";
-   document.F1.cliente_cond.value = 'qp';
-   nm_campos_between(document.getElementById('id_vis_cliente'), document.F1.cliente_cond, 'cliente');
-   document.F1.cliente.value = "";
-   document.F1.cliente_autocomp.value = "";
+   document.F1.codprefijo_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_codprefijo'), document.F1.codprefijo_cond, 'codprefijo');
+   document.F1.codprefijo.value = "";
+   document.F1.numero_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_numero'), document.F1.numero_cond, 'numero');
+   document.F1.numero.value = "";
+   document.F1.periodo_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_periodo'), document.F1.periodo_cond, 'periodo');
    document.F1.fecasentad_cond.value = 'nn';
    nm_campos_between(document.getElementById('id_vis_fecasentad'), document.F1.fecasentad_cond, 'fecasentad');
    document.F1.fecasentad_dia.value = "";
@@ -3770,6 +2964,10 @@ foreach ($Arr_format as $Part_date)
    document.F1.fecasentad_hor.value = "";
    document.F1.fecasentad_min.value = "";
    document.F1.fecasentad_seg.value = "";
+   document.F1.cliente_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_cliente'), document.F1.cliente_cond, 'cliente');
+   document.F1.cliente.value = "";
+   document.F1.cliente_autocomp.value = "";
  }
  function SC_carga_evt_jquery()
  {
@@ -3833,55 +3031,12 @@ foreach ($Arr_format as $Part_date)
          }
      }
  }
-<?php
-   if (isset($this->redir_modal) && !empty($this->redir_modal))
-   {
-       echo $this->redir_modal;
-   }
-?>
 </SCRIPT>
 </BODY>
 </HTML>
 <?php
    }
 
-   function gera_array_filtros()
-   {
-       $this->NM_fil_ant = array();
-       $NM_patch   = "FACILWEB_FE_73/grid_kardex_fv_tns";
-       if (is_dir($this->NM_path_filter . $NM_patch))
-       {
-           $NM_dir = @opendir($this->NM_path_filter . $NM_patch);
-           while (FALSE !== ($NM_arq = @readdir($NM_dir)))
-           {
-             if (@is_file($this->NM_path_filter . $NM_patch . "/" . $NM_arq))
-             {
-                 $Sc_v6 = false;
-                 $NMcmp_filter = file($this->NM_path_filter . $NM_patch . "/" . $NM_arq);
-                 $NMcmp_filter = explode("@NMF@", $NMcmp_filter[0]);
-                 if (substr($NMcmp_filter[0], 0, 6) == "SC_V6_" || substr($NMcmp_filter[0], 0, 6) == "SC_V8_")
-                 {
-                     $Name_filter = substr($NMcmp_filter[0], 6);
-                     if (!empty($Name_filter))
-                     {
-                         $nmgp_save_name = str_replace('/', ' ', $Name_filter);
-                         $nmgp_save_name = str_replace('\\', ' ', $nmgp_save_name);
-                         $nmgp_save_name = str_replace('.', ' ', $nmgp_save_name);
-                         $this->NM_fil_ant[$Name_filter][0] = $NM_patch . "/" . $nmgp_save_name;
-                         $this->NM_fil_ant[$Name_filter][1] = "" . $this->Ini->Nm_lang['lang_srch_public'] . "";
-                         $Sc_v6 = true;
-                     }
-                 }
-                 if (!$Sc_v6)
-                 {
-                     $this->NM_fil_ant[$NM_arq][0] = $NM_patch . "/" . $NM_arq;
-                     $this->NM_fil_ant[$NM_arq][1] = "" . $this->Ini->Nm_lang['lang_srch_public'] . "";
-                 }
-             }
-           }
-       }
-       return $this->NM_fil_ant;
-   }
    /**
     * @access  public
     * @param  string  $NM_operador  $this->Ini->Nm_lang['pesq_global_NM_operador']
@@ -3919,276 +3074,25 @@ foreach ($Arr_format as $Part_date)
       $this->NM_operador    = (isset($NM_operador) && ("and" == strtolower($NM_operador) || "or" == strtolower($NM_operador))) ? $NM_operador : "and";
    }
 
-   function salva_filtro($nmgp_save_origem)
-   {
-      global $NM_filters_save, $nmgp_save_name, $nmgp_save_option, $script_case_init;
-          $NM_filters_save = str_replace("__NM_PLUS__", "+", $NM_filters_save);
-          $NM_str_filter  = "SC_V8_" . $nmgp_save_name . "@NMF@";
-          $nmgp_save_name = str_replace('/', ' ', $nmgp_save_name);
-          $nmgp_save_name = str_replace('\\', ' ', $nmgp_save_name);
-          $nmgp_save_name = str_replace('.', ' ', $nmgp_save_name);
-          if (!NM_is_utf8($nmgp_save_name))
-          {
-              $nmgp_save_name = sc_convert_encoding($nmgp_save_name, "UTF-8", $_SESSION['scriptcase']['charset']);
-          }
-          $NM_str_filter  .= $NM_filters_save;
-          $NM_patch = $this->NM_path_filter;
-          if (!is_dir($NM_patch))
-          {
-              $NMdir = mkdir($NM_patch, 0755);
-          }
-          $NM_patch .= "FACILWEB_FE_73/";
-          if (!is_dir($NM_patch))
-          {
-              $NMdir = mkdir($NM_patch, 0755);
-          }
-          $NM_patch .= "grid_kardex_fv_tns/";
-          if (!is_dir($NM_patch))
-          {
-              $NMdir = mkdir($NM_patch, 0755);
-          }
-          $Parms_usr  = "";
-          $NM_filter = fopen ($NM_patch . $nmgp_save_name, 'w');
-          if (!NM_is_utf8($NM_str_filter))
-          {
-              $NM_str_filter = sc_convert_encoding($NM_str_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-          }
-          fwrite($NM_filter, $NM_str_filter);
-          fclose($NM_filter);
-   }
-   function recupera_filtro($NM_filters)
-   {
-      global $NM_operador, $script_case_init;
-      $NM_patch = $this->NM_path_filter . "/" . $NM_filters;
-      if (!is_file($NM_patch))
-      {
-          $NM_filters = sc_convert_encoding($NM_filters, "UTF-8", $_SESSION['scriptcase']['charset']);
-          $NM_patch = $this->NM_path_filter . "/" . $NM_filters;
-      }
-      $return_fields = array();
-      $tp_fields     = array();
-      $tb_fields_esp = array();
-      $old_bi_opcs   = array("TP","HJ","OT","U7","SP","US","MM","UM","AM","PS","SS","P3","PM","P7","CY","LY","YY","M6","M3","M18","M24");
-      $tp_fields['SC_codcomp_cond'] = 'cond';
-      $tp_fields['SC_codcomp'] = 'select';
-      $tp_fields['SC_codprefijo_cond'] = 'cond';
-      $tp_fields['SC_codprefijo'] = 'select';
-      $tp_fields['SC_numero_cond'] = 'cond';
-      $tp_fields['SC_numero'] = 'text_aut';
-      $tp_fields['id_ac_numero'] = 'text_aut';
-      $tp_fields['SC_periodo_cond'] = 'cond';
-      $tp_fields['SC_periodo'] = 'select';
-      $tp_fields['SC_fecha_cond'] = 'cond';
-      $tp_fields['SC_fecha_dia'] = 'text';
-      $tp_fields['SC_fecha_mes'] = 'text';
-      $tp_fields['SC_fecha_ano'] = 'text';
-      $tp_fields['SC_fecha_input_2_dia'] = 'text';
-      $tp_fields['SC_fecha_input_2_mes'] = 'text';
-      $tp_fields['SC_fecha_input_2_ano'] = 'text';
-      $tp_fields['SC_fecha_hor'] = 'text';
-      $tp_fields['SC_fecha_min'] = 'text';
-      $tp_fields['SC_fecha_seg'] = 'text';
-      $tp_fields['SC_fecha_input_2_hor'] = 'text';
-      $tp_fields['SC_fecha_input_2_min'] = 'text';
-      $tp_fields['SC_fecha_input_2_seg'] = 'text';
-      $tp_fields['SC_cliente_cond'] = 'cond';
-      $tp_fields['SC_cliente'] = 'text_aut';
-      $tp_fields['id_ac_cliente'] = 'text_aut';
-      $tp_fields['SC_fecasentad_cond'] = 'cond';
-      $tp_fields['SC_fecasentad_dia'] = 'text';
-      $tp_fields['SC_fecasentad_mes'] = 'text';
-      $tp_fields['SC_fecasentad_ano'] = 'text';
-      $tp_fields['SC_fecasentad_input_2_dia'] = 'text';
-      $tp_fields['SC_fecasentad_input_2_mes'] = 'text';
-      $tp_fields['SC_fecasentad_input_2_ano'] = 'text';
-      $tp_fields['SC_fecasentad_hor'] = 'text';
-      $tp_fields['SC_fecasentad_min'] = 'text';
-      $tp_fields['SC_fecasentad_seg'] = 'text';
-      $tp_fields['SC_fecasentad_input_2_hor'] = 'text';
-      $tp_fields['SC_fecasentad_input_2_min'] = 'text';
-      $tp_fields['SC_fecasentad_input_2_seg'] = 'text';
-      $tp_fields['SC_NM_operador'] = 'text';
-      if (is_file($NM_patch))
-      {
-          $SC_V8    = false;
-          $NMfilter = file($NM_patch);
-          $NMcmp_filter = explode("@NMF@", $NMfilter[0]);
-          if (substr($NMcmp_filter[0], 0, 5) == "SC_V8")
-          {
-              $SC_V8 = true;
-          }
-          if (substr($NMcmp_filter[0], 0, 5) == "SC_V6" || substr($NMcmp_filter[0], 0, 5) == "SC_V8")
-          {
-              unset($NMcmp_filter[0]);
-          }
-          foreach ($NMcmp_filter as $Cada_cmp)
-          {
-              $Cada_cmp = explode("#NMF#", $Cada_cmp);
-              if (isset($tb_fields_esp[$Cada_cmp[0]]))
-              {
-                  $Cada_cmp[0] = $tb_fields_esp[$Cada_cmp[0]];
-              }
-              if (!$SC_V8 && substr($Cada_cmp[0], 0, 11) != "div_ac_lab_" && substr($Cada_cmp[0], 0, 6) != "id_ac_")
-              {
-                  $Cada_cmp[0] = "SC_" . $Cada_cmp[0];
-              }
-              if (!isset($tp_fields[$Cada_cmp[0]]))
-              {
-                  continue;
-              }
-              $list   = array();
-              $list_a = array();
-              if (substr($Cada_cmp[1], 0, 10) == "_NM_array_")
-              {
-                  if (substr($Cada_cmp[1], 0, 17) == "_NM_array_#NMARR#")
-                  {
-                      $Sc_temp = explode("#NMARR#", substr($Cada_cmp[1], 17));
-                      foreach ($Sc_temp as $Cada_val)
-                      {
-                          $list[]   = $Cada_val;
-                          $tmp_pos  = strpos($Cada_val, "##@@");
-                          $val_a    = ($tmp_pos !== false) ?  substr($Cada_val, $tmp_pos + 4) : $Cada_val;
-                          $list_a[] = array('opt' => $Cada_val, 'value' => $val_a);
-                      }
-                  }
-              }
-              elseif ($tp_fields[$Cada_cmp[0]] == 'dselect')
-              {
-                  $list[]   = $Cada_cmp[1];
-                  $tmp_pos  = strpos($Cada_cmp[1], "##@@");
-                  $val_a    = ($tmp_pos !== false) ?  substr($Cada_cmp[1], $tmp_pos + 4) : $Cada_cmp[1];
-                  $list_a[] = array('opt' => $Cada_cmp[1], 'value' => $val_a);
-              }
-              else
-              {
-                  $list[0] = $Cada_cmp[1];
-              }
-              if ($tp_fields[$Cada_cmp[0]] == 'select2_aut')
-              {
-                  if (!isset($list[0]))
-                  {
-                      $list[0] = "";
-                  }
-                  $return_fields['set_select2_aut'][] = array('field' => $Cada_cmp[0], 'value' => $list[0]);
-              }
-              elseif ($tp_fields[$Cada_cmp[0]] == 'dselect')
-              {
-                  $return_fields['set_dselect'][] = array('field' => $Cada_cmp[0], 'value' => $list_a);
-              }
-              elseif ($tp_fields[$Cada_cmp[0]] == 'fil_order')
-              {
-                  $return_fields['set_fil_order'][] = array('field' => $Cada_cmp[0], 'value' => $list);
-              }
-              elseif ($tp_fields[$Cada_cmp[0]] == 'selmult')
-              {
-                  if (count($list) == 1 && $list[0] == "")
-                  {
-                      continue;
-                  }
-                  $return_fields['set_selmult'][] = array('field' => $Cada_cmp[0], 'value' => $list);
-              }
-              elseif ($tp_fields[$Cada_cmp[0]] == 'ddcheckbox')
-              {
-                  $return_fields['set_ddcheckbox'][] = array('field' => $Cada_cmp[0], 'value' => $list);
-              }
-              elseif ($tp_fields[$Cada_cmp[0]] == 'checkbox')
-              {
-                  $return_fields['set_checkbox'][] = array('field' => $Cada_cmp[0], 'value' => $list);
-              }
-              else
-              {
-                  if (!isset($list[0]))
-                  {
-                      $list[0] = "";
-                  }
-                  if ($tp_fields[$Cada_cmp[0]] == 'html')
-                  {
-                      $return_fields['set_html'][] = array('field' => $Cada_cmp[0], 'value' => $list[0]);
-                  }
-                  elseif ($tp_fields[$Cada_cmp[0]] == 'radio')
-                  {
-                      $return_fields['set_radio'][] = array('field' => $Cada_cmp[0], 'value' => $list[0]);
-                  }
-                  elseif ($tp_fields[$Cada_cmp[0]] == 'cond' && in_array($list[0], $old_bi_opcs))
-                  {
-                      $Cada_cmp[1] = "bi_" . $list[0];
-                      $return_fields['set_val'][] = array('field' => $Cada_cmp[0], 'value' => $Cada_cmp[1]);
-                  }
-                  else
-                  {
-                      $return_fields['set_val'][] = array('field' => $Cada_cmp[0], 'value' => $list[0]);
-                  }
-              }
-          }
-          $this->NM_curr_fil = $NM_filters;
-      }
-      return $return_fields;
-   }
-   function apaga_filtro()
-   {
-      global $NM_filters_del;
-      if (isset($NM_filters_del) && !empty($NM_filters_del))
-      { 
-          $NM_patch = $this->NM_path_filter . "/" . $NM_filters_del;
-          if (!is_file($NM_patch))
-          {
-              $NM_filters_del = sc_convert_encoding($NM_filters_del, "UTF-8", $_SESSION['scriptcase']['charset']);
-              $NM_patch = $this->NM_path_filter . "/" . $NM_filters_del;
-          }
-          if (is_file($NM_patch))
-          {
-              @unlink($NM_patch);
-          }
-          if ($NM_filters_del == $this->NM_curr_fil)
-          {
-              $this->NM_curr_fil = "";
-          }
-      }
-   }
    /**
     * @access  public
     */
    function trata_campos()
    {
-      global $codcomp_cond, $codcomp,
+      global $fecha_cond, $fecha, $fecha_dia, $fecha_mes, $fecha_ano, $fecha_hor, $fecha_min, $fecha_seg, $fecha_input_2_dia, $fecha_input_2_mes, $fecha_input_2_ano, $fecha_input_2_min, $fecha_input_2_hor, $fecha_input_2_seg,
              $codprefijo_cond, $codprefijo,
-             $numero_cond, $numero, $numero_autocomp,
+             $numero_cond, $numero,
              $periodo_cond, $periodo,
-             $fecha_cond, $fecha, $fecha_dia, $fecha_mes, $fecha_ano, $fecha_hor, $fecha_min, $fecha_seg, $fecha_input_2_dia, $fecha_input_2_mes, $fecha_input_2_ano, $fecha_input_2_min, $fecha_input_2_hor, $fecha_input_2_seg,
-             $cliente_cond, $cliente, $cliente_autocomp,
-             $fecasentad_cond, $fecasentad, $fecasentad_dia, $fecasentad_mes, $fecasentad_ano, $fecasentad_hor, $fecasentad_min, $fecasentad_seg, $nmgp_tab_label;
+             $fecasentad_cond, $fecasentad, $fecasentad_dia, $fecasentad_mes, $fecasentad_ano, $fecasentad_hor, $fecasentad_min, $fecasentad_seg,
+             $cliente_cond, $cliente, $cliente_autocomp, $nmgp_tab_label;
 
       $C_formatado = true;
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_conv_dados.php", "F", "nm_conv_limpa_dado") ; 
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_edit.php", "F", "nmgp_Form_Num_Val") ; 
-      if (!empty($numero_autocomp) && empty($numero))
-      {
-          $numero = $numero_autocomp;
-      }
       if (!empty($cliente_autocomp) && empty($cliente))
       {
           $cliente = $cliente_autocomp;
-      }
-      $codcomp_cond_salva = $codcomp_cond; 
-      if (!isset($codcomp_input_2) || $codcomp_input_2 == "")
-      {
-          $codcomp_input_2 = $codcomp;
-      }
-      $codprefijo_cond_salva = $codprefijo_cond; 
-      if (!isset($codprefijo_input_2) || $codprefijo_input_2 == "")
-      {
-          $codprefijo_input_2 = $codprefijo;
-      }
-      $numero_cond_salva = $numero_cond; 
-      if (!isset($numero_input_2) || $numero_input_2 == "")
-      {
-          $numero_input_2 = $numero;
-      }
-      $periodo_cond_salva = $periodo_cond; 
-      if (!isset($periodo_input_2) || $periodo_input_2 == "")
-      {
-          $periodo_input_2 = $periodo;
       }
       $fecha_cond_salva = $fecha_cond; 
       if (!isset($fecha_input_2_dia) || $fecha_input_2_dia == "")
@@ -4215,21 +3119,26 @@ foreach ($Arr_format as $Part_date)
       {
           $fecha_input_2_seg = $fecha_seg;
       }
+      $codprefijo_cond_salva = $codprefijo_cond; 
+      if (!isset($codprefijo_input_2) || $codprefijo_input_2 == "")
+      {
+          $codprefijo_input_2 = $codprefijo;
+      }
+      $numero_cond_salva = $numero_cond; 
+      if (!isset($numero_input_2) || $numero_input_2 == "")
+      {
+          $numero_input_2 = $numero;
+      }
+      $periodo_cond_salva = $periodo_cond; 
+      if (!isset($periodo_input_2) || $periodo_input_2 == "")
+      {
+          $periodo_input_2 = $periodo;
+      }
+      $fecasentad_cond_salva = $fecasentad_cond; 
       $cliente_cond_salva = $cliente_cond; 
       if (!isset($cliente_input_2) || $cliente_input_2 == "")
       {
           $cliente_input_2 = $cliente;
-      }
-      $fecasentad_cond_salva = $fecasentad_cond; 
-      $tmp_pos = strpos($codcomp, "##@@");
-      if ($tmp_pos === false) {
-          $L_lookup = $codcomp;
-      }
-      else {
-          $L_lookup = substr($codcomp, 0, $tmp_pos);
-      }
-      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['psq_check_ret']['codcomp'])) {
-          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "TIPO : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
       }
       $tmp_pos = strpos($codprefijo, "##@@");
       if ($tmp_pos === false) {
@@ -4252,18 +3161,6 @@ foreach ($Arr_format as $Part_date)
           if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "PERIODO : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']  = array(); 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codcomp'] = $codcomp; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codcomp_cond'] = $codcomp_cond_salva; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codprefijo'] = $codprefijo; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codprefijo_cond'] = $codprefijo_cond_salva; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['numero'] = $numero; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['numero_cond'] = $numero_cond_salva; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['periodo'] = $periodo; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['periodo_cond'] = $periodo_cond_salva; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_dia'] = $fecha_dia; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_mes'] = $fecha_mes; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_ano'] = $fecha_ano; 
@@ -4278,8 +3175,14 @@ foreach ($Arr_format as $Part_date)
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_input_2_seg'] = $fecha_input_2_seg; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecha_cond'] = $fecha_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['cliente'] = $cliente; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['cliente_cond'] = $cliente_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codprefijo'] = $codprefijo; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['codprefijo_cond'] = $codprefijo_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['numero'] = $numero; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['numero_cond'] = $numero_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['periodo'] = $periodo; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['periodo_cond'] = $periodo_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_dia'] = $fecasentad_dia; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_mes'] = $fecasentad_mes; 
@@ -4288,6 +3191,9 @@ foreach ($Arr_format as $Part_date)
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_min'] = $fecasentad_min; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_seg'] = $fecasentad_seg; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['fecasentad_cond'] = $fecasentad_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['cliente'] = $cliente; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['cliente_cond'] = $cliente_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
@@ -4306,63 +3212,14 @@ foreach ($Arr_format as $Part_date)
       {
           return;
       }
-      $Conteudo = $codcomp;
-      if (strpos($Conteudo, "##@@") !== false)
-      {
-          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
-      }
-      $this->cmp_formatado['codcomp'] = $Conteudo;
       $Conteudo = $codprefijo;
       if (strpos($Conteudo, "##@@") !== false)
       {
           $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
       }
       $this->cmp_formatado['codprefijo'] = $Conteudo;
-      $nmgp_def_dados = array();
-    if ($numero != '') {
-      $numero_look = substr($this->Db->qstr($numero), 1, -1); 
-      $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct NUMERO from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp where NUMERO = '$numero_look'"; 
-      unset($cmp1,$cmp2);
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Db->Execute($nm_comando)) 
-      { 
-         while (!$rs->EOF) 
-         { 
-            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
-            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
-            $rs->MoveNext() ; 
-         } 
-         $rs->Close() ; 
-      } 
-      else  
-      {  
-         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-         exit; 
-      } 
-
-    }
-      if (!empty($nmgp_def_dados) && isset($cmp2) && !empty($cmp2))
-      {
-          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
-          {
-             $cmp2 = NM_conv_charset($cmp2, $_SESSION['scriptcase']['charset'], "UTF-8");
-          }
-          $this->cmp_formatado['numero'] = $cmp2;
-      }
-      elseif (!empty($nmgp_def_dados) && isset($cmp1) && !empty($cmp1))
-      {
-          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
-          {
-             $cmp1 = NM_conv_charset($cmp1, $_SESSION['scriptcase']['charset'], "UTF-8");
-          }
-          $this->cmp_formatado['numero'] = $cmp1;
-      }
-      else
-      {
-          $this->cmp_formatado['numero'] = $numero;
-      }
+      $Conteudo = $numero;
+      $this->cmp_formatado['numero'] = $Conteudo;
       $Conteudo = $periodo;
       if (strpos($Conteudo, "##@@") !== false)
       {
@@ -4375,26 +3232,18 @@ foreach ($Arr_format as $Part_date)
       $nmgp_def_dados = array(); 
    if (is_numeric($cliente))
    { 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_comando = "select TERID, NIT + ' - ' + NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-      { 
-          $nm_comando = "select TERID, concat(NIT,' - ',NOMBRE) from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-      { 
-          $nm_comando = "select TERID, NIT&' - '&NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-      { 
-          $nm_comando = "select TERID, NIT||' - '||NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
-      else 
-      { 
-          $nm_comando = "select TERID, NIT||' - '||NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE" ; 
-      } 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE"; 
+      }
+      else
+      {
+          $nm_comando = "select TERID, NOMBRE from TERCEROS where TERID = $cliente_look order by NIT, NOMBRE"; 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -4436,34 +3285,6 @@ foreach ($Arr_format as $Part_date)
       else
       {
           $this->cmp_formatado['cliente'] = $cliente;
-      }
-
-      //----- $codcomp
-      $this->Date_part = false;
-      if (isset($codcomp))
-      {
-         $this->monta_condicao("CODCOMP", $codcomp_cond, $codcomp, "", "codcomp");
-      }
-
-      //----- $codprefijo
-      $this->Date_part = false;
-      if (isset($codprefijo))
-      {
-         $this->monta_condicao("CODPREFIJO", $codprefijo_cond, $codprefijo, "", "codprefijo");
-      }
-
-      //----- $numero
-      $this->Date_part = false;
-      if (isset($numero) || $numero_cond == "nu" || $numero_cond == "nn" || $numero_cond == "ep" || $numero_cond == "ne")
-      {
-         $this->monta_condicao("NUMERO", $numero_cond, $numero, "", "numero");
-      }
-
-      //----- $periodo
-      $this->Date_part = false;
-      if (isset($periodo))
-      {
-         $this->monta_condicao("PERIODO", $periodo_cond, $periodo, "", "periodo");
       }
 
       //----- $fecha
@@ -4522,11 +3343,25 @@ foreach ($Arr_format as $Part_date)
           }
       }
 
-      //----- $cliente
+      //----- $codprefijo
       $this->Date_part = false;
-      if (isset($cliente) || $cliente_cond == "nu" || $cliente_cond == "nn" || $cliente_cond == "ep" || $cliente_cond == "ne")
+      if (isset($codprefijo))
       {
-         $this->monta_condicao("CLIENTE", $cliente_cond, $cliente, "", "cliente");
+         $this->monta_condicao("CODPREFIJO", $codprefijo_cond, $codprefijo, "", "codprefijo");
+      }
+
+      //----- $numero
+      $this->Date_part = false;
+      if (isset($numero) || $numero_cond == "nu" || $numero_cond == "nn" || $numero_cond == "ep" || $numero_cond == "ne")
+      {
+         $this->monta_condicao("NUMERO", $numero_cond, $numero, "", "numero");
+      }
+
+      //----- $periodo
+      $this->Date_part = false;
+      if (isset($periodo))
+      {
+         $this->monta_condicao("PERIODO", $periodo_cond, $periodo, "", "periodo");
       }
 
       //----- $fecasentad
@@ -4583,6 +3418,13 @@ foreach ($Arr_format as $Part_date)
           {
               $this->monta_condicao("FECASENTAD", $fecasentad_cond, $fecasentad, $fecasentad_input_2, 'fecasentad', 'TIMESTAMP');
           }
+      }
+
+      //----- $cliente
+      $this->Date_part = false;
+      if (isset($cliente) || $cliente_cond == "nu" || $cliente_cond == "nn" || $cliente_cond == "ep" || $cliente_cond == "ne")
+      {
+         $this->monta_condicao("CLIENTE", $cliente_cond, $cliente, "", "cliente");
       }
    }
 
@@ -4649,153 +3491,6 @@ foreach ($Arr_format as $Part_date)
        }
    } // jqueryCalendarWeekInit
 
-   function nmgp_redireciona_form($nm_apl_dest, $nm_apl_retorno, $nm_apl_parms, $nm_target="", $alt_modal=0, $larg_modal=0, $opc="")
-   {
-      if (is_array($nm_apl_parms))
-      {
-          $tmp_parms = "";
-          foreach ($nm_apl_parms as $par => $val)
-          {
-              $par = trim($par);
-              $val = trim($val);
-              $tmp_parms .= str_replace(".", "_", $par) . "?#?";
-              if (substr($val, 0, 1) == "$")
-              {
-                  $tmp_parms .= $$val;
-              }
-              elseif (substr($val, 0, 1) == "{")
-              {
-                  $val        = substr($val, 1, -1);
-                  $tmp_parms .= $this->$val;
-              }
-              elseif (substr($val, 0, 1) == "[")
-              {
-                  $tmp_parms .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns'][substr($val, 1, -1)];
-              }
-              else
-              {
-                  $tmp_parms .= $val;
-              }
-              $tmp_parms .= "?@?";
-          }
-          $nm_apl_parms = $tmp_parms;
-      }
-      $target = (empty($nm_target)) ? "_self" : $nm_target;
-      if (strtolower(substr($nm_apl_dest, 0, 7)) == "http://" || strtolower(substr($nm_apl_dest, 0, 8)) == "https://" || strtolower(substr($nm_apl_dest, 0, 3)) == "../")
-      {
-          echo "<SCRIPT language=\"javascript\">";
-          if (strtolower($target) == "_blank")
-          {
-              echo "window.open ('" . $nm_apl_dest . "');";
-              echo "</SCRIPT>";
-              return;
-          }
-          else
-          {
-              echo "window.location='" . $nm_apl_dest . "';";
-              echo "</SCRIPT>";
-              exit;
-          }
-      }
-      $dir = explode("/", $nm_apl_dest);
-      if (count($dir) == 1)
-      {
-          $nm_apl_dest = str_replace(".php", "", $nm_apl_dest);
-          $nm_apl_dest = $this->Ini->path_link . $nm_apl_dest . "/" . $nm_apl_dest . ".php";
-      }
-      if ($nm_target == "modal")
-      {
-          if (!empty($nm_apl_parms))
-          {
-              $nm_apl_parms = str_replace("?#?", "*scin", $nm_apl_parms);
-              $nm_apl_parms = str_replace("?@?", "*scout", $nm_apl_parms);
-              $nm_apl_parms = "nmgp_parms=" . $nm_apl_parms . "&";
-          }
-          $par_modal = "?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_outra_jan=true&nmgp_url_saida=modal&NMSC_modal=ok&";
-           if ((isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida_form_full']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida_form_full']) || (isset($this->grid_emb_form_full) && $this->grid_emb_form_full))
-           {
-              $this->redir_modal = "$(function() { parent.tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
-           }
-           else
-           {
-              $this->redir_modal = "$(function() { tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
-           }
-          return;
-      }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['iframe_print']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['iframe_print'] )
-      {
-          $target = "_parent";
-      }
-      if (!isset($this->SC_redir_btn) || !$this->SC_redir_btn)
-      {
-   ?>
-     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-      <HTML>
-      <HEAD>
-      <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
-<?php
-if ($_SESSION['scriptcase']['proc_mobile'])
-{
-?>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0," />
-<?php
-}
-?>
-       <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
-       <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
-       <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
-       <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
-       <META http-equiv="Pragma" content="no-cache"/>
-      </HEAD>
-      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
-      <BODY>
-   <?php
-      }
-   ?>
-   <form name="Fredir" method="post" 
-                     target="_self"> 
-     <input type="hidden" name="nmgp_parms" value="<?php echo NM_encode_input($nm_apl_parms) ?>"/>
-<?php
-   if ($target == "_blank")
-   {
-?>
-       <input type="hidden" name="nmgp_outra_jan" value="true"/> 
-<?php
-   }
-   else
-   {
-?>
-     <input type="hidden" name="nmgp_url_saida" value="<?php echo NM_encode_input($nm_apl_retorno) ?>">
-     <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page) ?>"/> 
-<?php
-   }
-?>
-   </form> 
-      <SCRIPT type="text/javascript">
-          window.onload = function(){
-             submit_Fredir();
-          };
-          function submit_Fredir()
-          {
-              document.Fredir.target = "<?php echo $target ?>"; 
-              document.Fredir.action = "<?php echo $nm_apl_dest ?>";
-              document.Fredir.submit();
-          }
-      </SCRIPT>
-   <?php
-      if (!isset($this->SC_redir_btn) || !$this->SC_redir_btn)
-      {
-   ?>
-      </BODY>
-      </HTML>
-   <?php
-      }
-      if ($target != "_blank")
-      {
-          exit;
-      }
-   }
    
    function css_obj_select_ajax($Obj)
    {
@@ -4950,6 +3645,55 @@ if ($_SESSION['scriptcase']['proc_mobile'])
            return $dt_out;
        }
    }
+function fCrearQR($vnombrearchivo,$vcontenido='Prueba qr',$vdirectorio='',$vmargin=0,$vtamanio=2,$vcalidad=20)
+{
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+  
+	sc_include_library("prj", "qr", "qrlib.php", true, true);
+	
+	$tempDir       = $vdirectorio;
+	$fileName      = $vnombrearchivo;
+	$outerFrame    = $vmargin;
+	$pixelPerPoint = $vtamanio;
+	$jpegQuality   = $vcalidad;
+	$codeContents  = $vcontenido;
+
+	$frame = QRcode::text($codeContents, false, QR_ECLEVEL_M);
+
+	$h = count($frame);
+	$w = strlen($frame[0]);
+
+	$imgW = $w + 2*$outerFrame;
+	$imgH = $h + 2*$outerFrame;
+
+	$base_image = imagecreate($imgW, $imgH);
+
+	$col[0] = imagecolorallocate($base_image,255,255,255); 
+	$col[1] = imagecolorallocate($base_image,0,0,0);     
+
+	imagefill($base_image, 0, 0, $col[0]);
+
+	for($y=0; $y<$h; $y++) {
+		for($x=0; $x<$w; $x++) {
+			if ($frame[$y][$x] == '1') {
+				imagesetpixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
+			}
+		}
+	}
+
+	$target_image = imagecreate($imgW * $pixelPerPoint, $imgH * $pixelPerPoint);
+	imagecopyresized(
+		$target_image, 
+		$base_image, 
+		0, 0, 0, 0, 
+		$imgW * $pixelPerPoint, $imgH * $pixelPerPoint, $imgW, $imgH
+	);
+	imagedestroy($base_image);
+	imagejpeg($target_image, $tempDir.$fileName, $jpegQuality);
+	imagedestroy($target_image);
+
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
+}
 }
 
 ?>

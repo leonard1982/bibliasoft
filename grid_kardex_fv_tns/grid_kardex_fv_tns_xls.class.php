@@ -85,11 +85,6 @@ class grid_kardex_fv_tns_xls
                }
           }
       }
-      if (isset($gprefijos)) 
-      {
-          $_SESSION['gprefijos'] = $gprefijos;
-          nm_limpa_str_grid_kardex_fv_tns($_SESSION["gprefijos"]);
-      }
       if (isset($gidempresa)) 
       {
           $_SESSION['gidempresa'] = $gidempresa;
@@ -277,12 +272,13 @@ class grid_kardex_fv_tns_xls
           {
               $Busca_temp = NM_conv_charset($Busca_temp, $_SESSION['scriptcase']['charset'], "UTF-8");
           }
-          $this->codcomp = $Busca_temp['codcomp']; 
-          $tmp_pos = strpos($this->codcomp, "##@@");
-          if ($tmp_pos !== false && !is_array($this->codcomp))
+          $this->fecha = $Busca_temp['fecha']; 
+          $tmp_pos = strpos($this->fecha, "##@@");
+          if ($tmp_pos !== false && !is_array($this->fecha))
           {
-              $this->codcomp = substr($this->codcomp, 0, $tmp_pos);
+              $this->fecha = substr($this->fecha, 0, $tmp_pos);
           }
+          $this->fecha_2 = $Busca_temp['fecha_input_2']; 
           $this->codprefijo = $Busca_temp['codprefijo']; 
           $tmp_pos = strpos($this->codprefijo, "##@@");
           if ($tmp_pos !== false && !is_array($this->codprefijo))
@@ -301,24 +297,17 @@ class grid_kardex_fv_tns_xls
           {
               $this->periodo = substr($this->periodo, 0, $tmp_pos);
           }
-          $this->fecha = $Busca_temp['fecha']; 
-          $tmp_pos = strpos($this->fecha, "##@@");
-          if ($tmp_pos !== false && !is_array($this->fecha))
-          {
-              $this->fecha = substr($this->fecha, 0, $tmp_pos);
-          }
-          $this->fecha_2 = $Busca_temp['fecha_input_2']; 
-          $this->cliente = $Busca_temp['cliente']; 
-          $tmp_pos = strpos($this->cliente, "##@@");
-          if ($tmp_pos !== false && !is_array($this->cliente))
-          {
-              $this->cliente = substr($this->cliente, 0, $tmp_pos);
-          }
           $this->fecasentad = $Busca_temp['fecasentad']; 
           $tmp_pos = strpos($this->fecasentad, "##@@");
           if ($tmp_pos !== false && !is_array($this->fecasentad))
           {
               $this->fecasentad = substr($this->fecasentad, 0, $tmp_pos);
+          }
+          $this->cliente = $Busca_temp['cliente']; 
+          $tmp_pos = strpos($this->cliente, "##@@");
+          if ($tmp_pos !== false && !is_array($this->cliente))
+          {
+              $this->cliente = substr($this->cliente, 0, $tmp_pos);
           }
       } 
       $this->nm_where_dinamico = "";
@@ -329,7 +318,53 @@ if (!isset($_SESSION['g_PJFE'])) {$_SESSION['g_PJFE'] = "";}
 if (!isset($this->sc_temp_g_PJFE)) {$this->sc_temp_g_PJFE = (isset($_SESSION['g_PJFE'])) ? $_SESSION['g_PJFE'] : "";}
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
- $vsql = "select if((select w.modo from cloud_webservicefe w where w.id_empresa='".$this->sc_temp_gidempresa."')='DESARROLLO',prefijo_prueba,prefijo) as prefijo from cloud_prefijos where tipo='FV' and cod_prefijo='".$this->codprefijo ."' and id_empresa='".$this->sc_temp_gidempresa."'";
+  $vsql = "select validar_codcliente_tns from cloud_empresas where id_empresa='".$this->sc_temp_gidempresa."'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vAutoTercero = array();
+      $this->vautotercero = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vAutoTercero[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vautotercero[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vAutoTercero = false;
+          $this->vAutoTercero_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $this->vautotercero = false;
+          $this->vautotercero_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+
+if(isset($this->vautotercero[0][0]))
+{	
+	if($this->vautotercero[0][0]=="SI")
+	{
+		$this->NM_cmp_hidden["ico_cliente"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['php_cmp_sel']["ico_cliente"] = "off"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["ico_cliente"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['php_cmp_sel']["ico_cliente"] = "on"; }
+	}
+}
+
+$vsql = "select if((select w.modo from cloud_webservicefe w where w.id_empresa='".$this->sc_temp_gidempresa."' limit 1)='DESARROLLO',prefijo_prueba,prefijo) as prefijo from cloud_prefijos where tipo='FV' and cod_prefijo='".$this->codprefijo ."' and id_empresa='".$this->sc_temp_gidempresa."'";
+
+
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -359,250 +394,280 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $this->vpjfe = false;
           $this->vpjfe_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-if(isset($this->vpjfe[0][0]))
-{
-	$this->sc_temp_g_PJFE = $this->vpjfe[0][0];
-}
-
-
-if($this->sc_temp_gproveedor=="DATAICO")
-{
-	$this->nmgp_botoes["btn_consultar_estado"] = "off";;
-	$this->nmgp_botoes["btn_soporte"] = "off";;
-	$this->nmgp_botoes["btn_consultar_folios"] = "off";;
-}
-
-?>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery-1.11.1.js'); ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js/bootstrap/css', 'bootstrap.min.css'); ?>">
-<script src="<?php echo sc_url_library('prj', 'js/bootstrap/js', 'bootstrap.min.js'); ?>"></script>
-
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
-
-<script>
-	
-$(document).ready(function(){
-  
-    
-});
-	
-$(document).ajaxStart(function(){
-
-	$.blockUI({ 
-		message: 'Espere por favor...', 
-		css: { 
-			border: 'none', 
-			padding: '15px', 
-			backgroundColor: '#000', 
-			'-webkit-border-radius': '10px', 
-			'-moz-border-radius': '10px', 
-			opacity: .5, 
-			color: '#fff'
-		}
-	});
-
-}).ajaxStop(function(){
-
-		$.unblockUI();
-
-});
-	
-
-	function fEstadoFE(nfactura)
-	{
-		$.post("../cEstadoFacturaElectronica/index.php",{
-
-			nfactura:nfactura
-
-		},function(r){
-
-			var obj = JSON.parse(r);
-
-			switch(obj.codigo)
-			{
-				case 200:
-					alert("Esta factura ya fue enviada satisfactoriamente.");
-				break;
-				case 101:
-					alert("El token del emisor no es válido.");
-				break;
-				case 105:
-					alert("Error al extraer los datos, verifique que la información enviada sea correcta.");
-				break;
-				case 102:
-					alert("Error en validaciones.");
-				break;
-				case 103:
-					alert("Ha ocurrido un error en la ejecución del servicio, por favor intente mas tarde.");
-				break;
-			}
-		});
-	}
-
-	function fEnviarFE(kardexid,cufe)
-	{
-		if($.isEmptyObject(cufe))
-		{
-			alertify.confirm('Confirme', '¿Desea enviar el documento?'
-				,function(){ 
-					
-					function checkConnection() 
-					{
-						$.ajax({
-							url: 'https://www.solucionesnavarro.net/fe/procesos.php',
-							async: false,
-							data: {'tag' : 'connection'}
-						})
-						.fail(function() { alert('No hay conexion a internet, intentelo nuevamente!!!'); })
-						.done(function() { 
-							
-							$.post("../cEnviarFactura/index.php",{
-								
-								kardexid:kardexid
-
-							},function(r){
-
-								console.log(r);
-								alertify.alert('Información',r, function(){ 
-									
-									var indicio = $("#SC_fast_search_top").val();
-									if(!$.isEmptyObject(indicio))
-									{
-									   $("#SC_fast_search_top").val(indicio);
-										nm_gp_submit_qsearch('top');
-									}
-									else
-									{
-										sc_btn_btn_recargar();
-									}
-
-								});
-							});
-						});
-					}
-					checkConnection();
-				}		
-				,function(){ 
-
-				}
-			);
-		}
-		else
-		{
-			alertify.confirm('Información', 'El documento ya fue enviado, ¿Desea consultar su estado?'
-			,function()
-			 { 
-				fConsultarEstado(kardexid); 
-			 }
-			,function()
-			 { 
-
-			 });
-		}
-	}
-
-	function fConsultarEstado(kardexid)
-	{
-		function checkConnection() {
-			$.ajax({
-				url: 'https://www.solucionesnavarro.net/fe/procesos.php',
-				async: false,
-				data: {'tag' : 'connection'}
-			})
-			.fail(function() { alert('No hay conexion a internet, intentelo nuevamente!!!'); })
-			.done(function() { 
-
-				$.post("../cConsultarEstado/index.php",{
-
-					kardexid:kardexid
-
-				},function(r){
-
-					console.log(r);
-					alertify.alert('Información',r, function(){ window.location='../grid_kardex_fv_tns/'; });
-
-				});
-			})
-		}
-
-		checkConnection();
-	}
-
-	function fPDFFactura(documento,tipo)
-	{
-		function checkConnection() {
-			$.ajax({
-				url: 'https://www.solucionesnavarro.net/fe/procesos.php',
-				async: false,
-				data: {'tag' : 'connection'}
-			})
-			.fail(function() { alert('No hay conexion a internet, intentelo nuevamente!!!'); })
-			.done(function() { 
-
-				console.log("fPDFFactura documento: ");
-				console.log(documento);
-
-				$.post("../blank_generar_pdf_fe/index.php",{
-
-					documento:documento,
-					tipo:tipo,
-					codcomp:'FV'
-
-				},function(r){
-
-					console.log("Data fPDFFactura: ");
-					console.log(r)
-
-					if($.isEmptyObject(r))
-					{
-						if(tipo=='pdf')
-						{
-							window.open('../blank_generar_pdf_fe/'+documento+'.pdf','PDF','fullscreen=yes');
-						}
-						else
-						{
-							window.open('../blank_generar_pdf_fe/'+documento+'.xml','XML','fullscreen=yes');
-						}   
-					}
-					else
-					{
-						alertify.alert('Información',r, function(){ });
-					}
-					
-					sc_btn_btn_recargar();
-				});
-			})
-		}
-
-		checkConnection();
-	}
-
-	function fFoliosRestantes()
-	{
-		$.post("../cFoliosFE/index.php",{ok:""},function(r){
-
-			var obj = JSON.parse(r);
-
-			if(!$.isEmptyObject(obj.foliosRestantes))
-			{
-				alertify.alert('Información',"Folios Restantes: "+obj.foliosRestantes, function(){ });
-			}
-		});
-	}
-</script>
-<style>
-	input{
-		
-		height:50px;
-	}
-</style>
+;
+if(isset($this->vpjfe[0][0]))
+{
+	$this->sc_temp_g_PJFE = $this->vpjfe[0][0];
+}
+
+
+if($this->sc_temp_gproveedor=="DATAICO")
+{
+	$this->nmgp_botoes["btn_consultar_estado"] = "off";;
+	$this->nmgp_botoes["btn_soporte"] = "off";;
+	$this->nmgp_botoes["btn_consultar_folios"] = "off";;
+}
+
+?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-1.11.1.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js/bootstrap/css', 'bootstrap.min.css'); ?>">
+<script src="<?php echo sc_url_library('prj', 'js/bootstrap/js', 'bootstrap.min.js'); ?>"></script>
+
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+
+<script>
+	
+$(document).ready(function(){
+  
+    
+});
+	
+
+	
+
+function fEstadoFE(nfactura)
+{
+	$.post("../cEstadoFacturaElectronica/index.php",{
+
+		nfactura:nfactura
+
+	},function(r){
+
+		var obj = JSON.parse(r);
+
+		switch(obj.codigo)
+		{
+			case 200:
+				alert("Esta factura ya fue enviada satisfactoriamente.");
+			break;
+			case 101:
+				alert("El token del emisor no es válido.");
+			break;
+			case 105:
+				alert("Error al extraer los datos, verifique que la información enviada sea correcta.");
+			break;
+			case 102:
+				alert("Error en validaciones.");
+			break;
+			case 103:
+				alert("Ha ocurrido un error en la ejecución del servicio, por favor intente mas tarde.");
+			break;
+		}
+	});
+}
+
+function fEnviarFE(kardexid,cufe)
+{
+	if($.isEmptyObject(cufe))
+	{
+		alertify.confirm('Confirme', '¿Desea enviar el documento?'
+			,function(){ 
+						
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+
+				$.post("../cEnviarFactura/index.php",{
+
+					kardexid:kardexid
+
+				},function(r){
+
+					$.unblockUI();
+
+					console.log(r);
+					alertify.alert('Información',r, function(){ 
+
+						nm_gp_submit_ajax ('igual', 'breload');
+
+						
+
+					});
+				});
+
+			}		
+			,function(){ 
+
+			}
+		);
+	}
+	else
+	{
+		alertify.confirm('Información', 'El documento ya fue enviado, ¿Desea consultar su estado?'
+		,function()
+		 { 
+			fConsultarEstado(kardexid); 
+		 }
+		,function()
+		 { 
+
+		 });
+	}
+}
+
+function fConsultarEstado(kardexid)
+{
+	function checkConnection() {
+		$.ajax({
+			url: 'https://www.solucionesnavarro.net/fe/procesos.php',
+			async: false,
+			data: {'tag' : 'connection'}
+		})
+		.fail(function() { alert('No hay conexion a internet, intentelo nuevamente!!!'); })
+		.done(function() { 
+
+			$.post("../cConsultarEstado/index.php",{
+
+				kardexid:kardexid
+
+			},function(r){
+
+				console.log(r);
+				alertify.alert('Información',r, function(){ window.location='../grid_kardex_fv_tns/'; });
+
+			});
+		})
+	}
+
+	checkConnection();
+}
+
+function fPDFFactura(documento,tipo)
+{
+	console.log("fPDFFactura documento: ");
+	console.log(documento);
+	
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_generar_pdf_fe/index.php",{
+
+		documento:documento,
+		tipo:tipo,
+		codcomp:'FV'
+
+	},function(r){
+		
+		$.unblockUI();
+
+		console.log("Data fPDFFactura: ");
+		console.log(r)
+
+		if($.isEmptyObject(r))
+		{
+			if(tipo=='pdf')
+			{
+				window.open('../blank_generar_pdf_fe/'+documento+'.pdf','PDF','fullscreen=yes');
+			}
+			else
+			{
+				window.open('../blank_generar_pdf_fe/'+documento+'.xml','XML','fullscreen=yes');
+			}   
+		}
+		else
+		{
+			alertify.alert('Información',r, function(){ });
+		}
+
+		sc_btn_btn_recargar();
+	});
+}
+
+function fPDFFacturaVarios(documento,tipo,proveedor,token,pass,servidor,urlpdf)
+{
+
+	console.log("fPDFFactura documento: ");
+	console.log(documento);
+	
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_generar_pdf_fe_varios/index.php",{
+
+		documento:documento,
+		tipo:tipo,
+		codcomp:'FV',
+		proveedor:proveedor,
+		token:token,
+		pass:pass,
+		servidor:servidor,
+		urlpdf:urlpdf
+
+	},function(r){
+		
+		$.unblockUI();
+
+		console.log("Data fPDFFactura: ");
+		console.log(r)
+
+		if($.isEmptyObject(r))
+		{
+			if(tipo=='pdf')
+			{
+				window.open('../blank_generar_pdf_fe_varios/'+documento+'.pdf','PDF','fullscreen=yes');
+			}
+			else
+			{
+				window.open('../blank_generar_pdf_fe_varios/'+documento+'.xml','XML','fullscreen=yes');
+			}   
+		}
+		else
+		{
+			alertify.alert('Información',r, function(){ });
+		}
+
+		sc_btn_btn_recargar();
+	});
+}
+
+function fFoliosRestantes()
+{
+	$.post("../cFoliosFE/index.php",{ok:""},function(r){
+
+		var obj = JSON.parse(r);
+
+		if(!$.isEmptyObject(obj.foliosRestantes))
+		{
+			alertify.alert('Información',"Folios Restantes: "+obj.foliosRestantes, function(){ });
+		}
+	});
+}
+</script>
 <?php
 if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 if (isset($this->sc_temp_g_PJFE)) {$_SESSION['g_PJFE'] = $this->sc_temp_g_PJFE;}
@@ -644,18 +709,18 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       } 
       $this->nm_field_dinamico = array();
       $this->nm_order_dinamico = array();
-      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp"; 
+      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     K.SN_ENLACEPDF,     K.SN_ENLACEXML,     K.SN_FE_VALIDACION,     SN_PROVEEDOR,      SN_TOKEN_EMP,     SN_TOKEN_PASS,     SN_SERVIDOR FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp"; 
+          $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, SN_FE_VALIDACION, SN_PROVEEDOR, SN_TOKEN_EMP, SN_TOKEN_PASS, SN_SERVIDOR, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     K.SN_ENLACEPDF,     K.SN_ENLACEXML,     K.SN_FE_VALIDACION,     SN_PROVEEDOR,      SN_TOKEN_EMP,     SN_TOKEN_PASS,     SN_SERVIDOR FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp"; 
+          $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, SN_FE_VALIDACION, SN_PROVEEDOR, SN_TOKEN_EMP, SN_TOKEN_PASS, SN_SERVIDOR, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     K.SN_ENLACEPDF,     K.SN_ENLACEXML,     K.SN_FE_VALIDACION,     SN_PROVEEDOR,      SN_TOKEN_EMP,     SN_TOKEN_PASS,     SN_SERVIDOR FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL ) nm_sel_esp"; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp"; 
+          $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, SN_FE_VALIDACION, SN_PROVEEDOR, SN_TOKEN_EMP, SN_TOKEN_PASS, SN_SERVIDOR, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     K.SN_ENLACEPDF,     K.SN_ENLACEXML,     K.SN_FE_VALIDACION,     SN_PROVEEDOR,      SN_TOKEN_EMP,     SN_TOKEN_PASS,     SN_SERVIDOR FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq'];
@@ -699,9 +764,14 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $this->sn_cufe = $rs->fields[14] ;  
          $this->sn_enlacepdf = $rs->fields[15] ;  
          $this->sn_enlacexml = $rs->fields[16] ;  
-         $this->cliente = $rs->fields[17] ;  
+         $this->sn_fe_validacion = $rs->fields[17] ;  
+         $this->sn_proveedor = $rs->fields[18] ;  
+         $this->sn_token_emp = $rs->fields[19] ;  
+         $this->sn_token_pass = $rs->fields[20] ;  
+         $this->sn_servidor = $rs->fields[21] ;  
+         $this->cliente = $rs->fields[22] ;  
          $this->cliente = (string)$this->cliente;
-         $this->ndoc = $rs->fields[18] ;  
+         $this->ndoc = $rs->fields[23] ;  
      if ($this->groupby_show == "S") {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'])
          { 
@@ -753,22 +823,22 @@ if (!isset($_SESSION['gautotercero'])) {$_SESSION['gautotercero'] = "";}
 if (!isset($this->sc_temp_gautotercero)) {$this->sc_temp_gautotercero = (isset($_SESSION['gautotercero'])) ? $_SESSION['gautotercero'] : "";}
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
- $this->numero  = intval($this->numero );
-
-$vfecha  = $this->fecha ;
-$vfecha  = substr($vfecha, 0, 9);
-$vfecha  = date_create($vfecha);
-$vfecha  = date_format($vfecha,'Y-m-d');
-
-
-
-$vcufe = "";
-
-$this->ico_cliente  = "<img src='../_lib/img/scriptcase__NM__ico__NM__user_information_32.png' style='width:30px;'/>";
-
-
-$vdoc = $this->nit_tercero ;
-$vsql = "select documento from cloud_terceros where documento='".$vdoc."' and id_empresa='".$this->sc_temp_gidempresa."'";
+  $this->numero  = intval($this->numero );
+
+$vfecha  = $this->fecha ;
+$vfecha  = substr($vfecha, 0, 9);
+$vfecha  = date_create($vfecha);
+$vfecha  = date_format($vfecha,'Y-m-d');
+
+
+
+$vcufe = "";
+
+$this->ico_cliente  = "<img src='../_lib/img/scriptcase__NM__ico__NM__user_information_32.png' style='width:30px;'/>";
+
+
+$vdoc = $this->nit_tercero ;
+$vsql = "select documento from cloud_terceros where documento='".$vdoc."' and id_empresa='".$this->sc_temp_gidempresa."'";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -798,21 +868,21 @@ $vsql = "select documento from cloud_terceros where documento='".$vdoc."' and id
           $this->vsiexiste = false;
           $this->vsiexiste_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-if(isset($this->vsiexiste[0][0]))
-{
-	$this->NM_field_style["ico_cliente"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
-}
-else
-{
-	if($this->sc_temp_gautotercero=='SI')
-	{
-		
-		$vdoc = $this->nit_tercero ;
-		$vnom = $this->nombre ;
-		$vsql = "insert into cloud_terceros set documento='".$vdoc."',nombres='".$vnom."',id_empresa='".$this->sc_temp_gidempresa."',cod_postal='540001',cod_regimen='49',detalle_tributario='ZY',responsabilidades_fiscales='R-99-PN',cod_departamento='54'";
-
+;
+
+if(isset($this->vsiexiste[0][0]))
+{
+	$this->NM_field_style["ico_cliente"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
+}
+else
+{
+	if($this->sc_temp_gautotercero=='SI')
+	{
+		
+		$vdoc = $this->nit_tercero ;
+		$vnom = $this->nombre ;
+		$vsql = "insert into cloud_terceros set documento='".$vdoc."',nombres='".$vnom."',id_empresa='".$this->sc_temp_gidempresa."',cod_postal='540001',cod_regimen='49',detalle_tributario='ZY',responsabilidades_fiscales='R-99-PN',cod_departamento='54'";
+
 		
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -824,114 +894,168 @@ else
              exit;
          }
          $rf->Close();
-      ;
-	}
-}
-
-
-if(!empty($this->sc_temp_g_PJFE))
-{
-	$this->pj_fe  = $this->sc_temp_g_PJFE;
-}
-else
-{
-	$this->pj_fe  = "";
-}
-
-$vcufe = $this->sn_cufe ;
-		
-if(!empty($vcufe))
-{
-	
-
-	$this->NM_field_style["codcomp"] = "background-color:#ff9900;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
-	$this->NM_field_style["enviar"] = "background-color:#ff9900;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
-
-	$vnfe = $this->pj_fe .$this->numero ;
-
-	if($this->sc_temp_gfacturaonline=="SI" and !empty($this->sc_temp_gservidorfacturas))
-	{
-		$this->pdf  = "<a href='".$this->sc_temp_gservidorfacturas."?idempresa=".$this->sc_temp_gidempresa."&id=".$this->kardexid ."' target='_blank' ><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
-	}
-	else
-	{
-		if($this->sc_temp_gproveedor=="DATAICO")
-		{
-			
-				$vpdf = stripslashes($this->sn_enlacepdf );
-				$vxml = stripslashes($this->sn_enlacexml );
-				
-				$this->pdf  = "<a href='".$vpdf."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
-
-				$this->avisos  = "<a href='".$vxml."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' /></a>";
-				
-			$this->enviar  = "<img src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' />";
-		}
-		if($this->sc_temp_gproveedor=="HKA")
-		{
-			$this->pdf  = "<img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"pdf\");return false;' />";
-			
-			$this->avisos  = "<img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"xml\");return false;'/>";
-			
-			$file = "../blank_generar_pdf_fe/".$vnfe.".pdf";
-
-			if (file_exists($file))
-			{
-				$this->pdf  = "<a href='".$file."' target='_blank' ><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;'/></a>";
-			}
-
-			$file = "../blank_generar_pdf_fe/".$vnfe.".xml";
-
-			if (file_exists($file))
-			{
-				$vruta_file = $_SERVER["DOCUMENT_ROOT"].'/xmls/'.$vnfe.'.xml';
-				if(!file_exists($vruta_file))
-				{
-					copy($file,$vruta_file);
-				}
-
-				$this->avisos  = "<a href='".$file."' target='_blank' ><img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;'/></a>";
-				
-				$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
-			}
-		}
-		
-	}
-
-}
-else
-{
-	if($this->sc_temp_gproveedor=="DATAICO")
-	{
-		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
-
-		$vnfe = $this->pj_fe .$this->numero ;
-
-		$this->pdf  = "";
-
-		$this->avisos  = "";
-	}
-	
-	if($this->sc_temp_gproveedor=="HKA")
-	{
-		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
-
-		$vnfe = $this->pj_fe .$this->numero ;
-
-		if($this->sc_temp_gfacturaonline=="SI" and !empty($this->sc_temp_gservidorfacturas))
-		{
-			$this->pdf  = "<a href='".$this->sc_temp_gservidorfacturas."?idempresa=".$this->sc_temp_gidempresa."&id=".$this->kardexid ."' target='_blank' ><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
-		}
-		else
-		{
-			$this->pdf  = "<img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"pdf\");return false;' />";
-		}
-
-		$this->avisos  = "<img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"xml\");return false;'/>";
-	}
-}
-
-
+      ;
+	}
+}
+
+
+if(!empty($this->sc_temp_g_PJFE))
+{
+	$this->pj_fe  = $this->sc_temp_g_PJFE;
+}
+else
+{
+	$this->pj_fe  = "";
+}
+
+$vcufe = $this->sn_cufe ;
+		
+if(!empty($vcufe))
+{
+	
+
+	$this->NM_field_style["codcomp"] = "background-color:#ff9900;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
+	$this->NM_field_style["enviar"] = "background-color:#ff9900;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
+
+	$vnfe = $this->pj_fe .$this->numero ;
+
+	if($this->sc_temp_gfacturaonline=="SI" and !empty($this->sc_temp_gservidorfacturas))
+	{
+		$this->pdf  = "<a href='".$this->sc_temp_gservidorfacturas."?idempresa=".$this->sc_temp_gidempresa."&id=".$this->kardexid ."' target='_blank' ><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
+		
+		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+		
+		$this->avisos  = "<img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"xml\");return false;'/>";
+		
+
+		$file = "../blank_generar_pdf_fe/".$vnfe.".xml";
+
+		if (file_exists($file))
+		{
+			$vruta_file = $_SERVER["DOCUMENT_ROOT"].'/xmls/'.$vnfe.'.xml';
+			if(!file_exists($vruta_file))
+			{
+				copy($file,$vruta_file);
+			}
+
+			$this->avisos  = "<a href='".$file."' target='_blank' ><img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;'/></a>";
+
+			$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+		}
+	}
+	else
+	{
+		if($this->sc_temp_gproveedor=="FACILWEB")
+		{
+			
+				$vpdf = stripslashes($this->sn_enlacepdf );
+				$vxml = stripslashes($this->sn_enlacexml );
+				
+				$this->pdf  = "<a href='".$vpdf."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
+
+				$this->avisos  = "<a href='".$vxml."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' /></a>";
+				
+			$this->enviar  = "<img src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' />";
+		}
+		
+		if($this->sc_temp_gproveedor=="DATAICO")
+		{
+			
+				$vpdf = stripslashes($this->sn_enlacepdf );
+				$vxml = stripslashes($this->sn_enlacexml );
+				
+				$this->pdf  = "<a href='".$vpdf."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
+
+				$this->avisos  = "<a href='".$vxml."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' /></a>";
+				
+			$this->enviar  = "<img src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' />";
+		}
+		
+		if($this->sc_temp_gproveedor=="HKA")
+		{
+			$this->pdf  = "<img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"pdf\");return false;' />";
+			
+			$this->avisos  = "<img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"xml\");return false;'/>";
+			
+			$file = "../blank_generar_pdf_fe/".$vnfe.".pdf";
+
+			if (file_exists($file))
+			{
+				$this->pdf  = "<a href='".$file."' target='_blank' ><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;'/></a>";
+			}
+
+			$file = "../blank_generar_pdf_fe/".$vnfe.".xml";
+
+			if (file_exists($file))
+			{
+				$vruta_file = $_SERVER["DOCUMENT_ROOT"].'/xmls/'.$vnfe.'.xml';
+				if(!file_exists($vruta_file))
+				{
+					copy($file,$vruta_file);
+				}
+
+				$this->avisos  = "<a href='".$file."' target='_blank' ><img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;'/></a>";
+				
+				$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+			}
+		}
+		
+		$vpdf = stripslashes($this->sn_enlacepdf );
+		$vxml = stripslashes($this->sn_enlacexml );
+		
+		if(!empty($this->sn_proveedor ) and !empty($this->sn_token_emp ) and !empty($this->sn_token_pass ) and !empty($this->sn_servidor ))
+		{
+			$this->pdf  = "<img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' onclick='fPDFFacturaVarios(\"".$vnfe."\",\"pdf\",\"".$this->sn_proveedor ."\",\"".$this->sn_token_emp ."\",\"".$this->sn_token_pass ."\",\"".$this->sn_servidor ."\",\"".$vpdf."\");return false;' />"; 
+			
+			$this->avisos  = "<img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' onclick='fPDFFacturaVarios(\"".$vnfe."\",\"xml\",\"".$this->sn_proveedor ."\",\"".$this->sn_token_emp ."\",\"".$this->sn_token_pass ."\",\"".$this->sn_servidor ."\",\"".$vxml."\");return false;' />"; 
+		}
+	}
+
+}
+else
+{
+	if($this->sc_temp_gproveedor=="FACILWEB")
+	{
+		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+
+		$vnfe = $this->pj_fe .$this->numero ;
+
+		$this->pdf  = "";
+
+		$this->avisos  = "";
+	}
+	
+	if($this->sc_temp_gproveedor=="DATAICO")
+	{
+		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+
+		$vnfe = $this->pj_fe .$this->numero ;
+
+		$this->pdf  = "";
+
+		$this->avisos  = "";
+	}
+	
+	if($this->sc_temp_gproveedor=="HKA")
+	{
+		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+
+		$vnfe = $this->pj_fe .$this->numero ;
+
+		if($this->sc_temp_gfacturaonline=="SI" and !empty($this->sc_temp_gservidorfacturas))
+		{
+			$this->pdf  = "<a href='".$this->sc_temp_gservidorfacturas."?idempresa=".$this->sc_temp_gidempresa."&id=".$this->kardexid ."' target='_blank' ><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
+		}
+		else
+		{
+			$this->pdf  = "<img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"pdf\");return false;' />";
+		}
+
+		$this->avisos  = "<img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"xml\");return false;'/>";
+	}
+}
+
+
 $this->numfe  = $this->pj_fe ."/".$this->numero ;
 if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 if (isset($this->sc_temp_gautotercero)) {$_SESSION['gautotercero'] = $this->sc_temp_gautotercero;}
@@ -1511,7 +1635,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $current_cell_ref = $this->calc_cell($this->Xls_col);
          if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
              $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
          $this->enviar = html_entity_decode($this->enviar, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
@@ -1567,7 +1691,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $current_cell_ref = $this->calc_cell($this->Xls_col);
          if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
              $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
          $this->numfe = html_entity_decode($this->numfe, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
@@ -1627,7 +1751,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $current_cell_ref = $this->calc_cell($this->Xls_col);
          if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
              $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
          $this->ico_cliente = html_entity_decode($this->ico_cliente, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
@@ -1682,7 +1806,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $current_cell_ref = $this->calc_cell($this->Xls_col);
          if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
              $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
          $this->pdf = html_entity_decode($this->pdf, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
@@ -1702,7 +1826,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $current_cell_ref = $this->calc_cell($this->Xls_col);
          if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
              $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
          $this->avisos = html_entity_decode($this->avisos, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
@@ -1788,7 +1912,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $this->enviar = strip_tags($this->enviar);
          $this->enviar = NM_charset_to_utf8($this->enviar);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->enviar;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -1828,7 +1952,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $this->numfe = strip_tags($this->numfe);
          $this->numfe = NM_charset_to_utf8($this->numfe);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->numfe;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -1864,7 +1988,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $this->ico_cliente = strip_tags($this->ico_cliente);
          $this->ico_cliente = NM_charset_to_utf8($this->ico_cliente);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->ico_cliente;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -1896,7 +2020,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $this->pdf = strip_tags($this->pdf);
          $this->pdf = NM_charset_to_utf8($this->pdf);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->pdf;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -1908,7 +2032,7 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $this->avisos = strip_tags($this->avisos);
          $this->avisos = NM_charset_to_utf8($this->avisos);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->avisos;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -2200,6 +2324,55 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
    } 
+function fCrearQR($vnombrearchivo,$vcontenido='Prueba qr',$vdirectorio='',$vmargin=0,$vtamanio=2,$vcalidad=20)
+{
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+  
+	sc_include_library("prj", "qr", "qrlib.php", true, true);
+	
+	$tempDir       = $vdirectorio;
+	$fileName      = $vnombrearchivo;
+	$outerFrame    = $vmargin;
+	$pixelPerPoint = $vtamanio;
+	$jpegQuality   = $vcalidad;
+	$codeContents  = $vcontenido;
+
+	$frame = QRcode::text($codeContents, false, QR_ECLEVEL_M);
+
+	$h = count($frame);
+	$w = strlen($frame[0]);
+
+	$imgW = $w + 2*$outerFrame;
+	$imgH = $h + 2*$outerFrame;
+
+	$base_image = imagecreate($imgW, $imgH);
+
+	$col[0] = imagecolorallocate($base_image,255,255,255); 
+	$col[1] = imagecolorallocate($base_image,0,0,0);     
+
+	imagefill($base_image, 0, 0, $col[0]);
+
+	for($y=0; $y<$h; $y++) {
+		for($x=0; $x<$w; $x++) {
+			if ($frame[$y][$x] == '1') {
+				imagesetpixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
+			}
+		}
+	}
+
+	$target_image = imagecreate($imgW * $pixelPerPoint, $imgH * $pixelPerPoint);
+	imagecopyresized(
+		$target_image, 
+		$base_image, 
+		0, 0, 0, 0, 
+		$imgW * $pixelPerPoint, $imgH * $pixelPerPoint, $imgW, $imgH
+	);
+	imagedestroy($base_image);
+	imagejpeg($target_image, $tempDir.$fileName, $jpegQuality);
+	imagedestroy($target_image);
+
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
+}
 }
 
 ?>

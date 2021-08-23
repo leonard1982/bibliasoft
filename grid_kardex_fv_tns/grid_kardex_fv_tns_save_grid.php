@@ -924,7 +924,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        <link rel="stylesheet" type="text/css" href="<?php echo $_SESSION['sc_session']['path_third'] ?>/font-awesome/css/all.min.css" /> 
       </HEAD>
       <BODY class="scGridPage" style="margin: 0px; overflow-x: hidden">
-      <script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/jquery/js/jquery.js"></script>
+      <script language="javascript" type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
       <script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/tigra_color_picker/picker.js"></script>
 <?php
    }
@@ -954,10 +954,10 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  }
  function nm_new_grid()
  {
-     document.getElementById('id_btn_edit').style.display = 'none';
-     document.getElementById('id_btn_save').style.display = '';
-     document.getElementById('Edit_grid').style.display = 'none';
-     document.getElementById('Salvar_grid').style.display = '';
+     $('#id_btn_edit').hide();
+     $('#id_btn_save').show();
+     $('#Edit_grid').hide();
+     $('#Salvar_grid').show();
      ajusta_window();
      document.Fsave.nmgp_save_name.focus();
  }
@@ -968,6 +968,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    {
    ?>
      $('#id_div_save_grid_new_<?php echo $this->tbar_pos; ?>').hide();
+     buttonunselectedSG();
      event.stopPropagation();
    <?php
    }
@@ -985,6 +986,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
      else
      {
        $('#Bsair').click();
+       $('#Bsair').mousedown();
      }
    <?php
    }
@@ -1349,8 +1351,6 @@ function buttonunselectedSG() {
    $("#save_grid_top").removeClass("selected");
    $("#save_grid_bottom").removeClass("selected");
 }
-    buttonSelectedSG();
-    ajusta_window()
 </script>
 <?php
    if (!$this->embbed)

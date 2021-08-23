@@ -50,10 +50,11 @@ var Css_Btn_selected = new Array();
 Id_Btn_selected[0] = "selcmp_top";
 Id_Btn_selected[1] = "ordcmp_top";
 Id_Btn_selected[2] = "sel_groupby_top";
+Id_Btn_selected[3] = "dynamic_search_top";
 function ajax_navigate(opc, parm)
 {
     var scrollNavigateReload = false, extraParams = "", iEvt, iStart = 0;
-    for (ibtn = 0; ibtn < 3; ibtn++) {
+    for (ibtn = 0; ibtn < 4; ibtn++) {
         Css_Btn_selected[ibtn] = $("#" + Id_Btn_selected[ibtn]).attr('class');
     }
     nmAjaxProcOn();
@@ -102,18 +103,6 @@ function ajax_navigate(opc, parm)
             nmAjaxProcOff();
             nm_move();
         }
-        document.getElementById('nmsc_iframe_liga_A_grid_terceros').src = 'NM_Blank_Page.htm';
-        document.getElementById('nmsc_iframe_liga_E_grid_terceros').src = 'NM_Blank_Page.htm';
-        document.getElementById('nmsc_iframe_liga_D_grid_terceros').src = 'NM_Blank_Page.htm';
-        document.getElementById('nmsc_iframe_liga_B_grid_terceros').src = 'NM_Blank_Page.htm';
-        document.getElementById('nmsc_iframe_liga_A_grid_terceros').style.height = '0px';
-        document.getElementById('nmsc_iframe_liga_E_grid_terceros').style.height = '0px';
-        document.getElementById('nmsc_iframe_liga_D_grid_terceros').style.height = '0px';
-        document.getElementById('nmsc_iframe_liga_B_grid_terceros').style.height = '0px';
-        document.getElementById('nmsc_iframe_liga_A_grid_terceros').style.width  = '0px';
-        document.getElementById('nmsc_iframe_liga_E_grid_terceros').style.width  = '0px';
-        document.getElementById('nmsc_iframe_liga_D_grid_terceros').style.width  = '0px';
-        document.getElementById('nmsc_iframe_liga_B_grid_terceros').style.width  = '0px';
         if (oResp["setValue"]) {
           for (i = 0; i < oResp["setValue"].length; i++) {
             $("#" + oResp["setValue"][i]["field"]).html(oResp["setValue"][i]["value"]);
@@ -195,9 +184,6 @@ function ajax_navigate(opc, parm)
                eval (oResp["exec_JS"][i]["function"] + '("' + oResp["exec_JS"][i]["parm"] + '");');
           }
         }
-        if (oResp["htmOutput"]) {
-           nmAjaxShowDebug(oResp);
-        }
         if (!SC_Link_View)
         {
             if (Qsearch_ok)
@@ -207,7 +193,7 @@ function ajax_navigate(opc, parm)
             SC_init_jquery(false);
             tb_init('a.thickbox, area.thickbox, input.thickbox');
         }
-        for (ibtn = 0; ibtn < 3; ibtn++) {
+        for (ibtn = 0; ibtn < 4; ibtn++) {
              $("#" + Id_Btn_selected[ibtn]).attr('class', Css_Btn_selected[ibtn]);
         }
         nmAjaxProcOff();
@@ -312,9 +298,6 @@ function ajax_navigate_res(opc, parm)
                eval (oResp["exec_JS"][i]["function"] + '("' + oResp["exec_JS"][i]["parm"] + '");');
           }
         }
-        if (oResp["htmOutput"]) {
-           nmAjaxShowDebug(oResp);
-        }
         nmAjaxProcOff();
         if (oResp["exec_script"]) {
           for (i = 0; i < oResp["exec_script"].length; i++) {
@@ -366,9 +349,6 @@ function ajax_export(tp_export, parms, strCallback, showAjax)
         if (oResp["ss_time_out"]) {
             nmAjaxProcOff();
             nm_move();
-        }
-        if (oResp["htmOutput"]) {
-           nmAjaxShowDebug(oResp);
         }
         if (oResp["file_export"]) {
             strPath = oResp['file_export'];

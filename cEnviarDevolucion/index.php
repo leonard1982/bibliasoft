@@ -216,8 +216,8 @@ class cEnviarDevolucion_ini
       $this->nm_dt_criacao   = "20200127"; 
       $this->nm_hr_criacao   = "145046"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210107"; 
-      $this->nm_hr_ult_alt   = "101849"; 
+      $this->nm_dt_ult_alt   = "20210820"; 
+      $this->nm_hr_ult_alt   = "170646"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -896,7 +896,7 @@ class cEnviarDevolucion_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['cEnviarDevolucion']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['cEnviarDevolucion']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwH9X7DSvCVWBqHgrwDkB/HEF/DoFUD9BiZkFGHAN7HQFaDMvCHEXeHEFaHMX7HQBiDQX7HIBeVWJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEXCHIrqHQNmDuFaHABYHQrqDMNOZSrCV5FYHIF7HQNwH9BOHArYHuFaHgNODkFeV5FqHMBiHQJKH9BiDSrwHQNUDMBYVcFiV5FYHIJeHQBiZSBqHAzGZMJeHgBYHEFKH5FYVoX7D9JKDQX7D1BOV5FGDMzGVcBUHEF/HIrqHQXGVIJsD1vsZMBOHgveDkBsV5FqHIX7HQFYDuBqHIrwHuXGDMvmZSJ3V5X/VErqHQNwH9BqHABYHQJeDMvCDkFeV5B7ZuFaHQXODQFaDSN7HQJeDMNOZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEXCHIJeHQBiZSFUD1vOV5BODMzGVcFiV5FYHIraHQBqZ1BOD1rwHuBOHgvsDkFeV5FqHIX7HQXsH9BiHIrwHuFUDMNOZSrCV5FYHIF7DcFYZSBqHAN7HuFUHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5FaHIFGHQJeZ9JeZ1rwHQFaHuzGVIBOV5X7DoF7D9XOZSB/HABYV5X7DMrYHErCDWXCVoXGD9XsDQJsHABYV5BqDMrwDkBsV5F/DoraD9BiZ1FGZ1rYD5NUDEBeZSXeH5FGDoB/D9NmZ9XGDSzGD5F7HuzGVcFKDur/VorqHQNwVIJsD1NaD5FaDEvsZSJGDuFaZuBqD9NwH9X7Z1rwV5JwHuBYVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7HIXGHQBiH9BqHIrwHQFaHgBeZSJ3HEFqHMXGHQNmH9BiHABYHQF7DMBYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHErsH5BmDoXGD9NmH9FGD1veD5NUHgvsDkB/DWF/HMraD9JmZSFaHANOHuB/HgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsDkBsDWFYDoJsD9BiZSB/DSrYD5NUDErKVkJ3H5F/VoB/D9NmH9X7Z1rwD5rqHuBYVcBOH5FqDoFGD9BsH9B/Z1vmV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsDWF/VoB/HQBiZ9rqZ1BYD5JsDMvsVcXKDWFYDoJsDcBqH9BOD1rKHQJwDEBODkFeH5FYVoFGHQJKDQJwHAveD5JwHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsD5BOHgveHErsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKV5FYVEF7HQXOH9BOHArYD5NUHgrKZSJGHEFqHMBiHQJKH9BiHAvOVWXGDMzGVcB/DWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwDQBqHIrKVWBqDMBOVIB/DWXCVErqD9BsZ1rqHAN7HQXGDEBeZSJ3V5FaHINUDcBwDQFaZ1BYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaDSzGVWBqHuNODkB/HEF/HMXGD9BsZ1B/HIBOD5XGHgBOHENiDWrGZuBqDcXGDQJwHANKVWBqDMvOVIFCDWFaHMBiD9BsVIraD1rwV5X7HgBeHEBUDWF/VoB/DcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7D1BeHuraHuNOVIFCDWF/DoFGDcBqZ1FaHAN7HQFUDMzGHEJGDWXCDoB/D9XsDQJwHABYV5FGHuvmVcBOV5X7DoJsHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9FeDWF/VoX7HQJmZSB/HArYD5F7HgBYHEXeV5FqZuFaD9FYDQJsZ1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgrKHErCV5FqHIFUHQFYH9BiHAvCD5F7DMBYV9BUDuX7HMraHQXOH9BOHAvCV5X7DMvCHErCDWr/HMB/DcXGDQFaHIBOD5F7DMBOVIBsV5F/HMFUHQBqZkBiHINKD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIvsVWFaDMBYVcXKH5B7VENUHQNwVIJsD1NaV5X7HgBeVkJqDWFGZuBqDcXGZSBiD1BOD5F7DMrYZSNiDuX7HMFUDcNmZ1BOHAvmV5X7HgNKHErsH5F/HMFaHQNmDQFaHINaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwDMveHErsH5FYHIB/HQBiH9BiHIvsD5F7DMzGZSJqHEFYHIXGHQBiZkFGZ1vmV5X7HgBeVkJ3DWXCHIraHQXsZSBiHAvCD5F7DMBYVcB/DWF/HMJeDcFYZ1FGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgBeDkB/HEB3DoB/HQFYDQJwHANOV5JwHgrKDkFCDWJeVoB/D9BsZkFUHArKHQraDEBeHEXeDuFYVoB/D9NwZ9rqZ1rwHQBOHgrKVcFCH5XCHIF7DcBqZ1B/DSBeV5FaHgvCZSJGDWB3ZuXGHQXGDQFGHAveD5BOHuzGVcBUDuFGVoFGHQFYH9FaHIBeZMBODEvsZSJGDWr/DoB/D9XsZSFGD1NKV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raDMBODkBsV5X7HIrqDcFYZkFGD1rwHQrqHgvsZSJ3V5XCHIFUHQFYZSBiZ1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDQBqHAvmV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5JsDMzGVkJqDuXKDoXGHQJKH9X7DSrwD5XGHuzGZSJqDWXCVoBqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -1069,9 +1069,13 @@ class cEnviarDevolucion_ini
           {
               $this->nm_falta_var .= "g_kardexid; ";
           }
-          if (!isset($_SESSION['gid_empresa'])) 
+          if (!isset($_SESSION['gpost'])) 
           {
-              $this->nm_falta_var .= "gid_empresa; ";
+              $this->nm_falta_var .= "gpost; ";
+          }
+          if (!isset($_SESSION['gvalidatns'])) 
+          {
+              $this->nm_falta_var .= "gvalidatns; ";
           }
       }
 // 
@@ -1957,52 +1961,58 @@ class cEnviarDevolucion_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'on';
+if (!isset($_SESSION['gvalidatns'])) {$_SESSION['gvalidatns'] = "";}
+if (!isset($this->sc_temp_gvalidatns)) {$this->sc_temp_gvalidatns = (isset($_SESSION['gvalidatns'])) ? $_SESSION['gvalidatns'] : "";}
+if (!isset($_SESSION['gpost'])) {$_SESSION['gpost'] = "";}
+if (!isset($this->sc_temp_gpost)) {$this->sc_temp_gpost = (isset($_SESSION['gpost'])) ? $_SESSION['gpost'] : "";}
 if (!isset($_SESSION['g_kardexid'])) {$_SESSION['g_kardexid'] = "";}
 if (!isset($this->sc_temp_g_kardexid)) {$this->sc_temp_g_kardexid = (isset($_SESSION['g_kardexid'])) ? $_SESSION['g_kardexid'] : "";}
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
-  $vkardexid   = 0;
-$vpost       = "NO";
-$idempresa   = 1;
-$vndocumento = "";
-$vpost       = "NO";
-$vvalidatns  = "NO";
-$vprint_r    = "NO";
-
-
-if(isset($this->sc_temp_gidempresa))
-{
-	$idempresa = $this->sc_temp_gidempresa;
-}
-
-if(isset($this->sc_temp_g_kardexid))
-{
-	if($this->sc_temp_g_kardexid>0)
-	{
-		$vkardexid = $this->sc_temp_g_kardexid;
-	}
-}
-
-if(isset($_POST["kardexid"]))
-{
-	$vkardexid = $_POST["kardexid"];
-	$vpost = "SI";
-}
-
-if(isset($_GET["kardexid"]))
-{
-	$vkardexid = $_GET["kardexid"];
-}
-
-if(isset($_GET["idempresa"]))
-{
-	$idempresa = $_GET["idempresa"];
-}
-
-if(isset($_GET["documento"]))
-{
-	$vndocumento = $_GET["documento"];
-	$vsql = "select kardexid from kardex where codcomp='DV' and sn_pjfe||numero ='".trim($vndocumento)."'";
+  $vkardexid   = 0;
+$vpost       = "NO";
+$idempresa   = 1;
+$vndocumento = "";
+$vvalidatns  = "NO";
+$vprint_r    = "NO";
+
+
+
+
+
+if(isset($this->sc_temp_gidempresa))
+{
+	$idempresa = $this->sc_temp_gidempresa;
+}
+
+if(isset($this->sc_temp_g_kardexid))
+{
+	if($this->sc_temp_g_kardexid>0)
+	{
+		$vkardexid = $this->sc_temp_g_kardexid;
+	}
+}
+
+if(isset($_POST["kardexid"]))
+{
+	$vkardexid = $_POST["kardexid"];
+	$vpost = "SI";
+}
+
+if(isset($_GET["kardexid"]))
+{
+	$vkardexid = $_GET["kardexid"];
+}
+
+if(isset($_GET["idempresa"]))
+{
+	$idempresa = $_GET["idempresa"];
+}
+
+if(isset($_GET["documento"]))
+{
+	$vndocumento = $_GET["documento"];
+	$vsql = "select kardexid from kardex where codcomp='DV' and sn_pjfe||numero ='".trim($vndocumento)."'";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2032,33 +2042,51 @@ if(isset($_GET["documento"]))
           $this->vkid = false;
           $this->vkid_erro = $this->Db->ErrorMsg();
       } 
-;
-	if(isset($this->vkid[0][0]))
-	{
-		$vkardexid = $this->vkid[0][0];
-	}
-}
-
-if(isset($_GET["post"]))
-{
-	$vpost = $_GET["post"];
-}
-
-if(isset($_GET["validatns"]))
-{
-	$vvalidatns = $_GET["validatns"];
-}
-
-if(isset($_GET["print"]))
-{
-	$vprint_r = $_GET["print"];
-}
-	
-
-
+;
+	if(isset($this->vkid[0][0]))
+	{
+		$vkardexid = $this->vkid[0][0];
+	}
+}
+
+if(isset($this->sc_temp_gpost))
+{
+	if(!empty($this->sc_temp_gpost))
+	{
+		$vpost = $this->sc_temp_gpost;
+	}
+}
+
+if(isset($this->sc_temp_gvalidatns))
+{
+	if(!empty($this->sc_temp_gvalidatns))
+	{
+		$vvalidatns = $this->sc_temp_gvalidatns;
+	}
+}
+
+if(isset($_GET["post"]))
+{
+	$vpost = $_GET["post"];
+}
+
+if(isset($_GET["validatns"]))
+{
+	$vvalidatns = $_GET["validatns"];
+}
+
+if(isset($_GET["print"]))
+{
+	$vprint_r = $_GET["print"];
+}
+	
+
+
 $this->fEnviarFE($vkardexid,$vpost,$idempresa,$vvalidatns,$vprint_r);
 if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 if (isset($this->sc_temp_g_kardexid)) {$_SESSION['g_kardexid'] = $this->sc_temp_g_kardexid;}
+if (isset($this->sc_temp_gpost)) {$_SESSION['gpost'] = $this->sc_temp_gpost;}
+if (isset($this->sc_temp_gvalidatns)) {$_SESSION['gvalidatns'] = $this->sc_temp_gvalidatns;}
 $_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
@@ -2107,23 +2135,173 @@ $_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'off';
        } 
        exit;
    } 
-function fEnviarFE($vkardexid,$vpost,$idempresa,$vvalidatns,$vprint_r)
+function fCrearQR($vnombrearchivo,$vcontenido='Prueba qr',$vdirectorio='',$vmargin=0,$vtamanio=2,$vcalidad=20)
 {
 $_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'on';
-if (!isset($_SESSION['gid_empresa'])) {$_SESSION['gid_empresa'] = "";}
-if (!isset($this->sc_temp_gid_empresa)) {$this->sc_temp_gid_empresa = (isset($_SESSION['gid_empresa'])) ? $_SESSION['gid_empresa'] : "";}
+  
+	sc_include_library("prj", "qr", "qrlib.php", true, true);
+	
+	$tempDir       = $vdirectorio;
+	$fileName      = $vnombrearchivo;
+	$outerFrame    = $vmargin;
+	$pixelPerPoint = $vtamanio;
+	$jpegQuality   = $vcalidad;
+	$codeContents  = $vcontenido;
+
+	$frame = QRcode::text($codeContents, false, QR_ECLEVEL_M);
+
+	$h = count($frame);
+	$w = strlen($frame[0]);
+
+	$imgW = $w + 2*$outerFrame;
+	$imgH = $h + 2*$outerFrame;
+
+	$base_image = imagecreate($imgW, $imgH);
+
+	$col[0] = imagecolorallocate($base_image,255,255,255); 
+	$col[1] = imagecolorallocate($base_image,0,0,0);     
+
+	imagefill($base_image, 0, 0, $col[0]);
+
+	for($y=0; $y<$h; $y++) {
+		for($x=0; $x<$w; $x++) {
+			if ($frame[$y][$x] == '1') {
+				imagesetpixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
+			}
+		}
+	}
+
+	$target_image = imagecreate($imgW * $pixelPerPoint, $imgH * $pixelPerPoint);
+	imagecopyresized(
+		$target_image, 
+		$base_image, 
+		0, 0, 0, 0, 
+		$imgW * $pixelPerPoint, $imgH * $pixelPerPoint, $imgW, $imgH
+	);
+	imagedestroy($base_image);
+	imagejpeg($target_image, $tempDir.$fileName, $jpegQuality);
+	imagedestroy($target_image);
+
+$_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'off';
+}
+function fDigito($vdoc)
+{
+$_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'on';
+  
+	$long=strlen($vdoc);
+	$str=$vdoc;
+	$arr = str_split($str);
+	switch ($long)
+	{
+	case 4:
+	$valor=$arr[3]*3+$arr[2]*7+$arr[1]*13+$arr[0]*17;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 5:
+	$valor=$arr[0]*19+$arr[1]*17+$arr[2]*13+$arr[3]*7+$arr[4]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 6:
+	$valor=$arr[0]*23+$arr[1]*19+$arr[2]*17+$arr[3]*13+$arr[4]*7+$arr[5]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 7:
+	$valor=$arr[0]*29+$arr[1]*23+$arr[2]*19+$arr[3]*17+$arr[4]*13+$arr[5]*7+$arr[6]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 8:
+	$valor=$arr[0]*37+$arr[1]*29+$arr[2]*23+$arr[3]*19+$arr[4]*17+$arr[5]*13+$arr[6]*7+$arr[7]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 9:
+	$valor=$arr[0]*41+$arr[1]*37+$arr[2]*29+$arr[3]*23+$arr[4]*19+$arr[5]*17+$arr[6]*13+$arr[7]*7+$arr[8]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 10:
+	$valor=$arr[0]*43+$arr[1]*41+$arr[2]*37+$arr[3]*29+$arr[4]*23+$arr[5]*19+$arr[6]*17+$arr[7]*13+$arr[8]*7+$arr[9]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+	}
+
+$_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'off';
+}
+function fEnviarFE($vkardexid,$vpost,$idempresa,$vvalidatns,$vprint_r)
+{
+$_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'on';
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
-  
-	ob_start();
-	
+  
+	ob_start();
+	
 	$vMotNota = 6;
 	$vTipoDoc = 91; 
-	$vrango   = "NC-1";
-	$vcodcomp = "NC";
-	
-	$v_modo = "DESARROLLO";
-	$vsql = "select modo from cloud_webservicefe where id_empresa='".$idempresa."'";	
+	$vrango   = "NC-1";
+	$vcodcomp = "NC";
+	
+	$v_modo = "DESARROLLO";
+	$vsql = "select modo from cloud_webservicefe where id_empresa='".$idempresa."'";	
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2153,137 +2331,160 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vmodo = false;
           $vmodo_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-	if(isset($vmodo[0][0]))
-	{
-		$v_modo = $vmodo[0][0];
-	}
-
-	sc_include_library("prj", "qr", "qrlib.php", true, true);
-	sc_include_library("prj", "php-image-magician", "php_image_magician.php", true, true);
-
-	$vcodprefijo       = '00';
-	$vnumero           = 0;
-	$vtotal            = 0;
-	$TokenEnterprise   = '';
-	$TokenAutorizacion = '';
-	$vServidor         = '';
-	$vpjfe             = "";
-	$vnit              = "";
-	$vnit2             = "";
-	$vfecha            = "";
-	$vfecvence         = "";
-	$vmunicipio   = 'CUCUTA';
-	$vcodmunicipio= "";
-	$vcod_departamento = "";
-	$vdepartamento= "";
-	$vcodmu_codep = "";
-	$vcodepart    = '54';
-	$vconsecutivo = "";
-	$vtotal       = 0;
-	$vemail  = "servicio@solucionesnavarro.com";
+;
+	if(isset($vmodo[0][0]))
+	{
+		$v_modo = $vmodo[0][0];
+	}
+
+	sc_include_library("prj", "qr", "qrlib.php", true, true);
+	sc_include_library("prj", "php-image-magician", "php_image_magician.php", true, true);
+
+	$vcodprefijo       = '00';
+	$vnumero           = 0;
+	$vtotal            = 0;
+	$TokenEnterprise   = '';
+	$TokenAutorizacion = '';
+	$vServidor         = '';
+	$vpjfe             = "";
+	$vnit              = "";
+	$vnit2             = "";
+	$vfecha            = "";
+	$vfecvence         = "";
+	$vmunicipio   = 'CUCUTA';
+	$vcodmunicipio= "";
+	$vcod_departamento = "";
+	$vdepartamento= "";
+	$vcodmu_codep = "";
+	$vcodepart    = '54';
+	$vcod_departamentoymunicipio = '54001'; 
+	$vconsecutivo = "";
+	$vtotal       = 0;
+	$vemail  = "servicio@solucionesnavarro.com";
 	$vaccion = "Enviar";
-	$vtelef1 = "";
-	$vcodImp = "";
-	$vdirecc1= "";
-	$vpostal = "";
-	$vnomregtri = "";
-	$vnombre = "";
-	$vtipodociden = "";
-	$vobligaciones= array();
-	$vnatjuridica = "";
-	$vregimen     = "";
-	$vdv = "";
-	$vbasetotal  = 0;
-	$vtotalitems = 0;
-
-	$cant	="";
-	$codbp	="";
-	$desc	="";
-	$codest	="";
-	$base	="";
-	$codImp	="";
-	$Timp	="";
-	$Timp	="";
-	$eliva	="";
-	$tot	="";
-	$tot	="";
-	$valun	="";
-	$valun	="";
-	$sec	="";
-
-
-	$max    = "";
-
-	$decoded = '';
-	$vcufe	 = '';	
-	$vestado = '';
-	$vavisos = '';
-	$eldesc	 = 0;
-	$t		 = 0;
-	$elmonto = 0;
-	$bas_br	 = 0;
-
-	$t_reg	 ='';
-	$vEsfac	 ='NO';
-	$lafechadevencimiento = '';
-	$vvalida = false;
-	$vmensaje= "";
-	$vcoderror  = "";
-	$vmensajes  = "";
-	$vformapago = "";
-	$file       = "";
-	$vcodcli    = "";
-	$factura    = "";
-	$vpasos     = "";
-	$cont       = 0;
-	$vmen       = "";
-	$vobserv    = "";
-	$vhoracrea  = date("H:i:s");
-	$codsucursal= "00001";
-	$vexclusiones = "''";
-	$vrbase     = 0;
-	$vriva      = 0;
-	$vtotal     = 0;
-	$vcantidadDecimales = 2;
-	$vvalorTributoUnidad= "0.00";
-	$vnovalidaremail    = "NO";
-	$vcorreoalternativo = "";
-	$vinicial = 1;
-	
-	$vnitemisor   = "";
-	$vcelemisor   = "";
-	$vemailemisor = "";
-	$vcorreodesvio  = "";
-	$vfacturaonline = "";
-	$vhoracreacion  = "";
-	$vnombre_pc_red = "";
-	
-	$vinformacionAdicional   = "";
-	$vsumarImpuestosDelDetalle = "NO";
-	
-	$vivatotal = 0;
-	$vbasetotalizado = 0;
-	$vivatotalizado  = 0;
-	$viconsumototal  = 0;
-	$vproveedor = "HKA";
-	$venvio_dian    = 0;
-	$venvio_cliente = 0;
-	$vconsecutivo_pruebas = "";
-	$vresolucion = "";
-	$vfecha2    = "";
-	$vretencion = 0;
-	$vretica    = 0;
-	$vretiva    = 0;
-	$vmodo      = 1;
-	$vServidor2 = "";
-	$vbasetotalizado_delcero = 0;
-	
-	$factura = new FacturaGeneral();
-	$factura->cliente = new Cliente();
-
-	$vsql1 = "select k.codprefijo,k.numero,k.total,t.nittri,k.fecha,k.fecvence,k.formapago,t.nit,k.observ,k.horacrea,k.vrbase,t.terid,k.vrrfte,k.retfte,k.retiva, k.retica,k.vrrica,k.vrriva from kardex k inner join terceros t on k.cliente=t.terid where k.kardexid='".$vkardexid."'";
-
+	$vtelef1 = "";
+	$vcodImp = "";
+	$vdirecc1= "";
+	$vpostal = "";
+	$vnomregtri = "";
+	$vnombre = "";
+	$vtipodociden = "";
+	$vobligaciones= array();
+	$vnatjuridica = "";
+	$vregimen     = "";
+	$vdv = "";
+	$vbasetotal  = 0;
+	$vtotalitems = 0;
+
+	$cant	="";
+	$codbp	="";
+	$desc	="";
+	$codest	="";
+	$base	="";
+	$codImp	="";
+	$Timp	="";
+	$Timp	="";
+	$eliva	="";
+	$tot	="";
+	$tot	="";
+	$valun	="";
+	$valun	="";
+	$sec	="";
+
+
+	$max    = "";
+
+	$decoded = '';
+	$vcufe	 = '';	
+	$vestado = '';
+	$vavisos = '';
+	$eldesc	 = 0;
+	$t		 = 0;
+	$elmonto = 0;
+	$bas_br	 = 0;
+
+	$t_reg	 ='';
+	$vEsfac	 ='NO';
+	$lafechadevencimiento = '';
+	$vvalida = false;
+	$vmensaje= "";
+	$vcoderror  = "";
+	$vmensajes  = "";
+	$vformapago = "";
+	$file       = "";
+	$vcodcli    = "";
+	$factura    = "";
+	$vpasos     = "";
+	$cont       = 0;
+	$vmen       = "";
+	$vobserv    = "";
+	$vhoracrea  = date("H:i:s");
+	$codsucursal= "00001";
+	$vexclusiones = "''";
+	$vrbase     = 0;
+	$vriva      = 0;
+	$vtotal     = 0;
+	$vcantidadDecimales = 2;
+	$vvalorTributoUnidad= "0.00";
+	$vnovalidaremail    = "NO";
+	$vcorreoalternativo = "";
+	$vinicial = 1;
+	
+	$vnitemisor   = "";
+	$vcelemisor   = "";
+	$vemailemisor = "";
+	$vcorreodesvio  = "";
+	$vfacturaonline = "";
+	$vhoracreacion  = "";
+	$vnombre_pc_red = "";
+	
+	$vinformacionAdicional   = "";
+	$vsumarImpuestosDelDetalle = "NO";
+	
+	$vivatotal = 0;
+	$vbasetotalizado = 0;
+	$vivatotalizado  = 0;
+	$viconsumototal  = 0;
+	$vproveedor = "HKA";
+	$venvio_dian    = 0;
+	$venvio_cliente = 0;
+	$vconsecutivo_pruebas = "";
+	$vresolucion = "";
+	$vfecha2    = "";
+	$vretencion = 0;
+	$vretica    = 0;
+	$vretiva    = 0;
+	$vmodo      = 1;
+	$vServidor2 = "";
+	$vbasetotalizado_delcero = 0;
+	
+	$vdescuentoexclusion   = "''";
+	$vsqldescuentoexclusion = "d.preciobase";
+	$vsqldescuentoexclusionneto = "d.precioneto";
+	
+	$vobservacion_dataico = "";
+	$vbasetotalizado_delcero = 0;
+	$vTestSetId = "";
+	$vdiascredito = 0;
+	$vtexto_encabezado = "";
+	$vtexto_pie_pagina = "";
+	$vtelefonosuc   = "";
+	$vdireccionsuc  = "";
+	$vnombreestablecimiento = "";
+	$vcorreo_copia = "";
+	$vcorreo_suc = "";
+	$vlogo_suc   = "";
+	$vterid      = "";
+	$vmunicipio_tns = "NO";
+	$vvalidar_codcliente_tns = "NO";
+	$vbug_xml = "NO";
+	$vseguimiento  = "";
+	
+	$factura = new FacturaGeneral();
+	$factura->cliente = new Cliente();
+
+	$vsql1 = "select k.codprefijo,k.numero,k.total,t.nittri,k.fecha,k.fecvence,k.formapago,t.nit,k.observ,k.horacrea,k.vrbase,t.terid,k.vrrfte,k.retfte,k.retiva, k.retica,k.vrrica,k.vrriva from kardex k inner join terceros t on k.cliente=t.terid where k.kardexid='".$vkardexid."'";
+
 	 
       $nm_select = $vsql1; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2313,36 +2514,36 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vdatoskardex = false;
           $vdatoskardex_erro = $this->Db->ErrorMsg();
       } 
-;
-
-	if(isset($vdatoskardex[0][0]))
-	{
-		$vcodprefijo  = $vdatoskardex[0][0];
-		$vnumero      = $vdatoskardex[0][1];
-		$vnit         = $vdatoskardex[0][3];
-		$vfecha       = $vdatoskardex[0][4];
-		$vfecvence    = $vdatoskardex[0][5];
-		$vformapago   = $vdatoskardex[0][6];
-		$vcodcli      = $vdatoskardex[0][7];
-		$vobserv      = utf8_encode($vdatoskardex[0][8]);
-		$vhoracreacion= $vdatoskardex[0][9];
-		
-		$vterid        = $vdatoskardex[0][11];
-		$vretencion    = $vdatoskardex[0][12];
-		$vporretencion = $vdatoskardex[0][13];
-		$vretiva       = $vdatoskardex[0][14];
-		$vretica       = $vdatoskardex[0][15];
-		$vvrrica       = $vdatoskardex[0][16];
-		$vvrriva       = $vdatoskardex[0][17];
-		
-		$vconsecutivo = $vnumero;
-		$vtotal       = $vtotal;
-		$vpasos      .= "1. Consulta kardex tns, ";
-	}
-
-
-	$vsql = "select if((select w.modo from cloud_webservicefe w where w.id_empresa='".$idempresa."')='DESARROLLO',prefijo_prueba,prefijo) as prefijo,inicial,final,resolucion,consecutivo_pruebas from cloud_prefijos where tipo='".$vcodcomp."' and cod_prefijo='".$vcodprefijo."' and  id_empresa='".$idempresa."'";
-	
+;
+
+	if(isset($vdatoskardex[0][0]))
+	{
+		$vcodprefijo  = $vdatoskardex[0][0];
+		$vnumero      = $vdatoskardex[0][1];
+		$vnit         = $vdatoskardex[0][3];
+		$vfecha       = $vdatoskardex[0][4];
+		$vfecvence    = $vdatoskardex[0][5];
+		$vformapago   = $vdatoskardex[0][6];
+		$vcodcli      = $vdatoskardex[0][7];
+		$vobserv      = utf8_encode($vdatoskardex[0][8]);
+		$vhoracreacion= $vdatoskardex[0][9];
+		
+		$vterid        = $vdatoskardex[0][11];
+		$vretencion    = $vdatoskardex[0][12];
+		$vporretencion = $vdatoskardex[0][13];
+		$vretiva       = $vdatoskardex[0][14];
+		$vretica       = $vdatoskardex[0][15];
+		$vvrrica       = $vdatoskardex[0][16];
+		$vvrriva       = $vdatoskardex[0][17];
+		
+		$vconsecutivo = $vnumero;
+		$vtotal       = $vtotal;
+		$vpasos      .= "1. Consulta kardex tns, ";
+	}
+
+
+	$vsql = "select if((select w.modo from cloud_webservicefe w where w.id_empresa='".$idempresa."')='DESARROLLO',prefijo_prueba,prefijo) as prefijo,inicial,final,resolucion,consecutivo_pruebas from cloud_prefijos where tipo='".$vcodcomp."' and cod_prefijo='".$vcodprefijo."' and  id_empresa='".$idempresa."'";
+	
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2372,22 +2573,22 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vpjfe2 = false;
           $vpjfe2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-	if(isset($vpjfe2[0][0]))
-	{
-		$vpjfe       = $vpjfe2[0][0];
-		$vinicial    = $vpjfe2[0][1]; 
-		$vrango      = $vpjfe."-".$vinicial;
-		$vresolucion = $vpjfe2[0][3]; 
-		$vconsecutivo_pruebas = $vpjfe2[0][4];
-
-		$vpasos      .= "2. Consulta prefijo en cloud, ";
-	}
-
-
-	$vsql = "select if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,if(modo='DESARROLLO',servidor2_pruebas,servidor2) as servidor2,if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword, if(modo='DESARROLLO',1,0) as modos from cloud_webservicefe where id_empresa='".$idempresa."'";
-	
+;
+
+	if(isset($vpjfe2[0][0]))
+	{
+		$vpjfe       = $vpjfe2[0][0];
+		$vinicial    = $vpjfe2[0][1]; 
+		$vrango      = $vpjfe."-".$vinicial;
+		$vresolucion = $vpjfe2[0][3]; 
+		$vconsecutivo_pruebas = $vpjfe2[0][4];
+
+		$vpasos      .= "2. Consulta prefijo en cloud, ";
+	}
+
+
+	$vsql = "select if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,if(modo='DESARROLLO',servidor2_pruebas,servidor2) as servidor2,if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword, if(modo='DESARROLLO',1,0) as modos,testsetId from cloud_webservicefe where id_empresa='".$idempresa."'";
+	
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2413,46 +2614,47 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $ds_fv = false;
           $ds_fv_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-	if(isset($ds_fv[0][0]) and (isset($ds_fv[0][1])) and (isset($ds_fv[0][2])) and (isset($ds_fv[0][3])))
-	{
-		if(!empty(($ds_fv[0][0])) and (!empty($ds_fv[0][1])) and (!empty($ds_fv[0][2])) and (!empty($ds_fv[0][3])))
-		{
-			error_reporting(E_ERROR);
-			$WebService     = new WebService();
-			$factura        = new FacturaGeneral();
-			$cliente        = new Cliente();
-			$destinatario   = new Destinatario();
-			$direccion      = new Direccion();
-			$det_tributario = new Tributos();
-			$emaildest      = new Strings();
-			$vServidor      = $ds_fv[0][0];
-			$vServidor2     = $ds_fv[0][1];
-
-			$options = array('exceptions' => true, 'trace' => true);
-
-			$params;
-			$TokenEnterprise   = $ds_fv[0][2];
-			$TokenAutorizacion = $ds_fv[0][3];
-			$vmodo             = $ds_fv[0][4];
-			$enviarAdjunto     = false;
-			$vvalida           = true;
-
-			$vpasos      .= "3. Consulta datos del webservice, ";
-		}
-		else
-		{
-			$vmensaje .= "No se encuentra la información del WebService";
-		}
-	}
-	else
-	{
-		$vmensaje .= "No se encuentra la información del WebService";
-	}
-	
-	$vsql = "select ccnit,celular,correo,codsucursal,cantidadDecimales,valorTributoUnidad,no_validar_mail,email_alternativo,desviar_correo_a,enviar_documento_online,correo_copia,nombre_pc_red,proveedor,enviar_dian,enviar_cliente from cloud_empresas where id_empresa='".$idempresa."'";
-
+;
+
+	if(isset($ds_fv[0][0]) and (isset($ds_fv[0][1])) and (isset($ds_fv[0][2])) and (isset($ds_fv[0][3])))
+	{
+		if(!empty(($ds_fv[0][0])) and (!empty($ds_fv[0][1])) and (!empty($ds_fv[0][2])) and (!empty($ds_fv[0][3])))
+		{
+			error_reporting(E_ERROR);
+			$WebService     = new WebService();
+			$factura        = new FacturaGeneral();
+			$cliente        = new Cliente();
+			$destinatario   = new Destinatario();
+			$direccion      = new Direccion();
+			$det_tributario = new Tributos();
+			$emaildest      = new Strings();
+			$vServidor      = $ds_fv[0][0];
+			$vServidor2     = $ds_fv[0][1];
+
+			$options = array('exceptions' => true, 'trace' => true);
+
+			$params;
+			$TokenEnterprise   = $ds_fv[0][2];
+			$TokenAutorizacion = $ds_fv[0][3];
+			$vmodo             = $ds_fv[0][4];
+			$vTestSetId        = $ds_fv[0][5];
+			$enviarAdjunto     = false;
+			$vvalida           = true;
+
+			$vpasos      .= "3. Consulta datos del webservice, ";
+		}
+		else
+		{
+			$vmensaje .= "No se encuentra la información del WebService";
+		}
+	}
+	else
+	{
+		$vmensaje .= "No se encuentra la información del WebService";
+	}
+	
+	$vsql = "select ccnit,celular,correo,codsucursal,cantidadDecimales,valorTributoUnidad,no_validar_mail,email_alternativo,desviar_correo_a,enviar_documento_online,correo_copia,nombre_pc_red,proveedor,enviar_dian,enviar_cliente,pie_pagina,head_note,celular,direccion,razon_social,correo_copia,correo,logo,validar_codcliente_tns, desactivar_xml_enlista from cloud_empresas where id_empresa='".$idempresa."'";
+
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2482,52 +2684,68 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vdataemisor = false;
           $vdataemisor_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-	if(isset($vdataemisor[0][0]))
-	{
-		$vnitemisor                           = $vdataemisor[0][0];
-		$vcelemisor                           = $vdataemisor[0][1];
-		$vemailemisor                         = $vdataemisor[0][10];
-
-		$codsucursal                          = $vdataemisor[0][3];
-		$vcantidadDecimales                   = $vdataemisor[0][4];
-		$vvalorTributoUnidad                  = $vdataemisor[0][5];
-		$vnovalidaremail    				  = $vdataemisor[0][6];
-		$vcorreoalternativo 				  = $vdataemisor[0][7];
-		$vcorreodesvio                        = $vdataemisor[0][8];
-		$vfacturaonline                       = $vdataemisor[0][9]; 
-		$vnombre_pc_red      = $vdataemisor[0][11]; 
-		$vproveedor          = $vdataemisor[0][12];
-		$venvio_dian         = $vdataemisor[0][13];
-		$venvio_cliente      = $vdataemisor[0][14];
-
-		if($vnovalidaremail=="SI")
-		{
-			if(empty($vcorreoalternativo))
-			{
-				$vvalida = false;
-				$vmensaje .= "Si su configuración es: 'Correo alternativo', debe especificar un correo alternativo.<br>";
-			}
-		}
-
-		if($vfacturaonline=="SI")
-		{
-			if(empty($vcorreodesvio))
-			{
-				$vvalida = false;
-				$vmensaje .= "Si su configuración es: 'Enviar Documento Online', debe especificar un correo para desvío.<br>";
-			}
-		}
-
-		$vpasos      .= "5. Datos del emisor, ";
-	}
-
-	if($vvalida)
-	{
-		if($vvalidatns=="NO")
-		{
-			$vsql_cliente = "select nittri,trim(iif(tipodociden='C','13','31')) as tipoiden,nombre,nomregtri,direcc1,telef1,email,trim(iif(natjuridica='N',2,1)) as naturaleza from terceros where nit='".$vnit."' or nittri='".$vnit."'";
+;
+
+	if(isset($vdataemisor[0][0]))
+	{
+		$vnitemisor                           = $vdataemisor[0][0];
+		$vcelemisor                           = $vdataemisor[0][1];
+		$vemailemisor                         = $vdataemisor[0][10];
+
+		$codsucursal                          = $vdataemisor[0][3];
+		$vcantidadDecimales                   = $vdataemisor[0][4];
+		$vvalorTributoUnidad                  = $vdataemisor[0][5];
+		$vnovalidaremail    				  = $vdataemisor[0][6];
+		$vcorreoalternativo 				  = $vdataemisor[0][7];
+		$vcorreodesvio                        = $vdataemisor[0][8];
+		$vfacturaonline                       = $vdataemisor[0][9]; 
+		$vnombre_pc_red                       = $vdataemisor[0][11]; 
+		$vproveedor                           = $vdataemisor[0][12];
+		$venvio_dian                          = $vdataemisor[0][13];
+		$venvio_cliente                       = $vdataemisor[0][14];
+		$vtexto_pie_pagina = $vdataemisor[0][15];
+		$vtexto_encabezado = $vdataemisor[0][16];
+		$vtelefonosuc      = $vdataemisor[0][17];
+		$vdireccionsuc     = $vdataemisor[0][18];
+		$vnombreestablecimiento = $vdataemisor[0][19];
+		$vcorreo_copia     = $vdataemisor[0][20];
+		$vcorreo_suc       = $vdataemisor[0][21];
+		$vlogo_suc         = $vdataemisor[0][22];
+		$vvalidar_codcliente_tns = $vdataemisor[0][23];
+		$vbug_xml = $vdataemisor[0][24];
+		
+		if($vvalidatns=="NO")
+		{
+			$vvalidatns = $vvalidar_codcliente_tns;
+		}
+
+		if($vnovalidaremail=="SI")
+		{
+			if(empty($vcorreoalternativo))
+			{
+				$vvalida = false;
+				$vmensaje .= "Si su configuración es: 'Correo alternativo', debe especificar un correo alternativo.<br>";
+			}
+		}
+
+		if($vfacturaonline=="SI")
+		{
+			if(empty($vcorreodesvio))
+			{
+				$vvalida = false;
+				$vmensaje .= "Si su configuración es: 'Enviar Documento Online', debe especificar un correo para desvío.<br>";
+			}
+		}
+
+		$vpasos      .= "5. Datos del emisor, ";
+	}
+
+	if($vvalida)
+	{
+		if($vvalidatns=="NO")
+		{
+			
+			$vsql_cliente = "select nittri,trim(iif(tipodociden='C','13','31')) as tipoiden,nombre,nomregtri,direcc1,telef1,email,trim(iif(natjuridica='N',2,1)) as naturaleza from terceros where terid='".$vterid."'";
 			 
       $nm_select = $vsql_cliente; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2553,75 +2771,75 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $ds_fe = false;
           $ds_fe_erro = $this->Db->ErrorMsg();
       } 
-;	
-
-			if(isset($ds_fe[0][0]) and !empty($ds_fe[0][0]))
-			{
-				$vnit  = $ds_fe[0][0];
-				$vnit2 = $ds_fe[0][0];
-
-				$vv0 = strpos($vnit,"-");
-				if($vv0 === false)
-				{
-					$vdv = fObtenerDigitoV($vnit);
-				}
-				else
-				{
-					$vv0  = explode("-",$vnit);
-					$vv2 = $vv0[0];
-					$vnit= $vv2;
-					$vdv = fObtenerDigitoV($vv2);
-				}
-
-
-				$vtipodociden = $ds_fe[0][1];
-				$vnombre      = utf8_encode($ds_fe[0][2]);
-				if(empty($vnombre))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene nombre en TNS: ".$vnit.".<br>";
-				}
-				$vnomregtri   = utf8_encode($ds_fe[0][3]);
-				if(empty($vnomregtri))
-				{
-					$vnomregtri = $vnombre;
-				}
-				$vdirecc1     = utf8_encode($ds_fe[0][4]);
-				$direccion    = $vdirecc1;
-				if(empty($vdirecc1))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene dirección en TNS: ".$vnit.".<br>";
-				}
-				$vtelef1      = utf8_encode($ds_fe[0][5]);
-				if(empty($vtelef1))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene telefono en TNS: ".$vnit.".<br>";
-				}
-				$vemail       = $ds_fe[0][6];
-
-				
-
-				if($vnovalidaremail=="NO")
-				{
-					if(empty($vemail))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene correo electrónico en TNS: ".$vnit.".<br>";
-					}
-				}
-				else
-				{
-					if(empty($vemail))
-					{
-						$vemail = $vcorreoalternativo;
-					}
-				}
-
-				$vnatjuridica = $ds_fe[0][7];
-
-
+;	
+
+			if(isset($ds_fe[0][0]) and !empty($ds_fe[0][0]))
+			{
+				$vnit  = $ds_fe[0][0];
+				$vnit2 = $ds_fe[0][0];
+
+				$vv0 = strpos($vnit,"-");
+				if($vv0 === false)
+				{
+					$vdv = fObtenerDigitoV($vnit);
+				}
+				else
+				{
+					$vv0  = explode("-",$vnit);
+					$vv2 = $vv0[0];
+					$vnit= $vv2;
+					$vdv = fObtenerDigitoV($vv2);
+				}
+
+
+				$vtipodociden = $ds_fe[0][1];
+				$vnombre      = utf8_encode($ds_fe[0][2]);
+				if(empty($vnombre))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene nombre en TNS: ".$vnit.".<br>";
+				}
+				$vnomregtri   = utf8_encode($ds_fe[0][3]);
+				if(empty($vnomregtri))
+				{
+					$vnomregtri = $vnombre;
+				}
+				$vdirecc1     = utf8_encode($ds_fe[0][4]);
+				$direccion    = $vdirecc1;
+				if(empty($vdirecc1))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene dirección en TNS: ".$vnit.".<br>";
+				}
+				$vtelef1      = utf8_encode($ds_fe[0][5]);
+				if(empty($vtelef1))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene telefono en TNS: ".$vnit.".<br>";
+				}
+				$vemail       = $ds_fe[0][6];
+
+				
+
+				if($vnovalidaremail=="NO")
+				{
+					if(empty($vemail))
+					{
+						$vvalida   = false;
+						$vmensaje .= "-El tercero no tiene correo electrónico en TNS: ".$vnit.".<br>";
+					}
+				}
+				else
+				{
+					if(empty($vemail))
+					{
+						$vemail = $vcorreoalternativo;
+					}
+				}
+
+				$vnatjuridica = $ds_fe[0][7];
+
+
 				 
       $nm_select = "select m.municipio,m.codigo_mu,t.detalle_tributario,t.cod_postal,t.responsabilidades_fiscales,t.cod_regimen,t.cod_departamento,dp.departamento,concat(t.cod_departamento,t.cod_municipio) as codmu_codep from cloud_terceros t inner join cloud_municipio m on t.cod_municipio=m.codigo_mu and t.cod_departamento=m.codigo_dep inner join cloud_departamento dp on t.cod_departamento=dp.codigo where  (t.documento='".$vnit2."' or t.documento='".$vcodcli."') and t.id_empresa='".$idempresa."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2654,94 +2872,95 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vinfo2 = false;
           $vinfo2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-				if(isset($vinfo2[0][0]))
-				{
-					$vmunicipio    = $vinfo2[0][0];
-					if(empty($vmunicipio))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene municipio en FACILWEB: ".$vnit.".<br>";
-					}
-					$vcodmunicipio = $vinfo2[0][1];
-					if(empty($vcodmunicipio))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene codmunicipio en FACILWEB: ".$vnit.".<br>";
-					}
-					$codImp		   = $vinfo2[0][2];
-					if(empty($codImp))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene responsabilidades rut en FACILWEB: ".$vnit.".<br>";
-					}
-					$vpostal       = $vinfo2[0][3];
-					if(empty($vpostal))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene codigo postal en FACILWEB: ".$vnit.".<br>";
-					}
-					$vobligaciones = $vinfo2[0][4];
-					if(empty($vobligaciones))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene especificado el detalle tributario en FACILWEB: ".$vnit.".<br>";
-					}
-					$vregimen      = $vinfo2[0][5];
-					if(empty($vregimen))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene especificado el régimen en FACILWEB: ".$vnit.".<br>";
-					}
-
-					$vcod_departamento = $vinfo2[0][6];
-					if(empty($vcod_departamento))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene el codigo del departamento en FACILWEB: ".$vnit.".<br>";
-					}
-
-					$vdepartamento = $vinfo2[0][7];
-					if(empty($vdepartamento))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene el departamento en FACILWEB: ".$vnit.".<br>";
-					}
-
-					$vcodmu_codep  = $vinfo2[0][8];
-					if(empty($vcodmu_codep))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene codigo departamento + codigo municipio en FACILWEB: ".$vnit.".<br>";
-					}
-				}
-				else
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no existe en FACILWEB: ".$vnit.".<br>";
-				}
-
-				$vpasos      .= "4. Datos del cliente en cloud, ";
-
-			}
-			else
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no existe en TNS: ".$vnit.".<br>";
-			}
-		}
-		else
+;
+
+				if(isset($vinfo2[0][0]))
+				{
+					$vmunicipio    = $vinfo2[0][0];
+					if(empty($vmunicipio))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene municipio en FACILWEB: ".$vnit.".<br>";
+					}
+					$vcodmunicipio = $vinfo2[0][1];
+					if(empty($vcodmunicipio))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene codmunicipio en FACILWEB: ".$vnit.".<br>";
+					}
+					$codImp		   = $vinfo2[0][2];
+					if(empty($codImp))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene responsabilidades rut en FACILWEB: ".$vnit.".<br>";
+					}
+					$vpostal       = $vinfo2[0][3];
+					if(empty($vpostal))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene codigo postal en FACILWEB: ".$vnit.".<br>";
+					}
+					$vobligaciones = $vinfo2[0][4];
+					if(empty($vobligaciones))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene especificado el detalle tributario en FACILWEB: ".$vnit.".<br>";
+					}
+					$vregimen      = $vinfo2[0][5];
+					if(empty($vregimen))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene especificado el régimen en FACILWEB: ".$vnit.".<br>";
+					}
+
+					$vcod_departamento = $vinfo2[0][6];
+					if(empty($vcod_departamento))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene el codigo del departamento en FACILWEB: ".$vnit.".<br>";
+					}
+
+					$vdepartamento = $vinfo2[0][7];
+					if(empty($vdepartamento))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene el departamento en FACILWEB: ".$vnit.".<br>";
+					}
+
+					$vcodmu_codep  = trim($vinfo2[0][8]);
+					$vcod_departamentoymunicipio = $vcodmu_codep;
+					if(empty($vcodmu_codep))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene codigo departamento + codigo municipio en FACILWEB: ".$vnit.".<br>";
+					}
+				}
+				else
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no existe en FACILWEB: ".$vnit.".<br>";
+				}
+
+				$vpasos      .= "4. Datos del cliente en cloud, ";
+
+			}
+			else
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no existe en TNS: ".$vnit.".<br>";
+			}
+		}
+		else
 		{
-			
-			$vsql_cliente = "select t.nittri,iif(t.tipodociden='C','13','31') as tipoiden,t.nombre,t.nomregtri,t.direcc1,t.telef1,t.email,iif(t.natjuridica='N',2,1) as naturaleza,c.nombre as ciudad,c.departamento,c.codigo as cod_departamento,coalesce(iif(f.regsimplif='S','49','48'),'48') as regimen from terceros t left join ciudane c on t.ciudaneid=c.ciudaneid left join tercerosself f on t.terid=f.terid where t.nit='".$vnit."' or t.nittri='".$vnit."'";
-
+			
+			$vsql_cliente = "select t.nittri,iif(t.tipodociden='C','13','31') as tipoiden,t.nombre,t.nomregtri,t.direcc1,t.telef1,t.email,iif(t.natjuridica='N',2,1) as naturaleza,c.nombre as ciudad,c.departamento,c.codigo as cod_departamento,coalesce(iif(f.regsimplif='S','49','48'),'48') as regimen from terceros t left join ciudane c on t.ciudaneid=c.ciudaneid left join tercerosself f on t.terid=f.terid where t.terid='".$vterid."'";
+
 			if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
 {
     $this->Db->BeginTrans();
     $this->Ini->sc_tem_trans_banco = true;
 }
-
+
 			 
       $nm_select = $vsql_cliente; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2767,156 +2986,158 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $ds_fe = false;
           $ds_fe_erro = $this->Db->ErrorMsg();
       } 
-;	
-
-			if(isset($ds_fe[0][0]) and !empty($ds_fe[0][0]))
-			{
-				$vnit  = $ds_fe[0][0];
-				$vnit2 = $ds_fe[0][0];
-
-				$vv0 = strpos($vnit,"-");
-				if($vv0 === false)
-				{
-					$vdv = fObtenerDigitoV($vnit);
-				}
-				else
-				{
-					$vv0  = explode("-",$vnit);
-					$vv2 = $vv0[0];
-					$vnit= $vv2;
-					$vdv = fObtenerDigitoV($vv2);
-				}
-
-				$vtipodociden = trim($ds_fe[0][1]);
-				$vnombre      = utf8_encode($ds_fe[0][2]);
-				if(empty($vnombre))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene nombre en TNS: ".$vnit.". <br>";
-				}
-				$vnomregtri   = utf8_encode($ds_fe[0][3]);
-				if(empty($vnomregtri))
-				{
-					$vnomregtri = $vnombre;
-				}
-				$vdirecc1     = utf8_encode($ds_fe[0][4]);
-				$direccion    = $vdirecc1;
-				if(empty($vdirecc1))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene dirección en TNS: ".$vnit.". <br>";
-				}
-				$vtelef1      = utf8_encode($ds_fe[0][5]);
-				if(empty($vtelef1))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene telefono en TNS: ".$vnit.". <br>";
-				}
-				$vemail       = $ds_fe[0][6];
-
-				if($vnovalidaremail=="NO")
-				{
-					if(empty($vemail))
-					{
-						$vvalida   = false;
-						$vmensaje .= "El tercero no tiene correo electrónico en TNS: ".$vnit.". <br>";
-					}
-				}
-				else
-				{
-					if(empty($vemail))
-					{
-						$vemail = $vcorreoalternativo;
-					}
-				}
-
-				if(!empty($vemail))
-				{
-					if (filter_var($vemail, FILTER_VALIDATE_EMAIL))
-					{
-
-					}
-					else
-					{
-						$vvalida   = false;
-						$vmensaje .= "El correo electrónico no tiene un formato adecuado: ".$vemail." <br>";
-					}
-				}
-
-				$vreceptor = $vemail;
-
-				$vnatjuridica = trim($ds_fe[0][7]);
-
-				$vmunicipio    = trim($ds_fe[0][8]);
-				if(empty($vmunicipio) or $vmunicipio=="SIN CIUDAD")
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene municipio en TNS: ".$vnit.". <br>";
-				}
-
-				$vdepartamento = trim($ds_fe[0][9]);
-				if(empty($vdepartamento))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene el departamento en TNS: ".$vnit.". <br>";
-				}
-
-				$vcodmu_codep  = trim($ds_fe[0][10]);
-				if(empty($vcodmu_codep))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene codigo departamento + codigo municipio en TNS: ".$vnit.". <br>";
-				}
-
-				$vcod_departamento = substr($vcodmu_codep,0,1);
-
-				$vpostal       = $vcodmu_codep;
-
-				$vregimen      = trim($ds_fe[0][11]);
-				if(empty($vregimen))
-				{
-					$vvalida   = false;
-					$vmensaje .= "El tercero no tiene especificado el régimen en TNS: ".$vnit.". <br>";
-				}
-
-				$codImp		   = "01";
-				if($vregimen=="49")
-				{
-					$codImp	   = "ZY";
-				}
-
-				$vobligaciones = "O-99";	
-
-				$vpasos      .= "4. Datos del cliente en TNS, ";
-			}
-			else
-			{
-				$vvalida   = false;
-				$vmensaje .= "El tercero no existe en TNS: ".$vnit.". <br>";
-			}
+;	
+
+			if(isset($ds_fe[0][0]) and !empty($ds_fe[0][0]))
+			{
+				$vnit  = $ds_fe[0][0];
+				$vnit2 = $ds_fe[0][0];
+
+				$vv0 = strpos($vnit,"-");
+				if($vv0 === false)
+				{
+					$vdv = fObtenerDigitoV($vnit);
+				}
+				else
+				{
+					$vv0  = explode("-",$vnit);
+					$vv2 = $vv0[0];
+					$vnit= $vv2;
+					$vdv = fObtenerDigitoV($vv2);
+				}
+
+				$vtipodociden = trim($ds_fe[0][1]);
+				$vnombre      = utf8_encode($ds_fe[0][2]);
+				if(empty($vnombre))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene nombre en TNS: ".$vnit.". <br>";
+				}
+				$vnomregtri   = utf8_encode($ds_fe[0][3]);
+				if(empty($vnomregtri))
+				{
+					$vnomregtri = $vnombre;
+				}
+				$vdirecc1     = utf8_encode($ds_fe[0][4]);
+				$direccion    = $vdirecc1;
+				if(empty($vdirecc1))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene dirección en TNS: ".$vnit.". <br>";
+				}
+				$vtelef1      = utf8_encode($ds_fe[0][5]);
+				if(empty($vtelef1))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene telefono en TNS: ".$vnit.". <br>";
+				}
+				$vemail       = $ds_fe[0][6];
+
+				if($vnovalidaremail=="NO")
+				{
+					if(empty($vemail))
+					{
+						$vvalida   = false;
+						$vmensaje .= "El tercero no tiene correo electrónico en TNS: ".$vnit.". <br>";
+					}
+				}
+				else
+				{
+					if(empty($vemail))
+					{
+						$vemail = $vcorreoalternativo;
+					}
+				}
+
+				if(!empty($vemail))
+				{
+					if (filter_var($vemail, FILTER_VALIDATE_EMAIL))
+					{
+
+					}
+					else
+					{
+						$vvalida   = false;
+						$vmensaje .= "El correo electrónico no tiene un formato adecuado: ".$vemail." <br>";
+					}
+				}
+
+				$vreceptor = $vemail;
+
+				$vnatjuridica = trim($ds_fe[0][7]);
+
+				$vmunicipio    = trim($ds_fe[0][8]);
+				if(empty($vmunicipio) or $vmunicipio=="SIN CIUDAD")
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene municipio en TNS: ".$vnit.". <br>";
+				}
+
+				$vdepartamento = trim($ds_fe[0][9]);
+				if(empty($vdepartamento))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene el departamento en TNS: ".$vnit.". <br>";
+				}
+
+				$vcodmu_codep  = trim($ds_fe[0][10]);
+				$vcod_departamentoymunicipio = $vcodmu_codep; 
+				if(empty($vcodmu_codep))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene codigo departamento + codigo municipio en TNS: ".$vnit.". <br>";
+				}
+
+				$vcod_departamento = substr($vcodmu_codep,0,2);
+				$vcodmunicipio     = substr($vcodmu_codep,2,5);
+
+				$vpostal       = $vcodmu_codep;
+
+				$vregimen      = trim($ds_fe[0][11]);
+				if(empty($vregimen))
+				{
+					$vvalida   = false;
+					$vmensaje .= "El tercero no tiene especificado el régimen en TNS: ".$vnit.". <br>";
+				}
+
+				$codImp		   = "01";
+				if($vregimen=="49")
+				{
+					$codImp	   = "ZY";
+				}
+
+				$vobligaciones = "O-99";	
+
+				$vpasos      .= "4. Datos del cliente en TNS, ";
+			}
+			else
+			{
+				$vvalida   = false;
+				$vmensaje .= "El tercero no existe en TNS: ".$vnit.". <br>";
+			}
 			if ($this->Ini->sc_tem_trans_banco)
 {
     $this->Db->CommitTrans();
     $this->Ini->sc_tem_trans_banco = false;
 }
-
-		
-		}
-	}
-
-	if($vvalida)
-	{
-		
-		$factura->cantidadDecimales    = $vcantidadDecimales;
-		$factura->informacionAdicional = $vobserv;
-
-		$destinatarios1 = new Destinatario();	
-		$destinatarios1->canalDeEntrega = "0";
-
-		$correodestinatario1 = new strings();	 
-		$correodestinatario1->string[0] = trim($vemail);
-		
-		$vsql = "select ccnit,celular,correo,codsucursal,cantidadDecimales,valorTributoUnidad,no_validar_mail,email_alternativo,desviar_correo_a,enviar_documento_online,correo_copia,informacion_adicional,sumarImpuestosDelDetalle from cloud_empresas where id_empresa='".$idempresa."'";
+
+		
+		}
+	}
+
+	if($vvalida)
+	{
+		
+		$factura->cantidadDecimales    = $vcantidadDecimales;
+		$factura->informacionAdicional = $vobserv;
+
+		$destinatarios1 = new Destinatario();	
+		$destinatarios1->canalDeEntrega = "0";
+
+		$correodestinatario1 = new strings();	 
+		$correodestinatario1->string[0] = trim($vemail);
+		
+		$vsql = "select ccnit,celular,correo,codsucursal,cantidadDecimales,valorTributoUnidad,no_validar_mail,email_alternativo,desviar_correo_a,enviar_documento_online,correo_copia,informacion_adicional,sumarImpuestosDelDetalle from cloud_empresas where id_empresa='".$idempresa."'";
 		 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2946,205 +3167,283 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vdataemisor = false;
           $vdataemisor_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-		if(isset($vdataemisor[0][0]))
-		{
-			$vnitemisor   = $vdataemisor[0][0];
-			$vcelemisor   = $vdataemisor[0][1];
-			$vemailemisor = $vdataemisor[0][2];
-			$codsucursal                          = $vdataemisor[0][3];
-			$vcantidadDecimales                   = $vdataemisor[0][4];
-			$vvalorTributoUnidad                  = $vdataemisor[0][5];
-			$vnovalidaremail    				  = $vdataemisor[0][6];
-			$vcorreoalternativo 				  = $vdataemisor[0][7];
-			$vcorreodesvio                        = $vdataemisor[0][8];
-			$vfacturaonline                       = $vdataemisor[0][9]; 
-			$vinformacionAdicional                = $vdataemisor[0][11];
-			$vsumarImpuestosDelDetalle            = $vdataemisor[0][12];
-	 
-			$correodestinatario1->string[1] = trim($vemailemisor);
-		}
-		
-		if($vfacturaonline=="NO")
-		{
-			if(!empty($vemailemisor))
-			{ 
-				$correodestinatario1->string[1] = trim($vemailemisor);
-			}
-		}
-		
-		$destinatarios1->email = $correodestinatario1;
-		$destinatarios1->nitProveedorReceptor = $vnit;
-		
-		$vtelef1 = str_replace(' ','',$vtelef1);
-		$vtelef1 = str_replace('-','',$vtelef1);
-		$vtelef1 = str_replace(' ','',$vtelef1);
-		$vtelef1 = preg_replace('/[^0-9]/', '',$vtelef1);
-		$vtelef1 = substr($vtelef1, 1, 10);
-		$destinatarios1->telefono = $vtelef1;	
-		
-		$factura->cliente->destinatario[0] = $destinatarios1;
-
-		$factura->cliente->telefono = $vtelef1;
-
-		$tributos1 = new Tributos();	
+;
+
+		if(isset($vdataemisor[0][0]))
+		{
+			$vnitemisor   = $vdataemisor[0][0];
+			$vcelemisor   = $vdataemisor[0][1];
+			$vemailemisor = $vdataemisor[0][2];
+			$codsucursal                          = $vdataemisor[0][3];
+			$vcantidadDecimales                   = $vdataemisor[0][4];
+			$vvalorTributoUnidad                  = $vdataemisor[0][5];
+			$vnovalidaremail    				  = $vdataemisor[0][6];
+			$vcorreoalternativo 				  = $vdataemisor[0][7];
+			$vcorreodesvio                        = $vdataemisor[0][8];
+			$vfacturaonline                       = $vdataemisor[0][9]; 
+			$vinformacionAdicional                = $vdataemisor[0][11];
+			$vsumarImpuestosDelDetalle            = $vdataemisor[0][12];
+	 
+			$correodestinatario1->string[1] = trim($vemailemisor);
+		}
+		
+		if($vfacturaonline=="NO")
+		{
+			if(!empty($vemailemisor))
+			{ 
+				$correodestinatario1->string[1] = trim($vemailemisor);
+			}
+		}
+		
+		$destinatarios1->email = $correodestinatario1;
+		$destinatarios1->nitProveedorReceptor = $vnit;
+		
+		$vtelef1 = str_replace(' ','',$vtelef1);
+		$vtelef1 = str_replace('-','',$vtelef1);
+		$vtelef1 = str_replace(' ','',$vtelef1);
+		$vtelef1 = preg_replace('/[^0-9]/', '',$vtelef1);
+		$vtelef1 = substr($vtelef1, 0, 10);
+		$destinatarios1->telefono = $vtelef1;	
+		
+		$factura->cliente->destinatario[0] = $destinatarios1;
+
+		$factura->cliente->telefono = $vtelef1;
+
+		$tributos1 = new Tributos();	
 		$tributos1->codigoImpuesto = $codImp;
-		$factura->cliente->detallesTributarios[0] = $tributos1;
-
-		$extensible1 = new Extensibles();
-		$extensible1->controlInterno1 = "";
-		$extensible1->controlInterno2 = "";
-		$extensible1->nombre = "";
-		$extensible1->valor = "";
-
-		$tributos1->extras[0] = $extensible1;
-
-		$DireccionFiscal[0] = new Direccion();	
-		$DireccionFiscal[0]->aCuidadoDe = "";
-		$DireccionFiscal[0]->aLaAtencionDe = "";
-		$DireccionFiscal[0]->bloque = "";
-		$DireccionFiscal[0]->buzon = "";
-		$DireccionFiscal[0]->calle = "";
-		$DireccionFiscal[0]->calleAdicional = "";
-		$DireccionFiscal[0]->ciudad = $vmunicipio;
-		$DireccionFiscal[0]->codigoDepartamento = $vcod_departamento;
-		$DireccionFiscal[0]->correccionHusoHorario = "";
-		$DireccionFiscal[0]->departamento = $vdepartamento;
-		$DireccionFiscal[0]->departamentoOrg = "";
-		$DireccionFiscal[0]->habitacion = "";
+		$factura->cliente->detallesTributarios[0] = $tributos1;
+
+		$extensible1 = new Extensibles();
+		$extensible1->controlInterno1 = "";
+		$extensible1->controlInterno2 = "";
+		$extensible1->nombre = "";
+		$extensible1->valor = "";
+		
+		$vid_ciudad = 780;
+		if(!empty($vcod_departamentoymunicipio))
+		{
+			$vsql = "select id from municipalities where code='".$vcod_departamentoymunicipio."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vCiu = array();
+      $vciu = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vCiu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vciu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vCiu = false;
+          $vCiu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vciu = false;
+          $vciu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+			if(isset($vciu[0][0]))
+			{
+				$vid_ciudad = $vciu[0][0];
+			}
+		}
+		else
+		{
+			$vsql = "select id from municipalities where code='".$vcod_departamento.$vcodmunicipio."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vCiu = array();
+      $vciu = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vCiu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vciu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vCiu = false;
+          $vCiu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vciu = false;
+          $vciu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+			if(isset($vciu[0][0]))
+			{
+				$vid_ciudad = $vciu[0][0];
+			}
+		}
+
+		$tributos1->extras[0] = $extensible1;
+
+		$DireccionFiscal[0] = new Direccion();	
+		$DireccionFiscal[0]->aCuidadoDe = "";
+		$DireccionFiscal[0]->aLaAtencionDe = "";
+		$DireccionFiscal[0]->bloque = "";
+		$DireccionFiscal[0]->buzon = "";
+		$DireccionFiscal[0]->calle = "";
+		$DireccionFiscal[0]->calleAdicional = "";
+		$DireccionFiscal[0]->ciudad = $vmunicipio;
+		$DireccionFiscal[0]->codigoDepartamento = $vcod_departamento;
+		$DireccionFiscal[0]->correccionHusoHorario = "";
+		$DireccionFiscal[0]->departamento = $vdepartamento;
+		$DireccionFiscal[0]->departamentoOrg = "";
+		$DireccionFiscal[0]->habitacion = "";
 		$DireccionFiscal[0]->distrito = "";
-		$DireccionFiscal[0]->lenguaje = "es";
-		$DireccionFiscal[0]->municipio = $vcodmu_codep;
-		$DireccionFiscal[0]->nombreEdificio = "";
-		$DireccionFiscal[0]->numeroParcela = "";
-		$DireccionFiscal[0]->pais = "CO";
-		$DireccionFiscal[0]->piso = "";
-		$DireccionFiscal[0]->region = "";
-		$DireccionFiscal[0]->subDivision = "";
-		$DireccionFiscal[0]->ubicacion = "";
-		$DireccionFiscal[0]->zonaPostal = $vpostal;	
-		$DireccionFiscal[0]->direccion  = $direccion;
-
-		$DireccionFiscal[1] = new Direccion();	
-		$DireccionFiscal[1]->aCuidadoDe = "";
-		$DireccionFiscal[1]->aLaAtencionDe = "";
-		$DireccionFiscal[1]->bloque = "";
-		$DireccionFiscal[1]->buzon = "";
-		$DireccionFiscal[1]->calle = "";
-		$DireccionFiscal[1]->calleAdicional = "";
-		$DireccionFiscal[1]->ciudad = $vmunicipio;
-		$DireccionFiscal[1]->codigoDepartamento = $vcod_departamento;
-		$DireccionFiscal[1]->correccionHusoHorario = "";
-		$DireccionFiscal[1]->departamento = $vdepartamento;
-		$DireccionFiscal[1]->departamentoOrg = "";
-		$DireccionFiscal[1]->habitacion = "";
+		$DireccionFiscal[0]->lenguaje = "es";
+		$DireccionFiscal[0]->municipio = $vcodmu_codep;
+		$DireccionFiscal[0]->nombreEdificio = "";
+		$DireccionFiscal[0]->numeroParcela = "";
+		$DireccionFiscal[0]->pais = "CO";
+		$DireccionFiscal[0]->piso = "";
+		$DireccionFiscal[0]->region = "";
+		$DireccionFiscal[0]->subDivision = $vid_ciudad;
+		$DireccionFiscal[0]->ubicacion = $vcod_departamentoymunicipio;
+		$DireccionFiscal[0]->zonaPostal = $vpostal;	
+		$DireccionFiscal[0]->direccion  = $direccion;
+
+		$DireccionFiscal[1] = new Direccion();	
+		$DireccionFiscal[1]->aCuidadoDe = "";
+		$DireccionFiscal[1]->aLaAtencionDe = "";
+		$DireccionFiscal[1]->bloque = "";
+		$DireccionFiscal[1]->buzon = "";
+		$DireccionFiscal[1]->calle = "";
+		$DireccionFiscal[1]->calleAdicional = "";
+		$DireccionFiscal[1]->ciudad = $vmunicipio;
+		$DireccionFiscal[1]->codigoDepartamento = $vcod_departamento;
+		$DireccionFiscal[1]->correccionHusoHorario = "";
+		$DireccionFiscal[1]->departamento = $vdepartamento;
+		$DireccionFiscal[1]->departamentoOrg = "";
+		$DireccionFiscal[1]->habitacion = "";
 		$DireccionFiscal[1]->distrito = ""; 
-		$DireccionFiscal[1]->lenguaje = "es";
-		$DireccionFiscal[1]->municipio = $vcodmu_codep;
-		$DireccionFiscal[1]->nombreEdificio = "";
-		$DireccionFiscal[1]->numeroParcela = "";
-		$DireccionFiscal[1]->pais = "CO";
-		$DireccionFiscal[1]->piso = "";
-		$DireccionFiscal[1]->region = "";
-		$DireccionFiscal[1]->subDivision = "";
-		$DireccionFiscal[1]->ubicacion = "";
-		$DireccionFiscal[1]->zonaPostal = $vpostal;	
-		$DireccionFiscal[1]->direccion  = $direccion;
-
-		$factura->cliente->direccionFiscal = $DireccionFiscal[0];
-		$factura->cliente->direccionCliente= $DireccionFiscal[1];
-
-		$factura->cliente->email = $vemail;
-
-
-		$InfoLegalCliente = new InformacionLegalCliente();
-		$InfoLegalCliente->codigoEstablecimiento = "00001";
-		$InfoLegalCliente->nombreRegistroRUT = $vnombre;
-		$InfoLegalCliente->numeroIdentificacion = $vnit;
-		$InfoLegalCliente->numeroIdentificacionDV = $vdv;
-		$InfoLegalCliente->tipoIdentificacion = $vtipodociden;	
-
-		$factura->cliente->informacionLegalCliente = $InfoLegalCliente;
-
-
-		$factura->cliente->nombreRazonSocial  = $vnombre;
-		$factura->cliente->notificar = "SI";
-		$factura->cliente->numeroDocumento = $vnit;
-		$factura->cliente->numeroIdentificacionDV = $vdv;
-
-		$sicoma = strpos($vobligaciones,",");
-		if($sicoma === false)
-		{
-			$obligacionesCliente[0] = new Obligaciones();
+		$DireccionFiscal[1]->lenguaje = "es";
+		$DireccionFiscal[1]->municipio = $vcodmu_codep;
+		$DireccionFiscal[1]->nombreEdificio = "";
+		$DireccionFiscal[1]->numeroParcela = "";
+		$DireccionFiscal[1]->pais = "CO";
+		$DireccionFiscal[1]->piso = "";
+		$DireccionFiscal[1]->region = "";
+		$DireccionFiscal[1]->subDivision = $vid_ciudad;
+		$DireccionFiscal[1]->ubicacion = $vcod_departamentoymunicipio;
+		$DireccionFiscal[1]->zonaPostal = $vpostal;	
+		$DireccionFiscal[1]->direccion  = $direccion;
+
+		$factura->cliente->direccionFiscal = $DireccionFiscal[0];
+		$factura->cliente->direccionCliente= $DireccionFiscal[1];
+
+		$factura->cliente->email = $vemail;
+
+
+		$InfoLegalCliente = new InformacionLegalCliente();
+		$InfoLegalCliente->codigoEstablecimiento = "00001";
+		$InfoLegalCliente->nombreRegistroRUT = $vnombre;
+		$InfoLegalCliente->numeroIdentificacion = $vnit;
+		$InfoLegalCliente->numeroIdentificacionDV = $vdv;
+		$InfoLegalCliente->tipoIdentificacion = $vtipodociden;	
+
+		$factura->cliente->informacionLegalCliente = $InfoLegalCliente;
+
+
+		$factura->cliente->nombreRazonSocial  = $vnombre;
+		$factura->cliente->notificar = "SI";
+		$factura->cliente->numeroDocumento = $vnit;
+		$factura->cliente->numeroIdentificacionDV = $vdv;
+
+		$sicoma = strpos($vobligaciones,",");
+		if($sicoma === false)
+		{
+			$obligacionesCliente[0] = new Obligaciones();
 			$obligacionesCliente[0]->obligaciones = $vobligaciones;
 			$obligacionesCliente[0]->regimen = $vregimen;
-			$factura->cliente->responsabilidadesRut[0] = $obligacionesCliente[0];
-		}
-		else
-		{
-			$vobliga = explode(",",$vobligaciones);
-			$cont    = count($vobliga);
-
-			for($i=0;$i<$cont;$i++)
-			{
-				$obligacionesCliente[$i] = new Obligaciones();
+			$factura->cliente->responsabilidadesRut[0] = $obligacionesCliente[0];
+		}
+		else
+		{
+			$vobliga = explode(",",$vobligaciones);
+			$cont    = count($vobliga);
+
+			for($i=0;$i<$cont;$i++)
+			{
+				$obligacionesCliente[$i] = new Obligaciones();
 				$obligacionesCliente[$i]->obligaciones = $vobliga[$i];
 				$obligacionesCliente[$i]->regimen = $vregimen;
-				$factura->cliente->responsabilidadesRut[$i] = $obligacionesCliente[$i];
-			}
-		}
-
-		$factura->cliente->tipoIdentificacion = $vtipodociden;
-		$factura->cliente->tipoPersona = $vnatjuridica;
-
-		$vfechaemision     = substr($vfecha, 0, -9);
-		$vfechaemision     = trim($vfechaemision);
-		$vcontfecha        = strlen($vfechaemision);
-		if($vcontfecha==9)
-		{
-			$vfechaemision = $vfechaemision."0";
-		}
-		$vfechaemision     = $vfechaemision.date(' H:i:s');
-		$vfechaemision     = date_create($vfechaemision);
-		$vfechaemision     = date_format($vfechaemision,'Y-m-d H:i:s');	
-
-		$factura->fechaEmision = $vfechaemision;
-
-		if($vformapago=='CR')
-		{
-			$lafechadevencimiento	 = $vfecvence;
-			$lafechadevencimiento	 = date_create($lafechadevencimiento);
-			$lafechadevencimiento	 = date_format($lafechadevencimiento, 'Y-m-d');
-
-			$factura->fechaVencimiento = $lafechadevencimiento;
-
-			$pagos = new MediosDePago();
-			$pagos->medioPago = "ZZZ";
+				$factura->cliente->responsabilidadesRut[$i] = $obligacionesCliente[$i];
+			}
+		}
+
+		$factura->cliente->tipoIdentificacion = $vtipodociden;
+		$factura->cliente->tipoPersona = $vnatjuridica;
+
+		$vfechaemision     = substr($vfecha, 0, -9);
+		$vfechaemision     = trim($vfechaemision);
+		$vcontfecha        = strlen($vfechaemision);
+		if($vcontfecha==9)
+		{
+			$vfechaemision = $vfechaemision."0";
+		}
+		$vfechaemision     = $vfechaemision.date(' H:i:s');
+		$vfechaemision     = date_create($vfechaemision);
+		$vfechaemision     = date_format($vfechaemision,'Y-m-d H:i:s');	
+
+		$factura->fechaEmision = $vfechaemision;
+
+		if($vformapago=='CR')
+		{
+			$lafechadevencimiento	 = $vfecvence;
+			$lafechadevencimiento	 = date_create($lafechadevencimiento);
+			$lafechadevencimiento	 = date_format($lafechadevencimiento, 'Y-m-d');
+
+			$factura->fechaVencimiento = $lafechadevencimiento;
+
+			$pagos = new MediosDePago();
+			$pagos->medioPago = "ZZZ";
 			$pagos->metodoDePago = "2";
-			$pagos->numeroDeReferencia = "01";
+			$pagos->numeroDeReferencia = "01";
 			$pagos->fechaDeVencimiento = $lafechadevencimiento;
-		}
-		else
-		{
-			$pagos = new MediosDePago();
-			$pagos->medioPago = "10";
+		}
+		else
+		{
+			$pagos = new MediosDePago();
+			$pagos->medioPago = "10";
 			$pagos->metodoDePago = "1";
-			$pagos->numeroDeReferencia = "01";	
-		}
-
-		$factura->mediosDePago[0] = $pagos;
-		$factura->moneda = "COP";
-		$factura->redondeoAplicado = "0.00"	;
-		$factura->rangoNumeracion = $vrango;
-		$factura->tipoOperacion = "10";
-
-
-		$factura->tipoDocumento="01";
-
-		$factura->consecutivoDocumento = $vconsecutivo;
-		
-		$vsql0 = "select codproducto from cloud_exclusiones where id_empresa='".$idempresa."' and tipo in('OCULTO','EXTENSIBLE')";
+			$pagos->numeroDeReferencia = "01";	
+		}
+
+		$factura->mediosDePago[0] = $pagos;
+		$factura->moneda = "COP";
+		$factura->redondeoAplicado = "0.00"	;
+		$factura->rangoNumeracion = $vrango;
+		$factura->tipoOperacion = "10";
+
+
+		$factura->tipoDocumento="01";
+
+		$factura->consecutivoDocumento = $vconsecutivo;
+		
+		$vsql0 = "select codproducto from cloud_exclusiones where id_empresa='".$idempresa."' and tipo in('OCULTO','EXTENSIBLE')";
 		 
       $nm_select = $vsql0; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3174,29 +3473,83 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vexclu = false;
           $vexclu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-		if(isset($vexclu[0][0]))
-		{
-			$vcont = count($vexclu );
-			$vexclusiones = "";
-			for($i=0;$i<$vcont;$i++)
-			{
-				$vex = $vexclu[$i][0];
-				if($i==($vcont-1))
-				{
-					$vexclusiones .= " '".$vex."' ";
-				}
-				else
-				{
-					$vexclusiones .= " '".$vex."', ";
-				}
-			}
-		}
-
-		$vsql_detalle = "select d.canlista, p.codigo, p.descrip, p.codigo as codigo2, ROUND((d.preciobase*d.canlista),$vcantidadDecimales) as preciobase, trim(iif(d.porciva='08','02','01')) as codigoimpuesto, d.porciva, ROUND((d.precioiva*d.canlista),$vcantidadDecimales) as precioiva, d.descuento, ROUND((d.preciobase*d.canlista),$vcantidadDecimales) as bas_br,dekardexid,coalesce(mc.descrip,'SIN MARCA') as marca,p.unidad,p.unimay,p.factor,p.factorglb,d.tipund,ROUND(d.preciobase,$vcantidadDecimales) as preciobase,ROUND((d.precioneto*d.canlista),$vcantidadDecimales) as precioneto FROM dekardex d left join material p on d.matid=p.matid left join marcaart mc on p.marcaartid=mc.marcaartid where d.kardexid='".$vkardexid."' and p.codigo not in(".$vexclusiones.")";
-
-
+;
+
+		if(isset($vexclu[0][0]))
+		{
+			$vcont = count($vexclu );
+			$vexclusiones = "";
+			for($i=0;$i<$vcont;$i++)
+			{
+				$vex = $vexclu[$i][0];
+				if($i==($vcont-1))
+				{
+					$vexclusiones .= " '".$vex."' ";
+				}
+				else
+				{
+					$vexclusiones .= " '".$vex."', ";
+				}
+			}
+		}
+		
+		$vsql = "select codproducto from cloud_exclusiones where id_empresa='".$idempresa."' and tipo in('DESCUENTO')";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDescuentoExclu = array();
+      $vdescuentoexclu = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDescuentoExclu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdescuentoexclu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDescuentoExclu = false;
+          $vDescuentoExclu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vdescuentoexclu = false;
+          $vdescuentoexclu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+
+		if(isset($vdescuentoexclu[0][0]))
+		{
+			$vcont = count($vdescuentoexclu );
+			$vdescuentoexclusion = "";
+			for($i=0;$i<$vcont;$i++)
+			{
+				$vdesex = $vdescuentoexclu[$i][0];
+				if($i==($vcont-1))
+				{
+					$vdescuentoexclusion .= " '".$vdesex."' ";
+				}
+				else
+				{
+					$vdescuentoexclusion .= " '".$vdesex."', ";
+				}
+			}
+
+			$vsqldescuentoexclusion = "coalesce((IIF(p.codigo not in('01.001','01.002','01.003'),d.preciobase+(select sum(x.preciobase) from dekardex x inner join material y on x.matid=y.matid where x.kardexid='".$vkardexid."' and y.codigo in (".$vdescuentoexclusion.")),d.preciobase)),d.preciobase)";
+
+			$vsqldescuentoexclusionneto = "coalesce((IIF(p.codigo not in('01.001','01.002','01.003'),d.precioneto+(select sum(x.precioneto) from dekardex x inner join material y on x.matid=y.matid where x.kardexid='".$vkardexid."' and y.codigo in (".$vdescuentoexclusion.")),d.precioneto)),d.precioneto)";
+		}
+
+		$vsql_detalle = "select d.canlista, p.codigo, p.descrip, p.codigo as codigo2, ROUND((".$vsqldescuentoexclusion."*d.canlista)) as preciobase, trim(iif(d.porciva='08','02','01')) as codigoimpuesto, d.porciva, ROUND(((".$vsqldescuentoexclusion."*d.canlista)*(d.porciva/100))) as precioiva, d.descuento, ROUND((".$vsqldescuentoexclusion."*d.canlista),$vcantidadDecimales) as bas_br,dekardexid,coalesce(mc.descrip,'SIN MARCA') as marca,p.unidad,p.unimay,p.factor,p.factorglb,d.tipund,ROUND(".$vsqldescuentoexclusion.",$vcantidadDecimales) as preciobase,(".$vsqldescuentoexclusionneto."*d.canlista) as precioneto FROM dekardex d left join material p on d.matid=p.matid left join marcaart mc on p.marcaartid=mc.marcaartid where d.kardexid='".$vkardexid."' and p.codigo not in(".$vexclusiones.") and p.codigo not in(".$vdescuentoexclusion.")";
+
+
 		 
       $nm_select = $vsql_detalle; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3226,42 +3579,88 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vdetalle = false;
           $vdetalle_erro = $this->Db->ErrorMsg();
       } 
-;
-
-		if(isset($vdetalle[0][0]))
-		{
-
-			$vpasos      .= "6. Detalle del documento tns, ";
-
+;
+
+		if(isset($vdetalle[0][0]))
+		{
+
+			$vpasos      .= "6. Detalle del documento tns, ";
+
 			for($i=0;$i<count($vdetalle );$i++)
-			{
-				$cant	=$vdetalle[$i][0];
-				$codbp	=utf8_encode($vdetalle[$i][1]);
-				$desc	=utf8_encode($vdetalle[$i][2]);
-				$codest	=utf8_encode($vdetalle[$i][3]);
-				$base	=$vdetalle[$i][4];
-				$codImp	=$vdetalle[$i][5];
-				$Timp	=$vdetalle[$i][6];
-				$Timp	=$Timp;
-				$eliva	=$vdetalle[$i][7];
-				$eldesc	=$vdetalle[$i][8];
-				$bas_br	=$vdetalle[$i][9];
-				$tot	=$base+$eliva;
-				$tot	=strval ($tot);
-				$valun  = floatval($vdetalle[$i][17]);
-				$vprecioneto = floatval($vdetalle[$i][18]);
-				$sec=$i+1;
-				$sec=strval($sec);
-				$vdekardexid = $vdetalle[$i][10];
-				$vmarca      = $vdetalle[$i][11];
-				$vunidad     = trim($vdetalle[$i][12]);
-				
-				if(intval($Timp)==0)
-				{
-					$vbasetotalizado_delcero += $vprecioneto;
-				}
-				
-				 
+			{
+				$cant	=$vdetalle[$i][0];
+				$codbp	=utf8_encode($vdetalle[$i][1]);
+				$desc	=utf8_encode($vdetalle[$i][2]);
+				$codest	=utf8_encode($vdetalle[$i][3]);
+				$base	=$vdetalle[$i][4];
+				$codImp	=$vdetalle[$i][5];
+				$Timp	=$vdetalle[$i][6];
+				$Timp	=$Timp;
+				$eliva	=$vdetalle[$i][7];
+				$eldesc	=$vdetalle[$i][8];
+				$bas_br	=$vdetalle[$i][9];
+				$tot	=$base+$eliva;
+				$valun  = floatval($vdetalle[$i][17]);
+				$vprecioneto = floatval($vdetalle[$i][18]);
+				$sec=$i+1;
+				$sec=strval($sec);
+				$vdekardexid = $vdetalle[$i][10];
+				$vmarca      = $vdetalle[$i][11];
+				$vunidad     = trim($vdetalle[$i][12]);
+				
+				if(intval($Timp)==0)
+				{
+					$vbasetotalizado_delcero += $vprecioneto;
+				}
+				
+				if($vproveedor=="FACILWEB")
+				{
+					if(!empty(trim($vunidad)))
+					{
+						$vsql = "select id from unit_measures where UPPER(name)='".strtoupper(trim($vunidad))."' limit 1";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vUnid = array();
+      $vunid = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vUnid[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vunid[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vUnid = false;
+          $vUnid_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vunid = false;
+          $vunid_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+						if(isset($vunid[0][0]))
+						{
+							$vunidad = $vunid[0][0];
+						}
+						else
+						{
+							$vunidad = "70";
+						}
+					}
+				}
+				else
+				{
+					 
       $nm_select = "select codigo_um from cloud_unidades_medida where codigo_um='".$vunidad."' or descripcion_um='".$vunidad."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3290,23 +3689,24 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vund = false;
           $vund_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-				if(isset($vund[0][0]))
-				{
-					$vunidad = $vund[0][0];
-				}
-				else
-				{
-					$vunidad = "WSD";
-				}
-
-				$vtotal      += $tot;
-				$vbasetotal  += $base;
-				$vtotalitems++;
-				$vserial = "";
-				$vseriales = "";
-				$vsql_serial = "select seriales from dekardexself where dekardexid='".$vdekardexid."'";
+;
+
+					if(isset($vund[0][0]))
+					{
+						$vunidad = $vund[0][0];
+					}
+					else
+					{
+						$vunidad = "WSD";
+					}
+				}
+
+				$vtotal      += $tot;
+				$vbasetotal  += $base;
+				$vtotalitems++;
+				$vserial = "";
+				$vseriales = "";
+				$vsql_serial = "select seriales from dekardexself where dekardexid='".$vdekardexid."'";
 				 
       $nm_select = $vsql_serial; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3332,28 +3732,28 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vseriale = false;
           $vseriale_erro = $this->Db->ErrorMsg();
       } 
-;
-
-				if(isset($vseriale[0][0]))
-				{
-					$vserial = $vseriale[0][0];
-					if(!empty($vserial))
-					{
-						$vseriales = $vserial; 
-					}
-				}
-
-				$factDetalle[$i] = new FacturaDetalle();
-				$factDetalle[$i]->cantidadPorEmpaque = "1";
-				$factDetalle[$i]->cantidadReal = $cant;
-				$factDetalle[$i]->cantidadRealUnidadMedida = "WSD"; 
-				$factDetalle[$i]->cantidadUnidades = $cant;
-				$factDetalle[$i]->codigoProducto = $codbp;
+;
+
+				if(isset($vseriale[0][0]))
+				{
+					$vserial = $vseriale[0][0];
+					if(!empty($vserial))
+					{
+						$vseriales = $vserial; 
+					}
+				}
+
+				$factDetalle[$i] = new FacturaDetalle();
+				$factDetalle[$i]->cantidadPorEmpaque = "1";
+				$factDetalle[$i]->cantidadReal = $cant;
+				$factDetalle[$i]->cantidadRealUnidadMedida = $vunidad; 
+				$factDetalle[$i]->cantidadUnidades = $cant;
+				$factDetalle[$i]->codigoProducto = $codbp;
 				$factDetalle[$i]->descripcion = $desc;
 				$factDetalle[$i]->descripcionTecnica = $desc;
-				$factDetalle[$i]->estandarCodigo = "999";
-				$factDetalle[$i]->estandarCodigoProducto = $codest;
-				
+				$factDetalle[$i]->estandarCodigo = "999";
+				$factDetalle[$i]->estandarCodigoProducto = $codest;
+				
 				 
       $nm_select = "select id_mandatorio,dv_mandatorio,tipo_id from cloud_exclusiones where codproducto='".$codbp."' and  id_empresa='".$idempresa."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3383,109 +3783,109 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vcodman = false;
           $vcodman_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-				if(isset($vcodman[0][0]))
-				{
-					$vid_mandatorio = $vcodman[0][0];
-					$vdv_mandatorio = $vcodman[0][1];
-					$vid_tipo       = $vcodman[0][2];
-
-					$factDetalle[$i]->mandatorioNumeroIdentificacion   = $vid_mandatorio;
-					$factDetalle[$i]->mandatorioNumeroIdentificacionDV = $vdv_mandatorio;
-					$factDetalle[$i]->mandatorioTipoIdentificacion     = $vid_tipo;
-				}
-
-				if($eldesc>0)
-				{
-					$elmonto	= round($bas_br*(round(($eldesc/100), 2)), 2);
-					$eldesc		= round($eldesc+0, 2);
-
-					$descuentos[$t] = new cargosDescuentos();
-							$descuentos[$t]->descripcion = "DESCUENTO COMERCIAL";
-							$descuentos[$t]->indicador = 0;
+;
+
+				if(isset($vcodman[0][0]))
+				{
+					$vid_mandatorio = $vcodman[0][0];
+					$vdv_mandatorio = $vcodman[0][1];
+					$vid_tipo       = $vcodman[0][2];
+
+					$factDetalle[$i]->mandatorioNumeroIdentificacion   = $vid_mandatorio;
+					$factDetalle[$i]->mandatorioNumeroIdentificacionDV = $vdv_mandatorio;
+					$factDetalle[$i]->mandatorioTipoIdentificacion     = $vid_tipo;
+				}
+
+				if($eldesc>0)
+				{
+					$elmonto	= round($bas_br*(round(($eldesc/100), 2)), 2);
+					$eldesc		= round($eldesc+0, 2);
+
+					$descuentos[$t] = new cargosDescuentos();
+							$descuentos[$t]->descripcion = "DESCUENTO COMERCIAL";
+							$descuentos[$t]->indicador = 0;
 							$descuentos[$t]->monto = $elmonto;
 							$descuentos[$t]->montoBase = round($bas_br, 2);
 							$descuentos[$t]->porcentaje = $eldesc;
 							$descuentos[$t]->secuencia = $t+1;
-
-					$factDetalle[$i]->cargosDescuentos[0] = $descuentos[$t];
-					$t=$t+1;
-				}
-				
-				if($vsumarImpuestosDelDetalle=="SI")
-				{
-					
-
-					$base = round($tot/((intval($Timp)/100)+1),$vcantidadDecimales);
-					$vivatotal += $base;
-					$eliva = $tot-$base;
-					$valun = round($base/$cant,$vcantidadDecimales);
-
-					if(intval($Timp)>0)
-					{
-						$vbasetotalizado += $base;
-						$vivatotalizado  += $eliva;
-					}
-
-					$impdet[$i] = new FacturaImpuestos;
-					$impdet[$i]->baseImponibleTOTALImp = $base;
-					$impdet[$i]->codigoTOTALImp = $codImp;
-					$impdet[$i]->controlInterno = "";
-					$impdet[$i]->porcentajeTOTALImp = $Timp;
-					$impdet[$i]->unidadMedida = "";
-					$impdet[$i]->unidadMedidaTributo = "";
-					$impdet[$i]->valorTOTALImp = $eliva;
-					$impdet[$i]->valorTributoUnidad = "";
-					$factDetalle[$i]->impuestosDetalles[0] = $impdet[$i];
-				}
-				else
-				{
-					$impdet[$i] = new FacturaImpuestos;
-					$impdet[$i]->baseImponibleTOTALImp = $base;
-					$impdet[$i]->codigoTOTALImp = $codImp;
-					$impdet[$i]->controlInterno = "";
-					$impdet[$i]->porcentajeTOTALImp = $Timp;
-					$impdet[$i]->unidadMedida = "";
-					$impdet[$i]->unidadMedidaTributo = "";
-					$impdet[$i]->valorTOTALImp = $eliva;
-					$impdet[$i]->valorTributoUnidad = "";
-					$factDetalle[$i]->impuestosDetalles[0] = $impdet[$i];
-				}
-				
-				if($vsumarImpuestosDelDetalle=="SI")
-				{
-
-					$impTot[$i] = new ImpuestosTotales;
-					$impTot[$i]->codigoTOTALImp = $codImp;
-					$impTot[$i]->montoTotal = $eliva;
-					$factDetalle[$i]->impuestosTotales[0] = $impTot[$i];
-				}
-				else
-				{
-					$impTot[$i] = new ImpuestosTotales;
-					$impTot[$i]->codigoTOTALImp = $codImp;
-					$impTot[$i]->montoTotal = $eliva;
-					$factDetalle[$i]->impuestosTotales[0] = $impTot[$i];
-				}
-
-				$factDetalle[$i]->marca = "HKA";
-				$factDetalle[$i]->muestraGratis = "0";
-				$factDetalle[$i]->precioTotal = $tot;
-				$factDetalle[$i]->precioTotalSinImpuestos = $base;
-				$factDetalle[$i]->precioVentaUnitario = $valun;
-				$factDetalle[$i]->secuencia = $sec;
-				$factDetalle[$i]->unidadMedida = "WSD";		
-
+
+					$factDetalle[$i]->cargosDescuentos[0] = $descuentos[$t];
+					$t=$t+1;
+				}
+				
+				if($vsumarImpuestosDelDetalle=="SI")
+				{
+					
+
+					$base = round($tot/((intval($Timp)/100)+1),$vcantidadDecimales);
+					$vivatotal += $base;
+					$eliva = $tot-$base;
+					$valun = round($base/$cant,$vcantidadDecimales);
+
+					if(intval($Timp)>0)
+					{
+						$vbasetotalizado += $base;
+						$vivatotalizado  += $eliva;
+					}
+
+					$impdet[$i] = new FacturaImpuestos;
+					$impdet[$i]->baseImponibleTOTALImp = $base;
+					$impdet[$i]->codigoTOTALImp = $codImp;
+					$impdet[$i]->controlInterno = "";
+					$impdet[$i]->porcentajeTOTALImp = $Timp;
+					$impdet[$i]->unidadMedida = "";
+					$impdet[$i]->unidadMedidaTributo = "";
+					$impdet[$i]->valorTOTALImp = $eliva;
+					$impdet[$i]->valorTributoUnidad = "";
+					$factDetalle[$i]->impuestosDetalles[0] = $impdet[$i];
+				}
+				else
+				{
+					$impdet[$i] = new FacturaImpuestos;
+					$impdet[$i]->baseImponibleTOTALImp = $base;
+					$impdet[$i]->codigoTOTALImp = $codImp;
+					$impdet[$i]->controlInterno = "";
+					$impdet[$i]->porcentajeTOTALImp = $Timp;
+					$impdet[$i]->unidadMedida = "";
+					$impdet[$i]->unidadMedidaTributo = "";
+					$impdet[$i]->valorTOTALImp = $eliva;
+					$impdet[$i]->valorTributoUnidad = "";
+					$factDetalle[$i]->impuestosDetalles[0] = $impdet[$i];
+				}
+				
+				if($vsumarImpuestosDelDetalle=="SI")
+				{
+
+					$impTot[$i] = new ImpuestosTotales;
+					$impTot[$i]->codigoTOTALImp = $codImp;
+					$impTot[$i]->montoTotal = $eliva;
+					$factDetalle[$i]->impuestosTotales[0] = $impTot[$i];
+				}
+				else
+				{
+					$impTot[$i] = new ImpuestosTotales;
+					$impTot[$i]->codigoTOTALImp = $codImp;
+					$impTot[$i]->montoTotal = $eliva;
+					$factDetalle[$i]->impuestosTotales[0] = $impTot[$i];
+				}
+
+				$factDetalle[$i]->marca = "HKA";
+				$factDetalle[$i]->muestraGratis = "0";
+				$factDetalle[$i]->precioTotal = $tot;
+				$factDetalle[$i]->precioTotalSinImpuestos = $base;
+				$factDetalle[$i]->precioVentaUnitario = $valun;
+				$factDetalle[$i]->secuencia = $sec;
+				$factDetalle[$i]->unidadMedida = "WSD";		
+
 				$factura->detalleDeFactura [$i] = $factDetalle[$i]; 
-
+
 			}
-		}
-
-
-		$vsql_tipo_impuesto = "select ROUND(sum(d.preciobase*d.canmat),$vcantidadDecimales) as base, trim(iif(d.porciva='08','02','01')) as codigoimpuesto, porciva as porcentaje, ROUND(sum(d.precioiva*d.canlista),$vcantidadDecimales) as iva from dekardex d inner join material p on d.matid=p.matid where d.kardexid='".$vkardexid."' and p.codigo not in(".$vexclusiones.") group by d.porciva";
-		
-		
+		}
+
+
+		$vsql_tipo_impuesto = "select ROUND(sum(d.preciobase*d.canmat),$vcantidadDecimales) as base, trim(iif(d.porciva='08','02','01')) as codigoimpuesto, porciva as porcentaje, ROUND(sum(d.precioiva*d.canlista),$vcantidadDecimales) as iva from dekardex d inner join material p on d.matid=p.matid where d.kardexid='".$vkardexid."' and p.codigo not in(".$vexclusiones.") group by d.porciva";
+		
+		
 		 
       $nm_select = $vsql_tipo_impuesto; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3511,77 +3911,77 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $dt_impfac = false;
           $dt_impfac_erro = $this->Db->ErrorMsg();
       } 
-;
-
-		if(isset($dt_impfac[0][0]))
-		{								
-			for($t=0;$t<count($dt_impfac );$t++)
-			{		
-				$base		=$dt_impfac[$t][0];
-				$base		=strval($base);
-				$codImp		=$dt_impfac[$t][1];
-				$codImp		=strval($codImp);
-				$Timp		=$dt_impfac[$t][2];
-				$Timp		=$Timp;
-				$eliva		=$dt_impfac[$t][3];
-
-				$objImpGen[$t] = new FacturaImpuestos;
-				
-				if($vsumarImpuestosDelDetalle=="SI")
-				{
-					if(intval($Timp)>0)
-					{
-						$objImpGen[$t]->baseImponibleTOTALImp = $vbasetotalizado;
-					}
-					else
-					{
-						$objImpGen[$t]->baseImponibleTOTALImp = $vbasetotalizado_delcero;
-					}
-				}
-				else
-				{
-					$objImpGen[$t]->baseImponibleTOTALImp = $base;
-				}
-
-				$objImpGen[$t]->codigoTOTALImp = $codImp;
-				$objImpGen[$t]->controlInterno = "";
-				$objImpGen[$t]->porcentajeTOTALImp = $Timp;
-				$objImpGen[$t]->unidadMedida = "";
-				$objImpGen[$t]->unidadMedidaTributo = "";
-				$objImpGen[$t]->valorTributoUnidad = "0.00";
-				
-				if($vsumarImpuestosDelDetalle=="SI")
-				{
-					if(intval($Timp)>0)
-					{
-						$objImpGen[$t]->valorTOTALImp = $vivatotalizado;
-					}
-					else
-					{
-						$objImpGen[$t]->valorTOTALImp = 0;
-					}
-				}
-				else
-				{
-					if(intval($Timp)>0)
-					{
-						$objImpGen[$t]->valorTOTALImp = $eliva;
-					}
-					else
-					{
-						$objImpGen[$t]->valorTOTALImp = 0;
-					}
-				}
-
-				$factura->impuestosGenerales[$t] = $objImpGen[$t];
-			}
-
-			$vpasos      .= "7. Impuestos generales, ";
-		}
-
-		
-		$vsql_iva = "select trim(iif(d.porciva='08','02','01')) as codigoimpuesto, ROUND((sum(d.preciobase*d.canlista)*(d.porciva/100)),$vcantidadDecimales) as iva, ROUND(sum(d.preciobase*d.canlista),$vcantidadDecimales) as base from dekardex d inner join material p on d.matid=p.matid where d.kardexid='".$vkardexid."' and p.codigo not in(".$vexclusiones.") group by iif(d.porciva='08','02','01'),d.porciva";
-
+;
+
+		if(isset($dt_impfac[0][0]))
+		{								
+			for($t=0;$t<count($dt_impfac );$t++)
+			{		
+				$base		=$dt_impfac[$t][0];
+				$base		=strval($base);
+				$codImp		=$dt_impfac[$t][1];
+				$codImp		=strval($codImp);
+				$Timp		=$dt_impfac[$t][2];
+				$Timp		=$Timp;
+				$eliva		=$dt_impfac[$t][3];
+
+				$objImpGen[$t] = new FacturaImpuestos;
+				
+				if($vsumarImpuestosDelDetalle=="SI")
+				{
+					if(intval($Timp)>0)
+					{
+						$objImpGen[$t]->baseImponibleTOTALImp = $vbasetotalizado;
+					}
+					else
+					{
+						$objImpGen[$t]->baseImponibleTOTALImp = $vbasetotalizado_delcero;
+					}
+				}
+				else
+				{
+					$objImpGen[$t]->baseImponibleTOTALImp = $base;
+				}
+
+				$objImpGen[$t]->codigoTOTALImp = $codImp;
+				$objImpGen[$t]->controlInterno = "";
+				$objImpGen[$t]->porcentajeTOTALImp = $Timp;
+				$objImpGen[$t]->unidadMedida = "";
+				$objImpGen[$t]->unidadMedidaTributo = "";
+				$objImpGen[$t]->valorTributoUnidad = "0.00";
+				
+				if($vsumarImpuestosDelDetalle=="SI")
+				{
+					if(intval($Timp)>0)
+					{
+						$objImpGen[$t]->valorTOTALImp = $vivatotalizado;
+					}
+					else
+					{
+						$objImpGen[$t]->valorTOTALImp = 0;
+					}
+				}
+				else
+				{
+					if(intval($Timp)>0)
+					{
+						$objImpGen[$t]->valorTOTALImp = $eliva;
+					}
+					else
+					{
+						$objImpGen[$t]->valorTOTALImp = 0;
+					}
+				}
+
+				$factura->impuestosGenerales[$t] = $objImpGen[$t];
+			}
+
+			$vpasos      .= "7. Impuestos generales, ";
+		}
+
+		
+		$vsql_iva = "select trim(iif(d.porciva='08','02','01')) as codigoimpuesto, ROUND((sum(d.preciobase*d.canlista)*(d.porciva/100)),$vcantidadDecimales) as iva, ROUND(sum(d.preciobase*d.canlista),$vcantidadDecimales) as base from dekardex d inner join material p on d.matid=p.matid where d.kardexid='".$vkardexid."' and p.codigo not in(".$vexclusiones.") group by iif(d.porciva='08','02','01'),d.porciva";
+
 		 
       $nm_select = $vsql_iva; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3611,69 +4011,69 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $dt_imptfac = false;
           $dt_imptfac_erro = $this->Db->ErrorMsg();
       } 
-;
-		
-		
-		$codImp	 = "";
-		$eliva	 = 0;
-		$base	 = 0;
-		$tot	 = 0;
-
-		if(isset($dt_imptfac[0][0]))
-		{
-			$vcont = count($dt_imptfac );
-			for($i=0;$i<$vcont;$i++)
-			{
-				$codImp	 = $dt_imptfac[$i][0];
-				$codImp	 = strval($codImp);
-				$eliva	+= floatval($dt_imptfac[$i][1]);
-				$base	+= floatval($dt_imptfac[$i][2]);
-				$tot	+= $base+$eliva;
-			}
-		}
-		
-		$impTot[0] = new ImpuestosTotales;
-		$impTot[0]->codigoTOTALImp = $codImp;
-		
-		if($vsumarImpuestosDelDetalle=="SI")
-		{
-			if($viconsumototal>0)
-			{
-				$vivatotalizado = $vivatotalizado - $viconsumototal;
-			}
-			$impTot[0]->montoTotal = $vivatotalizado;
-		}
-		else
-		{
-			if($viconsumototal>0)
-			{
-				$eliva = $eliva - $viconsumototal;
-			}
-			$impTot[0]->montoTotal = $eliva;
-		}
-		
-		$factura->impuestosTotales[0] = $impTot[0];
-
-		$vpasos      .= "8. Suma por tipos de IVA, ";
-		
-		if($vsumarImpuestosDelDetalle=="SI")
-		{
-			$factura->totalBaseImponible = ($vbasetotalizado+$vbasetotalizado_delcero);
-			$factura->totalSinImpuestos  = ($vbasetotalizado+$vbasetotalizado_delcero);
-		}
-		else
-		{
-			$factura->totalBaseImponible = floatval($vbasetotal);
-			$factura->totalSinImpuestos  = floatval($vbasetotal);
-		}
-
-		$factura->totalBrutoConImpuesto = $vtotal;
-		$factura->totalMonto =$vtotal;
-		$factura->totalProductos=$vtotalitems;
-		
-		$factura->tipoDocumento = $vTipoDoc;
-
-		$vsql_motivo = "select m.codigo from kardex k inner join motivodev m on k.motivodevid=m.motivodevid where k.kardexid='".$vkardexid."' and m.motivodevid<>1";
+;
+		
+		
+		$codImp	 = "";
+		$eliva	 = 0;
+		$base	 = 0;
+		$tot	 = 0;
+
+		if(isset($dt_imptfac[0][0]))
+		{
+			$vcont = count($dt_imptfac );
+			for($i=0;$i<$vcont;$i++)
+			{
+				$codImp	 = $dt_imptfac[$i][0];
+				$codImp	 = strval($codImp);
+				$eliva	+= floatval($dt_imptfac[$i][1]);
+				$base	+= floatval($dt_imptfac[$i][2]);
+				$tot	+= $base+$eliva;
+			}
+		}
+		
+		$impTot[0] = new ImpuestosTotales;
+		$impTot[0]->codigoTOTALImp = $codImp;
+		
+		if($vsumarImpuestosDelDetalle=="SI")
+		{
+			if($viconsumototal>0)
+			{
+				$vivatotalizado = $vivatotalizado - $viconsumototal;
+			}
+			$impTot[0]->montoTotal = $vivatotalizado;
+		}
+		else
+		{
+			if($viconsumototal>0)
+			{
+				$eliva = $eliva - $viconsumototal;
+			}
+			$impTot[0]->montoTotal = $eliva;
+		}
+		
+		$factura->impuestosTotales[0] = $impTot[0];
+
+		$vpasos      .= "8. Suma por tipos de IVA, ";
+		
+		if($vsumarImpuestosDelDetalle=="SI")
+		{
+			$factura->totalBaseImponible = ($vbasetotalizado+$vbasetotalizado_delcero);
+			$factura->totalSinImpuestos  = ($vbasetotalizado+$vbasetotalizado_delcero);
+		}
+		else
+		{
+			$factura->totalBaseImponible = floatval($vbasetotal);
+			$factura->totalSinImpuestos  = floatval($vbasetotal);
+		}
+
+		$factura->totalBrutoConImpuesto = $vtotal;
+		$factura->totalMonto =$vtotal;
+		$factura->totalProductos=$vtotalitems;
+		
+		$factura->tipoDocumento = $vTipoDoc;
+
+		$vsql_motivo = "select m.codigo from kardex k inner join motivodev m on k.motivodevid=m.motivodevid where k.kardexid='".$vkardexid."' and m.motivodevid<>1";
 		 
       $nm_select = $vsql_motivo; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3703,19 +4103,60 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vmotivo = false;
           $vmotivo_erro = $this->Db->ErrorMsg();
       } 
-;
-		if(isset($vmotivo[0][0]))
-		{
-			$vMotNota = trim($vmotivo[0][0]);
-		}
-
-		$vcufe = "";
-		$vFafectada = "";
-		$vfechaemisionfac = "";
-		$vnumfac = "";
-	
-		
-		$vsql = "select factid from kardexself where kardexid='".$vkardexid."'";
+;
+		if(isset($vmotivo[0][0]))
+		{
+			$vMotNota = trim($vmotivo[0][0]);
+		}
+		
+		$vprovee_anterior  = "";
+		$vservidor_anterior= "";
+		$vtoken_anterior   = "";
+		$vpasswor_anterior = "";
+		
+		$vsql = "select if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword,if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,modo,(select pa.proveedor from cloud_webservice_proveedores pa where pa.id_proveedores=wfe.proveedor_anterior) as provee_anterior, (select pa.servidor1 from cloud_webservice_proveedores pa where pa.id_proveedores=wfe.proveedor_anterior) as servidor_anterior, wfe.token_anterior, wfe.passwor_anterior from cloud_webservicefe wfe where wfe.id_empresa='".$this->sc_temp_gidempresa."'";
+
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $ds_fv2 = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $ds_fv2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $ds_fv2 = false;
+          $ds_fv2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+		if(isset($ds_fv2[0][0]) and (isset($ds_fv2[0][1])) and (isset($ds_fv2[0][2])))
+		{
+			$vprovee_anterior  = $ds_fv2[0][4];
+			$vservidor_anterior= $ds_fv2[0][5];
+			$vtoken_anterior   = $ds_fv2[0][6];
+			$vpasswor_anterior = $ds_fv2[0][7];
+		}
+
+		$vcufe = "";
+		$vFafectada = "";
+		$vfechaemisionfac = "";
+		$vnumfac = "";
+	
+		
+		$vsql = "select factid from kardexself where kardexid='".$vkardexid."'";
 		 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3745,13 +4186,13 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vkardexiddocref = false;
           $vkardexiddocref_erro = $this->Db->ErrorMsg();
       } 
-;
-		if(isset($vkardexiddocref[0][0]))
-		{
-			$vkid = $vkardexiddocref[0][0];
-			if(!empty($vkid))
-			{
-				$vsql = "select sn_cufe,sn_pjfe,numero,fecha from kardex where kardexid='".$vkid."'";
+;
+		if(isset($vkardexiddocref[0][0]))
+		{
+			$vkid = $vkardexiddocref[0][0];
+			if(!empty($vkid))
+			{
+				$vsql = "select sn_cufe,sn_pjfe,numero,fecha from kardex where kardexid='".$vkid."'";
 				 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3781,23 +4222,144 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vdatadocref = false;
           $vdatadocref_erro = $this->Db->ErrorMsg();
       } 
-;
-				if(isset($vdatadocref[0][0]))
-				{
-					$vcufe            = $vdatadocref[0][0];
-					$vFafectada       = $vdatadocref[0][1].$vdatadocref[0][2];
-					$vfechaemisionfac = $vdatadocref[0][3];
-					$vfechaemisionfac = substr($vfechaemisionfac, 0, -9);
-					$vfechaemisionfac = date_create($vfechaemisionfac);
-					$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
-				}
-			}
-		}
-		
-		
-		if(empty($vcufe))
-		{
-			$vsql = "select docuid from kardex where kardexid='".$vkardexid."'";
+;
+				if(isset($vdatadocref[0][0]))
+				{
+					$vseguimiento  .= "1. Buscando en el factid, ";
+					$vcufe            = $vdatadocref[0][0];
+					$vFafectada       = $vdatadocref[0][1].$vdatadocref[0][2];
+					$vfechaemisionfac = $vdatadocref[0][3];
+					$vfechaemisionfac = substr($vfechaemisionfac, 0, -9);
+					$vfechaemisionfac = date_create($vfechaemisionfac);
+					$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
+				}
+			}
+		}
+		
+		
+		if(empty($vcufe))
+		{
+			$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'NROFACTVEN'";
+
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiExisteNro = array();
+      $vsiexistenro = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiExisteNro[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsiexistenro[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiExisteNro = false;
+          $vSiExisteNro_erro = $this->Db->ErrorMsg();
+          $vsiexistenro = false;
+          $vsiexistenro_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(isset($vsiexistenro[0][0]))
+			{
+				$vsql = "select nrofactven from kardex where kardexid='".$vkardexid."'";
+				 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDocuid = array();
+      $vdocuid = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDocuid[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdocuid[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDocuid = false;
+          $vDocuid_erro = $this->Db->ErrorMsg();
+          $vdocuid = false;
+          $vdocuid_erro = $this->Db->ErrorMsg();
+      } 
+;
+				if(isset($vdocuid[0][0]))
+				{
+					$vnrofv = $vdocuid[0][0];
+					if(!empty($vnrofv))
+					{
+						$vsql = "select (codprefijo||numero) as num,fecha,sn_cufe from kardex where codcomp='FV' and codprefijo||numero='".$vnrofv."'";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vData2 = array();
+      $vdata2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vData2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdata2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vData2 = false;
+          $vData2_erro = $this->Db->ErrorMsg();
+          $vdata2 = false;
+          $vdata2_erro = $this->Db->ErrorMsg();
+      } 
+;
+						if(isset($vdata2[0][0]))
+						{
+							$vseguimiento  .= "2. Buscando en el NROFACTVEN, ";
+							
+							$vFafectada       = $vdata2[0][0];
+							$vfechaemisionfac = $vdata2[0][1];
+							$vfechaemisionfac = substr($vfechaemisionfac, 0, -9);
+							$vfechaemisionfac = date_create($vfechaemisionfac);
+							$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
+							$vcufe            = $vdata2[0][2];
+						}
+					}
+				}
+			}
+		}
+		
+		
+		if(empty($vcufe))
+		{
+			$vsql = "select docuid from kardex where kardexid='".$vkardexid."'";
 			 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3827,13 +4389,13 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vdocuid = false;
           $vdocuid_erro = $this->Db->ErrorMsg();
       } 
-;
-			if(isset($vdocuid[0][0]))
-			{
-				$vkid2 = $vdocuid[0][0];
-				if(!empty($vkid2))
-				{
-					$vsql = "select (codprefijo||numero) as num,fecha from documento where docuid='".$vkid2."'";
+;
+			if(isset($vdocuid[0][0]))
+			{
+				$vkid2 = $vdocuid[0][0];
+				if(!empty($vkid2))
+				{
+					$vsql = "select (codprefijo||numero) as num,fecha from documento where docuid='".$vkid2."'";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3863,17 +4425,17 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vdata2 = false;
           $vdata2_erro = $this->Db->ErrorMsg();
       } 
-;
-					if(isset($vdata2[0][0]))
-					{
-						$vFafectada       = $vdata2[0][0];
-						$vfechaemisionfac = $vdata2[0][1];
-						$vfechaemisionfac = substr($vfechaemisionfac, 0, -9);
-						$vfechaemisionfac = date_create($vfechaemisionfac);
-						$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
-						
-						$vsql = "select if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword,if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,modo from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."'";
-	
+;
+					if(isset($vdata2[0][0]))
+					{
+						$vFafectada       = $vdata2[0][0];
+						$vfechaemisionfac = $vdata2[0][1];
+						$vfechaemisionfac = substr($vfechaemisionfac, 0, -9);
+						$vfechaemisionfac = date_create($vfechaemisionfac);
+						$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
+						
+						$vsql = "select if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword,if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,modo from cloud_webservicefe where id_empresa='".$this->sc_temp_gidempresa."'";
+	
 						 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3899,116 +4461,704 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $ds_fv = false;
           $ds_fv_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-						if(isset($ds_fv[0][0]) and (isset($ds_fv[0][1])) and (isset($ds_fv[0][2])))
-						{
-							if(!empty(($ds_fv[0][0])) and (!empty($ds_fv[0][1])) and (!empty($ds_fv[0][2])))
-							{
-								error_reporting(E_ERROR);
-								$WebService = new WebService();
-								$options = array('exceptions' => true, 'trace' => true);
-
-								$params;
-								$vservidor = $ds_fv[0][2];
-								$TokenEnterprise = $ds_fv[0][0];
-								$TokenAutorizacion = $ds_fv[0][1];
-								$vmodo = $ds_fv[0][3];
-
-								$params = array (
-											'tokenEmpresa'	=>$TokenEnterprise,
-											'tokenPassword'	=>$TokenAutorizacion,
-											'documento'		=>$vFafectada);
-
-								$resultado = $WebService->getEstadoDocumento($vservidor,$options,$params);
-
-
-								if($resultado["codigo"]==200)
-								{
-
-									$vcufe    = $resultado["cufe"];
-						       }
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		
-		
-		if(!empty($vcufe))
-		{
-			$DocRef = new DocumentoReferenciado();
+;
+						if(isset($ds_fv[0][0]) and (isset($ds_fv[0][1])) and (isset($ds_fv[0][2])))
+						{
+							if(!empty(($ds_fv[0][0])) and (!empty($ds_fv[0][1])) and (!empty($ds_fv[0][2])))
+							{
+								$vseguimiento  .= "3. Buscando en el webservice, ";
+								
+								
+								
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(empty($vcufe))
+		{
+			$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'NROFACTVEN'";
+
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiExisteNro = array();
+      $vsiexistenro = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiExisteNro[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsiexistenro[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiExisteNro = false;
+          $vSiExisteNro_erro = $this->Db->ErrorMsg();
+          $vsiexistenro = false;
+          $vsiexistenro_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(isset($vsiexistenro[0][0]))
+			{
+				$vsql = "select coalesce(nrofactven,'') as nro from kardex where kardexid='".$vkardexid."'";
+				 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDocuid = array();
+      $vdocuid = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDocuid[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdocuid[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDocuid = false;
+          $vDocuid_erro = $this->Db->ErrorMsg();
+          $vdocuid = false;
+          $vdocuid_erro = $this->Db->ErrorMsg();
+      } 
+;
+				if(isset($vdocuid[0][0]))
+				{
+					$vnrofv = $vdocuid[0][0];
+					if(!empty($vnrofv))
+					{
+						
+						$vsql = "select (codprefijo||numero) as num,fecha,sn_cufe from kardex where codcomp='FV' and codprefijo||numero='".$vnrofv."'";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vData2 = array();
+      $vdata2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vData2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdata2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vData2 = false;
+          $vData2_erro = $this->Db->ErrorMsg();
+          $vdata2 = false;
+          $vdata2_erro = $this->Db->ErrorMsg();
+      } 
+;
+						if(isset($vdata2[0][0]))
+						{
+							$vFafectada       = $vdata2[0][0];
+							$vfechaemisionfac = $vdata2[0][1];
+							$vfechaemisionfac = substr($vfechaemisionfac, 0, -9);
+							$vfechaemisionfac = date_create($vfechaemisionfac);
+							$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
+							$vcufe            = $vdata2[0][2];
+						}
+						else
+						{
+							$vsql = "select (codprefijo||numero) as num,fecha from documento where codcomp='FV' and codprefijo||numero='".$vnrofv."'";
+							 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vData2 = array();
+      $vdata2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vData2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdata2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vData2 = false;
+          $vData2_erro = $this->Db->ErrorMsg();
+          $vdata2 = false;
+          $vdata2_erro = $this->Db->ErrorMsg();
+      } 
+;
+							if(isset($vdata2[0][0]))
+							{
+								$vFafectada       = $vdata2[0][0];
+								$vfechaemisionfac = $vdata2[0][1];
+								$vfechaemisionfac = substr($vfechaemisionfac, 0, -9);
+								$vfechaemisionfac = date_create($vfechaemisionfac);
+								$vanio_fv         = date_format($vfechaemisionfac,'Y'); 
+								$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
+								
+								
+								if(empty($vcufe))
+								{
+															
+									$vsql = "select if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword,if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,modo,token_anterior,passwor_anterior,(select wp.servidor1 from cloud_webservice_proveedores wp where wp.id_proveedores=w.proveedor_anterior limit 1) as servidor1_ante, (select wp.proveedor from cloud_webservice_proveedores wp where wp.id_proveedores=w.proveedor_anterior limit 1) as proveedor_ant from cloud_webservicefe w where id_empresa='".$this->sc_temp_gidempresa."'";
+
+									 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $ds_fv4 = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $ds_fv4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $ds_fv4 = false;
+          $ds_fv4_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+									if(isset($ds_fv4[0][0]) and (isset($ds_fv4[0][1])) and (isset($ds_fv4[0][2])))
+									{
+										if(!empty(($ds_fv4[0][0])) and (!empty($ds_fv4[0][1])) and (!empty($ds_fv4[0][2])))
+										{
+											$vservidor           = $ds_fv4[0][2];
+											$TokenEnterprise     = $ds_fv4[0][0];
+											$TokenAutorizacion   = $ds_fv4[0][1];
+											$vmodo               = $ds_fv4[0][3];
+											$vtoken_anterior     = $ds_fv4[0][4]; 
+											$vpasswor_anterior   = $ds_fv4[0][5];
+											$vservidor1_anteri   = $ds_fv4[0][6]; 
+											$vproveedor_ant      = $ds_fv4[0][7]; 
+
+											if($vanio_fv==date("Y"))
+											{
+												$vseguimiento  .= "4. Buscando en el webservice 2, ";
+
+												error_reporting(E_ERROR);
+												$WebService = new WebService();
+												$options = array('exceptions' => true, 'trace' => true);
+
+												$params;
+												$params = array (
+															'tokenEmpresa'	=>$TokenEnterprise,
+															'tokenPassword'	=>$TokenAutorizacion,
+															'documento'		=>$vFafectada);
+
+												$resultado = $WebService->getEstadoDocumento($vservidor,$options,$params);
+
+
+												if($resultado["codigo"]==200)
+												{
+
+													$vcufe    = $resultado["cufe"];
+												}
+											}
+											else
+											{
+												switch($vproveedor_ant)
+												{
+													case 'HKA':
+														$vseguimiento  .= "* Buscando en el webservice anterior, ";
+
+														error_reporting(E_ERROR);
+														$WebService = new WebService();
+														$options = array('exceptions' => true, 'trace' => true);
+
+														$params;
+														$params = array (
+																	'tokenEmpresa'	=>$vtoken_anterior,
+																	'tokenPassword'	=>$vpasswor_anterior,
+																	'documento'		=>$vFafectada);
+
+														$resultado = $WebService->getEstadoDocumento($vservidor1_anteri,$options,$params);
+
+
+														if($resultado["codigo"]==200)
+														{
+
+															$vcufe    = $resultado["cufe"];
+														}
+													break;
+
+													case 'DATAICO':
+
+													break;
+
+													case 'FACILWEB':
+
+													break;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(empty($vcufe))
+		{
+	
+			$vsql = "select observ from kardex where kardexid='".$vkardexid."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDocuid = array();
+      $vdocuid = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDocuid[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdocuid[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDocuid = false;
+          $vDocuid_erro = $this->Db->ErrorMsg();
+          $vdocuid = false;
+          $vdocuid_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(isset($vdocuid[0][0]))
+			{
+				$vnrofv = $vdocuid[0][0];
+				if(!empty($vnrofv))
+				{
+					$vsql = "select (codprefijo||numero) as num,fecha from documento where codcomp='FV' and codprefijo||numero='".$vnrofv."'";
+					 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vData2 = array();
+      $vdata2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vData2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdata2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vData2 = false;
+          $vData2_erro = $this->Db->ErrorMsg();
+          $vdata2 = false;
+          $vdata2_erro = $this->Db->ErrorMsg();
+      } 
+;
+					if(isset($vdata2[0][0]))
+					{
+						$vFafectada       = $vdata2[0][0];
+						$vfechaemisionfac = $vdata2[0][1];
+						$vfechaemisionfac = substr($vfechaemisionfac, 0, -9);
+						$vfechaemisionfac = date_create($vfechaemisionfac);
+						$vanio_fv         = date_format($vfechaemisionfac,'Y'); 
+						$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
+						
+						$vsql = "select if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword,if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,modo,token_anterior,passwor_anterior,(select wp.servidor1 from cloud_webservice_proveedores wp where wp.id_proveedores=w.proveedor_anterior limit 1) as servidor1_anterior, (select wp.proveedor from cloud_webservice_proveedores wp where wp.id_proveedores=w.proveedor_anterior limit 1) as proveedor_ant from cloud_webservicefe w where id_empresa='".$this->sc_temp_gidempresa."'";
+
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $ds_fv = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $ds_fv[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $ds_fv = false;
+          $ds_fv_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+						if(isset($ds_fv[0][0]) and (isset($ds_fv[0][1])) and (isset($ds_fv[0][2])))
+						{
+							if(!empty(($ds_fv[0][0])) and (!empty($ds_fv[0][1])) and (!empty($ds_fv[0][2])))
+							{
+								$vservidor           = $ds_fv[0][2];
+								$TokenEnterprise     = $ds_fv[0][0];
+								$TokenAutorizacion   = $ds_fv[0][1];
+								$vmodo               = $ds_fv[0][3];
+								$vtoken_anterior     = $ds_fv[0][4]; 
+								$vpasswor_anterior   = $ds_fv[0][5];
+								$vservidor1_anteri   = $ds_fv[0][6]; 
+								$vproveedor_ant      = $ds_fv[0][7]; 
+								
+								if($vanio_fv==date("Y"))
+								{
+									$vseguimiento  .= "5. Buscando en el webservice 3, ";
+
+									error_reporting(E_ERROR);
+									$WebService = new WebService();
+									$options = array('exceptions' => true, 'trace' => true);
+
+									$params;
+									$params = array (
+												'tokenEmpresa'	=>$TokenEnterprise,
+												'tokenPassword'	=>$TokenAutorizacion,
+												'documento'		=>$vFafectada);
+
+									$resultado = $WebService->getEstadoDocumento($vservidor,$options,$params);
+
+
+									if($resultado["codigo"]==200)
+									{
+
+										$vcufe    = $resultado["cufe"];
+									}
+								}
+								else
+								{
+									switch($vproveedor_ant)
+									{
+										case 'HKA':
+											$vseguimiento  .= "** Buscando en el webservice anterior, ";
+
+											error_reporting(E_ERROR);
+											$WebService = new WebService();
+											$options = array('exceptions' => true, 'trace' => true);
+
+											$params;
+											$params = array (
+														'tokenEmpresa'	=>$vtoken_anterior,
+														'tokenPassword'	=>$vpasswor_anterior,
+														'documento'		=>$vFafectada);
+
+											$resultado = $WebService->getEstadoDocumento($vservidor1_anteri,$options,$params);
+
+
+											if($resultado["codigo"]==200)
+											{
+
+												$vcufe    = $resultado["cufe"];
+											}
+										break;
+											
+										case 'DATAICO':
+											
+										break;
+											
+										case 'FACILWEB':
+											
+										break;
+									}
+								}
+							}
+						}
+
+					}
+					else
+					{
+						$vsql = "select numero_fe,fecha_factura from cloud_kardex where tipo='FV' and concat(prefijo,numero)='".$vnrofv."'";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vData2 = array();
+      $vdata2 = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vData2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdata2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vData2 = false;
+          $vData2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vdata2 = false;
+          $vdata2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+						if(isset($vdata2[0][0]))
+						{
+							$vFafectada       = $vdata2[0][0];
+							$vfechaemisionfac = $vdata2[0][1];
+							$vfechaemisionfac = date_create($vfechaemisionfac);
+							$vanio_fv         = date_format($vfechaemisionfac,'Y');
+							$vfechaemisionfac = date_format($vfechaemisionfac,'Y-m-d');
+
+							$vsql = "select if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword,if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,modo,token_anterior,passwor_anterior,(select wp.servidor1 from cloud_webservice_proveedores wp where wp.id_proveedores=w.proveedor_anterior limit 1) as servidor1_anterior, (select wp.proveedor from cloud_webservice_proveedores wp where wp.id_proveedores=w.proveedor_anterior limit 1) as proveedor_ant from cloud_webservicefe w where id_empresa='".$this->sc_temp_gidempresa."'";
+
+							 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $ds_fv = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $ds_fv[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $ds_fv = false;
+          $ds_fv_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+							if(isset($ds_fv[0][0]) and (isset($ds_fv[0][1])) and (isset($ds_fv[0][2])))
+							{
+								if(!empty(($ds_fv[0][0])) and (!empty($ds_fv[0][1])) and (!empty($ds_fv[0][2])))
+								{
+									$vseguimiento  .= "6. Buscando en el webservice 4, ";
+									
+									error_reporting(E_ERROR);
+									$WebService = new WebService();
+									$options = array('exceptions' => true, 'trace' => true);
+
+									$params;
+									$vservidor = $ds_fv[0][2];
+									$TokenEnterprise = $ds_fv[0][0];
+									$TokenAutorizacion = $ds_fv[0][1];
+									$vmodo = $ds_fv[0][3];
+									$vtoken_anterior     = $ds_fv[0][4]; 
+									$vpasswor_anterior   = $ds_fv[0][5];
+									$vservidor1_anteri   = $ds_fv[0][6]; 
+									$vproveedor_ant      = $ds_fv[0][7]; 
+
+									if($vanio_fv==date("Y"))
+									{
+										$vseguimiento  .= "5. Buscando en el webservice 3, ";
+
+										error_reporting(E_ERROR);
+										$WebService = new WebService();
+										$options = array('exceptions' => true, 'trace' => true);
+
+										$params;
+										$params = array (
+													'tokenEmpresa'	=>$TokenEnterprise,
+													'tokenPassword'	=>$TokenAutorizacion,
+													'documento'		=>$vFafectada);
+
+										$resultado = $WebService->getEstadoDocumento($vservidor,$options,$params);
+
+
+										if($resultado["codigo"]==200)
+										{
+
+											$vcufe    = $resultado["cufe"];
+										}
+									}
+									else
+									{
+										switch($vproveedor_ant)
+										{
+											case 'HKA':
+												$vseguimiento  .= "** Buscando en el webservice anterior, ";
+
+												error_reporting(E_ERROR);
+												$WebService = new WebService();
+												$options = array('exceptions' => true, 'trace' => true);
+
+												$params;
+												$params = array (
+															'tokenEmpresa'	=>$vtoken_anterior,
+															'tokenPassword'	=>$vpasswor_anterior,
+															'documento'		=>$vFafectada);
+
+												$resultado = $WebService->getEstadoDocumento($vservidor1_anteri,$options,$params);
+
+
+												if($resultado["codigo"]==200)
+												{
+
+													$vcufe    = $resultado["cufe"];
+												}
+											break;
+
+											case 'DATAICO':
+
+											break;
+
+											case 'FACILWEB':
+
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
+		if(!empty($vcufe))
+		{
+			$DocRef = new DocumentoReferenciado();
 			$DocRef->codigoEstatusDocumento = $vMotNota;
-			$DocRef->codigoInterno = '4';
-			$DocRef->cufeDocReferenciado = $vcufe;
+			$DocRef->codigoInterno = '4';
+			$DocRef->cufeDocReferenciado = $vcufe;
 			$DocRef->numeroDocumento=$vFafectada;
-			$factura->documentosReferenciados[0] =$DocRef;
-
-			$DocRef1 = new DocumentoReferenciado();
-			$DocRef1->codigoInterno = '5';
-			$DocRef1->cufeDocReferenciado = $vcufe;
-			$DocRef1->fecha = $vfechaemisionfac;
+			$factura->documentosReferenciados[0] =$DocRef;
+
+			$DocRef1 = new DocumentoReferenciado();
+			$DocRef1->codigoInterno = '5';
+			$DocRef1->cufeDocReferenciado = $vcufe;
+			$DocRef1->fecha = $vfechaemisionfac;
 			$DocRef1->numeroDocumento= $vFafectada;
-			$factura->documentosReferenciados[1] =$DocRef1;
-			
-		}
-			
-		}
-
-
-		$adjuntos="0";
-		$params = array(
-			 'tokenEmpresa' =>  $TokenEnterprise,
-			 'tokenPassword' =>$TokenAutorizacion,
-			 'factura' => $factura,
-			 'adjuntos' => $adjuntos
-		);
-
-		if(empty($vmensaje))
-		{
-			if($vpost=="SI")
-			{
-				
-				switch($vproveedor)
-				{
-					case 'HKA':
-						$resultado = $WebService->enviar($vServidor,$options,$params);
-
-						switch($resultado["codigo"])
-						{
-							case 200:
-								$vmen =  "<center style='margin-bottom:10px;'>Documento ".$vpjfe."/".$vconsecutivo." Se ha aceptado y procesado con éxito!"."</center><br>";
-
-								$vcufe    = $resultado["cufe"];
-								$vfecha   = $vfechaemision;
-								$vfecha   = substr($vfecha, 0, -9);
-								$vfecha   = date_create($vfecha);
-								$vfecha   = date_format($vfecha,'Y-m-d');
-								$vestado  = $resultado["codigo"];
-								$vavisos  = json_encode($resultado);
-								$vnumero  = $vpjfe.$vconsecutivo;
-								$vtercero = $vnit2;
-								$vqr      = $resultado["qr"];
-								$vxml     = $resultado["xml"];
-
-								if($vprint_r=="SI")
-								{
-									print_r($resultado);
-								}
-
-								if(isset($resultado["fechaAceptacionDIAN"]))
-								{
-									$vfechavalidacion = $resultado["fechaAceptacionDIAN"];
-								}
-								if(isset($resultado["fechaRespuesta"]))
-								{
-									$vfechavalidacion = $resultado["fechaRespuesta"];
-								}
-
-								$vfechavalidacion = substr($vfechavalidacion, 0, 18);
-
-								$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."' where kardexid='".$vkardexid."'";
+			$factura->documentosReferenciados[1] =$DocRef1;
+			
+		}
+			
+		}
+
+
+		$adjuntos="0";
+		$params = array(
+			 'tokenEmpresa' =>  $TokenEnterprise,
+			 'tokenPassword' =>$TokenAutorizacion,
+			 'factura' => $factura,
+			 'adjuntos' => $adjuntos
+		);
+
+		if(empty($vmensaje))
+		{
+			if($vpost=="SI")
+			{
+				
+				switch($vproveedor)
+				{
+					case 'HKA':
+						$resultado = $WebService->enviar($vServidor,$options,$params);
+
+						switch($resultado["codigo"])
+						{
+							case 200:
+								$vmen =  "<center style='margin-bottom:10px;'>Documento ".$vpjfe."/".$vconsecutivo." Se ha aceptado y procesado con éxito!"."</center><br>";
+
+								$vcufe    = $resultado["cufe"];
+								$vfecha   = $vfechaemision;
+								$vfecha   = substr($vfecha, 0, -9);
+								$vfecha   = date_create($vfecha);
+								$vfecha   = date_format($vfecha,'Y-m-d');
+								$vestado  = $resultado["codigo"];
+								$vavisos  = json_encode($resultado);
+								$vnumero  = $vpjfe.$vconsecutivo;
+								$vtercero = $vnit2;
+								$vqr      = $resultado["qr"];
+								$vxml     = $resultado["xml"];
+
+								if($vprint_r=="SI")
+								{
+									print_r($resultado);
+								}
+
+								if(isset($resultado["fechaAceptacionDIAN"]))
+								{
+									$vfechavalidacion = $resultado["fechaAceptacionDIAN"];
+								}
+								if(isset($resultado["fechaRespuesta"]))
+								{
+									$vfechavalidacion = $resultado["fechaRespuesta"];
+								}
+
+								$vfechavalidacion = substr($vfechavalidacion, 0, 18);
+
+								$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."' where kardexid='".$vkardexid."'";
 								
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4025,46 +5175,46 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-
-								$vruta = $_SERVER["DOCUMENT_ROOT"];
-
-								if (!file_exists($vruta.'/qr'))
-								{
-									mkdir($vruta.'/qr', 0777, true);
-								}
-
-								sc_include_library("prj", "qr", "qrlib.php", true, true);
-								sc_include_library("prj", "php-image-magician", "php_image_magician.php", true, true);
-
-								$vrutaqr  = $vruta.'/qr/'.$vpjfe.$vconsecutivo.'.png';
-								$vrutaqr2 = $vruta.'/qr/'.$vpjfe.$vconsecutivo.'.bmp';
-								if(!empty($vnombre_pc_red))
-								{
-									$vrutaqr3 = '\\\\'.$vnombre_pc_red.'\\qr\\'.$vcodprefijo.$vnumero.'.bmp';
-								}
-
-								if(!empty($vcufe))
-								{
-									QRcode::png($vqr,$vrutaqr,QR_ECLEVEL_H,12,5);
-
-									$magicianObj = new imageLib($vrutaqr);
-									$magicianObj -> saveImage($vrutaqr2);  
-
-									$path = $vrutaqr;
-
-									$type = pathinfo($path, PATHINFO_EXTENSION);
-
-									$data = file_get_contents($path);
-
-									$base64 = 'data:image/' .$type.';base64,'.base64_encode($data);
-
-									$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr2."',sn_qr_base64='".$base64."' where kardexid='".$vkardexid."'";
-
-									if(!empty($vnombre_pc_red))
-									{
-										$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr3."',sn_qr_base64='".$base64."' where kardexid='".$vkardexid."'";
-									}
+      ;
+
+								$vruta = $_SERVER["DOCUMENT_ROOT"];
+
+								if (!file_exists($vruta.'/qr'))
+								{
+									mkdir($vruta.'/qr', 0777, true);
+								}
+
+								sc_include_library("prj", "qr", "qrlib.php", true, true);
+								sc_include_library("prj", "php-image-magician", "php_image_magician.php", true, true);
+
+								$vrutaqr  = $vruta.'/qr/'.$vpjfe.$vconsecutivo.'.png';
+								$vrutaqr2 = $vruta.'/qr/'.$vpjfe.$vconsecutivo.'.bmp';
+								if(!empty($vnombre_pc_red))
+								{
+									$vrutaqr3 = '\\\\'.$vnombre_pc_red.'\\qr\\'.$vcodprefijo.$vnumero.'.bmp';
+								}
+
+								if(!empty($vcufe))
+								{
+									QRcode::png($vqr,$vrutaqr,QR_ECLEVEL_H,12,5);
+
+									$magicianObj = new imageLib($vrutaqr);
+									$magicianObj -> saveImage($vrutaqr2);  
+
+									$path = $vrutaqr;
+
+									$type = pathinfo($path, PATHINFO_EXTENSION);
+
+									$data = file_get_contents($path);
+
+									$base64 = 'data:image/' .$type.';base64,'.base64_encode($data);
+
+									$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr2."',sn_qr_base64='".$base64."',sn_proveedor='".$vproveedor."',sn_token_emp='".$TokenEnterprise."',sn_token_pass='".$TokenAutorizacion."',sn_servidor='".$vServidor."' where kardexid='".$vkardexid."'";
+
+									if(!empty($vnombre_pc_red))
+									{
+										$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr3."',sn_qr_base64='".$base64."' where kardexid='".$vkardexid."'";
+									}
 									
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4081,10 +5231,10 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-
-									$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."', id_empresa='".$idempresa."',tipo='DV',prefijo='".$vcodprefijo."',numero='".$vconsecutivo."',tercero='".$vtercero."',fecha_factura='".$vfecha."',horacrea='".$vhoracreacion."',fecha_validacion='".$vfechavalidacion."',fac_devuelta='".$vFafectada."',xml='".$vxml."',qr_base64='".$base64."'";
-
+      ;
+
+									$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."', id_empresa='".$idempresa."',tipo='DV',prefijo='".$vcodprefijo."',numero='".$vconsecutivo."',tercero='".$vtercero."',fecha_factura='".$vfecha."',horacrea='".$vhoracreacion."',fecha_validacion='".$vfechavalidacion."',fac_devuelta='".$vFafectada."',xml='".$vxml."',qr_base64='".$base64."'";
+
 									 
       if (in_array(strtolower($this->Ini->nm_con_conn_mysql['tpbanco']), $this->Ini->nm_bases_sybase))
       { 
@@ -4130,13 +5280,13 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vsi = false;
           $vsi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-									if(isset($vsi[0][0]))
-									{
-										$sql="update cloud_kardex SET cufe = '".$vcufe."', numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."',qr_base64='".$base64."',horacrea='".$vhoracreacion."',fecha_validacion='".$vfechavalidacion."',fecha_factura='".$vfecha."',fac_devuelta='".$vFafectada."',xml='".$vxml."' where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vconsecutivo."'";
-									}
-
+;
+
+									if(isset($vsi[0][0]))
+									{
+										$sql="update cloud_kardex SET cufe = '".$vcufe."', numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."',qr_base64='".$base64."',horacrea='".$vhoracreacion."',fecha_validacion='".$vfechavalidacion."',fecha_factura='".$vfecha."',fac_devuelta='".$vFafectada."',xml='".$vxml."' where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vconsecutivo."'";
+									}
+
 									
      $nm_select = $sql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4148,10 +5298,10 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-
-									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
-
+      ;
+
+									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
+
 									 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4181,10 +5331,10 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vsicufetns = false;
           $vsicufetns_erro = $this->Db->ErrorMsg();
       } 
-;
-									if(isset($vsicufetns[0][0]))
-									{
-										$vsql_update = "update kardex set cufe='".$vcufe."' where kardexid='".$vkardexid."'";
+;
+									if(isset($vsicufetns[0][0]))
+									{
+										$vsql_update = "update kardex set cufe='".$vcufe."' where kardexid='".$vkardexid."'";
 										
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4201,11 +5351,11 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-									}
-
-									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
-
+      ;
+									}
+
+									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
+
 									 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4235,10 +5385,10 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vsicufetns2 = false;
           $vsicufetns2_erro = $this->Db->ErrorMsg();
       } 
-;
-									if(isset($vsicufetns2[0][0]))
-									{
-										$vsql_update = "update kardex set estadodian='EXITOSA' where kardexid='".$vkardexid."'";
+;
+									if(isset($vsicufetns2[0][0]))
+									{
+										$vsql_update = "update kardex set estadodian='EXITOSA' where kardexid='".$vkardexid."'";
 										
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4255,45 +5405,45 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-									}
-								}
-								echo $vmen;
-
-							break;
-							case 201:
-
-								$vmen =  "<center style='margin-bottom:10px;'>Documento ".$vpjfe."/".$vconsecutivo." Se ha aceptado y procesado con éxito!"."</center><br>";
-
-								$vcufe    = $resultado["cufe"];
-								$vfecha   = $vfechaemision;
-								$vfecha   = substr($vfecha, 0, -9);
-								$vfecha   = date_create($vfecha);
-								$vfecha   = date_format($vfecha,'Y-m-d');
-								$vestado  = $resultado["codigo"];
-								$vavisos  = json_encode($resultado);
-								$vnumero  = $vpjfe.$vconsecutivo;
-								$vtercero = $vnit2;
-								$vqr      = $resultado["qr"];
-								$vxml     = $resultado["xml"];
-
-								if($vprint_r=="SI")
-								{
-									print_r($resultado);
-								}
-
-								if(isset($resultado["fechaAceptacionDIAN"]))
-								{
-									$vfechavalidacion = $resultado["fechaAceptacionDIAN"];
-								}
-								if(isset($resultado["fechaRespuesta"]))
-								{
-									$vfechavalidacion = $resultado["fechaRespuesta"];
-								}
-
-								$vfechavalidacion = substr($vfechavalidacion, 0, 18);
-
-								$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."' where kardexid='".$vkardexid."'";
+      ;
+									}
+								}
+								echo $vmen;
+
+							break;
+							case 201:
+
+								$vmen =  "<center style='margin-bottom:10px;'>Documento ".$vpjfe."/".$vconsecutivo." Se ha aceptado y procesado con éxito!"."</center><br>";
+
+								$vcufe    = $resultado["cufe"];
+								$vfecha   = $vfechaemision;
+								$vfecha   = substr($vfecha, 0, -9);
+								$vfecha   = date_create($vfecha);
+								$vfecha   = date_format($vfecha,'Y-m-d');
+								$vestado  = $resultado["codigo"];
+								$vavisos  = json_encode($resultado);
+								$vnumero  = $vpjfe.$vconsecutivo;
+								$vtercero = $vnit2;
+								$vqr      = $resultado["qr"];
+								$vxml     = $resultado["xml"];
+
+								if($vprint_r=="SI")
+								{
+									print_r($resultado);
+								}
+
+								if(isset($resultado["fechaAceptacionDIAN"]))
+								{
+									$vfechavalidacion = $resultado["fechaAceptacionDIAN"];
+								}
+								if(isset($resultado["fechaRespuesta"]))
+								{
+									$vfechavalidacion = $resultado["fechaRespuesta"];
+								}
+
+								$vfechavalidacion = substr($vfechavalidacion, 0, 18);
+
+								$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."' where kardexid='".$vkardexid."'";
 								
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4310,45 +5460,45 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-
-								$vruta = $_SERVER["DOCUMENT_ROOT"];
-
-								if (!file_exists($vruta.'/qr'))
-								{
-									mkdir($vruta.'/qr', 0777, true);
-								}
-
-								sc_include_library("prj", "qr", "qrlib.php", true, true);
-								sc_include_library("prj", "php-image-magician", "php_image_magician.php", true, true);
-
-								$vrutaqr  = $vruta.'/qr/'.$vpjfe.$vconsecutivo.'.png';
-								$vrutaqr2 = $vruta.'/qr/'.$vpjfe.$vconsecutivo.'.bmp';
-								if(!empty($vnombre_pc_red))
-								{
-									$vrutaqr3 = '\\\\'.$vnombre_pc_red.'\\qr\\'.$vcodprefijo.$vnumero.'.bmp';
-								}
-
-								if(!empty($vcufe))
-								{
-									QRcode::png($vqr,$vrutaqr,QR_ECLEVEL_H,12,5);
-
-									$magicianObj = new imageLib($vrutaqr);
-									$magicianObj -> saveImage($vrutaqr2);  
-
-									$path = $vrutaqr;
-
-									$type = pathinfo($path, PATHINFO_EXTENSION);
-
-									$data = file_get_contents($path);
-
-									$base64 = 'data:image/' .$type.';base64,'.base64_encode($data);
-
-									$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr2."',sn_qr_base64='".$base64."' where kardexid='".$vkardexid."'";
-									if(!empty($vnombre_pc_red))
-									{
-										$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr3."',sn_qr_base64='".$base64."' where kardexid='".$vkardexid."'";
-									}
+      ;
+
+								$vruta = $_SERVER["DOCUMENT_ROOT"];
+
+								if (!file_exists($vruta.'/qr'))
+								{
+									mkdir($vruta.'/qr', 0777, true);
+								}
+
+								sc_include_library("prj", "qr", "qrlib.php", true, true);
+								sc_include_library("prj", "php-image-magician", "php_image_magician.php", true, true);
+
+								$vrutaqr  = $vruta.'/qr/'.$vpjfe.$vconsecutivo.'.png';
+								$vrutaqr2 = $vruta.'/qr/'.$vpjfe.$vconsecutivo.'.bmp';
+								if(!empty($vnombre_pc_red))
+								{
+									$vrutaqr3 = '\\\\'.$vnombre_pc_red.'\\qr\\'.$vcodprefijo.$vnumero.'.bmp';
+								}
+
+								if(!empty($vcufe))
+								{
+									QRcode::png($vqr,$vrutaqr,QR_ECLEVEL_H,12,5);
+
+									$magicianObj = new imageLib($vrutaqr);
+									$magicianObj -> saveImage($vrutaqr2);  
+
+									$path = $vrutaqr;
+
+									$type = pathinfo($path, PATHINFO_EXTENSION);
+
+									$data = file_get_contents($path);
+
+									$base64 = 'data:image/' .$type.';base64,'.base64_encode($data);
+
+									$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr2."',sn_qr_base64='".$base64."' where kardexid='".$vkardexid."'";
+									if(!empty($vnombre_pc_red))
+									{
+										$vsql_update = "update kardex set sn_rutaqr='".$vrutaqr3."',sn_qr_base64='".$base64."' where kardexid='".$vkardexid."'";
+									}
 									
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4365,10 +5515,10 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-
-									$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."', id_empresa='".$idempresa."',tipo='DV',prefijo='".$vcodprefijo."',numero='".$vconsecutivo."',tercero='".$vtercero."',fecha_factura='".$vfecha."',horacrea='".$vhoracreacion."',fecha_validacion='".$vfechavalidacion."',fac_devuelta='".$vFafectada."',xml='".$vxml."',qr_base64='".$base64."'";
-
+      ;
+
+									$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."', id_empresa='".$idempresa."',tipo='DV',prefijo='".$vcodprefijo."',numero='".$vconsecutivo."',tercero='".$vtercero."',fecha_factura='".$vfecha."',horacrea='".$vhoracreacion."',fecha_validacion='".$vfechavalidacion."',fac_devuelta='".$vFafectada."',xml='".$vxml."',qr_base64='".$base64."'";
+
 									 
       if (in_array(strtolower($this->Ini->nm_con_conn_mysql['tpbanco']), $this->Ini->nm_bases_sybase))
       { 
@@ -4414,13 +5564,13 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vsi = false;
           $vsi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-									if(isset($vsi[0][0]))
-									{
-										$sql="update cloud_kardex SET cufe = '".$vcufe."', numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."',qr_base64='".$base64."',horacrea='".$vhoracreacion."',fecha_validacion='".$vfechavalidacion."',fecha_factura='".$vfecha."',fac_devuelta='".$vFafectada."',xml='".$vxml."' where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vconsecutivo."'";
-									}
-
+;
+
+									if(isset($vsi[0][0]))
+									{
+										$sql="update cloud_kardex SET cufe = '".$vcufe."', numero_fe='".$vnumero."', estado='".$vestado."', avisos='".$vavisos."',qr_base64='".$base64."',horacrea='".$vhoracreacion."',fecha_validacion='".$vfechavalidacion."',fecha_factura='".$vfecha."',fac_devuelta='".$vFafectada."',xml='".$vxml."' where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vconsecutivo."'";
+									}
+
 									
      $nm_select = $sql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4432,10 +5582,10 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-
-									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
-
+      ;
+
+									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
+
 									 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4465,10 +5615,10 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vsicufetns = false;
           $vsicufetns_erro = $this->Db->ErrorMsg();
       } 
-;
-									if(isset($vsicufetns[0][0]))
-									{
-										$vsql_update = "update kardex set cufe='".$vcufe."' where kardexid='".$vkardexid."'";
+;
+									if(isset($vsicufetns[0][0]))
+									{
+										$vsql_update = "update kardex set cufe='".$vcufe."' where kardexid='".$vkardexid."'";
 										
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4485,11 +5635,11 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-									}
-
-									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
-
+      ;
+									}
+
+									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
+
 									 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4519,10 +5669,10 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vsicufetns2 = false;
           $vsicufetns2_erro = $this->Db->ErrorMsg();
       } 
-;
-									if(isset($vsicufetns2[0][0]))
-									{
-										$vsql_update = "update kardex set estadodian='EXITOSA' where kardexid='".$vkardexid."'";
+;
+									if(isset($vsicufetns2[0][0]))
+									{
+										$vsql_update = "update kardex set estadodian='EXITOSA' where kardexid='".$vkardexid."'";
 										
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4539,32 +5689,32 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-									}
-								}
-								echo $vmen;
-								
-							break;
-							case 114:
-								$vmen = 'Documento emitido previamente.';
-								echo $vmen;
-							break;
-							default:
-								$vmen = 'Hubo un problema al enviar el documento: <br>';
-								echo $vmen;
-								print_r($resultado);
-							break;
-						}
-					break;
-						
-					case 'DATAICO':
-						$vparametros = array();
-						$vcliente    = array();
-						$vencabezado = array();
-						$vdetalle    = array();
-						$vparametros["uuid"] = "";
-						
-						$vsql = "select nombre_archivos from cloud_kardex where cufe='".$vcufe."'";
+      ;
+									}
+								}
+								echo $vmen;
+								
+							break;
+							case 114:
+								$vmen = 'Documento emitido previamente.';
+								echo $vmen;
+							break;
+							default:
+								$vmen = 'Hubo un problema al enviar el documento: <br>';
+								echo $vmen;
+								print_r($resultado);
+							break;
+						}
+					break;
+						
+					case 'DATAICO':
+						$vparametros = array();
+						$vcliente    = array();
+						$vencabezado = array();
+						$vdetalle    = array();
+						$vparametros["uuid"] = "";
+						
+						$vsql = "select nombre_archivos from cloud_kardex where cufe='".$vcufe."'";
 						 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4594,357 +5744,367 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vuuid2 = false;
           $vuuid2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-						if(isset($vuuid2[0][0]))
-						{
-							$vparametros["uuid"] = $vuuid2[0][0];
-						}
-						
-						
-						$vparametros["url"] = $vServidor2;
-						$vparametros["dataico_auth"] = $TokenEnterprise;
+;
+						if(isset($vuuid2[0][0]))
+						{
+							$vparametros["uuid"] = $vuuid2[0][0];
+						}
+						
+						
+						$vparametros["url"] = $vServidor2;
+						$vparametros["dataico_auth"] = $TokenEnterprise;
 						$vparametros["modo"] = $vmodo;
-						$vparametros["dataico_account_id"] = $TokenAutorizacion;
+						$vparametros["dataico_account_id"] = $TokenAutorizacion;
 						$vparametros["send_dian"] = false;
 						$vparametros["send_email"] = false;
-						if($venvio_dian==1)
-						{
+						if($venvio_dian==1)
+						{
 							$vparametros["send_dian"] = true;
-						}
-
-						if($venvio_cliente==1)
-						{
+						}
+
+						if($venvio_cliente==1)
+						{
 							$vparametros["send_email"] = true;
-						}
-
+						}
+
 						$vcliente['email'] = $vemail;
 						$vcliente['phone'] = $vtelef1;
-						if($vnatjuridica==2)
-						{
+						if($vnatjuridica==2)
+						{
 							$vcliente['party_type'] = 'PERSONA_NATURAL' ; 
-						}
-						else
-						{
+						}
+						else
+						{
 							$vcliente['party_type'] = 'PERSONA_JURIDICA' ; 
-						}
+						}
 						$vcliente['party_identification'] = $vnit;
-						switch($vtipodociden)
-						{
-							case 13:
+						switch($vtipodociden)
+						{
+							case 13:
 								$vcliente['party_identification_type'] = 'CC'; 
-							break;
-							
-							case 31:
+							break;
+							
+							case 31:
 								$vcliente['party_identification_type'] = 'NIT'; 
-							break;
-						}
+							break;
+						}
 						$vcliente['regimen'] = 'ORDINARIO';  
 						$vcliente['address_line'] = $direccion;
 						$vcliente['country_code'] = 'CO';
-						if($vnatjuridica==2)
-						{
-							$vpartesnombre = explode(" ",$vnombre);
-							switch(count($vpartesnombre))
-							{
-								case 2:
+						if($vnatjuridica==2)
+						{
+							$vpartesnombre = explode(" ",$vnombre);
+							switch(count($vpartesnombre))
+							{
+								case 2:
 									$vcliente['first_name'] = $vpartesnombre[0];
 									$vcliente['family_name'] = $vpartesnombre[1];
-								break;
-									
-								case 3:
+								break;
+									
+								case 3:
 									$vcliente['first_name'] = $vpartesnombre[0];
 									$vcliente['family_name'] = $vpartesnombre[1]." ".$vpartesnombre[2];
-								break;
-									
-								case 4:
+								break;
+									
+								case 4:
 									$vcliente['first_name'] = $vpartesnombre[0]." ".$vpartesnombre[1];
 									$vcliente['family_name'] = $vpartesnombre[2]." ".$vpartesnombre[3];
-								break;
-									
-								case 5:
+								break;
+									
+								case 5:
 									$vcliente['first_name'] = $vpartesnombre[0]." ".$vpartesnombre[1];
 									$vcliente['family_name'] = $vpartesnombre[2]." ".$vpartesnombre[3]." ".$vpartesnombre[4];
-								break;
-									
-								case 6:
+								break;
+									
+								case 6:
 									$vcliente['first_name'] = $vpartesnombre[0]." ".$vpartesnombre[1]." ".$vpartesnombre[2];
 									$vcliente['family_name'] = $vpartesnombre[3]." ".$vpartesnombre[4]." ".$vpartesnombre[5];
-								break;
-							}
-							
-						}
-						else
-						{
+								break;
+							}
+							
+						}
+						else
+						{
 							$vcliente['company_name'] = $vnombre;
-						}
-						 
-						if($vregimen==48)
-						{
+						}
+						 
+						if($vregimen==48)
+						{
 							$vcliente['tax_level_code'] = 'COMUN';
-						}
-						else
-						{
+						}
+						else
+						{
 							$vcliente['tax_level_code'] = 'SIMPLIFICADO';
-						}
+						}
 						$vcliente['city']  = $vcodmunicipio;
 						$vcliente['department'] = $vcod_departamento;
-
-						$vfecha2                   = date_create($vfechaemision);
+
+						$vfecha2                   = date_create($vfechaemision);
 						$vencabezado["fecha"]      = date_format($vfecha2,'d/m/Y');
 						$vencabezado["fecha_pago"] = date_format($vfecha2,'d/m/Y H:i:s');
-						if($vmodo==1)
-						{
+						if($vmodo==1)
+						{
 							$vencabezado["numero"] = $vconsecutivo_pruebas;
-						}
-						else
-						{
-							$vencabezado["numero"] = $vnumero;
-						}
-						if($vformapago=="CR")
-						{
+						}
+						else
+						{
+							$vencabezado["numero"] = $vnumero;
+						}
+						if($vformapago=="CR")
+						{
 							$vencabezado["forma_pago"] = 'CREDITO';
-						}
-						else
-						{
+						}
+						else
+						{
 							$vencabezado["forma_pago"] = 'DEBITO';
-						}
+						}
 						$vencabezado["medio_pago"] = 'CASH'; 
 						$vencabezado["observacion"]= '';
 						$vencabezado["resolucion"] = $vresolucion;
 						$vencabezado["prefijo"]    = $vpjfe;
-
-						if(count($factura->detalleDeFactura)>0)
-						{
-							for($i=0;$i<count($factura->detalleDeFactura);$i++)
-							{
+
+						if(count($factura->detalleDeFactura)>0)
+						{
+							for($i=0;$i<count($factura->detalleDeFactura);$i++)
+							{
 								$vdetalle[$i]["codigo"]       = $factura->detalleDeFactura[$i]->codigoProducto;
 								$vdetalle[$i]["cantidad"]     = $factura->detalleDeFactura[$i]->cantidadReal;
 								$vdetalle[$i]["descripcion"]  = $factura->detalleDeFactura[$i]->descripcion;
-								$vdetalle[$i]["precio"]       = ($factura->detalleDeFactura[$i]->precioTotal/$factura->detalleDeFactura[$i]->cantidadReal) / ((intval($factura->detalleDeFactura[$i]->impuestosDetalles[0]->porcentajeTOTALImp)/100)+1);
+								$vdetalle[$i]["precio"]       = round($factura->detalleDeFactura[$i]->precioTotal/$factura->detalleDeFactura[$i]->cantidadReal,$vcantidadDecimales) / ((intval($factura->detalleDeFactura[$i]->impuestosDetalles[0]->porcentajeTOTALImp)/100)+1);
 								$vdetalle[$i]["tax_rate"]     = intval($factura->detalleDeFactura[$i]->impuestosDetalles[0]->porcentajeTOTALImp);
-								
+								
 								$vdetalle[$i]["tax_category"] = 'IVA';
-							}
-						}
-						
-						
-						$vrete    = array();
-						if($vretencion>0 and $vporretencion>0)
-						{
-							$vrete[] = array(
-								'tax_category' =>  'RET_FUENTE',
-								'tax_rate' => floatval($vporretencion)
-								 );
-						}
-						
-						if($vretica>0 and $vvrrica>0)
-						{
-							$vrete[] = array(
-								'tax_category' =>  'RET_ICA',
-								'tax_rate' => floatval($vretica/10)
-								 );
-						}
-						
-						if($vretiva>0 and $vvrriva>0)
-						{
-							$vrete[] = array(
-								'tax_category' =>  'RET_IVA',
-								'tax_rate' => floatval($vretiva)
-								 );
-						}
-						
-
-						function fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle,$vretenciones)
-						{
-							$documento = array();
-							$items = array();
-							$numbering = array();
-							$notes = array();
-							$retentions = array();
-
-							$documento['actions']['send_dian']  = $vparametros["send_dian"];
-							$documento['actions']['send_email'] = $vparametros["send_email"];
+							}
+						}
+						
+						
+						$vrete    = array();
+						if($vretencion>0 and $vporretencion>0)
+						{
+							$vrete[] = array(
+								'tax_category' =>  'RET_FUENTE',
+								'tax_rate' => floatval($vporretencion)
+								 );
+						}
+						
+						if($vretica>0 and $vvrrica>0)
+						{
+							$vrete[] = array(
+								'tax_category' =>  'RET_ICA',
+								'tax_rate' => floatval($vretica/10)
+								 );
+						}
+						
+						if($vretiva>0 and $vvrriva>0)
+						{
+							$vrete[] = array(
+								'tax_category' =>  'RET_IVA',
+								'tax_rate' => floatval($vretiva)
+								 );
+						}
+						
+
+						function fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle,$vretenciones)
+						{
+							$documento = array();
+							$items = array();
+							$numbering = array();
+							$notes = array();
+							$retentions = array();
+
+							$documento['actions']['send_dian']  = $vparametros["send_dian"];
+							$documento['actions']['send_email'] = $vparametros["send_email"];
 							$documento['credit_note']['reason'] = 'ANULACION';
-
-							if($vparametros["modo"] == 1)
-							{	
-							  $documento['credit_note']['env'] = 'PRUEBAS';
-							}
-							else
-							{
-							  $documento['credit_note']['env'] = 'PRODUCCION';
-							}	
-
-							$documento['credit_note']['dataico_account_id'] = $vparametros["dataico_account_id"];
-							$documento['credit_note']['invoice_id'] = $vparametros["uuid"];
-
-
+
+							if($vparametros["modo"] == 1)
+							{	
+							  $documento['credit_note']['env'] = 'PRUEBAS';
+							}
+							else
+							{
+							  $documento['credit_note']['env'] = 'PRODUCCION';
+							}	
+
+							$documento['credit_note']['dataico_account_id'] = $vparametros["dataico_account_id"];
+							$documento['credit_note']['invoice_id'] = $vparametros["uuid"];
+
+
 							$documento['credit_note']['issue_date']    = $vencabezado["fecha_pago"];   
-
+
 							$documento['credit_note']['payment_means_type'] = $vencabezado["forma_pago"];
-
-							$documento['credit_note']['payment_means'] = $vencabezado["medio_pago"];
-
-							if(!empty($vencabezado["observacion"]))
-							{
-								$documento['credit_note']['notes'] = array($vencabezado["observacion"]);
-							}
-							
-
-							$numbering['resolution_number'] = $vencabezado["resolucion"];  
-							$numbering['prefix'] = $vencabezado["prefijo"];	
-
-							for($i=0;$i<count($vdetalle);$i++)
-							{
-								$impuestos = array( 
-									"tax_rate" =>  $vdetalle[$i]["tax_rate"],
-									"tax_category" =>  $vdetalle[$i]["tax_category"],
-								);
-
-								$item = array(
-									'sku' =>  $vdetalle[$i]["codigo"],
-									'quantity' => $vdetalle[$i]["cantidad"] ,
-									'description' => $vdetalle[$i]["descripcion"],
-									'price' => $vdetalle[$i]["precio"],
-									'original_price' => $vdetalle[$i]["precio"],
-									'taxes' => array($impuestos)
-									);
-								$items[$i] = $item;
-							}
-							
-
-							if(count($vretenciones)>0)
-							{
-								$documento['credit_note']['retentions'] = $vretenciones; 
-							}
-
-							$documento['credit_note']['numbering'] = $numbering;
-							$documento['credit_note']['customer']  = $vcliente;
-							$documento['credit_note']['items']     = $items;
-
-							$documento = json_encode($documento, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
-
-
-
-							$parms = array('data'  => $documento);
-							$parms = http_build_query($parms);
-							
-
-							$response = sc_webservice("curl", $vparametros["url"] , 80, "POST", $documento, array(CURLOPT_RETURNTRANSFER => true, CURLOPT_SSL_VERIFYPEER=>false, CURLOPT_HTTPHEADER => array(
-									'Content-Type: application/json', 'auth-token: ' . $vparametros["dataico_auth"]  ),), 30);
-
-							$vrespuesta = json_decode($response);
-							
-							$vcufe = "";
-							$venlace_pdf = "";
-							$venlace_xml = "";
-							$vqr_code = "";
-							$vfechavalidacion = date("Y-m-d H:i:s");
-							$vuuid = "";
-							
-							
-							if(isset($vrespuesta->uuid))
-							{
-								if(!empty($vrespuesta->uuid))
-								{
-									$vuuid = $vrespuesta->uuid;
-								}
-							
-								if(isset($vrespuesta->cufe))
-								{
-									if(!empty($vrespuesta->cufe))
-									{
-										$vcufe = $vrespuesta->cufe;
-									}
-								}
-
-								if(!empty($vcufe))
-								{
-									if(isset($vrespuesta->dian_status))
-									{
-										echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'>ESTADO DIAN: ".$vrespuesta->dian_status."</div>";
-									}
-
-									if(isset($vrespuesta->qrcode))
-									{
-										if(!empty($vrespuesta->qrcode))
-										{
-											$vqr_code = "data:image/png;base64,".base64_encode($vrespuesta->qrcode);
-										}
-									}
-
-									if(isset($vrespuesta->xml_url))
-									{
-										if(!empty($vrespuesta->xml_url))
-										{
-											echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vrespuesta->xml_url)."' target='_blank' style='color:white;'>Ver XML</a></div>";
-
-											$venlace_xml = $vrespuesta->xml_url;
-										}
-									}
-
-									if(isset($vrespuesta->pdf_url))
-									{
-										if(!empty($vrespuesta->pdf_url))
-										{
-											echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vrespuesta->pdf_url)."' target='_blank' style='color:white;'>Ver PDF</a></div>";
-
-											$venlace_pdf = $vrespuesta->pdf_url;
-										}
-									}
-									
-									return json_encode(array(
-								
-										"cufe"=>$vcufe,
-										"enlace_xml"=>$venlace_xml,
-										"enlace_pdf"=>$venlace_pdf,
-										"qr"=>$vqr_code,
-										"fecha_validacion"=>$vfechavalidacion,
-										"uuid" => $vuuid
-									));
-
-								}
-							}
-							else
-							{
-								if(isset($vrespuesta->errors))
-								{
-									return $vrespuesta->errors;
-								}
-							}
-						}
-
-						$vretorno  = fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle, $vrete);
-						$vretorno2 = json_decode($vretorno);
-
-						if(isset($vretorno[0]->error))
-						{
-							echo $vretorno[0]->error;
-						}
-						
-						if(isset($vretorno2->cufe))
-						{
-							
-							if(!empty($vretorno2->cufe))
-							{
-								$vcufe = $vretorno2->cufe;
-								$venlace_pdf = $vretorno2->enlace_pdf;
-								$venlace_xml = $vretorno2->enlace_xml;
-								$vqr_code = $vretorno2->qr;
-								$vfechavalidacion = $vretorno2->fecha_validacion;
-								$vuuid = $vretorno2->uuid;
-
-								$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vpjfe.$vnumero."',estado='200',id_empresa='".$idempresa."',tipo='DV',prefijo='".$vcodprefijo."',numero='".$vnumero."',tercero='".$vnit2."',fecha_factura='".$vfecha."',horacrea='".$vhoracrea."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$vqr_code."',enlace_pdf='".$venlace_pdf."',xml='".$venlace_xml."',nombre_archivos='".$vuuid."'";
-
+
+							$documento['credit_note']['payment_means'] = $vencabezado["medio_pago"];
+
+							if(!empty($vencabezado["observacion"]))
+							{
+								$documento['credit_note']['notes'] = array($vencabezado["observacion"]);
+							}
+							
+
+							$numbering['resolution_number'] = $vencabezado["resolucion"];  
+							$numbering['prefix']   = $vencabezado["prefijo"];	
+							$numbering['flexible'] = true;
+
+							for($i=0;$i<count($vdetalle);$i++)
+							{
+								$impuestos = array( 
+									"tax_rate" =>  $vdetalle[$i]["tax_rate"],
+									"tax_category" =>  $vdetalle[$i]["tax_category"],
+								);
+
+								$item = array(
+									'sku' =>  $vdetalle[$i]["codigo"],
+									'quantity' => $vdetalle[$i]["cantidad"] ,
+									'description' => $vdetalle[$i]["descripcion"],
+									'price' => $vdetalle[$i]["precio"],
+									'original_price' => $vdetalle[$i]["precio"],
+									'taxes' => array($impuestos)
+									);
+								$items[$i] = $item;
+							}
+							
+
+							if(count($vretenciones)>0)
+							{
+								$documento['credit_note']['retentions'] = $vretenciones; 
+							}
+
+							$documento['credit_note']['number']    = $vencabezado["numero"];
+							$documento['credit_note']['numbering'] = $numbering;
+							$documento['credit_note']['customer']  = $vcliente;
+							$documento['credit_note']['items']     = $items;
+
+							$documento = json_encode($documento, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+
+							$varchivo4 = fopen("dataico_nota_credito_json.json","w+");
+							fwrite($varchivo4,$documento);
+
+
+							$parms = array('data'  => $documento);
+							$parms = http_build_query($parms);
+							
+
+							$response = sc_webservice("curl", $vparametros["url"] , 80, "POST", $documento, array(CURLOPT_RETURNTRANSFER => true, CURLOPT_SSL_VERIFYPEER=>false, CURLOPT_HTTPHEADER => array(
+									'Content-Type: application/json', 'auth-token: ' . $vparametros["dataico_auth"]  ),), 30);
+
+							$vrespuesta = json_decode($response);
+							$varchivo3 = fopen("dataico_nota_credito_respuesta.json","w+");
+							fwrite($varchivo3,$response);
+							
+							$vcufe = "";
+							$venlace_pdf = "";
+							$venlace_xml = "";
+							$vqr_code = "";
+							$vfechavalidacion = date("Y-m-d H:i:s");
+							$vuuid = "";
+							
+							
+							if(isset($vrespuesta->uuid))
+							{
+								if(!empty($vrespuesta->uuid))
+								{
+									$vuuid = $vrespuesta->uuid;
+								}
+							
+								if(isset($vrespuesta->cufe))
+								{
+									if(!empty($vrespuesta->cufe))
+									{
+										$vcufe = $vrespuesta->cufe;
+									}
+								}
+
+								if(!empty($vcufe))
+								{
+									if(isset($vrespuesta->dian_status))
+									{
+										echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'>ESTADO DIAN: ".$vrespuesta->dian_status."</div>";
+									}
+
+									if(isset($vrespuesta->qrcode))
+									{
+										if(!empty($vrespuesta->qrcode))
+										{
+											$vqr_code = "data:image/png;base64,".base64_encode($vrespuesta->qrcode);
+										}
+									}
+
+									if(isset($vrespuesta->xml_url))
+									{
+										if(!empty($vrespuesta->xml_url))
+										{
+											echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vrespuesta->xml_url)."' target='_blank' style='color:white;'>Ver XML</a></div>";
+
+											$venlace_xml = $vrespuesta->xml_url;
+										}
+									}
+
+									if(isset($vrespuesta->pdf_url))
+									{
+										if(!empty($vrespuesta->pdf_url))
+										{
+											echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vrespuesta->pdf_url)."' target='_blank' style='color:white;'>Ver PDF</a></div>";
+
+											$venlace_pdf = $vrespuesta->pdf_url;
+										}
+									}
+									
+									return json_encode(array(
+								
+										"cufe"=>$vcufe,
+										"enlace_xml"=>$venlace_xml,
+										"enlace_pdf"=>$venlace_pdf,
+										"qr"=>$vqr_code,
+										"fecha_validacion"=>$vfechavalidacion,
+										"uuid" => $vuuid
+									));
+
+								}
+							}
+							else
+							{
+								if(isset($vrespuesta->errors))
+								{
+									return $vrespuesta;
+								}
+							}
+						}
+
+						$vretorno  = fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle, $vrete);
+						
+						if(isset($vretorno->errors))
+						{
+							print_r($vretorno);
+						}
+						else
+						{
+							$vretorno2 = json_decode($vretorno);
+						}
+						
+						if(isset($vretorno2->cufe))
+						{
+							
+							if(!empty($vretorno2->cufe))
+							{
+								$vcufe = $vretorno2->cufe;
+								$venlace_pdf = $vretorno2->enlace_pdf;
+								$venlace_xml = $vretorno2->enlace_xml;
+								$vqr_code = $vretorno2->qr;
+								$vfechavalidacion = $vretorno2->fecha_validacion;
+								$vuuid = $vretorno2->uuid;
+
+								$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vpjfe.$vnumero."',estado='200',id_empresa='".$idempresa."',tipo='DV',prefijo='".$vcodprefijo."',numero='".$vnumero."',tercero='".$vnit2."',fecha_factura='".$vfecha."',horacrea='".$vhoracrea."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$vqr_code."',enlace_pdf='".$venlace_pdf."',xml='".$venlace_xml."',nombre_archivos='".$vuuid."'";
+								
+
 								 
       if (in_array(strtolower($this->Ini->nm_con_conn_mysql['tpbanco']), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select * from cloud_kardex where id_empresa='".$idempresa."' and tipo='FV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'"; 
+          $nm_select = "select * from cloud_kardex where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'"; 
       }
       else
       { 
-          $nm_select = "select * from cloud_kardex where id_empresa='".$idempresa."' and tipo='FV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'"; 
+          $nm_select = "select * from cloud_kardex where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -4982,13 +6142,13 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $vsi = false;
           $vsi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-
-								if(isset($vsi[0][0]))
-								{
-									$sql="update cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vpjfe.$vnumero."',estado='200',tercero='".$vnit2."',fecha_factura='".$vfecha."',horacrea='".$vhoracrea."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$vqr_code."',enlace_pdf='".$venlace_pdf."',xml='".$venlace_xml."'',nombre_archivos='".$vuuid."'  where id_empresa='".$this->sc_temp_gid_empresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'";
-								}
-
+;
+
+								if(isset($vsi[0][0]))
+								{
+									$sql="update cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vpjfe.$vnumero."',estado='200',tercero='".$vnit2."',fecha_factura='".$vfecha."',horacrea='".$vhoracrea."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$vqr_code."',enlace_pdf='".$venlace_pdf."',xml='".$venlace_xml."'',nombre_archivos='".$vuuid."'  where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'";
+								}
+
 								
      $nm_select = $sql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -5000,16 +6160,16 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
-
-								$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."' where kardexid='".$vkardexid."'";
-
+      ;
+
+								$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."',sn_proveedor='".$vproveedor."',sn_token_emp='".$TokenEnterprise."',sn_token_pass='".$TokenAutorizacion."',sn_servidor='".$vServidor."' where kardexid='".$vkardexid."'";
+
 								if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
 {
     $this->Db->BeginTrans();
     $this->Ini->sc_tem_trans_banco = true;
 }
-
+
 								
      $nm_select = $vsql_update; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -5026,51 +6186,1236 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
              exit;
          }
          $rf->Close();
-      ;
+      ;
 								if ($this->Ini->sc_tem_trans_banco)
 {
     $this->Db->CommitTrans();
     $this->Ini->sc_tem_trans_banco = false;
 }
-
-							}
-						}
-						
-					break;
-						
-					case 'TECH':
-						
-					break;
-				}
-			}
-			else
-			{
-				$json = json_encode(array("factura"=>$factura),JSON_UNESCAPED_UNICODE);
-
-				$vnomjson = "json_".date("Y_m_d_H_i_s").".json";
-				$fh = fopen($vnomjson, 'w');
-				fwrite($fh, $json);
-				fclose($fh);
-
-			   $json = file_get_contents($vnomjson);
-				
-			   $php_array = json_decode($json, true);
-
-			   header("Content-type: text/xml");
-
-			   $xml = Array2XML::createXML('xml', $php_array);
-
-			   echo $xml->saveXML();
-			   
-			}
-
-	}
-	else
-	{
-		echo $vmensaje;
+
+							}
+						}
+						
+					break;
+						
+					case 'TECH':
+						
+					break;
+						
+					case 'FACILWEB':
+						$vfecha  = $vfechaemision;
+						$vfecha  = date_create($vfecha);
+						$vfecha  = date_format($vfecha,'Y-m-d');	
+						$vhora   = date("H:i:s");
+						$vprefijo= $vpjfe;
+						$vccnit  = $vnit;
+						$vdv     = $this->fDigito($vnit);
+						$vnombre = $vnombre;
+						$vcelular= $vtelef1;
+						$vdireccion= $direccion;
+						
+						$vsql = "select if(modo='DESARROLLO',servidor1_pruebas,servidor1) as servidor1,if(modo='DESARROLLO',servidor2_pruebas,servidor2) as servidor2,if(modo='DESARROLLO',token_pruebas,tokenempresa) as  tokenempresa,if(modo='DESARROLLO',password_pruebas,tokenpassword) as tokenpassword, if(modo='DESARROLLO',1,0) as modos,testsetId from cloud_webservicefe where id_empresa='".$idempresa."'";
+	
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $ds_fv2 = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $ds_fv2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $ds_fv2 = false;
+          $ds_fv2_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+						if(isset($ds_fv2[0][2]))
+						{
+							$TokenEnterprise   = $ds_fv2[0][2];
+							$TokenAutorizacion = $ds_fv2[0][3];
+						}
+						$vtoken = $TokenEnterprise;
+
+						$vcorreo = $vemail;
+						
+						$vciudad = 780;
+						if(!empty($vcod_departamentoymunicipio))
+						{
+							$vsql = "select id from municipalities where code='".$vcod_departamentoymunicipio."'";
+							 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vCiu = array();
+      $vciu = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vCiu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vciu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vCiu = false;
+          $vCiu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vciu = false;
+          $vciu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+							if(isset($vciu[0][0]))
+							{
+								$vciudad = $vciu[0][0];
+							}
+						}
+						else
+						{
+							$vsql = "select id from municipalities where code='".$vcod_departamento.$vcodmunicipio."'";
+							 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vCiu = array();
+      $vciu = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vCiu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vciu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vCiu = false;
+          $vCiu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vciu = false;
+          $vciu_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+							if(isset($vciu[0][0]))
+							{
+								$vciudad = $vciu[0][0];
+							}
+						}
+	
+						$vobservaciones = $vobserv;
+
+						$curl = curl_init();
+						$vurl   = $vServidor2;
+						if($vmodo=="DESARROLLO")
+						{
+							$vurl .= "/".$vTestSetId; 
+						}
+				
+						
+						$vdatos["billing_reference"]["number"]       =  $vFafectada;
+						$vdatos["billing_reference"]["uuid"]         =  $vcufe;
+						$vdatos["billing_reference"]["issue_date"]   =  $vfechaemisionfac;
+						
+						$vmotivo = "";
+						$vsql    = "select descripcion from motivodev where codigo='".$vMotNota."'";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vMot = array();
+      $vmot = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vMot[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vmot[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vMot = false;
+          $vMot_erro = $this->Db->ErrorMsg();
+          $vmot = false;
+          $vmot_erro = $this->Db->ErrorMsg();
+      } 
+;
+						if(isset($vmot[0][0]))
+						{
+							$vmotivo = $vmot[0][0];
+						}
+
+						$vdatos["discrepancyresponsecode"]        =  intval($vMotNota);
+						$vdatos["discrepancyresponsedescription"] =  $vmotivo;
+						
+						$vhora = date("H:i:s");
+						$vdatos["number"] =  intval($vnumero);
+						$vdatos["resolution_number"] = $vresolucion;
+						$vdatos["prefix"] =  $vpjfe;
+						$vdatos["type_document_id"] =  4;
+						$vdatos["date"] =  $vfecha;
+						$vdatos["time"] =  $vhora;
+						$vdatos["notes"] =  $vobservaciones;
+						$vdatos["sendmail"] =  true;
+						
+						$vdatos["establishment_phone"]       =  $vtelefonosuc;
+						$vdatos["establishment_address"]     =  $vdireccionsuc;
+						$vdatos["establishment_name"]        =  $vnombreestablecimiento;
+						$vdatos["establishment_email"]       =  $vcorreo_suc;
+						$vdatos["disable_confirmation_text"] =  true;
+						if(!empty($vlogo_suc))
+						{
+							$vruta_logo_suc = "../_lib/file/img/logos/$idempresa/".$vlogo_suc;
+							if(file_exists($vruta_logo_suc))
+							{
+								$contenidoBinario = file_get_contents($vruta_logo_suc);
+								$imagenComoBase64 = base64_encode($contenidoBinario);
+								
+								$vdatos["establishment_logo"] =  $imagenComoBase64;
+							}
+						}
+
+
+						if(!empty($vtexto_encabezado))
+						{
+							$vdatos["head_note"] =  $vtexto_encabezado;
+						}
+
+						if(!empty($vtexto_pie_pagina))
+						{
+							$vdatos["foot_note"] =  $vtexto_pie_pagina;
+						}
+						
+						$vccnit  = $vnit;
+						$vdv     = $this->fDigito($vnit);
+
+						$vdatos["customer"]["identification_number"] =  intval($vnit);
+						$vdatos["customer"]["dv"] =  $vdv;
+						$vdatos["customer"]["name"] =  $vnombre;
+						$vdatos["customer"]["phone"] =  trim($vtelef1);
+						$vdatos["customer"]["address"] =  $direccion;
+						$vdatos["customer"]["email"] =  trim($vemail);
+						$vdatos["customer"]["merchant_registration"] =  "0000000-00";
+						
+						if($vregimen==48)
+						{
+							$vregimen = "1";
+						}
+						else
+						{
+							$vregimen = "2";
+						}
+						$vtipodoc = 3;
+						switch($vtipodociden)
+						{
+							case 13:
+								$vtipodoc = "3";
+							break;
+							
+							case 31:
+								$vtipodoc = "6";
+							break;
+						}
+						$vtipopersona = 2;
+						if($vnatjuridica == 2)
+						{
+							$vtipopersona = "2";
+						}
+						else
+						{
+							$vtipopersona = "1"; 
+						}
+						
+						$vdatos["customer"]["type_document_identification_id"] =  intval($vtipodoc);
+						$vdatos["customer"]["type_organization_id"] =  intval($vtipopersona);
+						$vdatos["customer"]["municipality_id"] =  intval($vciudad);
+						$vdatos["customer"]["type_regime_id"] =  intval($vregimen);
+
+						$vdescripcion = '';
+						$vporciva = '';
+						$vcanlista= '0';
+						$vpreciou = '0';
+						$vprecioiva = '0';
+						$vparcvta = '0';
+						$vnota = '';
+						$vbodega = '';
+						$vcodigo = '';
+						$vbasetotal = 0;
+						$contador   = 0;
+						$vivatotal  = 0;
+						$vbasetotal = 0;
+						
+						$vivatotales      = Array();
+						$vbasetotales     = Array();
+						$vporcentajesivas = Array();
+						
+
+						if(count($factura->detalleDeFactura)>0)
+						{
+							for($i=0;$i<count($factura->detalleDeFactura);$i++)
+							{
+								
+								$vdescripcion = $factura->detalleDeFactura[$i]->descripcion;
+								$vporciva     = intval($factura->detalleDeFactura[$i]->impuestosDetalles[0]->porcentajeTOTALImp);
+								$vcanlista    = $factura->detalleDeFactura[$i]->cantidadReal;
+								$vparcvta     = $factura->detalleDeFactura[$i]->precioTotal;
+								if(!empty(strtoupper(trim($factura->detalleDeFactura[$i]->cantidadRealUnidadMedida))))
+								{
+									$vunidad  = strtoupper(trim($factura->detalleDeFactura[$i]->cantidadRealUnidadMedida));
+								}
+								
+								
+								$vprecioiva   = 0;
+								$vbaselinea   = 0;
+								
+								if($vporciva>0)
+								{
+									$vbaselinea   = $vparcvta/(($vporciva/100)+1);
+									$vprecioiva   = $vparcvta - $vbaselinea;
+									$vpreciou     = $vbaselinea/$vcanlista;
+									$vbasetotal  += $vbaselinea;
+									$vivatotal   += $vprecioiva;
+									$vporcentajesiva = $vporciva;
+								}
+								else
+								{
+									$vpreciou     = $vparcvta/$vcanlista;
+								}
+								
+								
+								if(count($vporcentajesivas)>0)
+								{
+									$v_vali = true;
+									for($e=0;$e<count($vporcentajesivas);$e++)
+									{
+										if($vporcentajesivas[$e]==$vporciva)
+										{
+											$vivatotales[$e]   += $vprecioiva;
+											$vbasetotales[$e]  += $vbaselinea;
+											$v_vali = false;
+										}
+									}
+									
+									if($v_vali)
+									{
+										$vivatotales [count($vporcentajesivas)]  = $vprecioiva;
+										$vbasetotales[count($vporcentajesivas)]  = $vbaselinea;
+										$vporcentajesivas[count($vporcentajesivas)] = $vporciva;
+									}
+								}
+								else
+								{
+									$vivatotales [0]  = $vprecioiva;
+									$vbasetotales[0]  = $vbaselinea;
+									$vporcentajesivas[0] = $vporciva;
+								}
+								
+								$vnota        = '';
+								$vbodega      = 0;
+								$vcodigo      = $factura->detalleDeFactura[$i]->codigoProducto;
+
+								$vdatos["credit_note_lines"][$contador]["unit_measure_id"] = $vunidad;
+								$vdatos["credit_note_lines"][$contador]["invoiced_quantity"] = $vcanlista;
+								
+								if($vporciva>0)
+								{
+									$vdatos["credit_note_lines"][$contador]["line_extension_amount"] = $vbaselinea;
+								}
+								else
+								{
+									$vdatos["credit_note_lines"][$contador]["line_extension_amount"] = $vparcvta;
+								}
+								
+								$vdatos["credit_note_lines"][$contador]["free_of_charge_indicator"] = false;
+
+								$vdatos["credit_note_lines"][$contador]["allowance_charges"][0]["charge_indicator"] =  false;
+								$vdatos["credit_note_lines"][$contador]["allowance_charges"][0]["allowance_charge_reason"] =  "DESCUENTO GENERAL";
+								$vdatos["credit_note_lines"][$contador]["allowance_charges"][0]["amount"] =  "0.00";
+								$vdatos["credit_note_lines"][$contador]["allowance_charges"][0]["base_amount"] =  $vparcvta;
+								
+								if($vporciva>0)
+								{
+									$vdatos["credit_note_lines"][$contador]["tax_totals"][0]["tax_id"] = 1;
+									$vdatos["credit_note_lines"][$contador]["tax_totals"][0]["tax_amount"] = $vprecioiva;
+									$vdatos["credit_note_lines"][$contador]["tax_totals"][0]["taxable_amount"] = $vbaselinea;
+									$vdatos["credit_note_lines"][$contador]["tax_totals"][0]["percent"] = $vporciva.".00";
+								}
+
+								if(isset($factura->detalleDeFactura[$i]->mandatorioNumeroIdentificacion))
+								{
+									if(!empty($factura->detalleDeFactura[$i]->mandatorioNumeroIdentificacion))
+									{
+										$vdatos["credit_note_lines"][$contador]["agentparty"] = $factura->detalleDeFactura[$i]->mandatorioNumeroIdentificacion;
+										$vdatos["credit_note_lines"][$contador]["agentparty_dv"] = $this->fDigito($factura->detalleDeFactura[$i]->mandatorioNumeroIdentificacion);
+									}
+								}
+
+
+								$vdatos["credit_note_lines"][$contador]["description"] = $vdescripcion;
+								$vdatos["credit_note_lines"][$contador]["code"] = $vcodigo;
+								$vdatos["credit_note_lines"][$contador]["type_item_identification_id"] = 4;
+								$vdatos["credit_note_lines"][$contador]["price_amount"] = $vpreciou;
+								$vdatos["credit_note_lines"][$contador]["base_quantity"] = $vcanlista;	
+								
+								if(!empty($factura->detalleDeFactura[$i]->nota))
+								{
+									$vdatos["credit_note_lines"][$contador]["notes"]  = $factura->detalleDeFactura[$i]->nota;
+								}
+
+								$contador++;
+							}
+
+						}
+						
+						$vdatos["allowance_charges"][0]["discount_id"] =  1;
+						$vdatos["allowance_charges"][0]["charge_indicator"] =  false;
+						$vdatos["allowance_charges"][0]["allowance_charge_reason"] =  "DESCUENTO GENERAL";
+						$vdatos["allowance_charges"][0]["amount"] =  "0.00";
+						
+						if(count($vporcentajesivas)>0)
+						{
+							for($i=0;$i<count($vporcentajesivas);$i++)
+							{
+								$vdatos["tax_totals"][$i]["tax_id"] = 1;
+								$vdatos["tax_totals"][$i]["tax_amount"] = $vivatotales[$i];
+								$vdatos["tax_totals"][$i]["percent"] = $vporcentajesivas[$i];
+								$vdatos["tax_totals"][$i]["taxable_amount"] = $vbasetotales[$i];
+							}
+						}
+						
+						if($vivatotal>0)
+						{
+							$vdatos["allowance_charges"][0]["base_amount"] =  $vbasetotal;
+							$vdatos["legal_monetary_totals"]["line_extension_amount"] =  $vbasetotal;
+							$vdatos["legal_monetary_totals"]["tax_exclusive_amount"] =  $vbasetotal;
+						}
+						else
+						{
+							$vdatos["allowance_charges"][0]["base_amount"] =  $vtotal;
+							$vdatos["legal_monetary_totals"]["line_extension_amount"] =  $vtotal;
+							$vdatos["legal_monetary_totals"]["tax_exclusive_amount"] =  "0.00";
+						}
+						
+						$vdatos["legal_monetary_totals"]["tax_inclusive_amount"] =  $vtotal;
+						$vdatos["legal_monetary_totals"]["allowance_total_amount"] =  "0.00";
+						$vdatos["legal_monetary_totals"]["charge_total_amount"] =  "0.00";
+						$vdatos["legal_monetary_totals"]["payable_amount"] =  $vtotal;
+						
+
+						$vdatos = json_encode($vdatos, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);	
+
+						$varchivo = fopen("nota_credito.json","w+");
+						fwrite($varchivo,$vdatos);
+						
+						$varchivo2 = fopen("nota_credito_trazabilidad.txt","w+");
+						fwrite($varchivo2,$vseguimiento);
+						
+
+						$vdconexion = array(
+						  CURLOPT_URL => $vurl,
+						  CURLOPT_RETURNTRANSFER => true,
+						  CURLOPT_ENCODING => '',
+						  CURLOPT_MAXREDIRS => 10,
+						  CURLOPT_TIMEOUT => 0,
+						  CURLOPT_FOLLOWLOCATION => true,
+						  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+						  CURLOPT_CUSTOMREQUEST => 'POST',
+						  CURLOPT_POSTFIELDS =>$vdatos,
+						  CURLOPT_HTTPHEADER => array(
+							'Content-Type: application/json',
+							'Accept: application/json',
+							'Authorization: Bearer '.$vtoken
+						  ),
+						);
+
+						curl_setopt_array($curl, $vdconexion);
+
+						$response = curl_exec($curl);
+						$vinvoicexml = "";
+						$vzipinvoicexml = "";
+						$vunsignedinvoicexml = "";
+						$vreqfe = "";
+						$vrptafe = "";
+						$vurlinvoicexml = "";
+						$vurlinvoicepdf = "";
+						$vurlinvoiceattached = "";
+						$vcufe = "";
+						$vQRStr  = "";
+
+						curl_close($curl);
+						$json = json_decode($response);
+
+
+						$varchivo2 = fopen("nota_credito_respuesta.json","w+");
+						fwrite($varchivo2,$response);
+
+						if(isset($json->errors))
+						{	
+							$vmensaje = "";
+							foreach($json->errors as $clave=>$valor){
+								$vmensaje .= strtoupper($clave).": <br>";
+								$vinfo = "";
+								foreach($valor as $ids=>$valores)
+								{
+									$vinfo .= "*. ".$valores."<br>";
+								}
+								$vmensaje .= $vinfo;		
+							}
+
+							echo $vmensaje;
+						}
+						else
+						{
+							if(isset($json->message))
+							{
+							}
+
+							if(isset($json->invoicexml))
+							{
+								$vinvoicexml = (string)$json->invoicexml;
+							}
+
+							if(isset($json->zipinvoicexml))
+							{
+								$vzipinvoicexml = (string)$json->zipinvoicexml;
+							}
+
+							if(isset($json->urlinvoicexml))
+							{
+								$vurlinvoicexml = (string)$json->urlinvoicexml;
+							}
+
+							if(isset($json->urlinvoicepdf))
+							{
+								$vurlinvoicepdf = (string)$json->urlinvoicepdf;
+							}
+
+							if(isset($json->cude))
+							{
+								$vcufe = (string)$json->cude;
+							}
+
+							if(isset($json->QRStr))
+							{
+								$vQRStr = (string)$json->QRStr;
+							}
+
+							$vsql = "select nit from cloud_empresas where id_empresa='".$idempresa."'";
+							 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $r5 = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $r5 = false;
+          $r5_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+							if(isset($r5[0][0]))
+							{
+								$vurlinvoicepdf = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$r5[0][0]."/".$vurlinvoicepdf;
+								$vurlinvoicexml = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$r5[0][0]."/".$vurlinvoicexml; 
+							}
+							
+							$vfechavalidacion = date("Y-m-d H:i:s");
+							$vqr_code    = $vQRStr;
+							$venlace_pdf = $vurlinvoicepdf;
+							$venlace_xml = $vurlinvoicexml;
+							$vuuid       = $vcufe;
+
+							if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->IsValid))
+							{
+								if($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->IsValid=="true")
+								{
+									$vruta = $_SERVER["DOCUMENT_ROOT"];
+
+									if (!file_exists($vruta.'/qr'))
+									{
+										mkdir($vruta.'/qr', 0777, true);
+									}
+									
+									$vrutaqr1        = $vruta.'/qr/';
+									$vnombrearchivo  = $vpjfe.$vconsecutivo.'.jpg';
+									$vrutaqr3        = '';
+									
+									if(!empty($vnombre_pc_red))
+									{
+										$vrutaqr3 = '\\\\'.$vnombre_pc_red.'\\qr\\'.$vpjfe.$vnumero.'.jpg';
+									}
+									
+									try
+									{
+										$this->fCrearQR($vnombrearchivo,$vQRStr,$vrutaqr1);
+									}
+									catch (Exception $e)
+									{
+									}
+
+									$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vpjfe.$vnumero."',estado='200',id_empresa='".$idempresa."',tipo='DV',prefijo='".$vcodprefijo."',numero='".$vnumero."',tercero='".$vnit2."',fecha_factura='".$vfecha."',horacrea='".$vhoracrea."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$vqr_code."',enlace_pdf='".$venlace_pdf."',xml='".$venlace_xml."',nombre_archivos='".$vuuid."'";
+
+									 
+      if (in_array(strtolower($this->Ini->nm_con_conn_mysql['tpbanco']), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select * from cloud_kardex where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'"; 
+      }
+      else
+      { 
+          $nm_select = "select * from cloud_kardex where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSi = array();
+      $vsi = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
+                 $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
+                 $SCrx->fields[3] = (string)$SCrx->fields[3];
+                 $SCrx->fields[9] = (strpos(strtolower($SCrx->fields[9]), "e")) ? (float)$SCrx->fields[9] : $SCrx->fields[9];
+                 $SCrx->fields[9] = (string)$SCrx->fields[9];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSi[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsi[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSi = false;
+          $vSi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vsi = false;
+          $vsi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+
+									if(isset($vsi[0][0]))
+									{
+										$sql="update cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vpjfe.$vnumero."',estado='200',tercero='".$vnit2."',fecha_factura='".$vfecha."',horacrea='".$vhoracrea."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$vqr_code."',enlace_pdf='".$venlace_pdf."',xml='".$venlace_xml."',nombre_archivos='".$vuuid."'  where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'";
+									}
+
+
+									
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Ini->nm_db_conn_mysql->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_mysql->ErrorMsg());
+             exit;
+         }
+         $rf->Close();
+      ;
+
+									$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."',sn_enlacepdf='".$venlace_pdf."',sn_enlacexml='".$venlace_xml."',sn_proveedor='".$vproveedor."',sn_token_emp='".$TokenEnterprise."',sn_token_pass='".$TokenAutorizacion."',sn_servidor='".$vServidor."',sn_rutaqr='".$vrutaqr3."' where kardexid='".$vkardexid."'";
+
+									if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+									
+     $nm_select = $vsql_update; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+									
+									$sihay = false;
+
+									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
+
+									if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+									 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiCUFETNS = array();
+      $vsicufetns = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiCUFETNS[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsicufetns[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiCUFETNS = false;
+          $vSiCUFETNS_erro = $this->Db->ErrorMsg();
+          $vsicufetns = false;
+          $vsicufetns_erro = $this->Db->ErrorMsg();
+      } 
+;
+									if(isset($vsicufetns[0][0]))
+									{
+										$sihay = true;
+									}
+									else
+									{
+										$sihay = false;
+									}
+									if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+									$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
+
+									if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+									 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiCUFETNS2 = array();
+      $vsicufetns2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiCUFETNS2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsicufetns2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiCUFETNS2 = false;
+          $vSiCUFETNS2_erro = $this->Db->ErrorMsg();
+          $vsicufetns2 = false;
+          $vsicufetns2_erro = $this->Db->ErrorMsg();
+      } 
+;
+									if(isset($vsicufetns2[0][0]))
+									{
+										$sihay = true;
+									}
+									else
+									{
+										$sihay = false;
+									}
+									if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+									if($sihay)
+									{
+										$vsql_update = "update kardex set cufe='".$vcufe."',estadodian='EXITOSA' where kardexid='".$vkardexid."'";
+										if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+										
+     $nm_select = $vsql_update; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+									}
+
+									echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->StatusMessage."</div>";
+									
+									if(!empty($vcorreo_copia))
+									{
+										$vemail = $vcorreo_copia;
+										
+										$curl = curl_init();
+										curl_setopt_array($curl, array(
+										  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2020/public/api/ubl2.1/send-email',
+										  CURLOPT_RETURNTRANSFER => true,
+										  CURLOPT_ENCODING => '',
+										  CURLOPT_MAXREDIRS => 10,
+										  CURLOPT_TIMEOUT => 0,
+										  CURLOPT_FOLLOWLOCATION => true,
+										  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+										  CURLOPT_CUSTOMREQUEST => 'POST',
+										  CURLOPT_POSTFIELDS =>'{
+											"prefix": "'.$vpjfe.'",
+											"number": "'.$vnumero.'",
+											"alternate_email": "'.$vemail.'"
+										}
+										',
+										  CURLOPT_HTTPHEADER => array(
+											'Content-Type: application/json',
+											'accept: application/json',
+											'Authorization: Bearer '.$vtoken
+										  ),
+										));
+
+										$response = curl_exec($curl);
+										curl_close($curl);
+									}
+	
+								}
+								else
+								{
+									if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage))
+									{
+										if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+										{
+											if(!empty($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+											{
+												$vjson_error = json_decode($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string);
+												
+												if(is_array($vjson_error))
+												{
+													foreach($vjson_error as $vkey=>$vdata)
+													{
+														echo $vdata."<br>";
+													}
+												}
+												else
+												{
+													$veltexto = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+													$vvalidando = false;
+													
+													$pos = strpos($veltexto, "Documento con CUFE");
+													if ($pos === false)
+													{
+													}
+													else
+													{
+														$vvalidando = true;
+													}
+													
+													$pos2 = strpos($veltexto, "Documento procesado anteriormente");
+													if ($pos2 === false)
+													{
+													}
+													else
+													{
+														$vvalidando = true;
+													}
+													
+													
+													if($vvalidando)
+													{
+														$sql="insert into cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vpjfe.$vnumero."',estado='200',id_empresa='".$idempresa."',tipo='DV',prefijo='".$vcodprefijo."',numero='".$vnumero."',tercero='".$vnit2."',fecha_factura='".$vfecha."',horacrea='".$vhoracrea."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$vqr_code."',enlace_pdf='".$venlace_pdf."',xml='".$venlace_xml."',nombre_archivos='".$vuuid."'";
+
+														 
+      if (in_array(strtolower($this->Ini->nm_con_conn_mysql['tpbanco']), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select * from cloud_kardex where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'"; 
+      }
+      else
+      { 
+          $nm_select = "select * from cloud_kardex where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSi = array();
+      $vsi = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
+                 $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
+                 $SCrx->fields[3] = (string)$SCrx->fields[3];
+                 $SCrx->fields[9] = (strpos(strtolower($SCrx->fields[9]), "e")) ? (float)$SCrx->fields[9] : $SCrx->fields[9];
+                 $SCrx->fields[9] = (string)$SCrx->fields[9];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSi[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsi[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSi = false;
+          $vSi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $vsi = false;
+          $vsi_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+
+														if(isset($vsi[0][0]))
+														{
+															$sql="update cloud_kardex SET cufe = '".$vcufe."',numero_fe='".$vpjfe.$vnumero."',estado='200',tercero='".$vnit2."',fecha_factura='".$vfecha."',horacrea='".$vhoracrea."',fecha_validacion='".$vfechavalidacion."',qr_base64='".$vqr_code."',enlace_pdf='".$venlace_pdf."',xml='".$venlace_xml."',nombre_archivos='".$vuuid."'  where id_empresa='".$idempresa."' and tipo='DV' and prefijo='".$vcodprefijo."' and numero='".$vnumero."'";
+														}
+
+
+														
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Ini->nm_db_conn_mysql->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_mysql->ErrorMsg());
+             exit;
+         }
+         $rf->Close();
+      ;
+
+														$vsql_update = "update kardex set sn_cufe='".$vcufe."',sn_pjfe='".$vpjfe."',sn_fe_validacion='".$vfechavalidacion."',sn_enlacepdf='".$venlace_pdf."',sn_enlacexml='".$venlace_xml."' where kardexid='".$vkardexid."'";
+
+														if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+														
+     $nm_select = $vsql_update; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+														if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+														
+														$sihay = false;
+
+														$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'CUFE'";
+
+														if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+														 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiCUFETNS = array();
+      $vsicufetns = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiCUFETNS[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsicufetns[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiCUFETNS = false;
+          $vSiCUFETNS_erro = $this->Db->ErrorMsg();
+          $vsicufetns = false;
+          $vsicufetns_erro = $this->Db->ErrorMsg();
+      } 
+;
+														if(isset($vsicufetns[0][0]))
+														{
+															$sihay = true;
+														}
+														else
+														{
+															$sihay = false;
+														}
+														if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+														$vsql = "SELECT RDB\$FIELD_NAME AS CAMPO FROM RDB\$RELATION_FIELDS WHERE RDB\$RELATION_NAME = 'KARDEX' AND RDB\$FIELD_NAME = 'ESTADODIAN'";
+
+														if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+														 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiCUFETNS2 = array();
+      $vsicufetns2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiCUFETNS2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsicufetns2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiCUFETNS2 = false;
+          $vSiCUFETNS2_erro = $this->Db->ErrorMsg();
+          $vsicufetns2 = false;
+          $vsicufetns2_erro = $this->Db->ErrorMsg();
+      } 
+;
+														if(isset($vsicufetns2[0][0]))
+														{
+															$sihay = true;
+														}
+														else
+														{
+															$sihay = false;
+														}
+														if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+
+														if($sihay)
+														{
+															$vsql_update = "update kardex set cufe='".$vcufe."',estadodian='EXITOSA' where kardexid='".$vkardexid."'";
+															if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+															
+     $nm_select = $vsql_update; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+															if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+														}
+														
+														echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;' >DOCUMENTO ACEPTADO CON ÉXITO!!!</div>";
+													}
+													else
+													{
+														echo $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+													}
+												}
+											}
+											else
+											{
+												echo "Un error en el envío.";
+											}
+										}
+									}
+								}
+							}
+						}
+					break;
+				}
+			}
+			else
+			{
+				$varchivo2 = fopen("nota_credito_trazabilidad.txt","w+");
+				fwrite($varchivo2,$vseguimiento);
+				
+				$json = json_encode(array("factura"=>$factura),JSON_UNESCAPED_UNICODE);
+
+				$vnomjson = "json_".date("Y_m_d_H_i_s").".json";
+				$fh = fopen($vnomjson, 'w');
+				fwrite($fh, $json);
+				fclose($fh);
+				
+				if($vbug_xml=="NO")
+				{
+				   $json = file_get_contents($vnomjson);
+
+				   $php_array = json_decode($json, true);
+
+				   header("Content-type: text/xml");
+
+				   $xml = Array2XML::createXML('xml', $php_array);
+
+				   echo $xml->saveXML();
+				}
+			   
+			}
+
+	}
+	else
+	{
+		echo $vmensaje;
 	}
 if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
-if (isset($this->sc_temp_gid_empresa)) {$_SESSION['gid_empresa'] = $this->sc_temp_gid_empresa;}
 $_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'off';
 }
    function nm_conv_data_db($dt_in, $form_in, $form_out)
@@ -5250,19 +7595,33 @@ $_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'off';
    {
        $_SESSION["g_kardexid"] = "";
    }
-   if (isset($_POST["gid_empresa"])) 
+   if (isset($_POST["gpost"])) 
    {
-       $_SESSION["gid_empresa"] = $_POST["gid_empresa"];
-       nm_limpa_str_cEnviarDevolucion($_SESSION["gid_empresa"]);
+       $_SESSION["gpost"] = $_POST["gpost"];
+       nm_limpa_str_cEnviarDevolucion($_SESSION["gpost"]);
    }
-   if (isset($_GET["gid_empresa"])) 
+   if (isset($_GET["gpost"])) 
    {
-       $_SESSION["gid_empresa"] = $_GET["gid_empresa"];
-       nm_limpa_str_cEnviarDevolucion($_SESSION["gid_empresa"]);
+       $_SESSION["gpost"] = $_GET["gpost"];
+       nm_limpa_str_cEnviarDevolucion($_SESSION["gpost"]);
    }
-   if (!isset($_SESSION["gid_empresa"])) 
+   if (!isset($_SESSION["gpost"])) 
    {
-       $_SESSION["gid_empresa"] = "";
+       $_SESSION["gpost"] = "";
+   }
+   if (isset($_POST["gvalidatns"])) 
+   {
+       $_SESSION["gvalidatns"] = $_POST["gvalidatns"];
+       nm_limpa_str_cEnviarDevolucion($_SESSION["gvalidatns"]);
+   }
+   if (isset($_GET["gvalidatns"])) 
+   {
+       $_SESSION["gvalidatns"] = $_GET["gvalidatns"];
+       nm_limpa_str_cEnviarDevolucion($_SESSION["gvalidatns"]);
+   }
+   if (!isset($_SESSION["gvalidatns"])) 
+   {
+       $_SESSION["gvalidatns"] = "";
    }
    if (!empty($glo_perfil))  
    { 
@@ -5429,10 +7788,15 @@ $_SESSION['scriptcase']['cEnviarDevolucion']['contr_erro'] = 'off';
            $_SESSION['g_kardexid'] = $g_kardexid;
            nm_limpa_str_cEnviarDevolucion($_SESSION["g_kardexid"]);
        }
-       if (isset($gid_empresa)) 
+       if (isset($gpost)) 
        {
-           $_SESSION['gid_empresa'] = $gid_empresa;
-           nm_limpa_str_cEnviarDevolucion($_SESSION["gid_empresa"]);
+           $_SESSION['gpost'] = $gpost;
+           nm_limpa_str_cEnviarDevolucion($_SESSION["gpost"]);
+       }
+       if (isset($gvalidatns)) 
+       {
+           $_SESSION['gvalidatns'] = $gvalidatns;
+           nm_limpa_str_cEnviarDevolucion($_SESSION["gvalidatns"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

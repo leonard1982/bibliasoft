@@ -78,6 +78,11 @@ class grid_kardex_fv_tns_grid
    var $sn_cufe;
    var $sn_enlacepdf;
    var $sn_enlacexml;
+   var $sn_fe_validacion;
+   var $sn_proveedor;
+   var $sn_token_emp;
+   var $sn_token_pass;
+   var $sn_servidor;
    var $cliente;
    var $ndoc;
 //--- 
@@ -312,9 +317,10 @@ class grid_kardex_fv_tns_grid
        $this->aba_iframe = true;
    }
    $this->nmgp_botoes['group_1'] = "on";
+   $this->nmgp_botoes['group_3'] = "on";
    $this->nmgp_botoes['group_1'] = "on";
-   $this->nmgp_botoes['group_2'] = "on";
-   $this->nmgp_botoes['exit'] = "on";
+   $this->nmgp_botoes['group_3'] = "on";
+   $this->nmgp_botoes['exit'] = "off";
    $this->nmgp_botoes['first'] = "on";
    $this->nmgp_botoes['back'] = "on";
    $this->nmgp_botoes['forward'] = "on";
@@ -335,18 +341,17 @@ class grid_kardex_fv_tns_grid
    $this->nmgp_botoes['qtline'] = "on";
    $this->nmgp_botoes['navpage'] = "on";
    $this->nmgp_botoes['rows'] = "on";
-   $this->nmgp_botoes['summary'] = "on";
-   $this->nmgp_botoes['sel_col'] = "on";
-   $this->nmgp_botoes['sort_col'] = "on";
    $this->nmgp_botoes['qsearch'] = "on";
-   $this->nmgp_botoes['gantt'] = "on";
    $this->nmgp_botoes['groupby'] = "on";
-   $this->nmgp_botoes['gridsave'] = "on";
+   $this->nmgp_botoes['gridsavesession'] = "on";
+   $this->nmgp_botoes['reload'] = "on";
    $this->nmgp_botoes['btn_enviar_fe'] = "on";
    $this->nmgp_botoes['btn_consultar_folios'] = "on";
    $this->nmgp_botoes['btn_consultar_estado'] = "on";
-   $this->nmgp_botoes['btn_recargar'] = "on";
    $this->nmgp_botoes['btn_soporte'] = "on";
+   $this->nmgp_botoes['btn_generar_proveedor'] = "on";
+   $this->nmgp_botoes['btn_regenerar_propio'] = "on";
+   $this->nmgp_botoes['btn_volver'] = "on";
    $this->Cmps_ord_def['FECHA'] = " desc";
    $this->Cmps_ord_def['NOMBRE'] = " asc";
    $this->Cmps_ord_def['TOTAL'] = " asc";
@@ -388,12 +393,14 @@ class grid_kardex_fv_tns_grid
        {
            $Busca_temp = NM_conv_charset($Busca_temp, $_SESSION['scriptcase']['charset'], "UTF-8");
        }
-       $this->codcomp = $Busca_temp['codcomp']; 
-       $tmp_pos = strpos($this->codcomp, "##@@");
-       if ($tmp_pos !== false && !is_array($this->codcomp))
+       $this->fecha = $Busca_temp['fecha']; 
+       $tmp_pos = strpos($this->fecha, "##@@");
+       if ($tmp_pos !== false && !is_array($this->fecha))
        {
-           $this->codcomp = substr($this->codcomp, 0, $tmp_pos);
+           $this->fecha = substr($this->fecha, 0, $tmp_pos);
        }
+       $fecha_2 = $Busca_temp['fecha_input_2']; 
+       $this->fecha_2 = $Busca_temp['fecha_input_2']; 
        $this->codprefijo = $Busca_temp['codprefijo']; 
        $tmp_pos = strpos($this->codprefijo, "##@@");
        if ($tmp_pos !== false && !is_array($this->codprefijo))
@@ -412,25 +419,17 @@ class grid_kardex_fv_tns_grid
        {
            $this->periodo = substr($this->periodo, 0, $tmp_pos);
        }
-       $this->fecha = $Busca_temp['fecha']; 
-       $tmp_pos = strpos($this->fecha, "##@@");
-       if ($tmp_pos !== false && !is_array($this->fecha))
-       {
-           $this->fecha = substr($this->fecha, 0, $tmp_pos);
-       }
-       $fecha_2 = $Busca_temp['fecha_input_2']; 
-       $this->fecha_2 = $Busca_temp['fecha_input_2']; 
-       $this->cliente = $Busca_temp['cliente']; 
-       $tmp_pos = strpos($this->cliente, "##@@");
-       if ($tmp_pos !== false && !is_array($this->cliente))
-       {
-           $this->cliente = substr($this->cliente, 0, $tmp_pos);
-       }
        $this->fecasentad = $Busca_temp['fecasentad']; 
        $tmp_pos = strpos($this->fecasentad, "##@@");
        if ($tmp_pos !== false && !is_array($this->fecasentad))
        {
            $this->fecasentad = substr($this->fecasentad, 0, $tmp_pos);
+       }
+       $this->cliente = $Busca_temp['cliente']; 
+       $tmp_pos = strpos($this->cliente, "##@@");
+       if ($tmp_pos !== false && !is_array($this->cliente))
+       {
+           $this->cliente = substr($this->cliente, 0, $tmp_pos);
        }
    } 
    else 
@@ -458,7 +457,53 @@ if (!isset($_SESSION['g_PJFE'])) {$_SESSION['g_PJFE'] = "";}
 if (!isset($this->sc_temp_g_PJFE)) {$this->sc_temp_g_PJFE = (isset($_SESSION['g_PJFE'])) ? $_SESSION['g_PJFE'] : "";}
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
- $vsql = "select if((select w.modo from cloud_webservicefe w where w.id_empresa='".$this->sc_temp_gidempresa."')='DESARROLLO',prefijo_prueba,prefijo) as prefijo from cloud_prefijos where tipo='FV' and cod_prefijo='".$this->codprefijo ."' and id_empresa='".$this->sc_temp_gidempresa."'";
+  $vsql = "select validar_codcliente_tns from cloud_empresas where id_empresa='".$this->sc_temp_gidempresa."'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vAutoTercero = array();
+      $this->vautotercero = array();
+      if ($SCrx = $this->Ini->nm_db_conn_mysql->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vAutoTercero[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vautotercero[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vAutoTercero = false;
+          $this->vAutoTercero_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+          $this->vautotercero = false;
+          $this->vautotercero_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
+      } 
+;
+
+if(isset($this->vautotercero[0][0]))
+{	
+	if($this->vautotercero[0][0]=="SI")
+	{
+		$this->NM_cmp_hidden["ico_cliente"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['php_cmp_sel']["ico_cliente"] = "off"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["ico_cliente"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['php_cmp_sel']["ico_cliente"] = "on"; }
+	}
+}
+
+$vsql = "select if((select w.modo from cloud_webservicefe w where w.id_empresa='".$this->sc_temp_gidempresa."' limit 1)='DESARROLLO',prefijo_prueba,prefijo) as prefijo from cloud_prefijos where tipo='FV' and cod_prefijo='".$this->codprefijo ."' and id_empresa='".$this->sc_temp_gidempresa."'";
+
+
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -488,250 +533,280 @@ if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SES
           $this->vpjfe = false;
           $this->vpjfe_erro = $this->Ini->nm_db_conn_mysql->ErrorMsg();
       } 
-;
-if(isset($this->vpjfe[0][0]))
-{
-	$this->sc_temp_g_PJFE = $this->vpjfe[0][0];
-}
-
-
-if($this->sc_temp_gproveedor=="DATAICO")
-{
-	$this->nmgp_botoes["btn_consultar_estado"] = "off";;
-	$this->nmgp_botoes["btn_soporte"] = "off";;
-	$this->nmgp_botoes["btn_consultar_folios"] = "off";;
-}
-
-?>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery-1.11.1.js'); ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js/bootstrap/css', 'bootstrap.min.css'); ?>">
-<script src="<?php echo sc_url_library('prj', 'js/bootstrap/js', 'bootstrap.min.js'); ?>"></script>
-
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
-
-<script>
-	
-$(document).ready(function(){
-  
-    
-});
-	
-$(document).ajaxStart(function(){
-
-	$.blockUI({ 
-		message: 'Espere por favor...', 
-		css: { 
-			border: 'none', 
-			padding: '15px', 
-			backgroundColor: '#000', 
-			'-webkit-border-radius': '10px', 
-			'-moz-border-radius': '10px', 
-			opacity: .5, 
-			color: '#fff'
-		}
-	});
-
-}).ajaxStop(function(){
-
-		$.unblockUI();
-
-});
-	
-
-	function fEstadoFE(nfactura)
-	{
-		$.post("../cEstadoFacturaElectronica/index.php",{
-
-			nfactura:nfactura
-
-		},function(r){
-
-			var obj = JSON.parse(r);
-
-			switch(obj.codigo)
-			{
-				case 200:
-					alert("Esta factura ya fue enviada satisfactoriamente.");
-				break;
-				case 101:
-					alert("El token del emisor no es válido.");
-				break;
-				case 105:
-					alert("Error al extraer los datos, verifique que la información enviada sea correcta.");
-				break;
-				case 102:
-					alert("Error en validaciones.");
-				break;
-				case 103:
-					alert("Ha ocurrido un error en la ejecución del servicio, por favor intente mas tarde.");
-				break;
-			}
-		});
-	}
-
-	function fEnviarFE(kardexid,cufe)
-	{
-		if($.isEmptyObject(cufe))
-		{
-			alertify.confirm('Confirme', '¿Desea enviar el documento?'
-				,function(){ 
-					
-					function checkConnection() 
-					{
-						$.ajax({
-							url: 'https://www.solucionesnavarro.net/fe/procesos.php',
-							async: false,
-							data: {'tag' : 'connection'}
-						})
-						.fail(function() { alert('No hay conexion a internet, intentelo nuevamente!!!'); })
-						.done(function() { 
-							
-							$.post("../cEnviarFactura/index.php",{
-								
-								kardexid:kardexid
-
-							},function(r){
-
-								console.log(r);
-								alertify.alert('Información',r, function(){ 
-									
-									var indicio = $("#SC_fast_search_top").val();
-									if(!$.isEmptyObject(indicio))
-									{
-									   $("#SC_fast_search_top").val(indicio);
-										nm_gp_submit_qsearch('top');
-									}
-									else
-									{
-										sc_btn_btn_recargar();
-									}
-
-								});
-							});
-						});
-					}
-					checkConnection();
-				}		
-				,function(){ 
-
-				}
-			);
-		}
-		else
-		{
-			alertify.confirm('Información', 'El documento ya fue enviado, ¿Desea consultar su estado?'
-			,function()
-			 { 
-				fConsultarEstado(kardexid); 
-			 }
-			,function()
-			 { 
-
-			 });
-		}
-	}
-
-	function fConsultarEstado(kardexid)
-	{
-		function checkConnection() {
-			$.ajax({
-				url: 'https://www.solucionesnavarro.net/fe/procesos.php',
-				async: false,
-				data: {'tag' : 'connection'}
-			})
-			.fail(function() { alert('No hay conexion a internet, intentelo nuevamente!!!'); })
-			.done(function() { 
-
-				$.post("../cConsultarEstado/index.php",{
-
-					kardexid:kardexid
-
-				},function(r){
-
-					console.log(r);
-					alertify.alert('Información',r, function(){ window.location='../grid_kardex_fv_tns/'; });
-
-				});
-			})
-		}
-
-		checkConnection();
-	}
-
-	function fPDFFactura(documento,tipo)
-	{
-		function checkConnection() {
-			$.ajax({
-				url: 'https://www.solucionesnavarro.net/fe/procesos.php',
-				async: false,
-				data: {'tag' : 'connection'}
-			})
-			.fail(function() { alert('No hay conexion a internet, intentelo nuevamente!!!'); })
-			.done(function() { 
-
-				console.log("fPDFFactura documento: ");
-				console.log(documento);
-
-				$.post("../blank_generar_pdf_fe/index.php",{
-
-					documento:documento,
-					tipo:tipo,
-					codcomp:'FV'
-
-				},function(r){
-
-					console.log("Data fPDFFactura: ");
-					console.log(r)
-
-					if($.isEmptyObject(r))
-					{
-						if(tipo=='pdf')
-						{
-							window.open('../blank_generar_pdf_fe/'+documento+'.pdf','PDF','fullscreen=yes');
-						}
-						else
-						{
-							window.open('../blank_generar_pdf_fe/'+documento+'.xml','XML','fullscreen=yes');
-						}   
-					}
-					else
-					{
-						alertify.alert('Información',r, function(){ });
-					}
-					
-					sc_btn_btn_recargar();
-				});
-			})
-		}
-
-		checkConnection();
-	}
-
-	function fFoliosRestantes()
-	{
-		$.post("../cFoliosFE/index.php",{ok:""},function(r){
-
-			var obj = JSON.parse(r);
-
-			if(!$.isEmptyObject(obj.foliosRestantes))
-			{
-				alertify.alert('Información',"Folios Restantes: "+obj.foliosRestantes, function(){ });
-			}
-		});
-	}
-</script>
-<style>
-	input{
-		
-		height:50px;
-	}
-</style>
+;
+if(isset($this->vpjfe[0][0]))
+{
+	$this->sc_temp_g_PJFE = $this->vpjfe[0][0];
+}
+
+
+if($this->sc_temp_gproveedor=="DATAICO")
+{
+	$this->nmgp_botoes["btn_consultar_estado"] = "off";;
+	$this->nmgp_botoes["btn_soporte"] = "off";;
+	$this->nmgp_botoes["btn_consultar_folios"] = "off";;
+}
+
+?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-1.11.1.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js/bootstrap/css', 'bootstrap.min.css'); ?>">
+<script src="<?php echo sc_url_library('prj', 'js/bootstrap/js', 'bootstrap.min.js'); ?>"></script>
+
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+
+<script>
+	
+$(document).ready(function(){
+  
+    
+});
+	
+
+	
+
+function fEstadoFE(nfactura)
+{
+	$.post("../cEstadoFacturaElectronica/index.php",{
+
+		nfactura:nfactura
+
+	},function(r){
+
+		var obj = JSON.parse(r);
+
+		switch(obj.codigo)
+		{
+			case 200:
+				alert("Esta factura ya fue enviada satisfactoriamente.");
+			break;
+			case 101:
+				alert("El token del emisor no es válido.");
+			break;
+			case 105:
+				alert("Error al extraer los datos, verifique que la información enviada sea correcta.");
+			break;
+			case 102:
+				alert("Error en validaciones.");
+			break;
+			case 103:
+				alert("Ha ocurrido un error en la ejecución del servicio, por favor intente mas tarde.");
+			break;
+		}
+	});
+}
+
+function fEnviarFE(kardexid,cufe)
+{
+	if($.isEmptyObject(cufe))
+	{
+		alertify.confirm('Confirme', '¿Desea enviar el documento?'
+			,function(){ 
+						
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+
+				$.post("../cEnviarFactura/index.php",{
+
+					kardexid:kardexid
+
+				},function(r){
+
+					$.unblockUI();
+
+					console.log(r);
+					alertify.alert('Información',r, function(){ 
+
+						nm_gp_submit_ajax ('igual', 'breload');
+
+						
+
+					});
+				});
+
+			}		
+			,function(){ 
+
+			}
+		);
+	}
+	else
+	{
+		alertify.confirm('Información', 'El documento ya fue enviado, ¿Desea consultar su estado?'
+		,function()
+		 { 
+			fConsultarEstado(kardexid); 
+		 }
+		,function()
+		 { 
+
+		 });
+	}
+}
+
+function fConsultarEstado(kardexid)
+{
+	function checkConnection() {
+		$.ajax({
+			url: 'https://www.solucionesnavarro.net/fe/procesos.php',
+			async: false,
+			data: {'tag' : 'connection'}
+		})
+		.fail(function() { alert('No hay conexion a internet, intentelo nuevamente!!!'); })
+		.done(function() { 
+
+			$.post("../cConsultarEstado/index.php",{
+
+				kardexid:kardexid
+
+			},function(r){
+
+				console.log(r);
+				alertify.alert('Información',r, function(){ window.location='../grid_kardex_fv_tns/'; });
+
+			});
+		})
+	}
+
+	checkConnection();
+}
+
+function fPDFFactura(documento,tipo)
+{
+	console.log("fPDFFactura documento: ");
+	console.log(documento);
+	
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_generar_pdf_fe/index.php",{
+
+		documento:documento,
+		tipo:tipo,
+		codcomp:'FV'
+
+	},function(r){
+		
+		$.unblockUI();
+
+		console.log("Data fPDFFactura: ");
+		console.log(r)
+
+		if($.isEmptyObject(r))
+		{
+			if(tipo=='pdf')
+			{
+				window.open('../blank_generar_pdf_fe/'+documento+'.pdf','PDF','fullscreen=yes');
+			}
+			else
+			{
+				window.open('../blank_generar_pdf_fe/'+documento+'.xml','XML','fullscreen=yes');
+			}   
+		}
+		else
+		{
+			alertify.alert('Información',r, function(){ });
+		}
+
+		sc_btn_btn_recargar();
+	});
+}
+
+function fPDFFacturaVarios(documento,tipo,proveedor,token,pass,servidor,urlpdf)
+{
+
+	console.log("fPDFFactura documento: ");
+	console.log(documento);
+	
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_generar_pdf_fe_varios/index.php",{
+
+		documento:documento,
+		tipo:tipo,
+		codcomp:'FV',
+		proveedor:proveedor,
+		token:token,
+		pass:pass,
+		servidor:servidor,
+		urlpdf:urlpdf
+
+	},function(r){
+		
+		$.unblockUI();
+
+		console.log("Data fPDFFactura: ");
+		console.log(r)
+
+		if($.isEmptyObject(r))
+		{
+			if(tipo=='pdf')
+			{
+				window.open('../blank_generar_pdf_fe_varios/'+documento+'.pdf','PDF','fullscreen=yes');
+			}
+			else
+			{
+				window.open('../blank_generar_pdf_fe_varios/'+documento+'.xml','XML','fullscreen=yes');
+			}   
+		}
+		else
+		{
+			alertify.alert('Información',r, function(){ });
+		}
+
+		sc_btn_btn_recargar();
+	});
+}
+
+function fFoliosRestantes()
+{
+	$.post("../cFoliosFE/index.php",{ok:""},function(r){
+
+		var obj = JSON.parse(r);
+
+		if(!$.isEmptyObject(obj.foliosRestantes))
+		{
+			alertify.alert('Información',"Folios Restantes: "+obj.foliosRestantes, function(){ });
+		}
+	});
+}
+</script>
 <?php
 if (isset($this->sc_temp_gidempresa)) {$_SESSION['gidempresa'] = $this->sc_temp_gidempresa;}
 if (isset($this->sc_temp_g_PJFE)) {$_SESSION['g_PJFE'] = $this->sc_temp_g_PJFE;}
@@ -780,8 +855,10 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       $this->nmgp_botoes['btn_enviar_fe'] = "off";
       $this->nmgp_botoes['btn_consultar_estado'] = "off";
       $this->nmgp_botoes['btn_soporte'] = "off";
+      $this->nmgp_botoes['btn_generar_proveedor'] = "off";
+      $this->nmgp_botoes['btn_regenerar_propio'] = "off";
    } 
-   if ($this->nmgp_botoes['btn_enviar_fe'] != "on" && $this->nmgp_botoes['btn_consultar_estado'] != "on" && $this->nmgp_botoes['btn_soporte'] != "on") 
+   if ($this->nmgp_botoes['btn_enviar_fe'] != "on" && $this->nmgp_botoes['btn_consultar_estado'] != "on" && $this->nmgp_botoes['btn_soporte'] != "on" && $this->nmgp_botoes['btn_generar_proveedor'] != "on" && $this->nmgp_botoes['btn_regenerar_propio'] != "on") 
    { 
       $this->NM_btn_run_show = false;
    } 
@@ -1091,15 +1168,15 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp"; 
+       $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, SN_FE_VALIDACION, SN_PROVEEDOR, SN_TOKEN_EMP, SN_TOKEN_PASS, SN_SERVIDOR, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     K.SN_ENLACEPDF,     K.SN_ENLACEXML,     K.SN_FE_VALIDACION,     SN_PROVEEDOR,      SN_TOKEN_EMP,     SN_TOKEN_PASS,     SN_SERVIDOR FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp"; 
+       $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, SN_FE_VALIDACION, SN_PROVEEDOR, SN_TOKEN_EMP, SN_TOKEN_PASS, SN_SERVIDOR, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     K.SN_ENLACEPDF,     K.SN_ENLACEXML,     K.SN_FE_VALIDACION,     SN_PROVEEDOR,      SN_TOKEN_EMP,     SN_TOKEN_PASS,     SN_SERVIDOR FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp"; 
+       $nmgp_select = "SELECT NUM, FECHA, NOMBRE, EMAIL2, TOTAL, KARDEXID, CODCOMP, CODPREFIJO, NUMERO, PERIODO, FORMAPAGO, FECVENCE, HORACREA, NIT_TERCERO, SN_CUFE, SN_ENLACEPDF, SN_ENLACEXML, SN_FE_VALIDACION, SN_PROVEEDOR, SN_TOKEN_EMP, SN_TOKEN_PASS, SN_SERVIDOR, CLIENTE, NDOC from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     K.SN_ENLACEPDF,     K.SN_ENLACEXML,     K.SN_FE_VALIDACION,     SN_PROVEEDOR,      SN_TOKEN_EMP,     SN_TOKEN_PASS,     SN_SERVIDOR FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq']; 
    $nmgp_order_by = ""; 
@@ -1200,10 +1277,15 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
        $this->sn_cufe = $this->rs_grid->fields[14] ;  
        $this->sn_enlacepdf = $this->rs_grid->fields[15] ;  
        $this->sn_enlacexml = $this->rs_grid->fields[16] ;  
-       $this->cliente = $this->rs_grid->fields[17] ;  
+       $this->sn_fe_validacion = $this->rs_grid->fields[17] ;  
+       $this->sn_proveedor = $this->rs_grid->fields[18] ;  
+       $this->sn_token_emp = $this->rs_grid->fields[19] ;  
+       $this->sn_token_pass = $this->rs_grid->fields[20] ;  
+       $this->sn_servidor = $this->rs_grid->fields[21] ;  
+       $this->cliente = $this->rs_grid->fields[22] ;  
        $this->cliente = (string)$this->cliente;
-       $this->ndoc = $this->rs_grid->fields[18] ;  
-       $GLOBALS["cliente"] = $this->rs_grid->fields[17] ;  
+       $this->ndoc = $this->rs_grid->fields[23] ;  
+       $GLOBALS["cliente"] = $this->rs_grid->fields[22] ;  
        $GLOBALS["cliente"] = (string)$GLOBALS["cliente"] ;
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
@@ -1231,8 +1313,13 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
            $this->sn_cufe = $this->rs_grid->fields[14] ;  
            $this->sn_enlacepdf = $this->rs_grid->fields[15] ;  
            $this->sn_enlacexml = $this->rs_grid->fields[16] ;  
-           $this->cliente = $this->rs_grid->fields[17] ;  
-           $this->ndoc = $this->rs_grid->fields[18] ;  
+           $this->sn_fe_validacion = $this->rs_grid->fields[17] ;  
+           $this->sn_proveedor = $this->rs_grid->fields[18] ;  
+           $this->sn_token_emp = $this->rs_grid->fields[19] ;  
+           $this->sn_token_pass = $this->rs_grid->fields[20] ;  
+           $this->sn_servidor = $this->rs_grid->fields[21] ;  
+           $this->cliente = $this->rs_grid->fields[22] ;  
+           $this->ndoc = $this->rs_grid->fields[23] ;  
        } 
    } 
    $this->nmgp_reg_inicial = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['final'] + 1;
@@ -1324,7 +1411,49 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("    <input type=\"hidden\" name=\"nmgp_url_saida\">\r\n");
            $nm_saida->saida("    <input type=\"hidden\" name=\"script_case_init\">\r\n");
            $nm_saida->saida("   </form>\r\n");
-           $nm_saida->saida("   <script type=\"text/javascript\" src=\"grid_kardex_fv_tns_jquery.js\"></script>\r\n");
+           $confirmButtonClass = '';
+           $cancelButtonClass  = '';
+           $confirmButtonText  = $this->Ini->Nm_lang['lang_btns_cfrm'];
+           $cancelButtonText   = $this->Ini->Nm_lang['lang_btns_cncl'];
+           $confirmButtonFA    = '';
+           $cancelButtonFA     = '';
+           $confirmButtonFAPos = '';
+           $cancelButtonFAPos  = '';
+           if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['style']) && '' != $this->arr_buttons['bsweetalert_ok']['style']) {
+               $confirmButtonClass = 'scButton_' . $this->arr_buttons['bsweetalert_ok']['style'];
+           }
+           if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['style']) && '' != $this->arr_buttons['bsweetalert_cancel']['style']) {
+               $cancelButtonClass = 'scButton_' . $this->arr_buttons['bsweetalert_cancel']['style'];
+           }
+           if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['value']) && '' != $this->arr_buttons['bsweetalert_ok']['value']) {
+               $confirmButtonText = $this->arr_buttons['bsweetalert_ok']['value'];
+           }
+           if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['value']) && '' != $this->arr_buttons['bsweetalert_cancel']['value']) {
+               $cancelButtonText = $this->arr_buttons['bsweetalert_cancel']['value'];
+           }
+           if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['fontawesomeicon']) && '' != $this->arr_buttons['bsweetalert_ok']['fontawesomeicon']) {
+               $confirmButtonFA = $this->arr_buttons['bsweetalert_ok']['fontawesomeicon'];
+           }
+           if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']) && '' != $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']) {
+               $cancelButtonFA = $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon'];
+           }
+           if (isset($this->arr_buttons['bsweetalert_ok']) && isset($this->arr_buttons['bsweetalert_ok']['display_position']) && 'img_right' != $this->arr_buttons['bsweetalert_ok']['display_position']) {
+               $confirmButtonFAPos = 'text_right';
+           }
+           if (isset($this->arr_buttons['bsweetalert_cancel']) && isset($this->arr_buttons['bsweetalert_cancel']['display_position']) && 'img_right' != $this->arr_buttons['bsweetalert_cancel']['display_position']) {
+               $cancelButtonFAPos = 'text_right';
+           }
+           $nm_saida->saida("   <script type=\"text/javascript\">\r\n");
+           $nm_saida->saida("     var scSweetAlertConfirmButton = \"" . $confirmButtonClass . "\";\r\n");
+           $nm_saida->saida("     var scSweetAlertCancelButton = \"" . $cancelButtonClass . "\";\r\n");
+           $nm_saida->saida("     var scSweetAlertConfirmButtonText = \"" . $confirmButtonText . "\";\r\n");
+           $nm_saida->saida("     var scSweetAlertCancelButtonText = \"" . $cancelButtonText . "\";\r\n");
+           $nm_saida->saida("     var scSweetAlertConfirmButtonFA = \"" . $confirmButtonFA . "\";\r\n");
+           $nm_saida->saida("     var scSweetAlertCancelButtonFA = \"" . $cancelButtonFA . "\";\r\n");
+           $nm_saida->saida("     var scSweetAlertConfirmButtonFAPos = \"" . $confirmButtonFAPos . "\";\r\n");
+           $nm_saida->saida("     var scSweetAlertCancelButtonFAPos = \"" . $cancelButtonFAPos . "\";\r\n");
+           $nm_saida->saida("   </script>\r\n");
+           $nm_saida->saida("   <script type=\"text/javascript\" src=\"grid_kardex_fv_tns_jquery-3.6.0.min.js\"></script>\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"grid_kardex_fv_tns_ajax.js\"></script>\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"grid_kardex_fv_tns_message.js\"></script>\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\">\r\n");
@@ -1333,11 +1462,13 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("     var sc_ajaxBordS = '" . $this->Ini->Border_s_ajax . "';\r\n");
            $nm_saida->saida("     var sc_ajaxBordW = '" . $this->Ini->Border_w_ajax . "';\r\n");
            $nm_saida->saida("   </script>\r\n");
-           $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery/js/jquery.js\"></script>\r\n");
+           $nm_saida->saida("   <script type=\"text/javascript\" src=\"../_lib/lib/js/jquery-3.6.0.min.js\"></script>\r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_sweetalert.css\" />\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/sweetalert/sweetalert2.all.min.js\"></script>\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/sweetalert/polyfill.min.js\"></script>\r\n");
            $nm_saida->saida("<script type=\"text/javascript\" src=\"../_lib/lib/js/frameControl.js\"></script>\r\n");
+           $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"" . $this->Ini->path_prod . "/third/jquery_plugin/viewerjs/viewer.css\" />\r\n");
+           $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/viewerjs/viewer.js\"></script>\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\">\r\n");
            $nm_saida->saida("      if (!window.Promise)\r\n");
            $nm_saida->saida("      {\r\n");
@@ -1355,6 +1486,23 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("         })\r\n");
            $nm_saida->saida("      })\r\n");
            $nm_saida->saida("   </script>\r\n");
+           $nm_saida->saida("   <script type=\"text/javascript\">\r\n");
+           $nm_saida->saida("     var applicationKeys = '';\r\n");
+           $nm_saida->saida("     var hotkeyList = '';\r\n");
+           $nm_saida->saida("     function execHotKey(e, h) {\r\n");
+           $nm_saida->saida("         var hotkey_fired = false\r\n");
+           $nm_saida->saida("         switch (true) {\r\n");
+           $nm_saida->saida("         }\r\n");
+           $nm_saida->saida("         if (hotkey_fired) {\r\n");
+           $nm_saida->saida("             e.preventDefault();\r\n");
+           $nm_saida->saida("             return false;\r\n");
+           $nm_saida->saida("         } else {\r\n");
+           $nm_saida->saida("             return true;\r\n");
+           $nm_saida->saida("         }\r\n");
+           $nm_saida->saida("     }\r\n");
+           $nm_saida->saida("   </script>\r\n");
+           $nm_saida->saida("   <script type=\"text/javascript\" src=\"../_lib/lib/js/hotkeys.inc.js\"></script>\r\n");
+           $nm_saida->saida("   <script type=\"text/javascript\" src=\"../_lib/lib/js/hotkeys_setup.js\"></script>\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery/js/jquery-ui.js\"></script>\r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/jquery/css/smoothness/jquery-ui.css\" type=\"text/css\" media=\"screen\" />\r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/font-awesome/css/all.min.css\" type=\"text/css\" media=\"screen\" />\r\n");
@@ -1362,6 +1510,8 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/malsup-blockui/jquery.blockUI.js\"></script>\r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/jquery_plugin/dropdown_check_list/css/ui.dropdownchecklist.standalone.css\" type=\"text/css\" />\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/dropdown_check_list/js/ui.dropdownchecklist.js\"></script>\r\n");
+           $nm_saida->saida("   <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/jquery_plugin/select2/css/select2.min.css\" type=\"text/css\" />\r\n");
+           $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/select2/js/select2.full.min.js\"></script>\r\n");
            $nm_saida->saida("        <script type=\"text/javascript\">\r\n");
            $nm_saida->saida("          var sc_pathToTB = '" . $this->Ini->path_prod . "/third/jquery_plugin/thickbox/';\r\n");
            $nm_saida->saida("          var sc_tbLangClose = \"" . html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) . "\";\r\n");
@@ -1451,7 +1601,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("  function scSetFixedHeadersPosition(gridHeaders, headerPlaceholder) {\r\n");
            $nm_saida->saida("   if(gridHeaders)\r\n");
            $nm_saida->saida("   {\r\n");
-           $nm_saida->saida("       headerPlaceholder.css({\"top\": 0" . $gridWidthCorrection . ", \"left\": (Math.floor(gridHeaders.position().left) - $(document).scrollLeft()" . $gridWidthCorrection . ") + \"px\"});\r\n");
+           $nm_saida->saida("       headerPlaceholder.css({\"top\": 0" . $gridWidthCorrection . ", \"left\": (Math.floor(gridHeaders.offset().left) - $(document).scrollLeft()" . $gridWidthCorrection . ") + \"px\"});\r\n");
            $nm_saida->saida("   }\r\n");
            $nm_saida->saida("  }\r\n");
            $nm_saida->saida("  function scIsHeaderVisible(gridHeaders) {\r\n");
@@ -1618,6 +1768,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("         tipo = 'save';\r\n");
            $nm_saida->saida("       }\r\n");
            $nm_saida->saida("       if ($(\"#id_div_save_grid_new_\" + pos).css('display') != 'none') {\r\n");
+               $nm_saida->saida("         $(\"#save_grid_\" + pos).removeClass(\"selected\");\r\n");
            $nm_saida->saida("         $(\"#id_div_save_grid_new_\" + pos).hide();\r\n");
                $nm_saida->saida("         return;\r\n");
            $nm_saida->saida("       }\r\n");
@@ -1625,7 +1776,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("     else\r\n");
            $nm_saida->saida("     {\r\n");
            $nm_saida->saida("         if ($(\"#sc_id_save_grid_placeholder_\" + pos).css('display') != 'none') {\r\n");
-               $nm_saida->saida("             $(\"#save_grid_\" + pos).removeClass(\"selected\")\r\n");
+               $nm_saida->saida("             $(\"#save_grid_\" + pos).removeClass(\"selected\");\r\n");
                $nm_saida->saida("             scBtnSaveGridHide(pos);\r\n");
                $nm_saida->saida("             return;\r\n");
            $nm_saida->saida("         }\r\n");
@@ -1680,8 +1831,7 @@ $nm_saida->saida("                }\r\n");
 $nm_saida->saida("            }\r\n");
 $nm_saida->saida("            if (oResp[\"Fsave_ok\"] && oResp[\"Fsave_ok\"] != '') {\r\n");
 $nm_saida->saida("                  if(oResp[\"Fsave_ok\"] == 'save_conf_grid')\r\n");
-$nm_saida->saida("                  {\r\n");
-$nm_saida->saida("                    sweetAlertConfig = {\r\n");
+$nm_saida->saida("                  {                    sweetAlertConfig = {\r\n");
 $nm_saida->saida("                        customClass: {\r\n");
 $nm_saida->saida("                            popup: 'scSweetAlertPopup',\r\n");
 $nm_saida->saida("                            header: 'scSweetAlertHeader',\r\n");
@@ -1699,8 +1849,7 @@ $nm_saida->saida("                    sweetAlertConfig['customClass']['content']
 $nm_saida->saida("                    sweetAlertConfig['timer'] = 3000;\r\n");
 $nm_saida->saida("                    sweetAlertConfig[\"position\"] = \"\";\r\n");
 $nm_saida->saida("                    sweetAlertConfig[\"text\"] = \"" . $this->Ini->Nm_lang['lang_othr_savegrid_save_msge'] . "\";\r\n");
-$nm_saida->saida("                    Swal.fire(sweetAlertConfig);\r\n");
-$nm_saida->saida("                  }\r\n");
+$nm_saida->saida("                    Swal.fire(sweetAlertConfig);                  }\r\n");
 $nm_saida->saida("                  else if(oResp[\"Fsave_ok\"] == 'select_conf_grid')\r\n");
 $nm_saida->saida("                  {\r\n");
 $nm_saida->saida("                      nm_gp_move('igual', '0');\r\n");
@@ -1730,7 +1879,7 @@ $nm_saida->saida("}\r\n");
            $nm_saida->saida("       {\r\n");
            $nm_saida->saida("           $('#id_div_save_grid_new_' + pos).offset({top:($('#save_grid_' + pos).offset().top-($('#save_grid_' + pos).height()/2)-$('#id_div_save_grid_new_' + pos).height())});\r\n");
            $nm_saida->saida("       }\r\n");
-           $nm_saida->saida("       if(($('#save_grid_' + pos).position().left + $('#id_div_save_grid_new_' + pos).outerWidth() +10) >= str_width)\r\n");
+           $nm_saida->saida("       if(($('#save_grid_' + pos).offset().left + $('#id_div_save_grid_new_' + pos).outerWidth() +10) >= str_width)\r\n");
            $nm_saida->saida("       {\r\n");
            $nm_saida->saida("           $('#id_div_save_grid_new_' + pos).css('left', str_width - $('#id_div_save_grid_new_' + pos).outerWidth() - 50)\r\n");
            $nm_saida->saida("       }\r\n");
@@ -2079,7 +2228,7 @@ $nm_saida->saida("}\r\n");
            {
                $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
            }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
@@ -2088,7 +2237,7 @@ $nm_saida->saida("}\r\n");
            $nm_saida->saida("       </TD>\r\n");
            $nm_saida->saida("     </TR>\r\n");
            $nm_saida->saida("   </TABLE>\r\n");
-           $nm_saida->saida("  <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery/js/jquery.js\"></script>\r\n");
+           $nm_saida->saida("  <script type=\"text/javascript\" src=\"../_lib/lib/js/jquery-3.6.0.min.js\"></script>\r\n");
            $nm_saida->saida("  <script type=\"text/javascript\">\r\n");
            $nm_saida->saida("     $(\"#Bprint_print\").addClass(\"disabled\").prop(\"disabled\", true);\r\n");
            $nm_saida->saida("     $(function() {\r\n");
@@ -2113,7 +2262,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        }
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opcao'] == "pdf" && !$this->Print_All)
@@ -2620,15 +2769,6 @@ $nm_saida->saida("}\r\n");
              } 
          } 
      } 
-     $NM_seq_lab = 1;
-     foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels'] as $NM_cmp => $NM_lab)
-     {
-         if (empty($NM_lab) || $NM_lab == "&nbsp;")
-         {
-             $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels'][$NM_cmp] = "No_Label" . $NM_seq_lab;
-             $NM_seq_lab++;
-         }
-     } 
    } 
  }
  function NM_label_num()
@@ -2964,35 +3104,6 @@ $nm_saida->saida("}\r\n");
    $this->sc_where_orig    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_orig'];
    $this->sc_where_atual   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq'];
    $this->sc_where_filtro  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq_filtro'];
-// 
-   $SC_Label = (isset($this->New_label['num'])) ? $this->New_label['num'] : "# TNS"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['num'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['enviar'])) ? $this->New_label['enviar'] : "ENVIAR"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['enviar'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "FECHA"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['fecha'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['numfe'])) ? $this->New_label['numfe'] : "DOC"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['numfe'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['nombre'])) ? $this->New_label['nombre'] : "NOMBRE"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['nombre'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['email2'])) ? $this->New_label['email2'] : "CORREO"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['email2'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['ico_cliente'])) ? $this->New_label['ico_cliente'] : ""; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['ico_cliente'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['total'])) ? $this->New_label['total'] : "TOTAL"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['total'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['detalle'])) ? $this->New_label['detalle'] : "DETALLE"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['detalle'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['pdf'])) ? $this->New_label['pdf'] : "PDF"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['pdf'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['avisos'])) ? $this->New_label['avisos'] : "XML"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['avisos'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['adjuntos'])) ? $this->New_label['adjuntos'] : ""; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['adjuntos'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['sc_field_0'])) ? $this->New_label['sc_field_0'] : ""; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['sc_field_0'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['kardexid'])) ? $this->New_label['kardexid'] : "ID"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['labels']['kardexid'] = $SC_Label; 
    if (!$this->grid_emb_form && isset($_SESSION['scriptcase']['sc_apl_conf']['grid_kardex_fv_tns']['lig_edit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_kardex_fv_tns']['lig_edit'] != '')
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['mostra_edit'] = $_SESSION['scriptcase']['sc_apl_conf']['grid_kardex_fv_tns']['lig_edit'];
@@ -3261,10 +3372,15 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf
           $this->sn_cufe = $this->rs_grid->fields[14] ;  
           $this->sn_enlacepdf = $this->rs_grid->fields[15] ;  
           $this->sn_enlacexml = $this->rs_grid->fields[16] ;  
-          $this->cliente = $this->rs_grid->fields[17] ;  
+          $this->sn_fe_validacion = $this->rs_grid->fields[17] ;  
+          $this->sn_proveedor = $this->rs_grid->fields[18] ;  
+          $this->sn_token_emp = $this->rs_grid->fields[19] ;  
+          $this->sn_token_pass = $this->rs_grid->fields[20] ;  
+          $this->sn_servidor = $this->rs_grid->fields[21] ;  
+          $this->cliente = $this->rs_grid->fields[22] ;  
           $this->cliente = (string)$this->cliente;
-          $this->ndoc = $this->rs_grid->fields[18] ;  
-          $GLOBALS["cliente"] = $this->rs_grid->fields[17] ;  
+          $this->ndoc = $this->rs_grid->fields[23] ;  
+          $GLOBALS["cliente"] = $this->rs_grid->fields[22] ;  
           $GLOBALS["cliente"] = (string)$GLOBALS["cliente"];
           $this->SC_seq_page++; 
           if ($this->NM_btn_run_show)
@@ -3294,7 +3410,7 @@ if (!isset($_SESSION['gautotercero'])) {$_SESSION['gautotercero'] = "";}
 if (!isset($this->sc_temp_gautotercero)) {$this->sc_temp_gautotercero = (isset($_SESSION['gautotercero'])) ? $_SESSION['gautotercero'] : "";}
 if (!isset($_SESSION['gidempresa'])) {$_SESSION['gidempresa'] = "";}
 if (!isset($this->sc_temp_gidempresa)) {$this->sc_temp_gidempresa = (isset($_SESSION['gidempresa'])) ? $_SESSION['gidempresa'] : "";}
- $this->numero  = intval($this->numero );
+  $this->numero  = intval($this->numero );
 $vfecha  = $this->fecha ;
 $vfecha  = substr($vfecha, 0, 9);
 $vfecha  = date_create($vfecha);
@@ -3378,9 +3494,37 @@ if(!empty($vcufe))
 	if($this->sc_temp_gfacturaonline=="SI" and !empty($this->sc_temp_gservidorfacturas))
 	{
 		$this->pdf  = "<a href='".$this->sc_temp_gservidorfacturas."?idempresa=".$this->sc_temp_gidempresa."&id=".$this->kardexid ."' target='_blank' ><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
+		
+		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+		
+		$this->avisos  = "<img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"xml\");return false;'/>";
+		
+		$file = "../blank_generar_pdf_fe/".$vnfe.".xml";
+		if (file_exists($file))
+		{
+			$vruta_file = $_SERVER["DOCUMENT_ROOT"].'/xmls/'.$vnfe.'.xml';
+			if(!file_exists($vruta_file))
+			{
+				copy($file,$vruta_file);
+			}
+			$this->avisos  = "<a href='".$file."' target='_blank' ><img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;'/></a>";
+			$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+		}
 	}
 	else
 	{
+		if($this->sc_temp_gproveedor=="FACILWEB")
+		{
+			
+				$vpdf = stripslashes($this->sn_enlacepdf );
+				$vxml = stripslashes($this->sn_enlacexml );
+				
+				$this->pdf  = "<a href='".$vpdf."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' /></a>";
+				$this->avisos  = "<a href='".$vxml."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' /></a>";
+				
+			$this->enviar  = "<img src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' />";
+		}
+		
 		if($this->sc_temp_gproveedor=="DATAICO")
 		{
 			
@@ -3392,6 +3536,7 @@ if(!empty($vcufe))
 				
 			$this->enviar  = "<img src='../_lib/img/scriptcase__NM__ico__NM__mail_information_32.png' />";
 		}
+		
 		if($this->sc_temp_gproveedor=="HKA")
 		{
 			$this->pdf  = "<img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' onclick='fPDFFactura(\"".$vnfe."\",\"pdf\");return false;' />";
@@ -3417,10 +3562,27 @@ if(!empty($vcufe))
 			}
 		}
 		
+		$vpdf = stripslashes($this->sn_enlacepdf );
+		$vxml = stripslashes($this->sn_enlacexml );
+		
+		if(!empty($this->sn_proveedor ) and !empty($this->sn_token_emp ) and !empty($this->sn_token_pass ) and !empty($this->sn_servidor ))
+		{
+			$this->pdf  = "<img src='../_lib/img/grp__NM__ico__NM__fwc_ico_pdf.png' style='width:30px;cursor:pointer;' onclick='fPDFFacturaVarios(\"".$vnfe."\",\"pdf\",\"".$this->sn_proveedor ."\",\"".$this->sn_token_emp ."\",\"".$this->sn_token_pass ."\",\"".$this->sn_servidor ."\",\"".$vpdf."\");return false;' />"; 
+			
+			$this->avisos  = "<img src='../_lib/img/scriptcase__NM__ico__NM__code_line_32.png' style='width:30px;cursor:pointer;' onclick='fPDFFacturaVarios(\"".$vnfe."\",\"xml\",\"".$this->sn_proveedor ."\",\"".$this->sn_token_emp ."\",\"".$this->sn_token_pass ."\",\"".$this->sn_servidor ."\",\"".$vxml."\");return false;' />"; 
+		}
 	}
 }
 else
 {
+	if($this->sc_temp_gproveedor=="FACILWEB")
+	{
+		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
+		$vnfe = $this->pj_fe .$this->numero ;
+		$this->pdf  = "";
+		$this->avisos  = "";
+	}
+	
 	if($this->sc_temp_gproveedor=="DATAICO")
 	{
 		$this->enviar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' onclick='fEnviarFE(\"".$this->kardexid ."\",\"".$vcufe."\");' />";
@@ -3610,6 +3772,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $graf = "" ;  
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'num', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -3633,6 +3800,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $graf = "" ;  
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'enviar', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
               $Style_enviar = "";
           if (isset($this->NM_field_style["enviar"]) && !empty($this->NM_field_style["enviar"]))
           {
@@ -3679,6 +3851,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
                } 
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'fecha', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "NOWRAP";
@@ -3724,6 +3901,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $graf = "" ;  
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'numfe', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "NOWRAP";
@@ -3769,6 +3951,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $graf = "" ;  
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'nombre', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -3814,6 +4001,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $graf = "" ;  
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'email2', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -3837,6 +4029,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $graf = "" ;  
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'ico_cliente', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
               $Style_ico_cliente = "";
           if (isset($this->NM_field_style["ico_cliente"]) && !empty($this->NM_field_style["ico_cliente"]))
           {
@@ -3892,6 +4089,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               nmgp_Form_Num_Val($conteudo, ",", ",", "0", "S", "2", "$", "V:1:4", "-") ; 
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'total', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -3934,6 +4136,10 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               } 
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'detalle', $str_tem_display, $conteudo_original); 
+          } 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "NOWRAP";
@@ -3979,6 +4185,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $graf = "" ;  
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'pdf', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -4002,6 +4213,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $graf = "" ;  
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'avisos', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -4044,6 +4260,10 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               } 
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'adjuntos', $str_tem_display, $conteudo_original); 
+          } 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "NOWRAP";
@@ -4108,6 +4328,10 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               } 
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'sc_field_0', $str_tem_display, $conteudo_original); 
+          } 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "NOWRAP";
@@ -4157,6 +4381,11 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               nmgp_Form_Num_Val($conteudo, "", "", "0", "S", "2", "", "N:1", "-") ; 
           } 
           $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'kardexid', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['proc_pdf'])
           {
               $this->SC_nowrap = "NOWRAP";
@@ -4375,17 +4604,45 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $stateSearchIconClose  = '';
               $stateSearchIconSearch = 'none';
           }
-          $nm_saida->saida("          <input type=\"hidden\"  id=\"fast_search_f0_top\" name=\"nmgp_fast_search\" value=\"SC_all_Cmp\">\r\n");
-          $nm_saida->saida("          <select id=\"cond_fast_search_f0_top\" class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;display:none;\" name=\"nmgp_cond_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
-          $OPC_sel = " selected='selected'";
-          $nm_saida->saida("           <option value=\"qp\"$OPC_sel>" . $this->Ini->Nm_lang['lang_srch_like'] . "</option>\r\n");
-          $nm_saida->saida("          </select>\r\n");
           $nm_saida->saida("          <span id=\"quicksearchph_top\" class=\"" . $this->css_css_toolbar_obj . "\" style='display: inline-block; vertical-align: inherit;'>\r\n");
           $nm_saida->saida("           <span>\r\n");
-          $nm_saida->saida("             <input type=\"text\" id=\"SC_fast_search_top\" class=\"" . $this->css_css_toolbar_obj . "_text\" style=\"border-width: 0px;\" name=\"nmgp_arg_fast_search\" value=\"" . NM_encode_input($OPC_dat) . "\" size=\"30\" onChange=\"change_fast_top = 'CH';\" alt=\"{maxLength: 255}\" placeholder=\"" . $this->Ini->Nm_lang['lang_othr_qk_watermark'] . "\">&nbsp;\r\n");
+          $nm_saida->saida("             <input type=\"text\" id=\"SC_fast_search_top\" class=\"" . $this->css_css_toolbar_obj . "_text\" style=\"border-width: 0px;\" name=\"nmgp_arg_fast_search\" value=\"" . NM_encode_input($OPC_dat) . "\" size=\"20\" onChange=\"change_fast_top = 'CH';\" alt=\"{maxLength: 255}\" placeholder=\"Buscar\">&nbsp;\r\n");
+          $nm_saida->saida("             <i id='SC_fast_search_dropdown_top' style='cursor: pointer;' class='fas fa-caret-down' onclick=\"nm_gp_open_qsearch_div('top');\"></i>\r\n");
           $nm_saida->saida("             <img style=\"display: " . $stateSearchIconSearch . "\" id=\"SC_fast_search_submit_top\" class='css_toolbar_obj_qs_search_img' src=\"" . $this->Ini->path_botoes . "/" . $this->Ini->Img_qs_search . "\" onclick=\"nm_gp_submit_qsearch('top');\">\r\n");
           $nm_saida->saida("             <img style=\"display: " . $stateSearchIconClose . "\" class='css_toolbar_obj_qs_search_img' id=\"SC_fast_search_close_top\" src=\"" . $this->Ini->path_botoes . "/" . $this->Ini->Img_qs_clean . "\" onclick=\"document.getElementById('SC_fast_search_top').value = '__Clear_Fast__'; nm_gp_submit_qsearch('top');\">\r\n");
           $nm_saida->saida("            </span>\r\n");
+          $nm_saida->saida("<div id='id_qs_div_top' class='scGridQuickSearchDivMoldura' style='display:none; position:absolute;'>\r\n");
+          $nm_saida->saida("                <div>\r\n");
+          $nm_saida->saida("                    <span>\r\n");
+          $nm_saida->saida("                      <p  class='scGridQuickSearchDivLabel'>" . $this->Ini->Nm_lang['lang_btns_clmn'] . "</span></p>\r\n");
+          $OPC_cmp_sel = explode("_VLS_", $OPC_cmp);
+          $nm_saida->saida("          <select multiple=multiple  id=\"fast_search_f0_top\" class=\"\" style=\"vertical-align: middle;\" name=\"nmgp_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
+          $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
+          $SC_Label_atu['num'] = (isset($this->New_label['num'])) ? $this->New_label['num'] : '# TNS'; 
+          foreach ($SC_Label_atu as $CMP => $LABEL)
+          {
+                  if($CMP == 'SC_all_Cmp')
+                     continue;
+              $OPC_sel = (in_array($CMP, $OPC_cmp_sel) || ($CMP == 'SC_all_Cmp' && empty($OPC_cmp))) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"" . $CMP . "\"$OPC_sel>" . $LABEL . "</option>\r\n");
+           }
+          $nm_saida->saida("          </select>\r\n");
+          $nm_saida->saida("                    </span>\r\n");
+          $nm_saida->saida("                    <span  style='display:none;' >\r\n");
+          $nm_saida->saida("                      <p class='scGridQuickSearchDivLabel'>" . $this->Ini->Nm_lang['lang_quck_srchcond'] . "</span></p>\r\n");
+          $nm_saida->saida("          <select id=\"cond_fast_search_f0_top\" class=\"\" style=\"vertical-align: middle;display:none;\" name=\"nmgp_cond_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
+          $OPC_sel = " selected='selected'";
+          $nm_saida->saida("           <option value=\"qp\"$OPC_sel>" . $this->Ini->Nm_lang['lang_srch_like'] . "</option>\r\n");
+          $nm_saida->saida("          </select>\r\n");
+          $nm_saida->saida("                    </span>\r\n");
+          $nm_saida->saida("                </div>\r\n");
+          $nm_saida->saida("                <div class='scGridQuickSearchDivToolbar'>\r\n");
+       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "nm_gp_cancel_qsearch_div_store_temp('top');", "nm_gp_cancel_qsearch_div_store_temp('top');", "qs_cancel", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $nm_saida->saida("      $Cod_Btn \r\n");
+       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bapply_appdiv", "nm_gp_submit_qsearch('top');", "nm_gp_submit_qsearch('top');", "qs_search", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $nm_saida->saida("      $Cod_Btn \r\n");
+          $nm_saida->saida("                </div>\r\n");
+          $nm_saida->saida("             </div>\r\n");
           $nm_saida->saida("          </span>");
           $NM_btn = true;
       }
@@ -4424,14 +4681,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_word_res = "n";
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-          {
-              $Tem_word_res = "s";
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Gb_Free_cmp']))
-          {
-              $Tem_word_res = "n";
-          }
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_kardex_fv_tns/grid_kardex_fv_tns_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
@@ -4442,14 +4691,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_xls_res = "n";
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-          {
-              $Tem_xls_res = "s";
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Gb_Free_cmp']))
-          {
-              $Tem_xls_res = "n";
-          }
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_kardex_fv_tns/grid_kardex_fv_tns_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_kardex_fv_tns&nm_tp_xls=xls&nm_tot_xls=S&nm_res_cons=" . $Tem_xls_res . "&nm_ini_xls_res=grid&nm_all_modules=grid&password=n&summary_export_columns=S&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
@@ -4465,14 +4706,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_xml_res = "n";
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-          {
-              $Tem_xml_res = "s";
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Gb_Free_cmp']))
-          {
-              $Tem_xml_res = "n";
-          }
           $Xml_mod_export = "grid";
           if ($Tem_xml_res == "n")
           {
@@ -4488,14 +4721,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_csv_res = "n";
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-          {
-              $Tem_csv_res = "s";
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Gb_Free_cmp']))
-          {
-              $Tem_csv_res = "n";
-          }
           $Csv_mod_export = "";
           if ($Tem_csv_res == "n")
           {
@@ -4556,8 +4781,19 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $nm_saida->saida("          <img id=\"NM_sep_2\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
+      if ($this->nmgp_botoes['group_3'] == "on" && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_3_top = false;</script>\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_3", "scBtnGrpShow('group_3_top')", "scBtnGrpShow('group_3_top')", "sc_btgp_btn_group_3_top", "", "Opciones", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "__sc_grp__", "text_fontawesomeicon", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("           $Cod_Btn\r\n");
+          $NM_btn  = true;
+          $NM_Gbtn = false;
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_3", 'group_3', 'top', 'app', 'ini');
+          $nm_saida->saida("           $Cod_Btn\r\n");
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_consultar_folios'] == "on" && !$this->grid_emb_form) 
       { 
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
                $btn_value = "Consutar Folios";
                if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
                {
@@ -4568,9 +4804,53 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__folder3_mail_32.png\"  id=\"sc_btn_consultar_folios_top\" onClick=\"sc_btn_btn_consultar_folios();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
-          $NM_btn = true;
+          $nm_saida->saida("<a id=\"sc_btn_consultar_folios_top\" href=\"javascript: sc_btn_btn_consultar_folios();\" class=\"scBtnGrpLink\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
+          $nm_saida->saida("            </div>\r\n");
+          $NM_Gbtn = true;
       } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_soporte'] == "on" && !$this->grid_emb_form) 
+      { 
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+               $btn_value = "Soporte";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
+               {
+                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+               $btn_hint = "¿Desea enviar un correo de soporte?";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
+               {
+                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+          $nm_saida->saida("<a id=\"sc_btn_soporte_top\" href=\"javascript: sc_btn_btn_soporte();\" class=\"scBtnGrpLink\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
+          $nm_saida->saida("            </div>\r\n");
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_generar_proveedor'] == "on" && !$this->grid_emb_form) 
+      { 
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_generar_proveedor", "sc_btn_btn_generar_proveedor();", "sc_btn_btn_generar_proveedor();", "sc_btn_generar_proveedor_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_regenerar_propio'] == "on" && !$this->grid_emb_form) 
+      { 
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_regenerar_propio", "sc_btn_btn_regenerar_propio();", "sc_btn_btn_regenerar_propio();", "sc_btn_regenerar_propio_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+          $NM_Gbtn = true;
+      } 
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_3", 'group_3', 'top', 'app', 'fim');
+          $nm_saida->saida("           $Cod_Btn\r\n");
+          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
+          $nm_saida->saida("             if (!sc_itens_btgp_group_3_top) {\r\n");
+          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_3_top').style.display='none'; }\r\n");
+          $nm_saida->saida("           </script>\r\n");
+      }
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
       {
           if ($NM_btn)
@@ -4582,43 +4862,24 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_consultar_estado'] == "on" && !$this->grid_emb_form) 
       { 
-               $btn_value = "Consultar Estado";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Consultar Estado";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__mail_server_warning_32.png\"  id=\"sc_btn_consultar_estado_top\" onClick=\"sc_btn_btn_consultar_estado();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_4";
-              $nm_saida->saida("          <img id=\"NM_sep_4\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_recargar'] == "on" && !$this->grid_emb_form) 
-      { 
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_recargar", "sc_btn_btn_recargar();", "sc_btn_btn_recargar();", "sc_btn_recargar_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_consultar_estado", "sc_btn_btn_consultar_estado();", "sc_btn_btn_consultar_estado();", "sc_btn_consultar_estado_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $NM_btn = true;
       } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
+          if ($this->nmgp_botoes['reload'] == "on")
           {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_5";
-              $nm_saida->saida("          <img id=\"NM_sep_5\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "breload", "nm_gp_submit_ajax ('igual', 'breload');", "nm_gp_submit_ajax ('igual', 'breload');", "reload_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
           }
-      }
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_volver'] == "on" && !$this->grid_emb_form) 
+      { 
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_volver", "sc_btn_btn_volver();", "sc_btn_btn_volver();", "sc_btn_volver_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
+          $NM_btn = true;
+      } 
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if (is_file("grid_kardex_fv_tns_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_kardex_fv_tns_help.txt"); 
@@ -4648,23 +4909,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
       }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_soporte'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Soporte";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "¿Desea enviar un correo de soporte?";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__user_headphones_32.png\"  id=\"sc_btn_soporte_top\" onClick=\"sc_btn_btn_soporte();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
-          $NM_btn = true;
-      } 
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
       }
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
@@ -4741,8 +4985,8 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $nm_saida->saida("           <option value=\"500\" " . $obj_sel . ">500</option>\r\n");
               $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == 1000) ? " selected" : "";
               $nm_saida->saida("           <option value=\"1000\" " . $obj_sel . ">1000</option>\r\n");
-              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == 2000) ? " selected" : "";
-              $nm_saida->saida("           <option value=\"2000\" " . $obj_sel . ">2000</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == all) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"all\" " . $obj_sel . ">all</option>\r\n");
               $nm_saida->saida("          </select>\r\n");
               $NM_btn = true;
           }
@@ -4840,14 +5084,14 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_kardex_fv_tns_help.txt") && !$this->grid_emb_form)
@@ -4948,20 +5192,50 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $stateSearchIconClose  = '';
               $stateSearchIconSearch = 'none';
           }
-          $nm_saida->saida("          <input type=\"hidden\"  id=\"fast_search_f0_top\" name=\"nmgp_fast_search\" value=\"SC_all_Cmp\">\r\n");
-          $nm_saida->saida("          <select id=\"cond_fast_search_f0_top\" class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;display:none;\" name=\"nmgp_cond_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
-          $OPC_sel = " selected='selected'";
-          $nm_saida->saida("           <option value=\"qp\"$OPC_sel>" . $this->Ini->Nm_lang['lang_srch_like'] . "</option>\r\n");
-          $nm_saida->saida("          </select>\r\n");
           $nm_saida->saida("          <span id=\"quicksearchph_top\" class=\"" . $this->css_css_toolbar_obj . "\" style='display: inline-block; vertical-align: inherit;'>\r\n");
           $nm_saida->saida("           <span>\r\n");
-          $nm_saida->saida("             <input type=\"text\" id=\"SC_fast_search_top\" class=\"" . $this->css_css_toolbar_obj . "_text\" style=\"border-width: 0px;\" name=\"nmgp_arg_fast_search\" value=\"" . NM_encode_input($OPC_dat) . "\" size=\"30\" onChange=\"change_fast_top = 'CH';\" alt=\"{maxLength: 255}\" placeholder=\"" . $this->Ini->Nm_lang['lang_othr_qk_watermark'] . "\">&nbsp;\r\n");
+          $nm_saida->saida("             <input type=\"text\" id=\"SC_fast_search_top\" class=\"" . $this->css_css_toolbar_obj . "_text\" style=\"border-width: 0px;\" name=\"nmgp_arg_fast_search\" value=\"" . NM_encode_input($OPC_dat) . "\" size=\"20\" onChange=\"change_fast_top = 'CH';\" alt=\"{maxLength: 255}\" placeholder=\"Buscar\">&nbsp;\r\n");
+          $nm_saida->saida("             <i id='SC_fast_search_dropdown_top' style='cursor: pointer;' class='fas fa-caret-down' onclick=\"nm_gp_open_qsearch_div('top');\"></i>\r\n");
           $nm_saida->saida("             <img style=\"display: " . $stateSearchIconSearch . "\" id=\"SC_fast_search_submit_top\" class='css_toolbar_obj_qs_search_img' src=\"" . $this->Ini->path_botoes . "/" . $this->Ini->Img_qs_search . "\" onclick=\"nm_gp_submit_qsearch('top');\">\r\n");
           $nm_saida->saida("             <img style=\"display: " . $stateSearchIconClose . "\" class='css_toolbar_obj_qs_search_img' id=\"SC_fast_search_close_top\" src=\"" . $this->Ini->path_botoes . "/" . $this->Ini->Img_qs_clean . "\" onclick=\"document.getElementById('SC_fast_search_top').value = '__Clear_Fast__'; nm_gp_submit_qsearch('top');\">\r\n");
           $nm_saida->saida("            </span>\r\n");
+          $nm_saida->saida("<div id='id_qs_div_top' class='scGridQuickSearchDivMoldura' style='display:none; position:absolute;'>\r\n");
+          $nm_saida->saida("                <div>\r\n");
+          $nm_saida->saida("                    <span>\r\n");
+          $nm_saida->saida("                      <p  class='scGridQuickSearchDivLabel'>" . $this->Ini->Nm_lang['lang_btns_clmn'] . "</span></p>\r\n");
+          $OPC_cmp_sel = explode("_VLS_", $OPC_cmp);
+          $nm_saida->saida("          <select multiple=multiple  id=\"fast_search_f0_top\" class=\"\" style=\"vertical-align: middle;\" name=\"nmgp_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
+          $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
+          $SC_Label_atu['num'] = (isset($this->New_label['num'])) ? $this->New_label['num'] : '# TNS'; 
+          foreach ($SC_Label_atu as $CMP => $LABEL)
+          {
+                  if($CMP == 'SC_all_Cmp')
+                     continue;
+              $OPC_sel = (in_array($CMP, $OPC_cmp_sel) || ($CMP == 'SC_all_Cmp' && empty($OPC_cmp))) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"" . $CMP . "\"$OPC_sel>" . $LABEL . "</option>\r\n");
+           }
+          $nm_saida->saida("          </select>\r\n");
+          $nm_saida->saida("                    </span>\r\n");
+          $nm_saida->saida("                    <span  style='display:none;' >\r\n");
+          $nm_saida->saida("                      <p class='scGridQuickSearchDivLabel'>" . $this->Ini->Nm_lang['lang_quck_srchcond'] . "</span></p>\r\n");
+          $nm_saida->saida("          <select id=\"cond_fast_search_f0_top\" class=\"\" style=\"vertical-align: middle;display:none;\" name=\"nmgp_cond_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
+          $OPC_sel = " selected='selected'";
+          $nm_saida->saida("           <option value=\"qp\"$OPC_sel>" . $this->Ini->Nm_lang['lang_srch_like'] . "</option>\r\n");
+          $nm_saida->saida("          </select>\r\n");
+          $nm_saida->saida("                    </span>\r\n");
+          $nm_saida->saida("                </div>\r\n");
+          $nm_saida->saida("                <div class='scGridQuickSearchDivToolbar'>\r\n");
+       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "nm_gp_cancel_qsearch_div_store_temp('top');", "nm_gp_cancel_qsearch_div_store_temp('top');", "qs_cancel", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $nm_saida->saida("      $Cod_Btn \r\n");
+       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bapply_appdiv", "nm_gp_submit_qsearch('top');", "nm_gp_submit_qsearch('top');", "qs_search", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $nm_saida->saida("      $Cod_Btn \r\n");
+          $nm_saida->saida("                </div>\r\n");
+          $nm_saida->saida("             </div>\r\n");
           $nm_saida->saida("          </span>");
           $NM_btn = true;
       }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
       if ($this->nmgp_botoes['group_1'] == "on" && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_1_top = false;</script>\r\n");
@@ -4995,14 +5269,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_word_res = "n";
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-          {
-              $Tem_word_res = "s";
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Gb_Free_cmp']))
-          {
-              $Tem_word_res = "n";
-          }
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_kardex_fv_tns/grid_kardex_fv_tns_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
@@ -5013,14 +5279,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_xls_res = "n";
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-          {
-              $Tem_xls_res = "s";
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Gb_Free_cmp']))
-          {
-              $Tem_xls_res = "n";
-          }
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_kardex_fv_tns/grid_kardex_fv_tns_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_kardex_fv_tns&nm_tp_xls=xls&nm_tot_xls=S&nm_res_cons=" . $Tem_xls_res . "&nm_ini_xls_res=grid&nm_all_modules=grid&password=n&summary_export_columns=S&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
@@ -5036,14 +5294,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_xml_res = "n";
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-          {
-              $Tem_xml_res = "s";
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Gb_Free_cmp']))
-          {
-              $Tem_xml_res = "n";
-          }
           $Xml_mod_export = "grid";
           if ($Tem_xml_res == "n")
           {
@@ -5059,14 +5309,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_csv_res = "n";
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-          {
-              $Tem_csv_res = "s";
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Gb_Free_cmp']))
-          {
-              $Tem_csv_res = "n";
-          }
           $Csv_mod_export = "";
           if ($Tem_csv_res == "n")
           {
@@ -5109,101 +5351,121 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
           $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_1_top').style.display='none'; }\r\n");
           $nm_saida->saida("           </script>\r\n");
       }
-      if ($this->nmgp_botoes['group_2'] == "on" && !$this->grid_emb_form)
+      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
       {
-          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_2_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_2", "scBtnGrpShow('group_2_top')", "scBtnGrpShow('group_2_top')", "sc_btgp_btn_group_2_top", "", "" . $this->Ini->Nm_lang['lang_btns_settings'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_settings'] . "", "", "", "__sc_grp__", "text_img", "text_right", "", "", "", "", "", "", "");
+          if ($NM_btn)
+          {
+              $NM_btn = false;
+              $NM_ult_sep = "NM_sep_4";
+              $nm_saida->saida("          <img id=\"NM_sep_4\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+          }
+      }
+      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
+      {
+          if ($NM_btn)
+          {
+              $NM_btn = false;
+              $NM_ult_sep = "NM_sep_5";
+              $nm_saida->saida("          <img id=\"NM_sep_5\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+          }
+      }
+      if ($this->nmgp_botoes['group_3'] == "on" && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_3_top = false;</script>\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_3", "scBtnGrpShow('group_3_top')", "scBtnGrpShow('group_3_top')", "sc_btgp_btn_group_3_top", "", "Opciones", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "__sc_grp__", "text_fontawesomeicon", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("           $Cod_Btn\r\n");
           $NM_btn  = true;
           $NM_Gbtn = false;
-          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'ini');
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_3", 'group_3', 'top', 'app', 'ini');
           $nm_saida->saida("           $Cod_Btn\r\n");
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['filter'] == "on"  && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_consultar_folios'] == "on" && !$this->grid_emb_form) 
+      { 
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'grid');", "nm_gp_move('busca', '0', 'grid');", "pesq_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
-           $nm_saida->saida("           $Cod_Btn \r\n");
+               $btn_value = "Consutar Folios";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
+               {
+                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+               $btn_hint = "Consutar Folios";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
+               {
+                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+          $nm_saida->saida("<a id=\"sc_btn_consultar_folios_top\" href=\"javascript: sc_btn_btn_consultar_folios();\" class=\"scBtnGrpLink\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
           $nm_saida->saida("            </div>\r\n");
-           $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-      if ($this->nmgp_botoes['sort_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-          {
-              $UseAlias =  "N";
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-          {
-              $UseAlias =  "N";
-          }
-          else
-          {
-              $UseAlias =  "S";
-          }
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_soporte'] == "on" && !$this->grid_emb_form) 
+      { 
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_kardex_fv_tns/grid_kardex_fv_tns_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_kardex_fv_tns/grid_kardex_fv_tns_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
+               $btn_value = "Soporte";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
+               {
+                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+               $btn_hint = "¿Desea enviar un correo de soporte?";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
+               {
+                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+          $nm_saida->saida("<a id=\"sc_btn_soporte_top\" href=\"javascript: sc_btn_btn_soporte();\" class=\"scBtnGrpLink\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
           $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['SC_Ind_Groupby'] != "sc_free_total")
-        {
-        }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-      if ($this->nmgp_botoes['gridsave'] == "on" && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $save_grid_format = 'extended';
-          if($_SESSION['scriptcase']['proc_mobile'])
-          {
-              $save_grid_format = 'extended';
-          }
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_generar_proveedor'] == "on" && !$this->grid_emb_form) 
+      { 
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-          if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
-          {
-          $nm_saida->saida("            <div id='id_save_grid_div_top' style='display:inline-block'>\r\n");
-          }
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgridsave", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "save_grid_top", "", "Guardar Configuración", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
-          {
-          $nm_saida->saida("              <div id='id_div_save_grid_new_top' style='display:none; position: absolute;'>\r\n");
-          $nm_saida->saida("              </div>\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_generar_proveedor", "sc_btn_btn_generar_proveedor();", "sc_btn_btn_generar_proveedor();", "sc_btn_generar_proveedor_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
-          }
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_regenerar_propio'] == "on" && !$this->grid_emb_form) 
+      { 
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_regenerar_propio", "sc_btn_btn_regenerar_propio();", "sc_btn_btn_regenerar_propio();", "sc_btn_regenerar_propio_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'fim');
+          $NM_Gbtn = true;
+      } 
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_3", 'group_3', 'top', 'app', 'fim');
           $nm_saida->saida("           $Cod_Btn\r\n");
           $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
-          $nm_saida->saida("             if (!sc_itens_btgp_group_2_top) {\r\n");
-          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_2_top').style.display='none'; }\r\n");
+          $nm_saida->saida("             if (!sc_itens_btgp_group_3_top) {\r\n");
+          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_3_top').style.display='none'; }\r\n");
           $nm_saida->saida("           </script>\r\n");
       }
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
+      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
+      {
+          if ($NM_btn)
+          {
+              $NM_btn = false;
+              $NM_ult_sep = "NM_sep_6";
+              $nm_saida->saida("          <img id=\"NM_sep_6\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+          }
+      }
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_consultar_estado'] == "on" && !$this->grid_emb_form) 
+      { 
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_consultar_estado", "sc_btn_btn_consultar_estado();", "sc_btn_btn_consultar_estado();", "sc_btn_consultar_estado_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
+          $NM_btn = true;
+      } 
+          if ($this->nmgp_botoes['reload'] == "on")
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "breload", "nm_gp_submit_ajax ('igual', 'breload');", "nm_gp_submit_ajax ('igual', 'breload');", "reload_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_volver'] == "on" && !$this->grid_emb_form) 
+      { 
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_volver", "sc_btn_btn_volver();", "sc_btn_btn_volver();", "sc_btn_volver_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
+          $NM_btn = true;
+      } 
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if (is_file("grid_kardex_fv_tns_help.txt") && !$this->grid_emb_form)
@@ -5286,6 +5548,38 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"left\" width=\"33%\"> \r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opcao_print'] != "print") 
       {
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
+          {
+              $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'];
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "birpara", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "brec_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $Page_Atu   = ceil($this->nmgp_reg_inicial / $Reg_Page);
+              $nm_saida->saida("          <input id=\"rec_f0_bot\" type=\"text\" class=\"" . $this->css_css_toolbar_obj . "\" name=\"rec\" value=\"" . NM_encode_input($Page_Atu) . "\" style=\"width:25px;vertical-align: middle;\"/> \r\n");
+              $NM_btn = true;
+          }
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['qtline'] == "on" && $this->Ini->Apl_paginacao != "FULL")
+          {
+              $nm_saida->saida("          <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border: 0px;vertical-align: middle;\">" . $this->Ini->Nm_lang['lang_btns_rows'] . "</span>\r\n");
+              $nm_saida->saida("          <select class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;\" id=\"quant_linhas_f0_bot\" name=\"nmgp_quant_linhas\" onchange=\"sc_ind = document.getElementById('quant_linhas_f0_bot').selectedIndex; nm_gp_submit_ajax('muda_qt_linhas', document.getElementById('quant_linhas_f0_bot').options[sc_ind].value);\"> \r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == 10) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"10\" " . $obj_sel . ">10</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == 20) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"20\" " . $obj_sel . ">20</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == 50) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"50\" " . $obj_sel . ">50</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == 100) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"100\" " . $obj_sel . ">100</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == 500) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"500\" " . $obj_sel . ">500</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == 1000) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"1000\" " . $obj_sel . ">1000</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] == all) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"all\" " . $obj_sel . ">all</option>\r\n");
+              $nm_saida->saida("          </select>\r\n");
+              $NM_btn = true;
+          }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opc_liga']['nav']))
           {
               if ($this->Rec_ini == 0)
@@ -5314,20 +5608,48 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               }
                   $NM_btn = true;
           }
-          if ($this->nmgp_botoes['rows'] == "on" && empty($this->nm_grid_sem_reg))
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['navpage'] == "on" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opc_liga']['nav']) && $this->Ini->Apl_paginacao != "FULL" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'] != "all")
           {
-              $nm_sumario = "[" . $this->Ini->Nm_lang['lang_othr_smry_info'] . "]";
-              $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
-              if ($this->Ini->Apl_paginacao == "FULL")
+              $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['qt_lin_grid'];
+              $Max_link   = 5;
+              $Mid_link   = ceil($Max_link / 2);
+              $Corr_link  = (($Max_link % 2) == 0) ? 0 : 1;
+              $Qtd_Pages  = ceil($this->count_ger / $Reg_Page);
+              $Page_Atu   = ceil($this->nmgp_reg_final / $Reg_Page);
+              $Link_ini   = 1;
+              if ($Page_Atu > $Max_link)
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
               }
-              else
+              elseif ($Page_Atu > $Mid_link)
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              if (($Qtd_Pages - $Link_ini) < $Max_link)
+              {
+                  $Link_ini = ($Qtd_Pages - $Max_link) + 1;
+              }
+              if ($Link_ini < 1)
+              {
+                  $Link_ini = 1;
+              }
+              for ($x = 0; $x < $Max_link && $Link_ini <= $Qtd_Pages; $x++)
+              {
+                  $rec = (($Link_ini - 1) * $Reg_Page) + 1;
+                  if ($Link_ini == $Page_Atu)
+                  {
+                      $nm_saida->saida("            <span class=\"scGridToolbarNavOpen\" style=\"vertical-align: middle;\">" . $Link_ini . "</span>\r\n");
+                  }
+                  else
+                  {
+                      $nm_saida->saida("            <a class=\"scGridToolbarNav\" style=\"vertical-align: middle;\" href=\"javascript: nm_gp_submit_rec(" . $rec . ");\">" . $Link_ini . "</a>\r\n");
+                  }
+                  $Link_ini++;
+                  if (($x + 1) < $Max_link && $Link_ini <= $Qtd_Pages && '' != $this->Ini->Str_toolbarnav_separator && @is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator))
+                  {
+                      $nm_saida->saida("            <img src=\"" . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+                  }
+              }
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['opc_liga']['nav']))
@@ -5343,9 +5665,23 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
               $NM_btn = true;
           }
           $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
-          $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
+          if ($this->nmgp_botoes['rows'] == "on" && empty($this->nm_grid_sem_reg))
+          {
+              $nm_sumario = "[" . $this->Ini->Nm_lang['lang_othr_smry_info'] . "]";
+              $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
+              if ($this->Ini->Apl_paginacao == "FULL")
+              {
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
+              }
+              else
+              {
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
+              }
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
+              $NM_btn = true;
+          }
           if (is_file("grid_kardex_fv_tns_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_kardex_fv_tns_help.txt"); 
@@ -5462,6 +5798,106 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
    }
+    function getFieldHighlight($filter_type, $field, $str_value, $str_value_original='')
+    {
+        $str_html_ini = '<div class="highlight">';
+        $str_html_fim = '</div>';
+
+        if($filter_type == 'advanced_search')
+        {
+            if (
+                isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ]) &&
+                isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field . "_cond" ]) &&
+                !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ]) &&
+                (
+                    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field . "_cond"] == 'qp' ||
+                    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field . "_cond"] == 'eq' ||
+                    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field . "_cond"] == 'ii'
+                )
+            )
+            {
+                if($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field . "_cond"] == 'qp')
+                {
+                    if(strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ], $str_value) == 0)
+                    {
+                        $str_value = $str_html_ini. $str_value .$str_html_fim;
+                    }
+                    elseif(strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ], $str_value_original) == 0)
+                    {
+                        $str_value = $str_html_ini. $str_value .$str_html_fim;
+                    }
+                    else
+                    {
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                    }
+                }
+                elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field . "_cond"] == 'eq')
+                {
+                    if(strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ], $str_value) == 0)
+                    {
+                        $str_value = $str_html_ini. $str_value .$str_html_fim;
+                    }
+                    elseif(strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ], $str_value_original) == 0)
+                    {
+                        $str_value = $str_html_ini. $str_value .$str_html_fim;
+                    }
+                }
+                elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field . "_cond"] == 'ii')
+                {
+                    if(strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ], substr($str_value, 0, strlen($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ]))) == 0)
+                    {
+                        $str_value = $str_html_ini. substr($str_value, 0, strlen($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ])) .$str_html_fim . substr($str_value, strlen($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['campos_busca'][ $field ]));
+                    }
+                }
+            }
+        }
+        elseif($filter_type == 'quicksearch')
+        {
+            if(
+                isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][0]) &&
+                (
+                    (
+                    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][0] == 'SC_all_Cmp' &&
+                    in_array($field, array('num'))
+                    ) ||
+                    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][0] == $field ||
+                    strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][0], $field . '_VLS_') !== false ||
+                    strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][0], '_VLS_' . $field) !== false
+                )
+            )
+            {
+                if($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][1] == 'qp')
+                {
+                    if(strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][2], $str_value) == 0)
+                    {
+                        $str_value = $str_html_ini. $str_value .$str_html_fim;
+                    }
+                    elseif(!empty($str_value_original) && $str_value_original != '&nbsp;' && strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][2], $str_value_original) == 0)
+                    {
+                        $str_value = $str_html_ini. $str_value .$str_html_fim;
+                    }
+                    else
+                    {
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                    }
+                }
+                elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][1] == 'eq')
+                {
+                    if(strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][2], $str_value) == 0)
+                    {
+                        $str_value = $str_html_ini. $str_value .$str_html_fim;
+                    }
+                    elseif(!empty($str_value_original) && $str_value_original != '&nbsp;' && strcasecmp($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['fast_search'][2], $str_value_original) == 0)
+                    {
+                        $str_value = $str_html_ini. $str_value .$str_html_fim;
+                    }
+                }
+            }
+        }
+        return $str_value;
+    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
    { 
       $trab_campo = $nm_campo;
@@ -5575,153 +6011,6 @@ $_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
       }
       $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
    } 
-   function nmgp_redireciona_form($nm_apl_dest, $nm_apl_retorno, $nm_apl_parms, $nm_target="", $alt_modal=0, $larg_modal=0, $opc="")
-   {
-      if (is_array($nm_apl_parms))
-      {
-          $tmp_parms = "";
-          foreach ($nm_apl_parms as $par => $val)
-          {
-              $par = trim($par);
-              $val = trim($val);
-              $tmp_parms .= str_replace(".", "_", $par) . "?#?";
-              if (substr($val, 0, 1) == "$")
-              {
-                  $tmp_parms .= $$val;
-              }
-              elseif (substr($val, 0, 1) == "{")
-              {
-                  $val        = substr($val, 1, -1);
-                  $tmp_parms .= $this->$val;
-              }
-              elseif (substr($val, 0, 1) == "[")
-              {
-                  $tmp_parms .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns'][substr($val, 1, -1)];
-              }
-              else
-              {
-                  $tmp_parms .= $val;
-              }
-              $tmp_parms .= "?@?";
-          }
-          $nm_apl_parms = $tmp_parms;
-      }
-      $target = (empty($nm_target)) ? "_self" : $nm_target;
-      if (strtolower(substr($nm_apl_dest, 0, 7)) == "http://" || strtolower(substr($nm_apl_dest, 0, 8)) == "https://" || strtolower(substr($nm_apl_dest, 0, 3)) == "../")
-      {
-          echo "<SCRIPT language=\"javascript\">";
-          if (strtolower($target) == "_blank")
-          {
-              echo "window.open ('" . $nm_apl_dest . "');";
-              echo "</SCRIPT>";
-              return;
-          }
-          else
-          {
-              echo "window.location='" . $nm_apl_dest . "';";
-              echo "</SCRIPT>";
-              exit;
-          }
-      }
-      $dir = explode("/", $nm_apl_dest);
-      if (count($dir) == 1)
-      {
-          $nm_apl_dest = str_replace(".php", "", $nm_apl_dest);
-          $nm_apl_dest = $this->Ini->path_link . $nm_apl_dest . "/" . $nm_apl_dest . ".php";
-      }
-      if ($nm_target == "modal")
-      {
-          if (!empty($nm_apl_parms))
-          {
-              $nm_apl_parms = str_replace("?#?", "*scin", $nm_apl_parms);
-              $nm_apl_parms = str_replace("?@?", "*scout", $nm_apl_parms);
-              $nm_apl_parms = "nmgp_parms=" . $nm_apl_parms . "&";
-          }
-          $par_modal = "?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_outra_jan=true&nmgp_url_saida=modal&NMSC_modal=ok&";
-           if ((isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida_form_full']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['embutida_form_full']) || (isset($this->grid_emb_form_full) && $this->grid_emb_form_full))
-           {
-              $this->redir_modal = "$(function() { parent.tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
-           }
-           else
-           {
-              $this->redir_modal = "$(function() { tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
-           }
-          return;
-      }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['iframe_print']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['iframe_print'] )
-      {
-          $target = "_parent";
-      }
-      if (!isset($this->SC_redir_btn) || !$this->SC_redir_btn)
-      {
-   ?>
-     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-      <HTML>
-      <HEAD>
-      <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
-<?php
-if ($_SESSION['scriptcase']['proc_mobile'])
-{
-?>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0," />
-<?php
-}
-?>
-       <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
-       <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
-       <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
-       <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
-       <META http-equiv="Pragma" content="no-cache"/>
-      </HEAD>
-      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
-      <BODY>
-   <?php
-      }
-   ?>
-   <form name="Fredir" method="post" 
-                     target="_self"> 
-     <input type="hidden" name="nmgp_parms" value="<?php echo NM_encode_input($nm_apl_parms) ?>"/>
-<?php
-   if ($target == "_blank")
-   {
-?>
-       <input type="hidden" name="nmgp_outra_jan" value="true"/> 
-<?php
-   }
-   else
-   {
-?>
-     <input type="hidden" name="nmgp_url_saida" value="<?php echo NM_encode_input($nm_apl_retorno) ?>">
-     <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page) ?>"/> 
-<?php
-   }
-?>
-   </form> 
-      <SCRIPT type="text/javascript">
-          window.onload = function(){
-             submit_Fredir();
-          };
-          function submit_Fredir()
-          {
-              document.Fredir.target = "<?php echo $target ?>"; 
-              document.Fredir.action = "<?php echo $nm_apl_dest ?>";
-              document.Fredir.submit();
-          }
-      </SCRIPT>
-   <?php
-      if (!isset($this->SC_redir_btn) || !$this->SC_redir_btn)
-      {
-   ?>
-      </BODY>
-      </HTML>
-   <?php
-      }
-      if ($target != "_blank")
-      {
-          exit;
-      }
-   }
  function check_btns()
  {
  }
@@ -6192,17 +6481,6 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    $nm_saida->saida("       tb_show('', 'index.php?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nm_call_php=btn_consultar_estado&nmgp_opcao=formphp&nm_check=' + vls_check + '&nmgp_url_saida=modal&TB_iframe=true&modal=true&height=250&width=800', '');\r\n");
    $nm_saida->saida("       return;\r\n");
    $nm_saida->saida("   }\r\n");
-   $nm_saida->saida("   var Crtl_btn_btn_recargar = false;\r\n");
-   $nm_saida->saida("   function sc_btn_btn_recargar()\r\n");
-   $nm_saida->saida("   {\r\n");
-   $nm_saida->saida("       if (Crtl_btn_btn_recargar) {return;}\r\n");
-   $nm_saida->saida("       document.F4.target = \"_self\";\r\n");
-   $nm_saida->saida("       Crtl_btn_btn_recargar = true;\r\n");
-   $nm_saida->saida("       document.F4.rec.value = \"\";\r\n");
-   $nm_saida->saida("       document.F4.nm_call_php.value = \"btn_recargar\";\r\n");
-   $nm_saida->saida("       document.F4.nmgp_opcao.value = \"formphp\" ;\r\n");
-   $nm_saida->saida("       document.F4.submit() ;\r\n");
-   $nm_saida->saida("   }\r\n");
    $nm_saida->saida("   var vls_check = \"\";\r\n");
    $nm_saida->saida("   function sc_btn_btn_soporte()\r\n");
    $nm_saida->saida("   {\r\n");
@@ -6230,6 +6508,68 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    $nm_saida->saida("   {\r\n");
    $nm_saida->saida("       return;\r\n");
    $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   var vls_check = \"\";\r\n");
+   $nm_saida->saida("   function sc_btn_btn_generar_proveedor()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       var checked_records, i;\r\n");
+   $nm_saida->saida("       vls_check = \"\";\r\n");
+   $nm_saida->saida("       checked_records = $(\".sc-ui-check-run\").filter(\":checked\");\r\n");
+   $nm_saida->saida("       for (i = 0; i <= checked_records.length; i++)\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           vls_check += (vls_check != \"\") ? \";\" : \"\";\r\n");
+   $nm_saida->saida("           vls_check += $(checked_records[i]).val();\r\n");
+   $nm_saida->saida("       }\r\n");
+   $nm_saida->saida("       if (vls_check == \"\" || vls_check == \"0\" || vls_check == \"undefined\")\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           scJs_alert (\"" . $this->Ini->Nm_lang['lang_othr_slct'] . "\");\r\n");
+   $nm_saida->saida("           return;\r\n");
+   $nm_saida->saida("       }\r\n");
+   $nm_saida->saida("       document.FBtn_Run.nm_run_opt_sel.value = vls_check;\r\n");
+   $nm_saida->saida("       document.FBtn_Run.target = \"_self\";\r\n");
+   $nm_saida->saida("       scJs_confirm('¿Desea generar los accesos de cada registro con su proveedor?', sc_btn_btn_generar_proveedor_ok, sc_btn_btn_generar_proveedor_cancel)\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function sc_btn_btn_generar_proveedor_ok()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       document.FBtn_Run.nm_call_php.value = \"btn_generar_proveedor\";\r\n");
+   $nm_saida->saida("       document.FBtn_Run.submit();\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function sc_btn_btn_generar_proveedor_cancel()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       return;\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   var vls_check = \"\";\r\n");
+   $nm_saida->saida("   function sc_btn_btn_regenerar_propio()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       var checked_records, i;\r\n");
+   $nm_saida->saida("       vls_check = \"\";\r\n");
+   $nm_saida->saida("       checked_records = $(\".sc-ui-check-run\").filter(\":checked\");\r\n");
+   $nm_saida->saida("       for (i = 0; i <= checked_records.length; i++)\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           vls_check += (vls_check != \"\") ? \";\" : \"\";\r\n");
+   $nm_saida->saida("           vls_check += $(checked_records[i]).val();\r\n");
+   $nm_saida->saida("       }\r\n");
+   $nm_saida->saida("       if (vls_check == \"\" || vls_check == \"0\" || vls_check == \"undefined\")\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           scJs_alert (\"" . $this->Ini->Nm_lang['lang_othr_slct'] . "\");\r\n");
+   $nm_saida->saida("           return;\r\n");
+   $nm_saida->saida("       }\r\n");
+   $nm_saida->saida("       document.FBtn_Run.nm_run_opt_sel.value = vls_check;\r\n");
+   $nm_saida->saida("       document.FBtn_Run.target = \"_self\";\r\n");
+   $nm_saida->saida("       scJs_confirm('¿Desea regenerar el CUFE de los documentos seleccionados?', sc_btn_btn_regenerar_propio_ok, sc_btn_btn_regenerar_propio_cancel)\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function sc_btn_btn_regenerar_propio_ok()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       document.FBtn_Run.nm_call_php.value = \"btn_regenerar_propio\";\r\n");
+   $nm_saida->saida("       document.FBtn_Run.submit();\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function sc_btn_btn_regenerar_propio_cancel()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       return;\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function sc_btn_btn_volver() \r\n");
+   $nm_saida->saida("   { \r\n");
+   $nm_saida->saida("       location.href = \"../grid_kardex_fv_tns\";\r\n");
+   $nm_saida->saida("   } \r\n");
    $nm_saida->saida("   function nm_marca_check_grid(obj_mark)\r\n");
    $nm_saida->saida("   {\r\n");
    $nm_saida->saida("      $(\".sc-ui-check-run\").prop(\"checked\", $(obj_mark).prop(\"checked\"));\r\n");
@@ -6388,7 +6728,26 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    $nm_saida->saida("       { \r\n");
    $nm_saida->saida("           document.getElementById('SC_fast_search_' + pos).value = '';\r\n");
    $nm_saida->saida("       } \r\n");
-   $nm_saida->saida("       out_qsearch = $('#fast_search_f0_' + pos).val();\r\n");
+   $nm_saida->saida("       obj = document.getElementById('fast_search_f0_' + pos);\r\n");
+   $nm_saida->saida("       if (!obj.length)\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           out_qsearch = obj.options[obj.selectedIndex].value;\r\n");
+   $nm_saida->saida("       }\r\n");
+   $nm_saida->saida("       else\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           for (iCheck = 0; iCheck < obj.length; iCheck++)\r\n");
+   $nm_saida->saida("           {\r\n");
+   $nm_saida->saida("               if (obj.options[iCheck].selected)\r\n");
+   $nm_saida->saida("               {\r\n");
+   $nm_saida->saida("                   out_qsearch += (out_qsearch != \"\") ? \"_VLS_\" : \"\";\r\n");
+   $nm_saida->saida("                   out_qsearch += obj.options[iCheck].value;\r\n");
+   $nm_saida->saida("               }\r\n");
+   $nm_saida->saida("           }\r\n");
+   $nm_saida->saida("       }\r\n");
+   $nm_saida->saida("       if(out_qsearch == '')\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           out_qsearch = 'SC_all_Cmp';\r\n");
+   $nm_saida->saida("       }\r\n");
    $nm_saida->saida("       out_qsearch += \"_SCQS_\" + $('#cond_fast_search_f0_' + pos).val();\r\n");
    $nm_saida->saida("       out_qsearch += \"_SCQS_\" + document.getElementById('SC_fast_search_' + pos).value;\r\n");
    $nm_saida->saida("       out_qsearch = out_qsearch.replace(/[+]/g, \"__NM_PLUS__\");\r\n");
@@ -6799,7 +7158,15 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    $nm_saida->saida("   nm_img = new Image();\r\n");
    $nm_saida->saida("   function nm_mostra_img(imagem, altura, largura)\r\n");
    $nm_saida->saida("   {\r\n");
-   $nm_saida->saida("       tb_show(\"\", imagem, \"\");\r\n");
+   $nm_saida->saida("       var image = new Image();\r\n");
+   $nm_saida->saida("       image.src = imagem;\r\n");
+   $nm_saida->saida("       var viewer = new Viewer(image, {\r\n");
+   $nm_saida->saida("           navbar: false,\r\n");
+   $nm_saida->saida("           hidden: function () {\r\n");
+   $nm_saida->saida("               viewer.destroy();\r\n");
+   $nm_saida->saida("           },\r\n");
+   $nm_saida->saida("       });\r\n");
+   $nm_saida->saida("       viewer.show();\r\n");
    $nm_saida->saida("   }\r\n");
    $nm_saida->saida("   function nm_mostra_doc(campo1, campo2)\r\n");
    $nm_saida->saida("   {\r\n");
@@ -6896,7 +7263,60 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        $nm_saida->saida("         setTimeout(\"parent.scAjaxDetailHeight('grid_kardex_fv_tns', $(document).innerHeight())\",50);\r\n");
        $nm_saida->saida("      })\r\n");
    }
+   $nm_saida->saida("   function process_hotkeys(hotkey)\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("   return false;\r\n");
+   $nm_saida->saida("   }\r\n");
    $nm_saida->saida("   </script>\r\n");
  }
+function fCrearQR($vnombrearchivo,$vcontenido='Prueba qr',$vdirectorio='',$vmargin=0,$vtamanio=2,$vcalidad=20)
+{
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+  
+	sc_include_library("prj", "qr", "qrlib.php", true, true);
+	
+	$tempDir       = $vdirectorio;
+	$fileName      = $vnombrearchivo;
+	$outerFrame    = $vmargin;
+	$pixelPerPoint = $vtamanio;
+	$jpegQuality   = $vcalidad;
+	$codeContents  = $vcontenido;
+
+	$frame = QRcode::text($codeContents, false, QR_ECLEVEL_M);
+
+	$h = count($frame);
+	$w = strlen($frame[0]);
+
+	$imgW = $w + 2*$outerFrame;
+	$imgH = $h + 2*$outerFrame;
+
+	$base_image = imagecreate($imgW, $imgH);
+
+	$col[0] = imagecolorallocate($base_image,255,255,255); 
+	$col[1] = imagecolorallocate($base_image,0,0,0);     
+
+	imagefill($base_image, 0, 0, $col[0]);
+
+	for($y=0; $y<$h; $y++) {
+		for($x=0; $x<$w; $x++) {
+			if ($frame[$y][$x] == '1') {
+				imagesetpixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
+			}
+		}
+	}
+
+	$target_image = imagecreate($imgW * $pixelPerPoint, $imgH * $pixelPerPoint);
+	imagecopyresized(
+		$target_image, 
+		$base_image, 
+		0, 0, 0, 0, 
+		$imgW * $pixelPerPoint, $imgH * $pixelPerPoint, $imgW, $imgH
+	);
+	imagedestroy($base_image);
+	imagejpeg($target_image, $tempDir.$fileName, $jpegQuality);
+	imagedestroy($target_image);
+
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
+}
 }
 ?>

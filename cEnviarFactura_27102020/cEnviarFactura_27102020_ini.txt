@@ -1,0 +1,7 @@
+index.php
+FACILWEB_FE_73
+cEnviarFactura_27102020
+NAO
+blank
+cEnviarFactura_27102020
+LigMd5

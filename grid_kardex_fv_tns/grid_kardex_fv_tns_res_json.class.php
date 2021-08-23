@@ -176,7 +176,7 @@ class grid_kardex_fv_tns_res_json
                         {
                             $tit_rowspan[$col_t] .= "_";
                         }
-                        $tit_rowspan[$col_t] .= $columns['label'];
+                        $tit_rowspan[$col_t] .= $this->Json_use_label ? $columns['label'] : $columns['field_name'];
                        $col_t++;
                    }
                }
@@ -186,7 +186,7 @@ class grid_kardex_fv_tns_res_json
                     {
                        $this->campo_titulo[$col] .= "_";
                     }
-                    $this->campo_titulo[$col] .= $columns['label'];
+                    $this->campo_titulo[$col] .= $this->Json_use_label ? $columns['label'] : $columns['field_name'];
                    $col++;
                }
            }
@@ -551,6 +551,55 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
    } 
+function fCrearQR($vnombrearchivo,$vcontenido='Prueba qr',$vdirectorio='',$vmargin=0,$vtamanio=2,$vcalidad=20)
+{
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+  
+	sc_include_library("prj", "qr", "qrlib.php", true, true);
+	
+	$tempDir       = $vdirectorio;
+	$fileName      = $vnombrearchivo;
+	$outerFrame    = $vmargin;
+	$pixelPerPoint = $vtamanio;
+	$jpegQuality   = $vcalidad;
+	$codeContents  = $vcontenido;
+
+	$frame = QRcode::text($codeContents, false, QR_ECLEVEL_M);
+
+	$h = count($frame);
+	$w = strlen($frame[0]);
+
+	$imgW = $w + 2*$outerFrame;
+	$imgH = $h + 2*$outerFrame;
+
+	$base_image = imagecreate($imgW, $imgH);
+
+	$col[0] = imagecolorallocate($base_image,255,255,255); 
+	$col[1] = imagecolorallocate($base_image,0,0,0);     
+
+	imagefill($base_image, 0, 0, $col[0]);
+
+	for($y=0; $y<$h; $y++) {
+		for($x=0; $x<$w; $x++) {
+			if ($frame[$y][$x] == '1') {
+				imagesetpixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
+			}
+		}
+	}
+
+	$target_image = imagecreate($imgW * $pixelPerPoint, $imgH * $pixelPerPoint);
+	imagecopyresized(
+		$target_image, 
+		$base_image, 
+		0, 0, 0, 0, 
+		$imgW * $pixelPerPoint, $imgH * $pixelPerPoint, $imgW, $imgH
+	);
+	imagedestroy($base_image);
+	imagejpeg($target_image, $tempDir.$fileName, $jpegQuality);
+	imagedestroy($target_image);
+
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
+}
 }
 
 ?>

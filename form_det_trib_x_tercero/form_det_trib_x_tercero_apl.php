@@ -2633,7 +2633,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_det_trib_x_tercero']['Lookup_
    $unformatted_value_id_dt_ter = $this->id_dt_ter;
    $unformatted_value_id_tercero = $this->id_tercero;
 
-   $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY codigo, descripcion_dt";
+   $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY codigo, descripcion_dt";
 
    $this->id_dt_ter = $old_value_id_dt_ter;
    $this->id_tercero = $old_value_id_tercero;
@@ -4109,7 +4109,7 @@ $_SESSION['scriptcase']['form_det_trib_x_tercero']['contr_erro'] = 'off';
               $this->nmgp_dados_form["id_dt_ter"] = $this->id_dt_ter;
               $this->id_tercero = "" . $_SESSION['terc_cliente'] . "";  
               $this->nmgp_dados_form["id_tercero"] = $this->id_tercero;
-              $this->cod_det_trib = "ZY";  
+              $this->cod_det_trib = "ZZ";  
               $this->nmgp_dados_form["cod_det_trib"] = $this->cod_det_trib;
               $this->decripcion_dt = "";  
               $this->nmgp_dados_form["decripcion_dt"] = $this->decripcion_dt;
@@ -4720,7 +4720,7 @@ else
    $unformatted_value_id_dt_ter = $this->id_dt_ter;
    $unformatted_value_id_tercero = $this->id_tercero;
 
-   $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY codigo, descripcion_dt";
+   $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY codigo, descripcion_dt";
 
    $this->id_dt_ter = $old_value_id_dt_ter;
    $this->id_tercero = $old_value_id_tercero;

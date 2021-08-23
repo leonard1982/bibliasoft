@@ -125,7 +125,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  ?>
   <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Str_btn_css ?>" /> 
   <link rel="stylesheet" type="text/css" href="<?php echo $this->path_prod ?>/third/jquery/css/smoothness/jquery-ui.css" />
-  <script type="text/javascript" src="<?php echo $this->path_prod ?>/third/jquery/js/jquery.js"></script>
+  <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="<?php echo $this->path_prod ?>/third/jquery/js/jquery-ui.js"></script>
  <script>
   <?php echo $pb->getJavascript(); ?>

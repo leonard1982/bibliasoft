@@ -1,0 +1,2812 @@
+<?php
+
+if (!isset($this->NM_ajax_info['param']['buffer_output']) || !$this->NM_ajax_info['param']['buffer_output'])
+{
+    $sOBContents = ob_get_contents();
+    ob_end_clean();
+}
+
+header("X-XSS-Protection: 1; mode=block");
+header("X-Frame-Options: SAMEORIGIN");
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+<HEAD>
+ <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("Tercero"); } else { echo strip_tags("Tercero"); } ?></TITLE>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
+ <META http-equiv="Last-Modified" content="<?php echo gmdate('D, d M Y H:i:s') ?> GMT" />
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
+ <META http-equiv="Pragma" content="no-cache" />
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+<?php
+
+if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+{
+?>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+}
+
+?>
+ <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+ <SCRIPT type="text/javascript">
+  var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+  var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+  var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_esc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+  var sc_userSweetAlertDisplayed = false;
+ </SCRIPT>
+ <SCRIPT type="text/javascript">
+  var sc_blockCol = '<?php echo $this->Ini->Block_img_col; ?>';
+  var sc_blockExp = '<?php echo $this->Ini->Block_img_exp; ?>';
+  var sc_ajaxBg = '<?php echo $this->Ini->Color_bg_ajax; ?>';
+  var sc_ajaxBordC = '<?php echo $this->Ini->Border_c_ajax; ?>';
+  var sc_ajaxBordS = '<?php echo $this->Ini->Border_s_ajax; ?>';
+  var sc_ajaxBordW = '<?php echo $this->Ini->Border_w_ajax; ?>';
+  var sc_ajaxMsgTime = 2;
+  var sc_img_status_ok = '<?php echo $this->Ini->path_icones; ?>/<?php echo $this->Ini->Img_status_ok; ?>';
+  var sc_img_status_err = '<?php echo $this->Ini->path_icones; ?>/<?php echo $this->Ini->Img_status_err; ?>';
+  var sc_css_status = '<?php echo $this->Ini->Css_status; ?>';
+  var sc_css_status_pwd_box = '<?php echo $this->Ini->Css_status_pwd_box; ?>';
+  var sc_css_status_pwd_text = '<?php echo $this->Ini->Css_status_pwd_text; ?>';
+ </SCRIPT>
+        <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery.js"></SCRIPT>
+<input type="hidden" id="sc-mobile-lock" value='true' />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></SCRIPT>
+ <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery/css/smoothness/jquery-ui.css" type="text/css" media="screen" />
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/sweetalert2.all.min.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/polyfill.min.js"></SCRIPT>
+ <script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->url_lib_js; ?>jquery.iframe-transport.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->url_lib_js; ?>jquery.fileupload.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></SCRIPT>
+<style type="text/css">
+.sc-button-image.disabled {
+	opacity: 0.25
+}
+.sc-button-image.disabled img {
+	cursor: default !important
+}
+</style>
+ <style type="text/css">
+  .fileinput-button-padding {
+   padding: 3px 10px !important;
+  }
+  .fileinput-button {
+   position: relative;
+   overflow: hidden;
+   float: left;
+   margin-right: 4px;
+  }
+  .fileinput-button input {
+   position: absolute;
+   top: 0;
+   right: 0;
+   margin: 0;
+   border: solid transparent;
+   border-width: 0 0 100px 200px;
+   opacity: 0;
+   filter: alpha(opacity=0);
+   -moz-transform: translate(-300px, 0) scale(4);
+   direction: ltr;
+   cursor: pointer;
+  }
+ </style>
+<link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/css/select2.min.css" type="text/css" />
+<script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/js/select2.full.min.js"></script>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->url_lib_js; ?>scInput.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->url_lib_js; ?>jquery.scInput.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->url_lib_js; ?>jquery.scInput2.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->url_lib_js; ?>jquery.fieldSelection.js"></SCRIPT>
+ <?php
+ if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['embutida_pdf']))
+ {
+ ?>
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_form.css" />
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_form<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+  <?php 
+  if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts)) 
+  { 
+  ?> 
+  <link href="<?php echo $this->Ini->str_google_fonts ?>" rel="stylesheet" /> 
+  <?php 
+  } 
+  ?> 
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_appdiv.css" /> 
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_appdiv<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_tab.css" />
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_tab<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/buttons/<?php echo $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form ?>.css" />
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_prod; ?>/third/font-awesome/css/all.min.css" />
+<?php
+   include_once("../_lib/css/" . $this->Ini->str_schema_all . "_tab.php");
+ }
+?>
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>form_cloud_terceros/form_cloud_terceros_<?php echo strtolower($_SESSION['scriptcase']['reg_conf']['css_dir']) ?>.css" />
+
+<script>
+var scFocusFirstErrorField = false;
+var scFocusFirstErrorName  = "<?php echo $this->scFormFocusErrorName; ?>";
+</script>
+
+<?php
+include_once("form_cloud_terceros_sajax_js.php");
+?>
+<script type="text/javascript">
+if (document.getElementById("id_error_display_fixed"))
+{
+ scCenterFixedElement("id_error_display_fixed");
+}
+var posDispLeft = 0;
+var posDispTop = 0;
+var Nm_Proc_Atualiz = false;
+function findPos(obj)
+{
+ var posCurLeft = posCurTop = 0;
+ if (obj.offsetParent)
+ {
+  posCurLeft = obj.offsetLeft
+  posCurTop = obj.offsetTop
+  while (obj = obj.offsetParent)
+  {
+   posCurLeft += obj.offsetLeft
+   posCurTop += obj.offsetTop
+  }
+ }
+ posDispLeft = posCurLeft - 10;
+ posDispTop = posCurTop + 30;
+}
+var Nav_permite_ret = "<?php if ($this->Nav_permite_ret) { echo 'S'; } else { echo 'N'; } ?>";
+var Nav_permite_ava = "<?php if ($this->Nav_permite_ava) { echo 'S'; } else { echo 'N'; } ?>";
+var Nav_binicio     = "<?php echo $this->arr_buttons['binicio']['type']; ?>";
+var Nav_bavanca     = "<?php echo $this->arr_buttons['bavanca']['type']; ?>";
+var Nav_bretorna    = "<?php echo $this->arr_buttons['bretorna']['type']; ?>";
+var Nav_bfinal      = "<?php echo $this->arr_buttons['bfinal']['type']; ?>";
+function nav_atualiza(str_ret, str_ava, str_pos)
+{
+<?php
+ if (isset($this->NM_btn_navega) && 'N' == $this->NM_btn_navega)
+ {
+     echo " return;";
+ }
+ else
+ {
+?>
+ if ('S' == str_ret)
+ {
+<?php
+    if ($this->nmgp_botoes['first'] == "on")
+    {
+?>
+       $("#sc_b_ini_" + str_pos).prop("disabled", false).removeClass("disabled");
+<?php
+    }
+    if ($this->nmgp_botoes['back'] == "on")
+    {
+?>
+       $("#sc_b_ret_" + str_pos).prop("disabled", false).removeClass("disabled");
+<?php
+    }
+?>
+ }
+ else
+ {
+<?php
+    if ($this->nmgp_botoes['first'] == "on")
+    {
+?>
+       $("#sc_b_ini_" + str_pos).prop("disabled", true).addClass("disabled");
+<?php
+    }
+    if ($this->nmgp_botoes['back'] == "on")
+    {
+?>
+       $("#sc_b_ret_" + str_pos).prop("disabled", true).addClass("disabled");
+<?php
+    }
+?>
+ }
+ if ('S' == str_ava)
+ {
+<?php
+    if ($this->nmgp_botoes['last'] == "on")
+    {
+?>
+       $("#sc_b_fim_" + str_pos).prop("disabled", false).removeClass("disabled");
+<?php
+    }
+    if ($this->nmgp_botoes['forward'] == "on")
+    {
+?>
+       $("#sc_b_avc_" + str_pos).prop("disabled", false).removeClass("disabled");
+<?php
+    }
+?>
+ }
+ else
+ {
+<?php
+    if ($this->nmgp_botoes['last'] == "on")
+    {
+?>
+       $("#sc_b_fim_" + str_pos).prop("disabled", true).addClass("disabled");
+<?php
+    }
+    if ($this->nmgp_botoes['forward'] == "on")
+    {
+?>
+       $("#sc_b_avc_" + str_pos).prop("disabled", true).addClass("disabled");
+<?php
+    }
+?>
+ }
+<?php
+  }
+?>
+}
+function nav_liga_img()
+{
+ sExt = sImg.substr(sImg.length - 4);
+ sImg = sImg.substr(0, sImg.length - 4);
+ if ('_off' == sImg.substr(sImg.length - 4))
+ {
+  sImg = sImg.substr(0, sImg.length - 4);
+ }
+ sImg += sExt;
+}
+function nav_desliga_img()
+{
+ sExt = sImg.substr(sImg.length - 4);
+ sImg = sImg.substr(0, sImg.length - 4);
+ if ('_off' != sImg.substr(sImg.length - 4))
+ {
+  sImg += '_off';
+ }
+ sImg += sExt;
+}
+<?php
+
+include_once('form_cloud_terceros_jquery.php');
+
+?>
+
+ var Dyn_Ini  = true;
+ $(function() {
+
+  scJQElementsAdd('');
+
+  scJQGeneralAdd();
+
+  $('#SC_fast_search_t').keyup(function(e) {
+   scQuickSearchKeyUp('t', e);
+  });
+
+  addAutocomplete(this);
+
+  $(document).bind('drop dragover', function (e) {
+      e.preventDefault();
+  });
+
+  var i, iTestWidth, iMaxLabelWidth = 0, $labelList = $(".scUiLabelWidthFix");
+  for (i = 0; i < $labelList.length; i++) {
+    iTestWidth = $($labelList[i]).width();
+    sTestWidth = iTestWidth + "";
+    if ("" == iTestWidth) {
+      iTestWidth = 0;
+    }
+    else if ("px" == sTestWidth.substr(sTestWidth.length - 2)) {
+      iTestWidth = parseInt(sTestWidth.substr(0, sTestWidth.length - 2));
+    }
+    iMaxLabelWidth = Math.max(iMaxLabelWidth, iTestWidth);
+  }
+  if (0 < iMaxLabelWidth) {
+    $(".scUiLabelWidthFix").css("width", iMaxLabelWidth + "px");
+  }
+<?php
+if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && !empty($this->NM_non_ajax_info['ajaxJavascript']))
+{
+    foreach ($this->NM_non_ajax_info['ajaxJavascript'] as $aFnData)
+    {
+?>
+  <?php echo $aFnData[0]; ?>(<?php echo implode(', ', $aFnData[1]); ?>);
+
+<?php
+    }
+}
+?>
+ });
+
+   $(window).on('load', function() {
+     if ($('#t').length>0) {
+         scQuickSearchKeyUp('t', null);
+     }
+   });
+   function scQuickSearchSubmit_t() {
+     nm_move('fast_search', 't');
+   }
+
+   function scQuickSearchKeyUp(sPos, e) {
+     if (null != e) {
+       var keyPressed = e.charCode || e.keyCode || e.which;
+       if (13 == keyPressed) {
+         if ('t' == sPos) scQuickSearchSubmit_t();
+       }
+       else
+       {
+           $('#SC_fast_search_submit_'+sPos).show();
+       }
+     }
+   }
+   function nm_gp_submit_qsearch(pos)
+   {
+        nm_move('fast_search', pos);
+   }
+   function nm_gp_open_qsearch_div(pos)
+   {
+        if($('#SC_fast_search_dropdown_' + pos).hasClass('fa-caret-down'))
+        {
+            if(($('#quicksearchph_' + pos).offset().top+$('#id_qs_div_' + pos).height()+10) >= $(document).height())
+            {
+                $('#id_qs_div_' + pos).offset({top:($('#quicksearchph_' + pos).offset().top-($('#quicksearchph_' + pos).height()/2)-$('#id_qs_div_' + pos).height()-4)});
+            }
+
+            nm_gp_open_qsearch_div_store_temp(pos);
+            $('#SC_fast_search_dropdown_' + pos).removeClass('fa-caret-down').addClass('fa-caret-up');
+        }
+        else
+        {
+            $('#SC_fast_search_dropdown_' + pos).removeClass('fa-caret-up').addClass('fa-caret-down');
+        }
+        $('#id_qs_div_' + pos).toggle();
+   }
+
+   var tmp_qs_arr_fields = [], tmp_qs_arr_cond = "";
+   function nm_gp_open_qsearch_div_store_temp(pos)
+   {
+        tmp_qs_arr_fields = [], tmp_qs_str_cond = "";
+
+        if($('#fast_search_f0_' + pos).prop('type') == 'select-multiple')
+        {
+            tmp_qs_arr_fields = $('#fast_search_f0_' + pos).val();
+        }
+        else
+        {
+            tmp_qs_arr_fields.push($('#fast_search_f0_' + pos).val());
+        }
+
+        tmp_qs_str_cond = $('#cond_fast_search_f0_' + pos).val();
+   }
+
+   function nm_gp_cancel_qsearch_div_store_temp(pos)
+   {
+        $('#fast_search_f0_' + pos).val('');
+        $("#fast_search_f0_" + pos + " option").prop('selected', false);
+        for(it=0; it<tmp_qs_arr_fields.length; it++)
+        {
+            $("#fast_search_f0_" + pos + " option[value='"+ tmp_qs_arr_fields[it] +"']").prop('selected', true);
+        }
+        $("#fast_search_f0_" + pos).change();
+        tmp_qs_arr_fields = [];
+
+        $('#cond_fast_search_f0_' + pos).val(tmp_qs_str_cond);
+        $('#cond_fast_search_f0_' + pos).change();
+        tmp_qs_str_cond = "";
+
+        nm_gp_open_qsearch_div(pos);
+   } if($(".sc-ui-block-control").length) {
+  preloadBlock = new Image();
+  preloadBlock.src = "<?php echo $this->Ini->path_icones; ?>/" + sc_blockExp;
+ }
+
+ var show_block = {
+  
+ };
+
+ function toggleBlock(e) {
+  var block = e.data.block,
+      block_id = $(block).attr("id");
+      block_img = $("#" + block_id + " .sc-ui-block-control");
+
+  if (1 >= block.rows.length) {
+   return;
+  }
+
+  show_block[block_id] = !show_block[block_id];
+
+  if (show_block[block_id]) {
+    $(block).css("height", "100%");
+    if (block_img.length) block_img.attr("src", changeImgName(block_img.attr("src"), sc_blockCol));
+  }
+  else {
+    $(block).css("height", "");
+    if (block_img.length) block_img.attr("src", changeImgName(block_img.attr("src"), sc_blockExp));
+  }
+
+  for (var i = 1; i < block.rows.length; i++) {
+   if (show_block[block_id])
+    $(block.rows[i]).show();
+   else
+    $(block.rows[i]).hide();
+  }
+
+  if (show_block[block_id]) {
+  }
+ }
+
+ function changeImgName(imgOld, imgNew) {
+   var aOld = imgOld.split("/");
+   aOld.pop();
+   aOld.push(imgNew);
+   return aOld.join("/");
+ }
+
+ function addAutocomplete(elem) {
+
+
+  $(".sc-ui-autocomp-documento", elem).on("focus", function() {
+   var sId = $(this).attr("id").substr(6);
+   scEventControl_data[sId]["autocomp"] = true;
+  }).on("blur", function() {
+   var sId = $(this).attr("id").substr(6), sRow = "documento" != sId ? sId.substr(9) : "";
+   if ("" == $(this).val()) {
+    var hasChanged = "" != $("#id_sc_field_" + sId).val();
+    $("#id_sc_field_" + sId).val("");
+    if (hasChanged) {
+     if ('function' == typeof do_ajax_form_cloud_terceros_event_documento_onchange) { do_ajax_form_cloud_terceros_event_documento_onchange(sRow); }
+    }
+   }
+   scEventControl_data[sId]["autocomp"] = false;
+  }).on("keydown", function(e) {
+   if(e.keyCode == $.ui.keyCode.TAB && $(".ui-autocomplete").filter(":visible").length) {
+    e.keyCode = $.ui.keyCode.DOWN;
+    $(this).trigger(e);
+    e.keyCode = $.ui.keyCode.ENTER;
+    $(this).trigger(e);
+   }
+  }).autocomplete({
+   minLength: 1,
+   source: function (request, response) {
+    $.ajax({
+     url: "form_cloud_terceros.php",
+     dataType: "json",
+     data: {
+      term: request.term,
+      nmgp_opcao: "ajax_autocomp",
+      nmgp_parms: "NM_ajax_opcao?#?autocomp_documento",
+      script_case_init: document.F2.script_case_init.value
+     },
+     success: function (data) {
+      if (data == "ss_time_out") {
+          nm_move('novo');
+      }
+      response(data);
+     }
+    });
+   },
+   change: function (event, ui) {
+    var sId = $(this).attr("id").substr(6), sRow = 'documento' != sId ? sId.substr(9) : '';
+    if ("" == $(this).val()) {
+     do_ajax_form_cloud_terceros_event_documento_onchange(sRow);
+    }
+   },
+   focus: function (event, ui) {
+    var sId = $(this).attr("id").substr(6), sRow = 'documento' != sId ? sId.substr(9) : '';
+    $("#id_sc_field_" + sId).val(ui.item.value);
+    $(this).val(ui.item.label);
+    event.preventDefault();
+   },
+   select: function (event, ui) {
+    var sId = $(this).attr("id").substr(6), sRow = 'documento' != sId ? sId.substr(9) : '';
+    $("#id_sc_field_" + sId).val(ui.item.value);
+    $(this).val(ui.item.label);
+    do_ajax_form_cloud_terceros_event_documento_onchange(sRow);
+    event.preventDefault();
+    $("#id_sc_field_" + sId).trigger("focus");
+   }
+  });
+  $("#id_ac_documento", elem).on("focus", function() {
+    $("#id_sc_field_documento").trigger("focus");
+  }).on("blur", function() {
+    $("#id_sc_field_documento").trigger("blur");
+  });
+
+  $(".sc-ui-autocomp-nombres", elem).on("focus", function() {
+   var sId = $(this).attr("id").substr(6);
+   scEventControl_data[sId]["autocomp"] = true;
+  }).on("blur", function() {
+   var sId = $(this).attr("id").substr(6), sRow = "nombres" != sId ? sId.substr(7) : "";
+   if ("" == $(this).val()) {
+    var hasChanged = "" != $("#id_sc_field_" + sId).val();
+    $("#id_sc_field_" + sId).val("");
+    if (hasChanged) {
+     if ('function' == typeof do_ajax_form_cloud_terceros_event_nombres_onchange) { do_ajax_form_cloud_terceros_event_nombres_onchange(sRow); }
+    }
+   }
+   scEventControl_data[sId]["autocomp"] = false;
+  }).on("keydown", function(e) {
+   if(e.keyCode == $.ui.keyCode.TAB && $(".ui-autocomplete").filter(":visible").length) {
+    e.keyCode = $.ui.keyCode.DOWN;
+    $(this).trigger(e);
+    e.keyCode = $.ui.keyCode.ENTER;
+    $(this).trigger(e);
+   }
+  }).autocomplete({
+   minLength: 1,
+   source: function (request, response) {
+    $.ajax({
+     url: "form_cloud_terceros.php",
+     dataType: "json",
+     data: {
+      term: request.term,
+      nmgp_opcao: "ajax_autocomp",
+      nmgp_parms: "NM_ajax_opcao?#?autocomp_nombres",
+      script_case_init: document.F2.script_case_init.value
+     },
+     success: function (data) {
+      if (data == "ss_time_out") {
+          nm_move('novo');
+      }
+      response(data);
+     }
+    });
+   },
+   change: function (event, ui) {
+    var sId = $(this).attr("id").substr(6), sRow = 'nombres' != sId ? sId.substr(7) : '';
+    if ("" == $(this).val()) {
+     do_ajax_form_cloud_terceros_event_nombres_onchange(sRow);
+    }
+   },
+   focus: function (event, ui) {
+    var sId = $(this).attr("id").substr(6), sRow = 'nombres' != sId ? sId.substr(7) : '';
+    ui.item.value = ui.item.value.toUpperCase();
+    ui.item.label = ui.item.label.toUpperCase();
+    $("#id_sc_field_" + sId).val(ui.item.value);
+    $(this).val(ui.item.label);
+    event.preventDefault();
+   },
+   select: function (event, ui) {
+    var sId = $(this).attr("id").substr(6), sRow = 'nombres' != sId ? sId.substr(7) : '';
+    ui.item.value = ui.item.value.toUpperCase();
+    ui.item.label = ui.item.label.toUpperCase();
+    $("#id_sc_field_" + sId).val(ui.item.value);
+    $(this).val(ui.item.label);
+    do_ajax_form_cloud_terceros_event_nombres_onchange(sRow);
+    event.preventDefault();
+    $("#id_sc_field_" + sId).trigger("focus");
+   }
+  });
+  $("#id_ac_nombres", elem).on("focus", function() {
+    $("#id_sc_field_nombres").trigger("focus");
+  }).on("blur", function() {
+    $("#id_sc_field_nombres").trigger("blur");
+  });
+}
+</script>
+</HEAD>
+<?php
+$str_iframe_body = ('F' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] || 'R' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe']) ? 'margin: 2px;' : '';
+ if (isset($_SESSION['nm_aba_bg_color']))
+ {
+     $this->Ini->cor_bg_grid = $_SESSION['nm_aba_bg_color'];
+     $this->Ini->img_fun_pag = $_SESSION['nm_aba_bg_img'];
+ }
+if ($GLOBALS["erro_incl"] == 1)
+{
+    $this->nmgp_opcao = "novo";
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['opc_ant'] = "novo";
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['recarga'] = "novo";
+}
+if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['recarga']))
+{
+    $opcao_botoes = $this->nmgp_opcao;
+}
+else
+{
+    $opcao_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['recarga'];
+}
+    $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
+    $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
+    $vertical_center = '';
+?>
+<body class="scFormPage" style="<?php echo $remove_margin . $str_iframe_body . $vertical_center; ?>">
+<?php
+
+if (!isset($this->NM_ajax_info['param']['buffer_output']) || !$this->NM_ajax_info['param']['buffer_output'])
+{
+    echo $sOBContents;
+}
+
+?>
+<div id="idJSSpecChar" style="display: none;"></div>
+<script type="text/javascript">
+function NM_tp_critica(TP)
+{
+    if (TP == 0 || TP == 1 || TP == 2)
+    {
+        nmdg_tipo_crit = TP;
+    }
+}
+</script> 
+<?php
+ include_once("form_cloud_terceros_js0.php");
+?>
+<script type="text/javascript"> 
+ function setLocale(oSel)
+ {
+  var sLocale = "";
+  if (-1 < oSel.selectedIndex)
+  {
+   sLocale = oSel.options[oSel.selectedIndex].value;
+  }
+  document.F1.nmgp_idioma_novo.value = sLocale;
+ }
+ function setSchema(oSel)
+ {
+  var sLocale = "";
+  if (-1 < oSel.selectedIndex)
+  {
+   sLocale = oSel.options[oSel.selectedIndex].value;
+  }
+  document.F1.nmgp_schema_f.value = sLocale;
+ }
+var scInsertFieldWithErrors = new Array();
+<?php
+foreach ($this->NM_ajax_info['fieldsWithErrors'] as $insertFieldName) {
+?>
+scInsertFieldWithErrors.push("<?php echo $insertFieldName; ?>");
+<?php
+}
+?>
+$(function() {
+	scAjaxError_markFieldList(scInsertFieldWithErrors);
+});
+ </script>
+<form  name="F1" method="post" 
+               action="./" 
+               target="_self">
+<input type="hidden" name="nmgp_url_saida" value="">
+<?php
+if ('novo' == $this->nmgp_opcao || 'incluir' == $this->nmgp_opcao)
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['insert_validation'] = md5(time() . rand(1, 99999));
+?>
+<input type="hidden" name="nmgp_ins_valid" value="<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['insert_validation']; ?>">
+<?php
+}
+?>
+<input type="hidden" name="nm_form_submit" value="1">
+<input type="hidden" name="nmgp_idioma_novo" value="">
+<input type="hidden" name="nmgp_schema_f" value="">
+<input type="hidden" name="nmgp_opcao" value="">
+<input type="hidden" name="nmgp_ancora" value="">
+<input type="hidden" name="nmgp_num_form" value="<?php  echo $this->form_encode_input($nmgp_num_form); ?>">
+<input type="hidden" name="nmgp_parms" value="">
+<input type="hidden" name="script_case_init" value="<?php  echo $this->form_encode_input($this->Ini->sc_page); ?>">
+<input type="hidden" name="NM_cancel_return_new" value="<?php echo $this->NM_cancel_return_new ?>">
+<input type="hidden" name="csrf_token" value="<?php echo $this->scCsrfGetToken() ?>" />
+<input type="hidden" name="_sc_force_mobile" id="sc-id-mobile-control" value="" />
+<?php
+$_SESSION['scriptcase']['error_span_title']['form_cloud_terceros'] = $this->Ini->Error_icon_span;
+$_SESSION['scriptcase']['error_icon_title']['form_cloud_terceros'] = '' != $this->Ini->Err_ico_title ? $this->Ini->path_icones . '/' . $this->Ini->Err_ico_title : '';
+?>
+<div style="display: none; position: absolute; z-index: 1000" id="id_error_display_table_frame">
+<table class="scFormErrorTable scFormToastTable">
+<tr><td class="scFormErrorMessage scFormToastMessage"><table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormErrorMessageFont" style="padding: 0px; vertical-align: top; width: 100%"><span id="id_error_display_table_text"></span></td><td style="padding: 0px; vertical-align: top"><?php echo nmButtonOutput($this->arr_buttons, "berrm_clse", "scAjaxHideErrorDisplay('table')", "scAjaxHideErrorDisplay('table')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</td></tr></table></td></tr>
+</table>
+</div>
+<div style="display: none; position: absolute; z-index: 1000" id="id_message_display_frame">
+ <table class="scFormMessageTable" id="id_message_display_content" style="width: 100%">
+  <tr id="id_message_display_title_line">
+   <td class="scFormMessageTitle" style="height: 20px"><?php
+if ('' != $this->Ini->Msg_ico_title) {
+?>
+<img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Msg_ico_title; ?>" style="border-width: 0px; vertical-align: middle">&nbsp;<?php
+}
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bmessageclose", "_scAjaxMessageBtnClose()", "_scAjaxMessageBtnClose()", "id_message_display_close_icon", "", "", "float: right", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<span id="id_message_display_title" style="vertical-align: middle"></span></td>
+  </tr>
+  <tr>
+   <td class="scFormMessageMessage"><?php
+if ('' != $this->Ini->Msg_ico_body) {
+?>
+<img id="id_message_display_body_icon" src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Msg_ico_body; ?>" style="border-width: 0px; vertical-align: middle">&nbsp;<?php
+}
+?>
+<span id="id_message_display_text"></span><div id="id_message_display_buttond" style="display: none; text-align: center"><br /><input id="id_message_display_buttone" type="button" class="scButton_default" value="Ok" onClick="_scAjaxMessageBtnClick()" ></div></td>
+  </tr>
+ </table>
+</div>
+<?php
+$msgDefClose = isset($this->arr_buttons['bmessageclose']) ? $this->arr_buttons['bmessageclose']['value'] : 'Ok';
+?>
+<script type="text/javascript">
+var scMsgDefTitle = "<?php echo $this->Ini->Nm_lang['lang_usr_lang_othr_msgs_titl']; ?>";
+var scMsgDefButton = "Ok";
+var scMsgDefClose = "<?php echo $msgDefClose; ?>";
+var scMsgDefClick = "close";
+var scMsgDefScInit = "<?php echo $this->Ini->page; ?>";
+</script>
+<?php
+if ($this->record_insert_ok)
+{
+?>
+<script type="text/javascript">
+if (typeof sc_userSweetAlertDisplayed === "undefined" || !sc_userSweetAlertDisplayed) {
+    _scAjaxShowMessage({message: "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_othr_ajax_frmi']) ?>", title: "", isModal: false, timeout: sc_ajaxMsgTime, showButton: false, buttonLabel: "Ok", topPos: 0, leftPos: 0, width: 0, height: 0, redirUrl: "", redirTarget: "", redirParam: "", showClose: false, showBodyIcon: true, isToast: true, type: "success"});
+}
+sc_userSweetAlertDisplayed = false;
+</script>
+<?php
+}
+if ($this->record_delete_ok)
+{
+?>
+<script type="text/javascript">
+if (typeof sc_userSweetAlertDisplayed === "undefined" || !sc_userSweetAlertDisplayed) {
+    _scAjaxShowMessage({message: "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_othr_ajax_frmd']) ?>", title: "", isModal: false, timeout: sc_ajaxMsgTime, showButton: false, buttonLabel: "Ok", topPos: 0, leftPos: 0, width: 0, height: 0, redirUrl: "", redirTarget: "", redirParam: "", showClose: false, showBodyIcon: true, isToast: true, type: "success"});
+}
+sc_userSweetAlertDisplayed = false;
+</script>
+<?php
+}
+?>
+<table id="main_table_form"  align="center" cellpadding=0 cellspacing=0 >
+ <tr>
+  <td>
+  <div class="scFormBorder" style="<?php echo (isset($remove_border) ? $remove_border : ''); ?>">
+   <table width='100%' cellspacing=0 cellpadding=0>
+<?php
+  if (!$this->Embutida_call && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['mostra_cab']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['mostra_cab'] != "N") && (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard'] || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['compact_mode'] || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['maximized']))
+  {
+?>
+<tr><td>
+<style>
+#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
+#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
+</style>
+
+<div style="width: 100%">
+ <div class="scFormHeader" style="height:11px; display: block; border-width:0px; "></div>
+ <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
+ 	<table style="width:100%; border-collapse:collapse; padding:0;">
+    	<tr>
+        	<td id="lin1_col1" class="scFormHeaderFont"><span><?php if ($this->nmgp_opcao == "novo") { echo "Tercero"; } else { echo "Tercero"; } ?></span></td>
+            <td id="lin1_col2" class="scFormHeaderFont"><span><?php if ($this->Ini->Export_img_zip) {$this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . '/scriptcase__NM__ico__NM__businesspeople2_32.png';echo '<IMG SRC="scriptcase__NM__ico__NM__businesspeople2_32.png';}else{ echo '<IMG SRC="' . $this->Ini->path_imag_cab  . '/scriptcase__NM__ico__NM__businesspeople2_32.png';}?>" BORDER="0"/></span></td>
+        </tr>
+    </table>		 
+ </div>
+</div>
+</td></tr>
+<?php
+  }
+?>
+<tr><td>
+<?php
+if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "R")
+{
+?>
+    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar" style="padding: 0px; spacing: 0px">
+    <table style="border-collapse: collapse; border-width: 0px; width: 100%">
+    <tr> 
+     <td nowrap align="left" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php
+}
+if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "R")
+{
+    $NM_btn = false;
+      if ($this->nmgp_botoes['qsearch'] == "on" && $opcao_botoes != "novo")
+      {
+          $OPC_cmp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['fast_search'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['fast_search'][0] : "";
+          $OPC_arg = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['fast_search'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['fast_search'][1] : "";
+          $OPC_dat = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['fast_search'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['fast_search'][2] : "";
+          $stateSearchIconClose  = 'none';
+          $stateSearchIconSearch = '';
+          if(!empty($OPC_dat))
+          {
+              $stateSearchIconClose  = '';
+              $stateSearchIconSearch = 'none';
+          }
+?> 
+           <script type="text/javascript">var change_fast_t = "";</script>
+          <input id='fast_search_f0_t' type="hidden" name="nmgp_fast_search_t" value="SC_all_Cmp">
+          <select id='cond_fast_search_f0_t' class="scFormToolbarInput" style="vertical-align: middle;display:none;" name="nmgp_cond_fast_search_t" onChange="change_fast_t = 'CH';">
+<?php 
+          $OPC_sel = ("qp" == $OPC_arg) ? " selected" : "";
+           echo "           <option value='qp'" . $OPC_sel . ">" . $this->Ini->Nm_lang['lang_srch_like'] . "</option>";
+?> 
+          </select>
+          <span id="quicksearchph_t" class="scFormToolbarInput" style='display: inline-block; vertical-align: inherit'>
+              <span>
+                  <input type="text" id="SC_fast_search_t" class="scFormToolbarInputText" style="border-width: 0px;;" name="nmgp_arg_fast_search_t" value="<?php echo $this->form_encode_input($OPC_dat) ?>" size="30" onChange="change_fast_t = 'CH';" alt="{maxLength: 255}" placeholder="<?php echo $this->Ini->Nm_lang['lang_othr_qk_watermark'] ?>">&nbsp;
+                  <img style="display: <?php echo $stateSearchIconSearch ?>; "  id="SC_fast_search_submit_t" class='css_toolbar_obj_qs_search_img' src="<?php echo $this->Ini->path_botoes ?>/<?php echo $this->Ini->Img_qs_search; ?>" onclick="scQuickSearchSubmit_t();">
+                  <img style="display: <?php echo $stateSearchIconClose ?>; " id="SC_fast_search_close_t" class='css_toolbar_obj_qs_search_img' src="<?php echo $this->Ini->path_botoes ?>/<?php echo $this->Ini->Img_qs_clean; ?>" onclick="document.getElementById('SC_fast_search_t').value = '__Clear_Fast__'; nm_move('fast_search', 't');">
+              </span>
+          </span>  </div>
+  <?php
+      }
+?> 
+     </td> 
+     <td nowrap align="center" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php 
+    if ($opcao_botoes != "novo") {
+        $sCondStyle = ($this->nmgp_botoes['new'] == "on") ? '' : 'display: none;';
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bnovo", "scBtnFn_sys_format_inc()", "scBtnFn_sys_format_inc()", "sc_b_new_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-1", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes == "novo") && (!$this->Embutida_call || $this->sc_evento == "novo" || $this->sc_evento == "insert" || $this->sc_evento == "incluir")) {
+        $sCondStyle = ($this->nmgp_botoes['insert'] == "on") ? '' : 'display: none;';
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bincluir", "scBtnFn_sys_format_inc()", "scBtnFn_sys_format_inc()", "sc_b_ins_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-2", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if ($opcao_botoes != "novo") {
+        $sCondStyle = ($this->nmgp_botoes['update'] == "on") ? '' : 'display: none;';
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "balterar", "scBtnFn_sys_format_alt()", "scBtnFn_sys_format_alt()", "sc_b_upd_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-3", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if ($opcao_botoes != "novo") {
+        $sCondStyle = ($this->nmgp_botoes['delete'] == "on") ? '' : 'display: none;';
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bexcluir", "scBtnFn_sys_format_exc()", "scBtnFn_sys_format_exc()", "sc_b_del_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-4", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+?> 
+     </td> 
+     <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php 
+    if ('' != $this->url_webhelp) {
+        $sCondStyle = '';
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "scBtnFn_sys_format_hlp()", "scBtnFn_sys_format_hlp()", "sc_b_hlp_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if ((!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
+        $sCondStyle = (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $nm_apl_dependente != 1 && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "R" && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-5", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if ((!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
+        $sCondStyle = (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] == "R" || $this->aba_iframe || $this->nmgp_botoes['exit'] != "on") && ($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "F" && $this->nmgp_botoes['exit'] == "on") && ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-6", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if ((!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
+        $sCondStyle = (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] == "R" || $this->aba_iframe || $this->nmgp_botoes['exit'] != "on") && ($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "F" && $this->nmgp_botoes['exit'] == "on") && ($nm_apl_dependente != 1 || $this->nmgp_botoes['exit'] != "on") && ((!$this->aba_iframe || $this->is_calendar_app) && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-7", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+}
+if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['run_iframe'] != "R")
+{
+?>
+   </td></tr> 
+   </table> 
+   </td></tr></table> 
+<?php
+}
+?>
+<?php
+if (!$NM_btn && isset($NM_ult_sep))
+{
+    echo "    <script language=\"javascript\">";
+    echo "      document.getElementById('" .  $NM_ult_sep . "').style.display='none';";
+    echo "    </script>";
+}
+unset($NM_ult_sep);
+?>
+<?php if ('novo' != $this->nmgp_opcao || $this->Embutida_form) { ?><script>nav_atualiza(Nav_permite_ret, Nav_permite_ava, 't');</script><?php } ?>
+</td></tr> 
+<tr><td>
+<?php
+       echo "<div id=\"sc-ui-empty-form\" class=\"scFormPageText\" style=\"padding: 10px; text-align: center; font-weight: bold" . ($this->nmgp_form_empty ? '' : '; display: none') . "\">";
+       echo $this->Ini->Nm_lang['lang_errm_empt'];
+       echo "</div>";
+  if ($this->nmgp_form_empty)
+  {
+       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['where_filter']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['empty_filter'] = true;
+       }
+  }
+?>
+<?php $sc_hidden_no = 1; $sc_hidden_yes = 0; ?>
+   <a name="bloco_0"></a>
+   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
+<div id="div_hidden_bloco_0"><!-- bloco_c -->
+<?php
+   if (!isset($this->nmgp_cmp_hidden['id_cloud_tercero']))
+   {
+       $this->nmgp_cmp_hidden['id_cloud_tercero'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['id_empresa']))
+   {
+       $this->nmgp_cmp_hidden['id_empresa'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['cod_pais']))
+   {
+       $this->nmgp_cmp_hidden['cod_pais'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['cod_lenguaje']))
+   {
+       $this->nmgp_cmp_hidden['cod_lenguaje'] = 'off';
+   }
+?>
+<TABLE align="center" id="hidden_bloco_0" class="scFormTable" width="100%" style="height: 100%;"><?php
+           if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['id_cloud_tercero']))
+           {
+               $this->nmgp_cmp_readonly['id_cloud_tercero'] = 'on';
+           }
+?>
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['id_cloud_tercero']))
+    {
+        $this->nm_new_label['id_cloud_tercero'] = "Id Cloud Tercero";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_cloud_tercero = $this->id_cloud_tercero;
+   if (!isset($this->nmgp_cmp_hidden['id_cloud_tercero']))
+   {
+       $this->nmgp_cmp_hidden['id_cloud_tercero'] = 'off';
+   }
+   $sStyleHidden_id_cloud_tercero = '';
+   if (isset($this->nmgp_cmp_hidden['id_cloud_tercero']) && $this->nmgp_cmp_hidden['id_cloud_tercero'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_cloud_tercero']);
+       $sStyleHidden_id_cloud_tercero = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_cloud_tercero = 'display: none;';
+   $sStyleReadInp_id_cloud_tercero = '';
+   if (/*($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || */(isset($this->nmgp_cmp_readonly["id_cloud_tercero"]) &&  $this->nmgp_cmp_readonly["id_cloud_tercero"] == "on"))
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_cloud_tercero']);
+       $sStyleReadLab_id_cloud_tercero = '';
+       $sStyleReadInp_id_cloud_tercero = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_cloud_tercero']) && $this->nmgp_cmp_hidden['id_cloud_tercero'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="id_cloud_tercero" value="<?php echo $this->form_encode_input($id_cloud_tercero) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php if ((isset($this->Embutida_form) && $this->Embutida_form) || ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir")) { ?>
+
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_id_cloud_tercero_label" id="hidden_field_label_id_cloud_tercero" style="<?php echo $sStyleHidden_id_cloud_tercero; ?>"><span id="id_label_id_cloud_tercero"><?php echo $this->nm_new_label['id_cloud_tercero']; ?></span></TD>
+    <TD class="scFormDataOdd css_id_cloud_tercero_line" id="hidden_field_data_id_cloud_tercero" style="<?php echo $sStyleHidden_id_cloud_tercero; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_cloud_tercero_line" style="vertical-align: top;padding: 0px"><span id="id_read_on_id_cloud_tercero" class="css_id_cloud_tercero_line" style="<?php echo $sStyleReadLab_id_cloud_tercero; ?>"><?php echo $this->form_format_readonly("id_cloud_tercero", $this->form_encode_input($this->id_cloud_tercero)); ?></span><span id="id_read_off_id_cloud_tercero" class="css_read_off_id_cloud_tercero" style="<?php echo $sStyleReadInp_id_cloud_tercero; ?>"><input type="hidden" name="id_cloud_tercero" value="<?php echo $this->form_encode_input($id_cloud_tercero) . "\">"?><span id="id_ajax_label_id_cloud_tercero"><?php echo nl2br($id_cloud_tercero); ?></span>
+</span></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_cloud_tercero_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_cloud_tercero_text"></span></td></tr></table></td></tr></table></TD>
+   <?php }
+      else
+      {
+         $sc_hidden_no--;
+      }
+?>
+<?php }?>
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['documento']))
+    {
+        $this->nm_new_label['documento'] = "Documento";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $documento = $this->documento;
+   $sStyleHidden_documento = '';
+   if (isset($this->nmgp_cmp_hidden['documento']) && $this->nmgp_cmp_hidden['documento'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['documento']);
+       $sStyleHidden_documento = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_documento = 'display: none;';
+   $sStyleReadInp_documento = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['documento']) && $this->nmgp_cmp_readonly['documento'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['documento']);
+       $sStyleReadLab_documento = '';
+       $sStyleReadInp_documento = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['documento']) && $this->nmgp_cmp_hidden['documento'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="documento" value="<?php echo $this->form_encode_input($documento) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_documento_label" id="hidden_field_label_documento" style="<?php echo $sStyleHidden_documento; ?>"><span id="id_label_documento"><?php echo $this->nm_new_label['documento']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['php_cmp_required']['documento']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['php_cmp_required']['documento'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></TD>
+    <TD class="scFormDataOdd css_documento_line" id="hidden_field_data_documento" style="<?php echo $sStyleHidden_documento; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_documento_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["documento"]) &&  $this->nmgp_cmp_readonly["documento"] == "on") { 
+
+ ?>
+<input type="hidden" name="documento" value="<?php echo $this->form_encode_input($documento) . "\">" . $documento . ""; ?>
+<?php } else { ?>
+
+<?php
+$aRecData['documento'] = $this->documento;
+$aLookup = array();
+   if (in_array(strtolower($this->Ini->nm_con_conn_firebird['tpbanco']), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_documento']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_documento'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_documento']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_documento'] = array(); 
+    }
+
+   $old_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $old_value_id_empresa = $this->id_empresa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $unformatted_value_id_empresa = $this->id_empresa;
+
+   $detalle_tributario_val_str = "''";
+   if (!empty($this->detalle_tributario))
+   {
+       if (is_array($this->detalle_tributario))
+       {
+           $Tmp_array = $this->detalle_tributario;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->detalle_tributario);
+       }
+       $detalle_tributario_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $detalle_tributario_val_str)
+          {
+             $detalle_tributario_val_str .= ", ";
+          }
+          $detalle_tributario_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $responsabilidades_fiscales_val_str = "''";
+   if (!empty($this->responsabilidades_fiscales))
+   {
+       if (is_array($this->responsabilidades_fiscales))
+       {
+           $Tmp_array = $this->responsabilidades_fiscales;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->responsabilidades_fiscales);
+       }
+       $responsabilidades_fiscales_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $responsabilidades_fiscales_val_str)
+          {
+             $responsabilidades_fiscales_val_str .= ", ";
+          }
+          $responsabilidades_fiscales_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $nm_comando = "SELECT NITTRI FROM TERCEROS WHERE NITTRI = '" . substr($this->Db->qstr($this->documento), 1, -1) . "' ORDER BY NITTRI";
+
+   $this->id_cloud_tercero = $old_value_id_cloud_tercero;
+   $this->id_empresa = $old_value_id_empresa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Ini->nm_db_conn_firebird->SelectLimit($nm_comando, 10, 0))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_cloud_terceros_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_cloud_terceros_pack_protect_string(NM_charset_to_utf8($rs->fields[0]))));
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_documento'][] = $rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[0] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_firebird->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+$sAutocompValue = (isset($aLookup[0][$this->documento])) ? $aLookup[0][$this->documento] : $this->documento;
+$documento_look = (isset($aLookup[0][$this->documento])) ? $aLookup[0][$this->documento] : $this->documento;
+?>
+<span id="id_read_on_documento" class="sc-ui-readonly-documento css_documento_line" style="<?php echo $sStyleReadLab_documento; ?>"><?php echo $this->form_format_readonly("documento", str_replace("<", "&lt;", $documento_look)); ?></span><span id="id_read_off_documento" class="css_read_off_documento" style="white-space: nowrap;<?php echo $sStyleReadInp_documento; ?>">
+ <input class="sc-js-input scFormObjectOdd css_documento_obj" style="display: none;" id="id_sc_field_documento" type=text name="documento" value="<?php echo $this->form_encode_input($documento) ?>"
+ size=14 maxlength=14 style="display: none" alt="{datatype: 'text', maxLength: 14, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ><input type="text" id="id_ac_documento" name="documento_autocomp" class="scFormObjectOdd sc-ui-autocomp-documento css_documento_obj" size="30" value="<?php echo $this->form_encode_input($this->documento); ?>" alt="{datatype: 'text', maxLength: 14, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}"  /></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_documento_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_documento_text"></span></td></tr></table></td></tr></table></TD>
+   <?php }?>
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['nombres']))
+    {
+        $this->nm_new_label['nombres'] = "Nombres";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $nombres = $this->nombres;
+   $sStyleHidden_nombres = '';
+   if (isset($this->nmgp_cmp_hidden['nombres']) && $this->nmgp_cmp_hidden['nombres'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['nombres']);
+       $sStyleHidden_nombres = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_nombres = 'display: none;';
+   $sStyleReadInp_nombres = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['nombres']) && $this->nmgp_cmp_readonly['nombres'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['nombres']);
+       $sStyleReadLab_nombres = '';
+       $sStyleReadInp_nombres = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['nombres']) && $this->nmgp_cmp_hidden['nombres'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="nombres" value="<?php echo $this->form_encode_input($nombres) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_nombres_label" id="hidden_field_label_nombres" style="<?php echo $sStyleHidden_nombres; ?>"><span id="id_label_nombres"><?php echo $this->nm_new_label['nombres']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['php_cmp_required']['nombres']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['php_cmp_required']['nombres'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></TD>
+    <TD class="scFormDataOdd css_nombres_line" id="hidden_field_data_nombres" style="<?php echo $sStyleHidden_nombres; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nombres_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nombres"]) &&  $this->nmgp_cmp_readonly["nombres"] == "on") { 
+
+ ?>
+<input type="hidden" name="nombres" value="<?php echo $this->form_encode_input($nombres) . "\">" . $nombres . ""; ?>
+<?php } else { ?>
+
+<?php
+$aRecData['nombres'] = $this->nombres;
+$aLookup = array();
+   if (in_array(strtolower($this->Ini->nm_con_conn_firebird['tpbanco']), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_nombres']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_nombres'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_nombres']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_nombres'] = array(); 
+    }
+
+   $old_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $old_value_id_empresa = $this->id_empresa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $unformatted_value_id_empresa = $this->id_empresa;
+
+   $detalle_tributario_val_str = "''";
+   if (!empty($this->detalle_tributario))
+   {
+       if (is_array($this->detalle_tributario))
+       {
+           $Tmp_array = $this->detalle_tributario;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->detalle_tributario);
+       }
+       $detalle_tributario_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $detalle_tributario_val_str)
+          {
+             $detalle_tributario_val_str .= ", ";
+          }
+          $detalle_tributario_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $responsabilidades_fiscales_val_str = "''";
+   if (!empty($this->responsabilidades_fiscales))
+   {
+       if (is_array($this->responsabilidades_fiscales))
+       {
+           $Tmp_array = $this->responsabilidades_fiscales;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->responsabilidades_fiscales);
+       }
+       $responsabilidades_fiscales_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $responsabilidades_fiscales_val_str)
+          {
+             $responsabilidades_fiscales_val_str .= ", ";
+          }
+          $responsabilidades_fiscales_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $nm_comando = "SELECT NOMBRE FROM TERCEROS WHERE NOMBRE = '" . substr($this->Db->qstr($this->nombres), 1, -1) . "' ORDER BY NOMBRE";
+
+   $this->id_cloud_tercero = $old_value_id_cloud_tercero;
+   $this->id_empresa = $old_value_id_empresa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Ini->nm_db_conn_firebird->SelectLimit($nm_comando, 10, 0))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_cloud_terceros_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_cloud_terceros_pack_protect_string(NM_charset_to_utf8($rs->fields[0]))));
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_nombres'][] = $rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[0] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_firebird->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+$sAutocompValue = (isset($aLookup[0][$this->nombres])) ? $aLookup[0][$this->nombres] : $this->nombres;
+$nombres_look = (isset($aLookup[0][$this->nombres])) ? $aLookup[0][$this->nombres] : $this->nombres;
+?>
+<span id="id_read_on_nombres" class="sc-ui-readonly-nombres css_nombres_line" style="<?php echo $sStyleReadLab_nombres; ?>"><?php echo $this->form_format_readonly("nombres", str_replace("<", "&lt;", $nombres_look)); ?></span><span id="id_read_off_nombres" class="css_read_off_nombres" style="white-space: nowrap;<?php echo $sStyleReadInp_nombres; ?>">
+ <input class="sc-js-input scFormObjectOdd css_nombres_obj" style="display: none;" id="id_sc_field_nombres" type=text name="nombres" value="<?php echo $this->form_encode_input($nombres) ?>"
+ size=50 maxlength=120 style="display: none" alt="{datatype: 'text', maxLength: 120, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: 'upper', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ><input type="text" id="id_ac_nombres" name="nombres_autocomp" class="scFormObjectOdd sc-ui-autocomp-nombres css_nombres_obj" size="60" value="<?php echo $this->form_encode_input($this->nombres); ?>" alt="{datatype: 'text', maxLength: 120, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: 'upper', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}"  /></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_nombres_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_nombres_text"></span></td></tr></table></td></tr></table></TD>
+   <?php }?>
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['id_empresa']))
+    {
+        $this->nm_new_label['id_empresa'] = "Id Empresa";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_empresa = $this->id_empresa;
+   if (!isset($this->nmgp_cmp_hidden['id_empresa']))
+   {
+       $this->nmgp_cmp_hidden['id_empresa'] = 'off';
+   }
+   $sStyleHidden_id_empresa = '';
+   if (isset($this->nmgp_cmp_hidden['id_empresa']) && $this->nmgp_cmp_hidden['id_empresa'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_empresa']);
+       $sStyleHidden_id_empresa = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_empresa = 'display: none;';
+   $sStyleReadInp_id_empresa = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_empresa']) && $this->nmgp_cmp_readonly['id_empresa'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_empresa']);
+       $sStyleReadLab_id_empresa = '';
+       $sStyleReadInp_id_empresa = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_empresa']) && $this->nmgp_cmp_hidden['id_empresa'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="id_empresa" value="<?php echo $this->form_encode_input($id_empresa) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_id_empresa_label" id="hidden_field_label_id_empresa" style="<?php echo $sStyleHidden_id_empresa; ?>"><span id="id_label_id_empresa"><?php echo $this->nm_new_label['id_empresa']; ?></span></TD>
+    <TD class="scFormDataOdd css_id_empresa_line" id="hidden_field_data_id_empresa" style="<?php echo $sStyleHidden_id_empresa; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_empresa_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_empresa"]) &&  $this->nmgp_cmp_readonly["id_empresa"] == "on") { 
+
+ ?>
+<input type="hidden" name="id_empresa" value="<?php echo $this->form_encode_input($id_empresa) . "\">" . $id_empresa . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_id_empresa" class="sc-ui-readonly-id_empresa css_id_empresa_line" style="<?php echo $sStyleReadLab_id_empresa; ?>"><?php echo $this->form_format_readonly("id_empresa", $this->form_encode_input($this->id_empresa)); ?></span><span id="id_read_off_id_empresa" class="css_read_off_id_empresa" style="white-space: nowrap;<?php echo $sStyleReadInp_id_empresa; ?>">
+ <input class="sc-js-input scFormObjectOdd css_id_empresa_obj" style="" id="id_sc_field_id_empresa" type=text name="id_empresa" value="<?php echo $this->form_encode_input($id_empresa) ?>"
+ size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['id_empresa']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['id_empresa']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['id_empresa']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_empresa_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_empresa_text"></span></td></tr></table></td></tr></table></TD>
+   <?php }?>
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
+<?php } 
+?> 
+
+
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   </tr></table>
+   <a name="bloco_1"></a>
+   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
+<div id="div_hidden_bloco_1"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_1" class="scFormTable" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['cod_departamento']))
+   {
+       $this->nm_new_label['cod_departamento'] = "Departamento";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $cod_departamento = $this->cod_departamento;
+   $sStyleHidden_cod_departamento = '';
+   if (isset($this->nmgp_cmp_hidden['cod_departamento']) && $this->nmgp_cmp_hidden['cod_departamento'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['cod_departamento']);
+       $sStyleHidden_cod_departamento = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_cod_departamento = 'display: none;';
+   $sStyleReadInp_cod_departamento = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cod_departamento']) && $this->nmgp_cmp_readonly['cod_departamento'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['cod_departamento']);
+       $sStyleReadLab_cod_departamento = '';
+       $sStyleReadInp_cod_departamento = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['cod_departamento']) && $this->nmgp_cmp_hidden['cod_departamento'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="cod_departamento" value="<?php echo $this->form_encode_input($this->cod_departamento) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_cod_departamento_line" id="hidden_field_data_cod_departamento" style="<?php echo $sStyleHidden_cod_departamento; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cod_departamento_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_cod_departamento_label" style=""><span id="id_label_cod_departamento"><?php echo $this->nm_new_label['cod_departamento']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cod_departamento"]) &&  $this->nmgp_cmp_readonly["cod_departamento"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento'] = array(); 
+    }
+
+   $old_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $old_value_id_empresa = $this->id_empresa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $unformatted_value_id_empresa = $this->id_empresa;
+
+   $detalle_tributario_val_str = "''";
+   if (!empty($this->detalle_tributario))
+   {
+       if (is_array($this->detalle_tributario))
+       {
+           $Tmp_array = $this->detalle_tributario;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->detalle_tributario);
+       }
+       $detalle_tributario_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $detalle_tributario_val_str)
+          {
+             $detalle_tributario_val_str .= ", ";
+          }
+          $detalle_tributario_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $responsabilidades_fiscales_val_str = "''";
+   if (!empty($this->responsabilidades_fiscales))
+   {
+       if (is_array($this->responsabilidades_fiscales))
+       {
+           $Tmp_array = $this->responsabilidades_fiscales;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->responsabilidades_fiscales);
+       }
+       $responsabilidades_fiscales_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $responsabilidades_fiscales_val_str)
+          {
+             $responsabilidades_fiscales_val_str .= ", ";
+          }
+          $responsabilidades_fiscales_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $nm_comando = "SELECT codigo, departamento  FROM cloud_departamento  ORDER BY departamento";
+
+   $this->id_cloud_tercero = $old_value_id_cloud_tercero;
+   $this->id_empresa = $old_value_id_empresa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_departamento'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $cod_departamento_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->cod_departamento_1))
+          {
+              foreach ($this->cod_departamento_1 as $tmp_cod_departamento)
+              {
+                  if (trim($tmp_cod_departamento) === trim($cadaselect[1])) { $cod_departamento_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->cod_departamento) === trim($cadaselect[1])) { $cod_departamento_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="cod_departamento" value="<?php echo $this->form_encode_input($cod_departamento) . "\">" . $cod_departamento_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_cod_departamento();
+   $x = 0 ; 
+   $cod_departamento_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->cod_departamento_1))
+          {
+              foreach ($this->cod_departamento_1 as $tmp_cod_departamento)
+              {
+                  if (trim($tmp_cod_departamento) === trim($cadaselect[1])) { $cod_departamento_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->cod_departamento) === trim($cadaselect[1])) { $cod_departamento_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($cod_departamento_look))
+          {
+              $cod_departamento_look = $this->cod_departamento;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_cod_departamento\" class=\"css_cod_departamento_line\" style=\"" .  $sStyleReadLab_cod_departamento . "\">" . $this->form_format_readonly("cod_departamento", $this->form_encode_input($cod_departamento_look)) . "</span><span id=\"id_read_off_cod_departamento\" class=\"css_read_off_cod_departamento\" style=\"white-space: nowrap; " . $sStyleReadInp_cod_departamento . "\">";
+   echo " <span id=\"idAjaxSelect_cod_departamento\"><select class=\"sc-js-input scFormObjectOdd css_cod_departamento_obj\" style=\"\" id=\"id_sc_field_cod_departamento\" name=\"cod_departamento\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->cod_departamento) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->cod_departamento)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cod_departamento_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cod_departamento_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+   <?php
+   if (!isset($this->nm_new_label['cod_municipio']))
+   {
+       $this->nm_new_label['cod_municipio'] = "Municipio";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $cod_municipio = $this->cod_municipio;
+   $sStyleHidden_cod_municipio = '';
+   if (isset($this->nmgp_cmp_hidden['cod_municipio']) && $this->nmgp_cmp_hidden['cod_municipio'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['cod_municipio']);
+       $sStyleHidden_cod_municipio = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_cod_municipio = 'display: none;';
+   $sStyleReadInp_cod_municipio = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cod_municipio']) && $this->nmgp_cmp_readonly['cod_municipio'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['cod_municipio']);
+       $sStyleReadLab_cod_municipio = '';
+       $sStyleReadInp_cod_municipio = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['cod_municipio']) && $this->nmgp_cmp_hidden['cod_municipio'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="cod_municipio" value="<?php echo $this->form_encode_input($this->cod_municipio) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_cod_municipio_line" id="hidden_field_data_cod_municipio" style="<?php echo $sStyleHidden_cod_municipio; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cod_municipio_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_cod_municipio_label" style=""><span id="id_label_cod_municipio"><?php echo $this->nm_new_label['cod_municipio']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cod_municipio"]) &&  $this->nmgp_cmp_readonly["cod_municipio"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio'] = array(); 
+    }
+
+   $old_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $old_value_id_empresa = $this->id_empresa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $unformatted_value_id_empresa = $this->id_empresa;
+
+   $nm_comando = "SELECT codigo_mu, municipio  FROM cloud_municipio  WHERE codigo_dep=$this->cod_departamento ORDER BY municipio";
+
+   $this->id_cloud_tercero = $old_value_id_cloud_tercero;
+   $this->id_empresa = $old_value_id_empresa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_municipio'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $cod_municipio_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->cod_municipio_1))
+          {
+              foreach ($this->cod_municipio_1 as $tmp_cod_municipio)
+              {
+                  if (trim($tmp_cod_municipio) === trim($cadaselect[1])) { $cod_municipio_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->cod_municipio) === trim($cadaselect[1])) { $cod_municipio_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="cod_municipio" value="<?php echo $this->form_encode_input($cod_municipio) . "\">" . $cod_municipio_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_cod_municipio();
+   $x = 0 ; 
+   $cod_municipio_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->cod_municipio_1))
+          {
+              foreach ($this->cod_municipio_1 as $tmp_cod_municipio)
+              {
+                  if (trim($tmp_cod_municipio) === trim($cadaselect[1])) { $cod_municipio_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->cod_municipio) === trim($cadaselect[1])) { $cod_municipio_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($cod_municipio_look))
+          {
+              $cod_municipio_look = $this->cod_municipio;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_cod_municipio\" class=\"css_cod_municipio_line\" style=\"" .  $sStyleReadLab_cod_municipio . "\">" . $this->form_format_readonly("cod_municipio", $this->form_encode_input($cod_municipio_look)) . "</span><span id=\"id_read_off_cod_municipio\" class=\"css_read_off_cod_municipio\" style=\"white-space: nowrap; " . $sStyleReadInp_cod_municipio . "\">";
+   echo " <span id=\"idAjaxSelect_cod_municipio\"><select class=\"sc-js-input scFormObjectOdd css_cod_municipio_obj\" style=\"\" id=\"id_sc_field_cod_municipio\" name=\"cod_municipio\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->cod_municipio) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->cod_municipio)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cod_municipio_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cod_municipio_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+   <?php
+    if (!isset($this->nm_new_label['cod_postal']))
+    {
+        $this->nm_new_label['cod_postal'] = "Código Postal";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $cod_postal = $this->cod_postal;
+   $sStyleHidden_cod_postal = '';
+   if (isset($this->nmgp_cmp_hidden['cod_postal']) && $this->nmgp_cmp_hidden['cod_postal'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['cod_postal']);
+       $sStyleHidden_cod_postal = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_cod_postal = 'display: none;';
+   $sStyleReadInp_cod_postal = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cod_postal']) && $this->nmgp_cmp_readonly['cod_postal'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['cod_postal']);
+       $sStyleReadLab_cod_postal = '';
+       $sStyleReadInp_cod_postal = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['cod_postal']) && $this->nmgp_cmp_hidden['cod_postal'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="cod_postal" value="<?php echo $this->form_encode_input($cod_postal) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_cod_postal_line" id="hidden_field_data_cod_postal" style="<?php echo $sStyleHidden_cod_postal; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cod_postal_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_cod_postal_label" style=""><span id="id_label_cod_postal"><?php echo $this->nm_new_label['cod_postal']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['php_cmp_required']['cod_postal']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['php_cmp_required']['cod_postal'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cod_postal"]) &&  $this->nmgp_cmp_readonly["cod_postal"] == "on") { 
+
+ ?>
+<input type="hidden" name="cod_postal" value="<?php echo $this->form_encode_input($cod_postal) . "\">" . $cod_postal . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_cod_postal" class="sc-ui-readonly-cod_postal css_cod_postal_line" style="<?php echo $sStyleReadLab_cod_postal; ?>"><?php echo $this->form_format_readonly("cod_postal", $this->form_encode_input($this->cod_postal)); ?></span><span id="id_read_off_cod_postal" class="css_read_off_cod_postal" style="white-space: nowrap;<?php echo $sStyleReadInp_cod_postal; ?>">
+ <input class="sc-js-input scFormObjectOdd css_cod_postal_obj" style="" id="id_sc_field_cod_postal" type=text name="cod_postal" value="<?php echo $this->form_encode_input($cod_postal) ?>"
+ size=6 maxlength=6 alt="{datatype: 'text', maxLength: 6, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: 'upper', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php
+   $Sc_iframe_master = ($this->Embutida_call) ? 'nmgp_iframe_ret*scinnmsc_iframe_liga_form_cloud_terceros*scout' : '';
+   if (isset($this->Ini->sc_lig_md5["grid_cloud_codigo_postal"]) && $this->Ini->sc_lig_md5["grid_cloud_codigo_postal"] == "S") {
+       $Parms_Lig  = "SC_glo_par_gcod_municipio*scingcod_municipio*scoutnmgp_url_saida*scin*scoutnmgp_parms_ret*scinF1,cod_postal,codigo_postal*scoutnm_evt_ret_busca*scinsc_form_cloud_terceros_cod_postal_onchange(this)*scout" . $Sc_iframe_master;
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_cloud_terceros@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "SC_glo_par_gcod_municipio*scingcod_municipio*scoutnmgp_url_saida*scin*scoutnmgp_parms_ret*scinF1,cod_postal,codigo_postal*scoutnm_evt_ret_busca*scinsc_form_cloud_terceros_cod_postal_onchange(this)*scout" . $Sc_iframe_master;
+   }
+?>
+
+<?php if (!$this->Ini->Export_img_zip) { ?><?php echo nmButtonOutput($this->arr_buttons, "bform_captura", "nm_submit_cap('" . $this->Ini->link_grid_cloud_codigo_postal_cons_psq. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_grid_cloud_codigo_postal_cons_psq. "', '" . $Md5_Lig . "')", "cap_cod_postal", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php } ?>
+<?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cod_postal_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cod_postal_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+   <?php
+   if (!isset($this->nm_new_label['cod_regimen']))
+   {
+       $this->nm_new_label['cod_regimen'] = "Regimen";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $cod_regimen = $this->cod_regimen;
+   $sStyleHidden_cod_regimen = '';
+   if (isset($this->nmgp_cmp_hidden['cod_regimen']) && $this->nmgp_cmp_hidden['cod_regimen'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['cod_regimen']);
+       $sStyleHidden_cod_regimen = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_cod_regimen = 'display: none;';
+   $sStyleReadInp_cod_regimen = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cod_regimen']) && $this->nmgp_cmp_readonly['cod_regimen'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['cod_regimen']);
+       $sStyleReadLab_cod_regimen = '';
+       $sStyleReadInp_cod_regimen = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['cod_regimen']) && $this->nmgp_cmp_hidden['cod_regimen'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="cod_regimen" value="<?php echo $this->form_encode_input($this->cod_regimen) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_cod_regimen_line" id="hidden_field_data_cod_regimen" style="<?php echo $sStyleHidden_cod_regimen; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cod_regimen_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_cod_regimen_label" style=""><span id="id_label_cod_regimen"><?php echo $this->nm_new_label['cod_regimen']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cod_regimen"]) &&  $this->nmgp_cmp_readonly["cod_regimen"] == "on") { 
+
+$cod_regimen_look = "";
+ if ($this->cod_regimen == "48") { $cod_regimen_look .= "Responsable de IVA" ;} 
+ if ($this->cod_regimen == "49") { $cod_regimen_look .= "No Responsable de IVA" ;} 
+ if (empty($cod_regimen_look)) { $cod_regimen_look = $this->cod_regimen; }
+?>
+<input type="hidden" name="cod_regimen" value="<?php echo $this->form_encode_input($cod_regimen) . "\">" . $cod_regimen_look . ""; ?>
+<?php } else { ?>
+<?php
+
+$cod_regimen_look = "";
+ if ($this->cod_regimen == "48") { $cod_regimen_look .= "Responsable de IVA" ;} 
+ if ($this->cod_regimen == "49") { $cod_regimen_look .= "No Responsable de IVA" ;} 
+ if (empty($cod_regimen_look)) { $cod_regimen_look = $this->cod_regimen; }
+?>
+<span id="id_read_on_cod_regimen" class="css_cod_regimen_line"  style="<?php echo $sStyleReadLab_cod_regimen; ?>"><?php echo $this->form_format_readonly("cod_regimen", $this->form_encode_input($cod_regimen_look)); ?></span><span id="id_read_off_cod_regimen" class="css_read_off_cod_regimen" style="white-space: nowrap; <?php echo $sStyleReadInp_cod_regimen; ?>">
+ <span id="idAjaxSelect_cod_regimen"><select class="sc-js-input scFormObjectOdd css_cod_regimen_obj" style="" id="id_sc_field_cod_regimen" name="cod_regimen" size="1" alt="{type: 'select', enterTab: false}">
+ <option  value="48" <?php  if ($this->cod_regimen == "48") { echo " selected" ;} ?><?php  if (empty($this->cod_regimen)) { echo " selected" ;} ?>>Responsable de IVA</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_regimen'][] = '48'; ?>
+ <option  value="49" <?php  if ($this->cod_regimen == "49") { echo " selected" ;} ?>>No Responsable de IVA</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_cod_regimen'][] = '49'; ?>
+ </select></span>
+</span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cod_regimen_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cod_regimen_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+
+
+
+
+
+
+<?php $sStyleHidden_cod_departamento_dumb = ('' == $sStyleHidden_cod_departamento) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_cod_departamento_dumb" style="<?php echo $sStyleHidden_cod_departamento_dumb; ?>"></TD>
+<?php $sStyleHidden_cod_municipio_dumb = ('' == $sStyleHidden_cod_municipio) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_cod_municipio_dumb" style="<?php echo $sStyleHidden_cod_municipio_dumb; ?>"></TD>
+<?php $sStyleHidden_cod_postal_dumb = ('' == $sStyleHidden_cod_postal) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_cod_postal_dumb" style="<?php echo $sStyleHidden_cod_postal_dumb; ?>"></TD>
+<?php $sStyleHidden_cod_regimen_dumb = ('' == $sStyleHidden_cod_regimen) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_cod_regimen_dumb" style="<?php echo $sStyleHidden_cod_regimen_dumb; ?>"></TD>
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   </tr></table>
+   <a name="bloco_2"></a>
+   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
+<div id="div_hidden_bloco_2"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_2" class="scFormTable" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['detalle_tributario']))
+   {
+       $this->nm_new_label['detalle_tributario'] = "Detalle Tributario";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $detalle_tributario = $this->detalle_tributario;
+   $sStyleHidden_detalle_tributario = '';
+   if (isset($this->nmgp_cmp_hidden['detalle_tributario']) && $this->nmgp_cmp_hidden['detalle_tributario'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['detalle_tributario']);
+       $sStyleHidden_detalle_tributario = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_detalle_tributario = 'display: none;';
+   $sStyleReadInp_detalle_tributario = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['detalle_tributario']) && $this->nmgp_cmp_readonly['detalle_tributario'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['detalle_tributario']);
+       $sStyleReadLab_detalle_tributario = '';
+       $sStyleReadInp_detalle_tributario = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['detalle_tributario']) && $this->nmgp_cmp_hidden['detalle_tributario'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="detalle_tributario" value="<?php echo $this->form_encode_input($this->detalle_tributario) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php  $this->detalle_tributario_1 = explode(",", trim($this->detalle_tributario)) ; ?>
+    <TD class="scFormDataOdd css_detalle_tributario_line" id="hidden_field_data_detalle_tributario" style="<?php echo $sStyleHidden_detalle_tributario; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_detalle_tributario_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_detalle_tributario_label" style=""><span id="id_label_detalle_tributario"><?php echo $this->nm_new_label['detalle_tributario']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["detalle_tributario"]) &&  $this->nmgp_cmp_readonly["detalle_tributario"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario'] = array(); 
+    }
+
+   $old_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $old_value_id_empresa = $this->id_empresa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $unformatted_value_id_empresa = $this->id_empresa;
+
+   $detalle_tributario_val_str = "''";
+   if (!empty($this->detalle_tributario))
+   {
+       if (is_array($this->detalle_tributario))
+       {
+           $Tmp_array = $this->detalle_tributario;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->detalle_tributario);
+       }
+       $detalle_tributario_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $detalle_tributario_val_str)
+          {
+             $detalle_tributario_val_str .= ", ";
+          }
+          $detalle_tributario_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $responsabilidades_fiscales_val_str = "''";
+   if (!empty($this->responsabilidades_fiscales))
+   {
+       if (is_array($this->responsabilidades_fiscales))
+       {
+           $Tmp_array = $this->responsabilidades_fiscales;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->responsabilidades_fiscales);
+       }
+       $responsabilidades_fiscales_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $responsabilidades_fiscales_val_str)
+          {
+             $responsabilidades_fiscales_val_str .= ", ";
+          }
+          $responsabilidades_fiscales_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + '/' + descripcion_dt  FROM cloud_detalle_tributario  ORDER BY codigo, descripcion_dt";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo,'/',descripcion_dt)  FROM cloud_detalle_tributario  ORDER BY codigo, descripcion_dt";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&'/'&descripcion_dt  FROM cloud_detalle_tributario  ORDER BY codigo, descripcion_dt";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||'/'||descripcion_dt  FROM cloud_detalle_tributario  ORDER BY codigo, descripcion_dt";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||'/'||descripcion_dt  FROM cloud_detalle_tributario  ORDER BY codigo, descripcion_dt";
+   }
+
+   $this->id_cloud_tercero = $old_value_id_cloud_tercero;
+   $this->id_empresa = $old_value_id_empresa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_detalle_tributario'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $detalle_tributario_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          foreach ($this->detalle_tributario_1 as $Dados)
+          {
+              if ($Dados === $cadaselect[1])
+              {
+                  $detalle_tributario_look .= $cadaselect[0] . "&nbsp;";
+                  break;
+              }
+          }
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="detalle_tributario" value="<?php echo $this->form_encode_input($detalle_tributario) . "\">" . $detalle_tributario_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_detalle_tributario();
+   $x = 0 ; 
+   $detalle_tributario_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          foreach ($this->detalle_tributario_1 as $Dados)
+          {
+              if ($Dados === $cadaselect[1])
+              {
+                  $detalle_tributario_look .= $cadaselect[0] . "<br>";
+                  break;
+              }
+          }
+          $x++; 
+   }
+          if (empty($detalle_tributario_look))
+          {
+              $detalle_tributario_look = $this->detalle_tributario;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_detalle_tributario\" class=\"css_detalle_tributario_line\" style=\"" .  $sStyleReadLab_detalle_tributario . "\">" . $this->form_format_readonly("detalle_tributario", $this->form_encode_input($detalle_tributario_look)) . "</span><span id=\"id_read_off_detalle_tributario\" class=\"css_read_off_detalle_tributario\" style=\"white-space: nowrap; " . $sStyleReadInp_detalle_tributario . "\">";
+   echo " <span id=\"idAjaxSelect_detalle_tributario\"><select class=\"sc-js-input scFormObjectOdd css_detalle_tributario_obj\" style=\"\" id=\"id_sc_field_detalle_tributario\" name=\"detalle_tributario[]\" size=\"7\" alt=\"{type: 'select', enterTab: false}\" multiple>" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          foreach ($this->detalle_tributario_1 as $Dados)
+          {
+              if ($Dados === $cadaselect[1])
+              {
+                  echo " selected" ; 
+                  break;
+              }
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->detalle_tributario)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_detalle_tributario_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_detalle_tributario_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['responsabilidades_fiscales']))
+   {
+       $this->nm_new_label['responsabilidades_fiscales'] = "Responsabilidades Fiscales";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $responsabilidades_fiscales = $this->responsabilidades_fiscales;
+   $sStyleHidden_responsabilidades_fiscales = '';
+   if (isset($this->nmgp_cmp_hidden['responsabilidades_fiscales']) && $this->nmgp_cmp_hidden['responsabilidades_fiscales'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['responsabilidades_fiscales']);
+       $sStyleHidden_responsabilidades_fiscales = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_responsabilidades_fiscales = 'display: none;';
+   $sStyleReadInp_responsabilidades_fiscales = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['responsabilidades_fiscales']) && $this->nmgp_cmp_readonly['responsabilidades_fiscales'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['responsabilidades_fiscales']);
+       $sStyleReadLab_responsabilidades_fiscales = '';
+       $sStyleReadInp_responsabilidades_fiscales = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['responsabilidades_fiscales']) && $this->nmgp_cmp_hidden['responsabilidades_fiscales'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="responsabilidades_fiscales" value="<?php echo $this->form_encode_input($this->responsabilidades_fiscales) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php  $this->responsabilidades_fiscales_1 = explode(",", trim($this->responsabilidades_fiscales)) ; ?>
+    <TD class="scFormDataOdd css_responsabilidades_fiscales_line" id="hidden_field_data_responsabilidades_fiscales" style="<?php echo $sStyleHidden_responsabilidades_fiscales; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_responsabilidades_fiscales_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_responsabilidades_fiscales_label" style=""><span id="id_label_responsabilidades_fiscales"><?php echo $this->nm_new_label['responsabilidades_fiscales']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["responsabilidades_fiscales"]) &&  $this->nmgp_cmp_readonly["responsabilidades_fiscales"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales'] = array(); 
+    }
+
+   $old_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $old_value_id_empresa = $this->id_empresa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_id_cloud_tercero = $this->id_cloud_tercero;
+   $unformatted_value_id_empresa = $this->id_empresa;
+
+   $detalle_tributario_val_str = "''";
+   if (!empty($this->detalle_tributario))
+   {
+       if (is_array($this->detalle_tributario))
+       {
+           $Tmp_array = $this->detalle_tributario;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->detalle_tributario);
+       }
+       $detalle_tributario_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $detalle_tributario_val_str)
+          {
+             $detalle_tributario_val_str .= ", ";
+          }
+          $detalle_tributario_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $responsabilidades_fiscales_val_str = "''";
+   if (!empty($this->responsabilidades_fiscales))
+   {
+       if (is_array($this->responsabilidades_fiscales))
+       {
+           $Tmp_array = $this->responsabilidades_fiscales;
+       }
+       else
+       {
+           $Tmp_array = explode(",", $this->responsabilidades_fiscales);
+       }
+       $responsabilidades_fiscales_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $responsabilidades_fiscales_val_str)
+          {
+             $responsabilidades_fiscales_val_str .= ", ";
+          }
+          $responsabilidades_fiscales_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $nm_comando = "SELECT codigo, concat(codigo,'/',descripcion)  FROM cloud_responsabilidades_tributarias  where codigo in('O-13','O-15','O-23','O-47','R-99-PN') ORDER BY codigo, descripcion";
+
+   $this->id_cloud_tercero = $old_value_id_cloud_tercero;
+   $this->id_empresa = $old_value_id_empresa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['Lookup_responsabilidades_fiscales'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $responsabilidades_fiscales_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          foreach ($this->responsabilidades_fiscales_1 as $Dados)
+          {
+              if ($Dados === $cadaselect[1])
+              {
+                  $responsabilidades_fiscales_look .= $cadaselect[0] . "&nbsp;";
+                  break;
+              }
+          }
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="responsabilidades_fiscales" value="<?php echo $this->form_encode_input($responsabilidades_fiscales) . "\">" . $responsabilidades_fiscales_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_responsabilidades_fiscales();
+   $x = 0 ; 
+   $responsabilidades_fiscales_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          foreach ($this->responsabilidades_fiscales_1 as $Dados)
+          {
+              if ($Dados === $cadaselect[1])
+              {
+                  $responsabilidades_fiscales_look .= $cadaselect[0] . "<br>";
+                  break;
+              }
+          }
+          $x++; 
+   }
+          if (empty($responsabilidades_fiscales_look))
+          {
+              $responsabilidades_fiscales_look = $this->responsabilidades_fiscales;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_responsabilidades_fiscales\" class=\"css_responsabilidades_fiscales_line\" style=\"" .  $sStyleReadLab_responsabilidades_fiscales . "\">" . $this->form_format_readonly("responsabilidades_fiscales", $this->form_encode_input($responsabilidades_fiscales_look)) . "</span><span id=\"id_read_off_responsabilidades_fiscales\" class=\"css_read_off_responsabilidades_fiscales\" style=\"white-space: nowrap; " . $sStyleReadInp_responsabilidades_fiscales . "\">";
+   echo " <span id=\"idAjaxSelect_responsabilidades_fiscales\"><select class=\"sc-js-input scFormObjectOdd css_responsabilidades_fiscales_obj\" style=\"\" id=\"id_sc_field_responsabilidades_fiscales\" name=\"responsabilidades_fiscales[]\" size=\"7\" alt=\"{type: 'select', enterTab: false}\" multiple>" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          foreach ($this->responsabilidades_fiscales_1 as $Dados)
+          {
+              if ($Dados === $cadaselect[1])
+              {
+                  echo " selected" ; 
+                  break;
+              }
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->responsabilidades_fiscales)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_responsabilidades_fiscales_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_responsabilidades_fiscales_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['cod_pais']))
+    {
+        $this->nm_new_label['cod_pais'] = "Pais";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $cod_pais = $this->cod_pais;
+   if (!isset($this->nmgp_cmp_hidden['cod_pais']))
+   {
+       $this->nmgp_cmp_hidden['cod_pais'] = 'off';
+   }
+   $sStyleHidden_cod_pais = '';
+   if (isset($this->nmgp_cmp_hidden['cod_pais']) && $this->nmgp_cmp_hidden['cod_pais'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['cod_pais']);
+       $sStyleHidden_cod_pais = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_cod_pais = 'display: none;';
+   $sStyleReadInp_cod_pais = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cod_pais']) && $this->nmgp_cmp_readonly['cod_pais'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['cod_pais']);
+       $sStyleReadLab_cod_pais = '';
+       $sStyleReadInp_cod_pais = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['cod_pais']) && $this->nmgp_cmp_hidden['cod_pais'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="cod_pais" value="<?php echo $this->form_encode_input($cod_pais) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_cod_pais_line" id="hidden_field_data_cod_pais" style="<?php echo $sStyleHidden_cod_pais; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cod_pais_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_cod_pais_label" style=""><span id="id_label_cod_pais"><?php echo $this->nm_new_label['cod_pais']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cod_pais"]) &&  $this->nmgp_cmp_readonly["cod_pais"] == "on") { 
+
+ ?>
+<input type="hidden" name="cod_pais" value="<?php echo $this->form_encode_input($cod_pais) . "\">" . $cod_pais . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_cod_pais" class="sc-ui-readonly-cod_pais css_cod_pais_line" style="<?php echo $sStyleReadLab_cod_pais; ?>"><?php echo $this->form_format_readonly("cod_pais", $this->form_encode_input($this->cod_pais)); ?></span><span id="id_read_off_cod_pais" class="css_read_off_cod_pais" style="white-space: nowrap;<?php echo $sStyleReadInp_cod_pais; ?>">
+ <input class="sc-js-input scFormObjectOdd css_cod_pais_obj" style="" id="id_sc_field_cod_pais" type=text name="cod_pais" value="<?php echo $this->form_encode_input($cod_pais) ?>"
+ size=3 maxlength=3 alt="{datatype: 'text', maxLength: 3, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cod_pais_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cod_pais_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['cod_lenguaje']))
+    {
+        $this->nm_new_label['cod_lenguaje'] = "Lenguaje";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $cod_lenguaje = $this->cod_lenguaje;
+   if (!isset($this->nmgp_cmp_hidden['cod_lenguaje']))
+   {
+       $this->nmgp_cmp_hidden['cod_lenguaje'] = 'off';
+   }
+   $sStyleHidden_cod_lenguaje = '';
+   if (isset($this->nmgp_cmp_hidden['cod_lenguaje']) && $this->nmgp_cmp_hidden['cod_lenguaje'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['cod_lenguaje']);
+       $sStyleHidden_cod_lenguaje = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_cod_lenguaje = 'display: none;';
+   $sStyleReadInp_cod_lenguaje = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cod_lenguaje']) && $this->nmgp_cmp_readonly['cod_lenguaje'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['cod_lenguaje']);
+       $sStyleReadLab_cod_lenguaje = '';
+       $sStyleReadInp_cod_lenguaje = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['cod_lenguaje']) && $this->nmgp_cmp_hidden['cod_lenguaje'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="cod_lenguaje" value="<?php echo $this->form_encode_input($cod_lenguaje) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_cod_lenguaje_line" id="hidden_field_data_cod_lenguaje" style="<?php echo $sStyleHidden_cod_lenguaje; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cod_lenguaje_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_cod_lenguaje_label" style=""><span id="id_label_cod_lenguaje"><?php echo $this->nm_new_label['cod_lenguaje']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cod_lenguaje"]) &&  $this->nmgp_cmp_readonly["cod_lenguaje"] == "on") { 
+
+ ?>
+<input type="hidden" name="cod_lenguaje" value="<?php echo $this->form_encode_input($cod_lenguaje) . "\">" . $cod_lenguaje . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_cod_lenguaje" class="sc-ui-readonly-cod_lenguaje css_cod_lenguaje_line" style="<?php echo $sStyleReadLab_cod_lenguaje; ?>"><?php echo $this->form_format_readonly("cod_lenguaje", $this->form_encode_input($this->cod_lenguaje)); ?></span><span id="id_read_off_cod_lenguaje" class="css_read_off_cod_lenguaje" style="white-space: nowrap;<?php echo $sStyleReadInp_cod_lenguaje; ?>">
+ <input class="sc-js-input scFormObjectOdd css_cod_lenguaje_obj" style="" id="id_sc_field_cod_lenguaje" type=text name="cod_lenguaje" value="<?php echo $this->form_encode_input($cod_lenguaje) ?>"
+ size=2 maxlength=2 alt="{datatype: 'text', maxLength: 2, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cod_lenguaje_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cod_lenguaje_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+
+
+
+
+
+
+   </td></tr></table>
+   </tr>
+</TABLE></div><!-- bloco_f -->
+</td></tr>
+<tr id="sc-id-required-row"><td class="scFormPageText">
+<span class="scFormRequiredOddColor">* <?php echo $this->Ini->Nm_lang['lang_othr_reqr']; ?></span>
+</td></tr> 
+</table> 
+</div> 
+</td> 
+</tr> 
+</table> 
+
+<div id="id_debug_window" style="display: none; position: absolute; left: 50px; top: 50px"><table class="scFormMessageTable">
+<tr><td class="scFormMessageTitle"><?php echo nmButtonOutput($this->arr_buttons, "berrm_clse", "scAjaxHideDebug()", "scAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+&nbsp;&nbsp;Output</td></tr>
+<tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>
+</table></div>
+
+</form> 
+<script> 
+<?php
+  $nm_sc_blocos_da_pag = array(0,1,2);
+
+  foreach ($this->Ini->nm_hidden_blocos as $bloco => $hidden)
+  {
+      if ($hidden == "off" && in_array($bloco, $nm_sc_blocos_da_pag))
+      {
+          echo "document.getElementById('hidden_bloco_" . $bloco . "').style.display = 'none';";
+          if (isset($nm_sc_blocos_aba[$bloco]))
+          {
+               echo "document.getElementById('id_tabs_" . $nm_sc_blocos_aba[$bloco] . "_" . $bloco . "').style.display = 'none';";
+          }
+      }
+  }
+?>
+</script> 
+<script>
+<?php
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['masterValue']))
+{
+    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) {
+?>
+var dbParentFrame = $(parent.document).find("[name='<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['parent_widget']; ?>']");
+if (dbParentFrame && dbParentFrame[0] && dbParentFrame[0].contentWindow.scAjaxDetailValue)
+{
+<?php
+        foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['masterValue'] as $cmp_master => $val_master)
+        {
+?>
+    dbParentFrame[0].contentWindow.scAjaxDetailValue('<?php echo $cmp_master ?>', '<?php echo $val_master ?>');
+<?php
+        }
+        unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['masterValue']);
+?>
+}
+<?php
+    }
+    else {
+?>
+if (parent && parent.scAjaxDetailValue)
+{
+<?php
+        foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['masterValue'] as $cmp_master => $val_master)
+        {
+?>
+    parent.scAjaxDetailValue('<?php echo $cmp_master ?>', '<?php echo $val_master ?>');
+<?php
+        }
+        unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['masterValue']);
+?>
+}
+<?php
+    }
+}
+?>
+function updateHeaderFooter(sFldName, sFldValue)
+{
+  if (sFldValue[0] && sFldValue[0]["value"])
+  {
+    sFldValue = sFldValue[0]["value"];
+  }
+}
+</script>
+<?php
+if (isset($_POST['master_nav']) && 'on' == $_POST['master_nav'])
+{
+    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) {
+?>
+<script>
+ var dbParentFrame = $(parent.document).find("[name='<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['parent_widget']; ?>']");
+ dbParentFrame[0].contentWindow.scAjaxDetailStatus("form_cloud_terceros");
+</script>
+<?php
+    }
+    else {
+        $sTamanhoIframe = isset($_POST['sc_ifr_height']) && '' != $_POST['sc_ifr_height'] ? '"' . $_POST['sc_ifr_height'] . '"' : '$(document).innerHeight()';
+?>
+<script>
+ parent.scAjaxDetailStatus("form_cloud_terceros");
+ parent.scAjaxDetailHeight("form_cloud_terceros", <?php echo $sTamanhoIframe; ?>);
+</script>
+<?php
+    }
+}
+elseif (isset($_GET['script_case_detail']) && 'Y' == $_GET['script_case_detail'])
+{
+    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['dashboard_info']['under_dashboard']) {
+    }
+    else {
+    $sTamanhoIframe = isset($_GET['sc_ifr_height']) && '' != $_GET['sc_ifr_height'] ? '"' . $_GET['sc_ifr_height'] . '"' : '$(document).innerHeight()';
+?>
+<script>
+ if (0 == <?php echo $sTamanhoIframe; ?>) {
+  setTimeout(function() {
+   parent.scAjaxDetailHeight("form_cloud_terceros", <?php echo $sTamanhoIframe; ?>);
+  }, 100);
+ }
+ else {
+  parent.scAjaxDetailHeight("form_cloud_terceros", <?php echo $sTamanhoIframe; ?>);
+ }
+</script>
+<?php
+    }
+}
+?>
+<?php
+if (isset($this->NM_ajax_info['displayMsg']) && $this->NM_ajax_info['displayMsg'])
+{
+    $isToast   = isset($this->NM_ajax_info['displayMsgToast']) && $this->NM_ajax_info['displayMsgToast'] ? 'true' : 'false';
+    $toastType = $isToast && isset($this->NM_ajax_info['displayMsgToastType']) ? $this->NM_ajax_info['displayMsgToastType'] : '';
+?>
+<script type="text/javascript">
+_scAjaxShowMessage({title: scMsgDefTitle, message: "<?php echo $this->NM_ajax_info['displayMsgTxt']; ?>", isModal: false, timeout: sc_ajaxMsgTime, showButton: false, buttonLabel: "Ok", topPos: 0, leftPos: 0, width: 0, height: 0, redirUrl: "", redirTarget: "", redirParam: "", showClose: false, showBodyIcon: true, isToast: <?php echo $isToast ?>, toastPos: "", type: "<?php echo $toastType ?>"});
+</script>
+<?php
+}
+?>
+<?php
+if ('' != $this->scFormFocusErrorName)
+{
+?>
+<script>
+scAjaxFocusError();
+</script>
+<?php
+}
+?>
+<script type='text/javascript'>
+bLigEditLookupCall = <?php if ($this->lig_edit_lookup_call) { ?>true<?php } else { ?>false<?php } ?>;
+function scLigEditLookupCall()
+{
+<?php
+if ($this->lig_edit_lookup && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['sc_modal'])
+{
+?>
+  parent.<?php echo $this->lig_edit_lookup_cb; ?>(<?php echo $this->lig_edit_lookup_row; ?>);
+<?php
+}
+elseif ($this->lig_edit_lookup)
+{
+?>
+  opener.<?php echo $this->lig_edit_lookup_cb; ?>(<?php echo $this->lig_edit_lookup_row; ?>);
+<?php
+}
+?>
+}
+if (bLigEditLookupCall)
+{
+  scLigEditLookupCall();
+}
+<?php
+if (isset($this->redir_modal) && !empty($this->redir_modal))
+{
+    echo $this->redir_modal;
+}
+?>
+</script>
+<?php
+if ($this->nmgp_form_empty) {
+?>
+<script type="text/javascript">
+scAjax_displayEmptyForm();
+</script>
+<?php
+}
+?>
+<script type="text/javascript">
+	function scBtnFn_sys_format_inc() {
+		if ($("#sc_b_new_t.sc-unique-btn-1").length && $("#sc_b_new_t.sc-unique-btn-1").is(":visible")) {
+			nm_move ('novo');
+			 return;
+		}
+		if ($("#sc_b_ins_t.sc-unique-btn-2").length && $("#sc_b_ins_t.sc-unique-btn-2").is(":visible")) {
+			nm_atualiza ('incluir');
+			 return;
+		}
+	}
+	function scBtnFn_sys_format_alt() {
+		if ($("#sc_b_upd_t.sc-unique-btn-3").length && $("#sc_b_upd_t.sc-unique-btn-3").is(":visible")) {
+			nm_atualiza ('alterar');
+			 return;
+		}
+	}
+	function scBtnFn_sys_format_exc() {
+		if ($("#sc_b_del_t.sc-unique-btn-4").length && $("#sc_b_del_t.sc-unique-btn-4").is(":visible")) {
+			nm_atualiza ('excluir');
+			 return;
+		}
+	}
+	function scBtnFn_sys_format_hlp() {
+		if ($("#sc_b_hlp_t").length && $("#sc_b_hlp_t").is(":visible")) {
+			window.open('<?php echo $this->url_webhelp; ?>', '', 'resizable, scrollbars'); 
+			 return;
+		}
+	}
+	function scBtnFn_sys_format_sai() {
+		if ($("#sc_b_sai_t.sc-unique-btn-5").length && $("#sc_b_sai_t.sc-unique-btn-5").is(":visible")) {
+			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
+			 return;
+		}
+		if ($("#sc_b_sai_t.sc-unique-btn-6").length && $("#sc_b_sai_t.sc-unique-btn-6").is(":visible")) {
+			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
+			 return;
+		}
+		if ($("#sc_b_sai_t.sc-unique-btn-7").length && $("#sc_b_sai_t.sc-unique-btn-7").is(":visible")) {
+			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
+			 return;
+		}
+	}
+</script>
+<script type="text/javascript">
+$(function() {
+ $("#sc-id-mobile-in").mouseover(function() {
+  $(this).css("cursor", "pointer");
+ }).click(function() {
+  scMobileDisplayControl("in");
+ });
+ $("#sc-id-mobile-out").mouseover(function() {
+  $(this).css("cursor", "pointer");
+ }).click(function() {
+  scMobileDisplayControl("out");
+ });
+});
+function scMobileDisplayControl(sOption) {
+ $("#sc-id-mobile-control").val(sOption);
+ nm_atualiza("recarga_mobile");
+}
+</script>
+<?php
+       if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'])
+       {
+?>
+<span id="sc-id-mobile-in"><?php echo $this->Ini->Nm_lang['lang_version_mobile']; ?></span>
+<?php
+       }
+?>
+<?php
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_cloud_terceros']['buttonStatus'] = $this->nmgp_botoes;
+?>
+<script type="text/javascript">
+   function sc_session_redir(url_redir)
+   {
+       if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')
+       {
+           window.parent.sc_session_redir(url_redir);
+       }
+       else
+       {
+           if (window.opener && typeof window.opener.sc_session_redir === 'function')
+           {
+               window.close();
+               window.opener.sc_session_redir(url_redir);
+           }
+           else
+           {
+               window.location = url_redir;
+           }
+       }
+   }
+</script>
+</body> 
+</html> 

@@ -219,7 +219,7 @@ if (@is_file($_str_btn_file))
  }
  ?>
  <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $STR_btn; ?>" /> 
- <script type="text/javascript" src="<?php echo $STR_prod; ?>/third/jquery/js/jquery.js"></script>
+ <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
  <script type="text/javascript">
  function viewClick() {
   if ($("#idBtnView").prop("disabled")) {
@@ -311,6 +311,7 @@ if (isset($_SESSION['sc_session'][$aParams['script_case_init']]['grid_kardex_fv_
 $NM_pdfurl  = $STR_tmp;
 $NM_target  = "_self";
 $path_doc_md5 = md5('newpdf_' . $NM_tit_doc);
+$_SESSION['sc_session'][$aParams['script_case_init']]['grid_kardex_fv_tns'][$path_doc_md5][0] = $_SESSION['scriptcase']['grid_kardex_fv_tns']['glo_nm_path_imag_temp'] . "/" . $NM_tit_doc;
 $_SESSION['sc_session'][$aParams['script_case_init']]['grid_kardex_fv_tns'][$path_doc_md5][1] = $NM_tit_doc;
 $NM_volta   = "volta_grid";
 ?>
@@ -359,6 +360,10 @@ $NM_volta   = "volta_grid";
            elseif (FALSE !== strpos(php_uname(), 'Debian 4.9')) 
            {
                $file_to_test .= '/stretch/';
+           }
+           elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+           {
+               $file_to_test .= '/centos8/';
            }
            else
            {

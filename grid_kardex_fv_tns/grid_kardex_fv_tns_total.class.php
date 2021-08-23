@@ -21,12 +21,14 @@ class grid_kardex_fv_tns_total
           {
               $Busca_temp = NM_conv_charset($Busca_temp, $_SESSION['scriptcase']['charset'], "UTF-8");
           }
-          $this->codcomp = $Busca_temp['codcomp']; 
-          $tmp_pos = strpos($this->codcomp, "##@@");
-          if ($tmp_pos !== false && !is_array($this->codcomp))
+          $this->fecha = $Busca_temp['fecha']; 
+          $tmp_pos = strpos($this->fecha, "##@@");
+          if ($tmp_pos !== false && !is_array($this->fecha))
           {
-              $this->codcomp = substr($this->codcomp, 0, $tmp_pos);
+              $this->fecha = substr($this->fecha, 0, $tmp_pos);
           }
+          $fecha_2 = $Busca_temp['fecha_input_2']; 
+          $this->fecha_2 = $Busca_temp['fecha_input_2']; 
           $this->codprefijo = $Busca_temp['codprefijo']; 
           $tmp_pos = strpos($this->codprefijo, "##@@");
           if ($tmp_pos !== false && !is_array($this->codprefijo))
@@ -45,25 +47,17 @@ class grid_kardex_fv_tns_total
           {
               $this->periodo = substr($this->periodo, 0, $tmp_pos);
           }
-          $this->fecha = $Busca_temp['fecha']; 
-          $tmp_pos = strpos($this->fecha, "##@@");
-          if ($tmp_pos !== false && !is_array($this->fecha))
-          {
-              $this->fecha = substr($this->fecha, 0, $tmp_pos);
-          }
-          $fecha_2 = $Busca_temp['fecha_input_2']; 
-          $this->fecha_2 = $Busca_temp['fecha_input_2']; 
-          $this->cliente = $Busca_temp['cliente']; 
-          $tmp_pos = strpos($this->cliente, "##@@");
-          if ($tmp_pos !== false && !is_array($this->cliente))
-          {
-              $this->cliente = substr($this->cliente, 0, $tmp_pos);
-          }
           $this->fecasentad = $Busca_temp['fecasentad']; 
           $tmp_pos = strpos($this->fecasentad, "##@@");
           if ($tmp_pos !== false && !is_array($this->fecasentad))
           {
               $this->fecasentad = substr($this->fecasentad, 0, $tmp_pos);
+          }
+          $this->cliente = $Busca_temp['cliente']; 
+          $tmp_pos = strpos($this->cliente, "##@@");
+          if ($tmp_pos !== false && !is_array($this->cliente))
+          {
+              $this->cliente = substr($this->cliente, 0, $tmp_pos);
           }
       } 
    }
@@ -77,7 +71,7 @@ class grid_kardex_fv_tns_total
           return; 
       } 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['tot_geral'] = array() ;  
-      $nm_comando = "select count(*) from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     SN_ENLACEPDF,     SN_ENLACEXML FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL AND CODPREFIJO IN(" . $_SESSION['gprefijos'] . ") ) nm_sel_esp " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq']; 
+      $nm_comando = "select count(*) from (SELECT      KARDEXID,     CODCOMP,     CODPREFIJO,     NUMERO,     FECHA,     FECASENTAD,     OBSERV,     PERIODO,     CENID,     AREADID,     SUCID,     CLIENTE,     VENDEDOR,     FORMAPAGO,     PLAZODIAS,     BCOID,     TIPODOC,     DOCUMENTO,     CONCEPTO,     FECVENCE,     RETIVA,     RETICA,     RETFTE,     AJUSTEBASE,     AJUSTEIVA,     AJUSTEIVAEXC,     AJUSTENETO,     VRBASE,     VRIVA,     VRICONSUMO,     VRRFTE,     VRRICA,     VRRIVA,     TOTAL,     DOCUID,     FPCONTADO,     FPCREDITO,     DESPACHAR_A,     USUARIO,     HORA,     FACTORCONV,     NROFACPROV,     VEHICULOID,     FECANULADO,     DESXCAMBIO,     DEVOLXCAMBIO,     TIPOICA2ID,     MONEDA,     NROCONTROL,     PRONTOPAGO,     MOTIVODEVID,     IMPRESA,     HORACREA,     PUNXVEN,     EXPORTACION,     ANTICIPO,     IMPORTADO,     HORACOMANDA,     FECEMI,     ANTICIPOADIC,     RECIBOID,     IMPNOTENT,     MOTIVOCIERRE,     CONTRATO,     VRIVAEXC,     PROPINA,     CONTRATOINMID,     CANTCLIENTES,     PERIODOFACT,     ANOFACT,     CONTRATOID,     APARTADO,     FECHAENT,     HORAENT,     ASENTANDO,     RETCREE,     VRRCREE,     TIPOCREEID,     NROCOMVEN,     NROFACTEQ,     PORCUTIAIU,     COMEXP,     FECRECLAMO,     MOTRECLAMO,     CHEQUEADO,     FACTREMPOST,     CAMBIODESPACHAR_A,     FECHACORTE,     '' AS DESCUENTO_TOTAL,     (SELECT T.NITTRI FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NIT_TERCERO,     (SELECT T.NOMBRE FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS NOMBRE,     (SELECT P.PREIMP FROM PREFIJO P WHERE P.CODPREFIJO=K.CODPREFIJO) AS PJFE,     (CODCOMP||'/'||CODPREFIJO||'/'||NUMERO) AS NDOC,     K.SN_CONSECUTIVO,     (K.CODPREFIJO||''||CAST(K.NUMERO AS INT)) AS NUM,     (SELECT T.EMAIL FROM TERCEROS T WHERE T.TERID=K.CLIENTE) AS EMAIL2,     K.SN_CUFE,     K.SN_ENLACEPDF,     K.SN_ENLACEXML,     K.SN_FE_VALIDACION,     SN_PROVEEDOR,      SN_TOKEN_EMP,     SN_TOKEN_PASS,     SN_SERVIDOR FROM      KARDEX K WHERE      CODCOMP IN ('FV')  AND FECANULADO IS NULL ) nm_sel_esp " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_kardex_fv_tns']['where_pesq']; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
       if (!$rt = $this->Db->Execute($nm_comando)) 
@@ -236,6 +230,55 @@ class grid_kardex_fv_tns_total
       }
       $nm_campo = $str_highlight_ini . $trab_saida . $str_highlight_ini;
    } 
+function fCrearQR($vnombrearchivo,$vcontenido='Prueba qr',$vdirectorio='',$vmargin=0,$vtamanio=2,$vcalidad=20)
+{
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'on';
+  
+	sc_include_library("prj", "qr", "qrlib.php", true, true);
+	
+	$tempDir       = $vdirectorio;
+	$fileName      = $vnombrearchivo;
+	$outerFrame    = $vmargin;
+	$pixelPerPoint = $vtamanio;
+	$jpegQuality   = $vcalidad;
+	$codeContents  = $vcontenido;
+
+	$frame = QRcode::text($codeContents, false, QR_ECLEVEL_M);
+
+	$h = count($frame);
+	$w = strlen($frame[0]);
+
+	$imgW = $w + 2*$outerFrame;
+	$imgH = $h + 2*$outerFrame;
+
+	$base_image = imagecreate($imgW, $imgH);
+
+	$col[0] = imagecolorallocate($base_image,255,255,255); 
+	$col[1] = imagecolorallocate($base_image,0,0,0);     
+
+	imagefill($base_image, 0, 0, $col[0]);
+
+	for($y=0; $y<$h; $y++) {
+		for($x=0; $x<$w; $x++) {
+			if ($frame[$y][$x] == '1') {
+				imagesetpixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
+			}
+		}
+	}
+
+	$target_image = imagecreate($imgW * $pixelPerPoint, $imgH * $pixelPerPoint);
+	imagecopyresized(
+		$target_image, 
+		$base_image, 
+		0, 0, 0, 0, 
+		$imgW * $pixelPerPoint, $imgH * $pixelPerPoint, $imgW, $imgH
+	);
+	imagedestroy($base_image);
+	imagejpeg($target_image, $tempDir.$fileName, $jpegQuality);
+	imagedestroy($target_image);
+
+$_SESSION['scriptcase']['grid_kardex_fv_tns']['contr_erro'] = 'off';
+}
 }
 
 ?>

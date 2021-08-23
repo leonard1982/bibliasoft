@@ -5073,31 +5073,31 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_datosemp']['Lookup_detalle_tr
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo&' - '&descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
 
    $this->dv = $old_value_dv;
@@ -7149,7 +7149,7 @@ $_SESSION['scriptcase']['form_datosemp']['contr_erro'] = 'off';
               $this->nmgp_dados_form["nombre_archivo"] = $this->nombre_archivo;
               $this->tamanio = "";  
               $this->nmgp_dados_form["tamanio"] = $this->tamanio;
-              $this->detalle_trib = "ZY";  
+              $this->detalle_trib = "ZZ";  
               $this->nmgp_dados_form["detalle_trib"] = $this->detalle_trib;
               $this->codigos_ciiu = "6202";  
               $this->nmgp_dados_form["codigos_ciiu"] = $this->codigos_ciiu;
@@ -8521,31 +8521,31 @@ else
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo&' - '&descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
 
    $this->dv = $old_value_dv;

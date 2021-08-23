@@ -989,7 +989,7 @@ else
    $unformatted_value_id_dt_ter = $this->id_dt_ter;
    $unformatted_value_id_tercero = $this->id_tercero;
 
-   $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY codigo, descripcion_dt";
+   $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY codigo, descripcion_dt";
 
    $this->id_dt_ter = $old_value_id_dt_ter;
    $this->id_tercero = $old_value_id_tercero;

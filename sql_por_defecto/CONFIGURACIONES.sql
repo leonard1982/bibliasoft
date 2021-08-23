@@ -8902,4 +8902,9 @@ UPDATE `detalle_tributario` SET `descripcion_dt` = 'IVA' WHERE `detalle_tributar
 ALTER TABLE `caja` CHANGE `cantidad` `cantidad` DECIMAL(15,2) NULL DEFAULT NULL;
 ALTER TABLE `caja` CHANGE `cantidad` `cantidad` DECIMAL(15,2) NULL DEFAULT '0';
 
+UPDATE `detalle_tributario` SET `descripcion_dt` = 'No aplica' WHERE `detalle_tributario`.`id_detalle_trib` = 15;
+UPDATE `det_trib_x_tercero` SET `cod_det_trib`='ZZ',`decripcion_dt`='No aplica' WHERE cod_det_trib <> '01';
+UPDATE `responsabilidades_tributarias` SET `descripcion` = 'No aplica' WHERE `responsabilidades_tributarias`.`id_resp_trib` = 86;
+UPDATE `resp_trib_x_tercero` SET `decripcion_rt`='No aplica' WHERE codigo_rt = 'R-99-PN';
+
 COMMIT;

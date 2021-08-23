@@ -1,0 +1,22 @@
+.css_codcomp_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codcomp_grid_line {vertical-align: top;text-align: left;}
+.css_codprefijo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codprefijo_grid_line {vertical-align: top;text-align: center;}
+.css_numero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero_grid_line {vertical-align: top;text-align: left;}
+.css_fecha_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_nit_tercero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nit_tercero_grid_line {vertical-align: top;text-align: right;}
+.css_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cliente_grid_line {vertical-align: top;text-align: left;}
+.css_ico_cliente_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_ico_cliente_grid_line {text-align: center;}
+.css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_total_grid_line {vertical-align: top;text-align: right;}
+.css_pdf_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_pdf_grid_line {text-align: center;}
+.css_avisos_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_avisos_grid_line {text-align: center;}
+.css_qr_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_qr_grid_line {text-align: center;}

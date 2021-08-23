@@ -2945,31 +2945,31 @@ else
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, concat(codigo, ' - ',descripcion_dt)  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo&' - '&descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZY') ORDER BY id_detalle_trib, codigo";
+       $nm_comando = "SELECT codigo, codigo||' - '||descripcion_dt  FROM detalle_tributario  WHERE codigo in('01','ZZ','ZY') ORDER BY id_detalle_trib, codigo";
    }
 
    $this->dv = $old_value_dv;

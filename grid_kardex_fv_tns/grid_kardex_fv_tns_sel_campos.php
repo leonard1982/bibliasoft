@@ -2,6 +2,7 @@
    if(!isset($bol_sel_campos_include))
    {
        $bol_sel_campos_include = false;
+       global $bol_sel_campos_include;
    }
    if(!$bol_sel_campos_include)
    {
@@ -294,12 +295,17 @@ function Sel_processa_out()
    
    function displayHtml($bol_css_all)
    {
-      global $tab_ger_campos, $tab_blk_campos;
+      global $tab_ger_campos, $tab_blk_campos, $bol_sel_campos_include;
 
       $this->Sel_css($bol_css_all);
 
+if(isset($bol_sel_campos_include) && $bol_sel_campos_include && $_SESSION['scriptcase']['proc_mobile'])
+{
 ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript" src="../_lib/lib/js/nm_touchfix.jquery.js"></script>
+<?php
+}
+?><script language="javascript" type="text/javascript">
 
 <?php
 if ($this->embbed)
@@ -348,7 +354,7 @@ if ($_SESSION['scriptcase']['proc_mobile']) {
 <?php
 }
 
-if(!isset($bol_sel_campos_include) || !$bol_sel_campos_include)
+if(!isset($bol_sel_campos_include) || $bol_sel_campos_include)
 {
 ?>
 function scSubmitSelCamposAjaxExport(sPos) {
@@ -710,7 +716,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
 </HEAD>
 <BODY class="scGridPage" style="margin: 0px; overflow-x: hidden">
-<script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/jquery/js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/jquery/js/jquery-ui.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/jquery_plugin/touch_punch/jquery.ui.touch-punch.min.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $_SESSION['sc_session']['path_third'] ?>/tigra_color_picker/picker.js"></script>
