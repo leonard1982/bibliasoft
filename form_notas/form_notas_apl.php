@@ -467,13 +467,17 @@ class form_notas_apl
       {
           $_SESSION['gCupoilimitado'] = $this->gCupoilimitado;
       }
-      if (isset($this->par_numfacventa) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
-      {
-          $_SESSION['par_numfacventa'] = $this->par_numfacventa;
-      }
       if (isset($this->gidtercero) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
+      }
+      if (isset($this->vGIdFacAfec) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['vGIdFacAfec'] = $this->vGIdFacAfec;
+      }
+      if (isset($this->par_numfacventa) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['par_numfacventa'] = $this->par_numfacventa;
       }
       if (isset($this->elped) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
       {
@@ -482,10 +486,6 @@ class form_notas_apl
       if (isset($this->gCliente) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
       {
           $_SESSION['gCliente'] = $this->gCliente;
-      }
-      if (isset($this->vGIdFacAfec) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
-      {
-          $_SESSION['vGIdFacAfec'] = $this->vGIdFacAfec;
       }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_notas']['embutida_parms']))
       { 
@@ -538,13 +538,21 @@ class form_notas_apl
           {
               $_SESSION['gCupoilimitado'] = $this->gCupoilimitado;
           }
-          if (isset($this->par_numfacventa)) 
-          {
-              $_SESSION['par_numfacventa'] = $this->par_numfacventa;
-          }
           if (isset($this->gidtercero)) 
           {
               $_SESSION['gidtercero'] = $this->gidtercero;
+          }
+          if (!isset($this->vGIdFacAfec) && isset($this->vgidfacafec)) 
+          {
+              $this->vGIdFacAfec = $this->vgidfacafec;
+          }
+          if (isset($this->vGIdFacAfec)) 
+          {
+              $_SESSION['vGIdFacAfec'] = $this->vGIdFacAfec;
+          }
+          if (isset($this->par_numfacventa)) 
+          {
+              $_SESSION['par_numfacventa'] = $this->par_numfacventa;
           }
           if (isset($this->elped)) 
           {
@@ -557,14 +565,6 @@ class form_notas_apl
           if (isset($this->gCliente)) 
           {
               $_SESSION['gCliente'] = $this->gCliente;
-          }
-          if (!isset($this->vGIdFacAfec) && isset($this->vgidfacafec)) 
-          {
-              $this->vGIdFacAfec = $this->vgidfacafec;
-          }
-          if (isset($this->vGIdFacAfec)) 
-          {
-              $_SESSION['vGIdFacAfec'] = $this->vGIdFacAfec;
           }
           if (isset($this->NM_where_filter_form))
           {
@@ -592,13 +592,21 @@ class form_notas_apl
           {
               $_SESSION['gCupoilimitado'] = $this->gCupoilimitado;
           }
-          if (isset($this->par_numfacventa)) 
-          {
-              $_SESSION['par_numfacventa'] = $this->par_numfacventa;
-          }
           if (isset($this->gidtercero)) 
           {
               $_SESSION['gidtercero'] = $this->gidtercero;
+          }
+          if (!isset($this->vGIdFacAfec) && isset($this->vgidfacafec)) 
+          {
+              $this->vGIdFacAfec = $this->vgidfacafec;
+          }
+          if (isset($this->vGIdFacAfec)) 
+          {
+              $_SESSION['vGIdFacAfec'] = $this->vGIdFacAfec;
+          }
+          if (isset($this->par_numfacventa)) 
+          {
+              $_SESSION['par_numfacventa'] = $this->par_numfacventa;
           }
           if (isset($this->elped)) 
           {
@@ -611,14 +619,6 @@ class form_notas_apl
           if (isset($this->gCliente)) 
           {
               $_SESSION['gCliente'] = $this->gCliente;
-          }
-          if (!isset($this->vGIdFacAfec) && isset($this->vgidfacafec)) 
-          {
-              $this->vGIdFacAfec = $this->vgidfacafec;
-          }
-          if (isset($this->vGIdFacAfec)) 
-          {
-              $_SESSION['vGIdFacAfec'] = $this->vGIdFacAfec;
           }
       } 
       elseif (isset($script_case_init) && !empty($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_notas']['parms']))
@@ -972,10 +972,10 @@ class form_notas_apl
       {
           $this->nmgp_botoes['cancel'] = "off";
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_orig'] = " where id_fact>0";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_orig'] = "";
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_pesq']))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_pesq'] = " where id_fact>0";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_pesq'] = "";
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_pesq_filtro'] = "";
       }
       $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_orig'];
@@ -2107,7 +2107,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     $original_pref_pedido = $this->pref_pedido;
 }
   $this->NM_ajax_info['buttonDisplay']['delete'] = $this->nmgp_botoes["delete"] = "off";;
-$this->NM_ajax_info['buttonDisplay']['new'] = $this->nmgp_botoes["new"] = "on";;
 
 if($this->pref_pedido <>"")
 	{
@@ -10776,19 +10775,10 @@ $idnota=$this->idfacven ;
 $vGrupo="";
 $vCambiaVal='NO';
 $vControl='NO';
+$vsql = "select * from detalleventa where numfac='".$vLafac."'";
+echo $vsql;
  
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_select = "select * from detalleventa where numfac=$vLafac"; 
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_select = "select * from detalleventa where numfac=$vLafac"; 
-      }
-      else
-      { 
-          $nm_select = "select * from detalleventa where numfac=$vLafac"; 
-      }
+      $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->ds = array();
@@ -10798,75 +10788,6 @@ $vControl='NO';
           $nm_count = $SCrx->FieldCount();
           while (!$SCrx->EOF)
           { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
-                 $SCrx->fields[5] = str_replace(',', '.', $SCrx->fields[5]);
-                 $SCrx->fields[6] = str_replace(',', '.', $SCrx->fields[6]);
-                 $SCrx->fields[7] = str_replace(',', '.', $SCrx->fields[7]);
-                 $SCrx->fields[8] = str_replace(',', '.', $SCrx->fields[8]);
-                 $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
-                 $SCrx->fields[10] = str_replace(',', '.', $SCrx->fields[10]);
-                 $SCrx->fields[11] = str_replace(',', '.', $SCrx->fields[11]);
-                 $SCrx->fields[12] = str_replace(',', '.', $SCrx->fields[12]);
-                 $SCrx->fields[13] = str_replace(',', '.', $SCrx->fields[13]);
-                 $SCrx->fields[14] = str_replace(',', '.', $SCrx->fields[14]);
-                 $SCrx->fields[15] = str_replace(',', '.', $SCrx->fields[15]);
-                 $SCrx->fields[16] = str_replace(',', '.', $SCrx->fields[16]);
-                 $SCrx->fields[17] = str_replace(',', '.', $SCrx->fields[17]);
-                 $SCrx->fields[18] = str_replace(',', '.', $SCrx->fields[18]);
-                 $SCrx->fields[19] = str_replace(',', '.', $SCrx->fields[19]);
-                 $SCrx->fields[20] = str_replace(',', '.', $SCrx->fields[20]);
-                 $SCrx->fields[29] = str_replace(',', '.', $SCrx->fields[29]);
-                 $SCrx->fields[30] = str_replace(',', '.', $SCrx->fields[30]);
-                 $SCrx->fields[31] = str_replace(',', '.', $SCrx->fields[31]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
-                 $SCrx->fields[3] = (string)$SCrx->fields[3];
-                 $SCrx->fields[5] = (strpos(strtolower($SCrx->fields[5]), "e")) ? (float)$SCrx->fields[5] : $SCrx->fields[5];
-                 $SCrx->fields[5] = (string)$SCrx->fields[5];
-                 $SCrx->fields[6] = (strpos(strtolower($SCrx->fields[6]), "e")) ? (float)$SCrx->fields[6] : $SCrx->fields[6];
-                 $SCrx->fields[6] = (string)$SCrx->fields[6];
-                 $SCrx->fields[7] = (strpos(strtolower($SCrx->fields[7]), "e")) ? (float)$SCrx->fields[7] : $SCrx->fields[7];
-                 $SCrx->fields[7] = (string)$SCrx->fields[7];
-                 $SCrx->fields[8] = (strpos(strtolower($SCrx->fields[8]), "e")) ? (float)$SCrx->fields[8] : $SCrx->fields[8];
-                 $SCrx->fields[8] = (string)$SCrx->fields[8];
-                 $SCrx->fields[9] = (strpos(strtolower($SCrx->fields[9]), "e")) ? (float)$SCrx->fields[9] : $SCrx->fields[9];
-                 $SCrx->fields[9] = (string)$SCrx->fields[9];
-                 $SCrx->fields[10] = (strpos(strtolower($SCrx->fields[10]), "e")) ? (float)$SCrx->fields[10] : $SCrx->fields[10];
-                 $SCrx->fields[10] = (string)$SCrx->fields[10];
-                 $SCrx->fields[11] = (strpos(strtolower($SCrx->fields[11]), "e")) ? (float)$SCrx->fields[11] : $SCrx->fields[11];
-                 $SCrx->fields[11] = (string)$SCrx->fields[11];
-                 $SCrx->fields[12] = (strpos(strtolower($SCrx->fields[12]), "e")) ? (float)$SCrx->fields[12] : $SCrx->fields[12];
-                 $SCrx->fields[12] = (string)$SCrx->fields[12];
-                 $SCrx->fields[13] = (strpos(strtolower($SCrx->fields[13]), "e")) ? (float)$SCrx->fields[13] : $SCrx->fields[13];
-                 $SCrx->fields[13] = (string)$SCrx->fields[13];
-                 $SCrx->fields[14] = (strpos(strtolower($SCrx->fields[14]), "e")) ? (float)$SCrx->fields[14] : $SCrx->fields[14];
-                 $SCrx->fields[14] = (string)$SCrx->fields[14];
-                 $SCrx->fields[15] = (strpos(strtolower($SCrx->fields[15]), "e")) ? (float)$SCrx->fields[15] : $SCrx->fields[15];
-                 $SCrx->fields[15] = (string)$SCrx->fields[15];
-                 $SCrx->fields[16] = (strpos(strtolower($SCrx->fields[16]), "e")) ? (float)$SCrx->fields[16] : $SCrx->fields[16];
-                 $SCrx->fields[16] = (string)$SCrx->fields[16];
-                 $SCrx->fields[17] = (strpos(strtolower($SCrx->fields[17]), "e")) ? (float)$SCrx->fields[17] : $SCrx->fields[17];
-                 $SCrx->fields[17] = (string)$SCrx->fields[17];
-                 $SCrx->fields[18] = (strpos(strtolower($SCrx->fields[18]), "e")) ? (float)$SCrx->fields[18] : $SCrx->fields[18];
-                 $SCrx->fields[18] = (string)$SCrx->fields[18];
-                 $SCrx->fields[19] = (strpos(strtolower($SCrx->fields[19]), "e")) ? (float)$SCrx->fields[19] : $SCrx->fields[19];
-                 $SCrx->fields[19] = (string)$SCrx->fields[19];
-                 $SCrx->fields[20] = (strpos(strtolower($SCrx->fields[20]), "e")) ? (float)$SCrx->fields[20] : $SCrx->fields[20];
-                 $SCrx->fields[20] = (string)$SCrx->fields[20];
-                 $SCrx->fields[29] = (strpos(strtolower($SCrx->fields[29]), "e")) ? (float)$SCrx->fields[29] : $SCrx->fields[29];
-                 $SCrx->fields[29] = (string)$SCrx->fields[29];
-                 $SCrx->fields[30] = (strpos(strtolower($SCrx->fields[30]), "e")) ? (float)$SCrx->fields[30] : $SCrx->fields[30];
-                 $SCrx->fields[30] = (string)$SCrx->fields[30];
-                 $SCrx->fields[31] = (strpos(strtolower($SCrx->fields[31]), "e")) ? (float)$SCrx->fields[31] : $SCrx->fields[31];
-                 $SCrx->fields[31] = (string)$SCrx->fields[31];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                       $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];
@@ -10882,7 +10803,7 @@ $vControl='NO';
           $this->ds_erro = $this->Db->ErrorMsg();
       } 
 ;
-if(!empty($this->ds[0][0]))
+if(isset($this->ds[0][0]))
    { 
 	$i=0;
 	foreach($this->ds  as $ads)
@@ -11059,7 +10980,7 @@ $_SESSION['scriptcase']['form_notas']['contr_erro'] = 'off';
       {
           $this->nmgp_opcao = "final";
       }
-      $sc_where = trim("id_fact>0");
+      $sc_where = trim("");
       if (substr(strtolower($sc_where), 0, 5) == "where")
       {
           $sc_where  = substr($sc_where , 5);
@@ -11206,56 +11127,40 @@ $_SESSION['scriptcase']['form_notas']['contr_erro'] = 'off';
               $nmgp_select = "SELECT idfacven, numfacven, nremision, credito, fechaven, fechavenc, idcli, subtotal, valoriva, total, pagada, asentada, observaciones, saldo, adicional, formapago, adicional2, adicional3, obspago, vendedor, pedido, resolucion, dircliente, imconsumo, retefuente, reteiva, reteica, cree, espos, cufe, enlacepdf, estado, avisos, creado, editado, usuario_crea, dias_decredito, banco, tipo, id_fact, enviada_a_tns, fecha_a_tns, factura_tns, creado_en_movil, disponible_en_movil, mot_nc, mot_nd from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
-          $aWhere[] = "id_fact>0";
           $aWhere[] = $sc_where_filter;
           if ($this->nmgp_opcao == "igual" || (($_SESSION['sc_session'][$this->Ini->sc_page]['form_adm_clientes']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_adm_clientes']['run_iframe'] == "R") && ($this->sc_evento == "insert" || $this->sc_evento == "update")) )
           { 
-              if (!empty($sc_where))
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               {
-                  if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-                  {
-                     $aWhere[] = "idfacven = $this->idfacven"; 
-                  }  
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-                  {
-                     $aWhere[] = "idfacven = $this->idfacven"; 
-                  }  
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
-                  {
-                     $aWhere[] = "idfacven = $this->idfacven"; 
-                  }  
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
-                  {
-                     $aWhere[] = "idfacven = $this->idfacven"; 
-                  }  
-                  else  
-                  {
-                     $aWhere[] = "idfacven = $this->idfacven"; 
-                  }
-              } 
-              else
+                  $aWhere[] = "idfacven = $this->idfacven"; 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               {
-                  if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+                  $aWhere[] = "idfacven = $this->idfacven"; 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+              {
+                  $aWhere[] = "idfacven = $this->idfacven"; 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              {
+                  $aWhere[] = "idfacven = $this->idfacven"; 
+              }  
+              else  
+              {
+                  $aWhere[] = "idfacven = $this->idfacven"; 
+              }  
+              if (!empty($sc_where_filter))  
+              {
+                  $teste_select = $nmgp_select . $this->returnWhere($aWhere);
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = $teste_select; 
+                  $rs = $this->Db->Execute($teste_select); 
+                  if ($rs->EOF)
                   {
-                      $aWhere[] = "idfacven = $this->idfacven"; 
+                     $aWhere = array($sc_where_filter);
                   }  
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-                  {
-                      $aWhere[] = "idfacven = $this->idfacven"; 
-                  }  
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
-                  {
-                      $aWhere[] = "idfacven = $this->idfacven"; 
-                  }  
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
-                  {
-                      $aWhere[] = "idfacven = $this->idfacven"; 
-                  }  
-                  else  
-                  {
-                      $aWhere[] = "idfacven = $this->idfacven"; 
-                  }
-              } 
+                  $rs->Close(); 
+              }  
           } 
           $nmgp_select .= $this->returnWhere($aWhere) . ' ';
           $sc_order_by = "";
@@ -11681,6 +11586,233 @@ $_SESSION['scriptcase']['form_notas']['contr_erro'] = 'off';
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detalle_notasDC']['embutida_parms'] = "par_numfacventa*scin" . $this->nmgp_dados_form['idfacven'] . "*scoutedit_cantidad*scin0*scoutsw*scin0*scoutgfactsinexist*scin@aspass@SI@aspass@*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
   }
+// 
+//-- 
+   function nm_db_retorna($str_where_param = '') 
+   {  
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $str_where_filter = ('' != $str_where_param) ? ' and ' . $str_where_param : '';
+     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter); 
+     }  
+     else  
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " where idfacven < $this->idfacven" . $str_where_filter); 
+     }  
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if (isset($rs->fields[0]) && $rs->fields[0] != "") 
+     { 
+         $this->idfacven = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+         $rs->Close();  
+         $this->nmgp_opcao = "igual";  
+         return ;  
+     } 
+     else 
+     { 
+        $this->nmgp_opcao = "inicio";  
+        $rs->Close();  
+        return ; 
+     } 
+   } 
+// 
+//-- 
+   function nm_db_avanca($str_where_param = '') 
+   {  
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $str_where_filter = ('' != $str_where_param) ? ' and ' . $str_where_param : '';
+     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter); 
+     }  
+     else  
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " where idfacven > $this->idfacven" . $str_where_filter); 
+     }  
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if (isset($rs->fields[0]) && $rs->fields[0] != "") 
+     { 
+         $this->idfacven = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+         $rs->Close();  
+         $this->nmgp_opcao = "igual";  
+         return ;  
+     } 
+     else 
+     { 
+        $this->nmgp_opcao = "final";  
+        $rs->Close();  
+        return ; 
+     } 
+   } 
+// 
+//-- 
+   function nm_db_inicio($str_where_param = '') 
+   {   
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela; 
+     $rs = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela);
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if ($rs->fields[0] == 0) 
+     { 
+         $this->nmgp_opcao = "novo"; 
+         $this->nm_flag_saida_novo = "S"; 
+         $rs->Close(); 
+         if ($this->aba_iframe)
+         {
+             $this->nmgp_botoes['exit'] = 'off';
+         }
+         return;
+     }
+     $str_where_filter = ('' != $str_where_param) ? ' where ' . $str_where_param : '';
+     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     else  
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if (!isset($rs->fields[0]) || $rs->EOF) 
+     { 
+         if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_filter']))
+         { 
+             $rs->Close();  
+             return ; 
+         } 
+         $this->nm_flag_saida_novo = "S"; 
+         $this->nmgp_opcao = "novo";  
+         $rs->Close();  
+         if ($this->aba_iframe)
+         {
+             $this->nmgp_botoes['exit'] = 'off';
+         }
+         return ; 
+     } 
+     $this->idfacven = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+     $rs->Close();  
+     $this->nmgp_opcao = "igual";  
+     return ;  
+   } 
+// 
+//-- 
+   function nm_db_final($str_where_param = '') 
+   { 
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $str_where_filter = ('' != $str_where_param) ? ' where ' . $str_where_param : '';
+     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     else  
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idfacven) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if (!isset($rs->fields[0]) || $rs->EOF) 
+     { 
+         $this->nm_flag_saida_novo = "S"; 
+         $this->nmgp_opcao = "novo";  
+         $rs->Close();  
+         if ($this->aba_iframe)
+         {
+             $this->nmgp_botoes['exit'] = 'off';
+         }
+         return ; 
+     } 
+     $this->idfacven = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+     $rs->Close();  
+     $this->nmgp_opcao = "igual";  
+     return ;  
+   } 
    function NM_gera_nav_page() 
    {
        $this->SC_nav_page = "";
@@ -16502,11 +16634,11 @@ else
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_filter_form']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_filter_form'])
       {
-          $sc_where = " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_filter_form'] . " and (id_fact>0) and (" . $comando . ")";
+          $sc_where = " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['where_filter_form'] . " and (" . $comando . ")";
       }
       else
       {
-          $sc_where = " where id_fact>0 and (" . $comando . ")";
+         $sc_where = " where " . $comando;
       }
       $nmgp_select = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela . $sc_where; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
