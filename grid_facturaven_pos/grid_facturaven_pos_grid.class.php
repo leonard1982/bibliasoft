@@ -157,6 +157,7 @@ class grid_facturaven_pos_grid
    var $restaurante;
    var $whatsapp_propio;
    var $ver_xml_propio;
+   var $envio_dataico;
    var $existeentns;
    var $imprimir;
    var $fechaven;
@@ -856,6 +857,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 	
 	case 'CADENA S. A.':
@@ -869,6 +871,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 	case 'DATAICO':
 		$this->nmgp_botoes["btn_enviar_fe"] = "on";;
@@ -881,6 +884,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "on"; }
 	break;
 	
 	case 'FACILWEB':
@@ -894,6 +898,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "on"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "on"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 }
 
@@ -1175,6 +1180,52 @@ function fConsultarEstadoTech(empresa,id)
 				
 			});
 		}
+	}
+}
+	
+function $this->fEnviarDataico(idfacven,bd)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_envio_dataico/index.php",{
+			
+			idfacven:idfacven,
+			bd:bd
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="ok")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
 	}
 }
 	
@@ -3691,6 +3742,8 @@ $nm_saida->saida("}\r\n");
    $this->css_whatsapp_propio_grid_line = $compl_css_emb . "css_whatsapp_propio_grid_line";
    $this->css_ver_xml_propio_label = $compl_css_emb . "css_ver_xml_propio_label";
    $this->css_ver_xml_propio_grid_line = $compl_css_emb . "css_ver_xml_propio_grid_line";
+   $this->css_envio_dataico_label = $compl_css_emb . "css_envio_dataico_label";
+   $this->css_envio_dataico_grid_line = $compl_css_emb . "css_envio_dataico_grid_line";
    $this->css_idfacven_label = $compl_css_emb . "css_idfacven_label";
    $this->css_idfacven_grid_line = $compl_css_emb . "css_idfacven_grid_line";
    $this->css_numfacven_label = $compl_css_emb . "css_numfacven_label";
@@ -4183,6 +4236,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_ver_xml_propio_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_ver_xml_propio_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
+ function NM_label_envio_dataico()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['envio_dataico'])) ? $this->New_label['envio_dataico'] : "Acción"; 
+   if (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_envio_dataico_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_envio_dataico_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_idfacven()
  {
    global $nm_saida;
@@ -4475,6 +4536,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['whatsapp_propio'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['ver_xml_propio'])) ? $this->New_label['ver_xml_propio'] : "JSON"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['ver_xml_propio'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['envio_dataico'])) ? $this->New_label['envio_dataico'] : "Acción"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['envio_dataico'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idfacven'])) ? $this->New_label['idfacven'] : "Idfacven"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['idfacven'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['numfacven'])) ? $this->New_label['numfacven'] : "No"; 
@@ -5540,12 +5603,17 @@ if($this->asentada =="1")
 			case 'FACILWEB':
 				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
 			break;
+				
+			case 'DATAICO':
+				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
+			break;
 		}
 	}
 	else
 	{
 		$this->enviar_propio  = "";
 		$this->enviar_tech    = "";
+		$this->envio_dataico  = "";
 	}
 	
 	if(!empty($this->cufe ))
@@ -5633,6 +5701,19 @@ if($this->asentada =="1")
 					$this->enviar_propio  = "";
 				}
 			}
+			
+			if($this->sc_temp_gproveedor=="DATAICO")
+			{
+				if(!empty($this->enlacepdf ))
+				{
+					$this->editarpos  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png'   id=pdf_".$this->idfacven ."' name='pdf_".$this->idfacven ."' /></a>";
+					$this->envio_dataico  = "<a style='cursor:pointer;' onclick='fReenviarDataico(\"".$this->idfacven ."\");'><div class='tooltip'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /><span class='tooltiptext'>Reenviar correo</span></div></a>";
+				}
+				else
+				{
+					$this->envio_dataico  = "";
+				}
+			}
 		}
 	}
 	else
@@ -5660,6 +5741,18 @@ if($this->asentada =="1")
 				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' rel='Reversar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /><span class='tooltiptext'>Revesar documento</span></div></a>";
 			}
 		}
+		
+		if($this->sc_temp_gproveedor=="DATAICO")
+		{
+			if($this->si_electronica =="FE")
+			{
+				$this->editarpos  = "";
+			}
+			else
+			{
+				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' rel='Reversar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /><span class='tooltiptext'>Revesar documento</span></div></a>";
+			}
+		}
 	}
 }
 else
@@ -5670,23 +5763,11 @@ else
 	
 	$this->enviar_tech  = "";
 	$this->enviar_propio  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' rel='Asentar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Asentar</span></div></a>";
+	
+	$this->envio_dataico  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' rel='Asentar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Asentar</span></div></a>";
 }
 $vurl = sc_url_library("prj", "factura", "index.php");
 $this->a4  = "<a href='".$vurl."?idempresa=".$this->sc_temp_gbd_seleccionada."&id=".$this->idfacven ."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__printer3_32.png'  style='width:32px;'/></a>";
-if($this->si_electronica =="FE")
-{
-	if($this->sc_temp_gproveedor=="DATAICO")
-	{
-		if(!empty($this->cufe ))
-		{
-			$this->pdf  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png' /></a>";
-		}
-		else
-		{
-			$this->pdf  = "";
-		}
-	}
-}
 if($this->estado =='200' or $this->estado =='201')
 {
 	$this->NM_field_style["numero2"] = "background-color:#33ff99;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -6813,6 +6894,35 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_ver_xml_propio_grid_line . "\"  style=\"" . $this->Css_Cmp['css_ver_xml_propio_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_ver_xml_propio_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_envio_dataico()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off") { 
+          $conteudo = sc_strip_script($this->envio_dataico); 
+          $conteudo_original = sc_strip_script($this->envio_dataico); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'envio_dataico', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'envio_dataico', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_envio_dataico_grid_line . "\"  style=\"" . $this->Css_Cmp['css_envio_dataico_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_envio_dataico_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_idfacven()
  {
       global $nm_saida;
@@ -7827,7 +7937,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 49;
+   $this->NM_colspan  = 50;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -8651,6 +8761,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -8968,6 +9082,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
@@ -9291,6 +9409,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -9608,6 +9730,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
@@ -9931,6 +10057,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -10248,6 +10378,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
@@ -10569,6 +10703,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -10884,6 +11022,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
@@ -11205,6 +11347,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -11523,6 +11669,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -11829,6 +11979,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
@@ -12141,6 +12295,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -12447,6 +12605,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
@@ -12759,6 +12921,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -13065,6 +13231,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
@@ -13377,6 +13547,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -13683,6 +13857,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
@@ -13995,6 +14173,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -14268,6 +14450,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -14533,6 +14719,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
@@ -14804,6 +14994,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -15069,6 +15263,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
@@ -15340,6 +15538,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -15605,6 +15807,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
@@ -15876,6 +16082,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -16141,6 +16351,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
@@ -16412,6 +16626,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -16680,6 +16898,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -16945,6 +17167,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }

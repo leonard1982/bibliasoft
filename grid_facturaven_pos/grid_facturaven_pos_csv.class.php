@@ -491,6 +491,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 	
 	case 'CADENA S. A.':
@@ -504,6 +505,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 	case 'DATAICO':
 		$this->nmgp_botoes["btn_enviar_fe"] = "on";;
@@ -516,6 +518,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "on"; }
 	break;
 	
 	case 'FACILWEB':
@@ -529,6 +532,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "on"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "on"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 }
 
@@ -813,6 +817,52 @@ function fConsultarEstadoTech(empresa,id)
 	}
 }
 	
+function $this->fEnviarDataico(idfacven,bd)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_envio_dataico/index.php",{
+			
+			idfacven:idfacven,
+			bd:bd
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="ok")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
+	}
+}
+	
 $(document).ajaxStart(function(){
 	
     
@@ -1048,6 +1098,14 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               }
               $SC_Label = (isset($this->New_label['ver_xml_propio'])) ? $this->New_label['ver_xml_propio'] : "JSON"; 
               if ($Cada_col == "ver_xml_propio" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['envio_dataico'])) ? $this->New_label['envio_dataico'] : "Acción"; 
+              if ($Cada_col == "envio_dataico" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
                   $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
@@ -1623,12 +1681,17 @@ if($this->asentada =="1")
 			case 'FACILWEB':
 				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
 			break;
+				
+			case 'DATAICO':
+				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
+			break;
 		}
 	}
 	else
 	{
 		$this->enviar_propio  = "";
 		$this->enviar_tech    = "";
+		$this->envio_dataico  = "";
 	}
 	
 	if(!empty($this->cufe ))
@@ -1729,6 +1792,20 @@ if($this->asentada =="1")
 					$this->enviar_propio  = "";
 				}
 			}
+			
+			if($this->sc_temp_gproveedor=="DATAICO")
+			{
+				if(!empty($this->enlacepdf ))
+				{
+					$this->editarpos  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png'   id=pdf_".$this->idfacven ."' name='pdf_".$this->idfacven ."' /></a>";
+
+					$this->envio_dataico  = "<a style='cursor:pointer;' onclick='fReenviarDataico(\"".$this->idfacven ."\");'><div class='tooltip'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /><span class='tooltiptext'>Reenviar correo</span></div></a>";
+				}
+				else
+				{
+					$this->envio_dataico  = "";
+				}
+			}
 		}
 	}
 	else
@@ -1757,6 +1834,18 @@ if($this->asentada =="1")
 				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' rel='Reversar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /><span class='tooltiptext'>Revesar documento</span></div></a>";
 			}
 		}
+		
+		if($this->sc_temp_gproveedor=="DATAICO")
+		{
+			if($this->si_electronica =="FE")
+			{
+				$this->editarpos  = "";
+			}
+			else
+			{
+				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' rel='Reversar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /><span class='tooltiptext'>Revesar documento</span></div></a>";
+			}
+		}
 	}
 }
 else
@@ -1767,25 +1856,14 @@ else
 	
 	$this->enviar_tech  = "";
 	$this->enviar_propio  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' rel='Asentar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Asentar</span></div></a>";
+	
+	$this->envio_dataico  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' rel='Asentar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Asentar</span></div></a>";
 }
 
 $vurl = sc_url_library("prj", "factura", "index.php");
 $this->a4  = "<a href='".$vurl."?idempresa=".$this->sc_temp_gbd_seleccionada."&id=".$this->idfacven ."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__printer3_32.png'  style='width:32px;'/></a>";
 
-if($this->si_electronica =="FE")
-{
-	if($this->sc_temp_gproveedor=="DATAICO")
-	{
-		if(!empty($this->cufe ))
-		{
-			$this->pdf  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png' /></a>";
-		}
-		else
-		{
-			$this->pdf  = "";
-		}
-	}
-}
+
 
 if($this->estado =='200' or $this->estado =='201')
 {
@@ -2076,6 +2154,14 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
    {
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->ver_xml_propio);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- envio_dataico
+   function NM_export_envio_dataico()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->envio_dataico);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }

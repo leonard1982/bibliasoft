@@ -582,6 +582,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 	
 	case 'CADENA S. A.':
@@ -595,6 +596,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 	case 'DATAICO':
 		$this->nmgp_botoes["btn_enviar_fe"] = "on";;
@@ -607,6 +609,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "on"; }
 	break;
 	
 	case 'FACILWEB':
@@ -620,6 +623,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "on"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "on"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 }
 
@@ -901,6 +905,52 @@ function fConsultarEstadoTech(empresa,id)
 				
 			});
 		}
+	}
+}
+	
+function $this->fEnviarDataico(idfacven,bd)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_envio_dataico/index.php",{
+			
+			idfacven:idfacven,
+			bd:bd
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="ok")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
 	}
 }
 	
@@ -1246,6 +1296,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['ver_xml_propio']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['ver_xml_propio'] = "JSON"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['envio_dataico']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['envio_dataico'] = "Acción"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['idfacven']))
        {
@@ -7584,6 +7638,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 	
 	case 'CADENA S. A.':
@@ -7597,6 +7652,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 	case 'DATAICO':
 		$this->nmgp_botoes["btn_enviar_fe"] = "on";;
@@ -7609,6 +7665,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "off"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "on"; }
 	break;
 	
 	case 'FACILWEB':
@@ -7622,6 +7679,7 @@ switch($this->sc_temp_gproveedor)
 		
 		$this->NM_cmp_hidden["enviar_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_propio"] = "on"; }
 		$this->NM_cmp_hidden["whatsapp_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "on"; }
+		$this->NM_cmp_hidden["envio_dataico"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["envio_dataico"] = "off"; }
 	break;
 }
 
@@ -7903,6 +7961,52 @@ function fConsultarEstadoTech(empresa,id)
 				
 			});
 		}
+	}
+}
+	
+function $this->fEnviarDataico(idfacven,bd)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_envio_dataico/index.php",{
+			
+			idfacven:idfacven,
+			bd:bd
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="ok")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
 	}
 }
 	

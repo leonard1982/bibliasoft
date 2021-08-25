@@ -186,6 +186,8 @@ function Sel_cmp_process()
       $tab_blk_campos[] = "whatsapp_propio";
       $tab_ger_campos['ver_xml_propio'] = "on";
       $tab_blk_campos[] = "ver_xml_propio";
+      $tab_ger_campos['envio_dataico'] = "on";
+      $tab_blk_campos[] = "envio_dataico";
       $tab_ger_campos['idfacven'] = "on";
       $tab_ger_campos['numfacven'] = "on";
       $tab_ger_campos['fechavenc'] = "on";
