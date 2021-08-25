@@ -797,6 +797,12 @@ function fReenviarPropio(idfacven)
 	});
 }
 	
+function fReenviarDataico(idfacven)
+{
+
+	
+}
+	
 function fAsentarDoc(idfacven)
 {
 	if(confirm('¿Desea asentar el documento?'))
@@ -908,7 +914,7 @@ function fConsultarEstadoTech(empresa,id)
 	}
 }
 	
-function $this->fEnviarDataico(idfacven)
+function fEnvioDataico(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
 	{
@@ -7852,6 +7858,12 @@ function fReenviarPropio(idfacven)
 	});
 }
 	
+function fReenviarDataico(idfacven)
+{
+
+	
+}
+	
 function fAsentarDoc(idfacven)
 {
 	if(confirm('¿Desea asentar el documento?'))
@@ -7963,7 +7975,7 @@ function fConsultarEstadoTech(empresa,id)
 	}
 }
 	
-function $this->fEnviarDataico(idfacven)
+function fEnvioDataico(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
 	{

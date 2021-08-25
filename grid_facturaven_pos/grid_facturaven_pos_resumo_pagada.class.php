@@ -733,6 +733,12 @@ function fReenviarPropio(idfacven)
 	});
 }
 	
+function fReenviarDataico(idfacven)
+{
+
+	
+}
+	
 function fAsentarDoc(idfacven)
 {
 	if(confirm('¿Desea asentar el documento?'))
@@ -844,7 +850,7 @@ function fConsultarEstadoTech(empresa,id)
 	}
 }
 	
-function $this->fEnviarDataico(idfacven)
+function fEnvioDataico(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
 	{
@@ -6598,6 +6604,12 @@ function fReenviarPropio(idfacven)
 	});
 }
 	
+function fReenviarDataico(idfacven)
+{
+
+	
+}
+	
 function fAsentarDoc(idfacven)
 {
 	if(confirm('¿Desea asentar el documento?'))
@@ -6709,7 +6721,7 @@ function fConsultarEstadoTech(empresa,id)
 	}
 }
 	
-function $this->fEnviarDataico(idfacven)
+function fEnvioDataico(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
 	{
@@ -7065,7 +7077,7 @@ if($this->asentada =="1")
 			break;
 				
 			case 'DATAICO':
-				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\");' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
+				$this->envio_dataico  = "<a onclick='fEnvioDataico(\"".$this->idfacven ."\");' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
 			break;
 		}
 	}
