@@ -908,7 +908,7 @@ function fConsultarEstadoTech(empresa,id)
 	}
 }
 	
-function $this->fEnviarDataico(idfacven,bd)
+function $this->fEnviarDataico(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
 	{
@@ -927,8 +927,7 @@ function $this->fEnviarDataico(idfacven,bd)
 		
 		$.post("../blank_envio_dataico/index.php",{
 			
-			idfacven:idfacven,
-			bd:bd
+			idfacven:idfacven
 			   
 			},function(r){
 
@@ -7964,7 +7963,7 @@ function fConsultarEstadoTech(empresa,id)
 	}
 }
 	
-function $this->fEnviarDataico(idfacven,bd)
+function $this->fEnviarDataico(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
 	{
@@ -7983,8 +7982,7 @@ function $this->fEnviarDataico(idfacven,bd)
 		
 		$.post("../blank_envio_dataico/index.php",{
 			
-			idfacven:idfacven,
-			bd:bd
+			idfacven:idfacven
 			   
 			},function(r){
 

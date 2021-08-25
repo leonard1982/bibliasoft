@@ -817,7 +817,7 @@ function fConsultarEstadoTech(empresa,id)
 	}
 }
 	
-function $this->fEnviarDataico(idfacven,bd)
+function $this->fEnviarDataico(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
 	{
@@ -836,8 +836,7 @@ function $this->fEnviarDataico(idfacven,bd)
 		
 		$.post("../blank_envio_dataico/index.php",{
 			
-			idfacven:idfacven,
-			bd:bd
+			idfacven:idfacven
 			   
 			},function(r){
 
@@ -1683,7 +1682,7 @@ if($this->asentada =="1")
 			break;
 				
 			case 'DATAICO':
-				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
+				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\");' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
 			break;
 		}
 	}
