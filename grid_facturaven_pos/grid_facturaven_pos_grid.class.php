@@ -1074,8 +1074,52 @@ function fReenviarPropio(idfacven)
 	
 function fReenviarDataico(idfacven)
 {
+	$.post("../blank_correo_reenvio/index.php",{
 
-	
+		idfacven:idfacven
+
+	},function(r){
+
+		console.log(r);
+		var correo = "";
+		
+		if(correo = prompt("Correo Electrónico",r))
+		{
+			if(correo == null || correo == "")
+			{
+			   alert("Debe digitar un correo.");
+			}
+			else
+			{
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+				
+				$.post("../blank_reenvio_dataico/index.php",{
+
+					idfacven:idfacven,
+					correo:correo
+
+				},function(r2){
+
+					$.unblockUI();
+					
+					console.log(r2);
+					alert(r2);
+				});
+			}
+		}
+
+	});
 }
 	
 function fAsentarDoc(idfacven)
