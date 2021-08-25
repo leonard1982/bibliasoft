@@ -218,7 +218,7 @@ class blank_envio_dataico_ini
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210825"; 
-      $this->nm_hr_ult_alt   = "120845"; 
+      $this->nm_hr_ult_alt   = "135838"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_envio_dataico_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQJsHArYHuXGHgrKZSNiH5XKVEFGHQJmZkFGZ1rYD5BqHgveZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveZSJGDWXCHIF7HQBiH9X7HIrwHQNUHgrKDkBOV5X/VEraD9XOH9BqHABYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWJeDoJeDcBqZ1B/Z1NOV5JsDMNKZSXeDWFqVoBiD9NmH9X7DSBYV5JwHgrYDkBOH5XCVoB/D9BiZ1F7HABYV5JeDMBYZSXeV5XKVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKD5JwHgvsHEXeV5FqHIBOHQNwDuFaHANOD5BODMNOVcFKH5XCVEraD9BsH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVorqHQBqZ1BiHAvCZMFaHgBeHEFiV5B3DoF7D9XsDuFaHAveD5NUDMvsVcXKDWF/VEraDcBqVINUHIBeHQBqDEBeHArsH5FYVoFaDcBwDQJsHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDQFUD1BeD5BOHgvsDkBsHEFYVEF7D9BiZkFGZ1BeZMXGDEBOVkXeDWr/VoB/HQNmZSBiHAN7V5XGHgvsDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoBqHQJeDQX7DSzGV5XGHuvmDkFCDWFYDoXGDcFYZ1BOZ1BeV5BOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGHEXeV5XCZuBOD9JKDQX7Z1rwV5raHgrKVcFKDWFaVENUDcBqZ1B/DSrYD5rqDEBODkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9JKDQBqHINaVWJsDMrYV9BUDWJeVENUD9BsZ1FaHAvmD5BqHgBOHENiHEXCHMJwHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDQBqHAvmVWJwDMvmVcFKV5BmVoBqD9BsZkFGHArKD5rqHgNOZSJGDWFqDoBOHQFYDQFaDSN7HuXGDMBYVcBOV5X7VorqHQBiZ1FGZ1NOHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -3006,113 +3006,111 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 				else
 				{
 					$vsiyadian = false;
-					
-					print_r($vrespuesta);
 
-					if(isset($vrespuesta->errors))
+					if(isset($vrespuesta->errors[0]->error))
 					{
-							
-						if(isset($vrespuesta->errors[0]->error))
+						$veltexto = $vrespuesta->errors[0]->error;
+						$vvalidando = false;
+						$vfechavalidacion = date("Y-m-d H:i:s");
+
+						$pos = strpos($veltexto, "No se encuentra");
+						if ($pos === false)
 						{
-							$veltexto = $vrespuesta->errors[0]->error;
-							$vvalidando = false;
-							$vfechavalidacion = date("Y-m-d H:i:s");
+						}
+						else
+						{
+							$vvalidando = true;
+						}
+						
+						echo "aquí 1";
 
-							$pos = strpos($veltexto, "No se encuentra numeración");
-							if ($pos === false)
+						if($vvalidando)
+						{
+							$curl2 = curl_init();
+							$vdconexion = array(
+							  CURLOPT_URL => 'https://api.dataico.com/direct/dataico_api/v2/invoices?number='.$vencabezado["prefijo"].$vencabezado["numero"],
+							  CURLOPT_RETURNTRANSFER => true,
+							  CURLOPT_ENCODING => '',
+							  CURLOPT_MAXREDIRS => 10,
+							  CURLOPT_TIMEOUT => 0,
+							  CURLOPT_FOLLOWLOCATION => true,
+							  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+							  CURLOPT_CUSTOMREQUEST => 'GET',
+							  CURLOPT_HTTPHEADER => array(
+								'Content-Type: application/json',
+								'auth-token: '.$vparametros["dataico_auth"]
+							  ),
+							);
+
+							curl_setopt_array($curl2, $vdconexion);
+
+							$response = curl_exec($curl2);
+							curl_close($curl2);
+
+							$vr = json_decode($response);
+							
+							echo "aquí 2";
+							if(isset($vr->invoice->dian_status))
 							{
-							}
-							else
-							{
-								$vvalidando = true;
-							}
-
-							if($vvalidando)
-							{
-								$curl2 = curl_init();
-								$vdconexion = array(
-								  CURLOPT_URL => 'https://api.dataico.com/direct/dataico_api/v2/invoices?number='.$vencabezado["prefijo"].$vencabezado["numero"],
-								  CURLOPT_RETURNTRANSFER => true,
-								  CURLOPT_ENCODING => '',
-								  CURLOPT_MAXREDIRS => 10,
-								  CURLOPT_TIMEOUT => 0,
-								  CURLOPT_FOLLOWLOCATION => true,
-								  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-								  CURLOPT_CUSTOMREQUEST => 'GET',
-								  CURLOPT_HTTPHEADER => array(
-									'Content-Type: application/json',
-									'auth-token: '.$vparametros["dataico_auth"]
-								  ),
-								);
-
-								curl_setopt_array($curl2, $vdconexion);
-
-								$response = curl_exec($curl2);
-								curl_close($curl2);
-
-								$vr = json_decode($response);
-								if(isset($vr->invoice->dian_status))
+								if($vr->invoice->dian_status=="DIAN_ACEPTADO")
 								{
-									if($vr->invoice->dian_status=="DIAN_ACEPTADO")
+									$vsiyadian = true;
+
+									if(isset($vr->invoice->uuid))
 									{
-										$vsiyadian = true;
-
-										if(isset($vr->invoice->uuid))
+										if(!empty($vr->invoice->uuid))
 										{
-											if(!empty($vr->invoice->uuid))
+											$vuuid = $vr->invoice->uuid;
+										}
+
+										if(isset($vr->invoice->cufe))
+										{
+											if(!empty($vr->invoice->cufe))
 											{
-												$vuuid = $vr->invoice->uuid;
+												$vcufe = $vr->invoice->cufe;
+											}
+										}
+
+										if(!empty($vcufe))
+										{
+											if(isset($vr->invoice->dian_status))
+											{
+												echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'>ESTADO DIAN: ".$vr->invoice->dian_status."</div>";
 											}
 
-											if(isset($vr->invoice->cufe))
+											if(isset($vr->invoice->qrcode))
 											{
-												if(!empty($vr->invoice->cufe))
+												if(!empty($vr->invoice->qrcode))
 												{
-													$vcufe = $vr->invoice->cufe;
+													$vqr_code = "data:image/png;base64,".base64_encode($vr->invoice->qrcode);
 												}
 											}
 
-											if(!empty($vcufe))
+											if(isset($vr->invoice->xml_url))
 											{
-												if(isset($vr->invoice->dian_status))
+												if(!empty($vr->invoice->xml_url))
 												{
-													echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'>ESTADO DIAN: ".$vr->invoice->dian_status."</div>";
+													echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vr->invoice->xml_url)."' target='_blank' style='color:white;'>Ver XML</a></div>";
+
+													$venlace_xml = $vr->invoice->xml_url;
 												}
+											}
 
-												if(isset($vr->invoice->qrcode))
+											if(isset($vr->invoice->pdf_url))
+											{
+												if(!empty($vr->invoice->pdf_url))
 												{
-													if(!empty($vr->invoice->qrcode))
-													{
-														$vqr_code = "data:image/png;base64,".base64_encode($vr->invoice->qrcode);
-													}
-												}
+													echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vr->invoice->pdf_url)."' target='_blank' style='color:white;'>Ver PDF</a></div>";
 
-												if(isset($vr->invoice->xml_url))
-												{
-													if(!empty($vr->invoice->xml_url))
-													{
-														echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vr->invoice->xml_url)."' target='_blank' style='color:white;'>Ver XML</a></div>";
-
-														$venlace_xml = $vr->invoice->xml_url;
-													}
-												}
-
-												if(isset($vr->invoice->pdf_url))
-												{
-													if(!empty($vr->invoice->pdf_url))
-													{
-														echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vr->invoice->pdf_url)."' target='_blank' style='color:white;'>Ver PDF</a></div>";
-
-														$venlace_pdf = $vr->invoice->pdf_url;
-													}
+													$venlace_pdf = $vr->invoice->pdf_url;
 												}
 											}
 										}
 									}
 								}
 							}
-
 						}
+
 					}
 					
 					if(!$vsiyadian)
