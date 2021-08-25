@@ -878,7 +878,7 @@ switch($this->sc_temp_gproveedor)
 		$this->nmgp_botoes["btn_enviar_hka_tech"] = "off";;
 		$this->nmgp_botoes["btn_pdf"] = "off";;
 	    $this->nmgp_botoes["btn_reenviar"] = "on";;
-	    $this->NM_cmp_hidden["pdf"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["pdf"] = "on"; }
+	    $this->NM_cmp_hidden["pdf"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["pdf"] = "off"; }
 		$this->NM_cmp_hidden["reenviar"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["reenviar"] = "off"; }
 		$this->NM_cmp_hidden["enviar_tech"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["enviar_tech"] = "off"; }
 		
