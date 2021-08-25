@@ -218,7 +218,7 @@ class blank_envio_dataico_ini
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210825"; 
-      $this->nm_hr_ult_alt   = "105608"; 
+      $this->nm_hr_ult_alt   = "110102"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_envio_dataico_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZSX7D1veHuBiDMzGVIBsV5F/VoX7DcNmZSBOD1rwHQF7HgBeZSJqDWr/HMB/D9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcXOZSFGD1BeHQB/DMzGDkB/H5FqVoF7HQBsZSBODSvmD5JeHgveHArsH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDMBYHEXeV5XCVoJwDcXOZSX7HABYD5NUHuBYVIBOHEFYVoraDcNwH9B/D1rKD5NUDEvsHEFiDWX7VoXGDcJeZSX7Z1NaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoJeD9NwDQB/HAvCVWXGHuBYDkFCDWFYHMXGDcFYZ1BiHANOHuBOHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMXGHgveDkXKDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWFaVoF7D9XOZ1BiD1rKD5XGDMzGVkJqDWrGDoJeDcXOZSX7D1BOV5BqHuNOZSNiDuFGVorqD9BsZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQBqHIrKHQJwDMvOVcFeDWFaDoFGDcJUZ1X7HArYV5XGHgveHArsH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9BsZkFGZ1vmZMJeDEBeVkJGH5FYHINUD9NmDuBqHAN7D5F7HuzGVcFCDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDorqD9XsDQJsHArYD5NUHuvmDkB/V5X7DoraD9BsZSFaHANOV5JeDEBOZSJqV5FaVoFaDcJeDQFGD1veV5FUHuvmVcBOH5FqVoraHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKD5rqDEBOHArCV5XCVoB/D9JKDuBqHANOHuraHgvOVcXKDuX7DoXGHQBiH9BqDSrYHQX7DENOHENiDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWBmZuJeHQBiZ9XGHABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIBeD5JeHgNKHArsH5BmDoXGD9NmH9BiDSzGVWJeHgvOZSNiDWFYHMrqHQNwZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1978,6 +1978,10 @@ if($vidfacven>0)
 	$vmediodepago   = 10;
 	$vcodmuni       = "001";
 	$vcoddepartamento = "54";
+	$vnombre1   = "";
+	$vnombre2   = "";
+	$vapellido1 = "";
+	$vapellido2 = ""; 
 
 	
 
@@ -2039,7 +2043,7 @@ if($vidfacven>0)
 	}
 	else
 	{
-		$vsql = "select f.fechaven,f.numfacven,r.resolucion,TIME(f.creado) as hora,r.prefijo,t.documento,t.dv,t.nombres,t.tel_cel,t.direccion,if(t.regimen='SIM','49','48') as regimen,if(t.tipo_documento='13','13','31') as tipodoc,if(t.tipo='NAT','2','1') as tipopersona,'' as ciudad, f.credito as formapago,coalesce(f.fechavenc,f.fechaven),coalesce(TIMESTAMPDIFF(DAY, f.fechaven, f.fechavenc),1) AS dias_credito,f.total,t.urlmail,(dr.direc) as direccion2,(select m.codigo_mu from municipio m where m.idmun=t.idmuni limit 1) as codigomu, f.observaciones,r.texto_encabezado, r.texto_pie_pagina,dr.correo, t.correo_notificafe, t.celular_notificafe,f.idcli,(select m.codigo_dep from municipio m where m.idmun=t.idmuni limit 1) as coddepartamento from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero left join direccion dr on dr.iddireccion=f.dircliente  where f.idfacven='".$vidfacven."'";
+		$vsql = "select f.fechaven,f.numfacven,r.resolucion,TIME(f.creado) as hora,r.prefijo,t.documento,t.dv,t.nombres,t.tel_cel,t.direccion,if(t.regimen='SIM','49','48') as regimen,if(t.tipo_documento='13','13','31') as tipodoc,if(t.tipo='NAT','2','1') as tipopersona,'' as ciudad, f.credito as formapago,coalesce(f.fechavenc,f.fechaven),coalesce(TIMESTAMPDIFF(DAY, f.fechaven, f.fechavenc),1) AS dias_credito,f.total,t.urlmail,(dr.direc) as direccion2,(select m.codigo_mu from municipio m where m.idmun=t.idmuni limit 1) as codigomu, f.observaciones,r.texto_encabezado, r.texto_pie_pagina,dr.correo, t.correo_notificafe, t.celular_notificafe,f.idcli,(select m.codigo_dep from municipio m where m.idmun=t.idmuni limit 1) as coddepartamento, t.nombre1,t.nombre2,t.apellido1,t.apellido2 from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero left join direccion dr on dr.iddireccion=f.dircliente  where f.idfacven='".$vidfacven."'";
 		 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2106,6 +2110,10 @@ if($vidfacven>0)
 			$vtexto_pie_pagina = $this->r2[0][23];
 			$vidtercero        = $this->r2[0][27];
 			$vcoddepartamento  = $this->r2[0][28];
+			$vnombre1          = $this->r2[0][29];
+			$vnombre2          = $this->r2[0][30];
+			$vapellido1        = $this->r2[0][31];
+			$vapellido2        = $this->r2[0][32]; 
 		}
 
 		$curl = curl_init();
