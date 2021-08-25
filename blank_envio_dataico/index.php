@@ -218,7 +218,7 @@ class blank_envio_dataico_ini
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210825"; 
-      $this->nm_hr_ult_alt   = "142815"; 
+      $this->nm_hr_ult_alt   = "142902"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_envio_dataico_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiH9BiD1BeHuFGDMzGDkBsH5XCDoF7D9BiH9BODSNOV5FaDMNKZSXeHEFqDoJsHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoJwHQNmDQJsD1veVWXGHgrwVcBODWF/DorqD9JmVIJsHAN7HQX7DMzGHENiDWF/HIBqD9XsH9FUHAveHuFUDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDorqD9XsDQJsHArYD5NUHuvmDkB/V5X7DoraD9BsZSFaHANOV5JeDEBOZSJqV5FaVoFaDcJeDQFGD1veV5FUHuvmVcBOH5FqVoraHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuvmVIBsH5FqHIX7HQBsZ1BiD1rwHQBqHgBeVkJqH5FYVoJsDcBwH9FUHArYHQJsDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHANKVWBODMvOZSNiDWFYHMBiD9BsVIraD1rwV5X7HgBeHErCV5FaDoBqDcJeH9X7HIBeHuNUDMNOV9FeV5X7DoFGHQBsZ1F7DSNOHQBOHgrKHArsDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZSX7HIrwV5FaDMrwVcB/HEF/HMJeHQXGH9FaHArKV5JsDMvCHENiDuXKDoJeHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgBOHEBUDWFqHMJwD9JKH9FUHArYHuXGDMvOVcrsDWFYHMFUHQBiZ1B/HAN7HuX7HgNKHEXeV5XCHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaVoB/D9XsH9FGHAN7D5BqHuNODkB/V5X7DoNUDcBqZ1FaD1rKD5NUDEBeHEXeH5FYDoB/HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFGDMBOVcrsDurGVEF7HQNwH9B/D1rKV5JwDEBOVkJqHEXCDoF7DcXGDuBqHANOD5BqHgrKDkBsHEFYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWB3VEX7HQNmVINUHArYHQJwDEBODkFeH5FYVoFGHQJKDQJsHIrKHuNUHuBYVcBODWBmVENUHQBiZSB/HIBeHuJeHgvsHArCDWFqHIBOD9NmDuBqD1veD5BqHuNODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2952,7 +2952,6 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 				{
 					if(isset($vrespuesta->dian_status))
 					{
-						echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'>ESTADO DIAN: ".$vrespuesta->dian_status."</div>";
 					}
 
 					if(isset($vrespuesta->qrcode))
@@ -2967,7 +2966,6 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 					{
 						if(!empty($vrespuesta->xml_url))
 						{
-							echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vrespuesta->xml_url)."' target='_blank' style='color:white;'>Ver XML</a></div>";
 
 							$venlace_xml = $vrespuesta->xml_url;
 						}
@@ -2977,7 +2975,6 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 					{
 						if(!empty($vrespuesta->pdf_url))
 						{
-							echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vrespuesta->pdf_url)."' target='_blank' style='color:white;'>Ver PDF</a></div>";
 
 							$venlace_pdf = $vrespuesta->pdf_url;
 						}
@@ -3053,7 +3050,6 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 										{
 											if(isset($vr->invoice->dian_status))
 											{
-												echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'>ESTADO DIAN: ".$vr->invoice->dian_status."</div>";
 											}
 
 											if(isset($vr->invoice->qrcode))
@@ -3068,7 +3064,6 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 											{
 												if(!empty($vr->invoice->xml_url))
 												{
-													echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vr->invoice->xml_url)."' target='_blank' style='color:white;'>Ver XML</a></div>";
 
 													$venlace_xml = $vr->invoice->xml_url;
 												}
@@ -3078,7 +3073,6 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 											{
 												if(!empty($vr->invoice->pdf_url))
 												{
-													echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;'><a href='".stripslashes($vr->invoice->pdf_url)."' target='_blank' style='color:white;'>Ver PDF</a></div>";
 
 													$venlace_pdf = $vr->invoice->pdf_url;
 												}
