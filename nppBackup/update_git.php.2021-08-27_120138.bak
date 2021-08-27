@@ -1,0 +1,3 @@
+<?php
+echo Shell_exec("cd\ && cd facilweb/htdocs && git pull");
+?>
