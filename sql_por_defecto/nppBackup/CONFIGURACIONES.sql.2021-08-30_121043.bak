@@ -8907,12 +8907,4 @@ UPDATE `det_trib_x_tercero` SET `cod_det_trib`='ZZ',`decripcion_dt`='No aplica' 
 UPDATE `responsabilidades_tributarias` SET `descripcion` = 'No aplica' WHERE `responsabilidades_tributarias`.`id_resp_trib` = 86;
 UPDATE `resp_trib_x_tercero` SET `decripcion_rt`='No aplica' WHERE codigo_rt = 'R-99-PN';
 
-ALTER TABLE `inventarioself` CHANGE `cantidad` `cantidad` DECIMAL(12,3) NULL DEFAULT NULL;
-
-ALTER TABLE `inventarioself` CHANGE `existencia` `existencia` DECIMAL(12,3) NOT NULL DEFAULT '0.00' COMMENT 'Guarda la existencia que hay en el momento de hacer el inventario';
-
-ALTER TABLE `inventario` CHANGE `cantidad` `cantidad` DECIMAL(12,3) NULL DEFAULT NULL;
-
-ALTER TABLE `inventario` CHANGE `existencia` `existencia` DECIMAL(12,3) NOT NULL DEFAULT '0.000' COMMENT 'Se coloca la existencia del producto que queda en bodega despues de la transacción';
-
 COMMIT;
