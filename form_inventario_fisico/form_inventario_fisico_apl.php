@@ -3846,7 +3846,7 @@ $_SESSION['scriptcase']['form_inventario_fisico']['contr_erro'] = 'off';
       { 
           if ($this->existencia_ != '')  
           { 
-              $iTestSize = 6;
+              $iTestSize = 13;
               if ('-' == substr($this->existencia_, 0, 1))
               {
                   $iTestSize++;
@@ -3871,7 +3871,7 @@ $_SESSION['scriptcase']['form_inventario_fisico']['contr_erro'] = 'off';
                   }
                   $this->NM_ajax_info['errList']['existencia_'][] = $this->Ini->Nm_lang['lang_errm_size'];
               } 
-              if ($teste_validade->Valor($this->existencia_, 3, 2, 0, 0, "S") == false)  
+              if ($teste_validade->Valor($this->existencia_, 10, 2, 0, 0, "S") == false)  
               { 
                   $hasError = true;
                   $Campos_Crit .= "Existencia; " ; 
