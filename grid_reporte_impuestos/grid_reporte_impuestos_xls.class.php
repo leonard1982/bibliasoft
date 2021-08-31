@@ -66,7 +66,7 @@ class grid_reporte_impuestos_xls
           }
           else
           {
-              $this->progress_bar_end();
+              $this->monta_html();
           }
       }
       else { 
@@ -112,6 +112,21 @@ class grid_reporte_impuestos_xls
                    }
                }
           }
+      }
+      if (isset($gcorreo_receptor)) 
+      {
+          $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+          nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_receptor"]);
+      }
+      if (isset($gcorreo_asunto)) 
+      {
+          $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+          nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_asunto"]);
+      }
+      if (isset($gcorreo_mensaje)) 
+      {
+          $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+          nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_mensaje"]);
       }
       $this->Use_phpspreadsheet = (phpversion() >=  "7.3.9" && is_dir($this->Ini->path_third . '/phpspreadsheet')) ? true : false;
       $this->Xls_tot_col = 0;
@@ -217,27 +232,6 @@ class grid_reporte_impuestos_xls
           $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['tot_geral'][9];
           $this->sum_ing_terceros = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['tot_geral'][10];
       }
-      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['embutida'] && !$this->Ini->sc_export_ajax) {
-          require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
-          $this->pb = new scProgressBar();
-          $this->pb->setRoot($this->Ini->root);
-          $this->pb->setDir($_SESSION['scriptcase']['grid_reporte_impuestos']['glo_nm_path_imag_temp'] . "/");
-          $this->pb->setProgressbarMd5($_GET['pbmd5']);
-          $this->pb->initialize();
-          $this->pb->setReturnUrl("./");
-          $this->pb->setReturnOption($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_return']);
-          if ($this->Tem_xls_res) {
-              $PB_plus = intval ($this->count_ger * 0.04);
-              $PB_plus = ($PB_plus < 2) ? 2 : $PB_plus;
-          }
-          else {
-              $PB_plus = intval ($this->count_ger * 0.02);
-              $PB_plus = ($PB_plus < 1) ? 1 : $PB_plus;
-          }
-          $PB_tot = $this->count_ger + $PB_plus;
-          $this->PB_dif = $PB_tot - $this->count_ger;
-          $this->pb->setTotalSteps($PB_tot );
-      }
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['SC_Ind_Groupby'] == "periodo")
       {
           $this->sum_subtotal = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['tot_geral'][2];
@@ -320,6 +314,24 @@ class grid_reporte_impuestos_xls
           {
               $this->idcli = substr($this->idcli, 0, $tmp_pos);
           }
+          $this->correo_receptor = $Busca_temp['correo_receptor']; 
+          $tmp_pos = strpos($this->correo_receptor, "##@@");
+          if ($tmp_pos !== false && !is_array($this->correo_receptor))
+          {
+              $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+          }
+          $this->asunto = $Busca_temp['asunto']; 
+          $tmp_pos = strpos($this->asunto, "##@@");
+          if ($tmp_pos !== false && !is_array($this->asunto))
+          {
+              $this->asunto = substr($this->asunto, 0, $tmp_pos);
+          }
+          $this->mensaje = $Busca_temp['mensaje']; 
+          $tmp_pos = strpos($this->mensaje, "##@@");
+          if ($tmp_pos !== false && !is_array($this->mensaje))
+          {
+              $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
+          }
       } 
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_name']))
       {
@@ -356,27 +368,27 @@ class grid_reporte_impuestos_xls
       $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20) from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, fechavenc from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT tipo, convert(char(23),fechaven,121), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, convert(char(23),fechavenc,121) from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, convert(char(23),fechaven,121), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, fechavenc from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipo, EXTEND(fechaven, YEAR TO DAY), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, EXTEND(fechavenc, YEAR TO DAY) from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, EXTEND(fechaven, YEAR TO DAY), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, fechavenc from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq'];
@@ -411,11 +423,6 @@ class grid_reporte_impuestos_xls
       {
          $this->SC_seq_register++;
          $prim_reg = false;
-         if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['embutida'] && !$this->Ini->sc_export_ajax) {
-             $Mens_bar = NM_charset_to_utf8($this->Ini->Nm_lang['lang_othr_prcs']);
-             $this->pb->setProgressbarMessage($Mens_bar . ": " . $this->SC_seq_register . $PB_tot);
-             $this->pb->addSteps(1);
-         }
          $this->Xls_col = 0;
          $this->Xls_row++;
          $this->tipo = $rs->fields[0] ;  
@@ -450,13 +457,6 @@ class grid_reporte_impuestos_xls
          $this->ing_terceros = $rs->fields[12] ;  
          $this->ing_terceros =  str_replace(",", ".", $this->ing_terceros);
          $this->ing_terceros = (string)$this->ing_terceros;
-         $this->idfacven = $rs->fields[13] ;  
-         $this->idfacven = (string)$this->idfacven;
-         $this->numfacven = $rs->fields[14] ;  
-         $this->numfacven = (string)$this->numfacven;
-         $this->credito = $rs->fields[15] ;  
-         $this->credito = (string)$this->credito;
-         $this->fechavenc = $rs->fields[16] ;  
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['SC_Ind_Groupby'] == "periodo")
          {
              $Format_tst = $this->Ini->Get_Gb_date_format('periodo', 'fechaven');
@@ -622,13 +622,6 @@ class grid_reporte_impuestos_xls
           if ($this->Tem_xls_res)
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_res_grid'] = true;
-              if (!$this->Ini->sc_export_ajax) {
-                  $this->PB_dif = intval ($this->PB_dif / 2);
-                  $Mens_bar  = NM_charset_to_utf8($this->Ini->Nm_lang['lang_othr_prcs']);
-                  $Mens_smry = NM_charset_to_utf8($this->Ini->Nm_lang['lang_othr_smry_titl']);
-                  $this->pb->setProgressbarMessage($Mens_bar . ": " . $Mens_smry);
-                  $this->pb->addSteps($this->PB_dif);
-              }
               $this->Res_xls->monta_xls();
               if ($this->Use_phpspreadsheet) {
                   $Xls_res = \PhpOffice\PhpSpreadsheet\IOFactory::load($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_res_sheet']);
@@ -643,11 +636,6 @@ class grid_reporte_impuestos_xls
               unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_res_grid']);
               unlink($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_res_sheet']);
           } 
-          if (!$this->Ini->sc_export_ajax) {
-              $Mens_bar = NM_charset_to_utf8($this->Ini->Nm_lang['lang_btns_export_finished']);
-              $this->pb->setProgressbarMessage($Mens_bar);
-              $this->pb->addSteps($this->PB_dif);
-          }
           if ($this->Use_phpspreadsheet) {
               if ($this->Xls_tp == ".xlsx") {
                   $objWriter = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($this->Xls_dados);
@@ -1095,118 +1083,6 @@ class grid_reporte_impuestos_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['idfacven'])) ? $this->New_label['idfacven'] : "Idfacven"; 
-          if ($Cada_col == "idfacven" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "right";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
-          $SC_Label = (isset($this->New_label['numfacven'])) ? $this->New_label['numfacven'] : "Numfacven"; 
-          if ($Cada_col == "numfacven" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "right";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
-          $SC_Label = (isset($this->New_label['credito'])) ? $this->New_label['credito'] : "Credito"; 
-          if ($Cada_col == "credito" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "center";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
-          $SC_Label = (isset($this->New_label['fechavenc'])) ? $this->New_label['fechavenc'] : "Fechavenc"; 
-          if ($Cada_col == "fechavenc" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "center";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
       } 
       $this->Xls_col = 0;
       $this->Xls_row++;
@@ -1450,94 +1326,6 @@ class grid_reporte_impuestos_xls
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->ing_terceros);
          $this->Xls_col++;
    }
-   //----- idfacven
-   function NM_export_idfacven()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->idfacven = NM_charset_to_utf8($this->idfacven);
-         if (is_numeric($this->idfacven))
-         {
-             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
-         }
-         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->idfacven);
-         $this->Xls_col++;
-   }
-   //----- numfacven
-   function NM_export_numfacven()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->numfacven = NM_charset_to_utf8($this->numfacven);
-         if (is_numeric($this->numfacven))
-         {
-             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
-         }
-         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->numfacven);
-         $this->Xls_col++;
-   }
-   //----- credito
-   function NM_export_credito()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-      if (!empty($this->credito))
-      {
-             $conteudo_x =  $this->credito;
-             nm_conv_limpa_dado($conteudo_x, "");
-             if (is_numeric($conteudo_x) && $conteudo_x > 0) 
-             { 
-                 $this->nm_data->SetaData($this->credito, "");
-                 $this->credito = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DH", "ddmmaaaa;hhiiss"));
-             } 
-      }
-         $this->credito = NM_charset_to_utf8($this->credito);
-         if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->credito, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-         }
-         else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->credito, PHPExcel_Cell_DataType::TYPE_STRING);
-         }
-         $this->Xls_col++;
-   }
-   //----- fechavenc
-   function NM_export_fechavenc()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->fechavenc = substr($this->fechavenc, 0, 10);
-         if (empty($this->fechavenc) || $this->fechavenc == "0000-00-00")
-         {
-             if ($this->Use_phpspreadsheet) {
-                 $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->fechavenc, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-             }
-             else {
-                 $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->fechavenc, PHPExcel_Cell_DataType::TYPE_STRING);
-             }
-         }
-         else
-         {
-             $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->fechavenc);
-             $this->NM_ctrl_style[$current_cell_ref]['format'] = $this->SC_date_conf_region;
-         }
-         $this->Xls_col++;
-   }
    //----- tipo
    function NM_sub_cons_tipo()
    {
@@ -1672,56 +1460,6 @@ class grid_reporte_impuestos_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
-         $this->Xls_col++;
-   }
-   //----- idfacven
-   function NM_sub_cons_idfacven()
-   {
-         $this->idfacven = NM_charset_to_utf8($this->idfacven);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->idfacven;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
-         $this->Xls_col++;
-   }
-   //----- numfacven
-   function NM_sub_cons_numfacven()
-   {
-         $this->numfacven = NM_charset_to_utf8($this->numfacven);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->numfacven;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
-         $this->Xls_col++;
-   }
-   //----- credito
-   function NM_sub_cons_credito()
-   {
-      if (!empty($this->credito))
-      {
-         $conteudo_x =  $this->credito;
-         nm_conv_limpa_dado($conteudo_x, "");
-         if (is_numeric($conteudo_x) && $conteudo_x > 0) 
-         { 
-             $this->nm_data->SetaData($this->credito, "");
-             $this->credito = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DH", "ddmmaaaa;hhiiss"));
-         } 
-      }
-         $this->credito = NM_charset_to_utf8($this->credito);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->credito;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
-   //----- fechavenc
-   function NM_sub_cons_fechavenc()
-   {
-         $this->fechavenc = substr($this->fechavenc, 0, 10);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->fechavenc;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "data";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $this->SC_date_conf_region;
          $this->Xls_col++;
    }
    function xls_sub_cons_copy_label($row)
@@ -2657,25 +2395,6 @@ class grid_reporte_impuestos_xls
            return $dt_out;
        }
    }
-   function progress_bar_end()
-   {
-      unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_file']);
-      if (is_file($this->Xls_f))
-      {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_file'] = $this->Xls_f;
-      }
-      $path_doc_md5 = md5($this->Ini->path_imag_temp . "/" . $this->Arquivo);
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos'][$path_doc_md5][0] = $this->Ini->path_imag_temp . "/" . $this->Arquivo;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos'][$path_doc_md5][1] = $this->Tit_doc;
-      $Mens_bar = $this->Ini->Nm_lang['lang_othr_file_msge'];
-      if ($_SESSION['scriptcase']['charset'] != "UTF-8") {
-          $Mens_bar = sc_convert_encoding($Mens_bar, "UTF-8", $_SESSION['scriptcase']['charset']);
-      }
-      $this->pb->setProgressbarMessage($Mens_bar);
-      $this->pb->setDownloadLink($this->Ini->path_imag_temp . "/" . $this->Arquivo);
-      $this->pb->setDownloadMd5($path_doc_md5);
-      $this->pb->completed();
-   }
    //---- 
    function monta_html()
    {
@@ -2692,9 +2411,8 @@ class grid_reporte_impuestos_xls
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+<HTML>
 <HEAD>
- <TITLE>Reporte Impuestos :: Excel</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -2710,52 +2428,11 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
  <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
-  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
-  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
- <?php
- if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts))
- {
- ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->str_google_fonts ?>" />
- <?php
- }
- ?>
-  <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_css ?>" /> 
 </HEAD>
-<BODY class="scExportPage">
-<?php echo $this->Ini->Ajax_result_set ?>
-<table style="border-collapse: collapse; border-width: 0; height: 100%; width: 100%"><tr><td style="padding: 0; text-align: center; vertical-align: middle">
- <table class="scExportTable" align="center">
-  <tr>
-   <td class="scExportTitle" style="height: 25px">XLS</td>
-  </tr>
-  <tr>
-   <td class="scExportLine" style="width: 100%">
-    <table style="border-collapse: collapse; border-width: 0; width: 100%"><tr><td class="scExportLineFont" style="padding: 3px 0 0 0" id="idMessage">
-    <?php echo $this->Ini->Nm_lang['lang_othr_file_msge'] ?>
-    </td><td class="scExportLineFont" style="text-align:right; padding: 3px 0 0 0">
-     <?php echo nmButtonOutput($this->arr_buttons, "bexportview", "document.Fview.submit()", "document.Fview.submit()", "idBtnView", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
- ?>
-     <?php echo nmButtonOutput($this->arr_buttons, "bdownload", "document.Fdown.submit()", "document.Fdown.submit()", "idBtnDown", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
- ?>
-     <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.F0.submit()", "document.F0.submit()", "idBtnBack", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
- ?>
-    </td></tr></table>
-   </td>
-  </tr>
- </table>
-</td></tr></table>
-<form name="Fview" method="get" action="<?php echo $this->Ini->path_imag_temp . "/" . $this->Arquivo ?>" target="_blank" style="display: none"> 
-</form>
-<form name="Fdown" method="get" action="grid_reporte_impuestos_download.php" target="_blank" style="display: none"> 
-<input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
-<input type="hidden" name="nm_tit_doc" value="grid_reporte_impuestos"> 
-<input type="hidden" name="nm_name_doc" value="<?php echo $path_doc_md5 ?>"> 
-</form>
-<FORM name="F0" method=post action="./"> 
-<INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
-<INPUT type="hidden" name="nmgp_opcao" value="<?php echo NM_encode_input($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_return']); ?>"> 
-</FORM> 
+<BODY>
+<SCRIPT>
+    window.location='<?php echo $this->Ini->path_imag_temp . "/" . $this->Arquivo; ?>';
+</SCRIPT>
 </BODY>
 </HTML>
 <?php

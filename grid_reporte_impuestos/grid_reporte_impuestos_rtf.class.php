@@ -84,6 +84,21 @@ class grid_reporte_impuestos_rtf
                }
           }
       }
+      if (isset($gcorreo_receptor)) 
+      {
+          $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+          nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_receptor"]);
+      }
+      if (isset($gcorreo_asunto)) 
+      {
+          $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+          nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_asunto"]);
+      }
+      if (isset($gcorreo_mensaje)) 
+      {
+          $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+          nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_mensaje"]);
+      }
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
@@ -187,6 +202,24 @@ class grid_reporte_impuestos_rtf
           if ($tmp_pos !== false && !is_array($this->idcli))
           {
               $this->idcli = substr($this->idcli, 0, $tmp_pos);
+          }
+          $this->correo_receptor = $Busca_temp['correo_receptor']; 
+          $tmp_pos = strpos($this->correo_receptor, "##@@");
+          if ($tmp_pos !== false && !is_array($this->correo_receptor))
+          {
+              $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+          }
+          $this->asunto = $Busca_temp['asunto']; 
+          $tmp_pos = strpos($this->asunto, "##@@");
+          if ($tmp_pos !== false && !is_array($this->asunto))
+          {
+              $this->asunto = substr($this->asunto, 0, $tmp_pos);
+          }
+          $this->mensaje = $Busca_temp['mensaje']; 
+          $tmp_pos = strpos($this->mensaje, "##@@");
+          if ($tmp_pos !== false && !is_array($this->mensaje))
+          {
+              $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
           }
       } 
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['rtf_name']))
@@ -310,38 +343,6 @@ class grid_reporte_impuestos_rtf
               $SC_Label = str_replace('>', '&gt;', $SC_Label);
               $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
           }
-          $SC_Label = (isset($this->New_label['idfacven'])) ? $this->New_label['idfacven'] : "Idfacven"; 
-          if ($Cada_col == "idfacven" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              $SC_Label = str_replace('<', '&lt;', $SC_Label);
-              $SC_Label = str_replace('>', '&gt;', $SC_Label);
-              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
-          }
-          $SC_Label = (isset($this->New_label['numfacven'])) ? $this->New_label['numfacven'] : "Numfacven"; 
-          if ($Cada_col == "numfacven" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              $SC_Label = str_replace('<', '&lt;', $SC_Label);
-              $SC_Label = str_replace('>', '&gt;', $SC_Label);
-              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
-          }
-          $SC_Label = (isset($this->New_label['credito'])) ? $this->New_label['credito'] : "Credito"; 
-          if ($Cada_col == "credito" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              $SC_Label = str_replace('<', '&lt;', $SC_Label);
-              $SC_Label = str_replace('>', '&gt;', $SC_Label);
-              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
-          }
-          $SC_Label = (isset($this->New_label['fechavenc'])) ? $this->New_label['fechavenc'] : "Fechavenc"; 
-          if ($Cada_col == "fechavenc" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              $SC_Label = str_replace('<', '&lt;', $SC_Label);
-              $SC_Label = str_replace('>', '&gt;', $SC_Label);
-              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
-          }
       } 
       $this->Texto_tag .= "</tr>\r\n";
       $this->nm_field_dinamico = array();
@@ -349,27 +350,27 @@ class grid_reporte_impuestos_rtf
       $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20) from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, fechavenc from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT tipo, convert(char(23),fechaven,121), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, convert(char(23),fechavenc,121) from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, convert(char(23),fechaven,121), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, fechavenc from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipo, EXTEND(fechaven, YEAR TO DAY), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, EXTEND(fechavenc, YEAR TO DAY) from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, EXTEND(fechaven, YEAR TO DAY), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, fechavenc from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq'];
@@ -447,13 +448,6 @@ class grid_reporte_impuestos_rtf
          $this->ing_terceros = $rs->fields[12] ;  
          $this->ing_terceros =  str_replace(",", ".", $this->ing_terceros);
          $this->ing_terceros = (string)$this->ing_terceros;
-         $this->idfacven = $rs->fields[13] ;  
-         $this->idfacven = (string)$this->idfacven;
-         $this->numfacven = $rs->fields[14] ;  
-         $this->numfacven = (string)$this->numfacven;
-         $this->credito = $rs->fields[15] ;  
-         $this->credito = (string)$this->credito;
-         $this->fechavenc = $rs->fields[16] ;  
          //----- lookup - idcli
          $this->look_idcli = $this->idcli; 
          $this->Lookup->lookup_idcli($this->look_idcli, $this->idcli) ; 
@@ -608,54 +602,6 @@ class grid_reporte_impuestos_rtf
          $this->ing_terceros = str_replace('<', '&lt;', $this->ing_terceros);
          $this->ing_terceros = str_replace('>', '&gt;', $this->ing_terceros);
          $this->Texto_tag .= "<td>" . $this->ing_terceros . "</td>\r\n";
-   }
-   //----- idfacven
-   function NM_export_idfacven()
-   {
-             nmgp_Form_Num_Val($this->idfacven, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->idfacven = NM_charset_to_utf8($this->idfacven);
-         $this->idfacven = str_replace('<', '&lt;', $this->idfacven);
-         $this->idfacven = str_replace('>', '&gt;', $this->idfacven);
-         $this->Texto_tag .= "<td>" . $this->idfacven . "</td>\r\n";
-   }
-   //----- numfacven
-   function NM_export_numfacven()
-   {
-             nmgp_Form_Num_Val($this->numfacven, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->numfacven = NM_charset_to_utf8($this->numfacven);
-         $this->numfacven = str_replace('<', '&lt;', $this->numfacven);
-         $this->numfacven = str_replace('>', '&gt;', $this->numfacven);
-         $this->Texto_tag .= "<td>" . $this->numfacven . "</td>\r\n";
-   }
-   //----- credito
-   function NM_export_credito()
-   {
-             $conteudo_x =  $this->credito;
-             nm_conv_limpa_dado($conteudo_x, "");
-             if (is_numeric($conteudo_x) && $conteudo_x > 0) 
-             { 
-                 $this->nm_data->SetaData($this->credito, "");
-                 $this->credito = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DH", "ddmmaaaa;hhiiss"));
-             } 
-         $this->credito = NM_charset_to_utf8($this->credito);
-         $this->credito = str_replace('<', '&lt;', $this->credito);
-         $this->credito = str_replace('>', '&gt;', $this->credito);
-         $this->Texto_tag .= "<td>" . $this->credito . "</td>\r\n";
-   }
-   //----- fechavenc
-   function NM_export_fechavenc()
-   {
-             $conteudo_x =  $this->fechavenc;
-             nm_conv_limpa_dado($conteudo_x, "YYYY-MM-DD");
-             if (is_numeric($conteudo_x) && strlen($conteudo_x) > 0) 
-             { 
-                 $this->nm_data->SetaData($this->fechavenc, "YYYY-MM-DD  ");
-                 $this->fechavenc = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DT", "ddmmaaaa"));
-             } 
-         $this->fechavenc = NM_charset_to_utf8($this->fechavenc);
-         $this->fechavenc = str_replace('<', '&lt;', $this->fechavenc);
-         $this->fechavenc = str_replace('>', '&gt;', $this->fechavenc);
-         $this->Texto_tag .= "<td>" . $this->fechavenc . "</td>\r\n";
    }
 
    //----- 

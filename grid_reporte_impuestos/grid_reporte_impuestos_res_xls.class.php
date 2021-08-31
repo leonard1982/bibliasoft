@@ -41,7 +41,7 @@ class grid_reporte_impuestos_res_xls
       }
       else
       {
-          $this->progress_bar_end();
+          $this->monta_html();
       }
    }
 
@@ -113,25 +113,6 @@ class grid_reporte_impuestos_res_xls
       }
       $this->Res       = new grid_reporte_impuestos_resumo("out");
       $this->prep_modulos("Res");
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_res_grid']) && !$this->Ini->sc_export_ajax) {
-          require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
-          $this->pb = new scProgressBar();
-          $this->pb->setRoot($this->Ini->root);
-          $this->pb->setDir($_SESSION['scriptcase']['grid_reporte_impuestos']['glo_nm_path_imag_temp'] . "/");
-          $this->pb->setProgressbarMd5($_GET['pbmd5']);
-          $this->pb->initialize();
-          $this->pb->setReturnUrl("./");
-          $this->pb->setReturnOption($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_return']);
-          $this->pb->setTotalSteps(100);
-          $Mens_bar  = $this->Ini->Nm_lang['lang_othr_prcs'];
-          $Mens_smry = $this->Ini->Nm_lang['lang_othr_smry_titl'];
-          if ($_SESSION['scriptcase']['charset'] != "UTF-8") {
-              $Mens_bar  = sc_convert_encoding($Mens_bar, "UTF-8", $_SESSION['scriptcase']['charset']);
-              $Mens_smry = sc_convert_encoding($Mens_smry, "UTF-8", $_SESSION['scriptcase']['charset']);
-          }
-          $this->pb->setProgressbarMessage($Mens_bar . ": " . $Mens_smry);
-          $this->pb->addSteps(50);
-      }
    }
 
    //---- 
@@ -147,16 +128,6 @@ class grid_reporte_impuestos_res_xls
    function grava_arquivo()
    {
       $this->Res->resumo_export();
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_res_grid']) && !$this->Ini->sc_export_ajax) {
-          $Mens_bar  = $this->Ini->Nm_lang['lang_othr_prcs'];
-          $Mens_smry = $this->Ini->Nm_lang['lang_othr_smry_titl'];
-          if ($_SESSION['scriptcase']['charset'] != "UTF-8") {
-              $Mens_bar  = sc_convert_encoding($Mens_bar, "UTF-8", $_SESSION['scriptcase']['charset']);
-              $Mens_smry = sc_convert_encoding($Mens_smry, "UTF-8", $_SESSION['scriptcase']['charset']);
-          }
-          $this->pb->setProgressbarMessage($Mens_bar . ": " . $Mens_smry);
-          $this->pb->addSteps(30);
-      }
       $this->comp_field   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pivot_group_by'];
       $this->comp_y_axys  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pivot_y_axys'];
       $this->comp_tabular = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pivot_tabular'];
@@ -401,25 +372,6 @@ class grid_reporte_impuestos_res_xls
        $val_ret = $arr_alfa[$result] . $val_ret;
        return $val_ret;
    }
-   function progress_bar_end()
-   {
-      unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_file']);
-      if (is_file($this->Xls_f))
-      {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_file'] = $this->Xls_f;
-      }
-      $path_doc_md5 = md5($this->Ini->path_imag_temp . "/" . $this->Arquivo);
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos'][$path_doc_md5][0] = $this->Ini->path_imag_temp . "/" . $this->Arquivo;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos'][$path_doc_md5][1] = $this->Tit_doc;
-      $Mens_bar = $this->Ini->Nm_lang['lang_othr_file_msge'];
-      if ($_SESSION['scriptcase']['charset'] != "UTF-8") {
-          $Mens_bar = sc_convert_encoding($Mens_bar, "UTF-8", $_SESSION['scriptcase']['charset']);
-      }
-      $this->pb->setProgressbarMessage($Mens_bar);
-      $this->pb->setDownloadLink($this->Ini->path_imag_temp . "/" . $this->Arquivo);
-      $this->pb->setDownloadMd5($path_doc_md5);
-      $this->pb->completed();
-   }
    //---- 
    function monta_html()
    {
@@ -436,9 +388,8 @@ class grid_reporte_impuestos_res_xls
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+<HTML>
 <HEAD>
- <TITLE>Reporte Impuestos :: Excel</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -454,53 +405,11 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
  <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
-  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
-  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
- <?php
- if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts))
- {
- ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->str_google_fonts ?>" />
- <?php
- }
- ?>
-  <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_css ?>" /> 
 </HEAD>
-<BODY class="scExportPage">
-<?php echo $this->Ini->Ajax_result_set ?>
-<table style="border-collapse: collapse; border-width: 0; height: 100%; width: 100%"><tr><td style="padding: 0; text-align: center; vertical-align: middle">
- <table class="scExportTable" align="center">
-  <tr>
-   <td class="scExportTitle" style="height: 25px">XLS</td>
-  </tr>
-  <tr>
-   <td class="scExportLine" style="width: 100%">
-    <table style="border-collapse: collapse; border-width: 0; width: 100%"><tr><td class="scExportLineFont" style="padding: 3px 0 0 0" id="idMessage">
-    <?php echo $this->Ini->Nm_lang['lang_othr_file_msge'] ?>
-    </td><td class="scExportLineFont" style="text-align:right; padding: 3px 0 0 0">
-     <?php echo nmButtonOutput($this->arr_buttons, "bexportview", "document.Fview.submit()", "document.Fview.submit()", "idBtnView", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
- ?>
-     <?php echo nmButtonOutput($this->arr_buttons, "bdownload", "document.Fdown.submit()", "document.Fdown.submit()", "idBtnDown", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
- ?>
-     <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.F0.submit()", "document.F0.submit()", "idBtnBack", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
- ?>
-    </td></tr></table>
-   </td>
-  </tr>
- </table>
-</td></tr></table>
-<form name="Fview" method="get" action="<?php echo $this->Ini->path_imag_temp . "/" . $this->Arquivo ?>" target="_blank" style="display: none"> 
-</form>
-<form name="Fdown" method="get" action="grid_reporte_impuestos_download.php" target="_blank" style="display: none"> 
-<input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
-<input type="hidden" name="nm_tit_doc" value="grid_reporte_impuestos"> 
-<input type="hidden" name="nm_name_doc" value="<?php echo $path_doc_md5 ?>"> 
-</form>
-<FORM name="F0" method=post action="./"> 
-<INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
-<INPUT type="hidden" name="nmgp_opcao" value="<?php echo NM_encode_input($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['xls_return']); ?>"> 
-</FORM> 
-</td></tr></table>
+<BODY>
+<SCRIPT>
+    window.location='<?php echo $this->Ini->path_imag_temp . "/" . $this->Arquivo; ?>';
+</SCRIPT>
 </BODY>
 </HTML>
 <?php

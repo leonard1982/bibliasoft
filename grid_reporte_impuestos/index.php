@@ -228,7 +228,7 @@ class grid_reporte_impuestos_ini
       $this->nm_hr_criacao   = "145955"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210831"; 
-      $this->nm_hr_ult_alt   = "151143"; 
+      $this->nm_hr_ult_alt   = "162107"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -376,9 +376,7 @@ class grid_reporte_impuestos_ini
             if(!empty($img_width) && !empty($img_height)){
                 $sc_obj_img->setWidth($img_width);
                 $sc_obj_img->setHeight($img_height);
-            }
-                $sc_obj_img->setManterAspecto(true);
-            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            }            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
             echo $out1_img_cache;
                exit;
             }
@@ -945,7 +943,7 @@ class grid_reporte_impuestos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_reporte_impuestos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_reporte_impuestos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuFaDSN7V5FaHgvOVcFKHEF/DoJeHQBsZ1FGHABYV5JwDEvsHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDErKVkJ3DWr/HMJeHQXsDQX7HANOHQNUHuNOZSJqDWFYHIBiDcFYZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeD5XGDMzGHEJGDWF/DoB/D9NwH9FGD1veD5JwHgrYDkBOHEFYDoXGD9XOZ1rqHArYV5FaDErKZSJGH5F/DoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiDWX7HMB/D9JKDQB/D1BOV5BODMNOVcFeHEF/HMFUD9BsZSFaHANOHQF7HgBeVkJGH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHErsDurmDoXGHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiD9XOZ1B/DSBeV5X7HgvsHEXeV5B7DoJeD9XsDQFUHAN7HuJwDMvOVcFCDWB3VoF7D9XOZSBOHIBOZMXGHgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSBiHAN7HQJsDMNODkFCH5XCHIraDcBqZSBqZ1NOHQNUDEBeHArsHEFqHIFGHQJeDQBqHANOHuraHuvmVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuNOZSJqDWJeHINUHQNwZ1rqHArKZMB/DErKDkXKHEB7ZuFaD9NwZSX7D1BeHQBOHgvsVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7VoX7DcJUZ1FaHArKD5FaDErKVkJGH5F/VoB/DcXOZSX7DSBYD5F7HuzGVcrsDWFYDoraD9XOH9FaD1rKD5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1F7DSNOHQBiHgrKHENiDWFqDoBOHQBiDQB/HAvmD5F7HuBOV9BUHEFYHIFGHQXOZSBOHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiHINKD5JeHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcrsH5FqHMX7D9BiZ1F7DSBOZMFaHgrKZSJGDWF/VoXGDcJeH9BiHIBeHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -3752,6 +3750,21 @@ class grid_reporte_impuestos_apl
                    }
               }
           } 
+          if (isset($gcorreo_receptor)) 
+          {
+              $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+              nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_receptor"]);
+          }
+          if (isset($gcorreo_asunto)) 
+          {
+              $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+              nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_asunto"]);
+          }
+          if (isset($gcorreo_mensaje)) 
+          {
+              $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+              nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_mensaje"]);
+          }
       } 
       if ($Parms_form_pdf)
       { 
@@ -3761,6 +3774,10 @@ class grid_reporte_impuestos_apl
           $_SESSION['sc_session'][$script_case_init]['grid_reporte_impuestos']['embutida_pai'] = "";
       } 
       $_SESSION['scriptcase']['sc_ctl_ajax'] = 'part';
+      if (!function_exists("SC_Mail_Image"))
+      {
+          include_once("grid_reporte_impuestos_sc_mail_image.php");
+      }
       if (!$this->Ini || isset($_SESSION['sc_session'][$script_case_init]['grid_reporte_impuestos']['embutida_ibase'])) 
       { 
           $this->Ini = new grid_reporte_impuestos_ini(); 
@@ -4188,7 +4205,7 @@ class grid_reporte_impuestos_apl
       $this->Ini->SC_module_export = (isset($SC_module_export) && !empty($SC_module_export)) ? $SC_module_export : "grid,resume,chart"; 
       if (empty($this->Ini->SC_module_export) && $nmgp_opcao == 'pdf')
       { 
-          $this->Ini->SC_module_export = "grid,resume";
+          $this->Ini->SC_module_export = "grid,resume,chart";
       }
       elseif (empty($this->Ini->SC_module_export) && $nmgp_opcao == 'print')
       { 
@@ -4427,14 +4444,14 @@ class grid_reporte_impuestos_apl
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
       include($this->Ini->path_btn . $this->Ini->Str_btn_grid);
-      $this->arr_buttons['group_group_1']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
+      $this->arr_buttons['group_group_3']= array(
+          'value'            => "Enviar al Correo",
+          'hint'             => "Enviar al Correo",
           'type'             => "button",
-          'display'          => "text_img",
+          'display'          => "only_text",
           'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
+          'image'            => "",
+          'fontawesomeicon'  => "fas fa-cog",
           'has_fa'           => true,
           'content_icons'    => false,
           'style'            => "default",
@@ -4453,9 +4470,22 @@ class grid_reporte_impuestos_apl
           'style'            => "default",
       );
 
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
+      $this->arr_buttons['group_group_3']= array(
+          'value'            => "Enviar al Correo",
+          'hint'             => "Enviar al Correo",
+          'type'             => "button",
+          'display'          => "only_text",
+          'display_position' => "text_right",
+          'image'            => "",
+          'fontawesomeicon'  => "fas fa-cog",
+          'has_fa'           => true,
+          'content_icons'    => false,
+          'style'            => "default",
+      );
+
+      $this->arr_buttons['group_group_1']= array(
+          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
+          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
           'type'             => "button",
           'display'          => "text_img",
           'display_position' => "text_right",
@@ -4524,19 +4554,11 @@ class grid_reporte_impuestos_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order'][] = "valor_iva_5";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order'][] = "excento";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order'][] = "ing_terceros";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order'][] = "idfacven";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order'][] = "numfacven";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order'][] = "credito";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order'][] = "fechavenc";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['field_order'];
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['usr_cmp_sel']))
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['usr_cmp_sel'] = array();
           } 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['usr_cmp_sel']['idfacven'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['usr_cmp_sel']['numfacven'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['usr_cmp_sel']['credito'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['usr_cmp_sel']['fechavenc'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['usr_cmp_sel'];
       } 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_reporte_impuestos']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_reporte_impuestos']['exit'] != '')
@@ -6890,6 +6912,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos'][$path_doc
    {
        $nmgp_parms = "";
    }
+   if (isset($gcorreo_receptor)) 
+   {
+       $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+   }
+   if (isset($gcorreo_asunto)) 
+   {
+       $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+   }
+   if (isset($gcorreo_mensaje)) 
+   {
+       $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -7006,6 +7040,21 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos'][$path_doc
                     $Tmp_par   = $cadapar[0];
                     $$Tmp_par = $cadapar[1];
                 }
+           }
+           if (isset($gcorreo_receptor)) 
+           {
+               $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+               nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_receptor"]);
+           }
+           if (isset($gcorreo_asunto)) 
+           {
+               $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+               nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_asunto"]);
+           }
+           if (isset($gcorreo_mensaje)) 
+           {
+               $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+               nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_mensaje"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -7240,6 +7289,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos'][$path_doc
        { 
            $_SESSION['sc_session'][$script_case_init]['grid_reporte_impuestos']['opcao'] = $nmgp_opcao ;  
        }   
+       if (isset($_POST["gcorreo_receptor"])) 
+       {
+           $_SESSION["gcorreo_receptor"] = $_POST["gcorreo_receptor"];
+           nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_receptor"]);
+       }
+       if (isset($_GET["gcorreo_receptor"])) 
+       {
+           $_SESSION["gcorreo_receptor"] = $_GET["gcorreo_receptor"];
+           nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_receptor"]);
+       }
+       if (!isset($_SESSION["gcorreo_receptor"])) 
+       {
+           $_SESSION["gcorreo_receptor"] = "";
+       }
+       if (isset($_POST["gcorreo_asunto"])) 
+       {
+           $_SESSION["gcorreo_asunto"] = $_POST["gcorreo_asunto"];
+           nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_asunto"]);
+       }
+       if (isset($_GET["gcorreo_asunto"])) 
+       {
+           $_SESSION["gcorreo_asunto"] = $_GET["gcorreo_asunto"];
+           nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_asunto"]);
+       }
+       if (!isset($_SESSION["gcorreo_asunto"])) 
+       {
+           $_SESSION["gcorreo_asunto"] = "";
+       }
+       if (isset($_POST["gcorreo_mensaje"])) 
+       {
+           $_SESSION["gcorreo_mensaje"] = $_POST["gcorreo_mensaje"];
+           nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_mensaje"]);
+       }
+       if (isset($_GET["gcorreo_mensaje"])) 
+       {
+           $_SESSION["gcorreo_mensaje"] = $_GET["gcorreo_mensaje"];
+           nm_limpa_str_grid_reporte_impuestos($_SESSION["gcorreo_mensaje"]);
+       }
+       if (!isset($_SESSION["gcorreo_mensaje"])) 
+       {
+           $_SESSION["gcorreo_mensaje"] = "";
+       }
        if (isset($nmgp_lig_edit_lapis)) 
        {
           $_SESSION['sc_session'][$script_case_init]['grid_reporte_impuestos']['mostra_edit'] = $nmgp_lig_edit_lapis;

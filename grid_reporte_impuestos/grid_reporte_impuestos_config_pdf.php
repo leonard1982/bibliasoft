@@ -23,7 +23,7 @@
     $SC_cod_proj = "FACILWEBv2";
     $SC_apl_proc = "grid_reporte_impuestos";
     $SC_ver_93   = true;
-    $SC_conf_opt = explode(",","tem_res_cons,tem_res_res,cor_imp,papel,orientacao,bookmarks,all_cab,all_label,label_group,page_break");
+    $SC_conf_opt = explode(",","tem_res_cons,tem_res_res,cor_imp,papel,orientacao,bookmarks,all_cab,all_label,label_group,pdf_compacted,page_break");
 /* sc_apl_default */
     if (!isset($_SESSION['sc_session']))
     {

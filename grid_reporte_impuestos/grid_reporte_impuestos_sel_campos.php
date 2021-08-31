@@ -161,33 +161,18 @@ function Sel_cmp_process()
       $tab_blk_campos = array();
 
             $tab_ger_campos['tipo'] = "on";
-      $tab_blk_campos[] = "tipo";
       $tab_ger_campos['fechaven'] = "on";
       $tab_ger_campos['numero2'] = "on";
-      $tab_blk_campos[] = "numero2";
       $tab_ger_campos['idcli'] = "on";
       $tab_ger_campos['subtotal'] = "on";
-      $tab_blk_campos[] = "subtotal";
       $tab_ger_campos['valoriva'] = "on";
-      $tab_blk_campos[] = "valoriva";
       $tab_ger_campos['total'] = "on";
-      $tab_blk_campos[] = "total";
       $tab_ger_campos['base_iva_19'] = "on";
-      $tab_blk_campos[] = "base_iva_19";
       $tab_ger_campos['valor_iva_19'] = "on";
-      $tab_blk_campos[] = "valor_iva_19";
       $tab_ger_campos['base_iva_5'] = "on";
-      $tab_blk_campos[] = "base_iva_5";
       $tab_ger_campos['valor_iva_5'] = "on";
-      $tab_blk_campos[] = "valor_iva_5";
       $tab_ger_campos['excento'] = "on";
-      $tab_blk_campos[] = "excento";
       $tab_ger_campos['ing_terceros'] = "on";
-      $tab_blk_campos[] = "ing_terceros";
-      $tab_ger_campos['idfacven'] = "on";
-      $tab_ger_campos['numfacven'] = "on";
-      $tab_ger_campos['credito'] = "on";
-      $tab_ger_campos['fechavenc'] = "on";
 
 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_reporte_impuestos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_reporte_impuestos']['field_display']))

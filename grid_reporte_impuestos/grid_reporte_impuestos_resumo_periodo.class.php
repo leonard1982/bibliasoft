@@ -388,12 +388,33 @@ class grid_reporte_impuestos_resumo
        {
            $this->idcli = substr($this->idcli, 0, $tmp_pos);
        }
+       $this->correo_receptor = $Busca_temp['correo_receptor']; 
+       $tmp_pos = strpos($this->correo_receptor, "##@@");
+       if ($tmp_pos !== false && !is_array($this->correo_receptor))
+       {
+           $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+       }
+       $this->asunto = $Busca_temp['asunto']; 
+       $tmp_pos = strpos($this->asunto, "##@@");
+       if ($tmp_pos !== false && !is_array($this->asunto))
+       {
+           $this->asunto = substr($this->asunto, 0, $tmp_pos);
+       }
+       $this->mensaje = $Busca_temp['mensaje']; 
+       $tmp_pos = strpos($this->mensaje, "##@@");
+       if ($tmp_pos !== false && !is_array($this->mensaje))
+       {
+           $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
+       }
      } 
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pesq_tab_label']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pesq_tab_label'] = "";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pesq_tab_label'] .= "fechaven?#?" . "Fecha" . "?@?";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pesq_tab_label'] .= "idcli?#?" . "Cliente" . "?@?";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pesq_tab_label'] .= "correo_receptor?#?" . "Correo que recibe" . "?@?";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pesq_tab_label'] .= "asunto?#?" . "Asunto" . "?@?";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pesq_tab_label'] .= "mensaje?#?" . "Mensaje" . "?@?";
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_search_add']))
       {
@@ -752,6 +773,18 @@ class grid_reporte_impuestos_resumo
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['labels']['documento']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['labels']['documento'] = "Documento"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['labels']['correo_receptor']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['labels']['correo_receptor'] = "Correo que recibe"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['labels']['asunto']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['labels']['asunto'] = "Asunto"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['labels']['mensaje']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['labels']['mensaje'] = "Mensaje"; 
        }
        //-----
        $this->comp_field_nm = array(
@@ -4661,7 +4694,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "Rxls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_tot_xls=S&nm_res_cons=s&nm_ini_xls_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=res&language=&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "Rxls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_tot_xls=S&nm_res_cons=s&nm_ini_xls_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=res&language=&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
       }
@@ -4731,6 +4764,76 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           $NM_Gbtn = false;
           $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'ini');
           $nm_saida->saida("           $Cod_Btn\r\n");
+      if ($this->nmgp_botoes['pdf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+      $Tem_gb_pdf  = "s";
+      $Tem_pdf_res = "n";
+      $Tem_pdf_res = "s";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['SC_Gb_Free_cmp']))
+      {
+          $Tem_pdf_res = "n";
+      }
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailpdf", "", "", "email_pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_pdf.php?export_ajax=R&nm_opc=pdf_res&nm_target=&nm_cor=cor&papel=8&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=s&nm_ini_pdf_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=res&language=es&conf_socor=N&nm_label_group=N&nm_all_cab=S&nm_all_label=S&pdf_zip=N&nm_orient_grid=2&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['doc'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemaildoc", "", "", "email_doc_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&export_ajax=R&nm_opc=doc_word_res&nm_cor=CO&nm_res_cons=s&nm_ini_word_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&origem=res&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['xls'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxls", "", "", "email_xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_xls.php?export_ajax=R&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_res_cons=s&nm_ini_xls_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=res&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['xml'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxml", "", "", "email_xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_xml.php?script_case_init=" . $this->Ini->sc_page . "&export_ajax=R&nm_opc=xml_res&summary_export_columns=S&nm_res_cons=s&nm_ini_xml_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&nm_xml_tag=tag&nm_xml_label=S&language=es&origem=res&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['json'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailjson", "", "", "email_json_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_json.php?script_case_init=" . $this->Ini->sc_page . "&export_ajax=R&nm_opc=json_res&summary_export_columns=S&nm_res_cons=s&nm_ini_json_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&nm_json_format=N&nm_json_label=S&language=es&origem=res&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['csv'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailcsv", "", "", "email_csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_csv.php?script_case_init=" . $this->Ini->sc_page . "&&export_ajax=R&nm_opc=csv_res&summary_export_columns=S&nm_res_cons=s&nm_ini_csv_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&nm_delim_line=1&nm_delim_col=1&nm_delim_dados=1&nm_label_csv=N&language=es&origem=res&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailrtf", "", "", "email_rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=rtf_res&sAdd=&nm_opc=rtf_res&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
           $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'fim');
           $nm_saida->saida("           $Cod_Btn\r\n");
           $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
@@ -4870,7 +4973,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "Rxls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_tot_xls=S&nm_res_cons=s&nm_ini_xls_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=res&language=&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "", "", "Rxls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_xls.php?script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_tot_xls=S&nm_res_cons=s&nm_ini_xls_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=res&language=&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
       }
@@ -4940,6 +5043,76 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           $NM_Gbtn = false;
           $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'ini');
           $nm_saida->saida("           $Cod_Btn\r\n");
+      if ($this->nmgp_botoes['pdf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+      $Tem_gb_pdf  = "s";
+      $Tem_pdf_res = "n";
+      $Tem_pdf_res = "s";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['SC_Gb_Free_cmp']))
+      {
+          $Tem_pdf_res = "n";
+      }
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailpdf", "", "", "email_pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_pdf.php?export_ajax=R&nm_opc=pdf_res&nm_target=&nm_cor=cor&papel=8&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=s&nm_ini_pdf_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=res&language=es&conf_socor=N&nm_label_group=N&nm_all_cab=S&nm_all_label=S&pdf_zip=N&nm_orient_grid=2&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['doc'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemaildoc", "", "", "email_doc_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=S&export_ajax=R&nm_opc=doc_word_res&nm_cor=CO&nm_res_cons=s&nm_ini_word_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&origem=res&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['xls'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxls", "", "", "email_xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_xls.php?export_ajax=R&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&nm_tp_xls=xlsx&nm_tot_xls=S&nm_res_cons=s&nm_ini_xls_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=S&origem=res&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['xml'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxml", "", "", "email_xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_xml.php?script_case_init=" . $this->Ini->sc_page . "&export_ajax=R&nm_opc=xml_res&summary_export_columns=S&nm_res_cons=s&nm_ini_xml_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&nm_xml_tag=tag&nm_xml_label=S&language=es&origem=res&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['json'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailjson", "", "", "email_json_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_json.php?script_case_init=" . $this->Ini->sc_page . "&export_ajax=R&nm_opc=json_res&summary_export_columns=S&nm_res_cons=s&nm_ini_json_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&nm_json_format=N&nm_json_label=S&language=es&origem=res&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['csv'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailcsv", "", "", "email_csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_config_csv.php?script_case_init=" . $this->Ini->sc_page . "&&export_ajax=R&nm_opc=csv_res&summary_export_columns=S&nm_res_cons=s&nm_ini_csv_res=grid,resume,chart&nm_all_modules=grid,resume,chart&password=n&nm_delim_line=1&nm_delim_col=1&nm_delim_dados=1&nm_label_csv=N&language=es&origem=res&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailrtf", "", "", "email_rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_impuestos/grid_reporte_impuestos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=rtf_res&sAdd=&nm_opc=rtf_res&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_impuestos&KeepThis=true&TB_iframe=true&modal=true", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
           $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'fim');
           $nm_saida->saida("           $Cod_Btn\r\n");
           $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
@@ -5415,7 +5588,7 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
       $nm_saida->saida("           document.Fexport.nmgp_tot_xls.value = tot_xls;\r\n");
       $nm_saida->saida("           document.Fexport.nmgp_password.value = password;\r\n");
       $nm_saida->saida("           document.Fexport.SC_module_export.value = SC_module_export;\r\n");
-      $nm_saida->saida("               document.Fexport.action = \"grid_reporte_impuestos_export_ctrl.php\";\r\n");
+      $nm_saida->saida("           document.Fexport.target = \"_blank\"; \r\n");
       $nm_saida->saida("           document.Fexport.submit() ;\r\n");
       $nm_saida->saida("       }\r\n");
       $nm_saida->saida("   }\r\n");
@@ -5972,6 +6145,24 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
           {
               $idcli = substr($idcli, 0, $tmp_pos);
           }
+          $correo_receptor = $Busca_temp['correo_receptor']; 
+          $tmp_pos = strpos($correo_receptor, "##@@");
+          if ($tmp_pos !== false && !is_array($correo_receptor))
+          {
+              $correo_receptor = substr($correo_receptor, 0, $tmp_pos);
+          }
+          $asunto = $Busca_temp['asunto']; 
+          $tmp_pos = strpos($asunto, "##@@");
+          if ($tmp_pos !== false && !is_array($asunto))
+          {
+              $asunto = substr($asunto, 0, $tmp_pos);
+          }
+          $mensaje = $Busca_temp['mensaje']; 
+          $tmp_pos = strpos($mensaje, "##@@");
+          if ($tmp_pos !== false && !is_array($mensaje))
+          {
+              $mensaje = substr($mensaje, 0, $tmp_pos);
+          }
       } 
       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['cond_pesq']))
       {  
@@ -6132,6 +6323,24 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
        {
            $this->idcli = substr($this->idcli, 0, $tmp_pos);
        }
+       $this->correo_receptor = $Busca_temp['correo_receptor']; 
+       $tmp_pos = strpos($this->correo_receptor, "##@@");
+       if ($tmp_pos !== false && !is_array($this->correo_receptor))
+       {
+           $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+       }
+       $this->asunto = $Busca_temp['asunto']; 
+       $tmp_pos = strpos($this->asunto, "##@@");
+       if ($tmp_pos !== false && !is_array($this->asunto))
+       {
+           $this->asunto = substr($this->asunto, 0, $tmp_pos);
+       }
+       $this->mensaje = $Busca_temp['mensaje']; 
+       $tmp_pos = strpos($this->mensaje, "##@@");
+       if ($tmp_pos !== false && !is_array($this->mensaje))
+       {
+           $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
+       }
      } 
      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_orig'];
      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq'];
@@ -6141,19 +6350,19 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
-         $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20) from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+         $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
      { 
-         $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, fechavenc from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+         $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      { 
-         $nmgp_select = "SELECT tipo, convert(char(23),fechaven,121), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, convert(char(23),fechavenc,121) from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+         $nmgp_select = "SELECT tipo, convert(char(23),fechaven,121), numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
      } 
      else 
      { 
-         $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros, idfacven, numfacven, credito, fechavenc from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
+         $nmgp_select = "SELECT tipo, fechaven, numero2, idcli, subtotal, valoriva, total, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, ing_terceros from (SELECT      f.idfacven as idfacven,     f.numfacven as numfacven,     f.credito as credito,     f.fechaven as fechaven,     f.fechavenc as fechavenc,     f.idcli as idcli,     f.subtotal as subtotal,     f.valoriva as valoriva,     f.total as total,     f.pagada as pagada,     f.saldo as saldo,     f.adicional as adicional,     f.adicional2 as adicional2,     f.adicional3 as adicional3,     f.resolucion as adicional4,     f.vendedor as vendedor,     f.creado as creado,     f.editado as editado,     f.usuario_crea as usuario_crea,     f.creado as inicio,     f.creado as fin,     f.dias_decredito as dias_decredito,     f.tipo as tipo,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numero2,     f.fecha_validacion as fecha_validacion,     f.cufe as cufe,     t.direccion as direccion,     (MONTH(f.fechaven)) as periodo,     (YEAR(f.fechaven)) as anio,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=f.idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=f.idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,    t.documento FROM      facturaven f     inner join terceros t on f.idcli=t.idtercero WHERE    f.asentada='1' and f.tipo='FV' ) nm_sel_esp"; 
      } 
      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq']; 
      $campos_order = "";
@@ -6198,6 +6407,24 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
                 {
                    $this->idcli = substr($this->idcli, 0, $tmp_pos);
                 }
+                $this->correo_receptor = $Busca_temp['correo_receptor']; 
+                $tmp_pos = strpos($this->correo_receptor, "##@@");
+                if ($tmp_pos !== false && !is_array($this->correo_receptor))
+                {
+                   $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+                }
+                $this->asunto = $Busca_temp['asunto']; 
+                $tmp_pos = strpos($this->asunto, "##@@");
+                if ($tmp_pos !== false && !is_array($this->asunto))
+                {
+                   $this->asunto = substr($this->asunto, 0, $tmp_pos);
+                }
+                $this->mensaje = $Busca_temp['mensaje']; 
+                $tmp_pos = strpos($this->mensaje, "##@@");
+                if ($tmp_pos !== false && !is_array($this->mensaje))
+                {
+                   $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
+                }
             } 
             $this->tipo = $rs_res->fields[0] ;  
             $this->fechaven = $rs_res->fields[1] ;  
@@ -6221,10 +6448,6 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
             $this->excento =  str_replace(",", ".", $this->excento);
             $this->ing_terceros = $rs_res->fields[12] ;  
             $this->ing_terceros =  str_replace(",", ".", $this->ing_terceros);
-            $this->idfacven = $rs_res->fields[13] ;  
-            $this->numfacven = $rs_res->fields[14] ;  
-            $this->credito = $rs_res->fields[15] ;  
-            $this->fechavenc = $rs_res->fields[16] ;  
             $Format_tst = $this->Ini->Get_Gb_date_format('periodo', 'fechaven');
             $Prefix_dat = $this->Ini->Get_Gb_prefix_date_format('periodo', 'fechaven');
             $TP_Time    = (in_array('fechaven', $this->Ini->Cmp_Sql_Time)) ? "0000-00-00 " : "";
@@ -6473,6 +6696,24 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
                            $lin_obj = $this->grid_search_idcli($this->grid_search_seq, 'N', $def['opc'], $def['val'], $def['label']);
                            $nm_saida->saida("" . $lin_obj . "\r\n");
                         }
+                        if ($cmp == "correo_receptor")
+                        {
+                           $this->grid_search_dat[$this->grid_search_seq] = "correo_receptor";
+                           $lin_obj = $this->grid_search_correo_receptor($this->grid_search_seq, 'N', $def['opc'], $def['val'], $def['label']);
+                           $nm_saida->saida("" . $lin_obj . "\r\n");
+                        }
+                        if ($cmp == "asunto")
+                        {
+                           $this->grid_search_dat[$this->grid_search_seq] = "asunto";
+                           $lin_obj = $this->grid_search_asunto($this->grid_search_seq, 'N', $def['opc'], $def['val'], $def['label']);
+                           $nm_saida->saida("" . $lin_obj . "\r\n");
+                        }
+                        if ($cmp == "mensaje")
+                        {
+                           $this->grid_search_dat[$this->grid_search_seq] = "mensaje";
+                           $lin_obj = $this->grid_search_mensaje($this->grid_search_seq, 'N', $def['opc'], $def['val'], $def['label']);
+                           $nm_saida->saida("" . $lin_obj . "\r\n");
+                        }
                         $lin_obj = $this->grid_search_tag_end();
                         $nm_saida->saida("" . $lin_obj . "\r\n");
                     }
@@ -6649,7 +6890,7 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
    function grid_search_add_tag()
    {
        $lin_obj  = "";
-       $All_cmp_search = array('fechaven','idcli');
+       $All_cmp_search = array('fechaven','idcli','correo_receptor','asunto','mensaje');
        $nmgp_tab_label = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['pesq_tab_label'];
        if (!empty($nmgp_tab_label))
        {
@@ -6661,7 +6902,7 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
               $nmgp_tab_label[$parte_campo[0]] = $parte_campo[1];
           }
        }
-       if (count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']) < 2)
+       if (count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']) < 5)
        {
            $lin_obj .= "<table id='id_grid_search_all_cmp' cellpadding=0 cellspacing=0>";
            foreach ($All_cmp_search as $cada_cmp)
@@ -6894,6 +7135,105 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
            $lin_obj .= "     <option value='" . $idcli . "'  selected>" . $sAutocompValue . "</option>";
        }
        $lin_obj .= "     </select>";
+       $lin_obj .= "       </span>";
+       $lin_obj .= "          </div>";
+       $lin_obj .= "          <div class='scGridFilterTagListFilterBar'>";
+       $lin_obj .= nmButtonOutput($this->arr_buttons, "bapply_appdiv", "closeAllTags();setTimeout(function() {nm_proc_grid_search($ind, 'proc_grid_search', 'grid_search_res')}, 200);", "closeAllTags();setTimeout(function() {nm_proc_grid_search($ind, 'proc_grid_search', 'grid_search_res')}, 200);", "grid_search_apply_" . $ind . "", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $lin_obj .= "          </div>";
+       $lin_obj .= "      </div>";
+       return $lin_obj;
+   }
+   function grid_search_correo_receptor($ind, $ajax, $opc="", $val=array(), $label='')
+   {
+       $lin_obj  = "";
+       $lin_obj .= "     <div class='scGridFilterTagListFilter' id='grid_search_correo_receptor_" . $ind . "' style='display:none'>";
+       $lin_obj .= "         <div class='scGridFilterTagListFilterLabel'>". NM_encode_input($label) ." <span class='scGridFilterTagListFilterLabelClose' onclick='closeAllTags(this);'></span></div>";
+       $lin_obj .= "         <div class='scGridFilterTagListFilterInputs'>";
+       if (empty($opc))
+       {
+           $opc = "eq";
+       }
+       $lin_obj .= "       <select id='grid_search_correo_receptor_cond_" . $ind . "' name='cond_grid_search_correo_receptor_" . $ind . "' class='" . $this->css_scAppDivToolbarInput . "' style='vertical-align: middle; display: none'>";
+       $selected = ($opc == "eq") ? " selected" : "";
+       $lin_obj .= "        <option value='eq'" . $selected . ">" . $this->Ini->Nm_lang['lang_srch_exac'] . "</option>";
+       $lin_obj .= "       </select>";
+       if ($opc == "nu" || $opc == "nn" || $opc == "ep" || $opc == "ne")
+       {
+           $display_in_1 = "none";
+       }
+       else
+       {
+           $display_in_1 = "''";
+       }
+       $lin_obj .= "       <span id=\"grid_correo_receptor_" . $ind . "\" style=\"display:" . $display_in_1 . "\">";
+       $val_cmp = (isset($val[0][0])) ? $val[0][0] : "";
+       $lin_obj .= "     <input  type=\"text\" class='sc-js-input " . $this->css_scAppDivToolbarInput . "' id='grid_search_correo_receptor_val_" . $ind . "' name='val_grid_search_correo_receptor_" . $ind . "' value=\"" . NM_encode_input($val_cmp) . "\" size=60 alt=\"{datatype: 'text', maxLength: 120, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}\">";
+       $lin_obj .= "       </span>";
+       $lin_obj .= "          </div>";
+       $lin_obj .= "          <div class='scGridFilterTagListFilterBar'>";
+       $lin_obj .= nmButtonOutput($this->arr_buttons, "bapply_appdiv", "closeAllTags();setTimeout(function() {nm_proc_grid_search($ind, 'proc_grid_search', 'grid_search_res')}, 200);", "closeAllTags();setTimeout(function() {nm_proc_grid_search($ind, 'proc_grid_search', 'grid_search_res')}, 200);", "grid_search_apply_" . $ind . "", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $lin_obj .= "          </div>";
+       $lin_obj .= "      </div>";
+       return $lin_obj;
+   }
+   function grid_search_asunto($ind, $ajax, $opc="", $val=array(), $label='')
+   {
+       $lin_obj  = "";
+       $lin_obj .= "     <div class='scGridFilterTagListFilter' id='grid_search_asunto_" . $ind . "' style='display:none'>";
+       $lin_obj .= "         <div class='scGridFilterTagListFilterLabel'>". NM_encode_input($label) ." <span class='scGridFilterTagListFilterLabelClose' onclick='closeAllTags(this);'></span></div>";
+       $lin_obj .= "         <div class='scGridFilterTagListFilterInputs'>";
+       if (empty($opc))
+       {
+           $opc = "eq";
+       }
+       $lin_obj .= "       <select id='grid_search_asunto_cond_" . $ind . "' name='cond_grid_search_asunto_" . $ind . "' class='" . $this->css_scAppDivToolbarInput . "' style='vertical-align: middle; display: none'>";
+       $selected = ($opc == "eq") ? " selected" : "";
+       $lin_obj .= "        <option value='eq'" . $selected . ">" . $this->Ini->Nm_lang['lang_srch_exac'] . "</option>";
+       $lin_obj .= "       </select>";
+       if ($opc == "nu" || $opc == "nn" || $opc == "ep" || $opc == "ne")
+       {
+           $display_in_1 = "none";
+       }
+       else
+       {
+           $display_in_1 = "''";
+       }
+       $lin_obj .= "       <span id=\"grid_asunto_" . $ind . "\" style=\"display:" . $display_in_1 . "\">";
+       $val_cmp = (isset($val[0][0])) ? $val[0][0] : "";
+       $lin_obj .= "     <input  type=\"text\" class='sc-js-input " . $this->css_scAppDivToolbarInput . "' id='grid_search_asunto_val_" . $ind . "' name='val_grid_search_asunto_" . $ind . "' value=\"" . NM_encode_input($val_cmp) . "\" size=80 alt=\"{datatype: 'text', maxLength: 200, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}\">";
+       $lin_obj .= "       </span>";
+       $lin_obj .= "          </div>";
+       $lin_obj .= "          <div class='scGridFilterTagListFilterBar'>";
+       $lin_obj .= nmButtonOutput($this->arr_buttons, "bapply_appdiv", "closeAllTags();setTimeout(function() {nm_proc_grid_search($ind, 'proc_grid_search', 'grid_search_res')}, 200);", "closeAllTags();setTimeout(function() {nm_proc_grid_search($ind, 'proc_grid_search', 'grid_search_res')}, 200);", "grid_search_apply_" . $ind . "", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       $lin_obj .= "          </div>";
+       $lin_obj .= "      </div>";
+       return $lin_obj;
+   }
+   function grid_search_mensaje($ind, $ajax, $opc="", $val=array(), $label='')
+   {
+       $lin_obj  = "";
+       $lin_obj .= "     <div class='scGridFilterTagListFilter' id='grid_search_mensaje_" . $ind . "' style='display:none'>";
+       $lin_obj .= "         <div class='scGridFilterTagListFilterLabel'>". NM_encode_input($label) ." <span class='scGridFilterTagListFilterLabelClose' onclick='closeAllTags(this);'></span></div>";
+       $lin_obj .= "         <div class='scGridFilterTagListFilterInputs'>";
+       if (empty($opc))
+       {
+           $opc = "eq";
+       }
+       $lin_obj .= "       <select id='grid_search_mensaje_cond_" . $ind . "' name='cond_grid_search_mensaje_" . $ind . "' class='" . $this->css_scAppDivToolbarInput . "' style='vertical-align: middle; display: none'>";
+       $selected = ($opc == "eq") ? " selected" : "";
+       $lin_obj .= "        <option value='eq'" . $selected . ">" . $this->Ini->Nm_lang['lang_srch_exac'] . "</option>";
+       $lin_obj .= "       </select>";
+       if ($opc == "nu" || $opc == "nn" || $opc == "ep" || $opc == "ne")
+       {
+           $display_in_1 = "none";
+       }
+       else
+       {
+           $display_in_1 = "''";
+       }
+       $lin_obj .= "       <span id=\"grid_mensaje_" . $ind . "\" style=\"display:" . $display_in_1 . "\">";
+       $val_cmp = (isset($val[0][0])) ? $val[0][0] : "";
+       $lin_obj .= "     <input  type=\"text\" class='sc-js-input " . $this->css_scAppDivToolbarInput . "' id='grid_search_mensaje_val_" . $ind . "' name='val_grid_search_mensaje_" . $ind . "' value=\"" . NM_encode_input($val_cmp) . "\" size=80 alt=\"{datatype: 'text', maxLength: 200, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}\">";
        $lin_obj .= "       </span>";
        $lin_obj .= "          </div>";
        $lin_obj .= "          <div class='scGridFilterTagListFilterBar'>";
@@ -7346,6 +7686,18 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
        $nm_saida->saida("                     obj_ac  = 'id_ac_grid_' + Tab_obj_grid_search[i] + i;\r\n");
        $nm_saida->saida("                     result  = grid_search_get_text(obj_dyn + i, obj_ac);\r\n");
        $nm_saida->saida("                 }\r\n");
+       $nm_saida->saida("                 if (Tab_obj_grid_search[i] == 'correo_receptor')\r\n");
+       $nm_saida->saida("                 {\r\n");
+       $nm_saida->saida("                     result  = grid_search_get_text(obj_dyn + i, '');\r\n");
+       $nm_saida->saida("                 }\r\n");
+       $nm_saida->saida("                 if (Tab_obj_grid_search[i] == 'asunto')\r\n");
+       $nm_saida->saida("                 {\r\n");
+       $nm_saida->saida("                     result  = grid_search_get_text(obj_dyn + i, '');\r\n");
+       $nm_saida->saida("                 }\r\n");
+       $nm_saida->saida("                 if (Tab_obj_grid_search[i] == 'mensaje')\r\n");
+       $nm_saida->saida("                 {\r\n");
+       $nm_saida->saida("                     result  = grid_search_get_text(obj_dyn + i, '');\r\n");
+       $nm_saida->saida("                 }\r\n");
        $nm_saida->saida("                 if((result == '' || result == '_VLS2_' || result == 'Y:_VLS_M:_VLS_D:_VLS2_Y:_VLS_M:_VLS_D:' || result == 'Y:_VLS_M:_VLS_D:_VLS_H:_VLS_I:_VLS_S:_VLS2_Y:_VLS_M:_VLS_D:_VLS_H:_VLS_I:_VLS_S:') && nm_empty_data_cond.indexOf(out_cond) == -1 && out_cond.substring(0, 3) != 'bi_')\r\n");
        $nm_saida->saida("                 {\r\n");
        $nm_saida->saida("                     alert(\"" . $this->Ini->Nm_lang['lang_srch_req_field'] . "\");\r\n");
@@ -7449,6 +7801,21 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['doc
        $nm_saida->saida("                     obj_ac  = 'id_ac_grid_' + Tab_obj_grid_search[i] + i;\r\n");
        $nm_saida->saida("                     result  = grid_search_get_text(obj_dyn + i, obj_ac);\r\n");
        $nm_saida->saida("                     str_out += \"id_ac_\" + Tab_obj_grid_search[i] + \"#NMF#\" + result + \"@NMF@\";\r\n");
+       $nm_saida->saida("                 }\r\n");
+       $nm_saida->saida("                 if (Tab_obj_grid_search[i] == 'correo_receptor')\r\n");
+       $nm_saida->saida("                 {\r\n");
+       $nm_saida->saida("                     result  = grid_search_get_text(obj_dyn + i, '');\r\n");
+       $nm_saida->saida("                     str_out += \"SC_\" + Tab_obj_grid_search[i] + \"#NMF#\" + result + \"@NMF@\";\r\n");
+       $nm_saida->saida("                 }\r\n");
+       $nm_saida->saida("                 if (Tab_obj_grid_search[i] == 'asunto')\r\n");
+       $nm_saida->saida("                 {\r\n");
+       $nm_saida->saida("                     result  = grid_search_get_text(obj_dyn + i, '');\r\n");
+       $nm_saida->saida("                     str_out += \"SC_\" + Tab_obj_grid_search[i] + \"#NMF#\" + result + \"@NMF@\";\r\n");
+       $nm_saida->saida("                 }\r\n");
+       $nm_saida->saida("                 if (Tab_obj_grid_search[i] == 'mensaje')\r\n");
+       $nm_saida->saida("                 {\r\n");
+       $nm_saida->saida("                     result  = grid_search_get_text(obj_dyn + i, '');\r\n");
+       $nm_saida->saida("                     str_out += \"SC_\" + Tab_obj_grid_search[i] + \"#NMF#\" + result + \"@NMF@\";\r\n");
        $nm_saida->saida("                 }\r\n");
        $nm_saida->saida("             }\r\n");
        $nm_saida->saida("         }\r\n");

@@ -2044,6 +2044,12 @@ function scJQCalendarAdd() {
   str_out += 'SC_idcli_cond#NMF#' + search_get_sel_txt('SC_idcli_cond') + '@NMF@';
   str_out += 'SC_idcli#NMF#' + search_get_text('SC_idcli') + '@NMF@';
   str_out += 'id_ac_idcli#NMF#' + search_get_title('select2-id_ac_idcli-container') + '@NMF@';
+  str_out += 'SC_correo_receptor_cond#NMF#' + search_get_sel_txt('SC_correo_receptor_cond') + '@NMF@';
+  str_out += 'SC_correo_receptor#NMF#' + search_get_text('SC_correo_receptor') + '@NMF@';
+  str_out += 'SC_asunto_cond#NMF#' + search_get_sel_txt('SC_asunto_cond') + '@NMF@';
+  str_out += 'SC_asunto#NMF#' + search_get_text('SC_asunto') + '@NMF@';
+  str_out += 'SC_mensaje_cond#NMF#' + search_get_sel_txt('SC_mensaje_cond') + '@NMF@';
+  str_out += 'SC_mensaje#NMF#' + search_get_text('SC_mensaje') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2314,6 +2320,9 @@ function nm_open_popup(parms)
       global 
              $fechaven_cond, $fechaven, $fechaven_dia, $fechaven_mes, $fechaven_ano, $fechaven_input_2_dia, $fechaven_input_2_mes, $fechaven_input_2_ano,
              $idcli_cond, $idcli, $idcli_autocomp,
+             $correo_receptor_cond, $correo_receptor,
+             $asunto_cond, $asunto,
+             $mensaje_cond, $mensaje,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2361,6 +2370,12 @@ function nm_open_popup(parms)
           $fechaven_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['fechaven_cond']; 
           $idcli = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['idcli']; 
           $idcli_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['idcli_cond']; 
+          $correo_receptor = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['correo_receptor']; 
+          $correo_receptor_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['correo_receptor_cond']; 
+          $asunto = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['asunto']; 
+          $asunto_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['asunto_cond']; 
+          $mensaje = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['mensaje']; 
+          $mensaje_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['mensaje_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['NM_operador']; 
       } 
       if (!isset($fechaven_cond) || empty($fechaven_cond))
@@ -2371,14 +2386,32 @@ function nm_open_popup(parms)
       {
          $idcli_cond = "eq";
       }
+      if (!isset($correo_receptor_cond) || empty($correo_receptor_cond))
+      {
+         $correo_receptor_cond = "eq";
+      }
+      if (!isset($asunto_cond) || empty($asunto_cond))
+      {
+         $asunto_cond = "eq";
+      }
+      if (!isset($mensaje_cond) || empty($mensaje_cond))
+      {
+         $mensaje_cond = "eq";
+      }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
       $str_hide_fechaven = (in_array($fechaven_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_idcli = (in_array($idcli_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_correo_receptor = (in_array($correo_receptor_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_asunto = (in_array($asunto_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_mensaje = (in_array($mensaje_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
       $str_display_fechaven = ('bw' == $fechaven_cond) ? $display_aberto : $display_fechado;
       $str_display_idcli = ('bw' == $idcli_cond) ? $display_aberto : $display_fechado;
+      $str_display_correo_receptor = ('bw' == $correo_receptor_cond) ? $display_aberto : $display_fechado;
+      $str_display_asunto = ('bw' == $asunto_cond) ? $display_aberto : $display_fechado;
+      $str_display_mensaje = ('bw' == $mensaje_cond) ? $display_aberto : $display_fechado;
 
       if (!isset($fechaven) || $fechaven == "")
       {
@@ -2406,6 +2439,48 @@ function nm_open_popup(parms)
          else
          {
          $idcli = substr($idcli, 0, $tmp_pos);
+         }
+      }
+      if (!isset($correo_receptor) || $correo_receptor == "")
+      {
+          $correo_receptor = "";
+      }
+      if (isset($correo_receptor) && !empty($correo_receptor))
+      {
+         $tmp_pos = strpos($correo_receptor, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $correo_receptor = substr($correo_receptor, 0, $tmp_pos);
+         }
+      }
+      if (!isset($asunto) || $asunto == "")
+      {
+          $asunto = "";
+      }
+      if (isset($asunto) && !empty($asunto))
+      {
+         $tmp_pos = strpos($asunto, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $asunto = substr($asunto, 0, $tmp_pos);
+         }
+      }
+      if (!isset($mensaje) || $mensaje == "")
+      {
+          $mensaje = "";
+      }
+      if (isset($mensaje) && !empty($mensaje))
+      {
+         $tmp_pos = strpos($mensaje, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $mensaje = substr($mensaje, 0, $tmp_pos);
          }
       }
 ?>
@@ -2663,6 +2738,96 @@ foreach ($Arr_format as $Part_date)
 ?>
 <INPUT  type="text" id="SC_idcli" name="idcli" value="<?php echo NM_encode_input($idcli) ?>"  size=19 alt="{datatype: 'text', maxLength: 19, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
 <select class="sc-js-input scFilterObjectEven sc-ui-autocomp-idcli" id="id_ac_idcli" name="idcli_autocomp"><?php if ('' !=  $idcli) { ?><option value="<?php echo $idcli ?>" selected><?php echo $sAutocompValue ?></option><?php } ?></select>
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_correo_receptor_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['correo_receptor'])) ? $this->New_label['correo_receptor'] : "Correo que recibe"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_correo_receptor_cond" name="correo_receptor_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_correo_receptor" <?php echo $str_hide_correo_receptor?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['correo_receptor'])) ? $this->New_label['correo_receptor'] : "Correo que recibe";
+ $nmgp_tab_label .= "correo_receptor?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<INPUT  type="text" id="SC_correo_receptor" name="correo_receptor" value="<?php echo NM_encode_input($correo_receptor) ?>"  size=60 alt="{datatype: 'text', maxLength: 120, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" class="sc-js-input scFilterObjectOdd">
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_asunto_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['asunto'])) ? $this->New_label['asunto'] : "Asunto"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_asunto_cond" name="asunto_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldEven">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_asunto" <?php echo $str_hide_asunto?> valign="top">
+        <TD class="scFilterFieldFontEven">
+           <?php
+ $SC_Label = (isset($this->New_label['asunto'])) ? $this->New_label['asunto'] : "Asunto";
+ $nmgp_tab_label .= "asunto?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<INPUT  type="text" id="SC_asunto" name="asunto" value="<?php echo NM_encode_input($asunto) ?>"  size=80 alt="{datatype: 'text', maxLength: 200, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" class="sc-js-input scFilterObjectEven">
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_mensaje_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['mensaje'])) ? $this->New_label['mensaje'] : "Mensaje"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_mensaje_cond" name="mensaje_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_mensaje" <?php echo $str_hide_mensaje?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['mensaje'])) ? $this->New_label['mensaje'] : "Mensaje";
+ $nmgp_tab_label .= "mensaje?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<INPUT  type="text" id="SC_mensaje" name="mensaje" value="<?php echo NM_encode_input($mensaje) ?>"  size=80 alt="{datatype: 'text', maxLength: 200, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" class="sc-js-input scFilterObjectOdd">
 
         </TD>
        </TR>
@@ -3221,6 +3386,15 @@ foreach ($Arr_format as $Part_date)
    document.F1.idcli.value = "";
    document.F1.idcli_autocomp.value = "";
    $('#select2-id_ac_idcli-container').html('<?php echo $this->Val_init_idcli['desc'] ?>');;
+   document.F1.correo_receptor_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_correo_receptor'), document.F1.correo_receptor_cond, 'correo_receptor');
+   document.F1.correo_receptor.value = "";
+   document.F1.asunto_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_asunto'), document.F1.asunto_cond, 'asunto');
+   document.F1.asunto.value = "";
+   document.F1.mensaje_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_mensaje'), document.F1.mensaje_cond, 'mensaje');
+   document.F1.mensaje.value = "";
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -3408,6 +3582,12 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_idcli_cond'] = 'cond';
       $tp_fields['SC_idcli'] = 'text_aut';
       $tp_fields['id_ac_idcli'] = 'select2_aut';
+      $tp_fields['SC_correo_receptor_cond'] = 'cond';
+      $tp_fields['SC_correo_receptor'] = 'text';
+      $tp_fields['SC_asunto_cond'] = 'cond';
+      $tp_fields['SC_asunto'] = 'text';
+      $tp_fields['SC_mensaje_cond'] = 'cond';
+      $tp_fields['SC_mensaje'] = 'text';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -3552,7 +3732,10 @@ foreach ($Arr_format as $Part_date)
    function trata_campos()
    {
       global $fechaven_cond, $fechaven, $fechaven_dia, $fechaven_mes, $fechaven_ano, $fechaven_input_2_dia, $fechaven_input_2_mes, $fechaven_input_2_ano,
-             $idcli_cond, $idcli, $idcli_autocomp, $nmgp_tab_label;
+             $idcli_cond, $idcli, $idcli_autocomp,
+             $correo_receptor_cond, $correo_receptor,
+             $asunto_cond, $asunto,
+             $mensaje_cond, $mensaje, $nmgp_tab_label;
 
       $C_formatado = true;
       if ($this->NM_ajax_flag && ($this->NM_ajax_opcao == "ajax_grid_search" || $this->NM_ajax_opcao == "ajax_grid_search_change_fil"))
@@ -3596,6 +3779,25 @@ foreach ($Arr_format as $Part_date)
       if (!isset($idcli_input_2) || $idcli_input_2 == "")
       {
           $idcli_input_2 = $idcli;
+      }
+      $correo_receptor_cond_salva = $correo_receptor_cond; 
+      if (!isset($correo_receptor_input_2) || $correo_receptor_input_2 == "")
+      {
+          $correo_receptor_input_2 = $correo_receptor;
+      }
+      $asunto_cond_salva = $asunto_cond; 
+      if (!isset($asunto_input_2) || $asunto_input_2 == "")
+      {
+          $asunto_input_2 = $asunto;
+      }
+      $mensaje_cond_salva = $mensaje_cond; 
+      if (!isset($mensaje_input_2) || $mensaje_input_2 == "")
+      {
+          $mensaje_input_2 = $mensaje;
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca'];
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search']  = array(); 
@@ -3647,6 +3849,69 @@ foreach ($Arr_format as $Part_date)
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['idcli'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid];
           $I_Grid++;
       }
+      $Dyn_ok = false;
+      $Grid_ok = false;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['correo_receptor'] = $correo_receptor; 
+      if (is_array($correo_receptor) && !empty($correo_receptor))
+      {
+          $Grid_ok = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['val'][0] = $correo_receptor;
+      }
+      elseif ($correo_receptor_cond_salva == "nu" || $correo_receptor_cond_salva == "nn" || $correo_receptor_cond_salva == "ep" || $correo_receptor_cond_salva == "ne" || !empty($correo_receptor))
+      {
+          $Grid_ok = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['val'][0][0] = $correo_receptor;
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['correo_receptor_cond'] = $correo_receptor_cond_salva; 
+      if ($Grid_ok)
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['cmp'] = "correo_receptor"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['opc'] = $correo_receptor_cond_salva; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['correo_receptor'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid];
+          $I_Grid++;
+      }
+      $Dyn_ok = false;
+      $Grid_ok = false;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['asunto'] = $asunto; 
+      if (is_array($asunto) && !empty($asunto))
+      {
+          $Grid_ok = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['val'][0] = $asunto;
+      }
+      elseif ($asunto_cond_salva == "nu" || $asunto_cond_salva == "nn" || $asunto_cond_salva == "ep" || $asunto_cond_salva == "ne" || !empty($asunto))
+      {
+          $Grid_ok = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['val'][0][0] = $asunto;
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['asunto_cond'] = $asunto_cond_salva; 
+      if ($Grid_ok)
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['cmp'] = "asunto"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['opc'] = $asunto_cond_salva; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['asunto'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid];
+          $I_Grid++;
+      }
+      $Dyn_ok = false;
+      $Grid_ok = false;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['mensaje'] = $mensaje; 
+      if (is_array($mensaje) && !empty($mensaje))
+      {
+          $Grid_ok = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['val'][0] = $mensaje;
+      }
+      elseif ($mensaje_cond_salva == "nu" || $mensaje_cond_salva == "nn" || $mensaje_cond_salva == "ep" || $mensaje_cond_salva == "ne" || !empty($mensaje))
+      {
+          $Grid_ok = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['val'][0][0] = $mensaje;
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['mensaje_cond'] = $mensaje_cond_salva; 
+      if ($Grid_ok)
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['cmp'] = "mensaje"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid]['opc'] = $mensaje_cond_salva; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['mensaje'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['Grid_search'][$I_Grid];
+          $I_Grid++;
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
       {
@@ -3659,6 +3924,104 @@ foreach ($Arr_format as $Part_date)
       if ($idcli_cond == "bw" && ((!empty($idcli) && !is_numeric($idcli)) || (!empty($idcli_input_2) && !is_numeric($idcli_input_2)) ))
       {
           if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Cliente";
+      }
+      $fechaven_day   = $fechaven_dia; 
+      $fechaven_month = $fechaven_mes; 
+      $fechaven_year  = $fechaven_ano; 
+      $fechaven_diaSv = $fechaven_dia; 
+      $fechaven_mesSv = $fechaven_mes; 
+      $fechaven_anoSv = $fechaven_ano; 
+      $fechaven  = str_repeat(0, (4 - strlen($fechaven_ano))) . $fechaven_ano . "-"; 
+      $fechaven .= str_repeat(0, (2 - strlen($fechaven_mes))) . $fechaven_mes . "-"; 
+      $fechaven .= str_repeat(0, (2 - strlen($fechaven_dia))) . $fechaven_dia; 
+      $fechaven_input_2_day   = $fechaven_input_2_dia; 
+      $fechaven_input_2_month = $fechaven_input_2_mes; 
+      $fechaven_input_2_year  = $fechaven_input_2_ano; 
+      $fechaven_input_2_diaSv = $fechaven_input_2_dia; 
+      $fechaven_input_2_mesSv = $fechaven_input_2_mes; 
+      $fechaven_input_2_anoSv = $fechaven_input_2_ano; 
+      $fechaven_2  = str_repeat(0, (4 - strlen($fechaven_input_2_ano))) . $fechaven_input_2_ano . "-"; 
+      $fechaven_2 .= str_repeat(0, (2 - strlen($fechaven_input_2_mes))) . $fechaven_input_2_mes . "-"; 
+      $fechaven_2 .= str_repeat(0, (2 - strlen($fechaven_input_2_dia))) . $fechaven_input_2_dia; 
+      $_SESSION['scriptcase']['grid_reporte_impuestos']['contr_erro'] = 'on';
+if (!isset($_SESSION['gcorreo_mensaje'])) {$_SESSION['gcorreo_mensaje'] = "";}
+if (!isset($this->sc_temp_gcorreo_mensaje)) {$this->sc_temp_gcorreo_mensaje = (isset($_SESSION['gcorreo_mensaje'])) ? $_SESSION['gcorreo_mensaje'] : "";}
+if (!isset($_SESSION['gcorreo_asunto'])) {$_SESSION['gcorreo_asunto'] = "";}
+if (!isset($this->sc_temp_gcorreo_asunto)) {$this->sc_temp_gcorreo_asunto = (isset($_SESSION['gcorreo_asunto'])) ? $_SESSION['gcorreo_asunto'] : "";}
+if (!isset($_SESSION['gcorreo_receptor'])) {$_SESSION['gcorreo_receptor'] = "";}
+if (!isset($this->sc_temp_gcorreo_receptor)) {$this->sc_temp_gcorreo_receptor = (isset($_SESSION['gcorreo_receptor'])) ? $_SESSION['gcorreo_receptor'] : "";}
+ $this->sc_temp_gcorreo_receptor = $correo_receptor ;
+$this->sc_temp_gcorreo_asunto   = $asunto ;
+$this->sc_temp_gcorreo_mensaje  = $mensaje ;
+if (isset($this->sc_temp_gcorreo_receptor)) {$_SESSION['gcorreo_receptor'] = $this->sc_temp_gcorreo_receptor;}
+if (isset($this->sc_temp_gcorreo_asunto)) {$_SESSION['gcorreo_asunto'] = $this->sc_temp_gcorreo_asunto;}
+if (isset($this->sc_temp_gcorreo_mensaje)) {$_SESSION['gcorreo_mensaje'] = $this->sc_temp_gcorreo_mensaje;}
+$_SESSION['scriptcase']['grid_reporte_impuestos']['contr_erro'] = 'off'; 
+      if ($fechaven_day != $fechaven_diaSv)
+      {
+          $fechaven_dia = $fechaven_day; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_dia'] = $fechaven_dia; 
+      }
+      if ($fechaven_month != $fechaven_mesSv)
+      {
+          $fechaven_mes = $fechaven_month; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_mes'] = $fechaven_mes; 
+      }
+      if ($fechaven_year != $fechaven_anoSv)
+      {
+          $fechaven_ano = $fechaven_year; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_ano'] = $fechaven_ano; 
+      }
+      $fechaven = str_replace("0000", "", $fechaven);
+      $fechaven = str_replace("-00", "-", $fechaven);
+      $fechavenXX = explode("-", $fechaven);
+      if (isset($fechavenXX[2]) && $fechavenXX[2] != $fechaven_diaSv)
+      {
+          $fechaven_dia = $fechavenXX[2]; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_dia'] = $fechavenXX[2]; 
+      }
+      if (isset($fechavenXX[1]) && $fechavenXX[1] != $fechaven_mesSv)
+      {
+          $fechaven_mes = $fechavenXX[1]; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_mes'] = $fechavenXX[1]; 
+      }
+      if (isset($fechavenXX[0]) && $fechavenXX[0] != $fechaven_anoSv)
+      {
+          $fechaven_ano = $fechavenXX[0]; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_ano'] = $fechavenXX[0]; 
+      }
+      if ($fechaven_input_2_day != $fechaven_input_2_diaSv)
+      {
+          $fechaven_input_2_dia = $fechaven_input_2_day; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_input_2_dia'] = $fechaven_input_2_dia; 
+      }
+      if ($fechaven_input_2_month != $fechaven_input_2_mesSv)
+      {
+          $fechaven_input_2_mes = $fechaven_input_2_month; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_input_2_mes'] = $fechaven_input_2_mes; 
+      }
+      if ($fechaven_input_2_year != $fechaven_input_2_anoSv)
+      {
+          $fechaven_input_2_ano = $fechaven_input_2_year; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_input_2_ano'] = $fechaven_input_2_ano; 
+      }
+      $fechaven_2 = str_replace("0000", "", $fechaven_2);
+      $fechaven_2 = str_replace("-00", "-", $fechaven_2);
+      $fechavenXX = explode("-", $fechaven_2);
+      if (isset($fechavenXX[2]) && $fechavenXX[2] != $fechaven_input_2_diaSv)
+      {
+          $fechaven_input_2_dia = $fechavenXX[2]; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_input_2_dia'] = $fechavenXX[2]; 
+      }
+      if (isset($fechavenXX[1]) && $fechavenXX[1] != $fechaven_input_2_mesSv)
+      {
+          $fechaven_input_2_mes = $fechavenXX[1]; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_input_2_mes'] = $fechavenXX[1]; 
+      }
+      if (isset($fechavenXX[0]) && $fechavenXX[0] != $fechaven_input_2_anoSv)
+      {
+          $fechaven_input_2_ano = $fechavenXX[0]; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['']['campos_busca']['fechaven_input_2_ano'] = $fechavenXX[0]; 
       }
       if (!empty($this->Campos_Mens_erro)) 
       {
@@ -3723,6 +4086,34 @@ foreach ($Arr_format as $Part_date)
       else
       {
           $this->cmp_formatado['idcli'] = $idcli;
+      }
+      $Conteudo = $correo_receptor;
+      $this->cmp_formatado['correo_receptor'] = $Conteudo;
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['correo_receptor']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['correo_receptor']['label'] = $nmgp_tab_label['correo_receptor'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['correo_receptor']['descr'] = $nmgp_tab_label['correo_receptor'] . ": " . $this->cmp_formatado['correo_receptor'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['correo_receptor']['hint'] = $nmgp_tab_label['correo_receptor'] . ": " . $this->cmp_formatado['correo_receptor'];
+      }
+      $Conteudo = $asunto;
+      $this->cmp_formatado['asunto'] = $Conteudo;
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['asunto']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['asunto']['label'] = $nmgp_tab_label['asunto'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['asunto']['descr'] = $nmgp_tab_label['asunto'] . ": " . $this->cmp_formatado['asunto'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['asunto']['hint'] = $nmgp_tab_label['asunto'] . ": " . $this->cmp_formatado['asunto'];
+      }
+      $Conteudo = $mensaje;
+      $this->cmp_formatado['mensaje'] = $Conteudo;
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['mensaje']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['mensaje']['label'] = $nmgp_tab_label['mensaje'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['mensaje']['descr'] = $nmgp_tab_label['mensaje'] . ": " . $this->cmp_formatado['mensaje'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['grid_pesq']['mensaje']['hint'] = $nmgp_tab_label['mensaje'] . ": " . $this->cmp_formatado['mensaje'];
+      }
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca_ant']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca'];
       }
 
       //----- $fechaven
@@ -3857,7 +4248,7 @@ foreach ($Arr_format as $Part_date)
       {
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq_filtro'] = " (" . $this->comando_filtro . ")";
       }
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq'] != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq_ant'])
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq'] != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['where_pesq_ant'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca_ant'] != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['campos_busca'])
       {
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['cond_pesq'] .= $this->NM_operador;
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_impuestos']['contr_array_resumo'] = "NAO";

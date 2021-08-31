@@ -22,7 +22,7 @@
     }
     $SC_cod_proj = "FACILWEBv2";
     $SC_apl_proc = "grid_reporte_impuestos";
-    $SC_conf_opt = explode(",","tem_res_cons,tem_res_res,tp_xls");
+    $SC_conf_opt = explode(",","tem_res_cons,tem_res_res,tp_xls,xls_totals");
 /* sc_apl_default */
     if (!isset($_SESSION['sc_session']))
     {
