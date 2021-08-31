@@ -1,0 +1,52 @@
+.css_tipo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tipo_grid_line {vertical-align: top;text-align: left;}
+.css_fechaven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechaven_grid_line {vertical-align: top;text-align: center;}
+.css_numero2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero2_grid_line {vertical-align: top;text-align: left;}
+.css_idcli_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_idcli_grid_line {vertical-align: top;text-align: left;}
+.css_subtotal_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_subtotal_grid_line {vertical-align: top;text-align: right;}
+.css_subtotal_sub_tot {text-align: right;}
+.css_subtotal_tot_ger {text-align: right;}
+.css_valoriva_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valoriva_grid_line {vertical-align: top;text-align: right;}
+.css_valoriva_sub_tot {text-align: right;}
+.css_valoriva_tot_ger {text-align: right;}
+.css_total_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_total_grid_line {vertical-align: top;text-align: right;}
+.css_total_sub_tot {text-align: right;}
+.css_total_tot_ger {text-align: right;}
+.css_base_iva_19_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_base_iva_19_grid_line {vertical-align: top;text-align: right;}
+.css_base_iva_19_sub_tot {text-align: right;}
+.css_base_iva_19_tot_ger {text-align: right;}
+.css_valor_iva_19_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_iva_19_grid_line {vertical-align: top;text-align: right;}
+.css_valor_iva_19_sub_tot {text-align: right;}
+.css_valor_iva_19_tot_ger {text-align: right;}
+.css_base_iva_5_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_base_iva_5_grid_line {vertical-align: top;text-align: right;}
+.css_base_iva_5_sub_tot {text-align: right;}
+.css_base_iva_5_tot_ger {text-align: right;}
+.css_valor_iva_5_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_iva_5_grid_line {vertical-align: top;text-align: right;}
+.css_valor_iva_5_sub_tot {text-align: right;}
+.css_valor_iva_5_tot_ger {text-align: right;}
+.css_excento_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_excento_grid_line {vertical-align: top;text-align: right;}
+.css_excento_sub_tot {text-align: right;}
+.css_excento_tot_ger {text-align: right;}
+.css_ing_terceros_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_ing_terceros_grid_line {vertical-align: top;text-align: right;}
+.css_ing_terceros_sub_tot {text-align: right;}
+.css_ing_terceros_tot_ger {text-align: right;}
+.css_idfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idfacven_grid_line {vertical-align: top;text-align: right;}
+.css_numfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numfacven_grid_line {vertical-align: top;text-align: right;}
+.css_credito_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_credito_grid_line {vertical-align: top;text-align: center;}
+.css_fechavenc_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fechavenc_grid_line {vertical-align: top;text-align: center;}
