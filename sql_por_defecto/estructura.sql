@@ -5450,6 +5450,19 @@ ALTER TABLE `configuraciones` ADD `ver_xml_fe` SET('SI','NO') NOT NULL DEFAULT '
 CREATE TABLE `correos_validos` ( `id` INT NOT NULL AUTO_INCREMENT , `idtercero` INT NOT NULL DEFAULT '0' , `correo` INT(120) NULL DEFAULT NULL , `fecha` DATETIME NULL DEFAULT NULL , `valido` SET('SI','NO','NN') NOT NULL DEFAULT 'NN' , `json` TEXT NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE `correos_validos` CHANGE `correo` `correo` VARCHAR(120) NULL DEFAULT NULL;
 
+
+ALTER TABLE `webservicefe_proveedores` ADD `url_api_pdfs` VARCHAR(300) NULL DEFAULT NULL AFTER `servidor_prueba3`, ADD `url_api_sendmail` VARCHAR(300) NULL DEFAULT NULL AFTER `url_api_pdfs`;
+
+ALTER TABLE `webservicefe` ADD `url_api_pdfs` VARCHAR(300) NULL DEFAULT NULL AFTER `servidor_prueba3`, ADD `url_api_sendmail` VARCHAR(300) NULL DEFAULT NULL AFTER `url_api_pdfs`;
+
+ALTER TABLE `facturaven` ADD `proveedor` VARCHAR(40) NULL DEFAULT NULL AFTER `aplica_propina`, ADD `token` VARCHAR(150) NULL DEFAULT NULL AFTER `proveedor`, ADD `password` VARCHAR(150) NULL DEFAULT NULL AFTER `token`, ADD `servidor` VARCHAR(300) NULL DEFAULT NULL AFTER `password`;
+
+ALTER TABLE `configuraciones` ADD `columna_imprimir_ticket` SET('SI','NO') NOT NULL DEFAULT 'SI' COMMENT 'Para ver la columna de imprimir el ticket pos' AFTER `ver_xml_fe`, ADD `columna_imprimir_a4` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Para ver la columna donde uno ve la vista preliminar en formato A4' AFTER `columna_imprimir_ticket`, ADD `columna_whatsapp` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Para ver la columna de compartir enlace de pdf de factura electrónica de desarrollo propio al whatsapp' AFTER `columna_imprimir_a4`;
+
+ALTER TABLE `configuraciones` ADD `columna_npedido` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Para que se pueda activar la columna de número de pedido de donde viene la factura' AFTER `columna_whatsapp`;
+
+ALTER TABLE `configuraciones` ADD `columna_reg_pdf_propio` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Columna que da la opción de regenerar el PDF del documento electrónico si este ya ha sido enviado. Útil para cuando se ha enviado un documento electrónico y faltó algo por parametrizar en el PDF, por ejemplo el logo.' AFTER `columna_npedido`;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

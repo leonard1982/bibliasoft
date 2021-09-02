@@ -238,6 +238,16 @@ function Ord_cmp_init()
        $tab_def_campos['envio_dataico'] = "";
    }
    $tab_labels["envio_dataico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["envio_dataico"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["envio_dataico"] : "Acción";
+   $tab_ger_campos['regenerar_pdf_propio'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['regenerar_pdf_propio'] = "regenerar_pdf_propio";
+   }
+   else
+   {
+       $tab_def_campos['regenerar_pdf_propio'] = "";
+   }
+   $tab_labels["regenerar_pdf_propio"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["regenerar_pdf_propio"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["regenerar_pdf_propio"] : "Regenerar";
    $tab_ger_campos['editarpos'] = "none";
    $tab_ger_campos['copiar'] = "none";
    $tab_ger_campos['imprimircopia'] = "none";
@@ -250,6 +260,7 @@ function Ord_cmp_init()
    $tab_ger_campos['whatsapp_propio'] = "none";
    $tab_ger_campos['ver_xml_propio'] = "none";
    $tab_ger_campos['envio_dataico'] = "none";
+   $tab_ger_campos['regenerar_pdf_propio'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['field_display'] as $NM_cada_field => $NM_cada_opc)

@@ -467,6 +467,47 @@ function sc_rtrim(str, chars) {
         return str.replace(new RegExp("[" + chars + "]+$", "g"), "");
 }
 var hasJsFormOnload = false;
+function sc_exib_ocult_pag(N_pagina)
+{
+    document.getElementById('form_webservicefe_form0').style.width='1px';
+    document.getElementById('form_webservicefe_form0').style.height='0px';
+    document.getElementById('form_webservicefe_form0').style.display='none';
+    document.getElementById('form_webservicefe_form0').style.overflow='scroll';
+    document.getElementById('form_webservicefe_form1').style.width='1px';
+    document.getElementById('form_webservicefe_form1').style.height='0px';
+    document.getElementById('form_webservicefe_form1').style.display='none';
+    document.getElementById('form_webservicefe_form1').style.overflow='scroll';
+<?php
+    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe']['pdf_view']) {
+?>
+    var emptyRecords = $("#sc-ui-empty-form");
+    if (emptyRecords.length && emptyRecords.filter(":visible").length) {
+      return;
+    }
+<?php
+    }
+?>
+    document.getElementById(N_pagina).style.width='';
+    document.getElementById(N_pagina).style.height='';
+    document.getElementById(N_pagina).style.display='';
+    document.getElementById(N_pagina).style.overflow='visible';
+    sc_tab_pag(pag_ativa, 'scTabInactive');
+    displayChange_page(pag_ativa.substr(22), 'off');
+    pag_ativa = N_pagina;
+    sc_tab_pag(pag_ativa, 'scTabActive');
+    displayChange_page(pag_ativa.substr(22), 'on');
+}
+function sc_tab_pag(N_pagina, C_class)
+{
+    if ('scTabActive' == C_class)
+    {
+        $("#id_" + N_pagina).removeClass("scTabInactive").addClass("scTabActive");
+    }
+    else
+    {
+        $("#id_" + N_pagina).removeClass("scTabActive").addClass("scTabInactive");
+    }
+}
 
 function scCssFocus(oHtmlObj)
 {

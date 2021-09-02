@@ -498,6 +498,10 @@ function sc_exib_ocult_pag(N_pagina)
     document.getElementById('form_configuraciones_form1').style.height='0px';
     document.getElementById('form_configuraciones_form1').style.display='none';
     document.getElementById('form_configuraciones_form1').style.overflow='scroll';
+    document.getElementById('form_configuraciones_form2').style.width='1px';
+    document.getElementById('form_configuraciones_form2').style.height='0px';
+    document.getElementById('form_configuraciones_form2').style.display='none';
+    document.getElementById('form_configuraciones_form2').style.overflow='scroll';
 <?php
     if (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['pdf_view']) {
 ?>

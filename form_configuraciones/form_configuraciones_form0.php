@@ -826,6 +826,10 @@ var pag_ativa = "form_configuraciones_form0";
             'title' => "Empresa",
             'class' => $nmgp_num_form == "form_configuraciones_form1" ? "scTabActive" : "scTabInactive",
         ),
+        'form_configuraciones_form2' => array(
+            'title' => "Ventas",
+            'class' => $nmgp_num_form == "form_configuraciones_form2" ? "scTabActive" : "scTabInactive",
+        ),
     );
         if (!empty($this->Ini->nm_hidden_pages)) {
                 foreach ($this->Ini->nm_hidden_pages as $pageName => $pageStatus) {
@@ -834,6 +838,9 @@ var pag_ativa = "form_configuraciones_form0";
                         }
                         if ('Empresa' == $pageName && 'off' == $pageStatus) {
                                 $this->tabCssClass['form_configuraciones_form1']['class'] = 'scTabInactive';
+                        }
+                        if ('Ventas' == $pageName && 'off' == $pageStatus) {
+                                $this->tabCssClass['form_configuraciones_form2']['class'] = 'scTabInactive';
                         }
                 }
                 $displayingPage = false;
@@ -858,7 +865,6 @@ var pag_ativa = "form_configuraciones_form0";
 ?>
    <li id="id_form_configuraciones_form0" class="<?php echo $css_celula; ?> sc-form-page">
     <a href="javascript: sc_exib_ocult_pag ('form_configuraciones_form0')">
-     <img src="<?php echo $this->Ini->path_icones ?>/scriptcase__NM__ico__NM__gear_32.png" align="absmiddle">
      General
     </a>
    </li>
@@ -867,8 +873,15 @@ var pag_ativa = "form_configuraciones_form0";
 ?>
    <li id="id_form_configuraciones_form1" class="<?php echo $css_celula; ?> sc-form-page">
     <a href="javascript: sc_exib_ocult_pag ('form_configuraciones_form1')">
-     <img src="<?php echo $this->Ini->path_icones ?>/scriptcase__NM__ico__NM__application_enterprise_edit_24.png" align="absmiddle">
      Empresa
+    </a>
+   </li>
+<?php
+    $css_celula = $this->tabCssClass["form_configuraciones_form2"]['class'];
+?>
+   <li id="id_form_configuraciones_form2" class="<?php echo $css_celula; ?> sc-form-page">
+    <a href="javascript: sc_exib_ocult_pag ('form_configuraciones_form2')">
+     Ventas
     </a>
    </li>
 </ul>
@@ -1219,62 +1232,110 @@ $tmp_form_data = str_replace(';'   , ' '                                       ,
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
 <?php } 
 ?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+
+
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   <td width="30%" height="">
+   <a name="bloco_1"></a>
+<div id="div_hidden_bloco_1"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
    <?php
-    if (!isset($this->nm_new_label['nombre_pc']))
-    {
-        $this->nm_new_label['nombre_pc'] = "NOMBRE PC DE RED:";
-    }
-?>
-<?php
+   if (!isset($this->nm_new_label['caja_movil']))
+   {
+       $this->nm_new_label['caja_movil'] = "LLAMAR CAJA DESDE MÓVIL?:";
+   }
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $nombre_pc = $this->nombre_pc;
-   $sStyleHidden_nombre_pc = '';
-   if (isset($this->nmgp_cmp_hidden['nombre_pc']) && $this->nmgp_cmp_hidden['nombre_pc'] == 'off')
+   $caja_movil = $this->caja_movil;
+   $sStyleHidden_caja_movil = '';
+   if (isset($this->nmgp_cmp_hidden['caja_movil']) && $this->nmgp_cmp_hidden['caja_movil'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['nombre_pc']);
-       $sStyleHidden_nombre_pc = 'display: none;';
+       unset($this->nmgp_cmp_hidden['caja_movil']);
+       $sStyleHidden_caja_movil = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_nombre_pc = 'display: none;';
-   $sStyleReadInp_nombre_pc = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['nombre_pc']) && $this->nmgp_cmp_readonly['nombre_pc'] == 'on')
+   $sStyleReadLab_caja_movil = 'display: none;';
+   $sStyleReadInp_caja_movil = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['caja_movil']) && $this->nmgp_cmp_readonly['caja_movil'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['nombre_pc']);
-       $sStyleReadLab_nombre_pc = '';
-       $sStyleReadInp_nombre_pc = 'display: none;';
+       unset($this->nmgp_cmp_readonly['caja_movil']);
+       $sStyleReadLab_caja_movil = '';
+       $sStyleReadInp_caja_movil = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['nombre_pc']) && $this->nmgp_cmp_hidden['nombre_pc'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="nombre_pc" value="<?php echo $this->form_encode_input($nombre_pc) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['caja_movil']) && $this->nmgp_cmp_hidden['caja_movil'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="caja_movil" value="<?php echo $this->form_encode_input($this->caja_movil) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->caja_movil_1 = explode(";", trim($this->caja_movil));
+  } 
+  else
+  {
+      if (empty($this->caja_movil))
+      {
+          $this->caja_movil_1= array(); 
+          $this->caja_movil= "NO";
+      } 
+      else
+      {
+          $this->caja_movil_1= $this->caja_movil; 
+          $this->caja_movil= ""; 
+          foreach ($this->caja_movil_1 as $cada_caja_movil)
+          {
+             if (!empty($caja_movil))
+             {
+                 $this->caja_movil.= ";"; 
+             } 
+             $this->caja_movil.= $cada_caja_movil; 
+          } 
+      } 
+  } 
+?> 
 
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_nombre_pc_label" id="hidden_field_label_nombre_pc" style="<?php echo $sStyleHidden_nombre_pc; ?>"><span id="id_label_nombre_pc"><?php echo $this->nm_new_label['nombre_pc']; ?></span></TD>
-    <TD class="scFormDataOdd css_nombre_pc_line" id="hidden_field_data_nombre_pc" style="<?php echo $sStyleHidden_nombre_pc; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nombre_pc_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nombre_pc"]) &&  $this->nmgp_cmp_readonly["nombre_pc"] == "on") { 
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_caja_movil_label" id="hidden_field_label_caja_movil" style="<?php echo $sStyleHidden_caja_movil; ?>"><span id="id_label_caja_movil"><?php echo $this->nm_new_label['caja_movil']; ?></span></TD>
+    <TD class="scFormDataOdd css_caja_movil_line" id="hidden_field_data_caja_movil" style="<?php echo $sStyleHidden_caja_movil; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_caja_movil_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["caja_movil"]) &&  $this->nmgp_cmp_readonly["caja_movil"] == "on") { 
 
- ?>
-<input type="hidden" name="nombre_pc" value="<?php echo $this->form_encode_input($nombre_pc) . "\">" . $nombre_pc . ""; ?>
+$caja_movil_look = "";
+ if ($this->caja_movil == "SI") { $caja_movil_look .= "" ;} 
+ if (empty($caja_movil_look)) { $caja_movil_look = $this->caja_movil; }
+?>
+<input type="hidden" name="caja_movil" value="<?php echo $this->form_encode_input($caja_movil) . "\">" . $caja_movil_look . ""; ?>
 <?php } else { ?>
-<span id="id_read_on_nombre_pc" class="sc-ui-readonly-nombre_pc css_nombre_pc_line" style="<?php echo $sStyleReadLab_nombre_pc; ?>"><?php echo $this->form_format_readonly("nombre_pc", $this->form_encode_input($this->nombre_pc)); ?></span><span id="id_read_off_nombre_pc" class="css_read_off_nombre_pc<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_nombre_pc; ?>">
- <input class="sc-js-input scFormObjectOdd css_nombre_pc_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_nombre_pc" type=text name="nombre_pc" value="<?php echo $this->form_encode_input($nombre_pc) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=32"; } ?> maxlength=32 alt="{datatype: 'text', maxLength: 32, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+
+<?php
+
+$caja_movil_look = "";
+ if ($this->caja_movil == "SI") { $caja_movil_look .= "" ;} 
+ if (empty($caja_movil_look)) { $caja_movil_look = $this->caja_movil; }
+?>
+<span id="id_read_on_caja_movil" class="css_caja_movil_line" style="<?php echo $sStyleReadLab_caja_movil; ?>"><?php echo $this->form_format_readonly("caja_movil", $this->form_encode_input($caja_movil_look)); ?></span><span id="id_read_off_caja_movil" class="css_read_off_caja_movil css_caja_movil_line" style="<?php echo $sStyleReadInp_caja_movil; ?>"><?php echo "<div id=\"idAjaxCheckbox_caja_movil\" style=\"display: inline-block\" class=\"css_caja_movil_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_caja_movil_line"><?php $tempOptionId = "id-opt-caja_movil" . $sc_seq_vert . "-1"; ?>
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-caja_movil sc-ui-checkbox-caja_movil" name="caja_movil[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_caja_movil'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->caja_movil_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
 <span class="scFormPopupBubble" style="display: inline-block"><span class="scFormPopupTrigger"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "return false;", "return false;", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
 </span><table class="scFormPopup"><tbody><?php
 if (isset($_SESSION['scriptcase']['reg_conf']['html_dir']) && $_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'") {
 ?>
-<tr><td class="scFormPopupTopRight scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopLeft scFormPopupCorner"></td></tr><tr><td class="scFormPopupRight"></td><td class="scFormPopupContent">Coloque el nombre de RED del Computador donde está conectada la Impresora</td><td class="scFormPopupLeft"></td></tr><tr><td class="scFormPopupBottomRight scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomLeft scFormPopupCorner"></td></tr><?php
+<tr><td class="scFormPopupTopRight scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopLeft scFormPopupCorner"></td></tr><tr><td class="scFormPopupRight"></td><td class="scFormPopupContent">Para llamar caja desde el movil, para cobrar una cuenta desde restaurantes, pedidos, facturas, desde la aplicacion movil</td><td class="scFormPopupLeft"></td></tr><tr><td class="scFormPopupBottomRight scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomLeft scFormPopupCorner"></td></tr><?php
 } else {
 ?>
-<tr><td class="scFormPopupTopLeft scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopRight scFormPopupCorner"></td></tr><tr><td class="scFormPopupLeft"></td><td class="scFormPopupContent">Coloque el nombre de RED del Computador donde está conectada la Impresora</td><td class="scFormPopupRight"></td></tr><tr><td class="scFormPopupBottomLeft scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomRight scFormPopupCorner"></td></tr><?php
+<tr><td class="scFormPopupTopLeft scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopRight scFormPopupCorner"></td></tr><tr><td class="scFormPopupLeft"></td><td class="scFormPopupContent">Para llamar caja desde el movil, para cobrar una cuenta desde restaurantes, pedidos, facturas, desde la aplicacion movil</td><td class="scFormPopupRight"></td></tr><tr><td class="scFormPopupBottomLeft scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomRight scFormPopupCorner"></td></tr><?php
 }
 ?>
-</tbody></table></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_nombre_pc_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_nombre_pc_text"></span></td></tr></table></td></tr></table></TD>
+</tbody></table></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_caja_movil_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_caja_movil_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
 <?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
@@ -1288,57 +1349,141 @@ if (isset($_SESSION['scriptcase']['reg_conf']['html_dir']) && $_SESSION['scriptc
 
 
    <?php
-    if (!isset($this->nm_new_label['nombre_impre']))
+   if (!isset($this->nm_new_label['pago_automatico']))
+   {
+       $this->nm_new_label['pago_automatico'] = "COMPROBANTE DE EGRESO AUTOMÁTICO EN COMPRAS?:";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $pago_automatico = $this->pago_automatico;
+   $sStyleHidden_pago_automatico = '';
+   if (isset($this->nmgp_cmp_hidden['pago_automatico']) && $this->nmgp_cmp_hidden['pago_automatico'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['pago_automatico']);
+       $sStyleHidden_pago_automatico = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_pago_automatico = 'display: none;';
+   $sStyleReadInp_pago_automatico = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['pago_automatico']) && $this->nmgp_cmp_readonly['pago_automatico'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['pago_automatico']);
+       $sStyleReadLab_pago_automatico = '';
+       $sStyleReadInp_pago_automatico = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['pago_automatico']) && $this->nmgp_cmp_hidden['pago_automatico'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="pago_automatico" value="<?php echo $this->form_encode_input($this->pago_automatico) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->pago_automatico_1 = explode(";", trim($this->pago_automatico));
+  } 
+  else
+  {
+      if (empty($this->pago_automatico))
+      {
+          $this->pago_automatico_1= array(); 
+          $this->pago_automatico= "NO";
+      } 
+      else
+      {
+          $this->pago_automatico_1= $this->pago_automatico; 
+          $this->pago_automatico= ""; 
+          foreach ($this->pago_automatico_1 as $cada_pago_automatico)
+          {
+             if (!empty($pago_automatico))
+             {
+                 $this->pago_automatico.= ";"; 
+             } 
+             $this->pago_automatico.= $cada_pago_automatico; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_pago_automatico_label" id="hidden_field_label_pago_automatico" style="<?php echo $sStyleHidden_pago_automatico; ?>"><span id="id_label_pago_automatico"><?php echo $this->nm_new_label['pago_automatico']; ?></span></TD>
+    <TD class="scFormDataOdd css_pago_automatico_line" id="hidden_field_data_pago_automatico" style="<?php echo $sStyleHidden_pago_automatico; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_pago_automatico_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["pago_automatico"]) &&  $this->nmgp_cmp_readonly["pago_automatico"] == "on") { 
+
+$pago_automatico_look = "";
+ if ($this->pago_automatico == "SI") { $pago_automatico_look .= "" ;} 
+ if (empty($pago_automatico_look)) { $pago_automatico_look = $this->pago_automatico; }
+?>
+<input type="hidden" name="pago_automatico" value="<?php echo $this->form_encode_input($pago_automatico) . "\">" . $pago_automatico_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$pago_automatico_look = "";
+ if ($this->pago_automatico == "SI") { $pago_automatico_look .= "" ;} 
+ if (empty($pago_automatico_look)) { $pago_automatico_look = $this->pago_automatico; }
+?>
+<span id="id_read_on_pago_automatico" class="css_pago_automatico_line" style="<?php echo $sStyleReadLab_pago_automatico; ?>"><?php echo $this->form_format_readonly("pago_automatico", $this->form_encode_input($pago_automatico_look)); ?></span><span id="id_read_off_pago_automatico" class="css_read_off_pago_automatico css_pago_automatico_line" style="<?php echo $sStyleReadInp_pago_automatico; ?>"><?php echo "<div id=\"idAjaxCheckbox_pago_automatico\" style=\"display: inline-block\" class=\"css_pago_automatico_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_pago_automatico_line"><?php $tempOptionId = "id-opt-pago_automatico" . $sc_seq_vert . "-1"; ?>
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-pago_automatico sc-ui-checkbox-pago_automatico" name="pago_automatico[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_pago_automatico'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->pago_automatico_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('pago_automatico')", "nm_mostra_mens('pago_automatico')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_pago_automatico_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_pago_automatico_text"></span></td></tr></table></td></tr></table></TD>
+   <?php }?>
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['dia_limite_pago']))
     {
-        $this->nm_new_label['nombre_impre'] = "NOMBRE IMPRESORA DE RED:";
+        $this->nm_new_label['dia_limite_pago'] = "DÍA LÍMITE DE PAGO";
     }
 ?>
 <?php
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $nombre_impre = $this->nombre_impre;
-   $sStyleHidden_nombre_impre = '';
-   if (isset($this->nmgp_cmp_hidden['nombre_impre']) && $this->nmgp_cmp_hidden['nombre_impre'] == 'off')
+   $dia_limite_pago = $this->dia_limite_pago;
+   $sStyleHidden_dia_limite_pago = '';
+   if (isset($this->nmgp_cmp_hidden['dia_limite_pago']) && $this->nmgp_cmp_hidden['dia_limite_pago'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['nombre_impre']);
-       $sStyleHidden_nombre_impre = 'display: none;';
+       unset($this->nmgp_cmp_hidden['dia_limite_pago']);
+       $sStyleHidden_dia_limite_pago = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_nombre_impre = 'display: none;';
-   $sStyleReadInp_nombre_impre = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['nombre_impre']) && $this->nmgp_cmp_readonly['nombre_impre'] == 'on')
+   $sStyleReadLab_dia_limite_pago = 'display: none;';
+   $sStyleReadInp_dia_limite_pago = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['dia_limite_pago']) && $this->nmgp_cmp_readonly['dia_limite_pago'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['nombre_impre']);
-       $sStyleReadLab_nombre_impre = '';
-       $sStyleReadInp_nombre_impre = 'display: none;';
+       unset($this->nmgp_cmp_readonly['dia_limite_pago']);
+       $sStyleReadLab_dia_limite_pago = '';
+       $sStyleReadInp_dia_limite_pago = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['nombre_impre']) && $this->nmgp_cmp_hidden['nombre_impre'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="nombre_impre" value="<?php echo $this->form_encode_input($nombre_impre) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['dia_limite_pago']) && $this->nmgp_cmp_hidden['dia_limite_pago'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="dia_limite_pago" value="<?php echo $this->form_encode_input($dia_limite_pago) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_nombre_impre_label" id="hidden_field_label_nombre_impre" style="<?php echo $sStyleHidden_nombre_impre; ?>"><span id="id_label_nombre_impre"><?php echo $this->nm_new_label['nombre_impre']; ?></span></TD>
-    <TD class="scFormDataOdd css_nombre_impre_line" id="hidden_field_data_nombre_impre" style="<?php echo $sStyleHidden_nombre_impre; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nombre_impre_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nombre_impre"]) &&  $this->nmgp_cmp_readonly["nombre_impre"] == "on") { 
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_dia_limite_pago_label" id="hidden_field_label_dia_limite_pago" style="<?php echo $sStyleHidden_dia_limite_pago; ?>"><span id="id_label_dia_limite_pago"><?php echo $this->nm_new_label['dia_limite_pago']; ?></span></TD>
+    <TD class="scFormDataOdd css_dia_limite_pago_line" id="hidden_field_data_dia_limite_pago" style="<?php echo $sStyleHidden_dia_limite_pago; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_dia_limite_pago_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["dia_limite_pago"]) &&  $this->nmgp_cmp_readonly["dia_limite_pago"] == "on") { 
 
  ?>
-<input type="hidden" name="nombre_impre" value="<?php echo $this->form_encode_input($nombre_impre) . "\">" . $nombre_impre . ""; ?>
+<input type="hidden" name="dia_limite_pago" value="<?php echo $this->form_encode_input($dia_limite_pago) . "\">" . $dia_limite_pago . ""; ?>
 <?php } else { ?>
-<span id="id_read_on_nombre_impre" class="sc-ui-readonly-nombre_impre css_nombre_impre_line" style="<?php echo $sStyleReadLab_nombre_impre; ?>"><?php echo $this->form_format_readonly("nombre_impre", $this->form_encode_input($this->nombre_impre)); ?></span><span id="id_read_off_nombre_impre" class="css_read_off_nombre_impre<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_nombre_impre; ?>">
- <input class="sc-js-input scFormObjectOdd css_nombre_impre_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_nombre_impre" type=text name="nombre_impre" value="<?php echo $this->form_encode_input($nombre_impre) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=32"; } ?> maxlength=32 alt="{datatype: 'text', maxLength: 32, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
-<span class="scFormPopupBubble" style="display: inline-block"><span class="scFormPopupTrigger"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "return false;", "return false;", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span><table class="scFormPopup"><tbody><?php
-if (isset($_SESSION['scriptcase']['reg_conf']['html_dir']) && $_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'") {
-?>
-<tr><td class="scFormPopupTopRight scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopLeft scFormPopupCorner"></td></tr><tr><td class="scFormPopupRight"></td><td class="scFormPopupContent">Coloque el nombre de la Impresora donde se va a imprimir</td><td class="scFormPopupLeft"></td></tr><tr><td class="scFormPopupBottomRight scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomLeft scFormPopupCorner"></td></tr><?php
-} else {
-?>
-<tr><td class="scFormPopupTopLeft scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopRight scFormPopupCorner"></td></tr><tr><td class="scFormPopupLeft"></td><td class="scFormPopupContent">Coloque el nombre de la Impresora donde se va a imprimir</td><td class="scFormPopupRight"></td></tr><tr><td class="scFormPopupBottomLeft scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomRight scFormPopupCorner"></td></tr><?php
-}
-?>
-</tbody></table></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_nombre_impre_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_nombre_impre_text"></span></td></tr></table></td></tr></table></TD>
+<span id="id_read_on_dia_limite_pago" class="sc-ui-readonly-dia_limite_pago css_dia_limite_pago_line" style="<?php echo $sStyleReadLab_dia_limite_pago; ?>"><?php echo $this->form_format_readonly("dia_limite_pago", $this->form_encode_input($this->dia_limite_pago)); ?></span><span id="id_read_off_dia_limite_pago" class="css_read_off_dia_limite_pago<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_dia_limite_pago; ?>">
+ <input class="sc-js-input scFormObjectOdd css_dia_limite_pago_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_dia_limite_pago" type=text name="dia_limite_pago" value="<?php echo $this->form_encode_input($dia_limite_pago) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=2"; } ?> alt="{datatype: 'integer', maxLength: 2, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['dia_limite_pago']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['dia_limite_pago']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['dia_limite_pago']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'center', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_dia_limite_pago_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_dia_limite_pago_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
 <?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
@@ -1501,482 +1646,57 @@ $desactivar_control_sesion_look = "";
 
 
    <?php
-   if (!isset($this->nm_new_label['noborrar_tmp_enpos']))
-   {
-       $this->nm_new_label['noborrar_tmp_enpos'] = "NO BORRAR TEMPORALES EN VENTA RÁPIDA";
-   }
+    if (!isset($this->nm_new_label['nombre_pc']))
+    {
+        $this->nm_new_label['nombre_pc'] = "NOMBRE PC DE RED:";
+    }
+?>
+<?php
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $noborrar_tmp_enpos = $this->noborrar_tmp_enpos;
-   $sStyleHidden_noborrar_tmp_enpos = '';
-   if (isset($this->nmgp_cmp_hidden['noborrar_tmp_enpos']) && $this->nmgp_cmp_hidden['noborrar_tmp_enpos'] == 'off')
+   $nombre_pc = $this->nombre_pc;
+   $sStyleHidden_nombre_pc = '';
+   if (isset($this->nmgp_cmp_hidden['nombre_pc']) && $this->nmgp_cmp_hidden['nombre_pc'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['noborrar_tmp_enpos']);
-       $sStyleHidden_noborrar_tmp_enpos = 'display: none;';
+       unset($this->nmgp_cmp_hidden['nombre_pc']);
+       $sStyleHidden_nombre_pc = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_noborrar_tmp_enpos = 'display: none;';
-   $sStyleReadInp_noborrar_tmp_enpos = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['noborrar_tmp_enpos']) && $this->nmgp_cmp_readonly['noborrar_tmp_enpos'] == 'on')
+   $sStyleReadLab_nombre_pc = 'display: none;';
+   $sStyleReadInp_nombre_pc = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['nombre_pc']) && $this->nmgp_cmp_readonly['nombre_pc'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['noborrar_tmp_enpos']);
-       $sStyleReadLab_noborrar_tmp_enpos = '';
-       $sStyleReadInp_noborrar_tmp_enpos = 'display: none;';
+       unset($this->nmgp_cmp_readonly['nombre_pc']);
+       $sStyleReadLab_nombre_pc = '';
+       $sStyleReadInp_nombre_pc = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['noborrar_tmp_enpos']) && $this->nmgp_cmp_hidden['noborrar_tmp_enpos'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="noborrar_tmp_enpos" value="<?php echo $this->form_encode_input($this->noborrar_tmp_enpos) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['nombre_pc']) && $this->nmgp_cmp_hidden['nombre_pc'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="nombre_pc" value="<?php echo $this->form_encode_input($nombre_pc) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->noborrar_tmp_enpos_1 = explode(";", trim($this->noborrar_tmp_enpos));
-  } 
-  else
-  {
-      if (empty($this->noborrar_tmp_enpos))
-      {
-          $this->noborrar_tmp_enpos_1= array(); 
-          $this->noborrar_tmp_enpos= "NO";
-      } 
-      else
-      {
-          $this->noborrar_tmp_enpos_1= $this->noborrar_tmp_enpos; 
-          $this->noborrar_tmp_enpos= ""; 
-          foreach ($this->noborrar_tmp_enpos_1 as $cada_noborrar_tmp_enpos)
-          {
-             if (!empty($noborrar_tmp_enpos))
-             {
-                 $this->noborrar_tmp_enpos.= ";"; 
-             } 
-             $this->noborrar_tmp_enpos.= $cada_noborrar_tmp_enpos; 
-          } 
-      } 
-  } 
-?> 
 
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_noborrar_tmp_enpos_label" id="hidden_field_label_noborrar_tmp_enpos" style="<?php echo $sStyleHidden_noborrar_tmp_enpos; ?>"><span id="id_label_noborrar_tmp_enpos"><?php echo $this->nm_new_label['noborrar_tmp_enpos']; ?></span></TD>
-    <TD class="scFormDataOdd css_noborrar_tmp_enpos_line" id="hidden_field_data_noborrar_tmp_enpos" style="<?php echo $sStyleHidden_noborrar_tmp_enpos; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_noborrar_tmp_enpos_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["noborrar_tmp_enpos"]) &&  $this->nmgp_cmp_readonly["noborrar_tmp_enpos"] == "on") { 
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_nombre_pc_label" id="hidden_field_label_nombre_pc" style="<?php echo $sStyleHidden_nombre_pc; ?>"><span id="id_label_nombre_pc"><?php echo $this->nm_new_label['nombre_pc']; ?></span></TD>
+    <TD class="scFormDataOdd css_nombre_pc_line" id="hidden_field_data_nombre_pc" style="<?php echo $sStyleHidden_nombre_pc; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nombre_pc_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nombre_pc"]) &&  $this->nmgp_cmp_readonly["nombre_pc"] == "on") { 
 
-$noborrar_tmp_enpos_look = "";
- if ($this->noborrar_tmp_enpos == "SI") { $noborrar_tmp_enpos_look .= "SI" ;} 
- if (empty($noborrar_tmp_enpos_look)) { $noborrar_tmp_enpos_look = $this->noborrar_tmp_enpos; }
-?>
-<input type="hidden" name="noborrar_tmp_enpos" value="<?php echo $this->form_encode_input($noborrar_tmp_enpos) . "\">" . $noborrar_tmp_enpos_look . ""; ?>
+ ?>
+<input type="hidden" name="nombre_pc" value="<?php echo $this->form_encode_input($nombre_pc) . "\">" . $nombre_pc . ""; ?>
 <?php } else { ?>
-
-<?php
-
-$noborrar_tmp_enpos_look = "";
- if ($this->noborrar_tmp_enpos == "SI") { $noborrar_tmp_enpos_look .= "SI" ;} 
- if (empty($noborrar_tmp_enpos_look)) { $noborrar_tmp_enpos_look = $this->noborrar_tmp_enpos; }
-?>
-<span id="id_read_on_noborrar_tmp_enpos" class="css_noborrar_tmp_enpos_line" style="<?php echo $sStyleReadLab_noborrar_tmp_enpos; ?>"><?php echo $this->form_format_readonly("noborrar_tmp_enpos", $this->form_encode_input($noborrar_tmp_enpos_look)); ?></span><span id="id_read_off_noborrar_tmp_enpos" class="css_read_off_noborrar_tmp_enpos css_noborrar_tmp_enpos_line" style="<?php echo $sStyleReadInp_noborrar_tmp_enpos; ?>"><?php echo "<div id=\"idAjaxCheckbox_noborrar_tmp_enpos\" style=\"display: inline-block\" class=\"css_noborrar_tmp_enpos_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_noborrar_tmp_enpos_line"><?php $tempOptionId = "id-opt-noborrar_tmp_enpos" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-noborrar_tmp_enpos sc-ui-checkbox-noborrar_tmp_enpos" name="noborrar_tmp_enpos[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_noborrar_tmp_enpos'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->noborrar_tmp_enpos_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>">SI</label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('noborrar_tmp_enpos')", "nm_mostra_mens('noborrar_tmp_enpos')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_noborrar_tmp_enpos_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_noborrar_tmp_enpos_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['validar_correo_enlinea']))
-   {
-       $this->nm_new_label['validar_correo_enlinea'] = "Validar Correo en Línea";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $validar_correo_enlinea = $this->validar_correo_enlinea;
-   $sStyleHidden_validar_correo_enlinea = '';
-   if (isset($this->nmgp_cmp_hidden['validar_correo_enlinea']) && $this->nmgp_cmp_hidden['validar_correo_enlinea'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['validar_correo_enlinea']);
-       $sStyleHidden_validar_correo_enlinea = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_validar_correo_enlinea = 'display: none;';
-   $sStyleReadInp_validar_correo_enlinea = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['validar_correo_enlinea']) && $this->nmgp_cmp_readonly['validar_correo_enlinea'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['validar_correo_enlinea']);
-       $sStyleReadLab_validar_correo_enlinea = '';
-       $sStyleReadInp_validar_correo_enlinea = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['validar_correo_enlinea']) && $this->nmgp_cmp_hidden['validar_correo_enlinea'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="validar_correo_enlinea" value="<?php echo $this->form_encode_input($this->validar_correo_enlinea) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->validar_correo_enlinea_1 = explode(";", trim($this->validar_correo_enlinea));
-  } 
-  else
-  {
-      if (empty($this->validar_correo_enlinea))
-      {
-          $this->validar_correo_enlinea_1= array(); 
-          $this->validar_correo_enlinea= "NO";
-      } 
-      else
-      {
-          $this->validar_correo_enlinea_1= $this->validar_correo_enlinea; 
-          $this->validar_correo_enlinea= ""; 
-          foreach ($this->validar_correo_enlinea_1 as $cada_validar_correo_enlinea)
-          {
-             if (!empty($validar_correo_enlinea))
-             {
-                 $this->validar_correo_enlinea.= ";"; 
-             } 
-             $this->validar_correo_enlinea.= $cada_validar_correo_enlinea; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_validar_correo_enlinea_label" id="hidden_field_label_validar_correo_enlinea" style="<?php echo $sStyleHidden_validar_correo_enlinea; ?>"><span id="id_label_validar_correo_enlinea"><?php echo $this->nm_new_label['validar_correo_enlinea']; ?></span></TD>
-    <TD class="scFormDataOdd css_validar_correo_enlinea_line" id="hidden_field_data_validar_correo_enlinea" style="<?php echo $sStyleHidden_validar_correo_enlinea; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_validar_correo_enlinea_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["validar_correo_enlinea"]) &&  $this->nmgp_cmp_readonly["validar_correo_enlinea"] == "on") { 
-
-$validar_correo_enlinea_look = "";
- if ($this->validar_correo_enlinea == "SI") { $validar_correo_enlinea_look .= "SI" ;} 
- if (empty($validar_correo_enlinea_look)) { $validar_correo_enlinea_look = $this->validar_correo_enlinea; }
-?>
-<input type="hidden" name="validar_correo_enlinea" value="<?php echo $this->form_encode_input($validar_correo_enlinea) . "\">" . $validar_correo_enlinea_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$validar_correo_enlinea_look = "";
- if ($this->validar_correo_enlinea == "SI") { $validar_correo_enlinea_look .= "SI" ;} 
- if (empty($validar_correo_enlinea_look)) { $validar_correo_enlinea_look = $this->validar_correo_enlinea; }
-?>
-<span id="id_read_on_validar_correo_enlinea" class="css_validar_correo_enlinea_line" style="<?php echo $sStyleReadLab_validar_correo_enlinea; ?>"><?php echo $this->form_format_readonly("validar_correo_enlinea", $this->form_encode_input($validar_correo_enlinea_look)); ?></span><span id="id_read_off_validar_correo_enlinea" class="css_read_off_validar_correo_enlinea css_validar_correo_enlinea_line" style="<?php echo $sStyleReadInp_validar_correo_enlinea; ?>"><?php echo "<div id=\"idAjaxCheckbox_validar_correo_enlinea\" style=\"display: inline-block\" class=\"css_validar_correo_enlinea_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_validar_correo_enlinea_line"><?php $tempOptionId = "id-opt-validar_correo_enlinea" . $sc_seq_vert . "-1"; ?>
- <div class="sc switch">
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-validar_correo_enlinea sc-ui-checkbox-validar_correo_enlinea" name="validar_correo_enlinea[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_validar_correo_enlinea'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->validar_correo_enlinea_1))  { echo " checked" ;} ?> onClick="" ><span></span>
-<label for="<?php echo $tempOptionId ?>">SI</label> </div>
-</TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('validar_correo_enlinea')", "nm_mostra_mens('validar_correo_enlinea')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_validar_correo_enlinea_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_validar_correo_enlinea_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-
-
-   </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   <td width="30%" height="">
-   <a name="bloco_1"></a>
-<div id="div_hidden_bloco_1"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['modificainvpedido']))
-   {
-       $this->nm_new_label['modificainvpedido'] = "MODIFICAR INVENTARIO DESDE PEDIDO?:";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $modificainvpedido = $this->modificainvpedido;
-   $sStyleHidden_modificainvpedido = '';
-   if (isset($this->nmgp_cmp_hidden['modificainvpedido']) && $this->nmgp_cmp_hidden['modificainvpedido'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['modificainvpedido']);
-       $sStyleHidden_modificainvpedido = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_modificainvpedido = 'display: none;';
-   $sStyleReadInp_modificainvpedido = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['modificainvpedido']) && $this->nmgp_cmp_readonly['modificainvpedido'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['modificainvpedido']);
-       $sStyleReadLab_modificainvpedido = '';
-       $sStyleReadInp_modificainvpedido = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['modificainvpedido']) && $this->nmgp_cmp_hidden['modificainvpedido'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="modificainvpedido" value="<?php echo $this->form_encode_input($this->modificainvpedido) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->modificainvpedido_1 = explode(";", trim($this->modificainvpedido));
-  } 
-  else
-  {
-      if (empty($this->modificainvpedido))
-      {
-          $this->modificainvpedido_1= array(); 
-          $this->modificainvpedido= "NO";
-      } 
-      else
-      {
-          $this->modificainvpedido_1= $this->modificainvpedido; 
-          $this->modificainvpedido= ""; 
-          foreach ($this->modificainvpedido_1 as $cada_modificainvpedido)
-          {
-             if (!empty($modificainvpedido))
-             {
-                 $this->modificainvpedido.= ";"; 
-             } 
-             $this->modificainvpedido.= $cada_modificainvpedido; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_modificainvpedido_label" id="hidden_field_label_modificainvpedido" style="<?php echo $sStyleHidden_modificainvpedido; ?>"><span id="id_label_modificainvpedido"><?php echo $this->nm_new_label['modificainvpedido']; ?></span></TD>
-    <TD class="scFormDataOdd css_modificainvpedido_line" id="hidden_field_data_modificainvpedido" style="<?php echo $sStyleHidden_modificainvpedido; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_modificainvpedido_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["modificainvpedido"]) &&  $this->nmgp_cmp_readonly["modificainvpedido"] == "on") { 
-
-$modificainvpedido_look = "";
- if ($this->modificainvpedido == "SI") { $modificainvpedido_look .= "" ;} 
- if (empty($modificainvpedido_look)) { $modificainvpedido_look = $this->modificainvpedido; }
-?>
-<input type="hidden" name="modificainvpedido" value="<?php echo $this->form_encode_input($modificainvpedido) . "\">" . $modificainvpedido_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$modificainvpedido_look = "";
- if ($this->modificainvpedido == "SI") { $modificainvpedido_look .= "" ;} 
- if (empty($modificainvpedido_look)) { $modificainvpedido_look = $this->modificainvpedido; }
-?>
-<span id="id_read_on_modificainvpedido" class="css_modificainvpedido_line" style="<?php echo $sStyleReadLab_modificainvpedido; ?>"><?php echo $this->form_format_readonly("modificainvpedido", $this->form_encode_input($modificainvpedido_look)); ?></span><span id="id_read_off_modificainvpedido" class="css_read_off_modificainvpedido css_modificainvpedido_line" style="<?php echo $sStyleReadInp_modificainvpedido; ?>"><?php echo "<div id=\"idAjaxCheckbox_modificainvpedido\" style=\"display: inline-block\" class=\"css_modificainvpedido_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_modificainvpedido_line"><?php $tempOptionId = "id-opt-modificainvpedido" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-modificainvpedido sc-ui-checkbox-modificainvpedido" name="modificainvpedido[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_modificainvpedido'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->modificainvpedido_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_modificainvpedido_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_modificainvpedido_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['apertura_caja']))
-   {
-       $this->nm_new_label['apertura_caja'] = "MANEJAR APERTURA Y CIERRE DE CAJA?:";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $apertura_caja = $this->apertura_caja;
-   $sStyleHidden_apertura_caja = '';
-   if (isset($this->nmgp_cmp_hidden['apertura_caja']) && $this->nmgp_cmp_hidden['apertura_caja'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['apertura_caja']);
-       $sStyleHidden_apertura_caja = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_apertura_caja = 'display: none;';
-   $sStyleReadInp_apertura_caja = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['apertura_caja']) && $this->nmgp_cmp_readonly['apertura_caja'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['apertura_caja']);
-       $sStyleReadLab_apertura_caja = '';
-       $sStyleReadInp_apertura_caja = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['apertura_caja']) && $this->nmgp_cmp_hidden['apertura_caja'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="apertura_caja" value="<?php echo $this->form_encode_input($this->apertura_caja) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->apertura_caja_1 = explode(";", trim($this->apertura_caja));
-  } 
-  else
-  {
-      if (empty($this->apertura_caja))
-      {
-          $this->apertura_caja_1= array(); 
-          $this->apertura_caja= "NO";
-      } 
-      else
-      {
-          $this->apertura_caja_1= $this->apertura_caja; 
-          $this->apertura_caja= ""; 
-          foreach ($this->apertura_caja_1 as $cada_apertura_caja)
-          {
-             if (!empty($apertura_caja))
-             {
-                 $this->apertura_caja.= ";"; 
-             } 
-             $this->apertura_caja.= $cada_apertura_caja; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_apertura_caja_label" id="hidden_field_label_apertura_caja" style="<?php echo $sStyleHidden_apertura_caja; ?>"><span id="id_label_apertura_caja"><?php echo $this->nm_new_label['apertura_caja']; ?></span></TD>
-    <TD class="scFormDataOdd css_apertura_caja_line" id="hidden_field_data_apertura_caja" style="<?php echo $sStyleHidden_apertura_caja; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_apertura_caja_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["apertura_caja"]) &&  $this->nmgp_cmp_readonly["apertura_caja"] == "on") { 
-
-$apertura_caja_look = "";
- if ($this->apertura_caja == "SI") { $apertura_caja_look .= "" ;} 
- if (empty($apertura_caja_look)) { $apertura_caja_look = $this->apertura_caja; }
-?>
-<input type="hidden" name="apertura_caja" value="<?php echo $this->form_encode_input($apertura_caja) . "\">" . $apertura_caja_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$apertura_caja_look = "";
- if ($this->apertura_caja == "SI") { $apertura_caja_look .= "" ;} 
- if (empty($apertura_caja_look)) { $apertura_caja_look = $this->apertura_caja; }
-?>
-<span id="id_read_on_apertura_caja" class="css_apertura_caja_line" style="<?php echo $sStyleReadLab_apertura_caja; ?>"><?php echo $this->form_format_readonly("apertura_caja", $this->form_encode_input($apertura_caja_look)); ?></span><span id="id_read_off_apertura_caja" class="css_read_off_apertura_caja css_apertura_caja_line" style="<?php echo $sStyleReadInp_apertura_caja; ?>"><?php echo "<div id=\"idAjaxCheckbox_apertura_caja\" style=\"display: inline-block\" class=\"css_apertura_caja_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_apertura_caja_line"><?php $tempOptionId = "id-opt-apertura_caja" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-apertura_caja sc-ui-checkbox-apertura_caja" name="apertura_caja[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_apertura_caja'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->apertura_caja_1))  { echo " checked" ;} ?> onClick="do_ajax_form_configuraciones_event_apertura_caja_onclick();" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_apertura_caja_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_apertura_caja_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['caja_movil']))
-   {
-       $this->nm_new_label['caja_movil'] = "LLAMAR CAJA DESDE MÓVIL?:";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $caja_movil = $this->caja_movil;
-   $sStyleHidden_caja_movil = '';
-   if (isset($this->nmgp_cmp_hidden['caja_movil']) && $this->nmgp_cmp_hidden['caja_movil'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['caja_movil']);
-       $sStyleHidden_caja_movil = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_caja_movil = 'display: none;';
-   $sStyleReadInp_caja_movil = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['caja_movil']) && $this->nmgp_cmp_readonly['caja_movil'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['caja_movil']);
-       $sStyleReadLab_caja_movil = '';
-       $sStyleReadInp_caja_movil = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['caja_movil']) && $this->nmgp_cmp_hidden['caja_movil'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="caja_movil" value="<?php echo $this->form_encode_input($this->caja_movil) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->caja_movil_1 = explode(";", trim($this->caja_movil));
-  } 
-  else
-  {
-      if (empty($this->caja_movil))
-      {
-          $this->caja_movil_1= array(); 
-          $this->caja_movil= "NO";
-      } 
-      else
-      {
-          $this->caja_movil_1= $this->caja_movil; 
-          $this->caja_movil= ""; 
-          foreach ($this->caja_movil_1 as $cada_caja_movil)
-          {
-             if (!empty($caja_movil))
-             {
-                 $this->caja_movil.= ";"; 
-             } 
-             $this->caja_movil.= $cada_caja_movil; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_caja_movil_label" id="hidden_field_label_caja_movil" style="<?php echo $sStyleHidden_caja_movil; ?>"><span id="id_label_caja_movil"><?php echo $this->nm_new_label['caja_movil']; ?></span></TD>
-    <TD class="scFormDataOdd css_caja_movil_line" id="hidden_field_data_caja_movil" style="<?php echo $sStyleHidden_caja_movil; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_caja_movil_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["caja_movil"]) &&  $this->nmgp_cmp_readonly["caja_movil"] == "on") { 
-
-$caja_movil_look = "";
- if ($this->caja_movil == "SI") { $caja_movil_look .= "" ;} 
- if (empty($caja_movil_look)) { $caja_movil_look = $this->caja_movil; }
-?>
-<input type="hidden" name="caja_movil" value="<?php echo $this->form_encode_input($caja_movil) . "\">" . $caja_movil_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$caja_movil_look = "";
- if ($this->caja_movil == "SI") { $caja_movil_look .= "" ;} 
- if (empty($caja_movil_look)) { $caja_movil_look = $this->caja_movil; }
-?>
-<span id="id_read_on_caja_movil" class="css_caja_movil_line" style="<?php echo $sStyleReadLab_caja_movil; ?>"><?php echo $this->form_format_readonly("caja_movil", $this->form_encode_input($caja_movil_look)); ?></span><span id="id_read_off_caja_movil" class="css_read_off_caja_movil css_caja_movil_line" style="<?php echo $sStyleReadInp_caja_movil; ?>"><?php echo "<div id=\"idAjaxCheckbox_caja_movil\" style=\"display: inline-block\" class=\"css_caja_movil_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_caja_movil_line"><?php $tempOptionId = "id-opt-caja_movil" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-caja_movil sc-ui-checkbox-caja_movil" name="caja_movil[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_caja_movil'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->caja_movil_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span id="id_read_on_nombre_pc" class="sc-ui-readonly-nombre_pc css_nombre_pc_line" style="<?php echo $sStyleReadLab_nombre_pc; ?>"><?php echo $this->form_format_readonly("nombre_pc", $this->form_encode_input($this->nombre_pc)); ?></span><span id="id_read_off_nombre_pc" class="css_read_off_nombre_pc<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_nombre_pc; ?>">
+ <input class="sc-js-input scFormObjectOdd css_nombre_pc_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_nombre_pc" type=text name="nombre_pc" value="<?php echo $this->form_encode_input($nombre_pc) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=32"; } ?> maxlength=32 alt="{datatype: 'text', maxLength: 32, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 <span class="scFormPopupBubble" style="display: inline-block"><span class="scFormPopupTrigger"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "return false;", "return false;", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
 </span><table class="scFormPopup"><tbody><?php
 if (isset($_SESSION['scriptcase']['reg_conf']['html_dir']) && $_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'") {
 ?>
-<tr><td class="scFormPopupTopRight scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopLeft scFormPopupCorner"></td></tr><tr><td class="scFormPopupRight"></td><td class="scFormPopupContent">Para llamar caja desde el movil, para cobrar una cuenta desde restaurantes, pedidos, facturas, desde la aplicacion movil</td><td class="scFormPopupLeft"></td></tr><tr><td class="scFormPopupBottomRight scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomLeft scFormPopupCorner"></td></tr><?php
+<tr><td class="scFormPopupTopRight scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopLeft scFormPopupCorner"></td></tr><tr><td class="scFormPopupRight"></td><td class="scFormPopupContent">Coloque el nombre de RED del Computador donde está conectada la Impresora</td><td class="scFormPopupLeft"></td></tr><tr><td class="scFormPopupBottomRight scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomLeft scFormPopupCorner"></td></tr><?php
 } else {
 ?>
-<tr><td class="scFormPopupTopLeft scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopRight scFormPopupCorner"></td></tr><tr><td class="scFormPopupLeft"></td><td class="scFormPopupContent">Para llamar caja desde el movil, para cobrar una cuenta desde restaurantes, pedidos, facturas, desde la aplicacion movil</td><td class="scFormPopupRight"></td></tr><tr><td class="scFormPopupBottomLeft scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomRight scFormPopupCorner"></td></tr><?php
+<tr><td class="scFormPopupTopLeft scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopRight scFormPopupCorner"></td></tr><tr><td class="scFormPopupLeft"></td><td class="scFormPopupContent">Coloque el nombre de RED del Computador donde está conectada la Impresora</td><td class="scFormPopupRight"></td></tr><tr><td class="scFormPopupBottomLeft scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomRight scFormPopupCorner"></td></tr><?php
 }
 ?>
-</tbody></table></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_caja_movil_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_caja_movil_text"></span></td></tr></table></td></tr></table></TD>
+</tbody></table></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_nombre_pc_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_nombre_pc_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
 <?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
@@ -1990,736 +1710,57 @@ if (isset($_SESSION['scriptcase']['reg_conf']['html_dir']) && $_SESSION['scriptc
 
 
    <?php
-   if (!isset($this->nm_new_label['control_diasmora']))
-   {
-       $this->nm_new_label['control_diasmora'] = "CONTROL CARTERA CON DÍAS DE MORA?:";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $control_diasmora = $this->control_diasmora;
-   $sStyleHidden_control_diasmora = '';
-   if (isset($this->nmgp_cmp_hidden['control_diasmora']) && $this->nmgp_cmp_hidden['control_diasmora'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['control_diasmora']);
-       $sStyleHidden_control_diasmora = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_control_diasmora = 'display: none;';
-   $sStyleReadInp_control_diasmora = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['control_diasmora']) && $this->nmgp_cmp_readonly['control_diasmora'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['control_diasmora']);
-       $sStyleReadLab_control_diasmora = '';
-       $sStyleReadInp_control_diasmora = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['control_diasmora']) && $this->nmgp_cmp_hidden['control_diasmora'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="control_diasmora" value="<?php echo $this->form_encode_input($this->control_diasmora) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->control_diasmora_1 = explode(";", trim($this->control_diasmora));
-  } 
-  else
-  {
-      if (empty($this->control_diasmora))
-      {
-          $this->control_diasmora_1= array(); 
-          $this->control_diasmora= "NO";
-      } 
-      else
-      {
-          $this->control_diasmora_1= $this->control_diasmora; 
-          $this->control_diasmora= ""; 
-          foreach ($this->control_diasmora_1 as $cada_control_diasmora)
-          {
-             if (!empty($control_diasmora))
-             {
-                 $this->control_diasmora.= ";"; 
-             } 
-             $this->control_diasmora.= $cada_control_diasmora; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_control_diasmora_label" id="hidden_field_label_control_diasmora" style="<?php echo $sStyleHidden_control_diasmora; ?>"><span id="id_label_control_diasmora"><?php echo $this->nm_new_label['control_diasmora']; ?></span></TD>
-    <TD class="scFormDataOdd css_control_diasmora_line" id="hidden_field_data_control_diasmora" style="<?php echo $sStyleHidden_control_diasmora; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_control_diasmora_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["control_diasmora"]) &&  $this->nmgp_cmp_readonly["control_diasmora"] == "on") { 
-
-$control_diasmora_look = "";
- if ($this->control_diasmora == "SI") { $control_diasmora_look .= "" ;} 
- if (empty($control_diasmora_look)) { $control_diasmora_look = $this->control_diasmora; }
-?>
-<input type="hidden" name="control_diasmora" value="<?php echo $this->form_encode_input($control_diasmora) . "\">" . $control_diasmora_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$control_diasmora_look = "";
- if ($this->control_diasmora == "SI") { $control_diasmora_look .= "" ;} 
- if (empty($control_diasmora_look)) { $control_diasmora_look = $this->control_diasmora; }
-?>
-<span id="id_read_on_control_diasmora" class="css_control_diasmora_line" style="<?php echo $sStyleReadLab_control_diasmora; ?>"><?php echo $this->form_format_readonly("control_diasmora", $this->form_encode_input($control_diasmora_look)); ?></span><span id="id_read_off_control_diasmora" class="css_read_off_control_diasmora css_control_diasmora_line" style="<?php echo $sStyleReadInp_control_diasmora; ?>"><?php echo "<div id=\"idAjaxCheckbox_control_diasmora\" style=\"display: inline-block\" class=\"css_control_diasmora_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_control_diasmora_line"><?php $tempOptionId = "id-opt-control_diasmora" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-control_diasmora sc-ui-checkbox-control_diasmora" name="control_diasmora[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_control_diasmora'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->control_diasmora_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_control_diasmora_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_control_diasmora_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['control_costo']))
-   {
-       $this->nm_new_label['control_costo'] = "CONTROLAR VENTAS CON VALOR DEL COSTO?:";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $control_costo = $this->control_costo;
-   $sStyleHidden_control_costo = '';
-   if (isset($this->nmgp_cmp_hidden['control_costo']) && $this->nmgp_cmp_hidden['control_costo'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['control_costo']);
-       $sStyleHidden_control_costo = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_control_costo = 'display: none;';
-   $sStyleReadInp_control_costo = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['control_costo']) && $this->nmgp_cmp_readonly['control_costo'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['control_costo']);
-       $sStyleReadLab_control_costo = '';
-       $sStyleReadInp_control_costo = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['control_costo']) && $this->nmgp_cmp_hidden['control_costo'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="control_costo" value="<?php echo $this->form_encode_input($this->control_costo) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->control_costo_1 = explode(";", trim($this->control_costo));
-  } 
-  else
-  {
-      if (empty($this->control_costo))
-      {
-          $this->control_costo_1= array(); 
-          $this->control_costo= "NO";
-      } 
-      else
-      {
-          $this->control_costo_1= $this->control_costo; 
-          $this->control_costo= ""; 
-          foreach ($this->control_costo_1 as $cada_control_costo)
-          {
-             if (!empty($control_costo))
-             {
-                 $this->control_costo.= ";"; 
-             } 
-             $this->control_costo.= $cada_control_costo; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_control_costo_label" id="hidden_field_label_control_costo" style="<?php echo $sStyleHidden_control_costo; ?>"><span id="id_label_control_costo"><?php echo $this->nm_new_label['control_costo']; ?></span></TD>
-    <TD class="scFormDataOdd css_control_costo_line" id="hidden_field_data_control_costo" style="<?php echo $sStyleHidden_control_costo; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_control_costo_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["control_costo"]) &&  $this->nmgp_cmp_readonly["control_costo"] == "on") { 
-
-$control_costo_look = "";
- if ($this->control_costo == "SI") { $control_costo_look .= "" ;} 
- if (empty($control_costo_look)) { $control_costo_look = $this->control_costo; }
-?>
-<input type="hidden" name="control_costo" value="<?php echo $this->form_encode_input($control_costo) . "\">" . $control_costo_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$control_costo_look = "";
- if ($this->control_costo == "SI") { $control_costo_look .= "" ;} 
- if (empty($control_costo_look)) { $control_costo_look = $this->control_costo; }
-?>
-<span id="id_read_on_control_costo" class="css_control_costo_line" style="<?php echo $sStyleReadLab_control_costo; ?>"><?php echo $this->form_format_readonly("control_costo", $this->form_encode_input($control_costo_look)); ?></span><span id="id_read_off_control_costo" class="css_read_off_control_costo css_control_costo_line" style="<?php echo $sStyleReadInp_control_costo; ?>"><?php echo "<div id=\"idAjaxCheckbox_control_costo\" style=\"display: inline-block\" class=\"css_control_costo_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_control_costo_line"><?php $tempOptionId = "id-opt-control_costo" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-control_costo sc-ui-checkbox-control_costo" name="control_costo[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_control_costo'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->control_costo_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_control_costo_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_control_costo_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['activar_console_log']))
-   {
-       $this->nm_new_label['activar_console_log'] = "ACTIVAR CONSOLE LOG?:";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $activar_console_log = $this->activar_console_log;
-   $sStyleHidden_activar_console_log = '';
-   if (isset($this->nmgp_cmp_hidden['activar_console_log']) && $this->nmgp_cmp_hidden['activar_console_log'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['activar_console_log']);
-       $sStyleHidden_activar_console_log = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_activar_console_log = 'display: none;';
-   $sStyleReadInp_activar_console_log = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['activar_console_log']) && $this->nmgp_cmp_readonly['activar_console_log'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['activar_console_log']);
-       $sStyleReadLab_activar_console_log = '';
-       $sStyleReadInp_activar_console_log = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['activar_console_log']) && $this->nmgp_cmp_hidden['activar_console_log'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="activar_console_log" value="<?php echo $this->form_encode_input($this->activar_console_log) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->activar_console_log_1 = explode(";", trim($this->activar_console_log));
-  } 
-  else
-  {
-      if (empty($this->activar_console_log))
-      {
-          $this->activar_console_log_1= array(); 
-          $this->activar_console_log= "NO";
-      } 
-      else
-      {
-          $this->activar_console_log_1= $this->activar_console_log; 
-          $this->activar_console_log= ""; 
-          foreach ($this->activar_console_log_1 as $cada_activar_console_log)
-          {
-             if (!empty($activar_console_log))
-             {
-                 $this->activar_console_log.= ";"; 
-             } 
-             $this->activar_console_log.= $cada_activar_console_log; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_activar_console_log_label" id="hidden_field_label_activar_console_log" style="<?php echo $sStyleHidden_activar_console_log; ?>"><span id="id_label_activar_console_log"><?php echo $this->nm_new_label['activar_console_log']; ?></span></TD>
-    <TD class="scFormDataOdd css_activar_console_log_line" id="hidden_field_data_activar_console_log" style="<?php echo $sStyleHidden_activar_console_log; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_activar_console_log_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["activar_console_log"]) &&  $this->nmgp_cmp_readonly["activar_console_log"] == "on") { 
-
-$activar_console_log_look = "";
- if ($this->activar_console_log == "SI") { $activar_console_log_look .= "" ;} 
- if (empty($activar_console_log_look)) { $activar_console_log_look = $this->activar_console_log; }
-?>
-<input type="hidden" name="activar_console_log" value="<?php echo $this->form_encode_input($activar_console_log) . "\">" . $activar_console_log_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$activar_console_log_look = "";
- if ($this->activar_console_log == "SI") { $activar_console_log_look .= "" ;} 
- if (empty($activar_console_log_look)) { $activar_console_log_look = $this->activar_console_log; }
-?>
-<span id="id_read_on_activar_console_log" class="css_activar_console_log_line" style="<?php echo $sStyleReadLab_activar_console_log; ?>"><?php echo $this->form_format_readonly("activar_console_log", $this->form_encode_input($activar_console_log_look)); ?></span><span id="id_read_off_activar_console_log" class="css_read_off_activar_console_log css_activar_console_log_line" style="<?php echo $sStyleReadInp_activar_console_log; ?>"><?php echo "<div id=\"idAjaxCheckbox_activar_console_log\" style=\"display: inline-block\" class=\"css_activar_console_log_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_activar_console_log_line"><?php $tempOptionId = "id-opt-activar_console_log" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-activar_console_log sc-ui-checkbox-activar_console_log" name="activar_console_log[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_activar_console_log'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->activar_console_log_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('activar_console_log')", "nm_mostra_mens('activar_console_log')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_activar_console_log_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_activar_console_log_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['pago_automatico']))
-   {
-       $this->nm_new_label['pago_automatico'] = "COMPROBANTE DE EGRESO AUTOMÁTICO EN COMPRAS?:";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $pago_automatico = $this->pago_automatico;
-   $sStyleHidden_pago_automatico = '';
-   if (isset($this->nmgp_cmp_hidden['pago_automatico']) && $this->nmgp_cmp_hidden['pago_automatico'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['pago_automatico']);
-       $sStyleHidden_pago_automatico = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_pago_automatico = 'display: none;';
-   $sStyleReadInp_pago_automatico = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['pago_automatico']) && $this->nmgp_cmp_readonly['pago_automatico'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['pago_automatico']);
-       $sStyleReadLab_pago_automatico = '';
-       $sStyleReadInp_pago_automatico = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['pago_automatico']) && $this->nmgp_cmp_hidden['pago_automatico'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="pago_automatico" value="<?php echo $this->form_encode_input($this->pago_automatico) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->pago_automatico_1 = explode(";", trim($this->pago_automatico));
-  } 
-  else
-  {
-      if (empty($this->pago_automatico))
-      {
-          $this->pago_automatico_1= array(); 
-          $this->pago_automatico= "NO";
-      } 
-      else
-      {
-          $this->pago_automatico_1= $this->pago_automatico; 
-          $this->pago_automatico= ""; 
-          foreach ($this->pago_automatico_1 as $cada_pago_automatico)
-          {
-             if (!empty($pago_automatico))
-             {
-                 $this->pago_automatico.= ";"; 
-             } 
-             $this->pago_automatico.= $cada_pago_automatico; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_pago_automatico_label" id="hidden_field_label_pago_automatico" style="<?php echo $sStyleHidden_pago_automatico; ?>"><span id="id_label_pago_automatico"><?php echo $this->nm_new_label['pago_automatico']; ?></span></TD>
-    <TD class="scFormDataOdd css_pago_automatico_line" id="hidden_field_data_pago_automatico" style="<?php echo $sStyleHidden_pago_automatico; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_pago_automatico_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["pago_automatico"]) &&  $this->nmgp_cmp_readonly["pago_automatico"] == "on") { 
-
-$pago_automatico_look = "";
- if ($this->pago_automatico == "SI") { $pago_automatico_look .= "" ;} 
- if (empty($pago_automatico_look)) { $pago_automatico_look = $this->pago_automatico; }
-?>
-<input type="hidden" name="pago_automatico" value="<?php echo $this->form_encode_input($pago_automatico) . "\">" . $pago_automatico_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$pago_automatico_look = "";
- if ($this->pago_automatico == "SI") { $pago_automatico_look .= "" ;} 
- if (empty($pago_automatico_look)) { $pago_automatico_look = $this->pago_automatico; }
-?>
-<span id="id_read_on_pago_automatico" class="css_pago_automatico_line" style="<?php echo $sStyleReadLab_pago_automatico; ?>"><?php echo $this->form_format_readonly("pago_automatico", $this->form_encode_input($pago_automatico_look)); ?></span><span id="id_read_off_pago_automatico" class="css_read_off_pago_automatico css_pago_automatico_line" style="<?php echo $sStyleReadInp_pago_automatico; ?>"><?php echo "<div id=\"idAjaxCheckbox_pago_automatico\" style=\"display: inline-block\" class=\"css_pago_automatico_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_pago_automatico_line"><?php $tempOptionId = "id-opt-pago_automatico" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-pago_automatico sc-ui-checkbox-pago_automatico" name="pago_automatico[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_pago_automatico'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->pago_automatico_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('pago_automatico')", "nm_mostra_mens('pago_automatico')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_pago_automatico_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_pago_automatico_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['tipodoc_pordefecto_pos']))
-   {
-       $this->nm_new_label['tipodoc_pordefecto_pos'] = "DOCUMENTO POR DEFECTO EN POS";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $tipodoc_pordefecto_pos = $this->tipodoc_pordefecto_pos;
-   $sStyleHidden_tipodoc_pordefecto_pos = '';
-   if (isset($this->nmgp_cmp_hidden['tipodoc_pordefecto_pos']) && $this->nmgp_cmp_hidden['tipodoc_pordefecto_pos'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['tipodoc_pordefecto_pos']);
-       $sStyleHidden_tipodoc_pordefecto_pos = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_tipodoc_pordefecto_pos = 'display: none;';
-   $sStyleReadInp_tipodoc_pordefecto_pos = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['tipodoc_pordefecto_pos']) && $this->nmgp_cmp_readonly['tipodoc_pordefecto_pos'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['tipodoc_pordefecto_pos']);
-       $sStyleReadLab_tipodoc_pordefecto_pos = '';
-       $sStyleReadInp_tipodoc_pordefecto_pos = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['tipodoc_pordefecto_pos']) && $this->nmgp_cmp_hidden['tipodoc_pordefecto_pos'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="tipodoc_pordefecto_pos" value="<?php echo $this->form_encode_input($this->tipodoc_pordefecto_pos) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_tipodoc_pordefecto_pos_label" id="hidden_field_label_tipodoc_pordefecto_pos" style="<?php echo $sStyleHidden_tipodoc_pordefecto_pos; ?>"><span id="id_label_tipodoc_pordefecto_pos"><?php echo $this->nm_new_label['tipodoc_pordefecto_pos']; ?></span></TD>
-    <TD class="scFormDataOdd css_tipodoc_pordefecto_pos_line" id="hidden_field_data_tipodoc_pordefecto_pos" style="<?php echo $sStyleHidden_tipodoc_pordefecto_pos; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_tipodoc_pordefecto_pos_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["tipodoc_pordefecto_pos"]) &&  $this->nmgp_cmp_readonly["tipodoc_pordefecto_pos"] == "on") { 
-
-$tipodoc_pordefecto_pos_look = "";
- if ($this->tipodoc_pordefecto_pos == "FV") { $tipodoc_pordefecto_pos_look .= "FACTURA" ;} 
- if ($this->tipodoc_pordefecto_pos == "RS") { $tipodoc_pordefecto_pos_look .= "REMISIÓN" ;} 
- if (empty($tipodoc_pordefecto_pos_look)) { $tipodoc_pordefecto_pos_look = $this->tipodoc_pordefecto_pos; }
-?>
-<input type="hidden" name="tipodoc_pordefecto_pos" value="<?php echo $this->form_encode_input($tipodoc_pordefecto_pos) . "\">" . $tipodoc_pordefecto_pos_look . ""; ?>
-<?php } else { ?>
-<?php
-
-$tipodoc_pordefecto_pos_look = "";
- if ($this->tipodoc_pordefecto_pos == "FV") { $tipodoc_pordefecto_pos_look .= "FACTURA" ;} 
- if ($this->tipodoc_pordefecto_pos == "RS") { $tipodoc_pordefecto_pos_look .= "REMISIÓN" ;} 
- if (empty($tipodoc_pordefecto_pos_look)) { $tipodoc_pordefecto_pos_look = $this->tipodoc_pordefecto_pos; }
-?>
-<span id="id_read_on_tipodoc_pordefecto_pos" class="css_tipodoc_pordefecto_pos_line"  style="<?php echo $sStyleReadLab_tipodoc_pordefecto_pos; ?>"><?php echo $this->form_format_readonly("tipodoc_pordefecto_pos", $this->form_encode_input($tipodoc_pordefecto_pos_look)); ?></span><span id="id_read_off_tipodoc_pordefecto_pos" class="css_read_off_tipodoc_pordefecto_pos<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap; <?php echo $sStyleReadInp_tipodoc_pordefecto_pos; ?>">
- <span id="idAjaxSelect_tipodoc_pordefecto_pos" class="<?php echo $this->classes_100perc_fields['span_select'] ?>"><select class="sc-js-input scFormObjectOdd css_tipodoc_pordefecto_pos_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_tipodoc_pordefecto_pos" name="tipodoc_pordefecto_pos" size="1" alt="{type: 'select', enterTab: false}">
- <option  value="FV" <?php  if ($this->tipodoc_pordefecto_pos == "FV") { echo " selected" ;} ?><?php  if (empty($this->tipodoc_pordefecto_pos)) { echo " selected" ;} ?>>FACTURA</option>
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_tipodoc_pordefecto_pos'][] = 'FV'; ?>
- <option  value="RS" <?php  if ($this->tipodoc_pordefecto_pos == "RS") { echo " selected" ;} ?>>REMISIÓN</option>
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_tipodoc_pordefecto_pos'][] = 'RS'; ?>
- </select></span>
-</span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('tipodoc_pordefecto_pos')", "nm_mostra_mens('tipodoc_pordefecto_pos')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_tipodoc_pordefecto_pos_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_tipodoc_pordefecto_pos_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['codproducto_en_facventa']))
-   {
-       $this->nm_new_label['codproducto_en_facventa'] = "MOSTRAR CODPRODUCTO EN POS";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $codproducto_en_facventa = $this->codproducto_en_facventa;
-   $sStyleHidden_codproducto_en_facventa = '';
-   if (isset($this->nmgp_cmp_hidden['codproducto_en_facventa']) && $this->nmgp_cmp_hidden['codproducto_en_facventa'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['codproducto_en_facventa']);
-       $sStyleHidden_codproducto_en_facventa = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_codproducto_en_facventa = 'display: none;';
-   $sStyleReadInp_codproducto_en_facventa = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['codproducto_en_facventa']) && $this->nmgp_cmp_readonly['codproducto_en_facventa'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['codproducto_en_facventa']);
-       $sStyleReadLab_codproducto_en_facventa = '';
-       $sStyleReadInp_codproducto_en_facventa = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['codproducto_en_facventa']) && $this->nmgp_cmp_hidden['codproducto_en_facventa'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="codproducto_en_facventa" value="<?php echo $this->form_encode_input($this->codproducto_en_facventa) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->codproducto_en_facventa_1 = explode(";", trim($this->codproducto_en_facventa));
-  } 
-  else
-  {
-      if (empty($this->codproducto_en_facventa))
-      {
-          $this->codproducto_en_facventa_1= array(); 
-          $this->codproducto_en_facventa= "NO";
-      } 
-      else
-      {
-          $this->codproducto_en_facventa_1= $this->codproducto_en_facventa; 
-          $this->codproducto_en_facventa= ""; 
-          foreach ($this->codproducto_en_facventa_1 as $cada_codproducto_en_facventa)
-          {
-             if (!empty($codproducto_en_facventa))
-             {
-                 $this->codproducto_en_facventa.= ";"; 
-             } 
-             $this->codproducto_en_facventa.= $cada_codproducto_en_facventa; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_codproducto_en_facventa_label" id="hidden_field_label_codproducto_en_facventa" style="<?php echo $sStyleHidden_codproducto_en_facventa; ?>"><span id="id_label_codproducto_en_facventa"><?php echo $this->nm_new_label['codproducto_en_facventa']; ?></span></TD>
-    <TD class="scFormDataOdd css_codproducto_en_facventa_line" id="hidden_field_data_codproducto_en_facventa" style="<?php echo $sStyleHidden_codproducto_en_facventa; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_codproducto_en_facventa_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["codproducto_en_facventa"]) &&  $this->nmgp_cmp_readonly["codproducto_en_facventa"] == "on") { 
-
-$codproducto_en_facventa_look = "";
- if ($this->codproducto_en_facventa == "SI") { $codproducto_en_facventa_look .= "" ;} 
- if (empty($codproducto_en_facventa_look)) { $codproducto_en_facventa_look = $this->codproducto_en_facventa; }
-?>
-<input type="hidden" name="codproducto_en_facventa" value="<?php echo $this->form_encode_input($codproducto_en_facventa) . "\">" . $codproducto_en_facventa_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$codproducto_en_facventa_look = "";
- if ($this->codproducto_en_facventa == "SI") { $codproducto_en_facventa_look .= "" ;} 
- if (empty($codproducto_en_facventa_look)) { $codproducto_en_facventa_look = $this->codproducto_en_facventa; }
-?>
-<span id="id_read_on_codproducto_en_facventa" class="css_codproducto_en_facventa_line" style="<?php echo $sStyleReadLab_codproducto_en_facventa; ?>"><?php echo $this->form_format_readonly("codproducto_en_facventa", $this->form_encode_input($codproducto_en_facventa_look)); ?></span><span id="id_read_off_codproducto_en_facventa" class="css_read_off_codproducto_en_facventa css_codproducto_en_facventa_line" style="<?php echo $sStyleReadInp_codproducto_en_facventa; ?>"><?php echo "<div id=\"idAjaxCheckbox_codproducto_en_facventa\" style=\"display: inline-block\" class=\"css_codproducto_en_facventa_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_codproducto_en_facventa_line"><?php $tempOptionId = "id-opt-codproducto_en_facventa" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-codproducto_en_facventa sc-ui-checkbox-codproducto_en_facventa" name="codproducto_en_facventa[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_codproducto_en_facventa'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->codproducto_en_facventa_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('codproducto_en_facventa')", "nm_mostra_mens('codproducto_en_facventa')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_codproducto_en_facventa_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_codproducto_en_facventa_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['dia_limite_pago']))
+    if (!isset($this->nm_new_label['nombre_impre']))
     {
-        $this->nm_new_label['dia_limite_pago'] = "DÍA LÍMITE DE PAGO";
+        $this->nm_new_label['nombre_impre'] = "NOMBRE IMPRESORA DE RED:";
     }
 ?>
 <?php
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $dia_limite_pago = $this->dia_limite_pago;
-   $sStyleHidden_dia_limite_pago = '';
-   if (isset($this->nmgp_cmp_hidden['dia_limite_pago']) && $this->nmgp_cmp_hidden['dia_limite_pago'] == 'off')
+   $nombre_impre = $this->nombre_impre;
+   $sStyleHidden_nombre_impre = '';
+   if (isset($this->nmgp_cmp_hidden['nombre_impre']) && $this->nmgp_cmp_hidden['nombre_impre'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['dia_limite_pago']);
-       $sStyleHidden_dia_limite_pago = 'display: none;';
+       unset($this->nmgp_cmp_hidden['nombre_impre']);
+       $sStyleHidden_nombre_impre = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_dia_limite_pago = 'display: none;';
-   $sStyleReadInp_dia_limite_pago = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['dia_limite_pago']) && $this->nmgp_cmp_readonly['dia_limite_pago'] == 'on')
+   $sStyleReadLab_nombre_impre = 'display: none;';
+   $sStyleReadInp_nombre_impre = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['nombre_impre']) && $this->nmgp_cmp_readonly['nombre_impre'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['dia_limite_pago']);
-       $sStyleReadLab_dia_limite_pago = '';
-       $sStyleReadInp_dia_limite_pago = 'display: none;';
+       unset($this->nmgp_cmp_readonly['nombre_impre']);
+       $sStyleReadLab_nombre_impre = '';
+       $sStyleReadInp_nombre_impre = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['dia_limite_pago']) && $this->nmgp_cmp_hidden['dia_limite_pago'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="dia_limite_pago" value="<?php echo $this->form_encode_input($dia_limite_pago) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['nombre_impre']) && $this->nmgp_cmp_hidden['nombre_impre'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="nombre_impre" value="<?php echo $this->form_encode_input($nombre_impre) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_dia_limite_pago_label" id="hidden_field_label_dia_limite_pago" style="<?php echo $sStyleHidden_dia_limite_pago; ?>"><span id="id_label_dia_limite_pago"><?php echo $this->nm_new_label['dia_limite_pago']; ?></span></TD>
-    <TD class="scFormDataOdd css_dia_limite_pago_line" id="hidden_field_data_dia_limite_pago" style="<?php echo $sStyleHidden_dia_limite_pago; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_dia_limite_pago_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["dia_limite_pago"]) &&  $this->nmgp_cmp_readonly["dia_limite_pago"] == "on") { 
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_nombre_impre_label" id="hidden_field_label_nombre_impre" style="<?php echo $sStyleHidden_nombre_impre; ?>"><span id="id_label_nombre_impre"><?php echo $this->nm_new_label['nombre_impre']; ?></span></TD>
+    <TD class="scFormDataOdd css_nombre_impre_line" id="hidden_field_data_nombre_impre" style="<?php echo $sStyleHidden_nombre_impre; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nombre_impre_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nombre_impre"]) &&  $this->nmgp_cmp_readonly["nombre_impre"] == "on") { 
 
  ?>
-<input type="hidden" name="dia_limite_pago" value="<?php echo $this->form_encode_input($dia_limite_pago) . "\">" . $dia_limite_pago . ""; ?>
+<input type="hidden" name="nombre_impre" value="<?php echo $this->form_encode_input($nombre_impre) . "\">" . $nombre_impre . ""; ?>
 <?php } else { ?>
-<span id="id_read_on_dia_limite_pago" class="sc-ui-readonly-dia_limite_pago css_dia_limite_pago_line" style="<?php echo $sStyleReadLab_dia_limite_pago; ?>"><?php echo $this->form_format_readonly("dia_limite_pago", $this->form_encode_input($this->dia_limite_pago)); ?></span><span id="id_read_off_dia_limite_pago" class="css_read_off_dia_limite_pago<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_dia_limite_pago; ?>">
- <input class="sc-js-input scFormObjectOdd css_dia_limite_pago_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_dia_limite_pago" type=text name="dia_limite_pago" value="<?php echo $this->form_encode_input($dia_limite_pago) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=2"; } ?> alt="{datatype: 'integer', maxLength: 2, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['dia_limite_pago']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['dia_limite_pago']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['dia_limite_pago']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'center', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_dia_limite_pago_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_dia_limite_pago_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['valor_propina_sugerida']))
-    {
-        $this->nm_new_label['valor_propina_sugerida'] = "PORCENTAJE PROPINA SUGERIDA (Restaurantes)";
-    }
+<span id="id_read_on_nombre_impre" class="sc-ui-readonly-nombre_impre css_nombre_impre_line" style="<?php echo $sStyleReadLab_nombre_impre; ?>"><?php echo $this->form_format_readonly("nombre_impre", $this->form_encode_input($this->nombre_impre)); ?></span><span id="id_read_off_nombre_impre" class="css_read_off_nombre_impre<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_nombre_impre; ?>">
+ <input class="sc-js-input scFormObjectOdd css_nombre_impre_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_nombre_impre" type=text name="nombre_impre" value="<?php echo $this->form_encode_input($nombre_impre) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=32"; } ?> maxlength=32 alt="{datatype: 'text', maxLength: 32, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+<span class="scFormPopupBubble" style="display: inline-block"><span class="scFormPopupTrigger"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "return false;", "return false;", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span><table class="scFormPopup"><tbody><?php
+if (isset($_SESSION['scriptcase']['reg_conf']['html_dir']) && $_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'") {
 ?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $valor_propina_sugerida = $this->valor_propina_sugerida;
-   $sStyleHidden_valor_propina_sugerida = '';
-   if (isset($this->nmgp_cmp_hidden['valor_propina_sugerida']) && $this->nmgp_cmp_hidden['valor_propina_sugerida'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['valor_propina_sugerida']);
-       $sStyleHidden_valor_propina_sugerida = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_valor_propina_sugerida = 'display: none;';
-   $sStyleReadInp_valor_propina_sugerida = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['valor_propina_sugerida']) && $this->nmgp_cmp_readonly['valor_propina_sugerida'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['valor_propina_sugerida']);
-       $sStyleReadLab_valor_propina_sugerida = '';
-       $sStyleReadInp_valor_propina_sugerida = 'display: none;';
-   }
+<tr><td class="scFormPopupTopRight scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopLeft scFormPopupCorner"></td></tr><tr><td class="scFormPopupRight"></td><td class="scFormPopupContent">Coloque el nombre de la Impresora donde se va a imprimir</td><td class="scFormPopupLeft"></td></tr><tr><td class="scFormPopupBottomRight scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomLeft scFormPopupCorner"></td></tr><?php
+} else {
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['valor_propina_sugerida']) && $this->nmgp_cmp_hidden['valor_propina_sugerida'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="valor_propina_sugerida" value="<?php echo $this->form_encode_input($valor_propina_sugerida) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_valor_propina_sugerida_label" id="hidden_field_label_valor_propina_sugerida" style="<?php echo $sStyleHidden_valor_propina_sugerida; ?>"><span id="id_label_valor_propina_sugerida"><?php echo $this->nm_new_label['valor_propina_sugerida']; ?></span></TD>
-    <TD class="scFormDataOdd css_valor_propina_sugerida_line" id="hidden_field_data_valor_propina_sugerida" style="<?php echo $sStyleHidden_valor_propina_sugerida; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_valor_propina_sugerida_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["valor_propina_sugerida"]) &&  $this->nmgp_cmp_readonly["valor_propina_sugerida"] == "on") { 
-
- ?>
-<input type="hidden" name="valor_propina_sugerida" value="<?php echo $this->form_encode_input($valor_propina_sugerida) . "\">" . $valor_propina_sugerida . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_valor_propina_sugerida" class="sc-ui-readonly-valor_propina_sugerida css_valor_propina_sugerida_line" style="<?php echo $sStyleReadLab_valor_propina_sugerida; ?>"><?php echo $this->form_format_readonly("valor_propina_sugerida", $this->form_encode_input($this->valor_propina_sugerida)); ?></span><span id="id_read_off_valor_propina_sugerida" class="css_read_off_valor_propina_sugerida<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_valor_propina_sugerida; ?>">
- <input class="sc-js-input scFormObjectOdd css_valor_propina_sugerida_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_valor_propina_sugerida" type=text name="valor_propina_sugerida" value="<?php echo $this->form_encode_input($valor_propina_sugerida) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=4"; } ?> alt="{datatype: 'currency', currencySymbol: '<?php echo $this->field_config['valor_propina_sugerida']['symbol_mon']; ?>', currencyPosition: '<?php echo ((1 == $this->field_config['valor_propina_sugerida']['format_pos'] || 3 == $this->field_config['valor_propina_sugerida']['format_pos']) ? 'left' : 'right'); ?>', maxLength: 15, precision: 0, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['valor_propina_sugerida']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['valor_propina_sugerida']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['valor_propina_sugerida']['symbol_fmt']; ?>, manualDecimals: false, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['valor_propina_sugerida']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('valor_propina_sugerida')", "nm_mostra_mens('valor_propina_sugerida')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_valor_propina_sugerida_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_valor_propina_sugerida_text"></span></td></tr></table></td></tr></table></TD>
-   <?php }?>
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['ver_xml_fe']))
-   {
-       $this->nm_new_label['ver_xml_fe'] = "Ver JSON FE";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $ver_xml_fe = $this->ver_xml_fe;
-   $sStyleHidden_ver_xml_fe = '';
-   if (isset($this->nmgp_cmp_hidden['ver_xml_fe']) && $this->nmgp_cmp_hidden['ver_xml_fe'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['ver_xml_fe']);
-       $sStyleHidden_ver_xml_fe = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_ver_xml_fe = 'display: none;';
-   $sStyleReadInp_ver_xml_fe = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_xml_fe']) && $this->nmgp_cmp_readonly['ver_xml_fe'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['ver_xml_fe']);
-       $sStyleReadLab_ver_xml_fe = '';
-       $sStyleReadInp_ver_xml_fe = 'display: none;';
-   }
+<tr><td class="scFormPopupTopLeft scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopRight scFormPopupCorner"></td></tr><tr><td class="scFormPopupLeft"></td><td class="scFormPopupContent">Coloque el nombre de la Impresora donde se va a imprimir</td><td class="scFormPopupRight"></td></tr><tr><td class="scFormPopupBottomLeft scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomRight scFormPopupCorner"></td></tr><?php
+}
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['ver_xml_fe']) && $this->nmgp_cmp_hidden['ver_xml_fe'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="ver_xml_fe" value="<?php echo $this->form_encode_input($this->ver_xml_fe) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->ver_xml_fe_1 = explode(";", trim($this->ver_xml_fe));
-  } 
-  else
-  {
-      if (empty($this->ver_xml_fe))
-      {
-          $this->ver_xml_fe_1= array(); 
-          $this->ver_xml_fe= "NO";
-      } 
-      else
-      {
-          $this->ver_xml_fe_1= $this->ver_xml_fe; 
-          $this->ver_xml_fe= ""; 
-          foreach ($this->ver_xml_fe_1 as $cada_ver_xml_fe)
-          {
-             if (!empty($ver_xml_fe))
-             {
-                 $this->ver_xml_fe.= ";"; 
-             } 
-             $this->ver_xml_fe.= $cada_ver_xml_fe; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormLabelOdd scUiLabelWidthFix css_ver_xml_fe_label" id="hidden_field_label_ver_xml_fe" style="<?php echo $sStyleHidden_ver_xml_fe; ?>"><span id="id_label_ver_xml_fe"><?php echo $this->nm_new_label['ver_xml_fe']; ?></span></TD>
-    <TD class="scFormDataOdd css_ver_xml_fe_line" id="hidden_field_data_ver_xml_fe" style="<?php echo $sStyleHidden_ver_xml_fe; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_xml_fe_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_xml_fe"]) &&  $this->nmgp_cmp_readonly["ver_xml_fe"] == "on") { 
-
-$ver_xml_fe_look = "";
- if ($this->ver_xml_fe == "SI") { $ver_xml_fe_look .= "SI" ;} 
- if (empty($ver_xml_fe_look)) { $ver_xml_fe_look = $this->ver_xml_fe; }
-?>
-<input type="hidden" name="ver_xml_fe" value="<?php echo $this->form_encode_input($ver_xml_fe) . "\">" . $ver_xml_fe_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$ver_xml_fe_look = "";
- if ($this->ver_xml_fe == "SI") { $ver_xml_fe_look .= "SI" ;} 
- if (empty($ver_xml_fe_look)) { $ver_xml_fe_look = $this->ver_xml_fe; }
-?>
-<span id="id_read_on_ver_xml_fe" class="css_ver_xml_fe_line" style="<?php echo $sStyleReadLab_ver_xml_fe; ?>"><?php echo $this->form_format_readonly("ver_xml_fe", $this->form_encode_input($ver_xml_fe_look)); ?></span><span id="id_read_off_ver_xml_fe" class="css_read_off_ver_xml_fe css_ver_xml_fe_line" style="<?php echo $sStyleReadInp_ver_xml_fe; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_xml_fe\" style=\"display: inline-block\" class=\"css_ver_xml_fe_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_ver_xml_fe_line"><?php $tempOptionId = "id-opt-ver_xml_fe" . $sc_seq_vert . "-1"; ?>
- <div class="sc switch">
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_xml_fe sc-ui-checkbox-ver_xml_fe" name="ver_xml_fe[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_ver_xml_fe'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->ver_xml_fe_1))  { echo " checked" ;} ?> onClick="" ><span></span>
-<label for="<?php echo $tempOptionId ?>">SI</label> </div>
-</TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ver_xml_fe')", "nm_mostra_mens('ver_xml_fe')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_xml_fe_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_xml_fe_text"></span></td></tr></table></td></tr></table></TD>
+</tbody></table></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_nombre_impre_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_nombre_impre_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
 <?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>

@@ -20,6 +20,31 @@ function scFocusField(sField) {
     $oField = $(document.F1.elements[sField]);
   }
 
+  if ($oField.length > 0) {
+    switch ($oField[0].name) {
+      case 'proveedor':
+      case 'modo':
+      case 'servidor1':
+      case 'servidor2':
+      case 'servidor3':
+      case 'tokenempresa':
+      case 'tokenpassword':
+      case 'url_api_pdfs':
+      case 'url_api_sendmail':
+        sc_exib_ocult_pag('form_webservicefe_form0');
+        break;
+      case 'servidor_prueba1':
+      case 'servidor_prueba2':
+      case 'servidor_prueba3':
+      case 'token_prueba':
+      case 'password_prueba':
+      case 'enviar_dian':
+      case 'enviar_cliente':
+        sc_exib_ocult_pag('form_webservicefe_form1');
+        break;
+    }
+  }
+
   if ($("#id_ac_" + sField).length > 0) {
     if ($oField.hasClass("select2-hidden-accessible")) {
       if (false == scSetFocusOnField($oField)) {
@@ -58,6 +83,8 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["servidor3" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tokenempresa" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tokenpassword" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["url_api_pdfs" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["url_api_sendmail" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["servidor_prueba1" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["servidor_prueba2" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["servidor_prueba3" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -108,6 +135,18 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["tokenpassword" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["url_api_pdfs" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["url_api_pdfs" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["url_api_sendmail" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["url_api_sendmail" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["servidor_prueba1" + iSeqRow]["blur"]) {
@@ -238,6 +277,12 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_servidor_prueba3' + iSeqRow).bind('blur', function() { sc_form_webservicefe_servidor_prueba3_onblur(this, iSeqRow) })
                                               .bind('change', function() { sc_form_webservicefe_servidor_prueba3_onchange(this, iSeqRow) })
                                               .bind('focus', function() { sc_form_webservicefe_servidor_prueba3_onfocus(this, iSeqRow) });
+  $('#id_sc_field_url_api_pdfs' + iSeqRow).bind('blur', function() { sc_form_webservicefe_url_api_pdfs_onblur(this, iSeqRow) })
+                                          .bind('change', function() { sc_form_webservicefe_url_api_pdfs_onchange(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_webservicefe_url_api_pdfs_onfocus(this, iSeqRow) });
+  $('#id_sc_field_url_api_sendmail' + iSeqRow).bind('blur', function() { sc_form_webservicefe_url_api_sendmail_onblur(this, iSeqRow) })
+                                              .bind('change', function() { sc_form_webservicefe_url_api_sendmail_onchange(this, iSeqRow) })
+                                              .bind('focus', function() { sc_form_webservicefe_url_api_sendmail_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-enviar_dian' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-enviar_cliente' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
 } // scJQEventsAdd
@@ -443,6 +488,51 @@ function sc_form_webservicefe_servidor_prueba3_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_webservicefe_url_api_pdfs_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_validate_url_api_pdfs();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_url_api_pdfs_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_webservicefe_url_api_pdfs_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_url_api_sendmail_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_validate_url_api_sendmail();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_url_api_sendmail_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_webservicefe_url_api_sendmail_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function displayChange_page(page, status) {
+	if ("0" == page) {
+		displayChange_page_0(status);
+	}
+	if ("1" == page) {
+		displayChange_page_1(status);
+	}
+}
+
+function displayChange_page_0(status) {
+	displayChange_block("0", status);
+}
+
+function displayChange_page_1(status) {
+	displayChange_block("1", status);
+}
+
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
@@ -460,6 +550,8 @@ function displayChange_block_0(status) {
 	displayChange_field("servidor3", "", status);
 	displayChange_field("tokenempresa", "", status);
 	displayChange_field("tokenpassword", "", status);
+	displayChange_field("url_api_pdfs", "", status);
+	displayChange_field("url_api_sendmail", "", status);
 }
 
 function displayChange_block_1(status) {
@@ -480,6 +572,8 @@ function displayChange_row(row, status) {
 	displayChange_field_servidor3(row, status);
 	displayChange_field_tokenempresa(row, status);
 	displayChange_field_tokenpassword(row, status);
+	displayChange_field_url_api_pdfs(row, status);
+	displayChange_field_url_api_sendmail(row, status);
 	displayChange_field_servidor_prueba1(row, status);
 	displayChange_field_servidor_prueba2(row, status);
 	displayChange_field_servidor_prueba3(row, status);
@@ -510,6 +604,12 @@ function displayChange_field(field, row, status) {
 	}
 	if ("tokenpassword" == field) {
 		displayChange_field_tokenpassword(row, status);
+	}
+	if ("url_api_pdfs" == field) {
+		displayChange_field_url_api_pdfs(row, status);
+	}
+	if ("url_api_sendmail" == field) {
+		displayChange_field_url_api_sendmail(row, status);
 	}
 	if ("servidor_prueba1" == field) {
 		displayChange_field_servidor_prueba1(row, status);
@@ -577,6 +677,12 @@ function displayChange_field_tokenempresa(row, status) {
 }
 
 function displayChange_field_tokenpassword(row, status) {
+}
+
+function displayChange_field_url_api_pdfs(row, status) {
+}
+
+function displayChange_field_url_api_sendmail(row, status) {
 }
 
 function displayChange_field_servidor_prueba1(row, status) {

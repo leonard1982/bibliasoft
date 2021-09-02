@@ -3103,6 +3103,80 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_webservicefe_mob_validate_tokenpassword_cb
 
+  // ---------- Validate url_api_pdfs
+  function do_ajax_form_webservicefe_mob_validate_url_api_pdfs()
+  {
+    var nomeCampo_url_api_pdfs = "url_api_pdfs";
+    var var_url_api_pdfs = scAjaxGetFieldText(nomeCampo_url_api_pdfs);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_webservicefe_mob_validate_url_api_pdfs(var_url_api_pdfs, var_script_case_init, do_ajax_form_webservicefe_mob_validate_url_api_pdfs_cb);
+  } // do_ajax_form_webservicefe_mob_validate_url_api_pdfs
+
+  function do_ajax_form_webservicefe_mob_validate_url_api_pdfs_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "url_api_pdfs";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_webservicefe_mob_validate_url_api_pdfs_cb
+
+  // ---------- Validate url_api_sendmail
+  function do_ajax_form_webservicefe_mob_validate_url_api_sendmail()
+  {
+    var nomeCampo_url_api_sendmail = "url_api_sendmail";
+    var var_url_api_sendmail = scAjaxGetFieldText(nomeCampo_url_api_sendmail);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_webservicefe_mob_validate_url_api_sendmail(var_url_api_sendmail, var_script_case_init, do_ajax_form_webservicefe_mob_validate_url_api_sendmail_cb);
+  } // do_ajax_form_webservicefe_mob_validate_url_api_sendmail
+
+  function do_ajax_form_webservicefe_mob_validate_url_api_sendmail_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "url_api_sendmail";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_webservicefe_mob_validate_url_api_sendmail_cb
+
   // ---------- Validate servidor_prueba1
   function do_ajax_form_webservicefe_mob_validate_servidor_prueba1()
   {
@@ -3376,9 +3450,11 @@ sajax_show_javascript();
     var var_servidor_prueba3 = scAjaxGetFieldText("servidor_prueba3");
     var var_token_prueba = scAjaxGetFieldText("token_prueba");
     var var_password_prueba = scAjaxGetFieldText("password_prueba");
+    var var_url_api_pdfs = scAjaxGetFieldText("url_api_pdfs");
+    var var_url_api_sendmail = scAjaxGetFieldText("url_api_sendmail");
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn(true);
-    x_ajax_form_webservicefe_mob_event_proveedor_onchange(var_proveedor, var_servidor1, var_servidor2, var_servidor3, var_tokenempresa, var_tokenpassword, var_servidor_prueba1, var_servidor_prueba2, var_servidor_prueba3, var_token_prueba, var_password_prueba, var_script_case_init, do_ajax_form_webservicefe_mob_event_proveedor_onchange_cb);
+    x_ajax_form_webservicefe_mob_event_proveedor_onchange(var_proveedor, var_servidor1, var_servidor2, var_servidor3, var_tokenempresa, var_tokenpassword, var_servidor_prueba1, var_servidor_prueba2, var_servidor_prueba3, var_token_prueba, var_password_prueba, var_url_api_pdfs, var_url_api_sendmail, var_script_case_init, do_ajax_form_webservicefe_mob_event_proveedor_onchange_cb);
   } // do_ajax_form_webservicefe_mob_event_proveedor_onchange
 
   function do_ajax_form_webservicefe_mob_event_proveedor_onchange_cb(sResp)
@@ -3717,6 +3793,8 @@ function scJs_sweetalert_params(params) {
     var var_servidor3 = scAjaxGetFieldText("servidor3");
     var var_tokenempresa = scAjaxGetFieldText("tokenempresa");
     var var_tokenpassword = scAjaxGetFieldText("tokenpassword");
+    var var_url_api_pdfs = scAjaxGetFieldText("url_api_pdfs");
+    var var_url_api_sendmail = scAjaxGetFieldText("url_api_sendmail");
     var var_servidor_prueba1 = scAjaxGetFieldText("servidor_prueba1");
     var var_servidor_prueba2 = scAjaxGetFieldText("servidor_prueba2");
     var var_servidor_prueba3 = scAjaxGetFieldText("servidor_prueba3");
@@ -3734,7 +3812,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_webservicefe_mob_submit_form(var_proveedor, var_modo, var_servidor1, var_servidor2, var_servidor3, var_tokenempresa, var_tokenpassword, var_servidor_prueba1, var_servidor_prueba2, var_servidor_prueba3, var_token_prueba, var_password_prueba, var_enviar_dian, var_enviar_cliente, var_idwebservicefe, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_webservicefe_mob_submit_form_cb);
+    x_ajax_form_webservicefe_mob_submit_form(var_proveedor, var_modo, var_servidor1, var_servidor2, var_servidor3, var_tokenempresa, var_tokenpassword, var_url_api_pdfs, var_url_api_sendmail, var_servidor_prueba1, var_servidor_prueba2, var_servidor_prueba3, var_token_prueba, var_password_prueba, var_enviar_dian, var_enviar_cliente, var_idwebservicefe, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_webservicefe_mob_submit_form_cb);
   } // do_ajax_form_webservicefe_mob_submit_form
 
   function do_ajax_form_webservicefe_mob_submit_form_cb(sResp)
@@ -3766,6 +3844,8 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("servidor3");
       scAjaxHideErrorDisplay("tokenempresa");
       scAjaxHideErrorDisplay("tokenpassword");
+      scAjaxHideErrorDisplay("url_api_pdfs");
+      scAjaxHideErrorDisplay("url_api_sendmail");
       scAjaxHideErrorDisplay("servidor_prueba1");
       scAjaxHideErrorDisplay("servidor_prueba2");
       scAjaxHideErrorDisplay("servidor_prueba3");
@@ -3836,6 +3916,8 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob'][
     scAjaxHideErrorDisplay("servidor3");
     scAjaxHideErrorDisplay("tokenempresa");
     scAjaxHideErrorDisplay("tokenpassword");
+    scAjaxHideErrorDisplay("url_api_pdfs");
+    scAjaxHideErrorDisplay("url_api_sendmail");
     scAjaxHideErrorDisplay("servidor_prueba1");
     scAjaxHideErrorDisplay("servidor_prueba2");
     scAjaxHideErrorDisplay("servidor_prueba3");
@@ -3934,13 +4016,15 @@ if ($this->Embutida_form)
   ajax_field_list[4] = "servidor3";
   ajax_field_list[5] = "tokenempresa";
   ajax_field_list[6] = "tokenpassword";
-  ajax_field_list[7] = "servidor_prueba1";
-  ajax_field_list[8] = "servidor_prueba2";
-  ajax_field_list[9] = "servidor_prueba3";
-  ajax_field_list[10] = "token_prueba";
-  ajax_field_list[11] = "password_prueba";
-  ajax_field_list[12] = "enviar_dian";
-  ajax_field_list[13] = "enviar_cliente";
+  ajax_field_list[7] = "url_api_pdfs";
+  ajax_field_list[8] = "url_api_sendmail";
+  ajax_field_list[9] = "servidor_prueba1";
+  ajax_field_list[10] = "servidor_prueba2";
+  ajax_field_list[11] = "servidor_prueba3";
+  ajax_field_list[12] = "token_prueba";
+  ajax_field_list[13] = "password_prueba";
+  ajax_field_list[14] = "enviar_dian";
+  ajax_field_list[15] = "enviar_cliente";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -3954,6 +4038,8 @@ if ($this->Embutida_form)
     "servidor3": {"label": "Servidor 3", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "tokenempresa": {"label": "Token Empresa", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "tokenpassword": {"label": "Token Password", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "url_api_pdfs": {"label": "URL API PDFs", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "url_api_sendmail": {"label": "URL API SENDMAIL", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "servidor_prueba1": {"label": "Servidor Prueba 1", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "servidor_prueba2": {"label": "Servidor Prueba 2", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "servidor_prueba3": {"label": "Servidor Prueba 3", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -3982,6 +4068,8 @@ if ($this->Embutida_form)
     "servidor3": new Array(),
     "tokenempresa": new Array(),
     "tokenpassword": new Array(),
+    "url_api_pdfs": new Array(),
+    "url_api_sendmail": new Array(),
     "servidor_prueba1": new Array(),
     "servidor_prueba2": new Array(),
     "servidor_prueba3": new Array(),
@@ -3997,6 +4085,8 @@ if ($this->Embutida_form)
   ajax_field_mult["servidor3"][1] = "servidor3";
   ajax_field_mult["tokenempresa"][1] = "tokenempresa";
   ajax_field_mult["tokenpassword"][1] = "tokenpassword";
+  ajax_field_mult["url_api_pdfs"][1] = "url_api_pdfs";
+  ajax_field_mult["url_api_sendmail"][1] = "url_api_sendmail";
   ajax_field_mult["servidor_prueba1"][1] = "servidor_prueba1";
   ajax_field_mult["servidor_prueba2"][1] = "servidor_prueba2";
   ajax_field_mult["servidor_prueba3"][1] = "servidor_prueba3";
@@ -4013,6 +4103,8 @@ if ($this->Embutida_form)
     "servidor3": new Array("hidden_field_label_servidor3", "hidden_field_data_servidor3"),
     "tokenempresa": new Array("hidden_field_label_tokenempresa", "hidden_field_data_tokenempresa"),
     "tokenpassword": new Array("hidden_field_label_tokenpassword", "hidden_field_data_tokenpassword"),
+    "url_api_pdfs": new Array("hidden_field_label_url_api_pdfs", "hidden_field_data_url_api_pdfs"),
+    "url_api_sendmail": new Array("hidden_field_label_url_api_sendmail", "hidden_field_data_url_api_sendmail"),
     "servidor_prueba1": new Array("hidden_field_label_servidor_prueba1", "hidden_field_data_servidor_prueba1"),
     "servidor_prueba2": new Array("hidden_field_label_servidor_prueba2", "hidden_field_data_servidor_prueba2"),
     "servidor_prueba3": new Array("hidden_field_label_servidor_prueba3", "hidden_field_data_servidor_prueba3"),
@@ -4030,6 +4122,8 @@ if ($this->Embutida_form)
     "servidor3": "off",
     "tokenempresa": "off",
     "tokenpassword": "off",
+    "url_api_pdfs": "off",
+    "url_api_sendmail": "off",
     "servidor_prueba1": "off",
     "servidor_prueba2": "off",
     "servidor_prueba3": "off",
@@ -4151,6 +4245,40 @@ if ($this->Embutida_form)
       return;
     }
     if ("tokenpassword" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("url_api_pdfs" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("url_api_sendmail" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);

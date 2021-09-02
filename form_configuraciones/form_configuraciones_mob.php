@@ -292,8 +292,8 @@ class form_configuraciones_mob_ini
       $this->nm_dt_criacao   = "20180824"; 
       $this->nm_hr_criacao   = "070459"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210723"; 
-      $this->nm_hr_ult_alt   = "170044"; 
+      $this->nm_dt_ult_alt   = "20210902"; 
+      $this->nm_hr_ult_alt   = "165211"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -526,8 +526,7 @@ class form_configuraciones_mob_ini
           }
       }
       if (isset($_SESSION['scriptcase']['form_configuraciones_mob']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -967,7 +966,7 @@ class form_configuraciones_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYH9X7D1BeHQJwDMNODkB/HEF/DoJeDcJUZ1F7D1rwHQraDEvsZSXeV5B7ZuFaD9NwH9X7HABYVWBqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuX7DMzGV9FeDurGVENUHQXGZ1BiD1rwHuFUDMveHErCHEXCHIFGD9XsDQFGHAvCVWJsDMvmVcBOHEFYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5JwHuzGVIBOV5FYVoJwDcBqH9B/Z1BeV5FUDMzGVkXeHEFqVoBqD9NmDQFGHANOV5FUHgvsDkBOHEFYVoraD9BsZSB/HArYD5JeDMNKZSXeV5FqDoB/DcJeZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCV5FaVoBiHQJKZ9XGD1BeD5B/DMvOVcrsDWF/VEFGDcBqH9B/HINaZMBOHgNOVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BqHgBYHErsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraHQXOZSBOHAN7HQrqHgBOHEFiHEB3ZuXGHQNwH9BiHArYHuJwHuzGZSNiH5XCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeZ9F7D1BeHuF7DMvmVIB/HEF/DoFUHQNmH9FaHANOHQJwDEBODkFeH5FYVoFGHQJKDQBqHArYHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuzGVcFeDWF/HMJwDcJUZ1B/DSvOZMJeDEBeVkJGDuJeZuXGHQFYZSFGD1veV5X7DMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwV5FGHuNODkBOV5F/DorqD9JmZ1B/HIBeZMFaDErKVkXeDWX7DoF7D9JKDQX7Z1rwD5NUHgrKVcFCH5FqVoJwD9BsZ1B/Z1BeD5F7HgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuJsD9NmDQFUDSBYHQF7HgrwVcXKDuX7HIX7D9XGZ1F7D1rKHQFGHgrKDkB/DWFqHMB/HQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDuBqHANKV5BODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5JeDMveHEBUDuFaHMJeHQNmDQFUD1BeHQJsHgvsVIBODWJeVENUHQXOZ1rqHIBeZMJeDEvsVkJqDWr/VoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['form_configuraciones_mob']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['form_configuraciones_mob']['initialize'])  
       { 
@@ -1784,14 +1783,19 @@ ob_start();
             $espaciado = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_configuraciones_mob_validate_nombre_pc' == $_POST['rs'])
+        if ('ajax_form_configuraciones_mob_validate_caja_movil' == $_POST['rs'])
         {
-            $nombre_pc = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $caja_movil = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_configuraciones_mob_validate_nombre_impre' == $_POST['rs'])
+        if ('ajax_form_configuraciones_mob_validate_pago_automatico' == $_POST['rs'])
         {
-            $nombre_impre = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $pago_automatico = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_dia_limite_pago' == $_POST['rs'])
+        {
+            $dia_limite_pago = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_form_configuraciones_mob_validate_refresh_grid_doc' == $_POST['rs'])
@@ -1804,74 +1808,14 @@ ob_start();
             $desactivar_control_sesion = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_configuraciones_mob_validate_noborrar_tmp_enpos' == $_POST['rs'])
+        if ('ajax_form_configuraciones_mob_validate_nombre_pc' == $_POST['rs'])
         {
-            $noborrar_tmp_enpos = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nombre_pc = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_configuraciones_mob_validate_validar_correo_enlinea' == $_POST['rs'])
+        if ('ajax_form_configuraciones_mob_validate_nombre_impre' == $_POST['rs'])
         {
-            $validar_correo_enlinea = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_modificainvpedido' == $_POST['rs'])
-        {
-            $modificainvpedido = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_apertura_caja' == $_POST['rs'])
-        {
-            $apertura_caja = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_caja_movil' == $_POST['rs'])
-        {
-            $caja_movil = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_control_diasmora' == $_POST['rs'])
-        {
-            $control_diasmora = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_control_costo' == $_POST['rs'])
-        {
-            $control_costo = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_activar_console_log' == $_POST['rs'])
-        {
-            $activar_console_log = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_pago_automatico' == $_POST['rs'])
-        {
-            $pago_automatico = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_tipodoc_pordefecto_pos' == $_POST['rs'])
-        {
-            $tipodoc_pordefecto_pos = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_codproducto_en_facventa' == $_POST['rs'])
-        {
-            $codproducto_en_facventa = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_dia_limite_pago' == $_POST['rs'])
-        {
-            $dia_limite_pago = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_valor_propina_sugerida' == $_POST['rs'])
-        {
-            $valor_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_configuraciones_mob_validate_ver_xml_fe' == $_POST['rs'])
-        {
-            $ver_xml_fe = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nombre_impre = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_form_configuraciones_mob_validate_essociedad' == $_POST['rs'])
@@ -1887,6 +1831,86 @@ ob_start();
         if ('ajax_form_configuraciones_mob_validate_idconfiguraciones' == $_POST['rs'])
         {
             $idconfiguraciones = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_control_diasmora' == $_POST['rs'])
+        {
+            $control_diasmora = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_control_costo' == $_POST['rs'])
+        {
+            $control_costo = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_modificainvpedido' == $_POST['rs'])
+        {
+            $modificainvpedido = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_tipodoc_pordefecto_pos' == $_POST['rs'])
+        {
+            $tipodoc_pordefecto_pos = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_ver_xml_fe' == $_POST['rs'])
+        {
+            $ver_xml_fe = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_noborrar_tmp_enpos' == $_POST['rs'])
+        {
+            $noborrar_tmp_enpos = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_validar_correo_enlinea' == $_POST['rs'])
+        {
+            $validar_correo_enlinea = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_apertura_caja' == $_POST['rs'])
+        {
+            $apertura_caja = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_activar_console_log' == $_POST['rs'])
+        {
+            $activar_console_log = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_codproducto_en_facventa' == $_POST['rs'])
+        {
+            $codproducto_en_facventa = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_valor_propina_sugerida' == $_POST['rs'])
+        {
+            $valor_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_columna_imprimir_ticket' == $_POST['rs'])
+        {
+            $columna_imprimir_ticket = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_columna_imprimir_a4' == $_POST['rs'])
+        {
+            $columna_imprimir_a4 = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_columna_whatsapp' == $_POST['rs'])
+        {
+            $columna_whatsapp = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_columna_npedido' == $_POST['rs'])
+        {
+            $columna_npedido = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_configuraciones_mob_validate_columna_reg_pdf_propio' == $_POST['rs'])
+        {
+            $columna_reg_pdf_propio = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_form_configuraciones_mob_event_apertura_caja_onclick' == $_POST['rs'])
@@ -1911,35 +1935,40 @@ ob_start();
             $fecha = NM_utf8_urldecode($_POST['rsargs'][3]);
             $activo = NM_utf8_urldecode($_POST['rsargs'][4]);
             $espaciado = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $nombre_pc = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $nombre_impre = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $refresh_grid_doc = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $desactivar_control_sesion = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $noborrar_tmp_enpos = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $validar_correo_enlinea = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $modificainvpedido = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $apertura_caja = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $caja_movil = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $control_diasmora = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $control_costo = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $activar_console_log = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $pago_automatico = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $caja_movil = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $pago_automatico = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $dia_limite_pago = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $refresh_grid_doc = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $desactivar_control_sesion = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $nombre_pc = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $nombre_impre = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $essociedad = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $grancontr = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $idconfiguraciones = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $control_diasmora = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $control_costo = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $modificainvpedido = NM_utf8_urldecode($_POST['rsargs'][18]);
             $tipodoc_pordefecto_pos = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $codproducto_en_facventa = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $dia_limite_pago = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $valor_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $ver_xml_fe = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $essociedad = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $grancontr = NM_utf8_urldecode($_POST['rsargs'][25]);
-            $idconfiguraciones = NM_utf8_urldecode($_POST['rsargs'][26]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][27]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][28]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][29]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][30]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][31]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][32]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][33]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][34]);
+            $ver_xml_fe = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $noborrar_tmp_enpos = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $validar_correo_enlinea = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $apertura_caja = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $activar_console_log = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $codproducto_en_facventa = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $valor_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][26]);
+            $columna_imprimir_ticket = NM_utf8_urldecode($_POST['rsargs'][27]);
+            $columna_imprimir_a4 = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $columna_whatsapp = NM_utf8_urldecode($_POST['rsargs'][29]);
+            $columna_npedido = NM_utf8_urldecode($_POST['rsargs'][30]);
+            $columna_reg_pdf_propio = NM_utf8_urldecode($_POST['rsargs'][31]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][32]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][33]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][34]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][35]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][36]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][37]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][38]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][39]);
         }
         if ('ajax_form_configuraciones_mob_navigate_form' == $_POST['rs'])
         {
@@ -2512,21 +2541,26 @@ ob_start();
 
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html'] = array();
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['consolidararticulos'] = "class=\"sc-js-input scFormObjectOdd css_consolidararticulos_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_consolidararticulos\" name=\"consolidararticulos\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['desactivar_control_sesion'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['noborrar_tmp_enpos'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['validar_correo_enlinea'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['modificainvpedido'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['apertura_caja'] = " onClick=\"do_ajax_form_configuraciones_mob_event_apertura_caja_onclick();\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['caja_movil'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['control_diasmora'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['control_costo'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['activar_console_log'] = " onClick=\"\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['pago_automatico'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['tipodoc_pordefecto_pos'] = "class=\"sc-js-input scFormObjectOdd css_tipodoc_pordefecto_pos_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_tipodoc_pordefecto_pos\" name=\"tipodoc_pordefecto_pos\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['codproducto_en_facventa'] = " onClick=\"\" ";
-    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['ver_xml_fe'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['desactivar_control_sesion'] = " onClick=\"\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['essociedad'] = " onClick=\"\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['grancontr'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['control_diasmora'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['control_costo'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['modificainvpedido'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['tipodoc_pordefecto_pos'] = "class=\"sc-js-input scFormObjectOdd css_tipodoc_pordefecto_pos_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_tipodoc_pordefecto_pos\" name=\"tipodoc_pordefecto_pos\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['ver_xml_fe'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['noborrar_tmp_enpos'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['validar_correo_enlinea'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['apertura_caja'] = " onClick=\"do_ajax_form_configuraciones_mob_event_apertura_caja_onclick();\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['activar_console_log'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['codproducto_en_facventa'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['columna_imprimir_ticket'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['columna_imprimir_a4'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['columna_whatsapp'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['columna_npedido'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['columna_reg_pdf_propio'] = " onClick=\"\" ";
 
     if (!defined('SC_SAJAX_LOADED'))
     {
@@ -2546,27 +2580,32 @@ ob_start();
     sajax_export("ajax_form_configuraciones_mob_validate_fecha");
     sajax_export("ajax_form_configuraciones_mob_validate_activo");
     sajax_export("ajax_form_configuraciones_mob_validate_espaciado");
-    sajax_export("ajax_form_configuraciones_mob_validate_nombre_pc");
-    sajax_export("ajax_form_configuraciones_mob_validate_nombre_impre");
+    sajax_export("ajax_form_configuraciones_mob_validate_caja_movil");
+    sajax_export("ajax_form_configuraciones_mob_validate_pago_automatico");
+    sajax_export("ajax_form_configuraciones_mob_validate_dia_limite_pago");
     sajax_export("ajax_form_configuraciones_mob_validate_refresh_grid_doc");
     sajax_export("ajax_form_configuraciones_mob_validate_desactivar_control_sesion");
-    sajax_export("ajax_form_configuraciones_mob_validate_noborrar_tmp_enpos");
-    sajax_export("ajax_form_configuraciones_mob_validate_validar_correo_enlinea");
-    sajax_export("ajax_form_configuraciones_mob_validate_modificainvpedido");
-    sajax_export("ajax_form_configuraciones_mob_validate_apertura_caja");
-    sajax_export("ajax_form_configuraciones_mob_validate_caja_movil");
-    sajax_export("ajax_form_configuraciones_mob_validate_control_diasmora");
-    sajax_export("ajax_form_configuraciones_mob_validate_control_costo");
-    sajax_export("ajax_form_configuraciones_mob_validate_activar_console_log");
-    sajax_export("ajax_form_configuraciones_mob_validate_pago_automatico");
-    sajax_export("ajax_form_configuraciones_mob_validate_tipodoc_pordefecto_pos");
-    sajax_export("ajax_form_configuraciones_mob_validate_codproducto_en_facventa");
-    sajax_export("ajax_form_configuraciones_mob_validate_dia_limite_pago");
-    sajax_export("ajax_form_configuraciones_mob_validate_valor_propina_sugerida");
-    sajax_export("ajax_form_configuraciones_mob_validate_ver_xml_fe");
+    sajax_export("ajax_form_configuraciones_mob_validate_nombre_pc");
+    sajax_export("ajax_form_configuraciones_mob_validate_nombre_impre");
     sajax_export("ajax_form_configuraciones_mob_validate_essociedad");
     sajax_export("ajax_form_configuraciones_mob_validate_grancontr");
     sajax_export("ajax_form_configuraciones_mob_validate_idconfiguraciones");
+    sajax_export("ajax_form_configuraciones_mob_validate_control_diasmora");
+    sajax_export("ajax_form_configuraciones_mob_validate_control_costo");
+    sajax_export("ajax_form_configuraciones_mob_validate_modificainvpedido");
+    sajax_export("ajax_form_configuraciones_mob_validate_tipodoc_pordefecto_pos");
+    sajax_export("ajax_form_configuraciones_mob_validate_ver_xml_fe");
+    sajax_export("ajax_form_configuraciones_mob_validate_noborrar_tmp_enpos");
+    sajax_export("ajax_form_configuraciones_mob_validate_validar_correo_enlinea");
+    sajax_export("ajax_form_configuraciones_mob_validate_apertura_caja");
+    sajax_export("ajax_form_configuraciones_mob_validate_activar_console_log");
+    sajax_export("ajax_form_configuraciones_mob_validate_codproducto_en_facventa");
+    sajax_export("ajax_form_configuraciones_mob_validate_valor_propina_sugerida");
+    sajax_export("ajax_form_configuraciones_mob_validate_columna_imprimir_ticket");
+    sajax_export("ajax_form_configuraciones_mob_validate_columna_imprimir_a4");
+    sajax_export("ajax_form_configuraciones_mob_validate_columna_whatsapp");
+    sajax_export("ajax_form_configuraciones_mob_validate_columna_npedido");
+    sajax_export("ajax_form_configuraciones_mob_validate_columna_reg_pdf_propio");
     sajax_export("ajax_form_configuraciones_mob_event_apertura_caja_onclick");
     sajax_export("ajax_form_configuraciones_mob_event_serial_onclick");
     sajax_export("ajax_form_configuraciones_mob_event_serial_onfocus");
@@ -2710,14 +2749,14 @@ ob_start();
         exit;
     } // ajax_validate_espaciado
 
-    function ajax_form_configuraciones_mob_validate_nombre_pc($nombre_pc, $script_case_init)
+    function ajax_form_configuraciones_mob_validate_caja_movil($caja_movil, $script_case_init)
     {
         global $inicial_form_configuraciones_mob;
         //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_nombre_pc';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_caja_movil';
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'nombre_pc' => NM_utf8_urldecode($nombre_pc),
+                  'caja_movil' => NM_utf8_urldecode($caja_movil),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
@@ -2727,16 +2766,16 @@ ob_start();
         }
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
         exit;
-    } // ajax_validate_nombre_pc
+    } // ajax_validate_caja_movil
 
-    function ajax_form_configuraciones_mob_validate_nombre_impre($nombre_impre, $script_case_init)
+    function ajax_form_configuraciones_mob_validate_pago_automatico($pago_automatico, $script_case_init)
     {
         global $inicial_form_configuraciones_mob;
         //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_nombre_impre';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_pago_automatico';
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'nombre_impre' => NM_utf8_urldecode($nombre_impre),
+                  'pago_automatico' => NM_utf8_urldecode($pago_automatico),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
@@ -2746,7 +2785,26 @@ ob_start();
         }
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
         exit;
-    } // ajax_validate_nombre_impre
+    } // ajax_validate_pago_automatico
+
+    function ajax_form_configuraciones_mob_validate_dia_limite_pago($dia_limite_pago, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_dia_limite_pago';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'dia_limite_pago' => NM_utf8_urldecode($dia_limite_pago),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_dia_limite_pago
 
     function ajax_form_configuraciones_mob_validate_refresh_grid_doc($refresh_grid_doc, $script_case_init)
     {
@@ -2786,14 +2844,14 @@ ob_start();
         exit;
     } // ajax_validate_desactivar_control_sesion
 
-    function ajax_form_configuraciones_mob_validate_noborrar_tmp_enpos($noborrar_tmp_enpos, $script_case_init)
+    function ajax_form_configuraciones_mob_validate_nombre_pc($nombre_pc, $script_case_init)
     {
         global $inicial_form_configuraciones_mob;
         //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_noborrar_tmp_enpos';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_nombre_pc';
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'noborrar_tmp_enpos' => NM_utf8_urldecode($noborrar_tmp_enpos),
+                  'nombre_pc' => NM_utf8_urldecode($nombre_pc),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
@@ -2803,16 +2861,16 @@ ob_start();
         }
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
         exit;
-    } // ajax_validate_noborrar_tmp_enpos
+    } // ajax_validate_nombre_pc
 
-    function ajax_form_configuraciones_mob_validate_validar_correo_enlinea($validar_correo_enlinea, $script_case_init)
+    function ajax_form_configuraciones_mob_validate_nombre_impre($nombre_impre, $script_case_init)
     {
         global $inicial_form_configuraciones_mob;
         //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_validar_correo_enlinea';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_nombre_impre';
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'validar_correo_enlinea' => NM_utf8_urldecode($validar_correo_enlinea),
+                  'nombre_impre' => NM_utf8_urldecode($nombre_impre),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
                  );
@@ -2822,235 +2880,7 @@ ob_start();
         }
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
         exit;
-    } // ajax_validate_validar_correo_enlinea
-
-    function ajax_form_configuraciones_mob_validate_modificainvpedido($modificainvpedido, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_modificainvpedido';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'modificainvpedido' => NM_utf8_urldecode($modificainvpedido),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_modificainvpedido
-
-    function ajax_form_configuraciones_mob_validate_apertura_caja($apertura_caja, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_apertura_caja';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'apertura_caja' => NM_utf8_urldecode($apertura_caja),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_apertura_caja
-
-    function ajax_form_configuraciones_mob_validate_caja_movil($caja_movil, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_caja_movil';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'caja_movil' => NM_utf8_urldecode($caja_movil),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_caja_movil
-
-    function ajax_form_configuraciones_mob_validate_control_diasmora($control_diasmora, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_control_diasmora';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'control_diasmora' => NM_utf8_urldecode($control_diasmora),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_control_diasmora
-
-    function ajax_form_configuraciones_mob_validate_control_costo($control_costo, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_control_costo';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'control_costo' => NM_utf8_urldecode($control_costo),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_control_costo
-
-    function ajax_form_configuraciones_mob_validate_activar_console_log($activar_console_log, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_activar_console_log';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'activar_console_log' => NM_utf8_urldecode($activar_console_log),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_activar_console_log
-
-    function ajax_form_configuraciones_mob_validate_pago_automatico($pago_automatico, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_pago_automatico';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'pago_automatico' => NM_utf8_urldecode($pago_automatico),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_pago_automatico
-
-    function ajax_form_configuraciones_mob_validate_tipodoc_pordefecto_pos($tipodoc_pordefecto_pos, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_tipodoc_pordefecto_pos';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'tipodoc_pordefecto_pos' => NM_utf8_urldecode($tipodoc_pordefecto_pos),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_tipodoc_pordefecto_pos
-
-    function ajax_form_configuraciones_mob_validate_codproducto_en_facventa($codproducto_en_facventa, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_codproducto_en_facventa';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'codproducto_en_facventa' => NM_utf8_urldecode($codproducto_en_facventa),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_codproducto_en_facventa
-
-    function ajax_form_configuraciones_mob_validate_dia_limite_pago($dia_limite_pago, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_dia_limite_pago';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'dia_limite_pago' => NM_utf8_urldecode($dia_limite_pago),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_dia_limite_pago
-
-    function ajax_form_configuraciones_mob_validate_valor_propina_sugerida($valor_propina_sugerida, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_valor_propina_sugerida';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'valor_propina_sugerida' => NM_utf8_urldecode($valor_propina_sugerida),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_valor_propina_sugerida
-
-    function ajax_form_configuraciones_mob_validate_ver_xml_fe($ver_xml_fe, $script_case_init)
-    {
-        global $inicial_form_configuraciones_mob;
-        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_ver_xml_fe';
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
-                  'ver_xml_fe' => NM_utf8_urldecode($ver_xml_fe),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
-        exit;
-    } // ajax_validate_ver_xml_fe
+    } // ajax_validate_nombre_impre
 
     function ajax_form_configuraciones_mob_validate_essociedad($essociedad, $script_case_init)
     {
@@ -3109,6 +2939,310 @@ ob_start();
         exit;
     } // ajax_validate_idconfiguraciones
 
+    function ajax_form_configuraciones_mob_validate_control_diasmora($control_diasmora, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_control_diasmora';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'control_diasmora' => NM_utf8_urldecode($control_diasmora),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_control_diasmora
+
+    function ajax_form_configuraciones_mob_validate_control_costo($control_costo, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_control_costo';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'control_costo' => NM_utf8_urldecode($control_costo),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_control_costo
+
+    function ajax_form_configuraciones_mob_validate_modificainvpedido($modificainvpedido, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_modificainvpedido';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'modificainvpedido' => NM_utf8_urldecode($modificainvpedido),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_modificainvpedido
+
+    function ajax_form_configuraciones_mob_validate_tipodoc_pordefecto_pos($tipodoc_pordefecto_pos, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_tipodoc_pordefecto_pos';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'tipodoc_pordefecto_pos' => NM_utf8_urldecode($tipodoc_pordefecto_pos),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_tipodoc_pordefecto_pos
+
+    function ajax_form_configuraciones_mob_validate_ver_xml_fe($ver_xml_fe, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_ver_xml_fe';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'ver_xml_fe' => NM_utf8_urldecode($ver_xml_fe),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_ver_xml_fe
+
+    function ajax_form_configuraciones_mob_validate_noborrar_tmp_enpos($noborrar_tmp_enpos, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_noborrar_tmp_enpos';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'noborrar_tmp_enpos' => NM_utf8_urldecode($noborrar_tmp_enpos),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_noborrar_tmp_enpos
+
+    function ajax_form_configuraciones_mob_validate_validar_correo_enlinea($validar_correo_enlinea, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_validar_correo_enlinea';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'validar_correo_enlinea' => NM_utf8_urldecode($validar_correo_enlinea),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_validar_correo_enlinea
+
+    function ajax_form_configuraciones_mob_validate_apertura_caja($apertura_caja, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_apertura_caja';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'apertura_caja' => NM_utf8_urldecode($apertura_caja),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_apertura_caja
+
+    function ajax_form_configuraciones_mob_validate_activar_console_log($activar_console_log, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_activar_console_log';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'activar_console_log' => NM_utf8_urldecode($activar_console_log),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_activar_console_log
+
+    function ajax_form_configuraciones_mob_validate_codproducto_en_facventa($codproducto_en_facventa, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_codproducto_en_facventa';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'codproducto_en_facventa' => NM_utf8_urldecode($codproducto_en_facventa),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_codproducto_en_facventa
+
+    function ajax_form_configuraciones_mob_validate_valor_propina_sugerida($valor_propina_sugerida, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_valor_propina_sugerida';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'valor_propina_sugerida' => NM_utf8_urldecode($valor_propina_sugerida),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_valor_propina_sugerida
+
+    function ajax_form_configuraciones_mob_validate_columna_imprimir_ticket($columna_imprimir_ticket, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_columna_imprimir_ticket';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'columna_imprimir_ticket' => NM_utf8_urldecode($columna_imprimir_ticket),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_columna_imprimir_ticket
+
+    function ajax_form_configuraciones_mob_validate_columna_imprimir_a4($columna_imprimir_a4, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_columna_imprimir_a4';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'columna_imprimir_a4' => NM_utf8_urldecode($columna_imprimir_a4),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_columna_imprimir_a4
+
+    function ajax_form_configuraciones_mob_validate_columna_whatsapp($columna_whatsapp, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_columna_whatsapp';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'columna_whatsapp' => NM_utf8_urldecode($columna_whatsapp),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_columna_whatsapp
+
+    function ajax_form_configuraciones_mob_validate_columna_npedido($columna_npedido, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_columna_npedido';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'columna_npedido' => NM_utf8_urldecode($columna_npedido),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_columna_npedido
+
+    function ajax_form_configuraciones_mob_validate_columna_reg_pdf_propio($columna_reg_pdf_propio, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_columna_reg_pdf_propio';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'columna_reg_pdf_propio' => NM_utf8_urldecode($columna_reg_pdf_propio),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_columna_reg_pdf_propio
+
     function ajax_form_configuraciones_mob_event_apertura_caja_onclick($apertura_caja, $idconfiguraciones, $script_case_init)
     {
         global $inicial_form_configuraciones_mob;
@@ -3165,7 +3299,7 @@ ob_start();
         exit;
     } // ajax_event_serial_onfocus
 
-    function ajax_form_configuraciones_mob_submit_form($lineasporfactura, $consolidararticulos, $serial, $fecha, $activo, $espaciado, $nombre_pc, $nombre_impre, $refresh_grid_doc, $desactivar_control_sesion, $noborrar_tmp_enpos, $validar_correo_enlinea, $modificainvpedido, $apertura_caja, $caja_movil, $control_diasmora, $control_costo, $activar_console_log, $pago_automatico, $tipodoc_pordefecto_pos, $codproducto_en_facventa, $dia_limite_pago, $valor_propina_sugerida, $ver_xml_fe, $essociedad, $grancontr, $idconfiguraciones, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_configuraciones_mob_submit_form($lineasporfactura, $consolidararticulos, $serial, $fecha, $activo, $espaciado, $caja_movil, $pago_automatico, $dia_limite_pago, $refresh_grid_doc, $desactivar_control_sesion, $nombre_pc, $nombre_impre, $essociedad, $grancontr, $idconfiguraciones, $control_diasmora, $control_costo, $modificainvpedido, $tipodoc_pordefecto_pos, $ver_xml_fe, $noborrar_tmp_enpos, $validar_correo_enlinea, $apertura_caja, $activar_console_log, $codproducto_en_facventa, $valor_propina_sugerida, $columna_imprimir_ticket, $columna_imprimir_a4, $columna_whatsapp, $columna_npedido, $columna_reg_pdf_propio, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_configuraciones_mob;
         //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
@@ -3178,27 +3312,32 @@ ob_start();
                   'fecha' => NM_utf8_urldecode($fecha),
                   'activo' => NM_utf8_urldecode($activo),
                   'espaciado' => NM_utf8_urldecode($espaciado),
-                  'nombre_pc' => NM_utf8_urldecode($nombre_pc),
-                  'nombre_impre' => NM_utf8_urldecode($nombre_impre),
+                  'caja_movil' => NM_utf8_urldecode($caja_movil),
+                  'pago_automatico' => NM_utf8_urldecode($pago_automatico),
+                  'dia_limite_pago' => NM_utf8_urldecode($dia_limite_pago),
                   'refresh_grid_doc' => NM_utf8_urldecode($refresh_grid_doc),
                   'desactivar_control_sesion' => NM_utf8_urldecode($desactivar_control_sesion),
-                  'noborrar_tmp_enpos' => NM_utf8_urldecode($noborrar_tmp_enpos),
-                  'validar_correo_enlinea' => NM_utf8_urldecode($validar_correo_enlinea),
-                  'modificainvpedido' => NM_utf8_urldecode($modificainvpedido),
-                  'apertura_caja' => NM_utf8_urldecode($apertura_caja),
-                  'caja_movil' => NM_utf8_urldecode($caja_movil),
-                  'control_diasmora' => NM_utf8_urldecode($control_diasmora),
-                  'control_costo' => NM_utf8_urldecode($control_costo),
-                  'activar_console_log' => NM_utf8_urldecode($activar_console_log),
-                  'pago_automatico' => NM_utf8_urldecode($pago_automatico),
-                  'tipodoc_pordefecto_pos' => NM_utf8_urldecode($tipodoc_pordefecto_pos),
-                  'codproducto_en_facventa' => NM_utf8_urldecode($codproducto_en_facventa),
-                  'dia_limite_pago' => NM_utf8_urldecode($dia_limite_pago),
-                  'valor_propina_sugerida' => NM_utf8_urldecode($valor_propina_sugerida),
-                  'ver_xml_fe' => NM_utf8_urldecode($ver_xml_fe),
+                  'nombre_pc' => NM_utf8_urldecode($nombre_pc),
+                  'nombre_impre' => NM_utf8_urldecode($nombre_impre),
                   'essociedad' => NM_utf8_urldecode($essociedad),
                   'grancontr' => NM_utf8_urldecode($grancontr),
                   'idconfiguraciones' => NM_utf8_urldecode($idconfiguraciones),
+                  'control_diasmora' => NM_utf8_urldecode($control_diasmora),
+                  'control_costo' => NM_utf8_urldecode($control_costo),
+                  'modificainvpedido' => NM_utf8_urldecode($modificainvpedido),
+                  'tipodoc_pordefecto_pos' => NM_utf8_urldecode($tipodoc_pordefecto_pos),
+                  'ver_xml_fe' => NM_utf8_urldecode($ver_xml_fe),
+                  'noborrar_tmp_enpos' => NM_utf8_urldecode($noborrar_tmp_enpos),
+                  'validar_correo_enlinea' => NM_utf8_urldecode($validar_correo_enlinea),
+                  'apertura_caja' => NM_utf8_urldecode($apertura_caja),
+                  'activar_console_log' => NM_utf8_urldecode($activar_console_log),
+                  'codproducto_en_facventa' => NM_utf8_urldecode($codproducto_en_facventa),
+                  'valor_propina_sugerida' => NM_utf8_urldecode($valor_propina_sugerida),
+                  'columna_imprimir_ticket' => NM_utf8_urldecode($columna_imprimir_ticket),
+                  'columna_imprimir_a4' => NM_utf8_urldecode($columna_imprimir_a4),
+                  'columna_whatsapp' => NM_utf8_urldecode($columna_whatsapp),
+                  'columna_npedido' => NM_utf8_urldecode($columna_npedido),
+                  'columna_reg_pdf_propio' => NM_utf8_urldecode($columna_reg_pdf_propio),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),

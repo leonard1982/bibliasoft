@@ -28,30 +28,37 @@ function scFocusField(sField) {
       case 'fecha':
       case 'activo':
       case 'espaciado':
-      case 'nombre_pc':
-      case 'nombre_impre':
+      case 'caja_movil':
+      case 'pago_automatico':
+      case 'dia_limite_pago':
       case 'refresh_grid_doc':
       case 'desactivar_control_sesion':
-      case 'noborrar_tmp_enpos':
-      case 'validar_correo_enlinea':
-      case 'modificainvpedido':
-      case 'apertura_caja':
-      case 'caja_movil':
-      case 'control_diasmora':
-      case 'control_costo':
-      case 'activar_console_log':
-      case 'pago_automatico':
-      case 'tipodoc_pordefecto_pos':
-      case 'codproducto_en_facventa':
-      case 'dia_limite_pago':
-      case 'valor_propina_sugerida':
-      case 'ver_xml_fe':
+      case 'nombre_pc':
+      case 'nombre_impre':
         sc_exib_ocult_pag('form_configuraciones_form0');
         break;
       case 'essociedad':
       case 'grancontr':
       case 'idconfiguraciones':
         sc_exib_ocult_pag('form_configuraciones_form1');
+        break;
+      case 'control_diasmora':
+      case 'control_costo':
+      case 'modificainvpedido':
+      case 'tipodoc_pordefecto_pos':
+      case 'ver_xml_fe':
+      case 'noborrar_tmp_enpos':
+      case 'validar_correo_enlinea':
+      case 'apertura_caja':
+      case 'activar_console_log':
+      case 'codproducto_en_facventa':
+      case 'valor_propina_sugerida':
+      case 'columna_imprimir_ticket':
+      case 'columna_imprimir_a4':
+      case 'columna_whatsapp':
+      case 'columna_npedido':
+      case 'columna_reg_pdf_propio':
+        sc_exib_ocult_pag('form_configuraciones_form2');
         break;
     }
   }
@@ -93,27 +100,32 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["fecha" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["activo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["espaciado" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["nombre_pc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["nombre_impre" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["caja_movil" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["pago_automatico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["dia_limite_pago" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["refresh_grid_doc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["desactivar_control_sesion" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["noborrar_tmp_enpos" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["validar_correo_enlinea" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["modificainvpedido" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["apertura_caja" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["caja_movil" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["control_diasmora" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["control_costo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["activar_console_log" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["pago_automatico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["tipodoc_pordefecto_pos" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["codproducto_en_facventa" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["dia_limite_pago" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["valor_propina_sugerida" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["ver_xml_fe" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["nombre_pc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["nombre_impre" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["essociedad" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["grancontr" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idconfiguraciones" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["control_diasmora" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["control_costo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["modificainvpedido" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["tipodoc_pordefecto_pos" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_xml_fe" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["noborrar_tmp_enpos" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["validar_correo_enlinea" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["apertura_caja" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["activar_console_log" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["codproducto_en_facventa" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["valor_propina_sugerida" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["columna_imprimir_ticket" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["columna_imprimir_a4" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["columna_whatsapp" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["columna_npedido" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["columna_reg_pdf_propio" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -153,16 +165,22 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["espaciado" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["nombre_pc" + iSeqRow]["blur"]) {
+  if (scEventControl_data["caja_movil" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["nombre_pc" + iSeqRow]["change"]) {
+  if (scEventControl_data["caja_movil" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["nombre_impre" + iSeqRow]["blur"]) {
+  if (scEventControl_data["pago_automatico" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["nombre_impre" + iSeqRow]["change"]) {
+  if (scEventControl_data["pago_automatico" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["dia_limite_pago" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["dia_limite_pago" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["refresh_grid_doc" + iSeqRow]["blur"]) {
@@ -177,88 +195,16 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["desactivar_control_sesion" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["noborrar_tmp_enpos" + iSeqRow]["blur"]) {
+  if (scEventControl_data["nombre_pc" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["noborrar_tmp_enpos" + iSeqRow]["change"]) {
+  if (scEventControl_data["nombre_pc" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["validar_correo_enlinea" + iSeqRow]["blur"]) {
+  if (scEventControl_data["nombre_impre" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["validar_correo_enlinea" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["modificainvpedido" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["modificainvpedido" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["apertura_caja" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["apertura_caja" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["caja_movil" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["caja_movil" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["control_diasmora" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["control_diasmora" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["control_costo" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["control_costo" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["activar_console_log" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["activar_console_log" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["pago_automatico" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["pago_automatico" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["tipodoc_pordefecto_pos" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["tipodoc_pordefecto_pos" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["codproducto_en_facventa" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["codproducto_en_facventa" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["dia_limite_pago" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["dia_limite_pago" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["valor_propina_sugerida" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["valor_propina_sugerida" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["ver_xml_fe" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["ver_xml_fe" + iSeqRow]["change"]) {
+  if (scEventControl_data["nombre_impre" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["essociedad" + iSeqRow]["blur"]) {
@@ -277,6 +223,102 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["idconfiguraciones" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["control_diasmora" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["control_diasmora" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["control_costo" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["control_costo" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["modificainvpedido" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["modificainvpedido" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["tipodoc_pordefecto_pos" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["tipodoc_pordefecto_pos" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_xml_fe" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_xml_fe" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["noborrar_tmp_enpos" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["noborrar_tmp_enpos" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["validar_correo_enlinea" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["validar_correo_enlinea" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["apertura_caja" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["apertura_caja" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["activar_console_log" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["activar_console_log" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["codproducto_en_facventa" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["codproducto_en_facventa" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["valor_propina_sugerida" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["valor_propina_sugerida" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_imprimir_ticket" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_imprimir_ticket" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_imprimir_a4" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_imprimir_a4" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_whatsapp" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_whatsapp" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_npedido" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_npedido" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_reg_pdf_propio" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["columna_reg_pdf_propio" + iSeqRow]["change"]) {
     return true;
   }
   return false;
@@ -418,21 +460,41 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_ver_xml_fe' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_xml_fe_onblur(this, iSeqRow) })
                                         .bind('change', function() { sc_form_configuraciones_ver_xml_fe_onchange(this, iSeqRow) })
                                         .bind('focus', function() { sc_form_configuraciones_ver_xml_fe_onfocus(this, iSeqRow) });
+  $('#id_sc_field_columna_imprimir_ticket' + iSeqRow).bind('blur', function() { sc_form_configuraciones_columna_imprimir_ticket_onblur(this, iSeqRow) })
+                                                     .bind('change', function() { sc_form_configuraciones_columna_imprimir_ticket_onchange(this, iSeqRow) })
+                                                     .bind('focus', function() { sc_form_configuraciones_columna_imprimir_ticket_onfocus(this, iSeqRow) });
+  $('#id_sc_field_columna_imprimir_a4' + iSeqRow).bind('blur', function() { sc_form_configuraciones_columna_imprimir_a4_onblur(this, iSeqRow) })
+                                                 .bind('change', function() { sc_form_configuraciones_columna_imprimir_a4_onchange(this, iSeqRow) })
+                                                 .bind('focus', function() { sc_form_configuraciones_columna_imprimir_a4_onfocus(this, iSeqRow) });
+  $('#id_sc_field_columna_whatsapp' + iSeqRow).bind('blur', function() { sc_form_configuraciones_columna_whatsapp_onblur(this, iSeqRow) })
+                                              .bind('change', function() { sc_form_configuraciones_columna_whatsapp_onchange(this, iSeqRow) })
+                                              .bind('focus', function() { sc_form_configuraciones_columna_whatsapp_onfocus(this, iSeqRow) });
+  $('#id_sc_field_columna_npedido' + iSeqRow).bind('blur', function() { sc_form_configuraciones_columna_npedido_onblur(this, iSeqRow) })
+                                             .bind('change', function() { sc_form_configuraciones_columna_npedido_onchange(this, iSeqRow) })
+                                             .bind('focus', function() { sc_form_configuraciones_columna_npedido_onfocus(this, iSeqRow) });
+  $('#id_sc_field_columna_reg_pdf_propio' + iSeqRow).bind('blur', function() { sc_form_configuraciones_columna_reg_pdf_propio_onblur(this, iSeqRow) })
+                                                    .bind('change', function() { sc_form_configuraciones_columna_reg_pdf_propio_onchange(this, iSeqRow) })
+                                                    .bind('focus', function() { sc_form_configuraciones_columna_reg_pdf_propio_onfocus(this, iSeqRow) });
   $('#id_sc_field_probarnube' + iSeqRow).bind('change', function() { sc_form_configuraciones_probarnube_onchange(this, iSeqRow) });
-  $('.sc-ui-checkbox-desactivar_control_sesion' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-noborrar_tmp_enpos' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-validar_correo_enlinea' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-modificainvpedido' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-apertura_caja' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-caja_movil' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-control_diasmora' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-control_costo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-activar_console_log' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-pago_automatico' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-codproducto_en_facventa' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
-  $('.sc-ui-checkbox-ver_xml_fe' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-desactivar_control_sesion' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-essociedad' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-grancontr' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-control_diasmora' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-control_costo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-modificainvpedido' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_xml_fe' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-noborrar_tmp_enpos' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-validar_correo_enlinea' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-apertura_caja' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-activar_console_log' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-codproducto_en_facventa' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-columna_imprimir_ticket' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-columna_imprimir_a4' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-columna_whatsapp' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-columna_npedido' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-columna_reg_pdf_propio' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-integrar_tns' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-nube_pedidos' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-nube_inventario' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -906,6 +968,76 @@ function sc_form_configuraciones_ver_xml_fe_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_configuraciones_columna_imprimir_ticket_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_columna_imprimir_ticket();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_columna_imprimir_ticket_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_columna_imprimir_ticket_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_columna_imprimir_a4_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_columna_imprimir_a4();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_columna_imprimir_a4_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_columna_imprimir_a4_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_columna_whatsapp_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_columna_whatsapp();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_columna_whatsapp_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_columna_whatsapp_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_columna_npedido_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_columna_npedido();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_columna_npedido_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_columna_npedido_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_columna_reg_pdf_propio_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_columna_reg_pdf_propio();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_columna_reg_pdf_propio_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_columna_reg_pdf_propio_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_configuraciones_probarnube_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
@@ -916,6 +1048,9 @@ function displayChange_page(page, status) {
 	}
 	if ("1" == page) {
 		displayChange_page_1(status);
+	}
+	if ("2" == page) {
+		displayChange_page_2(status);
 	}
 }
 
@@ -928,6 +1063,10 @@ function displayChange_page_1(status) {
 	displayChange_block("2", status);
 }
 
+function displayChange_page_2(status) {
+	displayChange_block("3", status);
+}
+
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
@@ -938,6 +1077,9 @@ function displayChange_block(block, status) {
 	if ("2" == block) {
 		displayChange_block_2(status);
 	}
+	if ("3" == block) {
+		displayChange_block_3(status);
+	}
 }
 
 function displayChange_block_0(status) {
@@ -947,33 +1089,41 @@ function displayChange_block_0(status) {
 	displayChange_field("fecha", "", status);
 	displayChange_field("activo", "", status);
 	displayChange_field("espaciado", "", status);
-	displayChange_field("nombre_pc", "", status);
-	displayChange_field("nombre_impre", "", status);
-	displayChange_field("refresh_grid_doc", "", status);
-	displayChange_field("desactivar_control_sesion", "", status);
-	displayChange_field("noborrar_tmp_enpos", "", status);
-	displayChange_field("validar_correo_enlinea", "", status);
 }
 
 function displayChange_block_1(status) {
-	displayChange_field("modificainvpedido", "", status);
-	displayChange_field("apertura_caja", "", status);
 	displayChange_field("caja_movil", "", status);
-	displayChange_field("control_diasmora", "", status);
-	displayChange_field("control_costo", "", status);
-	displayChange_field("activar_console_log", "", status);
 	displayChange_field("pago_automatico", "", status);
-	displayChange_field("tipodoc_pordefecto_pos", "", status);
-	displayChange_field("codproducto_en_facventa", "", status);
 	displayChange_field("dia_limite_pago", "", status);
-	displayChange_field("valor_propina_sugerida", "", status);
-	displayChange_field("ver_xml_fe", "", status);
+	displayChange_field("refresh_grid_doc", "", status);
+	displayChange_field("desactivar_control_sesion", "", status);
+	displayChange_field("nombre_pc", "", status);
+	displayChange_field("nombre_impre", "", status);
 }
 
 function displayChange_block_2(status) {
 	displayChange_field("essociedad", "", status);
 	displayChange_field("grancontr", "", status);
 	displayChange_field("idconfiguraciones", "", status);
+}
+
+function displayChange_block_3(status) {
+	displayChange_field("control_diasmora", "", status);
+	displayChange_field("control_costo", "", status);
+	displayChange_field("modificainvpedido", "", status);
+	displayChange_field("tipodoc_pordefecto_pos", "", status);
+	displayChange_field("ver_xml_fe", "", status);
+	displayChange_field("noborrar_tmp_enpos", "", status);
+	displayChange_field("validar_correo_enlinea", "", status);
+	displayChange_field("apertura_caja", "", status);
+	displayChange_field("activar_console_log", "", status);
+	displayChange_field("codproducto_en_facventa", "", status);
+	displayChange_field("valor_propina_sugerida", "", status);
+	displayChange_field("columna_imprimir_ticket", "", status);
+	displayChange_field("columna_imprimir_a4", "", status);
+	displayChange_field("columna_whatsapp", "", status);
+	displayChange_field("columna_npedido", "", status);
+	displayChange_field("columna_reg_pdf_propio", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -983,27 +1133,32 @@ function displayChange_row(row, status) {
 	displayChange_field_fecha(row, status);
 	displayChange_field_activo(row, status);
 	displayChange_field_espaciado(row, status);
-	displayChange_field_nombre_pc(row, status);
-	displayChange_field_nombre_impre(row, status);
+	displayChange_field_caja_movil(row, status);
+	displayChange_field_pago_automatico(row, status);
+	displayChange_field_dia_limite_pago(row, status);
 	displayChange_field_refresh_grid_doc(row, status);
 	displayChange_field_desactivar_control_sesion(row, status);
-	displayChange_field_noborrar_tmp_enpos(row, status);
-	displayChange_field_validar_correo_enlinea(row, status);
-	displayChange_field_modificainvpedido(row, status);
-	displayChange_field_apertura_caja(row, status);
-	displayChange_field_caja_movil(row, status);
-	displayChange_field_control_diasmora(row, status);
-	displayChange_field_control_costo(row, status);
-	displayChange_field_activar_console_log(row, status);
-	displayChange_field_pago_automatico(row, status);
-	displayChange_field_tipodoc_pordefecto_pos(row, status);
-	displayChange_field_codproducto_en_facventa(row, status);
-	displayChange_field_dia_limite_pago(row, status);
-	displayChange_field_valor_propina_sugerida(row, status);
-	displayChange_field_ver_xml_fe(row, status);
+	displayChange_field_nombre_pc(row, status);
+	displayChange_field_nombre_impre(row, status);
 	displayChange_field_essociedad(row, status);
 	displayChange_field_grancontr(row, status);
 	displayChange_field_idconfiguraciones(row, status);
+	displayChange_field_control_diasmora(row, status);
+	displayChange_field_control_costo(row, status);
+	displayChange_field_modificainvpedido(row, status);
+	displayChange_field_tipodoc_pordefecto_pos(row, status);
+	displayChange_field_ver_xml_fe(row, status);
+	displayChange_field_noborrar_tmp_enpos(row, status);
+	displayChange_field_validar_correo_enlinea(row, status);
+	displayChange_field_apertura_caja(row, status);
+	displayChange_field_activar_console_log(row, status);
+	displayChange_field_codproducto_en_facventa(row, status);
+	displayChange_field_valor_propina_sugerida(row, status);
+	displayChange_field_columna_imprimir_ticket(row, status);
+	displayChange_field_columna_imprimir_a4(row, status);
+	displayChange_field_columna_whatsapp(row, status);
+	displayChange_field_columna_npedido(row, status);
+	displayChange_field_columna_reg_pdf_propio(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -1025,11 +1180,14 @@ function displayChange_field(field, row, status) {
 	if ("espaciado" == field) {
 		displayChange_field_espaciado(row, status);
 	}
-	if ("nombre_pc" == field) {
-		displayChange_field_nombre_pc(row, status);
+	if ("caja_movil" == field) {
+		displayChange_field_caja_movil(row, status);
 	}
-	if ("nombre_impre" == field) {
-		displayChange_field_nombre_impre(row, status);
+	if ("pago_automatico" == field) {
+		displayChange_field_pago_automatico(row, status);
+	}
+	if ("dia_limite_pago" == field) {
+		displayChange_field_dia_limite_pago(row, status);
 	}
 	if ("refresh_grid_doc" == field) {
 		displayChange_field_refresh_grid_doc(row, status);
@@ -1037,47 +1195,11 @@ function displayChange_field(field, row, status) {
 	if ("desactivar_control_sesion" == field) {
 		displayChange_field_desactivar_control_sesion(row, status);
 	}
-	if ("noborrar_tmp_enpos" == field) {
-		displayChange_field_noborrar_tmp_enpos(row, status);
+	if ("nombre_pc" == field) {
+		displayChange_field_nombre_pc(row, status);
 	}
-	if ("validar_correo_enlinea" == field) {
-		displayChange_field_validar_correo_enlinea(row, status);
-	}
-	if ("modificainvpedido" == field) {
-		displayChange_field_modificainvpedido(row, status);
-	}
-	if ("apertura_caja" == field) {
-		displayChange_field_apertura_caja(row, status);
-	}
-	if ("caja_movil" == field) {
-		displayChange_field_caja_movil(row, status);
-	}
-	if ("control_diasmora" == field) {
-		displayChange_field_control_diasmora(row, status);
-	}
-	if ("control_costo" == field) {
-		displayChange_field_control_costo(row, status);
-	}
-	if ("activar_console_log" == field) {
-		displayChange_field_activar_console_log(row, status);
-	}
-	if ("pago_automatico" == field) {
-		displayChange_field_pago_automatico(row, status);
-	}
-	if ("tipodoc_pordefecto_pos" == field) {
-		displayChange_field_tipodoc_pordefecto_pos(row, status);
-	}
-	if ("codproducto_en_facventa" == field) {
-		displayChange_field_codproducto_en_facventa(row, status);
-	}
-	if ("dia_limite_pago" == field) {
-		displayChange_field_dia_limite_pago(row, status);
-	}
-	if ("valor_propina_sugerida" == field) {
-		displayChange_field_valor_propina_sugerida(row, status);
-	}
-	if ("ver_xml_fe" == field) {
-		displayChange_field_ver_xml_fe(row, status);
+	if ("nombre_impre" == field) {
+		displayChange_field_nombre_impre(row, status);
 	}
 	if ("essociedad" == field) {
 		displayChange_field_essociedad(row, status);
@@ -1087,6 +1209,54 @@ function displayChange_field(field, row, status) {
 	}
 	if ("idconfiguraciones" == field) {
 		displayChange_field_idconfiguraciones(row, status);
+	}
+	if ("control_diasmora" == field) {
+		displayChange_field_control_diasmora(row, status);
+	}
+	if ("control_costo" == field) {
+		displayChange_field_control_costo(row, status);
+	}
+	if ("modificainvpedido" == field) {
+		displayChange_field_modificainvpedido(row, status);
+	}
+	if ("tipodoc_pordefecto_pos" == field) {
+		displayChange_field_tipodoc_pordefecto_pos(row, status);
+	}
+	if ("ver_xml_fe" == field) {
+		displayChange_field_ver_xml_fe(row, status);
+	}
+	if ("noborrar_tmp_enpos" == field) {
+		displayChange_field_noborrar_tmp_enpos(row, status);
+	}
+	if ("validar_correo_enlinea" == field) {
+		displayChange_field_validar_correo_enlinea(row, status);
+	}
+	if ("apertura_caja" == field) {
+		displayChange_field_apertura_caja(row, status);
+	}
+	if ("activar_console_log" == field) {
+		displayChange_field_activar_console_log(row, status);
+	}
+	if ("codproducto_en_facventa" == field) {
+		displayChange_field_codproducto_en_facventa(row, status);
+	}
+	if ("valor_propina_sugerida" == field) {
+		displayChange_field_valor_propina_sugerida(row, status);
+	}
+	if ("columna_imprimir_ticket" == field) {
+		displayChange_field_columna_imprimir_ticket(row, status);
+	}
+	if ("columna_imprimir_a4" == field) {
+		displayChange_field_columna_imprimir_a4(row, status);
+	}
+	if ("columna_whatsapp" == field) {
+		displayChange_field_columna_whatsapp(row, status);
+	}
+	if ("columna_npedido" == field) {
+		displayChange_field_columna_npedido(row, status);
+	}
+	if ("columna_reg_pdf_propio" == field) {
+		displayChange_field_columna_reg_pdf_propio(row, status);
 	}
 }
 
@@ -1120,10 +1290,13 @@ function displayChange_field_activo(row, status) {
 function displayChange_field_espaciado(row, status) {
 }
 
-function displayChange_field_nombre_pc(row, status) {
+function displayChange_field_caja_movil(row, status) {
 }
 
-function displayChange_field_nombre_impre(row, status) {
+function displayChange_field_pago_automatico(row, status) {
+}
+
+function displayChange_field_dia_limite_pago(row, status) {
 }
 
 function displayChange_field_refresh_grid_doc(row, status) {
@@ -1132,19 +1305,19 @@ function displayChange_field_refresh_grid_doc(row, status) {
 function displayChange_field_desactivar_control_sesion(row, status) {
 }
 
-function displayChange_field_noborrar_tmp_enpos(row, status) {
+function displayChange_field_nombre_pc(row, status) {
 }
 
-function displayChange_field_validar_correo_enlinea(row, status) {
+function displayChange_field_nombre_impre(row, status) {
 }
 
-function displayChange_field_modificainvpedido(row, status) {
+function displayChange_field_essociedad(row, status) {
 }
 
-function displayChange_field_apertura_caja(row, status) {
+function displayChange_field_grancontr(row, status) {
 }
 
-function displayChange_field_caja_movil(row, status) {
+function displayChange_field_idconfiguraciones(row, status) {
 }
 
 function displayChange_field_control_diasmora(row, status) {
@@ -1153,10 +1326,7 @@ function displayChange_field_control_diasmora(row, status) {
 function displayChange_field_control_costo(row, status) {
 }
 
-function displayChange_field_activar_console_log(row, status) {
-}
-
-function displayChange_field_pago_automatico(row, status) {
+function displayChange_field_modificainvpedido(row, status) {
 }
 
 function displayChange_field_tipodoc_pordefecto_pos(row, status) {
@@ -1174,25 +1344,40 @@ function displayChange_field_tipodoc_pordefecto_pos(row, status) {
 	}
 }
 
-function displayChange_field_codproducto_en_facventa(row, status) {
+function displayChange_field_ver_xml_fe(row, status) {
 }
 
-function displayChange_field_dia_limite_pago(row, status) {
+function displayChange_field_noborrar_tmp_enpos(row, status) {
+}
+
+function displayChange_field_validar_correo_enlinea(row, status) {
+}
+
+function displayChange_field_apertura_caja(row, status) {
+}
+
+function displayChange_field_activar_console_log(row, status) {
+}
+
+function displayChange_field_codproducto_en_facventa(row, status) {
 }
 
 function displayChange_field_valor_propina_sugerida(row, status) {
 }
 
-function displayChange_field_ver_xml_fe(row, status) {
+function displayChange_field_columna_imprimir_ticket(row, status) {
 }
 
-function displayChange_field_essociedad(row, status) {
+function displayChange_field_columna_imprimir_a4(row, status) {
 }
 
-function displayChange_field_grancontr(row, status) {
+function displayChange_field_columna_whatsapp(row, status) {
 }
 
-function displayChange_field_idconfiguraciones(row, status) {
+function displayChange_field_columna_npedido(row, status) {
+}
+
+function displayChange_field_columna_reg_pdf_propio(row, status) {
 }
 
 function scRecreateSelect2() {

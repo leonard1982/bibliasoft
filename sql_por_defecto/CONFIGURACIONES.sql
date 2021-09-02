@@ -8915,4 +8915,14 @@ ALTER TABLE `inventario` CHANGE `cantidad` `cantidad` DECIMAL(12,3) NULL DEFAULT
 
 ALTER TABLE `inventario` CHANGE `existencia` `existencia` DECIMAL(12,3) NOT NULL DEFAULT '0.000' COMMENT 'Se coloca la existencia del producto que queda en bodega despues de la transacción';
 
+UPDATE `webservicefe_proveedores` SET `servidor1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice' WHERE `webservicefe_proveedores`.`proveedor` = 4;
+UPDATE `webservicefe_proveedores` SET `servidor2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
+UPDATE `webservicefe_proveedores` SET `servidor_prueba1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
+UPDATE `webservicefe_proveedores` SET `servidor_prueba2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
+UPDATE `webservicefe_proveedores` SET `servidor3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
+UPDATE `webservicefe_proveedores` SET `servidor_prueba3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
+UPDATE `webservicefe_proveedores` SET `url_api_pdfs` = 'https://www.facilwebnube.com/apidian2021/public/index.php/api/download' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
+UPDATE `webservicefe_proveedores` SET `url_api_sendmail` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/send-email' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
+UPDATE `webservicefe` SET `servidor1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice', `servidor2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note', `servidor_prueba1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice', `servidor_prueba2` = 'https://www.facilwebnube.com/apidian201/public/api/ubl2.1/credit-note', `servidor3` = 'https://www.facilwebnube.com/apidian201/public/api/ubl2.1/debit-note', `servidor_prueba3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note', `url_api_pdfs` = 'https://www.facilwebnube.com/apidian2021/public/index.php/api/download', `url_api_sendmail` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/send-email' WHERE `webservicefe`.`proveedor` = 'FACILWEB';
+
 COMMIT;

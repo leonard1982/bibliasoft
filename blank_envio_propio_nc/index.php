@@ -217,8 +217,8 @@ class blank_envio_propio_nc_ini
       $this->nm_dt_criacao   = "20210213"; 
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210628"; 
-      $this->nm_hr_ult_alt   = "140628"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_envio_propio_nc_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_propio_nc']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_propio_nc']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZSFGHAvCV5BODMvOVcB/DWFaDoBiHQBiZkFGHAzGZMBODMvCZSJqDWX7HIFUD9NwH9FUZ1rwD5FaDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGHuvmVIBODur/HMJeDcFYZSB/HIBOZMXGHgvsVkJqHEXCVoJeHQJKZSX7D1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBODWFYDoJsD9BiZSB/DSrYD5FaDMNKZSJGDWF/DoJeD9XsZSFGHAveD5BqHuNODkB/V5X7DoJsDcBqVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaVoX7HQNwH9BOHANOZMB/DMzGHEBUDWr/DoraHQXGDuFaD1veV5FGHgvsDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5JeDMvsVcBUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoXGDcBiH9X7D1BeHuF7HgrYDkB/H5B7DoXGD9BsZSB/D1zGD5BODEBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSBiHANOD5rqHgrKDkFCDWFYHIrqDcFYZ1X7DSrYHuJwDMvCHArCV5FqVoXGDcJeDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQFUDMzGDkXKDWX7HMBOHQBiDQFUHAN7V5FaHuBOVcFKH5XCVEFGHQXGZkBiD1rKD5FaDMzGZSJGDWX7HIB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQX7Z1N7VWJeHuvmVcBOV5X7VoJwD9XOZ1rqHAN7D5FaDErKHEFiHEFqDoB/DcXOZSX7Z1N7V5FGDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMF7DcNmZ1X7HArYHQNUHgNOZSXeHEXCHIXGHQFYH9BiHAN7VWJwDMzGVcFCDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVorqHQBqZkBiHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuB/HgrwDkBsV5F/HIrqHQNmZ1rqHAN7V5FaHgNKVkJqDWr/HMFaDcBiDQJsDSBYHuJwDMrYDkBODuFqHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1980,10 +1980,13 @@ $vmotivo = '';
 $vtipo_ncnd = "";
 $vservidor3 = "";
 $vvalidar_correo_enlinea = "NO";
+$vurl_api_pdfs = "";
+$vurl_api_sendmail = "";
+$vtoken_password = "";
 
 
 
-$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo, servidor3,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea from webservicefe order by idwebservicefe desc limit 1";
+$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo, servidor3,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_pdfs, url_api_sendmail from webservicefe order by idwebservicefe desc limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2021,14 +2024,20 @@ if(isset($this->vserv[0][0]))
 		$vservidor = $this->vserv[0][1];
 		$vtoken    = $this->vserv[0][2];
 		$vmodo     = $this->vserv[0][4];
-		
-		if($vmodo=='PRUEBAS')
-		{
-			$vtestid   = $this->vserv[0][3];
-		}
+		$vtoken_password = $this->vserv[0][3];
 	}
 	$vservidor3 = $this->vserv[0][5];
 	$vvalidar_correo_enlinea = $this->vserv[0][6];
+}
+
+if(isset($this->vserv[0][7]))
+{
+	$vurl_api_pdfs = $this->vserv[0][7];
+}
+
+if(isset($this->vserv[0][8]))
+{
+	$vurl_api_sendmail = $this->vserv[0][8];
 }
 
 if(empty($vservidor) or empty($vtoken))
@@ -2366,7 +2375,7 @@ else
 				$vdatos["debit_note_lines"][$contador]["description"] = $vdescripcion;
 				$vdatos["debit_note_lines"][$contador]["code"] = $vcodigo;
 				$vdatos["debit_note_lines"][$contador]["type_item_identification_id"] = 4;
-				$vdatos["debit_note_lines"][$contador]["price_amount"] = $vpreciou;
+				$vdatos["debit_note_lines"][$contador]["price_amount"] = $vparcvta/$vcanlista;
 				$vdatos["debit_note_lines"][$contador]["base_quantity"] = $vcanlista;	
 			}
 
@@ -2616,11 +2625,11 @@ else
 ;
 								if(isset($this->r5[0][0]))
 								{
-									$vurlinvoicepdf = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$this->r5[0][0]."/".$vurlinvoicepdf;
-									$vurlinvoicexml = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$this->r5[0][0]."/".$vurlinvoicexml; 
+									$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+									$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 								}
 
-								$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."' WHERE idfacven='".$vidfacven."'";
+								$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 								
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2731,11 +2740,11 @@ else
 ;
 									if(isset($this->r5[0][0]))
 									{
-										$vurlinvoicepdf = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$this->r5[0][0]."/".$vurlinvoicepdf;
-										$vurlinvoicexml = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$this->r5[0][0]."/".$vurlinvoicexml; 
+										$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+										$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml;  
 									}
 
-									$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."' WHERE idfacven='".$vidfacven."'";
+									$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 									
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2943,11 +2952,11 @@ else
 ;
 					if(isset($this->r5[0][0]))
 					{
-						$vurlinvoicepdf = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$this->r5[0][0]."/".$vurlinvoicepdf;
-						$vurlinvoicexml = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$this->r5[0][0]."/".$vurlinvoicexml; 
+						$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+						$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 					}
 
-					$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."' WHERE idfacven='".$vidfacven."'";
+					$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 					
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3058,11 +3067,11 @@ else
 ;
 						if(isset($this->r5[0][0]))
 						{
-							$vurlinvoicepdf = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$this->r5[0][0]."/".$vurlinvoicepdf;
-							$vurlinvoicexml = "https://www.facilwebnube.com/apidian2020/public/index.php/api/download/".$this->r5[0][0]."/".$vurlinvoicexml; 
+							$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+							$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 						}
 
-						$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."' WHERE idfacven='".$vidfacven."'";
+						$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 						
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
