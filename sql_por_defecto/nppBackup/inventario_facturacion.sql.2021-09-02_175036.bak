@@ -19749,18 +19749,6 @@ ALTER TABLE `configuraciones` ADD `columna_npedido` SET('SI','NO') NOT NULL DEFA
 
 ALTER TABLE `configuraciones` ADD `columna_reg_pdf_propio` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Columna que da la opción de regenerar el PDF del documento electrónico si este ya ha sido enviado. Útil para cuando se ha enviado un documento electrónico y faltó algo por parametrizar en el PDF, por ejemplo el logo.' AFTER `columna_npedido`;
 
-
-UPDATE `webservicefe_proveedores` SET `servidor1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice' WHERE `webservicefe_proveedores`.`proveedor` = 4;
-UPDATE `webservicefe_proveedores` SET `servidor2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
-UPDATE `webservicefe_proveedores` SET `servidor_prueba1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
-UPDATE `webservicefe_proveedores` SET `servidor_prueba2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
-UPDATE `webservicefe_proveedores` SET `servidor3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
-UPDATE `webservicefe_proveedores` SET `servidor_prueba3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
-UPDATE `webservicefe_proveedores` SET `url_api_pdfs` = 'https://www.facilwebnube.com/apidian2021/public/index.php/api/download' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
-UPDATE `webservicefe_proveedores` SET `url_api_sendmail` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/send-email' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
-UPDATE `webservicefe` SET `servidor1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice', `servidor2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note', `servidor_prueba1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice', `servidor_prueba2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note', `servidor3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note', `servidor_prueba3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note', `url_api_pdfs` = 'https://www.facilwebnube.com/apidian2021/public/index.php/api/download', `url_api_sendmail` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/send-email' WHERE `webservicefe`.`proveedor` = 'FACILWEB';
-
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
