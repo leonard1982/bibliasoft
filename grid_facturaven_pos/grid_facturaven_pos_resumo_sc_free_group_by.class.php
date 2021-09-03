@@ -726,7 +726,7 @@ function fEnviarPropio(idfacven,bd)
 			}
 		});
 		
-		$.post("../blank_envio_propio/index.php",{
+		$.post("../blank_enviar_fes_propio/index.php",{
 			
 			idfacven:idfacven,
 			bd:bd
@@ -7929,7 +7929,7 @@ function fEnviarPropio(idfacven,bd)
 			}
 		});
 		
-		$.post("../blank_envio_propio/index.php",{
+		$.post("../blank_enviar_fes_propio/index.php",{
 			
 			idfacven:idfacven,
 			bd:bd
