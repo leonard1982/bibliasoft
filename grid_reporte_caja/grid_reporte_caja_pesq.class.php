@@ -2468,7 +2468,7 @@ foreach ($Arr_format as $Part_date)
 <?php
       $prefijo_look = substr($this->Db->qstr($prefijo), 1, -1); 
       $nmgp_def_dados = "" ; 
-      $nm_comando = "SELECT Idres, concat(prefijo,' - Vence: ',fec_vencimiento) as prefijo  FROM resdian  WHERE pref_factura='SI' ORDER BY resolucion"; 
+      $nm_comando = "SELECT Idres, concat(prefijo,' - Vence: ',fec_vencimiento) as prefijo  FROM resdian  WHERE pref_factura='SI' and pref_ncr='NO' and pref_ndb='NO' ORDER BY resolucion"; 
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3672,6 +3672,12 @@ foreach ($Arr_format as $Part_date)
       $fecha .= str_repeat(0, (2 - strlen($fecha_mes))) . $fecha_mes . "-"; 
       $fecha .= str_repeat(0, (2 - strlen($fecha_dia))) . $fecha_dia; 
       $_SESSION['scriptcase']['grid_reporte_caja']['contr_erro'] = 'on';
+if (!isset($_SESSION['gcorreo_mensaje'])) {$_SESSION['gcorreo_mensaje'] = "";}
+if (!isset($this->sc_temp_gcorreo_mensaje)) {$this->sc_temp_gcorreo_mensaje = (isset($_SESSION['gcorreo_mensaje'])) ? $_SESSION['gcorreo_mensaje'] : "";}
+if (!isset($_SESSION['gcorreo_asunto'])) {$_SESSION['gcorreo_asunto'] = "";}
+if (!isset($this->sc_temp_gcorreo_asunto)) {$this->sc_temp_gcorreo_asunto = (isset($_SESSION['gcorreo_asunto'])) ? $_SESSION['gcorreo_asunto'] : "";}
+if (!isset($_SESSION['gcorreo_receptor'])) {$_SESSION['gcorreo_receptor'] = "";}
+if (!isset($this->sc_temp_gcorreo_receptor)) {$this->sc_temp_gcorreo_receptor = (isset($_SESSION['gcorreo_receptor'])) ? $_SESSION['gcorreo_receptor'] : "";}
 if (!isset($_SESSION['elprefijo'])) {$_SESSION['elprefijo'] = "";}
 if (!isset($this->sc_temp_elprefijo)) {$this->sc_temp_elprefijo = (isset($_SESSION['elprefijo'])) ? $_SESSION['elprefijo'] : "";}
 if (!isset($_SESSION['elbanco'])) {$_SESSION['elbanco'] = "";}
@@ -3681,9 +3687,15 @@ if (!isset($this->sc_temp_lafecha)) {$this->sc_temp_lafecha = (isset($_SESSION['
  $this->sc_temp_lafecha = $fecha ;
 $this->sc_temp_elbanco = $banco ;
 $this->sc_temp_elprefijo = $prefijo ;
+$this->sc_temp_gcorreo_receptor = $correo_receptor ;
+$this->sc_temp_gcorreo_asunto   = $asunto ;
+$this->sc_temp_gcorreo_mensaje  = $mensaje ;
 if (isset($this->sc_temp_lafecha)) {$_SESSION['lafecha'] = $this->sc_temp_lafecha;}
 if (isset($this->sc_temp_elbanco)) {$_SESSION['elbanco'] = $this->sc_temp_elbanco;}
 if (isset($this->sc_temp_elprefijo)) {$_SESSION['elprefijo'] = $this->sc_temp_elprefijo;}
+if (isset($this->sc_temp_gcorreo_receptor)) {$_SESSION['gcorreo_receptor'] = $this->sc_temp_gcorreo_receptor;}
+if (isset($this->sc_temp_gcorreo_asunto)) {$_SESSION['gcorreo_asunto'] = $this->sc_temp_gcorreo_asunto;}
+if (isset($this->sc_temp_gcorreo_mensaje)) {$_SESSION['gcorreo_mensaje'] = $this->sc_temp_gcorreo_mensaje;}
 $_SESSION['scriptcase']['grid_reporte_caja']['contr_erro'] = 'off'; 
       if ($banco_LKP == $banco)
       {

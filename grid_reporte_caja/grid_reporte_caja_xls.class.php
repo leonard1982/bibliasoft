@@ -99,16 +99,6 @@ class grid_reporte_caja_xls
           $_SESSION['lafecha'] = $lafecha;
           nm_limpa_str_grid_reporte_caja($_SESSION["lafecha"]);
       }
-      if (isset($elprefijo)) 
-      {
-          $_SESSION['elprefijo'] = $elprefijo;
-          nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
-      }
-      if (isset($gidtercero)) 
-      {
-          $_SESSION['gidtercero'] = $gidtercero;
-          nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
-      }
       if (isset($gcorreo_receptor)) 
       {
           $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
@@ -123,6 +113,16 @@ class grid_reporte_caja_xls
       {
           $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
           nm_limpa_str_grid_reporte_caja($_SESSION["gcorreo_mensaje"]);
+      }
+      if (isset($elprefijo)) 
+      {
+          $_SESSION['elprefijo'] = $elprefijo;
+          nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
+      }
+      if (isset($gidtercero)) 
+      {
+          $_SESSION['gidtercero'] = $gidtercero;
+          nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
       }
       $this->Use_phpspreadsheet = (phpversion() >=  "7.3.9" && is_dir($this->Ini->path_third . '/phpspreadsheet')) ? true : false;
       $this->Xls_tot_col = 0;

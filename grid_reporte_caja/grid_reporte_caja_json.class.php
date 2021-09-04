@@ -101,16 +101,6 @@ class grid_reporte_caja_json
           $_SESSION['lafecha'] = $lafecha;
           nm_limpa_str_grid_reporte_caja($_SESSION["lafecha"]);
       }
-      if (isset($elprefijo)) 
-      {
-          $_SESSION['elprefijo'] = $elprefijo;
-          nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
-      }
-      if (isset($gidtercero)) 
-      {
-          $_SESSION['gidtercero'] = $gidtercero;
-          nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
-      }
       if (isset($gcorreo_receptor)) 
       {
           $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
@@ -125,6 +115,16 @@ class grid_reporte_caja_json
       {
           $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
           nm_limpa_str_grid_reporte_caja($_SESSION["gcorreo_mensaje"]);
+      }
+      if (isset($elprefijo)) 
+      {
+          $_SESSION['elprefijo'] = $elprefijo;
+          nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
+      }
+      if (isset($gidtercero)) 
+      {
+          $_SESSION['gidtercero'] = $gidtercero;
+          nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
       }
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  

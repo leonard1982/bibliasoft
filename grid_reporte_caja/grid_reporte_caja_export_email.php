@@ -343,7 +343,7 @@ if (!$this->embbed)
 
            <div id='id_div_export_email_bcc' class='scExportEmailDiv'  style='display:none' ><span class='scExportEmailLabel'><?php echo $this->Nm_lang['lang_othr_grid_export_email_bcc']; ?></span><br /><input id="id_html_export_email_bcc" name="html_export_email_bcc" size=70 class='scExportEmailInput' value='<?php echo $this->getJsonEmails(""); ?>' type="text"><br /></div>
 
-           <div id='id_div_export_email_subject' class='scExportEmailDiv'><span class='scExportEmailLabel'><?php echo $this->Nm_lang['lang_othr_grid_export_email_subject']; ?></span><br /><input id="id_html_export_email_subject" name="html_export_email_subject" size=70 class='scExportEmailInput' value="<?php echo "" . sprintf($this->Nm_lang['lang_export_email_subject'], '') . " "; ?>" type="text"><br /></div>
+           <div id='id_div_export_email_subject' class='scExportEmailDiv'><span class='scExportEmailLabel'><?php echo $this->Nm_lang['lang_othr_grid_export_email_subject']; ?></span><br /><input id="id_html_export_email_subject" name="html_export_email_subject" size=70 class='scExportEmailInput' value="<?php echo "" . sprintf($_SESSION['gcorreo_asunto'], '') . " "; ?>" type="text"><br /></div>
 
            <div id='id_div_export_email_email' class='scExportEmailDiv'><span class='scExportEmailLabel'><?php echo $this->Nm_lang['lang_othr_grid_export_email_email']; ?></span><br /><textarea id="id_html_export_email_email" rows=7 cols=70 class='scExportEmailInput' name="html_export_email_email"><?php echo preg_replace('/<br\s?\/?>/i', "
 ", "" . sprintf($_SESSION['gcorreo_mensaje'], $this->Nm_lang['lang_othr_grid_export_email_type_' . $this->sType]) . ""); ?></textarea></div>       </div>

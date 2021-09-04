@@ -1065,14 +1065,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
        }
        $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['embutida'])
-       { 
-           $css_body = "";
-       } 
-       else 
-       { 
-           $css_body = "margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px;";
-       } 
+       $css_body = "margin-top:30px;margin-bottom:30px;";
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['embutida'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['ajax_nav'] && !$this->Ini->sc_export_ajax)
        { 
            $nm_saida->saida("   <form name=\"form_ajax_redir_1\" method=\"post\" style=\"display: none\">\r\n");

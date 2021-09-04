@@ -228,7 +228,7 @@ class grid_reporte_caja_ini
       $this->nm_hr_criacao   = "134103"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210904"; 
-      $this->nm_hr_ult_alt   = "112404"; 
+      $this->nm_hr_ult_alt   = "112757"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -840,7 +840,7 @@ class grid_reporte_caja_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_reporte_caja']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_reporte_caja']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQX7Z1vCVWJeHuNODkB/DWF/HIFGDcBqZSBqD1rKD5BqHgvsHEJGH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErCHEFaVoFaHQXGDQX7DSvCVWJwHgrKVcFKDur/HMFaHQBqZ1B/D1rKHuB/HgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSJGDWr/VoB/D9NwDQJsZ1rwV5BOHuBYVcFKDWFYVoJwDcBqH9B/HABYV5JwDMBYHAFKV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1X7D1rwHQBqDMvCZSJ3HEXCVoJwDcBiDQB/Z1rwHQXGDMvmVIBOH5B7VErqD9XOZ1FGDSBeHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiDSvOD5BqHgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgvsV9FeV5FGVENUD9BiZ1F7HABYZMBqHgrKHEFiDuJeZuFaHQNwDQJwHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOZSFUHAvCVWJwDMBOVcXKDWXCHMF7HQXGZSB/Z1rYV5JeDMBYVkJqV5FaHIJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIF7D9XsH9BiHIrKHuB/HgrKVcXKHEF/HMFaDcJUZkFGD1rwHuX7DEBeDkXKDuXKDoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSFGHANOD5JwHuzGVcFKV5X7VoX7D9BiZ1F7HArYD5BiDMBYZSXeDWX7VoJsDcJeDuBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEBUDuFaDoJeD9JKZSX7Z1BYV5FUDMvOZSJqHEFYHINUDcBqH9BqHIrwHuJwHgvsHErCH5F/HMX7DcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDuBqHANKVWJsDMvmVcFKV5BmVoBqD9BsZkFGHArKHuXGHgBeVkXeHEFaHIJwD9XsDuBqHANOHQrqHuzGVcBODWFaHIrqHQBiVINUHABYHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1768,16 +1768,6 @@ class grid_reporte_caja_apl
               $_SESSION['lafecha'] = $lafecha;
               nm_limpa_str_grid_reporte_caja($_SESSION["lafecha"]);
           }
-          if (isset($elprefijo)) 
-          {
-              $_SESSION['elprefijo'] = $elprefijo;
-              nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
-          }
-          if (isset($gidtercero)) 
-          {
-              $_SESSION['gidtercero'] = $gidtercero;
-              nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
-          }
           if (isset($gcorreo_receptor)) 
           {
               $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
@@ -1792,6 +1782,16 @@ class grid_reporte_caja_apl
           {
               $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
               nm_limpa_str_grid_reporte_caja($_SESSION["gcorreo_mensaje"]);
+          }
+          if (isset($elprefijo)) 
+          {
+              $_SESSION['elprefijo'] = $elprefijo;
+              nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
+          }
+          if (isset($gidtercero)) 
+          {
+              $_SESSION['gidtercero'] = $gidtercero;
+              nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
           }
       } 
       if ($Parms_form_pdf)
@@ -3873,14 +3873,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja'][$path_doc_md5]
    {
        $_SESSION['lafecha'] = $lafecha;
    }
-   if (isset($elprefijo)) 
-   {
-       $_SESSION['elprefijo'] = $elprefijo;
-   }
-   if (isset($gidtercero)) 
-   {
-       $_SESSION['gidtercero'] = $gidtercero;
-   }
    if (isset($gcorreo_receptor)) 
    {
        $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
@@ -3892,6 +3884,14 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja'][$path_doc_md5]
    if (isset($gcorreo_mensaje)) 
    {
        $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+   }
+   if (isset($elprefijo)) 
+   {
+       $_SESSION['elprefijo'] = $elprefijo;
+   }
+   if (isset($gidtercero)) 
+   {
+       $_SESSION['gidtercero'] = $gidtercero;
    }
    if (!empty($glo_perfil))  
    { 
@@ -4020,16 +4020,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja'][$path_doc_md5]
                $_SESSION['lafecha'] = $lafecha;
                nm_limpa_str_grid_reporte_caja($_SESSION["lafecha"]);
            }
-           if (isset($elprefijo)) 
-           {
-               $_SESSION['elprefijo'] = $elprefijo;
-               nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
-           }
-           if (isset($gidtercero)) 
-           {
-               $_SESSION['gidtercero'] = $gidtercero;
-               nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
-           }
            if (isset($gcorreo_receptor)) 
            {
                $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
@@ -4044,6 +4034,16 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja'][$path_doc_md5]
            {
                $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
                nm_limpa_str_grid_reporte_caja($_SESSION["gcorreo_mensaje"]);
+           }
+           if (isset($elprefijo)) 
+           {
+               $_SESSION['elprefijo'] = $elprefijo;
+               nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
+           }
+           if (isset($gidtercero)) 
+           {
+               $_SESSION['gidtercero'] = $gidtercero;
+               nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -4306,34 +4306,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja'][$path_doc_md5]
        {
            $_SESSION["lafecha"] = "";
        }
-       if (isset($_POST["elprefijo"])) 
-       {
-           $_SESSION["elprefijo"] = $_POST["elprefijo"];
-           nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
-       }
-       if (isset($_GET["elprefijo"])) 
-       {
-           $_SESSION["elprefijo"] = $_GET["elprefijo"];
-           nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
-       }
-       if (!isset($_SESSION["elprefijo"])) 
-       {
-           $_SESSION["elprefijo"] = "";
-       }
-       if (isset($_POST["gidtercero"])) 
-       {
-           $_SESSION["gidtercero"] = $_POST["gidtercero"];
-           nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
-       }
-       if (isset($_GET["gidtercero"])) 
-       {
-           $_SESSION["gidtercero"] = $_GET["gidtercero"];
-           nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
-       }
-       if (!isset($_SESSION["gidtercero"])) 
-       {
-           $_SESSION["gidtercero"] = "";
-       }
        if (isset($_POST["gcorreo_receptor"])) 
        {
            $_SESSION["gcorreo_receptor"] = $_POST["gcorreo_receptor"];
@@ -4375,6 +4347,34 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja'][$path_doc_md5]
        if (!isset($_SESSION["gcorreo_mensaje"])) 
        {
            $_SESSION["gcorreo_mensaje"] = "";
+       }
+       if (isset($_POST["elprefijo"])) 
+       {
+           $_SESSION["elprefijo"] = $_POST["elprefijo"];
+           nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
+       }
+       if (isset($_GET["elprefijo"])) 
+       {
+           $_SESSION["elprefijo"] = $_GET["elprefijo"];
+           nm_limpa_str_grid_reporte_caja($_SESSION["elprefijo"]);
+       }
+       if (!isset($_SESSION["elprefijo"])) 
+       {
+           $_SESSION["elprefijo"] = "";
+       }
+       if (isset($_POST["gidtercero"])) 
+       {
+           $_SESSION["gidtercero"] = $_POST["gidtercero"];
+           nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
+       }
+       if (isset($_GET["gidtercero"])) 
+       {
+           $_SESSION["gidtercero"] = $_GET["gidtercero"];
+           nm_limpa_str_grid_reporte_caja($_SESSION["gidtercero"]);
+       }
+       if (!isset($_SESSION["gidtercero"])) 
+       {
+           $_SESSION["gidtercero"] = "";
        }
        if (isset($nmgp_lig_edit_lapis)) 
        {
