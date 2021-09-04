@@ -228,8 +228,8 @@ class grid_caja_informe_pos_ini
       $this->nm_dt_criacao   = "20190730"; 
       $this->nm_hr_criacao   = "103433"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210903"; 
+      $this->nm_hr_ult_alt   = "215718"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -377,9 +377,7 @@ class grid_caja_informe_pos_ini
             if(!empty($img_width) && !empty($img_height)){
                 $sc_obj_img->setWidth($img_width);
                 $sc_obj_img->setHeight($img_height);
-            }
-                $sc_obj_img->setManterAspecto(true);
-            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            }            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
             echo $out1_img_cache;
                exit;
             }
@@ -514,6 +512,25 @@ class grid_caja_informe_pos_ini
       }
       $this->sc_lig_target["C_@scinf_banco"] = '_blank';
       $this->sc_lig_target["C_@scinf_banco_@scinf_grid_reporte_caja"] = '_blank';
+      $Tmp_apl_lig = "grid_reporte_caja";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_reporte_caja_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_reporte_caja_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_reporte_caja_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_reporte_caja_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["grid_reporte_caja"] = 'S';
+          }
+      }
+      $this->sc_lig_target["C_@scinf_imprimir"] = '_blank';
+      $this->sc_lig_target["C_@scinf_imprimir_@scinf_grid_reporte_caja"] = '_blank';
       if ($_SESSION['sc_session'][$this->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard'])
       {
           $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['grid_caja_informe_pos']['dashboard_info']['dashboard_app'];
@@ -950,7 +967,7 @@ class grid_caja_informe_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_caja_informe_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_caja_informe_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDQJwHArYHQBODMNOZSJqDWJeDoX7DcJUZkBiHAvmD5JeDEBOHEJqDuJeHMXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7D1rKHuBODEBOHENiDWr/VoXGD9NwZSFGHIrwHuBiHgrwVIBODuX7HMFaDcJUZSB/D1rKV5XGDMzGVkJGH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSXeH5FYDoraD9JKH9X7HArYV5raHuvmVcBOV5F/DorqD9BsH9FaHAN7V5X7DMzGHEJqV5FaDoBOD9XsZSFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5FYVoF7DcJUZkBiHABYHQJsHgNKDkXKDWF/HIB/DcJeZSBiZ1BYV5raHuvmVIFCH5B7DoXGHQNwZkFGHANOHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMXGHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKHEF/HMB/HQNwZSB/HIrwHQrqHgBOVkJGDuJeVoFGHQXOZSFGHAveHQJeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiH9FUHINaV5XGHuzGVcBUH5B3VoF7DcJUZSBqHANOV5BODEBOZSJGDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9XGZ1F7DSrYD5BqDMBYHEJqV5FaZuBOHQNmDQJwHAN7VWXGHuBYVcB/DuX7HMX7D9XOH9BqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwDcBqH9B/HABYV5JwDMBYHEJqV5FaVoXGD9XsH9X7HAN7V5JwHuzGVIBOV5FYDoraDcNwH9FaHArKD5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NwH9BiHAvOD5F7DMvsVcFKHEFYHMB/DcJUZ1BOD1NaZMB/DMzGHErsDWr/DoXGHQJKZSFUHANOHuJwDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5JeDMvsV9BUDWB3VoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoBqHQFYDQX7HArYHQFaDMBYDkB/DWXCVErqHQXOZ1FGDSvmD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1938,6 +1955,21 @@ class grid_caja_informe_pos_apl
                    }
               }
           } 
+          if (isset($gcorreo_receptor)) 
+          {
+              $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+              nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_receptor"]);
+          }
+          if (isset($gcorreo_asunto)) 
+          {
+              $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+              nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_asunto"]);
+          }
+          if (isset($gcorreo_mensaje)) 
+          {
+              $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+              nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_mensaje"]);
+          }
           if (isset($elprefijo)) 
           {
               $_SESSION['elprefijo'] = $elprefijo;
@@ -1952,6 +1984,10 @@ class grid_caja_informe_pos_apl
           $_SESSION['sc_session'][$script_case_init]['grid_caja_informe_pos']['embutida_pai'] = "";
       } 
       $_SESSION['scriptcase']['sc_ctl_ajax'] = 'part';
+      if (!function_exists("SC_Mail_Image"))
+      {
+          include_once("grid_caja_informe_pos_sc_mail_image.php");
+      }
       if (!$this->Ini || isset($_SESSION['sc_session'][$script_case_init]['grid_caja_informe_pos']['embutida_ibase'])) 
       { 
           $this->Ini = new grid_caja_informe_pos_ini(); 
@@ -2410,14 +2446,14 @@ class grid_caja_informe_pos_apl
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
       include($this->Ini->path_btn . $this->Ini->Str_btn_grid);
-      $this->arr_buttons['group_group_1']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
+      $this->arr_buttons['group_group_3']= array(
+          'value'            => "Enviar al Correo",
+          'hint'             => "",
           'type'             => "button",
-          'display'          => "text_img",
+          'display'          => "only_text",
           'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
+          'image'            => "",
+          'fontawesomeicon'  => "fas fa-cog",
           'has_fa'           => true,
           'content_icons'    => false,
           'style'            => "default",
@@ -2436,9 +2472,22 @@ class grid_caja_informe_pos_apl
           'style'            => "default",
       );
 
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
+      $this->arr_buttons['group_group_3']= array(
+          'value'            => "Enviar al Correo",
+          'hint'             => "",
+          'type'             => "button",
+          'display'          => "only_text",
+          'display_position' => "text_right",
+          'image'            => "",
+          'fontawesomeicon'  => "fas fa-cog",
+          'has_fa'           => true,
+          'content_icons'    => false,
+          'style'            => "default",
+      );
+
+      $this->arr_buttons['group_group_1']= array(
+          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
+          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
           'type'             => "button",
           'display'          => "text_img",
           'display_position' => "text_right",
@@ -2501,6 +2550,7 @@ class grid_caja_informe_pos_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['field_order'][] = "tarjeta";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['field_order'][] = "cheques";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['field_order'][] = "formas_pago";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['field_order'][] = "imprimir";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['field_order'][] = "detalle";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['field_order'][] = "nota";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['field_order'];
@@ -4548,6 +4598,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos'][$path_doc_
    {
        $nmgp_parms = "";
    }
+   if (isset($gcorreo_receptor)) 
+   {
+       $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+   }
+   if (isset($gcorreo_asunto)) 
+   {
+       $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+   }
+   if (isset($gcorreo_mensaje)) 
+   {
+       $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+   }
    if (isset($elprefijo)) 
    {
        $_SESSION['elprefijo'] = $elprefijo;
@@ -4668,6 +4730,21 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos'][$path_doc_
                     $Tmp_par   = $cadapar[0];
                     $$Tmp_par = $cadapar[1];
                 }
+           }
+           if (isset($gcorreo_receptor)) 
+           {
+               $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+               nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_receptor"]);
+           }
+           if (isset($gcorreo_asunto)) 
+           {
+               $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+               nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_asunto"]);
+           }
+           if (isset($gcorreo_mensaje)) 
+           {
+               $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+               nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_mensaje"]);
            }
            if (isset($elprefijo)) 
            {
@@ -4907,6 +4984,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos'][$path_doc_
        { 
            $_SESSION['sc_session'][$script_case_init]['grid_caja_informe_pos']['opcao'] = $nmgp_opcao ;  
        }   
+       if (isset($_POST["gcorreo_receptor"])) 
+       {
+           $_SESSION["gcorreo_receptor"] = $_POST["gcorreo_receptor"];
+           nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_receptor"]);
+       }
+       if (isset($_GET["gcorreo_receptor"])) 
+       {
+           $_SESSION["gcorreo_receptor"] = $_GET["gcorreo_receptor"];
+           nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_receptor"]);
+       }
+       if (!isset($_SESSION["gcorreo_receptor"])) 
+       {
+           $_SESSION["gcorreo_receptor"] = "";
+       }
+       if (isset($_POST["gcorreo_asunto"])) 
+       {
+           $_SESSION["gcorreo_asunto"] = $_POST["gcorreo_asunto"];
+           nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_asunto"]);
+       }
+       if (isset($_GET["gcorreo_asunto"])) 
+       {
+           $_SESSION["gcorreo_asunto"] = $_GET["gcorreo_asunto"];
+           nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_asunto"]);
+       }
+       if (!isset($_SESSION["gcorreo_asunto"])) 
+       {
+           $_SESSION["gcorreo_asunto"] = "";
+       }
+       if (isset($_POST["gcorreo_mensaje"])) 
+       {
+           $_SESSION["gcorreo_mensaje"] = $_POST["gcorreo_mensaje"];
+           nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_mensaje"]);
+       }
+       if (isset($_GET["gcorreo_mensaje"])) 
+       {
+           $_SESSION["gcorreo_mensaje"] = $_GET["gcorreo_mensaje"];
+           nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_mensaje"]);
+       }
+       if (!isset($_SESSION["gcorreo_mensaje"])) 
+       {
+           $_SESSION["gcorreo_mensaje"] = "";
+       }
        if (isset($_POST["elprefijo"])) 
        {
            $_SESSION["elprefijo"] = $_POST["elprefijo"];

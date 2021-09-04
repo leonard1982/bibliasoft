@@ -79,6 +79,9 @@ var Table_sv_fil = new Array();
 Table_sv_fil[0] = "banco";
 Table_sv_fil[1] = "fecha";
 Table_sv_fil[2] = "resolucion";
+Table_sv_fil[3] = "correo_receptor";
+Table_sv_fil[4] = "asunto";
+Table_sv_fil[5] = "mensaje";
 function ajax_select_filter(parm)
 {
     nmAjaxProcOn();

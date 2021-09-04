@@ -143,10 +143,21 @@ function Ord_cmp_init()
        $tab_def_campos['formas_pago'] = "";
    }
    $tab_labels["formas_pago"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_caja_informe_pos']['labels']["formas_pago"])) ? $_SESSION['sc_session'][$sc_init]['grid_caja_informe_pos']['labels']["formas_pago"] : "Total formas de Pago";
+   $tab_ger_campos['imprimir'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['imprimir'] = "imprimir";
+   }
+   else
+   {
+       $tab_def_campos['imprimir'] = "";
+   }
+   $tab_labels["imprimir"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_caja_informe_pos']['labels']["imprimir"])) ? $_SESSION['sc_session'][$sc_init]['grid_caja_informe_pos']['labels']["imprimir"] : "Imprimir";
    $tab_ger_campos['efectivo'] = "none";
    $tab_ger_campos['tarjeta'] = "none";
    $tab_ger_campos['cheques'] = "none";
    $tab_ger_campos['formas_pago'] = "none";
+   $tab_ger_campos['imprimir'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_caja_informe_pos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_caja_informe_pos']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_caja_informe_pos']['field_display'] as $NM_cada_field => $NM_cada_opc)

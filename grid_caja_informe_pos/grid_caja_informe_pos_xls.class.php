@@ -95,6 +95,21 @@ class grid_caja_informe_pos_xls
                }
           }
       }
+      if (isset($gcorreo_receptor)) 
+      {
+          $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+          nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_receptor"]);
+      }
+      if (isset($gcorreo_asunto)) 
+      {
+          $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+          nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_asunto"]);
+      }
+      if (isset($gcorreo_mensaje)) 
+      {
+          $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+          nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_mensaje"]);
+      }
       if (isset($elprefijo)) 
       {
           $_SESSION['elprefijo'] = $elprefijo;
@@ -314,6 +329,24 @@ class grid_caja_informe_pos_xls
           if ($tmp_pos !== false && !is_array($this->resolucion))
           {
               $this->resolucion = substr($this->resolucion, 0, $tmp_pos);
+          }
+          $this->correo_receptor = $Busca_temp['correo_receptor']; 
+          $tmp_pos = strpos($this->correo_receptor, "##@@");
+          if ($tmp_pos !== false && !is_array($this->correo_receptor))
+          {
+              $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+          }
+          $this->asunto = $Busca_temp['asunto']; 
+          $tmp_pos = strpos($this->asunto, "##@@");
+          if ($tmp_pos !== false && !is_array($this->asunto))
+          {
+              $this->asunto = substr($this->asunto, 0, $tmp_pos);
+          }
+          $this->mensaje = $Busca_temp['mensaje']; 
+          $tmp_pos = strpos($this->mensaje, "##@@");
+          if ($tmp_pos !== false && !is_array($this->mensaje))
+          {
+              $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
           }
       } 
       $this->nm_where_dinamico = "";
@@ -1099,6 +1132,34 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['imprimir'])) ? $this->New_label['imprimir'] : "Imprimir"; 
+          if ($Cada_col == "imprimir" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
           $SC_Label = (isset($this->New_label['detalle'])) ? $this->New_label['detalle'] : "Movimiento"; 
           if ($Cada_col == "detalle" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -1299,6 +1360,24 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->formas_pago);
          $this->Xls_col++;
    }
+   //----- imprimir
+   function NM_export_imprimir()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->imprimir = NM_charset_to_utf8($this->imprimir);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->imprimir, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->imprimir, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- detalle
    function NM_export_detalle()
    {
@@ -1419,6 +1498,16 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0.00";
+         $this->Xls_col++;
+   }
+   //----- imprimir
+   function NM_sub_cons_imprimir()
+   {
+         $this->imprimir = NM_charset_to_utf8($this->imprimir);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->imprimir;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
    //----- detalle

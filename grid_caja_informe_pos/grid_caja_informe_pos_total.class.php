@@ -39,6 +39,24 @@ class grid_caja_informe_pos_total
           {
               $this->resolucion = substr($this->resolucion, 0, $tmp_pos);
           }
+          $this->correo_receptor = $Busca_temp['correo_receptor']; 
+          $tmp_pos = strpos($this->correo_receptor, "##@@");
+          if ($tmp_pos !== false && !is_array($this->correo_receptor))
+          {
+              $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+          }
+          $this->asunto = $Busca_temp['asunto']; 
+          $tmp_pos = strpos($this->asunto, "##@@");
+          if ($tmp_pos !== false && !is_array($this->asunto))
+          {
+              $this->asunto = substr($this->asunto, 0, $tmp_pos);
+          }
+          $this->mensaje = $Busca_temp['mensaje']; 
+          $tmp_pos = strpos($this->mensaje, "##@@");
+          if ($tmp_pos !== false && !is_array($this->mensaje))
+          {
+              $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
+          }
       } 
    }
 

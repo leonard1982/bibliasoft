@@ -169,6 +169,8 @@ function Sel_cmp_process()
       $tab_ger_campos['cheques'] = "on";
       $tab_ger_campos['formas_pago'] = "on";
       $tab_blk_campos[] = "formas_pago";
+      $tab_ger_campos['imprimir'] = "on";
+      $tab_blk_campos[] = "imprimir";
       $tab_ger_campos['detalle'] = "on";
       $tab_ger_campos['nota'] = "on";
 

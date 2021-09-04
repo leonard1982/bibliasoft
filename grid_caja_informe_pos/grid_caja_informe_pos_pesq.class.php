@@ -147,10 +147,17 @@ class grid_caja_informe_pos_pesq
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opcao'] = "igual";
     if (!$this->NM_ajax_flag && (!isset($bprocessa) || $bprocessa != "pesq"))
     {
+      global $banco_cond, $banco,
+             $fecha_cond, $fecha, $fecha_dia, $fecha_mes, $fecha_ano,
+             $resolucion_cond, $resolucion,
+             $correo_receptor_cond, $correo_receptor,
+             $asunto_cond, $asunto,
+             $mensaje_cond, $mensaje;
       $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'on';
 if (!isset($_SESSION['elprefijo'])) {$_SESSION['elprefijo'] = "";}
 if (!isset($this->sc_temp_elprefijo)) {$this->sc_temp_elprefijo = (isset($_SESSION['elprefijo'])) ? $_SESSION['elprefijo'] : "";}
  $this->sc_temp_elprefijo=0;
+$fecha  = date("Y-m-d");
 if (isset($this->sc_temp_elprefijo)) {$_SESSION['elprefijo'] = $this->sc_temp_elprefijo;}
 $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off'; 
       if (isset($fecha_day))
@@ -1809,7 +1816,7 @@ function scJQCalendarAdd() {
   }
   var str_out = "";
   str_out += 'SC_banco_cond#NMF#' + search_get_sel_txt('SC_banco_cond') + '@NMF@';
-  str_out += 'SC_banco#NMF#' + search_get_radio('SC_banco') + '@NMF@';
+  str_out += 'SC_banco#NMF#' + search_get_select('SC_banco') + '@NMF@';
   str_out += 'SC_fecha_cond#NMF#' + search_get_sel_txt('SC_fecha_cond') + '@NMF@';
   str_out += 'SC_fecha_dia#NMF#' + search_get_sel_txt('SC_fecha_dia') + '@NMF@';
   str_out += 'SC_fecha_mes#NMF#' + search_get_sel_txt('SC_fecha_mes') + '@NMF@';
@@ -1819,6 +1826,12 @@ function scJQCalendarAdd() {
   str_out += 'SC_fecha_input_2_ano#NMF#' + search_get_sel_txt('SC_fecha_input_2_ano') + '@NMF@';
   str_out += 'SC_resolucion_cond#NMF#' + search_get_sel_txt('SC_resolucion_cond') + '@NMF@';
   str_out += 'SC_resolucion#NMF#' + search_get_select('SC_resolucion') + '@NMF@';
+  str_out += 'SC_correo_receptor_cond#NMF#' + search_get_sel_txt('SC_correo_receptor_cond') + '@NMF@';
+  str_out += 'SC_correo_receptor#NMF#' + search_get_text('SC_correo_receptor') + '@NMF@';
+  str_out += 'SC_asunto_cond#NMF#' + search_get_sel_txt('SC_asunto_cond') + '@NMF@';
+  str_out += 'SC_asunto#NMF#' + search_get_text('SC_asunto') + '@NMF@';
+  str_out += 'SC_mensaje_cond#NMF#' + search_get_sel_txt('SC_mensaje_cond') + '@NMF@';
+  str_out += 'SC_mensaje#NMF#' + search_get_text('SC_mensaje') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2042,6 +2055,9 @@ function nm_open_popup(parms)
              $banco_cond, $banco,
              $fecha_cond, $fecha, $fecha_dia, $fecha_mes, $fecha_ano,
              $resolucion_cond, $resolucion,
+             $correo_receptor_cond, $correo_receptor,
+             $asunto_cond, $asunto,
+             $mensaje_cond, $mensaje,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2088,6 +2104,12 @@ function nm_open_popup(parms)
           $fecha_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['fecha_cond']; 
           $resolucion = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['resolucion']; 
           $resolucion_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['resolucion_cond']; 
+          $correo_receptor = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['correo_receptor']; 
+          $correo_receptor_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['correo_receptor_cond']; 
+          $asunto = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['asunto']; 
+          $asunto_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['asunto_cond']; 
+          $mensaje = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['mensaje']; 
+          $mensaje_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['mensaje_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['NM_operador']; 
       } 
       if (!isset($banco_cond) || empty($banco_cond))
@@ -2102,12 +2124,27 @@ function nm_open_popup(parms)
       {
          $resolucion_cond = "eq";
       }
+      if (!isset($correo_receptor_cond) || empty($correo_receptor_cond))
+      {
+         $correo_receptor_cond = "eq";
+      }
+      if (!isset($asunto_cond) || empty($asunto_cond))
+      {
+         $asunto_cond = "eq";
+      }
+      if (!isset($mensaje_cond) || empty($mensaje_cond))
+      {
+         $mensaje_cond = "eq";
+      }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
       $str_hide_banco = (in_array($banco_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_fecha = (in_array($fecha_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_resolucion = (in_array($resolucion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_correo_receptor = (in_array($correo_receptor_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_asunto = (in_array($asunto_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_mensaje = (in_array($mensaje_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
       if (!isset($banco) || $banco == "")
       {
@@ -2151,6 +2188,48 @@ function nm_open_popup(parms)
          $resolucion = substr($resolucion, 0, $tmp_pos);
          }
       }
+      if (!isset($correo_receptor) || $correo_receptor == "")
+      {
+          $correo_receptor = "";
+      }
+      if (isset($correo_receptor) && !empty($correo_receptor))
+      {
+         $tmp_pos = strpos($correo_receptor, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $correo_receptor = substr($correo_receptor, 0, $tmp_pos);
+         }
+      }
+      if (!isset($asunto) || $asunto == "")
+      {
+          $asunto = "";
+      }
+      if (isset($asunto) && !empty($asunto))
+      {
+         $tmp_pos = strpos($asunto, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $asunto = substr($asunto, 0, $tmp_pos);
+         }
+      }
+      if (!isset($mensaje) || $mensaje == "")
+      {
+          $mensaje = "";
+      }
+      if (isset($mensaje) && !empty($mensaje))
+      {
+         $tmp_pos = strpos($mensaje, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $mensaje = substr($mensaje, 0, $tmp_pos);
+         }
+      }
 ?>
  <TR align="center">
   <TD class="scFilterTableTd">
@@ -2183,7 +2262,6 @@ function nm_open_popup(parms)
 ?>
 
 <?php
-      $banco = $banco;
       $banco_look = substr($this->Db->qstr($banco), 1, -1); 
       $nmgp_def_dados = "" ; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
@@ -2238,48 +2316,38 @@ function nm_open_popup(parms)
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit; 
       } 
-      $i = 0;
+?>
+   <span id="idAjaxSelect_banco">
+      <SELECT class="scFilterObjectOdd" id="SC_banco" name="banco"  size="1">
+<?php
       $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
       $nm_opcoes  = explode("?@?", $nm_opcoesx);
-      echo "<span id=\"idAjaxRadio_banco\">\r\n";
-      echo "        <TABLE border=\"0px\" cellpadding=\"0px\">\r\n";
-      echo "         <TR>\r\n";
-      if (!isset($banco))
+      foreach ($nm_opcoes as $nm_opcao)
       {
-         $banco = "";
-      }
-      for ($j = 0; $j < sizeof($nm_opcoes); $j++)
-      {
-         if (!empty($nm_opcoes[$j]))
+         if (!empty($nm_opcao))
          {
-            $temp_bug_list = explode("?#?", $nm_opcoes[$j]);
+            $temp_bug_list = explode("?#?", $nm_opcao);
             list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
             if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
-            if ($nm_opc_cod === $banco)
+            if ("" != $banco)
             {
-               $tmp_cmp_click = "";
-               $tmp_cmp_sel   = "checked";
+                    $banco_sel = ($nm_opc_cod === $banco) ? "selected" : "";
             }
             else
             {
-               $tmp_cmp_click = "";
-               $tmp_cmp_sel   = ($nm_opc_cod === $banco) ? "checked" : "";
+               $banco_sel = ("S" == $nm_opc_sel) ? "selected" : "";
             }
-            echo "          <TD class=\"scFilterFieldFontOdd\">\r\n";
-            echo "           <INPUT class=\"scFilterObjectOdd\" type=\"radio\" id=\"SC_banco\" name=\"banco\" value=\"" . NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val) . "\" $tmp_cmp_sel $tmp_cmp_click>$nm_opc_val\r\n";
-            echo "          </TD>\r\n";
-            $i++;
-            if (1 == $i && $j < sizeof($nm_opcoes) - 1)
-            {
-               echo "         </TR>\r\n";
-               echo "         <TR>\r\n";
-               $i = 0;
-            }
+            $nm_sc_valor = $nm_opc_val;
+            $nm_opc_val = $nm_sc_valor;
+?>
+       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $banco_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
+<?php
          }
       }
-      echo "         </TR>\r\n";
-      echo "        </TABLE>\r\n";
-      echo "</span>\r\n";
+?>
+      </SELECT>
+   </span>
+<?php
 ?>
         
         </TD>
@@ -2293,7 +2361,7 @@ function nm_open_popup(parms)
 
 
 
-      <TD id='SC_fecha_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "Fecha"; ?></TD>
+      <TD id='SC_fecha_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "Fecha"; ?> <span class="scFilterRequiredOdd">*</span></TD>
       
       <INPUT type="hidden" id="SC_fecha_cond" name="fecha_cond" value="eq">
  
@@ -2415,7 +2483,7 @@ foreach ($Arr_format as $Part_date)
 
 
 
-      <TD id='SC_resolucion_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['resolucion'])) ? $this->New_label['resolucion'] : "Prefijo"; ?></TD>
+      <TD id='SC_resolucion_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['resolucion'])) ? $this->New_label['resolucion'] : "Prefijo"; ?> <span class="scFilterRequiredOdd">*</span></TD>
       
       <INPUT type="hidden" id="SC_resolucion_cond" name="resolucion_cond" value="eq">
  
@@ -2436,7 +2504,7 @@ foreach ($Arr_format as $Part_date)
 <?php
       $resolucion_look = substr($this->Db->qstr($resolucion), 1, -1); 
       $nmgp_def_dados = "" ; 
-      $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE pref_factura='SI' ORDER BY resolucion"; 
+      $nm_comando = "SELECT Idres, concat(prefijo,' - Vence: ',fec_vencimiento) as prefijo  FROM resdian  WHERE pref_factura='SI' ORDER BY resolucion"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
@@ -2464,7 +2532,6 @@ foreach ($Arr_format as $Part_date)
 ?>
    <span id="idAjaxSelect_resolucion">
       <SELECT class="scFilterObjectOdd" id="SC_resolucion" name="resolucion"  size="1">
-       <OPTION value=""></OPTION>
 <?php
       $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
       $nm_opcoes  = explode("?@?", $nm_opcoesx);
@@ -2501,6 +2568,96 @@ foreach ($Arr_format as $Part_date)
       </TABLE>
      </TD>
 
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_correo_receptor_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['correo_receptor'])) ? $this->New_label['correo_receptor'] : "Correo Destino"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_correo_receptor_cond" name="correo_receptor_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldEven">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_correo_receptor" <?php echo $str_hide_correo_receptor?> valign="top">
+        <TD class="scFilterFieldFontEven">
+           <?php
+ $SC_Label = (isset($this->New_label['correo_receptor'])) ? $this->New_label['correo_receptor'] : "Correo Destino";
+ $nmgp_tab_label .= "correo_receptor?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<INPUT  type="text" id="SC_correo_receptor" name="correo_receptor" value="<?php echo NM_encode_input($correo_receptor) ?>"  size=60 alt="{datatype: 'text', maxLength: 120, allowedChars: '', lettersCase: '', autoTab: false, enterSubmit: true}" class="sc-js-input scFilterObjectEven">
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_asunto_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['asunto'])) ? $this->New_label['asunto'] : "Asunto"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_asunto_cond" name="asunto_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_asunto" <?php echo $str_hide_asunto?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['asunto'])) ? $this->New_label['asunto'] : "Asunto";
+ $nmgp_tab_label .= "asunto?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<INPUT  type="text" id="SC_asunto" name="asunto" value="<?php echo NM_encode_input($asunto) ?>"  size=80 alt="{datatype: 'text', maxLength: 120, allowedChars: '', lettersCase: '', autoTab: false, enterSubmit: true}" class="sc-js-input scFilterObjectOdd">
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_mensaje_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['mensaje'])) ? $this->New_label['mensaje'] : "Mensaje"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_mensaje_cond" name="mensaje_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldEven">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_mensaje" <?php echo $str_hide_mensaje?> valign="top">
+        <TD class="scFilterFieldFontEven">
+           <?php
+ $SC_Label = (isset($this->New_label['mensaje'])) ? $this->New_label['mensaje'] : "Mensaje";
+ $nmgp_tab_label .= "mensaje?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<INPUT  type="text" id="SC_mensaje" name="mensaje" value="<?php echo NM_encode_input($mensaje) ?>"  size=80 alt="{datatype: 'text', maxLength: 200, allowedChars: '', lettersCase: '', autoTab: false, enterSubmit: true}" class="sc-js-input scFilterObjectEven">
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
    </tr>
    </TABLE>
   </TD>
@@ -2524,7 +2681,65 @@ foreach ($Arr_format as $Part_date)
     <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
     </td>
     <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
-   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+<?php
+   if (is_file("grid_caja_informe_pos_help.txt"))
+   {
+      $Arq_WebHelp = file("grid_caja_informe_pos_help.txt"); 
+      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
+      {
+          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
+          $Tmp = explode(";", $Arq_WebHelp[0]); 
+          foreach ($Tmp as $Cada_help)
+          {
+              $Tmp1 = explode(":", $Cada_help); 
+              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
+              {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+              }
+          }
+      }
+   }
+?>
+<?php
+   if ($nm_apl_dependente == 1 || (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && !$this->aba_iframe))
+   {
+       if ($nm_apl_dependente == 1) 
+       { 
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+       } 
+       elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard'])
+       { }
+       else 
+       { 
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+       } 
+   }
+   elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'])
+   {
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['sc_modal'])
+       {
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove();", "self.parent.tb_remove();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+       }
+       else
+       {
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+       }
+   }
 ?>
 <?php
    if ($this->nmgp_botoes['clear'] == "on")
@@ -2586,65 +2801,7 @@ foreach ($Arr_format as $Part_date)
 <?php
    }
 ?>
-<?php
-   if (is_file("grid_caja_informe_pos_help.txt"))
-   {
-      $Arq_WebHelp = file("grid_caja_informe_pos_help.txt"); 
-      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
-      {
-          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
-          $Tmp = explode(";", $Arq_WebHelp[0]); 
-          foreach ($Tmp as $Cada_help)
-          {
-              $Tmp1 = explode(":", $Cada_help); 
-              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
-              {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-              }
-          }
-      }
-   }
-?>
-<?php
-   if ($nm_apl_dependente == 1 || (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && !$this->aba_iframe))
-   {
-       if ($nm_apl_dependente == 1) 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-       elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard'])
-       { }
-       else 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-   }
-   elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'])
-   {
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['sc_modal'])
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove();", "self.parent.tb_remove();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-       else
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-   }
+   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Generar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Generar", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
     </td>
     <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
@@ -2753,7 +2910,65 @@ foreach ($Arr_format as $Part_date)
     <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
     </td>
     <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
-   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+<?php
+   if (is_file("grid_caja_informe_pos_help.txt"))
+   {
+      $Arq_WebHelp = file("grid_caja_informe_pos_help.txt"); 
+      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
+      {
+          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
+          $Tmp = explode(";", $Arq_WebHelp[0]); 
+          foreach ($Tmp as $Cada_help)
+          {
+              $Tmp1 = explode(":", $Cada_help); 
+              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
+              {
+?>
+          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+              }
+          }
+      }
+   }
+?>
+<?php
+   if ($nm_apl_dependente == 1 || (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && !$this->aba_iframe))
+   {
+       if ($nm_apl_dependente == 1) 
+       { 
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+       } 
+       elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard'])
+       { }
+       else 
+       { 
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+       } 
+   }
+   elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'])
+   {
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['sc_modal'])
+       {
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove();", "self.parent.tb_remove();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+       }
+       else
+       {
+?>
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+       }
+   }
 ?>
 <?php
    if ($this->nmgp_botoes['clear'] == "on")
@@ -2815,65 +3030,7 @@ foreach ($Arr_format as $Part_date)
 <?php
    }
 ?>
-<?php
-   if (is_file("grid_caja_informe_pos_help.txt"))
-   {
-      $Arq_WebHelp = file("grid_caja_informe_pos_help.txt"); 
-      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
-      {
-          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
-          $Tmp = explode(";", $Arq_WebHelp[0]); 
-          foreach ($Tmp as $Cada_help)
-          {
-              $Tmp1 = explode(":", $Cada_help); 
-              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
-              {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-              }
-          }
-      }
-   }
-?>
-<?php
-   if ($nm_apl_dependente == 1 || (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && !$this->aba_iframe))
-   {
-       if ($nm_apl_dependente == 1) 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-       elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard'])
-       { }
-       else 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-   }
-   elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'])
-   {
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['sc_modal'])
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove();", "self.parent.tb_remove();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-       else
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-   }
+   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Generar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Generar", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
     </td>
     <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
@@ -3039,13 +3196,7 @@ foreach ($Arr_format as $Part_date)
    document.getElementById('Salvar_filters_bot').style.display = 'none';
    document.F1.banco_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_banco'), document.F1.banco_cond, 'banco');
-   for (i = 0; i < document.F1.banco.length; i++)
-   {
-      if (document.F1.banco[i].checked)
-      {
-          document.F1.banco[i].checked = false;
-      }
-   }
+   document.F1.banco.value = "";
    document.F1.fecha_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_fecha'), document.F1.fecha_cond, 'fecha');
    document.F1.fecha_dia.value = "";
@@ -3054,6 +3205,15 @@ foreach ($Arr_format as $Part_date)
    document.F1.resolucion_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_resolucion'), document.F1.resolucion_cond, 'resolucion');
    document.F1.resolucion.value = "";
+   document.F1.correo_receptor_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_correo_receptor'), document.F1.correo_receptor_cond, 'correo_receptor');
+   document.F1.correo_receptor.value = "";
+   document.F1.asunto_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_asunto'), document.F1.asunto_cond, 'asunto');
+   document.F1.asunto.value = "";
+   document.F1.mensaje_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_mensaje'), document.F1.mensaje_cond, 'mensaje');
+   document.F1.mensaje.value = "";
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -3061,11 +3221,30 @@ foreach ($Arr_format as $Part_date)
     if (Field == 'all' || Field == 'resolucion') {
        Sc_carga_select2_resolucion();
     }
+    if (Field == 'all' || Field == 'banco') {
+       Sc_carga_select2_banco();
+    }
  }
  function Sc_carga_select2_resolucion()
  {
   $("#SC_resolucion").select2(
     {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_banco()
+ {
+  $("#SC_banco").select2(
+    {
+      minimumResultsForSearch: Infinity,
       language: {
         noResults: function() {
           return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
@@ -3233,7 +3412,7 @@ foreach ($Arr_format as $Part_date)
       $tb_fields_esp = array();
       $old_bi_opcs   = array("TP","HJ","OT","U7","SP","US","MM","UM","AM","PS","SS","P3","PM","P7","CY","LY","YY","M6","M3","M18","M24");
       $tp_fields['SC_banco_cond'] = 'cond';
-      $tp_fields['SC_banco'] = 'radio';
+      $tp_fields['SC_banco'] = 'select';
       $tp_fields['SC_fecha_cond'] = 'cond';
       $tp_fields['SC_fecha_dia'] = 'text';
       $tp_fields['SC_fecha_mes'] = 'text';
@@ -3243,6 +3422,12 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_fecha_input_2_ano'] = 'text';
       $tp_fields['SC_resolucion_cond'] = 'cond';
       $tp_fields['SC_resolucion'] = 'select';
+      $tp_fields['SC_correo_receptor_cond'] = 'cond';
+      $tp_fields['SC_correo_receptor'] = 'text';
+      $tp_fields['SC_asunto_cond'] = 'cond';
+      $tp_fields['SC_asunto'] = 'text';
+      $tp_fields['SC_mensaje_cond'] = 'cond';
+      $tp_fields['SC_mensaje'] = 'text';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -3388,7 +3573,10 @@ foreach ($Arr_format as $Part_date)
    {
       global $banco_cond, $banco,
              $fecha_cond, $fecha, $fecha_dia, $fecha_mes, $fecha_ano,
-             $resolucion_cond, $resolucion, $nmgp_tab_label;
+             $resolucion_cond, $resolucion,
+             $correo_receptor_cond, $correo_receptor,
+             $asunto_cond, $asunto,
+             $mensaje_cond, $mensaje, $nmgp_tab_label;
 
       $C_formatado = true;
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
@@ -3405,6 +3593,25 @@ foreach ($Arr_format as $Part_date)
       {
           $resolucion_input_2 = $resolucion;
       }
+      $correo_receptor_cond_salva = $correo_receptor_cond; 
+      if (!isset($correo_receptor_input_2) || $correo_receptor_input_2 == "")
+      {
+          $correo_receptor_input_2 = $correo_receptor;
+      }
+      $asunto_cond_salva = $asunto_cond; 
+      if (!isset($asunto_input_2) || $asunto_input_2 == "")
+      {
+          $asunto_input_2 = $asunto;
+      }
+      $mensaje_cond_salva = $mensaje_cond; 
+      if (!isset($mensaje_input_2) || $mensaje_input_2 == "")
+      {
+          $mensaje_input_2 = $mensaje;
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca'];
+      }
       $tmp_pos = strpos($banco, "##@@");
       if ($tmp_pos === false) {
           $L_lookup = $banco;
@@ -3414,6 +3621,26 @@ foreach ($Arr_format as $Part_date)
       }
       if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['psq_check_ret']['banco'])) {
           if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Banco/Caja : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      if (!$this->NM_ajax_flag || $this->NM_ajax_opcao != "ajax_grid_search")
+      {
+          if ($fecha_cond != "nu" && $fecha_cond != "nn" && $fecha_cond != "ep" && $fecha_cond != "ne")
+          {
+              if ($fecha_dia == "" && $fecha_mes == "" && $fecha_ano == "")
+              {
+                  if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Fecha : " . $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+              }
+          }
+      }
+      if (!$this->NM_ajax_flag || $this->NM_ajax_opcao != "ajax_grid_search")
+      {
+          if ($resolucion_cond != "nu" && $resolucion_cond != "nn" && $resolucion_cond != "ep" && $resolucion_cond != "ne")
+          {
+              if ($resolucion == "")
+              {
+                  if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Prefijo : " . $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+              }
+          }
       }
       $tmp_pos = strpos($resolucion, "##@@");
       if ($tmp_pos === false) {
@@ -3436,6 +3663,15 @@ foreach ($Arr_format as $Part_date)
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['resolucion'] = $resolucion; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['resolucion_cond'] = $resolucion_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['correo_receptor'] = $correo_receptor; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['correo_receptor_cond'] = $correo_receptor_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['asunto'] = $asunto; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['asunto_cond'] = $asunto_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['mensaje'] = $mensaje; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['mensaje_cond'] = $mensaje_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
@@ -3466,10 +3702,23 @@ foreach ($Arr_format as $Part_date)
       $fecha .= str_repeat(0, (2 - strlen($fecha_mes))) . $fecha_mes . "-"; 
       $fecha .= str_repeat(0, (2 - strlen($fecha_dia))) . $fecha_dia; 
       $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'on';
+if (!isset($_SESSION['gcorreo_mensaje'])) {$_SESSION['gcorreo_mensaje'] = "";}
+if (!isset($this->sc_temp_gcorreo_mensaje)) {$this->sc_temp_gcorreo_mensaje = (isset($_SESSION['gcorreo_mensaje'])) ? $_SESSION['gcorreo_mensaje'] : "";}
+if (!isset($_SESSION['gcorreo_asunto'])) {$_SESSION['gcorreo_asunto'] = "";}
+if (!isset($this->sc_temp_gcorreo_asunto)) {$this->sc_temp_gcorreo_asunto = (isset($_SESSION['gcorreo_asunto'])) ? $_SESSION['gcorreo_asunto'] : "";}
+if (!isset($_SESSION['gcorreo_receptor'])) {$_SESSION['gcorreo_receptor'] = "";}
+if (!isset($this->sc_temp_gcorreo_receptor)) {$this->sc_temp_gcorreo_receptor = (isset($_SESSION['gcorreo_receptor'])) ? $_SESSION['gcorreo_receptor'] : "";}
 if (!isset($_SESSION['elprefijo'])) {$_SESSION['elprefijo'] = "";}
 if (!isset($this->sc_temp_elprefijo)) {$this->sc_temp_elprefijo = (isset($_SESSION['elprefijo'])) ? $_SESSION['elprefijo'] : "";}
  $this->sc_temp_elprefijo=$resolucion ;
+
+$this->sc_temp_gcorreo_receptor = $correo_receptor ;
+$this->sc_temp_gcorreo_asunto   = $asunto ;
+$this->sc_temp_gcorreo_mensaje  = $mensaje ;
 if (isset($this->sc_temp_elprefijo)) {$_SESSION['elprefijo'] = $this->sc_temp_elprefijo;}
+if (isset($this->sc_temp_gcorreo_receptor)) {$_SESSION['gcorreo_receptor'] = $this->sc_temp_gcorreo_receptor;}
+if (isset($this->sc_temp_gcorreo_asunto)) {$_SESSION['gcorreo_asunto'] = $this->sc_temp_gcorreo_asunto;}
+if (isset($this->sc_temp_gcorreo_mensaje)) {$_SESSION['gcorreo_mensaje'] = $this->sc_temp_gcorreo_mensaje;}
 $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off'; 
       if ($banco_LKP == $banco)
       {
@@ -3516,22 +3765,31 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
       {
           return;
       }
-      $this->cmp_formatado['banco'] = $banco;
-      if (strpos($this->cmp_formatado['banco'], "##@@") !== false)
+      $Conteudo = $banco;
+      if (strpos($Conteudo, "##@@") !== false)
       {
-          $this->cmp_formatado['banco'] = substr($this->cmp_formatado['banco'], strpos($this->cmp_formatado['banco'], "##@@") + 4);
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
       }
-      $this->cmp_formatado['banco_input_2'] = $banco_input_2;
+      $this->cmp_formatado['banco'] = $Conteudo;
       $Conteudo = $resolucion;
       if (strpos($Conteudo, "##@@") !== false)
       {
           $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
       }
       $this->cmp_formatado['resolucion'] = $Conteudo;
+      $Conteudo = $correo_receptor;
+      $this->cmp_formatado['correo_receptor'] = $Conteudo;
+      $Conteudo = $asunto;
+      $this->cmp_formatado['asunto'] = $Conteudo;
+      $Conteudo = $mensaje;
+      $this->cmp_formatado['mensaje'] = $Conteudo;
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca_ant']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca'];
+      }
 
       //----- $banco
       $this->Date_part = false;
-      $banco = $banco; 
       if (isset($banco))
       {
          $this->monta_condicao("banco", $banco_cond, $banco, "", "banco");
@@ -3626,7 +3884,7 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
       {
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_pesq_filtro'] = " (" . $this->comando_filtro . ")";
       }
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_pesq'] != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_pesq_ant'])
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_pesq'] != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_pesq_ant'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca_ant'] != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['campos_busca'])
       {
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['cond_pesq'] .= $this->NM_operador;
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['contr_array_resumo'] = "NAO";
@@ -3667,6 +3925,7 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
    {
       switch ($Obj)
       {
+         case "banco" : return ('class="scFilterObjectOdd"'); break;
          case "resolucion" : return ('class="scFilterObjectOdd"'); break;
          default       : return ("");
       }

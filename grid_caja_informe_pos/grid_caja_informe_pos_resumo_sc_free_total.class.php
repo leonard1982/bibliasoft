@@ -351,6 +351,24 @@ class grid_caja_informe_pos_resumo
        {
            $this->resolucion = substr($this->resolucion, 0, $tmp_pos);
        }
+       $this->correo_receptor = $Busca_temp['correo_receptor']; 
+       $tmp_pos = strpos($this->correo_receptor, "##@@");
+       if ($tmp_pos !== false && !is_array($this->correo_receptor))
+       {
+           $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+       }
+       $this->asunto = $Busca_temp['asunto']; 
+       $tmp_pos = strpos($this->asunto, "##@@");
+       if ($tmp_pos !== false && !is_array($this->asunto))
+       {
+           $this->asunto = substr($this->asunto, 0, $tmp_pos);
+       }
+       $this->mensaje = $Busca_temp['mensaje']; 
+       $tmp_pos = strpos($this->mensaje, "##@@");
+       if ($tmp_pos !== false && !is_array($this->mensaje))
+       {
+           $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
+       }
      } 
       $this->nm_where_dinamico = "";
        ob_start(); 
@@ -4329,6 +4347,24 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['doc_
           {
               $resolucion = substr($resolucion, 0, $tmp_pos);
           }
+          $correo_receptor = $Busca_temp['correo_receptor']; 
+          $tmp_pos = strpos($correo_receptor, "##@@");
+          if ($tmp_pos !== false && !is_array($correo_receptor))
+          {
+              $correo_receptor = substr($correo_receptor, 0, $tmp_pos);
+          }
+          $asunto = $Busca_temp['asunto']; 
+          $tmp_pos = strpos($asunto, "##@@");
+          if ($tmp_pos !== false && !is_array($asunto))
+          {
+              $asunto = substr($asunto, 0, $tmp_pos);
+          }
+          $mensaje = $Busca_temp['mensaje']; 
+          $tmp_pos = strpos($mensaje, "##@@");
+          if ($tmp_pos !== false && !is_array($mensaje))
+          {
+              $mensaje = substr($mensaje, 0, $tmp_pos);
+          }
       } 
       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['cond_pesq']))
       {  
@@ -4487,6 +4523,24 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['doc_
        {
            $this->resolucion = substr($this->resolucion, 0, $tmp_pos);
        }
+       $this->correo_receptor = $Busca_temp['correo_receptor']; 
+       $tmp_pos = strpos($this->correo_receptor, "##@@");
+       if ($tmp_pos !== false && !is_array($this->correo_receptor))
+       {
+           $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+       }
+       $this->asunto = $Busca_temp['asunto']; 
+       $tmp_pos = strpos($this->asunto, "##@@");
+       if ($tmp_pos !== false && !is_array($this->asunto))
+       {
+           $this->asunto = substr($this->asunto, 0, $tmp_pos);
+       }
+       $this->mensaje = $Busca_temp['mensaje']; 
+       $tmp_pos = strpos($this->mensaje, "##@@");
+       if ($tmp_pos !== false && !is_array($this->mensaje))
+       {
+           $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
+       }
      } 
      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_orig'];
      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_pesq'];
@@ -4579,6 +4633,24 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
                 if ($tmp_pos !== false && !is_array($this->resolucion))
                 {
                    $this->resolucion = substr($this->resolucion, 0, $tmp_pos);
+                }
+                $this->correo_receptor = $Busca_temp['correo_receptor']; 
+                $tmp_pos = strpos($this->correo_receptor, "##@@");
+                if ($tmp_pos !== false && !is_array($this->correo_receptor))
+                {
+                   $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+                }
+                $this->asunto = $Busca_temp['asunto']; 
+                $tmp_pos = strpos($this->asunto, "##@@");
+                if ($tmp_pos !== false && !is_array($this->asunto))
+                {
+                   $this->asunto = substr($this->asunto, 0, $tmp_pos);
+                }
+                $this->mensaje = $Busca_temp['mensaje']; 
+                $tmp_pos = strpos($this->mensaje, "##@@");
+                if ($tmp_pos !== false && !is_array($this->mensaje))
+                {
+                   $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
                 }
             } 
             $this->banco = $rs_res->fields[0] ;  

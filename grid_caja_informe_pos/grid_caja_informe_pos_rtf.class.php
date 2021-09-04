@@ -84,6 +84,21 @@ class grid_caja_informe_pos_rtf
                }
           }
       }
+      if (isset($gcorreo_receptor)) 
+      {
+          $_SESSION['gcorreo_receptor'] = $gcorreo_receptor;
+          nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_receptor"]);
+      }
+      if (isset($gcorreo_asunto)) 
+      {
+          $_SESSION['gcorreo_asunto'] = $gcorreo_asunto;
+          nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_asunto"]);
+      }
+      if (isset($gcorreo_mensaje)) 
+      {
+          $_SESSION['gcorreo_mensaje'] = $gcorreo_mensaje;
+          nm_limpa_str_grid_caja_informe_pos($_SESSION["gcorreo_mensaje"]);
+      }
       if (isset($elprefijo)) 
       {
           $_SESSION['elprefijo'] = $elprefijo;
@@ -191,6 +206,24 @@ class grid_caja_informe_pos_rtf
           {
               $this->resolucion = substr($this->resolucion, 0, $tmp_pos);
           }
+          $this->correo_receptor = $Busca_temp['correo_receptor']; 
+          $tmp_pos = strpos($this->correo_receptor, "##@@");
+          if ($tmp_pos !== false && !is_array($this->correo_receptor))
+          {
+              $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+          }
+          $this->asunto = $Busca_temp['asunto']; 
+          $tmp_pos = strpos($this->asunto, "##@@");
+          if ($tmp_pos !== false && !is_array($this->asunto))
+          {
+              $this->asunto = substr($this->asunto, 0, $tmp_pos);
+          }
+          $this->mensaje = $Busca_temp['mensaje']; 
+          $tmp_pos = strpos($this->mensaje, "##@@");
+          if ($tmp_pos !== false && !is_array($this->mensaje))
+          {
+              $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
+          }
       } 
       $this->nm_where_dinamico = "";
       $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'on';
@@ -268,6 +301,14 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
           }
           $SC_Label = (isset($this->New_label['formas_pago'])) ? $this->New_label['formas_pago'] : "Total formas de Pago"; 
           if ($Cada_col == "formas_pago" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              $SC_Label = str_replace('<', '&lt;', $SC_Label);
+              $SC_Label = str_replace('>', '&gt;', $SC_Label);
+              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
+          }
+          $SC_Label = (isset($this->New_label['imprimir'])) ? $this->New_label['imprimir'] : "Imprimir"; 
+          if ($Cada_col == "imprimir" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $SC_Label = NM_charset_to_utf8($SC_Label);
               $SC_Label = str_replace('<', '&lt;', $SC_Label);
@@ -734,6 +775,14 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
          $this->formas_pago = str_replace('<', '&lt;', $this->formas_pago);
          $this->formas_pago = str_replace('>', '&gt;', $this->formas_pago);
          $this->Texto_tag .= "<td>" . $this->formas_pago . "</td>\r\n";
+   }
+   //----- imprimir
+   function NM_export_imprimir()
+   {
+         $this->imprimir = NM_charset_to_utf8($this->imprimir);
+         $this->imprimir = str_replace('<', '&lt;', $this->imprimir);
+         $this->imprimir = str_replace('>', '&gt;', $this->imprimir);
+         $this->Texto_tag .= "<td>" . $this->imprimir . "</td>\r\n";
    }
    //----- detalle
    function NM_export_detalle()

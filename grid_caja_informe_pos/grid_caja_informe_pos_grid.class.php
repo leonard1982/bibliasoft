@@ -59,6 +59,10 @@ class grid_caja_informe_pos_grid
    var $tarjeta;
    var $cheques;
    var $formas_pago;
+   var $imprimir;
+   var $correo_receptor;
+   var $asunto;
+   var $mensaje;
    var $banco;
    var $fecha;
    var $cantidad;
@@ -343,9 +347,10 @@ class grid_caja_informe_pos_grid
    {
        $this->aba_iframe = true;
    }
+   $this->nmgp_botoes['group_3'] = "on";
    $this->nmgp_botoes['group_1'] = "on";
+   $this->nmgp_botoes['group_3'] = "on";
    $this->nmgp_botoes['group_1'] = "on";
-   $this->nmgp_botoes['group_2'] = "on";
    $this->nmgp_botoes['exit'] = "on";
    $this->nmgp_botoes['first'] = "on";
    $this->nmgp_botoes['back'] = "on";
@@ -371,7 +376,6 @@ class grid_caja_informe_pos_grid
    $this->nmgp_botoes['sel_col'] = "on";
    $this->nmgp_botoes['sort_col'] = "on";
    $this->nmgp_botoes['qsearch'] = "on";
-   $this->nmgp_botoes['gantt'] = "on";
    $this->nmgp_botoes['groupby'] = "on";
    $this->nmgp_botoes['gridsave'] = "on";
    $this->nmgp_botoes['gridsavesession'] = "on";
@@ -432,6 +436,24 @@ class grid_caja_informe_pos_grid
        if ($tmp_pos !== false && !is_array($this->resolucion))
        {
            $this->resolucion = substr($this->resolucion, 0, $tmp_pos);
+       }
+       $this->correo_receptor = $Busca_temp['correo_receptor']; 
+       $tmp_pos = strpos($this->correo_receptor, "##@@");
+       if ($tmp_pos !== false && !is_array($this->correo_receptor))
+       {
+           $this->correo_receptor = substr($this->correo_receptor, 0, $tmp_pos);
+       }
+       $this->asunto = $Busca_temp['asunto']; 
+       $tmp_pos = strpos($this->asunto, "##@@");
+       if ($tmp_pos !== false && !is_array($this->asunto))
+       {
+           $this->asunto = substr($this->asunto, 0, $tmp_pos);
+       }
+       $this->mensaje = $Busca_temp['mensaje']; 
+       $tmp_pos = strpos($this->mensaje, "##@@");
+       if ($tmp_pos !== false && !is_array($this->mensaje))
+       {
+           $this->mensaje = substr($this->mensaje, 0, $tmp_pos);
        }
    } 
    $this->nm_field_dinamico = array();
@@ -1684,6 +1706,21 @@ $nm_saida->saida("                    }\r\n");
 $nm_saida->saida("                });\r\n");
 $nm_saida->saida("    });\r\n");
 $nm_saida->saida("}\r\n");
+           $nm_saida->saida("   function scBtnExportEmail(sUrl, sPos) {\r\n");
+           $nm_saida->saida("     $.ajax({\r\n");
+           $nm_saida->saida("       type: \"POST\",\r\n");
+           $nm_saida->saida("       dataType: \"html\",\r\n");
+           $nm_saida->saida("       url: sUrl\r\n");
+           $nm_saida->saida("     }).done(function(data) {\r\n");
+           $nm_saida->saida("       $(\"#sc_id_export_email_placeholder_\" + sPos).find(\"td\").html(\"\");\r\n");
+           $nm_saida->saida("       $(\"#sc_id_export_email_placeholder_\" + sPos).find(\"td\").html(data);\r\n");
+           $nm_saida->saida("       $(\"#sc_id_export_email_placeholder_\" + sPos).show();\r\n");
+           $nm_saida->saida("     });\r\n");
+           $nm_saida->saida("   }\r\n");
+           $nm_saida->saida("   function scBtnExportEmailHide(sPos) {\r\n");
+           $nm_saida->saida("     $(\"#sc_id_export_email_placeholder_\" + sPos).hide();\r\n");
+           $nm_saida->saida("     $(\"#sc_id_export_email_placeholder_\" + sPos).find(\"td\").html(\"\");\r\n");
+           $nm_saida->saida("   }\r\n");
            $nm_saida->saida("   function scBtnOrderCamposShow(sUrl, sPos) {\r\n");
            $nm_saida->saida("     if ($(\"#sc_id_order_campos_placeholder_\" + sPos).css('display') != 'none') {\r\n");
            if ($_SESSION['scriptcase']['proc_mobile']) { 
@@ -2134,6 +2171,8 @@ $nm_saida->saida("}\r\n");
    $this->css_cheques_grid_line = $compl_css_emb . "css_cheques_grid_line";
    $this->css_formas_pago_label = $compl_css_emb . "css_formas_pago_label";
    $this->css_formas_pago_grid_line = $compl_css_emb . "css_formas_pago_grid_line";
+   $this->css_imprimir_label = $compl_css_emb . "css_imprimir_label";
+   $this->css_imprimir_grid_line = $compl_css_emb . "css_imprimir_grid_line";
    $this->css_detalle_label = $compl_css_emb . "css_detalle_label";
    $this->css_detalle_grid_line = $compl_css_emb . "css_detalle_grid_line";
    $this->css_nota_label = $compl_css_emb . "css_nota_label";
@@ -2496,6 +2535,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_formas_pago_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_formas_pago_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
+ function NM_label_imprimir()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['imprimir'])) ? $this->New_label['imprimir'] : "Imprimir"; 
+   if (!isset($this->NM_cmp_hidden['imprimir']) || $this->NM_cmp_hidden['imprimir'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_imprimir_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_imprimir_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_detalle()
  {
    global $nm_saida;
@@ -2652,6 +2699,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['labels']['cheques'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['formas_pago'])) ? $this->New_label['formas_pago'] : "Total formas de Pago"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['labels']['formas_pago'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['imprimir'])) ? $this->New_label['imprimir'] : "Imprimir"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['labels']['imprimir'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['detalle'])) ? $this->New_label['detalle'] : "Movimiento"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['labels']['detalle'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['nota'])) ? $this->New_label['nota'] : "Causa del Mov."; 
@@ -3604,6 +3653,75 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_formas_pago_grid_line . "\"  style=\"" . $this->Css_Cmp['css_formas_pago_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_formas_pago_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_imprimir()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['imprimir']) || $this->NM_cmp_hidden['imprimir'] != "off") { 
+          $conteudo = $this->imprimir; 
+          $conteudo_original = $this->imprimir; 
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__printer3_32.png"))
+          { 
+              $conteudo = "&nbsp;" ;  
+          } 
+          else 
+          { 
+              if ($this->Ini->Export_img_zip)
+              {
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__printer3_32.png";
+                  $conteudo = "<img border=\"\" src=\"scriptcase__NM__ico__NM__printer3_32.png\"/>"; 
+              }
+              elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img) 
+              { 
+                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__printer3_32.png";
+                  $tmp_imprimir = fopen($loc_img_word, "rb"); 
+                  $reg_imprimir = fread($tmp_imprimir, filesize($loc_img_word)); 
+                  fclose($tmp_imprimir);  
+                  $conteudo = "<img border=\"0\" src=\"data:image/jpeg;base64," . base64_encode($reg_imprimir) . "\"/>" ; 
+              } 
+              else 
+              { 
+                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__printer3_32.png\"/>" ; 
+              } 
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'imprimir', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'imprimir', $str_tem_display, $conteudo_original); 
+          } 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_imprimir_grid_line . "\"  style=\"" . $this->Css_Cmp['css_imprimir_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
+ if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['Ind_lig_mult']++;
+       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_imprimir_@scinf_grid_reporte_caja']) ? $this->Ini->sc_lig_target['C_@scinf_imprimir_@scinf_grid_reporte_caja'] : (isset($this->Ini->sc_lig_target['C_@scinf_imprimir']) ? $this->Ini->sc_lig_target['C_@scinf_imprimir'] : null);
+       if (isset($this->Ini->sc_lig_md5["grid_reporte_caja"]) && $this->Ini->sc_lig_md5["grid_reporte_caja"] == "S") {
+           $Parms_Lig = "nmgp_lig_edit_lapis?#?S?@?elbanco?#?" . str_replace("'", "@aspass@", $this->banco) . "?@?lafecha?#?" . str_replace("'", "@aspass@", $this->fecha) . "?@?SC_glo_par_elprefijo?#?elprefijo?@?";
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['under_dashboard'] && isset($linkTarget))
+           {
+               if ('' != $Parms_Lig)
+               {
+                   $Parms_Lig .= '*scout';
+               }
+               $Parms_Lig .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['dashboard_info']['remove_border'] ? '1' : '0');
+           }
+           $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_caja_informe_pos@SC_par@" . md5($Parms_Lig);
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+       } else {
+           $Md5_Lig = "nmgp_lig_edit_lapis?#?S?@?elbanco?#?" . str_replace("'", "@aspass@", $this->banco) . "?@?lafecha?#?" . str_replace("'", "@aspass@", $this->fecha) . "?@?SC_glo_par_elprefijo?#?elprefijo?@?";
+       }
+   $nm_saida->saida("<a id=\"id_sc_field_imprimir_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_grid_reporte_caja_cons . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : '_blank') . "', 'inicio', '0', '0', '', 'grid_reporte_caja', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_imprimir_grid_line . "\" style=\"" . $this->Css_Cmp['css_imprimir_grid_line'] . "\">" . $conteudo . "</a>\r\n");
+} else {
+   $nm_saida->saida(" <span id=\"id_sc_field_imprimir_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
+       } 
+   $nm_saida->saida("</TD>\r\n");
+      }
+ }
  function NM_grid_detalle()
  {
       global $nm_saida;
@@ -3664,7 +3782,7 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 10;
+   $this->NM_colspan  = 11;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'])
    {
        $this->NM_colspan++;
@@ -3759,7 +3877,7 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
    {
        $nm_nivel_book_pdf = "<div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\">" .  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['tot_geral'][0] . "</H1></div>";
    }
-   $colspan  = 9;
+   $colspan  = 10;
    foreach ($this->NM_cmp_hidden as $Cmp => $Hidden)
    {
        if ($Hidden == "off")
@@ -4347,6 +4465,108 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
       }
+      if ($this->nmgp_botoes['group_3'] == "on" && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_3_top = false;</script>\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_3", "scBtnGrpShow('group_3_top')", "scBtnGrpShow('group_3_top')", "sc_btgp_btn_group_3_top", "", "Enviar al Correo", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "__sc_grp__", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("           $Cod_Btn\r\n");
+          $NM_btn  = true;
+          $NM_Gbtn = false;
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_3", 'group_3', 'top', 'app', 'ini');
+          $nm_saida->saida("           $Cod_Btn\r\n");
+      if ($this->nmgp_botoes['pdf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+      $Tem_gb_pdf  = "s";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] == "sc_free_total")
+      {
+          $Tem_gb_pdf = "n";
+      }
+      $Tem_pdf_res = "n";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] != "sc_free_total")
+      {
+          $Tem_pdf_res = "s";
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Gb_Free_cmp']))
+      {
+          $Tem_pdf_res = "n";
+      }
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailpdf", "", "", "email_pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_config_pdf.php?export_ajax=S&nm_opc=pdf&nm_target=&nm_cor=cor&papel=1&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=N&origem=cons&language=es&conf_socor=S&nm_label_group=S&nm_all_cab=N&nm_all_label=N&&pdf_zip=Nnm_orient_grid=2&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['doc'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+      $Tem_word_res = "n";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] != "sc_free_total")
+      {
+          $Tem_word_res = "s";
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Gb_Free_cmp']))
+      {
+          $Tem_word_res = "n";
+      }
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemaildoc", "", "", "email_doc_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&export_ajax=S&nm_opc=doc_word&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['xls'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxls", "", "", "email_xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=xls&sAdd=&nm_opc=xls&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['xml'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxml", "", "", "email_xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=xml&sAdd=&nm_opc=xml&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['json'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailjson", "", "", "email_json_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=json&sAdd=&nm_opc=json&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['csv'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailcsv", "", "", "email_csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=csv&sAdd=&nm_opc=csv&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailrtf", "", "", "email_rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=rtf&sAdd=&nm_opc=rtf&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_3", 'group_3', 'top', 'app', 'fim');
+          $nm_saida->saida("           $Cod_Btn\r\n");
+          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
+          $nm_saida->saida("             if (!sc_itens_btgp_group_3_top) {\r\n");
+          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_3_top').style.display='none'; }\r\n");
+          $nm_saida->saida("           </script>\r\n");
+      }
       if ($this->nmgp_botoes['group_1'] == "on" && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_1_top = false;</script>\r\n");
@@ -4868,6 +5088,136 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
           $nm_saida->saida("          </span>");
           $NM_btn = true;
       }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
+      if ($this->nmgp_botoes['sel_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+      $pos_path = strrpos($this->Ini->path_prod, "/");
+      $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+      }
+      if ($this->nmgp_botoes['sort_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+          {
+              $UseAlias =  "N";
+          }
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+          {
+              $UseAlias =  "N";
+          }
+          else
+          {
+              $UseAlias =  "S";
+          }
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+      }
+      if ($this->nmgp_botoes['group_3'] == "on" && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_3_top = false;</script>\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_3", "scBtnGrpShow('group_3_top')", "scBtnGrpShow('group_3_top')", "sc_btgp_btn_group_3_top", "", "Enviar al Correo", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "__sc_grp__", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("           $Cod_Btn\r\n");
+          $NM_btn  = true;
+          $NM_Gbtn = false;
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_3", 'group_3', 'top', 'app', 'ini');
+          $nm_saida->saida("           $Cod_Btn\r\n");
+      if ($this->nmgp_botoes['pdf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+      $Tem_gb_pdf  = "s";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] == "sc_free_total")
+      {
+          $Tem_gb_pdf = "n";
+      }
+      $Tem_pdf_res = "n";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] != "sc_free_total")
+      {
+          $Tem_pdf_res = "s";
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Gb_Free_cmp']))
+      {
+          $Tem_pdf_res = "n";
+      }
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailpdf", "", "", "email_pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_config_pdf.php?export_ajax=S&nm_opc=pdf&nm_target=&nm_cor=cor&papel=1&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=N&origem=cons&language=es&conf_socor=S&nm_label_group=S&nm_all_cab=N&nm_all_label=N&&pdf_zip=Nnm_orient_grid=2&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['doc'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+      $Tem_word_res = "n";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] != "sc_free_total")
+      {
+          $Tem_word_res = "s";
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Gb_Free_cmp']))
+      {
+          $Tem_word_res = "n";
+      }
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemaildoc", "", "", "email_doc_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&export_ajax=S&nm_opc=doc_word&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['xls'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxls", "", "", "email_xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=xls&sAdd=&nm_opc=xls&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['xml'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxml", "", "", "email_xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=xml&sAdd=&nm_opc=xml&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['json'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailjson", "", "", "email_json_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=json&sAdd=&nm_opc=json&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['csv'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailcsv", "", "", "email_csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=csv&sAdd=&nm_opc=csv&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+      if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
+      {
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_3_top = true;</script>\r\n");
+          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailrtf", "", "", "email_rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=rtf&sAdd=&nm_opc=rtf&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_informe_pos&KeepThis=true&TB_iframe=true&modal=true", "group_3", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+              $NM_Gbtn = true;
+      }
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_3", 'group_3', 'top', 'app', 'fim');
+          $nm_saida->saida("           $Cod_Btn\r\n");
+          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
+          $nm_saida->saida("             if (!sc_itens_btgp_group_3_top) {\r\n");
+          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_3_top').style.display='none'; }\r\n");
+          $nm_saida->saida("           </script>\r\n");
+      }
       if ($this->nmgp_botoes['group_1'] == "on" && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_1_top = false;</script>\r\n");
@@ -5036,104 +5386,31 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
           $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_1_top').style.display='none'; }\r\n");
           $nm_saida->saida("           </script>\r\n");
       }
-      if ($this->nmgp_botoes['group_2'] == "on" && !$this->grid_emb_form)
+      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
       {
-          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_2_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_2", "scBtnGrpShow('group_2_top')", "scBtnGrpShow('group_2_top')", "sc_btgp_btn_group_2_top", "", "" . $this->Ini->Nm_lang['lang_btns_settings'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_settings'] . "", "", "", "__sc_grp__", "text_img", "text_right", "", "", "", "", "", "", "");
-          $nm_saida->saida("           $Cod_Btn\r\n");
-          $NM_btn  = true;
-          $NM_Gbtn = false;
-          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'ini');
-          $nm_saida->saida("           $Cod_Btn\r\n");
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['filter'] == "on"  && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'grid');", "nm_gp_move('busca', '0', 'grid');", "pesq_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
-           $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-           $NM_Gbtn = true;
+          if ($NM_btn)
+          {
+              $NM_btn = false;
+              $NM_ult_sep = "NM_sep_2";
+              $nm_saida->saida("          <img id=\"NM_sep_2\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+          }
       }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-      if ($this->nmgp_botoes['sel_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-      $pos_path = strrpos($this->Ini->path_prod, "/");
-      $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['sort_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-          {
-              $UseAlias =  "N";
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-          {
-              $UseAlias =  "N";
-          }
-          else
-          {
-              $UseAlias =  "S";
-          }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_caja_informe_pos/grid_caja_informe_pos_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['SC_Ind_Groupby'] != "sc_free_total")
         {
           if ($this->nmgp_botoes['summary'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
           {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['where_resumo'])) {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
               else { 
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bresumo", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bresumo", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
               $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-                  $NM_Gbtn = true;
+                  $NM_btn = true;
           }
         }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'fim');
-          $nm_saida->saida("           $Cod_Btn\r\n");
-          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
-          $nm_saida->saida("             if (!sc_itens_btgp_group_2_top) {\r\n");
-          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_2_top').style.display='none'; }\r\n");
-          $nm_saida->saida("           </script>\r\n");
-      }
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if (is_file("grid_caja_informe_pos_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_caja_informe_pos_help.txt"); 
@@ -5214,6 +5491,40 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
       $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"left\" width=\"33%\"> \r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opcao_print'] != "print") 
       {
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
+          {
+              $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'];
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "birpara", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "brec_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $Page_Atu   = ceil($this->nmgp_reg_inicial / $Reg_Page);
+              $nm_saida->saida("          <input id=\"rec_f0_bot\" type=\"text\" class=\"" . $this->css_css_toolbar_obj . "\" name=\"rec\" value=\"" . NM_encode_input($Page_Atu) . "\" style=\"width:25px;vertical-align: middle;\"/> \r\n");
+              $NM_btn = true;
+          }
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['qtline'] == "on" && $this->Ini->Apl_paginacao != "FULL")
+          {
+              $nm_saida->saida("          <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border: 0px;vertical-align: middle;\">" . $this->Ini->Nm_lang['lang_btns_rows'] . "</span>\r\n");
+              $nm_saida->saida("          <select class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;\" id=\"quant_linhas_f0_bot\" name=\"nmgp_quant_linhas\" onchange=\"sc_ind = document.getElementById('quant_linhas_f0_bot').selectedIndex; nm_gp_submit_ajax('muda_qt_linhas', document.getElementById('quant_linhas_f0_bot').options[sc_ind].value);\"> \r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] == 10) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"10\" " . $obj_sel . ">10</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] == 20) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"20\" " . $obj_sel . ">20</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] == 25) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"25\" " . $obj_sel . ">25</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] == 50) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"50\" " . $obj_sel . ">50</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] == 100) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"100\" " . $obj_sel . ">100</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] == 200) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"200\" " . $obj_sel . ">200</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] == 500) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"500\" " . $obj_sel . ">500</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] == all) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"all\" " . $obj_sel . ">all</option>\r\n");
+              $nm_saida->saida("          </select>\r\n");
+              $NM_btn = true;
+          }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_liga']['nav']))
           {
               if ($this->Rec_ini == 0)
@@ -5242,6 +5553,64 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
               }
                   $NM_btn = true;
           }
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['navpage'] == "on" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_liga']['nav']) && $this->Ini->Apl_paginacao != "FULL" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'] != "all")
+          {
+              $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['qt_lin_grid'];
+              $Max_link   = 5;
+              $Mid_link   = ceil($Max_link / 2);
+              $Corr_link  = (($Max_link % 2) == 0) ? 0 : 1;
+              $Qtd_Pages  = ceil($this->count_ger / $Reg_Page);
+              $Page_Atu   = ceil($this->nmgp_reg_final / $Reg_Page);
+              $Link_ini   = 1;
+              if ($Page_Atu > $Max_link)
+              {
+                  $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+              }
+              elseif ($Page_Atu > $Mid_link)
+              {
+                  $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+              }
+              if (($Qtd_Pages - $Link_ini) < $Max_link)
+              {
+                  $Link_ini = ($Qtd_Pages - $Max_link) + 1;
+              }
+              if ($Link_ini < 1)
+              {
+                  $Link_ini = 1;
+              }
+              for ($x = 0; $x < $Max_link && $Link_ini <= $Qtd_Pages; $x++)
+              {
+                  $rec = (($Link_ini - 1) * $Reg_Page) + 1;
+                  if ($Link_ini == $Page_Atu)
+                  {
+                      $nm_saida->saida("            <span class=\"scGridToolbarNavOpen\" style=\"vertical-align: middle;\">" . $Link_ini . "</span>\r\n");
+                  }
+                  else
+                  {
+                      $nm_saida->saida("            <a class=\"scGridToolbarNav\" style=\"vertical-align: middle;\" href=\"javascript: nm_gp_submit_rec(" . $rec . ");\">" . $Link_ini . "</a>\r\n");
+                  }
+                  $Link_ini++;
+                  if (($x + 1) < $Max_link && $Link_ini <= $Qtd_Pages && '' != $this->Ini->Str_toolbarnav_separator && @is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator))
+                  {
+                      $nm_saida->saida("            <img src=\"" . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+                  }
+              }
+              $NM_btn = true;
+          }
+          if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_liga']['nav']))
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+          if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_liga']['nav']))
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['rows'] == "on" && empty($this->nm_grid_sem_reg))
           {
               $nm_sumario = "[" . $this->Ini->Nm_lang['lang_othr_smry_info'] . "]";
@@ -5258,22 +5627,6 @@ $_SESSION['scriptcase']['grid_caja_informe_pos']['contr_erro'] = 'off';
               $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
               $NM_btn = true;
           }
-          if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_liga']['nav']))
-          {
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-              $NM_btn = true;
-          }
-          if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_informe_pos']['opc_liga']['nav']))
-          {
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-              $NM_btn = true;
-          }
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if (is_file("grid_caja_informe_pos_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_caja_informe_pos_help.txt"); 
