@@ -1878,6 +1878,7 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'on';
 
 
 									$documento['credit_note']['issue_date']   = $vencabezado["fecha"];   
+									$documento['credit_note']['number']       = $vencabezado["numero"];  
 
 									$documento['credit_note']['payment_means_type'] = $vencabezado["forma_pago"];
 
