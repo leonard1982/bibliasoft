@@ -5463,6 +5463,9 @@ ALTER TABLE `configuraciones` ADD `columna_npedido` SET('SI','NO') NOT NULL DEFA
 
 ALTER TABLE `configuraciones` ADD `columna_reg_pdf_propio` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Columna que da la opción de regenerar el PDF del documento electrónico si este ya ha sido enviado. Útil para cuando se ha enviado un documento electrónico y faltó algo por parametrizar en el PDF, por ejemplo el logo.' AFTER `columna_npedido`;
 
+ALTER TABLE `facturaven` ADD `tipo_documento` VARCHAR(5) NOT NULL DEFAULT '1' COMMENT 'Aplica para desarrollo propio\r\n\r\n1. Venta nacional\r\n2. Exportacion\r\n3. Contingencia\r\n4. Venta AIU' AFTER `servidor`, ADD `note_aiu` VARCHAR(200) NULL DEFAULT NULL COMMENT 'Asunto de factura AIU' AFTER `tipo_documento`, ADD `porcentaje_admon` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje de administración en aiu propio' AFTER `note_aiu`, ADD `porcentaje_imprevisto` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje en imprevistos propio' AFTER `porcentaje_admon`, ADD `porcentaje_utilidad` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje utilidad aiu propio' AFTER `porcentaje_imprevisto`, ADD `monto_admon` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'Monto administracion propio' AFTER `porcentaje_utilidad`, ADD `monto_imprevisto` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'monto imprevisto propio' AFTER `monto_admon`, ADD `monto_utilidad` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'monto utilidad propio' AFTER `monto_imprevisto`;
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

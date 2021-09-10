@@ -3253,43 +3253,6 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_empresas_validate_password_cb
 
-  // ---------- Validate password_admin
-  function do_ajax_form_empresas_validate_password_admin()
-  {
-    var nomeCampo_password_admin = "password_admin";
-    var var_password_admin = scAjaxGetFieldText(nomeCampo_password_admin);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_empresas_validate_password_admin(var_password_admin, var_script_case_init, do_ajax_form_empresas_validate_password_admin_cb);
-  } // do_ajax_form_empresas_validate_password_admin
-
-  function do_ajax_form_empresas_validate_password_admin_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "password_admin";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_empresas_validate_password_admin_cb
-
   // ---------- Validate celular
   function do_ajax_form_empresas_validate_celular()
   {
@@ -3400,6 +3363,43 @@ sajax_show_javascript();
     scAjaxSetMaster();
     scAjaxSetFocus();
   } // do_ajax_form_empresas_validate_comentario_cb
+
+  // ---------- Validate entorno
+  function do_ajax_form_empresas_validate_entorno()
+  {
+    var nomeCampo_entorno = "entorno";
+    var var_entorno = scAjaxGetFieldSelect(nomeCampo_entorno);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_empresas_validate_entorno(var_entorno, var_script_case_init, do_ajax_form_empresas_validate_entorno_cb);
+  } // do_ajax_form_empresas_validate_entorno
+
+  function do_ajax_form_empresas_validate_entorno_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "entorno";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_empresas_validate_entorno_cb
 
   // ---------- Event onclick predeterminada
   function do_ajax_form_empresas_event_predeterminada_onclick()
@@ -3751,10 +3751,10 @@ function scJs_sweetalert_params(params) {
     var var_tipo_negocio = scAjaxGetFieldSelect("tipo_negocio");
     var var_predeterminada = scAjaxGetFieldCheckbox("predeterminada", ";");
     var var_password = scAjaxGetFieldText("password");
-    var var_password_admin = scAjaxGetFieldText("password_admin");
     var var_celular = scAjaxGetFieldText("celular");
     var var_correo = scAjaxGetFieldText("correo");
     var var_comentario = scAjaxGetFieldText("comentario");
+    var var_entorno = scAjaxGetFieldSelect("entorno");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -3764,7 +3764,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_empresas_submit_form(var_idempresa, var_nit, var_nombre, var_nombre_empresa, var_observaciones, var_creada, var_creada_hora, var_sinmovimiento, var_copiada_como, var_tipo_negocio, var_predeterminada, var_password, var_password_admin, var_celular, var_correo, var_comentario, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_empresas_submit_form_cb);
+    x_ajax_form_empresas_submit_form(var_idempresa, var_nit, var_nombre, var_nombre_empresa, var_observaciones, var_creada, var_creada_hora, var_sinmovimiento, var_copiada_como, var_tipo_negocio, var_predeterminada, var_password, var_celular, var_correo, var_comentario, var_entorno, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_empresas_submit_form_cb);
   } // do_ajax_form_empresas_submit_form
 
   function do_ajax_form_empresas_submit_form_cb(sResp)
@@ -3800,10 +3800,10 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("tipo_negocio");
       scAjaxHideErrorDisplay("predeterminada");
       scAjaxHideErrorDisplay("password");
-      scAjaxHideErrorDisplay("password_admin");
       scAjaxHideErrorDisplay("celular");
       scAjaxHideErrorDisplay("correo");
       scAjaxHideErrorDisplay("comentario");
+      scAjaxHideErrorDisplay("entorno");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas']['dashboard_info']['under_dashboard']) {
@@ -3871,10 +3871,10 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas']['dashboa
     scAjaxHideErrorDisplay("tipo_negocio");
     scAjaxHideErrorDisplay("predeterminada");
     scAjaxHideErrorDisplay("password");
-    scAjaxHideErrorDisplay("password_admin");
     scAjaxHideErrorDisplay("celular");
     scAjaxHideErrorDisplay("correo");
     scAjaxHideErrorDisplay("comentario");
+    scAjaxHideErrorDisplay("entorno");
     var var_idempresa = document.F2.idempresa.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -3985,10 +3985,10 @@ if ($this->Embutida_form)
   ajax_field_list[8] = "tipo_negocio";
   ajax_field_list[9] = "predeterminada";
   ajax_field_list[10] = "password";
-  ajax_field_list[11] = "password_admin";
-  ajax_field_list[12] = "celular";
-  ajax_field_list[13] = "correo";
-  ajax_field_list[14] = "comentario";
+  ajax_field_list[11] = "celular";
+  ajax_field_list[12] = "correo";
+  ajax_field_list[13] = "comentario";
+  ajax_field_list[14] = "entorno";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -4005,10 +4005,10 @@ if ($this->Embutida_form)
     "tipo_negocio": {"label": "Tipo Negocio", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "predeterminada": {"label": "Predeterminada", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "password": {"label": "Password", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "password_admin": {"label": "Password Verificación", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "celular": {"label": "Celular", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "correo": {"label": "Correo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "comentario": {"label": "Comentarios", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "comentario": {"label": "Comentarios", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "entorno": {"label": "Entorno", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -4032,10 +4032,10 @@ if ($this->Embutida_form)
     "tipo_negocio": new Array(),
     "predeterminada": new Array(),
     "password": new Array(),
-    "password_admin": new Array(),
     "celular": new Array(),
     "correo": new Array(),
-    "comentario": new Array()
+    "comentario": new Array(),
+    "entorno": new Array()
   };
   ajax_field_mult["idempresa"][1] = "idempresa";
   ajax_field_mult["nit"][1] = "nit";
@@ -4048,10 +4048,10 @@ if ($this->Embutida_form)
   ajax_field_mult["tipo_negocio"][1] = "tipo_negocio";
   ajax_field_mult["predeterminada"][1] = "predeterminada";
   ajax_field_mult["password"][1] = "password";
-  ajax_field_mult["password_admin"][1] = "password_admin";
   ajax_field_mult["celular"][1] = "celular";
   ajax_field_mult["correo"][1] = "correo";
   ajax_field_mult["comentario"][1] = "comentario";
+  ajax_field_mult["entorno"][1] = "entorno";
 
   var ajax_field_id = {
     "nit": new Array("hidden_field_label_nit", "hidden_field_data_nit"),
@@ -4062,10 +4062,10 @@ if ($this->Embutida_form)
     "tipo_negocio": new Array("hidden_field_label_tipo_negocio", "hidden_field_data_tipo_negocio"),
     "predeterminada": new Array("hidden_field_label_predeterminada", "hidden_field_data_predeterminada"),
     "password": new Array("hidden_field_label_password", "hidden_field_data_password"),
-    "password_admin": new Array("hidden_field_label_password_admin", "hidden_field_data_password_admin"),
     "celular": new Array("hidden_field_label_celular", "hidden_field_data_celular"),
     "correo": new Array("hidden_field_label_correo", "hidden_field_data_correo"),
-    "comentario": new Array("hidden_field_label_comentario", "hidden_field_data_comentario")
+    "comentario": new Array("hidden_field_label_comentario", "hidden_field_data_comentario"),
+    "entorno": new Array("hidden_field_label_entorno", "hidden_field_data_entorno")
   };
 
   var ajax_read_only = {
@@ -4080,10 +4080,10 @@ if ($this->Embutida_form)
     "tipo_negocio": "off",
     "predeterminada": "off",
     "password": "off",
-    "password_admin": "off",
     "celular": "off",
     "correo": "off",
-    "comentario": "off"
+    "comentario": "off",
+    "entorno": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -4282,23 +4282,6 @@ if ($this->Embutida_form)
 
       return;
     }
-    if ("password_admin" == sIndex)
-    {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
     if ("celular" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
@@ -4336,6 +4319,23 @@ if ($this->Embutida_form)
     if ("comentario" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("entorno" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

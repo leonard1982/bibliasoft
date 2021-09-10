@@ -217,8 +217,8 @@ class frm_pos_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "163114"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210724"; 
-      $this->nm_hr_ult_alt   = "073706"; 
+      $this->nm_dt_ult_alt   = "20210909"; 
+      $this->nm_hr_ult_alt   = "190611"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class frm_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZ9F7HABYHQJsHgvsV9FeV5FYVEX7HQBiVINUHArYHuBODMzGVkJ3DuFYVoB/D9NwZ9XGD1BeHQFaDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHENiV5FaHMJwDcXGZSX7D1veHuJwHgrKVIFCHEFYHMBOHQBsH9FaHAN7V5FGHgveZSJqH5FYDoJeHQJeDQBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDErKVkXeV5FqDoFUD9NwDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZSBOHANOV5BqDMvCHArCHEB3DoJeD9XsDQFUDSN7V5FaDMvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUDurGVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsD9XsDQJwHAvCV5BqHgvsVIB/H5FqHINUD9XOZ1BiHArYHuB/HgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeZSBiDSN7V5JwHuNOVIBsDWFaVoJwDcFYZkBiDSrYHQFaHgvsZSJ3DWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9BsZ1X7D1rwZMBqDErKVkJ3HEXKDoBOHQNwDQFaD1BeVWJeDMzGVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoJeD9XsDQFUZ1rwV5JeHuNODkFCH5B7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHIBeV5FGDMvCHErsDWFqHIFUHQNwZ9XGHABYV5raDMvmZSNiDWBmVErqHQBsZ1X7HANOHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveHErsHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDur/VorqHQBiH9FaHANOV5FaHgNOHEXeHEFaHINUHQNmZ9XGHABYHuNUDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2266,6 +2266,45 @@ $this->JS();
 					</th>
 				</tr>
 				<tr>
+				  <td colspan="2">
+					<table border="0" id="div_aiu" style="display:none;">
+						<tr>
+							<th>
+								<label>ADMON%</label>
+							</th>
+							<th>
+								<label>IMPREVISTO%</label>
+							</th>
+							<th>
+								<label>UTILIDAD%</label>
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<input id="venta_admon" name="venta_admon" class="inputingreso2" type="number" style="text-align:center;" value="8"/>
+							</td>
+							<td>
+								<input id="venta_imprevisto" name="venta_imprevisto" class="inputingreso2" type="number" style="text-align:center;" value="2" />
+							</td>
+							<td>
+								<input id="venta_utilidad" name="venta_utilidad" class="inputingreso2" type="number" style="text-align:center;"  value="6"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input id="venta_admon_valor" name="venta_admon_valor" class="inputingreso2" type="text" />
+							</td>
+							<td>
+								<input id="venta_imprevisto_valor" name="venta_imprevisto_valor" class="inputingreso2" type="text" />
+							</td>
+							<td>
+								<input id="venta_utilidad_valor" name="venta_utilidad_valor" class="inputingreso2" type="text" />
+							</td>
+						</tr>
+					</table>
+				  </td>
+				</tr>
+				<tr>
 					<th>
 						<label>PREFIJO</label>
 					</th>
@@ -2381,7 +2420,7 @@ $this->JS();
 				</tr>
 				<tr>
 					<th colspan="2">
-						<textArea id="idobservaciones" style="width:100%;text-transform: uppercase;" rows="10" class='form-control'>
+						<textArea id="idobservaciones" style="width:100%;text-transform: uppercase;" rows="5" class='form-control'>
 							
 						</textArea>
 					</th>
@@ -3838,6 +3877,18 @@ function fCambiarDireccion()
 
 $(document).ready(function(){
 	
+	$("#tipod").change(function(){
+		
+		if($("#tipod").val()=="AIU")
+		{
+		   $("#div_aiu").css("display","block");
+		}
+		else
+		{
+		   $("#div_aiu").css("display","none");
+		}
+	});
+	
 	$("#si_propina").change(function(){
 		
 		if($('#si_propina').prop('checked'))
@@ -5112,6 +5163,9 @@ $(document).ready(function(){
 												vrecmayamen
 										);
 
+										
+										c = c.toFixed(3);
+										
 										fAgregarFilaTabla
 										(
 												filas, 

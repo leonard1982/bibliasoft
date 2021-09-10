@@ -296,8 +296,8 @@ class form_empresas_ini
       $this->nm_dt_criacao   = "20181002"; 
       $this->nm_hr_criacao   = "212938"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210910"; 
+      $this->nm_hr_ult_alt   = "105557"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -955,7 +955,7 @@ class form_empresas_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSFGHAN7VWFaHuzGVcFKH5XKVEFGDcJUZ1X7HArYHQBOHgrKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDEvsVkXeDWXCVoBqHQFYDQJwHArYHQFaHuBOZSNiDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5JwHuzGVIBOV5FYVoJwDcJUZ1B/Z1rYD5BqDErKVkXeDWFqDoXGDcJeDQFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuXGHQNwH9BiDSzGV5JeHgvOVcFeHEF/HMraDcJUZkFGHIrwHQFUDEBeHENiHEXCDoraHQXsDQJsHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNKZSXeDWXCHMJeD9JKH9FUD1BOVWBODMBYVcBUDWJeVErqDcNmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDuFaHArYD5JwHgrKVcBUDWF/HMBqD9BsH9BOHArKV5FGHgNKHEFiDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1BODSrYHuFaDMvCZSJ3DWX7HIFUDcBiDQFUHIrwVWBOHuzGVcBODWFYHMFUD9XGZ1F7D1rwZMBOHgBOHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWF/VoraD9XOZSB/Z1rYD5BiDMzGHEXeV5FqDoBOD9NwH9X7HABYV5BqHgvsVcFCH5B7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1rqHIveHuJwHgBOVkXeDWX7HIrqD9XsH9BiHIBOV5JeDMrYZSNiDWrmVoFGDcBqZ1FaHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveHArsDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDuX7HMFaD9XGZ1B/DSNOHQJsDEBeVkJqDWr/HIJeHQBiDQFGD1NKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -1839,11 +1839,6 @@ ob_start();
             $password = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_empresas_validate_password_admin' == $_POST['rs'])
-        {
-            $password_admin = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
         if ('ajax_form_empresas_validate_celular' == $_POST['rs'])
         {
             $celular = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1857,6 +1852,11 @@ ob_start();
         if ('ajax_form_empresas_validate_comentario' == $_POST['rs'])
         {
             $comentario = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_empresas_validate_entorno' == $_POST['rs'])
+        {
+            $entorno = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_form_empresas_event_predeterminada_onclick' == $_POST['rs'])
@@ -1879,10 +1879,10 @@ ob_start();
             $tipo_negocio = NM_utf8_urldecode($_POST['rsargs'][9]);
             $predeterminada = NM_utf8_urldecode($_POST['rsargs'][10]);
             $password = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $password_admin = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $celular = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $correo = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $comentario = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $celular = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $correo = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $comentario = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $entorno = NM_utf8_urldecode($_POST['rsargs'][15]);
             $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][16]);
             $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][17]);
             $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][18]);
@@ -2382,6 +2382,7 @@ ob_start();
     $inicial_form_empresas->contr_form_empresas->NM_ajax_info['select_html']['copiada_como'] = "class=\"sc-js-input scFormObjectOdd css_copiada_como_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_copiada_como\" name=\"copiada_como\" size=\"1\" alt=\"{type: 'select', enterTab: false}\"";
     $inicial_form_empresas->contr_form_empresas->NM_ajax_info['select_html']['tipo_negocio'] = "class=\"sc-js-input scFormObjectOdd css_tipo_negocio_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_tipo_negocio\" name=\"tipo_negocio\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
     $inicial_form_empresas->contr_form_empresas->NM_ajax_info['select_html']['predeterminada'] = " onClick=\"do_ajax_form_empresas_event_predeterminada_onclick();\" ";
+    $inicial_form_empresas->contr_form_empresas->NM_ajax_info['select_html']['entorno'] = "class=\"sc-js-input scFormObjectOdd css_entorno_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_entorno\" name=\"entorno\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
 
     if (!defined('SC_SAJAX_LOADED'))
     {
@@ -2406,10 +2407,10 @@ ob_start();
     sajax_export("ajax_form_empresas_validate_tipo_negocio");
     sajax_export("ajax_form_empresas_validate_predeterminada");
     sajax_export("ajax_form_empresas_validate_password");
-    sajax_export("ajax_form_empresas_validate_password_admin");
     sajax_export("ajax_form_empresas_validate_celular");
     sajax_export("ajax_form_empresas_validate_correo");
     sajax_export("ajax_form_empresas_validate_comentario");
+    sajax_export("ajax_form_empresas_validate_entorno");
     sajax_export("ajax_form_empresas_event_predeterminada_onclick");
     sajax_export("ajax_form_empresas_submit_form");
     sajax_export("ajax_form_empresas_navigate_form");
@@ -2647,25 +2648,6 @@ ob_start();
         exit;
     } // ajax_validate_password
 
-    function ajax_form_empresas_validate_password_admin($password_admin, $script_case_init)
-    {
-        global $inicial_form_empresas;
-        //register_shutdown_function("form_empresas_pack_ajax_response");
-        $inicial_form_empresas->contr_form_empresas->NM_ajax_flag          = true;
-        $inicial_form_empresas->contr_form_empresas->NM_ajax_opcao         = 'validate_password_admin';
-        $inicial_form_empresas->contr_form_empresas->NM_ajax_info['param'] = array(
-                  'password_admin' => NM_utf8_urldecode($password_admin),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_empresas->contr_form_empresas->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_empresas->contr_form_empresas->controle();
-        exit;
-    } // ajax_validate_password_admin
-
     function ajax_form_empresas_validate_celular($celular, $script_case_init)
     {
         global $inicial_form_empresas;
@@ -2723,6 +2705,25 @@ ob_start();
         exit;
     } // ajax_validate_comentario
 
+    function ajax_form_empresas_validate_entorno($entorno, $script_case_init)
+    {
+        global $inicial_form_empresas;
+        //register_shutdown_function("form_empresas_pack_ajax_response");
+        $inicial_form_empresas->contr_form_empresas->NM_ajax_flag          = true;
+        $inicial_form_empresas->contr_form_empresas->NM_ajax_opcao         = 'validate_entorno';
+        $inicial_form_empresas->contr_form_empresas->NM_ajax_info['param'] = array(
+                  'entorno' => NM_utf8_urldecode($entorno),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_empresas->contr_form_empresas->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_empresas->contr_form_empresas->controle();
+        exit;
+    } // ajax_validate_entorno
+
     function ajax_form_empresas_event_predeterminada_onclick($predeterminada, $idempresa, $script_case_init)
     {
         global $inicial_form_empresas;
@@ -2743,7 +2744,7 @@ ob_start();
         exit;
     } // ajax_event_predeterminada_onclick
 
-    function ajax_form_empresas_submit_form($idempresa, $nit, $nombre, $nombre_empresa, $observaciones, $creada, $creada_hora, $sinmovimiento, $copiada_como, $tipo_negocio, $predeterminada, $password, $password_admin, $celular, $correo, $comentario, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_empresas_submit_form($idempresa, $nit, $nombre, $nombre_empresa, $observaciones, $creada, $creada_hora, $sinmovimiento, $copiada_como, $tipo_negocio, $predeterminada, $password, $celular, $correo, $comentario, $entorno, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_empresas;
         //register_shutdown_function("form_empresas_pack_ajax_response");
@@ -2762,10 +2763,10 @@ ob_start();
                   'tipo_negocio' => NM_utf8_urldecode($tipo_negocio),
                   'predeterminada' => NM_utf8_urldecode($predeterminada),
                   'password' => NM_utf8_urldecode($password),
-                  'password_admin' => NM_utf8_urldecode($password_admin),
                   'celular' => NM_utf8_urldecode($celular),
                   'correo' => NM_utf8_urldecode($correo),
                   'comentario' => NM_utf8_urldecode($comentario),
+                  'entorno' => NM_utf8_urldecode($entorno),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),

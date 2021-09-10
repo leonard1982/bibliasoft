@@ -1857,70 +1857,15 @@ $predeterminada_look = "";
 <?php } else { $sc_hidden_no++; ?>
 
     <TD class="scFormDataOdd css_password_line" id="hidden_field_data_password" style="<?php echo $sStyleHidden_password; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_password_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_password_label" style=""><span id="id_label_password"><?php echo $this->nm_new_label['password']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["password"]) &&  $this->nmgp_cmp_readonly["password"] == "on") { ?>
-<input type="hidden" name="password" value="">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["password"]) &&  $this->nmgp_cmp_readonly["password"] == "on") { 
+
+ ?>
+<input type="hidden" name="password" value="<?php echo $this->form_encode_input($password) . "\">" . $password . ""; ?>
 <?php } else { ?>
-<span id="id_read_on_password" class="sc-ui-readonly-password css_password_line" style="<?php echo $sStyleReadLab_password; ?>"><?php echo $this->form_format_readonly("password", $this->form_encode_input($this->password)); ?></span><span id="id_read_off_password" class="css_read_off_password<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_password; ?>"><div class="scFormObjectOddPwdBox"><input class="sc-js-input scFormObjectOddPwdInput scFormObjectOddPwdText sc-ui-pwd-toggle css_password_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_password" type="password" autocomplete="off" name="password" value="" 
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=30"; } ?> maxlength=30 alt="{datatype: 'text', maxLength: 30, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ><span id="id_pwd_show_hide_password" class="sc-ui-pwd-toggle-icon"><i class="fa fa-eye sc-ui-pwd-eye" aria-hidden="true" id="id_pwd_fa_password"></i></span></div></span><?php } ?>
+<span id="id_read_on_password" class="sc-ui-readonly-password css_password_line" style="<?php echo $sStyleReadLab_password; ?>"><?php echo $this->form_format_readonly("password", $this->form_encode_input($this->password)); ?></span><span id="id_read_off_password" class="css_read_off_password<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_password; ?>">
+ <input class="sc-js-input scFormObjectOdd css_password_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_password" type=text name="password" value="<?php echo $this->form_encode_input($password) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=30"; } ?> maxlength=30 alt="{datatype: 'text', maxLength: 30, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_password_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_password_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['password_admin']))
-    {
-        $this->nm_new_label['password_admin'] = "Password Verificación";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $password_admin = $this->password_admin;
-   $sStyleHidden_password_admin = '';
-   if (isset($this->nmgp_cmp_hidden['password_admin']) && $this->nmgp_cmp_hidden['password_admin'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['password_admin']);
-       $sStyleHidden_password_admin = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_password_admin = 'display: none;';
-   $sStyleReadInp_password_admin = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['password_admin']) && $this->nmgp_cmp_readonly['password_admin'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['password_admin']);
-       $sStyleReadLab_password_admin = '';
-       $sStyleReadInp_password_admin = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['password_admin']) && $this->nmgp_cmp_hidden['password_admin'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="password_admin" value="<?php echo $this->form_encode_input($password_admin) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_password_admin_line" id="hidden_field_data_password_admin" style="<?php echo $sStyleHidden_password_admin; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_password_admin_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_password_admin_label" style=""><span id="id_label_password_admin"><?php echo $this->nm_new_label['password_admin']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['php_cmp_required']['password_admin']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['php_cmp_required']['password_admin'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["password_admin"]) &&  $this->nmgp_cmp_readonly["password_admin"] == "on") { ?>
-<input type="hidden" name="password_admin" value="">
-<?php } else { ?>
-<span id="id_read_on_password_admin" class="sc-ui-readonly-password_admin css_password_admin_line" style="<?php echo $sStyleReadLab_password_admin; ?>"><?php echo $this->form_format_readonly("password_admin", $this->form_encode_input($this->password_admin)); ?></span><span id="id_read_off_password_admin" class="css_read_off_password_admin<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_password_admin; ?>"><div class="scFormObjectOddPwdBox"><input class="sc-js-input scFormObjectOddPwdInput scFormObjectOddPwdText sc-ui-pwd-toggle css_password_admin_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_password_admin" type="password" autocomplete="off" name="password_admin" value="" 
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=30"; } ?> maxlength=30 alt="{datatype: 'text', maxLength: 30, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ><span id="id_pwd_show_hide_password_admin" class="sc-ui-pwd-toggle-icon"><i class="fa fa-eye sc-ui-pwd-eye" aria-hidden="true" id="id_pwd_fa_password_admin"></i></span></div></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_password_admin_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_password_admin_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 
@@ -2115,6 +2060,83 @@ $comentario_val = str_replace('<br />', '__SC_BREAK_LINE__', nl2br($comentario))
 </textarea>
 </span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_comentario_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_comentario_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['entorno']))
+   {
+       $this->nm_new_label['entorno'] = "Entorno";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $entorno = $this->entorno;
+   $sStyleHidden_entorno = '';
+   if (isset($this->nmgp_cmp_hidden['entorno']) && $this->nmgp_cmp_hidden['entorno'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['entorno']);
+       $sStyleHidden_entorno = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_entorno = 'display: none;';
+   $sStyleReadInp_entorno = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['entorno']) && $this->nmgp_cmp_readonly['entorno'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['entorno']);
+       $sStyleReadLab_entorno = '';
+       $sStyleReadInp_entorno = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['entorno']) && $this->nmgp_cmp_hidden['entorno'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="entorno" value="<?php echo $this->form_encode_input($this->entorno) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_entorno_line" id="hidden_field_data_entorno" style="<?php echo $sStyleHidden_entorno; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_entorno_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_entorno_label" style=""><span id="id_label_entorno"><?php echo $this->nm_new_label['entorno']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["entorno"]) &&  $this->nmgp_cmp_readonly["entorno"] == "on") { 
+
+$entorno_look = "";
+ if ($this->entorno == "escritorio") { $entorno_look .= "Escritorio" ;} 
+ if ($this->entorno == "nube") { $entorno_look .= "Nube" ;} 
+ if (empty($entorno_look)) { $entorno_look = $this->entorno; }
+?>
+<input type="hidden" name="entorno" value="<?php echo $this->form_encode_input($entorno) . "\">" . $entorno_look . ""; ?>
+<?php } else { ?>
+<?php
+
+$entorno_look = "";
+ if ($this->entorno == "escritorio") { $entorno_look .= "Escritorio" ;} 
+ if ($this->entorno == "nube") { $entorno_look .= "Nube" ;} 
+ if (empty($entorno_look)) { $entorno_look = $this->entorno; }
+?>
+<span id="id_read_on_entorno" class="css_entorno_line"  style="<?php echo $sStyleReadLab_entorno; ?>"><?php echo $this->form_format_readonly("entorno", $this->form_encode_input($entorno_look)); ?></span><span id="id_read_off_entorno" class="css_read_off_entorno<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap; <?php echo $sStyleReadInp_entorno; ?>">
+ <span id="idAjaxSelect_entorno" class="<?php echo $this->classes_100perc_fields['span_select'] ?>"><select class="sc-js-input scFormObjectOdd css_entorno_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_entorno" name="entorno" size="1" alt="{type: 'select', enterTab: false}">
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['Lookup_entorno'][] = ''; ?>
+ <option value="">Entorno</option>
+ <option  value="escritorio" <?php  if ($this->entorno == "escritorio") { echo " selected" ;} ?>>Escritorio</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['Lookup_entorno'][] = 'escritorio'; ?>
+ <option  value="nube" <?php  if ($this->entorno == "nube") { echo " selected" ;} ?>>Nube</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['Lookup_entorno'][] = 'nube'; ?>
+ </select></span>
+</span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_entorno_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_entorno_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 

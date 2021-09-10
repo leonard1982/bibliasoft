@@ -1,0 +1,90 @@
+.css_nom_docu_grid_line {vertical-align: middle;text-align: right;}
+.css_fecha_grid_line {vertical-align: top;text-align: right;}
+.css_nom_empresa_grid_line {text-align: right;}
+.css_direccion_grid_line {text-align: right;}
+.css_correo_grid_line {text-align: right;}
+.css_telefono_grid_line {text-align: right;}
+.css_et1_grid_line {text-align: right;}
+.css_res_grid_line {text-align: right;}
+.css_et2_grid_line {text-align: right;}
+.css_documento_grid_line {text-align: right;}
+.css_et3_grid_line {text-align: right;}
+.css_rango_grid_line {text-align: right;}
+.css_et4_grid_line {text-align: right;}
+.css_cant_fact_grid_line {text-align: right;}
+.css_et5_grid_line {text-align: right;}
+.css_total_grid_line {text-align: right;}
+.css_blk_2 {}
+.css_blk_4 {}
+.css_blk_5 {}
+.css_blk_6 {}
+.css_blk_7 {}
+.css_blk_8 {}
+.css_et6_grid_line {text-align: right;}
+.css_et7_grid_line {text-align: right;}
+.css_et8_grid_line {text-align: right;}
+.css_et9_grid_line {text-align: right;}
+.css_can_efec_grid_line {text-align: right;}
+.css_med_efec_grid_line {text-align: right;}
+.css_porc_efec_grid_line {text-align: right;}
+.css_tot_efec_grid_line {text-align: right;}
+.css_c_tarj_grid_line {text-align: right;}
+.css_med_tarj_grid_line {text-align: right;}
+.css_porc_tarj_grid_line {text-align: right;}
+.css_tarjeta_grid_line {text-align: right;}
+.css_c_cheq_grid_line {text-align: right;}
+.css_med_cheq_grid_line {text-align: right;}
+.css_porc_cheq_grid_line {text-align: right;}
+.css_cheque_grid_line {text-align: right;}
+.css_c_tra_grid_line {text-align: right;}
+.css_med_tran_grid_line {text-align: right;}
+.css_porc_tran_grid_line {text-align: right;}
+.css_trans_grid_line {text-align: right;}
+.css_c_credito_grid_line {text-align: right;}
+.css_med_cred_grid_line {text-align: right;}
+.css_porc_credito_grid_line {text-align: right;}
+.css_credito_grid_line {text-align: right;}
+.css_et10_grid_line {font-weight:bold;text-align: right;}
+.css_total_vtas_grid_line {font-weight:bold;text-align: right;}
+.css_et_iva_grid_line {text-align: right;}
+.css_et_base_grid_line {text-align: right;}
+.css_et_val_iva_grid_line {text-align: right;}
+.css_etiva_19_grid_line {text-align: right;}
+.css_base19_grid_line {text-align: right;}
+.css_iva_19_grid_line {text-align: right;}
+.css_etiva_5_grid_line {text-align: right;}
+.css_base5_grid_line {text-align: right;}
+.css_iva_5_grid_line {text-align: right;}
+.css_etexc_0_grid_line {text-align: right;}
+.css_base0_grid_line {text-align: right;}
+.css_iva_0_grid_line {text-align: right;}
+.css_et_tot_grid_line {font-weight:bold;text-align: right;}
+.css_tot_base_grid_line {font-weight:bold;text-align: right;}
+.css_tot_iva_grid_line {font-weight:bold;text-align: right;}
+.css_et20_grid_line {text-align: right;}
+.css_et_vac_grid_line {text-align: right;}
+.css_et_imb_grid_line {text-align: right;}
+.css_imp_bol_grid_line {text-align: right;}
+.css_et_ic_grid_line {text-align: right;}
+.css_imp_consumo_grid_line {text-align: right;}
+.css_et_ic_dev_grid_line {text-align: right;}
+.css_imp_consumo_dev_grid_line {text-align: right;}
+.css_et_tot_inc_grid_line {font-weight:bold;text-align: right;}
+.css_tot_inc_grid_line {font-weight:bold;text-align: right;}
+.css_et_vn_grid_line {text-align: right;}
+.css_venta_netas_grid_line {text-align: right;}
+.css_et_reg_grid_line {text-align: right;}
+.css_vent_reg_grid_line {text-align: right;}
+.css_fac_anuladas_grid_line {text-align: right;}
+.css_f_anul_grid_line {text-align: right;}
+.css_et_obs_grid_line {text-align: right;}
+.css_obs_grid_line {text-align: right;}
+.css_et_fech_imp_grid_line {text-align: right;}
+.css_fecha_imp_grid_line {text-align: right;}
+.css_et_ubic_grid_line {text-align: right;}
+.css_ubicacion_grid_line {text-align: right;}
+.css_et_equipo_grid_line {text-align: right;}
+.css_nom_equipo_grid_line {text-align: right;}
+.css_et_serial_grid_line {text-align: right;}
+.css_serial_grid_line {text-align: right;}
+.css_et_fin2_grid_line {font-family:Courier;font-size:9px;vertical-align: middle;text-align: right;}

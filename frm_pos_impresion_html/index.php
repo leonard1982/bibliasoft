@@ -220,8 +220,8 @@ class frm_pos_impresion_html_ini
       $this->nm_dt_criacao   = "20181129"; 
       $this->nm_hr_criacao   = "080315"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210812"; 
-      $this->nm_hr_ult_alt   = "170604"; 
+      $this->nm_dt_ult_alt   = "20210909"; 
+      $this->nm_hr_ult_alt   = "172342"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -911,7 +911,7 @@ class frm_pos_impresion_html_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_impresion_html']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_impresion_html']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQBqHABYV5FaDMBYVcFKDur/HIBiDcBqZkBiHAN7V5JeDErKVkJ3DWXCVoFGHQXGDQFUHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMvCHEBUHEFqHIX7HQJKDuFaDSBYV5FGHgvOZSNiDur/VoBiHQFYZkFGHIveHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5JeHuzGVIBOV5FYVoJwD9XOZ1F7Z1BeD5JeDMNKZSXeHEFqVoFGD9NwDQJwHANOD5JwHuzGDkBOHEFYVoraD9BsZSBOZ1BeV5XGDEvsHEFiV5FqVoX7HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveVWJwHuBYVIB/DuX7VoX7HQXGZkFUZ1rYD5JwDErKZSJqH5F/DoXGHQNwDuBqHAvmVWJwDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5JeDMvsVcBUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoraHQNwZSFUHANOV5FGDMBYVcXKDur/HIrqD9JmVIJsD1rKHQNUDMBYVkJqHEFqVoBqHQNmDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwZSFUHABYV5X7HuBYVIB/DuX7HMJeD9XGZ1rqD1zGD5BqHgvsDkFeV5FqHIX7HQNmH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQJKZSX7HIrKVWJsHuzGZSJqDWF/VEraHQBsZ1B/HArYHQXGDEBOVkJGHEFqHMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDErKVkXeV5FqDoFUD9NwDQJsZ1rwV5BqHgrYDkBOHEFYDoXGD9XOZ1rqHAN7V5FaDErKZSXeHEFqDoB/D9XsH9FUZ1rwD5BOHuBYVcFKV5FYDoJeHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgvOVIFCH5FqVoJwDcNwH9FaHAvsZMJeHgBODkB/DuJeVoX7DcBwDuBOZ1BYVWJsDMBYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5JeDMvsV9BUDWB3VEFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HINUHQXGDQFUDSN7HurqDMrwVcBODWFaHIraDcNmZ1BOHAN7HQJeDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2551,7 +2551,8 @@ if (!isset($this->sc_temp_idfactura)) {$this->sc_temp_idfactura = (isset($_SESSI
 				}
 				
 			  ?>
-			  <th class="ln precio lnt" style="text-align:right;">$$</th>
+			  <th class="ln precio lnt" style="text-align:right;">Unit</th>
+			  <th class="ln precio lnt" style="text-align:right;">Total</th>
 			</tr>
 		  </thead>
 		  <tbody>
@@ -2562,7 +2563,7 @@ if (!isset($this->sc_temp_idfactura)) {$this->sc_temp_idfactura = (isset($_SESSI
 				$vcodigopro      = $this->vdatos[$i][4];
 				$descripcionpro  = $this->vdatos[$i][5];
 				$cantidadpro     = $this->vdatos[$i][6];
-				$precioupro      = number_format($this->vdatos[$i][7]);
+				$precioupro      = number_format($this->vdatos[$i][7],2);
 				$totalitempro    = number_format($this->vdatos[$i][8]);
 				$vdescuento      = $this->vdatos[$i][29];
 				
@@ -2582,33 +2583,35 @@ if (!isset($this->sc_temp_idfactura)) {$this->sc_temp_idfactura = (isset($_SESSI
 				if($vregimen=="Responsable de IVA")
 				{
 					echo "<tr class='ln'>";
-					echo "<td class='ln producto' colspan='4'>".$vdescripcionfinal."</td>";
+					echo "<td class='ln producto' colspan='5'>".$vdescripcionfinal."</td>";
 					echo "</tr>";
 					
 					echo "<tr class='ln'>";
 					echo "<td class='ln cantidad' style='text-align:center;'>".$cantidadpro."</td>";
 					echo "<td class='ln cantidad' style='text-align:center;'>".$porcentajedesc."</td>";
 					echo "<td class='ln precio' style='text-align:right;'>".$vtrifa."</td>";
+					echo "<td class='ln precio' style='text-align:right;'>".$precioupro."</td>";
 					echo "<td class='ln precio' style='text-align:right;'>$".$vtneto."</td>";
 					echo "</tr>";
 					
-					echo "<tr><td class='lns' colspan='4'></td></tr>";
+					echo "<tr><td class='lns' colspan='5'></td></tr>";
 					
 					$vproductos0[$i] = $vdescripcionfinal." - X ".$cantidadpro." - IVA: ".$vtrifa."% - TLINEA: $".$vtneto;
 				}
 				else
 				{
 					echo "<tr class='ln'>";
-					echo "<td class='ln producto' colspan='3'>".$vdescripcionfinal."</td>";
+					echo "<td class='ln producto' colspan='4'>".$vdescripcionfinal."</td>";
 					echo "</tr>";
 					
 					echo "<tr class='ln'>";
 					echo "<td class='ln cantidad' style='text-align:center;'>".$cantidadpro."</td>";
 					echo "<td class='ln cantidad' style='text-align:center;'>".$porcentajedesc."</td>";
+					echo "<td class='ln precio' style='text-align:right;'>".$precioupro."</td>";
 					echo "<td class='ln precio' style='text-align:right;'>$".$vtneto."</td>";
 					echo "</tr>";
 					
-					echo "<tr><td class='lns' colspan='3'></td></tr>";
+					echo "<tr><td class='lns' colspan='4'></td></tr>";
 					
 					$vproductos0[$i] = $i.". ".$vdescripcionfinal." - CANT: ".$cantidadpro." - TLINEA: $".$vtneto;
 				}

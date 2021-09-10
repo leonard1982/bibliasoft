@@ -62,10 +62,10 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["tipo_negocio" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["predeterminada" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["password" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["password_admin" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["celular" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["correo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["comentario" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["entorno" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -135,12 +135,6 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["password" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["password_admin" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["password_admin" + iSeqRow]["change"]) {
-    return true;
-  }
   if (scEventControl_data["celular" + iSeqRow]["blur"]) {
     return true;
   }
@@ -159,6 +153,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["comentario" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["entorno" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["entorno" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -171,6 +171,9 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("tipo_negocio" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("entorno" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   scEventControl_data[fieldName]["change"] = false;
@@ -244,9 +247,9 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_celular' + iSeqRow).bind('blur', function() { sc_form_empresas_celular_onblur(this, iSeqRow) })
                                      .bind('change', function() { sc_form_empresas_celular_onchange(this, iSeqRow) })
                                      .bind('focus', function() { sc_form_empresas_celular_onfocus(this, iSeqRow) });
-  $('#id_sc_field_password_admin' + iSeqRow).bind('blur', function() { sc_form_empresas_password_admin_onblur(this, iSeqRow) })
-                                            .bind('change', function() { sc_form_empresas_password_admin_onchange(this, iSeqRow) })
-                                            .bind('focus', function() { sc_form_empresas_password_admin_onfocus(this, iSeqRow) });
+  $('#id_sc_field_entorno' + iSeqRow).bind('blur', function() { sc_form_empresas_entorno_onblur(this, iSeqRow) })
+                                     .bind('change', function() { sc_form_empresas_entorno_onchange(this, iSeqRow) })
+                                     .bind('focus', function() { sc_form_empresas_entorno_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-sinmovimiento' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-predeterminada' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
 } // scJQEventsAdd
@@ -473,16 +476,16 @@ function sc_form_empresas_celular_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
-function sc_form_empresas_password_admin_onblur(oThis, iSeqRow) {
-  do_ajax_form_empresas_validate_password_admin();
+function sc_form_empresas_entorno_onblur(oThis, iSeqRow) {
+  do_ajax_form_empresas_validate_entorno();
   scCssBlur(oThis);
 }
 
-function sc_form_empresas_password_admin_onchange(oThis, iSeqRow) {
+function sc_form_empresas_entorno_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
-function sc_form_empresas_password_admin_onfocus(oThis, iSeqRow) {
+function sc_form_empresas_entorno_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
@@ -505,10 +508,10 @@ function displayChange_block_0(status) {
 	displayChange_field("tipo_negocio", "", status);
 	displayChange_field("predeterminada", "", status);
 	displayChange_field("password", "", status);
-	displayChange_field("password_admin", "", status);
 	displayChange_field("celular", "", status);
 	displayChange_field("correo", "", status);
 	displayChange_field("comentario", "", status);
+	displayChange_field("entorno", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -523,10 +526,10 @@ function displayChange_row(row, status) {
 	displayChange_field_tipo_negocio(row, status);
 	displayChange_field_predeterminada(row, status);
 	displayChange_field_password(row, status);
-	displayChange_field_password_admin(row, status);
 	displayChange_field_celular(row, status);
 	displayChange_field_correo(row, status);
 	displayChange_field_comentario(row, status);
+	displayChange_field_entorno(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -563,9 +566,6 @@ function displayChange_field(field, row, status) {
 	if ("password" == field) {
 		displayChange_field_password(row, status);
 	}
-	if ("password_admin" == field) {
-		displayChange_field_password_admin(row, status);
-	}
 	if ("celular" == field) {
 		displayChange_field_celular(row, status);
 	}
@@ -574,6 +574,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("comentario" == field) {
 		displayChange_field_comentario(row, status);
+	}
+	if ("entorno" == field) {
+		displayChange_field_entorno(row, status);
 	}
 }
 
@@ -634,9 +637,6 @@ function displayChange_field_predeterminada(row, status) {
 function displayChange_field_password(row, status) {
 }
 
-function displayChange_field_password_admin(row, status) {
-}
-
 function displayChange_field_celular(row, status) {
 }
 
@@ -646,9 +646,25 @@ function displayChange_field_correo(row, status) {
 function displayChange_field_comentario(row, status) {
 }
 
+function displayChange_field_entorno(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_entorno__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_entorno" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "entorno");
+	}
+}
+
 function scRecreateSelect2() {
 	displayChange_field_copiada_como("all", "on");
 	displayChange_field_tipo_negocio("all", "on");
+	displayChange_field_entorno("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -885,6 +901,9 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "tipo_negocio" == specificField) {
     scJQSelect2Add_tipo_negocio(seqRow);
   }
+  if (null == specificField || "entorno" == specificField) {
+    scJQSelect2Add_entorno(seqRow);
+  }
 } // scJQSelect2Add
 
 function scJQSelect2Add_copiada_como(seqRow) {
@@ -923,6 +942,25 @@ function scJQSelect2Add_tipo_negocio(seqRow) {
   );
 } // scJQSelect2Add
 
+function scJQSelect2Add_entorno(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_entorno_obj" : "#id_sc_field_entorno" + seqRow;
+  $(elemSelector).select2(
+    {
+      minimumResultsForSearch: Infinity,
+      containerCssClass: 'css_entorno_obj',
+      dropdownCssClass: 'css_entorno_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -933,6 +971,7 @@ function scJQElementsAdd(iLine) {
   scJQSelect2Add(iLine);
   setTimeout(function () { if ('function' == typeof displayChange_field_copiada_como) { displayChange_field_copiada_como(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_tipo_negocio) { displayChange_field_tipo_negocio(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_entorno) { displayChange_field_entorno(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)
