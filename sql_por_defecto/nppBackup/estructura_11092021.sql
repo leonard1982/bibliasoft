@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3311
--- Tiempo de generación: 11-09-2021 a las 21:58:02
+-- Tiempo de generación: 23-03-2021 a las 16:57:33
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -18,9 +18,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Base de datos: `inventario_facturacion`
---
 
 -- --------------------------------------------------------
 
@@ -182,7 +179,7 @@ CREATE TABLE `caja` (
   `jornada` set('AM','PM','TODO') COLLATE utf8_unicode_ci DEFAULT NULL,
   `detalle` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '''BASE'',''R. CAJA'',''FAC. CONTADO'',''PAGO FAC'',''OTROS PAGOS'',''CUADRE'',''PED. CONTADO''',
   `nota` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'anotación del detalle del movimiento',
-  `cantidad` decimal(15,2) DEFAULT '0.00',
+  `cantidad` decimal(10,2) DEFAULT NULL,
   `documento` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'se coloca el número del documento que se cobra o paga',
   `cierredia` set('SI','NO') COLLATE utf8_unicode_ci DEFAULT NULL,
   `totaldia` decimal(12,2) DEFAULT NULL,
@@ -579,18 +576,7 @@ CREATE TABLE `configuraciones` (
   `habilitar_comprobantes` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'habilita la generacion de comprobantes de contabilidad automáticos desde facturacion, compras y manuales',
   `noborrar_tmp_enpos` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO',
   `desactivar_control_sesion` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO',
-  `dia_limite_pago` int(11) NOT NULL DEFAULT '5',
-  `licencia_activa` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO',
-  `fecha_activacion` datetime DEFAULT NULL,
-  `cod_cliente` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'es el Nit del cliente sin dígito de verificación o el código establecido por facilweb en la nube',
-  `valor_propina_sugerida` int(11) NOT NULL DEFAULT '0',
-  `validar_correo_enlinea` set('SI','NO') COLLATE utf8_unicode_ci DEFAULT 'NO' COMMENT 'Valida en línea el correo de factura electrónica',
-  `ver_xml_fe` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'activa una columna en la lista de ventas donde se puede descargar el xml de envío',
-  `columna_imprimir_ticket` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'SI' COMMENT 'Para ver la columna de imprimir el ticket pos',
-  `columna_imprimir_a4` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'Para ver la columna donde uno ve la vista preliminar en formato A4',
-  `columna_whatsapp` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'Para ver la columna de compartir enlace de pdf de factura electrónica de desarrollo propio al whatsapp',
-  `columna_npedido` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'Para que se pueda activar la columna de número de pedido de donde viene la factura',
-  `columna_reg_pdf_propio` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'Columna que da la opción de regenerar el PDF del documento electrónico si este ya ha sido enviado. Útil para cuando se ha enviado un documento electrónico y faltó algo por parametrizar en el PDF, por ejemplo el logo.'
+  `dia_limite_pago` int(11) NOT NULL DEFAULT '5'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -730,21 +716,6 @@ CREATE TABLE `copias_diarias` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `correos_validos`
---
-
-CREATE TABLE `correos_validos` (
-  `id` int(11) NOT NULL,
-  `idtercero` int(11) NOT NULL DEFAULT '0',
-  `correo` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL,
-  `valido` set('SI','NO','NN') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NN',
-  `json` text COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `c_costos`
 --
 
@@ -847,8 +818,8 @@ CREATE TABLE `detallecompra` (
   `cantidad` decimal(12,2) DEFAULT NULL,
   `valorunit` decimal(12,2) DEFAULT NULL,
   `valorpar` decimal(12,2) DEFAULT NULL,
-  `iva` decimal(12,2) DEFAULT NULL,
-  `descuento` decimal(8,2) DEFAULT NULL,
+  `iva` int(11) DEFAULT NULL,
+  `descuento` decimal(6,0) DEFAULT NULL,
   `tasaiva` int(11) DEFAULT NULL COMMENT 'guarda la tasa del IVA',
   `tasadesc` int(11) DEFAULT NULL COMMENT 'guarda la tasa de dcto',
   `devuelto` int(11) DEFAULT NULL COMMENT ' cantidad en devolución',
@@ -926,24 +897,6 @@ CREATE TABLE `detallenotamov` (
   `lote` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'lote',
   `codigobar` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'código de barras o serial'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='detalle de mercancía trasladada de producción a área ventas';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `detallenota_convertir`
---
-
-CREATE TABLE `detallenota_convertir` (
-  `id_detnc` bigint(12) NOT NULL,
-  `id_mov` bigint(12) NOT NULL DEFAULT '0',
-  `id_prod` int(10) NOT NULL DEFAULT '0' COMMENT 'id del producto',
-  `descripcion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `origen` int(2) NOT NULL DEFAULT '0',
-  `destino` int(2) NOT NULL DEFAULT '0',
-  `cantidad` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `escala` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `costo` decimal(12,2) NOT NULL DEFAULT '0.00' COMMENT 'costo unitario'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='tabla para detalle de conversión de productos';
 
 -- --------------------------------------------------------
 
@@ -1249,9 +1202,7 @@ CREATE TABLE `direccion` (
   `ciudad` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'es el mismo municipio, se coloca el nombre y no el iD',
   `codigo_postal` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'es el código postal 6 dígitos',
   `lenguaje` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'lenguaje del destinatario',
-  `correo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `correo_notificafe` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `celular_notificafe` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
+  `correo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1347,7 +1298,7 @@ CREATE TABLE `facturacom` (
   `fechavenc` date DEFAULT NULL COMMENT 'fecha de vencimiento en compra',
   `idprov` bigint(10) DEFAULT NULL,
   `subtotal` decimal(12,2) DEFAULT NULL,
-  `valoriva` decimal(12,2) DEFAULT NULL,
+  `valoriva` decimal(10,2) DEFAULT NULL,
   `total` decimal(12,2) DEFAULT NULL,
   `pagada` set('SI','NO','AB') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO',
   `asentada` int(1) DEFAULT NULL,
@@ -1425,22 +1376,7 @@ CREATE TABLE `facturaven` (
   `cod_cuenta` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `qr_base64` longtext COLLATE utf8_unicode_ci,
   `fecha_validacion` datetime DEFAULT NULL,
-  `id_trans_fe` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'id de la transacción de la factura electrónica',
-  `porcentaje_propina_sugerida` int(11) NOT NULL DEFAULT '0',
-  `valor_propina` decimal(15,2) NOT NULL DEFAULT '0.00',
-  `aplica_propina` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO',
-  `proveedor` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `token` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `servidor` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tipo_documento` varchar(5) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1' COMMENT 'Aplica para desarrollo propio\r\n\r\n1. Venta nacional\r\n2. Exportacion\r\n3. Contingencia\r\n4. Venta AIU',
-  `note_aiu` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Asunto de factura AIU',
-  `porcentaje_admon` int(11) NOT NULL DEFAULT '0' COMMENT 'Porcentaje de administración en aiu propio',
-  `porcentaje_imprevisto` int(11) NOT NULL DEFAULT '0' COMMENT 'Porcentaje en imprevistos propio',
-  `porcentaje_utilidad` int(11) NOT NULL DEFAULT '0' COMMENT 'Porcentaje utilidad aiu propio',
-  `monto_admon` decimal(15,0) NOT NULL DEFAULT '0' COMMENT 'Monto administracion propio',
-  `monto_imprevisto` decimal(15,0) NOT NULL DEFAULT '0' COMMENT 'monto imprevisto propio',
-  `monto_utilidad` decimal(15,0) NOT NULL DEFAULT '0' COMMENT 'monto utilidad propio'
+  `id_trans_fe` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'id de la transacción de la factura electrónica'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1803,7 +1739,7 @@ CREATE TABLE `impuestos` (
 CREATE TABLE `inventario` (
   `idinv` int(12) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `cantidad` decimal(12,3) DEFAULT NULL,
+  `cantidad` decimal(10,3) DEFAULT NULL,
   `idpro` int(10) DEFAULT NULL,
   `costo` decimal(12,0) NOT NULL DEFAULT '0',
   `valorparcial` decimal(12,0) NOT NULL DEFAULT '0',
@@ -1829,13 +1765,12 @@ CREATE TABLE `inventario` (
   `lote2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'para manejo del lote del producto ej.: drogueria ',
   `idcombo` int(10) NOT NULL DEFAULT '0' COMMENT 'para el control de los combos y el inventario',
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `existencia` decimal(12,3) NOT NULL DEFAULT '0.000' COMMENT 'Se coloca la existencia del producto que queda en bodega despues de la transacción',
+  `existencia` decimal(10,3) NOT NULL DEFAULT '0.000' COMMENT 'Se coloca la existencia del producto que queda en bodega despues de la transacción',
   `codigobar_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'El serial o el código de barras único',
   `cant_umen` decimal(14,2) NOT NULL DEFAULT '0.00' COMMENT 'cantidad expresada en unidad menor',
   `factor` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'el factor en el que se expresa existencia y cant_umen',
   `unidad_base` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'unidad en base para el factor',
-  `unid_transac` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'unidad en la que se registra campo cantidad',
-  `valorpar_combo` decimal(15,2) NOT NULL DEFAULT '0.00'
+  `unid_transac` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'unidad en la que se registra campo cantidad'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1847,7 +1782,7 @@ CREATE TABLE `inventario` (
 CREATE TABLE `inventarioself` (
   `idinv` int(12) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `cantidad` decimal(12,3) DEFAULT NULL,
+  `cantidad` decimal(10,3) DEFAULT NULL,
   `idpro` int(10) DEFAULT NULL,
   `costo` decimal(12,0) NOT NULL DEFAULT '0',
   `valorparcial` decimal(12,0) NOT NULL DEFAULT '0',
@@ -1867,14 +1802,9 @@ CREATE TABLE `inventarioself` (
   `tallas` int(2) NOT NULL DEFAULT '0' COMMENT 'id de la talla',
   `sabor` int(2) NOT NULL DEFAULT '0' COMMENT 'Guarda el ID Talla pero para manejar sabor',
   `numdev` int(11) DEFAULT '0' COMMENT 'Guarda el núnero de devolución',
-  `existencia` decimal(12,3) NOT NULL DEFAULT '0.000' COMMENT 'Guarda la existencia que hay en el momento de hacer el inventario',
+  `existencia` decimal(12,2) NOT NULL DEFAULT '0.00' COMMENT 'Guarda la existencia que hay en el momento de hacer el inventario',
   `lote2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Lote del producto',
-  `codigobar_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Código de barra o serila único',
-  `cant_umen` decimal(14,2) NOT NULL DEFAULT '0.00',
-  `factor` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `unidad_base` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unid_transac` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `valorpar_combo` decimal(15,2) NOT NULL DEFAULT '0.00'
+  `codigobar_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Código de barra o serila único'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2197,10 +2127,7 @@ CREATE TABLE `pedidos` (
   `prefijo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'codigo del prefijo para usar con el movil',
   `cod_cliente` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'para guardar la cc o nit del cliente para uso movil',
   `descargado_nube` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'se crea el campo descargado_nube en la tabla pedidos y pedidos_self para marcar un pedido en la nube si ya fue descargado',
-  `cod_vendedor` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'codigo del vendedor al crear el pedido en la nube',
-  `porcentaje_propina_sugerida` int(11) NOT NULL DEFAULT '0',
-  `valor_propina` decimal(15,2) NOT NULL DEFAULT '0.00',
-  `aplica_propina` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO'
+  `cod_vendedor` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'codigo del vendedor al crear el pedido en la nube'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2243,10 +2170,7 @@ CREATE TABLE `pedidos_self` (
   `prefijo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'codigo del prefijo para usar con el movil',
   `cod_cliente` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'para guardar la cc o nit del cliente para uso movil',
   `descargado_nube` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'se crea el campo descargado_nube en la tabla pedidos y pedidos_self para marcar un pedido en la nube si ya fue descargado',
-  `cod_vendedor` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'codigo del vendedor al crear el pedido en la nube',
-  `porcentaje_propina_sugerida` int(11) NOT NULL DEFAULT '0',
-  `valor_propina` decimal(15,2) NOT NULL DEFAULT '0.00',
-  `aplica_propina` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO'
+  `cod_vendedor` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'codigo del vendedor al crear el pedido en la nube'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2314,66 +2238,6 @@ CREATE TABLE `plancuentas` (
   `id_plancuenta` int(11) NOT NULL,
   `codigo` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'codigo del plan de cuentas',
   `nombre` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'descripcion de la cuenta'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuestos`
---
-
-CREATE TABLE `presupuestos` (
-  `id_presupuesto` int(11) NOT NULL,
-  `fecha` date DEFAULT NULL COMMENT 'la fecha de la creación del presupuesto',
-  `descripcion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'descripción del enfoque del presupuesto',
-  `id_usuario` int(11) NOT NULL DEFAULT '0' COMMENT 'el id del tercero que está ligado al usuario del sistema que crea el presupuesto',
-  `creado` datetime DEFAULT NULL,
-  `editado` datetime DEFAULT NULL,
-  `activo` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'SI'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuesto_categorias`
---
-
-CREATE TABLE `presupuesto_categorias` (
-  `id_categoria` int(11) NOT NULL,
-  `descripcion` varchar(80) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='por ejemplo: alimentación, entretenimiento, alojamiento, movilidad, entre otros';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuesto_detalles`
---
-
-CREATE TABLE `presupuesto_detalles` (
-  `id_presupuesto_detalle` int(11) NOT NULL,
-  `id_presupuesto` int(11) NOT NULL DEFAULT '0',
-  `id_categoria` int(11) NOT NULL DEFAULT '0' COMMENT 'el id de la categoría del detalle del presupuesto, ejemplo: servicios públicos, alimentación, entretenimiento, arriendo',
-  `presupuesto` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT 'el importe o valor del presupuesto',
-  `descripcion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'una descripción, por ejemplo: recibo del internet',
-  `creado` datetime DEFAULT NULL,
-  `actualizado` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuesto_movimientos`
---
-
-CREATE TABLE `presupuesto_movimientos` (
-  `id_presupuesto_movimiento` int(11) NOT NULL,
-  `id_presupuesto` int(11) NOT NULL DEFAULT '0',
-  `id_detalle_presupuesto` int(11) NOT NULL DEFAULT '0' COMMENT 'el id del detalle del presupuesto que se creó',
-  `fecha` date DEFAULT NULL COMMENT 'la fecha en que se está llevando a cabo el movimiento',
-  `gastado` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT 'el importe o valor gastado del presupuesto en ese movimiento',
-  `id_banco` int(11) NOT NULL DEFAULT '0' COMMENT 'el id del banco desde donde estamos gastando al presupuesto',
-  `tipo_doc` set('FC','CE') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'FC' COMMENT 'el tipo de documento que afectó el presupuesto sea un FC compra o un CE comprobante de egreso',
-  `id_documento` int(11) NOT NULL DEFAULT '0' COMMENT 'el id del documento que afectó el presupuesto sea un FC compra o un CE comprobante de egreso'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2963,10 +2827,7 @@ CREATE TABLE `terceros` (
   `longitude` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `activo` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'SI' COMMENT 'PARA COLOCAR EL ESTADO DEL TERCERO',
   `es_tecnico` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO',
-  `codigo_tercero` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `porcentaje_propina_sugerida` int(11) NOT NULL DEFAULT '0',
-  `correo_notificafe` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `celular_notificafe` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL
+  `codigo_tercero` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3276,9 +3137,7 @@ CREATE TABLE `usuarios` (
   `banco_movil` int(11) NOT NULL DEFAULT '1' COMMENT 'el banco o caja donde van a ir los valores si el usuario es movil',
   `ubicacion` varchar(30) COLLATE utf8_unicode_ci DEFAULT 'VENTAS' COMMENT 'área donde está ubicado el PC',
   `n_equipo` varchar(30) COLLATE utf8_unicode_ci DEFAULT 'PC',
-  `serial` varchar(30) COLLATE utf8_unicode_ci DEFAULT '0000000000',
-  `idbod` int(11) NOT NULL DEFAULT '0' COMMENT 'id de la bodega',
-  `ocultar_bod` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'SI' COMMENT 'PARA SABER SI OCULTA BODEGA EN FACTURA'
+  `serial` varchar(30) COLLATE utf8_unicode_ci DEFAULT '0000000000'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3360,6 +3219,18 @@ CREATE TABLE `visita_conceptos` (
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `v_contactos_terceros`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `v_contactos_terceros` (
+`idtercero` bigint(20)
+,`nombres` varchar(120)
+,`tipo` varchar(9)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `webservicefe`
 --
 
@@ -3378,9 +3249,7 @@ CREATE TABLE `webservicefe` (
   `enviar_dian` int(11) NOT NULL DEFAULT '0' COMMENT '1 sí, 0 no',
   `enviar_cliente` int(11) NOT NULL DEFAULT '0' COMMENT '1 sí, 0 no',
   `servidor3` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `servidor_prueba3` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `url_api_pdfs` varchar(300) DEFAULT NULL,
-  `url_api_sendmail` varchar(300) DEFAULT NULL
+  `servidor_prueba3` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3401,9 +3270,7 @@ CREATE TABLE `webservicefe_proveedores` (
   `token_prueba` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_prueba` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `servidor3` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `servidor_prueba3` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `url_api_pdfs` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `url_api_sendmail` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL
+  `servidor_prueba3` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3432,6 +3299,15 @@ CREATE TABLE `zona_postal` (
   `idmuni` int(4) NOT NULL DEFAULT '0' COMMENT 'id del municipio',
   `zona` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Código de la zona'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `v_contactos_terceros`
+--
+DROP TABLE IF EXISTS `v_contactos_terceros`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_contactos_terceros`  AS  select `terceros`.`idtercero` AS `idtercero`,`terceros`.`nombres` AS `nombres`,'terceros' AS `tipo` from `terceros` union select `contactos`.`id_contacto` AS `id_contacto`,`contactos`.`nombres` AS `nombres`,'contactos' AS `tipo` from `contactos` ;
 
 --
 -- Índices para tablas volcadas
@@ -3684,12 +3560,6 @@ ALTER TABLE `copias_diarias`
   ADD PRIMARY KEY (`id_copia_diaria`);
 
 --
--- Indices de la tabla `correos_validos`
---
-ALTER TABLE `correos_validos`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `c_costos`
 --
 ALTER TABLE `c_costos`
@@ -3763,12 +3633,6 @@ ALTER TABLE `detallenotamov`
   ADD KEY `colores` (`colores`),
   ADD KEY `tallas` (`tallas`),
   ADD KEY `sabor` (`sabor`);
-
---
--- Indices de la tabla `detallenota_convertir`
---
-ALTER TABLE `detallenota_convertir`
-  ADD PRIMARY KEY (`id_detnc`);
 
 --
 -- Indices de la tabla `detallepagos`
@@ -4257,30 +4121,6 @@ ALTER TABLE `permisos_menu_movil`
 --
 ALTER TABLE `plancuentas`
   ADD PRIMARY KEY (`id_plancuenta`);
-
---
--- Indices de la tabla `presupuestos`
---
-ALTER TABLE `presupuestos`
-  ADD PRIMARY KEY (`id_presupuesto`);
-
---
--- Indices de la tabla `presupuesto_categorias`
---
-ALTER TABLE `presupuesto_categorias`
-  ADD PRIMARY KEY (`id_categoria`);
-
---
--- Indices de la tabla `presupuesto_detalles`
---
-ALTER TABLE `presupuesto_detalles`
-  ADD PRIMARY KEY (`id_presupuesto_detalle`);
-
---
--- Indices de la tabla `presupuesto_movimientos`
---
-ALTER TABLE `presupuesto_movimientos`
-  ADD PRIMARY KEY (`id_presupuesto_movimiento`);
 
 --
 -- Indices de la tabla `produccion`
@@ -4864,12 +4704,6 @@ ALTER TABLE `copias_diarias`
   MODIFY `id_copia_diaria` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `correos_validos`
---
-ALTER TABLE `correos_validos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `c_costos`
 --
 ALTER TABLE `c_costos`
@@ -4922,12 +4756,6 @@ ALTER TABLE `detallekardexcombos`
 --
 ALTER TABLE `detallenotamov`
   MODIFY `idnota` bigint(12) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `detallenota_convertir`
---
-ALTER TABLE `detallenota_convertir`
-  MODIFY `id_detnc` bigint(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detallepagos`
@@ -5248,30 +5076,6 @@ ALTER TABLE `plancuentas`
   MODIFY `id_plancuenta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `presupuestos`
---
-ALTER TABLE `presupuestos`
-  MODIFY `id_presupuesto` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `presupuesto_categorias`
---
-ALTER TABLE `presupuesto_categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `presupuesto_detalles`
---
-ALTER TABLE `presupuesto_detalles`
-  MODIFY `id_presupuesto_detalle` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `presupuesto_movimientos`
---
-ALTER TABLE `presupuesto_movimientos`
-  MODIFY `id_presupuesto_movimiento` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `produccion`
 --
 ALTER TABLE `produccion`
@@ -5576,6 +5380,92 @@ ALTER TABLE `zona_clientes`
 --
 ALTER TABLE `zona_postal`
   MODIFY `idzona` int(4) NOT NULL AUTO_INCREMENT;
+  
+ALTER TABLE `inventario` ADD `valorpar_combo` DECIMAL(15,2) NOT NULL DEFAULT '0' AFTER `unid_transac`;
+
+ALTER TABLE `inventarioself` ADD `cant_umen` DECIMAL(14,2) NOT NULL DEFAULT '0' AFTER `codigobar_2`, ADD `factor` DECIMAL(10,2) NOT NULL DEFAULT '0' AFTER `cant_umen`, ADD `unidad_base` VARCHAR(10) NULL DEFAULT NULL AFTER `factor`, ADD `unid_transac` VARCHAR(10) NULL DEFAULT NULL AFTER `unidad_base`;
+
+ALTER TABLE `inventarioself` ADD `valorpar_combo` DECIMAL(15,2) NOT NULL DEFAULT '0' AFTER `unid_transac`;  
+
+ALTER TABLE `configuraciones` ADD `licencia_activa` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `dia_limite_pago`;
+
+ALTER TABLE `configuraciones` ADD `fecha_activacion` DATETIME NULL DEFAULT NULL AFTER `licencia_activa`;
+
+ALTER TABLE `configuraciones` ADD `cod_cliente` VARCHAR(30) NULL DEFAULT NULL COMMENT 'es el Nit del cliente sin dígito de verificación o el código establecido por facilweb en la nube' AFTER `fecha_activacion`;
+
+ALTER TABLE `configuraciones` ADD `valor_propina_sugerida` DECIMAL(15,2) NOT NULL DEFAULT '0' AFTER `cod_cliente`;
+ALTER TABLE `configuraciones` CHANGE `valor_propina_sugerida` `valor_propina_sugerida` INT NOT NULL DEFAULT '0';
+
+ALTER TABLE `facturaven` ADD `porcentaje_propina_sugerida` INT NOT NULL DEFAULT '0' AFTER `id_trans_fe`, ADD `valor_propina` DECIMAL(15,2) NOT NULL DEFAULT '0' AFTER `porcentaje_propina_sugerida`;
+
+
+CREATE TABLE `presupuestos` ( `id_presupuesto` INT NOT NULL AUTO_INCREMENT , `fecha` DATE NULL DEFAULT NULL COMMENT 'la fecha de la creación del presupuesto' , `descripcion` VARCHAR(200) NULL DEFAULT NULL COMMENT 'descripción del enfoque del presupuesto' , `id_usuario` INT NOT NULL DEFAULT '0' COMMENT 'el id del tercero que está ligado al usuario del sistema que crea el presupuesto' , `creado` DATETIME NULL DEFAULT NULL , `editado` DATETIME NULL DEFAULT NULL , `activo` SET('SI','NO') NOT NULL DEFAULT 'SI' , PRIMARY KEY (`id_presupuesto`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+
+CREATE TABLE `presupuesto_categorias` ( `id_categoria` INT NOT NULL AUTO_INCREMENT , `descripcion` VARCHAR(80) NULL DEFAULT NULL , PRIMARY KEY (`id_categoria`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+
+CREATE TABLE `presupuesto_detalles` ( `id_presupuesto_detalle` INT NOT NULL AUTO_INCREMENT , `id_presupuesto` INT NOT NULL DEFAULT '0' , `id_categoria` INT NOT NULL DEFAULT '0' , `presupuesto` DECIMAL(15,2) NOT NULL DEFAULT '0' , `descripcion` VARCHAR(200) NULL DEFAULT NULL , `creado` DATETIME NULL DEFAULT NULL , `actualizado` DATETIME NULL DEFAULT NULL , PRIMARY KEY (`id_presupuesto_detalle`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+
+CREATE TABLE `presupuesto_movimientos` ( `id_presupuesto_movimiento` INT NOT NULL AUTO_INCREMENT , `id_presupuesto` INT NOT NULL DEFAULT '0' , `id_detalle_presupuesto` INT NOT NULL DEFAULT '0' COMMENT 'el id del detalle del presupuesto que se creó' , `fecha` DATE NULL DEFAULT NULL COMMENT 'la fecha en que se está llevando a cabo el movimiento' , `gastado` DECIMAL(15,2) NOT NULL DEFAULT '0' COMMENT 'el importe o valor gastado del presupuesto en ese movimiento' , `id_banco` INT NOT NULL DEFAULT '0' COMMENT 'el id del banco desde donde estamos gastando al presupuesto' , `tipo_doc` SET('FC','CE') NOT NULL DEFAULT 'FC' COMMENT 'el tipo de documento que afectó el presupuesto sea un FC compra o un CE comprobante de egreso' , `id_documento` INT NOT NULL DEFAULT '0' COMMENT 'el id del documento que afectó el presupuesto sea un FC compra o un CE comprobante de egreso' , PRIMARY KEY (`id_presupuesto_movimiento`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+
+ALTER TABLE `presupuesto_detalles` CHANGE `id_presupuesto_detalle` `id_presupuesto_detalle` INT(11) NOT NULL AUTO_INCREMENT, CHANGE `id_categoria` `id_categoria` INT(11) NOT NULL DEFAULT '0' COMMENT 'el id de la categoría del detalle del presupuesto, ejemplo: servicios públicos, alimentación, entretenimiento, arriendo', CHANGE `presupuesto` `presupuesto` DECIMAL(15,2) NOT NULL DEFAULT '0.00' COMMENT 'el importe o valor del presupuesto', CHANGE `descripcion` `descripcion` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'una descripción, por ejemplo: recibo del internet', CHANGE `creado` `creado` DATETIME NULL DEFAULT NULL, CHANGE `actualizado` `actualizado` DATETIME NULL DEFAULT NULL;
+
+ALTER TABLE `presupuesto_categorias` COMMENT = 'por ejemplo: alimentación, entretenimiento, alojamiento, movilidad, entre otros';
+
+ALTER TABLE `terceros` ADD `porcentaje_propina_sugerida` INT NOT NULL DEFAULT '0' AFTER `codigo_tercero`;
+
+ALTER TABLE `facturaven` ADD `aplica_propina` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `valor_propina`;
+
+ALTER TABLE `usuarios` ADD `idbod` INT NOT NULL DEFAULT '0' COMMENT 'id de la bodega' AFTER `serial`; 
+ALTER TABLE `usuarios` ADD `ocultar_bod` SET('SI','NO') NOT NULL DEFAULT 'SI' COMMENT 'PARA SABER SI OCULTA BODEGA EN FACTURA' AFTER `idbod`; 
+
+ALTER TABLE `detallecompra` CHANGE `descuento` `descuento` DECIMAL(8,2) NULL DEFAULT NULL; 
+ALTER TABLE `detallecompra` CHANGE `iva` `iva` DECIMAL(12,2) NULL DEFAULT NULL; 
+ALTER TABLE `facturacom` CHANGE `valoriva` `valoriva` DECIMAL(12,2) NULL DEFAULT NULL; 
+
+ 
+ CREATE TABLE `detallenota_convertir` ( `id_detnc` BIGINT(12) NOT NULL AUTO_INCREMENT , 
+`id_mov` BIGINT(12) NOT NULL DEFAULT '0' , `id_prod` INT(10) NOT NULL DEFAULT '0' COMMENT 'id del producto' , 
+`descripcion` VARCHAR(200) NULL , `origen` INT(2) NOT NULL DEFAULT '0' , `destino` INT(2) NOT NULL DEFAULT '0' , 
+`cantidad` DECIMAL(10,2) NOT NULL DEFAULT '0' , `escala` DECIMAL(10,2) NOT NULL DEFAULT '0' , 
+`costo` DECIMAL(12,2) NOT NULL DEFAULT '0' COMMENT 'costo unitario' , 
+PRIMARY KEY (`id_detnc`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci COMMENT = 
+'tabla para detalle de conversión de productos';
+
+ALTER TABLE `configuraciones` ADD `validar_correo_enlinea` SET('SI','NO') NULL DEFAULT 'NO' COMMENT 'Valida en línea el correo de factura electrónica' AFTER `valor_propina_sugerida`;
+
+ALTER TABLE `terceros` ADD `correo_notificafe` VARCHAR(120) NULL DEFAULT NULL AFTER `porcentaje_propina_sugerida`, ADD `celular_notificafe` VARCHAR(120) NULL DEFAULT NULL AFTER `correo_notificafe`;
+
+ALTER TABLE `direccion` ADD `correo_notificafe` VARCHAR(120) NULL DEFAULT NULL AFTER `correo`, ADD `celular_notificafe` VARCHAR(15) NULL DEFAULT NULL AFTER `correo_notificafe`;
+
+ALTER TABLE `pedidos` ADD `porcentaje_propina_sugerida` INT NOT NULL DEFAULT '0' AFTER `cod_vendedor`, ADD `valor_propina` DECIMAL(15,2) NOT NULL DEFAULT '0' AFTER `porcentaje_propina_sugerida`, ADD `aplica_propina` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `valor_propina`;
+
+ALTER TABLE `pedidos_self` ADD `porcentaje_propina_sugerida` INT NOT NULL DEFAULT '0' AFTER `cod_vendedor`, ADD `valor_propina` DECIMAL(15,2) NOT NULL DEFAULT '0' AFTER `porcentaje_propina_sugerida`, ADD `aplica_propina` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `valor_propina`;
+
+ALTER TABLE `configuraciones` ADD `ver_xml_fe` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'activa una columna en la lista de ventas donde se puede descargar el xml de envío' AFTER `validar_correo_enlinea`;
+
+CREATE TABLE `correos_validos` ( `id` INT NOT NULL AUTO_INCREMENT , `idtercero` INT NOT NULL DEFAULT '0' , `correo` INT(120) NULL DEFAULT NULL , `fecha` DATETIME NULL DEFAULT NULL , `valido` SET('SI','NO','NN') NOT NULL DEFAULT 'NN' , `json` TEXT NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `correos_validos` CHANGE `correo` `correo` VARCHAR(120) NULL DEFAULT NULL;
+
+
+ALTER TABLE `webservicefe_proveedores` ADD `url_api_pdfs` VARCHAR(300) NULL DEFAULT NULL AFTER `servidor_prueba3`, ADD `url_api_sendmail` VARCHAR(300) NULL DEFAULT NULL AFTER `url_api_pdfs`;
+
+ALTER TABLE `webservicefe` ADD `url_api_pdfs` VARCHAR(300) NULL DEFAULT NULL AFTER `servidor_prueba3`, ADD `url_api_sendmail` VARCHAR(300) NULL DEFAULT NULL AFTER `url_api_pdfs`;
+
+ALTER TABLE `facturaven` ADD `proveedor` VARCHAR(40) NULL DEFAULT NULL AFTER `aplica_propina`, ADD `token` VARCHAR(150) NULL DEFAULT NULL AFTER `proveedor`, ADD `password` VARCHAR(150) NULL DEFAULT NULL AFTER `token`, ADD `servidor` VARCHAR(300) NULL DEFAULT NULL AFTER `password`;
+
+ALTER TABLE `configuraciones` ADD `columna_imprimir_ticket` SET('SI','NO') NOT NULL DEFAULT 'SI' COMMENT 'Para ver la columna de imprimir el ticket pos' AFTER `ver_xml_fe`, ADD `columna_imprimir_a4` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Para ver la columna donde uno ve la vista preliminar en formato A4' AFTER `columna_imprimir_ticket`, ADD `columna_whatsapp` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Para ver la columna de compartir enlace de pdf de factura electrónica de desarrollo propio al whatsapp' AFTER `columna_imprimir_a4`;
+
+ALTER TABLE `configuraciones` ADD `columna_npedido` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Para que se pueda activar la columna de número de pedido de donde viene la factura' AFTER `columna_whatsapp`;
+
+ALTER TABLE `configuraciones` ADD `columna_reg_pdf_propio` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Columna que da la opción de regenerar el PDF del documento electrónico si este ya ha sido enviado. Útil para cuando se ha enviado un documento electrónico y faltó algo por parametrizar en el PDF, por ejemplo el logo.' AFTER `columna_npedido`;
+
+ALTER TABLE `facturaven` ADD `tipo_documento` VARCHAR(5) NOT NULL DEFAULT '1' COMMENT 'Aplica para desarrollo propio\r\n\r\n1. Venta nacional\r\n2. Exportacion\r\n3. Contingencia\r\n4. Venta AIU' AFTER `servidor`, ADD `note_aiu` VARCHAR(200) NULL DEFAULT NULL COMMENT 'Asunto de factura AIU' AFTER `tipo_documento`, ADD `porcentaje_admon` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje de administración en aiu propio' AFTER `note_aiu`, ADD `porcentaje_imprevisto` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje en imprevistos propio' AFTER `porcentaje_admon`, ADD `porcentaje_utilidad` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje utilidad aiu propio' AFTER `porcentaje_imprevisto`, ADD `monto_admon` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'Monto administracion propio' AFTER `porcentaje_utilidad`, ADD `monto_imprevisto` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'monto imprevisto propio' AFTER `monto_admon`, ADD `monto_utilidad` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'monto utilidad propio' AFTER `monto_imprevisto`;
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
