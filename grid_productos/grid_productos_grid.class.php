@@ -649,7 +649,51 @@ if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
 if (!isset($_SESSION['gusuario_logueo'])) {$_SESSION['gusuario_logueo'] = "";}
 if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (isset($_SESSION['gusuario_logueo'])) ? $_SESSION['gusuario_logueo'] : "";}
- $vsql = "select ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo, ver_agregar_nota from configuraciones where idconfiguraciones=1";
+ $this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
+ 
+      $nm_select = "select grupo from usuarios where usuario='".$this->sc_temp_gusuario_logueo."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiExiste = array();
+      $this->vsiexiste = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiExiste[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiexiste[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiExiste = false;
+          $this->vSiExiste_erro = $this->Db->ErrorMsg();
+          $this->vsiexiste = false;
+          $this->vsiexiste_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+if(isset($this->vsiexiste[0][0]))
+{
+	if($this->vsiexiste[0][0]==1)
+	{
+		$this->NM_cmp_hidden["agregarnotainv"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "on"; }
+	}
+}
+
+
+$vsql = "select ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo, ver_agregar_nota from configuraciones where idconfiguraciones=1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -800,49 +844,6 @@ if(isset($this->vconfig[0][0]))
 	}
 }
 
-
-$this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
- 
-      $nm_select = "select grupo from usuarios where usuario='".$this->sc_temp_gusuario_logueo."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiExiste = array();
-      $this->vsiexiste = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $this->vSiExiste[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $this->vsiexiste[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vSiExiste = false;
-          $this->vSiExiste_erro = $this->Db->ErrorMsg();
-          $this->vsiexiste = false;
-          $this->vsiexiste_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-if(isset($this->vsiexiste[0][0]))
-{
-	if($this->vsiexiste[0][0]==1)
-	{
-		$this->NM_cmp_hidden["agregarnotainv"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "on"; }
-	}
-}
 
 if($this->sc_temp_gnube_activa == "SI")
 {
