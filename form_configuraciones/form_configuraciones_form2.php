@@ -1468,6 +1468,103 @@ $columna_reg_pdf_propio_look = "";
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
 <?php } 
 ?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_busqueda_refinada']))
+   {
+       $this->nm_new_label['ver_busqueda_refinada'] = "Ver Búsqueda Refinada";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_busqueda_refinada = $this->ver_busqueda_refinada;
+   $sStyleHidden_ver_busqueda_refinada = '';
+   if (isset($this->nmgp_cmp_hidden['ver_busqueda_refinada']) && $this->nmgp_cmp_hidden['ver_busqueda_refinada'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_busqueda_refinada']);
+       $sStyleHidden_ver_busqueda_refinada = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_busqueda_refinada = 'display: none;';
+   $sStyleReadInp_ver_busqueda_refinada = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_busqueda_refinada']) && $this->nmgp_cmp_readonly['ver_busqueda_refinada'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_busqueda_refinada']);
+       $sStyleReadLab_ver_busqueda_refinada = '';
+       $sStyleReadInp_ver_busqueda_refinada = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_busqueda_refinada']) && $this->nmgp_cmp_hidden['ver_busqueda_refinada'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_busqueda_refinada" value="<?php echo $this->form_encode_input($this->ver_busqueda_refinada) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_busqueda_refinada_1 = explode(";", trim($this->ver_busqueda_refinada));
+  } 
+  else
+  {
+      if (empty($this->ver_busqueda_refinada))
+      {
+          $this->ver_busqueda_refinada_1= array(); 
+          $this->ver_busqueda_refinada= "NO";
+      } 
+      else
+      {
+          $this->ver_busqueda_refinada_1= $this->ver_busqueda_refinada; 
+          $this->ver_busqueda_refinada= ""; 
+          foreach ($this->ver_busqueda_refinada_1 as $cada_ver_busqueda_refinada)
+          {
+             if (!empty($ver_busqueda_refinada))
+             {
+                 $this->ver_busqueda_refinada.= ";"; 
+             } 
+             $this->ver_busqueda_refinada.= $cada_ver_busqueda_refinada; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_ver_busqueda_refinada_label" id="hidden_field_label_ver_busqueda_refinada" style="<?php echo $sStyleHidden_ver_busqueda_refinada; ?>"><span id="id_label_ver_busqueda_refinada"><?php echo $this->nm_new_label['ver_busqueda_refinada']; ?></span></TD>
+    <TD class="scFormDataOdd css_ver_busqueda_refinada_line" id="hidden_field_data_ver_busqueda_refinada" style="<?php echo $sStyleHidden_ver_busqueda_refinada; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_busqueda_refinada_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_busqueda_refinada"]) &&  $this->nmgp_cmp_readonly["ver_busqueda_refinada"] == "on") { 
+
+$ver_busqueda_refinada_look = "";
+ if ($this->ver_busqueda_refinada == "SI") { $ver_busqueda_refinada_look .= "SI" ;} 
+ if (empty($ver_busqueda_refinada_look)) { $ver_busqueda_refinada_look = $this->ver_busqueda_refinada; }
+?>
+<input type="hidden" name="ver_busqueda_refinada" value="<?php echo $this->form_encode_input($ver_busqueda_refinada) . "\">" . $ver_busqueda_refinada_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_busqueda_refinada_look = "";
+ if ($this->ver_busqueda_refinada == "SI") { $ver_busqueda_refinada_look .= "SI" ;} 
+ if (empty($ver_busqueda_refinada_look)) { $ver_busqueda_refinada_look = $this->ver_busqueda_refinada; }
+?>
+<span id="id_read_on_ver_busqueda_refinada" class="css_ver_busqueda_refinada_line" style="<?php echo $sStyleReadLab_ver_busqueda_refinada; ?>"><?php echo $this->form_format_readonly("ver_busqueda_refinada", $this->form_encode_input($ver_busqueda_refinada_look)); ?></span><span id="id_read_off_ver_busqueda_refinada" class="css_read_off_ver_busqueda_refinada css_ver_busqueda_refinada_line" style="<?php echo $sStyleReadInp_ver_busqueda_refinada; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_busqueda_refinada\" style=\"display: inline-block\" class=\"css_ver_busqueda_refinada_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_busqueda_refinada_line"><?php $tempOptionId = "id-opt-ver_busqueda_refinada" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_busqueda_refinada sc-ui-checkbox-ver_busqueda_refinada" name="ver_busqueda_refinada[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_ver_busqueda_refinada'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_busqueda_refinada_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ver_busqueda_refinada')", "nm_mostra_mens('ver_busqueda_refinada')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_busqueda_refinada_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_busqueda_refinada_text"></span></td></tr></table></td></tr></table></TD>
+   <?php }?>
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
+<?php } 
+?> 
 
 
    </tr>

@@ -293,7 +293,7 @@ class form_configuraciones_mob_ini
       $this->nm_hr_criacao   = "070459"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210913"; 
-      $this->nm_hr_ult_alt   = "094918"; 
+      $this->nm_hr_ult_alt   = "110935"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -967,7 +967,7 @@ class form_configuraciones_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDuFaDSN7HQF7HuBOVcFCH5FqHIrqDcJUZSBqDSvOZMBqDErKHEFiDuFYHIX7DcJeH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXsZ9F7D1BeHQrqHuBYZSNiDuX7VoB/HQBiZSBqHABYHuFUDEBOHErsDWB3ZuBOHQXOH9X7Z1BYHuB/DMBYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwH9X7Z1rwV5BOHuNOVcB/V5X7VoBqD9BsH9B/Z1NOV5BqDEBeHEXeDuFaZuB/D9NwH9X7HArYV5FGHuvmVcBOV5X7DoJsDcJUZ1FaD1rwD5BiDEBOHEXeV5FaDorqHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBeZSXeV5FaVoFGDcBwDuBqHAN7D5JwDMvmZSJqH5FqVoF7DcBqH9BOD1rKHuBqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveHArsH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcXKDWFYHIJsHQBiZ1F7HABYHuFaHgBOHArsDWFqHMB/D9JKZSFGDSN7HQJsDMBYDkBsV5FYHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQX7D1BeV5XGHuBOVIBsHEFYHIFGD9JmZSBqHANOV5FUHgveDkB/DuFaHIBqHQJeDQX7HArYD5F7DMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKVWXGHgrKV9BUDWXCHMX7D9XOH9FaD1rwZMJwDErKHEFiDuFaHIB/D9FYDQFaHANOV5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBOD9XsZSFGHANOD5F7HgrYDkBOH5FqVoraD9BsZSB/HANOV5JeDMzGZSJGDWFqDoJeDcJeDQX7D1BeD5BqHuNODkBOV5F/DoraD9XOH9BOZ1BeV5X7DEBOZSXeDWrGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQBqDMveHEXeH5F/HIFGHQXsZ9XGHIrKHuBiHgrwDkFCDWJeHMrqHQBsZSB/Z1BeV5FGDErKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BqHgBYHArsDWFGDoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVorqHQNmH9BqHIBeV5JsHgNKHENiHEB7ZuBOD9NwZSFUHIrwD5XGDMrYVcBODur/HIJeHQXGZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['form_configuraciones_mob']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['form_configuraciones_mob']['initialize'])  
       { 
@@ -1914,6 +1914,11 @@ ob_start();
             $columna_reg_pdf_propio = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_configuraciones_mob_validate_ver_busqueda_refinada' == $_POST['rs'])
+        {
+            $ver_busqueda_refinada = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_configuraciones_mob_validate_ver_grupo' == $_POST['rs'])
         {
             $ver_grupo = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -2027,27 +2032,28 @@ ob_start();
             $columna_whatsapp = NM_utf8_urldecode($_POST['rsargs'][29]);
             $columna_npedido = NM_utf8_urldecode($_POST['rsargs'][30]);
             $columna_reg_pdf_propio = NM_utf8_urldecode($_POST['rsargs'][31]);
-            $ver_grupo = NM_utf8_urldecode($_POST['rsargs'][32]);
-            $ver_codigo = NM_utf8_urldecode($_POST['rsargs'][33]);
-            $ver_imagen = NM_utf8_urldecode($_POST['rsargs'][34]);
-            $ver_existencia = NM_utf8_urldecode($_POST['rsargs'][35]);
-            $ver_unidad = NM_utf8_urldecode($_POST['rsargs'][36]);
-            $ver_precio = NM_utf8_urldecode($_POST['rsargs'][37]);
-            $ver_impuesto = NM_utf8_urldecode($_POST['rsargs'][38]);
-            $ver_stock = NM_utf8_urldecode($_POST['rsargs'][39]);
-            $ver_ubicacion = NM_utf8_urldecode($_POST['rsargs'][40]);
-            $ver_costo = NM_utf8_urldecode($_POST['rsargs'][41]);
-            $ver_proveedor = NM_utf8_urldecode($_POST['rsargs'][42]);
-            $ver_combo = NM_utf8_urldecode($_POST['rsargs'][43]);
-            $ver_agregar_nota = NM_utf8_urldecode($_POST['rsargs'][44]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][45]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][46]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][47]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][48]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][49]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][50]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][51]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][52]);
+            $ver_busqueda_refinada = NM_utf8_urldecode($_POST['rsargs'][32]);
+            $ver_grupo = NM_utf8_urldecode($_POST['rsargs'][33]);
+            $ver_codigo = NM_utf8_urldecode($_POST['rsargs'][34]);
+            $ver_imagen = NM_utf8_urldecode($_POST['rsargs'][35]);
+            $ver_existencia = NM_utf8_urldecode($_POST['rsargs'][36]);
+            $ver_unidad = NM_utf8_urldecode($_POST['rsargs'][37]);
+            $ver_precio = NM_utf8_urldecode($_POST['rsargs'][38]);
+            $ver_impuesto = NM_utf8_urldecode($_POST['rsargs'][39]);
+            $ver_stock = NM_utf8_urldecode($_POST['rsargs'][40]);
+            $ver_ubicacion = NM_utf8_urldecode($_POST['rsargs'][41]);
+            $ver_costo = NM_utf8_urldecode($_POST['rsargs'][42]);
+            $ver_proveedor = NM_utf8_urldecode($_POST['rsargs'][43]);
+            $ver_combo = NM_utf8_urldecode($_POST['rsargs'][44]);
+            $ver_agregar_nota = NM_utf8_urldecode($_POST['rsargs'][45]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][46]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][47]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][48]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][49]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][50]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][51]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][52]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][53]);
         }
         if ('ajax_form_configuraciones_mob_navigate_form' == $_POST['rs'])
         {
@@ -2640,6 +2646,7 @@ ob_start();
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['columna_whatsapp'] = " onClick=\"\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['columna_npedido'] = " onClick=\"\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['columna_reg_pdf_propio'] = " onClick=\"\" ";
+    $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['ver_busqueda_refinada'] = " onClick=\"\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['ver_grupo'] = " onClick=\"\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['ver_codigo'] = " onClick=\"\" ";
     $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['select_html']['ver_imagen'] = " onClick=\"\" ";
@@ -2698,6 +2705,7 @@ ob_start();
     sajax_export("ajax_form_configuraciones_mob_validate_columna_whatsapp");
     sajax_export("ajax_form_configuraciones_mob_validate_columna_npedido");
     sajax_export("ajax_form_configuraciones_mob_validate_columna_reg_pdf_propio");
+    sajax_export("ajax_form_configuraciones_mob_validate_ver_busqueda_refinada");
     sajax_export("ajax_form_configuraciones_mob_validate_ver_grupo");
     sajax_export("ajax_form_configuraciones_mob_validate_ver_codigo");
     sajax_export("ajax_form_configuraciones_mob_validate_ver_imagen");
@@ -3348,6 +3356,25 @@ ob_start();
         exit;
     } // ajax_validate_columna_reg_pdf_propio
 
+    function ajax_form_configuraciones_mob_validate_ver_busqueda_refinada($ver_busqueda_refinada, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_ver_busqueda_refinada';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'ver_busqueda_refinada' => NM_utf8_urldecode($ver_busqueda_refinada),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_ver_busqueda_refinada
+
     function ajax_form_configuraciones_mob_validate_ver_grupo($ver_grupo, $script_case_init)
     {
         global $inicial_form_configuraciones_mob;
@@ -3651,7 +3678,7 @@ ob_start();
         exit;
     } // ajax_event_serial_onfocus
 
-    function ajax_form_configuraciones_mob_submit_form($lineasporfactura, $consolidararticulos, $serial, $fecha, $activo, $espaciado, $caja_movil, $pago_automatico, $dia_limite_pago, $refresh_grid_doc, $desactivar_control_sesion, $nombre_pc, $nombre_impre, $essociedad, $grancontr, $idconfiguraciones, $control_diasmora, $control_costo, $modificainvpedido, $tipodoc_pordefecto_pos, $ver_xml_fe, $noborrar_tmp_enpos, $validar_correo_enlinea, $apertura_caja, $activar_console_log, $codproducto_en_facventa, $valor_propina_sugerida, $columna_imprimir_ticket, $columna_imprimir_a4, $columna_whatsapp, $columna_npedido, $columna_reg_pdf_propio, $ver_grupo, $ver_codigo, $ver_imagen, $ver_existencia, $ver_unidad, $ver_precio, $ver_impuesto, $ver_stock, $ver_ubicacion, $ver_costo, $ver_proveedor, $ver_combo, $ver_agregar_nota, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_configuraciones_mob_submit_form($lineasporfactura, $consolidararticulos, $serial, $fecha, $activo, $espaciado, $caja_movil, $pago_automatico, $dia_limite_pago, $refresh_grid_doc, $desactivar_control_sesion, $nombre_pc, $nombre_impre, $essociedad, $grancontr, $idconfiguraciones, $control_diasmora, $control_costo, $modificainvpedido, $tipodoc_pordefecto_pos, $ver_xml_fe, $noborrar_tmp_enpos, $validar_correo_enlinea, $apertura_caja, $activar_console_log, $codproducto_en_facventa, $valor_propina_sugerida, $columna_imprimir_ticket, $columna_imprimir_a4, $columna_whatsapp, $columna_npedido, $columna_reg_pdf_propio, $ver_busqueda_refinada, $ver_grupo, $ver_codigo, $ver_imagen, $ver_existencia, $ver_unidad, $ver_precio, $ver_impuesto, $ver_stock, $ver_ubicacion, $ver_costo, $ver_proveedor, $ver_combo, $ver_agregar_nota, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_configuraciones_mob;
         //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
@@ -3690,6 +3717,7 @@ ob_start();
                   'columna_whatsapp' => NM_utf8_urldecode($columna_whatsapp),
                   'columna_npedido' => NM_utf8_urldecode($columna_npedido),
                   'columna_reg_pdf_propio' => NM_utf8_urldecode($columna_reg_pdf_propio),
+                  'ver_busqueda_refinada' => NM_utf8_urldecode($ver_busqueda_refinada),
                   'ver_grupo' => NM_utf8_urldecode($ver_grupo),
                   'ver_codigo' => NM_utf8_urldecode($ver_codigo),
                   'ver_imagen' => NM_utf8_urldecode($ver_imagen),

@@ -58,6 +58,7 @@ function scFocusField(sField) {
       case 'columna_whatsapp':
       case 'columna_npedido':
       case 'columna_reg_pdf_propio':
+      case 'ver_busqueda_refinada':
         sc_exib_ocult_pag('form_configuraciones_mob_form2');
         break;
       case 'ver_grupo':
@@ -141,6 +142,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["columna_whatsapp" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["columna_npedido" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["columna_reg_pdf_propio" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_busqueda_refinada" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ver_grupo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ver_codigo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ver_imagen" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -347,6 +349,12 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["columna_reg_pdf_propio" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_busqueda_refinada" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_busqueda_refinada" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["ver_grupo" + iSeqRow]["blur"]) {
@@ -556,6 +564,8 @@ function scJQEventsAdd(iSeqRow) {
                                        .bind('focus', function() { sc_form_configuraciones_ver_combo_onfocus(this, iSeqRow) });
   $('#id_sc_field_ver_agregar_nota' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_agregar_nota_onblur(this, iSeqRow) })
                                               .bind('focus', function() { sc_form_configuraciones_ver_agregar_nota_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_busqueda_refinada' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_busqueda_refinada_onblur(this, iSeqRow) })
+                                                   .bind('focus', function() { sc_form_configuraciones_ver_busqueda_refinada_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-caja_movil' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-pago_automatico' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-desactivar_control_sesion' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -575,6 +585,7 @@ function scJQEventsAdd(iSeqRow) {
   $('.sc-ui-checkbox-columna_whatsapp' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-columna_npedido' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-columna_reg_pdf_propio' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_busqueda_refinada' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_grupo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_codigo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_imagen' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -1057,6 +1068,16 @@ function sc_form_configuraciones_ver_agregar_nota_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_configuraciones_ver_busqueda_refinada_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_mob_validate_ver_busqueda_refinada();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_busqueda_refinada_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_page(page, status) {
 	if ("0" == page) {
 		displayChange_page_0(status);
@@ -1149,6 +1170,7 @@ function displayChange_block_3(status) {
 	displayChange_field("columna_whatsapp", "", status);
 	displayChange_field("columna_npedido", "", status);
 	displayChange_field("columna_reg_pdf_propio", "", status);
+	displayChange_field("ver_busqueda_refinada", "", status);
 }
 
 function displayChange_block_4(status) {
@@ -1200,6 +1222,7 @@ function displayChange_row(row, status) {
 	displayChange_field_columna_whatsapp(row, status);
 	displayChange_field_columna_npedido(row, status);
 	displayChange_field_columna_reg_pdf_propio(row, status);
+	displayChange_field_ver_busqueda_refinada(row, status);
 	displayChange_field_ver_grupo(row, status);
 	displayChange_field_ver_codigo(row, status);
 	displayChange_field_ver_imagen(row, status);
@@ -1311,6 +1334,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("columna_reg_pdf_propio" == field) {
 		displayChange_field_columna_reg_pdf_propio(row, status);
+	}
+	if ("ver_busqueda_refinada" == field) {
+		displayChange_field_ver_busqueda_refinada(row, status);
 	}
 	if ("ver_grupo" == field) {
 		displayChange_field_ver_grupo(row, status);
@@ -1471,6 +1497,9 @@ function displayChange_field_columna_npedido(row, status) {
 }
 
 function displayChange_field_columna_reg_pdf_propio(row, status) {
+}
+
+function displayChange_field_ver_busqueda_refinada(row, status) {
 }
 
 function displayChange_field_ver_grupo(row, status) {
