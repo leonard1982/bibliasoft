@@ -218,7 +218,7 @@ class blank_envio_dataico_ini
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210913"; 
-      $this->nm_hr_ult_alt   = "171008"; 
+      $this->nm_hr_ult_alt   = "173652"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_envio_dataico_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsH9FGHIrKD5BODMBOVcB/HEF/HMFaHQBsZSB/D1rwHQFUDMzGVkJ3DWFGVoFGD9XsZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXOH9FGHIrwD5BqHgvOVcBODWFaHMXGHQNmZ1F7HANOHuX7DMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQX7Z1N7VWJeHuvmVcBOV5X7VoJwDcJUZ1F7HABYZMB/DMBYHEXeHEFqDoF7D9XsZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHENiHEXCDoBqD9XsDQB/HANOD5NUDMvOVIFCDur/VEraD9BiZSBqHIrwHQBqHgrKZSJ3HEB7ZuB/HQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDuBqHAvOV5BqDMvmVcFKV5BmVoBqD9BsZkFGHArKZMFaHgrKHArCV5FaVoJwHQXGDQFGD1NKVWJsHuzGVIBsHEFYDoNUDcFYZSBqHAN7HQNUHgvsHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXOZ9rqZ1BYHurqDMNOVcFKH5XCHIFGD9JmZSFaHABYD5BOHgvsHEXeH5F/DorqDcJeDQFUDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMBYVkJqDWX7HIFGHQBiH9X7D1veD5XGHuBYDkB/DWFaHMBqD9XOZ1F7Z1rYD5F7DEBeHEJqHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaVoB/D9XsH9FGHAN7D5BqHuNODkB/V5X7DoNUDcBqZ1FaD1rKD5NUDEBeHEXeH5FYDoB/HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJeHuNOVcFeH5XKVErqHQXGVIJsHIveHuX7DEvsVkJ3HEB7DoXGD9XsDQX7HIBeHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHANKVWBqDMvOV9BUH5FqHMBiD9BsVIraD1rwV5X7HgBeHENiH5FYHIrqDcBwDQFGHANOHQF7DMzGZSJqH5FqVEFGD9XOVINUD1rwD5F7DMvCZSJ3DuFaHIXGHQJeDuFaZ1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2857,136 +2857,73 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 			$vretorno    = "";
 			$headers = array('auth-token:'.$vparametros["dataico_auth"],'Content-Type: application/json');
 
-			
-			if(isset($vretorno->invoice->dian_status))
+			$parms = array('data'  => $documento);
+			$parms = http_build_query($parms);
+
+			$response = sc_webservice("curl", $vparametros["url"] , 80, "POST", $documento, array(CURLOPT_RETURNTRANSFER => true, CURLOPT_SSL_VERIFYPEER=>false, CURLOPT_HTTPHEADER => array(
+					'Content-Type: application/json', 'auth-token: ' . $vparametros["dataico_auth"]  ),), 30);
+
+			$vrespuesta = json_decode($response);
+
+			$vnomarchivo2 = "dataico_respuesta.json";
+			$varchivo2 = fopen($vnomarchivo2,"w+");
+			fwrite($varchivo2,$response);
+
+			if(isset($vrespuesta->uuid))
 			{
-
-				if($vretorno->invoice->dian_status=="DIAN_ACEPTADO")
+				if(!empty($vrespuesta->uuid))
 				{
+					$vuuid = $vrespuesta->uuid;
+				}
+			}
 
+			if(isset($vrespuesta->cufe) and isset($vrespuesta->dian_status))
+			{
+				if(!empty($vrespuesta->cufe) and $vrespuesta->dian_status=="DIAN_ACEPTADO")
+				{
+					$vcufe = $vrespuesta->cufe;
+				}
+			}
+
+			if(!empty($vcufe))
+			{
+				if(isset($vrespuesta->dian_status))
+				{
 				}
 
-				if($vretorno->invoice->dian_status=="DIAN_NO_ENVIADO")
+				if(isset($vrespuesta->qrcode))
 				{
-
-				}
-
-				if(isset($vretorno->invoice->cufe))
-				{
-					if(!empty($vretorno->invoice->cufe))
+					if(!empty($vrespuesta->qrcode))
 					{
-						$vcufe   = $vretorno->invoice->cufe;
+						$vqr_code = "data:image/png;base64,".base64_encode($vrespuesta->qrcode);
 					}
 				}
 
-				if(isset($vretorno->invoice->pdf_url))
+				if(isset($vrespuesta->xml_url))
 				{
-					if(!empty($vretorno->invoice->pdf_url))
+					if(!empty($vrespuesta->xml_url))
 					{
-						$venlace_pdf = stripslashes($vretorno->invoice->pdf_url);
+
+						$venlace_xml = $vrespuesta->xml_url;
 					}
 				}
 
-				if(isset($vretorno->invoice->xml_url))
+				if(isset($vrespuesta->pdf_url))
 				{
-					if(!empty($vretorno->invoice->xml_url))
+					if(!empty($vrespuesta->pdf_url))
 					{
-						$venlace_xml = stripslashes($vretorno->invoice->xml_url);
+
+						$venlace_pdf = $vrespuesta->pdf_url;
 					}
 				}
 
-				if(isset($vretorno->invoice->qrcode))
-				{
-					if(!empty($vretorno->invoice->qrcode))
-					{
-						$vqr_code = "data:image/png;base64,".base64_encode($vretorno->invoice->qrcode);
-					}
-				}
-
-				if(isset($vretorno->invoice->issue_date))
-				{
-					if(!empty($vretorno->invoice->issue_date))
-					{
-						$vfechavalidacion  = $vencabezado["fecha_pago"];
-					}
-				}
-
-				if(isset($vretorno->invoice->uuid))
-				{
-					if(!empty($vretorno->invoice->uuid))
-					{
-						$vuuid = $vretorno->invoice->uuid;
-					}
-				}
 			}
 			else
 			{
+				$vsiyadian = false;
 
-				$parms = array('data'  => $documento);
-				$parms = http_build_query($parms);
-
-				$response = sc_webservice("curl", $vparametros["url"] , 80, "POST", $documento, array(CURLOPT_RETURNTRANSFER => true, CURLOPT_SSL_VERIFYPEER=>false, CURLOPT_HTTPHEADER => array(
-						'Content-Type: application/json', 'auth-token: ' . $vparametros["dataico_auth"]  ),), 30);
-
-				$vrespuesta = json_decode($response);
-				
-				$vnomarchivo2 = "dataico_respuesta.json";
-				$varchivo2 = fopen($vnomarchivo2,"w+");
-				fwrite($varchivo2,$response);
-
-				if(isset($vrespuesta->uuid))
+				if(isset($vrespuesta->errors))
 				{
-					if(!empty($vrespuesta->uuid))
-					{
-						$vuuid = $vrespuesta->uuid;
-					}
-				}
-
-				if(isset($vrespuesta->cufe) and isset($vrespuesta->dian_status))
-				{
-					if(!empty($vrespuesta->cufe) and $vrespuesta->dian_status=="DIAN_ACEPTADO")
-					{
-						$vcufe = $vrespuesta->cufe;
-					}
-				}
-
-				if(!empty($vcufe))
-				{
-					if(isset($vrespuesta->dian_status))
-					{
-					}
-
-					if(isset($vrespuesta->qrcode))
-					{
-						if(!empty($vrespuesta->qrcode))
-						{
-							$vqr_code = "data:image/png;base64,".base64_encode($vrespuesta->qrcode);
-						}
-					}
-
-					if(isset($vrespuesta->xml_url))
-					{
-						if(!empty($vrespuesta->xml_url))
-						{
-
-							$venlace_xml = $vrespuesta->xml_url;
-						}
-					}
-
-					if(isset($vrespuesta->pdf_url))
-					{
-						if(!empty($vrespuesta->pdf_url))
-						{
-
-							$venlace_pdf = $vrespuesta->pdf_url;
-						}
-					}
-
-				}
-				else
-				{
-					$vsiyadian = false;
-
 					if(isset($vrespuesta->errors[0]->error))
 					{
 						$veltexto = $vrespuesta->errors[0]->error;
@@ -3026,7 +2963,7 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 							curl_close($curl2);
 
 							$vr = json_decode($response2);
-							
+
 							if(isset($vr->invoice->dian_status))
 							{
 								if($vr->invoice->dian_status=="DIAN_ACEPTADO")
@@ -3086,17 +3023,17 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 						}
 
 					}
-					
-					if(!$vsiyadian)
+				}
+
+				if(!$vsiyadian)
+				{
+					if(is_array($vrespuesta->errors))
 					{
-						if(is_array($vrespuesta->errors))
-						{
-							print_r($vrespuesta->errors[0]->error);
-						}
-						else
-						{
-							echo $vrespuesta->errors;
-						}
+						print_r($vrespuesta->errors[0]->error);
+					}
+					else
+					{
+						echo $vrespuesta->errors;
 					}
 				}
 			}
