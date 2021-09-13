@@ -218,7 +218,7 @@ class blank_envio_dataico_ini
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210825"; 
-      $this->nm_hr_ult_alt   = "142902"; 
+      $this->nm_hr_ult_alt   = "144106"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_envio_dataico_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZSX7HIrwV5FaDMrwVcB/HEF/HMJeHQXGH9FaHArKV5JsDMvCHENiDuXKDoJeHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgBOHEBUDWFqHMJwD9JKH9FUHArYHuXGDMvOVcrsDWFYHMFUHQBiZ1B/HAN7HuX7HgNKHEXeV5XCHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaVoB/D9XsH9FGHAN7D5BqHuNODkB/V5X7DoNUDcBqZ1FaD1rKD5NUDEBeHEXeH5FYDoB/HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFGDMBOVcrsDurGVEF7HQNwH9B/D1rKV5JwDEBOVkJqHEXCDoF7DcXGDuBqHANOD5BqHgrKDkBsHEFYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWB3VEX7HQNmVINUHArYHQJwDEBODkFeH5FYVoFGHQJKDQJsHIrKHuNUHuBYVcBODWBmVENUHQBiZSB/HIBeHuJeHgvsHArCDWFqHIBOD9NmDuBqD1veD5BqHuNODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQBqHANOV5JeDMBOVcFKV5X7HMJeDcFYZ1rqDSrYV5FGHgNOVkJqDWXCDorqHQJeDQX7Z1BYV5BqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveV5FUDMzGDkFCH5FqHIBiHQXGZ1F7HANOD5BOHgBOZSJqDWF/HIBqDcXGDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHgrKVcBOV5F/VErqD9JmZ1B/Z1BeD5BiDMzGHEFiDWX7ZuFaDcJeDQX7DSBYV5FGHuNOZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQBqHINaVWXGHgrwDkFCDuX7VEFGD9BsZ1BiHANOHQraHgBOHArCDWX7HMB/DcJeDuBqHAveHQBqDMzGVcFeDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUHEX/VoF7HQNmH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNwH9X7DSrwHQJwDMvOVIBODuX7HIXGHQBsZSBOHArKHuJeHgNKVkXeHEFqHIFGDcXGH9X7Z1vCVWXGHuvmDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1982,10 +1982,11 @@ if($vidfacven>0)
 	$vnombre2   = "";
 	$vapellido1 = "";
 	$vapellido2 = ""; 
+	$vcal_valores_decimales = 2;
 
 	
 
-	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, enviar_dian, enviar_cliente from webservicefe order by idwebservicefe desc limit 1";
+	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, enviar_dian, enviar_cliente, (select c.cal_valores_decimales from configuraciones c where c.idconfiguraciones=1) as cal_valores_decimales from webservicefe order by idwebservicefe desc limit 1";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2035,6 +2036,7 @@ if($vidfacven>0)
 
 		$venvio_dian    = $this->vserv[0][6];
 		$venvio_cliente = $this->vserv[0][7];
+		$vcal_valores_decimales = $this->vserv[0][8];
 	}
 
 	if(empty($vservidor) or empty($vtoken))
@@ -2498,7 +2500,7 @@ if($vidfacven>0)
 		
 		
 
-		$vretorno = $this->fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle, $vrete);
+		$vretorno = $this->fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle, $vrete, $vcal_valores_decimales);
 		$vretorno2 = json_decode($vretorno);
 
 		if(!empty($vretorno2->cufe))
@@ -2727,7 +2729,7 @@ $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
 	
 $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'off';
 }
-function fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle,$vretenciones)
+function fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle,$vretenciones,$vcal_valores_decimales)
 		{
 $_SESSION['scriptcase']['blank_envio_dataico']['contr_erro'] = 'on';
   

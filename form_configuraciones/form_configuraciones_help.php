@@ -553,6 +553,64 @@ class form_configuraciones_help
 </html>
 <?php
         }
+        if ($nm_cod_campo ==  "cal_valores_decimales")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Calcular Valores con Decimales</b><br>" . nl2br("Para calcular los valores que se envian en la factura electronica."); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "cal_cantidades_decimales")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Calcular Cantidades con Decimales</b><br>" . nl2br("Para calcular los cantidades que se envian en la factura electronica."); ?>
+</body>
+</html>
+<?php
+        }
     }
 }
 if (!empty($_GET))

@@ -1684,6 +1684,130 @@ $ver_busqueda_refinada_look = "";
 
 <?php } 
 ?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['cal_valores_decimales']))
+    {
+        $this->nm_new_label['cal_valores_decimales'] = "Calcular Valores con Decimales";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $cal_valores_decimales = $this->cal_valores_decimales;
+   $sStyleHidden_cal_valores_decimales = '';
+   if (isset($this->nmgp_cmp_hidden['cal_valores_decimales']) && $this->nmgp_cmp_hidden['cal_valores_decimales'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['cal_valores_decimales']);
+       $sStyleHidden_cal_valores_decimales = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_cal_valores_decimales = 'display: none;';
+   $sStyleReadInp_cal_valores_decimales = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cal_valores_decimales']) && $this->nmgp_cmp_readonly['cal_valores_decimales'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['cal_valores_decimales']);
+       $sStyleReadLab_cal_valores_decimales = '';
+       $sStyleReadInp_cal_valores_decimales = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['cal_valores_decimales']) && $this->nmgp_cmp_hidden['cal_valores_decimales'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="cal_valores_decimales" value="<?php echo $this->form_encode_input($cal_valores_decimales) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_cal_valores_decimales_line" id="hidden_field_data_cal_valores_decimales" style="<?php echo $sStyleHidden_cal_valores_decimales; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cal_valores_decimales_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_cal_valores_decimales_label" style=""><span id="id_label_cal_valores_decimales"><?php echo $this->nm_new_label['cal_valores_decimales']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cal_valores_decimales"]) &&  $this->nmgp_cmp_readonly["cal_valores_decimales"] == "on") { 
+
+ ?>
+<input type="hidden" name="cal_valores_decimales" value="<?php echo $this->form_encode_input($cal_valores_decimales) . "\">" . $cal_valores_decimales . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_cal_valores_decimales" class="sc-ui-readonly-cal_valores_decimales css_cal_valores_decimales_line" style="<?php echo $sStyleReadLab_cal_valores_decimales; ?>"><?php echo $this->form_format_readonly("cal_valores_decimales", $this->form_encode_input($this->cal_valores_decimales)); ?></span><span id="id_read_off_cal_valores_decimales" class="css_read_off_cal_valores_decimales<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_cal_valores_decimales; ?>">
+ <input class="sc-js-input scFormObjectOdd css_cal_valores_decimales_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_cal_valores_decimales" type=text name="cal_valores_decimales" value="<?php echo $this->form_encode_input($cal_valores_decimales) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=2"; } ?> alt="{datatype: 'integer', maxLength: 2, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['cal_valores_decimales']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['cal_valores_decimales']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['cal_valores_decimales']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('cal_valores_decimales')", "nm_mostra_mens('cal_valores_decimales')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cal_valores_decimales_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cal_valores_decimales_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['cal_cantidades_decimales']))
+    {
+        $this->nm_new_label['cal_cantidades_decimales'] = "Calcular Cantidades con Decimales";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $cal_cantidades_decimales = $this->cal_cantidades_decimales;
+   $sStyleHidden_cal_cantidades_decimales = '';
+   if (isset($this->nmgp_cmp_hidden['cal_cantidades_decimales']) && $this->nmgp_cmp_hidden['cal_cantidades_decimales'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['cal_cantidades_decimales']);
+       $sStyleHidden_cal_cantidades_decimales = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_cal_cantidades_decimales = 'display: none;';
+   $sStyleReadInp_cal_cantidades_decimales = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cal_cantidades_decimales']) && $this->nmgp_cmp_readonly['cal_cantidades_decimales'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['cal_cantidades_decimales']);
+       $sStyleReadLab_cal_cantidades_decimales = '';
+       $sStyleReadInp_cal_cantidades_decimales = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['cal_cantidades_decimales']) && $this->nmgp_cmp_hidden['cal_cantidades_decimales'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="cal_cantidades_decimales" value="<?php echo $this->form_encode_input($cal_cantidades_decimales) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_cal_cantidades_decimales_line" id="hidden_field_data_cal_cantidades_decimales" style="<?php echo $sStyleHidden_cal_cantidades_decimales; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cal_cantidades_decimales_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_cal_cantidades_decimales_label" style=""><span id="id_label_cal_cantidades_decimales"><?php echo $this->nm_new_label['cal_cantidades_decimales']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cal_cantidades_decimales"]) &&  $this->nmgp_cmp_readonly["cal_cantidades_decimales"] == "on") { 
+
+ ?>
+<input type="hidden" name="cal_cantidades_decimales" value="<?php echo $this->form_encode_input($cal_cantidades_decimales) . "\">" . $cal_cantidades_decimales . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_cal_cantidades_decimales" class="sc-ui-readonly-cal_cantidades_decimales css_cal_cantidades_decimales_line" style="<?php echo $sStyleReadLab_cal_cantidades_decimales; ?>"><?php echo $this->form_format_readonly("cal_cantidades_decimales", $this->form_encode_input($this->cal_cantidades_decimales)); ?></span><span id="id_read_off_cal_cantidades_decimales" class="css_read_off_cal_cantidades_decimales<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_cal_cantidades_decimales; ?>">
+ <input class="sc-js-input scFormObjectOdd css_cal_cantidades_decimales_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_cal_cantidades_decimales" type=text name="cal_cantidades_decimales" value="<?php echo $this->form_encode_input($cal_cantidades_decimales) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=2"; } ?> alt="{datatype: 'integer', maxLength: 2, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['cal_cantidades_decimales']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['cal_cantidades_decimales']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['cal_cantidades_decimales']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('cal_cantidades_decimales')", "nm_mostra_mens('cal_cantidades_decimales')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cal_cantidades_decimales_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cal_cantidades_decimales_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
 
 
 

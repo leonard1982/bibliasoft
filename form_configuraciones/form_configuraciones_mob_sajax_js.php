@@ -4065,6 +4065,80 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_configuraciones_mob_validate_ver_busqueda_refinada_cb
 
+  // ---------- Validate cal_valores_decimales
+  function do_ajax_form_configuraciones_mob_validate_cal_valores_decimales()
+  {
+    var nomeCampo_cal_valores_decimales = "cal_valores_decimales";
+    var var_cal_valores_decimales = scAjaxGetFieldText(nomeCampo_cal_valores_decimales);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_mob_validate_cal_valores_decimales(var_cal_valores_decimales, var_script_case_init, do_ajax_form_configuraciones_mob_validate_cal_valores_decimales_cb);
+  } // do_ajax_form_configuraciones_mob_validate_cal_valores_decimales
+
+  function do_ajax_form_configuraciones_mob_validate_cal_valores_decimales_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "cal_valores_decimales";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_mob_validate_cal_valores_decimales_cb
+
+  // ---------- Validate cal_cantidades_decimales
+  function do_ajax_form_configuraciones_mob_validate_cal_cantidades_decimales()
+  {
+    var nomeCampo_cal_cantidades_decimales = "cal_cantidades_decimales";
+    var var_cal_cantidades_decimales = scAjaxGetFieldText(nomeCampo_cal_cantidades_decimales);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_mob_validate_cal_cantidades_decimales(var_cal_cantidades_decimales, var_script_case_init, do_ajax_form_configuraciones_mob_validate_cal_cantidades_decimales_cb);
+  } // do_ajax_form_configuraciones_mob_validate_cal_cantidades_decimales
+
+  function do_ajax_form_configuraciones_mob_validate_cal_cantidades_decimales_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "cal_cantidades_decimales";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_mob_validate_cal_cantidades_decimales_cb
+
   // ---------- Validate ver_grupo
   function do_ajax_form_configuraciones_mob_validate_ver_grupo()
   {
@@ -5001,6 +5075,8 @@ function scJs_sweetalert_params(params) {
     var var_columna_npedido = scAjaxGetFieldCheckbox("columna_npedido", ";");
     var var_columna_reg_pdf_propio = scAjaxGetFieldCheckbox("columna_reg_pdf_propio", ";");
     var var_ver_busqueda_refinada = scAjaxGetFieldCheckbox("ver_busqueda_refinada", ";");
+    var var_cal_valores_decimales = scAjaxGetFieldText("cal_valores_decimales");
+    var var_cal_cantidades_decimales = scAjaxGetFieldText("cal_cantidades_decimales");
     var var_ver_grupo = scAjaxGetFieldCheckbox("ver_grupo", ";");
     var var_ver_codigo = scAjaxGetFieldCheckbox("ver_codigo", ";");
     var var_ver_imagen = scAjaxGetFieldCheckbox("ver_imagen", ";");
@@ -5023,7 +5099,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_configuraciones_mob_submit_form(var_lineasporfactura, var_consolidararticulos, var_serial, var_fecha, var_activo, var_espaciado, var_caja_movil, var_pago_automatico, var_dia_limite_pago, var_refresh_grid_doc, var_desactivar_control_sesion, var_nombre_pc, var_nombre_impre, var_essociedad, var_grancontr, var_idconfiguraciones, var_control_diasmora, var_control_costo, var_modificainvpedido, var_tipodoc_pordefecto_pos, var_ver_xml_fe, var_noborrar_tmp_enpos, var_validar_correo_enlinea, var_apertura_caja, var_activar_console_log, var_codproducto_en_facventa, var_valor_propina_sugerida, var_columna_imprimir_ticket, var_columna_imprimir_a4, var_columna_whatsapp, var_columna_npedido, var_columna_reg_pdf_propio, var_ver_busqueda_refinada, var_ver_grupo, var_ver_codigo, var_ver_imagen, var_ver_existencia, var_ver_unidad, var_ver_precio, var_ver_impuesto, var_ver_stock, var_ver_ubicacion, var_ver_costo, var_ver_proveedor, var_ver_combo, var_ver_agregar_nota, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_configuraciones_mob_submit_form_cb);
+    x_ajax_form_configuraciones_mob_submit_form(var_lineasporfactura, var_consolidararticulos, var_serial, var_fecha, var_activo, var_espaciado, var_caja_movil, var_pago_automatico, var_dia_limite_pago, var_refresh_grid_doc, var_desactivar_control_sesion, var_nombre_pc, var_nombre_impre, var_essociedad, var_grancontr, var_idconfiguraciones, var_control_diasmora, var_control_costo, var_modificainvpedido, var_tipodoc_pordefecto_pos, var_ver_xml_fe, var_noborrar_tmp_enpos, var_validar_correo_enlinea, var_apertura_caja, var_activar_console_log, var_codproducto_en_facventa, var_valor_propina_sugerida, var_columna_imprimir_ticket, var_columna_imprimir_a4, var_columna_whatsapp, var_columna_npedido, var_columna_reg_pdf_propio, var_ver_busqueda_refinada, var_cal_valores_decimales, var_cal_cantidades_decimales, var_ver_grupo, var_ver_codigo, var_ver_imagen, var_ver_existencia, var_ver_unidad, var_ver_precio, var_ver_impuesto, var_ver_stock, var_ver_ubicacion, var_ver_costo, var_ver_proveedor, var_ver_combo, var_ver_agregar_nota, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_configuraciones_mob_submit_form_cb);
   } // do_ajax_form_configuraciones_mob_submit_form
 
   function do_ajax_form_configuraciones_mob_submit_form_cb(sResp)
@@ -5081,6 +5157,8 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("columna_npedido");
       scAjaxHideErrorDisplay("columna_reg_pdf_propio");
       scAjaxHideErrorDisplay("ver_busqueda_refinada");
+      scAjaxHideErrorDisplay("cal_valores_decimales");
+      scAjaxHideErrorDisplay("cal_cantidades_decimales");
       scAjaxHideErrorDisplay("ver_grupo");
       scAjaxHideErrorDisplay("ver_codigo");
       scAjaxHideErrorDisplay("ver_imagen");
@@ -5183,6 +5261,8 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob
     scAjaxHideErrorDisplay("columna_npedido");
     scAjaxHideErrorDisplay("columna_reg_pdf_propio");
     scAjaxHideErrorDisplay("ver_busqueda_refinada");
+    scAjaxHideErrorDisplay("cal_valores_decimales");
+    scAjaxHideErrorDisplay("cal_cantidades_decimales");
     scAjaxHideErrorDisplay("ver_grupo");
     scAjaxHideErrorDisplay("ver_codigo");
     scAjaxHideErrorDisplay("ver_imagen");
@@ -5329,19 +5409,21 @@ if ($this->Embutida_form)
   ajax_field_list[30] = "columna_npedido";
   ajax_field_list[31] = "columna_reg_pdf_propio";
   ajax_field_list[32] = "ver_busqueda_refinada";
-  ajax_field_list[33] = "ver_grupo";
-  ajax_field_list[34] = "ver_codigo";
-  ajax_field_list[35] = "ver_imagen";
-  ajax_field_list[36] = "ver_existencia";
-  ajax_field_list[37] = "ver_unidad";
-  ajax_field_list[38] = "ver_precio";
-  ajax_field_list[39] = "ver_impuesto";
-  ajax_field_list[40] = "ver_stock";
-  ajax_field_list[41] = "ver_ubicacion";
-  ajax_field_list[42] = "ver_costo";
-  ajax_field_list[43] = "ver_proveedor";
-  ajax_field_list[44] = "ver_combo";
-  ajax_field_list[45] = "ver_agregar_nota";
+  ajax_field_list[33] = "cal_valores_decimales";
+  ajax_field_list[34] = "cal_cantidades_decimales";
+  ajax_field_list[35] = "ver_grupo";
+  ajax_field_list[36] = "ver_codigo";
+  ajax_field_list[37] = "ver_imagen";
+  ajax_field_list[38] = "ver_existencia";
+  ajax_field_list[39] = "ver_unidad";
+  ajax_field_list[40] = "ver_precio";
+  ajax_field_list[41] = "ver_impuesto";
+  ajax_field_list[42] = "ver_stock";
+  ajax_field_list[43] = "ver_ubicacion";
+  ajax_field_list[44] = "ver_costo";
+  ajax_field_list[45] = "ver_proveedor";
+  ajax_field_list[46] = "ver_combo";
+  ajax_field_list[47] = "ver_agregar_nota";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -5384,6 +5466,8 @@ if ($this->Embutida_form)
     "columna_npedido": {"label": "Columna No Pedido", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "columna_reg_pdf_propio": {"label": "Columna Regenerar PDF", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "ver_busqueda_refinada": {"label": "Ver Búsqueda Refinada", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "cal_valores_decimales": {"label": "Calcular Valores con Decimales", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "cal_cantidades_decimales": {"label": "Calcular Cantidades con Decimales", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "ver_grupo": {"label": "Ver Grupo/Familia", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "ver_codigo": {"label": "Ver Código", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "ver_imagen": {"label": "Ver Imagen", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -5450,6 +5534,8 @@ if ($this->Embutida_form)
     "columna_npedido": new Array(),
     "columna_reg_pdf_propio": new Array(),
     "ver_busqueda_refinada": new Array(),
+    "cal_valores_decimales": new Array(),
+    "cal_cantidades_decimales": new Array(),
     "ver_grupo": new Array(),
     "ver_codigo": new Array(),
     "ver_imagen": new Array(),
@@ -5497,6 +5583,8 @@ if ($this->Embutida_form)
   ajax_field_mult["columna_npedido"][1] = "columna_npedido";
   ajax_field_mult["columna_reg_pdf_propio"][1] = "columna_reg_pdf_propio";
   ajax_field_mult["ver_busqueda_refinada"][1] = "ver_busqueda_refinada";
+  ajax_field_mult["cal_valores_decimales"][1] = "cal_valores_decimales";
+  ajax_field_mult["cal_cantidades_decimales"][1] = "cal_cantidades_decimales";
   ajax_field_mult["ver_grupo"][1] = "ver_grupo";
   ajax_field_mult["ver_codigo"][1] = "ver_codigo";
   ajax_field_mult["ver_imagen"][1] = "ver_imagen";
@@ -5544,6 +5632,8 @@ if ($this->Embutida_form)
     "columna_npedido": new Array("hidden_field_label_columna_npedido", "hidden_field_data_columna_npedido"),
     "columna_reg_pdf_propio": new Array("hidden_field_label_columna_reg_pdf_propio", "hidden_field_data_columna_reg_pdf_propio"),
     "ver_busqueda_refinada": new Array("hidden_field_label_ver_busqueda_refinada", "hidden_field_data_ver_busqueda_refinada"),
+    "cal_valores_decimales": new Array("hidden_field_label_cal_valores_decimales", "hidden_field_data_cal_valores_decimales"),
+    "cal_cantidades_decimales": new Array("hidden_field_label_cal_cantidades_decimales", "hidden_field_data_cal_cantidades_decimales"),
     "ver_grupo": new Array("hidden_field_label_ver_grupo", "hidden_field_data_ver_grupo"),
     "ver_codigo": new Array("hidden_field_label_ver_codigo", "hidden_field_data_ver_codigo"),
     "ver_imagen": new Array("hidden_field_label_ver_imagen", "hidden_field_data_ver_imagen"),
@@ -5593,6 +5683,8 @@ if ($this->Embutida_form)
     "columna_npedido": "off",
     "columna_reg_pdf_propio": "off",
     "ver_busqueda_refinada": "off",
+    "cal_valores_decimales": "off",
+    "cal_cantidades_decimales": "off",
     "ver_grupo": "off",
     "ver_codigo": "off",
     "ver_imagen": "off",
@@ -6164,6 +6256,40 @@ if ($this->Embutida_form)
     if ("ver_busqueda_refinada" == sIndex)
     {
       scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("cal_valores_decimales" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("cal_cantidades_decimales" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
