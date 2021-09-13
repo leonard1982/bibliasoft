@@ -847,6 +847,44 @@ function fJSONPropio(idfacven,bd)
 	});
 }
 	
+function fJSONDataico(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_dataico_json/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
 function fReenviarPropio(idfacven)
 {
 
@@ -8036,6 +8074,44 @@ function fJSONPropio(idfacven,bd)
 	});
 
 	$.post("../blank_envio_propio_xml/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
+function fJSONDataico(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_dataico_json/index.php",{
 
 		idfacven:idfacven,
 		bd:bd

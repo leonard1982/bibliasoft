@@ -756,6 +756,44 @@ function fJSONPropio(idfacven,bd)
 	});
 }
 	
+function fJSONDataico(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_dataico_json/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
 function fReenviarPropio(idfacven)
 {
 
@@ -2030,7 +2068,18 @@ if($this->estado =='200' or $this->estado =='201')
 	$this->NM_field_style["numero2"] = "background-color:#33ff99;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
 }
 
+
+switch($this->sc_temp_gproveedor)
+{
+
+	case 'FACILWEB':
 $this->ver_xml_propio  = "<a onclick='fJSONPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Consultar JSON'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Consutar JSON</span></div></a>";
+	break;
+
+	case 'DATAICO':
+$this->ver_xml_propio  = "<a onclick='fJSONDataico(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Consultar JSON'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Consutar JSON</span></div></a>";
+	break;
+}
 if (isset($this->sc_temp_gtipo_negocio)) {$_SESSION['gtipo_negocio'] = $this->sc_temp_gtipo_negocio;}
 if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
