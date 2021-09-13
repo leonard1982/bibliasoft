@@ -381,7 +381,7 @@ if(isset($this->vsixml[0][0]))
 	
 	if($this->vsixml[0][7]=="SI")
 	{
-		
+		echo "<script>$(document).ready(function(){ $('#TB_Interativ_Search').css('display','block'); });</script>";
 	}
 	else
 	{
