@@ -1256,6 +1256,110 @@ $ver_combo_look = "";
 
 <?php } 
 ?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_agregar_nota']))
+   {
+       $this->nm_new_label['ver_agregar_nota'] = "Ver Agregar Nota";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_agregar_nota = $this->ver_agregar_nota;
+   $sStyleHidden_ver_agregar_nota = '';
+   if (isset($this->nmgp_cmp_hidden['ver_agregar_nota']) && $this->nmgp_cmp_hidden['ver_agregar_nota'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_agregar_nota']);
+       $sStyleHidden_ver_agregar_nota = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_agregar_nota = 'display: none;';
+   $sStyleReadInp_ver_agregar_nota = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_agregar_nota']) && $this->nmgp_cmp_readonly['ver_agregar_nota'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_agregar_nota']);
+       $sStyleReadLab_ver_agregar_nota = '';
+       $sStyleReadInp_ver_agregar_nota = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_agregar_nota']) && $this->nmgp_cmp_hidden['ver_agregar_nota'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_agregar_nota" value="<?php echo $this->form_encode_input($this->ver_agregar_nota) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_agregar_nota_1 = explode(";", trim($this->ver_agregar_nota));
+  } 
+  else
+  {
+      if (empty($this->ver_agregar_nota))
+      {
+          $this->ver_agregar_nota_1= array(); 
+          $this->ver_agregar_nota= "NO";
+      } 
+      else
+      {
+          $this->ver_agregar_nota_1= $this->ver_agregar_nota; 
+          $this->ver_agregar_nota= ""; 
+          foreach ($this->ver_agregar_nota_1 as $cada_ver_agregar_nota)
+          {
+             if (!empty($ver_agregar_nota))
+             {
+                 $this->ver_agregar_nota.= ";"; 
+             } 
+             $this->ver_agregar_nota.= $cada_ver_agregar_nota; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_agregar_nota_line" id="hidden_field_data_ver_agregar_nota" style="<?php echo $sStyleHidden_ver_agregar_nota; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_agregar_nota_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_agregar_nota_label" style=""><span id="id_label_ver_agregar_nota"><?php echo $this->nm_new_label['ver_agregar_nota']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_agregar_nota"]) &&  $this->nmgp_cmp_readonly["ver_agregar_nota"] == "on") { 
+
+$ver_agregar_nota_look = "";
+ if ($this->ver_agregar_nota == "SI") { $ver_agregar_nota_look .= "SI" ;} 
+ if (empty($ver_agregar_nota_look)) { $ver_agregar_nota_look = $this->ver_agregar_nota; }
+?>
+<input type="hidden" name="ver_agregar_nota" value="<?php echo $this->form_encode_input($ver_agregar_nota) . "\">" . $ver_agregar_nota_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_agregar_nota_look = "";
+ if ($this->ver_agregar_nota == "SI") { $ver_agregar_nota_look .= "SI" ;} 
+ if (empty($ver_agregar_nota_look)) { $ver_agregar_nota_look = $this->ver_agregar_nota; }
+?>
+<span id="id_read_on_ver_agregar_nota" class="css_ver_agregar_nota_line" style="<?php echo $sStyleReadLab_ver_agregar_nota; ?>"><?php echo $this->form_format_readonly("ver_agregar_nota", $this->form_encode_input($ver_agregar_nota_look)); ?></span><span id="id_read_off_ver_agregar_nota" class="css_read_off_ver_agregar_nota css_ver_agregar_nota_line" style="<?php echo $sStyleReadInp_ver_agregar_nota; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_agregar_nota\" style=\"display: inline-block\" class=\"css_ver_agregar_nota_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_agregar_nota_line"><?php $tempOptionId = "id-opt-ver_agregar_nota" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_agregar_nota sc-ui-checkbox-ver_agregar_nota" name="ver_agregar_nota[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_agregar_nota'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_agregar_nota_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ver_agregar_nota')", "nm_mostra_mens('ver_agregar_nota')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_agregar_nota_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_agregar_nota_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
 
 
 

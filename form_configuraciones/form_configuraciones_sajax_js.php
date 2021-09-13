@@ -4472,6 +4472,43 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_configuraciones_validate_ver_combo_cb
 
+  // ---------- Validate ver_agregar_nota
+  function do_ajax_form_configuraciones_validate_ver_agregar_nota()
+  {
+    var nomeCampo_ver_agregar_nota = "ver_agregar_nota";
+    var var_ver_agregar_nota = scAjaxGetFieldCheckbox(nomeCampo_ver_agregar_nota, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_agregar_nota(var_ver_agregar_nota, var_script_case_init, do_ajax_form_configuraciones_validate_ver_agregar_nota_cb);
+  } // do_ajax_form_configuraciones_validate_ver_agregar_nota
+
+  function do_ajax_form_configuraciones_validate_ver_agregar_nota_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_agregar_nota";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_agregar_nota_cb
+
   // ---------- Event onclick apertura_caja
   function do_ajax_form_configuraciones_event_apertura_caja_onclick()
   {
@@ -4938,6 +4975,7 @@ function scJs_sweetalert_params(params) {
     var var_ver_costo = scAjaxGetFieldCheckbox("ver_costo", ";");
     var var_ver_proveedor = scAjaxGetFieldCheckbox("ver_proveedor", ";");
     var var_ver_combo = scAjaxGetFieldCheckbox("ver_combo", ";");
+    var var_ver_agregar_nota = scAjaxGetFieldCheckbox("ver_agregar_nota", ";");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -4947,7 +4985,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_configuraciones_submit_form(var_lineasporfactura, var_consolidararticulos, var_serial, var_fecha, var_activo, var_espaciado, var_caja_movil, var_pago_automatico, var_dia_limite_pago, var_refresh_grid_doc, var_desactivar_control_sesion, var_nombre_pc, var_nombre_impre, var_essociedad, var_grancontr, var_idconfiguraciones, var_control_diasmora, var_control_costo, var_modificainvpedido, var_tipodoc_pordefecto_pos, var_ver_xml_fe, var_noborrar_tmp_enpos, var_validar_correo_enlinea, var_apertura_caja, var_activar_console_log, var_codproducto_en_facventa, var_valor_propina_sugerida, var_columna_imprimir_ticket, var_columna_imprimir_a4, var_columna_whatsapp, var_columna_npedido, var_columna_reg_pdf_propio, var_ver_grupo, var_ver_codigo, var_ver_imagen, var_ver_existencia, var_ver_unidad, var_ver_precio, var_ver_impuesto, var_ver_stock, var_ver_ubicacion, var_ver_costo, var_ver_proveedor, var_ver_combo, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_configuraciones_submit_form_cb);
+    x_ajax_form_configuraciones_submit_form(var_lineasporfactura, var_consolidararticulos, var_serial, var_fecha, var_activo, var_espaciado, var_caja_movil, var_pago_automatico, var_dia_limite_pago, var_refresh_grid_doc, var_desactivar_control_sesion, var_nombre_pc, var_nombre_impre, var_essociedad, var_grancontr, var_idconfiguraciones, var_control_diasmora, var_control_costo, var_modificainvpedido, var_tipodoc_pordefecto_pos, var_ver_xml_fe, var_noborrar_tmp_enpos, var_validar_correo_enlinea, var_apertura_caja, var_activar_console_log, var_codproducto_en_facventa, var_valor_propina_sugerida, var_columna_imprimir_ticket, var_columna_imprimir_a4, var_columna_whatsapp, var_columna_npedido, var_columna_reg_pdf_propio, var_ver_grupo, var_ver_codigo, var_ver_imagen, var_ver_existencia, var_ver_unidad, var_ver_precio, var_ver_impuesto, var_ver_stock, var_ver_ubicacion, var_ver_costo, var_ver_proveedor, var_ver_combo, var_ver_agregar_nota, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_configuraciones_submit_form_cb);
   } // do_ajax_form_configuraciones_submit_form
 
   function do_ajax_form_configuraciones_submit_form_cb(sResp)
@@ -5016,6 +5054,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("ver_costo");
       scAjaxHideErrorDisplay("ver_proveedor");
       scAjaxHideErrorDisplay("ver_combo");
+      scAjaxHideErrorDisplay("ver_agregar_nota");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['dashboard_info']['under_dashboard']) {
@@ -5116,6 +5155,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['
     scAjaxHideErrorDisplay("ver_costo");
     scAjaxHideErrorDisplay("ver_proveedor");
     scAjaxHideErrorDisplay("ver_combo");
+    scAjaxHideErrorDisplay("ver_agregar_nota");
     var var_idconfiguraciones = document.F2.idconfiguraciones.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -5244,6 +5284,7 @@ if ($this->Embutida_form)
   ajax_field_list[41] = "ver_costo";
   ajax_field_list[42] = "ver_proveedor";
   ajax_field_list[43] = "ver_combo";
+  ajax_field_list[44] = "ver_agregar_nota";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -5296,7 +5337,8 @@ if ($this->Embutida_form)
     "ver_ubicacion": {"label": "Ver Ubicación", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "ver_costo": {"label": "Ver Costo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "ver_proveedor": {"label": "Ver Proveedor", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "ver_combo": {"label": "Ver Combo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "ver_combo": {"label": "Ver Combo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_agregar_nota": {"label": "Ver Agregar Nota", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -5360,7 +5402,8 @@ if ($this->Embutida_form)
     "ver_ubicacion": new Array(),
     "ver_costo": new Array(),
     "ver_proveedor": new Array(),
-    "ver_combo": new Array()
+    "ver_combo": new Array(),
+    "ver_agregar_nota": new Array()
   };
   ajax_field_mult["lineasporfactura"][1] = "lineasporfactura";
   ajax_field_mult["consolidararticulos"][1] = "consolidararticulos";
@@ -5406,6 +5449,7 @@ if ($this->Embutida_form)
   ajax_field_mult["ver_costo"][1] = "ver_costo";
   ajax_field_mult["ver_proveedor"][1] = "ver_proveedor";
   ajax_field_mult["ver_combo"][1] = "ver_combo";
+  ajax_field_mult["ver_agregar_nota"][1] = "ver_agregar_nota";
 
   var ajax_field_id = {
     "lineasporfactura": new Array("hidden_field_label_lineasporfactura", "hidden_field_data_lineasporfactura"),
@@ -5450,7 +5494,8 @@ if ($this->Embutida_form)
     "ver_ubicacion": new Array("hidden_field_label_ver_ubicacion", "hidden_field_data_ver_ubicacion"),
     "ver_costo": new Array("hidden_field_label_ver_costo", "hidden_field_data_ver_costo"),
     "ver_proveedor": new Array("hidden_field_label_ver_proveedor", "hidden_field_data_ver_proveedor"),
-    "ver_combo": new Array("hidden_field_label_ver_combo", "hidden_field_data_ver_combo")
+    "ver_combo": new Array("hidden_field_label_ver_combo", "hidden_field_data_ver_combo"),
+    "ver_agregar_nota": new Array("hidden_field_label_ver_agregar_nota", "hidden_field_data_ver_agregar_nota")
   };
 
   var ajax_read_only = {
@@ -5497,7 +5542,8 @@ if ($this->Embutida_form)
     "ver_ubicacion": "off",
     "ver_costo": "off",
     "ver_proveedor": "off",
-    "ver_combo": "off"
+    "ver_combo": "off",
+    "ver_agregar_nota": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -6241,6 +6287,23 @@ if ($this->Embutida_form)
       return;
     }
     if ("ver_combo" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_agregar_nota" == sIndex)
     {
       scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
       updateHeaderFooter(sIndex, aValue);

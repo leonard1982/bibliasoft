@@ -72,6 +72,7 @@ function scFocusField(sField) {
       case 'ver_costo':
       case 'ver_proveedor':
       case 'ver_combo':
+      case 'ver_agregar_nota':
         sc_exib_ocult_pag('form_configuraciones_mob_form3');
         break;
     }
@@ -152,6 +153,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["ver_costo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ver_proveedor" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ver_combo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_agregar_nota" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -419,6 +421,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["ver_combo" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["ver_agregar_nota" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_agregar_nota" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -546,6 +554,8 @@ function scJQEventsAdd(iSeqRow) {
                                            .bind('focus', function() { sc_form_configuraciones_ver_proveedor_onfocus(this, iSeqRow) });
   $('#id_sc_field_ver_combo' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_combo_onblur(this, iSeqRow) })
                                        .bind('focus', function() { sc_form_configuraciones_ver_combo_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_agregar_nota' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_agregar_nota_onblur(this, iSeqRow) })
+                                              .bind('focus', function() { sc_form_configuraciones_ver_agregar_nota_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-caja_movil' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-pago_automatico' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-desactivar_control_sesion' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -577,6 +587,7 @@ function scJQEventsAdd(iSeqRow) {
   $('.sc-ui-checkbox-ver_costo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_proveedor' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_combo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_agregar_nota' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-integrar_tns' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-nube_pedidos' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-nube_inventario' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -1036,6 +1047,16 @@ function sc_form_configuraciones_ver_combo_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_configuraciones_ver_agregar_nota_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_mob_validate_ver_agregar_nota();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_agregar_nota_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_page(page, status) {
 	if ("0" == page) {
 		displayChange_page_0(status);
@@ -1143,6 +1164,7 @@ function displayChange_block_4(status) {
 	displayChange_field("ver_costo", "", status);
 	displayChange_field("ver_proveedor", "", status);
 	displayChange_field("ver_combo", "", status);
+	displayChange_field("ver_agregar_nota", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -1190,6 +1212,7 @@ function displayChange_row(row, status) {
 	displayChange_field_ver_costo(row, status);
 	displayChange_field_ver_proveedor(row, status);
 	displayChange_field_ver_combo(row, status);
+	displayChange_field_ver_agregar_nota(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -1324,6 +1347,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("ver_combo" == field) {
 		displayChange_field_ver_combo(row, status);
+	}
+	if ("ver_agregar_nota" == field) {
+		displayChange_field_ver_agregar_nota(row, status);
 	}
 }
 
@@ -1481,6 +1507,9 @@ function displayChange_field_ver_proveedor(row, status) {
 }
 
 function displayChange_field_ver_combo(row, status) {
+}
+
+function displayChange_field_ver_agregar_nota(row, status) {
 }
 
 function scRecreateSelect2() {
