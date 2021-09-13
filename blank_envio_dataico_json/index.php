@@ -218,7 +218,7 @@ class blank_envio_dataico_json_ini
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210913"; 
-      $this->nm_hr_ult_alt   = "160202"; 
+      $this->nm_hr_ult_alt   = "165100"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_envio_dataico_json_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico_json']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico_json']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQFaZ1NaVWBODMBYVIBsHEBmVErqHQNmH9FaHArKZMB/HgNKHENiH5F/DoJeDcBiDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXOH9BiHANOHQF7HuvmVcBODuFqVorqD9JmZ1B/D1rKHQXGHgBOHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQX7Z1N7VWJeHuvmVcBOV5X7VoJwDcJUZ1F7HABYZMB/DMBYHEXeHEFqDoF7D9XsZSFUZ1rwD5FaHuzGDkBOV5X7DoJsHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuNOVIB/H5XCDoNUDcBqVIJsHAN7ZMFaHgNKHArsDWF/HIraD9XsZSBiD1BeD5JwDMvOVcB/H5FqHMBOHQBqZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVorqHQBqZkBiHAzGD5JeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQFaHuzGVIB/H5B3DoXGDcJUZkFGZ1NOV5JwHgvCHArsDWX7VoFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQX7HIrKD5F7DMvsVcBODuX7DoJeDcFYZ1BiHArYV5FGDMNKDkBsV5B7DoBOHQNwH9FUD1BeD5BqDMBOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuzGVcXKDWB3VEFGHQBiZ1B/D1rKHQF7DMvCHArCDWFGZuFaHQXsDQFUHIrwV5raDMzGVcFKH5XCDoJsHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5X7HuNOVcFKDWFaDoJsD9JmH9BOZ1BeV5FaDEBOVkJGDWXCVoXGD9XsZSFUZ1rwD5JsHgvsVcFCH5XCVoB/D9JmZ1B/D1rwD5FaDMNKZSXeHEXCDoXGD9XsZSX7Z1vCD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQBiZ9XGHANOHQFaHgrKV9FeV5FYHIBiHQXGH9B/DSBeHQraHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveHArsH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFKHEF/HMBODcFYZ1rqD1rwHQFGHgrKHErCDWFqHIBOHQJeDQB/Z1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1982,10 +1982,11 @@ if($vidfacven>0)
 	$vnombre2   = "";
 	$vapellido1 = "";
 	$vapellido2 = ""; 
+	$vcal_valores_decimales = 2;
 
 	
 
-	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, enviar_dian, enviar_cliente from webservicefe order by idwebservicefe desc limit 1";
+	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, enviar_dian, enviar_cliente, (select c.cal_valores_decimales from configuraciones c where c.idconfiguraciones=1) as cal_valores_decimales from webservicefe order by idwebservicefe desc limit 1";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2035,6 +2036,7 @@ if($vidfacven>0)
 
 		$venvio_dian    = $this->vserv[0][6];
 		$venvio_cliente = $this->vserv[0][7];
+		$vcal_valores_decimales = $this->vserv[0][8];
 	}
 
 	if(empty($vservidor) or empty($vtoken))
@@ -2721,8 +2723,8 @@ $_SESSION['scriptcase']['blank_envio_dataico_json']['contr_erro'] = 'on';
 						'sku' =>  $vdetalle[$i]["codigo"],
 						'quantity' => $vdetalle[$i]["cantidad"] ,
 						'description' => $vdetalle[$i]["descripcion"],
-						'price' => round($vdetalle[$i]["precio"],2),
-						'original_price' => $vdetalle[$i]["precio"],
+						'price' => round($vdetalle[$i]["precio"],$vcal_valores_decimales),
+						'original_price' => round($vdetalle[$i]["precio"],$vcal_valores_decimales),
 						'mandante_identification' => $vdetalle[$i]["mandante_identification"],
 						'mandante_identification_type' => $vdetalle[$i]["mandante_identification_type"],
 						'taxes' => array($impuestos)
@@ -2734,8 +2736,8 @@ $_SESSION['scriptcase']['blank_envio_dataico_json']['contr_erro'] = 'on';
 						'sku' =>  $vdetalle[$i]["codigo"],
 						'quantity' => $vdetalle[$i]["cantidad"] ,
 						'description' => $vdetalle[$i]["descripcion"],
-						'price' => round($vdetalle[$i]["precio"],2),
-						'original_price' => $vdetalle[$i]["precio"],
+						'price' => round($vdetalle[$i]["precio"],$vcal_valores_decimales),
+						'original_price' => round($vdetalle[$i]["precio"],$vcal_valores_decimales),
 						'taxes' => array($impuestos)
 						);
 				}
