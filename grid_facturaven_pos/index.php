@@ -234,8 +234,8 @@ class grid_facturaven_pos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210902"; 
-      $this->nm_hr_ult_alt   = "171136"; 
+      $this->nm_dt_ult_alt   = "20210913"; 
+      $this->nm_hr_ult_alt   = "115108"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1280,7 +1280,7 @@ class grid_facturaven_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDQFUHIvsV5BqHuNOVcBOH5B7VEraD9BsZ1FaHABYHQJsDEBeHEFiDuJeHMBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoJsHQNwH9FUHAveHuJwHuNOVIBOH5FqVEX7HQXGZ1X7HAN7V5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSXeDWXCDoraDcJeZSFGD1veVWJwHuzGVIBODWFaVErqDcJUZ1B/Z1NOD5BiDErKHEFiV5FaDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHENiDuJeDoJeHQNwDQFaZ1BYD5rqDMzGVIBODWF/VoX7D9XOZSBqZ1NOHQFaDEBOVkJGHEFqHMBiHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWBmZuXGHQBiDQBqD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1rqDSrYD5JeHgBOHEXeHEXCHIF7HQXODQFaHANOD5rqHgrKVcBOH5XCVoX7HQXOZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODuFaZ1vCVWBqHuBYVIFCDurGVEF7HQBiZSBOHArYV5FUHgBYHErCV5FqHIFUDcBiDQFUD1veV5BOHuzGVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoXGHQJeDQBqHAvOVWBOHgvOVcB/H5FqHIFUHQXOH9B/DSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeV5BqDMBYHEXeH5FYZuFaD9NmDQFGHANOV5FUHuBYVIBODWFYDoJsDcNwH9FaHArKD5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9JKDuBqHIvsVWXGDMvOVIFCDuFGVEF7HQBiH9BqHAN7HQraHgBYHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHErsHEB7DoBqHQBiZSBiHAveD5NUHgNKDkBOV5FYHMBiD9XGZ1FGDSrYHQBODMNKDkB/DWX7ZuB/HQNmDQJwDSBYD5XGDMBOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'])  
       { 
@@ -6220,7 +6220,19 @@ class grid_facturaven_pos_apl
               unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral']);
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] = 'pesq';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['orig_pesq'] = 'grid';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_refresh'] = true;
           } 
+      } 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] == "interativ_search")
+      { 
+          $this->SC_proc_interativ_search($_POST['parm']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['contr_array_resumo'] = "NAO";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['contr_total_geral']  = "NAO";
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] = 'inicio';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opc_int_search'] = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_refresh'] = true;
       } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] == 'pesq' && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['orig_pesq']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['orig_pesq']))  
       { 
@@ -6245,6 +6257,7 @@ class grid_facturaven_pos_apl
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['cond_pesq'] = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral']);
@@ -17280,6 +17293,17 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                   $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro'] . ")"; 
               }
           }
+          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'])) 
+          {
+              if (!empty($tmp_cmd)) 
+              {
+                  $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] . ")"; 
+              }
+              else
+              {
+                  $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] . ")"; 
+              }
+          }
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'] = $tmp_cmd;
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['fast_search']);
           return;
@@ -17340,6 +17364,10 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       else
       {
           $comando = " where (" . $comando . ")"; 
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'])) 
+      {
+          $comando .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] . ")";
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'] = $comando;
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['fast_search'][0] = $in_fields;
@@ -17627,6 +17655,204 @@ if ($_SESSION['scriptcase']['proc_mobile'])
            $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
            exit; 
        } 
+   }
+   function SC_proc_interativ_search($Parms)
+   {
+       $Parms = str_replace("__NM_PLUS__", "+", $Parms);
+       $Parms = str_replace("__NM_AMP__", "&", $Parms);
+       $Parms = str_replace("__NM_PRC__", "%", $Parms);
+       $cmps_numeric = array();
+       $cmps_numeric[] = "asentada";
+       $cmps_numeric[] = "vendedor";
+       $cmps_numeric[] = "idcli";
+       $range_bw = array();
+       if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($Parms))
+       {
+           $Parms = NM_conv_charset($Parms, $_SESSION['scriptcase']['charset'], "UTF-8");
+       }
+       $tmp     = explode("__DL__", $Parms);
+       $cmd_sql = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['int_search_sql'][$tmp[0]];
+       $vls     = "";
+       $bol_numeric = false;
+       if ($tmp[3] != "clear_interativ")
+       {
+           $vls  = explode("_VLS_", $tmp[3]);
+           if($tmp[2] == "nn" || $tmp[2] == "bw")
+           {
+               $bol_numeric = true;
+               $delim  = "";
+               $delim1 = "";
+           }
+           else
+           {
+               $delim  = "'";
+               $delim1 = "'";
+           }
+           if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
+           {
+               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+               {
+                   $delim  = "#";
+                   $delim1 = "#";
+               }
+               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_sep_date']))
+               {
+                   $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_sep_date'];
+                   $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_sep_date1'];
+               }
+           }
+       }
+       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'][$tmp[0]]);
+       if (!empty($vls))
+       {
+           $prep = "";
+           $bol_has_empty = false;
+           foreach ($vls as $cada_val)
+           {
+               $cada_val = NM_charset_decode($cada_val);
+               $descr = $cada_val;
+               $tmp_pos = strpos($cada_val, "##@@");
+               if ($tmp_pos !== false)
+               {
+                   $descr    = substr($cada_val, $tmp_pos + 4);
+                   $cada_val = substr($cada_val, 0, $tmp_pos);
+               }
+               $cada_val = substr($this->Db->qstr($cada_val), 1, -1);
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'][$tmp[0]]['lab'][$tmp[1]][] = $descr;
+               if ($cada_val == "")
+               {
+                   $bol_has_empty = true;
+               }
+               if (in_array($tmp[0], $cmps_numeric))
+               {
+                  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['decimal_db'] == ".")
+                  {
+                      $cada_val  = str_replace(",", ".", $cada_val);
+                  }
+                  else
+                  {
+                      $delim  = "'";
+                      $delim1 = "'";
+                      $cada_val  = str_replace(".", ",", $cada_val);
+                  }
+                   $prep .= ($prep != "") ? "," : "";
+                   $prep .= $delim . $cada_val . $delim1;
+               }
+               else
+               {
+                   $prep .= ($prep != "") ? "," : "";
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access) && $cada_val == "")
+                   {
+                       $prep .= 'null';
+                   }
+                   else
+                   $prep .= $delim . $cada_val . $delim1;
+               }
+               $range_bw[] = $cada_val;
+           }
+               $str_add_null    = '';
+               $str_add_null_or = '';
+               if($bol_has_empty)
+               {
+                   $str_add_null    = ' ' . $cmd_sql . ' is null ';
+                   $str_add_null_or = ' OR ' . $cmd_sql . ' is null ';
+               }
+           if ($prep == "" && $bol_numeric)
+           {
+               if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " is null";
+               }
+               else
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " = '' or " . $cmd_sql . " is null";
+               }
+           }
+           elseif ($prep == "" && $delim != "")
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " = '' or " . $cmd_sql . " is null";
+           }
+           elseif ( $tmp[2] == "bw")
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " between " . $delim . $range_bw[0] .  $delim1 . " and " . $delim . $range_bw[1] .  $delim1 . $str_add_null_or;
+           }
+           else
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " IN (" . $prep . ")" . $str_add_null_or;
+           }
+       }
+      $tmp_cmd = "";
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig'])) 
+      {
+          $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig']; 
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro'] . ")"; 
+          }
+          else
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro'] . ")"; 
+          }
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast'] . ")";
+          }
+          else 
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast'] . ")";
+          }
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo'])) 
+      { 
+          if (empty($tmp_where)) 
+          { 
+              $tmp_cmd = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo']; 
+          } 
+          else
+          { 
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo'] . ")"; 
+          } 
+      } 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] = "";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ']  = $tmp_cmd;
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'])) 
+      {
+          $prim = true;
+          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] as $cmp => $val) 
+          {
+              if (!$prim)
+              {
+                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] .= " and ";
+              }
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] .= "(" . $val['val'] . ")";
+              $prim = false;
+          }
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] . ")"; 
+          }
+          else
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] . ")"; 
+          }
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'] = $tmp_cmd;
+      if(isset($tmp[4]) && $tmp[4] == 'N')
+      {
+          $this->Arr_result['interativ_search'] = array();
+          $oJson = new Services_JSON();
+          echo $oJson->encode( $this->Arr_result );
+          exit;
+      }
    }
   function html_doc_word($nm_arquivo_doc_word, $nmgp_password)
   {

@@ -23531,10 +23531,6 @@ ALTER TABLE `productos` ADD `ubicacion` VARCHAR(120) NULL DEFAULT NULL AFTER `im
 
 ALTER TABLE `configuraciones` ADD `ver_grupo` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `columna_reg_pdf_propio`, ADD `ver_codigo` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_grupo`, ADD `ver_imagen` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_codigo`, ADD `ver_existencia` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_imagen`, ADD `ver_unidad` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_existencia`, ADD `ver_precio` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_unidad`, ADD `ver_impuesto` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_precio`, ADD `ver_stock` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_impuesto`, ADD `ver_ubicacion` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_stock`, ADD `ver_costo` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_ubicacion`, ADD `ver_proveedor` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_costo`, ADD `ver_combo` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_proveedor`; 
  
-ALTER TABLE `configuraciones` ADD `ver_agregar_nota` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_combo`; 
-
-ALTER TABLE `configuraciones` ADD `ver_busqueda_refinada` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_agregar_nota`;
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

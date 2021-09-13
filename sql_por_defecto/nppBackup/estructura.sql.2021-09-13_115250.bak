@@ -5583,8 +5583,6 @@ ALTER TABLE `configuraciones` ADD `ver_grupo` SET('SI','NO') NOT NULL DEFAULT 'N
 
 ALTER TABLE `configuraciones` ADD `ver_agregar_nota` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_combo`;
 
-ALTER TABLE `configuraciones` ADD `ver_busqueda_refinada` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_agregar_nota`;
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

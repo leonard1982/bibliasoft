@@ -473,7 +473,7 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
 $this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
 $this->NM_cmp_hidden["pedido"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["pedido"] = "off"; }
 
-$vsql = "select ver_xml_fe,(SELECT proveedor FROM webservicefe limit 1) as proveedor, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio from configuraciones where idconfiguraciones=1";
+$vsql = "select ver_xml_fe,(SELECT proveedor FROM webservicefe limit 1) as proveedor, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_agregar_nota from configuraciones where idconfiguraciones=1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -553,6 +553,15 @@ if(isset($this->vsixml[0][0]))
 	else
 	{
 		$this->NM_cmp_hidden["regenerar_pdf_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["regenerar_pdf_propio"] = "off"; }
+	}
+	
+	if($this->vsixml[0][7]=="SI")
+	{
+		
+	}
+	else
+	{
+		echo "<script>$(document).ready(function(){ $('#TB_Interativ_Search').css('display','none'); });</script>";
 	}
 }
 
@@ -676,6 +685,7 @@ switch($this->sc_temp_gproveedor)
 
 ?>
 <script>
+
 function fEnviarTech(idfacven)
 {
 	if(confirm('¿Desea firmar el documento electrónico?'))
@@ -7676,7 +7686,7 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
 $this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
 $this->NM_cmp_hidden["pedido"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["pedido"] = "off"; }
 
-$vsql = "select ver_xml_fe,(SELECT proveedor FROM webservicefe limit 1) as proveedor, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio from configuraciones where idconfiguraciones=1";
+$vsql = "select ver_xml_fe,(SELECT proveedor FROM webservicefe limit 1) as proveedor, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_agregar_nota from configuraciones where idconfiguraciones=1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -7756,6 +7766,15 @@ if(isset($this->vsixml[0][0]))
 	else
 	{
 		$this->NM_cmp_hidden["regenerar_pdf_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["regenerar_pdf_propio"] = "off"; }
+	}
+	
+	if($this->vsixml[0][7]=="SI")
+	{
+		
+	}
+	else
+	{
+		echo "<script>$(document).ready(function(){ $('#TB_Interativ_Search').css('display','none'); });</script>";
 	}
 }
 
@@ -7879,6 +7898,7 @@ switch($this->sc_temp_gproveedor)
 
 ?>
 <script>
+
 function fEnviarTech(idfacven)
 {
 	if(confirm('¿Desea firmar el documento electrónico?'))

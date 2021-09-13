@@ -92,6 +92,17 @@ class grid_facturaven_pos_total
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
       }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_fecha();
+          }
+          
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
       $rt->fields[1] = str_replace(",", ".", $rt->fields[1]);
@@ -133,6 +144,17 @@ class grid_facturaven_pos_total
       { 
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
+      }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_sc_free_group_by();
+          }
+          
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
@@ -176,6 +198,17 @@ class grid_facturaven_pos_total
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
       }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_formapago();
+          }
+          
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
       $rt->fields[1] = str_replace(",", ".", $rt->fields[1]);
@@ -217,6 +250,17 @@ class grid_facturaven_pos_total
       { 
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
+      }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_porcliente();
+          }
+          
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
@@ -260,6 +304,17 @@ class grid_facturaven_pos_total
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
       }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_porpj();
+          }
+          
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
       $rt->fields[1] = str_replace(",", ".", $rt->fields[1]);
@@ -301,6 +356,17 @@ class grid_facturaven_pos_total
       { 
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
+      }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_portipo();
+          }
+          
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
@@ -344,6 +410,17 @@ class grid_facturaven_pos_total
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
       }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_porvendedor();
+          }
+          
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
       $rt->fields[1] = str_replace(",", ".", $rt->fields[1]);
@@ -385,6 +462,17 @@ class grid_facturaven_pos_total
       { 
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
+      }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_porasentada();
+          }
+          
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
@@ -428,6 +516,17 @@ class grid_facturaven_pos_total
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
       }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_pagada();
+          }
+          
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
       $rt->fields[1] = str_replace(",", ".", $rt->fields[1]);
@@ -470,6 +569,17 @@ class grid_facturaven_pos_total
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
       }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral_porbanco();
+          }
+          
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 
       $rt->fields[1] = str_replace(",", ".", $rt->fields[1]);
@@ -511,6 +621,17 @@ class grid_facturaven_pos_total
       { 
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
+      }
+      if ($rt->fields[0] == 0)
+      { 
+          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search']))
+          {
+              $Contrl_Interat = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_sem_interativ'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+              $this->quebra_geral__NM_SC_();
+          }
+          
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][0] = "Total venta y descuento"; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1] = $rt->fields[0] ; 

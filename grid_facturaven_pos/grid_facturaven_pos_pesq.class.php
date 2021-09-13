@@ -4327,6 +4327,8 @@ foreach ($Arr_format as $Part_date)
    {
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_fast'] = "";
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['fast_search']);
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] = "";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
       if ("" == $this->comando_filtro)
       {
           $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig'];
