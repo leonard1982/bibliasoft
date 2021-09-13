@@ -316,7 +316,7 @@ class form_configuraciones_help
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
 <body class="scFormHelpPage">
-<?php echo "<b>Ver JSON FE</b><br>" . nl2br("Para ver en ventas una opción para descargar el JSON de factura electrónica en desarrollo propio."); ?>
+<?php echo "<b>Ver JSON FE</b><br>" . nl2br("Para ver en ventas una opcion para descargar el JSON de factura electronica en desarrollo propio y DATAICO."); ?>
 </body>
 </html>
 <?php

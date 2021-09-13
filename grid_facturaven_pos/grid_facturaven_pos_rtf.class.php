@@ -367,17 +367,14 @@ $vsql = "select ver_xml_fe,(SELECT proveedor FROM webservicefe limit 1) as prove
 if(isset($this->vsixml[0][0]))
 {
 	
-	if($this->vsixml[0][1]=="FACILWEB")
+	if($this->vsixml[0][0]=="SI")
 	{
-		if($this->vsixml[0][0]=="SI")
-		{
-			$this->NM_cmp_hidden["ver_xml_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["ver_xml_propio"] = "on"; }
-		}
-		
-		if($this->vsixml[0][4]=="SI")
-		{
-			$this->NM_cmp_hidden["whatsapp_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "on"; }
-		}
+		$this->NM_cmp_hidden["ver_xml_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["ver_xml_propio"] = "on"; }
+	}
+
+	if($this->vsixml[0][4]=="SI")
+	{
+		$this->NM_cmp_hidden["whatsapp_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "on"; }
 	}
 	
 	if($this->vsixml[0][3]=="SI")
