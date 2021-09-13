@@ -403,11 +403,26 @@ if (!isset($_SESSION['gcontador_grid_fe'])) {$_SESSION['gcontador_grid_fe'] = ""
 if (!isset($this->sc_temp_gcontador_grid_fe)) {$this->sc_temp_gcontador_grid_fe = (isset($_SESSION['gcontador_grid_fe'])) ? $_SESSION['gcontador_grid_fe'] : "";}
 if (!isset($_SESSION['gtipo_negocio'])) {$_SESSION['gtipo_negocio'] = "";}
 if (!isset($this->sc_temp_gtipo_negocio)) {$this->sc_temp_gtipo_negocio = (isset($_SESSION['gtipo_negocio'])) ? $_SESSION['gtipo_negocio'] : "";}
+if (!isset($_SESSION['gver_busqueda_refinada'])) {$_SESSION['gver_busqueda_refinada'] = "";}
+if (!isset($this->sc_temp_gver_busqueda_refinada)) {$this->sc_temp_gver_busqueda_refinada = (isset($_SESSION['gver_busqueda_refinada'])) ? $_SESSION['gver_busqueda_refinada'] : "";}
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
   ?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<script>
+var gver_refinada = "<?php echo $this->sc_temp_gver_busqueda_refinada; ?>";
+
+if(gver_refinada=="NO")
+{
+   window.onload = function(){ document.getElementById('TB_Interativ_Search').style.display='none'; };
+}
+else
+{
+	window.onload = function(){ document.getElementById('TB_Interativ_Search').style.display='block'; };
+}
+</script>
 <?php
 
 $this->NM_cmp_hidden["ver_xml_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["ver_xml_propio"] = "off"; }
@@ -447,6 +462,7 @@ $vsql = "select ver_xml_fe,(SELECT proveedor FROM webservicefe limit 1) as prove
 ;
 if(isset($this->vsixml[0][0]))
 {
+	
 	if($this->vsixml[0][1]=="FACILWEB")
 	{
 		if($this->vsixml[0][0]=="SI")
@@ -494,15 +510,6 @@ if(isset($this->vsixml[0][0]))
 	else
 	{
 		$this->NM_cmp_hidden["regenerar_pdf_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["regenerar_pdf_propio"] = "off"; }
-	}
-	
-	if($this->vsixml[0][7]=="SI")
-	{
-		echo "<script>$(document).ready(function(){ $('#TB_Interativ_Search').css('display','block'); });</script>";
-	}
-	else
-	{
-		echo "<script>$(document).ready(function(){ $('#TB_Interativ_Search').css('display','none'); });</script>";
 	}
 }
 
@@ -1100,6 +1107,7 @@ $(document).ajaxStart(function(){
 </style>
 <?php
 if (isset($this->sc_temp_gidtercero)) {$_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
+if (isset($this->sc_temp_gver_busqueda_refinada)) {$_SESSION['gver_busqueda_refinada'] = $this->sc_temp_gver_busqueda_refinada;}
 if (isset($this->sc_temp_gtipo_negocio)) {$_SESSION['gtipo_negocio'] = $this->sc_temp_gtipo_negocio;}
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
@@ -6431,11 +6439,26 @@ if (!isset($_SESSION['gcontador_grid_fe'])) {$_SESSION['gcontador_grid_fe'] = ""
 if (!isset($this->sc_temp_gcontador_grid_fe)) {$this->sc_temp_gcontador_grid_fe = (isset($_SESSION['gcontador_grid_fe'])) ? $_SESSION['gcontador_grid_fe'] : "";}
 if (!isset($_SESSION['gtipo_negocio'])) {$_SESSION['gtipo_negocio'] = "";}
 if (!isset($this->sc_temp_gtipo_negocio)) {$this->sc_temp_gtipo_negocio = (isset($_SESSION['gtipo_negocio'])) ? $_SESSION['gtipo_negocio'] : "";}
+if (!isset($_SESSION['gver_busqueda_refinada'])) {$_SESSION['gver_busqueda_refinada'] = "";}
+if (!isset($this->sc_temp_gver_busqueda_refinada)) {$this->sc_temp_gver_busqueda_refinada = (isset($_SESSION['gver_busqueda_refinada'])) ? $_SESSION['gver_busqueda_refinada'] : "";}
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
   ?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<script>
+var gver_refinada = "<?php echo $this->sc_temp_gver_busqueda_refinada; ?>";
+
+if(gver_refinada=="NO")
+{
+   window.onload = function(){ document.getElementById('TB_Interativ_Search').style.display='none'; };
+}
+else
+{
+	window.onload = function(){ document.getElementById('TB_Interativ_Search').style.display='block'; };
+}
+</script>
 <?php
 
 $this->NM_cmp_hidden["ver_xml_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["ver_xml_propio"] = "off"; }
@@ -6475,6 +6498,7 @@ $vsql = "select ver_xml_fe,(SELECT proveedor FROM webservicefe limit 1) as prove
 ;
 if(isset($this->vsixml[0][0]))
 {
+	
 	if($this->vsixml[0][1]=="FACILWEB")
 	{
 		if($this->vsixml[0][0]=="SI")
@@ -6522,15 +6546,6 @@ if(isset($this->vsixml[0][0]))
 	else
 	{
 		$this->NM_cmp_hidden["regenerar_pdf_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["regenerar_pdf_propio"] = "off"; }
-	}
-	
-	if($this->vsixml[0][7]=="SI")
-	{
-		echo "<script>$(document).ready(function(){ $('#TB_Interativ_Search').css('display','block'); });</script>";
-	}
-	else
-	{
-		echo "<script>$(document).ready(function(){ $('#TB_Interativ_Search').css('display','none'); });</script>";
 	}
 }
 
@@ -7128,6 +7143,7 @@ $(document).ajaxStart(function(){
 </style>
 <?php
 if (isset($this->sc_temp_gidtercero)) {$_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
+if (isset($this->sc_temp_gver_busqueda_refinada)) {$_SESSION['gver_busqueda_refinada'] = $this->sc_temp_gver_busqueda_refinada;}
 if (isset($this->sc_temp_gtipo_negocio)) {$_SESSION['gtipo_negocio'] = $this->sc_temp_gtipo_negocio;}
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
