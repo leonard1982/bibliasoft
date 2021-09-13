@@ -417,7 +417,7 @@ class grid_productos_pesq
       $codigobar = substr($this->Db->qstr($codigobar), 1, -1);
             $codigobar_look = substr($this->Db->qstr($codigobar), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct codigobar from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where  codigobar like '%" . $codigobar . "%'"; 
+      $nm_comando = "select distinct codigobar from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where  codigobar like '%" . $codigobar . "%'"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
@@ -449,7 +449,7 @@ class grid_productos_pesq
       $nompro = substr($this->Db->qstr($nompro), 1, -1);
             $nompro_look = substr($this->Db->qstr($nompro), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct nompro from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where  nompro like '%" . $nompro . "%'"; 
+      $nm_comando = "select distinct nompro from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where  nompro like '%" . $nompro . "%'"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
@@ -648,15 +648,15 @@ class grid_productos_pesq
       $nmgp_def_dados = array(); 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where   CAST (stockmen AS TEXT)  like '%" . $stockmen . "%'"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where   CAST (stockmen AS TEXT)  like '%" . $stockmen . "%'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where   CAST (stockmen AS VARCHAR)  like '%" . $stockmen . "%'"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where   CAST (stockmen AS VARCHAR)  like '%" . $stockmen . "%'"; 
       }
       else
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where  stockmen like '%" . $stockmen . "%'"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where  stockmen like '%" . $stockmen . "%'"; 
       }
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
@@ -2350,6 +2350,47 @@ function nm_open_popup(parms)
  </SCRIPT>
 <script type="text/javascript">
  $(function() {
+   scClass = $("#id_ac_idgrup").attr('class').split(' ');
+   scClass = scClass[ scClass.length-1 ];
+   $("#id_ac_idgrup").autocomplete({
+     minLength: 1,
+     classes: { 'ui-autocomplete': scClass + 'Ac' },
+     source: function (request, response) {
+     $.ajax({
+       url: "index.php",
+       dataType: "json",
+       data: {
+          q: request.term,
+          nmgp_opcao: "ajax_autocomp",
+          nmgp_parms: "NM_ajax_opcao?#?autocomp_idgrup",
+          max_itens: "10",
+          cod_desc: "N",
+          script_case_init: <?php echo $this->Ini->sc_page ?>
+        },
+       success: function (data) {
+         if (data == "ss_time_out") {
+             nm_move();
+         }
+         response(data);
+       }
+      });
+    },
+     select: function (event, ui) {
+       $("#SC_idgrup").val(ui.item.value);
+       $(this).val(ui.item.label);
+       event.preventDefault();
+     },
+     focus: function (event, ui) {
+       $("#SC_idgrup").val(ui.item.value);
+       $(this).val(ui.item.label);
+       event.preventDefault();
+     },
+     change: function (event, ui) {
+       if (null == ui.item) {
+          $("#SC_idgrup").val( $(this).val() );
+       }
+     }
+   });
   $(".sc-ui-autocomp-codigobar").on("focus", function() {
   }).on("blur", function() {
   }).on("keydown", function(e) {
@@ -2446,6 +2487,47 @@ function nm_open_popup(parms)
   }).on("select2:select", function(e) {;
    $("#SC_nompro").val(e.params.data.id);
   });
+   scClass = $("#id_ac_idpro1").attr('class').split(' ');
+   scClass = scClass[ scClass.length-1 ];
+   $("#id_ac_idpro1").autocomplete({
+     minLength: 1,
+     classes: { 'ui-autocomplete': scClass + 'Ac' },
+     source: function (request, response) {
+     $.ajax({
+       url: "index.php",
+       dataType: "json",
+       data: {
+          q: request.term,
+          nmgp_opcao: "ajax_autocomp",
+          nmgp_parms: "NM_ajax_opcao?#?autocomp_idpro1",
+          max_itens: "10",
+          cod_desc: "N",
+          script_case_init: <?php echo $this->Ini->sc_page ?>
+        },
+       success: function (data) {
+         if (data == "ss_time_out") {
+             nm_move();
+         }
+         response(data);
+       }
+      });
+    },
+     select: function (event, ui) {
+       $("#SC_idpro1").val(ui.item.value);
+       $(this).val(ui.item.label);
+       event.preventDefault();
+     },
+     focus: function (event, ui) {
+       $("#SC_idpro1").val(ui.item.value);
+       $(this).val(ui.item.label);
+       event.preventDefault();
+     },
+     change: function (event, ui) {
+       if (null == ui.item) {
+          $("#SC_idpro1").val( $(this).val() );
+       }
+     }
+   });
   $(".sc-ui-autocomp-stockmen").on("focus", function() {
   }).on("blur", function() {
   }).on("keydown", function(e) {
@@ -2494,88 +2576,6 @@ function nm_open_popup(parms)
   }).on("select2:select", function(e) {;
    $("#SC_stockmen").val(e.params.data.id);
   });
-   scClass = $("#id_ac_idgrup").attr('class').split(' ');
-   scClass = scClass[ scClass.length-1 ];
-   $("#id_ac_idgrup").autocomplete({
-     minLength: 1,
-     classes: { 'ui-autocomplete': scClass + 'Ac' },
-     source: function (request, response) {
-     $.ajax({
-       url: "index.php",
-       dataType: "json",
-       data: {
-          q: request.term,
-          nmgp_opcao: "ajax_autocomp",
-          nmgp_parms: "NM_ajax_opcao?#?autocomp_idgrup",
-          max_itens: "10",
-          cod_desc: "N",
-          script_case_init: <?php echo $this->Ini->sc_page ?>
-        },
-       success: function (data) {
-         if (data == "ss_time_out") {
-             nm_move();
-         }
-         response(data);
-       }
-      });
-    },
-     select: function (event, ui) {
-       $("#SC_idgrup").val(ui.item.value);
-       $(this).val(ui.item.label);
-       event.preventDefault();
-     },
-     focus: function (event, ui) {
-       $("#SC_idgrup").val(ui.item.value);
-       $(this).val(ui.item.label);
-       event.preventDefault();
-     },
-     change: function (event, ui) {
-       if (null == ui.item) {
-          $("#SC_idgrup").val( $(this).val() );
-       }
-     }
-   });
-   scClass = $("#id_ac_idpro1").attr('class').split(' ');
-   scClass = scClass[ scClass.length-1 ];
-   $("#id_ac_idpro1").autocomplete({
-     minLength: 1,
-     classes: { 'ui-autocomplete': scClass + 'Ac' },
-     source: function (request, response) {
-     $.ajax({
-       url: "index.php",
-       dataType: "json",
-       data: {
-          q: request.term,
-          nmgp_opcao: "ajax_autocomp",
-          nmgp_parms: "NM_ajax_opcao?#?autocomp_idpro1",
-          max_itens: "10",
-          cod_desc: "N",
-          script_case_init: <?php echo $this->Ini->sc_page ?>
-        },
-       success: function (data) {
-         if (data == "ss_time_out") {
-             nm_move();
-         }
-         response(data);
-       }
-      });
-    },
-     select: function (event, ui) {
-       $("#SC_idpro1").val(ui.item.value);
-       $(this).val(ui.item.label);
-       event.preventDefault();
-     },
-     focus: function (event, ui) {
-       $("#SC_idpro1").val(ui.item.value);
-       $(this).val(ui.item.label);
-       event.preventDefault();
-     },
-     change: function (event, ui) {
-       if (null == ui.item) {
-          $("#SC_idpro1").val( $(this).val() );
-       }
-     }
-   });
    scClass = $("#id_ac_idpro2").attr('class').split(' ');
    scClass = scClass[ scClass.length-1 ];
    $("#id_ac_idpro2").autocomplete({
@@ -2983,7 +2983,7 @@ function nm_open_popup(parms)
       {
       $codigobar_look = substr($this->Db->qstr($codigobar), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct codigobar from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where codigobar = '$codigobar_look'"; 
+      $nm_comando = "select distinct codigobar from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where codigobar = '$codigobar_look'"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
@@ -3044,7 +3044,7 @@ function nm_open_popup(parms)
       {
       $nompro_look = substr($this->Db->qstr($nompro), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct nompro from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where nompro = '$nompro_look'"; 
+      $nm_comando = "select distinct nompro from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where nompro = '$nompro_look'"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
@@ -3546,15 +3546,15 @@ function nm_open_popup(parms)
    { 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
       }
       else
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
       }
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
@@ -4664,7 +4664,7 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
     if ($codigobar != '') {
       $codigobar_look = substr($this->Db->qstr($codigobar), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct codigobar from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where codigobar = '$codigobar_look'"; 
+      $nm_comando = "select distinct codigobar from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where codigobar = '$codigobar_look'"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
@@ -4713,7 +4713,7 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
     if ($nompro != '') {
       $nompro_look = substr($this->Db->qstr($nompro), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct nompro from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where nompro = '$nompro_look'"; 
+      $nm_comando = "select distinct nompro from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where nompro = '$nompro_look'"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
@@ -4998,15 +4998,15 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
    { 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
       }
       else
       {
-          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
+          $nm_comando = "select distinct stockmen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp where stockmen = $stockmen_look"; 
       }
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {

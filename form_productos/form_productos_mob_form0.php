@@ -3040,8 +3040,6 @@ $precio_editable_look = "";
     <input id="<?php echo $tempOptionId ?>"  class="sc-ui-radio-unidmaymen sc-ui-radio-unidmaymen sc-js-input" type=radio name="unidmaymen" value="NO"
  alt="{type: 'radio', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_unidmaymen'][] = 'NO'; ?>
 <?php  if ("NO" == $this->unidmaymen)  { echo " checked" ;} ?><?php  if (empty($this->unidmaymen)) { echo " checked" ;} ?>  onClick="do_ajax_form_productos_mob_event_unidmaymen_onclick();" ><label for="<?php echo $tempOptionId ?>">NO</label></TD>
-</TR>
-<TR>
   <TD class="scFormDataFontOdd css_unidmaymen_line"><?php $tempOptionId = "id-opt-unidmaymen" . $sc_seq_vert . "-2"; ?>
     <input id="<?php echo $tempOptionId ?>"  class="sc-ui-radio-unidmaymen sc-ui-radio-unidmaymen sc-js-input" type=radio name="unidmaymen" value="SI"
  alt="{type: 'radio', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_unidmaymen'][] = 'SI'; ?>
@@ -4418,6 +4416,68 @@ else
 
 
    <?php
+    if (!isset($this->nm_new_label['ubicacion']))
+    {
+        $this->nm_new_label['ubicacion'] = "Ubicación";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ubicacion = $this->ubicacion;
+   $sStyleHidden_ubicacion = '';
+   if (isset($this->nmgp_cmp_hidden['ubicacion']) && $this->nmgp_cmp_hidden['ubicacion'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ubicacion']);
+       $sStyleHidden_ubicacion = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ubicacion = 'display: none;';
+   $sStyleReadInp_ubicacion = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ubicacion']) && $this->nmgp_cmp_readonly['ubicacion'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ubicacion']);
+       $sStyleReadLab_ubicacion = '';
+       $sStyleReadInp_ubicacion = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ubicacion']) && $this->nmgp_cmp_hidden['ubicacion'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="ubicacion" value="<?php echo $this->form_encode_input($ubicacion) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_ubicacion_line" id="hidden_field_data_ubicacion" style="<?php echo $sStyleHidden_ubicacion; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ubicacion_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ubicacion_label" style=""><span id="id_label_ubicacion"><?php echo $this->nm_new_label['ubicacion']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ubicacion"]) &&  $this->nmgp_cmp_readonly["ubicacion"] == "on") { 
+
+ ?>
+<input type="hidden" name="ubicacion" value="<?php echo $this->form_encode_input($ubicacion) . "\">" . $ubicacion . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_ubicacion" class="sc-ui-readonly-ubicacion css_ubicacion_line" style="<?php echo $sStyleReadLab_ubicacion; ?>"><?php echo $this->form_format_readonly("ubicacion", $this->form_encode_input($this->ubicacion)); ?></span><span id="id_read_off_ubicacion" class="css_read_off_ubicacion<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_ubicacion; ?>">
+ <input class="sc-js-input scFormObjectOdd css_ubicacion_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_ubicacion" type=text name="ubicacion" value="<?php echo $this->form_encode_input($ubicacion) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=40"; } ?> maxlength=120 alt="{datatype: 'text', maxLength: 120, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ubicacion')", "nm_mostra_mens('ubicacion')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ubicacion_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ubicacion_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
     if (!isset($this->nm_new_label['activo']))
     {
         $this->nm_new_label['activo'] = "Activo";
@@ -4468,8 +4528,6 @@ else
     <input id="<?php echo $tempOptionId ?>"  class="sc-ui-radio-activo sc-ui-radio-activo sc-js-input" type=radio name="activo" value="SI"
  alt="{type: 'radio', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_activo'][] = 'SI'; ?>
 <?php  if ("SI" == $this->activo)  { echo " checked" ;} ?><?php  if (empty($this->activo)) { echo " checked" ;} ?>  onClick="" ><label for="<?php echo $tempOptionId ?>">SI</label></TD>
-</TR>
-<TR>
   <TD class="scFormDataFontOdd css_activo_line"><?php $tempOptionId = "id-opt-activo" . $sc_seq_vert . "-2"; ?>
     <input id="<?php echo $tempOptionId ?>"  class="sc-ui-radio-activo sc-ui-radio-activo sc-js-input" type=radio name="activo" value="NO"
  alt="{type: 'radio', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_activo'][] = 'NO'; ?>

@@ -94,6 +94,9 @@ function Ord_cmp_init()
    $tab_ger_campos = array();
    $tab_def_campos = array();
    $tab_labels     = array();
+   $tab_ger_campos['idgrup'] = "on";
+   $tab_def_campos['idgrup'] = "idgrup";
+   $tab_labels["idgrup"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["idgrup"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["idgrup"] : "Grupo";
    $tab_ger_campos['codigobar'] = "on";
    $tab_def_campos['codigobar'] = "codigobar";
    $tab_labels["codigobar"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["codigobar"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["codigobar"] : "Código";
@@ -112,6 +115,9 @@ function Ord_cmp_init()
    $tab_ger_campos['preciomen'] = "on";
    $tab_def_campos['preciomen'] = "preciomen";
    $tab_labels["preciomen"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["preciomen"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["preciomen"] : "Precio";
+   $tab_ger_campos['idiva'] = "on";
+   $tab_def_campos['idiva'] = "idiva";
+   $tab_labels["idiva"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["idiva"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["idiva"] : "Impuesto(%)";
    $tab_ger_campos['btn_stock'] = "on";
    if ($use_alias == "S")
    {
@@ -122,6 +128,15 @@ function Ord_cmp_init()
        $tab_def_campos['btn_stock'] = "";
    }
    $tab_labels["btn_stock"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["btn_stock"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["btn_stock"] : "Stock";
+   $tab_ger_campos['ubicacion'] = "on";
+   $tab_def_campos['ubicacion'] = "ubicacion";
+   $tab_labels["ubicacion"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["ubicacion"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["ubicacion"] : "Ubicacion";
+   $tab_ger_campos['costomen'] = "on";
+   $tab_def_campos['costomen'] = "costomen";
+   $tab_labels["costomen"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["costomen"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["costomen"] : "Costo";
+   $tab_ger_campos['idpro1'] = "on";
+   $tab_def_campos['idpro1'] = "idpro1";
+   $tab_labels["idpro1"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["idpro1"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["idpro1"] : "Proveedor";
    $tab_ger_campos['escombo'] = "on";
    $tab_def_campos['escombo'] = "escombo";
    $tab_labels["escombo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["escombo"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["escombo"] : "Combo";

@@ -91,6 +91,11 @@ class grid_productos_json
                }
           }
       }
+      if (isset($gnit)) 
+      {
+          $_SESSION['gnit'] = $gnit;
+          nm_limpa_str_grid_productos($_SESSION["gnit"]);
+      }
       if (isset($gusuario_logueo)) 
       {
           $_SESSION['gusuario_logueo'] = $gusuario_logueo;
@@ -100,11 +105,6 @@ class grid_productos_json
       {
           $_SESSION['gnube_activa'] = $gnube_activa;
           nm_limpa_str_grid_productos($_SESSION["gnube_activa"]);
-      }
-      if (isset($gnit)) 
-      {
-          $_SESSION['gnit'] = $gnit;
-          nm_limpa_str_grid_productos($_SESSION["gnit"]);
       }
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
@@ -280,7 +280,150 @@ if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
 if (!isset($_SESSION['gusuario_logueo'])) {$_SESSION['gusuario_logueo'] = "";}
 if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (isset($_SESSION['gusuario_logueo'])) ? $_SESSION['gusuario_logueo'] : "";}
- $this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
+ $vsql = "select ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from configuraciones where idconfiguraciones=1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vConfig = array();
+      $this->vconfig = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vConfig[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vconfig[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vConfig = false;
+          $this->vConfig_erro = $this->Db->ErrorMsg();
+          $this->vconfig = false;
+          $this->vconfig_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vconfig[0][0]))
+{
+	if($this->vconfig[0][0]=="SI")
+	{
+		$this->NM_cmp_hidden["idgrup"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idgrup"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idgrup"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idgrup"] = "off"; }
+	}
+	
+	if($this->vconfig[0][1]=="SI")
+	{
+		$this->NM_cmp_hidden["codigobar"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["codigobar"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["codigobar"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["codigobar"] = "off"; }
+	}
+	
+	if($this->vconfig[0][2]=="SI")
+	{
+		$this->NM_cmp_hidden["imagen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["imagen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["imagen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["imagen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][3]=="SI")
+	{
+		$this->NM_cmp_hidden["existencia_menor"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["existencia_menor"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["existencia_menor"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["existencia_menor"] = "off"; }
+	}
+	
+	if($this->vconfig[0][4]=="SI")
+	{
+		$this->NM_cmp_hidden["unimen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["unimen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["unimen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["unimen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][5]=="SI")
+	{
+		$this->NM_cmp_hidden["preciomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["preciomen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["preciomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["preciomen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][6]=="SI")
+	{
+		$this->NM_cmp_hidden["idiva"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idiva"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "off"; }
+	}
+	
+	if($this->vconfig[0][6]=="SI")
+	{
+		$this->NM_cmp_hidden["btn_stock"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["btn_stock"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "off"; }
+	}
+	
+	if($this->vconfig[0][7]=="SI")
+	{
+		$this->NM_cmp_hidden["ubicacion"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["ubicacion"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "off"; }
+	}
+	
+	if($this->vconfig[0][8]=="SI")
+	{
+		$this->NM_cmp_hidden["costomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["costomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][9]=="SI")
+	{
+		$this->NM_cmp_hidden["idpro1"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idpro1"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "off"; }
+	}
+	
+	if($this->vconfig[0][10]=="SI")
+	{
+		$this->NM_cmp_hidden["escombo"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["escombo"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "off"; }
+	}
+}
+
+
+$this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
  
       $nm_select = "select grupo from usuarios where usuario='".$this->sc_temp_gusuario_logueo."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -368,30 +511,30 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
       }
       $this->nm_field_dinamico = array();
       $this->nm_order_dinamico = array();
-      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'];
@@ -445,81 +588,71 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
              $this->pb->setProgressbarMessage($Mens_bar . ": " . $this->SC_seq_register . $PB_tot);
              $this->pb->addSteps(1);
          }
-         $this->codigobar = $rs->fields[0] ;  
-         $this->nompro = $rs->fields[1] ;  
-         $this->imagen = $rs->fields[2] ;  
-         $this->existencia_menor = $rs->fields[3] ;  
-         $this->existencia_menor = (strpos(strtolower($this->existencia_menor), "e")) ? (float)$this->existencia_menor : $this->existencia_menor; 
+         $this->idgrup = $rs->fields[0] ;  
+         $this->idgrup = (string)$this->idgrup;
+         $this->codigobar = $rs->fields[1] ;  
+         $this->nompro = $rs->fields[2] ;  
+         $this->imagen = $rs->fields[3] ;  
+         $this->existencia_menor = $rs->fields[4] ;  
          $this->existencia_menor = (string)$this->existencia_menor;
-         $this->unimen = $rs->fields[4] ;  
-         $this->preciomen = $rs->fields[5] ;  
+         $this->unimen = $rs->fields[5] ;  
+         $this->preciomen = $rs->fields[6] ;  
          $this->preciomen =  str_replace(",", ".", $this->preciomen);
-         $this->preciomen = (strpos(strtolower($this->preciomen), "e")) ? (float)$this->preciomen : $this->preciomen; 
          $this->preciomen = (string)$this->preciomen;
-         $this->escombo = $rs->fields[6] ;  
-         $this->idprod = $rs->fields[7] ;  
-         $this->idprod = (string)$this->idprod;
-         $this->unimay = $rs->fields[8] ;  
+         $this->idiva = $rs->fields[7] ;  
+         $this->idiva = (string)$this->idiva;
+         $this->ubicacion = $rs->fields[8] ;  
          $this->costomen = $rs->fields[9] ;  
          $this->costomen =  str_replace(",", ".", $this->costomen);
-         $this->costomen = (strpos(strtolower($this->costomen), "e")) ? (float)$this->costomen : $this->costomen; 
          $this->costomen = (string)$this->costomen;
-         $this->recmayamen = $rs->fields[10] ;  
-         $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
-         $this->recmayamen = (strpos(strtolower($this->recmayamen), "e")) ? (float)$this->recmayamen : $this->recmayamen; 
-         $this->recmayamen = (string)$this->recmayamen;
-         $this->preciofull = $rs->fields[11] ;  
-         $this->preciofull =  str_replace(",", ".", $this->preciofull);
-         $this->preciofull = (strpos(strtolower($this->preciofull), "e")) ? (float)$this->preciofull : $this->preciofull; 
-         $this->preciofull = (string)$this->preciofull;
-         $this->stockmay = $rs->fields[12] ;  
-         $this->stockmay =  str_replace(",", ".", $this->stockmay);
-         $this->stockmay = (strpos(strtolower($this->stockmay), "e")) ? (float)$this->stockmay : $this->stockmay; 
-         $this->stockmay = (string)$this->stockmay;
-         $this->stockmen = $rs->fields[13] ;  
-         $this->stockmen = (strpos(strtolower($this->stockmen), "e")) ? (float)$this->stockmen : $this->stockmen; 
-         $this->stockmen = (string)$this->stockmen;
-         $this->idgrup = $rs->fields[14] ;  
-         $this->idgrup = (string)$this->idgrup;
-         $this->idpro1 = $rs->fields[15] ;  
+         $this->idpro1 = $rs->fields[10] ;  
          $this->idpro1 = (string)$this->idpro1;
-         $this->idpro2 = $rs->fields[16] ;  
+         $this->escombo = $rs->fields[11] ;  
+         $this->idprod = $rs->fields[12] ;  
+         $this->idprod = (string)$this->idprod;
+         $this->unimay = $rs->fields[13] ;  
+         $this->recmayamen = $rs->fields[14] ;  
+         $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
+         $this->recmayamen = (string)$this->recmayamen;
+         $this->preciofull = $rs->fields[15] ;  
+         $this->preciofull =  str_replace(",", ".", $this->preciofull);
+         $this->preciofull = (string)$this->preciofull;
+         $this->stockmay = $rs->fields[16] ;  
+         $this->stockmay =  str_replace(",", ".", $this->stockmay);
+         $this->stockmay = (string)$this->stockmay;
+         $this->stockmen = $rs->fields[17] ;  
+         $this->stockmen = (string)$this->stockmen;
+         $this->idpro2 = $rs->fields[18] ;  
          $this->idpro2 = (string)$this->idpro2;
-         $this->idiva = $rs->fields[17] ;  
-         $this->idiva = (string)$this->idiva;
-         $this->otro = $rs->fields[18] ;  
+         $this->otro = $rs->fields[19] ;  
          $this->otro = (string)$this->otro;
-         $this->otro2 = $rs->fields[19] ;  
+         $this->otro2 = $rs->fields[20] ;  
          $this->otro2 = (string)$this->otro2;
-         $this->preciomen2 = $rs->fields[20] ;  
+         $this->preciomen2 = $rs->fields[21] ;  
          $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
-         $this->preciomen2 = (strpos(strtolower($this->preciomen2), "e")) ? (float)$this->preciomen2 : $this->preciomen2; 
          $this->preciomen2 = (string)$this->preciomen2;
-         $this->preciomen3 = $rs->fields[21] ;  
+         $this->preciomen3 = $rs->fields[22] ;  
          $this->preciomen3 =  str_replace(",", ".", $this->preciomen3);
-         $this->preciomen3 = (strpos(strtolower($this->preciomen3), "e")) ? (float)$this->preciomen3 : $this->preciomen3; 
          $this->preciomen3 = (string)$this->preciomen3;
-         $this->precio2 = $rs->fields[22] ;  
+         $this->precio2 = $rs->fields[23] ;  
          $this->precio2 =  str_replace(",", ".", $this->precio2);
-         $this->precio2 = (strpos(strtolower($this->precio2), "e")) ? (float)$this->precio2 : $this->precio2; 
          $this->precio2 = (string)$this->precio2;
-         $this->preciomay = $rs->fields[23] ;  
+         $this->preciomay = $rs->fields[24] ;  
          $this->preciomay =  str_replace(",", ".", $this->preciomay);
-         $this->preciomay = (strpos(strtolower($this->preciomay), "e")) ? (float)$this->preciomay : $this->preciomay; 
          $this->preciomay = (string)$this->preciomay;
-         $this->unidmaymen = $rs->fields[24] ;  
+         $this->unidmaymen = $rs->fields[25] ;  
          //----- lookup - idgrup
          $this->look_idgrup = $this->idgrup; 
          $this->Lookup->lookup_idgrup($this->look_idgrup, $this->idgrup) ; 
          $this->look_idgrup = ($this->look_idgrup == "&nbsp;") ? "" : $this->look_idgrup; 
-         //----- lookup - idpro1
-         $this->look_idpro1 = $this->idpro1; 
-         $this->Lookup->lookup_idpro1($this->look_idpro1) ; 
-         $this->look_idpro1 = ($this->look_idpro1 == "&nbsp;") ? "" : $this->look_idpro1; 
          //----- lookup - idiva
          $this->look_idiva = $this->idiva; 
          $this->Lookup->lookup_idiva($this->look_idiva, $this->idiva) ; 
          $this->look_idiva = ($this->look_idiva == "&nbsp;") ? "" : $this->look_idiva; 
+         //----- lookup - idpro1
+         $this->look_idpro1 = $this->idpro1; 
+         $this->Lookup->lookup_idpro1($this->look_idpro1) ; 
+         $this->look_idpro1 = ($this->look_idpro1 == "&nbsp;") ? "" : $this->look_idpro1; 
          //----- lookup - otro
          $this->look_otro = $this->otro; 
          $this->Lookup->lookup_otro($this->look_otro); 
@@ -716,6 +849,22 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
       }
       $rs->Close();
    }
+   //----- idgrup
+   function NM_export_idgrup()
+   {
+         nmgp_Form_Num_Val($this->look_idgrup, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         $this->look_idgrup = NM_charset_to_utf8($this->look_idgrup);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['idgrup'])) ? $this->New_label['idgrup'] : "Grupo"; 
+         }
+         else
+         {
+             $SC_Label = "idgrup"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_idgrup;
+   }
    //----- codigobar
    function NM_export_codigobar()
    {
@@ -812,6 +961,22 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->preciomen;
    }
+   //----- idiva
+   function NM_export_idiva()
+   {
+         nmgp_Form_Num_Val($this->look_idiva, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         $this->look_idiva = NM_charset_to_utf8($this->look_idiva);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['idiva'])) ? $this->New_label['idiva'] : "Impuesto(%)"; 
+         }
+         else
+         {
+             $SC_Label = "idiva"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_idiva;
+   }
    //----- btn_stock
    function NM_export_btn_stock()
    {
@@ -826,6 +991,54 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->btn_stock;
+   }
+   //----- ubicacion
+   function NM_export_ubicacion()
+   {
+         $this->ubicacion = NM_charset_to_utf8($this->ubicacion);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['ubicacion'])) ? $this->New_label['ubicacion'] : "Ubicacion"; 
+         }
+         else
+         {
+             $SC_Label = "ubicacion"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->ubicacion;
+   }
+   //----- costomen
+   function NM_export_costomen()
+   {
+         if ($this->Json_format)
+         {
+             nmgp_Form_Num_Val($this->costomen, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+         }
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['costomen'])) ? $this->New_label['costomen'] : "Costo"; 
+         }
+         else
+         {
+             $SC_Label = "costomen"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->costomen;
+   }
+   //----- idpro1
+   function NM_export_idpro1()
+   {
+         $this->look_idpro1 = NM_charset_to_utf8($this->look_idpro1);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : "Proveedor"; 
+         }
+         else
+         {
+             $SC_Label = "idpro1"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_idpro1;
    }
    //----- escombo
    function NM_export_escombo()
@@ -889,24 +1102,6 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->unimay;
-   }
-   //----- costomen
-   function NM_export_costomen()
-   {
-         if ($this->Json_format)
-         {
-             nmgp_Form_Num_Val($this->costomen, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
-         }
-         if ($this->Json_use_label)
-         {
-             $SC_Label = (isset($this->New_label['costomen'])) ? $this->New_label['costomen'] : "Costo"; 
-         }
-         else
-         {
-             $SC_Label = "costomen"; 
-         }
-         $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->costomen;
    }
    //----- recmayamen
    function NM_export_recmayamen()
@@ -980,37 +1175,6 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->stockmen;
    }
-   //----- idgrup
-   function NM_export_idgrup()
-   {
-         nmgp_Form_Num_Val($this->look_idgrup, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->look_idgrup = NM_charset_to_utf8($this->look_idgrup);
-         if ($this->Json_use_label)
-         {
-             $SC_Label = (isset($this->New_label['idgrup'])) ? $this->New_label['idgrup'] : "Grupo"; 
-         }
-         else
-         {
-             $SC_Label = "idgrup"; 
-         }
-         $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_idgrup;
-   }
-   //----- idpro1
-   function NM_export_idpro1()
-   {
-         $this->look_idpro1 = NM_charset_to_utf8($this->look_idpro1);
-         if ($this->Json_use_label)
-         {
-             $SC_Label = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : "Proveedor"; 
-         }
-         else
-         {
-             $SC_Label = "idpro1"; 
-         }
-         $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_idpro1;
-   }
    //----- idpro2
    function NM_export_idpro2()
    {
@@ -1028,22 +1192,6 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->idpro2;
-   }
-   //----- idiva
-   function NM_export_idiva()
-   {
-         nmgp_Form_Num_Val($this->look_idiva, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->look_idiva = NM_charset_to_utf8($this->look_idiva);
-         if ($this->Json_use_label)
-         {
-             $SC_Label = (isset($this->New_label['idiva'])) ? $this->New_label['idiva'] : "%IVA"; 
-         }
-         else
-         {
-             $SC_Label = "idiva"; 
-         }
-         $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_idiva;
    }
    //----- otro
    function NM_export_otro()

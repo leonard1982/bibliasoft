@@ -130,6 +130,30 @@ class form_configuraciones_mob_apl
    var $columna_npedido_1;
    var $columna_reg_pdf_propio;
    var $columna_reg_pdf_propio_1;
+   var $ver_grupo;
+   var $ver_grupo_1;
+   var $ver_codigo;
+   var $ver_codigo_1;
+   var $ver_imagen;
+   var $ver_imagen_1;
+   var $ver_existencia;
+   var $ver_existencia_1;
+   var $ver_unidad;
+   var $ver_unidad_1;
+   var $ver_precio;
+   var $ver_precio_1;
+   var $ver_impuesto;
+   var $ver_impuesto_1;
+   var $ver_stock;
+   var $ver_stock_1;
+   var $ver_ubicacion;
+   var $ver_ubicacion_1;
+   var $ver_costo;
+   var $ver_costo_1;
+   var $ver_proveedor;
+   var $ver_proveedor_1;
+   var $ver_combo;
+   var $ver_combo_1;
    var $probarnube;
    var $nm_data;
    var $nmgp_opcao;
@@ -351,6 +375,54 @@ class form_configuraciones_mob_apl
           if (isset($this->NM_ajax_info['param']['valor_propina_sugerida']))
           {
               $this->valor_propina_sugerida = $this->NM_ajax_info['param']['valor_propina_sugerida'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_codigo']))
+          {
+              $this->ver_codigo = $this->NM_ajax_info['param']['ver_codigo'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_combo']))
+          {
+              $this->ver_combo = $this->NM_ajax_info['param']['ver_combo'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_costo']))
+          {
+              $this->ver_costo = $this->NM_ajax_info['param']['ver_costo'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_existencia']))
+          {
+              $this->ver_existencia = $this->NM_ajax_info['param']['ver_existencia'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_grupo']))
+          {
+              $this->ver_grupo = $this->NM_ajax_info['param']['ver_grupo'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_imagen']))
+          {
+              $this->ver_imagen = $this->NM_ajax_info['param']['ver_imagen'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_impuesto']))
+          {
+              $this->ver_impuesto = $this->NM_ajax_info['param']['ver_impuesto'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_precio']))
+          {
+              $this->ver_precio = $this->NM_ajax_info['param']['ver_precio'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_proveedor']))
+          {
+              $this->ver_proveedor = $this->NM_ajax_info['param']['ver_proveedor'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_stock']))
+          {
+              $this->ver_stock = $this->NM_ajax_info['param']['ver_stock'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_ubicacion']))
+          {
+              $this->ver_ubicacion = $this->NM_ajax_info['param']['ver_ubicacion'];
+          }
+          if (isset($this->NM_ajax_info['param']['ver_unidad']))
+          {
+              $this->ver_unidad = $this->NM_ajax_info['param']['ver_unidad'];
           }
           if (isset($this->NM_ajax_info['param']['ver_xml_fe']))
           {
@@ -1796,6 +1868,54 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'columna_reg_pdf_propio');
           }
+          if ('validate_ver_grupo' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_grupo');
+          }
+          if ('validate_ver_codigo' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_codigo');
+          }
+          if ('validate_ver_imagen' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_imagen');
+          }
+          if ('validate_ver_existencia' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_existencia');
+          }
+          if ('validate_ver_unidad' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_unidad');
+          }
+          if ('validate_ver_precio' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_precio');
+          }
+          if ('validate_ver_impuesto' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_impuesto');
+          }
+          if ('validate_ver_stock' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_stock');
+          }
+          if ('validate_ver_ubicacion' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_ubicacion');
+          }
+          if ('validate_ver_costo' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_costo');
+          }
+          if ('validate_ver_proveedor' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_proveedor');
+          }
+          if ('validate_ver_combo' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ver_combo');
+          }
           form_configuraciones_mob_pack_ajax_response();
           exit;
       }
@@ -2308,6 +2428,222 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                           $this->columna_reg_pdf_propio .= ";";
                       } 
                       $this->columna_reg_pdf_propio .= $dados_columna_reg_pdf_propio_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_grupo))
+          {
+              $x = 0; 
+              $this->ver_grupo_1 = $this->ver_grupo;
+              $this->ver_grupo = ""; 
+              if ($this->ver_grupo_1 != "") 
+              { 
+                  foreach ($this->ver_grupo_1 as $dados_ver_grupo_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_grupo .= ";";
+                      } 
+                      $this->ver_grupo .= $dados_ver_grupo_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_codigo))
+          {
+              $x = 0; 
+              $this->ver_codigo_1 = $this->ver_codigo;
+              $this->ver_codigo = ""; 
+              if ($this->ver_codigo_1 != "") 
+              { 
+                  foreach ($this->ver_codigo_1 as $dados_ver_codigo_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_codigo .= ";";
+                      } 
+                      $this->ver_codigo .= $dados_ver_codigo_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_imagen))
+          {
+              $x = 0; 
+              $this->ver_imagen_1 = $this->ver_imagen;
+              $this->ver_imagen = ""; 
+              if ($this->ver_imagen_1 != "") 
+              { 
+                  foreach ($this->ver_imagen_1 as $dados_ver_imagen_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_imagen .= ";";
+                      } 
+                      $this->ver_imagen .= $dados_ver_imagen_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_existencia))
+          {
+              $x = 0; 
+              $this->ver_existencia_1 = $this->ver_existencia;
+              $this->ver_existencia = ""; 
+              if ($this->ver_existencia_1 != "") 
+              { 
+                  foreach ($this->ver_existencia_1 as $dados_ver_existencia_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_existencia .= ";";
+                      } 
+                      $this->ver_existencia .= $dados_ver_existencia_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_unidad))
+          {
+              $x = 0; 
+              $this->ver_unidad_1 = $this->ver_unidad;
+              $this->ver_unidad = ""; 
+              if ($this->ver_unidad_1 != "") 
+              { 
+                  foreach ($this->ver_unidad_1 as $dados_ver_unidad_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_unidad .= ";";
+                      } 
+                      $this->ver_unidad .= $dados_ver_unidad_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_precio))
+          {
+              $x = 0; 
+              $this->ver_precio_1 = $this->ver_precio;
+              $this->ver_precio = ""; 
+              if ($this->ver_precio_1 != "") 
+              { 
+                  foreach ($this->ver_precio_1 as $dados_ver_precio_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_precio .= ";";
+                      } 
+                      $this->ver_precio .= $dados_ver_precio_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_impuesto))
+          {
+              $x = 0; 
+              $this->ver_impuesto_1 = $this->ver_impuesto;
+              $this->ver_impuesto = ""; 
+              if ($this->ver_impuesto_1 != "") 
+              { 
+                  foreach ($this->ver_impuesto_1 as $dados_ver_impuesto_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_impuesto .= ";";
+                      } 
+                      $this->ver_impuesto .= $dados_ver_impuesto_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_stock))
+          {
+              $x = 0; 
+              $this->ver_stock_1 = $this->ver_stock;
+              $this->ver_stock = ""; 
+              if ($this->ver_stock_1 != "") 
+              { 
+                  foreach ($this->ver_stock_1 as $dados_ver_stock_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_stock .= ";";
+                      } 
+                      $this->ver_stock .= $dados_ver_stock_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_ubicacion))
+          {
+              $x = 0; 
+              $this->ver_ubicacion_1 = $this->ver_ubicacion;
+              $this->ver_ubicacion = ""; 
+              if ($this->ver_ubicacion_1 != "") 
+              { 
+                  foreach ($this->ver_ubicacion_1 as $dados_ver_ubicacion_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_ubicacion .= ";";
+                      } 
+                      $this->ver_ubicacion .= $dados_ver_ubicacion_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_costo))
+          {
+              $x = 0; 
+              $this->ver_costo_1 = $this->ver_costo;
+              $this->ver_costo = ""; 
+              if ($this->ver_costo_1 != "") 
+              { 
+                  foreach ($this->ver_costo_1 as $dados_ver_costo_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_costo .= ";";
+                      } 
+                      $this->ver_costo .= $dados_ver_costo_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_proveedor))
+          {
+              $x = 0; 
+              $this->ver_proveedor_1 = $this->ver_proveedor;
+              $this->ver_proveedor = ""; 
+              if ($this->ver_proveedor_1 != "") 
+              { 
+                  foreach ($this->ver_proveedor_1 as $dados_ver_proveedor_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_proveedor .= ";";
+                      } 
+                      $this->ver_proveedor .= $dados_ver_proveedor_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->ver_combo))
+          {
+              $x = 0; 
+              $this->ver_combo_1 = $this->ver_combo;
+              $this->ver_combo = ""; 
+              if ($this->ver_combo_1 != "") 
+              { 
+                  foreach ($this->ver_combo_1 as $dados_ver_combo_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->ver_combo .= ";";
+                      } 
+                      $this->ver_combo .= $dados_ver_combo_1;
                       $x++ ; 
                   } 
               } 
@@ -2903,6 +3239,42 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'columna_reg_pdf_propio':
                return "Columna Regenerar PDF";
                break;
+           case 'ver_grupo':
+               return "Ver Grupo/Familia";
+               break;
+           case 'ver_codigo':
+               return "Ver Código";
+               break;
+           case 'ver_imagen':
+               return "Ver Imagen";
+               break;
+           case 'ver_existencia':
+               return "Ver Existencia";
+               break;
+           case 'ver_unidad':
+               return "Ver Unidad";
+               break;
+           case 'ver_precio':
+               return "Ver Precio";
+               break;
+           case 'ver_impuesto':
+               return "Ver Impuesto";
+               break;
+           case 'ver_stock':
+               return "Ver Stock";
+               break;
+           case 'ver_ubicacion':
+               return "Ver Ubicación";
+               break;
+           case 'ver_costo':
+               return "Ver Costo";
+               break;
+           case 'ver_proveedor':
+               return "Ver Proveedor";
+               break;
+           case 'ver_combo':
+               return "Ver Combo";
+               break;
            case 'ultima_edicion':
                return "Ultima Edicion";
                break;
@@ -3066,6 +3438,30 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_columna_npedido($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'columna_reg_pdf_propio' == $filtro)
         $this->ValidateField_columna_reg_pdf_propio($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_grupo' == $filtro)
+        $this->ValidateField_ver_grupo($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_codigo' == $filtro)
+        $this->ValidateField_ver_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_imagen' == $filtro)
+        $this->ValidateField_ver_imagen($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_existencia' == $filtro)
+        $this->ValidateField_ver_existencia($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_unidad' == $filtro)
+        $this->ValidateField_ver_unidad($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_precio' == $filtro)
+        $this->ValidateField_ver_precio($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_impuesto' == $filtro)
+        $this->ValidateField_ver_impuesto($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_stock' == $filtro)
+        $this->ValidateField_ver_stock($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_ubicacion' == $filtro)
+        $this->ValidateField_ver_ubicacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_costo' == $filtro)
+        $this->ValidateField_ver_costo($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_proveedor' == $filtro)
+        $this->ValidateField_ver_proveedor($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'ver_combo' == $filtro)
+        $this->ValidateField_ver_combo($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
 //---
@@ -4526,6 +4922,522 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_columna_reg_pdf_propio
 
+    function ValidateField_ver_grupo(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_grupo == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_grupo = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_grupo))
+          {
+              $x = 0; 
+              $this->ver_grupo_1 = array(); 
+              foreach ($this->ver_grupo as $ind => $dados_ver_grupo_1 ) 
+              {
+                  if ($dados_ver_grupo_1 != "") 
+                  {
+                      $this->ver_grupo_1[] = $dados_ver_grupo_1;
+                  } 
+              } 
+              $this->ver_grupo = ""; 
+              foreach ($this->ver_grupo_1 as $dados_ver_grupo_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_grupo .= ";";
+                   } 
+                   $this->ver_grupo .= $dados_ver_grupo_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_grupo';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_grupo
+
+    function ValidateField_ver_codigo(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_codigo == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_codigo = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_codigo))
+          {
+              $x = 0; 
+              $this->ver_codigo_1 = array(); 
+              foreach ($this->ver_codigo as $ind => $dados_ver_codigo_1 ) 
+              {
+                  if ($dados_ver_codigo_1 != "") 
+                  {
+                      $this->ver_codigo_1[] = $dados_ver_codigo_1;
+                  } 
+              } 
+              $this->ver_codigo = ""; 
+              foreach ($this->ver_codigo_1 as $dados_ver_codigo_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_codigo .= ";";
+                   } 
+                   $this->ver_codigo .= $dados_ver_codigo_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_codigo';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_codigo
+
+    function ValidateField_ver_imagen(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_imagen == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_imagen = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_imagen))
+          {
+              $x = 0; 
+              $this->ver_imagen_1 = array(); 
+              foreach ($this->ver_imagen as $ind => $dados_ver_imagen_1 ) 
+              {
+                  if ($dados_ver_imagen_1 != "") 
+                  {
+                      $this->ver_imagen_1[] = $dados_ver_imagen_1;
+                  } 
+              } 
+              $this->ver_imagen = ""; 
+              foreach ($this->ver_imagen_1 as $dados_ver_imagen_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_imagen .= ";";
+                   } 
+                   $this->ver_imagen .= $dados_ver_imagen_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_imagen';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_imagen
+
+    function ValidateField_ver_existencia(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_existencia == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_existencia = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_existencia))
+          {
+              $x = 0; 
+              $this->ver_existencia_1 = array(); 
+              foreach ($this->ver_existencia as $ind => $dados_ver_existencia_1 ) 
+              {
+                  if ($dados_ver_existencia_1 != "") 
+                  {
+                      $this->ver_existencia_1[] = $dados_ver_existencia_1;
+                  } 
+              } 
+              $this->ver_existencia = ""; 
+              foreach ($this->ver_existencia_1 as $dados_ver_existencia_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_existencia .= ";";
+                   } 
+                   $this->ver_existencia .= $dados_ver_existencia_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_existencia';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_existencia
+
+    function ValidateField_ver_unidad(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_unidad == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_unidad = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_unidad))
+          {
+              $x = 0; 
+              $this->ver_unidad_1 = array(); 
+              foreach ($this->ver_unidad as $ind => $dados_ver_unidad_1 ) 
+              {
+                  if ($dados_ver_unidad_1 != "") 
+                  {
+                      $this->ver_unidad_1[] = $dados_ver_unidad_1;
+                  } 
+              } 
+              $this->ver_unidad = ""; 
+              foreach ($this->ver_unidad_1 as $dados_ver_unidad_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_unidad .= ";";
+                   } 
+                   $this->ver_unidad .= $dados_ver_unidad_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_unidad';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_unidad
+
+    function ValidateField_ver_precio(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_precio == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_precio = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_precio))
+          {
+              $x = 0; 
+              $this->ver_precio_1 = array(); 
+              foreach ($this->ver_precio as $ind => $dados_ver_precio_1 ) 
+              {
+                  if ($dados_ver_precio_1 != "") 
+                  {
+                      $this->ver_precio_1[] = $dados_ver_precio_1;
+                  } 
+              } 
+              $this->ver_precio = ""; 
+              foreach ($this->ver_precio_1 as $dados_ver_precio_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_precio .= ";";
+                   } 
+                   $this->ver_precio .= $dados_ver_precio_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_precio';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_precio
+
+    function ValidateField_ver_impuesto(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_impuesto == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_impuesto = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_impuesto))
+          {
+              $x = 0; 
+              $this->ver_impuesto_1 = array(); 
+              foreach ($this->ver_impuesto as $ind => $dados_ver_impuesto_1 ) 
+              {
+                  if ($dados_ver_impuesto_1 != "") 
+                  {
+                      $this->ver_impuesto_1[] = $dados_ver_impuesto_1;
+                  } 
+              } 
+              $this->ver_impuesto = ""; 
+              foreach ($this->ver_impuesto_1 as $dados_ver_impuesto_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_impuesto .= ";";
+                   } 
+                   $this->ver_impuesto .= $dados_ver_impuesto_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_impuesto';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_impuesto
+
+    function ValidateField_ver_stock(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_stock == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_stock = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_stock))
+          {
+              $x = 0; 
+              $this->ver_stock_1 = array(); 
+              foreach ($this->ver_stock as $ind => $dados_ver_stock_1 ) 
+              {
+                  if ($dados_ver_stock_1 != "") 
+                  {
+                      $this->ver_stock_1[] = $dados_ver_stock_1;
+                  } 
+              } 
+              $this->ver_stock = ""; 
+              foreach ($this->ver_stock_1 as $dados_ver_stock_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_stock .= ";";
+                   } 
+                   $this->ver_stock .= $dados_ver_stock_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_stock';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_stock
+
+    function ValidateField_ver_ubicacion(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_ubicacion == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_ubicacion = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_ubicacion))
+          {
+              $x = 0; 
+              $this->ver_ubicacion_1 = array(); 
+              foreach ($this->ver_ubicacion as $ind => $dados_ver_ubicacion_1 ) 
+              {
+                  if ($dados_ver_ubicacion_1 != "") 
+                  {
+                      $this->ver_ubicacion_1[] = $dados_ver_ubicacion_1;
+                  } 
+              } 
+              $this->ver_ubicacion = ""; 
+              foreach ($this->ver_ubicacion_1 as $dados_ver_ubicacion_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_ubicacion .= ";";
+                   } 
+                   $this->ver_ubicacion .= $dados_ver_ubicacion_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_ubicacion';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_ubicacion
+
+    function ValidateField_ver_costo(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_costo == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_costo = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_costo))
+          {
+              $x = 0; 
+              $this->ver_costo_1 = array(); 
+              foreach ($this->ver_costo as $ind => $dados_ver_costo_1 ) 
+              {
+                  if ($dados_ver_costo_1 != "") 
+                  {
+                      $this->ver_costo_1[] = $dados_ver_costo_1;
+                  } 
+              } 
+              $this->ver_costo = ""; 
+              foreach ($this->ver_costo_1 as $dados_ver_costo_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_costo .= ";";
+                   } 
+                   $this->ver_costo .= $dados_ver_costo_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_costo';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_costo
+
+    function ValidateField_ver_proveedor(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_proveedor == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_proveedor = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_proveedor))
+          {
+              $x = 0; 
+              $this->ver_proveedor_1 = array(); 
+              foreach ($this->ver_proveedor as $ind => $dados_ver_proveedor_1 ) 
+              {
+                  if ($dados_ver_proveedor_1 != "") 
+                  {
+                      $this->ver_proveedor_1[] = $dados_ver_proveedor_1;
+                  } 
+              } 
+              $this->ver_proveedor = ""; 
+              foreach ($this->ver_proveedor_1 as $dados_ver_proveedor_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_proveedor .= ";";
+                   } 
+                   $this->ver_proveedor .= $dados_ver_proveedor_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_proveedor';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_proveedor
+
+    function ValidateField_ver_combo(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->ver_combo == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->ver_combo = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->ver_combo))
+          {
+              $x = 0; 
+              $this->ver_combo_1 = array(); 
+              foreach ($this->ver_combo as $ind => $dados_ver_combo_1 ) 
+              {
+                  if ($dados_ver_combo_1 != "") 
+                  {
+                      $this->ver_combo_1[] = $dados_ver_combo_1;
+                  } 
+              } 
+              $this->ver_combo = ""; 
+              foreach ($this->ver_combo_1 as $dados_ver_combo_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->ver_combo .= ";";
+                   } 
+                   $this->ver_combo .= $dados_ver_combo_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'ver_combo';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_ver_combo
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -4581,6 +5493,18 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['columna_whatsapp'] = $this->columna_whatsapp;
     $this->nmgp_dados_form['columna_npedido'] = $this->columna_npedido;
     $this->nmgp_dados_form['columna_reg_pdf_propio'] = $this->columna_reg_pdf_propio;
+    $this->nmgp_dados_form['ver_grupo'] = $this->ver_grupo;
+    $this->nmgp_dados_form['ver_codigo'] = $this->ver_codigo;
+    $this->nmgp_dados_form['ver_imagen'] = $this->ver_imagen;
+    $this->nmgp_dados_form['ver_existencia'] = $this->ver_existencia;
+    $this->nmgp_dados_form['ver_unidad'] = $this->ver_unidad;
+    $this->nmgp_dados_form['ver_precio'] = $this->ver_precio;
+    $this->nmgp_dados_form['ver_impuesto'] = $this->ver_impuesto;
+    $this->nmgp_dados_form['ver_stock'] = $this->ver_stock;
+    $this->nmgp_dados_form['ver_ubicacion'] = $this->ver_ubicacion;
+    $this->nmgp_dados_form['ver_costo'] = $this->ver_costo;
+    $this->nmgp_dados_form['ver_proveedor'] = $this->ver_proveedor;
+    $this->nmgp_dados_form['ver_combo'] = $this->ver_combo;
     $this->nmgp_dados_form['ultima_edicion'] = $this->ultima_edicion;
     $this->nmgp_dados_form['ruta_bd_tns'] = $this->ruta_bd_tns;
     $this->nmgp_dados_form['ip'] = $this->ip;
@@ -5353,6 +6277,18 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
           $this->ajax_return_values_columna_whatsapp();
           $this->ajax_return_values_columna_npedido();
           $this->ajax_return_values_columna_reg_pdf_propio();
+          $this->ajax_return_values_ver_grupo();
+          $this->ajax_return_values_ver_codigo();
+          $this->ajax_return_values_ver_imagen();
+          $this->ajax_return_values_ver_existencia();
+          $this->ajax_return_values_ver_unidad();
+          $this->ajax_return_values_ver_precio();
+          $this->ajax_return_values_ver_impuesto();
+          $this->ajax_return_values_ver_stock();
+          $this->ajax_return_values_ver_ubicacion();
+          $this->ajax_return_values_ver_costo();
+          $this->ajax_return_values_ver_proveedor();
+          $this->ajax_return_values_ver_combo();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
@@ -6562,6 +7498,570 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup
           }
    }
 
+          //----- ver_grupo
+   function ajax_return_values_ver_grupo($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_grupo", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_grupo);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_grupo = $this->ver_grupo;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_grupo'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_grupo']) && !empty($this->NM_ajax_info['select_html']['ver_grupo']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_grupo']);
+          }
+          $this->NM_ajax_info['fldList']['ver_grupo'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_grupo',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_grupo']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_grupo']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_grupo']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_grupo']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_grupo']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_codigo
+   function ajax_return_values_ver_codigo($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_codigo", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_codigo);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_codigo = $this->ver_codigo;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_codigo'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_codigo']) && !empty($this->NM_ajax_info['select_html']['ver_codigo']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_codigo']);
+          }
+          $this->NM_ajax_info['fldList']['ver_codigo'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_codigo',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_codigo']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_codigo']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_codigo']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_codigo']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_codigo']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_imagen
+   function ajax_return_values_ver_imagen($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_imagen", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_imagen);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_imagen = $this->ver_imagen;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_imagen'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_imagen']) && !empty($this->NM_ajax_info['select_html']['ver_imagen']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_imagen']);
+          }
+          $this->NM_ajax_info['fldList']['ver_imagen'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_imagen',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_imagen']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_imagen']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_imagen']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_imagen']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_imagen']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_existencia
+   function ajax_return_values_ver_existencia($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_existencia", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_existencia);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_existencia = $this->ver_existencia;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_existencia'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_existencia']) && !empty($this->NM_ajax_info['select_html']['ver_existencia']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_existencia']);
+          }
+          $this->NM_ajax_info['fldList']['ver_existencia'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_existencia',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_existencia']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_existencia']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_existencia']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_existencia']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_existencia']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_unidad
+   function ajax_return_values_ver_unidad($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_unidad", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_unidad);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_unidad = $this->ver_unidad;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_unidad'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_unidad']) && !empty($this->NM_ajax_info['select_html']['ver_unidad']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_unidad']);
+          }
+          $this->NM_ajax_info['fldList']['ver_unidad'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_unidad',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_unidad']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_unidad']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_unidad']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_unidad']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_unidad']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_precio
+   function ajax_return_values_ver_precio($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_precio", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_precio);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_precio = $this->ver_precio;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_precio'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_precio']) && !empty($this->NM_ajax_info['select_html']['ver_precio']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_precio']);
+          }
+          $this->NM_ajax_info['fldList']['ver_precio'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_precio',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_precio']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_precio']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_precio']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_precio']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_precio']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_impuesto
+   function ajax_return_values_ver_impuesto($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_impuesto", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_impuesto);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_impuesto = $this->ver_impuesto;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_impuesto'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_impuesto']) && !empty($this->NM_ajax_info['select_html']['ver_impuesto']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_impuesto']);
+          }
+          $this->NM_ajax_info['fldList']['ver_impuesto'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_impuesto',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_impuesto']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_impuesto']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_impuesto']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_impuesto']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_impuesto']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_stock
+   function ajax_return_values_ver_stock($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_stock", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_stock);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_stock = $this->ver_stock;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_stock'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_stock']) && !empty($this->NM_ajax_info['select_html']['ver_stock']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_stock']);
+          }
+          $this->NM_ajax_info['fldList']['ver_stock'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_stock',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_stock']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_stock']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_stock']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_stock']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_stock']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_ubicacion
+   function ajax_return_values_ver_ubicacion($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_ubicacion", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_ubicacion);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_ubicacion = $this->ver_ubicacion;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_ubicacion'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_ubicacion']) && !empty($this->NM_ajax_info['select_html']['ver_ubicacion']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_ubicacion']);
+          }
+          $this->NM_ajax_info['fldList']['ver_ubicacion'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_ubicacion',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_ubicacion']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_ubicacion']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_ubicacion']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_ubicacion']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_ubicacion']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_costo
+   function ajax_return_values_ver_costo($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_costo", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_costo);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_costo = $this->ver_costo;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_costo'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_costo']) && !empty($this->NM_ajax_info['select_html']['ver_costo']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_costo']);
+          }
+          $this->NM_ajax_info['fldList']['ver_costo'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_costo',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_costo']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_costo']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_costo']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_costo']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_costo']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_proveedor
+   function ajax_return_values_ver_proveedor($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_proveedor", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_proveedor);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_proveedor = $this->ver_proveedor;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_proveedor'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_proveedor']) && !empty($this->NM_ajax_info['select_html']['ver_proveedor']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_proveedor']);
+          }
+          $this->NM_ajax_info['fldList']['ver_proveedor'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_proveedor',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_proveedor']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_proveedor']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_proveedor']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_proveedor']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_proveedor']['labList'] = $aLabel;
+          }
+   }
+
+          //----- ver_combo
+   function ajax_return_values_ver_combo($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("ver_combo", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->ver_combo);
+              $aLookup = array();
+              $this->_tmp_lookup_ver_combo = $this->ver_combo;
+
+$aLookup[] = array(form_configuraciones_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_configuraciones_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_combo'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['ver_combo']) && !empty($this->NM_ajax_info['select_html']['ver_combo']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['ver_combo']);
+          }
+          $this->NM_ajax_info['fldList']['ver_combo'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-ver_combo',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['ver_combo']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['ver_combo']['valList'][$i] = form_configuraciones_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['ver_combo']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['ver_combo']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['ver_combo']['labList'] = $aLabel;
+          }
+   }
+
     function fetchUniqueUploadName($originalName, $uploadDir, $fieldName)
     {
         $originalName = trim($originalName);
@@ -6786,6 +8286,18 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
       $NM_val_form['columna_whatsapp'] = $this->columna_whatsapp;
       $NM_val_form['columna_npedido'] = $this->columna_npedido;
       $NM_val_form['columna_reg_pdf_propio'] = $this->columna_reg_pdf_propio;
+      $NM_val_form['ver_grupo'] = $this->ver_grupo;
+      $NM_val_form['ver_codigo'] = $this->ver_codigo;
+      $NM_val_form['ver_imagen'] = $this->ver_imagen;
+      $NM_val_form['ver_existencia'] = $this->ver_existencia;
+      $NM_val_form['ver_unidad'] = $this->ver_unidad;
+      $NM_val_form['ver_precio'] = $this->ver_precio;
+      $NM_val_form['ver_impuesto'] = $this->ver_impuesto;
+      $NM_val_form['ver_stock'] = $this->ver_stock;
+      $NM_val_form['ver_ubicacion'] = $this->ver_ubicacion;
+      $NM_val_form['ver_costo'] = $this->ver_costo;
+      $NM_val_form['ver_proveedor'] = $this->ver_proveedor;
+      $NM_val_form['ver_combo'] = $this->ver_combo;
       $NM_val_form['ultima_edicion'] = $this->ultima_edicion;
       $NM_val_form['ruta_bd_tns'] = $this->ruta_bd_tns;
       $NM_val_form['ip'] = $this->ip;
@@ -7084,6 +8596,66 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
               $this->columna_reg_pdf_propio = "null"; 
               $NM_val_null[] = "columna_reg_pdf_propio";
           } 
+          if ($this->ver_grupo == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_grupo = "null"; 
+              $NM_val_null[] = "ver_grupo";
+          } 
+          if ($this->ver_codigo == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_codigo = "null"; 
+              $NM_val_null[] = "ver_codigo";
+          } 
+          if ($this->ver_imagen == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_imagen = "null"; 
+              $NM_val_null[] = "ver_imagen";
+          } 
+          if ($this->ver_existencia == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_existencia = "null"; 
+              $NM_val_null[] = "ver_existencia";
+          } 
+          if ($this->ver_unidad == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_unidad = "null"; 
+              $NM_val_null[] = "ver_unidad";
+          } 
+          if ($this->ver_precio == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_precio = "null"; 
+              $NM_val_null[] = "ver_precio";
+          } 
+          if ($this->ver_impuesto == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_impuesto = "null"; 
+              $NM_val_null[] = "ver_impuesto";
+          } 
+          if ($this->ver_stock == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_stock = "null"; 
+              $NM_val_null[] = "ver_stock";
+          } 
+          if ($this->ver_ubicacion == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_ubicacion = "null"; 
+              $NM_val_null[] = "ver_ubicacion";
+          } 
+          if ($this->ver_costo == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_costo = "null"; 
+              $NM_val_null[] = "ver_costo";
+          } 
+          if ($this->ver_proveedor == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_proveedor = "null"; 
+              $NM_val_null[] = "ver_proveedor";
+          } 
+          if ($this->ver_combo == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->ver_combo = "null"; 
+              $NM_val_null[] = "ver_combo";
+          } 
       }
       if ($this->nmgp_opcao == "alterar") 
       {
@@ -7154,37 +8726,37 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = #$this->fecha#, activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio'"; 
+                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = #$this->fecha#, activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio', ver_grupo = '$this->ver_grupo', ver_codigo = '$this->ver_codigo', ver_imagen = '$this->ver_imagen', ver_existencia = '$this->ver_existencia', ver_unidad = '$this->ver_unidad', ver_precio = '$this->ver_precio', ver_impuesto = '$this->ver_impuesto', ver_stock = '$this->ver_stock', ver_ubicacion = '$this->ver_ubicacion', ver_costo = '$this->ver_costo', ver_proveedor = '$this->ver_proveedor', ver_combo = '$this->ver_combo'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio'"; 
+                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio', ver_grupo = '$this->ver_grupo', ver_codigo = '$this->ver_codigo', ver_imagen = '$this->ver_imagen', ver_existencia = '$this->ver_existencia', ver_unidad = '$this->ver_unidad', ver_precio = '$this->ver_precio', ver_impuesto = '$this->ver_impuesto', ver_stock = '$this->ver_stock', ver_ubicacion = '$this->ver_ubicacion', ver_costo = '$this->ver_costo', ver_proveedor = '$this->ver_proveedor', ver_combo = '$this->ver_combo'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio'"; 
+                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio', ver_grupo = '$this->ver_grupo', ver_codigo = '$this->ver_codigo', ver_imagen = '$this->ver_imagen', ver_existencia = '$this->ver_existencia', ver_unidad = '$this->ver_unidad', ver_precio = '$this->ver_precio', ver_impuesto = '$this->ver_impuesto', ver_stock = '$this->ver_stock', ver_ubicacion = '$this->ver_ubicacion', ver_costo = '$this->ver_costo', ver_proveedor = '$this->ver_proveedor', ver_combo = '$this->ver_combo'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = EXTEND('$this->fecha', YEAR TO DAY), activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio'"; 
+                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = EXTEND('$this->fecha', YEAR TO DAY), activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio', ver_grupo = '$this->ver_grupo', ver_codigo = '$this->ver_codigo', ver_imagen = '$this->ver_imagen', ver_existencia = '$this->ver_existencia', ver_unidad = '$this->ver_unidad', ver_precio = '$this->ver_precio', ver_impuesto = '$this->ver_impuesto', ver_stock = '$this->ver_stock', ver_ubicacion = '$this->ver_ubicacion', ver_costo = '$this->ver_costo', ver_proveedor = '$this->ver_proveedor', ver_combo = '$this->ver_combo'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio'"; 
+                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio', ver_grupo = '$this->ver_grupo', ver_codigo = '$this->ver_codigo', ver_imagen = '$this->ver_imagen', ver_existencia = '$this->ver_existencia', ver_unidad = '$this->ver_unidad', ver_precio = '$this->ver_precio', ver_impuesto = '$this->ver_impuesto', ver_stock = '$this->ver_stock', ver_ubicacion = '$this->ver_ubicacion', ver_costo = '$this->ver_costo', ver_proveedor = '$this->ver_proveedor', ver_combo = '$this->ver_combo'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio'"; 
+                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio', ver_grupo = '$this->ver_grupo', ver_codigo = '$this->ver_codigo', ver_imagen = '$this->ver_imagen', ver_existencia = '$this->ver_existencia', ver_unidad = '$this->ver_unidad', ver_precio = '$this->ver_precio', ver_impuesto = '$this->ver_impuesto', ver_stock = '$this->ver_stock', ver_ubicacion = '$this->ver_ubicacion', ver_costo = '$this->ver_costo', ver_proveedor = '$this->ver_proveedor', ver_combo = '$this->ver_combo'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio'"; 
+                  $SC_fields_update[] = "lineasporfactura = $this->lineasporfactura, consolidararticulos = '$this->consolidararticulos', serial = '$this->serial', fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", activo = '$this->activo', espaciado = $this->espaciado, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', refresh_grid_doc = $this->refresh_grid_doc, modificainvpedido = '$this->modificainvpedido', caja_movil = '$this->caja_movil', essociedad = '$this->essociedad', grancontr = '$this->grancontr', apertura_caja = '$this->apertura_caja', control_diasmora = '$this->control_diasmora', control_costo = '$this->control_costo', activar_console_log = '$this->activar_console_log', pago_automatico = '$this->pago_automatico', tipodoc_pordefecto_pos = '$this->tipodoc_pordefecto_pos', codproducto_en_facventa = '$this->codproducto_en_facventa', noborrar_tmp_enpos = '$this->noborrar_tmp_enpos', desactivar_control_sesion = '$this->desactivar_control_sesion', dia_limite_pago = $this->dia_limite_pago, valor_propina_sugerida = $this->valor_propina_sugerida, validar_correo_enlinea = '$this->validar_correo_enlinea', ver_xml_fe = '$this->ver_xml_fe', columna_imprimir_ticket = '$this->columna_imprimir_ticket', columna_imprimir_a4 = '$this->columna_imprimir_a4', columna_whatsapp = '$this->columna_whatsapp', columna_npedido = '$this->columna_npedido', columna_reg_pdf_propio = '$this->columna_reg_pdf_propio', ver_grupo = '$this->ver_grupo', ver_codigo = '$this->ver_codigo', ver_imagen = '$this->ver_imagen', ver_existencia = '$this->ver_existencia', ver_unidad = '$this->ver_unidad', ver_precio = '$this->ver_precio', ver_impuesto = '$this->ver_impuesto', ver_stock = '$this->ver_stock', ver_ubicacion = '$this->ver_ubicacion', ver_costo = '$this->ver_costo', ver_proveedor = '$this->ver_proveedor', ver_combo = '$this->ver_combo'"; 
               } 
               if (isset($NM_val_form['ultima_edicion']) && $NM_val_form['ultima_edicion'] != $this->nmgp_dados_select['ultima_edicion']) 
               { 
@@ -7382,7 +8954,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('lineasporfactura', 'consolidararticulos', 'serial', 'fecha', 'activo', 'espaciado', 'caja_movil', 'pago_automatico', 'dia_limite_pago', 'refresh_grid_doc', 'desactivar_control_sesion', 'nombre_pc', 'nombre_impre', 'essociedad', 'grancontr', 'idconfiguraciones', 'control_diasmora', 'control_costo', 'modificainvpedido', 'tipodoc_pordefecto_pos', 'ver_xml_fe', 'noborrar_tmp_enpos', 'validar_correo_enlinea', 'apertura_caja', 'activar_console_log', 'codproducto_en_facventa', 'valor_propina_sugerida', 'columna_imprimir_ticket', 'columna_imprimir_a4', 'columna_whatsapp', 'columna_npedido', 'columna_reg_pdf_propio'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('lineasporfactura', 'consolidararticulos', 'serial', 'fecha', 'activo', 'espaciado', 'caja_movil', 'pago_automatico', 'dia_limite_pago', 'refresh_grid_doc', 'desactivar_control_sesion', 'nombre_pc', 'nombre_impre', 'essociedad', 'grancontr', 'idconfiguraciones', 'control_diasmora', 'control_costo', 'modificainvpedido', 'tipodoc_pordefecto_pos', 'ver_xml_fe', 'noborrar_tmp_enpos', 'validar_correo_enlinea', 'apertura_caja', 'activar_console_log', 'codproducto_en_facventa', 'valor_propina_sugerida', 'columna_imprimir_ticket', 'columna_imprimir_a4', 'columna_whatsapp', 'columna_npedido', 'columna_reg_pdf_propio', 'ver_grupo', 'ver_codigo', 'ver_imagen', 'ver_existencia', 'ver_unidad', 'ver_precio', 'ver_impuesto', 'ver_stock', 'ver_ubicacion', 'ver_costo', 'ver_proveedor', 'ver_combo'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -7442,7 +9014,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", '$this->ultima_edicion'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES ($this->lineasporfactura, '$this->consolidararticulos', '$this->serial', #$this->fecha#, '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', #$this->fecha_activacion#, '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES ($this->lineasporfactura, '$this->consolidararticulos', '$this->serial', #$this->fecha#, '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', #$this->fecha_activacion#, '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
@@ -7453,7 +9025,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", '$this->ultima_edicion'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
@@ -7464,7 +9036,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", '$this->ultima_edicion'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
@@ -7475,7 +9047,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", TO_DATE('$this->ultima_edicion', 'yyyy-mm-dd hh24:mi:ss')";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
@@ -7486,7 +9058,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", '$this->ultima_edicion'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', EXTEND('$this->fecha', YEAR TO DAY), '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', EXTEND('$this->fecha_activacion', YEAR TO FRACTION), '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', EXTEND('$this->fecha', YEAR TO DAY), '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', EXTEND('$this->fecha_activacion', YEAR TO FRACTION), '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
@@ -7497,7 +9069,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", '$this->ultima_edicion'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
@@ -7508,7 +9080,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", '$this->ultima_edicion'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
@@ -7519,7 +9091,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", TO_DATE('$this->ultima_edicion', 'yyyy-mm-dd hh24:mi:ss')";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               else
               {
@@ -7530,7 +9102,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", ultima_edicion";
                        $compl_insert_val .= ", '$this->ultima_edicion'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "lineasporfactura, consolidararticulos, serial, fecha, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo $compl_insert) VALUES (" . $NM_seq_auto . "$this->lineasporfactura, '$this->consolidararticulos', '$this->serial', " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", '$this->activo', $this->espaciado, '$this->nombre_pc', '$this->nombre_impre', '$this->ruta_bd_tns', '$this->ip', $this->refresh_grid_doc, '$this->modificainvpedido', '$this->caja_movil', '$this->integrar_tns', '$this->essociedad', '$this->grancontr', '$this->apertura_caja', '$this->control_diasmora', '$this->control_costo', '$this->activar_console_log', '$this->pago_automatico', '$this->tipodoc_pordefecto_pos', '$this->nube_pedidos', '$this->nube_inventario', '$this->nube_cartera', '$this->nube_tesoreria', '$this->nube_agenda', '$this->nube_compras', '$this->nube_codigo', '$this->token', '$this->password', '$this->codproducto_en_facventa', '$this->habilitar_comprobantes', '$this->noborrar_tmp_enpos', '$this->desactivar_control_sesion', $this->dia_limite_pago, '$this->licencia_activa', " . $this->Ini->date_delim . $this->fecha_activacion . $this->Ini->date_delim1 . ", '$this->cod_cliente', $this->valor_propina_sugerida, '$this->validar_correo_enlinea', '$this->ver_xml_fe', '$this->columna_imprimir_ticket', '$this->columna_imprimir_a4', '$this->columna_whatsapp', '$this->columna_npedido', '$this->columna_reg_pdf_propio', '$this->ver_grupo', '$this->ver_codigo', '$this->ver_imagen', '$this->ver_existencia', '$this->ver_unidad', '$this->ver_precio', '$this->ver_impuesto', '$this->ver_stock', '$this->ver_ubicacion', '$this->ver_costo', '$this->ver_proveedor', '$this->ver_combo' $compl_insert_val)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -8041,23 +9613,23 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), ultima_edicion, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, str_replace (convert(char(10),fecha_activacion,102), '.', '-') + ' ' + convert(char(8),fecha_activacion,20), cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), ultima_edicion, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, str_replace (convert(char(10),fecha_activacion,102), '.', '-') + ' ' + convert(char(8),fecha_activacion,20), cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, convert(char(23),fecha,121), ultima_edicion, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, convert(char(23),fecha_activacion,121), cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, convert(char(23),fecha,121), ultima_edicion, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, convert(char(23),fecha_activacion,121), cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, fecha, TO_DATE(TO_CHAR(ultima_edicion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, fecha, TO_DATE(TO_CHAR(ultima_edicion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, EXTEND(fecha, YEAR TO DAY), ultima_edicion, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, EXTEND(fecha_activacion, YEAR TO FRACTION), cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, EXTEND(fecha, YEAR TO DAY), ultima_edicion, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, EXTEND(fecha_activacion, YEAR TO FRACTION), cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, fecha, ultima_edicion, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idconfiguraciones, lineasporfactura, consolidararticulos, serial, fecha, ultima_edicion, activo, espaciado, nombre_pc, nombre_impre, ruta_bd_tns, ip, refresh_grid_doc, modificainvpedido, caja_movil, integrar_tns, essociedad, grancontr, apertura_caja, control_diasmora, control_costo, activar_console_log, pago_automatico, tipodoc_pordefecto_pos, nube_pedidos, nube_inventario, nube_cartera, nube_tesoreria, nube_agenda, nube_compras, nube_codigo, token, password, codproducto_en_facventa, habilitar_comprobantes, noborrar_tmp_enpos, desactivar_control_sesion, dia_limite_pago, licencia_activa, fecha_activacion, cod_cliente, valor_propina_sugerida, validar_correo_enlinea, ver_xml_fe, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = "idconfiguraciones='1'";
@@ -8305,6 +9877,30 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_select['columna_npedido'] = $this->columna_npedido;
               $this->columna_reg_pdf_propio = $rs->fields[48] ; 
               $this->nmgp_dados_select['columna_reg_pdf_propio'] = $this->columna_reg_pdf_propio;
+              $this->ver_grupo = $rs->fields[49] ; 
+              $this->nmgp_dados_select['ver_grupo'] = $this->ver_grupo;
+              $this->ver_codigo = $rs->fields[50] ; 
+              $this->nmgp_dados_select['ver_codigo'] = $this->ver_codigo;
+              $this->ver_imagen = $rs->fields[51] ; 
+              $this->nmgp_dados_select['ver_imagen'] = $this->ver_imagen;
+              $this->ver_existencia = $rs->fields[52] ; 
+              $this->nmgp_dados_select['ver_existencia'] = $this->ver_existencia;
+              $this->ver_unidad = $rs->fields[53] ; 
+              $this->nmgp_dados_select['ver_unidad'] = $this->ver_unidad;
+              $this->ver_precio = $rs->fields[54] ; 
+              $this->nmgp_dados_select['ver_precio'] = $this->ver_precio;
+              $this->ver_impuesto = $rs->fields[55] ; 
+              $this->nmgp_dados_select['ver_impuesto'] = $this->ver_impuesto;
+              $this->ver_stock = $rs->fields[56] ; 
+              $this->nmgp_dados_select['ver_stock'] = $this->ver_stock;
+              $this->ver_ubicacion = $rs->fields[57] ; 
+              $this->nmgp_dados_select['ver_ubicacion'] = $this->ver_ubicacion;
+              $this->ver_costo = $rs->fields[58] ; 
+              $this->nmgp_dados_select['ver_costo'] = $this->ver_costo;
+              $this->ver_proveedor = $rs->fields[59] ; 
+              $this->nmgp_dados_select['ver_proveedor'] = $this->ver_proveedor;
+              $this->ver_combo = $rs->fields[60] ; 
+              $this->nmgp_dados_select['ver_combo'] = $this->ver_combo;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->nm_troca_decimal(",", ".");
               $this->idconfiguraciones = (string)$this->idconfiguraciones; 
@@ -8436,6 +10032,30 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["columna_npedido"] = $this->columna_npedido;
               $this->columna_reg_pdf_propio = "NO";  
               $this->nmgp_dados_form["columna_reg_pdf_propio"] = $this->columna_reg_pdf_propio;
+              $this->ver_grupo = "NO";  
+              $this->nmgp_dados_form["ver_grupo"] = $this->ver_grupo;
+              $this->ver_codigo = "SI";  
+              $this->nmgp_dados_form["ver_codigo"] = $this->ver_codigo;
+              $this->ver_imagen = "NO";  
+              $this->nmgp_dados_form["ver_imagen"] = $this->ver_imagen;
+              $this->ver_existencia = "SI";  
+              $this->nmgp_dados_form["ver_existencia"] = $this->ver_existencia;
+              $this->ver_unidad = "SI";  
+              $this->nmgp_dados_form["ver_unidad"] = $this->ver_unidad;
+              $this->ver_precio = "SI";  
+              $this->nmgp_dados_form["ver_precio"] = $this->ver_precio;
+              $this->ver_impuesto = "NO";  
+              $this->nmgp_dados_form["ver_impuesto"] = $this->ver_impuesto;
+              $this->ver_stock = "SI";  
+              $this->nmgp_dados_form["ver_stock"] = $this->ver_stock;
+              $this->ver_ubicacion = "NO";  
+              $this->nmgp_dados_form["ver_ubicacion"] = $this->ver_ubicacion;
+              $this->ver_costo = "NO";  
+              $this->nmgp_dados_form["ver_costo"] = $this->ver_costo;
+              $this->ver_proveedor = "NO";  
+              $this->nmgp_dados_form["ver_proveedor"] = $this->ver_proveedor;
+              $this->ver_combo = "NO";  
+              $this->nmgp_dados_form["ver_combo"] = $this->ver_combo;
               $this->probarnube = "";  
               $this->nmgp_dados_form["probarnube"] = $this->probarnube;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['dados_form'] = $this->nmgp_dados_form;
@@ -8494,6 +10114,18 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                   $this->columna_whatsapp = $this->nmgp_dados_select['columna_whatsapp'];  
                   $this->columna_npedido = $this->nmgp_dados_select['columna_npedido'];  
                   $this->columna_reg_pdf_propio = $this->nmgp_dados_select['columna_reg_pdf_propio'];  
+                  $this->ver_grupo = $this->nmgp_dados_select['ver_grupo'];  
+                  $this->ver_codigo = $this->nmgp_dados_select['ver_codigo'];  
+                  $this->ver_imagen = $this->nmgp_dados_select['ver_imagen'];  
+                  $this->ver_existencia = $this->nmgp_dados_select['ver_existencia'];  
+                  $this->ver_unidad = $this->nmgp_dados_select['ver_unidad'];  
+                  $this->ver_precio = $this->nmgp_dados_select['ver_precio'];  
+                  $this->ver_impuesto = $this->nmgp_dados_select['ver_impuesto'];  
+                  $this->ver_stock = $this->nmgp_dados_select['ver_stock'];  
+                  $this->ver_ubicacion = $this->nmgp_dados_select['ver_ubicacion'];  
+                  $this->ver_costo = $this->nmgp_dados_select['ver_costo'];  
+                  $this->ver_proveedor = $this->nmgp_dados_select['ver_proveedor'];  
+                  $this->ver_combo = $this->nmgp_dados_select['ver_combo'];  
               }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['foreign_key']))
@@ -8791,6 +10423,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
         include_once("form_configuraciones_mob_form0.php");
         include_once("form_configuraciones_mob_form1.php");
         include_once("form_configuraciones_mob_form2.php");
+        include_once("form_configuraciones_mob_form3.php");
         $this->hideFormPages();
  }
 
@@ -8799,6 +10432,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                         'Pag1' => '0',
                         'Pag2' => '1',
                         'Pag3' => '2',
+                        'Pag4' => '3',
                 );
 
                 $this->Ini->nm_page_blocks = array(
@@ -8812,6 +10446,9 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                         'Pag3' => array(
                                 3 => 'on',
                         ),
+                        'Pag4' => array(
+                                4 => 'on',
+                        ),
                 );
 
                 $this->Ini->nm_block_page = array(
@@ -8819,6 +10456,7 @@ $_SESSION['scriptcase']['form_configuraciones_mob']['contr_erro'] = 'off';
                         1 => 'Pag1',
                         2 => 'Pag2',
                         3 => 'Pag3',
+                        4 => 'Pag4',
                 );
 
                 if (!empty($this->Ini->nm_hidden_blocos)) {
@@ -9527,6 +11165,102 @@ function sc_file_size($file, $format = false)
        return $todo;
 
    }
+   function Form_lookup_ver_grupo()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_codigo()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_imagen()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_existencia()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_unidad()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_precio()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_impuesto()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_stock()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_ubicacion()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_costo()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_proveedor()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_ver_combo()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
    function SC_fast_search($in_fields, $arg_search, $data_search)
    {
       $fields = (strpos($in_fields, "SC_all_Cmp") !== false) ? array("SC_all_Cmp") : explode(";", $in_fields);
@@ -10058,6 +11792,18 @@ if (parent && parent.scAjaxDetailValue)
                         'columna_whatsapp' => 'columna_whatsapp',
                         'columna_npedido' => 'columna_npedido',
                         'columna_reg_pdf_propio' => 'columna_reg_pdf_propio',
+                        'ver_grupo' => 'ver_grupo',
+                        'ver_codigo' => 'ver_codigo',
+                        'ver_imagen' => 'ver_imagen',
+                        'ver_existencia' => 'ver_existencia',
+                        'ver_unidad' => 'ver_unidad',
+                        'ver_precio' => 'ver_precio',
+                        'ver_impuesto' => 'ver_impuesto',
+                        'ver_stock' => 'ver_stock',
+                        'ver_ubicacion' => 'ver_ubicacion',
+                        'ver_costo' => 'ver_costo',
+                        'ver_proveedor' => 'ver_proveedor',
+                        'ver_combo' => 'ver_combo',
                        );
         if (isset($aFocus[$sFieldName]))
         {

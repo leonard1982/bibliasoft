@@ -4028,6 +4028,450 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_configuraciones_validate_columna_reg_pdf_propio_cb
 
+  // ---------- Validate ver_grupo
+  function do_ajax_form_configuraciones_validate_ver_grupo()
+  {
+    var nomeCampo_ver_grupo = "ver_grupo";
+    var var_ver_grupo = scAjaxGetFieldCheckbox(nomeCampo_ver_grupo, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_grupo(var_ver_grupo, var_script_case_init, do_ajax_form_configuraciones_validate_ver_grupo_cb);
+  } // do_ajax_form_configuraciones_validate_ver_grupo
+
+  function do_ajax_form_configuraciones_validate_ver_grupo_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_grupo";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_grupo_cb
+
+  // ---------- Validate ver_codigo
+  function do_ajax_form_configuraciones_validate_ver_codigo()
+  {
+    var nomeCampo_ver_codigo = "ver_codigo";
+    var var_ver_codigo = scAjaxGetFieldCheckbox(nomeCampo_ver_codigo, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_codigo(var_ver_codigo, var_script_case_init, do_ajax_form_configuraciones_validate_ver_codigo_cb);
+  } // do_ajax_form_configuraciones_validate_ver_codigo
+
+  function do_ajax_form_configuraciones_validate_ver_codigo_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_codigo";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_codigo_cb
+
+  // ---------- Validate ver_imagen
+  function do_ajax_form_configuraciones_validate_ver_imagen()
+  {
+    var nomeCampo_ver_imagen = "ver_imagen";
+    var var_ver_imagen = scAjaxGetFieldCheckbox(nomeCampo_ver_imagen, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_imagen(var_ver_imagen, var_script_case_init, do_ajax_form_configuraciones_validate_ver_imagen_cb);
+  } // do_ajax_form_configuraciones_validate_ver_imagen
+
+  function do_ajax_form_configuraciones_validate_ver_imagen_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_imagen";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_imagen_cb
+
+  // ---------- Validate ver_existencia
+  function do_ajax_form_configuraciones_validate_ver_existencia()
+  {
+    var nomeCampo_ver_existencia = "ver_existencia";
+    var var_ver_existencia = scAjaxGetFieldCheckbox(nomeCampo_ver_existencia, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_existencia(var_ver_existencia, var_script_case_init, do_ajax_form_configuraciones_validate_ver_existencia_cb);
+  } // do_ajax_form_configuraciones_validate_ver_existencia
+
+  function do_ajax_form_configuraciones_validate_ver_existencia_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_existencia";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_existencia_cb
+
+  // ---------- Validate ver_unidad
+  function do_ajax_form_configuraciones_validate_ver_unidad()
+  {
+    var nomeCampo_ver_unidad = "ver_unidad";
+    var var_ver_unidad = scAjaxGetFieldCheckbox(nomeCampo_ver_unidad, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_unidad(var_ver_unidad, var_script_case_init, do_ajax_form_configuraciones_validate_ver_unidad_cb);
+  } // do_ajax_form_configuraciones_validate_ver_unidad
+
+  function do_ajax_form_configuraciones_validate_ver_unidad_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_unidad";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_unidad_cb
+
+  // ---------- Validate ver_precio
+  function do_ajax_form_configuraciones_validate_ver_precio()
+  {
+    var nomeCampo_ver_precio = "ver_precio";
+    var var_ver_precio = scAjaxGetFieldCheckbox(nomeCampo_ver_precio, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_precio(var_ver_precio, var_script_case_init, do_ajax_form_configuraciones_validate_ver_precio_cb);
+  } // do_ajax_form_configuraciones_validate_ver_precio
+
+  function do_ajax_form_configuraciones_validate_ver_precio_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_precio";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_precio_cb
+
+  // ---------- Validate ver_impuesto
+  function do_ajax_form_configuraciones_validate_ver_impuesto()
+  {
+    var nomeCampo_ver_impuesto = "ver_impuesto";
+    var var_ver_impuesto = scAjaxGetFieldCheckbox(nomeCampo_ver_impuesto, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_impuesto(var_ver_impuesto, var_script_case_init, do_ajax_form_configuraciones_validate_ver_impuesto_cb);
+  } // do_ajax_form_configuraciones_validate_ver_impuesto
+
+  function do_ajax_form_configuraciones_validate_ver_impuesto_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_impuesto";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_impuesto_cb
+
+  // ---------- Validate ver_stock
+  function do_ajax_form_configuraciones_validate_ver_stock()
+  {
+    var nomeCampo_ver_stock = "ver_stock";
+    var var_ver_stock = scAjaxGetFieldCheckbox(nomeCampo_ver_stock, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_stock(var_ver_stock, var_script_case_init, do_ajax_form_configuraciones_validate_ver_stock_cb);
+  } // do_ajax_form_configuraciones_validate_ver_stock
+
+  function do_ajax_form_configuraciones_validate_ver_stock_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_stock";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_stock_cb
+
+  // ---------- Validate ver_ubicacion
+  function do_ajax_form_configuraciones_validate_ver_ubicacion()
+  {
+    var nomeCampo_ver_ubicacion = "ver_ubicacion";
+    var var_ver_ubicacion = scAjaxGetFieldCheckbox(nomeCampo_ver_ubicacion, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_ubicacion(var_ver_ubicacion, var_script_case_init, do_ajax_form_configuraciones_validate_ver_ubicacion_cb);
+  } // do_ajax_form_configuraciones_validate_ver_ubicacion
+
+  function do_ajax_form_configuraciones_validate_ver_ubicacion_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_ubicacion";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_ubicacion_cb
+
+  // ---------- Validate ver_costo
+  function do_ajax_form_configuraciones_validate_ver_costo()
+  {
+    var nomeCampo_ver_costo = "ver_costo";
+    var var_ver_costo = scAjaxGetFieldCheckbox(nomeCampo_ver_costo, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_costo(var_ver_costo, var_script_case_init, do_ajax_form_configuraciones_validate_ver_costo_cb);
+  } // do_ajax_form_configuraciones_validate_ver_costo
+
+  function do_ajax_form_configuraciones_validate_ver_costo_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_costo";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_costo_cb
+
+  // ---------- Validate ver_proveedor
+  function do_ajax_form_configuraciones_validate_ver_proveedor()
+  {
+    var nomeCampo_ver_proveedor = "ver_proveedor";
+    var var_ver_proveedor = scAjaxGetFieldCheckbox(nomeCampo_ver_proveedor, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_proveedor(var_ver_proveedor, var_script_case_init, do_ajax_form_configuraciones_validate_ver_proveedor_cb);
+  } // do_ajax_form_configuraciones_validate_ver_proveedor
+
+  function do_ajax_form_configuraciones_validate_ver_proveedor_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_proveedor";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_proveedor_cb
+
+  // ---------- Validate ver_combo
+  function do_ajax_form_configuraciones_validate_ver_combo()
+  {
+    var nomeCampo_ver_combo = "ver_combo";
+    var var_ver_combo = scAjaxGetFieldCheckbox(nomeCampo_ver_combo, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_validate_ver_combo(var_ver_combo, var_script_case_init, do_ajax_form_configuraciones_validate_ver_combo_cb);
+  } // do_ajax_form_configuraciones_validate_ver_combo
+
+  function do_ajax_form_configuraciones_validate_ver_combo_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ver_combo";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_validate_ver_combo_cb
+
   // ---------- Event onclick apertura_caja
   function do_ajax_form_configuraciones_event_apertura_caja_onclick()
   {
@@ -4482,6 +4926,18 @@ function scJs_sweetalert_params(params) {
     var var_columna_whatsapp = scAjaxGetFieldCheckbox("columna_whatsapp", ";");
     var var_columna_npedido = scAjaxGetFieldCheckbox("columna_npedido", ";");
     var var_columna_reg_pdf_propio = scAjaxGetFieldCheckbox("columna_reg_pdf_propio", ";");
+    var var_ver_grupo = scAjaxGetFieldCheckbox("ver_grupo", ";");
+    var var_ver_codigo = scAjaxGetFieldCheckbox("ver_codigo", ";");
+    var var_ver_imagen = scAjaxGetFieldCheckbox("ver_imagen", ";");
+    var var_ver_existencia = scAjaxGetFieldCheckbox("ver_existencia", ";");
+    var var_ver_unidad = scAjaxGetFieldCheckbox("ver_unidad", ";");
+    var var_ver_precio = scAjaxGetFieldCheckbox("ver_precio", ";");
+    var var_ver_impuesto = scAjaxGetFieldCheckbox("ver_impuesto", ";");
+    var var_ver_stock = scAjaxGetFieldCheckbox("ver_stock", ";");
+    var var_ver_ubicacion = scAjaxGetFieldCheckbox("ver_ubicacion", ";");
+    var var_ver_costo = scAjaxGetFieldCheckbox("ver_costo", ";");
+    var var_ver_proveedor = scAjaxGetFieldCheckbox("ver_proveedor", ";");
+    var var_ver_combo = scAjaxGetFieldCheckbox("ver_combo", ";");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -4491,7 +4947,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_configuraciones_submit_form(var_lineasporfactura, var_consolidararticulos, var_serial, var_fecha, var_activo, var_espaciado, var_caja_movil, var_pago_automatico, var_dia_limite_pago, var_refresh_grid_doc, var_desactivar_control_sesion, var_nombre_pc, var_nombre_impre, var_essociedad, var_grancontr, var_idconfiguraciones, var_control_diasmora, var_control_costo, var_modificainvpedido, var_tipodoc_pordefecto_pos, var_ver_xml_fe, var_noborrar_tmp_enpos, var_validar_correo_enlinea, var_apertura_caja, var_activar_console_log, var_codproducto_en_facventa, var_valor_propina_sugerida, var_columna_imprimir_ticket, var_columna_imprimir_a4, var_columna_whatsapp, var_columna_npedido, var_columna_reg_pdf_propio, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_configuraciones_submit_form_cb);
+    x_ajax_form_configuraciones_submit_form(var_lineasporfactura, var_consolidararticulos, var_serial, var_fecha, var_activo, var_espaciado, var_caja_movil, var_pago_automatico, var_dia_limite_pago, var_refresh_grid_doc, var_desactivar_control_sesion, var_nombre_pc, var_nombre_impre, var_essociedad, var_grancontr, var_idconfiguraciones, var_control_diasmora, var_control_costo, var_modificainvpedido, var_tipodoc_pordefecto_pos, var_ver_xml_fe, var_noborrar_tmp_enpos, var_validar_correo_enlinea, var_apertura_caja, var_activar_console_log, var_codproducto_en_facventa, var_valor_propina_sugerida, var_columna_imprimir_ticket, var_columna_imprimir_a4, var_columna_whatsapp, var_columna_npedido, var_columna_reg_pdf_propio, var_ver_grupo, var_ver_codigo, var_ver_imagen, var_ver_existencia, var_ver_unidad, var_ver_precio, var_ver_impuesto, var_ver_stock, var_ver_ubicacion, var_ver_costo, var_ver_proveedor, var_ver_combo, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_configuraciones_submit_form_cb);
   } // do_ajax_form_configuraciones_submit_form
 
   function do_ajax_form_configuraciones_submit_form_cb(sResp)
@@ -4548,6 +5004,18 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("columna_whatsapp");
       scAjaxHideErrorDisplay("columna_npedido");
       scAjaxHideErrorDisplay("columna_reg_pdf_propio");
+      scAjaxHideErrorDisplay("ver_grupo");
+      scAjaxHideErrorDisplay("ver_codigo");
+      scAjaxHideErrorDisplay("ver_imagen");
+      scAjaxHideErrorDisplay("ver_existencia");
+      scAjaxHideErrorDisplay("ver_unidad");
+      scAjaxHideErrorDisplay("ver_precio");
+      scAjaxHideErrorDisplay("ver_impuesto");
+      scAjaxHideErrorDisplay("ver_stock");
+      scAjaxHideErrorDisplay("ver_ubicacion");
+      scAjaxHideErrorDisplay("ver_costo");
+      scAjaxHideErrorDisplay("ver_proveedor");
+      scAjaxHideErrorDisplay("ver_combo");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['dashboard_info']['under_dashboard']) {
@@ -4636,6 +5104,18 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['
     scAjaxHideErrorDisplay("columna_whatsapp");
     scAjaxHideErrorDisplay("columna_npedido");
     scAjaxHideErrorDisplay("columna_reg_pdf_propio");
+    scAjaxHideErrorDisplay("ver_grupo");
+    scAjaxHideErrorDisplay("ver_codigo");
+    scAjaxHideErrorDisplay("ver_imagen");
+    scAjaxHideErrorDisplay("ver_existencia");
+    scAjaxHideErrorDisplay("ver_unidad");
+    scAjaxHideErrorDisplay("ver_precio");
+    scAjaxHideErrorDisplay("ver_impuesto");
+    scAjaxHideErrorDisplay("ver_stock");
+    scAjaxHideErrorDisplay("ver_ubicacion");
+    scAjaxHideErrorDisplay("ver_costo");
+    scAjaxHideErrorDisplay("ver_proveedor");
+    scAjaxHideErrorDisplay("ver_combo");
     var var_idconfiguraciones = document.F2.idconfiguraciones.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -4752,12 +5232,25 @@ if ($this->Embutida_form)
   ajax_field_list[29] = "columna_whatsapp";
   ajax_field_list[30] = "columna_npedido";
   ajax_field_list[31] = "columna_reg_pdf_propio";
+  ajax_field_list[32] = "ver_grupo";
+  ajax_field_list[33] = "ver_codigo";
+  ajax_field_list[34] = "ver_imagen";
+  ajax_field_list[35] = "ver_existencia";
+  ajax_field_list[36] = "ver_unidad";
+  ajax_field_list[37] = "ver_precio";
+  ajax_field_list[38] = "ver_impuesto";
+  ajax_field_list[39] = "ver_stock";
+  ajax_field_list[40] = "ver_ubicacion";
+  ajax_field_list[41] = "ver_costo";
+  ajax_field_list[42] = "ver_proveedor";
+  ajax_field_list[43] = "ver_combo";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
   ajax_block_list[1] = "1";
   ajax_block_list[2] = "2";
   ajax_block_list[3] = "3";
+  ajax_block_list[4] = "4";
 
   var ajax_error_list = {
     "lineasporfactura": {"label": "LINEAS X FACTURA:", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -4791,7 +5284,19 @@ if ($this->Embutida_form)
     "columna_imprimir_a4": {"label": "Columna Imprimir A4", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "columna_whatsapp": {"label": "Columna Whatsapp", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "columna_npedido": {"label": "Columna No Pedido", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "columna_reg_pdf_propio": {"label": "Columna Regenerar PDF", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "columna_reg_pdf_propio": {"label": "Columna Regenerar PDF", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_grupo": {"label": "Ver Grupo/Familia", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_codigo": {"label": "Ver Código", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_imagen": {"label": "Ver Imagen", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_existencia": {"label": "Ver Existencia", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_unidad": {"label": "Ver Unidad", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_precio": {"label": "Ver Precio", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_impuesto": {"label": "Ver Impuesto", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_stock": {"label": "Ver Stock", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_ubicacion": {"label": "Ver Ubicación", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_costo": {"label": "Ver Costo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_proveedor": {"label": "Ver Proveedor", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ver_combo": {"label": "Ver Combo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -4799,14 +5304,16 @@ if ($this->Embutida_form)
     "0": "hidden_bloco_0",
     "1": "hidden_bloco_1",
     "2": "hidden_bloco_2",
-    "3": "hidden_bloco_3"
+    "3": "hidden_bloco_3",
+    "4": "hidden_bloco_4"
   };
 
   var ajax_block_tab = {
     "hidden_bloco_0": "",
     "hidden_bloco_1": "",
     "hidden_bloco_2": "",
-    "hidden_bloco_3": ""
+    "hidden_bloco_3": "",
+    "hidden_bloco_4": ""
   };
 
   var ajax_field_mult = {
@@ -4841,7 +5348,19 @@ if ($this->Embutida_form)
     "columna_imprimir_a4": new Array(),
     "columna_whatsapp": new Array(),
     "columna_npedido": new Array(),
-    "columna_reg_pdf_propio": new Array()
+    "columna_reg_pdf_propio": new Array(),
+    "ver_grupo": new Array(),
+    "ver_codigo": new Array(),
+    "ver_imagen": new Array(),
+    "ver_existencia": new Array(),
+    "ver_unidad": new Array(),
+    "ver_precio": new Array(),
+    "ver_impuesto": new Array(),
+    "ver_stock": new Array(),
+    "ver_ubicacion": new Array(),
+    "ver_costo": new Array(),
+    "ver_proveedor": new Array(),
+    "ver_combo": new Array()
   };
   ajax_field_mult["lineasporfactura"][1] = "lineasporfactura";
   ajax_field_mult["consolidararticulos"][1] = "consolidararticulos";
@@ -4875,6 +5394,18 @@ if ($this->Embutida_form)
   ajax_field_mult["columna_whatsapp"][1] = "columna_whatsapp";
   ajax_field_mult["columna_npedido"][1] = "columna_npedido";
   ajax_field_mult["columna_reg_pdf_propio"][1] = "columna_reg_pdf_propio";
+  ajax_field_mult["ver_grupo"][1] = "ver_grupo";
+  ajax_field_mult["ver_codigo"][1] = "ver_codigo";
+  ajax_field_mult["ver_imagen"][1] = "ver_imagen";
+  ajax_field_mult["ver_existencia"][1] = "ver_existencia";
+  ajax_field_mult["ver_unidad"][1] = "ver_unidad";
+  ajax_field_mult["ver_precio"][1] = "ver_precio";
+  ajax_field_mult["ver_impuesto"][1] = "ver_impuesto";
+  ajax_field_mult["ver_stock"][1] = "ver_stock";
+  ajax_field_mult["ver_ubicacion"][1] = "ver_ubicacion";
+  ajax_field_mult["ver_costo"][1] = "ver_costo";
+  ajax_field_mult["ver_proveedor"][1] = "ver_proveedor";
+  ajax_field_mult["ver_combo"][1] = "ver_combo";
 
   var ajax_field_id = {
     "lineasporfactura": new Array("hidden_field_label_lineasporfactura", "hidden_field_data_lineasporfactura"),
@@ -4907,7 +5438,19 @@ if ($this->Embutida_form)
     "columna_imprimir_a4": new Array("hidden_field_label_columna_imprimir_a4", "hidden_field_data_columna_imprimir_a4"),
     "columna_whatsapp": new Array("hidden_field_label_columna_whatsapp", "hidden_field_data_columna_whatsapp"),
     "columna_npedido": new Array("hidden_field_label_columna_npedido", "hidden_field_data_columna_npedido"),
-    "columna_reg_pdf_propio": new Array("hidden_field_label_columna_reg_pdf_propio", "hidden_field_data_columna_reg_pdf_propio")
+    "columna_reg_pdf_propio": new Array("hidden_field_label_columna_reg_pdf_propio", "hidden_field_data_columna_reg_pdf_propio"),
+    "ver_grupo": new Array("hidden_field_label_ver_grupo", "hidden_field_data_ver_grupo"),
+    "ver_codigo": new Array("hidden_field_label_ver_codigo", "hidden_field_data_ver_codigo"),
+    "ver_imagen": new Array("hidden_field_label_ver_imagen", "hidden_field_data_ver_imagen"),
+    "ver_existencia": new Array("hidden_field_label_ver_existencia", "hidden_field_data_ver_existencia"),
+    "ver_unidad": new Array("hidden_field_label_ver_unidad", "hidden_field_data_ver_unidad"),
+    "ver_precio": new Array("hidden_field_label_ver_precio", "hidden_field_data_ver_precio"),
+    "ver_impuesto": new Array("hidden_field_label_ver_impuesto", "hidden_field_data_ver_impuesto"),
+    "ver_stock": new Array("hidden_field_label_ver_stock", "hidden_field_data_ver_stock"),
+    "ver_ubicacion": new Array("hidden_field_label_ver_ubicacion", "hidden_field_data_ver_ubicacion"),
+    "ver_costo": new Array("hidden_field_label_ver_costo", "hidden_field_data_ver_costo"),
+    "ver_proveedor": new Array("hidden_field_label_ver_proveedor", "hidden_field_data_ver_proveedor"),
+    "ver_combo": new Array("hidden_field_label_ver_combo", "hidden_field_data_ver_combo")
   };
 
   var ajax_read_only = {
@@ -4942,7 +5485,19 @@ if ($this->Embutida_form)
     "columna_imprimir_a4": "off",
     "columna_whatsapp": "off",
     "columna_npedido": "off",
-    "columna_reg_pdf_propio": "off"
+    "columna_reg_pdf_propio": "off",
+    "ver_grupo": "off",
+    "ver_codigo": "off",
+    "ver_imagen": "off",
+    "ver_existencia": "off",
+    "ver_unidad": "off",
+    "ver_precio": "off",
+    "ver_impuesto": "off",
+    "ver_stock": "off",
+    "ver_ubicacion": "off",
+    "ver_costo": "off",
+    "ver_proveedor": "off",
+    "ver_combo": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -5482,6 +6037,210 @@ if ($this->Embutida_form)
       return;
     }
     if ("columna_reg_pdf_propio" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_grupo" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_codigo" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_imagen" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_existencia" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_unidad" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_precio" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_impuesto" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_stock" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_ubicacion" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_costo" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_proveedor" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ver_combo" == sIndex)
     {
       scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
       updateHeaderFooter(sIndex, aValue);

@@ -2,203 +2,106 @@
 <?php $sc_hidden_no = 1; $sc_hidden_yes = 0; ?>
    <a name="bloco_0"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_2"><!-- bloco_c -->
+<div id="div_hidden_bloco_4"><!-- bloco_c -->
 <?php
    if (!isset($this->nmgp_cmp_hidden['idconfiguraciones']))
    {
        $this->nmgp_cmp_hidden['idconfiguraciones'] = 'off';
    }
 ?>
-<TABLE align="center" id="hidden_bloco_2" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['essociedad']))
-   {
-       $this->nm_new_label['essociedad'] = "Responsable autoretención (Antiguo CREE):";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $essociedad = $this->essociedad;
-   $sStyleHidden_essociedad = '';
-   if (isset($this->nmgp_cmp_hidden['essociedad']) && $this->nmgp_cmp_hidden['essociedad'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['essociedad']);
-       $sStyleHidden_essociedad = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_essociedad = 'display: none;';
-   $sStyleReadInp_essociedad = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['essociedad']) && $this->nmgp_cmp_readonly['essociedad'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['essociedad']);
-       $sStyleReadLab_essociedad = '';
-       $sStyleReadInp_essociedad = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['essociedad']) && $this->nmgp_cmp_hidden['essociedad'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="essociedad" value="<?php echo $this->form_encode_input($this->essociedad) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->essociedad_1 = explode(";", trim($this->essociedad));
-  } 
-  else
-  {
-      if (empty($this->essociedad))
-      {
-          $this->essociedad_1= array(); 
-          $this->essociedad= "NO";
-      } 
-      else
-      {
-          $this->essociedad_1= $this->essociedad; 
-          $this->essociedad= ""; 
-          foreach ($this->essociedad_1 as $cada_essociedad)
-          {
-             if (!empty($essociedad))
-             {
-                 $this->essociedad.= ";"; 
-             } 
-             $this->essociedad.= $cada_essociedad; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormDataOdd css_essociedad_line" id="hidden_field_data_essociedad" style="<?php echo $sStyleHidden_essociedad; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_essociedad_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_essociedad_label" style=""><span id="id_label_essociedad"><?php echo $this->nm_new_label['essociedad']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["essociedad"]) &&  $this->nmgp_cmp_readonly["essociedad"] == "on") { 
-
-$essociedad_look = "";
- if ($this->essociedad == "SI") { $essociedad_look .= "" ;} 
- if (empty($essociedad_look)) { $essociedad_look = $this->essociedad; }
-?>
-<input type="hidden" name="essociedad" value="<?php echo $this->form_encode_input($essociedad) . "\">" . $essociedad_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$essociedad_look = "";
- if ($this->essociedad == "SI") { $essociedad_look .= "" ;} 
- if (empty($essociedad_look)) { $essociedad_look = $this->essociedad; }
-?>
-<span id="id_read_on_essociedad" class="css_essociedad_line" style="<?php echo $sStyleReadLab_essociedad; ?>"><?php echo $this->form_format_readonly("essociedad", $this->form_encode_input($essociedad_look)); ?></span><span id="id_read_off_essociedad" class="css_read_off_essociedad css_essociedad_line" style="<?php echo $sStyleReadInp_essociedad; ?>"><?php echo "<div id=\"idAjaxCheckbox_essociedad\" style=\"display: inline-block\" class=\"css_essociedad_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_essociedad_line"><?php $tempOptionId = "id-opt-essociedad" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-essociedad sc-ui-checkbox-essociedad" name="essociedad[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_essociedad'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->essociedad_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_essociedad_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_essociedad_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-<?php
+<TABLE align="center" id="hidden_bloco_4" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['idconfiguraciones']))
            {
                $this->nmgp_cmp_readonly['idconfiguraciones'] = 'on';
            }
 ?>
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
    <?php
-   if (!isset($this->nm_new_label['grancontr']))
+   if (!isset($this->nm_new_label['ver_grupo']))
    {
-       $this->nm_new_label['grancontr'] = "Auto retenedor en la fuente:";
+       $this->nm_new_label['ver_grupo'] = "Ver Grupo/Familia";
    }
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $grancontr = $this->grancontr;
-   $sStyleHidden_grancontr = '';
-   if (isset($this->nmgp_cmp_hidden['grancontr']) && $this->nmgp_cmp_hidden['grancontr'] == 'off')
+   $ver_grupo = $this->ver_grupo;
+   $sStyleHidden_ver_grupo = '';
+   if (isset($this->nmgp_cmp_hidden['ver_grupo']) && $this->nmgp_cmp_hidden['ver_grupo'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['grancontr']);
-       $sStyleHidden_grancontr = 'display: none;';
+       unset($this->nmgp_cmp_hidden['ver_grupo']);
+       $sStyleHidden_ver_grupo = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_grancontr = 'display: none;';
-   $sStyleReadInp_grancontr = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['grancontr']) && $this->nmgp_cmp_readonly['grancontr'] == 'on')
+   $sStyleReadLab_ver_grupo = 'display: none;';
+   $sStyleReadInp_ver_grupo = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_grupo']) && $this->nmgp_cmp_readonly['ver_grupo'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['grancontr']);
-       $sStyleReadLab_grancontr = '';
-       $sStyleReadInp_grancontr = 'display: none;';
+       unset($this->nmgp_cmp_readonly['ver_grupo']);
+       $sStyleReadLab_ver_grupo = '';
+       $sStyleReadInp_ver_grupo = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['grancontr']) && $this->nmgp_cmp_hidden['grancontr'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="grancontr" value="<?php echo $this->form_encode_input($this->grancontr) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_grupo']) && $this->nmgp_cmp_hidden['ver_grupo'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_grupo" value="<?php echo $this->form_encode_input($this->ver_grupo) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 <?php 
   if ($this->nmgp_opcao != "recarga") 
   {
-      $this->grancontr_1 = explode(";", trim($this->grancontr));
+      $this->ver_grupo_1 = explode(";", trim($this->ver_grupo));
   } 
   else
   {
-      if (empty($this->grancontr))
+      if (empty($this->ver_grupo))
       {
-          $this->grancontr_1= array(); 
-          $this->grancontr= "NO";
+          $this->ver_grupo_1= array(); 
+          $this->ver_grupo= "NO";
       } 
       else
       {
-          $this->grancontr_1= $this->grancontr; 
-          $this->grancontr= ""; 
-          foreach ($this->grancontr_1 as $cada_grancontr)
+          $this->ver_grupo_1= $this->ver_grupo; 
+          $this->ver_grupo= ""; 
+          foreach ($this->ver_grupo_1 as $cada_ver_grupo)
           {
-             if (!empty($grancontr))
+             if (!empty($ver_grupo))
              {
-                 $this->grancontr.= ";"; 
+                 $this->ver_grupo.= ";"; 
              } 
-             $this->grancontr.= $cada_grancontr; 
+             $this->ver_grupo.= $cada_ver_grupo; 
           } 
       } 
   } 
 ?> 
 
-    <TD class="scFormDataOdd css_grancontr_line" id="hidden_field_data_grancontr" style="<?php echo $sStyleHidden_grancontr; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_grancontr_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_grancontr_label" style=""><span id="id_label_grancontr"><?php echo $this->nm_new_label['grancontr']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["grancontr"]) &&  $this->nmgp_cmp_readonly["grancontr"] == "on") { 
+    <TD class="scFormDataOdd css_ver_grupo_line" id="hidden_field_data_ver_grupo" style="<?php echo $sStyleHidden_ver_grupo; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_grupo_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_grupo_label" style=""><span id="id_label_ver_grupo"><?php echo $this->nm_new_label['ver_grupo']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_grupo"]) &&  $this->nmgp_cmp_readonly["ver_grupo"] == "on") { 
 
-$grancontr_look = "";
- if ($this->grancontr == "SI") { $grancontr_look .= "" ;} 
- if (empty($grancontr_look)) { $grancontr_look = $this->grancontr; }
+$ver_grupo_look = "";
+ if ($this->ver_grupo == "SI") { $ver_grupo_look .= "SI" ;} 
+ if (empty($ver_grupo_look)) { $ver_grupo_look = $this->ver_grupo; }
 ?>
-<input type="hidden" name="grancontr" value="<?php echo $this->form_encode_input($grancontr) . "\">" . $grancontr_look . ""; ?>
+<input type="hidden" name="ver_grupo" value="<?php echo $this->form_encode_input($ver_grupo) . "\">" . $ver_grupo_look . ""; ?>
 <?php } else { ?>
 
 <?php
 
-$grancontr_look = "";
- if ($this->grancontr == "SI") { $grancontr_look .= "" ;} 
- if (empty($grancontr_look)) { $grancontr_look = $this->grancontr; }
+$ver_grupo_look = "";
+ if ($this->ver_grupo == "SI") { $ver_grupo_look .= "SI" ;} 
+ if (empty($ver_grupo_look)) { $ver_grupo_look = $this->ver_grupo; }
 ?>
-<span id="id_read_on_grancontr" class="css_grancontr_line" style="<?php echo $sStyleReadLab_grancontr; ?>"><?php echo $this->form_format_readonly("grancontr", $this->form_encode_input($grancontr_look)); ?></span><span id="id_read_off_grancontr" class="css_read_off_grancontr css_grancontr_line" style="<?php echo $sStyleReadInp_grancontr; ?>"><?php echo "<div id=\"idAjaxCheckbox_grancontr\" style=\"display: inline-block\" class=\"css_grancontr_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_grancontr_line"><?php $tempOptionId = "id-opt-grancontr" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-grancontr sc-ui-checkbox-grancontr" name="grancontr[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_grancontr'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->grancontr_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
+<span id="id_read_on_ver_grupo" class="css_ver_grupo_line" style="<?php echo $sStyleReadLab_ver_grupo; ?>"><?php echo $this->form_format_readonly("ver_grupo", $this->form_encode_input($ver_grupo_look)); ?></span><span id="id_read_off_ver_grupo" class="css_read_off_ver_grupo css_ver_grupo_line" style="<?php echo $sStyleReadInp_ver_grupo; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_grupo\" style=\"display: inline-block\" class=\"css_ver_grupo_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_grupo_line"><?php $tempOptionId = "id-opt-ver_grupo" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_grupo sc-ui-checkbox-ver_grupo" name="ver_grupo[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_grupo'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_grupo_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
 </TR></TABLE>
 <?php echo "</div>\r\n"; ?></span><?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_grancontr_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_grancontr_text"></span></td></tr></table></td></tr></table> </TD>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_grupo_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_grupo_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 
@@ -220,50 +123,1124 @@ $grancontr_look = "";
 
 
    <?php
-    if (!isset($this->nm_new_label['idconfiguraciones']))
-    {
-        $this->nm_new_label['idconfiguraciones'] = "Idconfiguraciones";
-    }
-?>
-<?php
+   if (!isset($this->nm_new_label['ver_codigo']))
+   {
+       $this->nm_new_label['ver_codigo'] = "Ver Código";
+   }
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $idconfiguraciones = $this->idconfiguraciones;
-   if (!isset($this->nmgp_cmp_hidden['idconfiguraciones']))
+   $ver_codigo = $this->ver_codigo;
+   $sStyleHidden_ver_codigo = '';
+   if (isset($this->nmgp_cmp_hidden['ver_codigo']) && $this->nmgp_cmp_hidden['ver_codigo'] == 'off')
    {
-       $this->nmgp_cmp_hidden['idconfiguraciones'] = 'off';
-   }
-   $sStyleHidden_idconfiguraciones = '';
-   if (isset($this->nmgp_cmp_hidden['idconfiguraciones']) && $this->nmgp_cmp_hidden['idconfiguraciones'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['idconfiguraciones']);
-       $sStyleHidden_idconfiguraciones = 'display: none;';
+       unset($this->nmgp_cmp_hidden['ver_codigo']);
+       $sStyleHidden_ver_codigo = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_idconfiguraciones = 'display: none;';
-   $sStyleReadInp_idconfiguraciones = '';
-   if (/*($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || */(isset($this->nmgp_cmp_readonly["idconfiguraciones"]) &&  $this->nmgp_cmp_readonly["idconfiguraciones"] == "on"))
+   $sStyleReadLab_ver_codigo = 'display: none;';
+   $sStyleReadInp_ver_codigo = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_codigo']) && $this->nmgp_cmp_readonly['ver_codigo'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['idconfiguraciones']);
-       $sStyleReadLab_idconfiguraciones = '';
-       $sStyleReadInp_idconfiguraciones = 'display: none;';
+       unset($this->nmgp_cmp_readonly['ver_codigo']);
+       $sStyleReadLab_ver_codigo = '';
+       $sStyleReadInp_ver_codigo = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['idconfiguraciones']) && $this->nmgp_cmp_hidden['idconfiguraciones'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="idconfiguraciones" value="<?php echo $this->form_encode_input($idconfiguraciones) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_codigo']) && $this->nmgp_cmp_hidden['ver_codigo'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_codigo" value="<?php echo $this->form_encode_input($this->ver_codigo) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
-<?php if ((isset($this->Embutida_form) && $this->Embutida_form) || ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir")) { ?>
-
-    <TD class="scFormDataOdd css_idconfiguraciones_line" id="hidden_field_data_idconfiguraciones" style="<?php echo $sStyleHidden_idconfiguraciones; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_idconfiguraciones_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_idconfiguraciones_label" style=""><span id="id_label_idconfiguraciones"><?php echo $this->nm_new_label['idconfiguraciones']; ?></span></span><br><span id="id_read_on_idconfiguraciones" class="css_idconfiguraciones_line" style="<?php echo $sStyleReadLab_idconfiguraciones; ?>"><?php echo $this->form_format_readonly("idconfiguraciones", $this->form_encode_input($this->idconfiguraciones)); ?></span><span id="id_read_off_idconfiguraciones" class="css_read_off_idconfiguraciones" style="<?php echo $sStyleReadInp_idconfiguraciones; ?>"><input type="hidden" name="idconfiguraciones" value="<?php echo $this->form_encode_input($idconfiguraciones) . "\">"?><span id="id_ajax_label_idconfiguraciones"><?php echo nl2br($idconfiguraciones); ?></span>
-</span></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_idconfiguraciones_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_idconfiguraciones_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_codigo_1 = explode(";", trim($this->ver_codigo));
+  } 
+  else
+  {
+      if (empty($this->ver_codigo))
+      {
+          $this->ver_codigo_1= array(); 
+          $this->ver_codigo= "NO";
+      } 
       else
       {
-         $sc_hidden_no--;
-      }
+          $this->ver_codigo_1= $this->ver_codigo; 
+          $this->ver_codigo= ""; 
+          foreach ($this->ver_codigo_1 as $cada_ver_codigo)
+          {
+             if (!empty($ver_codigo))
+             {
+                 $this->ver_codigo.= ";"; 
+             } 
+             $this->ver_codigo.= $cada_ver_codigo; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_codigo_line" id="hidden_field_data_ver_codigo" style="<?php echo $sStyleHidden_ver_codigo; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_codigo_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_codigo_label" style=""><span id="id_label_ver_codigo"><?php echo $this->nm_new_label['ver_codigo']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_codigo"]) &&  $this->nmgp_cmp_readonly["ver_codigo"] == "on") { 
+
+$ver_codigo_look = "";
+ if ($this->ver_codigo == "SI") { $ver_codigo_look .= "SI" ;} 
+ if (empty($ver_codigo_look)) { $ver_codigo_look = $this->ver_codigo; }
 ?>
-<?php }?>
+<input type="hidden" name="ver_codigo" value="<?php echo $this->form_encode_input($ver_codigo) . "\">" . $ver_codigo_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_codigo_look = "";
+ if ($this->ver_codigo == "SI") { $ver_codigo_look .= "SI" ;} 
+ if (empty($ver_codigo_look)) { $ver_codigo_look = $this->ver_codigo; }
+?>
+<span id="id_read_on_ver_codigo" class="css_ver_codigo_line" style="<?php echo $sStyleReadLab_ver_codigo; ?>"><?php echo $this->form_format_readonly("ver_codigo", $this->form_encode_input($ver_codigo_look)); ?></span><span id="id_read_off_ver_codigo" class="css_read_off_ver_codigo css_ver_codigo_line" style="<?php echo $sStyleReadInp_ver_codigo; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_codigo\" style=\"display: inline-block\" class=\"css_ver_codigo_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_codigo_line"><?php $tempOptionId = "id-opt-ver_codigo" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_codigo sc-ui-checkbox-ver_codigo" name="ver_codigo[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_codigo'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_codigo_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_codigo_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_codigo_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_imagen']))
+   {
+       $this->nm_new_label['ver_imagen'] = "Ver Imagen";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_imagen = $this->ver_imagen;
+   $sStyleHidden_ver_imagen = '';
+   if (isset($this->nmgp_cmp_hidden['ver_imagen']) && $this->nmgp_cmp_hidden['ver_imagen'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_imagen']);
+       $sStyleHidden_ver_imagen = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_imagen = 'display: none;';
+   $sStyleReadInp_ver_imagen = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_imagen']) && $this->nmgp_cmp_readonly['ver_imagen'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_imagen']);
+       $sStyleReadLab_ver_imagen = '';
+       $sStyleReadInp_ver_imagen = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_imagen']) && $this->nmgp_cmp_hidden['ver_imagen'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_imagen" value="<?php echo $this->form_encode_input($this->ver_imagen) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_imagen_1 = explode(";", trim($this->ver_imagen));
+  } 
+  else
+  {
+      if (empty($this->ver_imagen))
+      {
+          $this->ver_imagen_1= array(); 
+          $this->ver_imagen= "NO";
+      } 
+      else
+      {
+          $this->ver_imagen_1= $this->ver_imagen; 
+          $this->ver_imagen= ""; 
+          foreach ($this->ver_imagen_1 as $cada_ver_imagen)
+          {
+             if (!empty($ver_imagen))
+             {
+                 $this->ver_imagen.= ";"; 
+             } 
+             $this->ver_imagen.= $cada_ver_imagen; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_imagen_line" id="hidden_field_data_ver_imagen" style="<?php echo $sStyleHidden_ver_imagen; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_imagen_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_imagen_label" style=""><span id="id_label_ver_imagen"><?php echo $this->nm_new_label['ver_imagen']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_imagen"]) &&  $this->nmgp_cmp_readonly["ver_imagen"] == "on") { 
+
+$ver_imagen_look = "";
+ if ($this->ver_imagen == "SI") { $ver_imagen_look .= "SI" ;} 
+ if (empty($ver_imagen_look)) { $ver_imagen_look = $this->ver_imagen; }
+?>
+<input type="hidden" name="ver_imagen" value="<?php echo $this->form_encode_input($ver_imagen) . "\">" . $ver_imagen_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_imagen_look = "";
+ if ($this->ver_imagen == "SI") { $ver_imagen_look .= "SI" ;} 
+ if (empty($ver_imagen_look)) { $ver_imagen_look = $this->ver_imagen; }
+?>
+<span id="id_read_on_ver_imagen" class="css_ver_imagen_line" style="<?php echo $sStyleReadLab_ver_imagen; ?>"><?php echo $this->form_format_readonly("ver_imagen", $this->form_encode_input($ver_imagen_look)); ?></span><span id="id_read_off_ver_imagen" class="css_read_off_ver_imagen css_ver_imagen_line" style="<?php echo $sStyleReadInp_ver_imagen; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_imagen\" style=\"display: inline-block\" class=\"css_ver_imagen_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_imagen_line"><?php $tempOptionId = "id-opt-ver_imagen" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_imagen sc-ui-checkbox-ver_imagen" name="ver_imagen[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_imagen'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_imagen_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_imagen_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_imagen_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_existencia']))
+   {
+       $this->nm_new_label['ver_existencia'] = "Ver Existencia";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_existencia = $this->ver_existencia;
+   $sStyleHidden_ver_existencia = '';
+   if (isset($this->nmgp_cmp_hidden['ver_existencia']) && $this->nmgp_cmp_hidden['ver_existencia'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_existencia']);
+       $sStyleHidden_ver_existencia = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_existencia = 'display: none;';
+   $sStyleReadInp_ver_existencia = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_existencia']) && $this->nmgp_cmp_readonly['ver_existencia'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_existencia']);
+       $sStyleReadLab_ver_existencia = '';
+       $sStyleReadInp_ver_existencia = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_existencia']) && $this->nmgp_cmp_hidden['ver_existencia'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_existencia" value="<?php echo $this->form_encode_input($this->ver_existencia) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_existencia_1 = explode(";", trim($this->ver_existencia));
+  } 
+  else
+  {
+      if (empty($this->ver_existencia))
+      {
+          $this->ver_existencia_1= array(); 
+          $this->ver_existencia= "NO";
+      } 
+      else
+      {
+          $this->ver_existencia_1= $this->ver_existencia; 
+          $this->ver_existencia= ""; 
+          foreach ($this->ver_existencia_1 as $cada_ver_existencia)
+          {
+             if (!empty($ver_existencia))
+             {
+                 $this->ver_existencia.= ";"; 
+             } 
+             $this->ver_existencia.= $cada_ver_existencia; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_existencia_line" id="hidden_field_data_ver_existencia" style="<?php echo $sStyleHidden_ver_existencia; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_existencia_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_existencia_label" style=""><span id="id_label_ver_existencia"><?php echo $this->nm_new_label['ver_existencia']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_existencia"]) &&  $this->nmgp_cmp_readonly["ver_existencia"] == "on") { 
+
+$ver_existencia_look = "";
+ if ($this->ver_existencia == "SI") { $ver_existencia_look .= "SI" ;} 
+ if (empty($ver_existencia_look)) { $ver_existencia_look = $this->ver_existencia; }
+?>
+<input type="hidden" name="ver_existencia" value="<?php echo $this->form_encode_input($ver_existencia) . "\">" . $ver_existencia_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_existencia_look = "";
+ if ($this->ver_existencia == "SI") { $ver_existencia_look .= "SI" ;} 
+ if (empty($ver_existencia_look)) { $ver_existencia_look = $this->ver_existencia; }
+?>
+<span id="id_read_on_ver_existencia" class="css_ver_existencia_line" style="<?php echo $sStyleReadLab_ver_existencia; ?>"><?php echo $this->form_format_readonly("ver_existencia", $this->form_encode_input($ver_existencia_look)); ?></span><span id="id_read_off_ver_existencia" class="css_read_off_ver_existencia css_ver_existencia_line" style="<?php echo $sStyleReadInp_ver_existencia; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_existencia\" style=\"display: inline-block\" class=\"css_ver_existencia_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_existencia_line"><?php $tempOptionId = "id-opt-ver_existencia" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_existencia sc-ui-checkbox-ver_existencia" name="ver_existencia[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_existencia'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_existencia_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ver_existencia')", "nm_mostra_mens('ver_existencia')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_existencia_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_existencia_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_unidad']))
+   {
+       $this->nm_new_label['ver_unidad'] = "Ver Unidad";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_unidad = $this->ver_unidad;
+   $sStyleHidden_ver_unidad = '';
+   if (isset($this->nmgp_cmp_hidden['ver_unidad']) && $this->nmgp_cmp_hidden['ver_unidad'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_unidad']);
+       $sStyleHidden_ver_unidad = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_unidad = 'display: none;';
+   $sStyleReadInp_ver_unidad = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_unidad']) && $this->nmgp_cmp_readonly['ver_unidad'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_unidad']);
+       $sStyleReadLab_ver_unidad = '';
+       $sStyleReadInp_ver_unidad = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_unidad']) && $this->nmgp_cmp_hidden['ver_unidad'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_unidad" value="<?php echo $this->form_encode_input($this->ver_unidad) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_unidad_1 = explode(";", trim($this->ver_unidad));
+  } 
+  else
+  {
+      if (empty($this->ver_unidad))
+      {
+          $this->ver_unidad_1= array(); 
+          $this->ver_unidad= "NO";
+      } 
+      else
+      {
+          $this->ver_unidad_1= $this->ver_unidad; 
+          $this->ver_unidad= ""; 
+          foreach ($this->ver_unidad_1 as $cada_ver_unidad)
+          {
+             if (!empty($ver_unidad))
+             {
+                 $this->ver_unidad.= ";"; 
+             } 
+             $this->ver_unidad.= $cada_ver_unidad; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_unidad_line" id="hidden_field_data_ver_unidad" style="<?php echo $sStyleHidden_ver_unidad; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_unidad_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_unidad_label" style=""><span id="id_label_ver_unidad"><?php echo $this->nm_new_label['ver_unidad']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_unidad"]) &&  $this->nmgp_cmp_readonly["ver_unidad"] == "on") { 
+
+$ver_unidad_look = "";
+ if ($this->ver_unidad == "SI") { $ver_unidad_look .= "SI" ;} 
+ if (empty($ver_unidad_look)) { $ver_unidad_look = $this->ver_unidad; }
+?>
+<input type="hidden" name="ver_unidad" value="<?php echo $this->form_encode_input($ver_unidad) . "\">" . $ver_unidad_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_unidad_look = "";
+ if ($this->ver_unidad == "SI") { $ver_unidad_look .= "SI" ;} 
+ if (empty($ver_unidad_look)) { $ver_unidad_look = $this->ver_unidad; }
+?>
+<span id="id_read_on_ver_unidad" class="css_ver_unidad_line" style="<?php echo $sStyleReadLab_ver_unidad; ?>"><?php echo $this->form_format_readonly("ver_unidad", $this->form_encode_input($ver_unidad_look)); ?></span><span id="id_read_off_ver_unidad" class="css_read_off_ver_unidad css_ver_unidad_line" style="<?php echo $sStyleReadInp_ver_unidad; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_unidad\" style=\"display: inline-block\" class=\"css_ver_unidad_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_unidad_line"><?php $tempOptionId = "id-opt-ver_unidad" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_unidad sc-ui-checkbox-ver_unidad" name="ver_unidad[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_unidad'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_unidad_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_unidad_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_unidad_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_precio']))
+   {
+       $this->nm_new_label['ver_precio'] = "Ver Precio";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_precio = $this->ver_precio;
+   $sStyleHidden_ver_precio = '';
+   if (isset($this->nmgp_cmp_hidden['ver_precio']) && $this->nmgp_cmp_hidden['ver_precio'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_precio']);
+       $sStyleHidden_ver_precio = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_precio = 'display: none;';
+   $sStyleReadInp_ver_precio = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_precio']) && $this->nmgp_cmp_readonly['ver_precio'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_precio']);
+       $sStyleReadLab_ver_precio = '';
+       $sStyleReadInp_ver_precio = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_precio']) && $this->nmgp_cmp_hidden['ver_precio'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_precio" value="<?php echo $this->form_encode_input($this->ver_precio) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_precio_1 = explode(";", trim($this->ver_precio));
+  } 
+  else
+  {
+      if (empty($this->ver_precio))
+      {
+          $this->ver_precio_1= array(); 
+          $this->ver_precio= "NO";
+      } 
+      else
+      {
+          $this->ver_precio_1= $this->ver_precio; 
+          $this->ver_precio= ""; 
+          foreach ($this->ver_precio_1 as $cada_ver_precio)
+          {
+             if (!empty($ver_precio))
+             {
+                 $this->ver_precio.= ";"; 
+             } 
+             $this->ver_precio.= $cada_ver_precio; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_precio_line" id="hidden_field_data_ver_precio" style="<?php echo $sStyleHidden_ver_precio; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_precio_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_precio_label" style=""><span id="id_label_ver_precio"><?php echo $this->nm_new_label['ver_precio']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_precio"]) &&  $this->nmgp_cmp_readonly["ver_precio"] == "on") { 
+
+$ver_precio_look = "";
+ if ($this->ver_precio == "SI") { $ver_precio_look .= "SI" ;} 
+ if (empty($ver_precio_look)) { $ver_precio_look = $this->ver_precio; }
+?>
+<input type="hidden" name="ver_precio" value="<?php echo $this->form_encode_input($ver_precio) . "\">" . $ver_precio_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_precio_look = "";
+ if ($this->ver_precio == "SI") { $ver_precio_look .= "SI" ;} 
+ if (empty($ver_precio_look)) { $ver_precio_look = $this->ver_precio; }
+?>
+<span id="id_read_on_ver_precio" class="css_ver_precio_line" style="<?php echo $sStyleReadLab_ver_precio; ?>"><?php echo $this->form_format_readonly("ver_precio", $this->form_encode_input($ver_precio_look)); ?></span><span id="id_read_off_ver_precio" class="css_read_off_ver_precio css_ver_precio_line" style="<?php echo $sStyleReadInp_ver_precio; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_precio\" style=\"display: inline-block\" class=\"css_ver_precio_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_precio_line"><?php $tempOptionId = "id-opt-ver_precio" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_precio sc-ui-checkbox-ver_precio" name="ver_precio[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_precio'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_precio_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ver_precio')", "nm_mostra_mens('ver_precio')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_precio_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_precio_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_impuesto']))
+   {
+       $this->nm_new_label['ver_impuesto'] = "Ver Impuesto";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_impuesto = $this->ver_impuesto;
+   $sStyleHidden_ver_impuesto = '';
+   if (isset($this->nmgp_cmp_hidden['ver_impuesto']) && $this->nmgp_cmp_hidden['ver_impuesto'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_impuesto']);
+       $sStyleHidden_ver_impuesto = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_impuesto = 'display: none;';
+   $sStyleReadInp_ver_impuesto = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_impuesto']) && $this->nmgp_cmp_readonly['ver_impuesto'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_impuesto']);
+       $sStyleReadLab_ver_impuesto = '';
+       $sStyleReadInp_ver_impuesto = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_impuesto']) && $this->nmgp_cmp_hidden['ver_impuesto'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_impuesto" value="<?php echo $this->form_encode_input($this->ver_impuesto) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_impuesto_1 = explode(";", trim($this->ver_impuesto));
+  } 
+  else
+  {
+      if (empty($this->ver_impuesto))
+      {
+          $this->ver_impuesto_1= array(); 
+          $this->ver_impuesto= "NO";
+      } 
+      else
+      {
+          $this->ver_impuesto_1= $this->ver_impuesto; 
+          $this->ver_impuesto= ""; 
+          foreach ($this->ver_impuesto_1 as $cada_ver_impuesto)
+          {
+             if (!empty($ver_impuesto))
+             {
+                 $this->ver_impuesto.= ";"; 
+             } 
+             $this->ver_impuesto.= $cada_ver_impuesto; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_impuesto_line" id="hidden_field_data_ver_impuesto" style="<?php echo $sStyleHidden_ver_impuesto; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_impuesto_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_impuesto_label" style=""><span id="id_label_ver_impuesto"><?php echo $this->nm_new_label['ver_impuesto']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_impuesto"]) &&  $this->nmgp_cmp_readonly["ver_impuesto"] == "on") { 
+
+$ver_impuesto_look = "";
+ if ($this->ver_impuesto == "SI") { $ver_impuesto_look .= "SI" ;} 
+ if (empty($ver_impuesto_look)) { $ver_impuesto_look = $this->ver_impuesto; }
+?>
+<input type="hidden" name="ver_impuesto" value="<?php echo $this->form_encode_input($ver_impuesto) . "\">" . $ver_impuesto_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_impuesto_look = "";
+ if ($this->ver_impuesto == "SI") { $ver_impuesto_look .= "SI" ;} 
+ if (empty($ver_impuesto_look)) { $ver_impuesto_look = $this->ver_impuesto; }
+?>
+<span id="id_read_on_ver_impuesto" class="css_ver_impuesto_line" style="<?php echo $sStyleReadLab_ver_impuesto; ?>"><?php echo $this->form_format_readonly("ver_impuesto", $this->form_encode_input($ver_impuesto_look)); ?></span><span id="id_read_off_ver_impuesto" class="css_read_off_ver_impuesto css_ver_impuesto_line" style="<?php echo $sStyleReadInp_ver_impuesto; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_impuesto\" style=\"display: inline-block\" class=\"css_ver_impuesto_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_impuesto_line"><?php $tempOptionId = "id-opt-ver_impuesto" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_impuesto sc-ui-checkbox-ver_impuesto" name="ver_impuesto[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_impuesto'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_impuesto_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_impuesto_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_impuesto_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_stock']))
+   {
+       $this->nm_new_label['ver_stock'] = "Ver Stock";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_stock = $this->ver_stock;
+   $sStyleHidden_ver_stock = '';
+   if (isset($this->nmgp_cmp_hidden['ver_stock']) && $this->nmgp_cmp_hidden['ver_stock'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_stock']);
+       $sStyleHidden_ver_stock = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_stock = 'display: none;';
+   $sStyleReadInp_ver_stock = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_stock']) && $this->nmgp_cmp_readonly['ver_stock'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_stock']);
+       $sStyleReadLab_ver_stock = '';
+       $sStyleReadInp_ver_stock = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_stock']) && $this->nmgp_cmp_hidden['ver_stock'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_stock" value="<?php echo $this->form_encode_input($this->ver_stock) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_stock_1 = explode(";", trim($this->ver_stock));
+  } 
+  else
+  {
+      if (empty($this->ver_stock))
+      {
+          $this->ver_stock_1= array(); 
+          $this->ver_stock= "NO";
+      } 
+      else
+      {
+          $this->ver_stock_1= $this->ver_stock; 
+          $this->ver_stock= ""; 
+          foreach ($this->ver_stock_1 as $cada_ver_stock)
+          {
+             if (!empty($ver_stock))
+             {
+                 $this->ver_stock.= ";"; 
+             } 
+             $this->ver_stock.= $cada_ver_stock; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_stock_line" id="hidden_field_data_ver_stock" style="<?php echo $sStyleHidden_ver_stock; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_stock_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_stock_label" style=""><span id="id_label_ver_stock"><?php echo $this->nm_new_label['ver_stock']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_stock"]) &&  $this->nmgp_cmp_readonly["ver_stock"] == "on") { 
+
+$ver_stock_look = "";
+ if ($this->ver_stock == "SI") { $ver_stock_look .= "SI" ;} 
+ if (empty($ver_stock_look)) { $ver_stock_look = $this->ver_stock; }
+?>
+<input type="hidden" name="ver_stock" value="<?php echo $this->form_encode_input($ver_stock) . "\">" . $ver_stock_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_stock_look = "";
+ if ($this->ver_stock == "SI") { $ver_stock_look .= "SI" ;} 
+ if (empty($ver_stock_look)) { $ver_stock_look = $this->ver_stock; }
+?>
+<span id="id_read_on_ver_stock" class="css_ver_stock_line" style="<?php echo $sStyleReadLab_ver_stock; ?>"><?php echo $this->form_format_readonly("ver_stock", $this->form_encode_input($ver_stock_look)); ?></span><span id="id_read_off_ver_stock" class="css_read_off_ver_stock css_ver_stock_line" style="<?php echo $sStyleReadInp_ver_stock; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_stock\" style=\"display: inline-block\" class=\"css_ver_stock_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_stock_line"><?php $tempOptionId = "id-opt-ver_stock" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_stock sc-ui-checkbox-ver_stock" name="ver_stock[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_stock'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_stock_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ver_stock')", "nm_mostra_mens('ver_stock')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_stock_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_stock_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_ubicacion']))
+   {
+       $this->nm_new_label['ver_ubicacion'] = "Ver Ubicación";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_ubicacion = $this->ver_ubicacion;
+   $sStyleHidden_ver_ubicacion = '';
+   if (isset($this->nmgp_cmp_hidden['ver_ubicacion']) && $this->nmgp_cmp_hidden['ver_ubicacion'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_ubicacion']);
+       $sStyleHidden_ver_ubicacion = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_ubicacion = 'display: none;';
+   $sStyleReadInp_ver_ubicacion = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_ubicacion']) && $this->nmgp_cmp_readonly['ver_ubicacion'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_ubicacion']);
+       $sStyleReadLab_ver_ubicacion = '';
+       $sStyleReadInp_ver_ubicacion = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_ubicacion']) && $this->nmgp_cmp_hidden['ver_ubicacion'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_ubicacion" value="<?php echo $this->form_encode_input($this->ver_ubicacion) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_ubicacion_1 = explode(";", trim($this->ver_ubicacion));
+  } 
+  else
+  {
+      if (empty($this->ver_ubicacion))
+      {
+          $this->ver_ubicacion_1= array(); 
+          $this->ver_ubicacion= "NO";
+      } 
+      else
+      {
+          $this->ver_ubicacion_1= $this->ver_ubicacion; 
+          $this->ver_ubicacion= ""; 
+          foreach ($this->ver_ubicacion_1 as $cada_ver_ubicacion)
+          {
+             if (!empty($ver_ubicacion))
+             {
+                 $this->ver_ubicacion.= ";"; 
+             } 
+             $this->ver_ubicacion.= $cada_ver_ubicacion; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_ubicacion_line" id="hidden_field_data_ver_ubicacion" style="<?php echo $sStyleHidden_ver_ubicacion; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_ubicacion_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_ubicacion_label" style=""><span id="id_label_ver_ubicacion"><?php echo $this->nm_new_label['ver_ubicacion']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_ubicacion"]) &&  $this->nmgp_cmp_readonly["ver_ubicacion"] == "on") { 
+
+$ver_ubicacion_look = "";
+ if ($this->ver_ubicacion == "SI") { $ver_ubicacion_look .= "SI" ;} 
+ if (empty($ver_ubicacion_look)) { $ver_ubicacion_look = $this->ver_ubicacion; }
+?>
+<input type="hidden" name="ver_ubicacion" value="<?php echo $this->form_encode_input($ver_ubicacion) . "\">" . $ver_ubicacion_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_ubicacion_look = "";
+ if ($this->ver_ubicacion == "SI") { $ver_ubicacion_look .= "SI" ;} 
+ if (empty($ver_ubicacion_look)) { $ver_ubicacion_look = $this->ver_ubicacion; }
+?>
+<span id="id_read_on_ver_ubicacion" class="css_ver_ubicacion_line" style="<?php echo $sStyleReadLab_ver_ubicacion; ?>"><?php echo $this->form_format_readonly("ver_ubicacion", $this->form_encode_input($ver_ubicacion_look)); ?></span><span id="id_read_off_ver_ubicacion" class="css_read_off_ver_ubicacion css_ver_ubicacion_line" style="<?php echo $sStyleReadInp_ver_ubicacion; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_ubicacion\" style=\"display: inline-block\" class=\"css_ver_ubicacion_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_ubicacion_line"><?php $tempOptionId = "id-opt-ver_ubicacion" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_ubicacion sc-ui-checkbox-ver_ubicacion" name="ver_ubicacion[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_ubicacion'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_ubicacion_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_ubicacion_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_ubicacion_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_costo']))
+   {
+       $this->nm_new_label['ver_costo'] = "Ver Costo";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_costo = $this->ver_costo;
+   $sStyleHidden_ver_costo = '';
+   if (isset($this->nmgp_cmp_hidden['ver_costo']) && $this->nmgp_cmp_hidden['ver_costo'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_costo']);
+       $sStyleHidden_ver_costo = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_costo = 'display: none;';
+   $sStyleReadInp_ver_costo = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_costo']) && $this->nmgp_cmp_readonly['ver_costo'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_costo']);
+       $sStyleReadLab_ver_costo = '';
+       $sStyleReadInp_ver_costo = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_costo']) && $this->nmgp_cmp_hidden['ver_costo'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_costo" value="<?php echo $this->form_encode_input($this->ver_costo) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_costo_1 = explode(";", trim($this->ver_costo));
+  } 
+  else
+  {
+      if (empty($this->ver_costo))
+      {
+          $this->ver_costo_1= array(); 
+          $this->ver_costo= "NO";
+      } 
+      else
+      {
+          $this->ver_costo_1= $this->ver_costo; 
+          $this->ver_costo= ""; 
+          foreach ($this->ver_costo_1 as $cada_ver_costo)
+          {
+             if (!empty($ver_costo))
+             {
+                 $this->ver_costo.= ";"; 
+             } 
+             $this->ver_costo.= $cada_ver_costo; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_costo_line" id="hidden_field_data_ver_costo" style="<?php echo $sStyleHidden_ver_costo; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_costo_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_costo_label" style=""><span id="id_label_ver_costo"><?php echo $this->nm_new_label['ver_costo']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_costo"]) &&  $this->nmgp_cmp_readonly["ver_costo"] == "on") { 
+
+$ver_costo_look = "";
+ if ($this->ver_costo == "SI") { $ver_costo_look .= "SI" ;} 
+ if (empty($ver_costo_look)) { $ver_costo_look = $this->ver_costo; }
+?>
+<input type="hidden" name="ver_costo" value="<?php echo $this->form_encode_input($ver_costo) . "\">" . $ver_costo_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_costo_look = "";
+ if ($this->ver_costo == "SI") { $ver_costo_look .= "SI" ;} 
+ if (empty($ver_costo_look)) { $ver_costo_look = $this->ver_costo; }
+?>
+<span id="id_read_on_ver_costo" class="css_ver_costo_line" style="<?php echo $sStyleReadLab_ver_costo; ?>"><?php echo $this->form_format_readonly("ver_costo", $this->form_encode_input($ver_costo_look)); ?></span><span id="id_read_off_ver_costo" class="css_read_off_ver_costo css_ver_costo_line" style="<?php echo $sStyleReadInp_ver_costo; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_costo\" style=\"display: inline-block\" class=\"css_ver_costo_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_costo_line"><?php $tempOptionId = "id-opt-ver_costo" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_costo sc-ui-checkbox-ver_costo" name="ver_costo[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_costo'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_costo_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ver_costo')", "nm_mostra_mens('ver_costo')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_costo_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_costo_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_proveedor']))
+   {
+       $this->nm_new_label['ver_proveedor'] = "Ver Proveedor";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_proveedor = $this->ver_proveedor;
+   $sStyleHidden_ver_proveedor = '';
+   if (isset($this->nmgp_cmp_hidden['ver_proveedor']) && $this->nmgp_cmp_hidden['ver_proveedor'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_proveedor']);
+       $sStyleHidden_ver_proveedor = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_proveedor = 'display: none;';
+   $sStyleReadInp_ver_proveedor = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_proveedor']) && $this->nmgp_cmp_readonly['ver_proveedor'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_proveedor']);
+       $sStyleReadLab_ver_proveedor = '';
+       $sStyleReadInp_ver_proveedor = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_proveedor']) && $this->nmgp_cmp_hidden['ver_proveedor'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_proveedor" value="<?php echo $this->form_encode_input($this->ver_proveedor) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_proveedor_1 = explode(";", trim($this->ver_proveedor));
+  } 
+  else
+  {
+      if (empty($this->ver_proveedor))
+      {
+          $this->ver_proveedor_1= array(); 
+          $this->ver_proveedor= "NO";
+      } 
+      else
+      {
+          $this->ver_proveedor_1= $this->ver_proveedor; 
+          $this->ver_proveedor= ""; 
+          foreach ($this->ver_proveedor_1 as $cada_ver_proveedor)
+          {
+             if (!empty($ver_proveedor))
+             {
+                 $this->ver_proveedor.= ";"; 
+             } 
+             $this->ver_proveedor.= $cada_ver_proveedor; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_proveedor_line" id="hidden_field_data_ver_proveedor" style="<?php echo $sStyleHidden_ver_proveedor; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_proveedor_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_proveedor_label" style=""><span id="id_label_ver_proveedor"><?php echo $this->nm_new_label['ver_proveedor']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_proveedor"]) &&  $this->nmgp_cmp_readonly["ver_proveedor"] == "on") { 
+
+$ver_proveedor_look = "";
+ if ($this->ver_proveedor == "SI") { $ver_proveedor_look .= "SI" ;} 
+ if (empty($ver_proveedor_look)) { $ver_proveedor_look = $this->ver_proveedor; }
+?>
+<input type="hidden" name="ver_proveedor" value="<?php echo $this->form_encode_input($ver_proveedor) . "\">" . $ver_proveedor_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_proveedor_look = "";
+ if ($this->ver_proveedor == "SI") { $ver_proveedor_look .= "SI" ;} 
+ if (empty($ver_proveedor_look)) { $ver_proveedor_look = $this->ver_proveedor; }
+?>
+<span id="id_read_on_ver_proveedor" class="css_ver_proveedor_line" style="<?php echo $sStyleReadLab_ver_proveedor; ?>"><?php echo $this->form_format_readonly("ver_proveedor", $this->form_encode_input($ver_proveedor_look)); ?></span><span id="id_read_off_ver_proveedor" class="css_read_off_ver_proveedor css_ver_proveedor_line" style="<?php echo $sStyleReadInp_ver_proveedor; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_proveedor\" style=\"display: inline-block\" class=\"css_ver_proveedor_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_proveedor_line"><?php $tempOptionId = "id-opt-ver_proveedor" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_proveedor sc-ui-checkbox-ver_proveedor" name="ver_proveedor[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_proveedor'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_proveedor_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_proveedor_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_proveedor_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['ver_combo']))
+   {
+       $this->nm_new_label['ver_combo'] = "Ver Combo";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ver_combo = $this->ver_combo;
+   $sStyleHidden_ver_combo = '';
+   if (isset($this->nmgp_cmp_hidden['ver_combo']) && $this->nmgp_cmp_hidden['ver_combo'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ver_combo']);
+       $sStyleHidden_ver_combo = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ver_combo = 'display: none;';
+   $sStyleReadInp_ver_combo = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ver_combo']) && $this->nmgp_cmp_readonly['ver_combo'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ver_combo']);
+       $sStyleReadLab_ver_combo = '';
+       $sStyleReadInp_ver_combo = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ver_combo']) && $this->nmgp_cmp_hidden['ver_combo'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="ver_combo" value="<?php echo $this->form_encode_input($this->ver_combo) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->ver_combo_1 = explode(";", trim($this->ver_combo));
+  } 
+  else
+  {
+      if (empty($this->ver_combo))
+      {
+          $this->ver_combo_1= array(); 
+          $this->ver_combo= "NO";
+      } 
+      else
+      {
+          $this->ver_combo_1= $this->ver_combo; 
+          $this->ver_combo= ""; 
+          foreach ($this->ver_combo_1 as $cada_ver_combo)
+          {
+             if (!empty($ver_combo))
+             {
+                 $this->ver_combo.= ";"; 
+             } 
+             $this->ver_combo.= $cada_ver_combo; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_ver_combo_line" id="hidden_field_data_ver_combo" style="<?php echo $sStyleHidden_ver_combo; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ver_combo_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ver_combo_label" style=""><span id="id_label_ver_combo"><?php echo $this->nm_new_label['ver_combo']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ver_combo"]) &&  $this->nmgp_cmp_readonly["ver_combo"] == "on") { 
+
+$ver_combo_look = "";
+ if ($this->ver_combo == "SI") { $ver_combo_look .= "SI" ;} 
+ if (empty($ver_combo_look)) { $ver_combo_look = $this->ver_combo; }
+?>
+<input type="hidden" name="ver_combo" value="<?php echo $this->form_encode_input($ver_combo) . "\">" . $ver_combo_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$ver_combo_look = "";
+ if ($this->ver_combo == "SI") { $ver_combo_look .= "SI" ;} 
+ if (empty($ver_combo_look)) { $ver_combo_look = $this->ver_combo; }
+?>
+<span id="id_read_on_ver_combo" class="css_ver_combo_line" style="<?php echo $sStyleReadLab_ver_combo; ?>"><?php echo $this->form_format_readonly("ver_combo", $this->form_encode_input($ver_combo_look)); ?></span><span id="id_read_off_ver_combo" class="css_read_off_ver_combo css_ver_combo_line" style="<?php echo $sStyleReadInp_ver_combo; ?>"><?php echo "<div id=\"idAjaxCheckbox_ver_combo\" style=\"display: inline-block\" class=\"css_ver_combo_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_ver_combo_line"><?php $tempOptionId = "id-opt-ver_combo" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-ver_combo sc-ui-checkbox-ver_combo" name="ver_combo[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_ver_combo'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->ver_combo_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('ver_combo')", "nm_mostra_mens('ver_combo')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ver_combo_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ver_combo_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
 
 
 
@@ -417,7 +1394,7 @@ else {
 </script> 
 <script> 
 <?php
-  $nm_sc_blocos_da_pag = array(0,1,2);
+  $nm_sc_blocos_da_pag = array(0,1,2,3,4);
 
   foreach ($this->Ini->nm_hidden_blocos as $bloco => $hidden)
   {

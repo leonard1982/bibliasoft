@@ -436,7 +436,150 @@ if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
 if (!isset($_SESSION['gusuario_logueo'])) {$_SESSION['gusuario_logueo'] = "";}
 if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (isset($_SESSION['gusuario_logueo'])) ? $_SESSION['gusuario_logueo'] : "";}
- $this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
+ $vsql = "select ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from configuraciones where idconfiguraciones=1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vConfig = array();
+      $this->vconfig = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vConfig[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vconfig[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vConfig = false;
+          $this->vConfig_erro = $this->Db->ErrorMsg();
+          $this->vconfig = false;
+          $this->vconfig_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vconfig[0][0]))
+{
+	if($this->vconfig[0][0]=="SI")
+	{
+		$this->NM_cmp_hidden["idgrup"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idgrup"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idgrup"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idgrup"] = "off"; }
+	}
+	
+	if($this->vconfig[0][1]=="SI")
+	{
+		$this->NM_cmp_hidden["codigobar"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["codigobar"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["codigobar"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["codigobar"] = "off"; }
+	}
+	
+	if($this->vconfig[0][2]=="SI")
+	{
+		$this->NM_cmp_hidden["imagen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["imagen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["imagen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["imagen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][3]=="SI")
+	{
+		$this->NM_cmp_hidden["existencia_menor"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["existencia_menor"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["existencia_menor"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["existencia_menor"] = "off"; }
+	}
+	
+	if($this->vconfig[0][4]=="SI")
+	{
+		$this->NM_cmp_hidden["unimen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["unimen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["unimen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["unimen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][5]=="SI")
+	{
+		$this->NM_cmp_hidden["preciomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["preciomen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["preciomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["preciomen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][6]=="SI")
+	{
+		$this->NM_cmp_hidden["idiva"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idiva"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "off"; }
+	}
+	
+	if($this->vconfig[0][6]=="SI")
+	{
+		$this->NM_cmp_hidden["btn_stock"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["btn_stock"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "off"; }
+	}
+	
+	if($this->vconfig[0][7]=="SI")
+	{
+		$this->NM_cmp_hidden["ubicacion"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["ubicacion"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "off"; }
+	}
+	
+	if($this->vconfig[0][8]=="SI")
+	{
+		$this->NM_cmp_hidden["costomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["costomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][9]=="SI")
+	{
+		$this->NM_cmp_hidden["idpro1"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idpro1"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "off"; }
+	}
+	
+	if($this->vconfig[0][10]=="SI")
+	{
+		$this->NM_cmp_hidden["escombo"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["escombo"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "off"; }
+	}
+}
+
+
+$this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
  
       $nm_select = "select grupo from usuarios where usuario='".$this->sc_temp_gusuario_logueo."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -690,6 +833,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        }
        eval ("\$this->comp_field = array(" . $Str_gb . ");");;
 
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idgrup']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idgrup'] = "Grupo"; 
+       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['codigobar']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['codigobar'] = "Código"; 
@@ -714,9 +861,25 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['preciomen'] = "Precio"; 
        }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idiva']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idiva'] = "Impuesto(%)"; 
+       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['btn_stock']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['btn_stock'] = "Stock"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['ubicacion']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['ubicacion'] = "Ubicacion"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['costomen']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['costomen'] = "Costo"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro1']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro1'] = "Proveedor"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['escombo']))
        {
@@ -734,10 +897,6 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['unimay'] = "Unidad"; 
        }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['costomen']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['costomen'] = "Costo"; 
-       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['recmayamen']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['recmayamen'] = "Factor"; 
@@ -754,21 +913,9 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['stockmen'] = "Existencia"; 
        }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idgrup']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idgrup'] = "Grupo"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro1']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro1'] = "Proveedor"; 
-       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro2']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro2'] = "Proveedor 2"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idiva']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idiva'] = "%IVA"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['otro']))
        {
@@ -6043,7 +6190,150 @@ if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
 if (!isset($_SESSION['gusuario_logueo'])) {$_SESSION['gusuario_logueo'] = "";}
 if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (isset($_SESSION['gusuario_logueo'])) ? $_SESSION['gusuario_logueo'] : "";}
- $this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
+ $vsql = "select ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from configuraciones where idconfiguraciones=1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vConfig = array();
+      $this->vconfig = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vConfig[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vconfig[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vConfig = false;
+          $this->vConfig_erro = $this->Db->ErrorMsg();
+          $this->vconfig = false;
+          $this->vconfig_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vconfig[0][0]))
+{
+	if($this->vconfig[0][0]=="SI")
+	{
+		$this->NM_cmp_hidden["idgrup"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idgrup"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idgrup"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idgrup"] = "off"; }
+	}
+	
+	if($this->vconfig[0][1]=="SI")
+	{
+		$this->NM_cmp_hidden["codigobar"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["codigobar"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["codigobar"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["codigobar"] = "off"; }
+	}
+	
+	if($this->vconfig[0][2]=="SI")
+	{
+		$this->NM_cmp_hidden["imagen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["imagen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["imagen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["imagen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][3]=="SI")
+	{
+		$this->NM_cmp_hidden["existencia_menor"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["existencia_menor"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["existencia_menor"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["existencia_menor"] = "off"; }
+	}
+	
+	if($this->vconfig[0][4]=="SI")
+	{
+		$this->NM_cmp_hidden["unimen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["unimen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["unimen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["unimen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][5]=="SI")
+	{
+		$this->NM_cmp_hidden["preciomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["preciomen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["preciomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["preciomen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][6]=="SI")
+	{
+		$this->NM_cmp_hidden["idiva"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idiva"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "off"; }
+	}
+	
+	if($this->vconfig[0][6]=="SI")
+	{
+		$this->NM_cmp_hidden["btn_stock"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["btn_stock"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "off"; }
+	}
+	
+	if($this->vconfig[0][7]=="SI")
+	{
+		$this->NM_cmp_hidden["ubicacion"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["ubicacion"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "off"; }
+	}
+	
+	if($this->vconfig[0][8]=="SI")
+	{
+		$this->NM_cmp_hidden["costomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["costomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][9]=="SI")
+	{
+		$this->NM_cmp_hidden["idpro1"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idpro1"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "off"; }
+	}
+	
+	if($this->vconfig[0][10]=="SI")
+	{
+		$this->NM_cmp_hidden["escombo"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["escombo"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "off"; }
+	}
+}
+
+
+$this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
  
       $nm_select = "select grupo from usuarios where usuario='".$this->sc_temp_gusuario_logueo."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -6106,19 +6396,19 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
-         $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+         $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
      { 
-         $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+         $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      { 
-         $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+         $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
      } 
      else 
      { 
-         $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+         $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
      } 
      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']; 
      $campos_order = "";
@@ -6228,40 +6518,41 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                 }
                 $this->stockmen_2 = $Busca_temp['stockmen_input_2']; 
             } 
-            $this->codigobar = $rs_res->fields[0] ;  
-            $this->nompro = $rs_res->fields[1] ;  
-            $this->imagen = $rs_res->fields[2] ;  
-            $this->existencia_menor = $rs_res->fields[3] ;  
-            $this->unimen = $rs_res->fields[4] ;  
-            $this->preciomen = $rs_res->fields[5] ;  
+            $this->idgrup = $rs_res->fields[0] ;  
+            $this->codigobar = $rs_res->fields[1] ;  
+            $this->nompro = $rs_res->fields[2] ;  
+            $this->imagen = $rs_res->fields[3] ;  
+            $this->existencia_menor = $rs_res->fields[4] ;  
+            $this->unimen = $rs_res->fields[5] ;  
+            $this->preciomen = $rs_res->fields[6] ;  
             $this->preciomen =  str_replace(",", ".", $this->preciomen);
-            $this->escombo = $rs_res->fields[6] ;  
-            $this->idprod = $rs_res->fields[7] ;  
-            $this->unimay = $rs_res->fields[8] ;  
+            $this->idiva = $rs_res->fields[7] ;  
+            $this->ubicacion = $rs_res->fields[8] ;  
             $this->costomen = $rs_res->fields[9] ;  
             $this->costomen =  str_replace(",", ".", $this->costomen);
-            $this->recmayamen = $rs_res->fields[10] ;  
+            $this->idpro1 = $rs_res->fields[10] ;  
+            $this->escombo = $rs_res->fields[11] ;  
+            $this->idprod = $rs_res->fields[12] ;  
+            $this->unimay = $rs_res->fields[13] ;  
+            $this->recmayamen = $rs_res->fields[14] ;  
             $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
-            $this->preciofull = $rs_res->fields[11] ;  
+            $this->preciofull = $rs_res->fields[15] ;  
             $this->preciofull =  str_replace(",", ".", $this->preciofull);
-            $this->stockmay = $rs_res->fields[12] ;  
+            $this->stockmay = $rs_res->fields[16] ;  
             $this->stockmay =  str_replace(",", ".", $this->stockmay);
-            $this->stockmen = $rs_res->fields[13] ;  
-            $this->idgrup = $rs_res->fields[14] ;  
-            $this->idpro1 = $rs_res->fields[15] ;  
-            $this->idpro2 = $rs_res->fields[16] ;  
-            $this->idiva = $rs_res->fields[17] ;  
-            $this->otro = $rs_res->fields[18] ;  
-            $this->otro2 = $rs_res->fields[19] ;  
-            $this->preciomen2 = $rs_res->fields[20] ;  
+            $this->stockmen = $rs_res->fields[17] ;  
+            $this->idpro2 = $rs_res->fields[18] ;  
+            $this->otro = $rs_res->fields[19] ;  
+            $this->otro2 = $rs_res->fields[20] ;  
+            $this->preciomen2 = $rs_res->fields[21] ;  
             $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
-            $this->preciomen3 = $rs_res->fields[21] ;  
+            $this->preciomen3 = $rs_res->fields[22] ;  
             $this->preciomen3 =  str_replace(",", ".", $this->preciomen3);
-            $this->precio2 = $rs_res->fields[22] ;  
+            $this->precio2 = $rs_res->fields[23] ;  
             $this->precio2 =  str_replace(",", ".", $this->precio2);
-            $this->preciomay = $rs_res->fields[23] ;  
+            $this->preciomay = $rs_res->fields[24] ;  
             $this->preciomay =  str_replace(",", ".", $this->preciomay);
-            $this->unidmaymen = $rs_res->fields[24] ;  
+            $this->unidmaymen = $rs_res->fields[25] ;  
             $this->codigobar_orig = $this->codigobar;
             $this->nompro_orig = $this->nompro;
             $this->unimay_orig = $this->unimay;

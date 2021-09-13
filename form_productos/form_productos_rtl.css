@@ -130,6 +130,9 @@
 .css_imagen_label { }
 .css_imagen_line { }
 .css_imagen_obj { }
+.css_ubicacion_label { }
+.css_ubicacion_line { }
+.css_ubicacion_obj { }
 .css_sugerido_mayor_label {color:#000099;font-weight:bold;text-align:left;}
 .css_sugerido_mayor_line {font-weight:bold;text-align:center;}
 .css_sugerido_mayor_obj {font-size:16px;font-weight:bold;border-color:#FFFFFF;}

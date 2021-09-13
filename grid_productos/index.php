@@ -235,8 +235,8 @@ class grid_productos_ini
       $this->nm_dt_criacao   = "20171209"; 
       $this->nm_hr_criacao   = "171017"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210913"; 
+      $this->nm_hr_ult_alt   = "104926"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1143,7 +1143,7 @@ class grid_productos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_productos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_productos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOZSFGHIrKHuBqDMzGVcXKDuX7VoBqHQBqZ1X7HAzGZMJeDMzGZSXeDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErCDWFqHINUHQJKZSFUDSN7VWBqDMzGVcXKDWF/VoBqDcFYH9BqHIrwHQF7HgBOHArsH5FYVoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSFGHAveV5BOHuNODkBOH5XCVEraDcBqH9FaD1rKD5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIBeHQrqDEBOHArCDuJeHMX7D9JKH9BiHAN7D5B/HgrwDkBOHEF/HIrqHQNmH9B/D1rwHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiHINKD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuNOV9FeDuX7DoraHQXGZkBiD1rKHQrqHgNODkFeV5FqHIBiD9FYDQX7HIBeHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQFaDSBYV5XGDMBYV9FeHEX7HIXGDcBqZSB/D1rwV5B/DMzGZSJqDWF/HIFGHQXsDQBqD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHEJqDuJeHMBqHQJKZSBiDSrwHuFUDMvOVcFKDWrmVoF7D9BiZkBiHArKHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9FaHArKD5XGDEBOZSXeH5F/ZuB/DcJeZSFGD1veV5JwHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBsZkFGZ1NOD5rqHgNKHENiH5FYVoBiHQNmH9X7HIvsV5JeHgrKVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUHEX/VoF7HQNmH9BqHArKV5FUDMrYZSXeV5FqHIJsDcBiZ9XGHIrKHuraDMvOZSJqDuFGVEraDcBqH9BOHABYHQBqHgNKHENiDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -1308,6 +1308,10 @@ class grid_productos_ini
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['grid_productos']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['grid_productos']['embutida_init']) 
       {
+          if (!isset($_SESSION['gnit'])) 
+          {
+              $this->nm_falta_var .= "gnit; ";
+          }
           if (!isset($_SESSION['gusuario_logueo'])) 
           {
               $this->nm_falta_var .= "gusuario_logueo; ";
@@ -1315,10 +1319,6 @@ class grid_productos_ini
           if (!isset($_SESSION['gnube_activa'])) 
           {
               $this->nm_falta_var .= "gnube_activa; ";
-          }
-          if (!isset($_SESSION['gnit'])) 
-          {
-              $this->nm_falta_var .= "gnit; ";
           }
       }
 // 
@@ -2228,6 +2228,11 @@ class grid_productos_apl
                    }
               }
           } 
+          if (isset($gnit)) 
+          {
+              $_SESSION['gnit'] = $gnit;
+              nm_limpa_str_grid_productos($_SESSION["gnit"]);
+          }
           if (isset($gusuario_logueo)) 
           {
               $_SESSION['gusuario_logueo'] = $gusuario_logueo;
@@ -2237,11 +2242,6 @@ class grid_productos_apl
           {
               $_SESSION['gnube_activa'] = $gnube_activa;
               nm_limpa_str_grid_productos($_SESSION["gnube_activa"]);
-          }
-          if (isset($gnit)) 
-          {
-              $_SESSION['gnit'] = $gnit;
-              nm_limpa_str_grid_productos($_SESSION["gnit"]);
           }
       } 
       if ($Parms_form_pdf)
@@ -2942,26 +2942,27 @@ class grid_productos_apl
       } 
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order']))
       { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "idgrup";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "codigobar";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "nompro";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "imagen";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "existencia_menor";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "unimen";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "preciomen";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "idiva";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "btn_stock";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "ubicacion";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "costomen";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "idpro1";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "escombo";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "agregarnotainv";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "idprod";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "unimay";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "costomen";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "recmayamen";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "preciofull";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "stockmay";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "stockmen";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "idgrup";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "idpro1";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "idpro2";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "idiva";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "otro";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "otro2";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'][] = "preciomen2";
@@ -2975,15 +2976,11 @@ class grid_productos_apl
           } 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['idprod'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['unimay'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['costomen'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['recmayamen'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['preciofull'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['stockmay'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['stockmen'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['idgrup'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['idpro1'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['idpro2'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['idiva'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['otro'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['otro2'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['usr_cmp_sel']['preciomen2'] = "off";
@@ -4123,69 +4120,59 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sc_sq
     {
        if (!is_numeric($Run_register)) { continue; }
        $this->rs_grid->fields = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sc_sql_btn_run'][$Run_register];
-       $this->codigobar = $this->rs_grid->fields[0] ;  
-       $this->nompro = $this->rs_grid->fields[1] ;  
-       $this->imagen = $this->rs_grid->fields[2] ;  
-       $this->existencia_menor = $this->rs_grid->fields[3] ;  
-       $this->existencia_menor = (strpos(strtolower($this->existencia_menor), "e")) ? (float)$this->existencia_menor : $this->existencia_menor; 
+       $this->idgrup = $this->rs_grid->fields[0] ;  
+       $this->idgrup = (string)$this->idgrup;
+       $this->codigobar = $this->rs_grid->fields[1] ;  
+       $this->nompro = $this->rs_grid->fields[2] ;  
+       $this->imagen = $this->rs_grid->fields[3] ;  
+       $this->existencia_menor = $this->rs_grid->fields[4] ;  
        $this->existencia_menor = (string)$this->existencia_menor;
-       $this->unimen = $this->rs_grid->fields[4] ;  
-       $this->preciomen = $this->rs_grid->fields[5] ;  
+       $this->unimen = $this->rs_grid->fields[5] ;  
+       $this->preciomen = $this->rs_grid->fields[6] ;  
        $this->preciomen =  str_replace(",", ".", $this->preciomen);
-       $this->preciomen = (strpos(strtolower($this->preciomen), "e")) ? (float)$this->preciomen : $this->preciomen; 
        $this->preciomen = (string)$this->preciomen;
-       $this->escombo = $this->rs_grid->fields[6] ;  
-       $this->idprod = $this->rs_grid->fields[7] ;  
-       $this->idprod = (string)$this->idprod;
-       $this->unimay = $this->rs_grid->fields[8] ;  
+       $this->idiva = $this->rs_grid->fields[7] ;  
+       $this->idiva = (string)$this->idiva;
+       $this->ubicacion = $this->rs_grid->fields[8] ;  
        $this->costomen = $this->rs_grid->fields[9] ;  
        $this->costomen =  str_replace(",", ".", $this->costomen);
-       $this->costomen = (strpos(strtolower($this->costomen), "e")) ? (float)$this->costomen : $this->costomen; 
        $this->costomen = (string)$this->costomen;
-       $this->recmayamen = $this->rs_grid->fields[10] ;  
-       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
-       $this->recmayamen = (strpos(strtolower($this->recmayamen), "e")) ? (float)$this->recmayamen : $this->recmayamen; 
-       $this->recmayamen = (string)$this->recmayamen;
-       $this->preciofull = $this->rs_grid->fields[11] ;  
-       $this->preciofull =  str_replace(",", ".", $this->preciofull);
-       $this->preciofull = (strpos(strtolower($this->preciofull), "e")) ? (float)$this->preciofull : $this->preciofull; 
-       $this->preciofull = (string)$this->preciofull;
-       $this->stockmay = $this->rs_grid->fields[12] ;  
-       $this->stockmay =  str_replace(",", ".", $this->stockmay);
-       $this->stockmay = (strpos(strtolower($this->stockmay), "e")) ? (float)$this->stockmay : $this->stockmay; 
-       $this->stockmay = (string)$this->stockmay;
-       $this->stockmen = $this->rs_grid->fields[13] ;  
-       $this->stockmen = (strpos(strtolower($this->stockmen), "e")) ? (float)$this->stockmen : $this->stockmen; 
-       $this->stockmen = (string)$this->stockmen;
-       $this->idgrup = $this->rs_grid->fields[14] ;  
-       $this->idgrup = (string)$this->idgrup;
-       $this->idpro1 = $this->rs_grid->fields[15] ;  
+       $this->idpro1 = $this->rs_grid->fields[10] ;  
        $this->idpro1 = (string)$this->idpro1;
-       $this->idpro2 = $this->rs_grid->fields[16] ;  
+       $this->escombo = $this->rs_grid->fields[11] ;  
+       $this->idprod = $this->rs_grid->fields[12] ;  
+       $this->idprod = (string)$this->idprod;
+       $this->unimay = $this->rs_grid->fields[13] ;  
+       $this->recmayamen = $this->rs_grid->fields[14] ;  
+       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
+       $this->recmayamen = (string)$this->recmayamen;
+       $this->preciofull = $this->rs_grid->fields[15] ;  
+       $this->preciofull =  str_replace(",", ".", $this->preciofull);
+       $this->preciofull = (string)$this->preciofull;
+       $this->stockmay = $this->rs_grid->fields[16] ;  
+       $this->stockmay =  str_replace(",", ".", $this->stockmay);
+       $this->stockmay = (string)$this->stockmay;
+       $this->stockmen = $this->rs_grid->fields[17] ;  
+       $this->stockmen = (string)$this->stockmen;
+       $this->idpro2 = $this->rs_grid->fields[18] ;  
        $this->idpro2 = (string)$this->idpro2;
-       $this->idiva = $this->rs_grid->fields[17] ;  
-       $this->idiva = (string)$this->idiva;
-       $this->otro = $this->rs_grid->fields[18] ;  
+       $this->otro = $this->rs_grid->fields[19] ;  
        $this->otro = (string)$this->otro;
-       $this->otro2 = $this->rs_grid->fields[19] ;  
+       $this->otro2 = $this->rs_grid->fields[20] ;  
        $this->otro2 = (string)$this->otro2;
-       $this->preciomen2 = $this->rs_grid->fields[20] ;  
+       $this->preciomen2 = $this->rs_grid->fields[21] ;  
        $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
-       $this->preciomen2 = (strpos(strtolower($this->preciomen2), "e")) ? (float)$this->preciomen2 : $this->preciomen2; 
        $this->preciomen2 = (string)$this->preciomen2;
-       $this->preciomen3 = $this->rs_grid->fields[21] ;  
+       $this->preciomen3 = $this->rs_grid->fields[22] ;  
        $this->preciomen3 =  str_replace(",", ".", $this->preciomen3);
-       $this->preciomen3 = (strpos(strtolower($this->preciomen3), "e")) ? (float)$this->preciomen3 : $this->preciomen3; 
        $this->preciomen3 = (string)$this->preciomen3;
-       $this->precio2 = $this->rs_grid->fields[22] ;  
+       $this->precio2 = $this->rs_grid->fields[23] ;  
        $this->precio2 =  str_replace(",", ".", $this->precio2);
-       $this->precio2 = (strpos(strtolower($this->precio2), "e")) ? (float)$this->precio2 : $this->precio2; 
        $this->precio2 = (string)$this->precio2;
-       $this->preciomay = $this->rs_grid->fields[23] ;  
+       $this->preciomay = $this->rs_grid->fields[24] ;  
        $this->preciomay =  str_replace(",", ".", $this->preciomay);
-       $this->preciomay = (strpos(strtolower($this->preciomay), "e")) ? (float)$this->preciomay : $this->preciomay; 
        $this->preciomay = (string)$this->preciomay;
-       $this->unidmaymen = $this->rs_grid->fields[24] ;  
+       $this->unidmaymen = $this->rs_grid->fields[25] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->imagenprod))
@@ -4488,69 +4475,59 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sc_sq
     {
        if (!is_numeric($Run_register)) { continue; }
        $this->rs_grid->fields = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sc_sql_btn_run'][$Run_register];
-       $this->codigobar = $this->rs_grid->fields[0] ;  
-       $this->nompro = $this->rs_grid->fields[1] ;  
-       $this->imagen = $this->rs_grid->fields[2] ;  
-       $this->existencia_menor = $this->rs_grid->fields[3] ;  
-       $this->existencia_menor = (strpos(strtolower($this->existencia_menor), "e")) ? (float)$this->existencia_menor : $this->existencia_menor; 
+       $this->idgrup = $this->rs_grid->fields[0] ;  
+       $this->idgrup = (string)$this->idgrup;
+       $this->codigobar = $this->rs_grid->fields[1] ;  
+       $this->nompro = $this->rs_grid->fields[2] ;  
+       $this->imagen = $this->rs_grid->fields[3] ;  
+       $this->existencia_menor = $this->rs_grid->fields[4] ;  
        $this->existencia_menor = (string)$this->existencia_menor;
-       $this->unimen = $this->rs_grid->fields[4] ;  
-       $this->preciomen = $this->rs_grid->fields[5] ;  
+       $this->unimen = $this->rs_grid->fields[5] ;  
+       $this->preciomen = $this->rs_grid->fields[6] ;  
        $this->preciomen =  str_replace(",", ".", $this->preciomen);
-       $this->preciomen = (strpos(strtolower($this->preciomen), "e")) ? (float)$this->preciomen : $this->preciomen; 
        $this->preciomen = (string)$this->preciomen;
-       $this->escombo = $this->rs_grid->fields[6] ;  
-       $this->idprod = $this->rs_grid->fields[7] ;  
-       $this->idprod = (string)$this->idprod;
-       $this->unimay = $this->rs_grid->fields[8] ;  
+       $this->idiva = $this->rs_grid->fields[7] ;  
+       $this->idiva = (string)$this->idiva;
+       $this->ubicacion = $this->rs_grid->fields[8] ;  
        $this->costomen = $this->rs_grid->fields[9] ;  
        $this->costomen =  str_replace(",", ".", $this->costomen);
-       $this->costomen = (strpos(strtolower($this->costomen), "e")) ? (float)$this->costomen : $this->costomen; 
        $this->costomen = (string)$this->costomen;
-       $this->recmayamen = $this->rs_grid->fields[10] ;  
-       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
-       $this->recmayamen = (strpos(strtolower($this->recmayamen), "e")) ? (float)$this->recmayamen : $this->recmayamen; 
-       $this->recmayamen = (string)$this->recmayamen;
-       $this->preciofull = $this->rs_grid->fields[11] ;  
-       $this->preciofull =  str_replace(",", ".", $this->preciofull);
-       $this->preciofull = (strpos(strtolower($this->preciofull), "e")) ? (float)$this->preciofull : $this->preciofull; 
-       $this->preciofull = (string)$this->preciofull;
-       $this->stockmay = $this->rs_grid->fields[12] ;  
-       $this->stockmay =  str_replace(",", ".", $this->stockmay);
-       $this->stockmay = (strpos(strtolower($this->stockmay), "e")) ? (float)$this->stockmay : $this->stockmay; 
-       $this->stockmay = (string)$this->stockmay;
-       $this->stockmen = $this->rs_grid->fields[13] ;  
-       $this->stockmen = (strpos(strtolower($this->stockmen), "e")) ? (float)$this->stockmen : $this->stockmen; 
-       $this->stockmen = (string)$this->stockmen;
-       $this->idgrup = $this->rs_grid->fields[14] ;  
-       $this->idgrup = (string)$this->idgrup;
-       $this->idpro1 = $this->rs_grid->fields[15] ;  
+       $this->idpro1 = $this->rs_grid->fields[10] ;  
        $this->idpro1 = (string)$this->idpro1;
-       $this->idpro2 = $this->rs_grid->fields[16] ;  
+       $this->escombo = $this->rs_grid->fields[11] ;  
+       $this->idprod = $this->rs_grid->fields[12] ;  
+       $this->idprod = (string)$this->idprod;
+       $this->unimay = $this->rs_grid->fields[13] ;  
+       $this->recmayamen = $this->rs_grid->fields[14] ;  
+       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
+       $this->recmayamen = (string)$this->recmayamen;
+       $this->preciofull = $this->rs_grid->fields[15] ;  
+       $this->preciofull =  str_replace(",", ".", $this->preciofull);
+       $this->preciofull = (string)$this->preciofull;
+       $this->stockmay = $this->rs_grid->fields[16] ;  
+       $this->stockmay =  str_replace(",", ".", $this->stockmay);
+       $this->stockmay = (string)$this->stockmay;
+       $this->stockmen = $this->rs_grid->fields[17] ;  
+       $this->stockmen = (string)$this->stockmen;
+       $this->idpro2 = $this->rs_grid->fields[18] ;  
        $this->idpro2 = (string)$this->idpro2;
-       $this->idiva = $this->rs_grid->fields[17] ;  
-       $this->idiva = (string)$this->idiva;
-       $this->otro = $this->rs_grid->fields[18] ;  
+       $this->otro = $this->rs_grid->fields[19] ;  
        $this->otro = (string)$this->otro;
-       $this->otro2 = $this->rs_grid->fields[19] ;  
+       $this->otro2 = $this->rs_grid->fields[20] ;  
        $this->otro2 = (string)$this->otro2;
-       $this->preciomen2 = $this->rs_grid->fields[20] ;  
+       $this->preciomen2 = $this->rs_grid->fields[21] ;  
        $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
-       $this->preciomen2 = (strpos(strtolower($this->preciomen2), "e")) ? (float)$this->preciomen2 : $this->preciomen2; 
        $this->preciomen2 = (string)$this->preciomen2;
-       $this->preciomen3 = $this->rs_grid->fields[21] ;  
+       $this->preciomen3 = $this->rs_grid->fields[22] ;  
        $this->preciomen3 =  str_replace(",", ".", $this->preciomen3);
-       $this->preciomen3 = (strpos(strtolower($this->preciomen3), "e")) ? (float)$this->preciomen3 : $this->preciomen3; 
        $this->preciomen3 = (string)$this->preciomen3;
-       $this->precio2 = $this->rs_grid->fields[22] ;  
+       $this->precio2 = $this->rs_grid->fields[23] ;  
        $this->precio2 =  str_replace(",", ".", $this->precio2);
-       $this->precio2 = (strpos(strtolower($this->precio2), "e")) ? (float)$this->precio2 : $this->precio2; 
        $this->precio2 = (string)$this->precio2;
-       $this->preciomay = $this->rs_grid->fields[23] ;  
+       $this->preciomay = $this->rs_grid->fields[24] ;  
        $this->preciomay =  str_replace(",", ".", $this->preciomay);
-       $this->preciomay = (strpos(strtolower($this->preciomay), "e")) ? (float)$this->preciomay : $this->preciomay; 
        $this->preciomay = (string)$this->preciomay;
-       $this->unidmaymen = $this->rs_grid->fields[24] ;  
+       $this->unidmaymen = $this->rs_grid->fields[25] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->imagenprod))
@@ -4927,69 +4904,59 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sc_sq
     {
        if (!is_numeric($Run_register)) { continue; }
        $this->rs_grid->fields = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sc_sql_btn_run'][$Run_register];
-       $this->codigobar = $this->rs_grid->fields[0] ;  
-       $this->nompro = $this->rs_grid->fields[1] ;  
-       $this->imagen = $this->rs_grid->fields[2] ;  
-       $this->existencia_menor = $this->rs_grid->fields[3] ;  
-       $this->existencia_menor = (strpos(strtolower($this->existencia_menor), "e")) ? (float)$this->existencia_menor : $this->existencia_menor; 
+       $this->idgrup = $this->rs_grid->fields[0] ;  
+       $this->idgrup = (string)$this->idgrup;
+       $this->codigobar = $this->rs_grid->fields[1] ;  
+       $this->nompro = $this->rs_grid->fields[2] ;  
+       $this->imagen = $this->rs_grid->fields[3] ;  
+       $this->existencia_menor = $this->rs_grid->fields[4] ;  
        $this->existencia_menor = (string)$this->existencia_menor;
-       $this->unimen = $this->rs_grid->fields[4] ;  
-       $this->preciomen = $this->rs_grid->fields[5] ;  
+       $this->unimen = $this->rs_grid->fields[5] ;  
+       $this->preciomen = $this->rs_grid->fields[6] ;  
        $this->preciomen =  str_replace(",", ".", $this->preciomen);
-       $this->preciomen = (strpos(strtolower($this->preciomen), "e")) ? (float)$this->preciomen : $this->preciomen; 
        $this->preciomen = (string)$this->preciomen;
-       $this->escombo = $this->rs_grid->fields[6] ;  
-       $this->idprod = $this->rs_grid->fields[7] ;  
-       $this->idprod = (string)$this->idprod;
-       $this->unimay = $this->rs_grid->fields[8] ;  
+       $this->idiva = $this->rs_grid->fields[7] ;  
+       $this->idiva = (string)$this->idiva;
+       $this->ubicacion = $this->rs_grid->fields[8] ;  
        $this->costomen = $this->rs_grid->fields[9] ;  
        $this->costomen =  str_replace(",", ".", $this->costomen);
-       $this->costomen = (strpos(strtolower($this->costomen), "e")) ? (float)$this->costomen : $this->costomen; 
        $this->costomen = (string)$this->costomen;
-       $this->recmayamen = $this->rs_grid->fields[10] ;  
-       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
-       $this->recmayamen = (strpos(strtolower($this->recmayamen), "e")) ? (float)$this->recmayamen : $this->recmayamen; 
-       $this->recmayamen = (string)$this->recmayamen;
-       $this->preciofull = $this->rs_grid->fields[11] ;  
-       $this->preciofull =  str_replace(",", ".", $this->preciofull);
-       $this->preciofull = (strpos(strtolower($this->preciofull), "e")) ? (float)$this->preciofull : $this->preciofull; 
-       $this->preciofull = (string)$this->preciofull;
-       $this->stockmay = $this->rs_grid->fields[12] ;  
-       $this->stockmay =  str_replace(",", ".", $this->stockmay);
-       $this->stockmay = (strpos(strtolower($this->stockmay), "e")) ? (float)$this->stockmay : $this->stockmay; 
-       $this->stockmay = (string)$this->stockmay;
-       $this->stockmen = $this->rs_grid->fields[13] ;  
-       $this->stockmen = (strpos(strtolower($this->stockmen), "e")) ? (float)$this->stockmen : $this->stockmen; 
-       $this->stockmen = (string)$this->stockmen;
-       $this->idgrup = $this->rs_grid->fields[14] ;  
-       $this->idgrup = (string)$this->idgrup;
-       $this->idpro1 = $this->rs_grid->fields[15] ;  
+       $this->idpro1 = $this->rs_grid->fields[10] ;  
        $this->idpro1 = (string)$this->idpro1;
-       $this->idpro2 = $this->rs_grid->fields[16] ;  
+       $this->escombo = $this->rs_grid->fields[11] ;  
+       $this->idprod = $this->rs_grid->fields[12] ;  
+       $this->idprod = (string)$this->idprod;
+       $this->unimay = $this->rs_grid->fields[13] ;  
+       $this->recmayamen = $this->rs_grid->fields[14] ;  
+       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
+       $this->recmayamen = (string)$this->recmayamen;
+       $this->preciofull = $this->rs_grid->fields[15] ;  
+       $this->preciofull =  str_replace(",", ".", $this->preciofull);
+       $this->preciofull = (string)$this->preciofull;
+       $this->stockmay = $this->rs_grid->fields[16] ;  
+       $this->stockmay =  str_replace(",", ".", $this->stockmay);
+       $this->stockmay = (string)$this->stockmay;
+       $this->stockmen = $this->rs_grid->fields[17] ;  
+       $this->stockmen = (string)$this->stockmen;
+       $this->idpro2 = $this->rs_grid->fields[18] ;  
        $this->idpro2 = (string)$this->idpro2;
-       $this->idiva = $this->rs_grid->fields[17] ;  
-       $this->idiva = (string)$this->idiva;
-       $this->otro = $this->rs_grid->fields[18] ;  
+       $this->otro = $this->rs_grid->fields[19] ;  
        $this->otro = (string)$this->otro;
-       $this->otro2 = $this->rs_grid->fields[19] ;  
+       $this->otro2 = $this->rs_grid->fields[20] ;  
        $this->otro2 = (string)$this->otro2;
-       $this->preciomen2 = $this->rs_grid->fields[20] ;  
+       $this->preciomen2 = $this->rs_grid->fields[21] ;  
        $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
-       $this->preciomen2 = (strpos(strtolower($this->preciomen2), "e")) ? (float)$this->preciomen2 : $this->preciomen2; 
        $this->preciomen2 = (string)$this->preciomen2;
-       $this->preciomen3 = $this->rs_grid->fields[21] ;  
+       $this->preciomen3 = $this->rs_grid->fields[22] ;  
        $this->preciomen3 =  str_replace(",", ".", $this->preciomen3);
-       $this->preciomen3 = (strpos(strtolower($this->preciomen3), "e")) ? (float)$this->preciomen3 : $this->preciomen3; 
        $this->preciomen3 = (string)$this->preciomen3;
-       $this->precio2 = $this->rs_grid->fields[22] ;  
+       $this->precio2 = $this->rs_grid->fields[23] ;  
        $this->precio2 =  str_replace(",", ".", $this->precio2);
-       $this->precio2 = (strpos(strtolower($this->precio2), "e")) ? (float)$this->precio2 : $this->precio2; 
        $this->precio2 = (string)$this->precio2;
-       $this->preciomay = $this->rs_grid->fields[23] ;  
+       $this->preciomay = $this->rs_grid->fields[24] ;  
        $this->preciomay =  str_replace(",", ".", $this->preciomay);
-       $this->preciomay = (strpos(strtolower($this->preciomay), "e")) ? (float)$this->preciomay : $this->preciomay; 
        $this->preciomay = (string)$this->preciomay;
-       $this->unidmaymen = $this->rs_grid->fields[24] ;  
+       $this->unidmaymen = $this->rs_grid->fields[25] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->imagenprod))
@@ -5138,69 +5105,59 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sc_sq
     {
        if (!is_numeric($Run_register)) { continue; }
        $this->rs_grid->fields = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sc_sql_btn_run'][$Run_register];
-       $this->codigobar = $this->rs_grid->fields[0] ;  
-       $this->nompro = $this->rs_grid->fields[1] ;  
-       $this->imagen = $this->rs_grid->fields[2] ;  
-       $this->existencia_menor = $this->rs_grid->fields[3] ;  
-       $this->existencia_menor = (strpos(strtolower($this->existencia_menor), "e")) ? (float)$this->existencia_menor : $this->existencia_menor; 
+       $this->idgrup = $this->rs_grid->fields[0] ;  
+       $this->idgrup = (string)$this->idgrup;
+       $this->codigobar = $this->rs_grid->fields[1] ;  
+       $this->nompro = $this->rs_grid->fields[2] ;  
+       $this->imagen = $this->rs_grid->fields[3] ;  
+       $this->existencia_menor = $this->rs_grid->fields[4] ;  
        $this->existencia_menor = (string)$this->existencia_menor;
-       $this->unimen = $this->rs_grid->fields[4] ;  
-       $this->preciomen = $this->rs_grid->fields[5] ;  
+       $this->unimen = $this->rs_grid->fields[5] ;  
+       $this->preciomen = $this->rs_grid->fields[6] ;  
        $this->preciomen =  str_replace(",", ".", $this->preciomen);
-       $this->preciomen = (strpos(strtolower($this->preciomen), "e")) ? (float)$this->preciomen : $this->preciomen; 
        $this->preciomen = (string)$this->preciomen;
-       $this->escombo = $this->rs_grid->fields[6] ;  
-       $this->idprod = $this->rs_grid->fields[7] ;  
-       $this->idprod = (string)$this->idprod;
-       $this->unimay = $this->rs_grid->fields[8] ;  
+       $this->idiva = $this->rs_grid->fields[7] ;  
+       $this->idiva = (string)$this->idiva;
+       $this->ubicacion = $this->rs_grid->fields[8] ;  
        $this->costomen = $this->rs_grid->fields[9] ;  
        $this->costomen =  str_replace(",", ".", $this->costomen);
-       $this->costomen = (strpos(strtolower($this->costomen), "e")) ? (float)$this->costomen : $this->costomen; 
        $this->costomen = (string)$this->costomen;
-       $this->recmayamen = $this->rs_grid->fields[10] ;  
-       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
-       $this->recmayamen = (strpos(strtolower($this->recmayamen), "e")) ? (float)$this->recmayamen : $this->recmayamen; 
-       $this->recmayamen = (string)$this->recmayamen;
-       $this->preciofull = $this->rs_grid->fields[11] ;  
-       $this->preciofull =  str_replace(",", ".", $this->preciofull);
-       $this->preciofull = (strpos(strtolower($this->preciofull), "e")) ? (float)$this->preciofull : $this->preciofull; 
-       $this->preciofull = (string)$this->preciofull;
-       $this->stockmay = $this->rs_grid->fields[12] ;  
-       $this->stockmay =  str_replace(",", ".", $this->stockmay);
-       $this->stockmay = (strpos(strtolower($this->stockmay), "e")) ? (float)$this->stockmay : $this->stockmay; 
-       $this->stockmay = (string)$this->stockmay;
-       $this->stockmen = $this->rs_grid->fields[13] ;  
-       $this->stockmen = (strpos(strtolower($this->stockmen), "e")) ? (float)$this->stockmen : $this->stockmen; 
-       $this->stockmen = (string)$this->stockmen;
-       $this->idgrup = $this->rs_grid->fields[14] ;  
-       $this->idgrup = (string)$this->idgrup;
-       $this->idpro1 = $this->rs_grid->fields[15] ;  
+       $this->idpro1 = $this->rs_grid->fields[10] ;  
        $this->idpro1 = (string)$this->idpro1;
-       $this->idpro2 = $this->rs_grid->fields[16] ;  
+       $this->escombo = $this->rs_grid->fields[11] ;  
+       $this->idprod = $this->rs_grid->fields[12] ;  
+       $this->idprod = (string)$this->idprod;
+       $this->unimay = $this->rs_grid->fields[13] ;  
+       $this->recmayamen = $this->rs_grid->fields[14] ;  
+       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
+       $this->recmayamen = (string)$this->recmayamen;
+       $this->preciofull = $this->rs_grid->fields[15] ;  
+       $this->preciofull =  str_replace(",", ".", $this->preciofull);
+       $this->preciofull = (string)$this->preciofull;
+       $this->stockmay = $this->rs_grid->fields[16] ;  
+       $this->stockmay =  str_replace(",", ".", $this->stockmay);
+       $this->stockmay = (string)$this->stockmay;
+       $this->stockmen = $this->rs_grid->fields[17] ;  
+       $this->stockmen = (string)$this->stockmen;
+       $this->idpro2 = $this->rs_grid->fields[18] ;  
        $this->idpro2 = (string)$this->idpro2;
-       $this->idiva = $this->rs_grid->fields[17] ;  
-       $this->idiva = (string)$this->idiva;
-       $this->otro = $this->rs_grid->fields[18] ;  
+       $this->otro = $this->rs_grid->fields[19] ;  
        $this->otro = (string)$this->otro;
-       $this->otro2 = $this->rs_grid->fields[19] ;  
+       $this->otro2 = $this->rs_grid->fields[20] ;  
        $this->otro2 = (string)$this->otro2;
-       $this->preciomen2 = $this->rs_grid->fields[20] ;  
+       $this->preciomen2 = $this->rs_grid->fields[21] ;  
        $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
-       $this->preciomen2 = (strpos(strtolower($this->preciomen2), "e")) ? (float)$this->preciomen2 : $this->preciomen2; 
        $this->preciomen2 = (string)$this->preciomen2;
-       $this->preciomen3 = $this->rs_grid->fields[21] ;  
+       $this->preciomen3 = $this->rs_grid->fields[22] ;  
        $this->preciomen3 =  str_replace(",", ".", $this->preciomen3);
-       $this->preciomen3 = (strpos(strtolower($this->preciomen3), "e")) ? (float)$this->preciomen3 : $this->preciomen3; 
        $this->preciomen3 = (string)$this->preciomen3;
-       $this->precio2 = $this->rs_grid->fields[22] ;  
+       $this->precio2 = $this->rs_grid->fields[23] ;  
        $this->precio2 =  str_replace(",", ".", $this->precio2);
-       $this->precio2 = (strpos(strtolower($this->precio2), "e")) ? (float)$this->precio2 : $this->precio2; 
        $this->precio2 = (string)$this->precio2;
-       $this->preciomay = $this->rs_grid->fields[23] ;  
+       $this->preciomay = $this->rs_grid->fields[24] ;  
        $this->preciomay =  str_replace(",", ".", $this->preciomay);
-       $this->preciomay = (strpos(strtolower($this->preciomay), "e")) ? (float)$this->preciomay : $this->preciomay; 
        $this->preciomay = (string)$this->preciomay;
-       $this->unidmaymen = $this->rs_grid->fields[24] ;  
+       $this->unidmaymen = $this->rs_grid->fields[25] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->imagenprod))
@@ -6546,6 +6503,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos'][$path_doc_md5][1]
    {
        $nmgp_parms = "";
    }
+   if (isset($gnit)) 
+   {
+       $_SESSION['gnit'] = $gnit;
+   }
    if (isset($gusuario_logueo)) 
    {
        $_SESSION['gusuario_logueo'] = $gusuario_logueo;
@@ -6553,10 +6514,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos'][$path_doc_md5][1]
    if (isset($gnube_activa)) 
    {
        $_SESSION['gnube_activa'] = $gnube_activa;
-   }
-   if (isset($gnit)) 
-   {
-       $_SESSION['gnit'] = $gnit;
    }
    if (!empty($glo_perfil))  
    { 
@@ -6675,6 +6632,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos'][$path_doc_md5][1]
                     $$Tmp_par = $cadapar[1];
                 }
            }
+           if (isset($gnit)) 
+           {
+               $_SESSION['gnit'] = $gnit;
+               nm_limpa_str_grid_productos($_SESSION["gnit"]);
+           }
            if (isset($gusuario_logueo)) 
            {
                $_SESSION['gusuario_logueo'] = $gusuario_logueo;
@@ -6684,11 +6646,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos'][$path_doc_md5][1]
            {
                $_SESSION['gnube_activa'] = $gnube_activa;
                nm_limpa_str_grid_productos($_SESSION["gnube_activa"]);
-           }
-           if (isset($gnit)) 
-           {
-               $_SESSION['gnit'] = $gnit;
-               nm_limpa_str_grid_productos($_SESSION["gnit"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -6923,6 +6880,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos'][$path_doc_md5][1]
        { 
            $_SESSION['sc_session'][$script_case_init]['grid_productos']['opcao'] = $nmgp_opcao ;  
        }   
+       if (isset($_POST["gnit"])) 
+       {
+           $_SESSION["gnit"] = $_POST["gnit"];
+           nm_limpa_str_grid_productos($_SESSION["gnit"]);
+       }
+       if (isset($_GET["gnit"])) 
+       {
+           $_SESSION["gnit"] = $_GET["gnit"];
+           nm_limpa_str_grid_productos($_SESSION["gnit"]);
+       }
+       if (!isset($_SESSION["gnit"])) 
+       {
+           $_SESSION["gnit"] = "";
+       }
        if (isset($_POST["gusuario_logueo"])) 
        {
            $_SESSION["gusuario_logueo"] = $_POST["gusuario_logueo"];
@@ -6950,20 +6921,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos'][$path_doc_md5][1]
        if (!isset($_SESSION["gnube_activa"])) 
        {
            $_SESSION["gnube_activa"] = "";
-       }
-       if (isset($_POST["gnit"])) 
-       {
-           $_SESSION["gnit"] = $_POST["gnit"];
-           nm_limpa_str_grid_productos($_SESSION["gnit"]);
-       }
-       if (isset($_GET["gnit"])) 
-       {
-           $_SESSION["gnit"] = $_GET["gnit"];
-           nm_limpa_str_grid_productos($_SESSION["gnit"]);
-       }
-       if (!isset($_SESSION["gnit"])) 
-       {
-           $_SESSION["gnit"] = "";
        }
        if (!isset($_SESSION['sc_session'][$script_case_init]['grid_productos']['mostra_edit'])) 
        {

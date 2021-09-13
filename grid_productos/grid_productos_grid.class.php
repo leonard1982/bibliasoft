@@ -104,24 +104,25 @@ class grid_productos_grid
    var $btn_stock;
    var $agregarnotainv;
    var $sc_field_0;
+   var $idgrup;
    var $codigobar;
    var $nompro;
    var $imagen;
    var $existencia_menor;
    var $unimen;
    var $preciomen;
+   var $idiva;
+   var $ubicacion;
+   var $costomen;
+   var $idpro1;
    var $escombo;
    var $idprod;
    var $unimay;
-   var $costomen;
    var $recmayamen;
    var $preciofull;
    var $stockmay;
    var $stockmen;
-   var $idgrup;
-   var $idpro1;
    var $idpro2;
-   var $idiva;
    var $otro;
    var $otro2;
    var $preciomen2;
@@ -517,7 +518,30 @@ class grid_productos_grid
    $this->nmgp_botoes['btn_subir_a_nube'] = "on";
    $this->nmgp_botoes['btn_actualizar_nube'] = "on";
    $this->nmgp_botoes['btn_recalcular'] = "on";
+   $this->Cmps_ord_def['idgrup'] = " desc";
+   $this->Cmps_ord_def['codigobar'] = " asc";
    $this->Cmps_ord_def['nompro'] = " asc";
+   $this->Cmps_ord_def['existencia_menor'] = " desc";
+   $this->Cmps_ord_def['unimen'] = " asc";
+   $this->Cmps_ord_def['preciomen'] = " desc";
+   $this->Cmps_ord_def['idiva'] = " desc";
+   $this->Cmps_ord_def['ubicacion'] = " asc";
+   $this->Cmps_ord_def['costomen'] = " desc";
+   $this->Cmps_ord_def['idpro1'] = " desc";
+   $this->Cmps_ord_def['escombo'] = " asc";
+   $this->Cmps_ord_def['idprod'] = " desc";
+   $this->Cmps_ord_def['unimay'] = " asc";
+   $this->Cmps_ord_def['recmayamen'] = " desc";
+   $this->Cmps_ord_def['preciofull'] = " asc";
+   $this->Cmps_ord_def['stockmay'] = " desc";
+   $this->Cmps_ord_def['stockmen'] = " desc";
+   $this->Cmps_ord_def['idpro2'] = " desc";
+   $this->Cmps_ord_def['otro'] = " desc";
+   $this->Cmps_ord_def['otro2'] = " desc";
+   $this->Cmps_ord_def['preciomen2'] = " desc";
+   $this->Cmps_ord_def['preciomen3'] = " desc";
+   $this->Cmps_ord_def['precio2'] = " desc";
+   $this->Cmps_ord_def['preciomay'] = " desc";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_productos']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_productos']['btn_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_productos']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
@@ -625,7 +649,150 @@ if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
 if (!isset($_SESSION['gusuario_logueo'])) {$_SESSION['gusuario_logueo'] = "";}
 if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (isset($_SESSION['gusuario_logueo'])) ? $_SESSION['gusuario_logueo'] : "";}
- $this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
+ $vsql = "select ver_grupo, ver_codigo, ver_imagen, ver_existencia, ver_unidad, ver_precio, ver_impuesto, ver_stock, ver_ubicacion, ver_costo, ver_proveedor, ver_combo from configuraciones where idconfiguraciones=1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vConfig = array();
+      $this->vconfig = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vConfig[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vconfig[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vConfig = false;
+          $this->vConfig_erro = $this->Db->ErrorMsg();
+          $this->vconfig = false;
+          $this->vconfig_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vconfig[0][0]))
+{
+	if($this->vconfig[0][0]=="SI")
+	{
+		$this->NM_cmp_hidden["idgrup"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idgrup"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idgrup"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idgrup"] = "off"; }
+	}
+	
+	if($this->vconfig[0][1]=="SI")
+	{
+		$this->NM_cmp_hidden["codigobar"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["codigobar"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["codigobar"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["codigobar"] = "off"; }
+	}
+	
+	if($this->vconfig[0][2]=="SI")
+	{
+		$this->NM_cmp_hidden["imagen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["imagen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["imagen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["imagen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][3]=="SI")
+	{
+		$this->NM_cmp_hidden["existencia_menor"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["existencia_menor"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["existencia_menor"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["existencia_menor"] = "off"; }
+	}
+	
+	if($this->vconfig[0][4]=="SI")
+	{
+		$this->NM_cmp_hidden["unimen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["unimen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["unimen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["unimen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][5]=="SI")
+	{
+		$this->NM_cmp_hidden["preciomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["preciomen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["preciomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["preciomen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][6]=="SI")
+	{
+		$this->NM_cmp_hidden["idiva"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idiva"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "off"; }
+	}
+	
+	if($this->vconfig[0][6]=="SI")
+	{
+		$this->NM_cmp_hidden["btn_stock"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["btn_stock"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "off"; }
+	}
+	
+	if($this->vconfig[0][7]=="SI")
+	{
+		$this->NM_cmp_hidden["ubicacion"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["ubicacion"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "off"; }
+	}
+	
+	if($this->vconfig[0][8]=="SI")
+	{
+		$this->NM_cmp_hidden["costomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["costomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "off"; }
+	}
+	
+	if($this->vconfig[0][9]=="SI")
+	{
+		$this->NM_cmp_hidden["idpro1"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["idpro1"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "off"; }
+	}
+	
+	if($this->vconfig[0][10]=="SI")
+	{
+		$this->NM_cmp_hidden["escombo"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "on"; }
+	}
+	else
+	{
+		$this->NM_cmp_hidden["escombo"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "off"; }
+	}
+}
+
+
+$this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
  
       $nm_select = "select grupo from usuarios where usuario='".$this->sc_temp_gusuario_logueo."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1087,7 +1254,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['tot_geral'][1];
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_resumo'])) 
    { 
-       $nmgp_select = "SELECT count(*) AS countTest from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT count(*) AS countTest from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
        $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']; 
        if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'])) 
        { 
@@ -1168,27 +1335,27 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT codigobar, nompro, imagen, existencia_menor, unimen, preciomen, escombo, idprod, unimay, costomen, recmayamen, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_resumo'])) 
@@ -1254,7 +1421,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    }
    if (empty($nmgp_order_by))
    {
-       $nmgp_order_by = " order by codigobar";
+       $nmgp_order_by = " order by idgrup";
    }
    $nmgp_select .= $nmgp_order_by; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['order_grid'] = $nmgp_order_by;
@@ -1280,69 +1447,59 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    }  
    else 
    { 
-       $this->codigobar = $this->rs_grid->fields[0] ;  
-       $this->nompro = $this->rs_grid->fields[1] ;  
-       $this->imagen = $this->rs_grid->fields[2] ;  
-       $this->existencia_menor = $this->rs_grid->fields[3] ;  
-       $this->existencia_menor = (strpos(strtolower($this->existencia_menor), "e")) ? (float)$this->existencia_menor : $this->existencia_menor; 
+       $this->idgrup = $this->rs_grid->fields[0] ;  
+       $this->idgrup = (string)$this->idgrup;
+       $this->codigobar = $this->rs_grid->fields[1] ;  
+       $this->nompro = $this->rs_grid->fields[2] ;  
+       $this->imagen = $this->rs_grid->fields[3] ;  
+       $this->existencia_menor = $this->rs_grid->fields[4] ;  
        $this->existencia_menor = (string)$this->existencia_menor;
-       $this->unimen = $this->rs_grid->fields[4] ;  
-       $this->preciomen = $this->rs_grid->fields[5] ;  
+       $this->unimen = $this->rs_grid->fields[5] ;  
+       $this->preciomen = $this->rs_grid->fields[6] ;  
        $this->preciomen =  str_replace(",", ".", $this->preciomen);
-       $this->preciomen = (strpos(strtolower($this->preciomen), "e")) ? (float)$this->preciomen : $this->preciomen; 
        $this->preciomen = (string)$this->preciomen;
-       $this->escombo = $this->rs_grid->fields[6] ;  
-       $this->idprod = $this->rs_grid->fields[7] ;  
-       $this->idprod = (string)$this->idprod;
-       $this->unimay = $this->rs_grid->fields[8] ;  
+       $this->idiva = $this->rs_grid->fields[7] ;  
+       $this->idiva = (string)$this->idiva;
+       $this->ubicacion = $this->rs_grid->fields[8] ;  
        $this->costomen = $this->rs_grid->fields[9] ;  
        $this->costomen =  str_replace(",", ".", $this->costomen);
-       $this->costomen = (strpos(strtolower($this->costomen), "e")) ? (float)$this->costomen : $this->costomen; 
        $this->costomen = (string)$this->costomen;
-       $this->recmayamen = $this->rs_grid->fields[10] ;  
-       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
-       $this->recmayamen = (strpos(strtolower($this->recmayamen), "e")) ? (float)$this->recmayamen : $this->recmayamen; 
-       $this->recmayamen = (string)$this->recmayamen;
-       $this->preciofull = $this->rs_grid->fields[11] ;  
-       $this->preciofull =  str_replace(",", ".", $this->preciofull);
-       $this->preciofull = (strpos(strtolower($this->preciofull), "e")) ? (float)$this->preciofull : $this->preciofull; 
-       $this->preciofull = (string)$this->preciofull;
-       $this->stockmay = $this->rs_grid->fields[12] ;  
-       $this->stockmay =  str_replace(",", ".", $this->stockmay);
-       $this->stockmay = (strpos(strtolower($this->stockmay), "e")) ? (float)$this->stockmay : $this->stockmay; 
-       $this->stockmay = (string)$this->stockmay;
-       $this->stockmen = $this->rs_grid->fields[13] ;  
-       $this->stockmen = (strpos(strtolower($this->stockmen), "e")) ? (float)$this->stockmen : $this->stockmen; 
-       $this->stockmen = (string)$this->stockmen;
-       $this->idgrup = $this->rs_grid->fields[14] ;  
-       $this->idgrup = (string)$this->idgrup;
-       $this->idpro1 = $this->rs_grid->fields[15] ;  
+       $this->idpro1 = $this->rs_grid->fields[10] ;  
        $this->idpro1 = (string)$this->idpro1;
-       $this->idpro2 = $this->rs_grid->fields[16] ;  
+       $this->escombo = $this->rs_grid->fields[11] ;  
+       $this->idprod = $this->rs_grid->fields[12] ;  
+       $this->idprod = (string)$this->idprod;
+       $this->unimay = $this->rs_grid->fields[13] ;  
+       $this->recmayamen = $this->rs_grid->fields[14] ;  
+       $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
+       $this->recmayamen = (string)$this->recmayamen;
+       $this->preciofull = $this->rs_grid->fields[15] ;  
+       $this->preciofull =  str_replace(",", ".", $this->preciofull);
+       $this->preciofull = (string)$this->preciofull;
+       $this->stockmay = $this->rs_grid->fields[16] ;  
+       $this->stockmay =  str_replace(",", ".", $this->stockmay);
+       $this->stockmay = (string)$this->stockmay;
+       $this->stockmen = $this->rs_grid->fields[17] ;  
+       $this->stockmen = (string)$this->stockmen;
+       $this->idpro2 = $this->rs_grid->fields[18] ;  
        $this->idpro2 = (string)$this->idpro2;
-       $this->idiva = $this->rs_grid->fields[17] ;  
-       $this->idiva = (string)$this->idiva;
-       $this->otro = $this->rs_grid->fields[18] ;  
+       $this->otro = $this->rs_grid->fields[19] ;  
        $this->otro = (string)$this->otro;
-       $this->otro2 = $this->rs_grid->fields[19] ;  
+       $this->otro2 = $this->rs_grid->fields[20] ;  
        $this->otro2 = (string)$this->otro2;
-       $this->preciomen2 = $this->rs_grid->fields[20] ;  
+       $this->preciomen2 = $this->rs_grid->fields[21] ;  
        $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
-       $this->preciomen2 = (strpos(strtolower($this->preciomen2), "e")) ? (float)$this->preciomen2 : $this->preciomen2; 
        $this->preciomen2 = (string)$this->preciomen2;
-       $this->preciomen3 = $this->rs_grid->fields[21] ;  
+       $this->preciomen3 = $this->rs_grid->fields[22] ;  
        $this->preciomen3 =  str_replace(",", ".", $this->preciomen3);
-       $this->preciomen3 = (strpos(strtolower($this->preciomen3), "e")) ? (float)$this->preciomen3 : $this->preciomen3; 
        $this->preciomen3 = (string)$this->preciomen3;
-       $this->precio2 = $this->rs_grid->fields[22] ;  
+       $this->precio2 = $this->rs_grid->fields[23] ;  
        $this->precio2 =  str_replace(",", ".", $this->precio2);
-       $this->precio2 = (strpos(strtolower($this->precio2), "e")) ? (float)$this->precio2 : $this->precio2; 
        $this->precio2 = (string)$this->precio2;
-       $this->preciomay = $this->rs_grid->fields[23] ;  
+       $this->preciomay = $this->rs_grid->fields[24] ;  
        $this->preciomay =  str_replace(",", ".", $this->preciomay);
-       $this->preciomay = (strpos(strtolower($this->preciomay), "e")) ? (float)$this->preciomay : $this->preciomay; 
        $this->preciomay = (string)$this->preciomay;
-       $this->unidmaymen = $this->rs_grid->fields[24] ;  
+       $this->unidmaymen = $this->rs_grid->fields[25] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->imagenprod))
@@ -1358,18 +1515,16 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        if (!isset($this->idpro1)) { $this->idpro1 = ""; }
        if (!isset($this->idiva)) { $this->idiva = ""; }
        if (!isset($this->escombo)) { $this->escombo = ""; }
-       $GLOBALS["idgrup"] = $this->rs_grid->fields[14] ;  
-       $GLOBALS["idgrup"] = (string)$GLOBALS["idgrup"] ;
-       $GLOBALS["idiva"] = $this->rs_grid->fields[17] ;  
+       $GLOBALS["idiva"] = $this->rs_grid->fields[7] ;  
        $GLOBALS["idiva"] = (string)$GLOBALS["idiva"] ;
+       $this->arg_sum_idgrup = ($this->idgrup == "") ? " is null " : " = " . $this->idgrup;
        $this->arg_sum_codigobar = " = " . $this->Db->qstr($this->codigobar);
        $this->arg_sum_nompro = " = " . $this->Db->qstr($this->nompro);
        $this->arg_sum_unimen = " = " . $this->Db->qstr($this->unimen);
+       $this->arg_sum_idiva = ($this->idiva == "") ? " is null " : " = " . $this->idiva;
+       $this->arg_sum_idpro1 = ($this->idpro1 == "") ? " is null " : " = " . $this->idpro1;
        $this->arg_sum_escombo = " = " . $this->Db->qstr($this->escombo);
        $this->arg_sum_unimay = " = " . $this->Db->qstr($this->unimay);
-       $this->arg_sum_idgrup = ($this->idgrup == "") ? " is null " : " = " . $this->idgrup;
-       $this->arg_sum_idpro1 = ($this->idpro1 == "") ? " is null " : " = " . $this->idpro1;
-       $this->arg_sum_idiva = ($this->idiva == "") ? " is null " : " = " . $this->idiva;
        $this->look_otro = $this->otro; 
        $this->Lookup->lookup_otro($this->look_otro); 
        $this->SC_seq_register = $this->nmgp_reg_start ; 
@@ -1411,31 +1566,32 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['final']++ ; 
            $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['final']; 
            $this->rs_grid->MoveNext(); 
-           $this->codigobar = $this->rs_grid->fields[0] ;  
-           $this->nompro = $this->rs_grid->fields[1] ;  
-           $this->imagen = $this->rs_grid->fields[2] ;  
-           $this->existencia_menor = $this->rs_grid->fields[3] ;  
-           $this->unimen = $this->rs_grid->fields[4] ;  
-           $this->preciomen = $this->rs_grid->fields[5] ;  
-           $this->escombo = $this->rs_grid->fields[6] ;  
-           $this->idprod = $this->rs_grid->fields[7] ;  
-           $this->unimay = $this->rs_grid->fields[8] ;  
+           $this->idgrup = $this->rs_grid->fields[0] ;  
+           $this->codigobar = $this->rs_grid->fields[1] ;  
+           $this->nompro = $this->rs_grid->fields[2] ;  
+           $this->imagen = $this->rs_grid->fields[3] ;  
+           $this->existencia_menor = $this->rs_grid->fields[4] ;  
+           $this->unimen = $this->rs_grid->fields[5] ;  
+           $this->preciomen = $this->rs_grid->fields[6] ;  
+           $this->idiva = $this->rs_grid->fields[7] ;  
+           $this->ubicacion = $this->rs_grid->fields[8] ;  
            $this->costomen = $this->rs_grid->fields[9] ;  
-           $this->recmayamen = $this->rs_grid->fields[10] ;  
-           $this->preciofull = $this->rs_grid->fields[11] ;  
-           $this->stockmay = $this->rs_grid->fields[12] ;  
-           $this->stockmen = $this->rs_grid->fields[13] ;  
-           $this->idgrup = $this->rs_grid->fields[14] ;  
-           $this->idpro1 = $this->rs_grid->fields[15] ;  
-           $this->idpro2 = $this->rs_grid->fields[16] ;  
-           $this->idiva = $this->rs_grid->fields[17] ;  
-           $this->otro = $this->rs_grid->fields[18] ;  
-           $this->otro2 = $this->rs_grid->fields[19] ;  
-           $this->preciomen2 = $this->rs_grid->fields[20] ;  
-           $this->preciomen3 = $this->rs_grid->fields[21] ;  
-           $this->precio2 = $this->rs_grid->fields[22] ;  
-           $this->preciomay = $this->rs_grid->fields[23] ;  
-           $this->unidmaymen = $this->rs_grid->fields[24] ;  
+           $this->idpro1 = $this->rs_grid->fields[10] ;  
+           $this->escombo = $this->rs_grid->fields[11] ;  
+           $this->idprod = $this->rs_grid->fields[12] ;  
+           $this->unimay = $this->rs_grid->fields[13] ;  
+           $this->recmayamen = $this->rs_grid->fields[14] ;  
+           $this->preciofull = $this->rs_grid->fields[15] ;  
+           $this->stockmay = $this->rs_grid->fields[16] ;  
+           $this->stockmen = $this->rs_grid->fields[17] ;  
+           $this->idpro2 = $this->rs_grid->fields[18] ;  
+           $this->otro = $this->rs_grid->fields[19] ;  
+           $this->otro2 = $this->rs_grid->fields[20] ;  
+           $this->preciomen2 = $this->rs_grid->fields[21] ;  
+           $this->preciomen3 = $this->rs_grid->fields[22] ;  
+           $this->precio2 = $this->rs_grid->fields[23] ;  
+           $this->preciomay = $this->rs_grid->fields[24] ;  
+           $this->unidmaymen = $this->rs_grid->fields[25] ;  
            if (!isset($this->codigobar)) { $this->codigobar = ""; }
            if (!isset($this->nompro)) { $this->nompro = ""; }
            if (!isset($this->unimay)) { $this->unimay = ""; }
@@ -2588,6 +2744,8 @@ $nm_saida->saida("}\r\n");
 
    $compl_css_emb = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida']) ? "grid_productos_" : "";
    $this->css_sep = " ";
+   $this->css_idgrup_label = $compl_css_emb . "css_idgrup_label";
+   $this->css_idgrup_grid_line = $compl_css_emb . "css_idgrup_grid_line";
    $this->css_codigobar_label = $compl_css_emb . "css_codigobar_label";
    $this->css_codigobar_grid_line = $compl_css_emb . "css_codigobar_grid_line";
    $this->css_nompro_label = $compl_css_emb . "css_nompro_label";
@@ -2600,8 +2758,16 @@ $nm_saida->saida("}\r\n");
    $this->css_unimen_grid_line = $compl_css_emb . "css_unimen_grid_line";
    $this->css_preciomen_label = $compl_css_emb . "css_preciomen_label";
    $this->css_preciomen_grid_line = $compl_css_emb . "css_preciomen_grid_line";
+   $this->css_idiva_label = $compl_css_emb . "css_idiva_label";
+   $this->css_idiva_grid_line = $compl_css_emb . "css_idiva_grid_line";
    $this->css_btn_stock_label = $compl_css_emb . "css_btn_stock_label";
    $this->css_btn_stock_grid_line = $compl_css_emb . "css_btn_stock_grid_line";
+   $this->css_ubicacion_label = $compl_css_emb . "css_ubicacion_label";
+   $this->css_ubicacion_grid_line = $compl_css_emb . "css_ubicacion_grid_line";
+   $this->css_costomen_label = $compl_css_emb . "css_costomen_label";
+   $this->css_costomen_grid_line = $compl_css_emb . "css_costomen_grid_line";
+   $this->css_idpro1_label = $compl_css_emb . "css_idpro1_label";
+   $this->css_idpro1_grid_line = $compl_css_emb . "css_idpro1_grid_line";
    $this->css_escombo_label = $compl_css_emb . "css_escombo_label";
    $this->css_escombo_grid_line = $compl_css_emb . "css_escombo_grid_line";
    $this->css_agregarnotainv_label = $compl_css_emb . "css_agregarnotainv_label";
@@ -2610,8 +2776,6 @@ $nm_saida->saida("}\r\n");
    $this->css_idprod_grid_line = $compl_css_emb . "css_idprod_grid_line";
    $this->css_unimay_label = $compl_css_emb . "css_unimay_label";
    $this->css_unimay_grid_line = $compl_css_emb . "css_unimay_grid_line";
-   $this->css_costomen_label = $compl_css_emb . "css_costomen_label";
-   $this->css_costomen_grid_line = $compl_css_emb . "css_costomen_grid_line";
    $this->css_recmayamen_label = $compl_css_emb . "css_recmayamen_label";
    $this->css_recmayamen_grid_line = $compl_css_emb . "css_recmayamen_grid_line";
    $this->css_preciofull_label = $compl_css_emb . "css_preciofull_label";
@@ -2620,14 +2784,8 @@ $nm_saida->saida("}\r\n");
    $this->css_stockmay_grid_line = $compl_css_emb . "css_stockmay_grid_line";
    $this->css_stockmen_label = $compl_css_emb . "css_stockmen_label";
    $this->css_stockmen_grid_line = $compl_css_emb . "css_stockmen_grid_line";
-   $this->css_idgrup_label = $compl_css_emb . "css_idgrup_label";
-   $this->css_idgrup_grid_line = $compl_css_emb . "css_idgrup_grid_line";
-   $this->css_idpro1_label = $compl_css_emb . "css_idpro1_label";
-   $this->css_idpro1_grid_line = $compl_css_emb . "css_idpro1_grid_line";
    $this->css_idpro2_label = $compl_css_emb . "css_idpro2_label";
    $this->css_idpro2_grid_line = $compl_css_emb . "css_idpro2_grid_line";
-   $this->css_idiva_label = $compl_css_emb . "css_idiva_label";
-   $this->css_idiva_grid_line = $compl_css_emb . "css_idiva_grid_line";
    $this->css_otro_label = $compl_css_emb . "css_otro_label";
    $this->css_otro_grid_line = $compl_css_emb . "css_otro_grid_line";
    $this->css_otro2_label = $compl_css_emb . "css_otro2_label";
@@ -2927,12 +3085,116 @@ $nm_saida->saida("}\r\n");
      } 
    } 
  }
+ function NM_label_idgrup()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['idgrup'])) ? $this->New_label['idgrup'] : "Grupo"; 
+   if (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idgrup_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idgrup_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'idgrup')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('idgrup')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
  function NM_label_codigobar()
  {
    global $nm_saida;
    $SC_Label = (isset($this->New_label['codigobar'])) ? $this->New_label['codigobar'] : "Código"; 
    if (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_codigobar_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_codigobar_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_codigobar_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_codigobar_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'codigobar')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('codigobar')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_nompro()
@@ -3004,7 +3266,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['existencia_menor'])) ? $this->New_label['existencia_menor'] : "Existencia"; 
    if (!isset($this->NM_cmp_hidden['existencia_menor']) || $this->NM_cmp_hidden['existencia_menor'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_existencia_menor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_existencia_menor_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_existencia_menor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_existencia_menor_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'existencia_menor')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('existencia_menor')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_unimen()
@@ -3012,7 +3322,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['unimen'])) ? $this->New_label['unimen'] : "Unidad"; 
    if (!isset($this->NM_cmp_hidden['unimen']) || $this->NM_cmp_hidden['unimen'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_unimen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_unimen_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_unimen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_unimen_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'unimen')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('unimen')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_preciomen()
@@ -3020,7 +3378,111 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['preciomen'])) ? $this->New_label['preciomen'] : "Precio"; 
    if (!isset($this->NM_cmp_hidden['preciomen']) || $this->NM_cmp_hidden['preciomen'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciomen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciomen_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciomen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciomen_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'preciomen')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('preciomen')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
+ function NM_label_idiva()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['idiva'])) ? $this->New_label['idiva'] : "Impuesto(%)"; 
+   if (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idiva_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idiva_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'idiva')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('idiva')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_btn_stock()
@@ -3031,12 +3493,228 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_btn_stock_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_btn_stock_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
+ function NM_label_ubicacion()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['ubicacion'])) ? $this->New_label['ubicacion'] : "Ubicacion"; 
+   if (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_ubicacion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_ubicacion_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'ubicacion')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('ubicacion')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
+ function NM_label_costomen()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['costomen'])) ? $this->New_label['costomen'] : "Costo"; 
+   if (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_costomen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_costomen_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'costomen')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('costomen')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
+ function NM_label_idpro1()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : "Proveedor"; 
+   if (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idpro1_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idpro1_label'] . "\" NOWRAP WIDTH=\"70px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'idpro1')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('idpro1')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
  function NM_label_escombo()
  {
    global $nm_saida;
    $SC_Label = (isset($this->New_label['escombo'])) ? $this->New_label['escombo'] : "Combo"; 
    if (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_escombo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_escombo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_escombo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_escombo_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'escombo')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('escombo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_agregarnotainv()
@@ -3052,7 +3730,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['idprod'])) ? $this->New_label['idprod'] : "Producto"; 
    if (!isset($this->NM_cmp_hidden['idprod']) || $this->NM_cmp_hidden['idprod'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idprod_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idprod_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idprod_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idprod_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'idprod')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('idprod')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_unimay()
@@ -3060,15 +3786,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['unimay'])) ? $this->New_label['unimay'] : "Unidad"; 
    if (!isset($this->NM_cmp_hidden['unimay']) || $this->NM_cmp_hidden['unimay'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_unimay_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_unimay_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_costomen()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['costomen'])) ? $this->New_label['costomen'] : "Costo"; 
-   if (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_costomen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_costomen_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_unimay_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_unimay_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'unimay')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('unimay')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_recmayamen()
@@ -3076,7 +3842,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['recmayamen'])) ? $this->New_label['recmayamen'] : "Factor"; 
    if (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_recmayamen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_recmayamen_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_recmayamen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_recmayamen_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'recmayamen')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('recmayamen')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_preciofull()
@@ -3084,7 +3898,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['preciofull'])) ? $this->New_label['preciofull'] : "Precio"; 
    if (!isset($this->NM_cmp_hidden['preciofull']) || $this->NM_cmp_hidden['preciofull'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciofull_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciofull_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciofull_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciofull_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'preciofull')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('preciofull')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_stockmay()
@@ -3092,7 +3954,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['stockmay'])) ? $this->New_label['stockmay'] : "Stock Mayor"; 
    if (!isset($this->NM_cmp_hidden['stockmay']) || $this->NM_cmp_hidden['stockmay'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_stockmay_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_stockmay_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_stockmay_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_stockmay_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'stockmay')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('stockmay')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_stockmen()
@@ -3100,23 +4010,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['stockmen'])) ? $this->New_label['stockmen'] : "Existencia"; 
    if (!isset($this->NM_cmp_hidden['stockmen']) || $this->NM_cmp_hidden['stockmen'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_stockmen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_stockmen_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_idgrup()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['idgrup'])) ? $this->New_label['idgrup'] : "Grupo"; 
-   if (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idgrup_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idgrup_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_idpro1()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : "Proveedor"; 
-   if (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idpro1_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idpro1_label'] . "\" NOWRAP WIDTH=\"70px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_stockmen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_stockmen_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'stockmen')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('stockmen')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_idpro2()
@@ -3124,15 +4066,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['idpro2'])) ? $this->New_label['idpro2'] : "Proveedor 2"; 
    if (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idpro2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idpro2_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_idiva()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['idiva'])) ? $this->New_label['idiva'] : "%IVA"; 
-   if (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idiva_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idiva_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idpro2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idpro2_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'idpro2')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('idpro2')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_otro()
@@ -3140,7 +4122,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['otro'])) ? $this->New_label['otro'] : "Descuento"; 
    if (!isset($this->NM_cmp_hidden['otro']) || $this->NM_cmp_hidden['otro'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_otro_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_otro_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_otro_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_otro_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'otro')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('otro')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_otro2()
@@ -3148,7 +4178,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['otro2'])) ? $this->New_label['otro2'] : "%  Desc."; 
    if (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_otro2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_otro2_label'] . "\" NOWRAP WIDTH=\"70px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_otro2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_otro2_label'] . "\" NOWRAP WIDTH=\"70px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'otro2')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('otro2')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_preciomen2()
@@ -3156,7 +4234,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['preciomen2'])) ? $this->New_label['preciomen2'] : "$ Menudeo Especial"; 
    if (!isset($this->NM_cmp_hidden['preciomen2']) || $this->NM_cmp_hidden['preciomen2'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciomen2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciomen2_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciomen2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciomen2_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'preciomen2')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('preciomen2')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_preciomen3()
@@ -3164,7 +4290,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['preciomen3'])) ? $this->New_label['preciomen3'] : "$ Menudeo Mayor"; 
    if (!isset($this->NM_cmp_hidden['preciomen3']) || $this->NM_cmp_hidden['preciomen3'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciomen3_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciomen3_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciomen3_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciomen3_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'preciomen3')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('preciomen3')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_precio2()
@@ -3172,7 +4346,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['precio2'])) ? $this->New_label['precio2'] : "$ Mayor Especial"; 
    if (!isset($this->NM_cmp_hidden['precio2']) || $this->NM_cmp_hidden['precio2'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_precio2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_precio2_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_precio2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_precio2_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'precio2')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('precio2')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_preciomay()
@@ -3180,7 +4402,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['preciomay'])) ? $this->New_label['preciomay'] : "$ Mayor"; 
    if (!isset($this->NM_cmp_hidden['preciomay']) || $this->NM_cmp_hidden['preciomay'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciomay_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciomay_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_preciomay_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_preciomay_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'preciomay')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('preciomay')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
 // 
@@ -3213,6 +4483,8 @@ $nm_saida->saida("}\r\n");
    $this->sc_where_atual   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'];
    $this->sc_where_filtro  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq_filtro'];
 // 
+   $SC_Label = (isset($this->New_label['idgrup'])) ? $this->New_label['idgrup'] : "Grupo"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idgrup'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['codigobar'])) ? $this->New_label['codigobar'] : "Código"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['codigobar'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['nompro'])) ? $this->New_label['nompro'] : "Producto"; 
@@ -3225,8 +4497,16 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['unimen'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['preciomen'])) ? $this->New_label['preciomen'] : "Precio"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['preciomen'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['idiva'])) ? $this->New_label['idiva'] : "Impuesto(%)"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idiva'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['btn_stock'])) ? $this->New_label['btn_stock'] : "Stock"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['btn_stock'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['ubicacion'])) ? $this->New_label['ubicacion'] : "Ubicacion"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['ubicacion'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['costomen'])) ? $this->New_label['costomen'] : "Costo"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['costomen'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : "Proveedor"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro1'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['escombo'])) ? $this->New_label['escombo'] : "Combo"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['escombo'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['agregarnotainv'])) ? $this->New_label['agregarnotainv'] : "Nota"; 
@@ -3235,8 +4515,6 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idprod'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['unimay'])) ? $this->New_label['unimay'] : "Unidad"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['unimay'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['costomen'])) ? $this->New_label['costomen'] : "Costo"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['costomen'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['recmayamen'])) ? $this->New_label['recmayamen'] : "Factor"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['recmayamen'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['preciofull'])) ? $this->New_label['preciofull'] : "Precio"; 
@@ -3245,14 +4523,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['stockmay'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['stockmen'])) ? $this->New_label['stockmen'] : "Existencia"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['stockmen'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['idgrup'])) ? $this->New_label['idgrup'] : "Grupo"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idgrup'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : "Proveedor"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro1'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idpro2'])) ? $this->New_label['idpro2'] : "Proveedor 2"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro2'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['idiva'])) ? $this->New_label['idiva'] : "%IVA"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idiva'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['otro'])) ? $this->New_label['otro'] : "Descuento"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['otro'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['otro2'])) ? $this->New_label['otro2'] : "%  Desc."; 
@@ -3589,69 +4861,59 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf']) 
               }
           }
           $this->Lin_impressas++;
-          $this->codigobar = $this->rs_grid->fields[0] ;  
-          $this->nompro = $this->rs_grid->fields[1] ;  
-          $this->imagen = $this->rs_grid->fields[2] ;  
-          $this->existencia_menor = $this->rs_grid->fields[3] ;  
-          $this->existencia_menor = (strpos(strtolower($this->existencia_menor), "e")) ? (float)$this->existencia_menor : $this->existencia_menor; 
+          $this->idgrup = $this->rs_grid->fields[0] ;  
+          $this->idgrup = (string)$this->idgrup;
+          $this->codigobar = $this->rs_grid->fields[1] ;  
+          $this->nompro = $this->rs_grid->fields[2] ;  
+          $this->imagen = $this->rs_grid->fields[3] ;  
+          $this->existencia_menor = $this->rs_grid->fields[4] ;  
           $this->existencia_menor = (string)$this->existencia_menor;
-          $this->unimen = $this->rs_grid->fields[4] ;  
-          $this->preciomen = $this->rs_grid->fields[5] ;  
+          $this->unimen = $this->rs_grid->fields[5] ;  
+          $this->preciomen = $this->rs_grid->fields[6] ;  
           $this->preciomen =  str_replace(",", ".", $this->preciomen);
-          $this->preciomen = (strpos(strtolower($this->preciomen), "e")) ? (float)$this->preciomen : $this->preciomen; 
           $this->preciomen = (string)$this->preciomen;
-          $this->escombo = $this->rs_grid->fields[6] ;  
-          $this->idprod = $this->rs_grid->fields[7] ;  
-          $this->idprod = (string)$this->idprod;
-          $this->unimay = $this->rs_grid->fields[8] ;  
+          $this->idiva = $this->rs_grid->fields[7] ;  
+          $this->idiva = (string)$this->idiva;
+          $this->ubicacion = $this->rs_grid->fields[8] ;  
           $this->costomen = $this->rs_grid->fields[9] ;  
           $this->costomen =  str_replace(",", ".", $this->costomen);
-          $this->costomen = (strpos(strtolower($this->costomen), "e")) ? (float)$this->costomen : $this->costomen; 
           $this->costomen = (string)$this->costomen;
-          $this->recmayamen = $this->rs_grid->fields[10] ;  
-          $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
-          $this->recmayamen = (strpos(strtolower($this->recmayamen), "e")) ? (float)$this->recmayamen : $this->recmayamen; 
-          $this->recmayamen = (string)$this->recmayamen;
-          $this->preciofull = $this->rs_grid->fields[11] ;  
-          $this->preciofull =  str_replace(",", ".", $this->preciofull);
-          $this->preciofull = (strpos(strtolower($this->preciofull), "e")) ? (float)$this->preciofull : $this->preciofull; 
-          $this->preciofull = (string)$this->preciofull;
-          $this->stockmay = $this->rs_grid->fields[12] ;  
-          $this->stockmay =  str_replace(",", ".", $this->stockmay);
-          $this->stockmay = (strpos(strtolower($this->stockmay), "e")) ? (float)$this->stockmay : $this->stockmay; 
-          $this->stockmay = (string)$this->stockmay;
-          $this->stockmen = $this->rs_grid->fields[13] ;  
-          $this->stockmen = (strpos(strtolower($this->stockmen), "e")) ? (float)$this->stockmen : $this->stockmen; 
-          $this->stockmen = (string)$this->stockmen;
-          $this->idgrup = $this->rs_grid->fields[14] ;  
-          $this->idgrup = (string)$this->idgrup;
-          $this->idpro1 = $this->rs_grid->fields[15] ;  
+          $this->idpro1 = $this->rs_grid->fields[10] ;  
           $this->idpro1 = (string)$this->idpro1;
-          $this->idpro2 = $this->rs_grid->fields[16] ;  
+          $this->escombo = $this->rs_grid->fields[11] ;  
+          $this->idprod = $this->rs_grid->fields[12] ;  
+          $this->idprod = (string)$this->idprod;
+          $this->unimay = $this->rs_grid->fields[13] ;  
+          $this->recmayamen = $this->rs_grid->fields[14] ;  
+          $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
+          $this->recmayamen = (string)$this->recmayamen;
+          $this->preciofull = $this->rs_grid->fields[15] ;  
+          $this->preciofull =  str_replace(",", ".", $this->preciofull);
+          $this->preciofull = (string)$this->preciofull;
+          $this->stockmay = $this->rs_grid->fields[16] ;  
+          $this->stockmay =  str_replace(",", ".", $this->stockmay);
+          $this->stockmay = (string)$this->stockmay;
+          $this->stockmen = $this->rs_grid->fields[17] ;  
+          $this->stockmen = (string)$this->stockmen;
+          $this->idpro2 = $this->rs_grid->fields[18] ;  
           $this->idpro2 = (string)$this->idpro2;
-          $this->idiva = $this->rs_grid->fields[17] ;  
-          $this->idiva = (string)$this->idiva;
-          $this->otro = $this->rs_grid->fields[18] ;  
+          $this->otro = $this->rs_grid->fields[19] ;  
           $this->otro = (string)$this->otro;
-          $this->otro2 = $this->rs_grid->fields[19] ;  
+          $this->otro2 = $this->rs_grid->fields[20] ;  
           $this->otro2 = (string)$this->otro2;
-          $this->preciomen2 = $this->rs_grid->fields[20] ;  
+          $this->preciomen2 = $this->rs_grid->fields[21] ;  
           $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
-          $this->preciomen2 = (strpos(strtolower($this->preciomen2), "e")) ? (float)$this->preciomen2 : $this->preciomen2; 
           $this->preciomen2 = (string)$this->preciomen2;
-          $this->preciomen3 = $this->rs_grid->fields[21] ;  
+          $this->preciomen3 = $this->rs_grid->fields[22] ;  
           $this->preciomen3 =  str_replace(",", ".", $this->preciomen3);
-          $this->preciomen3 = (strpos(strtolower($this->preciomen3), "e")) ? (float)$this->preciomen3 : $this->preciomen3; 
           $this->preciomen3 = (string)$this->preciomen3;
-          $this->precio2 = $this->rs_grid->fields[22] ;  
+          $this->precio2 = $this->rs_grid->fields[23] ;  
           $this->precio2 =  str_replace(",", ".", $this->precio2);
-          $this->precio2 = (strpos(strtolower($this->precio2), "e")) ? (float)$this->precio2 : $this->precio2; 
           $this->precio2 = (string)$this->precio2;
-          $this->preciomay = $this->rs_grid->fields[23] ;  
+          $this->preciomay = $this->rs_grid->fields[24] ;  
           $this->preciomay =  str_replace(",", ".", $this->preciomay);
-          $this->preciomay = (strpos(strtolower($this->preciomay), "e")) ? (float)$this->preciomay : $this->preciomay; 
           $this->preciomay = (string)$this->preciomay;
-          $this->unidmaymen = $this->rs_grid->fields[24] ;  
+          $this->unidmaymen = $this->rs_grid->fields[25] ;  
           if (!isset($this->codigobar)) { $this->codigobar = ""; }
           if (!isset($this->nompro)) { $this->nompro = ""; }
           if (!isset($this->unimay)) { $this->unimay = ""; }
@@ -3667,18 +4929,16 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf']) 
                   $this->imagenprod = $this->Db->BlobDecode($this->imagenprod, false, true, "BLOB");
               }
           }
-          $GLOBALS["idgrup"] = $this->rs_grid->fields[14] ;  
-          $GLOBALS["idgrup"] = (string)$GLOBALS["idgrup"];
-          $GLOBALS["idiva"] = $this->rs_grid->fields[17] ;  
+          $GLOBALS["idiva"] = $this->rs_grid->fields[7] ;  
           $GLOBALS["idiva"] = (string)$GLOBALS["idiva"];
+          $this->arg_sum_idgrup = ($this->idgrup == "") ? " is null " : " = " . $this->idgrup;
           $this->arg_sum_codigobar = " = " . $this->Db->qstr($this->codigobar);
           $this->arg_sum_nompro = " = " . $this->Db->qstr($this->nompro);
           $this->arg_sum_unimen = " = " . $this->Db->qstr($this->unimen);
+          $this->arg_sum_idiva = ($this->idiva == "") ? " is null " : " = " . $this->idiva;
+          $this->arg_sum_idpro1 = ($this->idpro1 == "") ? " is null " : " = " . $this->idpro1;
           $this->arg_sum_escombo = " = " . $this->Db->qstr($this->escombo);
           $this->arg_sum_unimay = " = " . $this->Db->qstr($this->unimay);
-          $this->arg_sum_idgrup = ($this->idgrup == "") ? " is null " : " = " . $this->idgrup;
-          $this->arg_sum_idpro1 = ($this->idpro1 == "") ? " is null " : " = " . $this->idpro1;
-          $this->arg_sum_idiva = ($this->idiva == "") ? " is null " : " = " . $this->idiva;
           $this->look_otro = $this->otro; 
           $this->Lookup->lookup_otro($this->look_otro); 
           $this->SC_seq_page++; 
@@ -4076,6 +5336,36 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao']       = "igual" ; 
    } 
  }
+ function NM_grid_idgrup()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off") { 
+          $conteudo = NM_encode_input(sc_strip_script($this->idgrup)); 
+          $conteudo_original = NM_encode_input(sc_strip_script($this->idgrup)); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $this->Lookup->lookup_idgrup($conteudo , $this->idgrup) ; 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'idgrup', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'idgrup', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idgrup_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idgrup_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idgrup_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_codigobar()
  {
       global $nm_saida;
@@ -4359,6 +5649,36 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_preciomen_grid_line . "\"  style=\"" . $this->Css_Cmp['css_preciomen_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_preciomen_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_idiva()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off") { 
+          $conteudo = NM_encode_input(sc_strip_script($this->idiva)); 
+          $conteudo_original = NM_encode_input(sc_strip_script($this->idiva)); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $this->Lookup->lookup_idiva($conteudo , $this->idiva) ; 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'idiva', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'idiva', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idiva_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idiva_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idiva_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_btn_stock()
  {
       global $nm_saida;
@@ -4426,6 +5746,99 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    $nm_saida->saida(" <span id=\"id_sc_field_btn_stock_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
        } 
    $nm_saida->saida("</TD>\r\n");
+      }
+ }
+ function NM_grid_ubicacion()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off") { 
+          $conteudo = sc_strip_script($this->ubicacion); 
+          $conteudo_original = sc_strip_script($this->ubicacion); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'ubicacion', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'ubicacion', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_ubicacion_grid_line . "\"  style=\"" . $this->Css_Cmp['css_ubicacion_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_ubicacion_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_costomen()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off") { 
+          $nm_cor_num = ($this->costomen < 0) ? "color:#FF0000;" : "";
+          $conteudo = NM_encode_input(sc_strip_script($this->costomen)); 
+          $conteudo_original = NM_encode_input(sc_strip_script($this->costomen)); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          else    
+          { 
+              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'costomen', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'costomen', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_costomen_grid_line . "\"  style=\"" . $nm_cor_num . "" . $this->Css_Cmp['css_costomen_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_costomen_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_idpro1()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off") { 
+          $conteudo = sc_strip_script($this->idpro1); 
+          $conteudo_original = sc_strip_script($this->idpro1); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $this->Lookup->lookup_idpro1($conteudo) ; 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'idpro1', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'idpro1', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idpro1_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idpro1_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idpro1_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_escombo()
@@ -4615,40 +6028,6 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_unimay_grid_line . "\"  style=\"" . $this->Css_Cmp['css_unimay_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_unimay_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_costomen()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off") { 
-          $nm_cor_num = ($this->costomen < 0) ? "color:#FF0000;" : "";
-          $conteudo = NM_encode_input(sc_strip_script($this->costomen)); 
-          $conteudo_original = NM_encode_input(sc_strip_script($this->costomen)); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          else    
-          { 
-              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'costomen', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'costomen', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_costomen_grid_line . "\"  style=\"" . $nm_cor_num . "" . $this->Css_Cmp['css_costomen_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_costomen_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
  function NM_grid_recmayamen()
  {
       global $nm_saida;
@@ -4781,72 +6160,6 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_stockmen_grid_line . "\"  style=\"" . $this->Css_Cmp['css_stockmen_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_stockmen_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_idgrup()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off") { 
-          $conteudo = NM_encode_input(sc_strip_script($this->idgrup)); 
-          $conteudo_original = NM_encode_input(sc_strip_script($this->idgrup)); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $this->Lookup->lookup_idgrup($conteudo , $this->idgrup) ; 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'idgrup', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'idgrup', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idgrup_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idgrup_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idgrup_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
- function NM_grid_idpro1()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off") { 
-          $conteudo = sc_strip_script($this->idpro1); 
-          $conteudo_original = sc_strip_script($this->idpro1); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $this->Lookup->lookup_idpro1($conteudo) ; 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'idpro1', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'idpro1', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idpro1_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idpro1_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idpro1_" . $this->SC_seq_page . "\">\r\n");
-if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
-   $nm_saida->saida("" . sc_substr(strip_tags($conteudo), 0, 5) . nmButtonOutput($this->arr_buttons, "bqtd_bytes", "", "", "bidpro1", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . str_replace('"', '&quot;', strip_tags($conteudo)) . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "") . "\r\n");
-} else {
-   $nm_saida->saida("$conteudo\r\n");
-}
-   $nm_saida->saida("</span></TD>\r\n");
-      }
- }
  function NM_grid_idpro2()
  {
       global $nm_saida;
@@ -4878,36 +6191,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
               $this->SC_nowrap = "NOWRAP";
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idpro2_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idpro2_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idpro2_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
- function NM_grid_idiva()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off") { 
-          $conteudo = NM_encode_input(sc_strip_script($this->idiva)); 
-          $conteudo_original = NM_encode_input(sc_strip_script($this->idiva)); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $this->Lookup->lookup_idiva($conteudo , $this->idiva) ; 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'idiva', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'idiva', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idiva_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idiva_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idiva_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_otro()
@@ -5120,7 +6403,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 29;
+   $this->NM_colspan  = 30;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -5572,6 +6855,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
         $colspan++;
@@ -5604,7 +6891,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
         $colspan++;
     }
@@ -5624,10 +6927,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
         $colspan++;
@@ -5644,19 +6943,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
         $colspan++;
     }
@@ -5788,6 +7075,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
         $colspan++;
@@ -5820,7 +7111,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
         $colspan++;
     }
@@ -5840,10 +7147,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
         $colspan++;
@@ -5860,19 +7163,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
         $colspan++;
     }
@@ -6004,6 +7295,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
         $colspan++;
@@ -6036,7 +7331,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
         $colspan++;
     }
@@ -6056,10 +7367,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
         $colspan++;
@@ -6076,19 +7383,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
         $colspan++;
     }
@@ -6220,6 +7515,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
         $colspan++;
@@ -6252,7 +7551,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
         $colspan++;
     }
@@ -6272,10 +7587,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
         $colspan++;
@@ -6292,19 +7603,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
         $colspan++;
     }
@@ -6436,6 +7735,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
         $colspan++;
@@ -6468,7 +7771,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
         $colspan++;
     }
@@ -6488,10 +7807,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
         $colspan++;
@@ -6508,19 +7823,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
         $colspan++;
     }
@@ -6650,6 +7953,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
         $colspan++;
@@ -6682,7 +7989,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
         $colspan++;
     }
@@ -6702,10 +8025,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
         $colspan++;
@@ -6722,19 +8041,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
         $colspan++;
     }
@@ -6864,6 +8171,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
         $colspan++;
@@ -6896,7 +8207,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
         $colspan++;
     }
@@ -6916,10 +8243,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
         $colspan++;
@@ -6936,19 +8259,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
         $colspan++;
     }
@@ -7078,6 +8389,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
         $colspan++;
@@ -7110,7 +8425,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
         $colspan++;
     }
@@ -7130,10 +8461,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
         $colspan++;
@@ -7150,19 +8477,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
         $colspan++;
     }
@@ -7253,6 +8568,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
        $colspan++;
@@ -7285,7 +8604,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
        $colspan++;
     }
@@ -7305,10 +8640,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
        $colspan++;
@@ -7325,19 +8656,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
        $colspan++;
     }
@@ -7417,6 +8736,10 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['field_order'] as $Cada_cmp)
    {
+    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "codigobar" && (!isset($this->NM_cmp_hidden['codigobar']) || $this->NM_cmp_hidden['codigobar'] != "off"))
     {
        $colspan++;
@@ -7449,7 +8772,23 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "btn_stock" && (!isset($this->NM_cmp_hidden['btn_stock']) || $this->NM_cmp_hidden['btn_stock'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "ubicacion" && (!isset($this->NM_cmp_hidden['ubicacion']) || $this->NM_cmp_hidden['ubicacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
     {
        $colspan++;
     }
@@ -7469,10 +8808,6 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
-    if ($Cada_cmp == "costomen" && (!isset($this->NM_cmp_hidden['costomen']) || $this->NM_cmp_hidden['costomen'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "recmayamen" && (!isset($this->NM_cmp_hidden['recmayamen']) || $this->NM_cmp_hidden['recmayamen'] != "off"))
     {
        $colspan++;
@@ -7489,19 +8824,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
-    if ($Cada_cmp == "idgrup" && (!isset($this->NM_cmp_hidden['idgrup']) || $this->NM_cmp_hidden['idgrup'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "idpro1" && (!isset($this->NM_cmp_hidden['idpro1']) || $this->NM_cmp_hidden['idpro1'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "idpro2" && (!isset($this->NM_cmp_hidden['idpro2']) || $this->NM_cmp_hidden['idpro2'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "idiva" && (!isset($this->NM_cmp_hidden['idiva']) || $this->NM_cmp_hidden['idiva'] != "off"))
     {
        $colspan++;
     }
@@ -9292,7 +10615,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
        $lin_obj .= "        </table>";
        $lin_obj .= "     </td></tr>";
        $Cmps_where = "";
-       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen');
+       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen','ubicacion');
        foreach ($Cmps_apl as $cada_cmp_apl)
        { 
            if (strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'], $cada_cmp_apl) !== false)
@@ -9308,7 +10631,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
                }
            }
        }
-       $nm_comando = "select idgrup, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp";
+       $nm_comando = "select idgrup, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp";
        $tmp_where = "";
        if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']))
        {
@@ -9509,7 +10832,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
        $lin_obj .= "        </table>";
        $lin_obj .= "     </td></tr>";
        $Cmps_where = "";
-       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen');
+       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen','ubicacion');
        foreach ($Cmps_apl as $cada_cmp_apl)
        { 
            if (strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'], $cada_cmp_apl) !== false)
@@ -9525,7 +10848,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
                }
            }
        }
-       $nm_comando = "select stockmen, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp";
+       $nm_comando = "select stockmen, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp";
        $tmp_where = "";
        if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']))
        {
@@ -9719,7 +11042,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
        $lin_obj .= "        </table>";
        $lin_obj .= "     </td></tr>";
        $Cmps_where = "";
-       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen');
+       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen','ubicacion');
        foreach ($Cmps_apl as $cada_cmp_apl)
        { 
            if (strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'], $cada_cmp_apl) !== false)
@@ -9735,7 +11058,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
                }
            }
        }
-       $nm_comando = "select preciomen, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp";
+       $nm_comando = "select preciomen, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp";
        $tmp_where = "";
        if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']))
        {
@@ -9929,7 +11252,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
        $lin_obj .= "        </table>";
        $lin_obj .= "     </td></tr>";
        $Cmps_where = "";
-       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen');
+       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen','ubicacion');
        foreach ($Cmps_apl as $cada_cmp_apl)
        { 
            if (strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'], $cada_cmp_apl) !== false)
@@ -9945,7 +11268,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
                }
            }
        }
-       $nm_comando = "select idpro1, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp";
+       $nm_comando = "select idpro1, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp";
        $tmp_where = "";
        if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']))
        {
@@ -10146,7 +11469,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
        $lin_obj .= "        </table>";
        $lin_obj .= "     </td></tr>";
        $Cmps_where = "";
-       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen');
+       $Cmps_apl = array('idprod','codigobar','nompro','unimay','unimen','costomay','costomen','recmayamen','preciofull','preciomen','stockmay','stockmen','idgrup','idpro1','idpro2','idiva','otro','otro2','imagenprod','escombo','unidmaymen','existencia_menor','preciomen2','preciomen3','precio2','preciomay','imagen','ubicacion');
        foreach ($Cmps_apl as $cada_cmp_apl)
        { 
            if (strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'], $cada_cmp_apl) !== false)
@@ -10162,7 +11485,7 @@ if (strlen($conteudo) > 5 && $conteudo != "&nbsp;") {
                }
            }
        }
-       $nm_comando = "select idiva, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen FROM      productos ) nm_sel_esp";
+       $nm_comando = "select idiva, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp";
        $tmp_where = "";
        if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']))
        {

@@ -47,6 +47,7 @@ function scFocusField(sField) {
       case 'idiva':
       case 'existencia':
       case 'u_menor':
+      case 'ubicacion':
       case 'activo':
       case 'colores':
       case 'confcolor':
@@ -138,6 +139,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["idiva" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["existencia" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["u_menor" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ubicacion" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["activo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["colores" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["confcolor" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -317,6 +319,12 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["u_menor" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ubicacion" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ubicacion" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["activo" + iSeqRow]["blur"]) {
@@ -793,6 +801,9 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_imagen' + iSeqRow).bind('blur', function() { sc_form_productos_imagen_onblur(this, iSeqRow) })
                                     .bind('change', function() { sc_form_productos_imagen_onchange(this, iSeqRow) })
                                     .bind('focus', function() { sc_form_productos_imagen_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ubicacion' + iSeqRow).bind('blur', function() { sc_form_productos_ubicacion_onblur(this, iSeqRow) })
+                                       .bind('change', function() { sc_form_productos_ubicacion_onchange(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_productos_ubicacion_onfocus(this, iSeqRow) });
   $('#id_sc_field_sugerido_mayor' + iSeqRow).bind('blur', function() { sc_form_productos_sugerido_mayor_onblur(this, iSeqRow) })
                                             .bind('change', function() { sc_form_productos_sugerido_mayor_onchange(this, iSeqRow) })
                                             .bind('focus', function() { sc_form_productos_sugerido_mayor_onfocus(this, iSeqRow) });
@@ -1519,6 +1530,20 @@ function sc_form_productos_imagen_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_productos_ubicacion_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_ubicacion();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_ubicacion_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_ubicacion_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_productos_sugerido_mayor_onblur(oThis, iSeqRow) {
   do_ajax_form_productos_validate_sugerido_mayor();
   scCssBlur(oThis);
@@ -1728,6 +1753,7 @@ function displayChange_block_1(status) {
 	displayChange_field("idiva", "", status);
 	displayChange_field("existencia", "", status);
 	displayChange_field("u_menor", "", status);
+	displayChange_field("ubicacion", "", status);
 	displayChange_field("activo", "", status);
 }
 
@@ -1805,6 +1831,7 @@ function displayChange_row(row, status) {
 	displayChange_field_idiva(row, status);
 	displayChange_field_existencia(row, status);
 	displayChange_field_u_menor(row, status);
+	displayChange_field_ubicacion(row, status);
 	displayChange_field_activo(row, status);
 	displayChange_field_colores(row, status);
 	displayChange_field_confcolor(row, status);
@@ -1910,6 +1937,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("u_menor" == field) {
 		displayChange_field_u_menor(row, status);
+	}
+	if ("ubicacion" == field) {
+		displayChange_field_ubicacion(row, status);
 	}
 	if ("activo" == field) {
 		displayChange_field_activo(row, status);
@@ -2130,6 +2160,9 @@ function displayChange_field_existencia(row, status) {
 }
 
 function displayChange_field_u_menor(row, status) {
+}
+
+function displayChange_field_ubicacion(row, status) {
 }
 
 function displayChange_field_activo(row, status) {

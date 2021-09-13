@@ -60,6 +60,20 @@ function scFocusField(sField) {
       case 'columna_reg_pdf_propio':
         sc_exib_ocult_pag('form_configuraciones_form2');
         break;
+      case 'ver_grupo':
+      case 'ver_codigo':
+      case 'ver_imagen':
+      case 'ver_existencia':
+      case 'ver_unidad':
+      case 'ver_precio':
+      case 'ver_impuesto':
+      case 'ver_stock':
+      case 'ver_ubicacion':
+      case 'ver_costo':
+      case 'ver_proveedor':
+      case 'ver_combo':
+        sc_exib_ocult_pag('form_configuraciones_form3');
+        break;
     }
   }
 
@@ -126,6 +140,18 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["columna_whatsapp" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["columna_npedido" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["columna_reg_pdf_propio" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_grupo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_codigo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_imagen" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_existencia" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_unidad" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_precio" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_impuesto" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_stock" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_ubicacion" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_costo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_proveedor" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["ver_combo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -321,6 +347,78 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["columna_reg_pdf_propio" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["ver_grupo" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_grupo" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_codigo" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_codigo" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_imagen" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_imagen" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_existencia" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_existencia" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_unidad" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_unidad" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_precio" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_precio" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_impuesto" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_impuesto" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_stock" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_stock" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_ubicacion" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_ubicacion" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_costo" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_costo" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_proveedor" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_proveedor" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_combo" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["ver_combo" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -475,6 +573,42 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_columna_reg_pdf_propio' + iSeqRow).bind('blur', function() { sc_form_configuraciones_columna_reg_pdf_propio_onblur(this, iSeqRow) })
                                                     .bind('change', function() { sc_form_configuraciones_columna_reg_pdf_propio_onchange(this, iSeqRow) })
                                                     .bind('focus', function() { sc_form_configuraciones_columna_reg_pdf_propio_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_grupo' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_grupo_onblur(this, iSeqRow) })
+                                       .bind('change', function() { sc_form_configuraciones_ver_grupo_onchange(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_configuraciones_ver_grupo_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_codigo' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_codigo_onblur(this, iSeqRow) })
+                                        .bind('change', function() { sc_form_configuraciones_ver_codigo_onchange(this, iSeqRow) })
+                                        .bind('focus', function() { sc_form_configuraciones_ver_codigo_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_imagen' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_imagen_onblur(this, iSeqRow) })
+                                        .bind('change', function() { sc_form_configuraciones_ver_imagen_onchange(this, iSeqRow) })
+                                        .bind('focus', function() { sc_form_configuraciones_ver_imagen_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_existencia' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_existencia_onblur(this, iSeqRow) })
+                                            .bind('change', function() { sc_form_configuraciones_ver_existencia_onchange(this, iSeqRow) })
+                                            .bind('focus', function() { sc_form_configuraciones_ver_existencia_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_unidad' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_unidad_onblur(this, iSeqRow) })
+                                        .bind('change', function() { sc_form_configuraciones_ver_unidad_onchange(this, iSeqRow) })
+                                        .bind('focus', function() { sc_form_configuraciones_ver_unidad_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_precio' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_precio_onblur(this, iSeqRow) })
+                                        .bind('change', function() { sc_form_configuraciones_ver_precio_onchange(this, iSeqRow) })
+                                        .bind('focus', function() { sc_form_configuraciones_ver_precio_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_impuesto' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_impuesto_onblur(this, iSeqRow) })
+                                          .bind('change', function() { sc_form_configuraciones_ver_impuesto_onchange(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_configuraciones_ver_impuesto_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_stock' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_stock_onblur(this, iSeqRow) })
+                                       .bind('change', function() { sc_form_configuraciones_ver_stock_onchange(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_configuraciones_ver_stock_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_ubicacion' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_ubicacion_onblur(this, iSeqRow) })
+                                           .bind('change', function() { sc_form_configuraciones_ver_ubicacion_onchange(this, iSeqRow) })
+                                           .bind('focus', function() { sc_form_configuraciones_ver_ubicacion_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_costo' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_costo_onblur(this, iSeqRow) })
+                                       .bind('change', function() { sc_form_configuraciones_ver_costo_onchange(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_configuraciones_ver_costo_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_proveedor' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_proveedor_onblur(this, iSeqRow) })
+                                           .bind('change', function() { sc_form_configuraciones_ver_proveedor_onchange(this, iSeqRow) })
+                                           .bind('focus', function() { sc_form_configuraciones_ver_proveedor_onfocus(this, iSeqRow) });
+  $('#id_sc_field_ver_combo' + iSeqRow).bind('blur', function() { sc_form_configuraciones_ver_combo_onblur(this, iSeqRow) })
+                                       .bind('change', function() { sc_form_configuraciones_ver_combo_onchange(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_configuraciones_ver_combo_onfocus(this, iSeqRow) });
   $('#id_sc_field_probarnube' + iSeqRow).bind('change', function() { sc_form_configuraciones_probarnube_onchange(this, iSeqRow) });
   $('.sc-ui-checkbox-caja_movil' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-pago_automatico' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -495,6 +629,18 @@ function scJQEventsAdd(iSeqRow) {
   $('.sc-ui-checkbox-columna_whatsapp' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-columna_npedido' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-columna_reg_pdf_propio' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_grupo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_codigo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_imagen' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_existencia' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_unidad' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_precio' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_impuesto' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_stock' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_ubicacion' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_costo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_proveedor' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-ver_combo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-integrar_tns' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-nube_pedidos' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-nube_inventario' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -1038,6 +1184,174 @@ function sc_form_configuraciones_columna_reg_pdf_propio_onfocus(oThis, iSeqRow) 
   scCssFocus(oThis);
 }
 
+function sc_form_configuraciones_ver_grupo_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_grupo();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_grupo_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_grupo_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_codigo_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_codigo();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_codigo_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_codigo_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_imagen_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_imagen();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_imagen_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_imagen_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_existencia_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_existencia();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_existencia_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_existencia_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_unidad_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_unidad();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_unidad_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_unidad_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_precio_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_precio();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_precio_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_precio_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_impuesto_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_impuesto();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_impuesto_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_impuesto_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_stock_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_stock();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_stock_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_stock_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_ubicacion_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_ubicacion();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_ubicacion_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_ubicacion_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_costo_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_costo();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_costo_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_costo_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_proveedor_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_proveedor();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_proveedor_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_proveedor_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_configuraciones_ver_combo_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_ver_combo();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_ver_combo_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_ver_combo_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_configuraciones_probarnube_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
@@ -1051,6 +1365,9 @@ function displayChange_page(page, status) {
 	}
 	if ("2" == page) {
 		displayChange_page_2(status);
+	}
+	if ("3" == page) {
+		displayChange_page_3(status);
 	}
 }
 
@@ -1067,6 +1384,10 @@ function displayChange_page_2(status) {
 	displayChange_block("3", status);
 }
 
+function displayChange_page_3(status) {
+	displayChange_block("4", status);
+}
+
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
@@ -1079,6 +1400,9 @@ function displayChange_block(block, status) {
 	}
 	if ("3" == block) {
 		displayChange_block_3(status);
+	}
+	if ("4" == block) {
+		displayChange_block_4(status);
 	}
 }
 
@@ -1126,6 +1450,21 @@ function displayChange_block_3(status) {
 	displayChange_field("columna_reg_pdf_propio", "", status);
 }
 
+function displayChange_block_4(status) {
+	displayChange_field("ver_grupo", "", status);
+	displayChange_field("ver_codigo", "", status);
+	displayChange_field("ver_imagen", "", status);
+	displayChange_field("ver_existencia", "", status);
+	displayChange_field("ver_unidad", "", status);
+	displayChange_field("ver_precio", "", status);
+	displayChange_field("ver_impuesto", "", status);
+	displayChange_field("ver_stock", "", status);
+	displayChange_field("ver_ubicacion", "", status);
+	displayChange_field("ver_costo", "", status);
+	displayChange_field("ver_proveedor", "", status);
+	displayChange_field("ver_combo", "", status);
+}
+
 function displayChange_row(row, status) {
 	displayChange_field_lineasporfactura(row, status);
 	displayChange_field_consolidararticulos(row, status);
@@ -1159,6 +1498,18 @@ function displayChange_row(row, status) {
 	displayChange_field_columna_whatsapp(row, status);
 	displayChange_field_columna_npedido(row, status);
 	displayChange_field_columna_reg_pdf_propio(row, status);
+	displayChange_field_ver_grupo(row, status);
+	displayChange_field_ver_codigo(row, status);
+	displayChange_field_ver_imagen(row, status);
+	displayChange_field_ver_existencia(row, status);
+	displayChange_field_ver_unidad(row, status);
+	displayChange_field_ver_precio(row, status);
+	displayChange_field_ver_impuesto(row, status);
+	displayChange_field_ver_stock(row, status);
+	displayChange_field_ver_ubicacion(row, status);
+	displayChange_field_ver_costo(row, status);
+	displayChange_field_ver_proveedor(row, status);
+	displayChange_field_ver_combo(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -1257,6 +1608,42 @@ function displayChange_field(field, row, status) {
 	}
 	if ("columna_reg_pdf_propio" == field) {
 		displayChange_field_columna_reg_pdf_propio(row, status);
+	}
+	if ("ver_grupo" == field) {
+		displayChange_field_ver_grupo(row, status);
+	}
+	if ("ver_codigo" == field) {
+		displayChange_field_ver_codigo(row, status);
+	}
+	if ("ver_imagen" == field) {
+		displayChange_field_ver_imagen(row, status);
+	}
+	if ("ver_existencia" == field) {
+		displayChange_field_ver_existencia(row, status);
+	}
+	if ("ver_unidad" == field) {
+		displayChange_field_ver_unidad(row, status);
+	}
+	if ("ver_precio" == field) {
+		displayChange_field_ver_precio(row, status);
+	}
+	if ("ver_impuesto" == field) {
+		displayChange_field_ver_impuesto(row, status);
+	}
+	if ("ver_stock" == field) {
+		displayChange_field_ver_stock(row, status);
+	}
+	if ("ver_ubicacion" == field) {
+		displayChange_field_ver_ubicacion(row, status);
+	}
+	if ("ver_costo" == field) {
+		displayChange_field_ver_costo(row, status);
+	}
+	if ("ver_proveedor" == field) {
+		displayChange_field_ver_proveedor(row, status);
+	}
+	if ("ver_combo" == field) {
+		displayChange_field_ver_combo(row, status);
 	}
 }
 
@@ -1378,6 +1765,42 @@ function displayChange_field_columna_npedido(row, status) {
 }
 
 function displayChange_field_columna_reg_pdf_propio(row, status) {
+}
+
+function displayChange_field_ver_grupo(row, status) {
+}
+
+function displayChange_field_ver_codigo(row, status) {
+}
+
+function displayChange_field_ver_imagen(row, status) {
+}
+
+function displayChange_field_ver_existencia(row, status) {
+}
+
+function displayChange_field_ver_unidad(row, status) {
+}
+
+function displayChange_field_ver_precio(row, status) {
+}
+
+function displayChange_field_ver_impuesto(row, status) {
+}
+
+function displayChange_field_ver_stock(row, status) {
+}
+
+function displayChange_field_ver_ubicacion(row, status) {
+}
+
+function displayChange_field_ver_costo(row, status) {
+}
+
+function displayChange_field_ver_proveedor(row, status) {
+}
+
+function displayChange_field_ver_combo(row, status) {
 }
 
 function scRecreateSelect2() {

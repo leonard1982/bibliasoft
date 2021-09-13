@@ -344,7 +344,7 @@ class grid_productos_grafico
       $prep_label['unimen'] = "Unidad";
       $prep_label['idgrup'] = "Grupo";
       $prep_label['idpro1'] = "Proveedor";
-      $prep_label['idiva'] = "%IVA";
+      $prep_label['idiva'] = "Impuesto(%)";
       $prep_label['escombo'] = "Combo";
       $x = 0;
       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['SC_Gb_Free_cmp'] as $cmp_gb => $resto)

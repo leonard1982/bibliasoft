@@ -3753,6 +3753,43 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_productos_validate_u_menor_cb
 
+  // ---------- Validate ubicacion
+  function do_ajax_form_productos_validate_ubicacion()
+  {
+    var nomeCampo_ubicacion = "ubicacion";
+    var var_ubicacion = scAjaxGetFieldText(nomeCampo_ubicacion);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_ubicacion(var_ubicacion, var_script_case_init, do_ajax_form_productos_validate_ubicacion_cb);
+  } // do_ajax_form_productos_validate_ubicacion
+
+  function do_ajax_form_productos_validate_ubicacion_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "ubicacion";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_ubicacion_cb
+
   // ---------- Validate activo
   function do_ajax_form_productos_validate_activo()
   {
@@ -5948,6 +5985,7 @@ function scJs_sweetalert_params(params) {
     var var_idiva = scAjaxGetFieldSelect("idiva");
     var var_existencia = scAjaxGetFieldHidden("existencia");
     var var_u_menor = scAjaxGetFieldHidden("u_menor");
+    var var_ubicacion = scAjaxGetFieldText("ubicacion");
     var var_activo = scAjaxGetFieldRadio("activo");
     var var_colores = scAjaxGetFieldSelect("colores");
     var var_confcolor = "";
@@ -5989,7 +6027,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_productos_submit_form(var_codigoprod, var_codigobar, var_nompro, var_idgrup, var_idpro1, var_tipo_producto, var_idpro2, var_otro, var_otro2, var_precio_editable, var_maneja_tcs_lfs, var_stockmen, var_unidmaymen, var_unimay, var_unimen, var_unidad_ma, var_unidad_, var_multiple_escala, var_en_base_a, var_costomen, var_costo_prom, var_recmayamen, var_idiva, var_existencia, var_u_menor, var_activo, var_colores, var_confcolor, var_tallas, var_conftalla, var_sabores, var_sabor, var_fecha_vencimiento, var_lote, var_serial_codbarras, var_relleno, var_control_costo, var_por_preciominimo, var_sugerido_mayor, var_sugerido_menor, var_preciofull, var_precio2, var_preciomay, var_preciomen, var_preciomen2, var_preciomen3, var_imagen, var_cod_cuenta, var_idprod, var_id_marca, var_id_linea, var_codigobar2, var_codigobar3, var_imagen_ul_name, var_imagen_ul_type, var_imagen_salva, var_imagen_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_productos_submit_form_cb);
+    x_ajax_form_productos_submit_form(var_codigoprod, var_codigobar, var_nompro, var_idgrup, var_idpro1, var_tipo_producto, var_idpro2, var_otro, var_otro2, var_precio_editable, var_maneja_tcs_lfs, var_stockmen, var_unidmaymen, var_unimay, var_unimen, var_unidad_ma, var_unidad_, var_multiple_escala, var_en_base_a, var_costomen, var_costo_prom, var_recmayamen, var_idiva, var_existencia, var_u_menor, var_ubicacion, var_activo, var_colores, var_confcolor, var_tallas, var_conftalla, var_sabores, var_sabor, var_fecha_vencimiento, var_lote, var_serial_codbarras, var_relleno, var_control_costo, var_por_preciominimo, var_sugerido_mayor, var_sugerido_menor, var_preciofull, var_precio2, var_preciomay, var_preciomen, var_preciomen2, var_preciomen3, var_imagen, var_cod_cuenta, var_idprod, var_id_marca, var_id_linea, var_codigobar2, var_codigobar3, var_imagen_ul_name, var_imagen_ul_type, var_imagen_salva, var_imagen_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_productos_submit_form_cb);
   } // do_ajax_form_productos_submit_form
 
   function do_ajax_form_productos_submit_form_cb(sResp)
@@ -6039,6 +6077,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("idiva");
       scAjaxHideErrorDisplay("existencia");
       scAjaxHideErrorDisplay("u_menor");
+      scAjaxHideErrorDisplay("ubicacion");
       scAjaxHideErrorDisplay("activo");
       scAjaxHideErrorDisplay("colores");
       scAjaxHideErrorDisplay("confcolor");
@@ -6155,6 +6194,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['dashbo
     scAjaxHideErrorDisplay("idiva");
     scAjaxHideErrorDisplay("existencia");
     scAjaxHideErrorDisplay("u_menor");
+    scAjaxHideErrorDisplay("ubicacion");
     scAjaxHideErrorDisplay("activo");
     scAjaxHideErrorDisplay("colores");
     scAjaxHideErrorDisplay("confcolor");
@@ -6361,34 +6401,35 @@ if ($this->Embutida_form)
   ajax_field_list[22] = "idiva";
   ajax_field_list[23] = "existencia";
   ajax_field_list[24] = "u_menor";
-  ajax_field_list[25] = "activo";
-  ajax_field_list[26] = "colores";
-  ajax_field_list[27] = "confcolor";
-  ajax_field_list[28] = "tallas";
-  ajax_field_list[29] = "conftalla";
-  ajax_field_list[30] = "sabores";
-  ajax_field_list[31] = "sabor";
-  ajax_field_list[32] = "fecha_vencimiento";
-  ajax_field_list[33] = "lote";
-  ajax_field_list[34] = "serial_codbarras";
-  ajax_field_list[35] = "relleno";
-  ajax_field_list[36] = "control_costo";
-  ajax_field_list[37] = "por_preciominimo";
-  ajax_field_list[38] = "sugerido_mayor";
-  ajax_field_list[39] = "sugerido_menor";
-  ajax_field_list[40] = "preciofull";
-  ajax_field_list[41] = "precio2";
-  ajax_field_list[42] = "preciomay";
-  ajax_field_list[43] = "preciomen";
-  ajax_field_list[44] = "preciomen2";
-  ajax_field_list[45] = "preciomen3";
-  ajax_field_list[46] = "imagen";
-  ajax_field_list[47] = "cod_cuenta";
-  ajax_field_list[48] = "idprod";
-  ajax_field_list[49] = "id_marca";
-  ajax_field_list[50] = "id_linea";
-  ajax_field_list[51] = "codigobar2";
-  ajax_field_list[52] = "codigobar3";
+  ajax_field_list[25] = "ubicacion";
+  ajax_field_list[26] = "activo";
+  ajax_field_list[27] = "colores";
+  ajax_field_list[28] = "confcolor";
+  ajax_field_list[29] = "tallas";
+  ajax_field_list[30] = "conftalla";
+  ajax_field_list[31] = "sabores";
+  ajax_field_list[32] = "sabor";
+  ajax_field_list[33] = "fecha_vencimiento";
+  ajax_field_list[34] = "lote";
+  ajax_field_list[35] = "serial_codbarras";
+  ajax_field_list[36] = "relleno";
+  ajax_field_list[37] = "control_costo";
+  ajax_field_list[38] = "por_preciominimo";
+  ajax_field_list[39] = "sugerido_mayor";
+  ajax_field_list[40] = "sugerido_menor";
+  ajax_field_list[41] = "preciofull";
+  ajax_field_list[42] = "precio2";
+  ajax_field_list[43] = "preciomay";
+  ajax_field_list[44] = "preciomen";
+  ajax_field_list[45] = "preciomen2";
+  ajax_field_list[46] = "preciomen3";
+  ajax_field_list[47] = "imagen";
+  ajax_field_list[48] = "cod_cuenta";
+  ajax_field_list[49] = "idprod";
+  ajax_field_list[50] = "id_marca";
+  ajax_field_list[51] = "id_linea";
+  ajax_field_list[52] = "codigobar2";
+  ajax_field_list[53] = "codigobar3";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -6427,6 +6468,7 @@ if ($this->Embutida_form)
     "idiva": {"label": "Impuesto", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "existencia": {"label": "Existencia en unidad menor:", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "u_menor": {"label": "U. Menor", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "ubicacion": {"label": "Ubicación", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "activo": {"label": "Activo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "colores": {"label": "Maneja Colores?", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "confcolor": {"label": "Configurar Colores", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -6508,6 +6550,7 @@ if ($this->Embutida_form)
     "idiva": new Array(),
     "existencia": new Array(),
     "u_menor": new Array(),
+    "ubicacion": new Array(),
     "activo": new Array(),
     "colores": new Array(),
     "confcolor": new Array(),
@@ -6562,6 +6605,7 @@ if ($this->Embutida_form)
   ajax_field_mult["idiva"][1] = "idiva";
   ajax_field_mult["existencia"][1] = "existencia";
   ajax_field_mult["u_menor"][1] = "u_menor";
+  ajax_field_mult["ubicacion"][1] = "ubicacion";
   ajax_field_mult["activo"][1] = "activo";
   ajax_field_mult["colores"][1] = "colores";
   ajax_field_mult["confcolor"][1] = "confcolor";
@@ -6612,6 +6656,7 @@ if ($this->Embutida_form)
     "idiva": new Array("hidden_field_label_idiva", "hidden_field_data_idiva"),
     "existencia": new Array("hidden_field_label_existencia", "hidden_field_data_existencia"),
     "u_menor": new Array("hidden_field_label_u_menor", "hidden_field_data_u_menor"),
+    "ubicacion": new Array("hidden_field_label_ubicacion", "hidden_field_data_ubicacion"),
     "activo": new Array("hidden_field_label_activo", "hidden_field_data_activo"),
     "colores": new Array("hidden_field_label_colores", "hidden_field_data_colores"),
     "confcolor": new Array("hidden_field_label_confcolor", "hidden_field_data_confcolor"),
@@ -6667,6 +6712,7 @@ if ($this->Embutida_form)
     "idiva": "off",
     "existencia": "off",
     "u_menor": "off",
+    "ubicacion": "off",
     "activo": "off",
     "colores": "off",
     "confcolor": "off",
@@ -7117,6 +7163,23 @@ if ($this->Embutida_form)
     if ("u_menor" == sIndex)
     {
       scAjaxSetFieldLabel(sIndex, aValue);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("ubicacion" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

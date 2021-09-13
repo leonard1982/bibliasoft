@@ -350,6 +350,151 @@ class form_configuraciones_mob_help
 </html>
 <?php
         }
+        if ($nm_cod_campo ==  "ver_existencia")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Ver Existencia</b><br>" . nl2br("La existencia de la bodega principal."); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "ver_precio")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Ver Precio</b><br>" . nl2br("El precio full."); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "ver_stock")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Ver Stock</b><br>" . nl2br("Columna que permite ver la existencia del producto en todas las bodegas."); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "ver_costo")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Ver Costo</b><br>" . nl2br("Para ver el costo de compra de un producto."); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "ver_combo")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Ver Combo</b><br>" . nl2br("Desde esta columna podemos gestionar los combos."); ?>
+</body>
+</html>
+<?php
+        }
     }
 }
 if (!empty($_GET))
