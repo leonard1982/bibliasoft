@@ -235,7 +235,7 @@ class grid_facturaven_pos_ini
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210913"; 
-      $this->nm_hr_ult_alt   = "123032"; 
+      $this->nm_hr_ult_alt   = "125916"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1280,7 +1280,7 @@ class grid_facturaven_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQJwD1BeV5XGDMNOV9BUDWFaHIJsHQBqZ1X7Z1BeZMBqHgBOVkJ3DWr/HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYZMFaHgBOVkXeV5B3ZuBODcBwH9BiHIrKV5FUDMNOV9FeDWFYHIrqDcBqH9BqDSBeHuJwDMveHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODuX7VoX7D9JmZ1B/D1rKD5BiDMzGVkXeDWX7DoF7D9NmDQJwHABYV5BOHgvsVcFCDWF/DoraD9BsZSBOZ1BeD5BqDEBOZSJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsZ1vCD5F7DMvsVcB/HEFYHMBOHQNmH9BqHAvCZMBqHgNKHEBUH5F/DoF7D9NwZSX7HAvCV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5JeDMvsV9BUDWXKVoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuBOD9NmZ9F7HAveD5XGHuNOVcBUDWJeDoFUHQXGZkFGHIBeV5FaHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODuFaDSBYVWXGHuvmV9BUH5B7VEFGDcNmZ1FaHArYV5FaHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHEXeH5F/HIraD9NwDuBqHIrwHuJeHuNOVcXKDur/VoBqDcBqZSBOHIBeHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODuX7VoX7D9JmZ1B/D1rKD5BiDMzGVkXeDWX7DoF7D9NmDQJwHABYV5BOHgvsVcFCDWF/DoraD9BsZSBOZ1BeD5BqDEBOZSJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuJsHgNKZSJ3DuJeHIF7HQFYZ9F7D1vOVWJeHgrYDkBsDWFYHMrqDcJUH9BqZ1NOHuFaHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveHArsH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcrsHEFYHMBqDcFYVINUHArYD5BiHgBOZSJGDWF/HMB/HQXODQJsDSNaV5XGDMvODkBsHEF/HMFaHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'])  
       { 
@@ -1288,47 +1288,7 @@ class grid_facturaven_pos_ini
           $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
 if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
-if (!isset($_SESSION['gver_busqueda_refinada'])) {$_SESSION['gver_busqueda_refinada'] = "";}
-if (!isset($this->sc_temp_gver_busqueda_refinada)) {$this->sc_temp_gver_busqueda_refinada = (isset($_SESSION['gver_busqueda_refinada'])) ? $_SESSION['gver_busqueda_refinada'] : "";}
-  $this->sc_temp_gver_busqueda_refinada = "NO";
-$vsql = "select ver_agregar_nota from configuraciones where idconfiguraciones=1";
- 
-      $nm_select = $vsql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiXml = array();
-      $this->vsixml = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $this->vSiXml[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $this->vsixml[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vSiXml = false;
-          $this->vSiXml_erro = $this->Db->ErrorMsg();
-          $this->vsixml = false;
-          $this->vsixml_erro = $this->Db->ErrorMsg();
-      } 
-;
-if(isset($this->vsixml[0][0]))
-{
-	$this->sc_temp_gver_busqueda_refinada = $this->vsixml[0][0];
-}
-
-
-$vsql = "SELECT proveedor, if(modo='PRUEBAS',servidor_prueba1,servidor1) as server1, if(modo='PRUEBAS',servidor_prueba2,servidor2) as server2, if(modo='PRUEBAS',token_prueba,tokenempresa) as tk_empresa, if(modo='PRUEBAS',password_prueba,tokenpassword) as tk_password, modo, enviar_dian, enviar_cliente FROM webservicefe where idwebservicefe='1'";
+  $vsql = "SELECT proveedor, if(modo='PRUEBAS',servidor_prueba1,servidor1) as server1, if(modo='PRUEBAS',servidor_prueba2,servidor2) as server2, if(modo='PRUEBAS',token_prueba,tokenempresa) as tk_empresa, if(modo='PRUEBAS',password_prueba,tokenpassword) as tk_password, modo, enviar_dian, enviar_cliente FROM webservicefe where idwebservicefe='1'";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1479,7 +1439,6 @@ if(isset($this->vsiactivapj[0][0]))
 	{
 		$this->nm_mens_alert[] = $vmensaje;$this->nm_params_alert[] = array();}
 }
-if (isset($this->sc_temp_gver_busqueda_refinada)) {$_SESSION['gver_busqueda_refinada'] = $this->sc_temp_gver_busqueda_refinada;}
 if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
 $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
           $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'] = false;
@@ -4327,11 +4286,6 @@ class grid_facturaven_pos_apl
           {
               $_SESSION['gIdfac'] = $gIdfac;
               nm_limpa_str_grid_facturaven_pos($_SESSION["gIdfac"]);
-          }
-          if (isset($gver_busqueda_refinada)) 
-          {
-              $_SESSION['gver_busqueda_refinada'] = $gver_busqueda_refinada;
-              nm_limpa_str_grid_facturaven_pos($_SESSION["gver_busqueda_refinada"]);
           }
       } 
       if ($Parms_form_pdf)
@@ -18414,10 +18368,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
    {
        $_SESSION['gIdfac'] = $gIdfac;
    }
-   if (isset($gver_busqueda_refinada)) 
-   {
-       $_SESSION['gver_busqueda_refinada'] = $gver_busqueda_refinada;
-   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -18568,11 +18518,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
            {
                $_SESSION['gIdfac'] = $gIdfac;
                nm_limpa_str_grid_facturaven_pos($_SESSION["gIdfac"]);
-           }
-           if (isset($gver_busqueda_refinada)) 
-           {
-               $_SESSION['gver_busqueda_refinada'] = $gver_busqueda_refinada;
-               nm_limpa_str_grid_facturaven_pos($_SESSION["gver_busqueda_refinada"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -18900,20 +18845,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
        if (!isset($_SESSION["gIdfac"])) 
        {
            $_SESSION["gIdfac"] = "";
-       }
-       if (isset($_POST["gver_busqueda_refinada"])) 
-       {
-           $_SESSION["gver_busqueda_refinada"] = $_POST["gver_busqueda_refinada"];
-           nm_limpa_str_grid_facturaven_pos($_SESSION["gver_busqueda_refinada"]);
-       }
-       if (isset($_GET["gver_busqueda_refinada"])) 
-       {
-           $_SESSION["gver_busqueda_refinada"] = $_GET["gver_busqueda_refinada"];
-           nm_limpa_str_grid_facturaven_pos($_SESSION["gver_busqueda_refinada"]);
-       }
-       if (!isset($_SESSION["gver_busqueda_refinada"])) 
-       {
-           $_SESSION["gver_busqueda_refinada"] = "";
        }
        if (isset($nmgp_lig_edit_lapis)) 
        {
