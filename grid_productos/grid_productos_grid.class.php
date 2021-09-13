@@ -745,7 +745,7 @@ if(isset($this->vconfig[0][0]))
 		$this->NM_cmp_hidden["idiva"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idiva"] = "off"; }
 	}
 	
-	if($this->vconfig[0][6]=="SI")
+	if($this->vconfig[0][7]=="SI")
 	{
 		$this->NM_cmp_hidden["btn_stock"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "on"; }
 	}
@@ -754,7 +754,7 @@ if(isset($this->vconfig[0][0]))
 		$this->NM_cmp_hidden["btn_stock"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["btn_stock"] = "off"; }
 	}
 	
-	if($this->vconfig[0][7]=="SI")
+	if($this->vconfig[0][8]=="SI")
 	{
 		$this->NM_cmp_hidden["ubicacion"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "on"; }
 	}
@@ -763,7 +763,7 @@ if(isset($this->vconfig[0][0]))
 		$this->NM_cmp_hidden["ubicacion"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["ubicacion"] = "off"; }
 	}
 	
-	if($this->vconfig[0][8]=="SI")
+	if($this->vconfig[0][9]=="SI")
 	{
 		$this->NM_cmp_hidden["costomen"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "on"; }
 	}
@@ -772,7 +772,7 @@ if(isset($this->vconfig[0][0]))
 		$this->NM_cmp_hidden["costomen"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["costomen"] = "off"; }
 	}
 	
-	if($this->vconfig[0][9]=="SI")
+	if($this->vconfig[0][10]=="SI")
 	{
 		$this->NM_cmp_hidden["idpro1"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "on"; }
 	}
@@ -781,7 +781,7 @@ if(isset($this->vconfig[0][0]))
 		$this->NM_cmp_hidden["idpro1"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["idpro1"] = "off"; }
 	}
 	
-	if($this->vconfig[0][10]=="SI")
+	if($this->vconfig[0][11]=="SI")
 	{
 		$this->NM_cmp_hidden["escombo"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "on"; }
 	}
