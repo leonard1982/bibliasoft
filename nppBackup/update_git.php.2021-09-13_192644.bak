@@ -13,7 +13,7 @@ $consulta = $conexion->consulta($vsql);
 while($r = mysqli_fetch_array($consulta))
 {
 	echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
-	echo Shell_exec("cd c:/facilweb/htdocs/mysql/bin && mysql -h localhost --port=3311 -u root -p,.Facilweb2020 -f -D ".$r[0]." < c:/facilweb/htdocs/script_update.sql");
+	echo Shell_exec("cd c:/facilweb/htdocs && mysql -h localhost --port=3311 -u root -p,.Facilweb2020 -f -D ".$r[0]." < c:/facilweb/htdocs/script_update.sql");
 	echo "</div>";
 }
 ?>
