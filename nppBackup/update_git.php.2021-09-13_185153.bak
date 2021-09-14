@@ -1,0 +1,6 @@
+<?php
+$vconsulta = Shell_exec("cd\ && cd facilweb/htdocs && git pull");
+echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
+echo $vconsulta;
+echo "</div>";
+?>

@@ -1,6 +1,16 @@
 <?php
-$vconsulta = Shell_exec("cd\ && cd facilweb/htdocs && git pull");
+$vconsulta = Shell_exec("cd\ && cd facilweb/htdocs && git add . && git commit -m '.' && git pull");
 echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
 echo $vconsulta;
 echo "</div>";
+
+//traemos las librerias
+include_once 'baseDeDatos.php';
+$conexion = new dbMysql("127.0.0.1","root",",.Facilweb2020",'facilweb',3311);
+$vsql = "select nombre from empresas";
+$consulta = $conexion->consulta($vsql);
+while($r = mysqli_fetch_array($consulta))
+{
+	Shell_exec("cd c:/facilweb/htdocs && mysql -h localhost --port=3311 -u root -p,.Facilweb2020 -f -D ".$r[0]." < c:/facilweb/htdocs/script_update.sql");
+}
 ?>
