@@ -25,9 +25,9 @@ if($vso=="escritorio")
 	$consulta = $conexion->consulta($vsql);
 	while($r = mysqli_fetch_array($consulta))
 	{
-		//echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
-		Shell_exec("cd c:/facilweb/htdocs/mysql/bin && mysql -h localhost --port=3311 -u root -p,.Facilweb2020 -f -D ".$r[0]." < c:/facilweb/htdocs/script_update.sql");
-		//echo "</div>";
+		echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
+		echo Shell_exec("cd c:/facilweb/htdocs/mysql/bin && mysql -h localhost --port=3311 -u root -p,.Facilweb2020 -f -D ".$r[0]." < c:/facilweb/htdocs/script_update.sql");
+		echo "</div>";
 	}
 }
 else
@@ -44,6 +44,6 @@ else
 }
 
 echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
-echo "Actualizado con éxito!!!. <a href='../'>Aquí para volver<a/>";
+echo "Actualizado con éxito!!!.";
 echo "</div>";
 ?>
