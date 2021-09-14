@@ -217,8 +217,8 @@ class blank_correo_reenvio2_ini
       $this->nm_dt_criacao   = "20210210"; 
       $this->nm_hr_criacao   = "115749"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210628"; 
-      $this->nm_hr_ult_alt   = "100214"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_correo_reenvio2_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwZ9F7HANOD5F7HuNODkBsDur/HMBqDcBqH9BOHArYD5XGDENOHEFiDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9JmZkBiD1rKD5JeHgNKHEFiH5BmDoXGD9XsH9X7HAN7D5F7HgvsVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBOH5FqVoraD9XOZSFaHAN7V5FaDEBOZSJqV5FaDoJeDcBwDQX7HABYD5NUHuBYVIBOHEFYVoraHQNmVIraZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMvCHErCV5XCHMBiD9NwDQFaHIrwD5JsHuNOVIBODWFaDoX7HQNwZ1rqD1rwHuBOHgNKZSJqHEFqHIJwHQNmZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgrKVkJqHEFqHMFaD9JKH9FUDSN7VWJsDMBOVcB/DWXCHMraHQNwVIJsHANOHQraDMvCDkXKDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQJwHIrwHuB/HuNOVcFeHEFYHIX7D9BsH9BOHIveD5BODENOHENiV5FaDoF7D9NmDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXsDQX7HIvsVWJeDMBOVcFKDuFqVoJwDcBqZ1FaD1rKV5JeDErKHArCDuFaHIX7DcBwDQBqD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBOH5FqVoraD9XOZSFaHAN7V5FaDEBOZSJqV5FaDoJeDcBwDQX7HABYD5NUHuBYVIBOHEFYVoraHQNmVIraZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFYVErqDcJUZ1BODSrYV5BqDMzGZSJqH5FYVoXGDcBwDQJwD1veV5BqDMvOVcFeH5FqHMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUHEX/VoF7HQNwZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXODQFUD1veHQXGDMBOVcFKHEX7HMFGD9BsH9B/DSNOV5X7DErKHEXeDWXCDoF7HQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1942,9 +1942,10 @@ class blank_correo_reenvio2_apl
 	$vmodo     = "";
 	
 	$vvalidar_correo_enlinea = "NO";
+	$vurl_api_sendmail = "";
 	$vok       = true;
 	
-	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea from webservicefe order by idwebservicefe desc limit 1";
+	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_sendmail from webservicefe order by idwebservicefe desc limit 1";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1987,6 +1988,7 @@ class blank_correo_reenvio2_apl
 		}
 		
 		$vvalidar_correo_enlinea = $this->vser[0][5];
+		$vurl_api_sendmail = $this->vser[0][6];
 	}
 	
 	$vsql = "select r.prefijo,f.numfacven from facturaven f inner join resdian r on f.resolucion=r.Idres where f.idfacven='".$vidfacven."'";
@@ -2086,7 +2088,7 @@ class blank_correo_reenvio2_apl
 			$curl = curl_init();
 
 			curl_setopt_array($curl, array(
-			  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2020/public/api/ubl2.1/send-email',
+			  CURLOPT_URL => $vurl_api_sendmail,
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => '',
 			  CURLOPT_MAXREDIRS => 10,
