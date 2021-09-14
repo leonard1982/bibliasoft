@@ -2291,7 +2291,7 @@ function nm_open_popup(parms)
       }
       if (!isset($idcli_cond) || empty($idcli_cond))
       {
-         $idcli_cond = "qp";
+         $idcli_cond = "eq";
       }
       if (!isset($asentada_cond) || empty($asentada_cond))
       {
@@ -2639,7 +2639,7 @@ foreach ($Arr_format as $Part_date)
 
 
    
-      <INPUT type="hidden" id="SC_idcli_cond" name="idcli_cond" value="qp">
+      <INPUT type="hidden" id="SC_idcli_cond" name="idcli_cond" value="eq">
 
     <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
  $SC_Label = (isset($this->New_label['idcli'])) ? $this->New_label['idcli'] : "Cliente";
@@ -3539,7 +3539,7 @@ foreach ($Arr_format as $Part_date)
    document.F1.fechaven_input_2_dia.value = "";
    document.F1.fechaven_input_2_mes.value = "";
    document.F1.fechaven_input_2_ano.value = "";
-   document.F1.idcli_cond.value = 'qp';
+   document.F1.idcli_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_idcli'), document.F1.idcli_cond, 'idcli');
    document.F1.idcli.value = "";
    document.F1.idcli_autocomp.value = "";
