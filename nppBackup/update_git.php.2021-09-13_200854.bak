@@ -44,6 +44,6 @@ else
 }
 
 echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
-echo "Actualizado con éxito!!!. <b>-> <a href='../' style='color:white;'>Aquí para volver<a/></b>";
+echo "Actualizado con éxito!!!. <b><a href='../' style='color:white;'>Aquí para volver<a/></b>";
 echo "</div>";
 ?>
