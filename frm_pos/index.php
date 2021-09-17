@@ -217,8 +217,8 @@ class frm_pos_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "163114"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210909"; 
-      $this->nm_hr_ult_alt   = "190716"; 
+      $this->nm_dt_ult_alt   = "20210917"; 
+      $this->nm_hr_ult_alt   = "112014"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class frm_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXOZSFUDSN7HuX7DMrYVcBUDWFYVEF7HQXGZ1B/Z1BeZMBqHgNKVkXeV5FqDoB/D9NmZSBiDSrwHuBqDMNOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBiHQJKH9X7HIrwD5NUHuNOVIB/H5XCHIJsHQBqZ1FGDSBeHuXGHgBOHArCHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DorqD9XOZSB/Z1rYD5BiDErKHEFiV5FaDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveV5BqHgrKVcFeDuX7VoBOD9XOZ1F7DSBOZMBOHgrKHEJGDWr/HIJwD9NmDQJsD1NKVWJsHgrKVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUHEX/VoF7HQNwZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcXGH9BiD1NKVWJwDMvOV9FiV5FYHMJeDcBqZSBOHIveHuBOHgNKVkJ3V5XKZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZ9F7D1BOV5BOHgrwVcFKDWrmVorqHQNmVINUHArYHQFGDEBeZSJqHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZ1X7D1NaD5BqDEBeHEJGHEFqHMFGDcBiDQFUHAvCV5XGHuvmV9FeDWJeHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBOD9NwH9X7Z1BYV5raHuzGVcFKV5X7VoFGHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgrKHArsDWF/DoBqHQFYDQB/DSBYHQNUHgrKDkFCH5XCHIF7DcNwVIJsHIveHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDuFqHIFUHQNmZSFaD1rKHuFUDEvsVkXeDWXCHIX7DcBwDQFGHAveHQJwDMvODkBsDWrmVENUD9JmH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2146,9 +2146,9 @@ $this->JS();
 			<th width="40px">ITEM</th>
 			<th>PRODUCTO</th>
 			<th width="100px">CANTIDAD</th>
-			<th width="150px">UNITARIO</th>
-			<th width="150px">DTO.</th>
-			<th width="100px">TOTAL</th>
+			<th width="150px" style="text-align:center;" >UNITARIO</th>
+			<th width="150px" style="text-align:center;" >DTO.</th>
+			<th width="100px" style="text-align:center;" >TOTAL</th>
 			<th width="40px"></th>
 			<th width="40px"></th>
 		</tr>
@@ -3434,26 +3434,17 @@ function fAutorizar(){
 	$( "#dialog").dialog();
 }
 
-function fEditarCantidad(id,accion=true,event=""){
+function fEditarCantidad(id,accion=true,event="",iddet,idfacven,cantidad)
+{
 
-	console.log("id: "+id+" accion: "+accion+" event: "+event);
+	var iddet2 = $("#itemsagregados"+id).val();
+	console.log("id: "+id+" accion: "+accion+" event: "+event+" iddet2:"+iddet2+" idfacven: "+idfacven+" cantidad: "+cantidad);
+	
+	var code = (event.keyCode ? event.keyCode : event.which);
 
-	if(accion){
-
-		$("#editarcantidad"+id).attr("readonly",false);
-		$("#editarcantidad"+id).select();
-
-	}else{
-
-		var code = (event.keyCode ? event.keyCode : event.which);
-
-		if(code==13){
-
-			$("#editarcantidad"+id).attr("readonly",true);
-			$("#txt_articulo").focus();
-		}
-
-		return false;
+	if(code==13)
+	{
+		$("#editarcantidad"+id).val(formatNumber(cantidad,2));
 	}
 }
 	
@@ -3770,8 +3761,9 @@ function fAutocompletarArticulos(indicio,ventaunidad,tipoprecio)
 function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,descuento,total,iddet="")
 {
 
-		var iditem = "items"+fila;
+		var iditem      = "items"+fila;
 		var	datosnuevos = "";
+		var idfacven    = $("#idfactura").val();
 											 
 		datosnuevos += "<tr id='"+iditem+"'>";
 											 
@@ -3780,16 +3772,17 @@ function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,des
 		datosnuevos += "<input id='itemsagregados"+fila+"' type='radio' value='"+iddet+"' onkeyup='fEliminarItem(event,\""+iditem+"\",this.id);' name='itemsagregados' />";
 		datosnuevos += "</td>";
 		datosnuevos += "<td>"+descripcionproducto+"</td>";
+	
 		datosnuevos += "<td>";
-		datosnuevos += "<input size='7' id='editarcantidad"+fila+"' class='inputcenter' onkeyup='fSoloNumerosCantidad(event,this);' onkeypress='fEditarCantidad(\""+fila+"\",false,event);' type='text' value='"+cantidad+"'  />";
+		datosnuevos += "<input size='7' id='editarcantidad"+fila+"' class='inputcenter' value='"+formatNumber(cantidad,2)+"' onkeypress='fEditarCantidad(\""+fila+"\",false,event,\""+iddet+"\",\""+idfacven+"\",this.value);' type='text' />";
 		datosnuevos += "</td>";
 											 
 		datosnuevos += "<td>";
-		datosnuevos += "<input size='12' class='inputcenter' id='autorizarprecio' onkeyup='fSoloNumerosPrecio(event,this);' type='text' value='"+formatNumber(preciounitario)+"' />";
+		datosnuevos += "<input size='12' class='inputcenter' style='text-align:right;' id='autorizarprecio"+fila+"' value='"+formatNumber(preciounitario)+"' type='text' />";
 		datosnuevos += "</td>";
 											 
 		datosnuevos += "<td>";
-		datosnuevos += "<input size='7' class='inputcenter'  type='text' value='"+descuento+"'  readonly='readonly' />";
+		datosnuevos += "<input size='7' class='inputcenter' style='text-align:right;' type='text' value='"+descuento+"' />";
 		datosnuevos += "</td>";
 											 
 		if(!$.isEmptyObject(descuento))
@@ -3800,7 +3793,7 @@ function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,des
 			}
 		}
 		datosnuevos += "<td>";
-		datosnuevos += "<input  class='inputcenter' type='text' value='"+formatNumber(total)+"' />";
+		datosnuevos += "<input  class='inputcenter' id='autorizartotal"+fila+"'  style='text-align:right;'  type='text' value='"+formatNumber(total)+"' />";
 		datosnuevos += "</td>";
 											 
 		datosnuevos += "<td>";
@@ -4770,7 +4763,7 @@ $(document).ready(function(){
 
 						if(!$.isEmptyObject(c)){
 
-							$("#ventaitemcantidad").val(formatNumber(c,3));
+							$("#ventaitemcantidad").val(formatNumber(c,2));
 						}
 						
 						if(!$.isEmptyObject(p)){
