@@ -71,6 +71,12 @@ class grid_productos_total
           }
           $stockmen_2 = $Busca_temp['stockmen_input_2']; 
           $this->stockmen_2 = $Busca_temp['stockmen_input_2']; 
+          $this->ubicacion = $Busca_temp['ubicacion']; 
+          $tmp_pos = strpos($this->ubicacion, "##@@");
+          if ($tmp_pos !== false && !is_array($this->ubicacion))
+          {
+              $this->ubicacion = substr($this->ubicacion, 0, $tmp_pos);
+          }
       } 
    }
 
@@ -562,6 +568,12 @@ class grid_productos_total
               $this->stockmen = substr($this->stockmen, 0, $tmp_pos);
           }
           $this->stockmen_2 = $Busca_temp['stockmen_input_2']; 
+          $this->ubicacion = $Busca_temp['ubicacion']; 
+          $tmp_pos = strpos($this->ubicacion, "##@@");
+          if ($tmp_pos !== false && !is_array($this->ubicacion))
+          {
+              $this->ubicacion = substr($this->ubicacion, 0, $tmp_pos);
+          }
       } 
       $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'];
       $ind_qb                = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['SC_Ind_Groupby'];

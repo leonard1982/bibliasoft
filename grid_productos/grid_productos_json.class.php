@@ -273,6 +273,12 @@ class grid_productos_json
               $this->stockmen = substr($this->stockmen, 0, $tmp_pos);
           }
           $this->stockmen_2 = $Busca_temp['stockmen_input_2']; 
+          $this->ubicacion = $Busca_temp['ubicacion']; 
+          $tmp_pos = strpos($this->ubicacion, "##@@");
+          if ($tmp_pos !== false && !is_array($this->ubicacion))
+          {
+              $this->ubicacion = substr($this->ubicacion, 0, $tmp_pos);
+          }
       } 
       $this->nm_where_dinamico = "";
       $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'on';

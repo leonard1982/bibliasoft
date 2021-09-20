@@ -71,7 +71,7 @@ function bootstrapMobile() {
                 break;
         }
 
-        rOrder.openInModalPane({
+        if (rOrder) rOrder.openInModalPane({
             openingButton: '#ordcmp_top',
             paneTitleText: $('#ordcmp_top').html(),
             onClose: function (paneContent, openButton, closeButton) {
@@ -121,7 +121,7 @@ function bootstrapMobile() {
             toolbarPaddingClass: toolbarPaddingClass,
             toggleHandler: toggleHandler
         });
-        rColumns.openInModalPane({
+        if (rColumns) rColumns.openInModalPane({
             openingButton: '#selcmp_top',
             paneTitleText: $('#selcmp_top').html(),
             onClose: function (paneContent, openButton, closeButton) {
@@ -154,7 +154,7 @@ function bootstrapMobile() {
             toolbarPaddingClass: toolbarPaddingClass,
             toggleHandler: toggleHandler
         });
-        rDynamicSearch.openInModalPane({
+        if (rDynamicSearch) rDynamicSearch.openInModalPane({
             openingButton: '#dynamic_search_top',
             paneTitleText: $('#dynamic_search_top').html(),
             holdAjax: true,
@@ -171,6 +171,8 @@ function bootstrapMobile() {
                 // paneContent.find('.scAppDivContent table select').on('touchend.preventLeak', function(e){ e.stopPropagation(); return true; });
                 var applyBtn = paneContent.find('#dyn_search');
                 var cancelBtn = paneContent.find('#dyn_cancel');
+                var closeArrow = paneContent.find('#nm_close_dyn');
+                closeArrow.hide();
                 cancelBtn.attr('onclick', '');
                 cancelBtn.off('click');
                 cancelBtn.off('mousedown');
@@ -189,7 +191,7 @@ function bootstrapMobile() {
             toolbarPaddingClass: toolbarPaddingClass,
             toggleHandler: toggleHandler
         });
-        rGroupBy.openInModalPane({
+        if (rGroupBy) rGroupBy.openInModalPane({
             openingButton: '#sel_groupby_top',
             paneTitleText: $('#sel_groupby_top').html(),
             onClose: function (paneContent, openButton, closeButton) {
@@ -231,7 +233,7 @@ function bootstrapMobile() {
                 });
             }
         });
-        rSaveGridT.openInModalPane({
+        if (rSaveGridT) rSaveGridT.openInModalPane({
             openingButton: '#save_grid_top',
             paneTitleText: '',
             beforeReady: function (paneContent, openButton, closeButton) {
@@ -264,7 +266,7 @@ function bootstrapMobile() {
             // execClickBeforeReady: true,
             toggleHandler: toggleHandler
         });
-        rSaveGrid.openInModalPane({
+        if (rSaveGrid) rSaveGrid.openInModalPane({
             openingButton: '#save_grid_bot',
             paneTitleText: '',
             onReady: function (paneContent, openButton, closeButton) {
@@ -296,7 +298,7 @@ function bootstrapMobile() {
             toolbarPaddingClass: toolbarPaddingClass,
             toggleHandler: toggleHandler
         });
-        rChartConf.openInModalPane({
+        if (rChartConf) rChartConf.openInModalPane({
             openingButton: '#chart_custom_top',
             paneTitleText: $('#chart_custom_top').text(),
             onReady: function (paneContent, openButton, closeButton) {
@@ -323,7 +325,7 @@ function bootstrapMobile() {
             toolbarPaddingClass: toolbarPaddingClass,
             toggleHandler: toggleHandler
         });
-        rSaveSearch.openInModalPane({
+        if (rSaveSearch) rSaveSearch.openInModalPane({
             openingButton: '#Ativa_save_bot',
             paneTitleText: '',
             onReady: function (paneContent, openButton, closeButton) {
@@ -350,7 +352,7 @@ function bootstrapMobile() {
             },
             toggleHandler: toggleHandler
         });
-        rSaveSearchT.openInModalPane({
+        if (rSaveSearchT) rSaveSearchT.openInModalPane({
             openingButton: '#Ativa_save_top',
             paneTitleText: '',
             onReady: function (paneContent, openButton, closeButton) {
@@ -389,9 +391,10 @@ function bootstrapMobile() {
         {
             rRefinedSearch.openInModalPane({
                 openingButton: true,
-                paneTitleText: app.langs['lang_refined_search_button'],
+                paneTitleText: app.langs['lang_refined_search'],
                 onReady: function (paneContent, openButton, closeButton) {
                     var optClass = 'scGridRefinedSearchCampo';
+                    $('.dn-expand-button').click()
                 },
                 appendTo: appendTo,
                 bodyClass: bodyClass,
@@ -401,8 +404,9 @@ function bootstrapMobile() {
                 toggleHandler: toggleHandler
             });
         }
-        rSearch.openInModalPane({
+        if (rSearch) rSearch.openInModalPane({
             openingButton: true,
+            holdAjax: true,
             paneTitleText: app.langs['lang_summary_search_button'],
             appendTo: appendTo,
             bodyClass: bodyClass,
@@ -411,8 +415,8 @@ function bootstrapMobile() {
             toolbarPaddingClass: toolbarPaddingClass,
             toggleHandler: toggleHandler
         });
-        rSearchTr.remove();
-        rGridDet.openInModalPane({
+        if (rSearchTr) rSearchTr.remove();
+        if (rGridDet) rGridDet.openInModalPane({
             openingButton: true,
             paneTitleText: app.langs['lang_details_button'],
             appendTo: appendTo,
@@ -441,15 +445,40 @@ function bootstrapMobile() {
             toggleHandler: toggleHandler
         });
         handlePopState();
-
+        _process(function () {}, 2000).then(function () {
+            $('.'+toolbarClass).find('a').removeClass('selected');
+        });
+        if (typeof nm_cancel_new_grid === 'function' && typeof $nm_cancel_new_grid !== 'function') {
+            window.$nm_cancel_new_grid = nm_cancel_new_grid;
+            window.nm_cancel_new_grid = function () {
+                var keep_panel = true;
+                var replace_cancel_btn = true;
+                var fn_action_cancel = function (a,b) {
+                    if (!a) {
+                        parent.close();
+                    }
+                };
+                fn_action_cancel(keep_panel, replace_cancel_btn);
+                $nm_cancel_new_grid();
+            }
+        }
         if (typeof nmAjaxProcOn === 'function' && typeof $nmAjaxProcOn !== 'function') {
+            app.procStarted = false;
             window.$nmAjaxProcOn = nmAjaxProcOn;
             window.$nmAjaxProcOff = nmAjaxProcOff;
             window.nmAjaxProcOn = function () {
+                if (app.procStarted) {
+                    return true;
+                }
+                app.procStarted = true;
                 if (!$('.modal-pane-container.active[nm-modalpane-holdajax]')[0]) window.history.back();
                 $nmAjaxProcOn();
             };
             window.nmAjaxProcOff = function () {
+                if (!app.procStarted) {
+                    return true;
+                }
+                app.procStarted = false;
                 if (app.appType === 'summary') {
                     _process(function () {}).then(function () {
                         if (app.displayScrollUp) appendScrollButton();
@@ -460,6 +489,27 @@ function bootstrapMobile() {
             };
         }
 
+        if (typeof FusionCharts !== 'undefined') {
+            FusionCharts.addEventListener('dataUpdated', function() {
+                $('#res_chart_table span:not(.fusioncharts-container)')
+                    .addClass('scButton_default')
+                    .css({
+                        display: 'inline-block',
+                        height: '',
+                        width: '',
+                        background: '',
+                        border: '',
+                        padding: '',
+                        'font-family': '',
+                        'font-size': '',
+                        'font-weight': '',
+                        right: '',
+                        left: '0px',
+                        color: ''
+                    });
+            });
+        }
+
         // history.go(0);
     } else {
         $('body').addClass('ready');
@@ -467,6 +517,7 @@ function bootstrapMobile() {
 }
 
 function appendNavBar() {
+    var app = getAppData();
     var btn = '' +
         '<div id="mobile-navbar" class="scGridHeader scGridHeaderFont">' +
             '<input id="mnv-first" />' +
@@ -488,23 +539,27 @@ function appendNavBar() {
         left: '0',
         width: '100%'
     });
+    var height = '55px';
+    if (app['navigationBarButtons'].includes('sys_format_rows')) {
+        var height = '75px';
+    }
     $('#sc_grid_toobar_bot > table').css({
-        padding: '0px',
+        padding: '0 0 9px 0',
         display: 'flex',
         'flex-direction': 'row',
         'justify-content': 'center',
         'justify-items': 'center',
-        'align-items': 'center',
+        'align-items': 'flex-end',
         position: 'relative',
         width: '100%',
-        height: '55px'
+        height: height
     });
     $('#sc_grid_toobar_bot > table').find('tr, td, table, tbody').css({
         padding: '0px',
         display: 'block',
         width: '100%',
     });
-    $('#sc_grid_toobar_bot').find('.scGridToolbarPadding:first-child, .scGridToolbarPadding:nth-child(3)').remove();
+    //$('#sc_grid_toobar_bot').find('.scGridToolbarPadding:first-child, .scGridToolbarPadding:nth-child(3)').remove();
     $('#sc_grid_toobar_bot > table').find('.scGridToolbarPadding').css({
         padding: '0px',
         display: 'flex',
@@ -664,11 +719,10 @@ function checkScroll() {
     if (!app.displayScrollUp) return false;
     var a = 40;
     var b = 10;
-    var pos = $(window).scrollTop();
+    var pos = $('[data-scroll]').scrollTop();
     var posa = $(window).scrollLeft();
     var posb = $('[data-scroll]').not('[data-scroll="0"]').scrollLeft();
-    // var app = getAppType();
-    // switch (app) {
+    // switch (app.appType) {
     //     case 'grid':
     //         a = (parseInt($('#sc_grid_toobar_top').parent().outerHeight()) || 0) + (parseInt($('#sc_grid_head').outerHeight()) || 0);
     //         break;
@@ -707,11 +761,15 @@ function toggleScrollButton(state) {
 }
 
 function scBtnGrpShowMobile(sGroup) {
-    var dT = $('#sc_btgp_div_' + sGroup).prev()[0].getBoundingClientRect().top +  $('#sc_btgp_div_' + sGroup).prev()[0].getBoundingClientRect().height - 5;
-    $('#sc_btgp_div_' + sGroup).stop().css('top', dT + 'px').stop().show('fade');
+    var tgt = $('#sc_btgp_div_' + sGroup);
+    if (!tgt) {
+        tgt = $(sGroup);
+    }
+    var dT = tgt.prev()[0].getBoundingClientRect().top +  tgt.prev()[0].getBoundingClientRect().height - 5;
+    tgt.stop().css('top', dT + 'px').stop().show('fade');
     var submenuOverlay = '<div class="submenuOverlay"></div>';
 
-    $('#sc_btgp_div_' + sGroup).parent().append(submenuOverlay);
+    tgt.parent().append(submenuOverlay);
     $('body, html').css({'overflow': 'hidden', 'height': '100vh'});
     // $('body, html').on("touchmove.lock", function (e) { e.preventDefault(); });
     $('#sc_btgp_div_' + sGroup + ' .thickbox').off('click.closeSubMenu');
@@ -730,6 +788,7 @@ function nm_show_dynamicsearch_fields_mobile() {
     var dT = 100 +  25;
     var submenuOverlay = '<div class="submenuOverlay"></div>';
 
+    $(sGroup).css('top', dT + 'px').stop().show('fade');
     $(sGroup).parent().append(submenuOverlay);
     $('body, html').css({'overflow': 'hidden', 'height': '100vh'});
     $(sGroup + ' div').off('click.closeSubMenu');
@@ -867,8 +926,8 @@ function toolbarPlacement() {
         }
         if ($('.' + scToolbar)[0]) {
             var tB = $('.' + scToolbar)[0];
-            $(tB).find('> tbody > tr > td:last-child').remove();
-            $(tB).find('> tbody > tr > td:last-child').remove();
+            //$(tB).find('> tbody > tr > td:last-child').remove();
+            //$(tB).find('> tbody > tr > td:last-child').remove();
         }
 
         var optionsButton = '<td style="display: flex; padding: 0; border: 0;"><div class="headerOptions ' + headerClass + '"><div class="optsDots ' + headerFontClass + '"></div></div></td>';
@@ -921,8 +980,8 @@ function toggleToolbar(e, forceClose) {
             break;
         case 'detail':
         case 'summary':
-            toolBarTop = $('.scGridToolbar').parent();
-            scToolbar = $('.scGridToolbar');
+            toolBarTop = $('.scGridTabelaTd > .scGridToolbar').parent();
+            scToolbar = $('.scGridTabelaTd > .scGridToolbar');
             scHeadOptions = $('.scGridTabelaTd > .scGridHeader').find('.headerOptions');
             break;
     }
@@ -947,7 +1006,7 @@ function toggleToolbar(e, forceClose) {
             var t = setTimeout(function () {
                 $('#slide_signal').stop().fadeOut(500);
             }, 4000);
-            scToolbar.on('scroll.removeTimeout', function () {
+            scToolbar.find('>tbody').on('scroll.removeTimeout', function () {
                 clearTimeout(t);
                 $('#slide_signal').stop().fadeOut(500);
                 scHeadOptions.off('click.removeTimeout');
@@ -1080,6 +1139,8 @@ function specificStyle() {
                     'margin': '2px 0',
                     'width': '100%'
                 });
+                $('#quicksearchph_top input[type="text"]').get()[0].style.width = 'calc(100% - 35px)';
+                $("#sc_grid_toobar_top [id^=NM_sep]").replaceWith('<hr style="width: 100%; border-color: rgba(0,0,0,.2); border-width: 0 0 1px 0;" />');
             }
             if (appData.displayOptionsButton) {
                 $('#sc_grid_toobar_top').parent().css({
@@ -1114,8 +1175,12 @@ function specificStyle() {
                 var t = setTimeout(function() { $('#slide_signal').stop().fadeOut(500); }, 4000);
             }
             if ($('#sc_grid_toobar_bot')[0]) {
+                var height = '55px';
+                if (appData['navigationBarButtons'].includes('sys_format_rows')) {
+                    var height = '75px';
+                }
                 $('body').css({
-                    'padding-bottom': '55px'
+                    'padding-bottom': height
                 });
             } else {
                 $('body').css({
@@ -1287,7 +1352,7 @@ function specificStyle() {
             $('.scGridToolbarPadding').attr('width', '');
             $('.scGridToolbarPadding').attr('aligh', '');
             $('.scGridToolbarPadding').parents('table, tbody, tr, td').attr('style', 'display:block !important; width: 100% !important; white-space: nowrap;');
-            $('.scGridToolbar').attr('style', 'padding: 0;');
+            $('.scGridTabelaTd > .scGridToolbar').attr('style', 'padding: 0;');
             $('.scGridBorder').parent().css('padding', '0');
             $('.scGridTabelaTd .scGridHeader').parent().parent().css({
                 position: 'fixed',
@@ -1336,7 +1401,7 @@ function specificStyle() {
             });
 
             if (appData.toolbarOrientation == 'H') {
-                $('.scGridToolbar').append('<div id="slide_signal"><div class="bnc_arrow">&#x2039;</div></div>');
+                $('.scGridTabelaTd > .scGridToolbar').append('<div id="slide_signal"><div class="bnc_arrow">&#x2039;</div></div>');
 
                 $('body #quicksearchph_top img').css({
                     'top': '60%'
@@ -1393,7 +1458,7 @@ function specificStyle() {
 
 
             if (appData.displayOptionsButton) {
-                $('.scGridToolbar').parent().attr('style', 'position: fixed; z-index: 10; top: ' + (parseInt(hH.outerHeight()) || 0) + 'px; display:none !important; width: 100% !important; padding: 0;');
+                $('.scGridTabelaTd > .scGridToolbar').parent().attr('style', 'position: fixed; z-index: 10; top: ' + (parseInt(hH.outerHeight()) || 0) + 'px; display:none !important; width: 100% !important; padding: 0;');
                 $('body').css({
                     'padding-top': (parseInt(hH.outerHeight()) || 0) + 'px',
                 });
@@ -1404,7 +1469,7 @@ function specificStyle() {
                 });
             } else {
 
-                $('.scGridToolbar').parent().attr('style', 'position: fixed; z-index: 10; top: ' + ((parseInt(hH.outerHeight()) || 0) - 1) + 'px; important; width: 100% !important; padding: 0;');
+                $('.scGridTabelaTd > .scGridToolbar').parent().attr('style', 'position: fixed; z-index: 10; top: ' + ((parseInt(hH.outerHeight()) || 0) - 1) + 'px; important; width: 100% !important; padding: 0;');
                 var hT = $('.scGridToolbar').parent();
                 $('body').css({
                     'padding-top': ((parseInt(hH.outerHeight()) || 0) + (parseInt(hT.outerHeight()) || 0)) + 'px',

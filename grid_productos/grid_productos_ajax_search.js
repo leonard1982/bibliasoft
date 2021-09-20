@@ -84,6 +84,7 @@ Table_sv_fil[4] = "idpro2";
 Table_sv_fil[5] = "idiva";
 Table_sv_fil[6] = "escombo";
 Table_sv_fil[7] = "stockmen";
+Table_sv_fil[8] = "ubicacion";
 function ajax_select_filter(parm)
 {
     nmAjaxProcOn();

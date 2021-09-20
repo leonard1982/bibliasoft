@@ -1860,7 +1860,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
 </HEAD>
-<BODY class="scGridPage">
+<BODY id="grid_search" class="scGridPage">
 <FORM style="display:none;" name="form_ok" method="POST" action="<?php echo $NM_retorno; ?>" target="_self">
 <INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
 <INPUT type="hidden" name="nmgp_opcao" value="pesq"> 
@@ -1932,7 +1932,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 $vertical_center = '';
 ?>
-<BODY class="scFilterPage" style="<?php echo $vertical_center ?>">
+<BODY id="grid_search" class="scFilterPage" style="<?php echo $vertical_center ?>">
 <?php echo $this->Ini->Ajax_result_set ?>
 <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_js . "/browserSniffer.js" ?>"></SCRIPT>
         <script type="text/javascript">
@@ -2218,6 +2218,8 @@ var nmdg_Form = "F1";
   str_out += 'SC_stockmen#NMF#' + search_get_text('SC_stockmen') + '@NMF@';
   str_out += 'id_ac_stockmen#NMF#' + search_get_title('select2-id_ac_stockmen-container') + '@NMF@';
   str_out += 'SC_stockmen_input_2#NMF#' + search_get_text('SC_stockmen_input_2') + '@NMF@';
+  str_out += 'SC_ubicacion_cond#NMF#' + search_get_sel_txt('SC_ubicacion_cond') + '@NMF@';
+  str_out += 'SC_ubicacion#NMF#' + search_get_text('SC_ubicacion') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2713,6 +2715,7 @@ function nm_open_popup(parms)
              $idiva_cond, $idiva,
              $escombo_cond, $escombo,
              $stockmen_cond, $stockmen, $stockmen_input_2, $stockmen_autocomp, $stockmen_IN,
+             $ubicacion_cond, $ubicacion,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2769,6 +2772,8 @@ function nm_open_popup(parms)
           $stockmen_IN = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['stockmen_IN']; 
           $stockmen_input_2 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['stockmen_input_2']; 
           $stockmen_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['stockmen_cond']; 
+          $ubicacion = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['ubicacion']; 
+          $ubicacion_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['ubicacion_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['NM_operador']; 
       } 
       if (!isset($codigobar_cond) || empty($codigobar_cond))
@@ -2803,6 +2808,10 @@ function nm_open_popup(parms)
       {
          $stockmen_cond = "le";
       }
+      if (!isset($ubicacion_cond) || empty($ubicacion_cond))
+      {
+         $ubicacion_cond = "eq";
+      }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
@@ -2814,6 +2823,7 @@ function nm_open_popup(parms)
       $str_hide_idiva = (in_array($idiva_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_escombo = (in_array($escombo_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_stockmen = (in_array($stockmen_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_ubicacion = (in_array($ubicacion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
       $str_display_codigobar = ('bw' == $codigobar_cond) ? $display_aberto : $display_fechado;
       $str_display_nompro = ('bw' == $nompro_cond) ? $display_aberto : $display_fechado;
@@ -2823,6 +2833,7 @@ function nm_open_popup(parms)
       $str_display_idiva = ('bw' == $idiva_cond) ? $display_aberto : $display_fechado;
       $str_display_escombo = ('bw' == $escombo_cond) ? $display_aberto : $display_fechado;
       $str_display_stockmen = ('bw' == $stockmen_cond) ? $display_aberto : $display_fechado;
+      $str_display_ubicacion = ('bw' == $ubicacion_cond) ? $display_aberto : $display_fechado;
 
       // idiva
       if (is_array($idiva) && !empty($idiva))
@@ -2953,6 +2964,20 @@ function nm_open_popup(parms)
          else
          {
          $stockmen = substr($stockmen, 0, $tmp_pos);
+         }
+      }
+      if (!isset($ubicacion) || $ubicacion == "")
+      {
+          $ubicacion = "";
+      }
+      if (isset($ubicacion) && !empty($ubicacion))
+      {
+         $tmp_pos = strpos($ubicacion, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $ubicacion = substr($ubicacion, 0, $tmp_pos);
          }
       }
 ?>
@@ -3676,6 +3701,36 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
       </TABLE>
      </TD>
 
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_ubicacion_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['ubicacion'])) ? $this->New_label['ubicacion'] : "Ubicacion"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_ubicacion_cond" name="ubicacion_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_ubicacion" <?php echo $str_hide_ubicacion?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['ubicacion'])) ? $this->New_label['ubicacion'] : "Ubicacion";
+ $nmgp_tab_label .= "ubicacion?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<INPUT  type="text" id="SC_ubicacion" name="ubicacion" value="<?php echo NM_encode_input($ubicacion) ?>"  size=50 alt="{datatype: 'text', maxLength: 360, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" class="sc-js-input scFilterObjectOdd">
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
    </tr>
    </TABLE>
   </TD>
@@ -4225,6 +4280,9 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
    $('#select2-id_ac_stockmen-container').html('<?php echo $this->Val_init_stockmen['desc'] ?>');;
    document.F1.stockmen_input_2.value = "";
    document.F1.stockmen_IN.value = "";
+   document.F1.ubicacion_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_ubicacion'), document.F1.ubicacion_cond, 'ubicacion');
+   document.F1.ubicacion.value = "";
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -4404,6 +4462,8 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
       $tp_fields['SC_stockmen'] = 'text_aut';
       $tp_fields['id_ac_stockmen'] = 'select2_aut';
       $tp_fields['SC_stockmen_input_2'] = 'text';
+      $tp_fields['SC_ubicacion_cond'] = 'cond';
+      $tp_fields['SC_ubicacion'] = 'text';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -4554,7 +4614,8 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
              $idpro2_cond, $idpro2, $idpro2_autocomp,
              $idiva_cond, $idiva,
              $escombo_cond, $escombo,
-             $stockmen_cond, $stockmen, $stockmen_input_2, $stockmen_autocomp, $stockmen_IN, $nmgp_tab_label;
+             $stockmen_cond, $stockmen, $stockmen_input_2, $stockmen_autocomp, $stockmen_IN,
+             $ubicacion_cond, $ubicacion, $nmgp_tab_label;
 
       $C_formatado = true;
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
@@ -4624,6 +4685,11 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
       {
           $stockmen_input_2 = $stockmen;
       }
+      $ubicacion_cond_salva = $ubicacion_cond; 
+      if (!isset($ubicacion_input_2) || $ubicacion_input_2 == "")
+      {
+          $ubicacion_input_2 = $ubicacion;
+      }
       if (is_array($idiva)) {
           foreach ($idiva as $I => $Val) {
               $tmp_pos = strpos($Val, "##@@");
@@ -4683,6 +4749,9 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['stockmen_input_2'] = $stockmen_input_2; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['stockmen_IN'] = $stockmen_IN; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['stockmen_cond'] = $stockmen_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['ubicacion'] = $ubicacion; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['ubicacion_cond'] = $ubicacion_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
@@ -5127,6 +5196,8 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
           nmgp_Form_Num_Val($Conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
       } 
       $this->cmp_formatado['stockmen_input_2'] = $Conteudo;
+      $Conteudo = $ubicacion;
+      $this->cmp_formatado['ubicacion'] = $Conteudo;
 
       //----- $codigobar
       $this->Date_part = false;
@@ -5270,6 +5341,13 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
       if ($stockmen_cond == "in")
       {
           $stockmen = $Cmp_save;
+      }
+
+      //----- $ubicacion
+      $this->Date_part = false;
+      if (isset($ubicacion) || $ubicacion_cond == "nu" || $ubicacion_cond == "nn" || $ubicacion_cond == "ep" || $ubicacion_cond == "ne")
+      {
+         $this->monta_condicao("ubicacion", $ubicacion_cond, $ubicacion, "", "ubicacion");
       }
    }
 

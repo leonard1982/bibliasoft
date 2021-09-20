@@ -428,6 +428,12 @@ class grid_productos_resumo
        }
        $stockmen_2 = $Busca_temp['stockmen_input_2']; 
        $this->stockmen_2 = $Busca_temp['stockmen_input_2']; 
+       $this->ubicacion = $Busca_temp['ubicacion']; 
+       $tmp_pos = strpos($this->ubicacion, "##@@");
+       if ($tmp_pos !== false && !is_array($this->ubicacion))
+       {
+           $this->ubicacion = substr($this->ubicacion, 0, $tmp_pos);
+       }
      } 
       $this->nm_where_dinamico = "";
        ob_start(); 
@@ -4519,7 +4525,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       if (!$this->Ini->Export_html_zip && $this->Print_All && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word']) 
       {
-          $nm_saida->saida(" <BODY class=\"" . $this->css_scGridPage . "\" style=\"-webkit-print-color-adjust: exact;\">\r\n");
+          $nm_saida->saida(" <BODY id=\"grid_summary\" class=\"" . $this->css_scGridPage . "\" style=\"-webkit-print-color-adjust: exact;\">\r\n");
           $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $summary_width . ">\r\n");
           $nm_saida->saida("     <TR>\r\n");
           $nm_saida->saida("       <TD align=\"center\">\r\n");
@@ -4545,7 +4551,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_margin'] ? 'margin: 0;' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_border'] ? 'border-width: 0;' : '';
           $vertical_center = '';
-          $nm_saida->saida(" <BODY class=\"" . $this->css_scGridPage . "\" style=\"" . $remove_margin . $vertical_center . "\">\r\n");
+          $nm_saida->saida(" <BODY id=\"grid_summary\" class=\"" . $this->css_scGridPage . "\" style=\"" . $remove_margin . $vertical_center . "\">\r\n");
       }
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "print" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'])
       {
@@ -5977,6 +5983,12 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word'])
               $stockmen = substr($stockmen, 0, $tmp_pos);
           }
           $stockmen_2 = $Busca_temp['stockmen_input_2']; 
+          $ubicacion = $Busca_temp['ubicacion']; 
+          $tmp_pos = strpos($ubicacion, "##@@");
+          if ($tmp_pos !== false && !is_array($ubicacion))
+          {
+              $ubicacion = substr($ubicacion, 0, $tmp_pos);
+          }
       } 
       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['cond_pesq']))
       {  
@@ -6188,6 +6200,12 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word'])
        }
        $stockmen_2 = $Busca_temp['stockmen_input_2']; 
        $this->stockmen_2 = $Busca_temp['stockmen_input_2']; 
+       $this->ubicacion = $Busca_temp['ubicacion']; 
+       $tmp_pos = strpos($this->ubicacion, "##@@");
+       if ($tmp_pos !== false && !is_array($this->ubicacion))
+       {
+           $this->ubicacion = substr($this->ubicacion, 0, $tmp_pos);
+       }
      } 
      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_orig'];
      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq'];
@@ -6537,6 +6555,12 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                    $this->stockmen = substr($this->stockmen, 0, $tmp_pos);
                 }
                 $this->stockmen_2 = $Busca_temp['stockmen_input_2']; 
+                $this->ubicacion = $Busca_temp['ubicacion']; 
+                $tmp_pos = strpos($this->ubicacion, "##@@");
+                if ($tmp_pos !== false && !is_array($this->ubicacion))
+                {
+                   $this->ubicacion = substr($this->ubicacion, 0, $tmp_pos);
+                }
             } 
             $this->idgrup = $rs_res->fields[0] ;  
             $this->codigobar = $rs_res->fields[1] ;  

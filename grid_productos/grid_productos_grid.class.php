@@ -440,7 +440,7 @@ class grid_productos_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['mostra_edit'] = "N";
        }
    }
-   if ($this->Ini->SC_Link_View || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opc_psq'])
+   if ($this->Ini->SC_Link_View || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opc_psq'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['psq_edit'] == 'N'))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['mostra_edit'] = "N";
    }
@@ -629,6 +629,12 @@ class grid_productos_grid
        }
        $stockmen_2 = $Busca_temp['stockmen_input_2']; 
        $this->stockmen_2 = $Busca_temp['stockmen_input_2']; 
+       $this->ubicacion = $Busca_temp['ubicacion']; 
+       $tmp_pos = strpos($this->ubicacion, "##@@");
+       if ($tmp_pos !== false && !is_array($this->ubicacion))
+       {
+           $this->ubicacion = substr($this->ubicacion, 0, $tmp_pos);
+       }
    } 
    $this->nm_field_dinamico = array();
    $this->nm_order_dinamico = array();
@@ -2558,7 +2564,7 @@ $nm_saida->saida("}\r\n");
            {
                $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
            }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
@@ -2592,7 +2598,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        }
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf" && !$this->Print_All)
@@ -8953,7 +8959,20 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
               $stateSearchIconClose  = '';
               $stateSearchIconSearch = 'none';
           }
-          $nm_saida->saida("          <input type=\"hidden\"  id=\"fast_search_f0_top\" name=\"nmgp_fast_search\" value=\"SC_all_Cmp\">\r\n");
+          $OPC_cmp_sel = explode("_VLS_", $OPC_cmp);
+          $nm_saida->saida("          <select   id=\"fast_search_f0_top\" class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;\" name=\"nmgp_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
+          $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
+          $SC_Label_atu['idpro1'] = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : 'Proveedor'; 
+          $SC_Label_atu['idgrup'] = (isset($this->New_label['idgrup'])) ? $this->New_label['idgrup'] : 'Grupo'; 
+          $SC_Label_atu['codigobar'] = (isset($this->New_label['codigobar'])) ? $this->New_label['codigobar'] : 'Código'; 
+          $SC_Label_atu['nompro'] = (isset($this->New_label['nompro'])) ? $this->New_label['nompro'] : 'Producto'; 
+          $SC_Label_atu['ubicacion'] = (isset($this->New_label['ubicacion'])) ? $this->New_label['ubicacion'] : 'Ubicacion'; 
+          foreach ($SC_Label_atu as $CMP => $LABEL)
+          {
+              $OPC_sel = (in_array($CMP, $OPC_cmp_sel) || ($CMP == 'SC_all_Cmp' && empty($OPC_cmp))) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"" . $CMP . "\"$OPC_sel>" . $LABEL . "</option>\r\n");
+           }
+          $nm_saida->saida("          </select>\r\n");
           $nm_saida->saida("          <select id=\"cond_fast_search_f0_top\" class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;display:none;\" name=\"nmgp_cond_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
           $OPC_sel = " selected='selected'";
           $nm_saida->saida("           <option value=\"qp\"$OPC_sel>" . $this->Ini->Nm_lang['lang_srch_like'] . "</option>\r\n");
@@ -9298,7 +9317,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__refresh_32.png\"  id=\"sc_btn_recalcular_top\" onClick=\"sc_btn_btn_recalcular();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__refresh_32.png\"  id=\"sc_btn_recalcular_top\" onClick=\"sc_btn_btn_recalcular();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
           if ($this->nmgp_botoes['reload'] == "on")
@@ -9567,14 +9586,14 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_productos_help.txt") && !$this->grid_emb_form)
@@ -9675,7 +9694,20 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
               $stateSearchIconClose  = '';
               $stateSearchIconSearch = 'none';
           }
-          $nm_saida->saida("          <input type=\"hidden\"  id=\"fast_search_f0_top\" name=\"nmgp_fast_search\" value=\"SC_all_Cmp\">\r\n");
+          $OPC_cmp_sel = explode("_VLS_", $OPC_cmp);
+          $nm_saida->saida("          <select   id=\"fast_search_f0_top\" class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;\" name=\"nmgp_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
+          $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
+          $SC_Label_atu['idpro1'] = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : 'Proveedor'; 
+          $SC_Label_atu['idgrup'] = (isset($this->New_label['idgrup'])) ? $this->New_label['idgrup'] : 'Grupo'; 
+          $SC_Label_atu['codigobar'] = (isset($this->New_label['codigobar'])) ? $this->New_label['codigobar'] : 'Código'; 
+          $SC_Label_atu['nompro'] = (isset($this->New_label['nompro'])) ? $this->New_label['nompro'] : 'Producto'; 
+          $SC_Label_atu['ubicacion'] = (isset($this->New_label['ubicacion'])) ? $this->New_label['ubicacion'] : 'Ubicacion'; 
+          foreach ($SC_Label_atu as $CMP => $LABEL)
+          {
+              $OPC_sel = (in_array($CMP, $OPC_cmp_sel) || ($CMP == 'SC_all_Cmp' && empty($OPC_cmp))) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"" . $CMP . "\"$OPC_sel>" . $LABEL . "</option>\r\n");
+           }
+          $nm_saida->saida("          </select>\r\n");
           $nm_saida->saida("          <select id=\"cond_fast_search_f0_top\" class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;display:none;\" name=\"nmgp_cond_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
           $OPC_sel = " selected='selected'";
           $nm_saida->saida("           <option value=\"qp\"$OPC_sel>" . $this->Ini->Nm_lang['lang_srch_like'] . "</option>\r\n");
@@ -10020,7 +10052,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__refresh_32.png\"  id=\"sc_btn_recalcular_top\" onClick=\"sc_btn_btn_recalcular();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__refresh_32.png\"  id=\"sc_btn_recalcular_top\" onClick=\"sc_btn_btn_recalcular();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
           if ($this->nmgp_botoes['reload'] == "on")
@@ -10289,14 +10321,14 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_productos_help.txt") && !$this->grid_emb_form)
@@ -10445,7 +10477,8 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -10475,7 +10508,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                 (
                     (
                     $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['fast_search'][0] == 'SC_all_Cmp' &&
-                    in_array($field, array('nompro', 'unimay', 'unimen', 'idpro1', 'codigobar'))
+                    in_array($field, array('nompro', 'unimay', 'unimen', 'idpro1', 'codigobar', 'ubicacion', 'idgrup'))
                     ) ||
                     $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['fast_search'][0] == $field ||
                     strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['fast_search'][0], $field . '_VLS_') !== false ||
@@ -10495,7 +10528,8 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['fast_search'][1] == 'eq')
@@ -10607,19 +10641,19 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $lin_obj  = "    <div id=\"div_int_idgrup\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('idgrup')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_idgrup\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('idgrup')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_idgrup\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('idgrup')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_idgrup_ck\" name=\"int_search_idgrup_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('idgrup');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('idgrup')\">";
+       $lin_obj .= "              <span id=\"id_expand_idgrup\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_idgrup\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_idgrup_ck\" name=\"int_search_idgrup_ck[]\" value=\"\" checked onclick=\"event.stopPropagation(); nm_change_mult_int_search('idgrup');\">";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['int_search_label']['idgrup'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_idgrup\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','idgrup', '', 'idgrup', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_idgrup\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','idgrup', '', 'idgrup', '')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -10824,19 +10858,19 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $lin_obj  = "    <div id=\"div_int_stockmen\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('stockmen')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_stockmen\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('stockmen')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_stockmen\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('stockmen')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_stockmen_ck\" name=\"int_search_stockmen_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('stockmen');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('stockmen')\">";
+       $lin_obj .= "              <span id=\"id_expand_stockmen\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_stockmen\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_stockmen_ck\" name=\"int_search_stockmen_ck[]\" value=\"\" checked onclick=\"event.stopPropagation(); nm_change_mult_int_search('stockmen');\">";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['int_search_label']['stockmen'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_stockmen\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','stockmen', '', 'stockmen', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_stockmen\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','stockmen', '', 'stockmen', '')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -11034,19 +11068,19 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $lin_obj  = "    <div id=\"div_int_preciomen\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('preciomen')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_preciomen\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('preciomen')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_preciomen\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('preciomen')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_preciomen_ck\" name=\"int_search_preciomen_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('preciomen');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('preciomen')\">";
+       $lin_obj .= "              <span id=\"id_expand_preciomen\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_preciomen\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_preciomen_ck\" name=\"int_search_preciomen_ck[]\" value=\"\" checked onclick=\"event.stopPropagation(); nm_change_mult_int_search('preciomen');\">";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['int_search_label']['preciomen'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_preciomen\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','preciomen', '', 'preciomen', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_preciomen\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','preciomen', '', 'preciomen', '')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -11244,19 +11278,19 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $lin_obj  = "    <div id=\"div_int_idpro1\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('idpro1')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_idpro1\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('idpro1')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_idpro1\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('idpro1')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_idpro1_ck\" name=\"int_search_idpro1_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('idpro1');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('idpro1')\">";
+       $lin_obj .= "              <span id=\"id_expand_idpro1\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_idpro1\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_idpro1_ck\" name=\"int_search_idpro1_ck[]\" value=\"\" checked onclick=\"event.stopPropagation(); nm_change_mult_int_search('idpro1');\">";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['int_search_label']['idpro1'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_idpro1\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','idpro1', '', 'idpro1', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_idpro1\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','idpro1', '', 'idpro1', '')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -11461,19 +11495,19 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $lin_obj  = "    <div id=\"div_int_idiva\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('idiva')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_idiva\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('idiva')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_idiva\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('idiva')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_idiva_ck\" name=\"int_search_idiva_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('idiva');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('idiva')\">";
+       $lin_obj .= "              <span id=\"id_expand_idiva\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_idiva\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_idiva_ck\" name=\"int_search_idiva_ck[]\" value=\"\" checked onclick=\"event.stopPropagation(); nm_change_mult_int_search('idiva');\">";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['int_search_label']['idiva'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_idiva\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','idiva', '', 'idiva', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_idiva\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','idiva', '', 'idiva', '')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -11879,6 +11913,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $nm_saida->saida("             obj_check[i].checked = ckeck;\r\n");
        $nm_saida->saida("         }\r\n");
        $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("    \r\n");
        $nm_saida->saida("     $( document ).ready(function() {\r\n");
        $nm_saida->saida("        adjustMobile();\r\n");
        $nm_saida->saida("    });\r\n");
@@ -12820,7 +12855,22 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    $nm_saida->saida("       { \r\n");
    $nm_saida->saida("           document.getElementById('SC_fast_search_' + pos).value = '';\r\n");
    $nm_saida->saida("       } \r\n");
-   $nm_saida->saida("       out_qsearch = $('#fast_search_f0_' + pos).val();\r\n");
+   $nm_saida->saida("       obj = document.getElementById('fast_search_f0_' + pos);\r\n");
+   $nm_saida->saida("       if (!obj.length)\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           out_qsearch = obj.options[obj.selectedIndex].value;\r\n");
+   $nm_saida->saida("       }\r\n");
+   $nm_saida->saida("       else\r\n");
+   $nm_saida->saida("       {\r\n");
+   $nm_saida->saida("           for (iCheck = 0; iCheck < obj.length; iCheck++)\r\n");
+   $nm_saida->saida("           {\r\n");
+   $nm_saida->saida("               if (obj.options[iCheck].selected)\r\n");
+   $nm_saida->saida("               {\r\n");
+   $nm_saida->saida("                   out_qsearch += (out_qsearch != \"\") ? \"_VLS_\" : \"\";\r\n");
+   $nm_saida->saida("                   out_qsearch += obj.options[iCheck].value;\r\n");
+   $nm_saida->saida("               }\r\n");
+   $nm_saida->saida("           }\r\n");
+   $nm_saida->saida("       }\r\n");
    $nm_saida->saida("       out_qsearch += \"_SCQS_\" + $('#cond_fast_search_f0_' + pos).val();\r\n");
    $nm_saida->saida("       out_qsearch += \"_SCQS_\" + document.getElementById('SC_fast_search_' + pos).value;\r\n");
    $nm_saida->saida("       out_qsearch = out_qsearch.replace(/[+]/g, \"__NM_PLUS__\");\r\n");
