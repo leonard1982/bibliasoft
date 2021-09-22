@@ -217,8 +217,8 @@ class frm_pos_gestionarmaster_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "174314"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210922"; 
+      $this->nm_hr_ult_alt   = "171548"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class frm_pos_gestionarmaster_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_gestionarmaster']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_gestionarmaster']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDQFaDSN7D5BODMzGVcFKDur/HMBODcNmZSFaHANOD5BqHgNKVkJGDuFaDoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1rqDSrYV5FGDEvsHEJGDWFqHINUDcXGDQJwHAveD5JeDMzGVIB/DWJeHMJsHQBqZ1B/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5JeHuzGVIBOV5FYVoJwD9XOZ1F7Z1BeD5JeDMNKZSXeDuFaVoB/D9NwZSFGD1veD5BqHuNODkBOV5F/VoB/D9XOZSB/Z1rYD5NUDErKZSJGH5F/VoB/D9NwZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuNOVIB/HEFYHINUHQBsH9BqD1zGZMBqDEBOHEXeV5FqHINUDcXOZSFUHIrwHQrqDMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUDurGVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsD9FYDQFaZ1N7V5FUHgrwVcrsDWXCVEX7DcJUZ1BODSrYHQFUHgNKZSXeH5FYHIFGHQBiH9BiHArYVWJwHgvsDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmZSFUHIrKD5rqHuBOVcB/DWFYHMFaD9BsZ1BiD1rKV5FGHgNKHArsDuFaVoBOHQNmDQJsD1BeD5NUDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JeHuBYV9FeDuFqDoJsHQBqZ1F7HAN7HQraHgBOHEXeDWXCHIraHQNwH9FUHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoJeD9XsDQFUZ1rwV5JeHuNODkFCH5FqVoJwDcJUH9B/HArYD5JeDEvsHEFiHEFqDoB/D9XsH9X7HArYV5BOHuNOVcBODWFaVoFGD9BiZ1F7HArYD5XGHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiD9BiZkFGDSNOHQBiDENOHErCDuFYVoJeD9NwZSFGDSzGV5XGHuNODkBOHEX7VoFGHQBiZSBqDSrYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiDSvOD5XGHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuNODkBsH5XCHIraD9BiZSB/HAN7V5JsHgveVkJqHEFqDoB/D9JKDQX7D1veHuXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2943,6 +2943,8 @@ if(isset($_POST['cargardocumento']))
 	$vdircliente    = "";
 	$vvalor_propina = 0;
 	$vaplica_propina= "NO";
+	$vorden_compra  = "";
+	$vorden_fecha   = "";
 	
 	$vporcentaje_propina_sugerida = 0;
 
@@ -3004,7 +3006,9 @@ if(isset($_POST['cargardocumento']))
 		    f.porcentaje_propina_sugerida,
 			f.aplica_propina,
 			f.pedido,
-			t.porcentaje_propina_sugerida as pocentaje_propina_cliente
+			t.porcentaje_propina_sugerida as pocentaje_propina_cliente,
+			coalesce(f.orden_compra,'') as orden_compra,
+			coalesce(f.orden_fecha,'') as orden_fecha
 			from 
 			facturaven f 
 			inner join terceros t on f.idcli=t.idtercero 
@@ -3073,6 +3077,9 @@ if(isset($_POST['cargardocumento']))
 			$vvalor_propina = ceil($vvalor_propina);
 			$vvalor_propina = $vvalor_propina*100;
 		}
+		
+		$vorden_compra  = $this->vfactura[0][22];
+		$vorden_fecha   = $this->vfactura[0][23];
 	
 		 
       $nm_select = "select u.grupo from usuarios u where u.tercero='".$this->sc_temp_gidtercero."'"; 
@@ -3140,7 +3147,9 @@ if(isset($_POST['cargardocumento']))
 		"dircliente"     =>$vdircliente,
 		"porcentaje_propina"=>$vporcentaje_propina_sugerida,
 		"valor_propina"  =>$vvalor_propina,
-		"aplica_propina" =>$vaplica_propina
+		"aplica_propina" =>$vaplica_propina,
+		"orden_compra"   =>$vorden_compra,
+		"orden_fecha"    =>$vorden_fecha
 	));
 }
 
@@ -4274,6 +4283,86 @@ if(isset($_POST["cambiarobservacionmaster"]))
          }
          $rf->Close();
       ;
+}
+
+if(isset($_POST["ordendecompra"]))
+{
+	$idfactura   = $_POST['idfactura'];
+	$ordencompra = $_POST['ordencompra'];
+	
+	$sql = "update facturaven set orden_compra='".$ordencompra."' where idfacven='".$idfactura."'";
+	echo $sql;
+	
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+}
+
+if(isset($_POST["ordendecomprafecha"]))
+{
+	$idfactura   = $_POST['idfactura'];
+	$ordenfecha  = $_POST['ordenfecha'];
+	
+	if(!empty($ordenfecha))
+	{
+		$ordenfecha  = date_create($ordenfecha);
+		$ordenfecha  = date_format($ordenfecha,"Y-m-d");
+		
+		$sql = "update facturaven set orden_fecha='".$ordenfecha."' where idfacven='".$idfactura."'";
+		
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}
+	else
+	{
+		$sql = "update facturaven set orden_fecha=NULL where idfacven='".$idfactura."'";
+		
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}
+	
+	echo $sql;
 }
 
 if(isset($_POST["cargardirecciones"]))

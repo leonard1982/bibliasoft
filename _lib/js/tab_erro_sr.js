@@ -24,7 +24,7 @@ Nm_erro = {
   "lang_jscr_mxvl" : "Максимална дужина је прекорачена",
   "lang_jscr_nnum" : "Поље је нумеричко",
   "lang_jscr_nvlf" : "Негативни знак мора бити на левој страни вредности",
-  "lang_jscr_reqr" : "Неопходно поље",
+  "lang_jscr_reqr" : "Obavezno polje",
   "lang_jscr_secd" : "Секунде",
   "lang_jscr_wfix" : "Да ли желите да исправите?"
 };

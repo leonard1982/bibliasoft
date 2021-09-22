@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Üksikasjad";
   $this->Nm_lang['lang_refined_search'] = "Täpsem otsing";
   $this->Nm_lang['lang_summary_search_button'] = "Otsing";
+  $this->Nm_lang['lang_btns_stepava'] = "Järgmine";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Minge järgmise sammu juurde";
+  $this->Nm_lang['lang_btns_stepprev'] = "Eelmine";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Naaske eelmise sammu juurde";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Püsiv riik";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Salvesta rakenduse olek seansi ajal";
   $this->Nm_lang['lang_recur_endon'] = "Lõpeb";

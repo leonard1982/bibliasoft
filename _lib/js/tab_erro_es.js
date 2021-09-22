@@ -1,5 +1,5 @@
 Nm_erro = {
-  "lang_jscr_dcml" : "Decimales",
+  "lang_jscr_dcml" : "Decimaless",
   "lang_jscr_decm" : "Décima de segundo",
   "lang_jscr_hour" : "Hora",
   "lang_jscr_iday" : "Día",
@@ -19,7 +19,7 @@ Nm_erro = {
   "lang_jscr_mnth" : "Mes",
   "lang_jscr_msfr" : "¡Faltó definir un nombre para el formulario!",
   "lang_jscr_mslg" : "Faltó Login;",
-  "lang_jscr_msob" : "¡Faltó definir un nombre para este objeto del Formulario!",
+  "lang_jscr_msob" : "¡Faltó definir un nombre para este objeto del formulario!",
   "lang_jscr_mxdg" : "La cantidad de dígitos superó lo previsto",
   "lang_jscr_mxvl" : "Límite máximo excedido",
   "lang_jscr_nnum" : "¡Campo con datos no numéricos!",

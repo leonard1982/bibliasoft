@@ -261,7 +261,7 @@
   $this->Nm_lang['lang_category_work'] = "工作";
   $this->Nm_lang['lang_error_google_service'] = "Google服务返回的错误";
   $this->Nm_lang['lang_events_order'] = "事件的顺序";
-  $this->Nm_lang['lang_google_error_cert'] = "我们注意到没有配置SSL证书的路径发生错误。请按照本教程来了解如何解决问题： <br /> <a href=https://help.scriptcase.net/portal/en/kb/articles/running-calendar-displays-curl-error-60>https://help.scriptcase.net/portal/en/kb/articles/running-calendar-displays-curl-error-60</a>";
+  $this->Nm_lang['lang_google_error_cert'] = "我们注意到没有配置SSL证书的路径发生错误.";
   $this->Nm_lang['lang_onel_days_frid'] = "F";
   $this->Nm_lang['lang_onel_days_mond'] = "M";
   $this->Nm_lang['lang_onel_days_satd'] = "S";
@@ -312,7 +312,7 @@
   $this->Nm_lang['lang_errm_file_empty'] = "文件为空";
   $this->Nm_lang['lang_errm_file_size'] = "无效的文件大小";
   $this->Nm_lang['lang_errm_file_size_extension'] = "{SC_EXTENSION}类型的文件允许的最大大小为{SC_LIMIT}。";
-  $this->Nm_lang['lang_errm_hacked_key'] = "This Application was generated using a hacked serial key. Please <a href=http://www.scriptcase.net/contact-scriptcase-team/>contact us</a> to solve this issue or <a href=https://www.scriptcase.net/buy-scriptcase/>acquire</a> a valid license key.";
+  $this->Nm_lang['lang_errm_hacked_key'] = "This Application was generated using a hacked serial key. Please <a href=https://superlead.superanium.com/contactus>contact us</a> to solve this issue or <a href=http://superlead.superanium.com/>acquire</a> a valid license.";
   $this->Nm_lang['lang_errm_mu_dragfile_clickable'] = "将文件拖放到此处";
   $this->Nm_lang['lang_errm_mu_dragimg'] = "将文件拖放到此处";
   $this->Nm_lang['lang_errm_mu_dragimg_clickable'] = "单击以上传或拖放文件到此处";
@@ -438,7 +438,7 @@
   $this->Nm_lang['lang_othr_grid_export_email_type_xml'] = "XML";
   $this->Nm_lang['lang_othr_grid_export_email_type_xml_res'] = "XML";
   $this->Nm_lang['lang_othr_grid_titl'] = "报表";
-  $this->Nm_lang['lang_othr_grid_title'] = "报告";
+  $this->Nm_lang['lang_othr_grid_title'] = "清单";
   $this->Nm_lang['lang_othr_groupby_available_fld'] = "可用字段";
   $this->Nm_lang['lang_othr_groupby_axis_x'] = "X轴的字段";
   $this->Nm_lang['lang_othr_groupby_axis_y'] = "Y轴的字段";
@@ -644,13 +644,13 @@
   $this->Nm_lang['lang_errm_muok'] = "还有剩余的上传。之前上传的保存记录会丢弃它。你要继续吗？";
   $this->Nm_lang['lang_errm_mu_complete'] = "上传完成";
   $this->Nm_lang['lang_errm_mu_pending'] = "待上传";
-  $this->Nm_lang['lang_errm_tz'] = "上传功能需要在支持PHP的时区扩展。 <br/> <a href=https://suporte.scriptcase.com.br/index.php?/Knowledgebase/Article/View/69/0/configuring-datetimezone-in-phpini target=_blank >检查它的设置方式。</a> <br/> <a href=http://www.php.net/manual/en/timezones.php target=_blank >支持的时区列表。</a>";
+  $this->Nm_lang['lang_errm_tz'] = "上传功能需要在支持PHP的时区扩展。";
   $this->Nm_lang['lang_active_login'] = "您还没有在系统中注册。 <BR/>联系要求查阅授予系统管理员。";
   $this->Nm_lang['lang_active_mail_message'] = "<p>用户%s 试图访问系统，但他没有被激活！ </p><br/><p>电子邮箱<strong>：%s </strong> </p><p>消息： <br/> %s </p>";
   $this->Nm_lang['lang_act_code_error'] = "无效的激活码！";
   $this->Nm_lang['lang_add'] = "加入";
   $this->Nm_lang['lang_del'] = "删除";
-  $this->Nm_lang['lang_google_recaptcha_error_cert'] = "SSL证书的路径出现错误。没有配置请按照本教程来解决这个问题：<br /><a href=https://suporte.scriptcase.com.br/en-us/article/1116-recaptcha-execution-displays-error-macos</a>";
+  $this->Nm_lang['lang_google_recaptcha_error_cert'] = "SSL证书的路径出现错误。没有配置";
   $this->Nm_lang['lang_lang_modsec_link_social'] = "访问社交网络之一下面链接到您当前的帐户。";
   $this->Nm_lang['lang_list_sync_users'] = "同步用户";
   $this->Nm_lang['lang_list_users_x_groups'] = "组/用户";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "细节";
   $this->Nm_lang['lang_refined_search'] = "精细搜索";
   $this->Nm_lang['lang_summary_search_button'] = "搜索";
+  $this->Nm_lang['lang_btns_stepava'] = "下一个";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "进入下一步";
+  $this->Nm_lang['lang_btns_stepprev'] = "以前的";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "返回上一步";
   $this->Nm_lang['lang_btns_gridsavesession'] = "坚持状态";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "在会话中保存应用程序状态";
   $this->Nm_lang['lang_recur_endon'] = "结束于";
@@ -822,7 +826,7 @@
   $this->Nm_lang['lang_btns_rtff'] = "RTF";
   $this->Nm_lang['lang_btns_rtff_hint'] = "导出RTF";
   $this->Nm_lang['lang_btns_rtrn_hint'] = "返回之前的应用程序";
-  $this->Nm_lang['lang_btns_rtrn_scrp_hint'] = "返回ScriptCase";
+  $this->Nm_lang['lang_btns_rtrn_scrp_hint'] = "返回";
   $this->Nm_lang['lang_btns_rtrv_form'] = "修改";
   $this->Nm_lang['lang_btns_rtrv_form_hint'] = "修改表单数据";
   $this->Nm_lang['lang_btns_rtrv_grid'] = "获取数据";
@@ -1155,7 +1159,7 @@
   $this->Nm_lang['lang_errm_tmeo'] = "记录数超出限制，更改搜索条件。";
   $this->Nm_lang['lang_errm_type_pswd'] = "输入访问密码";
   $this->Nm_lang['lang_errm_ukey'] = "更新数据库时主键错误：";
-  $this->Nm_lang['lang_errm_unth_hwto'] = "开发环境中可关闭安全模式：菜单栏 (选项) - (我的ScriptCase)";
+  $this->Nm_lang['lang_errm_unth_hwto'] = "开发环境中可关闭安全模式：菜单栏 (选项)";
   $this->Nm_lang['lang_errm_unth_user'] = "未授权用户";
   $this->Nm_lang['lang_errm_updt'] = "数据库更新错误";
   $this->Nm_lang['lang_errm_upld'] = "(上传失败)";

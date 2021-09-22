@@ -575,7 +575,7 @@ class grid_facturaven_pos_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['mostra_edit'] = "N";
        }
    }
-   if ($this->Ini->SC_Link_View || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opc_psq'])
+   if ($this->Ini->SC_Link_View || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opc_psq'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_edit'] == 'N'))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['mostra_edit'] = "N";
    }
@@ -771,7 +771,9 @@ if (!isset($_SESSION['gtipo_negocio'])) {$_SESSION['gtipo_negocio'] = "";}
 if (!isset($this->sc_temp_gtipo_negocio)) {$this->sc_temp_gtipo_negocio = (isset($_SESSION['gtipo_negocio'])) ? $_SESSION['gtipo_negocio'] : "";}
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
-  ?>
+  $vfactura = sc_url_library("prj", "factura", "index.php");
+
+?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
 <?php
@@ -3617,7 +3619,7 @@ $nm_saida->saida("}\r\n");
            {
                $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
            }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
@@ -3651,7 +3653,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        }
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] == "pdf" && !$this->Print_All)
@@ -18177,7 +18179,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__cashier_32.png\"  id=\"sc_SC_btn_0_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('frm_pos') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'frm_pos');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__cashier_32.png\"  id=\"sc_SC_btn_0_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('frm_pos') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'frm_pos');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18201,7 +18203,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_into_32.png\"  id=\"sc_Asentar_top\" onClick=\"sc_btn_Asentar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_into_32.png\"  id=\"sc_Asentar_top\" onClick=\"sc_btn_Asentar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18225,7 +18227,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18249,7 +18251,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__garbage_delete_32.png\"  id=\"sc_Eliminar_top\" onClick=\"sc_btn_Eliminar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__garbage_delete_32.png\"  id=\"sc_Eliminar_top\" onClick=\"sc_btn_Eliminar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18280,7 +18282,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__copy_32.png\"  id=\"sc_copiar_documento_como_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_documento_como') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'control_copiar_documento_como');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__copy_32.png\"  id=\"sc_copiar_documento_como_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_documento_como') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'control_copiar_documento_como');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18304,7 +18306,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18343,7 +18345,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_copy_32.png\"  id=\"sc_btn_copiar_rango_top\" onClick=\"sc_btn_btn_copiar_rango();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_copy_32.png\"  id=\"sc_btn_copiar_rango_top\" onClick=\"sc_btn_btn_copiar_rango();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18367,7 +18369,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__mail_forward_all_24.png\"  id=\"sc_btn_reenviar_top\" onClick=\"sc_btn_btn_reenviar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__mail_forward_all_24.png\"  id=\"sc_btn_reenviar_top\" onClick=\"sc_btn_btn_reenviar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18391,7 +18393,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_hka_tech_top\" onClick=\"sc_btn_btn_enviar_hka_tech();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_hka_tech_top\" onClick=\"sc_btn_btn_enviar_hka_tech();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18415,7 +18417,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_top\" onClick=\"sc_btn_btn_pdf();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_top\" onClick=\"sc_btn_btn_pdf();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18446,7 +18448,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__plasma_tv_32.png\"  id=\"sc_btn_calculadora_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_grupos_calculadora') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'blank_grupos_calculadora');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__plasma_tv_32.png\"  id=\"sc_btn_calculadora_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_grupos_calculadora') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'blank_grupos_calculadora');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
           $nm_saida->saida("         </td> \r\n");
@@ -18651,14 +18653,14 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_facturaven_pos_help.txt") && !$this->grid_emb_form)
@@ -19144,7 +19146,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__cashier_32.png\"  id=\"sc_SC_btn_0_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('frm_pos') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'frm_pos');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__cashier_32.png\"  id=\"sc_SC_btn_0_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('frm_pos') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'frm_pos');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19168,7 +19170,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_into_32.png\"  id=\"sc_Asentar_top\" onClick=\"sc_btn_Asentar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_into_32.png\"  id=\"sc_Asentar_top\" onClick=\"sc_btn_Asentar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19192,7 +19194,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19216,7 +19218,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__garbage_delete_32.png\"  id=\"sc_Eliminar_top\" onClick=\"sc_btn_Eliminar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__garbage_delete_32.png\"  id=\"sc_Eliminar_top\" onClick=\"sc_btn_Eliminar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19247,7 +19249,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__copy_32.png\"  id=\"sc_copiar_documento_como_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_documento_como') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'control_copiar_documento_como');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__copy_32.png\"  id=\"sc_copiar_documento_como_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_documento_como') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'control_copiar_documento_como');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19271,7 +19273,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19310,7 +19312,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_copy_32.png\"  id=\"sc_btn_copiar_rango_top\" onClick=\"sc_btn_btn_copiar_rango();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_copy_32.png\"  id=\"sc_btn_copiar_rango_top\" onClick=\"sc_btn_btn_copiar_rango();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19334,7 +19336,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__mail_forward_all_24.png\"  id=\"sc_btn_reenviar_top\" onClick=\"sc_btn_btn_reenviar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__mail_forward_all_24.png\"  id=\"sc_btn_reenviar_top\" onClick=\"sc_btn_btn_reenviar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19358,7 +19360,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_hka_tech_top\" onClick=\"sc_btn_btn_enviar_hka_tech();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_hka_tech_top\" onClick=\"sc_btn_btn_enviar_hka_tech();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19382,7 +19384,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_top\" onClick=\"sc_btn_btn_pdf();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_top\" onClick=\"sc_btn_btn_pdf();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19628,14 +19630,14 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_facturaven_pos_help.txt") && !$this->grid_emb_form)
@@ -19784,7 +19786,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -19834,7 +19837,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['fast_search'][1] == 'eq')
@@ -19936,19 +19940,19 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $lin_obj  = "    <div id=\"div_int_asentada\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('asentada')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_asentada\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('asentada')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_asentada\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('asentada')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_asentada_ck\" name=\"int_search_asentada_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('asentada');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('asentada')\">";
+       $lin_obj .= "              <span id=\"id_expand_asentada\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_asentada\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_asentada_ck\" name=\"int_search_asentada_ck[]\" value=\"\" checked onclick=\"event.stopPropagation(); nm_change_mult_int_search('asentada');\">";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['int_search_label']['asentada'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_asentada\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','asentada', '', 'asentada', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_asentada\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','asentada', '', 'asentada', '')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -20154,19 +20158,19 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $lin_obj  = "    <div id=\"div_int_vendedor\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('vendedor')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_vendedor\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('vendedor')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_vendedor\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('vendedor')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_vendedor_ck\" name=\"int_search_vendedor_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('vendedor');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('vendedor')\">";
+       $lin_obj .= "              <span id=\"id_expand_vendedor\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_vendedor\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_vendedor_ck\" name=\"int_search_vendedor_ck[]\" value=\"\" checked onclick=\"event.stopPropagation(); nm_change_mult_int_search('vendedor');\">";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['int_search_label']['vendedor'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_vendedor\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','vendedor', '', 'vendedor', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_vendedor\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','vendedor', '', 'vendedor', '')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -20371,19 +20375,19 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $lin_obj  = "    <div id=\"div_int_idcli\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('idcli')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_idcli\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('idcli')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_idcli\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('idcli')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_idcli_ck\" name=\"int_search_idcli_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('idcli');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('idcli')\">";
+       $lin_obj .= "              <span id=\"id_expand_idcli\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_idcli\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_idcli_ck\" name=\"int_search_idcli_ck[]\" value=\"\" checked onclick=\"event.stopPropagation(); nm_change_mult_int_search('idcli');\">";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['int_search_label']['idcli'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_idcli\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','idcli', '', 'idcli', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_idcli\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','idcli', '', 'idcli', '')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -20787,6 +20791,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $nm_saida->saida("             obj_check[i].checked = ckeck;\r\n");
        $nm_saida->saida("         }\r\n");
        $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("    \r\n");
        $nm_saida->saida("     $( document ).ready(function() {\r\n");
        $nm_saida->saida("        adjustMobile();\r\n");
        $nm_saida->saida("    });\r\n");

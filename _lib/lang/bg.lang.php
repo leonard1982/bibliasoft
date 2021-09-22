@@ -6,7 +6,7 @@
   $this->Nm_lang['lang_log_creator'] = "Създател";
   $this->Nm_lang['lang_log_date_insert'] = "Дата на вграждане";
   $this->Nm_lang['lang_log_description'] = "Описание";
-  $this->Nm_lang['lang_log_id'] = "ID";
+  $this->Nm_lang['lang_log_id'] = "ИД";
   $this->Nm_lang['lang_log_ip'] = "IP адрес";
   $this->Nm_lang['lang_log_title'] = "Системен журнал";
   $this->Nm_lang['lang_log_updates'] = "Актуализации";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Подробности";
   $this->Nm_lang['lang_refined_search'] = "Рафинирано търсене";
   $this->Nm_lang['lang_summary_search_button'] = "Търсене";
+  $this->Nm_lang['lang_btns_stepava'] = "Следващия";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Отидете на следващата стъпка";
+  $this->Nm_lang['lang_btns_stepprev'] = "Предишен";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Върнете се към предишната стъпка";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Персистираща държава";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Запазване на състоянието на приложението в сесия";
   $this->Nm_lang['lang_recur_endon'] = "Завършва в";

@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "तपशील";
   $this->Nm_lang['lang_refined_search'] = "परिष्कृत शोध";
   $this->Nm_lang['lang_summary_search_button'] = "शोधा";
+  $this->Nm_lang['lang_btns_stepava'] = "पुढे";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "पुढील चरणावर जा";
+  $this->Nm_lang['lang_btns_stepprev'] = "मागील";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "मागील चरणात परत या";
   $this->Nm_lang['lang_btns_gridsavesession'] = "कायम रहा";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "सत्रात अॅप स्थिती जतन करा";
   $this->Nm_lang['lang_recur_endon'] = "मध्ये समाप्त होतो";

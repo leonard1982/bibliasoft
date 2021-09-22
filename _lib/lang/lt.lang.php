@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Išsami informacija";
   $this->Nm_lang['lang_refined_search'] = "Patobulinta paieška";
   $this->Nm_lang['lang_summary_search_button'] = "Paieška";
+  $this->Nm_lang['lang_btns_stepava'] = "Kitas";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Pereikite prie kito veiksmo";
+  $this->Nm_lang['lang_btns_stepprev'] = "Ankstesnis";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Grįžti į ankstesnį veiksmą";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Išsilaikiusi valstybė";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Išsaugoti programos būseną sesijoje";
   $this->Nm_lang['lang_recur_endon'] = "Baigiasi";

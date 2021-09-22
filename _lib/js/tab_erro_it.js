@@ -6,7 +6,7 @@ Nm_erro = {
   "lang_jscr_intg" : "Numeri interi e",
   "lang_jscr_ivcr" : "Numero di carta di credito non valido",
   "lang_jscr_ivdt" : "Dati non validi:",
-  "lang_jscr_ivem" : "E-mail non valido",
+  "lang_jscr_ivem" : "E-mail non valida",
   "lang_jscr_ivnb" : "Numero intero non valido",
   "lang_jscr_ivtm" : "Ora non valida:",
   "lang_jscr_ivv2" : "Dati non validi:",

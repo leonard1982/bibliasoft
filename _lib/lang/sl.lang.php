@@ -62,10 +62,10 @@
   $this->Nm_lang['lang_btns_bpassfld_up_hint'] = "Premik navzgor polje";
   $this->Nm_lang['lang_btns_cancel_summary'] = "Preklic";
   $this->Nm_lang['lang_btns_chart_back'] = "Pojdi nazaj";
-  $this->Nm_lang['lang_btns_clean_summary_all_hint'] = "čisto";
-  $this->Nm_lang['lang_btns_clean_summary_field'] = "Clean";
-  $this->Nm_lang['lang_btns_clean_summary_field_hint'] = "čisto";
-  $this->Nm_lang['lang_btns_clear'] = "Čisto";
+  $this->Nm_lang['lang_btns_clean_summary_all_hint'] = "Počisti filtre";
+  $this->Nm_lang['lang_btns_clean_summary_field'] = "Počisti";
+  $this->Nm_lang['lang_btns_clean_summary_field_hint'] = "Počisti filtre";
+  $this->Nm_lang['lang_btns_clear'] = "Počisti";
   $this->Nm_lang['lang_btns_clear_hint'] = "Brisanje podpisa";
   $this->Nm_lang['lang_btns_ctarea'] = "Področje";
   $this->Nm_lang['lang_btns_ctarea_hint'] = "Območje Chart";
@@ -133,7 +133,7 @@
   $this->Nm_lang['lang_btns_mdtl_neww_hint'] = "Dodaj novi";
   $this->Nm_lang['lang_btns_menu'] = "Meni";
   $this->Nm_lang['lang_btns_menu_hint'] = "Odprite menu aplikacijo";
-  $this->Nm_lang['lang_btns_multiselect'] = "VečIzbirno";
+  $this->Nm_lang['lang_btns_multiselect'] = "Več opcij";
   $this->Nm_lang['lang_btns_multiselect_hint'] = "Izberite več zapisov";
   $this->Nm_lang['lang_btns_ok_summary'] = "Ok";
   $this->Nm_lang['lang_btns_ok_summary_hint'] = "Ok";
@@ -149,7 +149,7 @@
   $this->Nm_lang['lang_btns_selected_summary'] = "Izbrano";
   $this->Nm_lang['lang_btns_settings'] = "Nastavitve";
   $this->Nm_lang['lang_btns_smry_msge_avgt'] = "Povp";
-  $this->Nm_lang['lang_btns_smry_msge_count'] = "Count";
+  $this->Nm_lang['lang_btns_smry_msge_count'] = "Število";
   $this->Nm_lang['lang_btns_smry_msge_maxm'] = "Max";
   $this->Nm_lang['lang_btns_smry_msge_mint'] = "Min";
   $this->Nm_lang['lang_btns_smry_msge_sdev'] = "Standardni odklon";
@@ -299,7 +299,7 @@
   $this->Nm_lang['lang_autocomp_notfound'] = "Ni zadetkov";
   $this->Nm_lang['lang_autocomp_searching'] = "Iskanje ...";
   $this->Nm_lang['lang_autocomp_tooshort'] = "Med %d ali več znakov";
-  $this->Nm_lang['lang_btns_clean_summary_all'] = "Clean";
+  $this->Nm_lang['lang_btns_clean_summary_all'] = "Počisti";
   $this->Nm_lang['lang_btns_email_json'] = "JSON (e-pošta)";
   $this->Nm_lang['lang_btns_email_json_hint'] = "Datoteko JSON pošljite po e-pošti";
   $this->Nm_lang['lang_btns_export_finished'] = "Dokončanje izvoza datoteke.";
@@ -327,7 +327,7 @@
   $this->Nm_lang['lang_export_title'] = "Izvozi nastavitve";
   $this->Nm_lang['lang_groupby_break_page_pdf'] = "Polja za prelom strani";
   $this->Nm_lang['lang_inherit_label'] = "Uporabite oznako namesto imena polja";
-  $this->Nm_lang['lang_msgs_totl'] = "Grand Povzetek";
+  $this->Nm_lang['lang_msgs_totl'] = "Povzetek";
   $this->Nm_lang['lang_othr_ajax_frmd'] = "Posnetek je uspešno izbrisan!";
   $this->Nm_lang['lang_othr_ajax_frmi'] = "Nov zapis je bil uspešno vstavljen!";
   $this->Nm_lang['lang_othr_ajax_frmu'] = "Podatki spremenjeni.";
@@ -468,7 +468,7 @@
   $this->Nm_lang['lang_othr_prtc'] = "Obarvano";
   $this->Nm_lang['lang_othr_qk_watermark'] = "Hitro iskanje";
   $this->Nm_lang['lang_othr_refinedsearch_more_mask'] = "(%s)";
-  $this->Nm_lang['lang_othr_refinedsearch_see_less'] = "- Hide";
+  $this->Nm_lang['lang_othr_refinedsearch_see_less'] = "- Skrij";
   $this->Nm_lang['lang_othr_refinedsearch_see_more'] = "+ Poglej vse";
   $this->Nm_lang['lang_othr_reqr'] = "Zahtevano polje";
   $this->Nm_lang['lang_othr_rows'] = "Zapisov";
@@ -668,7 +668,7 @@
   $this->Nm_lang['lang_sec_logged_fild_sc_session'] = "Session";
   $this->Nm_lang['lang_sended_active_code'] = "Sporočilo o aktivaciji je bilo poslano novemu uporabniku.";
   $this->Nm_lang['lang_send_actcode_newuser'] = "Pozdravljeni, <br/> Prosimo, obiščite to stran, da aktivirate svoj uporabniški račun %s.";
-  $this->Nm_lang['lang_social_login'] = "izredni prijava";
+  $this->Nm_lang['lang_social_login'] = "Alternativna prijava";
   $this->Nm_lang['lang_subject_mail_new_user'] = "Novi registrirani uporabnik";
   $this->Nm_lang['lang_subject_mail_not_active'] = "Zahteva po aktivaciji";
   $this->Nm_lang['lang_subject_new_user'] = "Aktivirajte uporabniški račun";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Podrobnosti";
   $this->Nm_lang['lang_refined_search'] = "Izboljšano iskanje";
   $this->Nm_lang['lang_summary_search_button'] = "Iskanje";
+  $this->Nm_lang['lang_btns_stepava'] = "Naslednji";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Pojdite na naslednji korak";
+  $this->Nm_lang['lang_btns_stepprev'] = "Prejšnji";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Vrnitev na prejšnji korak";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Vztrajati država";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Shrani stanje aplikacije v seji";
   $this->Nm_lang['lang_recur_endon'] = "Konča se";
@@ -735,7 +739,7 @@
   $this->Nm_lang['lang_btns_colr_updt_hint'] = "Shrani spremembe";
   $this->Nm_lang['lang_btns_copy'] = "Kopiraj";
   $this->Nm_lang['lang_btns_copy_hint'] = "Kopiranje podatkov v novi zapis";
-  $this->Nm_lang['lang_btns_cptc_rfim'] = "Osveži";
+  $this->Nm_lang['lang_btns_cptc_rfim'] = "Shrani";
   $this->Nm_lang['lang_btns_cptc_rfim_hint'] = "Osveži sliko";
   $this->Nm_lang['lang_btns_csvf'] = "CSV";
   $this->Nm_lang['lang_btns_csvf_hint'] = "Izvoz v CSV datoteko";
@@ -787,14 +791,14 @@
   $this->Nm_lang['lang_btns_mdtl_inst'] = "Dodaj";
   $this->Nm_lang['lang_btns_mdtl_inst_hint'] = "Vstavi to vrstico";
   $this->Nm_lang['lang_btns_mdtl_updt'] = "Shrani";
-  $this->Nm_lang['lang_btns_mdtl_updt_hint'] = "Osveži to vrstico";
+  $this->Nm_lang['lang_btns_mdtl_updt_hint'] = "Shrani to vrstico";
   $this->Nm_lang['lang_btns_menu_rtrn_hint'] = "Vrni se na razvojno okolje";
   $this->Nm_lang['lang_btns_mess_clse'] = "Zapri";
   $this->Nm_lang['lang_btns_mess_clse_hint'] = "Zapri";
   $this->Nm_lang['lang_btns_mode_prnt_hint'] = "Natisni";
   $this->Nm_lang['lang_btns_newn_hint'] = "Odpri nove zapise";
   $this->Nm_lang['lang_btns_neww'] = "Dodaj novega";
-  $this->Nm_lang['lang_btns_neww_hint'] = "Dodaj novega";
+  $this->Nm_lang['lang_btns_neww_hint'] = "Dodaj novi zapis";
   $this->Nm_lang['lang_btns_next'] = "Naslednji";
   $this->Nm_lang['lang_btns_next_hint'] = "Premik na naslednjega";
   $this->Nm_lang['lang_btns_next_page'] = "Naslednji";
@@ -853,8 +857,8 @@
   $this->Nm_lang['lang_btns_srch_mtmf_hint'] = "Iskanje postavk";
   $this->Nm_lang['lang_btns_srgb'] = "RGB";
   $this->Nm_lang['lang_btns_srgb_hint'] = "Izberi barve";
-  $this->Nm_lang['lang_btns_updt'] = "Osveži";
-  $this->Nm_lang['lang_btns_updt_hint'] = "Osveži zapis";
+  $this->Nm_lang['lang_btns_updt'] = "Shrani";
+  $this->Nm_lang['lang_btns_updt_hint'] = "Shrani zapis";
   $this->Nm_lang['lang_btns_view_chrt_hint'] = "Prikaz grafa";
   $this->Nm_lang['lang_btns_view_dtai_hint'] = "Prikaži stran s podrobnostmi";
   $this->Nm_lang['lang_btns_word'] = "WORD";
@@ -1167,7 +1171,7 @@
   $this->Nm_lang['lang_list_apps_x_groups'] = "Skupine / Aplikacije";
   $this->Nm_lang['lang_list_apps_x_users'] = "Uporabniki / Aplikacije";
   $this->Nm_lang['lang_list_groups'] = "Skupine";
-  $this->Nm_lang['lang_list_sync_apps'] = "Sinhroniziraj Aplikacije";
+  $this->Nm_lang['lang_list_sync_apps'] = "Sinhroniziraj aplikacije";
   $this->Nm_lang['lang_list_users'] = "Uporabniki";
   $this->Nm_lang['lang_list_users_groups'] = "Uporabniki / skupine";
   $this->Nm_lang['lang_login_fail'] = "Nekdo se je poskušal prijaviti kot uporabnik";
@@ -1194,8 +1198,8 @@
   $this->Nm_lang['lang_sec_priv_update'] = "Privilegij, da posodobitev";
   $this->Nm_lang['lang_sec_users_fild_activation_code'] = "Aktivacijska koda";
   $this->Nm_lang['lang_sec_users_fild_active'] = "Aktivna";
-  $this->Nm_lang['lang_sec_users_fild_email'] = "Email";
-  $this->Nm_lang['lang_sec_users_fild_login'] = "Uporabnik";
+  $this->Nm_lang['lang_sec_users_fild_email'] = "E-mail";
+  $this->Nm_lang['lang_sec_users_fild_login'] = "Prijava";
   $this->Nm_lang['lang_sec_users_fild_name'] = "Ime";
   $this->Nm_lang['lang_sec_users_fild_priv_admin'] = "Administrator";
   $this->Nm_lang['lang_sec_users_fild_pswd'] = "Geslo";
@@ -1203,7 +1207,7 @@
   $this->Nm_lang['lang_send_activation_code'] = "Pošlji aktivacijsko kodo na email :";
   $this->Nm_lang['lang_send_act_code'] = "Pozdravljeni, <br/> Zahtevali ste obnovo gesla. Dostop do povezave, za ustvarjanje novega gesla.";
   $this->Nm_lang['lang_send_mail_admin'] = "Nove informacije o uporabniku je bilo poslano na admin";
-  $this->Nm_lang['lang_send_new_pswd'] = "Zahtevali ste novo geslo. <br/> Novo geslo je:";
+  $this->Nm_lang['lang_send_new_pswd'] = "Zahtevali ste novo geslo. <br/> Novo geslo je:   ";
   $this->Nm_lang['lang_send_pswd'] = "Zahtevali ste, da si opomore gesla. Vaše geslo je:";
   $this->Nm_lang['lang_subject_mail'] = "Pridobi pozabljeno geslo";
   $this->Nm_lang['lang_syncronized_apps'] = "Aplikacije sinhronizirane";

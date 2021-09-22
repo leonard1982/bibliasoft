@@ -36,7 +36,7 @@
   $this->Nm_lang['lang_jscr_mxvl'] = "Максимална дужина је прекорачена";
   $this->Nm_lang['lang_jscr_nnum'] = "Поље је нумеричко";
   $this->Nm_lang['lang_jscr_nvlf'] = "Негативни знак мора бити на левој страни вредности";
-  $this->Nm_lang['lang_jscr_reqr'] = "Неопходно поље";
+  $this->Nm_lang['lang_jscr_reqr'] = "Obavezno polje";
   $this->Nm_lang['lang_jscr_secd'] = "Секунде";
   $this->Nm_lang['lang_jscr_wfix'] = "Да ли желите да исправите?";
   $this->Nm_lang['ang_btns_smry_msge_mint'] = "Минимум";
@@ -65,7 +65,7 @@
   $this->Nm_lang['lang_btns_clean_summary_all_hint'] = "Чист";
   $this->Nm_lang['lang_btns_clean_summary_field'] = "Чист";
   $this->Nm_lang['lang_btns_clean_summary_field_hint'] = "Чист";
-  $this->Nm_lang['lang_btns_clear'] = "Чист";
+  $this->Nm_lang['lang_btns_clear'] = "Обриши";
   $this->Nm_lang['lang_btns_clear_hint'] = "Брисање потписа";
   $this->Nm_lang['lang_btns_ctarea'] = "Област";
   $this->Nm_lang['lang_btns_ctarea_hint'] = "Површина Графикон";
@@ -133,7 +133,7 @@
   $this->Nm_lang['lang_btns_mdtl_neww_hint'] = "Додај ново";
   $this->Nm_lang['lang_btns_menu'] = "Мену";
   $this->Nm_lang['lang_btns_menu_hint'] = "Апликација Отворите мени";
-  $this->Nm_lang['lang_btns_multiselect'] = "Мултиселецт";
+  $this->Nm_lang['lang_btns_multiselect'] = "Više opcija";
   $this->Nm_lang['lang_btns_multiselect_hint'] = "Изаберите више евиденције";
   $this->Nm_lang['lang_btns_ok_summary'] = "Ok";
   $this->Nm_lang['lang_btns_ok_summary_hint'] = "Ok";
@@ -470,7 +470,7 @@
   $this->Nm_lang['lang_othr_refinedsearch_more_mask'] = "(%s)";
   $this->Nm_lang['lang_othr_refinedsearch_see_less'] = "- Хиде";
   $this->Nm_lang['lang_othr_refinedsearch_see_more'] = "+ Види све";
-  $this->Nm_lang['lang_othr_reqr'] = "Неопходно поље";
+  $this->Nm_lang['lang_othr_reqr'] = "Obavezno polje";
   $this->Nm_lang['lang_othr_rows'] = "Записи";
   $this->Nm_lang['lang_othr_rtff_msg1'] = "RTF фајл је креиран код:";
   $this->Nm_lang['lang_othr_rtff_msg2'] = "Кликните на линк да бисте га видели";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Детаљи";
   $this->Nm_lang['lang_refined_search'] = "Префињена претрага";
   $this->Nm_lang['lang_summary_search_button'] = "Претрага";
+  $this->Nm_lang['lang_btns_stepava'] = "Следећи";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Пређите на следећи корак";
+  $this->Nm_lang['lang_btns_stepprev'] = "Претходна";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Вратите се на претходни корак";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Упорна држава";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Сачувајте стање апликације у сесији";
   $this->Nm_lang['lang_recur_endon'] = "Завршава";
@@ -732,7 +736,7 @@
   $this->Nm_lang['lang_btns_cncl_hint'] = "Откажи";
   $this->Nm_lang['lang_btns_cncl_prnt_hint'] = "Откажи штампање";
   $this->Nm_lang['lang_btns_colr_cncl_hint'] = "Откажи промене";
-  $this->Nm_lang['lang_btns_colr_updt_hint'] = "Сачувај промене";
+  $this->Nm_lang['lang_btns_colr_updt_hint'] = "Spremi promjene";
   $this->Nm_lang['lang_btns_copy'] = "Копирај";
   $this->Nm_lang['lang_btns_copy_hint'] = "Копирај податке записа у нови запис";
   $this->Nm_lang['lang_btns_cptc_rfim'] = "Освежи";
@@ -771,7 +775,7 @@
   $this->Nm_lang['lang_btns_jump'] = "Иди на";
   $this->Nm_lang['lang_btns_jump_hint'] = "Иди на линију";
   $this->Nm_lang['lang_btns_lang'] = "Језик";
-  $this->Nm_lang['lang_btns_lang_hint'] = "Изабери језик";
+  $this->Nm_lang['lang_btns_lang_hint'] = "Odaberite jezik";
   $this->Nm_lang['lang_btns_last'] = "Последњи";
   $this->Nm_lang['lang_btns_last_hint'] = "Помери на последње";
   $this->Nm_lang['lang_btns_last_page'] = "Последњи";
@@ -1116,7 +1120,7 @@
   $this->Nm_lang['lang_pdff_wdth'] = "Резолуција странице у пикселима";
   $this->Nm_lang['lang_pdff_wrtg'] = "Страна за писање";
   $this->Nm_lang['lang_errm_ajax_data'] = "Неисправни подаци";
-  $this->Nm_lang['lang_errm_ajax_rqrd'] = "Неопходно поље";
+  $this->Nm_lang['lang_errm_ajax_rqrd'] = "Obavezno polje";
   $this->Nm_lang['lang_errm_cfrm_remv'] = "Избриши изабране редове?";
   $this->Nm_lang['lang_errm_cmlb_nfnd'] = "Заједничке библиотеке нису пронађене:";
   $this->Nm_lang['lang_errm_dbas'] = "Приступ бази података";

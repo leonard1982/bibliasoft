@@ -217,8 +217,8 @@ class frm_pos_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "163114"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210917"; 
-      $this->nm_hr_ult_alt   = "112014"; 
+      $this->nm_dt_ult_alt   = "20210922"; 
+      $this->nm_hr_ult_alt   = "171402"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class frm_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZ9F7D1BOV5BOHgrwVcFKDWrmVorqHQNmVINUHArYHQFGDEBeZSJqHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZ1X7D1NaD5BqDEBeHEJGHEFqHMFGDcBiDQFUHAvCV5XGHuvmV9FeDWJeHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBOD9NwH9X7Z1BYV5raHuzGVcFKV5X7VoFGHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgrKHArsDWF/DoBqHQFYDQB/DSBYHQNUHgrKDkFCH5XCHIF7DcNwVIJsHIveHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDuFqHIFUHQNmZSFaD1rKHuFUDEvsVkXeDWXCHIX7DcBwDQFGHAveHQJwDMvODkBsDWrmVENUD9JmH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDuBqHAN7VWBODMvOVcFKDur/VoFGHQBiZSB/HIrwV5JsDMBYHEJGDurmDoBOHQNwZSBiZ1BYHQJeDMrwV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBqHQJKZ9F7D1BeHQrqHuzGVcFeH5XCVoB/D9BsZ1FGHANOHQBOHgBYHEBUH5X/DoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSFaHAN7V5X7DMNKZSJGDWF/DoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuvmZSNiHEX/DoXGDcNmZ1rqD1rKHQF7DEBOHEXeDuXKZuFaDcBiH9FUZ1rwHuF7HgvOVcBUHEFYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWB3VEFGHQNmVINUHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJwHAN7HQJsHuvmDkBsDur/DoF7D9BiZkFGHAzGZMFaDErKDkXKDWXCVoFaHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2423,6 +2423,24 @@ $this->JS();
 						<textArea id="idobservaciones" style="width:100%;text-transform: uppercase;" rows="5" class='form-control'>
 							
 						</textArea>
+					</th>
+				</tr>
+				
+				<tr>
+					<th>
+						<label>ORDEN COMPRA</label>
+					</th>
+					<th>
+						<label>FECHA ORDEN</label>
+					</th>
+				</tr>
+				<tr>
+					
+					<th>
+						<input id="ordencompra" name="ordencompra" type="text" class="form-control" autocomplete="off"/>
+					</th>
+					<th>
+						<input id="ordenfecha" name="ordenfecha" type="date" class="form-control"/>
 					</th>
 				</tr>
 					
@@ -3952,6 +3970,50 @@ $(document).ready(function(){
 		}
 	});
 	
+	$("#ordencompra").blur(function(){
+		
+		var idfactura     = $("#idfactura").val();
+		var ordencompra   = this.value;
+	
+		if(!$.isEmptyObject(idfactura))
+		{
+			$.post("../frm_pos_gestionarmaster/index.php",{
+			
+				idfactura:idfactura,
+				ordencompra:ordencompra,
+				ordendecompra:""
+	
+			},function(r){
+				
+				console.log("Log establecer orden de compra ");
+				console.log(r);
+	
+			});
+		}
+	});
+	
+	$("#ordenfecha").change(function(){
+		
+		var idfactura     = $("#idfactura").val();
+		var ordenfecha    = this.value;
+	
+		if(!$.isEmptyObject(idfactura))
+		{
+			$.post("../frm_pos_gestionarmaster/index.php",{
+			
+				idfactura:idfactura,
+				ordenfecha:ordenfecha,
+				ordendecomprafecha:""
+	
+			},function(r){
+				
+				console.log("Log establecer la fecha de la orden de compra ");
+				console.log(r);
+	
+			});
+		}
+	});
+	
 	$('#ventapagar').click(function(e){
 		
 		e.preventDefault();
@@ -4377,6 +4439,16 @@ $(document).ready(function(){
 						}
 	
 						$("#idobservaciones").val(obj.observaciones);
+						
+						if(!$.isEmptyObject(obj.orden_compra))
+						{
+						   $("#ordencompra").val(obj.orden_compra);						   
+						}
+						
+						if(!$.isEmptyObject(obj.orden_fecha))
+						{
+						   $("#ordenfecha").val(obj.orden_fecha);						   
+						}
 
 						$.post("../frm_pos_gestionardetalle/index.php",{
 

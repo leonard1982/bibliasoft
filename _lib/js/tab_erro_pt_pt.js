@@ -1,6 +1,6 @@
 Nm_erro = {
   "lang_jscr_dcml" : "Decimais",
-  "lang_jscr_decm" : "Décimo de segundo",
+  "lang_jscr_decm" : "Décimos de segundo",
   "lang_jscr_hour" : "Hora",
   "lang_jscr_iday" : "Dia",
   "lang_jscr_intg" : "Inteiros e",
@@ -15,17 +15,17 @@ Nm_erro = {
   "lang_jscr_maxm_date" : "Data máxima",
   "lang_jscr_minm" : "Min",
   "lang_jscr_minm_date" : "Data mínima",
-  "lang_jscr_mint" : "Minuto",
-  "lang_jscr_mnth" : "Mes",
-  "lang_jscr_msfr" : "Definir um nome para este objeto",
+  "lang_jscr_mint" : "Minutos",
+  "lang_jscr_mnth" : "Mês",
+  "lang_jscr_msfr" : "Definir um nome para o formulário",
   "lang_jscr_mslg" : "Faltou Login;",
-  "lang_jscr_msob" : "Definir um nome para este objeto",
-  "lang_jscr_mxdg" : "Quantidade de dígitos maior do que",
-  "lang_jscr_mxvl" : "Valor maximo ultrapassado",
+  "lang_jscr_msob" : "Definir um nome para este formulário",
+  "lang_jscr_mxdg" : "Foi exedida a quantidade de dígitos",
+  "lang_jscr_mxvl" : "Valor máximo ultrapassado",
   "lang_jscr_nnum" : "Campo com dados não numéricos",
-  "lang_jscr_nvlf" : "O sinal negativo deve ficar a esquerda do valor",
+  "lang_jscr_nvlf" : "O sinal negativo deve ficar à esquerda do valor",
   "lang_jscr_reqr" : "Campos obrigatórios",
-  "lang_jscr_secd" : "Segundo",
+  "lang_jscr_secd" : "Segundos",
   "lang_jscr_wfix" : "- Deseja corrigir?"
 };
 

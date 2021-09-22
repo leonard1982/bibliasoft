@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "詳細";
   $this->Nm_lang['lang_refined_search'] = "洗練された検索";
   $this->Nm_lang['lang_summary_search_button'] = "探す";
+  $this->Nm_lang['lang_btns_stepava'] = "次";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "次のステップに進みます";
+  $this->Nm_lang['lang_btns_stepprev'] = "前";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "前のステップに戻る";
   $this->Nm_lang['lang_btns_gridsavesession'] = "永続状態";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "セッションでアプリの状態を保存する";
   $this->Nm_lang['lang_recur_endon'] = "終わり";

@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "বিশদ";
   $this->Nm_lang['lang_refined_search'] = "পরিশোধিত অনুসন্ধান";
   $this->Nm_lang['lang_summary_search_button'] = "অনুসন্ধান করুন";
+  $this->Nm_lang['lang_btns_stepava'] = "পরবর্তী";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "পরবর্তী ধাপে যাও";
+  $this->Nm_lang['lang_btns_stepprev'] = "আগে";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "আগের পদক্ষেপে ফিরে যান";
   $this->Nm_lang['lang_btns_gridsavesession'] = "স্থায়ী অবস্থা";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "সেশনে অ্যাপের অবস্থা সংরক্ষণ করুন";
   $this->Nm_lang['lang_recur_endon'] = "শেষ হয়";

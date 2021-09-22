@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Detalles";
   $this->Nm_lang['lang_refined_search'] = "Búsqueda refinada";
   $this->Nm_lang['lang_summary_search_button'] = "Buscar";
+  $this->Nm_lang['lang_btns_stepava'] = "Próximo";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Vaya al siguiente paso";
+  $this->Nm_lang['lang_btns_stepprev'] = "Anterior";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Regresar al paso anterior";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Estado persistente";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Guardar el estado de la aplicación en la sesión";
   $this->Nm_lang['lang_recur_endon'] = "Termina en";

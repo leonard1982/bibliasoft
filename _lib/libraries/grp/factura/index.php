@@ -44,6 +44,8 @@ $vdireccion2_cliente = "";
 $vtelefono2_cliente = "";
 $vurlmail = "";
 $vdepartamento = "";
+$vordencompra = "";
+$vordenfecha  = "";
 
 //traemos las librerias
 include_once 'php/baseDeDatos.php';
@@ -109,7 +111,7 @@ if($r1 = mysqli_fetch_array($consulta))
 
 $vsql3 = "select k.qr_base64 as qr,t.nombres,t.documento,t.direccion,t.tel_cel,t.ciudad,concat(r.prefijo,'-',k.numfacven) as numfe,
 k.fechaven,k.fecha_validacion as sn_fe_validacion,k.fechavenc,k.observaciones,total as neto,k.subtotal as vrbase,k.valoriva as vriva,
-k.formapago as fpago,k.cufe,r.prefijo,k.resolucion,r.prefijo_fe,if(k.credito=2,'CONTADO','CRÉDITO') as formapago,(dr.direc) as direccion2,(dr.telefono) as telefono2,(dr.ciudad) as ciudad2, t.urlmail,(select dp.departamento from departamento dp where dp.iddep=dr.iddepar limit 1) as dep
+k.formapago as fpago,k.cufe,r.prefijo,k.resolucion,r.prefijo_fe,if(k.credito=2,'CONTADO','CRÉDITO') as formapago,(dr.direc) as direccion2,(dr.telefono) as telefono2,(dr.ciudad) as ciudad2, t.urlmail,(select dp.departamento from departamento dp where dp.iddep=dr.iddepar limit 1) as dep, coalesce(k.orden_compra,'') as orden_compra, coalesce(k.orden_fecha,'') as orden_fecha
 from facturaven k left join terceros t on k.idcli=t.idtercero left join resdian r on k.resolucion=r.Idres left join direccion dr on dr.iddireccion=k.dircliente where k.idfacven='".$vid."'";
 
 //conexion a tns
@@ -200,6 +202,9 @@ if($r3 = mysqli_fetch_array($consulta3))
 	}
 	$vurlmail = $r3[23];
 	$vdepartamento = $r3[24];
+	
+	$vordencompra = $r3[25];
+	$vordenfecha  = $r3[26];
 	
 	//el email si tiene sucursal
 	$vsql   = "select if((select dr.correo from direccion dr where dr.idter=f.idcli limit 1) is not null and (select dr.correo from direccion dr where dr.idter=f.idcli  limit 1) <> '',(select dr.correo from direccion dr where dr.idter=f.idcli limit 1),t.urlmail) as mail from terceros t inner join facturaven f on f.idcli=t.idtercero  where f.idfacven='".$vid."'";
@@ -824,14 +829,14 @@ function Loading() {
 				<td class="Pad3" style="color:#000; font-size:12px;"><?php if(!empty($vdepartamento)){echo $vdepartamento;} ?></td>
 				</tr>
 				
-				<tr style="visibility:collapse; display:none;">
-				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Order Reference / Orden de Compra Prefijo</td>
+				<tr style="<?php if(empty($vordencompra) and empty($vordenfecha)){ echo 'visibility:collapse;'; } ?>">
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Order de Compra</td>
 				<td class="Pad3" style="color:#000; font-size:12px; border-top: 1px solid #ccc;">
-				[strOrderReferencePrefix]
+				<?php if(!empty($vordencompra)){echo $vordencompra;} ?>
 				</td>
-				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Número</td>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Fecha Orden</td>
 				<td class="Pad3" style="color:#000; font-size:12px; border-top: 1px solid #ccc;">
-				[strOrderReferenceNumber]
+				<?php if(!empty($vordenfecha)){echo $vordenfecha;} ?>
 				</td>
 				</tr>
 				</tbody>

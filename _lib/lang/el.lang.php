@@ -480,7 +480,7 @@
   $this->Nm_lang['lang_othr_msec_capp'] = "Εφαρμογές";
   $this->Nm_lang['lang_othr_msec_cgrp'] = "Ομάδες";
   $this->Nm_lang['lang_othr_msec_cusr'] = "Χρήστες";
-  $this->Nm_lang['lang_othr_msec_cpwd'] = "Αλλαγή συνθιηματικού";
+  $this->Nm_lang['lang_othr_msec_cpwd'] = "Αλλαγή συνθηματικού";
   $this->Nm_lang['lang_othr_msec_sync'] = "Συγχρονισμός";
   $this->Nm_lang['lang_othr_msec_exit'] = "Αποσύνδεση";
   $this->Nm_lang['lang_othr_msec_secr'] = "Ασφάλεια";
@@ -602,7 +602,7 @@
   $this->Nm_lang['lang_othr_valueYYYYMMDDHHII'] = "";
   $this->Nm_lang['lang_othr_valueHHIISS'] = "";
   $this->Nm_lang['lang_othr_valueHH'] = "";
-  $this->Nm_lang['lang_msgs_totl'] = "Μεγάλο Περίληψη";
+  $this->Nm_lang['lang_msgs_totl'] = "Συνολικές γραμμές";
   $this->Nm_lang['lang_othr_cons_title_YYYY'] = "Έτος %s";
   $this->Nm_lang['lang_othr_cons_title_SEMIANNUAL'] = "Εξάμηνο του %s";
   $this->Nm_lang['lang_othr_cons_title_QUARTER'] = "Τρίμηνο του %s";
@@ -728,7 +728,7 @@
   $this->Nm_lang['lang_export_pdf_zip'] = "Δημιουργήστε συμπιεσμένο PDF";
   $this->Nm_lang['lang_btns_export_finished'] = "Ολοκλήρωση εξαγωγής αρχείων.";
   $this->Nm_lang['lang_othr_ajax_frmi'] = "Νέα εγγραφή έχει εισαχθεί με επιτυχία!";
-  $this->Nm_lang['lang_othr_ajax_frmd'] = "Εγγραφή διαγράφηκε με επιτυχία!";
+  $this->Nm_lang['lang_othr_ajax_frmd'] = "Η Εγγραφή διαγράφηκε με επιτυχία!";
   $this->Nm_lang['lang_errm_db_invalid_collation'] = "Η εντολή SQL έχει χαρακτήρες που δεν υποστηρίζονται από τη βάση δεδομένων.";
   $this->Nm_lang['lang_btns_json'] = "JSON";
   $this->Nm_lang['lang_btns_json_hint'] = "Δημιουργήστε το JSON";
@@ -755,7 +755,7 @@
   $this->Nm_lang['lang_srch_last_12mo'] = "Οι τελευταίοι 12 μήνες";
   $this->Nm_lang['lang_srch_last_06mo'] = "Οι τελευταίοι 6 μήνες";
   $this->Nm_lang['lang_srch_last_03mo'] = "Οι τελευταίοι 3 μήνες";
-  $this->Nm_lang['lang_retrieve_pswd'] = "Ανάκτηση συνθιηματικού";
+  $this->Nm_lang['lang_retrieve_pswd'] = "Ανάκτηση συνθηματικού";
   $this->Nm_lang['lang_error_login'] = "ΧΡΗΣΤΗΣ: Λάθος Χρήστης ή Συνθηματικό";
   $this->Nm_lang['lang_error_not_active'] = "ΧΡΗΣΤΗΣ: Ο Χρήστης δεν είναι ενεργός";
   $this->Nm_lang['lang_srch_last_24mo'] = "Τελευταίους 24 μήνες";
@@ -765,7 +765,7 @@
   $this->Nm_lang['lang_srch_and_cond'] = "και";
   $this->Nm_lang['lang_srch_orr_cond'] = "ή";
   $this->Nm_lang['lang_srch_empty'] = "Κενό Περιεχόμενο";
-  $this->Nm_lang['lang_srch_nempty'] = "Μη κενό περιεχόμενο";
+  $this->Nm_lang['lang_srch_nempty'] = "Επιλογή Ολων";
   $this->Nm_lang['lang_search_summary_current_year'] = "Τρέχον έτος";
   $this->Nm_lang['lang_search_summary_last_year'] = "Πέρυσι";
   $this->Nm_lang['lang_search_summary_last_month'] = "Τον προηγούμενο μήνα";
@@ -849,6 +849,10 @@
   $this->Nm_lang['lang_refined_search'] = "Εκλεπτυσμένη αναζήτηση";
   $this->Nm_lang['lang_summary_search_button'] = "Αναζήτηση";
   $this->Nm_lang['lang_details_button'] = "Λεπτομέριες";
+  $this->Nm_lang['lang_btns_stepprev'] = "Προηγούμενος";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Επιστροφή στο προηγούμενο βήμα";
+  $this->Nm_lang['lang_btns_stepava'] = "Επόμενο";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Πηγαίνετε στο επόμενο βήμα";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Επίμονο κράτος";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Αποθήκευση κατάστασης εφαρμογής σε περίοδο σύνδεσης";
   $this->Nm_lang['lang_recur_repeat'] = "Επαναλάβετε το καθένα";
@@ -1056,12 +1060,12 @@
   $this->Nm_lang['lang_srch_ever'] = "Συνεχώς";
   $this->Nm_lang['lang_srch_exac'] = "Ίσο";
   $this->Nm_lang['lang_srch_grtr'] = "Μεγαλύτερο από";
-  $this->Nm_lang['lang_srch_grtr_equl'] = "Μεγαλύτερο και ίσο από";
+  $this->Nm_lang['lang_srch_grtr_equl'] = "Μεγαλύτερο ή ίσο από";
   $this->Nm_lang['lang_srch_head_mesg'] = "Φίλτρο";
   $this->Nm_lang['lang_srch_impt'] = "Λήψη δεδομένων από εξωτερικό κατάλογο";
   $this->Nm_lang['lang_srch_last_mnth'] = "Προηγούμενος μήνας";
   $this->Nm_lang['lang_srch_less'] = "Μικρότερο από";
-  $this->Nm_lang['lang_srch_less_equl'] = "Μικρότερο και ίσο από";
+  $this->Nm_lang['lang_srch_less_equl'] = "Μικρότερο ή ίσο από";
   $this->Nm_lang['lang_srch_like'] = "Περιέχει";
   $this->Nm_lang['lang_srch_lst7'] = "Τελευταίες 7 ημέρες";
   $this->Nm_lang['lang_srch_lstw'] = "Τελευταία εβδομάδα (δευ-κυρ)";
@@ -1129,7 +1133,7 @@
   $this->Nm_lang['lang_errm_dele'] = "Λάθος κατά τη διαγραφή";
   $this->Nm_lang['lang_errm_dele_nfnd'] = "Λάθος κατά τη διαγραφή - Η γραμμή δεν βρέθηκε";
   $this->Nm_lang['lang_errm_empt'] = "Δεν υπάρχουν εγγραφές προς εμφάνιση";
-  $this->Nm_lang['lang_errm_errt'] = "Μήνυμα Λάθους";
+  $this->Nm_lang['lang_errm_errt'] = "Οδηγός εφαρμογής";
   $this->Nm_lang['lang_errm_fkvi'] = "Λάθος βάσης δεδομένων: Η εγγραφή δεν διαγράφηκε";
   $this->Nm_lang['lang_errm_flds'] = "Πεδία με λάθη:";
   $this->Nm_lang['lang_errm_fnfd'] = "Το αρχείο δεν υπάρχει";
@@ -1141,7 +1145,7 @@
   $this->Nm_lang['lang_errm_ivtp'] = "(Μη έγκυρος τύπος)";
   $this->Nm_lang['lang_errm_line'] = "Λάθη στις γραμμές -";
   $this->Nm_lang['lang_errm_mnch'] = "πρέπει να έχουν τουλάχιστον";
-  $this->Nm_lang['lang_errm_mxch'] = "πρέπει να έχουν το μέγιστο";
+  $this->Nm_lang['lang_errm_mxch'] = "Σε αυτό το πεδίο μπορείτε να εισάγετε μέχρι και";
   $this->Nm_lang['lang_errm_nchr'] = "χαρακτήρες";
   $this->Nm_lang['lang_errm_nfdr'] = "Η διαδρομή δεν υπάρχει ή δεν έχουν οριστεί οι σχετικές εξουσιοδοτήσεις";
   $this->Nm_lang['lang_errm_nfnd'] = "Λάθος κατά την ενημέρωση της βάσης δεδομένων - η γραμμή δεν βρέθηκε";
@@ -1153,7 +1157,7 @@
   $this->Nm_lang['lang_errm_size'] = "Απαράδεκτο Μέγεθος";
   $this->Nm_lang['lang_errm_time_outt'] = "Ο χρόνος της εφαρμογής έχει λήξει.";
   $this->Nm_lang['lang_errm_tmeo'] = "Το επιλεγμένο μέγεθος εγγραφής υπερβαίνει τα όρια Αναζητήστε ξανά με περισσότερες λεπτομέρειες";
-  $this->Nm_lang['lang_errm_type_pswd'] = "Παρακαλώ εισάγετε το συνθιηματικό πρόσβασης";
+  $this->Nm_lang['lang_errm_type_pswd'] = "Παρακαλώ εισάγετε το συνθηματικό πρόσβασης";
   $this->Nm_lang['lang_errm_ukey'] = "Λάθος κατά την  ενημέρωση της βάσης δεδομένων- Παραβίαση μοναδικού πεδίου:";
   $this->Nm_lang['lang_errm_unth_hwto'] = "Μπορείτε στο περιβάλλον ανάπτυξης να απενεργοποιήσετε την ασφάλεια . Access the menu (Options) - (My ScriptCase)";
   $this->Nm_lang['lang_errm_unth_user'] = "Μη εξουσιοδοτημένος χρήστης.<br>Καταγραφή δραστηριότητας.";
@@ -1162,8 +1166,8 @@
   $this->Nm_lang['lang_opt_yes'] = "Ναί";
   $this->Nm_lang['lang_opt_no'] = "Όχι";
   $this->Nm_lang['lang_exit'] = "Έξοδος";
-  $this->Nm_lang['lang_error_confirm_pswd'] = "Η επιβεβαίωση συνθιηματικού δεν ταιριάζει";
-  $this->Nm_lang['lang_ret_pass'] = "Ανάκτηση συνθιηματικού";
+  $this->Nm_lang['lang_error_confirm_pswd'] = "Η επιβεβαίωση συνθηματικού δεν ταιριάζει";
+  $this->Nm_lang['lang_ret_pass'] = "Ανάκτηση συνθηματικού";
   $this->Nm_lang['lang_error_pswd'] = "Οι δύο κωδικοί δεν ταιριάζουν";
   $this->Nm_lang['lang_syncronized_apps'] = "Συγχρονισμένες Εφαρμογές";
   $this->Nm_lang['lang_sync_apps'] = "Θέλετε να συγχρονίσετε όλες τις εφαρμογές του συστήματος ;";
@@ -1184,11 +1188,11 @@
   $this->Nm_lang['lang_list_sync_apps'] = "Συγχρονισμός Εφαρμογών";
   $this->Nm_lang['lang_msg_upd_pswd'] = "Ο Κωδικός πρόσβασης ενημερώθηκε επιτυχώς !";
   $this->Nm_lang['lang_old_pswd'] = "Παλαιός κωδικός";
-  $this->Nm_lang['lang_title_change_pswd'] = "Αλλαγή Ανάκτηση συνθιηματικού πρόσβασης";
+  $this->Nm_lang['lang_title_change_pswd'] = "Αλλαγή / Ανάκτηση συνθηματικού πρόσβασης";
   $this->Nm_lang['lang_send_act_code'] = "Γειά σας,<br/><br/>Ζητήσατε να ανακτήσετε το <b>συνθηματικό</b> πρόσβασής σας στην εφαρμογή.<br/>Παρακαλούμε επισκεφθείτε τον παρακάτω σύνδεσμο για να δημιουργήσετε ένα νέο συνθηματικό πρόσβασης.<br/>";
   $this->Nm_lang['lang_mail_sended_ok'] = "Ο κωδικός ενεργοποίησης εστάλει με επιτυχία!\nΠαρακαλώ ελέγξτε τo ηλεκτρονικό σας ταχυδρομείο.";
   $this->Nm_lang['lang_subject_mail'] = "Ανάκτηση Συνθηματικού";
-  $this->Nm_lang['lang_send_pswd'] = "Ζητήσατε να ανακτήσετε το συνθιηματικό πρόσβασης. Το νέο συνθιηματικό πρόσβασής σας είναι:";
+  $this->Nm_lang['lang_send_pswd'] = "Ζητήσατε να ανακτήσετε το συνθηματικό πρόσβασης. Το νέο συνθηματικό πρόσβασής σας είναι:";
   $this->Nm_lang['lang_list_apps_x_users'] = "Χρήστες / Εφαρμογές";
   $this->Nm_lang['lang_sec_users_fild_login'] = "Όνομα Χρήστη";
   $this->Nm_lang['lang_sec_users_fild_pswd'] = "Νέο Συνθηματικό";

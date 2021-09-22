@@ -392,7 +392,7 @@
   $this->Nm_lang['lang_othr_cplt_defn'] = "Seta Cor";
   $this->Nm_lang['lang_othr_cplt_titl'] = "Paleta de Cores";
   $this->Nm_lang['lang_othr_cptc_errm'] = "O texto digitado não confere com a imagem.";
-  $this->Nm_lang['lang_othr_cptc_lbel'] = "Digite os caracteres.";
+  $this->Nm_lang['lang_othr_cptc_lbel'] = "Digite os caracteres";
   $this->Nm_lang['lang_othr_csvf_msg1'] = "O arquivo CSV foi gerado em:";
   $this->Nm_lang['lang_othr_csvf_msg2'] = "Use o link para visualiza-lo.";
   $this->Nm_lang['lang_othr_curr_page'] = "Página Corrente";
@@ -458,7 +458,7 @@
   $this->Nm_lang['lang_othr_msec_cgrp'] = "Grupos";
   $this->Nm_lang['lang_othr_msec_cpwd'] = "Trocar senha";
   $this->Nm_lang['lang_othr_msec_cusr'] = "Usuários";
-  $this->Nm_lang['lang_othr_msec_exit'] = "Logoff";
+  $this->Nm_lang['lang_othr_msec_exit'] = "Sair";
   $this->Nm_lang['lang_othr_msec_secr'] = "Segurança";
   $this->Nm_lang['lang_othr_msec_sync'] = "Sincronizar";
   $this->Nm_lang['lang_othr_nivel'] = "Nível";
@@ -471,7 +471,7 @@
   $this->Nm_lang['lang_othr_prod_xtsc'] = "Em função deste novo release oferecer suporte a múltiplos idiomas, é necessário compilar todo seu projeto para que esteja disponível a função sc_convert_encoding.";
   $this->Nm_lang['lang_othr_prod_xtzp'] = "Devido a uma mudança no mecanismo de geração de arquivos Excel, é necessário que a extensão zip do PHP esteja habilitada. Contacte o administrador do servidor a respeito desta mudança.";
   $this->Nm_lang['lang_othr_prtc'] = "Tipo Cor";
-  $this->Nm_lang['lang_othr_qk_watermark'] = "Busca rápida";
+  $this->Nm_lang['lang_othr_qk_watermark'] = "Busca Rapida";
   $this->Nm_lang['lang_othr_refinedsearch_more_mask'] = "(%s)";
   $this->Nm_lang['lang_othr_refinedsearch_see_less'] = "- Ver Menos";
   $this->Nm_lang['lang_othr_refinedsearch_see_more'] = "+ Ver todos";
@@ -591,7 +591,7 @@
   $this->Nm_lang['lang_pdff_group_general'] = "GERAL";
   $this->Nm_lang['lang_pdff_pcht'] = "Gerando gráfico";
   $this->Nm_lang['lang_sweet_error'] = "Erro ao gerar o PDF";
-  $this->Nm_lang['lang_error_login'] = "Usuário / Senha errado.";
+  $this->Nm_lang['lang_error_login'] = "Usuário ou senha inválidos";
   $this->Nm_lang['lang_error_not_active'] = "Desculpe, mas o usuário não está ativo! Contacte o administrador!";
   $this->Nm_lang['lang_othr_srch_title'] = "Filtro de";
   $this->Nm_lang['lang_quck_srchcond'] = "Condição de pesquisa";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Detalhes";
   $this->Nm_lang['lang_refined_search'] = "Filtro Refinado";
   $this->Nm_lang['lang_summary_search_button'] = "Filtro";
+  $this->Nm_lang['lang_btns_stepava'] = "Avançar";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Avançar para o próximo passo";
+  $this->Nm_lang['lang_btns_stepprev'] = "Retornar";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Retorna para o passo anterior";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Persistir estado";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Salvar o estado da aplicação na sessão";
   $this->Nm_lang['lang_recur_endon'] = "Termina em";
@@ -865,7 +869,7 @@
   $this->Nm_lang['lang_btns_xmlf_hint'] = "Gerar XML";
   $this->Nm_lang['lang_btns_zpcd'] = "CEP";
   $this->Nm_lang['lang_btns_zpcd_hint'] = "Pesquisar CEP";
-  $this->Nm_lang['lang_btns_smry_msge_cnt'] = "Count";
+  $this->Nm_lang['lang_btns_smry_msge_cnt'] = "Contagem";
   $this->Nm_lang['lang_btns_smry_msge_pad'] = "Desvio padrão";
   $this->Nm_lang['lang_btns_srch_edit'] = "Salvar filtro";
   $this->Nm_lang['lang_chrt_angl_vals'] = "Ângulo dos valores";
@@ -1170,7 +1174,7 @@
   $this->Nm_lang['lang_list_sync_apps'] = "Sincronizar aplicações";
   $this->Nm_lang['lang_list_users'] = "Usuários";
   $this->Nm_lang['lang_list_users_groups'] = "Usuários/Grupos";
-  $this->Nm_lang['lang_login_fail'] = "Alguém tentou se logar com o usuário";
+  $this->Nm_lang['lang_login_fail'] = "Alguém tentou se logar com o usuário:";
   $this->Nm_lang['lang_login_ok'] = "Logado no sistema com sucesso!";
   $this->Nm_lang['lang_log_retrieve_pswd'] = "Enviar email para recuperar senha";
   $this->Nm_lang['lang_mail_sended_ok'] = "O e-mail foi enviado com sucesso!";
@@ -1181,7 +1185,7 @@
   $this->Nm_lang['lang_old_pswd'] = "Senha antiga";
   $this->Nm_lang['lang_opt_no'] = "Não";
   $this->Nm_lang['lang_opt_yes'] = "Sim";
-  $this->Nm_lang['lang_ret_pass'] = "Recuperar senha";
+  $this->Nm_lang['lang_ret_pass'] = "Recuperar Senha";
   $this->Nm_lang['lang_sec_app_description'] = "Descrição";
   $this->Nm_lang['lang_sec_app_name'] = "Nome da aplicação";
   $this->Nm_lang['lang_sec_description'] = "Descrição";
@@ -1195,10 +1199,10 @@
   $this->Nm_lang['lang_sec_users_fild_activation_code'] = "Código de ativação";
   $this->Nm_lang['lang_sec_users_fild_active'] = "Ativo";
   $this->Nm_lang['lang_sec_users_fild_email'] = "E-mail";
-  $this->Nm_lang['lang_sec_users_fild_login'] = "Login";
+  $this->Nm_lang['lang_sec_users_fild_login'] = "Usuário:";
   $this->Nm_lang['lang_sec_users_fild_name'] = "Nome";
   $this->Nm_lang['lang_sec_users_fild_priv_admin'] = "Privilégio de administrador";
-  $this->Nm_lang['lang_sec_users_fild_pswd'] = "Senha";
+  $this->Nm_lang['lang_sec_users_fild_pswd'] = "Senha:";
   $this->Nm_lang['lang_sec_users_fild_pswd_confirm'] = "Confirme a senha";
   $this->Nm_lang['lang_send_activation_code'] = "Enviar código de ativação para e-mail:";
   $this->Nm_lang['lang_send_act_code'] = "Olá, <br/>Este e-mail foi enviado porque você solicitou a geração de uma nova senha no nosso sistema.<br/>Copie o link abaixo e cole-o no seu browser ou simplesmente<br/>clique sobre ele para acessar a nossa tela de geração de nova senha.";

@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "వివరాలు";
   $this->Nm_lang['lang_refined_search'] = "శుద్ధి చేసిన శోధన";
   $this->Nm_lang['lang_summary_search_button'] = "వెతకండి";
+  $this->Nm_lang['lang_btns_stepava'] = "తరువాత";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "తదుపరి దశకు వెళ్ళండి";
+  $this->Nm_lang['lang_btns_stepprev'] = "మునుపటి";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "మునుపటి దశకు తిరిగి వెళ్ళు";
   $this->Nm_lang['lang_btns_gridsavesession'] = "స్థిరమైన స్థితి";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "అనువర్తన స్థితిని సెషన్‌లో సేవ్ చేయండి";
   $this->Nm_lang['lang_recur_endon'] = "ముగుస్తుంది";

@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Детали";
   $this->Nm_lang['lang_refined_search'] = "Рафинирано пребарување";
   $this->Nm_lang['lang_summary_search_button'] = "Пребарување";
+  $this->Nm_lang['lang_btns_stepava'] = "Следно";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Одете на следниот чекор";
+  $this->Nm_lang['lang_btns_stepprev'] = "Претходна";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Врати се на претходниот чекор";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Постојана држава";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Зачувајте ја состојбата на апликацијата на сесија";
   $this->Nm_lang['lang_recur_endon'] = "Завршува";

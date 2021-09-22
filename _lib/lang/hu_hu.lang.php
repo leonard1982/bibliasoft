@@ -171,7 +171,7 @@
   $this->Nm_lang['lang_errm_mu_delfile'] = "Állomány törlése";
   $this->Nm_lang['lang_errm_mu_delimg'] = "Kép törlése";
   $this->Nm_lang['lang_errm_mu_dragfile'] = "Húzza be az állományt ide";
-  $this->Nm_lang['lang_error_login_not_exist'] = "Nuncs bejelentkezve!";
+  $this->Nm_lang['lang_error_login_not_exist'] = "Nincs ilyen felhasználó!";
   $this->Nm_lang['lang_export_email_subject'] = "Jelentés";
   $this->Nm_lang['lang_othr_chart_title_HH'] = "Óra: %s";
   $this->Nm_lang['lang_othr_chart_title_YYYYMM'] = "Hónap és év";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Részletek";
   $this->Nm_lang['lang_refined_search'] = "Finomított keresés";
   $this->Nm_lang['lang_summary_search_button'] = "Keresés";
+  $this->Nm_lang['lang_btns_stepava'] = "Következő";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Folytassa a következő lépéssel";
+  $this->Nm_lang['lang_btns_stepprev'] = "Előző";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Vissza az előző lépésre";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Kitartó állam";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Az alkalmazás állapotának mentése a munkamenetben";
   $this->Nm_lang['lang_recur_endon'] = "Véget ér";

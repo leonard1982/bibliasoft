@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "פרטים";
   $this->Nm_lang['lang_refined_search'] = "חיפוש מעודן";
   $this->Nm_lang['lang_summary_search_button'] = "לחפש";
+  $this->Nm_lang['lang_btns_stepava'] = "הַבָּא";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "עבור לשלב הבא";
+  $this->Nm_lang['lang_btns_stepprev'] = "קודם";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "חזור לשלב הקודם";
   $this->Nm_lang['lang_btns_gridsavesession'] = "מדינה מתמשכת";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "שמור את מצב האפליקציה בהפעלה";
   $this->Nm_lang['lang_recur_endon'] = "נגמר ב";

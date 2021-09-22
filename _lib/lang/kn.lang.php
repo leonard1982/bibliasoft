@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "ವಿವರಗಳು";
   $this->Nm_lang['lang_refined_search'] = "ಸಂಸ್ಕರಿಸಿದ ಹುಡುಕಾಟ";
   $this->Nm_lang['lang_summary_search_button'] = "ಹುಡುಕಿ Kannada";
+  $this->Nm_lang['lang_btns_stepava'] = "ಮುಂದೆ";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "ಮುಂದಿನ ಹಂತಕ್ಕೆ ಹೋಗಿ";
+  $this->Nm_lang['lang_btns_stepprev'] = "ಹಿಂದಿನದು";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "ಹಿಂದಿನ ಹಂತಕ್ಕೆ ಹಿಂತಿರುಗಿ";
   $this->Nm_lang['lang_btns_gridsavesession'] = "ನಿರಂತರ ರಾಜ್ಯ";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "ಅಧಿವೇಶನದಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್ ಸ್ಥಿತಿಯನ್ನು ಉಳಿಸಿ";
   $this->Nm_lang['lang_recur_endon'] = "ಕೊನೆಗೊಳ್ಳುತ್ತದೆ";

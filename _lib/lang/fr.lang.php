@@ -1,8 +1,8 @@
 <?php
   $this->Nm_lang = array();
   $this->Nm_lang['Nm_charset']     = "ISO-8859-15";
-  $this->Nm_lang['lang_log_action'] = "action";
-  $this->Nm_lang['lang_log_app'] = "demande";
+  $this->Nm_lang['lang_log_action'] = "Action";
+  $this->Nm_lang['lang_log_app'] = "Demande";
   $this->Nm_lang['lang_log_creator'] = "Créateur";
   $this->Nm_lang['lang_log_date_insert'] = "Insérer la date";
   $this->Nm_lang['lang_log_description'] = "Description";
@@ -62,10 +62,10 @@
   $this->Nm_lang['lang_btns_bpassfld_up_hint'] = "Déplacer le champ vers le haut";
   $this->Nm_lang['lang_btns_cancel_summary'] = "Annuler";
   $this->Nm_lang['lang_btns_chart_back'] = "Retourner";
-  $this->Nm_lang['lang_btns_clean_summary_all_hint'] = "Nettoyer";
-  $this->Nm_lang['lang_btns_clean_summary_field'] = "Nettoyer";
-  $this->Nm_lang['lang_btns_clean_summary_field_hint'] = "Nettoyer";
-  $this->Nm_lang['lang_btns_clear'] = "Nettoyer";
+  $this->Nm_lang['lang_btns_clean_summary_all_hint'] = "Effacer";
+  $this->Nm_lang['lang_btns_clean_summary_field'] = "Effacer";
+  $this->Nm_lang['lang_btns_clean_summary_field_hint'] = "Effacer";
+  $this->Nm_lang['lang_btns_clear'] = "Effacer";
   $this->Nm_lang['lang_btns_clear_hint'] = "Effacer la signature";
   $this->Nm_lang['lang_btns_ctarea'] = "Zone";
   $this->Nm_lang['lang_btns_ctarea_hint'] = "Graphique de zone";
@@ -76,7 +76,7 @@
   $this->Nm_lang['lang_btns_ctline'] = "Ligne";
   $this->Nm_lang['lang_btns_ctline_hint'] = "Graphique linéaire";
   $this->Nm_lang['lang_btns_ctpersonalite'] = "Custom";
-  $this->Nm_lang['lang_btns_ctpersonalite_hint'] = "Personnaliser les options graphiques";
+  $this->Nm_lang['lang_btns_ctpersonalite_hint'] = "Options graphiques";
   $this->Nm_lang['lang_btns_ctpizza'] = "Circulaire";
   $this->Nm_lang['lang_btns_ctpizza_hint'] = "Graphique circulaire";
   $this->Nm_lang['lang_btns_ctstack'] = "Empilé";
@@ -113,7 +113,7 @@
   $this->Nm_lang['lang_btns_gbrl_hint'] = "Sélectionner les critères de regroupement";
   $this->Nm_lang['lang_btns_google'] = "Google+";
   $this->Nm_lang['lang_btns_google_hint'] = "Google+";
-  $this->Nm_lang['lang_btns_gridsave'] = "sauvegarder";
+  $this->Nm_lang['lang_btns_gridsave'] = "Enregistrer";
   $this->Nm_lang['lang_btns_gridsave_hint'] = "Enregistrer l'état actuel de la grille";
   $this->Nm_lang['lang_btns_grpby'] = "Par groupe";
   $this->Nm_lang['lang_btns_grpby_hint'] = "Regroupement dynamique";
@@ -193,7 +193,7 @@
   $this->Nm_lang['lang_chart_drill_down'] = "Drill-down";
   $this->Nm_lang['lang_chart_drill_down_use'] = "Utilisez drill-down au lieu de regroupement en série";
   $this->Nm_lang['lang_chart_level_groupby'] = "Sélectionnez le niveau";
-  $this->Nm_lang['lang_chart_metrics'] = "Métrique";
+  $this->Nm_lang['lang_chart_metrics'] = "Métriques";
   $this->Nm_lang['lang_chart_selected'] = "Sélectionné";
   $this->Nm_lang['lang_chart_sort_asc'] = "Ascendant";
   $this->Nm_lang['lang_chart_sort_desc'] = "Descendant";
@@ -206,7 +206,7 @@
   $this->Nm_lang['lang_chart_type_line'] = "Ligne";
   $this->Nm_lang['lang_chart_type_other'] = "Autres";
   $this->Nm_lang['lang_chart_type_pie'] = "Tarte";
-  $this->Nm_lang['lang_chart_type_stacked'] = "Stacked";
+  $this->Nm_lang['lang_chart_type_stacked'] = "Empilé";
   $this->Nm_lang['lang_chrt_export'] = "Exportation de graphiques";
   $this->Nm_lang['lang_chrt_img_cfg'] = "Configuration graphique";
   $this->Nm_lang['lang_chrt_zip_chrt'] = "Compression de graphiques";
@@ -299,7 +299,7 @@
   $this->Nm_lang['lang_autocomp_notfound'] = "Aucun résultat trouvé";
   $this->Nm_lang['lang_autocomp_searching'] = "Recherche...";
   $this->Nm_lang['lang_autocomp_tooshort'] = "Entre %d caractères ou plus";
-  $this->Nm_lang['lang_btns_clean_summary_all'] = "Nettoyer";
+  $this->Nm_lang['lang_btns_clean_summary_all'] = "Effacer";
   $this->Nm_lang['lang_btns_email_json'] = "JSON (e-mail)";
   $this->Nm_lang['lang_btns_email_json_hint'] = "Envoyer un fichier JSON par e-mail";
   $this->Nm_lang['lang_btns_export_finished'] = "Achèvement de l'exportation du fichier.";
@@ -327,7 +327,7 @@
   $this->Nm_lang['lang_export_title'] = "Paramètres d'exportation";
   $this->Nm_lang['lang_groupby_break_page_pdf'] = "Champs pour le saut de page";
   $this->Nm_lang['lang_inherit_label'] = "Utilisez une étiquette au lieu du nom du champ";
-  $this->Nm_lang['lang_msgs_totl'] = "Grande Résumé";
+  $this->Nm_lang['lang_msgs_totl'] = "Totaux";
   $this->Nm_lang['lang_othr_ajax_frmd'] = "Enregistrement supprimé avec succès!";
   $this->Nm_lang['lang_othr_ajax_frmi'] = "Nouvel enregistrement inséré avec succès!";
   $this->Nm_lang['lang_othr_ajax_frmu'] = "Données modifiées.";
@@ -403,8 +403,8 @@
   $this->Nm_lang['lang_othr_dynamicsearch_title'] = "Recherche dynamique";
   $this->Nm_lang['lang_othr_dynamicsearch_title_outside'] = "Filtre:";
   $this->Nm_lang['lang_othr_file_msge'] = "Fichier a été généré avec succès";
-  $this->Nm_lang['lang_othr_frmi_titl'] = "(Nouvel Enregistrement)";
-  $this->Nm_lang['lang_othr_frmi_title'] = "Nouveau record de";
+  $this->Nm_lang['lang_othr_frmi_titl'] = "(Nouvel enregistrement)";
+  $this->Nm_lang['lang_othr_frmi_title'] = "Nouvel enregistrement de";
   $this->Nm_lang['lang_othr_frmu_nlin'] = "Ligne";
   $this->Nm_lang['lang_othr_frmu_titl'] = "Édition";
   $this->Nm_lang['lang_othr_frmu_title'] = "Mise à jour de";
@@ -534,7 +534,7 @@
   $this->Nm_lang['lang_relative_period_from_now_f'] = "du courant";
   $this->Nm_lang['lang_relative_period_hour'] = "heure";
   $this->Nm_lang['lang_relative_period_quarter_p'] = "trimestres";
-  $this->Nm_lang['lang_relative_period_until_now'] = "avec courant";
+  $this->Nm_lang['lang_relative_period_until_now'] = "à ce jour";
   $this->Nm_lang['lang_relative_period_until_now_f'] = "avec courant";
   $this->Nm_lang['lang_reload_confirm'] = "Les modifications non enregistrées seront perdues. Es-tu sur de vouloir continuer?";
   $this->Nm_lang['lang_remove_container'] = "Êtes-vous sûr de vouloir supprimer ce widget?";
@@ -546,7 +546,7 @@
   $this->Nm_lang['lang_search_last_3_months_today'] = "3 derniers mois à partir d'aujourd'hui";
   $this->Nm_lang['lang_search_next_3_months_current'] = "3 prochains mois à partir de l'actuel";
   $this->Nm_lang['lang_search_next_3_months_today'] = "Prochain 3 mois à partir d'aujourd'hui";
-  $this->Nm_lang['lang_search_summary_current_quarter_today'] = "Le trimestre actuel à ce jour";
+  $this->Nm_lang['lang_search_summary_current_quarter_today'] = "Trimestre en cours à ce jour";
   $this->Nm_lang['lang_search_summary_current_year_today'] = "Année en cours à ce jour";
   $this->Nm_lang['lang_search_summary_last_12hr'] = "12 dernières heures";
   $this->Nm_lang['lang_search_summary_last_24hr'] = "Dernières 24 heures";
@@ -566,7 +566,7 @@
   $this->Nm_lang['lang_search_summary_next_week'] = "Prochaine semaine";
   $this->Nm_lang['lang_search_summary_next_year'] = "L'année prochaine";
   $this->Nm_lang['lang_sec_check_deleted'] = "Vérifiez si l'application est publiée.";
-  $this->Nm_lang['lang_select_file'] = "Choisir le dossier...";
+  $this->Nm_lang['lang_select_file'] = "Choisir un fichier...";
   $this->Nm_lang['lang_start_upload'] = "Commence le téléchargement";
   $this->Nm_lang['lang_tb_close'] = "Fermer";
   $this->Nm_lang['lang_tb_esc'] = "ou touche Echap";
@@ -624,7 +624,7 @@
   $this->Nm_lang['lang_srch_and_cond'] = "et";
   $this->Nm_lang['lang_srch_between_values'] = "jusqu&#39;à";
   $this->Nm_lang['lang_srch_curr_year'] = "Cette année";
-  $this->Nm_lang['lang_srch_empty'] = "Contenu vide";
+  $this->Nm_lang['lang_srch_empty'] = "Aucune donnée";
   $this->Nm_lang['lang_srch_last_03mo'] = "Les 3 derniers mois";
   $this->Nm_lang['lang_srch_last_06mo'] = "Les 6 derniers mois";
   $this->Nm_lang['lang_srch_last_12mo'] = "Les 12 derniers mois";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Détails";
   $this->Nm_lang['lang_refined_search'] = "Recherche raffinée";
   $this->Nm_lang['lang_summary_search_button'] = "Rechercher";
+  $this->Nm_lang['lang_btns_stepava'] = "Suivant";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Passer à l'étape suivante";
+  $this->Nm_lang['lang_btns_stepprev'] = "Précédent";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Revenir à l'étape précédente";
   $this->Nm_lang['lang_btns_gridsavesession'] = "État persistant";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Enregistrer l'état de l'application dans la session";
   $this->Nm_lang['lang_recur_endon'] = "Fini dans";
@@ -990,8 +994,8 @@
   $this->Nm_lang['lang_flsh_chrt_mrks_srst'] = "Ensemble";
   $this->Nm_lang['lang_days_frid'] = "Vendredi";
   $this->Nm_lang['lang_days_mond'] = "Lundi";
-  $this->Nm_lang['lang_days_satd'] = "samedi";
-  $this->Nm_lang['lang_days_sund'] = "dimanche";
+  $this->Nm_lang['lang_days_satd'] = "Samedi";
+  $this->Nm_lang['lang_days_sund'] = "Dimanche";
   $this->Nm_lang['lang_days_thud'] = "Jeudi";
   $this->Nm_lang['lang_days_tued'] = "Mardi";
   $this->Nm_lang['lang_days_wend'] = "Mercredi";
@@ -1045,7 +1049,7 @@
   $this->Nm_lang['lang_srch_betw'] = "Entre";
   $this->Nm_lang['lang_srch_betw_sevr'] = "Dans";
   $this->Nm_lang['lang_srch_butn'] = "Rechercher";
-  $this->Nm_lang['lang_srch_butn_clea'] = "Réintialiser  les champs";
+  $this->Nm_lang['lang_srch_butn_clea'] = "Réintialiser les champs";
   $this->Nm_lang['lang_srch_butn_cncl'] = "Annuler";
   $this->Nm_lang['lang_srch_butn_dele'] = "Supprimer le filtre";
   $this->Nm_lang['lang_srch_butn_exit'] = "Retour";
@@ -1099,7 +1103,7 @@
   $this->Nm_lang['lang_pdff_fnsh'] = "Génération PDF terminée.";
   $this->Nm_lang['lang_pdff_font'] = "Taille de police";
   $this->Nm_lang['lang_pdff_frmt_page'] = "Mise en forme de la page";
-  $this->Nm_lang['lang_pdff_gnrt'] = "Écriture  du fichier PDF";
+  $this->Nm_lang['lang_pdff_gnrt'] = "Écriture du fichier PDF";
   $this->Nm_lang['lang_pdff_htlm_pdf'] = "Créer une page HTML pour générer le PDF";
   $this->Nm_lang['lang_pdff_legl'] = "Légal";
   $this->Nm_lang['lang_pdff_letr'] = "Format 'Lettre'";

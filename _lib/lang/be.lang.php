@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Падрабязнасці";
   $this->Nm_lang['lang_refined_search'] = "Удакладнены пошук";
   $this->Nm_lang['lang_summary_search_button'] = "Пошук";
+  $this->Nm_lang['lang_btns_stepava'] = "Далей";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Перайдзіце да наступнага кроку";
+  $this->Nm_lang['lang_btns_stepprev'] = "Папярэдняя";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Вярнуцца да папярэдняга кроку";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Персісентная дзяржава";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Захаваць стан праграмы ў сесіі";
   $this->Nm_lang['lang_recur_endon'] = "Заканчэнне";

@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Perincian";
   $this->Nm_lang['lang_refined_search'] = "Pencarian yang diperhalusi";
   $this->Nm_lang['lang_summary_search_button'] = "Cari";
+  $this->Nm_lang['lang_btns_stepava'] = "Seterusnya";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Pergi ke langkah seterusnya";
+  $this->Nm_lang['lang_btns_stepprev'] = "Sebelumnya";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Kembali ke langkah sebelumnya";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Keadaan berterusan";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Simpan keadaan aplikasi dalam sesi";
   $this->Nm_lang['lang_recur_endon'] = "Berakhir dalam";
@@ -822,7 +826,7 @@
   $this->Nm_lang['lang_btns_rtff'] = "RTF";
   $this->Nm_lang['lang_btns_rtff_hint'] = "Eksport data ke fail RTF";
   $this->Nm_lang['lang_btns_rtrn_hint'] = "Kembali ke aplikasi sebelumnya";
-  $this->Nm_lang['lang_btns_rtrn_scrp_hint'] = "Kembali ke ScriptCase";
+  $this->Nm_lang['lang_btns_rtrn_scrp_hint'] = "Kembali";
   $this->Nm_lang['lang_btns_rtrv_form'] = "Edit";
   $this->Nm_lang['lang_btns_rtrv_form_hint'] = "Edit senarai data";
   $this->Nm_lang['lang_btns_rtrv_grid'] = "Dapatkan kembali";
@@ -1162,7 +1166,7 @@
   $this->Nm_lang['lang_error_confirm_pswd'] = "Pengesahan kata laluan tidak sepadan";
   $this->Nm_lang['lang_error_old_pswd'] = "Kata laluan asal tidak betul !";
   $this->Nm_lang['lang_error_pswd'] = "Kata laluan dan pengesahan tidak sepadan.";
-  $this->Nm_lang['lang_exit'] = "KELUAR";
+  $this->Nm_lang['lang_exit'] = "Log Keluar";
   $this->Nm_lang['lang_list_apps'] = "Aplikasi";
   $this->Nm_lang['lang_list_apps_x_groups'] = "Kumpulan vs Aplikasi";
   $this->Nm_lang['lang_list_apps_x_users'] = "Pengguna vs Aplikasi";
@@ -1174,7 +1178,7 @@
   $this->Nm_lang['lang_login_ok'] = "Berjaya log masuk ke dalam sistem!";
   $this->Nm_lang['lang_log_retrieve_pswd'] = "Hantar e-mel untuk mendapatkan kembali kata laluan";
   $this->Nm_lang['lang_mail_sended_ok'] = "Email telah berjaya dihantar!";
-  $this->Nm_lang['lang_menu_security'] = "KAWALAN";
+  $this->Nm_lang['lang_menu_security'] = "Keselamatan";
   $this->Nm_lang['lang_msg_upd_pswd'] = "Kata laluan telah berjaya dikemaskini!";
   $this->Nm_lang['lang_new_user'] = "Pengguna baru";
   $this->Nm_lang['lang_new_user_sign_in'] = "Pengguna baru telah didaftarkan di dalam sistem!<br/>  Pengguna: <b>%s</b><br/> E-mail: <b>%s</b>";

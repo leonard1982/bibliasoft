@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "세부";
   $this->Nm_lang['lang_refined_search'] = "세련된 검색";
   $this->Nm_lang['lang_summary_search_button'] = "검색";
+  $this->Nm_lang['lang_btns_stepava'] = "다음";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "다음 단계로 이동";
+  $this->Nm_lang['lang_btns_stepprev'] = "이전";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "이전 단계로 돌아가기";
   $this->Nm_lang['lang_btns_gridsavesession'] = "상태 유지";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "세션에 앱 상태 저장";
   $this->Nm_lang['lang_recur_endon'] = "끝";

@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Подробности";
   $this->Nm_lang['lang_refined_search'] = "Уточненный поиск";
   $this->Nm_lang['lang_summary_search_button'] = "Поиск";
+  $this->Nm_lang['lang_btns_stepava'] = "Следующий";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Перейти к следующему шагу";
+  $this->Nm_lang['lang_btns_stepprev'] = "Предыдущий";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Вернуться к предыдущему шагу";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Сохранять состояние";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Сохранить состояние приложения в сеансе";
   $this->Nm_lang['lang_recur_endon'] = "Заканчивается";
@@ -787,7 +791,7 @@
   $this->Nm_lang['lang_btns_mdtl_inst'] = "добавлять";
   $this->Nm_lang['lang_btns_mdtl_inst_hint'] = "Вставить эту строку";
   $this->Nm_lang['lang_btns_mdtl_updt'] = "Сохранить";
-  $this->Nm_lang['lang_btns_mdtl_updt_hint'] = "Обновить эту строку";
+  $this->Nm_lang['lang_btns_mdtl_updt_hint'] = "Сохранить эту строку";
   $this->Nm_lang['lang_btns_menu_rtrn_hint'] = "Вернуться в среду разработки";
   $this->Nm_lang['lang_btns_mess_clse'] = "близко";
   $this->Nm_lang['lang_btns_mess_clse_hint'] = "близко";

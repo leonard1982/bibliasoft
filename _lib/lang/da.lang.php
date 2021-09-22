@@ -173,9 +173,9 @@
   $this->Nm_lang['lang_errm_mu_dragfile'] = "Træk en fil her hen";
   $this->Nm_lang['lang_error_login_not_exist'] = "Login eksisterer ikke!";
   $this->Nm_lang['lang_export_email_subject'] = "Rapport af";
-  $this->Nm_lang['lang_othr_chart_title_HH'] = "Hour of %s";
+  $this->Nm_lang['lang_othr_chart_title_HH'] = "Timer af %s";
   $this->Nm_lang['lang_othr_chart_title_YYYYMM'] = "Måned og år for";
-  $this->Nm_lang['lang_othr_cons_title_HH'] = "Hour of %s";
+  $this->Nm_lang['lang_othr_cons_title_HH'] = "Timer af %s";
   $this->Nm_lang['lang_othr_cons_title_YYYYMM'] = "Måned og år for %s";
   $this->Nm_lang['lang_othr_detl_title'] = "Detaljer om";
   $this->Nm_lang['lang_per_month'] = "Måned";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "detaljer";
   $this->Nm_lang['lang_refined_search'] = "Raffineret søgning";
   $this->Nm_lang['lang_summary_search_button'] = "Søg";
+  $this->Nm_lang['lang_btns_stepava'] = "Næste";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Gå til næste trin";
+  $this->Nm_lang['lang_btns_stepprev'] = "Tidligere";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Vend tilbage til forrige trin";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Vedvarende tilstand";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Gem apptilstand i session";
   $this->Nm_lang['lang_recur_endon'] = "Slutter i";
@@ -1195,7 +1199,7 @@
   $this->Nm_lang['lang_sec_users_fild_activation_code'] = "Aktiveringskode";
   $this->Nm_lang['lang_sec_users_fild_active'] = "Aktiv";
   $this->Nm_lang['lang_sec_users_fild_email'] = "E-mail";
-  $this->Nm_lang['lang_sec_users_fild_login'] = "Login-navn";
+  $this->Nm_lang['lang_sec_users_fild_login'] = "Login navn";
   $this->Nm_lang['lang_sec_users_fild_name'] = "Navn";
   $this->Nm_lang['lang_sec_users_fild_priv_admin'] = "Administrator-Rettigheder";
   $this->Nm_lang['lang_sec_users_fild_pswd'] = "Adgangskode";

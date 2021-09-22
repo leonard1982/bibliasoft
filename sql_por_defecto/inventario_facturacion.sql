@@ -23537,6 +23537,8 @@ ALTER TABLE `configuraciones` ADD `ver_busqueda_refinada` SET('SI','NO') NOT NUL
 
 ALTER TABLE `configuraciones` ADD `cal_valores_decimales` INT NOT NULL DEFAULT '2' COMMENT 'Inicialmente para factura electrónica y luego irlo incluyendo en el resto de operaciones' AFTER `ver_busqueda_refinada`, ADD `cal_cantidades_decimales` INT NOT NULL DEFAULT '2' COMMENT 'Inicialmente para factura electrónica y luego irlo incluyendo en el resto de operaciones' AFTER `cal_valores_decimales`;
 
+ALTER TABLE `facturaven` ADD `orden_compra` VARCHAR(50) NULL DEFAULT NULL AFTER `monto_utilidad`, ADD `orden_fecha` DATE NULL DEFAULT NULL AFTER `orden_compra`;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

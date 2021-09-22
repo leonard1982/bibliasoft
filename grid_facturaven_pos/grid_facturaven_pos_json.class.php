@@ -293,7 +293,9 @@ if (!isset($_SESSION['gtipo_negocio'])) {$_SESSION['gtipo_negocio'] = "";}
 if (!isset($this->sc_temp_gtipo_negocio)) {$this->sc_temp_gtipo_negocio = (isset($_SESSION['gtipo_negocio'])) ? $_SESSION['gtipo_negocio'] : "";}
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
-  ?>
+  $vfactura = sc_url_library("prj", "factura", "index.php");
+
+?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
 <?php

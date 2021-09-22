@@ -62,10 +62,10 @@
   $this->Nm_lang['lang_btns_bpassfld_up_hint'] = "Pujar camp";
   $this->Nm_lang['lang_btns_cancel_summary'] = "Cancel · lar";
   $this->Nm_lang['lang_btns_chart_back'] = "Torna";
-  $this->Nm_lang['lang_btns_clean_summary_all_hint'] = "net";
-  $this->Nm_lang['lang_btns_clean_summary_field'] = "net";
-  $this->Nm_lang['lang_btns_clean_summary_field_hint'] = "net";
-  $this->Nm_lang['lang_btns_clear'] = "Net";
+  $this->Nm_lang['lang_btns_clean_summary_all_hint'] = "Netejar";
+  $this->Nm_lang['lang_btns_clean_summary_field'] = "Netejar";
+  $this->Nm_lang['lang_btns_clean_summary_field_hint'] = "Netejar";
+  $this->Nm_lang['lang_btns_clear'] = "Netejar";
   $this->Nm_lang['lang_btns_clear_hint'] = "Esborra la signatura";
   $this->Nm_lang['lang_btns_ctarea'] = "Zona";
   $this->Nm_lang['lang_btns_ctarea_hint'] = "Carta d'àrea";
@@ -299,7 +299,7 @@
   $this->Nm_lang['lang_autocomp_notfound'] = "Sense resultats";
   $this->Nm_lang['lang_autocomp_searching'] = "S'està cercant ...";
   $this->Nm_lang['lang_autocomp_tooshort'] = "Entre %d o més caràcters";
-  $this->Nm_lang['lang_btns_clean_summary_all'] = "net";
+  $this->Nm_lang['lang_btns_clean_summary_all'] = "Netejar";
   $this->Nm_lang['lang_btns_email_json'] = "JSON (correu electrònic)";
   $this->Nm_lang['lang_btns_email_json_hint'] = "Enviar fitxer JSON per correu electrònic";
   $this->Nm_lang['lang_btns_export_finished'] = "Finalització de l'exportació de fitxers.";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Detalls";
   $this->Nm_lang['lang_refined_search'] = "Cerca refinada";
   $this->Nm_lang['lang_summary_search_button'] = "Cerca";
+  $this->Nm_lang['lang_btns_stepava'] = "Pròxim";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Aneu al pas següent";
+  $this->Nm_lang['lang_btns_stepprev'] = "Anterior";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Torneu al pas anterior";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Estat persistent";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Desa l'estat de l'aplicació a la sessió";
   $this->Nm_lang['lang_recur_endon'] = "Finalitza";
@@ -1117,7 +1121,7 @@
   $this->Nm_lang['lang_pdff_wrtg'] = "Pàgina d'escriure";
   $this->Nm_lang['lang_errm_ajax_data'] = "Dades invàlides";
   $this->Nm_lang['lang_errm_ajax_rqrd'] = "Camps necessaris";
-  $this->Nm_lang['lang_errm_cfrm_remv'] = "Desitja esborrar les fileres seleccionades?";
+  $this->Nm_lang['lang_errm_cfrm_remv'] = "Desitja esborrar les fileres seleccionades ?";
   $this->Nm_lang['lang_errm_cmlb_nfnd'] = "Biblioteques comuns no trobades:";
   $this->Nm_lang['lang_errm_dbas'] = "Acces a la Base de Dades";
   $this->Nm_lang['lang_errm_dbcn_conn'] = "S'ha produït un error en connectar a la Base de Dades:";
@@ -1148,7 +1152,7 @@
   $this->Nm_lang['lang_errm_nfnd_extr'] = "Error d'accés a la base de dades - registre no trobat";
   $this->Nm_lang['lang_errm_none_imge'] = "No s'ha pogut crear la imatge per al grafic";
   $this->Nm_lang['lang_errm_pkey'] = "Error en afegir - El Registre ja existeix.";
-  $this->Nm_lang['lang_errm_remv'] = "Realment desitja esborrar el Registre??";
+  $this->Nm_lang['lang_errm_remv'] = "Realment desitja esborrar el Registre ?";
   $this->Nm_lang['lang_errm_reqd'] = "Falten Camps:";
   $this->Nm_lang['lang_errm_size'] = "Mida invàlida";
   $this->Nm_lang['lang_errm_time_outt'] = "L'Aplicació ha superat el límit de temps.";

@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Sīkāka informācija";
   $this->Nm_lang['lang_refined_search'] = "Uzlabota meklēšana";
   $this->Nm_lang['lang_summary_search_button'] = "Meklēt";
+  $this->Nm_lang['lang_btns_stepava'] = "Nākamais";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Pārejiet uz nākamo soli";
+  $this->Nm_lang['lang_btns_stepprev'] = "Iepriekšējais";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Atgriezties pie iepriekšējā soļa";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Pastāvīga valsts";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Saglabāt lietotnes stāvokli sesijā";
   $this->Nm_lang['lang_recur_endon'] = "Beidzas";

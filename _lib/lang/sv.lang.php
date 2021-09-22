@@ -307,7 +307,7 @@
   $this->Nm_lang['lang_btns_json'] = "JSON";
   $this->Nm_lang['lang_btns_json_hint'] = "Generera JSON";
   $this->Nm_lang['lang_errm_ajax_csrf'] = "Den CSRF valideringstoken är inte giltigt.";
-  $this->Nm_lang['lang_errm_api_nfnd'] = "API-profilen inte hittades, kontakta din systemadministratör. API-profil:";
+  $this->Nm_lang['lang_errm_api_nfnd'] = "API-profilen hittades inte, kontakta din systemadministratör. API-profil:";
   $this->Nm_lang['lang_errm_db_invalid_collation'] = "SQL-kommandot har tecken som inte stöds av databasen.";
   $this->Nm_lang['lang_errm_file_empty'] = "Filen är tom";
   $this->Nm_lang['lang_errm_file_size'] = "Ogiltig filstorlek";
@@ -318,7 +318,7 @@
   $this->Nm_lang['lang_errm_mu_dragimg_clickable'] = "Klicka för att ladda upp eller dra en fil och släpp den här";
   $this->Nm_lang['lang_errm_upld_admn'] = "Ett fel uppstod när filen. Kontakta administratören.";
   $this->Nm_lang['lang_error_upload'] = "Det gick inte att ladda upp filer till molnet";
-  $this->Nm_lang['lang_export_email_body'] = "Hej,\nVänligen hitta bifogad med denna e-postrapporten i %s.\n\n\n\nTack och ha en bra dag";
+  $this->Nm_lang['lang_export_email_body'] = "Hej,";
   $this->Nm_lang['lang_export_modules'] = "Välj modulerna";
   $this->Nm_lang['lang_export_mod_chart'] = "Diagram";
   $this->Nm_lang['lang_export_mod_grid'] = "Rutnät";
@@ -327,7 +327,7 @@
   $this->Nm_lang['lang_export_title'] = "Exportera inställningar";
   $this->Nm_lang['lang_groupby_break_page_pdf'] = "Fält för sidbrytning";
   $this->Nm_lang['lang_inherit_label'] = "Använd etikett istället för fältets namn";
-  $this->Nm_lang['lang_msgs_totl'] = "Grand Sammanfattning";
+  $this->Nm_lang['lang_msgs_totl'] = "Totalt";
   $this->Nm_lang['lang_othr_ajax_frmd'] = "Spela in slettet med framgång!";
   $this->Nm_lang['lang_othr_ajax_frmi'] = "Ny post infördes framgångsrikt!";
   $this->Nm_lang['lang_othr_ajax_frmu'] = "Data har ändrats.";
@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "Detaljer";
   $this->Nm_lang['lang_refined_search'] = "Förfinad sökning";
   $this->Nm_lang['lang_summary_search_button'] = "Sök";
+  $this->Nm_lang['lang_btns_stepava'] = "Nästa";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "Gå till nästa steg";
+  $this->Nm_lang['lang_btns_stepprev'] = "Tidigare";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "Återgå till föregående steg";
   $this->Nm_lang['lang_btns_gridsavesession'] = "Ihållande stat";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "Spara apptillstånd i sessionen";
   $this->Nm_lang['lang_recur_endon'] = "Slutar i";

@@ -684,6 +684,10 @@
   $this->Nm_lang['lang_details_button'] = "تفصیلات";
   $this->Nm_lang['lang_refined_search'] = "بہتر تلاش";
   $this->Nm_lang['lang_summary_search_button'] = "تلاش کریں";
+  $this->Nm_lang['lang_btns_stepava'] = "اگلے";
+  $this->Nm_lang['lang_btns_stepava_hint'] = "اگلے مرحلے پر جائیں";
+  $this->Nm_lang['lang_btns_stepprev'] = "پچھلا";
+  $this->Nm_lang['lang_btns_stepprev_hint'] = "پچھلے مرحلے پر واپس جائیں";
   $this->Nm_lang['lang_btns_gridsavesession'] = "ریاست رہو";
   $this->Nm_lang['lang_btns_gridsavesession_hint'] = "سیشن میں ایپ کی حالت بچائیں";
   $this->Nm_lang['lang_recur_endon'] = "ختم ہو جاتا ہے";
