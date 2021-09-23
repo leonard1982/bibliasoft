@@ -1,4 +1,10 @@
 <?php
+Shell_exec("cd\ && cd facilweb/htdocs && git add . && git commit -m '.'");
+$vconsulta = Shell_exec("cd\ && cd facilweb/htdocs && git pull");
+//echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
+//echo $vconsulta;
+//echo "</div>";
+
 //traemos las librerias
 include_once 'baseDeDatos.php';
 
@@ -14,12 +20,6 @@ else
 
 if($vso=="escritorio")
 {
-	Shell_exec("cd\ && cd facilweb/htdocs && git add . && git commit -m '.'");
-	$vconsulta = Shell_exec("cd\ && cd facilweb/htdocs && git pull");
-	//echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
-	//echo $vconsulta;
-	//echo "</div>";
-
 	$conexion = new dbMysql("127.0.0.1","root",",.Facilweb2020",'facilweb',3311);
 	$vsql = "select nombre from empresas";
 	$consulta = $conexion->consulta($vsql);

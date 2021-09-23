@@ -8925,13 +8925,4 @@ UPDATE `webservicefe_proveedores` SET `url_api_pdfs` = 'https://www.facilwebnube
 UPDATE `webservicefe_proveedores` SET `url_api_sendmail` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/send-email' WHERE `webservicefe_proveedores`.`proveedor` = 'FACILWEB';
 UPDATE `webservicefe` SET `servidor1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice', `servidor2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note', `servidor_prueba1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice', `servidor_prueba2` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note', `servidor3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note', `servidor_prueba3` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note', `url_api_pdfs` = 'https://www.facilwebnube.com/apidian2021/public/index.php/api/download', `url_api_sendmail` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/send-email' WHERE `webservicefe`.`proveedor` = 'FACILWEB';
 
-
-INSERT IGNORE `usuarios` (`idusuarios`,`creacion`, `usuario`, `password`, `nombre`, `correo`, `telefono`, `tercero`, `resolucion`, `grupo`, `activo`, `ultima_actualizacion`, `grupocomanda`, `nombre_pc`, `nombre_impre`, `sesion_id`, `acceso_inventario`, `acceso_gerencial`, `acceso_restaurante`, `sesion_id_movil`, `banco_movil`, `ubicacion`, `n_equipo`, `serial`, `idbod`, `ocultar_bod`) VALUES
-(999,NOW(), 'facilweb', 'facilweb', 'FACILWEB', 'correo@dominio.com', '', 1, 1, 1, 'S', NOW(), NULL, NULL, NULL, NULL, 'NO', 'NO', 'NO', NULL, 1, 'VENTAS', 'PC', '0000000000', 0, 'SI');
-
-ALTER TABLE `usuarios` CHANGE `grupocomanda` `grupocomanda` INT(11) NULL DEFAULT '0';
-UPDATE `usuarios` SET `banco_movil` = '1' WHERE `usuarios`.`idusuarios` = 1;
-
-UPDATE `usuarios` SET `sesion_id_movil` = NULL;
-
 COMMIT;
