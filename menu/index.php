@@ -811,7 +811,7 @@ $this->nm_bases_vfp       = array("vfp");
 $this->nm_bases_odbc      = array("odbc");
 $this->nm_bases_progress  = array("pdo_progress_odbc", "progress");
 $_SESSION['scriptcase']['sc_num_page'] = 1;
-$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDuBqD1BOVWXGHgrwZSJ3V5FYHIBiDcFYZ1F7D1NaZMJeDMzGHEJqDuFaHIraD9NmH9FUDSBYVWJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiDWXCVoBiHQXODuFaHIrKV5FGHuzGVcBUDuX7VEFGHQBqZ1BOHANOHQFaDErKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBOV5FYDoraD9BsZSFaD1zGV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMJwHQNmZkBiHAzGD5BOHgvsHErsDWFGDoBqHQBiDuFaD1vOV5XGDMvOV9BUDWFYHMJeHQBiZSBOD1vsZMBqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeHgrwVcFiV5X/VEFGDcJUZ1FGHIBeHuFUHgvsHArCDuFYHMBOHQXsDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqDSzGV5JeDMrYVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDErKHEFiDWFqHIX7HQFYDQX7HIrKHQBqHgrKVcFeDWFYHMBqHQNwZ1B/Z1rYHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiZSBiDSNaVWBOHuvmVcFKDur/HMB/HQBsZSBOHIBeHuFGDENOHEBUHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMJwHQNmZkBiHAzGD5BOHgvsHErsDWFGDoBqHQBiDuFaD1vOV5XGDMvOV9BUDWFYHMJeHQBiZSBOD1vsZMBqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBODMNOV9BUDWJeVoraDcJUZ1X7Z1BeHQBiHgrKZSJ3V5FqHIF7DcXGDQX7HABYHuB/DMvsVcFeDWF/HIFUHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5F7HgrKVcBOV5F/VEraHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrwVcFeDWJeHMFGHQXGZSB/HIveD5NUHgNOHENiH5FYDoBqHQJeDQJsHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqDSzGV5BODMrYV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMveHEJqHEFqHMXGD9XsDQFaHIrKV5X7HgvsDkB/Dur/HIF7HQNmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
  $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
 if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['menu']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['menu']['glo_nm_conexao']))
 { 
@@ -4187,6 +4187,21 @@ if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("grid_log") . "/g
         $_SESSION['scriptcase']['sc_apl_seg']['grid_log'] = "on";
     } 
 }
+if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("grid_log_pedidos_borrados") . "/grid_log_pedidos_borrados_ini.txt"))
+{
+    $sc_teste_seg = file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("grid_log_pedidos_borrados") . "/grid_log_pedidos_borrados_ini.txt");
+    if ((!isset($sc_teste_seg[3]) || trim($sc_teste_seg[3]) == "NAO") || (isset($_SESSION['nm_session']['user']['sec']['flag']) && $_SESSION['nm_session']['user']['sec']['flag'] == "N")) 
+    {
+        if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_log_pedidos_borrados']))
+        {
+            $_SESSION['scriptcase']['sc_apl_seg']['grid_log_pedidos_borrados'] = "on";
+        }
+    }
+    if (isset($_SESSION['nm_session']['user']['sec']['flag']) && $_SESSION['nm_session']['user']['sec']['flag'] == "N") 
+    { 
+        $_SESSION['scriptcase']['sc_apl_seg']['grid_log_pedidos_borrados'] = "on";
+    } 
+}
 if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("blank_soporte") . "/blank_soporte_ini.txt"))
 {
     $sc_teste_seg = file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("blank_soporte") . "/blank_soporte_ini.txt");
@@ -5458,45 +5473,50 @@ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[219]
 {
     $nm_var_lab[219] = sc_convert_encoding($nm_var_lab[219], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_lab[220] = "Ayuda";
+ $nm_var_lab[220] = "Pedidos Borrados";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[220]))
 {
     $nm_var_lab[220] = sc_convert_encoding($nm_var_lab[220], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_lab[221] = "Soporte";
+ $nm_var_lab[221] = "Ayuda";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[221]))
 {
     $nm_var_lab[221] = sc_convert_encoding($nm_var_lab[221], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_lab[222] = "Buscar Actualizaciones";
+ $nm_var_lab[222] = "Soporte";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[222]))
 {
     $nm_var_lab[222] = sc_convert_encoding($nm_var_lab[222], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_lab[223] = "Descargar Anydesk";
+ $nm_var_lab[223] = "Buscar Actualizaciones";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[223]))
 {
     $nm_var_lab[223] = sc_convert_encoding($nm_var_lab[223], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_lab[224] = "Acerca de";
+ $nm_var_lab[224] = "Descargar Anydesk";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[224]))
 {
     $nm_var_lab[224] = sc_convert_encoding($nm_var_lab[224], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_lab[225] = "Manual";
+ $nm_var_lab[225] = "Acerca de";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[225]))
 {
     $nm_var_lab[225] = sc_convert_encoding($nm_var_lab[225], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_lab[226] = "";
+ $nm_var_lab[226] = "Manual";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[226]))
 {
     $nm_var_lab[226] = sc_convert_encoding($nm_var_lab[226], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_lab[227] = "Salir";
+ $nm_var_lab[227] = "";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[227]))
 {
     $nm_var_lab[227] = sc_convert_encoding($nm_var_lab[227], $_SESSION['scriptcase']['charset'], "UTF-8");
+}
+ $nm_var_lab[228] = "Salir";
+if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_lab[228]))
+{
+    $nm_var_lab[228] = sc_convert_encoding($nm_var_lab[228], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
  $nm_var_hint[0] = "Clientes, proveedores, empleados...";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[0]))
@@ -6598,27 +6618,27 @@ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[219
 {
     $nm_var_hint[219] = sc_convert_encoding($nm_var_hint[219], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_hint[220] = "";
+ $nm_var_hint[220] = "Pedidos Borrados";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[220]))
 {
     $nm_var_hint[220] = sc_convert_encoding($nm_var_hint[220], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_hint[221] = "Soporte";
+ $nm_var_hint[221] = "";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[221]))
 {
     $nm_var_hint[221] = sc_convert_encoding($nm_var_hint[221], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_hint[222] = "Buscar Actualizaciones";
+ $nm_var_hint[222] = "Soporte";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[222]))
 {
     $nm_var_hint[222] = sc_convert_encoding($nm_var_hint[222], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_hint[223] = "Descargar Anydesk";
+ $nm_var_hint[223] = "Buscar Actualizaciones";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[223]))
 {
     $nm_var_hint[223] = sc_convert_encoding($nm_var_hint[223], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_hint[224] = "";
+ $nm_var_hint[224] = "Descargar Anydesk";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[224]))
 {
     $nm_var_hint[224] = sc_convert_encoding($nm_var_hint[224], $_SESSION['scriptcase']['charset'], "UTF-8");
@@ -6628,15 +6648,20 @@ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[225
 {
     $nm_var_hint[225] = sc_convert_encoding($nm_var_hint[225], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_hint[226] = "Nosotros";
+ $nm_var_hint[226] = "";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[226]))
 {
     $nm_var_hint[226] = sc_convert_encoding($nm_var_hint[226], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
- $nm_var_hint[227] = "SALIR";
+ $nm_var_hint[227] = "Nosotros";
 if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[227]))
 {
     $nm_var_hint[227] = sc_convert_encoding($nm_var_hint[227], $_SESSION['scriptcase']['charset'], "UTF-8");
+}
+ $nm_var_hint[228] = "SALIR";
+if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($nm_var_hint[228]))
+{
+    $nm_var_hint[228] = sc_convert_encoding($nm_var_hint[228], $_SESSION['scriptcase']['charset'], "UTF-8");
 }
 $saida_apl = $_SESSION['scriptcase']['sc_saida_menu'];
 $menu_menuData['data'] .= "item_1|.|" . $nm_var_lab[0] . "||" . $nm_var_hint[0] . "|usr__NM__bg__NM__community_users_12977.png|_self|\n";
@@ -7591,40 +7616,45 @@ if (isset($_SESSION['scriptcase']['sc_apl_seg']['grid_log']) && strtolower($_SES
     $menu_menuData['data'] .= "item_135|..|" . $nm_var_lab[219] . "|menu_form_php.php?sc_item_menu=item_135&sc_apl_menu=grid_log&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[219] . "|scriptcase__NM__ico__NM__user_find_32.png|" . $this->menu_target('_self') . "|" . "\n";
 }
 
-$menu_menuData['data'] .= "item_104|..|" . $nm_var_lab[220] . "||" . $nm_var_hint[220] . "|scriptcase__NM__ico__NM__help2_32.png|_self|\n";
+if (isset($_SESSION['scriptcase']['sc_apl_seg']['grid_log_pedidos_borrados']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['grid_log_pedidos_borrados']) == "on")
+{
+    $menu_menuData['data'] .= "item_257|..|" . $nm_var_lab[220] . "|menu_form_php.php?sc_item_menu=item_257&sc_apl_menu=grid_log_pedidos_borrados&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[220] . "|scriptcase__NM__ico__NM__user_find_32.png|" . $this->menu_target('_self') . "|" . "\n";
+}
+
+$menu_menuData['data'] .= "item_104|..|" . $nm_var_lab[221] . "||" . $nm_var_hint[221] . "|scriptcase__NM__ico__NM__help2_32.png|_self|\n";
 if (isset($_SESSION['scriptcase']['sc_apl_seg']['blank_soporte']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['blank_soporte']) == "on")
 {
-    $menu_menuData['data'] .= "item_155|...|" . $nm_var_lab[221] . "|menu_form_php.php?sc_item_menu=item_155&sc_apl_menu=blank_soporte&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[221] . "|scriptcase__NM__ico__NM__user_headset_32.png|" . $this->menu_target('_self') . "|" . "\n";
+    $menu_menuData['data'] .= "item_155|...|" . $nm_var_lab[222] . "|menu_form_php.php?sc_item_menu=item_155&sc_apl_menu=blank_soporte&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[222] . "|scriptcase__NM__ico__NM__user_headset_32.png|" . $this->menu_target('_self') . "|" . "\n";
 }
 
 if (isset($_SESSION['scriptcase']['sc_apl_seg']['blank_buscar_actualizaciones']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['blank_buscar_actualizaciones']) == "on")
 {
-    $menu_menuData['data'] .= "item_212|...|" . $nm_var_lab[222] . "|menu_form_php.php?sc_item_menu=item_212&sc_apl_menu=blank_buscar_actualizaciones&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[222] . "|scriptcase__NM__ico__NM__download_32.png|" . $this->menu_target('_self') . "|" . "\n";
+    $menu_menuData['data'] .= "item_212|...|" . $nm_var_lab[223] . "|menu_form_php.php?sc_item_menu=item_212&sc_apl_menu=blank_buscar_actualizaciones&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[223] . "|scriptcase__NM__ico__NM__download_32.png|" . $this->menu_target('_self') . "|" . "\n";
 }
 
 if (isset($_SESSION['scriptcase']['sc_apl_seg']['blank_anydesk']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['blank_anydesk']) == "on")
 {
-    $menu_menuData['data'] .= "item_156|...|" . $nm_var_lab[223] . "|menu_form_php.php?sc_item_menu=item_156&sc_apl_menu=blank_anydesk&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[223] . "|grp__NM__ico__NM__fw_ico_anydesk.png|" . $this->menu_target('_self') . "|" . "\n";
+    $menu_menuData['data'] .= "item_156|...|" . $nm_var_lab[224] . "|menu_form_php.php?sc_item_menu=item_156&sc_apl_menu=blank_anydesk&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[224] . "|grp__NM__ico__NM__fw_ico_anydesk.png|" . $this->menu_target('_self') . "|" . "\n";
 }
 
 if (isset($_SESSION['scriptcase']['sc_apl_seg']['blank']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['blank']) == "on")
 {
-    $menu_menuData['data'] .= "item_46|...|" . $nm_var_lab[224] . "|menu_form_php.php?sc_item_menu=item_46&sc_apl_menu=blank&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[224] . "|usr__NM__ico__NM__copyright_icon-icons.com_76791.png|" . $this->menu_target('_self') . "|" . "\n";
+    $menu_menuData['data'] .= "item_46|...|" . $nm_var_lab[225] . "|menu_form_php.php?sc_item_menu=item_46&sc_apl_menu=blank&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[225] . "|usr__NM__ico__NM__copyright_icon-icons.com_76791.png|" . $this->menu_target('_self') . "|" . "\n";
 }
 
 if (isset($_SESSION['scriptcase']['sc_apl_seg']['blank_ayuda']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['blank_ayuda']) == "on")
 {
-    $menu_menuData['data'] .= "item_105|...|" . $nm_var_lab[225] . "|menu_form_php.php?sc_item_menu=item_105&sc_apl_menu=blank_ayuda&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[225] . "|scriptcase__NM__ico__NM__book_blue_find_32.png|" . $this->menu_target('_self') . "|" . "\n";
+    $menu_menuData['data'] .= "item_105|...|" . $nm_var_lab[226] . "|menu_form_php.php?sc_item_menu=item_105&sc_apl_menu=blank_ayuda&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[226] . "|scriptcase__NM__ico__NM__book_blue_find_32.png|" . $this->menu_target('_self') . "|" . "\n";
 }
 
 if (isset($_SESSION['scriptcase']['sc_apl_seg']['blank_slider']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['blank_slider']) == "on")
 {
-    $menu_menuData['data'] .= "item_150|...|" . $nm_var_lab[226] . "|menu_form_php.php?sc_item_menu=item_150&sc_apl_menu=blank_slider&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[226] . "|grp__NM__ico__NM__favicon.ico|" . $this->menu_target('_self') . "|" . "\n";
+    $menu_menuData['data'] .= "item_150|...|" . $nm_var_lab[227] . "|menu_form_php.php?sc_item_menu=item_150&sc_apl_menu=blank_slider&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[227] . "|grp__NM__ico__NM__favicon.ico|" . $this->menu_target('_self') . "|" . "\n";
 }
 
 if (isset($_SESSION['scriptcase']['sc_apl_seg']['blank_fin_sesion']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['blank_fin_sesion']) == "on")
 {
-    $menu_menuData['data'] .= "item_20|.|" . $nm_var_lab[227] . "|menu_form_php.php?sc_item_menu=item_20&sc_apl_menu=blank_fin_sesion&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[227] . "|scriptcase__NM__ico__NM__exit_32.png|" . $this->menu_target('_parent') . "|" . "\n";
+    $menu_menuData['data'] .= "item_20|.|" . $nm_var_lab[228] . "|menu_form_php.php?sc_item_menu=item_20&sc_apl_menu=blank_fin_sesion&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[228] . "|scriptcase__NM__ico__NM__exit_32.png|" . $this->menu_target('_parent') . "|" . "\n";
 }
 
 
@@ -15687,8 +15717,8 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_log']) || strtolower($_SE
     $str_disabled = "Y";
 }
     $str_icon = "scriptcase__NM__ico__NM__user_find_32.png";
-    $icon_aba = "";
-    $icon_aba_inactive = "";
+    $icon_aba = "scriptcase__NM__ico__NM__user_find_32.png";
+    $icon_aba_inactive = "scriptcase__NM__ico__NM__user_find_32.png";
     if(empty($icon_aba) && isset($arr_menuicons['cons']['active']))
     {
         $icon_aba = $arr_menuicons['cons']['active'];
@@ -15717,6 +15747,43 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_log']) || strtolower($_SE
         'icon_color_disabled'     => "",
     );
 $str_disabled = "N";
+$str_link = "menu_form_php.php?sc_item_menu=item_257&sc_apl_menu=grid_log_pedidos_borrados&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "";
+if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_log_pedidos_borrados']) || strtolower($_SESSION['scriptcase']['sc_apl_seg']['grid_log_pedidos_borrados']) != "on")
+{
+    $str_link = "#";
+    $str_disabled = "Y";
+}
+    $str_icon = "scriptcase__NM__ico__NM__user_find_32.png";
+    $icon_aba = "scriptcase__NM__ico__NM__user_find_32.png";
+    $icon_aba_inactive = "scriptcase__NM__ico__NM__user_find_32.png";
+    if(empty($icon_aba) && isset($arr_menuicons['cons']['active']))
+    {
+        $icon_aba = $arr_menuicons['cons']['active'];
+    }
+    if(empty($icon_aba_inactive) && isset($arr_menuicons['cons']['inactive']))
+    {
+        $icon_aba_inactive = $arr_menuicons['cons']['inactive'];
+    }
+    $menu_menuData['data'][] = array(
+        'label'    => "" . $nm_var_lab[220] . "",
+        'level'    => "1",
+        'link'     => $str_link,
+        'hint'     => "" . $nm_var_hint[220] . "",
+        'id'       => "item_257",
+        'icon'     => $str_icon,
+        'icon_aba' => $icon_aba,
+        'icon_aba_inactive' => $icon_aba_inactive,
+        'target'   => " item-target=\"" . $this->menu_target('_self') . "\"",
+        'sc_id'    => "item_257",
+        'disabled' => $str_disabled,
+        'display'     => "text_img",
+        'display_position'=> "text_right",
+        'icon_fa'     => "fas fa-cog",
+        'icon_color'     => "",
+        'icon_color_hover'     => "",
+        'icon_color_disabled'     => "",
+    );
+$str_disabled = "N";
 $str_link = "#";
 $str_icon = "scriptcase__NM__ico__NM__help2_32.png";
 $icon_aba = "";
@@ -15734,10 +15801,10 @@ if($this->force_mobile || ($_SESSION['scriptcase']['device_mobile'] && $_SESSION
 $str_link = "#";
 }
 $menu_menuData['data'][] = array(
-    'label'    => "" . $nm_var_lab[220] . "",
+    'label'    => "" . $nm_var_lab[221] . "",
     'level'    => "1",
     'link'     => $str_link,
-    'hint'     => "" . $nm_var_hint[220] . "",
+    'hint'     => "" . $nm_var_hint[221] . "",
     'id'       => "item_104",
     'icon'     => $str_icon,
     'icon_aba' => $icon_aba,
@@ -15771,10 +15838,10 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['blank_soporte']) || strtolower
         $icon_aba_inactive = $arr_menuicons['blank']['inactive'];
     }
     $menu_menuData['data'][] = array(
-        'label'    => "" . $nm_var_lab[221] . "",
+        'label'    => "" . $nm_var_lab[222] . "",
         'level'    => "2",
         'link'     => $str_link,
-        'hint'     => "" . $nm_var_hint[221] . "",
+        'hint'     => "" . $nm_var_hint[222] . "",
         'id'       => "item_155",
         'icon'     => $str_icon,
         'icon_aba' => $icon_aba,
@@ -15808,10 +15875,10 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['blank_buscar_actualizaciones']
         $icon_aba_inactive = $arr_menuicons['blank']['inactive'];
     }
     $menu_menuData['data'][] = array(
-        'label'    => "" . $nm_var_lab[222] . "",
+        'label'    => "" . $nm_var_lab[223] . "",
         'level'    => "2",
         'link'     => $str_link,
-        'hint'     => "" . $nm_var_hint[222] . "",
+        'hint'     => "" . $nm_var_hint[223] . "",
         'id'       => "item_212",
         'icon'     => $str_icon,
         'icon_aba' => $icon_aba,
@@ -15845,10 +15912,10 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['blank_anydesk']) || strtolower
         $icon_aba_inactive = $arr_menuicons['blank']['inactive'];
     }
     $menu_menuData['data'][] = array(
-        'label'    => "" . $nm_var_lab[223] . "",
+        'label'    => "" . $nm_var_lab[224] . "",
         'level'    => "2",
         'link'     => $str_link,
-        'hint'     => "" . $nm_var_hint[223] . "",
+        'hint'     => "" . $nm_var_hint[224] . "",
         'id'       => "item_156",
         'icon'     => $str_icon,
         'icon_aba' => $icon_aba,
@@ -15882,10 +15949,10 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['blank']) || strtolower($_SESSI
         $icon_aba_inactive = $arr_menuicons['blank']['inactive'];
     }
     $menu_menuData['data'][] = array(
-        'label'    => "" . $nm_var_lab[224] . "",
+        'label'    => "" . $nm_var_lab[225] . "",
         'level'    => "2",
         'link'     => $str_link,
-        'hint'     => "" . $nm_var_hint[224] . "",
+        'hint'     => "" . $nm_var_hint[225] . "",
         'id'       => "item_46",
         'icon'     => $str_icon,
         'icon_aba' => $icon_aba,
@@ -15919,10 +15986,10 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['blank_ayuda']) || strtolower($
         $icon_aba_inactive = $arr_menuicons['blank']['inactive'];
     }
     $menu_menuData['data'][] = array(
-        'label'    => "" . $nm_var_lab[225] . "",
+        'label'    => "" . $nm_var_lab[226] . "",
         'level'    => "2",
         'link'     => $str_link,
-        'hint'     => "" . $nm_var_hint[225] . "",
+        'hint'     => "" . $nm_var_hint[226] . "",
         'id'       => "item_105",
         'icon'     => $str_icon,
         'icon_aba' => $icon_aba,
@@ -15956,10 +16023,10 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['blank_slider']) || strtolower(
         $icon_aba_inactive = $arr_menuicons['blank']['inactive'];
     }
     $menu_menuData['data'][] = array(
-        'label'    => "" . $nm_var_lab[226] . "",
+        'label'    => "" . $nm_var_lab[227] . "",
         'level'    => "2",
         'link'     => $str_link,
-        'hint'     => "" . $nm_var_hint[226] . "",
+        'hint'     => "" . $nm_var_hint[227] . "",
         'id'       => "item_150",
         'icon'     => $str_icon,
         'icon_aba' => $icon_aba,
@@ -15993,10 +16060,10 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['blank_fin_sesion']) || strtolo
         $icon_aba_inactive = $arr_menuicons['blank']['inactive'];
     }
     $menu_menuData['data'][] = array(
-        'label'    => "" . $nm_var_lab[227] . "",
+        'label'    => "" . $nm_var_lab[228] . "",
         'level'    => "0",
         'link'     => $str_link,
-        'hint'     => "" . $nm_var_hint[227] . "",
+        'hint'     => "" . $nm_var_hint[228] . "",
         'id'       => "item_20",
         'icon'     => $str_icon,
         'icon_aba' => $icon_aba,
@@ -16966,6 +17033,10 @@ function mudaIframe(str_id)
     {
         if (Tab_iframes[i] == str_id) 
         {
+            if($('#iframe_' + Tab_iframes[i]).length < 1)
+            {
+                $('#Iframe_control').append('<iframe id="iframe_'+ Tab_iframes[i] +'" name="menu_'+ Tab_iframes[i] +'_iframe" frameborder="0" class="scMenuIframe" style="display: none; width: 100%; height: 100%;" src=""></iframe>');
+            }
             $('#iframe_' + Tab_iframes[i]).show();
             Aba_atual    = str_id;
             $('#aba_td_' + Aba_atual).removeClass( 'scTabInactive' );
@@ -17091,6 +17162,10 @@ function scTabScroll(axis) {
       str_target_sv = str_id + "_iframe";
       str_id        = str_id.replace("menu_","");
   }
+    if($('#Iframe_control').length && $('#' + str_id).parent().length < 0)
+    {
+        $('#Iframe_control').append('<iframe id="iframe_btn_1" name="menu_btn_1_iframe" frameborder="0" class="scMenuIframe" style="display: none;" src=""></iframe>');
+    }
   if($('#' + str_id).parent().length)
   {
       if(!$('#' + str_id).parent().hasClass('menu__item--active'))
@@ -17224,14 +17299,6 @@ else
 ?>
       <iframe id="iframe_menu" name="menu_iframe" frameborder="0" class="scMenuIframe" style="width: 100%; height: 100%;"  src="<?php echo $SCR; ?>" <?php echo $link_default ?>></iframe>
 <?php
- foreach ($menu_menuData['data'] as $ind => $dados_menu)
- {
-     if ($dados_menu['link'] != "#")
-     {
-         echo "      <iframe id=\"iframe_" . $dados_menu['id'] . "\" name= \"menu_" . $dados_menu['id'] . "_iframe\" frameborder=\"0\" class=\"scMenuIframe\" style=\"display: none;width: 100%; height: 100%;\" src=\"\"></iframe>
-";
-     }
- }
 }
 ?></div></td>
   </tr>
