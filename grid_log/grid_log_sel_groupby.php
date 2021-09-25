@@ -742,11 +742,6 @@ if (!$embbed)
     $has_group_by_dynamic = true;
     $has_total_dynamic    = true && $opc_ret == "resumo";
     $iTabCount            = 1;
-    if ($opc_ret == "resumo")
-    {
-        $has_total_dynamic = true;
-        $iTabCount++;
-    }
     if (1 < $iTabCount)
     {
 ?>

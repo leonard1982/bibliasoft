@@ -985,6 +985,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
      else
      {
        $('#Bsair').click();
+       $('#Bsair').mousedown();
      }
    <?php
    }

@@ -777,13 +777,13 @@ function ajusta_window()
     bFixed = true;
     if (navigator.userAgent.indexOf("Chrome/") > 0)
     {
-      self.parent.tb_resize(altura + 180, largura + 50);
+      if (self.parent.tb_resize) self.parent.tb_resize(altura + 180, largura + 50);
       setTimeout("ajusta_window()", 50);
       return;
     }
   }
   mt.width( largura );
-  self.parent.tb_resize(altura + 180, largura + 50);
+  if (self.parent.tb_resize) self.parent.tb_resize(altura + 180, largura + 50);
 }
 
 $('#tabs > ul > li').click(function() {

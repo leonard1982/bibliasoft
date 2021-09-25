@@ -251,6 +251,38 @@ class grid_log_pesq
           $this->Db->Close(); 
           exit;
       }
+      if ($this->NM_ajax_opcao == 'autocomp_observaciones')
+      {
+          $observaciones = ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($_GET['q'])) ? sc_convert_encoding($_GET['q'], $_SESSION['scriptcase']['charset'], "UTF-8") : $_GET['q'];
+          $nmgp_def_dados = $this->lookup_ajax_observaciones($observaciones);
+          ob_end_clean();
+          ob_end_clean();
+          $count_aut_comp = 0;
+          $resp_aut_comp  = array();
+          foreach ($nmgp_def_dados as $Ind => $Lista)
+          {
+             if (is_array($Lista))
+             {
+                 foreach ($Lista as $Cod => $Valor)
+                 {
+                     if ($_GET['cod_desc'] == "S")
+                     {
+                         $Valor = $Cod . " - " . $Valor;
+                     }
+                     $resp_aut_comp[] = array('text' => $Valor , 'id' => $Cod);
+                     $count_aut_comp++;
+                 }
+             }
+             if ($count_aut_comp == $_GET['max_itens'])
+             {
+                 break;
+             }
+          }
+          $oJson = new Services_JSON();
+          echo $oJson->encode(array('results' => $resp_aut_comp));
+          $this->Db->Close(); 
+          exit;
+      }
    }
    function lookup_ajax_usuario($usuario)
    {
@@ -295,6 +327,34 @@ class grid_log_pesq
             $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
             $cmp2 = NM_charset_to_utf8(trim($rs->fields[1]));
             $nmgp_def_dados[] = array($cmp1 => $cmp2); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+
+      return $nmgp_def_dados;
+   }
+   
+   function lookup_ajax_observaciones($observaciones)
+   {
+      $observaciones = substr($this->Db->qstr($observaciones), 1, -1);
+            $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
+      $nmgp_def_dados = array(); 
+      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp where  observaciones like '%" . $observaciones . "%'"; 
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
+            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
             $rs->MoveNext() ; 
          } 
          $rs->Close() ; 
@@ -1483,7 +1543,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
 </HEAD>
-<BODY class="scGridPage">
+<BODY id="grid_search" class="scGridPage">
 <FORM style="display:none;" name="form_ok" method="POST" action="<?php echo $NM_retorno; ?>" target="_self">
 <INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
 <INPUT type="hidden" name="nmgp_opcao" value="pesq"> 
@@ -1530,6 +1590,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <script type="text/javascript" src="../_lib/lib/js/scInput.js"></script>
  <script type="text/javascript" src="../_lib/lib/js/jquery.scInput.js"></script>
  <script type="text/javascript" src="../_lib/lib/js/jquery.scInput2.js"></script>
+ <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/css/select2.min.css" type="text/css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/select2/js/select2.full.min.js"></SCRIPT>
  <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_error.css" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_error<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -1553,7 +1615,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 $vertical_center = '';
 ?>
-<BODY class="scFilterPage" style="<?php echo $vertical_center ?>">
+<BODY id="grid_search" class="scFilterPage" style="<?php echo $vertical_center ?>">
 <?php echo $this->Ini->Ajax_result_set ?>
 <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_js . "/browserSniffer.js" ?>"></SCRIPT>
         <script type="text/javascript">
@@ -1828,6 +1890,7 @@ function scJQCalendarAdd() {
    SC_carga_evt_jquery();
    scLoadScInput('input:text.sc-js-input');
    scJQCalendarAdd('');
+   Sc_carga_select2('all');
  });
  function nm_campos_between(nm_campo, nm_cond, nm_nome_obj)
  {
@@ -1889,6 +1952,7 @@ function scJQCalendarAdd() {
   str_out += 'SC_accion#NMF#' + search_get_Dselelect('SC_accion_dest') + '@NMF@';
   str_out += 'SC_observaciones_cond#NMF#' + search_get_sel_txt('SC_observaciones_cond') + '@NMF@';
   str_out += 'SC_observaciones#NMF#' + search_get_text('SC_observaciones') + '@NMF@';
+  str_out += 'id_ac_observaciones#NMF#' + search_get_title('select2-id_ac_observaciones-container') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2062,6 +2126,54 @@ function nm_open_popup(parms)
        }
      }
    });
+  $(".sc-ui-autocomp-observaciones").on("focus", function() {
+  }).on("blur", function() {
+  }).on("keydown", function(e) {
+   if(e.keyCode == $.ui.keyCode.TAB && $(".ui-autocomplete").filter(":visible").length) {
+    e.keyCode = $.ui.keyCode.DOWN;
+    $(this).trigger(e);
+    e.keyCode = $.ui.keyCode.ENTER;
+    $(this).trigger(e);
+   }
+  }).select2({
+   minimumInputLength: 1,
+   language: {
+    inputTooShort: function() {
+     return "<?php echo sprintf($this->Ini->Nm_lang['lang_autocomp_tooshort'], 1) ?>";
+    },
+    containerCssClass: 'scGridFilterDivResult',
+    dropdownCssClass: 'scGridFilterDivDropdown',
+    noResults: function() {
+     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+    },
+    searching: function() {
+     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+    }
+   },
+   width: "300px",
+   ajax: {
+    url: "index.php",
+    dataType: "json",
+    processResults: function (data) {
+      if (data == "ss_time_out") {
+          nm_move();
+      }
+      return data;
+    },
+    data: function (params) {
+     var query = {
+      q: params.term,
+      nmgp_opcao: "ajax_autocomp",
+      nmgp_parms: "NM_ajax_opcao?#?autocomp_observaciones",
+      max_itens: "10",
+      script_case_init: <?php echo $this->Ini->sc_page ?>
+     }
+     return query;
+    }
+   }
+  }).on("select2:select", function(e) {;
+   $("#SC_observaciones").val(e.params.data.id);
+  });
  });
 </script>
  <FORM name="F1" action="./" method="post" target="_self"> 
@@ -2153,7 +2265,7 @@ function nm_open_popup(parms)
              $fechayhora_cond, $fechayhora, $fechayhora_dia, $fechayhora_mes, $fechayhora_ano, $fechayhora_hor, $fechayhora_min, $fechayhora_seg, $fechayhora_input_2_dia, $fechayhora_input_2_mes, $fechayhora_input_2_ano, $fechayhora_input_2_min, $fechayhora_input_2_hor, $fechayhora_input_2_seg,
              $usuario_cond, $usuario, $usuario_autocomp,
              $accion_cond, $accion,
-             $observaciones_cond, $observaciones,
+             $observaciones_cond, $observaciones, $observaciones_autocomp,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2731,7 +2843,42 @@ foreach ($Arr_format as $Part_date)
      $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
-<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br><span id="id_hide_observaciones"  <?php echo $str_hide_observaciones?>><INPUT  type="text" id="SC_observaciones" name="observaciones" value="<?php echo NM_encode_input($observaciones) ?>"  size=50 alt="{datatype: 'text', maxLength: 32767, allowedChars: '', lettersCase: 'upper', autoTab: false, enterTab: false}" class="sc-js-input scFilterObjectEven">
+<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br><span id="id_hide_observaciones"  <?php echo $str_hide_observaciones?>><?php
+      if ($observaciones != "")
+      {
+      $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
+      $nmgp_def_dados = array(); 
+      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp where observaciones = '$observaciones_look'"; 
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = trim($rs->fields[0]);
+            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+      }
+      if (isset($nmgp_def_dados[0][$observaciones]))
+      {
+          $sAutocompValue = $nmgp_def_dados[0][$observaciones];
+      }
+      else
+      {
+          $sAutocompValue = $observaciones;
+      }
+?>
+<INPUT  type="text" id="SC_observaciones" name="observaciones" value="<?php echo NM_encode_input($observaciones) ?>"  size=50 alt="{datatype: 'text', maxLength: 32767, allowedChars: '', lettersCase: 'upper', autoTab: false, enterTab: false}" style="display: none">
+<select class="sc-js-input scFilterObjectEven sc-ui-autocomp-observaciones" id="id_ac_observaciones" name="observaciones_autocomp"><?php if ('' !=  $observaciones) { ?><option value="<?php echo $observaciones ?>" selected><?php echo $sAutocompValue ?></option><?php } ?></select>
  </TD>
    
 
@@ -3276,6 +3423,12 @@ foreach ($Arr_format as $Part_date)
    document.F1.observaciones_cond.value = 'qp';
    nm_campos_between(document.getElementById('id_vis_observaciones'), document.F1.observaciones_cond, 'observaciones');
    document.F1.observaciones.value = "";
+   document.F1.observaciones_autocomp.value = "";
+   $('#select2-id_ac_observaciones-container').html('<?php echo $this->Val_init_observaciones['desc'] ?>');;
+   Sc_carga_select2('all');
+ }
+ function Sc_carga_select2(Field)
+ {
  }
  function SC_carga_evt_jquery()
  {
@@ -3489,7 +3642,8 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_accion_cond'] = 'cond';
       $tp_fields['SC_accion'] = 'dselect';
       $tp_fields['SC_observaciones_cond'] = 'cond';
-      $tp_fields['SC_observaciones'] = 'text';
+      $tp_fields['SC_observaciones'] = 'text_aut';
+      $tp_fields['id_ac_observaciones'] = 'select2_aut';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -3636,7 +3790,7 @@ foreach ($Arr_format as $Part_date)
       global $fechayhora_cond, $fechayhora, $fechayhora_dia, $fechayhora_mes, $fechayhora_ano, $fechayhora_hor, $fechayhora_min, $fechayhora_seg, $fechayhora_input_2_dia, $fechayhora_input_2_mes, $fechayhora_input_2_ano, $fechayhora_input_2_min, $fechayhora_input_2_hor, $fechayhora_input_2_seg,
              $usuario_cond, $usuario, $usuario_autocomp,
              $accion_cond, $accion,
-             $observaciones_cond, $observaciones, $nmgp_tab_label;
+             $observaciones_cond, $observaciones, $observaciones_autocomp, $nmgp_tab_label;
 
       $C_formatado = true;
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
@@ -3645,6 +3799,10 @@ foreach ($Arr_format as $Part_date)
       if (!empty($usuario_autocomp) && empty($usuario))
       {
           $usuario = $usuario_autocomp;
+      }
+      if (!empty($observaciones_autocomp) && empty($observaciones))
+      {
+          $observaciones = $observaciones_autocomp;
       }
       $fechayhora_cond_salva = $fechayhora_cond; 
       if (!isset($fechayhora_input_2_dia) || $fechayhora_input_2_dia == "")
@@ -3820,8 +3978,51 @@ foreach ($Arr_format as $Part_date)
       }
       $this->cmp_formatado['accion'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['accion'];
       $this->cmp_formatado['accion_input_2'] = $accion_input_2;
-      $Conteudo = $observaciones;
-      $this->cmp_formatado['observaciones'] = $Conteudo;
+      $nmgp_def_dados = array();
+    if ($observaciones != '') {
+      $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
+      $nmgp_def_dados = array(); 
+      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp where observaciones = '$observaciones_look'"; 
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
+            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+
+    }
+      if (!empty($nmgp_def_dados) && isset($cmp2) && !empty($cmp2))
+      {
+          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+          {
+             $cmp2 = NM_conv_charset($cmp2, $_SESSION['scriptcase']['charset'], "UTF-8");
+          }
+          $this->cmp_formatado['observaciones'] = $cmp2;
+      }
+      elseif (!empty($nmgp_def_dados) && isset($cmp1) && !empty($cmp1))
+      {
+          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+          {
+             $cmp1 = NM_conv_charset($cmp1, $_SESSION['scriptcase']['charset'], "UTF-8");
+          }
+          $this->cmp_formatado['observaciones'] = $cmp1;
+      }
+      else
+      {
+          $this->cmp_formatado['observaciones'] = $observaciones;
+      }
 
       //----- $fechayhora
       $this->Date_part = false;

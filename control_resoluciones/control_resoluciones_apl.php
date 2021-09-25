@@ -1916,14 +1916,14 @@ if(isset($vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->G
 			}
 			else
 			{
-				$vprefix = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse[0]->Prefix;
-				$vresol  = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse[0]->ResolutionNumber;
-				$vdesde  = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse[0]->FromNumber;
-				$vhasta  = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse[0]->ToNumber;
-				$vfech   = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse[0]->ValidDateFrom;
+				$vprefix = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse->Prefix;
+				$vresol  = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse->ResolutionNumber;
+				$vdesde  = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse->FromNumber;
+				$vhasta  = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse->ToNumber;
+				$vfech   = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse->ValidDateFrom;
 				$vfech   = date_create($vfech);
 				$vfech   = date_format($vfech,"Y-m-d");
-				$vfech2  = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse[0]->ValidDateTo;
+				$vfech2  = $vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->GetNumberingRangeResult->ResponseList->NumberRangeResponse->ValidDateTo;
 				$vfech2  = date_create($vfech2);
 				$vfech2  = date_format($vfech2,"Y-m-d");
 
@@ -3023,7 +3023,8 @@ $_SESSION['scriptcase']['control_resoluciones']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
