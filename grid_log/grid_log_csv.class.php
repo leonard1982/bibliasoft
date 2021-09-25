@@ -419,6 +419,10 @@ class grid_log_csv
          $this->usuario = (string)$this->usuario;
          $this->accion = $rs->fields[5] ;  
          $this->observaciones = $rs->fields[6] ;  
+         //----- lookup - periodo
+         $this->look_periodo = $this->periodo; 
+         $this->Lookup->lookup_periodo($this->look_periodo); 
+         $this->look_periodo = ($this->look_periodo == "&nbsp;") ? "" : $this->look_periodo; 
          //----- lookup - usuario
          $this->look_usuario = $this->usuario; 
          $this->Lookup->lookup_usuario($this->look_usuario, $this->usuario) ; 
@@ -566,9 +570,8 @@ class grid_log_csv
    //----- periodo
    function NM_export_periodo()
    {
-             nmgp_Form_Num_Val($this->periodo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->periodo);
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->look_periodo);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }

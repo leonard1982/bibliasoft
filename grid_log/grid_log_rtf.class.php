@@ -358,6 +358,10 @@ class grid_log_rtf
          $this->usuario = (string)$this->usuario;
          $this->accion = $rs->fields[5] ;  
          $this->observaciones = $rs->fields[6] ;  
+         //----- lookup - periodo
+         $this->look_periodo = $this->periodo; 
+         $this->Lookup->lookup_periodo($this->look_periodo); 
+         $this->look_periodo = ($this->look_periodo == "&nbsp;") ? "" : $this->look_periodo; 
          //----- lookup - usuario
          $this->look_usuario = $this->usuario; 
          $this->Lookup->lookup_usuario($this->look_usuario, $this->usuario) ; 
@@ -408,11 +412,10 @@ class grid_log_rtf
    //----- periodo
    function NM_export_periodo()
    {
-             nmgp_Form_Num_Val($this->periodo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->periodo = NM_charset_to_utf8($this->periodo);
-         $this->periodo = str_replace('<', '&lt;', $this->periodo);
-         $this->periodo = str_replace('>', '&gt;', $this->periodo);
-         $this->Texto_tag .= "<td>" . $this->periodo . "</td>\r\n";
+         $this->look_periodo = NM_charset_to_utf8($this->look_periodo);
+         $this->look_periodo = str_replace('<', '&lt;', $this->look_periodo);
+         $this->look_periodo = str_replace('>', '&gt;', $this->look_periodo);
+         $this->Texto_tag .= "<td>" . $this->look_periodo . "</td>\r\n";
    }
    //----- fechayhora
    function NM_export_fechayhora()

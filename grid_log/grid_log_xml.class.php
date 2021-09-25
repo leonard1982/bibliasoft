@@ -391,6 +391,10 @@ class grid_log_xml
          $this->usuario = (string)$this->usuario;
          $this->accion = $rs->fields[5] ;  
          $this->observaciones = $rs->fields[6] ;  
+         //----- lookup - periodo
+         $this->look_periodo = $this->periodo; 
+         $this->Lookup->lookup_periodo($this->look_periodo); 
+         $this->look_periodo = ($this->look_periodo == "&nbsp;") ? "" : $this->look_periodo; 
          //----- lookup - usuario
          $this->look_usuario = $this->usuario; 
          $this->Lookup->lookup_usuario($this->look_usuario, $this->usuario) ; 
@@ -678,7 +682,10 @@ class grid_log_xml
    //----- periodo
    function NM_export_periodo()
    {
-             nmgp_Form_Num_Val($this->periodo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_periodo))
+         {
+             $this->look_periodo = sc_convert_encoding($this->look_periodo, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
          if ($this->Xml_tag_label)
          {
              $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "Periodo"; 
@@ -690,11 +697,11 @@ class grid_log_xml
          $this->clear_tag($SC_Label); 
          if ($this->New_Format)
          {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->periodo) . "</" . $SC_Label . ">\r\n";
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_periodo) . "</" . $SC_Label . ">\r\n";
          }
          else
          {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->periodo) . "\"";
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_periodo) . "\"";
          }
    }
    //----- fechayhora

@@ -85,6 +85,7 @@ class grid_log_grid
    var $usuario;
    var $accion;
    var $observaciones;
+   var $look_periodo;
 //--- 
  function monta_grid($linhas = 0)
  {
@@ -1042,6 +1043,8 @@ class grid_log_grid
        $GLOBALS["usuario"] = (string)$GLOBALS["usuario"] ;
        $this->arg_sum_anio = ($this->anio == "") ? " is null " : " = " . $this->anio;
        $this->arg_sum_periodo = ($this->periodo == "") ? " is null " : " = " . $this->periodo;
+       $this->look_periodo = $this->periodo; 
+       $this->Lookup->lookup_periodo($this->look_periodo); 
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Ind_Groupby'] == "sc_free_group_by")
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Gb_Free_cmp'] as $cmp_gb => $resto)
@@ -3161,6 +3164,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['proc_pdf']) {
           $GLOBALS["usuario"] = (string)$GLOBALS["usuario"];
           $this->arg_sum_anio = ($this->anio == "") ? " is null " : " = " . $this->anio;
           $this->arg_sum_periodo = ($this->periodo == "") ? " is null " : " = " . $this->periodo;
+          $this->look_periodo = $this->periodo; 
+          $this->Lookup->lookup_periodo($this->look_periodo); 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Ind_Groupby'] == "sc_free_group_by")
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Gb_Free_cmp'] as $cmp_gb => $resto)
@@ -3514,16 +3519,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['proc_pdf']) {
  {
       global $nm_saida;
       if (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off") { 
-          $conteudo = NM_encode_input(sc_strip_script($this->periodo)); 
-          $conteudo_original = NM_encode_input(sc_strip_script($this->periodo)); 
+          $conteudo = trim(NM_encode_input(sc_strip_script($this->look_periodo))); 
+          $conteudo_original = trim(NM_encode_input(sc_strip_script($this->look_periodo))); 
           if ($conteudo === "") 
           { 
               $conteudo = "&nbsp;" ;  
               $graf = "" ;  
-          } 
-          else    
-          { 
-              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
           } 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida'] && !empty($conteudo)) 
@@ -3908,7 +3909,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['proc_pdf']) {
    $this->count_periodo = $tot_periodo[1];
    $Temp_cmp_quebra = array(); 
    $conteudo = NM_encode_input(sc_strip_script($this->periodo)); 
-   nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+   $this->Lookup->lookup_sc_free_group_by_periodo($conteudo) ; 
    $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
    if (isset($this->nmgp_label_quebras['periodo']))
    {

@@ -607,6 +607,10 @@ class grid_log_xls
      }
      $prim_gb = false;
      $nm_houve_quebra = "N";
+         //----- lookup - periodo
+         $this->look_periodo = $this->periodo; 
+         $this->Lookup->lookup_periodo($this->look_periodo); 
+         $this->look_periodo = ($this->look_periodo == "&nbsp;") ? "" : $this->look_periodo; 
          //----- lookup - usuario
          $this->look_usuario = $this->usuario; 
          $this->Lookup->lookup_usuario($this->look_usuario, $this->usuario) ; 
@@ -1041,12 +1045,13 @@ class grid_log_xls
              $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->periodo = NM_charset_to_utf8($this->periodo);
-         if (is_numeric($this->periodo))
-         {
-             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
+         $this->look_periodo = NM_charset_to_utf8($this->look_periodo);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_periodo, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
          }
-         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->periodo);
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_periodo, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
          $this->Xls_col++;
    }
    //----- fechayhora
@@ -1165,11 +1170,11 @@ class grid_log_xls
    //----- periodo
    function NM_sub_cons_periodo()
    {
-         $this->periodo = NM_charset_to_utf8($this->periodo);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->periodo;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
+         $this->look_periodo = NM_charset_to_utf8($this->look_periodo);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_periodo;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
    //----- fechayhora
@@ -1423,7 +1428,7 @@ class grid_log_xls
    $this->count_periodo = $tot_periodo[1];
    $Temp_cmp_quebra = array(); 
    $conteudo = NM_encode_input(sc_strip_script($this->periodo)); 
-   nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+   $this->Lookup->lookup_sc_free_group_by_periodo($conteudo) ; 
    $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
    if (isset($this->nmgp_label_quebras['periodo']))
    {

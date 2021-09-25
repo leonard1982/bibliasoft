@@ -5458,7 +5458,6 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['doc_word'])
             $this->observaciones_orig = $this->observaciones;
             $this->periodo_orig = $this->periodo;
             $this->anio_orig = $this->anio;
-            nmgp_Form_Num_Val($this->periodo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             nmgp_Form_Num_Val($this->anio, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             if ($nm_tipo == "resumo")
             {
