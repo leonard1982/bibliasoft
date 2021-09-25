@@ -751,6 +751,18 @@ if (!$embbed)
     $has_group_by_dynamic = true;
     $has_total_dynamic    = true && $opc_ret == "resumo";
     $iTabCount            = 1;
+    foreach ($_SESSION['sc_session'][$sc_init]['grid_log_pedidos_borrados']['SC_All_Groupby'] as $QB => $Tp)
+    {
+        if (!in_array($QB, $_SESSION['sc_session'][$sc_init]['grid_log_pedidos_borrados']['SC_Groupby_hide']))
+        {
+            if ($QB != "sc_free_group_by")
+            {
+                $has_group_by_static = true;
+                $iTabCount++;
+                break;
+            }
+        }
+    }
     if (1 < $iTabCount)
     {
 ?>
@@ -877,6 +889,56 @@ $(function() {
 	});
 });
 </script>
+ <tr id="sc_id_static_groupby">
+<?php
+    if ($this->restore) {
+        ob_end_clean();
+        ob_start();
+    }
+?>
+  <td>
+  <div class="GroupByOptions">
+<?php
+     if (!in_array("_NM_SC_", $_SESSION['sc_session'][$sc_init]['grid_log_pedidos_borrados']['SC_Groupby_hide']))
+     {
+         $this->static_gb_ok = "sc_id_sel_groupby__NM_SC_";
+        if ($opc_ret != "resumo")
+        {
+        if ($groupby_atual == "_NM_SC_")
+        {
+            $check = " checked";
+            $bStartFree = false;
+            $this->static_gb_ok = "sc_id_sel_groupby__NM_SC_";
+        }
+        else
+        {
+            $check = "";
+        }
+?>
+      <div>
+      <input type="radio" class="scAppDivToolbarInput sc_ui_gby_selected" onclick='scShowTotalFields();change_actual_static("sc_id_sel_groupby__NM_SC_");display_btn_restore_gb();' name="sel_groupby" value="_NM_SC_" id="sc_id_sel_groupby__NM_SC_"<?php echo $check ?> style='display:none' />
+      <label for="sc_id_sel_groupby__NM_SC_">
+        <?php echo $this->Nm_lang['lang_othr_groupby_none'] ?>
+<?php
+    $prep_labels = array();
+?>
+        <span>
+        <?php echo implode($prep_labels, ', ');?>
+        </span>
+      </label>
+      </div>
+<?php
+        }
+     }
+?>
+  </div>
+  </td>
+<?php
+    if ($this->restore) {
+        $this->Arr_result['set_html'][] = array('field' => 'sc_id_static_groupby', 'value' =>  NM_charset_to_utf8(ob_get_contents()));
+    }
+?>
+ </tr>
  <tr id="sc_id_free_groupby">
 <?php
     if ($this->restore) {

@@ -199,6 +199,9 @@ class grid_log_pedidos_borrados_res_rtf
                nmgp_Form_Num_Val($valor_campo, ",", ".", "0", "S", "", "$", "V:3:", "-");
            }
        }
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+       {
+       }
        return $valor_campo;
    }
 

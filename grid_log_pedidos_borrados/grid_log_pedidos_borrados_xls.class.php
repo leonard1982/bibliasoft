@@ -205,6 +205,10 @@ class grid_log_pedidos_borrados_xls
           { 
               $this->Tem_xls_res = (strpos(" " . $_REQUEST['SC_module_export'], "resume") !== false || strpos(" " . $_REQUEST['SC_module_export'], "chart") !== false) ? true : false;
           } 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+          {
+              $this->Tem_xls_res  = false;
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $this->Tem_xls_res  = false;
@@ -253,6 +257,10 @@ class grid_log_pedidos_borrados_xls
       {
           $this->sum_cantidad = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][2];
           $this->sum_valorpar = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][3];
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+      {
+          $this->sum_valorpar = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][2];
       }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] && !$this->Ini->sc_export_ajax) {
           require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
@@ -407,30 +415,30 @@ class grid_log_pedidos_borrados_xls
       } 
       $this->nm_field_dinamico = array();
       $this->nm_order_dinamico = array();
-      $nmgp_select_count = "SELECT count(*) AS countTest from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+      $nmgp_select_count = "SELECT count(*) AS countTest from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT anio, periodo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT anio, periodo, convert(char(23),fechaven,121), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, convert(char(23),fechaven,121), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT anio, periodo, EXTEND(fechaven, YEAR TO DAY), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, EXTEND(fechaven, YEAR TO DAY), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_pesq'];
@@ -479,6 +487,7 @@ class grid_log_pedidos_borrados_xls
          $this->fechaven = $rs->fields[2] ;  
          $this->numero = $rs->fields[3] ;  
          $this->mesa_cliente = $rs->fields[4] ;  
+         $this->mesa_cliente = (string)$this->mesa_cliente;
          $this->descr = $rs->fields[5] ;  
          $this->cantidad = $rs->fields[6] ;  
          $this->cantidad =  str_replace(",", ".", $this->cantidad);
@@ -487,6 +496,7 @@ class grid_log_pedidos_borrados_xls
          $this->valorpar =  str_replace(",", ".", $this->valorpar);
          $this->valorpar = (string)$this->valorpar;
          $this->vendedor = $rs->fields[8] ;  
+         $this->vendedor = (string)$this->vendedor;
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_orig']))
          {
              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -510,10 +520,18 @@ class grid_log_pedidos_borrados_xls
                  }
              }
          }
+         if ($this->fechaven == "")
+         {
+             $this->arg_sum_fechaven = " is null";
+         }
+         elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+         {
+             $this->arg_sum_fechaven = " = " . $this->Db->qstr($this->fechaven);
+         }
          $this->arg_sum_numero = " = " . $this->Db->qstr($this->numero);
-         $this->arg_sum_mesa_cliente = " = " . $this->Db->qstr($this->mesa_cliente);
+         $this->arg_sum_mesa_cliente = ($this->mesa_cliente == "") ? " is null " : " = " . $this->mesa_cliente;
          $this->arg_sum_descr = " = " . $this->Db->qstr($this->descr);
-         $this->arg_sum_vendedor = " = " . $this->Db->qstr($this->vendedor);
+         $this->arg_sum_vendedor = ($this->vendedor == "") ? " is null " : " = " . $this->vendedor;
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by") 
           {  
               $SC_arg_Gby = array();
@@ -655,6 +673,14 @@ class grid_log_pedidos_borrados_xls
          $this->look_periodo = $this->periodo; 
          $this->Lookup->lookup_periodo($this->look_periodo); 
          $this->look_periodo = ($this->look_periodo == "&nbsp;") ? "" : $this->look_periodo; 
+         //----- lookup - mesa_cliente
+         $this->look_mesa_cliente = $this->mesa_cliente; 
+         $this->Lookup->lookup_mesa_cliente($this->look_mesa_cliente, $this->mesa_cliente) ; 
+         $this->look_mesa_cliente = ($this->look_mesa_cliente == "&nbsp;") ? "" : $this->look_mesa_cliente; 
+         //----- lookup - vendedor
+         $this->look_vendedor = $this->vendedor; 
+         $this->Lookup->lookup_vendedor($this->look_vendedor, $this->vendedor) ; 
+         $this->look_vendedor = ($this->look_vendedor == "&nbsp;") ? "" : $this->look_vendedor; 
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['field_order'] as $Cada_col)
          { 
@@ -1192,14 +1218,14 @@ class grid_log_pedidos_borrados_xls
              $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->mesa_cliente = html_entity_decode($this->mesa_cliente, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->mesa_cliente = strip_tags($this->mesa_cliente);
-         $this->mesa_cliente = NM_charset_to_utf8($this->mesa_cliente);
+         $this->look_mesa_cliente = html_entity_decode($this->look_mesa_cliente, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_mesa_cliente = strip_tags($this->look_mesa_cliente);
+         $this->look_mesa_cliente = NM_charset_to_utf8($this->look_mesa_cliente);
          if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->mesa_cliente, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_mesa_cliente, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
          }
          else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->mesa_cliente, PHPExcel_Cell_DataType::TYPE_STRING);
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_mesa_cliente, PHPExcel_Cell_DataType::TYPE_STRING);
          }
          $this->Xls_col++;
    }
@@ -1266,14 +1292,14 @@ class grid_log_pedidos_borrados_xls
              $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->vendedor = html_entity_decode($this->vendedor, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->vendedor = strip_tags($this->vendedor);
-         $this->vendedor = NM_charset_to_utf8($this->vendedor);
+         $this->look_vendedor = html_entity_decode($this->look_vendedor, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_vendedor = strip_tags($this->look_vendedor);
+         $this->look_vendedor = NM_charset_to_utf8($this->look_vendedor);
          if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->vendedor, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_vendedor, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
          }
          else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->vendedor, PHPExcel_Cell_DataType::TYPE_STRING);
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_vendedor, PHPExcel_Cell_DataType::TYPE_STRING);
          }
          $this->Xls_col++;
    }
@@ -1322,11 +1348,11 @@ class grid_log_pedidos_borrados_xls
    //----- mesa_cliente
    function NM_sub_cons_mesa_cliente()
    {
-         $this->mesa_cliente = html_entity_decode($this->mesa_cliente, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->mesa_cliente = strip_tags($this->mesa_cliente);
-         $this->mesa_cliente = NM_charset_to_utf8($this->mesa_cliente);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->mesa_cliente;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->look_mesa_cliente = html_entity_decode($this->look_mesa_cliente, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_mesa_cliente = strip_tags($this->look_mesa_cliente);
+         $this->look_mesa_cliente = NM_charset_to_utf8($this->look_mesa_cliente);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_mesa_cliente;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -1366,11 +1392,11 @@ class grid_log_pedidos_borrados_xls
    //----- vendedor
    function NM_sub_cons_vendedor()
    {
-         $this->vendedor = html_entity_decode($this->vendedor, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->vendedor = strip_tags($this->vendedor);
-         $this->vendedor = NM_charset_to_utf8($this->vendedor);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->vendedor;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->look_vendedor = html_entity_decode($this->look_vendedor, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_vendedor = strip_tags($this->look_vendedor);
+         $this->look_vendedor = NM_charset_to_utf8($this->look_vendedor);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_vendedor;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -1581,6 +1607,7 @@ class grid_log_pedidos_borrados_xls
    $this->sum_mesa_cliente_valorpar = $tot_mesa_cliente[3];
    $Temp_cmp_quebra = array(); 
    $conteudo = sc_strip_script($this->mesa_cliente); 
+   $this->Lookup->lookup_sc_free_group_by_mesa_cliente($conteudo , $this->mesa_cliente) ; 
    $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
    if (isset($this->nmgp_label_quebras['mesa_cliente']))
    {
@@ -1647,6 +1674,7 @@ class grid_log_pedidos_borrados_xls
    $this->sum_vendedor_valorpar = $tot_vendedor[3];
    $Temp_cmp_quebra = array(); 
    $conteudo = sc_strip_script($this->vendedor); 
+   $this->Lookup->lookup_sc_free_group_by_vendedor($conteudo , $this->vendedor) ; 
    $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
    if (isset($this->nmgp_label_quebras['vendedor']))
    {
@@ -2989,6 +3017,96 @@ class grid_log_pedidos_borrados_xls
            {
                $Format_Num = "#,##0";
                $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][3];
+               $prim_cmp = false;
+               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Vl_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Vl_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida']) {
+           $this->Xls_row++;
+           $this->Xls_col = 1;
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+       }
+   }
+   function quebra_geral__NM_SC__bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->Tot->quebra_geral__NM_SC_();
+       $prim_cmp = true;
+       $mens_tot = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][1] . ")";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['field_order'] as $Cada_cmp)
+       {
+           if ($Cada_cmp == "valorpar" && (!isset($this->NM_cmp_hidden['valorpar']) || $this->NM_cmp_hidden['valorpar'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][2];
                $prim_cmp = false;
                $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
                if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida']) {

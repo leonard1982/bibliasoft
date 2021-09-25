@@ -398,10 +398,22 @@ class grid_log_pedidos_borrados_pesq
    }
    function lookup_ajax_mesa_cliente($mesa_cliente)
    {
+      $mesa_cliente = str_replace($_SESSION['scriptcase']['reg_conf']['grup_num'], "", $mesa_cliente);
       $mesa_cliente = substr($this->Db->qstr($mesa_cliente), 1, -1);
             $mesa_cliente_look = substr($this->Db->qstr($mesa_cliente), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where  mesa_cliente like '%" . $mesa_cliente . "%'"; 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where   CAST (mesa_cliente AS TEXT)  like '%" . $mesa_cliente . "%'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where   CAST (mesa_cliente AS VARCHAR)  like '%" . $mesa_cliente . "%'"; 
+      }
+      else
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where  mesa_cliente like '%" . $mesa_cliente . "%'"; 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -409,6 +421,7 @@ class grid_log_pedidos_borrados_pesq
       { 
          while (!$rs->EOF) 
          { 
+            nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
             $rs->MoveNext() ; 
@@ -429,7 +442,7 @@ class grid_log_pedidos_borrados_pesq
       $descr = substr($this->Db->qstr($descr), 1, -1);
             $descr_look = substr($this->Db->qstr($descr), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where  descr like '%" . $descr . "%'"; 
+      $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where  descr like '%" . $descr . "%'"; 
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -454,10 +467,22 @@ class grid_log_pedidos_borrados_pesq
    
    function lookup_ajax_vendedor($vendedor)
    {
+      $vendedor = str_replace($_SESSION['scriptcase']['reg_conf']['grup_num'], "", $vendedor);
       $vendedor = substr($this->Db->qstr($vendedor), 1, -1);
             $vendedor_look = substr($this->Db->qstr($vendedor), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where  vendedor like '%" . $vendedor . "%'"; 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where   CAST (vendedor AS TEXT)  like '%" . $vendedor . "%'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where   CAST (vendedor AS VARCHAR)  like '%" . $vendedor . "%'"; 
+      }
+      else
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where  vendedor like '%" . $vendedor . "%'"; 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -465,6 +490,7 @@ class grid_log_pedidos_borrados_pesq
       { 
          while (!$rs->EOF) 
          { 
+            nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
             $rs->MoveNext() ; 
@@ -559,7 +585,7 @@ class grid_log_pedidos_borrados_pesq
       $nm_esp_postgres = array();
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $Nm_numeric[] = "anio";$Nm_numeric[] = "periodo";$Nm_numeric[] = "cantidad";$Nm_numeric[] = "valorpar";
+      $Nm_numeric[] = "anio";$Nm_numeric[] = "periodo";$Nm_numeric[] = "mesa_cliente";$Nm_numeric[] = "cantidad";$Nm_numeric[] = "valorpar";$Nm_numeric[] = "vendedor";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       if (in_array($campo_join, $Nm_numeric))
       {
@@ -3012,7 +3038,20 @@ foreach ($Arr_format as $Part_date)
       {
       $mesa_cliente_look = substr($this->Db->qstr($mesa_cliente), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where mesa_cliente = '$mesa_cliente_look'"; 
+   if (is_numeric($mesa_cliente))
+   { 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where mesa_cliente = $mesa_cliente_look"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where mesa_cliente = $mesa_cliente_look"; 
+      }
+      else
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where mesa_cliente = $mesa_cliente_look"; 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3020,6 +3059,7 @@ foreach ($Arr_format as $Part_date)
       { 
          while (!$rs->EOF) 
          { 
+            nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = trim($rs->fields[0]);
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
             $rs->MoveNext() ; 
@@ -3031,6 +3071,7 @@ foreach ($Arr_format as $Part_date)
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit; 
       } 
+   } 
       }
       if (isset($nmgp_def_dados[0][$mesa_cliente]))
       {
@@ -3038,11 +3079,12 @@ foreach ($Arr_format as $Part_date)
       }
       else
       {
+            nmgp_Form_Num_Val($mesa_cliente, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
           $sAutocompValue = $mesa_cliente;
       }
 ?>
-<INPUT  type="text" id="SC_mesa_cliente" name="mesa_cliente" value="<?php echo NM_encode_input($mesa_cliente) ?>"  size=50 alt="{datatype: 'text', maxLength: 360, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
-<input class="sc-js-input scFilterObjectEven" type="text" id="id_ac_mesa_cliente" name="mesa_cliente_autocomp" size="50"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'text', maxLength: 360, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}">
+<INPUT  type="text" id="SC_mesa_cliente" name="mesa_cliente" value="<?php echo NM_encode_input($mesa_cliente) ?>" size=50 alt="{datatype: 'integer', maxLength: 360, thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}" style="display: none">
+<input class="sc-js-input scFilterObjectEven" type="text" id="id_ac_mesa_cliente" name="mesa_cliente_autocomp" size="50"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'integer', maxLength: 360, thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}">
 
 
         </TD>
@@ -3078,7 +3120,7 @@ foreach ($Arr_format as $Part_date)
       {
       $descr_look = substr($this->Db->qstr($descr), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where descr = '$descr_look'"; 
+      $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where descr = '$descr_look'"; 
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3144,7 +3186,20 @@ foreach ($Arr_format as $Part_date)
       {
       $vendedor_look = substr($this->Db->qstr($vendedor), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where vendedor = '$vendedor_look'"; 
+   if (is_numeric($vendedor))
+   { 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where vendedor = $vendedor_look"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where vendedor = $vendedor_look"; 
+      }
+      else
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where vendedor = $vendedor_look"; 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3152,6 +3207,7 @@ foreach ($Arr_format as $Part_date)
       { 
          while (!$rs->EOF) 
          { 
+            nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = trim($rs->fields[0]);
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
             $rs->MoveNext() ; 
@@ -3163,6 +3219,7 @@ foreach ($Arr_format as $Part_date)
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit; 
       } 
+   } 
       }
       if (isset($nmgp_def_dados[0][$vendedor]))
       {
@@ -3170,11 +3227,12 @@ foreach ($Arr_format as $Part_date)
       }
       else
       {
+            nmgp_Form_Num_Val($vendedor, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
           $sAutocompValue = $vendedor;
       }
 ?>
-<INPUT  type="text" id="SC_vendedor" name="vendedor" value="<?php echo NM_encode_input($vendedor) ?>"  size=50 alt="{datatype: 'text', maxLength: 360, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
-<input class="sc-js-input scFilterObjectEven" type="text" id="id_ac_vendedor" name="vendedor_autocomp" size="50"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'text', maxLength: 360, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}">
+<INPUT  type="text" id="SC_vendedor" name="vendedor" value="<?php echo NM_encode_input($vendedor) ?>" size=50 alt="{datatype: 'integer', maxLength: 360, thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}" style="display: none">
+<input class="sc-js-input scFilterObjectEven" type="text" id="id_ac_vendedor" name="vendedor_autocomp" size="50"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'integer', maxLength: 360, thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}">
 
 
         </TD>
@@ -4219,6 +4277,14 @@ foreach ($Arr_format as $Part_date)
       if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['psq_check_ret']['periodo'])) {
           if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Periodo : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
       }
+      if ($mesa_cliente_cond != "in")
+      {
+          nm_limpa_numero($mesa_cliente, $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
+      }
+      if ($vendedor_cond != "in")
+      {
+          nm_limpa_numero($vendedor, $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['campos_busca']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['Grid_search']  = array(); 
       $I_Grid = 0;
@@ -4358,6 +4424,22 @@ foreach ($Arr_format as $Part_date)
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['campos_busca'] = $Temp_Busca;
       }
+      if ($mesa_cliente_cond != "in" && $mesa_cliente_cond != "bw" && !empty($mesa_cliente) && !is_numeric($mesa_cliente))
+      {
+          if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Mesa/Cliente";
+      }
+      if ($mesa_cliente_cond == "bw" && ((!empty($mesa_cliente) && !is_numeric($mesa_cliente)) || (!empty($mesa_cliente_input_2) && !is_numeric($mesa_cliente_input_2)) ))
+      {
+          if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Mesa/Cliente";
+      }
+      if ($vendedor_cond != "in" && $vendedor_cond != "bw" && !empty($vendedor) && !is_numeric($vendedor))
+      {
+          if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Vendedor";
+      }
+      if ($vendedor_cond == "bw" && ((!empty($vendedor) && !is_numeric($vendedor)) || (!empty($vendedor_input_2) && !is_numeric($vendedor_input_2)) ))
+      {
+          if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Vendedor";
+      }
       if (!empty($this->Campos_Mens_erro)) 
       {
           return;
@@ -4378,7 +4460,20 @@ foreach ($Arr_format as $Part_date)
     if ($mesa_cliente != '') {
       $mesa_cliente_look = substr($this->Db->qstr($mesa_cliente), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where mesa_cliente = '$mesa_cliente_look'"; 
+   if (is_numeric($mesa_cliente))
+   { 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where mesa_cliente = $mesa_cliente_look"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where mesa_cliente = $mesa_cliente_look"; 
+      }
+      else
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where mesa_cliente = $mesa_cliente_look"; 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -4386,6 +4481,7 @@ foreach ($Arr_format as $Part_date)
       { 
          while (!$rs->EOF) 
          { 
+            nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
             $rs->MoveNext() ; 
@@ -4397,6 +4493,7 @@ foreach ($Arr_format as $Part_date)
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit; 
       } 
+   } 
 
     }
       if (!empty($nmgp_def_dados) && isset($cmp2) && !empty($cmp2))
@@ -4417,13 +4514,15 @@ foreach ($Arr_format as $Part_date)
       }
       else
       {
-          $this->cmp_formatado['mesa_cliente'] = $mesa_cliente;
+          $cmp1 = $mesa_cliente;
+          nmgp_Form_Num_Val($cmp1, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+          $this->cmp_formatado['mesa_cliente'] = $cmp1;
       }
       $nmgp_def_dados = array();
     if ($descr != '') {
       $descr_look = substr($this->Db->qstr($descr), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where descr = '$descr_look'"; 
+      $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where descr = '$descr_look'"; 
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -4468,7 +4567,20 @@ foreach ($Arr_format as $Part_date)
     if ($vendedor != '') {
       $vendedor_look = substr($this->Db->qstr($vendedor), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where vendedor = '$vendedor_look'"; 
+   if (is_numeric($vendedor))
+   { 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where vendedor = $vendedor_look"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where vendedor = $vendedor_look"; 
+      }
+      else
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where vendedor = $vendedor_look"; 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -4476,6 +4588,7 @@ foreach ($Arr_format as $Part_date)
       { 
          while (!$rs->EOF) 
          { 
+            nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
             $rs->MoveNext() ; 
@@ -4487,6 +4600,7 @@ foreach ($Arr_format as $Part_date)
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit; 
       } 
+   } 
 
     }
       if (!empty($nmgp_def_dados) && isset($cmp2) && !empty($cmp2))
@@ -4507,7 +4621,9 @@ foreach ($Arr_format as $Part_date)
       }
       else
       {
-          $this->cmp_formatado['vendedor'] = $vendedor;
+          $cmp1 = $vendedor;
+          nmgp_Form_Num_Val($cmp1, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+          $this->cmp_formatado['vendedor'] = $cmp1;
       }
 
       //----- $anio

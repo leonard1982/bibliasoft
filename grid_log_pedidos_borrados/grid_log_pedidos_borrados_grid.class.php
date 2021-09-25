@@ -154,6 +154,8 @@ class grid_log_pedidos_borrados_grid
    } 
    else 
    { 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+      {
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'])
        { 
            include_once($this->Ini->path_embutida . "grid_log_pedidos_borrados/" . $this->Ini->Apl_resumo); 
@@ -167,6 +169,7 @@ class grid_log_pedidos_borrados_grid
        $this->Res->Erro   = $this->Erro;
        $this->Res->Ini    = $this->Ini;
        $this->Res->Lookup = $this->Lookup;
+      }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['pdf_res'])
        {
             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['proc_pdf'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['proc_pdf_vert'])
@@ -244,7 +247,7 @@ class grid_log_pedidos_borrados_grid
        { 
            $Gera_graf = false;
        } 
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['print_all'] && empty($this->nm_grid_sem_reg) && ($Gera_res || $Gera_graf))
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['print_all'] && empty($this->nm_grid_sem_reg) && ($Gera_res || $Gera_graf) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
        { 
            $this->Res->monta_html_ini_pdf();
            $this->Res->monta_resumo();
@@ -254,7 +257,7 @@ class grid_log_pedidos_borrados_grid
                $this->grafico_pdf();
            }
        } 
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opcao'] == "pdf")
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opcao'] == "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
        { 
            if (isset($_GET['flash_graf']) && 'chart' == $_GET['flash_graf'])
            {
@@ -275,7 +278,7 @@ class grid_log_pedidos_borrados_grid
                $this->Res->monta_html_fim_pdf();
            }
        } 
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['graf_pdf'] == "S")
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['graf_pdf'] == "S" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
        { 
            if (isset($_GET['flash_graf']) && 'pdf' == $_GET['flash_graf'] && $Gera_graf)
            {
@@ -445,13 +448,21 @@ class grid_log_pedidos_borrados_grid
        unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['force_toolbar']);
    } 
        $this->Tem_tab_vert = false;
-   if (count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']) > 1)
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by")
    {
-       $this->width_tabula_quebra  = (((count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']) - 1) * 13) + 3) . "px";
-       $this->width_tabula_display = "''";
-       $this->Tem_tab_vert = true;
+       if (count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']) > 1)
+       {
+           $this->width_tabula_quebra  = (((count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']) - 1) * 13) + 3) . "px";
+           $this->width_tabula_display = "''";
+           $this->Tem_tab_vert = true;
+       }
+       else
+       {
+           $this->width_tabula_quebra  = "0px";
+           $this->width_tabula_display = "none";
+       }
    }
-   else
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
    {
        $this->width_tabula_quebra  = "0px";
        $this->width_tabula_display = "none";
@@ -758,18 +769,14 @@ class grid_log_pedidos_borrados_grid
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']))  
        { 
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select'] = array(); 
-           $Free_sql_atual = array();
-           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_sql'] as $cmp => $resto)
-           {
-               foreach ($resto as $cmp_sql => $ord)
-               {
-                   $Free_sql_atual[$cmp_sql] = 0;
-               } 
-           } 
-           if (!isset($Free_sql_atual['idpedido']))
-           { 
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']['idpedido'] = 'desc'; 
-           } 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']; 
+       } 
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_") 
+   {
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']))  
+       { 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select'] = array(); 
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']; 
        } 
    }
@@ -785,6 +792,13 @@ class grid_log_pedidos_borrados_grid
                    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_quebra'][$cmp_var][$SC_Sql_col] = $SC_Sql_order;
                }
            }
+       } 
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_") 
+   {
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_quebra']))  
+       { 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_quebra'] = array(); 
        } 
    }
    if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_grid']))  
@@ -983,7 +997,7 @@ class grid_log_pedidos_borrados_grid
    $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][1];
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_resumo'])) 
    { 
-       $nmgp_select = "SELECT count(*) AS countTest from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT count(*) AS countTest from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
        $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_pesq']; 
        if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_pesq'])) 
        { 
@@ -1064,27 +1078,27 @@ class grid_log_pedidos_borrados_grid
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT anio, periodo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT anio, periodo, convert(char(23),fechaven,121), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, convert(char(23),fechaven,121), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT anio, periodo, EXTEND(fechaven, YEAR TO DAY), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, EXTEND(fechaven, YEAR TO DAY), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_resumo'])) 
@@ -1140,6 +1154,14 @@ class grid_log_pedidos_borrados_grid
    { 
        $nmgp_order_by = " order by " . $campos_order; 
    } 
+   if (substr(trim($nmgp_order_by), -1) == ",")
+   {
+       $nmgp_order_by = " " . substr(trim($nmgp_order_by), 0, -1);
+   }
+   if (trim($nmgp_order_by) == "order by")
+   {
+       $nmgp_order_by = "";
+   }
    $nmgp_select .= $nmgp_order_by; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['order_grid'] = $nmgp_order_by;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opcao'] == "pdf" || $this->Ini->Apl_paginacao == "FULL")
@@ -1171,6 +1193,7 @@ class grid_log_pedidos_borrados_grid
        $this->fechaven = $this->rs_grid->fields[2] ;  
        $this->numero = $this->rs_grid->fields[3] ;  
        $this->mesa_cliente = $this->rs_grid->fields[4] ;  
+       $this->mesa_cliente = (string)$this->mesa_cliente;
        $this->descr = $this->rs_grid->fields[5] ;  
        $this->cantidad = $this->rs_grid->fields[6] ;  
        $this->cantidad =  str_replace(",", ".", $this->cantidad);
@@ -1179,6 +1202,7 @@ class grid_log_pedidos_borrados_grid
        $this->valorpar =  str_replace(",", ".", $this->valorpar);
        $this->valorpar = (string)$this->valorpar;
        $this->vendedor = $this->rs_grid->fields[8] ;  
+       $this->vendedor = (string)$this->vendedor;
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_orig']))
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1193,6 +1217,10 @@ class grid_log_pedidos_borrados_grid
        if (!isset($this->mesa_cliente)) { $this->mesa_cliente = ""; }
        if (!isset($this->descr)) { $this->descr = ""; }
        if (!isset($this->vendedor)) { $this->vendedor = ""; }
+       $GLOBALS["mesa_cliente"] = $this->rs_grid->fields[4] ;  
+       $GLOBALS["mesa_cliente"] = (string)$GLOBALS["mesa_cliente"] ;
+       $GLOBALS["vendedor"] = $this->rs_grid->fields[8] ;  
+       $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"] ;
        $this->arg_sum_anio = ($this->anio == "") ? " is null " : " = " . $this->anio;
        $this->arg_sum_periodo = ($this->periodo == "") ? " is null " : " = " . $this->periodo;
        $this->look_periodo = $this->periodo; 
@@ -1211,10 +1239,18 @@ class grid_log_pedidos_borrados_grid
                }
            }
        }
+       if ($this->fechaven == "")
+       {
+           $this->arg_sum_fechaven = " is null";
+       }
+       elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+       {
+           $this->arg_sum_fechaven = " = " . $this->Db->qstr($this->fechaven);
+       }
        $this->arg_sum_numero = " = " . $this->Db->qstr($this->numero);
-       $this->arg_sum_mesa_cliente = " = " . $this->Db->qstr($this->mesa_cliente);
+       $this->arg_sum_mesa_cliente = ($this->mesa_cliente == "") ? " is null " : " = " . $this->mesa_cliente;
        $this->arg_sum_descr = " = " . $this->Db->qstr($this->descr);
-       $this->arg_sum_vendedor = " = " . $this->Db->qstr($this->vendedor);
+       $this->arg_sum_vendedor = ($this->vendedor == "") ? " is null " : " = " . $this->vendedor;
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
        $this->SC_sep_quebra = false;
@@ -2387,6 +2423,10 @@ $nm_saida->saida("}\r\n");
                    $nm_saida->saida("          <div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\">{$groupByLabel}</H1></div>\r\n");
                } 
            }
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+           {
+           $nm_saida->saida("          <div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\"></H1></div>\r\n");
+           }
        } 
        $this->Tab_align  = "center";
        $this->Tab_valign = "top";
@@ -3486,6 +3526,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
           $this->fechaven = $this->rs_grid->fields[2] ;  
           $this->numero = $this->rs_grid->fields[3] ;  
           $this->mesa_cliente = $this->rs_grid->fields[4] ;  
+          $this->mesa_cliente = (string)$this->mesa_cliente;
           $this->descr = $this->rs_grid->fields[5] ;  
           $this->cantidad = $this->rs_grid->fields[6] ;  
           $this->cantidad =  str_replace(",", ".", $this->cantidad);
@@ -3494,6 +3535,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
           $this->valorpar =  str_replace(",", ".", $this->valorpar);
           $this->valorpar = (string)$this->valorpar;
           $this->vendedor = $this->rs_grid->fields[8] ;  
+          $this->vendedor = (string)$this->vendedor;
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_orig']))
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -3508,6 +3550,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
           if (!isset($this->mesa_cliente)) { $this->mesa_cliente = ""; }
           if (!isset($this->descr)) { $this->descr = ""; }
           if (!isset($this->vendedor)) { $this->vendedor = ""; }
+          $GLOBALS["mesa_cliente"] = $this->rs_grid->fields[4] ;  
+          $GLOBALS["mesa_cliente"] = (string)$GLOBALS["mesa_cliente"];
+          $GLOBALS["vendedor"] = $this->rs_grid->fields[8] ;  
+          $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"];
           $this->arg_sum_anio = ($this->anio == "") ? " is null " : " = " . $this->anio;
           $this->arg_sum_periodo = ($this->periodo == "") ? " is null " : " = " . $this->periodo;
           $this->look_periodo = $this->periodo; 
@@ -3526,10 +3572,18 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
                    }
                }
           }
+          if ($this->fechaven == "")
+          {
+              $this->arg_sum_fechaven = " is null";
+          }
+          elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+          {
+              $this->arg_sum_fechaven = " = " . $this->Db->qstr($this->fechaven);
+          }
           $this->arg_sum_numero = " = " . $this->Db->qstr($this->numero);
-          $this->arg_sum_mesa_cliente = " = " . $this->Db->qstr($this->mesa_cliente);
+          $this->arg_sum_mesa_cliente = ($this->mesa_cliente == "") ? " is null " : " = " . $this->mesa_cliente;
           $this->arg_sum_descr = " = " . $this->Db->qstr($this->descr);
-          $this->arg_sum_vendedor = " = " . $this->Db->qstr($this->vendedor);
+          $this->arg_sum_vendedor = ($this->vendedor == "") ? " is null " : " = " . $this->vendedor;
           $this->SC_seq_page++; 
           $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['final'] + 1; 
           $this->SC_sep_quebra = true;
@@ -3649,7 +3703,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
               } 
               elseif (($nm_houve_quebra == "S" || ($this->nm_inicio_pag == 0)) && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida_grid'])
               { 
-                 if ($this->pdf_label_group == "S") 
+                 if ($this->pdf_all_label == "S" && ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")) 
+                 { } 
+                 elseif ($this->pdf_label_group == "S") 
                  {
                      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida_grid']) {
                          $this->label_grid($linhas);
@@ -3965,6 +4021,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
               $conteudo = "&nbsp;" ;  
               $graf = "" ;  
           } 
+          $this->Lookup->lookup_mesa_cliente($conteudo , $this->mesa_cliente) ; 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] && !empty($conteudo)) 
           { 
@@ -4090,6 +4147,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
               $conteudo = "&nbsp;" ;  
               $graf = "" ;  
           } 
+          $this->Lookup->lookup_vendedor($conteudo , $this->vendedor) ; 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] && !empty($conteudo)) 
           { 
@@ -4359,6 +4417,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
    $this->sum_mesa_cliente_valorpar = $tot_mesa_cliente[3];
    $Temp_cmp_quebra = array(); 
    $conteudo = sc_strip_script($this->mesa_cliente); 
+   $this->Lookup->lookup_sc_free_group_by_mesa_cliente($conteudo , $this->mesa_cliente) ; 
    $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
    if (isset($this->nmgp_label_quebras['mesa_cliente']))
    {
@@ -4425,6 +4484,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
    $this->sum_vendedor_valorpar = $tot_vendedor[3];
    $Temp_cmp_quebra = array(); 
    $conteudo = sc_strip_script($this->vendedor); 
+   $this->Lookup->lookup_sc_free_group_by_vendedor($conteudo , $this->vendedor) ; 
    $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
    if (isset($this->nmgp_label_quebras['vendedor']))
    {
@@ -5937,6 +5997,102 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
        $nm_saida->saida("    </TR>\r\n");
    }
  } 
+ function quebra_geral__NM_SC__top() 
+ {
+   global $nm_saida; 
+   if (isset($this->NM_tbody_open) && $this->NM_tbody_open)
+   {
+       $nm_saida->saida("    </TBODY>");
+   }
+   $this->NM_calc_span();
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['rows_emb']++;
+    $nm_saida->saida("<tr>\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida_grid']) {
+        $nm_saida->saida("<td class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . "; height: 10px;\">&nbsp;</td>\r\n");
+   }
+    $nm_saida->saida("<td class=\"" . $this->css_scGridTotal . "\" style=\"height: 10px;\" colspan=\"" . $this->NM_colspan . "\">&nbsp;</td>\r\n");
+    $nm_saida->saida("</tr>\r\n");
+ }
+ function quebra_geral__NM_SC__bot() 
+ {
+   global 
+          $nm_saida, $nm_data; 
+   $this->Tot->quebra_geral__NM_SC_(); 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['rows_emb']++;
+   $nm_nivel_book_pdf = "";
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opcao'] == "pdf" && !$this->Print_All)
+   {
+      $nm_nivel_book_pdf = "<div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\">" .  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][0] . "</H1></div>";
+   }
+   $tit_lin_sumariza      =  $nm_nivel_book_pdf . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][1] . ")";
+   $tit_lin_sumariza_orig =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][1] . ")";
+       $nm_saida->saida("    <TR class=\"" . $this->css_scGridTotal . "\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida_grid']) {
+       $nm_saida->saida("    <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra  . "; display:" . $this->width_tabula_display . ";\">&nbsp;</TD>\r\n");
+   }
+   $tit_lin_sumariza_atu = $tit_lin_sumariza;
+   $colspan  = 1;
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opc_psq'])
+   {
+       $colspan++;
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opcao_print'] == "print" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opcao'] == "pdf")
+   {
+       $colspan--;
+   } 
+   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['field_order'] as $Cada_cmp)
+   {
+    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "fechaven" && (!isset($this->NM_cmp_hidden['fechaven']) || $this->NM_cmp_hidden['fechaven'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "numero" && (!isset($this->NM_cmp_hidden['numero']) || $this->NM_cmp_hidden['numero'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "mesa_cliente" && (!isset($this->NM_cmp_hidden['mesa_cliente']) || $this->NM_cmp_hidden['mesa_cliente'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "descr" && (!isset($this->NM_cmp_hidden['descr']) || $this->NM_cmp_hidden['descr'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "cantidad" && (!isset($this->NM_cmp_hidden['cantidad']) || $this->NM_cmp_hidden['cantidad'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "valorpar" && (!isset($this->NM_cmp_hidden['valorpar']) || $this->NM_cmp_hidden['valorpar'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\" style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+          $tit_lin_sumariza_atu = "&nbsp;";
+          $colspan = 0;
+      }
+      $conteudo =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][2] ; 
+      nmgp_Form_Num_Val($conteudo, ",", ",", "0", "S", "2", "$", "V:3:12", "-"); 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_valorpar_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "vendedor" && (!isset($this->NM_cmp_hidden['vendedor']) || $this->NM_cmp_hidden['vendedor'] != "off"))
+    {
+       $colspan++;
+    }
+   }
+   if ($colspan > 0)
+   {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\"   " . "colspan=\"" . $colspan . "\"" . ">&nbsp;</TD>\r\n");
+       $nm_saida->saida("    </TR>\r\n");
+   }
+ } 
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
        $dt_out = $dt_in;
@@ -6134,8 +6290,15 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
       $Tem_gb_pdf  = "s";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+      {
+          $Tem_gb_pdf = "n";
+      }
       $Tem_pdf_res = "n";
-      $Tem_pdf_res = "s";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+      {
+          $Tem_pdf_res = "s";
+      }
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
       {
           $Tem_pdf_res = "n";
@@ -6155,7 +6318,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_word_res = "n";
-          $Tem_word_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_word_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_word_res = "n";
@@ -6170,7 +6336,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_xls_res = "n";
-          $Tem_xls_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_xls_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_xls_res = "n";
@@ -6190,7 +6359,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_xml_res = "n";
-          $Tem_xml_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_xml_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_xml_res = "n";
@@ -6205,7 +6377,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_csv_res = "n";
-          $Tem_csv_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_csv_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_csv_res = "n";
@@ -6233,7 +6408,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       if ($this->nmgp_botoes['print'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $Tem_pdf_res = "n";
-          $Tem_pdf_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_pdf_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_pdf_res = "n";
@@ -6263,6 +6441,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       }
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
+        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+        {
           if ($this->nmgp_botoes['summary'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
           {
             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
@@ -6278,6 +6458,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
                   $NM_btn = true;
             }
           }
+        }
           if (is_file("grid_log_pedidos_borrados_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_log_pedidos_borrados_help.txt"); 
@@ -6645,8 +6826,15 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
       $Tem_gb_pdf  = "s";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+      {
+          $Tem_gb_pdf = "n";
+      }
       $Tem_pdf_res = "n";
-      $Tem_pdf_res = "s";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+      {
+          $Tem_pdf_res = "s";
+      }
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
       {
           $Tem_pdf_res = "n";
@@ -6666,7 +6854,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_word_res = "n";
-          $Tem_word_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_word_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_word_res = "n";
@@ -6681,7 +6872,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_xls_res = "n";
-          $Tem_xls_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_xls_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_xls_res = "n";
@@ -6701,7 +6895,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_xml_res = "n";
-          $Tem_xml_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_xml_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_xml_res = "n";
@@ -6716,7 +6913,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
           $Tem_csv_res = "n";
-          $Tem_csv_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_csv_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_csv_res = "n";
@@ -6744,7 +6944,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
       if ($this->nmgp_botoes['print'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $Tem_pdf_res = "n";
-          $Tem_pdf_res = "s";
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+          {
+              $Tem_pdf_res = "s";
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
           {
               $Tem_pdf_res = "n";
@@ -6848,6 +7051,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
               $NM_Gbtn = true;
           }
       }
+        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] != "_NM_SC_")
+        {
           if ($this->nmgp_botoes['summary'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
           {
             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
@@ -6866,6 +7071,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
                   $NM_Gbtn = true;
             }
           }
+        }
           if ($NM_Gbtn)
           {
                   $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
@@ -7807,13 +8013,16 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
        {
        $mesa_cliente_look = substr($this->Db->qstr($mesa_cliente), 1, -1); 
        $nmgp_def_dados = array(); 
-       $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where mesa_cliente = '$mesa_cliente_look'"; 
+    if (is_numeric($mesa_cliente))
+    { 
+       $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where mesa_cliente = $mesa_cliente_look"; 
        $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
        $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
        { 
           while (!$rs->EOF) 
           { 
+              nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = trim($rs->fields[0]);
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
              $rs->MoveNext(); 
@@ -7832,6 +8041,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
               echo $this->Db->ErrorMsg(); 
            } 
        } 
+    } 
        }
        if (isset($nmgp_def_dados[0][$mesa_cliente]))
        {
@@ -7843,13 +8053,13 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
            $val[0][0]      = $val_cmp;
        }
        $val_cmp = (isset($val[0][0])) ? $val[0][0] : "";
-       $lin_obj .= "     <input  type=\"text\" class='sc-js-input " . $this->css_scAppDivToolbarInput . "' id='grid_search_mesa_cliente_val_" . $ind . "' name='val_grid_search_mesa_cliente_" . $ind . "' value=\"" . NM_encode_input($val_cmp) . "\" size=50 alt=\"{datatype: 'text', maxLength: 360, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}\" style='display: none'>";
+       $lin_obj .= "     <input  type=\"text\" class='sc-js-input " . $this->css_scAppDivToolbarInput . "' id='grid_search_mesa_cliente_val_" . $ind . "' name='val_grid_search_mesa_cliente_" . $ind . "' value=\"" . NM_encode_input($val_cmp) . "\" size=50 alt=\"{datatype: 'text', maxLength: 360, allowedChars: '0123456789" . $_SESSION['scriptcase']['reg_conf']['dec_num']  . $_SESSION['scriptcase']['reg_conf']['grup_num'] . "', lettersCase: '', enterTab: false}\" style='display: none'>";
        $tmp_pos = strpos($val_cmp, "##@@");
        if ($tmp_pos !== false) {
            $val_cmp = substr($val_cmp, ($tmp_pos + 4));
            $sAutocompValue = substr($sAutocompValue, ($tmp_pos + 4));
        }
-       $lin_obj .= "     <input class='sc-js-input " . $this->css_scAppDivToolbarInput . "' type='text' id='id_ac_grid_mesa_cliente" . $ind . "' name='val_grid_search_mesa_cliente_autocomp" . $ind . "' size='50' value='" . NM_encode_input($sAutocompValue) . "' alt=\"{datatype: 'text', maxLength: 50, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}\">";
+       $lin_obj .= "     <input class='sc-js-input " . $this->css_scAppDivToolbarInput . "' type='text' id='id_ac_grid_mesa_cliente" . $ind . "' name='val_grid_search_mesa_cliente_autocomp" . $ind . "' size='50' value='" . NM_encode_input($sAutocompValue) . "' alt=\"{datatype: 'text', maxLength: 50, allowedChars: '0123456789" . $_SESSION['scriptcase']['reg_conf']['dec_num']  . $_SESSION['scriptcase']['reg_conf']['grup_num'] . "', lettersCase: '', enterTab: false}\">";
        $lin_obj .= "       </span>";
        $lin_obj .= "          </div>";
        $lin_obj .= "          <div class='scGridFilterTagListFilterBar'>";
@@ -7887,7 +8097,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
        {
        $descr_look = substr($this->Db->qstr($descr), 1, -1); 
        $nmgp_def_dados = array(); 
-       $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where descr = '$descr_look'"; 
+       $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where descr = '$descr_look'"; 
        $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
        $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
@@ -7967,13 +8177,16 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
        {
        $vendedor_look = substr($this->Db->qstr($vendedor), 1, -1); 
        $nmgp_def_dados = array(); 
-       $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where vendedor = '$vendedor_look'"; 
+    if (is_numeric($vendedor))
+    { 
+       $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where vendedor = $vendedor_look"; 
        $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
        $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
        { 
           while (!$rs->EOF) 
           { 
+              nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = trim($rs->fields[0]);
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
              $rs->MoveNext(); 
@@ -7992,6 +8205,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
               echo $this->Db->ErrorMsg(); 
            } 
        } 
+    } 
        }
        if (isset($nmgp_def_dados[0][$vendedor]))
        {
@@ -8003,13 +8217,13 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
            $val[0][0]      = $val_cmp;
        }
        $val_cmp = (isset($val[0][0])) ? $val[0][0] : "";
-       $lin_obj .= "     <input  type=\"text\" class='sc-js-input " . $this->css_scAppDivToolbarInput . "' id='grid_search_vendedor_val_" . $ind . "' name='val_grid_search_vendedor_" . $ind . "' value=\"" . NM_encode_input($val_cmp) . "\" size=50 alt=\"{datatype: 'text', maxLength: 360, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}\" style='display: none'>";
+       $lin_obj .= "     <input  type=\"text\" class='sc-js-input " . $this->css_scAppDivToolbarInput . "' id='grid_search_vendedor_val_" . $ind . "' name='val_grid_search_vendedor_" . $ind . "' value=\"" . NM_encode_input($val_cmp) . "\" size=50 alt=\"{datatype: 'text', maxLength: 360, allowedChars: '0123456789" . $_SESSION['scriptcase']['reg_conf']['dec_num']  . $_SESSION['scriptcase']['reg_conf']['grup_num'] . "', lettersCase: '', enterTab: false}\" style='display: none'>";
        $tmp_pos = strpos($val_cmp, "##@@");
        if ($tmp_pos !== false) {
            $val_cmp = substr($val_cmp, ($tmp_pos + 4));
            $sAutocompValue = substr($sAutocompValue, ($tmp_pos + 4));
        }
-       $lin_obj .= "     <input class='sc-js-input " . $this->css_scAppDivToolbarInput . "' type='text' id='id_ac_grid_vendedor" . $ind . "' name='val_grid_search_vendedor_autocomp" . $ind . "' size='50' value='" . NM_encode_input($sAutocompValue) . "' alt=\"{datatype: 'text', maxLength: 50, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}\">";
+       $lin_obj .= "     <input class='sc-js-input " . $this->css_scAppDivToolbarInput . "' type='text' id='id_ac_grid_vendedor" . $ind . "' name='val_grid_search_vendedor_autocomp" . $ind . "' size='50' value='" . NM_encode_input($sAutocompValue) . "' alt=\"{datatype: 'text', maxLength: 50, allowedChars: '0123456789" . $_SESSION['scriptcase']['reg_conf']['dec_num']  . $_SESSION['scriptcase']['reg_conf']['grup_num'] . "', lettersCase: '', enterTab: false}\">";
        $lin_obj .= "       </span>";
        $lin_obj .= "          </div>";
        $lin_obj .= "          <div class='scGridFilterTagListFilterBar'>";
@@ -8024,13 +8238,25 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
        $this->NM_case_insensitive = false;
        $mesa_cliente_look = substr($this->Db->qstr($mesa_cliente), 1, -1); 
        $nmgp_def_dados = array(); 
-       $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where  mesa_cliente like '%" . $mesa_cliente . "%'"; 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where   CAST (mesa_cliente AS TEXT)  like '%" . $mesa_cliente . "%'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where   CAST (mesa_cliente AS VARCHAR)  like '%" . $mesa_cliente . "%'"; 
+      }
+      else
+      {
+          $nm_comando = "select distinct mesa_cliente from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where  mesa_cliente like '%" . $mesa_cliente . "%'"; 
+      }
        $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
        $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
        { 
           while (!$rs->EOF) 
           { 
+              nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
             $cmp1 = grid_log_pedidos_borrados_pack_protect_string($cmp1);
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 
@@ -8050,7 +8276,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
        $this->NM_case_insensitive = false;
        $descr_look = substr($this->Db->qstr($descr), 1, -1); 
        $nmgp_def_dados = array(); 
-       $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where  descr like '%" . $descr . "%'"; 
+       $nm_comando = "select distinct descr from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where  descr like '%" . $descr . "%'"; 
        $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
        $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
@@ -8076,13 +8302,25 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['p
        $this->NM_case_insensitive = false;
        $vendedor_look = substr($this->Db->qstr($vendedor), 1, -1); 
        $nmgp_def_dados = array(); 
-       $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp where  vendedor like '%" . $vendedor . "%'"; 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where   CAST (vendedor AS TEXT)  like '%" . $vendedor . "%'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where   CAST (vendedor AS VARCHAR)  like '%" . $vendedor . "%'"; 
+      }
+      else
+      {
+          $nm_comando = "select distinct vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp where  vendedor like '%" . $vendedor . "%'"; 
+      }
        $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
        $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
        { 
           while (!$rs->EOF) 
           { 
+              nmgp_Form_Num_Val($rs->fields[0], $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
             $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
             $cmp1 = grid_log_pedidos_borrados_pack_protect_string($cmp1);
             $nmgp_def_dados[] = array($cmp1 => $cmp1); 

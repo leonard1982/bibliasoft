@@ -112,6 +112,10 @@ class grid_log_pedidos_borrados_xml
       { 
           $this->Tem_xml_res = (strpos(" " . $_REQUEST['SC_module_export'], "resume") !== false) ? true : false;
       } 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+      {
+          $this->Tem_xml_res  = false;
+      }
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_cmp']))
       {
           $this->Tem_xml_res  = false;
@@ -138,6 +142,10 @@ class grid_log_pedidos_borrados_xml
           {
               $this->sum_cantidad = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][2];
               $this->sum_valorpar = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][3];
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+          {
+              $this->sum_valorpar = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['tot_geral'][2];
           }
       }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] && !$this->Ini->sc_export_ajax) {
@@ -306,30 +314,30 @@ class grid_log_pedidos_borrados_xml
       }
       $this->nm_field_dinamico = array();
       $this->nm_order_dinamico = array();
-      $nmgp_select_count = "SELECT count(*) AS countTest from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+      $nmgp_select_count = "SELECT count(*) AS countTest from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT anio, periodo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT anio, periodo, convert(char(23),fechaven,121), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, convert(char(23),fechaven,121), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT anio, periodo, EXTEND(fechaven, YEAR TO DAY), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, EXTEND(fechaven, YEAR TO DAY), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+          $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['where_pesq'];
@@ -394,6 +402,7 @@ class grid_log_pedidos_borrados_xml
          $this->fechaven = $rs->fields[2] ;  
          $this->numero = $rs->fields[3] ;  
          $this->mesa_cliente = $rs->fields[4] ;  
+         $this->mesa_cliente = (string)$this->mesa_cliente;
          $this->descr = $rs->fields[5] ;  
          $this->cantidad = $rs->fields[6] ;  
          $this->cantidad =  str_replace(",", ".", $this->cantidad);
@@ -402,10 +411,19 @@ class grid_log_pedidos_borrados_xml
          $this->valorpar =  str_replace(",", ".", $this->valorpar);
          $this->valorpar = (string)$this->valorpar;
          $this->vendedor = $rs->fields[8] ;  
+         $this->vendedor = (string)$this->vendedor;
          //----- lookup - periodo
          $this->look_periodo = $this->periodo; 
          $this->Lookup->lookup_periodo($this->look_periodo); 
          $this->look_periodo = ($this->look_periodo == "&nbsp;") ? "" : $this->look_periodo; 
+         //----- lookup - mesa_cliente
+         $this->look_mesa_cliente = $this->mesa_cliente; 
+         $this->Lookup->lookup_mesa_cliente($this->look_mesa_cliente, $this->mesa_cliente) ; 
+         $this->look_mesa_cliente = ($this->look_mesa_cliente == "&nbsp;") ? "" : $this->look_mesa_cliente; 
+         //----- lookup - vendedor
+         $this->look_vendedor = $this->vendedor; 
+         $this->Lookup->lookup_vendedor($this->look_vendedor, $this->vendedor) ; 
+         $this->look_vendedor = ($this->look_vendedor == "&nbsp;") ? "" : $this->look_vendedor; 
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['field_order'] as $Cada_col)
          { 
@@ -745,9 +763,9 @@ class grid_log_pedidos_borrados_xml
    //----- mesa_cliente
    function NM_export_mesa_cliente()
    {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->mesa_cliente))
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_mesa_cliente))
          {
-             $this->mesa_cliente = sc_convert_encoding($this->mesa_cliente, "UTF-8", $_SESSION['scriptcase']['charset']);
+             $this->look_mesa_cliente = sc_convert_encoding($this->look_mesa_cliente, "UTF-8", $_SESSION['scriptcase']['charset']);
          }
          if ($this->Xml_tag_label)
          {
@@ -760,11 +778,11 @@ class grid_log_pedidos_borrados_xml
          $this->clear_tag($SC_Label); 
          if ($this->New_Format)
          {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->mesa_cliente) . "</" . $SC_Label . ">\r\n";
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_mesa_cliente) . "</" . $SC_Label . ">\r\n";
          }
          else
          {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->mesa_cliente) . "\"";
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_mesa_cliente) . "\"";
          }
    }
    //----- descr
@@ -839,9 +857,9 @@ class grid_log_pedidos_borrados_xml
    //----- vendedor
    function NM_export_vendedor()
    {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->vendedor))
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_vendedor))
          {
-             $this->vendedor = sc_convert_encoding($this->vendedor, "UTF-8", $_SESSION['scriptcase']['charset']);
+             $this->look_vendedor = sc_convert_encoding($this->look_vendedor, "UTF-8", $_SESSION['scriptcase']['charset']);
          }
          if ($this->Xml_tag_label)
          {
@@ -854,11 +872,11 @@ class grid_log_pedidos_borrados_xml
          $this->clear_tag($SC_Label); 
          if ($this->New_Format)
          {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->vendedor) . "</" . $SC_Label . ">\r\n";
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_vendedor) . "</" . $SC_Label . ">\r\n";
          }
          else
          {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->vendedor) . "\"";
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_vendedor) . "\"";
          }
    }
 

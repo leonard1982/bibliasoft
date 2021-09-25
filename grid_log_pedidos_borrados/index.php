@@ -228,7 +228,7 @@ class grid_log_pedidos_borrados_ini
       $this->nm_hr_criacao   = "130303"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210925"; 
-      $this->nm_hr_ult_alt   = "131130"; 
+      $this->nm_hr_ult_alt   = "132647"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -945,7 +945,7 @@ class grid_log_pedidos_borrados_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_log_pedidos_borrados']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_log_pedidos_borrados']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDuFaHAN7HuB/DMNOV9FeHEF/HIBiD9BsZ1FGZ1BOD5XGDMzGHENiDWF/HMX7HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoBqHQFYDuBqHArYVWBqDMrYV9FeHEF/HMBOHQNmH9BOHArYV5FaDENOHEFiDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUD9XsDQJsZ1rwD5XGHgrYDkFCDWXCDoraDcJUZ1F7DSrYV5B/DEBOZSJGH5FYDoFUDcJeH9X7Z1rwV5BOHuzGVIBODWFaDoNUD9BsH9FaD1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoJeD9XGZ1FGHABYD5rqDEvsZSJGHEFqDoJeHQBiZSFGHArYHQJsDMvsVcBUH5XCVoF7HQJmZSBqHABYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiDSvOD5XGHgNKHArCDWF/VoBiDcJUZSX7Z1BYHuFaHuBYV9FeV5X7VEraD9XGZ1FGHArYD5XGDMzGZSJ3H5FYDoJeD9FYDuBqHAveV5XGHuBYVIB/HEF/DoF7D9XGZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQFUHIrwHuX7HgvOVcBOHEF/VoraDcBqZSBqHANOHuFGHgveHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDEBOVkJqV5FaVoJwD9JKZ9rqZ1zGD5F7DMvODkB/DWB3VoX7D9JmZSBOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODuX7VoX7D9JmZ1B/D1rKD5BiDEBOHEFiV5FaVoBqDcXOZSFGHAveD5JwHgrKVcFKHEFYDoNUD9BsH9FaD1rwD5BiDMBYVkXeV5FaDoJeD9NwH9X7HArYD5JsHuNODkFCH5B7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuF7HgvsVIBsDuFqHIraD9BsZSBOHArYHQF7DMBYVkXeHEFqDoXGD9XsDQBqHAvOD5F7HuzGVcBOV5F/HMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUHEX/VoX7HQNwZkFGHArKV5FUDMrYZSXeV5FqHIJsHQFYH9FGHAveHuNUHuBOVcBOH5XKVorqDcNmZ1FGDSBOZMBOHgveHENiH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4002,7 +4002,7 @@ class grid_log_pedidos_borrados_apl
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_date_format']['sc_free_group_by']['fechaven'] = 'YYYY';
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_All_Groupby'] = array('sc_free_group_by' => 'all');
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_All_Groupby'] = array('_NM_SC_' => 'grid', 'sc_free_group_by' => 'all');
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Groupby_hide'])) 
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Groupby_hide'] = array();
@@ -4053,6 +4053,9 @@ class grid_log_pedidos_borrados_apl
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['Labels_GB'][] = $Arr_free_labels[$Field];
           }
+      }
+      if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_")
+      {
       }
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['summarizing_fields_display']['sc_free_group_by']))
       {
@@ -4720,18 +4723,14 @@ class grid_log_pedidos_borrados_apl
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']))  
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select'] = array(); 
-              $Free_sql_atual = array();
-              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Gb_Free_sql'] as $cmp => $resto)
-              {
-                  foreach ($resto as $cmp_sql => $ord)
-                  {
-                      $Free_sql_atual[$cmp_sql] = 0;
-                  } 
-              } 
-              if (!isset($Free_sql_atual['idpedido']))
-              { 
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']['idpedido'] = 'desc'; 
-              } 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']; 
+          } 
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['SC_Ind_Groupby'] == "_NM_SC_") 
+      {
+          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']))  
+          { 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select'] = array(); 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['ordem_select']; 
           } 
       }
@@ -5788,7 +5787,11 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           }
           if ($field == "SC_all_Cmp" || $field == "mesa_cliente") 
           {
-              $this->SC_monta_condicao($comando, "mesa_cliente", $arg_search, $data_search);
+              $data_lookup = $this->SC_lookup_mesa_cliente($arg_search, $data_search);
+              if (is_array($data_lookup) && !empty($data_lookup)) 
+              {
+                  $this->SC_monta_condicao($comando, "mesa_cliente", $arg_search, $data_lookup);
+              }
           }
           if ($field == "SC_all_Cmp" || $field == "descr") 
           {
@@ -5804,7 +5807,11 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           }
           if ($field == "SC_all_Cmp" || $field == "vendedor") 
           {
-              $this->SC_monta_condicao($comando, "vendedor", $arg_search, $data_search);
+              $data_lookup = $this->SC_lookup_vendedor($arg_search, $data_search);
+              if (is_array($data_lookup) && !empty($data_lookup)) 
+              {
+                  $this->SC_monta_condicao($comando, "vendedor", $arg_search, $data_lookup);
+              }
           }
       }
       if (empty($comando)) 
@@ -5851,7 +5858,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "anio";$nm_numeric[] = "periodo";$nm_numeric[] = "cantidad";$nm_numeric[] = "valorpar";
+      $nm_numeric[] = "anio";$nm_numeric[] = "periodo";$nm_numeric[] = "mesa_cliente";$nm_numeric[] = "cantidad";$nm_numeric[] = "valorpar";$nm_numeric[] = "vendedor";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['decimal_db'] == ".")
@@ -6095,6 +6102,176 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           
        }
        return $result;
+   }
+   function SC_lookup_mesa_cliente($condicao, $campo)
+   {
+       $result     = array();
+       $campo_orig = $campo;
+       $campo      = substr($this->Db->qstr($campo), 1, -1);
+       $nm_comando = "SELECT nombres, idtercero FROM terceros WHERE (nombres LIKE '%$campo%')" ; 
+       if ($condicao == "ii")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
+       }
+       if ($condicao == "df" || $condicao == "np")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
+       }
+       if ($condicao == "gt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
+       }
+       if ($condicao == "ge")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
+       }
+       if ($condicao == "lt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
+       }
+       if ($condicao == "le")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+       if ($rx = $this->Db->Execute($nm_comando)) 
+       { 
+           $campo = $campo_orig;
+           while (!$rx->EOF) 
+           { 
+               $chave = (isset($rx->fields[1])) ? $rx->fields[1] : $rx->fields[0];
+               $label = $rx->fields[0];
+               if ($condicao == "eq" && $campo == $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "qp" && strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "np" && !strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "df" && $campo != $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "gt" && $label > $campo )
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ge" && $label >= $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "lt" && $label < $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "le" && $label <= $campo)
+               {
+                   $result[] = $chave;
+               }
+               $rx->MoveNext() ;
+           }  
+           return $result;
+       }  
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
+   }
+   function SC_lookup_vendedor($condicao, $campo)
+   {
+       $result     = array();
+       $campo_orig = $campo;
+       $campo      = substr($this->Db->qstr($campo), 1, -1);
+       $nm_comando = "SELECT nombres, idtercero FROM terceros WHERE (nombres LIKE '%$campo%')" ; 
+       if ($condicao == "ii")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
+       }
+       if ($condicao == "df" || $condicao == "np")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
+       }
+       if ($condicao == "gt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
+       }
+       if ($condicao == "ge")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
+       }
+       if ($condicao == "lt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
+       }
+       if ($condicao == "le")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+       if ($rx = $this->Db->Execute($nm_comando)) 
+       { 
+           $campo = $campo_orig;
+           while (!$rx->EOF) 
+           { 
+               $chave = (isset($rx->fields[1])) ? $rx->fields[1] : $rx->fields[0];
+               $label = $rx->fields[0];
+               if ($condicao == "eq" && $campo == $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "qp" && strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "np" && !strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "df" && $campo != $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "gt" && $label > $campo )
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ge" && $label >= $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "lt" && $label < $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "le" && $label <= $campo)
+               {
+                   $result[] = $chave;
+               }
+               $rx->MoveNext() ;
+           }  
+           return $result;
+       }  
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
    }
    function SC_proc_grid_search($Parms)
    {
@@ -7569,8 +7746,10 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        $Nm_numeric = array();
        $Nm_numeric[] = "anio";
        $Nm_numeric[] = "periodo";
+       $Nm_numeric[] = "mesa_cliente";
        $Nm_numeric[] = "cantidad";
        $Nm_numeric[] = "valorpar";
+       $Nm_numeric[] = "vendedor";
        if (in_array($name, $Nm_numeric))
        {
            if (is_array($val))

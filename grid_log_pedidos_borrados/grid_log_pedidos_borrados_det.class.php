@@ -232,23 +232,23 @@ class grid_log_pedidos_borrados_det
    $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_edit.php", "F", "nmgp_Form_Num_Val") ; 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase)) 
    { 
-       $nmgp_select = "SELECT anio, periodo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql)) 
    { 
-       $nmgp_select = "SELECT anio, periodo, convert(char(23),fechaven,121), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, convert(char(23),fechaven,121), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle)) 
    { 
-       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix)) 
    { 
-       $nmgp_select = "SELECT anio, periodo, EXTEND(fechaven, YEAR TO DAY), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, EXTEND(fechaven, YEAR TO DAY), numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  (select  t.nombres from terceros t where t.idtercero=ps.idcli) as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  (select  t.nombres from terceros t where t.idtercero=ps.vendedor) as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido where ps.idpedido not in(select p.idpedido from pedidos p)  and dps.descr is not null  ) nm_sel_esp"; 
+       $nmgp_select = "SELECT anio, periodo, fechaven, numero, mesa_cliente, descr, cantidad, valorpar, vendedor from (select  YEAR(ps.fechaven) as anio, MONTH(ps.fechaven) as periodo, ps.fechaven,  concat((select r.prefijo from resdian r where r.Idres=ps.prefijo_ped),'/',ps.numpedido) as numero,  ps.idcli as mesa_cliente,  dps.descr,  dps.cantidad,  dps.valorpar,  ps.vendedor as vendedor  from  pedidos_self ps  left join detallepedido_self dps on dps.idpedid=ps.idpedido  where  dps.descr is not null and (select p.idpedido from pedidos p where p.idpedido=ps.idpedido) is null) nm_sel_esp"; 
    } 
    $parms_det = explode("*PDet*", $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['chave_det']) ; 
    foreach ($parms_det as $key => $cada_par)
@@ -258,15 +258,15 @@ class grid_log_pedidos_borrados_det
    } 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nmgp_select .= " where  anio = $parms_det[0] and periodo = $parms_det[1] and numero = '$parms_det[2]' and mesa_cliente = '$parms_det[3]' and descr = '$parms_det[4]' and cantidad = $parms_det[5] and valorpar = $parms_det[6] and vendedor = '$parms_det[7]'" ;  
+       $nmgp_select .= " where  anio = $parms_det[0] and periodo = $parms_det[1] and numero = '$parms_det[2]' and mesa_cliente = $parms_det[3] and descr = '$parms_det[4]' and cantidad = $parms_det[5] and valorpar = $parms_det[6] and vendedor = $parms_det[7]" ;  
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nmgp_select .= " where  anio = $parms_det[0] and periodo = $parms_det[1] and numero = '$parms_det[2]' and mesa_cliente = '$parms_det[3]' and descr = '$parms_det[4]' and cantidad = $parms_det[5] and valorpar = $parms_det[6] and vendedor = '$parms_det[7]'" ;  
+       $nmgp_select .= " where  anio = $parms_det[0] and periodo = $parms_det[1] and numero = '$parms_det[2]' and mesa_cliente = $parms_det[3] and descr = '$parms_det[4]' and cantidad = $parms_det[5] and valorpar = $parms_det[6] and vendedor = $parms_det[7]" ;  
    } 
    else 
    { 
-       $nmgp_select .= " where  anio = $parms_det[0] and periodo = $parms_det[1] and numero = '$parms_det[2]' and mesa_cliente = '$parms_det[3]' and descr = '$parms_det[4]' and cantidad = $parms_det[5] and valorpar = $parms_det[6] and vendedor = '$parms_det[7]'" ;  
+       $nmgp_select .= " where  anio = $parms_det[0] and periodo = $parms_det[1] and numero = '$parms_det[2]' and mesa_cliente = $parms_det[3] and descr = '$parms_det[4]' and cantidad = $parms_det[5] and valorpar = $parms_det[6] and vendedor = $parms_det[7]" ;  
    } 
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
@@ -283,6 +283,7 @@ class grid_log_pedidos_borrados_det
    $this->fechaven = $rs->fields[2] ;  
    $this->numero = $rs->fields[3] ;  
    $this->mesa_cliente = $rs->fields[4] ;  
+   $this->mesa_cliente = (string)$this->mesa_cliente;
    $this->descr = $rs->fields[5] ;  
    $this->cantidad = $rs->fields[6] ;  
    $this->cantidad = str_replace(",", ".", $this->cantidad);
@@ -291,6 +292,7 @@ class grid_log_pedidos_borrados_det
    $this->valorpar = str_replace(",", ".", $this->valorpar);
    $this->valorpar = (string)$this->valorpar;
    $this->vendedor = $rs->fields[8] ;  
+   $this->vendedor = (string)$this->vendedor;
    $this->Lookup->lookup_periodo($this->periodo); 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['cmp_acum']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['cmp_acum']))
    {
@@ -654,6 +656,7 @@ $nm_saida->saida("</script>\r\n");
           { 
               $conteudo = "&nbsp;" ; 
           } 
+          $this->Lookup->lookup_mesa_cliente($conteudo , $this->mesa_cliente) ; 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] && !empty($conteudo)) 
           { 
@@ -770,6 +773,7 @@ $nm_saida->saida("</script>\r\n");
           { 
               $conteudo = "&nbsp;" ; 
           } 
+          $this->Lookup->lookup_vendedor($conteudo , $this->vendedor) ; 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_log_pedidos_borrados']['embutida'] && !empty($conteudo)) 
           { 
