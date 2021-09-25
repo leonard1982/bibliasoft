@@ -312,6 +312,8 @@ class grid_log_grafico
       $this->array_total_usuario = array();
       $this->array_total_accion = array();
       $this->array_total_observaciones = array();
+      $this->array_total_periodo = array();
+      $this->array_total_anio = array();
       //---- 
       $ind_tit = $this->campo_val;
       if ($this->campo > 0)
@@ -335,6 +337,8 @@ class grid_log_grafico
       $prep_label['usuario'] = "Usuario";
       $prep_label['accion'] = "Accion";
       $prep_label['observaciones'] = "Observaciones";
+      $prep_label['periodo'] = "Periodo";
+      $prep_label['anio'] = "Año";
       $x = 0;
       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Gb_Free_cmp'] as $cmp_gb => $resto)
       {

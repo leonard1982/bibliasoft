@@ -161,6 +161,10 @@ function Sel_cmp_process()
       $tab_blk_campos = array();
 
             $tab_ger_campos['idlog'] = "on";
+      $tab_ger_campos['anio'] = "on";
+      $tab_blk_campos[] = "anio";
+      $tab_ger_campos['periodo'] = "on";
+      $tab_blk_campos[] = "periodo";
       $tab_ger_campos['fechayhora'] = "on";
       $tab_ger_campos['usuario'] = "on";
       $tab_ger_campos['accion'] = "on";

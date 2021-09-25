@@ -345,7 +345,7 @@ class grid_log_pesq
       $observaciones = substr($this->Db->qstr($observaciones), 1, -1);
             $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp where  observaciones like '%" . $observaciones . "%'"; 
+      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp where  observaciones like '%" . $observaciones . "%'"; 
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -442,7 +442,7 @@ class grid_log_pesq
       $nm_esp_postgres = array();
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $Nm_numeric[] = "idlog";$Nm_numeric[] = "usuario";$Nm_numeric[] = "idlog";$Nm_numeric[] = "usuario";
+      $Nm_numeric[] = "idlog";$Nm_numeric[] = "usuario";$Nm_numeric[] = "periodo";$Nm_numeric[] = "anio";$Nm_numeric[] = "idlog";$Nm_numeric[] = "usuario";$Nm_numeric[] = "periodo";$Nm_numeric[] = "anio";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       if (in_array($campo_join, $Nm_numeric))
       {
@@ -1932,6 +1932,10 @@ function scJQCalendarAdd() {
       return;
   }
   var str_out = "";
+  str_out += 'SC_anio_cond#NMF#' + search_get_sel_txt('SC_anio_cond') + '@NMF@';
+  str_out += 'SC_anio#NMF#' + search_get_select('SC_anio') + '@NMF@';
+  str_out += 'SC_periodo_cond#NMF#' + search_get_sel_txt('SC_periodo_cond') + '@NMF@';
+  str_out += 'SC_periodo#NMF#' + search_get_select('SC_periodo') + '@NMF@';
   str_out += 'SC_fechayhora_cond#NMF#' + search_get_sel_txt('SC_fechayhora_cond') + '@NMF@';
   str_out += 'SC_fechayhora_dia#NMF#' + search_get_sel_txt('SC_fechayhora_dia') + '@NMF@';
   str_out += 'SC_fechayhora_mes#NMF#' + search_get_sel_txt('SC_fechayhora_mes') + '@NMF@';
@@ -2262,6 +2266,8 @@ function nm_open_popup(parms)
    function monta_form()
    {
       global 
+             $anio_cond, $anio,
+             $periodo_cond, $periodo,
              $fechayhora_cond, $fechayhora, $fechayhora_dia, $fechayhora_mes, $fechayhora_ano, $fechayhora_hor, $fechayhora_min, $fechayhora_seg, $fechayhora_input_2_dia, $fechayhora_input_2_mes, $fechayhora_input_2_ano, $fechayhora_input_2_min, $fechayhora_input_2_hor, $fechayhora_input_2_seg,
              $usuario_cond, $usuario, $usuario_autocomp,
              $accion_cond, $accion,
@@ -2304,6 +2310,10 @@ function nm_open_popup(parms)
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
           }
+          $anio = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['anio']; 
+          $anio_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['anio_cond']; 
+          $periodo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['periodo']; 
+          $periodo_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['periodo_cond']; 
           $fechayhora_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['fechayhora_dia']; 
           $fechayhora_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['fechayhora_mes']; 
           $fechayhora_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['fechayhora_ano']; 
@@ -2325,6 +2335,14 @@ function nm_open_popup(parms)
           $observaciones_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['observaciones_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['NM_operador']; 
       } 
+      if (!isset($anio_cond) || empty($anio_cond))
+      {
+         $anio_cond = "eq";
+      }
+      if (!isset($periodo_cond) || empty($periodo_cond))
+      {
+         $periodo_cond = "eq";
+      }
       if (!isset($fechayhora_cond) || empty($fechayhora_cond))
       {
          $fechayhora_cond = "bw";
@@ -2344,11 +2362,15 @@ function nm_open_popup(parms)
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
+      $str_hide_anio = (in_array($anio_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_periodo = (in_array($periodo_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_fechayhora = (in_array($fechayhora_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_usuario = (in_array($usuario_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_accion = (in_array($accion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_observaciones = (in_array($observaciones_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
+      $str_display_anio = ('bw' == $anio_cond) ? $display_aberto : $display_fechado;
+      $str_display_periodo = ('bw' == $periodo_cond) ? $display_aberto : $display_fechado;
       $str_display_fechayhora = ('bw' == $fechayhora_cond) ? $display_aberto : $display_fechado;
       $str_display_usuario = ('bw' == $usuario_cond) ? $display_aberto : $display_fechado;
       $str_display_accion = ('bw' == $accion_cond) ? $display_aberto : $display_fechado;
@@ -2382,6 +2404,34 @@ function nm_open_popup(parms)
       else
       {
          $accion_val_str = "''";
+      }
+      if (!isset($anio) || $anio == "")
+      {
+          $anio = "";
+      }
+      if (isset($anio) && !empty($anio))
+      {
+         $tmp_pos = strpos($anio, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $anio = substr($anio, 0, $tmp_pos);
+         }
+      }
+      if (!isset($periodo) || $periodo == "")
+      {
+          $periodo = "";
+      }
+      if (isset($periodo) && !empty($periodo))
+      {
+         $tmp_pos = strpos($periodo, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $periodo = substr($periodo, 0, $tmp_pos);
+         }
       }
       if (!isset($fechayhora) || $fechayhora == "")
       {
@@ -2437,6 +2487,100 @@ function nm_open_popup(parms)
   <TD width="100%" height="">
    <TABLE class="scFilterTable" id="hidden_bloco_0" valign="top" width="100%" style="height: 100%;">
    <tr>
+
+
+
+   
+      <INPUT type="hidden" id="SC_anio_cond" name="anio_cond" value="eq">
+
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['anio'])) ? $this->New_label['anio'] : "Año";
+ $nmgp_tab_label .= "anio?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br><span id="id_hide_anio"  <?php echo $str_hide_anio?>> 
+<?php
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['anio'] = array();
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['anio'][] = "2020";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['anio'][] = "2021";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['anio'][] = "2022";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['anio'][] = "2023";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['anio'][] = "2024";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['anio'][] = "2025";
+ ?>
+
+ <SELECT class="scFilterObjectOdd" id="SC_anio"  name="anio"  size="1">
+ <OPTION value="">TODOS</option>
+ <OPTION value="2020##@@2020"<?php if ($anio == "2020") { echo " selected" ;} ?>>2020</option>
+ <OPTION value="2021##@@2021"<?php if ($anio == "2021") { echo " selected" ;} ?>>2021</option>
+ <OPTION value="2022##@@2022"<?php if ($anio == "2022") { echo " selected" ;} ?>>2022</option>
+ <OPTION value="2023##@@2023"<?php if ($anio == "2023") { echo " selected" ;} ?>>2023</option>
+ <OPTION value="2024##@@2024"<?php if ($anio == "2024") { echo " selected" ;} ?>>2024</option>
+ <OPTION value="2025##@@2025"<?php if ($anio == "2025") { echo " selected" ;} ?>>2025</option>
+ </SELECT>
+ </TD>
+   
+
+
+
+   </tr><tr>
+
+
+
+   
+      <INPUT type="hidden" id="SC_periodo_cond" name="periodo_cond" value="eq">
+
+    <TD nowrap class="scFilterLabelEven" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "Periodo";
+ $nmgp_tab_label .= "periodo?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br><span id="id_hide_periodo"  <?php echo $str_hide_periodo?>> 
+<?php
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'] = array();
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "1";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "2";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "3";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "4";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "5";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "6";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "7";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "8";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "9";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "10";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "11";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'][] = "12";
+ ?>
+
+ <SELECT class="scFilterObjectEven" id="SC_periodo"  name="periodo"  size="1">
+ <OPTION value="">TODOS</option>
+ <OPTION value="1##@@ENERO"<?php if ($periodo == "1") { echo " selected" ;} ?>>ENERO</option>
+ <OPTION value="2##@@FEBRERO"<?php if ($periodo == "2") { echo " selected" ;} ?>>FEBRERO</option>
+ <OPTION value="3##@@MARZO"<?php if ($periodo == "3") { echo " selected" ;} ?>>MARZO</option>
+ <OPTION value="4##@@ABRIL"<?php if ($periodo == "4") { echo " selected" ;} ?>>ABRIL</option>
+ <OPTION value="5##@@MAYO"<?php if ($periodo == "5") { echo " selected" ;} ?>>MAYO</option>
+ <OPTION value="6##@@JUNIO"<?php if ($periodo == "6") { echo " selected" ;} ?>>JUNIO</option>
+ <OPTION value="7##@@JULIO"<?php if ($periodo == "7") { echo " selected" ;} ?>>JULIO</option>
+ <OPTION value="8##@@AGOSTO"<?php if ($periodo == "8") { echo " selected" ;} ?>>AGOSTO</option>
+ <OPTION value="9##@@SEPTIEMBRE"<?php if ($periodo == "9") { echo " selected" ;} ?>>SEPTIEMBRE</option>
+ <OPTION value="10##@@OCTUBRE"<?php if ($periodo == "10") { echo " selected" ;} ?>>OCTUBRE</option>
+ <OPTION value="11##@@NOVIEMBRE"<?php if ($periodo == "11") { echo " selected" ;} ?>>NOVIEMBRE</option>
+ <OPTION value="12##@@DICIEMBRE"<?php if ($periodo == "12") { echo " selected" ;} ?>>DICIEMBRE</option>
+ </SELECT>
+ </TD>
+   
+
+
+
+   </tr><tr>
 
 
 
@@ -2848,7 +2992,7 @@ foreach ($Arr_format as $Part_date)
       {
       $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp where observaciones = '$observaciones_look'"; 
+      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp where observaciones = '$observaciones_look'"; 
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3389,6 +3533,10 @@ foreach ($Arr_format as $Part_date)
        document.F1.NM_filters.selectedIndex = -1;
    }
    document.getElementById('Salvar_filters_bot').style.display = 'none';
+   document.F1.anio_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_anio'), document.F1.anio_cond, 'anio');
+   document.F1.periodo_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_periodo'), document.F1.periodo_cond, 'periodo');
    document.F1.fechayhora_cond.value = 'bw';
    nm_campos_between(document.getElementById('id_vis_fechayhora'), document.F1.fechayhora_cond, 'fechayhora');
    document.F1.fechayhora_dia.value = "";
@@ -3429,6 +3577,42 @@ foreach ($Arr_format as $Part_date)
  }
  function Sc_carga_select2(Field)
  {
+    if (Field == 'all' || Field == 'periodo') {
+       Sc_carga_select2_periodo();
+    }
+    if (Field == 'all' || Field == 'anio') {
+       Sc_carga_select2_anio();
+    }
+ }
+ function Sc_carga_select2_periodo()
+ {
+  $("#SC_periodo").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_anio()
+ {
+  $("#SC_anio").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
  }
  function SC_carga_evt_jquery()
  {
@@ -3623,6 +3807,10 @@ foreach ($Arr_format as $Part_date)
       $tp_fields     = array();
       $tb_fields_esp = array();
       $old_bi_opcs   = array("TP","HJ","OT","U7","SP","US","MM","UM","AM","PS","SS","P3","PM","P7","CY","LY","YY","M6","M3","M18","M24");
+      $tp_fields['SC_anio_cond'] = 'cond';
+      $tp_fields['SC_anio'] = 'select';
+      $tp_fields['SC_periodo_cond'] = 'cond';
+      $tp_fields['SC_periodo'] = 'select';
       $tp_fields['SC_fechayhora_cond'] = 'cond';
       $tp_fields['SC_fechayhora_dia'] = 'text';
       $tp_fields['SC_fechayhora_mes'] = 'text';
@@ -3787,7 +3975,9 @@ foreach ($Arr_format as $Part_date)
     */
    function trata_campos()
    {
-      global $fechayhora_cond, $fechayhora, $fechayhora_dia, $fechayhora_mes, $fechayhora_ano, $fechayhora_hor, $fechayhora_min, $fechayhora_seg, $fechayhora_input_2_dia, $fechayhora_input_2_mes, $fechayhora_input_2_ano, $fechayhora_input_2_min, $fechayhora_input_2_hor, $fechayhora_input_2_seg,
+      global $anio_cond, $anio,
+             $periodo_cond, $periodo,
+             $fechayhora_cond, $fechayhora, $fechayhora_dia, $fechayhora_mes, $fechayhora_ano, $fechayhora_hor, $fechayhora_min, $fechayhora_seg, $fechayhora_input_2_dia, $fechayhora_input_2_mes, $fechayhora_input_2_ano, $fechayhora_input_2_min, $fechayhora_input_2_hor, $fechayhora_input_2_seg,
              $usuario_cond, $usuario, $usuario_autocomp,
              $accion_cond, $accion,
              $observaciones_cond, $observaciones, $observaciones_autocomp, $nmgp_tab_label;
@@ -3803,6 +3993,16 @@ foreach ($Arr_format as $Part_date)
       if (!empty($observaciones_autocomp) && empty($observaciones))
       {
           $observaciones = $observaciones_autocomp;
+      }
+      $anio_cond_salva = $anio_cond; 
+      if (!isset($anio_input_2) || $anio_input_2 == "")
+      {
+          $anio_input_2 = $anio;
+      }
+      $periodo_cond_salva = $periodo_cond; 
+      if (!isset($periodo_input_2) || $periodo_input_2 == "")
+      {
+          $periodo_input_2 = $periodo;
       }
       $fechayhora_cond_salva = $fechayhora_cond; 
       if (!isset($fechayhora_input_2_dia) || $fechayhora_input_2_dia == "")
@@ -3844,6 +4044,26 @@ foreach ($Arr_format as $Part_date)
       {
           $observaciones_input_2 = $observaciones;
       }
+      $tmp_pos = strpos($anio, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $anio;
+      }
+      else {
+          $L_lookup = substr($anio, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['anio'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Año : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      $tmp_pos = strpos($periodo, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $periodo;
+      }
+      else {
+          $L_lookup = substr($periodo, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['psq_check_ret']['periodo'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Periodo : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
       if (is_array($accion)) {
           foreach ($accion as $I => $Val) {
               $tmp_pos = strpos($Val, "##@@");
@@ -3860,6 +4080,12 @@ foreach ($Arr_format as $Part_date)
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['anio'] = $anio; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['anio_cond'] = $anio_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['periodo'] = $periodo; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['periodo_cond'] = $periodo_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['fechayhora_dia'] = $fechayhora_dia; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['fechayhora_mes'] = $fechayhora_mes; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['campos_busca']['fechayhora_ano'] = $fechayhora_ano; 
@@ -3900,6 +4126,18 @@ foreach ($Arr_format as $Part_date)
       {
           return;
       }
+      $Conteudo = $anio;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['anio'] = $Conteudo;
+      $Conteudo = $periodo;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['periodo'] = $Conteudo;
       $nmgp_def_dados = array();
     if ($usuario != '') {
       $usuario_look = substr($this->Db->qstr($usuario), 1, -1); 
@@ -3982,7 +4220,7 @@ foreach ($Arr_format as $Part_date)
     if ($observaciones != '') {
       $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
       $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp where observaciones = '$observaciones_look'"; 
+      $nm_comando = "select distinct observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp where observaciones = '$observaciones_look'"; 
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -4022,6 +4260,20 @@ foreach ($Arr_format as $Part_date)
       else
       {
           $this->cmp_formatado['observaciones'] = $observaciones;
+      }
+
+      //----- $anio
+      $this->Date_part = false;
+      if (isset($anio))
+      {
+         $this->monta_condicao("anio", $anio_cond, $anio, "", "anio");
+      }
+
+      //----- $periodo
+      $this->Date_part = false;
+      if (isset($periodo))
+      {
+         $this->monta_condicao("periodo", $periodo_cond, $periodo, "", "periodo");
       }
 
       //----- $fechayhora

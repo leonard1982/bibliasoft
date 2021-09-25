@@ -36,6 +36,16 @@ class grid_log_xls
    var $Label_observaciones;
    var $sc_proc_quebra_observaciones;
    var $count_observaciones;
+   var $periodo_Old;
+   var $arg_sum_periodo;
+   var $Label_periodo;
+   var $sc_proc_quebra_periodo;
+   var $count_periodo;
+   var $anio_Old;
+   var $arg_sum_anio;
+   var $Label_anio;
+   var $sc_proc_quebra_anio;
+   var $count_anio;
    //---- 
    function __construct()
    {
@@ -116,6 +126,8 @@ class grid_log_xls
       $this->SC_top[] = "usuario";
       $this->SC_top[] = "accion";
       $this->SC_top[] = "observaciones";
+      $this->SC_top[] = "periodo";
+      $this->SC_top[] = "anio";
       $this->Xls_tot_col = 0;
       $this->Xls_row     = 0;
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
@@ -285,6 +297,18 @@ class grid_log_xls
           {
               $Busca_temp = NM_conv_charset($Busca_temp, $_SESSION['scriptcase']['charset'], "UTF-8");
           }
+          $this->anio = $Busca_temp['anio']; 
+          $tmp_pos = strpos($this->anio, "##@@");
+          if ($tmp_pos !== false && !is_array($this->anio))
+          {
+              $this->anio = substr($this->anio, 0, $tmp_pos);
+          }
+          $this->periodo = $Busca_temp['periodo']; 
+          $tmp_pos = strpos($this->periodo, "##@@");
+          if ($tmp_pos !== false && !is_array($this->periodo))
+          {
+              $this->periodo = substr($this->periodo, 0, $tmp_pos);
+          }
           $this->fechayhora = $Busca_temp['fechayhora']; 
           $tmp_pos = strpos($this->fechayhora, "##@@");
           if ($tmp_pos !== false && !is_array($this->fechayhora))
@@ -343,30 +367,30 @@ class grid_log_xls
       } 
       $this->nm_field_dinamico = array();
       $this->nm_order_dinamico = array();
-      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT idlog, TO_DATE(TO_CHAR(fechayhora, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, TO_DATE(TO_CHAR(fechayhora, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['where_pesq'];
@@ -410,11 +434,15 @@ class grid_log_xls
          $this->Xls_row++;
          $this->idlog = $rs->fields[0] ;  
          $this->idlog = (string)$this->idlog;
-         $this->fechayhora = $rs->fields[1] ;  
-         $this->usuario = $rs->fields[2] ;  
+         $this->anio = $rs->fields[1] ;  
+         $this->anio = (string)$this->anio;
+         $this->periodo = $rs->fields[2] ;  
+         $this->periodo = (string)$this->periodo;
+         $this->fechayhora = $rs->fields[3] ;  
+         $this->usuario = $rs->fields[4] ;  
          $this->usuario = (string)$this->usuario;
-         $this->accion = $rs->fields[3] ;  
-         $this->observaciones = $rs->fields[4] ;  
+         $this->accion = $rs->fields[5] ;  
+         $this->observaciones = $rs->fields[6] ;  
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Gb_Free_orig']))
          {
              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -422,6 +450,8 @@ class grid_log_xls
                  $this->$Cmp_clone = $this->$Cmp_orig;
              }
          }
+         $this->arg_sum_anio = ($this->anio == "") ? " is null " : " = " . $this->anio;
+         $this->arg_sum_periodo = ($this->periodo == "") ? " is null " : " = " . $this->periodo;
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Ind_Groupby'] == "sc_free_group_by")
          {
              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Gb_Free_cmp'] as $cmp_gb => $resto)
@@ -796,6 +826,62 @@ class grid_log_xls
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['anio'])) ? $this->New_label['anio'] : "Año"; 
+          if ($Cada_col == "anio" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "Periodo"; 
+          if ($Cada_col == "periodo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
           $SC_Label = (isset($this->New_label['fechayhora'])) ? $this->New_label['fechayhora'] : "Fechayhora"; 
           if ($Cada_col == "fechayhora" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -929,6 +1015,40 @@ class grid_log_xls
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->idlog);
          $this->Xls_col++;
    }
+   //----- anio
+   function NM_export_anio()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->anio = NM_charset_to_utf8($this->anio);
+         if (is_numeric($this->anio))
+         {
+             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
+         }
+         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->anio);
+         $this->Xls_col++;
+   }
+   //----- periodo
+   function NM_export_periodo()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->periodo = NM_charset_to_utf8($this->periodo);
+         if (is_numeric($this->periodo))
+         {
+             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
+         }
+         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->periodo);
+         $this->Xls_col++;
+   }
    //----- fechayhora
    function NM_export_fechayhora()
    {
@@ -1028,6 +1148,26 @@ class grid_log_xls
          $this->idlog = NM_charset_to_utf8($this->idlog);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->idlog;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
+         $this->Xls_col++;
+   }
+   //----- anio
+   function NM_sub_cons_anio()
+   {
+         $this->anio = NM_charset_to_utf8($this->anio);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->anio;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
+         $this->Xls_col++;
+   }
+   //----- periodo
+   function NM_sub_cons_periodo()
+   {
+         $this->periodo = NM_charset_to_utf8($this->periodo);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->periodo;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
          $this->Xls_col++;
@@ -1149,6 +1289,8 @@ class grid_log_xls
    $this->sc_proc_quebra_usuario = false;
    $this->sc_proc_quebra_accion = false;
    $this->sc_proc_quebra_observaciones = false;
+   $this->sc_proc_quebra_periodo = false;
+   $this->sc_proc_quebra_anio = false;
    $this->sc_proc_quebra_fechayhora = true; 
    $this->Tot->quebra_fechayhora_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
    $tot_fechayhora = $$Var_name_gb;
@@ -1181,6 +1323,8 @@ class grid_log_xls
    $this->sc_proc_quebra_fechayhora = false;
    $this->sc_proc_quebra_accion = false;
    $this->sc_proc_quebra_observaciones = false;
+   $this->sc_proc_quebra_periodo = false;
+   $this->sc_proc_quebra_anio = false;
    $this->sc_proc_quebra_usuario = true; 
    $this->Tot->quebra_usuario_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
    $tot_usuario = $$Var_name_gb;
@@ -1210,6 +1354,8 @@ class grid_log_xls
    $this->sc_proc_quebra_fechayhora = false;
    $this->sc_proc_quebra_usuario = false;
    $this->sc_proc_quebra_observaciones = false;
+   $this->sc_proc_quebra_periodo = false;
+   $this->sc_proc_quebra_anio = false;
    $this->sc_proc_quebra_accion = true; 
    $this->Tot->quebra_accion_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
    $tot_accion = $$Var_name_gb;
@@ -1238,6 +1384,8 @@ class grid_log_xls
    $this->sc_proc_quebra_fechayhora = false;
    $this->sc_proc_quebra_usuario = false;
    $this->sc_proc_quebra_accion = false;
+   $this->sc_proc_quebra_periodo = false;
+   $this->sc_proc_quebra_anio = false;
    $this->sc_proc_quebra_observaciones = true; 
    $this->Tot->quebra_observaciones_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
    $tot_observaciones = $$Var_name_gb;
@@ -1256,6 +1404,68 @@ class grid_log_xls
    }
    $this->$Cmps_Gb_Free = $Temp_cmp_quebra;
    $this->sc_proc_quebra_observaciones = false; 
+ } 
+ function quebra_periodo_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name) 
+ {
+   $Var_name_gb  = "SC_tot_" . $Cmp_Name;
+   $Cmps_Gb_Free = "campos_quebra_" . $Cmp_Name;
+   $Desc_Gb_Ant  = $Cmp_Name . "_ant_desc";
+   global $$Var_name_gb, $Desc_Gb_Ant;
+   $this->sc_proc_quebra_fechayhora = false;
+   $this->sc_proc_quebra_usuario = false;
+   $this->sc_proc_quebra_accion = false;
+   $this->sc_proc_quebra_observaciones = false;
+   $this->sc_proc_quebra_anio = false;
+   $this->sc_proc_quebra_periodo = true; 
+   $this->Tot->quebra_periodo_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
+   $tot_periodo = $$Var_name_gb;
+   $conteudo = $tot_periodo[0] ;  
+   $this->count_periodo = $tot_periodo[1];
+   $Temp_cmp_quebra = array(); 
+   $conteudo = NM_encode_input(sc_strip_script($this->periodo)); 
+   nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+   $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['periodo']))
+   {
+       $Temp_cmp_quebra[0]['lab'] = $this->nmgp_label_quebras['periodo']; 
+   }
+   else
+   {
+       $Temp_cmp_quebra[0]['lab'] = "Periodo"; 
+   }
+   $this->$Cmps_Gb_Free = $Temp_cmp_quebra;
+   $this->sc_proc_quebra_periodo = false; 
+ } 
+ function quebra_anio_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name) 
+ {
+   $Var_name_gb  = "SC_tot_" . $Cmp_Name;
+   $Cmps_Gb_Free = "campos_quebra_" . $Cmp_Name;
+   $Desc_Gb_Ant  = $Cmp_Name . "_ant_desc";
+   global $$Var_name_gb, $Desc_Gb_Ant;
+   $this->sc_proc_quebra_fechayhora = false;
+   $this->sc_proc_quebra_usuario = false;
+   $this->sc_proc_quebra_accion = false;
+   $this->sc_proc_quebra_observaciones = false;
+   $this->sc_proc_quebra_periodo = false;
+   $this->sc_proc_quebra_anio = true; 
+   $this->Tot->quebra_anio_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
+   $tot_anio = $$Var_name_gb;
+   $conteudo = $tot_anio[0] ;  
+   $this->count_anio = $tot_anio[1];
+   $Temp_cmp_quebra = array(); 
+   $conteudo = NM_encode_input(sc_strip_script($this->anio)); 
+   nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+   $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['anio']))
+   {
+       $Temp_cmp_quebra[0]['lab'] = $this->nmgp_label_quebras['anio']; 
+   }
+   else
+   {
+       $Temp_cmp_quebra[0]['lab'] = "Año"; 
+   }
+   $this->$Cmps_Gb_Free = $Temp_cmp_quebra;
+   $this->sc_proc_quebra_anio = false; 
  } 
    function quebra_fechayhora_sc_free_group_by_top()
    {
@@ -1662,6 +1872,232 @@ class grid_log_xls
        }
    }
    function quebra_observaciones_sc_free_group_by_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $prim_cmp = true;
+       $mens_tot_base = "";
+       $mens_tot = "";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order'] as $Cada_cmp)
+       {
+           if (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+   }
+   function quebra_periodo_sc_free_group_by_top()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $lim_col  = 1;
+       $temp_cmp = "";
+       $cont_col = 0;
+       foreach ($this->campos_quebra_periodo as $cada_campo) {
+           if ($cont_col == $lim_col) {
+               $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+               $temp_cmp = strip_tags($temp_cmp);
+               $temp_cmp = NM_charset_to_utf8($temp_cmp);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $temp_cmp = "";
+               $cont_col = 0;
+               $this->Xls_row++;
+           }
+           $temp_cmp .= $cada_campo['lab'] . " => " . $cada_campo['cmp'] . "  ";
+           $cont_col++;
+       }
+       if (!empty($temp_cmp)) {
+           $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+           $temp_cmp = strip_tags($temp_cmp);
+           $temp_cmp = NM_charset_to_utf8($temp_cmp);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida']) {
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+           }
+           else {
+               $current_cell_ref = $this->calc_cell($this->Xls_col);
+               if ($this->Use_phpspreadsheet) {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+               }
+               else {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+               }
+               $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+               $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+           }
+       }
+   }
+   function quebra_periodo_sc_free_group_by_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $prim_cmp = true;
+       $mens_tot_base = "";
+       $mens_tot = "";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order'] as $Cada_cmp)
+       {
+           if (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+   }
+   function quebra_anio_sc_free_group_by_top()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $lim_col  = 1;
+       $temp_cmp = "";
+       $cont_col = 0;
+       foreach ($this->campos_quebra_anio as $cada_campo) {
+           if ($cont_col == $lim_col) {
+               $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+               $temp_cmp = strip_tags($temp_cmp);
+               $temp_cmp = NM_charset_to_utf8($temp_cmp);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $temp_cmp = "";
+               $cont_col = 0;
+               $this->Xls_row++;
+           }
+           $temp_cmp .= $cada_campo['lab'] . " => " . $cada_campo['cmp'] . "  ";
+           $cont_col++;
+       }
+       if (!empty($temp_cmp)) {
+           $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+           $temp_cmp = strip_tags($temp_cmp);
+           $temp_cmp = NM_charset_to_utf8($temp_cmp);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['embutida']) {
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+           }
+           else {
+               $current_cell_ref = $this->calc_cell($this->Xls_col);
+               if ($this->Use_phpspreadsheet) {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+               }
+               else {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+               }
+               $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+               $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+           }
+       }
+   }
+   function quebra_anio_sc_free_group_by_bot()
    {
        if ($this->groupby_show != "S") {
            return;

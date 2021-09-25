@@ -166,10 +166,14 @@ function Sel_processa_out($sel_groupby)
            $tab_arr_groubby_cmp['usuario'] = array('cmp' => "usuario", 'ind' => 1, 'format' => "");
            $tab_arr_groubby_cmp['accion'] = array('cmp' => "accion", 'ind' => 2, 'format' => "");
            $tab_arr_groubby_cmp['observaciones'] = array('cmp' => "observaciones", 'ind' => 3, 'format' => "");
+           $tab_arr_groubby_cmp['periodo'] = array('cmp' => "periodo", 'ind' => 4, 'format' => "");
+           $tab_arr_groubby_cmp['anio'] = array('cmp' => "anio", 'ind' => 5, 'format' => "");
            $tab_arr_groubby_sql[0] = array('cmp' => "fechayhora", 'ord' => 'asc');
            $tab_arr_groubby_sql[1] = array('cmp' => "usuario", 'ord' => 'asc');
            $tab_arr_groubby_sql[2] = array('cmp' => "accion", 'ord' => 'asc');
            $tab_arr_groubby_sql[3] = array('cmp' => "observaciones", 'ord' => 'asc');
+           $tab_arr_groubby_sql[4] = array('cmp' => "periodo", 'ord' => 'asc');
+           $tab_arr_groubby_sql[5] = array('cmp' => "anio", 'ord' => 'asc');
            $_SESSION['sc_session'][$sc_init]['grid_log']['SC_Gb_Free_cmp']  = array();
            $_SESSION['sc_session'][$sc_init]['grid_log']['SC_Gb_Free_sql']  = array();
            $_SESSION['sc_session'][$sc_init]['grid_log']['SC_Gb_date_format']['sc_free_group_by'] = array();
@@ -270,6 +274,8 @@ function Sel_processa_form()
    $arr_campos_free['usuario'] = "Usuario";
    $arr_campos_free['accion'] = "Accion";
    $arr_campos_free['observaciones'] = "Observaciones";
+   $arr_campos_free['periodo'] = "Periodo";
+   $arr_campos_free['anio'] = "Año";
    $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";

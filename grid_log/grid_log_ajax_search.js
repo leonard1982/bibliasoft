@@ -76,10 +76,12 @@ function ajax_save_filter(save_name, save_opt, parm, pos)
 
 // ---------- select_filter
 var Table_sv_fil = new Array();
-Table_sv_fil[0] = "fechayhora";
-Table_sv_fil[1] = "usuario";
-Table_sv_fil[2] = "accion";
-Table_sv_fil[3] = "observaciones";
+Table_sv_fil[0] = "anio";
+Table_sv_fil[1] = "periodo";
+Table_sv_fil[2] = "fechayhora";
+Table_sv_fil[3] = "usuario";
+Table_sv_fil[4] = "accion";
+Table_sv_fil[5] = "observaciones";
 function ajax_select_filter(parm)
 {
     nmAjaxProcOn();

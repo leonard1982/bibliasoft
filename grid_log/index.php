@@ -227,8 +227,8 @@ class grid_log_ini
       $this->nm_dt_criacao   = "20190410"; 
       $this->nm_hr_criacao   = "202532"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210817"; 
-      $this->nm_hr_ult_alt   = "115231"; 
+      $this->nm_dt_ult_alt   = "20210925"; 
+      $this->nm_hr_ult_alt   = "123949"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -928,7 +928,7 @@ class grid_log_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_log']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_log']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwZSFGHAvmV5JeDMzGDkFCHEFYVoraD9JmVIJsDSrYZMJeHgNKVkXeV5FaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQXOH9FaHArYV5FGDEvsHEXeH5FGDoXGDcXGDQFaHArYHQJsDMrYZSNiDWXCDoNUDcJUZ1rqHANOV5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeV5FGDEBOZSXeDuXKVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHIrwHuB/DMBOZSJqDWJeHMX7D9BiZSBqHABYV5FaDMBYVkJGHEFqVoBiDcBwDQFaZ1rwVWBODMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5JeDMvsV9BUDWrmVEraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeDcXGZSX7HIrwHuBOHuzGVIB/H5XCDoFUHQJmZ1B/DSNOD5BiDMBYZSJqDWX7DoraHQBiDuFaZ1N7D5JsDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQB/Z1NaVWXGHuBOVcXKDWB3VoX7HQXOZSBqD1zGD5BqHgBOVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VENUHQBsZ1BOD1rwHQrqHgBOHENiHEFqHIJeHQXGDQX7HINaV5BqDMrYVcFKHEF/HIFGD9XOZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwD9BsZ1F7Z1BeV5BOHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoJeD9JKDQFaZ1vCV5JeDMrYV9FeH5XKVEX7D9JmZ1rqHArYHuXGHgNOHArsDWF/ZuXGD9XsDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqDSzGV5BODMrYV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDErKZSXeDWr/HIF7HQXsDuFaHIBeV5JeDMBYDkBOV5X/VEF7D9XOZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -3981,6 +3981,8 @@ class grid_log_apl
           $Arr_free_labels['usuario'] = "Usuario";
           $Arr_free_labels['accion'] = "Accion";
           $Arr_free_labels['observaciones'] = "Observaciones";
+          $Arr_free_labels['periodo'] = "Periodo";
+          $Arr_free_labels['anio'] = "Año";
           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['SC_Gb_Free_cmp'] as $Field => $Label)
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['Labels_GB'][] = $Arr_free_labels[$Field];
@@ -4393,6 +4395,8 @@ class grid_log_apl
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order']))
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order'][] = "idlog";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order'][] = "anio";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order'][] = "periodo";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order'][] = "fechayhora";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order'][] = "usuario";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['field_order'][] = "accion";
@@ -5589,7 +5593,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idlog";$nm_numeric[] = "usuario";
+      $nm_numeric[] = "idlog";$nm_numeric[] = "usuario";$nm_numeric[] = "periodo";$nm_numeric[] = "anio";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['decimal_db'] == ".")
@@ -6843,6 +6847,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log'][$path_doc_md5][1] = sub
        $Nm_numeric = array();
        $Nm_numeric[] = "idlog";
        $Nm_numeric[] = "usuario";
+       $Nm_numeric[] = "periodo";
+       $Nm_numeric[] = "anio";
        if (in_array($name, $Nm_numeric))
        {
            if (is_array($val))

@@ -163,6 +163,18 @@ class grid_log_rtf
           {
               $Busca_temp = NM_conv_charset($Busca_temp, $_SESSION['scriptcase']['charset'], "UTF-8");
           }
+          $this->anio = $Busca_temp['anio']; 
+          $tmp_pos = strpos($this->anio, "##@@");
+          if ($tmp_pos !== false && !is_array($this->anio))
+          {
+              $this->anio = substr($this->anio, 0, $tmp_pos);
+          }
+          $this->periodo = $Busca_temp['periodo']; 
+          $tmp_pos = strpos($this->periodo, "##@@");
+          if ($tmp_pos !== false && !is_array($this->periodo))
+          {
+              $this->periodo = substr($this->periodo, 0, $tmp_pos);
+          }
           $this->fechayhora = $Busca_temp['fechayhora']; 
           $tmp_pos = strpos($this->fechayhora, "##@@");
           if ($tmp_pos !== false && !is_array($this->fechayhora))
@@ -214,6 +226,22 @@ class grid_log_rtf
               $SC_Label = str_replace('>', '&gt;', $SC_Label);
               $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
           }
+          $SC_Label = (isset($this->New_label['anio'])) ? $this->New_label['anio'] : "Año"; 
+          if ($Cada_col == "anio" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              $SC_Label = str_replace('<', '&lt;', $SC_Label);
+              $SC_Label = str_replace('>', '&gt;', $SC_Label);
+              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
+          }
+          $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "Periodo"; 
+          if ($Cada_col == "periodo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              $SC_Label = str_replace('<', '&lt;', $SC_Label);
+              $SC_Label = str_replace('>', '&gt;', $SC_Label);
+              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
+          }
           $SC_Label = (isset($this->New_label['fechayhora'])) ? $this->New_label['fechayhora'] : "Fechayhora"; 
           if ($Cada_col == "fechayhora" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -250,30 +278,30 @@ class grid_log_rtf
       $this->Texto_tag .= "</tr>\r\n";
       $this->nm_field_dinamico = array();
       $this->nm_order_dinamico = array();
-      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT idlog, TO_DATE(TO_CHAR(fechayhora, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, TO_DATE(TO_CHAR(fechayhora, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT idlog, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones FROM      log g ) nm_sel_esp"; 
+          $nmgp_select = "SELECT idlog, anio, periodo, fechayhora, usuario, accion, observaciones from (SELECT      idlog,     fechayhora,     usuario,     accion,     CASE accion WHEN 'ELIMINAR' THEN     	CASE WHEN LOCATE('AL ITEM:',observaciones)>0 THEN                      (REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,'AL ITEM:',-1),' EN',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                      WHEN LOCATE('ITEM IDPEDIDO:',observaciones)>0 THEN                  	(REPLACE(observaciones,TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1)),coalesce((select dp.descr from detallepedido_self dp where dp.iddet=TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(observaciones,', ITEM:',-1),' EN ',1))),'EL ITEM FUE BORRADO DEL PEDIDO')))                                   ELSE         	observaciones         END               ELSE observaciones END     as observaciones,     MONTH(fechayhora) as periodo,     YEAR(fechayhora) as anio FROM      log g ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_log']['where_pesq'];
@@ -321,11 +349,15 @@ class grid_log_rtf
          $this->Texto_tag .= "<tr>\r\n";
          $this->idlog = $rs->fields[0] ;  
          $this->idlog = (string)$this->idlog;
-         $this->fechayhora = $rs->fields[1] ;  
-         $this->usuario = $rs->fields[2] ;  
+         $this->anio = $rs->fields[1] ;  
+         $this->anio = (string)$this->anio;
+         $this->periodo = $rs->fields[2] ;  
+         $this->periodo = (string)$this->periodo;
+         $this->fechayhora = $rs->fields[3] ;  
+         $this->usuario = $rs->fields[4] ;  
          $this->usuario = (string)$this->usuario;
-         $this->accion = $rs->fields[3] ;  
-         $this->observaciones = $rs->fields[4] ;  
+         $this->accion = $rs->fields[5] ;  
+         $this->observaciones = $rs->fields[6] ;  
          //----- lookup - usuario
          $this->look_usuario = $this->usuario; 
          $this->Lookup->lookup_usuario($this->look_usuario, $this->usuario) ; 
@@ -363,6 +395,24 @@ class grid_log_rtf
          $this->idlog = str_replace('<', '&lt;', $this->idlog);
          $this->idlog = str_replace('>', '&gt;', $this->idlog);
          $this->Texto_tag .= "<td>" . $this->idlog . "</td>\r\n";
+   }
+   //----- anio
+   function NM_export_anio()
+   {
+             nmgp_Form_Num_Val($this->anio, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         $this->anio = NM_charset_to_utf8($this->anio);
+         $this->anio = str_replace('<', '&lt;', $this->anio);
+         $this->anio = str_replace('>', '&gt;', $this->anio);
+         $this->Texto_tag .= "<td>" . $this->anio . "</td>\r\n";
+   }
+   //----- periodo
+   function NM_export_periodo()
+   {
+             nmgp_Form_Num_Val($this->periodo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         $this->periodo = NM_charset_to_utf8($this->periodo);
+         $this->periodo = str_replace('<', '&lt;', $this->periodo);
+         $this->periodo = str_replace('>', '&gt;', $this->periodo);
+         $this->Texto_tag .= "<td>" . $this->periodo . "</td>\r\n";
    }
    //----- fechayhora
    function NM_export_fechayhora()

@@ -97,6 +97,12 @@ function Ord_cmp_init()
    $tab_ger_campos['idlog'] = "on";
    $tab_def_campos['idlog'] = "idlog";
    $tab_labels["idlog"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_log']['labels']["idlog"])) ? $_SESSION['sc_session'][$sc_init]['grid_log']['labels']["idlog"] : "Idlog";
+   $tab_ger_campos['anio'] = "on";
+   $tab_def_campos['anio'] = "anio";
+   $tab_labels["anio"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_log']['labels']["anio"])) ? $_SESSION['sc_session'][$sc_init]['grid_log']['labels']["anio"] : "Año";
+   $tab_ger_campos['periodo'] = "on";
+   $tab_def_campos['periodo'] = "periodo";
+   $tab_labels["periodo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_log']['labels']["periodo"])) ? $_SESSION['sc_session'][$sc_init]['grid_log']['labels']["periodo"] : "Periodo";
    $tab_ger_campos['fechayhora'] = "on";
    $tab_def_campos['fechayhora'] = "fechayhora";
    $tab_labels["fechayhora"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_log']['labels']["fechayhora"])) ? $_SESSION['sc_session'][$sc_init]['grid_log']['labels']["fechayhora"] : "Fechayhora";
