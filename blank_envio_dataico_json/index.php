@@ -218,7 +218,7 @@ class blank_envio_dataico_json_ini
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20210930"; 
-      $this->nm_hr_ult_alt   = "171518"; 
+      $this->nm_hr_ult_alt   = "171809"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_envio_dataico_json_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico_json']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_dataico_json']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGH9BiHABYD5NUDMNOVcFeV5F/DorqDcNmZkBiDSvOZMFaHgveZSJqDWX7VoJwHQNwDQFUD1veHuJwHgvOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQFYDQFaD1BeV5FGHgvOVIBOV5X7VoX7HQNmZ1rqD1rKD5FaDEBOHErCV5FqZuBOD9NmDQFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDMBYHEXeV5XCVoJwDcXOZSX7HABYD5NUHuBYVIBOHEFYVoraDcNwH9B/D1rKD5NUDEvsHEFiDWX7VoXGDcJeZSX7Z1rwV5raHuvmVIFCH5FqVoraD9BsVIraZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBeHAFKV5B7ZuXGHQNwDQB/HAvmVWJeDMzGVIBODWFaVErqHQFYZkBiD1rwHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveDkB/DWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcrsDWXKVENUHQXGH9B/HArYD5JwHgNKZSJ3DuJeZuFaDcXGDQFUD1veD5F7DMzGDkFCDWF/VoJwHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeH9X7DSN7HQJeHuzGDkBsV5F/HMFaDcBqH9B/Z1BeZMXGHgNKHEJqDuJeDoF7HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoJsDcXGDQBqHANOVWJwDMBODkB/H5XCHINUD9JmZSBqD1zGZMXGDMveHArCH5FYHMFaHQFYH9X7DSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBODWFYDoJsD9BiZSB/DSrYD5FaDMNKZSXeH5F/DoraD9NmDQJsHArYD5BqHgvsDkBOV5X7VoJwD9JmZSFaD1rwD5FaDEBODkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1X7HIveHuX7HgBOVkJ3DWX7VoJeD9NmDQJwHIrwD5JeDMzGDkBODuFqVErqDcFYZ1F7D1zGZMXGHgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BqHgBYHArsH5X/DoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMJeD9XGZ1X7DSrYHQJeDEBOHErsDWX7VoBqDcJeH9X7HIrwHuJeDMNOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1985,6 +1985,8 @@ if($vidfacven>0)
 	$vcal_valores_decimales = 2;
 
 	
+	
+	
 
 	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, enviar_dian, enviar_cliente, (select c.cal_valores_decimales from configuraciones c where c.idconfiguraciones=1) as cal_valores_decimales from webservicefe order by idwebservicefe desc limit 1";
 	 
@@ -2432,10 +2434,21 @@ if($vidfacven>0)
 				$vdetalle[$i]["codigo"]       = $vcodigo;
 				$vdetalle[$i]["cantidad"]     = $vcanlista;
 				$vdetalle[$i]["descripcion"]  = $vdescripcion;
+				$vvalor_normal                = round( ( ($vparcvta/$vcanlista) / ((intval($vporciva)/100)+1) ) ,$vcal_valores_decimales);
+				$vvalor_normal                = $vvalor_normal*((intval($vporciva)/100)+1);
+				$vvalor_normal                = intval($vvalor_normal);
 				
-				$vivv = ($vparcvta/$vcanlista) - number_format((($vparcvta/$vcanlista) / ((intval($vporciva)/100)+1)),25,'.','');
-				$vivv = $this->truncar($vivv, 2);
-				$vdetalle[$i]["precio"]       = round( (($vparcvta/$vcanlista)-$vivv), $vcal_valores_decimales);
+				if($vvalor_normal<($vparcvta/$vcanlista))
+				{
+					$vivv = ($vparcvta/$vcanlista) - number_format((($vparcvta/$vcanlista) / ((intval($vporciva)/100)+1)),25,'.','');
+					$vivv = $this->truncar($vivv, 2);
+					$vdetalle[$i]["precio"]   = round( (($vparcvta/$vcanlista)-$vivv), $vcal_valores_decimales);
+				}
+				
+				if($vvalor_normal>=($vparcvta/$vcanlista))
+				{
+					$vdetalle[$i]["precio"]   = round( ( ($vparcvta/$vcanlista) / ((intval($vporciva)/100)+1) ) ,$vcal_valores_decimales);
+				}
 
 				if($vtipo_producto=="IM")
 				{
@@ -2661,12 +2674,12 @@ $_SESSION['scriptcase']['blank_envio_dataico_json']['contr_erro'] = 'on';
 $_SESSION['scriptcase']['blank_envio_dataico_json']['contr_erro'] = 'off';
 }
 function truncar($numero, $digitos)
-				{
+	{
 $_SESSION['scriptcase']['blank_envio_dataico_json']['contr_erro'] = 'on';
   
-					$truncar = 10**$digitos;
-					return intval($numero * $truncar) / $truncar;
-				
+		$truncar = 10**$digitos;
+		return intval($numero * $truncar) / $truncar;
+	
 $_SESSION['scriptcase']['blank_envio_dataico_json']['contr_erro'] = 'off';
 }
 function fEnviarDataico($vparametros, $vcliente, $vencabezado, $vdetalle,$vretenciones,$vcal_valores_decimales)
