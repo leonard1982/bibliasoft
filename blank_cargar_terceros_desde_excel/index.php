@@ -218,7 +218,7 @@ class blank_cargar_terceros_desde_excel_ini
       $this->nm_hr_criacao   = "091132"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211007"; 
-      $this->nm_hr_ult_alt   = "125552"; 
+      $this->nm_hr_ult_alt   = "130126"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_cargar_terceros_desde_excel_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_cargar_terceros_desde_excel']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_cargar_terceros_desde_excel']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQX7HIvsV5XGHuzGVcXKDuX7VoJwHQBsH9BOZ1BeV5BOHgvsHErCV5B3ZuFaD9JKZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsD9JKZSFUZ1rwHuJeHuvmVcB/DWFaVEraD9XOZ1FGD1rKV5JeDMzGVkJ3DWXCVoBOHQJKZSFUHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBOH5FqVoB/D9XOZSB/HIBeD5NUDErKVkJqV5FaZuFaDcBwDQFGHANOV5FGHgrKVcFCDWJeVoraD9XOH9BOZ1BeV5B/DMzGHEJGH5FYVoFaDcBwDQFUZ1rwD5JwHuBOVcFKH5FqDoraD9BsZ1FUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKH5XKVErqD9BsZkBiHAN7HuBqHgBeZSXeH5F/DoraHQXOZ9XGHAveHuNUDMvmVcBOV5FYHMX7D9BsZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAvsZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJwHuzGDkBsDur/DoFUD9JmZSBqZ1NOHQBiHgBYHArCV5XKVoFGDcBiZ9JeZ1BYVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQJsHIBeV5raHuNODkFCDuX7VoBOHQNmZ1X7D1rwHQBiDMNKZSXeH5F/HMXGD9NwDuFaHArYVWJwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiDWrGDoJeDcXGDQBqHIrKHQBOHgrwDkBOH5XCHMJwD9BsVINUD1rwHuBOHgvCHEJqDWX7HIFGHQXsDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDMBYHEXeV5XCVoJwDcXOZSX7D1BeV5FUHuzGVIBODuX7VoB/D9XOZSBOZ1BeZMB/DMzGHEJGDWr/DoF7DcBwDQFGHANOV5JwHuzGDkB/V5X7DoNUDcJUZ1FaD1rwV5B/DMzGHEJqV5FaVoB/D9FYDQJsD1BeD5JwHuNOVcFiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1BiHIveD5F7HgBYHEBUDWr/HIXGDcBiDuBqHAvCV5XGDMBOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VorqHQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsDcJeZSFUHAveVWXGDMvOVIFCDWFaHINUDcBqZSBOHAzGZMBOHgrKZSJ3DuFYZuB/HQJKH9BiDSBYV5JwHuNOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2446,6 +2446,8 @@ if(isset($_POST["submit"]))
 								}
 								else
 								{
+									$vidtercero = $this->vsiexiste[0][1];
+									
 									if($vsucursales=="NO")
 									{
 										$vsql = "select * from resp_trib_x_tercero id_tercero=(select t.idtercero from terceros t where t.documento='".$documento."')";
@@ -2553,6 +2555,61 @@ if(isset($_POST["submit"]))
          $rf->Close();
       ;
 										}
+										
+										$vsql = "select * from direccion where idter='".$vidtercero."' and idmuni=(select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1) and direc=".$direccion;
+										 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiDir = array();
+      $this->vsidir = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiDir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsidir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiDir = false;
+          $this->vSiDir_erro = $this->Db->ErrorMsg();
+          $this->vsidir = false;
+          $this->vsidir_erro = $this->Db->ErrorMsg();
+      } 
+;
+										if(!isset($this->vsidir[0][0]))
+										{
+											
+											$vsql = "insert into direccion set idter='".$vidtercero."', idmuni=(select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1), direc=".$direccion.", telefono=".$telefono.", ciudad=(select m.municipio from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1), codigo_postal='".$vcodigo_postal."',lenguaje='Español, Castellano', correo='".$vurlmail."', correo_notificafe='".$vurlmail."', celular_notificafe=".$telefono.", iddepar=(select m.iddepar from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1), obs=".$nombres;
+											
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+										}
 
 										if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
 {
@@ -2587,8 +2644,8 @@ if(isset($_POST["submit"]))
 									}
 									else
 									{
-										$vidtercero = $this->vsiexiste[0][1];
-										$vsql = "select * from direccion where idter='".$vidtercero."' and idmuni=(select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1) and direc='".$direccion."'";
+										
+										$vsql = "select * from direccion where idter='".$vidtercero."' and idmuni=(select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1) and direc=".$direccion;
 										 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2695,6 +2752,10 @@ if(isset($_POST["submit"]))
 												
 												echo "<td  style='color:white;background:orange;'>SUCURSAL CREADA</td>";
 											}
+											else
+											{
+												echo "<td  style='color:white;background:red;'>SUCURSAL PRINCIPAL</td>";
+											}
 										}
 										else
 										{
@@ -2734,10 +2795,12 @@ if(isset($_POST["submit"]))
 							}
 						}
 					}
-					$vregistros++;
+					
 				}
 				echo "</tr>";
 			}
+			
+			$vregistros++;
 		}
 
 		echo "</table><br>";
