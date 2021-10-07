@@ -218,7 +218,7 @@ class blank_cargar_terceros_desde_excel_ini
       $this->nm_hr_criacao   = "091132"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211007"; 
-      $this->nm_hr_ult_alt   = "130126"; 
+      $this->nm_hr_ult_alt   = "151219"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_cargar_terceros_desde_excel_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_cargar_terceros_desde_excel']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_cargar_terceros_desde_excel']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQJsHIBeV5raHuNODkFCDuX7VoBOHQNmZ1X7D1rwHQBiDMNKZSXeH5F/HMXGD9NwDuFaHArYVWJwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiDWrGDoJeDcXGDQBqHIrKHQBOHgrwDkBOH5XCHMJwD9BsVINUD1rwHuBOHgvCHEJqDWX7HIFGHQXsDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDMBYHEXeV5XCVoJwDcXOZSX7D1BeV5FUHuzGVIBODuX7VoB/D9XOZSBOZ1BeZMB/DMzGHEJGDWr/DoF7DcBwDQFGHANOV5JwHuzGDkB/V5X7DoNUDcJUZ1FaD1rwV5B/DMzGHEJqV5FaVoB/D9FYDQJsD1BeD5JwHuNOVcFiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1BiHIveD5F7HgBYHEBUDWr/HIXGDcBiDuBqHAvCV5XGDMBOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VorqHQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsDcJeZSFUHAveVWXGDMvOVIFCDWFaHINUDcBqZSBOHAzGZMBOHgrKZSJ3DuFYZuB/HQJKH9BiDSBYV5JwHuNOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeDQFGHAvCVWBOHuBYVcrsDWXCVoF7HQXGZkBiD1zGZMB/HgBOHENiDWB3DoXGHQJKH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQJsHIrKD5F7DMvmV9BUDur/DoX7D9JmZSBqZ1rYHQF7DEvsHEJqDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDMBYHEXeV5XCVoJwDcXOZSX7D1BeV5FUHuzGVIBODuX7VoB/D9XOZSBOZ1BeZMB/DMzGHEJGDWr/DoF7DcBwDQFGHANOV5JwHuzGDkB/V5X7DoNUDcJUZ1FaD1rwV5B/DMzGHEJqV5FaVoB/D9FYDQJsD1BeD5JwHuNOVcFiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsHIvsVWJsHuBOV9FeV5BmVEF7HQBsZSFaHIveV5JeHgNKVkJ3DuFaHMBiHQXODQX7HINaD5F7HgrKDkBsHEX7HMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VorqHQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsD9NmDQBqHAN7HuJeDMvsVcBOH5XCHMraDcJUVINUHANOHuB/HgBOHArCV5FaHIXGD9JKDuFaD1veV5FaDMBYV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2058,6 +2058,10 @@ if(isset($_POST["submit"]))
 									$vcodigo_postal         = "540001";
 								    $vdep_muni              = "54001";
 									$vurlmail               = "";
+									$vnombre1               = "";
+									$vnombre2               = "";
+									$vapellido1             = "";
+									$vapellido2             = "";
 										
 
 									if(!empty($fields[0]))
@@ -2124,6 +2128,50 @@ if(isset($_POST["submit"]))
 											break;
 										} 
 									} 
+								
+									if($naturaleza=="NAT")
+									{
+										$vpartes = explode(" ",$nombres);
+										
+										switch(count($vpartes))
+										{
+											case 1:
+												$vnombre1  = $vpartes[0];
+											break;
+												
+											case 2:
+												$vnombre1   = $vpartes[0];
+												$vapellido1 = $vpartes[1];
+											break;
+												
+											case 3:
+												$vnombre1   = $vpartes[0];
+												$vapellido1 = $vpartes[1];
+												$vapellido2 = $vpartes[2];
+											break;
+												
+											case 4:
+												$vnombre1   = $vpartes[0];
+												$vnombre2   = $vpartes[1];
+												$vapellido1 = $vpartes[2];
+												$vapellido2 = $vpartes[3];
+											break;
+												
+											case 5:
+												$vnombre1   = $vpartes[0];
+												$vnombre2   = $vpartes[1];
+												$vapellido1 = $vpartes[2]." ".$vpartes[3];
+												$vapellido2 = $vpartes[4];
+											break;
+												
+											case 6:
+												$vnombre1   = $vpartes[0]." ".$vpartes[1];
+												$vnombre2   = $vpartes[2];
+												$vapellido1 = $vpartes[3]." ".$vpartes[4];
+												$vapellido2 = $vpartes[5];
+											break;
+										}
+									}
 
 									if(!empty($fields[8]))
 									{
@@ -2287,7 +2335,11 @@ if(isset($_POST["submit"]))
 												notificar       = 'SI',
 												codigo_postal   = '".$vcodigo_postal."',
 												idmuni          = coalesce((select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1),828),
-												urlmail         = '".$vurlmail."'
+												urlmail         = '".$vurlmail."',
+												nombre1         = '".$vnombre1."',
+												nombre2         = '".$vnombre2."',
+												apellido1       = '".$vapellido1."',
+												apellido2       = '".$vapellido2."'
 												";
 								
 								$vsql2 = "UPDATE terceros u
@@ -2317,7 +2369,12 @@ if(isset($_POST["submit"]))
 												u.notificar       = 'SI',
 												u.codigo_postal   = '".$vcodigo_postal."',
 												u.idmuni          = coalesce((select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1),828),
-												u.urlmail         = '".$vurlmail."'
+												u.urlmail         = '".$vurlmail."',
+												nombre1         = '".$vnombre1."',
+												nombre2         = '".$vnombre2."',
+												apellido1       = '".$vapellido1."',
+												apellido2       = '".$vapellido2."'
+												
 												where u.documento='".$documento."'
 												";
 								
