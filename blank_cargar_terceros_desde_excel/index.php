@@ -217,8 +217,8 @@ class blank_cargar_terceros_desde_excel_ini
       $this->nm_dt_criacao   = "20180821"; 
       $this->nm_hr_criacao   = "091132"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20211007"; 
+      $this->nm_hr_ult_alt   = "121933"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_cargar_terceros_desde_excel_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_cargar_terceros_desde_excel']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_cargar_terceros_desde_excel']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZSFUD1veHQNUDMzGVIBsDur/VENUHQFYZkFUZ1rYHuJsDErKHEFiDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcNmZ1X7HABYHuX7HgBeZSJ3DWFqHIFGD9NwH9BiDSrwHuBOHuzGZSJqDWFaHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDorqD9XsDQJsHArYD5NUHuvmDkB/V5X7VoBqDcBqZ1FaHAN7V5BODMBYHEJGDWr/DoFUD9NmDQJsHABYV5BOHgvsDkBODWFYVoX7D9BsH9FaD1rwD5BiDMzGHEFiDWFqDoXGDcBwDQJsHABYV5raHgrKVcFCDur/VoBqDcJUZ1B/HINaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHENiV5FaDoFUD9FYDQFaDSvCV5BqHuBYVcBODur/VEF7DcNwH9BqDSNOZMJeDMvCHErCV5FqDoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDQBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKZMFaHgNOVkJqHEXCHIXGDcBwDQX7Z1zGV5JeHuNOVcBODur/VErqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDuFaHAvmV5BqDMzGZSNiDWFaHIFUDcFYH9B/HArYD5JwHgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDEBeHArCDuFaHIrqHQJKZ9XGD1BeD5XGDMBOVcBODWJeVoBiD9BsZ1F7DSrYHQFGHgrKHErsDWFqDoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwV5FGHgvsVcFCDWJeDoF7DcBqZ1FaHAN7D5BiDEvsHEFiDWFqDoJeDcJeZSX7HABYV5BOHuNODkFCH5FqVoJwDcJUZ1F7HArYD5JeDMzGHEFiDWFqDoFUDcBwDQFGHIrKV5FGHgrKVcBODuB7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQBODMvsVcXKDWXKVorqHQNmZ1BOHANOHQFGDEvsHEXeH5FGDoJeHQBiZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBqHQBiDQBqHANKVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQFUHgBOHErsDWB3VoFGD9FYDQFUHABYVWBOHuBYDkBsV5X7HMJwHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1941,7 +1941,7 @@ class blank_cargar_terceros_desde_excel_apl
 	<!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-	 <link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'materialize', 'materialize.min.css'); ?>">
+	 <link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'bootstrap.min.css'); ?>">
 	
 	 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-1.11.1.js'); ?>"></script>
 	
@@ -1959,6 +1959,7 @@ class blank_cargar_terceros_desde_excel_apl
 <body>
 	
 	<div class="container">
+	<br>
 	<h3>Importar terceros desde Excel</h3>
 	<p>El formato del archivo de Excel debe cumplir con el formato de la siguiente plantilla. </p>
 	<a href="<?php echo sc_url_library('prj', 'varios', 'plantilla_importar_terceros_ejemplo.xls'); ?>">Click aquí para descargar la plantilla - ejemplo.</a><br><br>
@@ -1966,9 +1967,16 @@ class blank_cargar_terceros_desde_excel_apl
 	<br>
 	<br>
 	<form action="" method="post" enctype="multipart/form-data">
+		Importar con Sucursales: 
+		<select id="sucursales" name="sucursales" class="form-control">
+			<option>NO</option>
+			<option>SI</option>
+		</select>
+		<br>
 		Seleccione el archivo a importar:<br>
-		<input class="btn waves-effect waves-light" type="file" name="excel" id="excel">
-		<button class="btn waves-effect waves-light" type="submit" name="submit">
+		<input class="form-control" type="file" name="excel" id="excel">
+		<br>
+		<button class="btn btn-primary" type="submit" name="submit">
 			Importar
   		</button>
 	</form>
@@ -1984,20 +1992,26 @@ class blank_cargar_terceros_desde_excel_apl
 if(isset($_POST["submit"])) 
 {
 	
+	$vsucursales = "NO";
+	if(isset($_POST["sucursales"]))
+	{
+		$vsucursales = $_POST["sucursales"];
+	}
+	
 	if(!empty($_FILES["excel"]["tmp_name"]))
 	{
 		
 		$xlsx = new SimpleXLSX($_FILES["excel"]["tmp_name"]);
 							   
 		echo "<div class='contenedor'>";
-		echo "<table class='striped highlight centered'>";
+		echo "<table class='table'>";
 		$vregistros = 0;
 		
 		
 		foreach ($xlsx->rows() as $fields)
 		{
 			
-			if(count($fields) != 21)
+			if(count($fields) != 24)
 			{
 				echo "<h5>POR FAVOR DILIGENCIE EL ARCHIVO DE EXCEL DE MANERA CORRECTA.</h5>";
 				break;
@@ -2041,6 +2055,10 @@ if(isset($_POST["submit"]))
 									$proveedor              = "NO";
 									$saldo_a_pagar          = 0;
 									$razon                  = "";
+									$vcodigo_postal         = "540001";
+								    $vdep_muni              = "54001";
+									$vurlmail               = "";
+										
 
 									if(!empty($fields[0]))
 									{
@@ -2222,6 +2240,21 @@ if(isset($_POST["submit"]))
 									{
 										$razon  = $fields[20];
 									}
+								
+									if(!empty($fields[21]))
+									{
+										$vcodigo_postal = $fields[21];
+									}
+								
+									if(!empty($fields[22]))
+									{
+										$vdep_muni = $fields[22];
+									}
+								
+									if(!empty($fields[23]))
+									{
+										$vurlmail = $fields[23];
+									}
 
 									
 									$vsql1 = "INSERT INTO 
@@ -2248,9 +2281,13 @@ if(isset($_POST["submit"]))
 												proveedor   	='".$proveedor."',           
 												saldoapagar 	='".$saldo_a_pagar."',    
 												sexo        	='O',
-												idmuni          ='828',
 												afiliacion      ='".date("Y-m-d")."',
-												nombre_comercil = '".$razon."'
+												nombre_comercil = '".$razon."',
+												lenguaje        = 'Español, Castellano',
+												notificar       = 'SI',
+												codigo_postal   = '".$vcodigo_postal."',
+												idmuni          = coalesce((select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1),828),
+												urlmail         = '".$vurlmail."'
 												";
 								
 								$vsql2 = "UPDATE terceros u
@@ -2275,11 +2312,16 @@ if(isset($_POST["submit"]))
 												u.empleado    	='".$empleado."',           
 												u.proveedor   	='".$proveedor."',           
 												u.saldoapagar 	='".$saldo_a_pagar."',
-												u.nombre_comercil = '".$razon."'
+												u.nombre_comercil = '".$razon."',
+												u.lenguaje        = 'Español, Castellano',
+												u.notificar       = 'SI',
+												u.codigo_postal   = '".$vcodigo_postal."',
+												u.idmuni          = coalesce((select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1),828),
+												u.urlmail         = '".$vurlmail."'
 												where u.documento='".$documento."'
 												";
 								
-								$sql = "select documento from terceros where documento='".$documento."'";
+								$sql = "select documento,idtercero from terceros where documento='".$documento."'";
 								 
       $nm_select = $sql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2342,17 +2384,164 @@ if(isset($_POST["submit"]))
     $this->Ini->sc_tem_trans_banco = false;
 }
 
-									echo "<h6>EL SIGUIENTE TERCERO FUE AGREGADO: ".$documento." -- ".$nombres.".</h6>";
+									
+									$vsql = "insert into resp_trib_x_tercero set id_tercero=(select t.idtercero from terceros t where t.documento='".$documento."'), codigo_rt='R-99-PN', decripcion_rt='No aplica'";
+									
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									
+									$vsql = "insert into det_trib_x_tercero set id_tercero=(select t.idtercero from terceros t where t.documento='".$documento."'), cod_det_trib='ZZ', decripcion_dt='No aplica'";
+									
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+									
+									echo "<td style='color:white;background:green;'>AGREGADO</td>";
 								}
 								else
 								{
-									if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+									if($vsucursales=="NO")
+									{
+										$vsql = "select * from resp_trib_x_tercero id_tercero=(select t.idtercero from terceros t where t.documento='".$documento."')";
+										 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiResp = array();
+      $this->vsiresp = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiResp[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiresp[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiResp = false;
+          $this->vSiResp_erro = $this->Db->ErrorMsg();
+          $this->vsiresp = false;
+          $this->vsiresp_erro = $this->Db->ErrorMsg();
+      } 
+;
+										if(!isset($this->vsiresp[0][0]))
+										{
+											$vsql = "insert into resp_trib_x_tercero set id_tercero=(select t.idtercero from terceros t where t.documento='".$documento."'), codigo_rt='R-99-PN', decripcion_rt='No aplica'";
+											
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										}
+
+										$vsql = "select * from det_trib_x_tercero where id_tercero=(select t.idtercero from terceros t where t.documento='".$documento."')";
+										 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDetalleTrib = array();
+      $this->vdetalletrib = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDetalleTrib[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdetalletrib[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDetalleTrib = false;
+          $this->vDetalleTrib_erro = $this->Db->ErrorMsg();
+          $this->vdetalletrib = false;
+          $this->vdetalletrib_erro = $this->Db->ErrorMsg();
+      } 
+;
+										if(!isset($this->vdetalletrib[0][0]))
+										{
+											$vsql = "insert into det_trib_x_tercero set id_tercero=(select t.idtercero from terceros t where t.documento='".$documento."'), cod_det_trib='ZZ', decripcion_dt='No aplica'";
+											
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										}
+
+										if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
 {
     $this->Db->BeginTrans();
     $this->Ini->sc_tem_trans_banco = true;
 }
 
-									
+										
      $nm_select = $vsql2; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2369,13 +2558,105 @@ if(isset($_POST["submit"]))
          }
          $rf->Close();
       ;
-									if ($this->Ini->sc_tem_trans_banco)
+										if ($this->Ini->sc_tem_trans_banco)
 {
     $this->Db->CommitTrans();
     $this->Ini->sc_tem_trans_banco = false;
 }
 
-									echo "<h6>EL SIGUIENTE TERCERO FUE MODIFICADO: ".$documento." -- ".$nombres.".</h6>";
+										echo "<td  style='color:white;background:blue;'>MODIFICADO</td>";
+									}
+									else
+									{
+										$vidtercero = $this->vsiexiste[0][1];
+										$vsql = "select * from direccion where idter='".$vidtercero."' and idmuni=(select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1) and direc='".$direccion."'";
+										 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiDir = array();
+      $this->vsidir = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiDir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsidir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiDir = false;
+          $this->vSiDir_erro = $this->Db->ErrorMsg();
+          $this->vsidir = false;
+          $this->vsidir_erro = $this->Db->ErrorMsg();
+      } 
+;
+										if(!isset($this->vsidir[0][0]))
+										{
+											$vsql = "select * from terceros where documento='".$documento."' and direccion=".$direccion;
+											 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDir2 = array();
+      $this->vdir2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDir2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdir2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDir2 = false;
+          $this->vDir2_erro = $this->Db->ErrorMsg();
+          $this->vdir2 = false;
+          $this->vdir2_erro = $this->Db->ErrorMsg();
+      } 
+;
+											if(!isset($this->vdir2[0][0]))
+											{
+											
+												$vsql = "insert into direccion set idter='".$vidtercero."', idmuni=(select m.idmun from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1), direc=".$direccion.", telefono=".$telefono.", ciudad=(select m.municipio from municipio m where concat(m.codigo_dep,m.codigo_mu)='".$vdep_muni."' limit 1), codigo_postal='".$vcodigo_postal."',lenguale='Español, Castellano', correo='".$vurlmail."', correo_notificafe='".$vurlmail."', celular_notificafe=".$telefono.", iddepar=(select m.iddepar from municipio m where concat(m.codigo_dep,m.codigo_mu), obs=".$nombres;
+												
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+											}
+										}
+									}
 								}
 							}
 						}
