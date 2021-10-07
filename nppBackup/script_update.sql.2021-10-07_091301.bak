@@ -1,0 +1,20 @@
+ALTER TABLE `productos` ADD `ubicacion` VARCHAR(120) NULL DEFAULT NULL AFTER `imagen`;
+ALTER TABLE `configuraciones` ADD `ver_grupo` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `columna_reg_pdf_propio`, ADD `ver_codigo` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_grupo`, ADD `ver_imagen` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_codigo`, ADD `ver_existencia` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_imagen`, ADD `ver_unidad` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_existencia`, ADD `ver_precio` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_unidad`, ADD `ver_impuesto` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_precio`, ADD `ver_stock` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_impuesto`, ADD `ver_ubicacion` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_stock`, ADD `ver_costo` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_ubicacion`, ADD `ver_proveedor` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_costo`, ADD `ver_combo` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_proveedor`;
+ALTER TABLE `configuraciones` ADD `ver_agregar_nota` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `ver_combo`;
+ALTER TABLE `configuraciones` ADD `ver_busqueda_refinada` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `ver_agregar_nota`;
+ALTER TABLE `configuraciones` ADD `cal_valores_decimales` INT NOT NULL DEFAULT '2' COMMENT 'Inicialmente para factura electrónica y luego irlo incluyendo en el resto de operaciones' AFTER `ver_busqueda_refinada`, ADD `cal_cantidades_decimales` INT NOT NULL DEFAULT '2' COMMENT 'Inicialmente para factura electrónica y luego irlo incluyendo en el resto de operaciones' AFTER `cal_valores_decimales`;
+
+ALTER TABLE `facturaven` ADD `tipo_documento` VARCHAR(5) NOT NULL DEFAULT '1' COMMENT 'Aplica para desarrollo propio\r\n\r\n1. Venta nacional\r\n2. Exportacion\r\n3. Contingencia\r\n4. Venta AIU' AFTER `servidor`, ADD `note_aiu` VARCHAR(200) NULL DEFAULT NULL COMMENT 'Asunto de factura AIU' AFTER `tipo_documento`, ADD `porcentaje_admon` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje de administración en aiu propio' AFTER `note_aiu`, ADD `porcentaje_imprevisto` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje en imprevistos propio' AFTER `porcentaje_admon`, ADD `porcentaje_utilidad` INT NOT NULL DEFAULT '0' COMMENT 'Porcentaje utilidad aiu propio' AFTER `porcentaje_imprevisto`, ADD `monto_admon` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'Monto administracion propio' AFTER `porcentaje_utilidad`, ADD `monto_imprevisto` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'monto imprevisto propio' AFTER `monto_admon`, ADD `monto_utilidad` DECIMAL(15.2) NOT NULL DEFAULT '0' COMMENT 'monto utilidad propio' AFTER `monto_imprevisto`;
+ALTER TABLE `facturaven` ADD `orden_compra` VARCHAR(50) NULL DEFAULT NULL AFTER `monto_utilidad`, ADD `orden_fecha` DATE NULL DEFAULT NULL AFTER `orden_compra`;
+
+INSERT IGNORE `usuarios` (`idusuarios`,`creacion`, `usuario`, `password`, `nombre`, `correo`, `telefono`, `tercero`, `resolucion`, `grupo`, `activo`, `ultima_actualizacion`, `grupocomanda`, `nombre_pc`, `nombre_impre`, `sesion_id`, `acceso_inventario`, `acceso_gerencial`, `acceso_restaurante`, `sesion_id_movil`, `banco_movil`, `ubicacion`, `n_equipo`, `serial`, `idbod`, `ocultar_bod`) VALUES
+(999,NOW(), 'facilweb', 'facilweb', 'FACILWEB', 'correo@dominio.com', '', 1, 1, 1, 'S', NOW(), NULL, NULL, NULL, NULL, 'NO', 'NO', 'NO', NULL, 1, 'VENTAS', 'PC', '0000000000', 0, 'SI');
+
+
+
+ALTER TABLE `usuarios` CHANGE `grupocomanda` `grupocomanda` INT(11) NULL DEFAULT '0';
+UPDATE `usuarios` SET `banco_movil` = '1' WHERE `usuarios`.`idusuarios` = 1;
+
+
+
+UPDATE `usuarios` SET `sesion_id_movil` = NULL;
