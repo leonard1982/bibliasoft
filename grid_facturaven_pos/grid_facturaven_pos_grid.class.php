@@ -147,7 +147,6 @@ class grid_facturaven_pos_grid
    var $sum_banco_valoriva;
    var $sum_banco_adicional;
    var $editarpos;
-   var $copiar;
    var $imprimircopia;
    var $a4;
    var $pdf;
@@ -155,12 +154,14 @@ class grid_facturaven_pos_grid
    var $enviar_propio;
    var $reenviar;
    var $restaurante;
-   var $whatsapp_propio;
-   var $ver_xml_propio;
    var $envio_dataico;
-   var $regenerar_pdf_propio;
+   var $opciones;
+   var $copiar;
    var $existeentns;
    var $imprimir;
+   var $whatsapp_propio;
+   var $ver_xml_propio;
+   var $regenerar_pdf_propio;
    var $fechaven;
    var $tipo;
    var $credito;
@@ -201,10 +202,10 @@ class grid_facturaven_pos_grid
    var $id_trans_fe;
    var $nomcli;
    var $si_electronica;
-   var $numfe;
    var $nombre_cliente;
    var $celular_ws;
    var $dircliente;
+   var $numfe;
    var $look_credito;
    var $look_asentada;
    var $grid_facturaven_pos_detalle;
@@ -619,7 +620,7 @@ class grid_facturaven_pos_grid
    $this->nmgp_botoes['group_1'] = "on";
    $this->nmgp_botoes['group_2'] = "on";
    $this->nmgp_botoes['group_1'] = "on";
-   $this->nmgp_botoes['exit'] = "on";
+   $this->nmgp_botoes['exit'] = "off";
    $this->nmgp_botoes['first'] = "on";
    $this->nmgp_botoes['back'] = "on";
    $this->nmgp_botoes['forward'] = "on";
@@ -661,6 +662,7 @@ class grid_facturaven_pos_grid
    $this->nmgp_botoes['btn_enviar_hka_tech'] = "on";
    $this->nmgp_botoes['btn_pdf'] = "on";
    $this->nmgp_botoes['btn_calculadora'] = "on";
+   $this->nmgp_botoes['btn_vigencia_certificado'] = "on";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['btn_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
@@ -776,10 +778,12 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
 ?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
+<script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
 <?php
 
-$this->NM_cmp_hidden["ver_xml_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["ver_xml_propio"] = "off"; }
-$this->NM_cmp_hidden["whatsapp_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "off"; }
 $this->NM_cmp_hidden["pedido"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["pedido"] = "off"; }
 
 $vsql = "select ver_xml_fe,(SELECT proveedor FROM webservicefe limit 1) as proveedor, columna_imprimir_ticket, columna_imprimir_a4, columna_whatsapp, columna_npedido, columna_reg_pdf_propio, ver_agregar_nota from configuraciones where idconfiguraciones=1";
@@ -818,12 +822,10 @@ if(isset($this->vsixml[0][0]))
 	
 	if($this->vsixml[0][0]=="SI")
 	{
-		$this->NM_cmp_hidden["ver_xml_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["ver_xml_propio"] = "on"; }
 	}
 
 	if($this->vsixml[0][4]=="SI")
 	{
-		$this->NM_cmp_hidden["whatsapp_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["whatsapp_propio"] = "on"; }
 	}
 	
 	if($this->vsixml[0][3]=="SI")
@@ -855,11 +857,9 @@ if(isset($this->vsixml[0][0]))
 	
 	if($this->vsixml[0][6]=="SI")
 	{
-		$this->NM_cmp_hidden["regenerar_pdf_propio"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["regenerar_pdf_propio"] = "on"; }
 	}
 	else
 	{
-		$this->NM_cmp_hidden["regenerar_pdf_propio"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["regenerar_pdf_propio"] = "off"; }
 	}
 }
 
@@ -1491,6 +1491,13 @@ $(document).ajaxStart(function(){
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+#pesq_top{
+	color:white !important;
+}
+#sc_btn_vigencia_certificado_top
+{
+	color:white !important;
 }
 </style>
 <?php
@@ -2140,27 +2147,27 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), usuario_crea, str_replace (convert(char(10),inicio,102), '.', '-') + ' ' + convert(char(8),inicio,20), str_replace (convert(char(10),fin,102), '.', '-') + ' ' + convert(char(8),fin,20), banco, dias_decredito, cod_cuenta, qr_base64, str_replace (convert(char(10),fecha_validacion,102), '.', '-') + ' ' + convert(char(8),fecha_validacion,20), cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, numfe, nombre_cliente, celular_ws, dircliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), usuario_crea, str_replace (convert(char(10),inicio,102), '.', '-') + ' ' + convert(char(8),inicio,20), str_replace (convert(char(10),fin,102), '.', '-') + ' ' + convert(char(8),fin,20), banco, dias_decredito, cod_cuenta, qr_base64, str_replace (convert(char(10),fecha_validacion,102), '.', '-') + ' ' + convert(char(8),fecha_validacion,20), cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, numfe, nombre_cliente, celular_ws, dircliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT convert(char(23),fechaven,121), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, convert(char(23),fechavenc,121), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, convert(char(23),creado,121), convert(char(23),editado,121), usuario_crea, convert(char(23),inicio,121), convert(char(23),fin,121), banco, dias_decredito, cod_cuenta, qr_base64, convert(char(23),fecha_validacion,121), cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, numfe, nombre_cliente, celular_ws, dircliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT convert(char(23),fechaven,121), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, convert(char(23),fechavenc,121), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, convert(char(23),creado,121), convert(char(23),editado,121), usuario_crea, convert(char(23),inicio,121), convert(char(23),fin,121), banco, dias_decredito, cod_cuenta, qr_base64, convert(char(23),fecha_validacion,121), cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, numfe, nombre_cliente, celular_ws, dircliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT EXTEND(fechaven, YEAR TO DAY), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), usuario_crea, EXTEND(inicio, YEAR TO FRACTION), EXTEND(fin, YEAR TO FRACTION), banco, dias_decredito, cod_cuenta, LOTOFILE(qr_base64, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as qr_base64, EXTEND(fecha_validacion, YEAR TO FRACTION), cufe, estado, enviada_a_tns, factura_tns, LOTOFILE(enlacepdf, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as enlacepdf, id_trans_fe, nomcli, si_electronica, numfe, nombre_cliente, celular_ws, dircliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT EXTEND(fechaven, YEAR TO DAY), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), usuario_crea, EXTEND(inicio, YEAR TO FRACTION), EXTEND(fin, YEAR TO FRACTION), banco, dias_decredito, cod_cuenta, LOTOFILE(qr_base64, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as qr_base64, EXTEND(fecha_validacion, YEAR TO FRACTION), cufe, estado, enviada_a_tns, factura_tns, LOTOFILE(enlacepdf, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, numfe, nombre_cliente, celular_ws, dircliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enviada_a_tns, factura_tns, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo'])) 
@@ -2353,11 +2360,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig']))
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -2630,10 +2637,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
            $this->id_trans_fe = $this->rs_grid->fields[37] ;  
            $this->nomcli = $this->rs_grid->fields[38] ;  
            $this->si_electronica = $this->rs_grid->fields[39] ;  
-           $this->numfe = $this->rs_grid->fields[40] ;  
-           $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-           $this->celular_ws = $this->rs_grid->fields[42] ;  
-           $this->dircliente = $this->rs_grid->fields[43] ;  
+           $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+           $this->celular_ws = $this->rs_grid->fields[41] ;  
+           $this->dircliente = $this->rs_grid->fields[42] ;  
+           $this->numfe = $this->rs_grid->fields[43] ;  
            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig']))
            {
                foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -3939,8 +3946,6 @@ $nm_saida->saida("}\r\n");
    $this->css_total_grid_line = $compl_css_emb . "css_total_grid_line";
    $this->css_editarpos_label = $compl_css_emb . "css_editarpos_label";
    $this->css_editarpos_grid_line = $compl_css_emb . "css_editarpos_grid_line";
-   $this->css_copiar_label = $compl_css_emb . "css_copiar_label";
-   $this->css_copiar_grid_line = $compl_css_emb . "css_copiar_grid_line";
    $this->css_imprimircopia_label = $compl_css_emb . "css_imprimircopia_label";
    $this->css_imprimircopia_grid_line = $compl_css_emb . "css_imprimircopia_grid_line";
    $this->css_a4_label = $compl_css_emb . "css_a4_label";
@@ -3959,14 +3964,10 @@ $nm_saida->saida("}\r\n");
    $this->css_restaurante_grid_line = $compl_css_emb . "css_restaurante_grid_line";
    $this->css_pedido_label = $compl_css_emb . "css_pedido_label";
    $this->css_pedido_grid_line = $compl_css_emb . "css_pedido_grid_line";
-   $this->css_whatsapp_propio_label = $compl_css_emb . "css_whatsapp_propio_label";
-   $this->css_whatsapp_propio_grid_line = $compl_css_emb . "css_whatsapp_propio_grid_line";
-   $this->css_ver_xml_propio_label = $compl_css_emb . "css_ver_xml_propio_label";
-   $this->css_ver_xml_propio_grid_line = $compl_css_emb . "css_ver_xml_propio_grid_line";
    $this->css_envio_dataico_label = $compl_css_emb . "css_envio_dataico_label";
    $this->css_envio_dataico_grid_line = $compl_css_emb . "css_envio_dataico_grid_line";
-   $this->css_regenerar_pdf_propio_label = $compl_css_emb . "css_regenerar_pdf_propio_label";
-   $this->css_regenerar_pdf_propio_grid_line = $compl_css_emb . "css_regenerar_pdf_propio_grid_line";
+   $this->css_opciones_label = $compl_css_emb . "css_opciones_label";
+   $this->css_opciones_grid_line = $compl_css_emb . "css_opciones_grid_line";
    $this->css_idfacven_label = $compl_css_emb . "css_idfacven_label";
    $this->css_idfacven_grid_line = $compl_css_emb . "css_idfacven_grid_line";
    $this->css_numfacven_label = $compl_css_emb . "css_numfacven_label";
@@ -4019,6 +4020,8 @@ $nm_saida->saida("}\r\n");
    $this->css_cufe_grid_line = $compl_css_emb . "css_cufe_grid_line";
    $this->css_estado_label = $compl_css_emb . "css_estado_label";
    $this->css_estado_grid_line = $compl_css_emb . "css_estado_grid_line";
+   $this->css_copiar_label = $compl_css_emb . "css_copiar_label";
+   $this->css_copiar_grid_line = $compl_css_emb . "css_copiar_grid_line";
    $this->css_existeentns_label = $compl_css_emb . "css_existeentns_label";
    $this->css_existeentns_grid_line = $compl_css_emb . "css_existeentns_grid_line";
    $this->css_imprimir_label = $compl_css_emb . "css_imprimir_label";
@@ -4371,14 +4374,6 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_editarpos_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_editarpos_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
- function NM_label_copiar()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['copiar'])) ? $this->New_label['copiar'] : "Duplicar"; 
-   if (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_copiar_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_copiar_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
  function NM_label_imprimircopia()
  {
    global $nm_saida;
@@ -4443,22 +4438,6 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_pedido_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_pedido_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
- function NM_label_whatsapp_propio()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['whatsapp_propio'])) ? $this->New_label['whatsapp_propio'] : "WhatsApp"; 
-   if (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_whatsapp_propio_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_whatsapp_propio_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_ver_xml_propio()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['ver_xml_propio'])) ? $this->New_label['ver_xml_propio'] : "JSON"; 
-   if (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_ver_xml_propio_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_ver_xml_propio_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
  function NM_label_envio_dataico()
  {
    global $nm_saida;
@@ -4467,12 +4446,12 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_envio_dataico_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_envio_dataico_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
- function NM_label_regenerar_pdf_propio()
+ function NM_label_opciones()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['regenerar_pdf_propio'])) ? $this->New_label['regenerar_pdf_propio'] : "Regenerar"; 
-   if (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_regenerar_pdf_propio_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_regenerar_pdf_propio_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+   if (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_opciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_opciones_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_idfacven()
@@ -4683,6 +4662,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_estado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_estado_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
+ function NM_label_copiar()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['copiar'])) ? $this->New_label['copiar'] : "Duplicar"; 
+   if (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_copiar_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_copiar_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_existeentns()
  {
    global $nm_saida;
@@ -4745,8 +4732,6 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['total'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['editarpos'])) ? $this->New_label['editarpos'] : "Editar"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['editarpos'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['copiar'])) ? $this->New_label['copiar'] : "Duplicar"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['copiar'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['imprimircopia'])) ? $this->New_label['imprimircopia'] : "Ticket"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['imprimircopia'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['a4'])) ? $this->New_label['a4'] : "A4"; 
@@ -4763,14 +4748,10 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['restaurante'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['pedido'])) ? $this->New_label['pedido'] : "Pedido"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['pedido'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['whatsapp_propio'])) ? $this->New_label['whatsapp_propio'] : "WhatsApp"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['whatsapp_propio'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['ver_xml_propio'])) ? $this->New_label['ver_xml_propio'] : "JSON"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['ver_xml_propio'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['envio_dataico'])) ? $this->New_label['envio_dataico'] : "Acción"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['envio_dataico'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['regenerar_pdf_propio'])) ? $this->New_label['regenerar_pdf_propio'] : "Regenerar"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['regenerar_pdf_propio'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['opciones'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idfacven'])) ? $this->New_label['idfacven'] : "Idfacven"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['idfacven'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['numfacven'])) ? $this->New_label['numfacven'] : "No"; 
@@ -4823,6 +4804,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['cufe'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Estado"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['estado'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['copiar'])) ? $this->New_label['copiar'] : "Duplicar"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['copiar'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['existeentns'])) ? $this->New_label['existeentns'] : "TNS"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['existeentns'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['imprimir'])) ? $this->New_label['imprimir'] : "PDF"; 
@@ -5352,11 +5335,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pd
           $this->id_trans_fe = $this->rs_grid->fields[37] ;  
           $this->nomcli = $this->rs_grid->fields[38] ;  
           $this->si_electronica = $this->rs_grid->fields[39] ;  
-          $this->numfe = $this->rs_grid->fields[40] ;  
-          $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-          $this->celular_ws = $this->rs_grid->fields[42] ;  
-          $this->dircliente = $this->rs_grid->fields[43] ;  
+          $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+          $this->celular_ws = $this->rs_grid->fields[41] ;  
+          $this->dircliente = $this->rs_grid->fields[42] ;  
           $this->dircliente = (string)$this->dircliente;
+          $this->numfe = $this->rs_grid->fields[43] ;  
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig']))
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -5839,13 +5822,12 @@ if($this->asentada =="1")
 				$this->enviar_tech  = "<a onclick='fEnviarTech(\"".$this->idfacven ."\");' rel='Firmar el documento electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/grp__NM__ico__NM__ico_firmar.png' /></a>";
 			break;
 			case 'FACILWEB':
-				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
+				$this->enviar_propio  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
 				
-				$this->regenerar_pdf_propio  = "<a onclick='fRegenerarPDFPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",\"".$this->cufe ."\");' rel='Regenerar PDF'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__document_refresh_32.png' /><span class='tooltiptext'>Regenerar PDF</span></div></a>";
 			break;
 				
 			case 'DATAICO':
-				$this->envio_dataico  = "<a onclick='fEnvioDataico(\"".$this->idfacven ."\");' rel='Enviar el documento electrónico'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /><span class='tooltiptext'>Enviar documento</span></div></a>";
+				$this->envio_dataico  = "<a onclick='fEnvioDataico(\"".$this->idfacven ."\");' title='Enviar el documento electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
 			break;
 		}
 	}
@@ -5934,7 +5916,7 @@ if($this->asentada =="1")
 				if(!empty($this->enlacepdf ))
 				{
 					$this->editarpos  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png'   id=pdf_".$this->idfacven ."' name='pdf_".$this->idfacven ."' /></a>";
-					$this->enviar_propio  = "<a style='cursor:pointer;' onclick='fReenviarPropio(\"".$this->idfacven ."\");'><div class='tooltip'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /><span class='tooltiptext'>Reenviar correo</span></div></a>";
+					$this->enviar_propio  = "<a style='cursor:pointer;' onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /></a>";
 				}
 				else
 				{
@@ -5947,7 +5929,7 @@ if($this->asentada =="1")
 				if(!empty($this->enlacepdf ))
 				{
 					$this->editarpos  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png'   id=pdf_".$this->idfacven ."' name='pdf_".$this->idfacven ."' /></a>";
-					$this->envio_dataico  = "<a style='cursor:pointer;' onclick='fReenviarDataico(\"".$this->idfacven ."\");'><div class='tooltip'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /><span class='tooltiptext'>Reenviar correo</span></div></a>";
+					$this->envio_dataico  = "<a style='cursor:pointer;' onclick='fReenviarDataico(\"".$this->idfacven ."\");' title='Reenviar Correo'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /></a>";
 				}
 				else
 				{
@@ -5978,7 +5960,7 @@ if($this->asentada =="1")
 			}
 			else
 			{
-				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' rel='Reversar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /><span class='tooltiptext'>Revesar documento</span></div></a>";
+				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' title='Reversar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /></a>";
 			}
 		}
 		
@@ -5990,7 +5972,7 @@ if($this->asentada =="1")
 			}
 			else
 			{
-				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' rel='Reversar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /><span class='tooltiptext'>Revesar documento</span></div></a>";
+				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' title='Reversar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /></a>";
 			}
 		}
 	}
@@ -6002,9 +5984,9 @@ else
 	$this->imprimircopia  = "<a href='../frm_pos_impresion_html/index.php?idfactura=".$this->idfacven ."' target='_blank'><img src='../_lib/img/usr__NM__bg__NM__apps_printer_15747.png' /></a>";
 	
 	$this->enviar_tech  = "";
-	$this->enviar_propio  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' rel='Asentar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Asentar</span></div></a>";
+	$this->enviar_propio  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' title='Asentar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /></a>";
 	
-	$this->envio_dataico  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' rel='Asentar documento'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Asentar</span></div></a>";
+	$this->envio_dataico  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' title='Asentar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /></a>";
 }
 $vurl = sc_url_library("prj", "factura", "index.php");
 $this->a4  = "<a href='".$vurl."?idempresa=".$this->sc_temp_gbd_seleccionada."&id=".$this->idfacven ."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__printer3_32.png'  style='width:32px;'/></a>";
@@ -6012,15 +5994,45 @@ if($this->estado =='200' or $this->estado =='201')
 {
 	$this->NM_field_style["numero2"] = "background-color:#33ff99;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
 }
+$vver_json = "";
+$vregenerar_pdf_propio = "";
+$vmandar_whatsapp = "";
+$vduplicar = $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_facturapos') . "/?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_url_saida=" . $this->nm_location . "&nmgp_parms=" . "gdoc*scin" . $this->numero2  . "*scout" . "gidfacven*scin" . $this->idfacven  . "*scout" . "gidtercero*scin" . $this->idcli  . "*scout";
+$vduplicar = "<a class='dropdown-item' href='".$vduplicar."' >Duplicar Documento</a>";
 switch($this->sc_temp_gproveedor)
 {
 	case 'FACILWEB':
-$this->ver_xml_propio  = "<a onclick='fJSONPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Consultar JSON'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Consutar JSON</span></div></a>";
+		
+		$vver_json = "<a class='dropdown-item' href='#' onclick='fJSONPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);'>Ver JSON</a>";
+		
+		
+		$vregenerar_pdf_propio = "<a class='dropdown-item' href='#' onclick='fRegenerarPDFPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",\"".$this->cufe ."\");'>Regenerar PDF Propio</a>";
+		
+		if(!empty($this->enlacepdf ))
+		{
+			$vmandar_whatsapp = $this->Ini->path_link . "" . SC_dir_app_name('control_mandar_whatsapp_propio') . "/?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_url_saida=" . $this->nm_location . "&nmgp_parms=" . "genlace_pdf*scin" . $this->enlacepdf  . "*scout" . "gcelular*scin" . $this->celular_ws  . "*scout" . "gnumero*scin" . $this->numero2  . "*scout" . "gnom_cliente*scin" . $this->nombre_cliente  . "*scout" . "giddireccion*scin" . $this->dircliente  . "*scout";
+			$vmandar_whatsapp = "<a class='dropdown-item' href='".$vmandar_whatsapp."' target='_self'>Enviar a WhatsApp</a>";
+		}
+		else
+		{
+			$vmandar_whatsapp = "<a class='dropdown-item' href='#' onclick='alert(\"El documento no ha sido enviado.\");'>Enviar a WhatsApp</a>";
+		}
 	break;
 	case 'DATAICO':
-$this->ver_xml_propio  = "<a onclick='fJSONDataico(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' rel='Consultar JSON'><div class='tooltip'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /><span class='tooltiptext'>Consutar JSON</span></div></a>";
+		$vver_json = "<a class='dropdown-item' href='#' onclick='fJSONDataico(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);'>Ver JSON</a>";
 	break;
 }
+$this->opciones  = "<div class='dropdown'>
+  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-ellipsis-v'></i>
+  </button>
+  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  	$vduplicar
+    $vmandar_whatsapp
+	$vregenerar_pdf_propio
+	$vver_json
+  </div>
+</div>";
 if (isset($this->sc_temp_gtipo_negocio)) {$_SESSION['gtipo_negocio'] = $this->sc_temp_gtipo_negocio;}
 if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
@@ -6583,75 +6595,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_editarpos_grid_line . "\"  style=\"" . $this->Css_Cmp['css_editarpos_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_editarpos_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_copiar()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off") { 
-          $conteudo = $this->copiar; 
-          $conteudo_original = $this->copiar; 
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__copy_32.png"))
-          { 
-              $conteudo = "&nbsp;" ;  
-          } 
-          else 
-          { 
-              if ($this->Ini->Export_img_zip)
-              {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__copy_32.png";
-                  $conteudo = "<img border=\"\" src=\"scriptcase__NM__ico__NM__copy_32.png\"/>"; 
-              }
-              elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img) 
-              { 
-                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__copy_32.png";
-                  $tmp_copiar = fopen($loc_img_word, "rb"); 
-                  $reg_copiar = fread($tmp_copiar, filesize($loc_img_word)); 
-                  fclose($tmp_copiar);  
-                  $conteudo = "<img border=\"0\" src=\"data:image/jpeg;base64," . base64_encode($reg_copiar) . "\"/>" ; 
-              } 
-              else 
-              { 
-                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__copy_32.png\"/>" ; 
-              } 
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'copiar', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'copiar', $str_tem_display, $conteudo_original); 
-          } 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_copiar_grid_line . "\"  style=\"" . $this->Css_Cmp['css_copiar_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
- if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Ind_lig_mult']++;
-       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_copiar_@scinf_control_copiar_facturapos']) ? $this->Ini->sc_lig_target['C_@scinf_copiar_@scinf_control_copiar_facturapos'] : (isset($this->Ini->sc_lig_target['C_@scinf_copiar']) ? $this->Ini->sc_lig_target['C_@scinf_copiar'] : null);
-       if (isset($this->Ini->sc_lig_md5["control_copiar_facturapos"]) && $this->Ini->sc_lig_md5["control_copiar_facturapos"] == "S") {
-           $Parms_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?gidfacven?#?" . str_replace("'", "@aspass@", $this->idfacven) . "?@?gdoc?#?" . str_replace("'", "@aspass@", $this->numero2) . "?@?NM_btn_insert?#?N?@?NM_btn_update?#?N?@?NM_btn_delete?#?N?@?NM_btn_navega?#?N?@?";
-           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['under_dashboard'] && isset($linkTarget))
-           {
-               if ('' != $Parms_Lig)
-               {
-                   $Parms_Lig .= '*scout';
-               }
-               $Parms_Lig .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_border'] ? '1' : '0');
-           }
-           $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_facturaven_pos@SC_par@" . md5($Parms_Lig);
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
-       } else {
-           $Md5_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?gidfacven?#?" . str_replace("'", "@aspass@", $this->idfacven) . "?@?gdoc?#?" . str_replace("'", "@aspass@", $this->numero2) . "?@?NM_btn_insert?#?N?@?NM_btn_update?#?N?@?NM_btn_delete?#?N?@?NM_btn_navega?#?N?@?";
-       }
-   $nm_saida->saida("<a  id=\"id_sc_field_copiar_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_control_copiar_facturapos_edit . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : '_self') . "', '', '0', '0', '', 'control_copiar_facturapos', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, ' Duplicar documento')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_copiar_grid_line . "\" style=\"" . $this->Css_Cmp['css_copiar_grid_line'] . "\">" . $conteudo . "</a>\r\n");
-} else {
-   $nm_saida->saida(" <span id=\"id_sc_field_copiar_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
-       } 
-   $nm_saida->saida("</TD>\r\n");
-      }
- }
  function NM_grid_imprimircopia()
  {
       global $nm_saida;
@@ -7027,121 +6970,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_pedido_grid_line . "\"  style=\"" . $this->Css_Cmp['css_pedido_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_pedido_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_whatsapp_propio()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off") { 
-          $conteudo = $this->whatsapp_propio; 
-          $conteudo_original = $this->whatsapp_propio; 
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_whatsapp.png"))
-          { 
-              $conteudo = "&nbsp;" ;  
-          } 
-          elseif ($this->Ini->Gd_missing)
-          { 
-              $conteudo = "<span class=\"scErrorLine\">" . $this->Ini->Nm_lang['lang_errm_gd'] . "</span>";
-          } 
-          else 
-          { 
-              $in_whatsapp_propio = $this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_whatsapp.png"; 
-              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_whatsapp.png"); 
-              $out_whatsapp_propio = str_replace("/", "_", $this->Ini->path_imag_cab); 
-              $out_whatsapp_propio = $this->Ini->path_imag_temp . "/sc_" . $out_whatsapp_propio . "_whatsapp_propio_3030_" . $img_time . "_grp__NM__ico__NM__ico_whatsapp.png";
-              if (!is_file($this->Ini->root . $out_whatsapp_propio)) 
-              {  
-                  $sc_obj_img = new nm_trata_img($in_whatsapp_propio);
-                  $sc_obj_img->setWidth(30);
-                  $sc_obj_img->setHeight(30);
-                  $sc_obj_img->setManterAspecto(true);
-                  $sc_obj_img->createImg($this->Ini->root . $out_whatsapp_propio);
-              } 
-              if ($this->Ini->Export_img_zip)
-              {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $out_whatsapp_propio;
-                  $Clear_path_img = str_replace($this->Ini->path_imag_temp . "/", "", $out_whatsapp_propio);
-                  $conteudo = "<img border=\"\" src=\"" . $Clear_path_img . "\"/>"; 
-              }
-              elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img) 
-              { 
-                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_whatsapp.png";
-                  $tmp_whatsapp_propio = fopen($loc_img_word, "rb"); 
-                  $reg_whatsapp_propio = fread($tmp_whatsapp_propio, filesize($loc_img_word)); 
-                  fclose($tmp_whatsapp_propio);  
-                  $conteudo = "<img border=\"0\" src=\"data:image/jpeg;base64," . base64_encode($reg_whatsapp_propio) . "\"/>" ; 
-              } 
-              else 
-              { 
-                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img . $out_whatsapp_propio . "\"/>" ; 
-              } 
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'whatsapp_propio', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'whatsapp_propio', $str_tem_display, $conteudo_original); 
-          } 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_whatsapp_propio_grid_line . "\"  style=\"" . $this->Css_Cmp['css_whatsapp_propio_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
- if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Ind_lig_mult']++;
-       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_whatsapp_propio_@scinf_control_mandar_whatsapp_propio']) ? $this->Ini->sc_lig_target['C_@scinf_whatsapp_propio_@scinf_control_mandar_whatsapp_propio'] : (isset($this->Ini->sc_lig_target['C_@scinf_whatsapp_propio']) ? $this->Ini->sc_lig_target['C_@scinf_whatsapp_propio'] : null);
-       if (isset($this->Ini->sc_lig_md5["control_mandar_whatsapp_propio"]) && $this->Ini->sc_lig_md5["control_mandar_whatsapp_propio"] == "S") {
-           $Parms_Lig = "nmgp_lig_edit_lapis*scinS*scoutnmgp_opcao*scinigual*scoutgenlace_pdf*scin" . str_replace("'", "@aspass@", $this->enlacepdf) . "*scoutgcelular*scin" . str_replace("'", "@aspass@", $this->celular_ws) . "*scoutgnumero*scin" . str_replace("'", "@aspass@", $this->numero2) . "*scoutgnom_cliente*scin" . str_replace("'", "@aspass@", $this->nombre_cliente) . "*scoutgiddireccion*scin" . str_replace("'", "@aspass@", $this->dircliente) . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutsc_redir_atualiz*scinok*scoutsc_redir_insert*scinok*scoutNMSC_modal*scinok*scout";
-           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['under_dashboard'] && isset($linkTarget))
-           {
-               if ('' != $Parms_Lig)
-               {
-                   $Parms_Lig .= '*scout';
-               }
-               $Parms_Lig .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_border'] ? '1' : '0');
-           }
-           $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_facturaven_pos@SC_par@" . md5($Parms_Lig);
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
-       } else {
-           $Md5_Lig = "nmgp_lig_edit_lapis*scinS*scoutnmgp_opcao*scinigual*scoutgenlace_pdf*scin" . str_replace("'", "@aspass@", $this->enlacepdf) . "*scoutgcelular*scin" . str_replace("'", "@aspass@", $this->celular_ws) . "*scoutgnumero*scin" . str_replace("'", "@aspass@", $this->numero2) . "*scoutgnom_cliente*scin" . str_replace("'", "@aspass@", $this->nombre_cliente) . "*scoutgiddireccion*scin" . str_replace("'", "@aspass@", $this->dircliente) . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutsc_redir_atualiz*scinok*scoutsc_redir_insert*scinok*scoutNMSC_modal*scinok*scout";
-       }
-   $nm_saida->saida("<a  id=\"id_sc_field_whatsapp_propio_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_control_mandar_whatsapp_propio_edit . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : 'modal') . "', '', '600', '900', '', 'control_mandar_whatsapp_propio', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_whatsapp_propio_grid_line . "\" style=\"" . $this->Css_Cmp['css_whatsapp_propio_grid_line'] . "\">" . $conteudo . "</a>\r\n");
-} else {
-   $nm_saida->saida(" <span id=\"id_sc_field_whatsapp_propio_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
-       } 
-   $nm_saida->saida("</TD>\r\n");
-      }
- }
- function NM_grid_ver_xml_propio()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off") { 
-          $conteudo = sc_strip_script($this->ver_xml_propio); 
-          $conteudo_original = sc_strip_script($this->ver_xml_propio); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'ver_xml_propio', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'ver_xml_propio', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "";
-          }
-          else
-          {
-              $this->SC_nowrap = "";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_ver_xml_propio_grid_line . "\"  style=\"" . $this->Css_Cmp['css_ver_xml_propio_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_ver_xml_propio_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
  function NM_grid_envio_dataico()
  {
       global $nm_saida;
@@ -7171,12 +6999,12 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_envio_dataico_grid_line . "\"  style=\"" . $this->Css_Cmp['css_envio_dataico_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_envio_dataico_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_regenerar_pdf_propio()
+ function NM_grid_opciones()
  {
       global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off") { 
-          $conteudo = sc_strip_script($this->regenerar_pdf_propio); 
-          $conteudo_original = sc_strip_script($this->regenerar_pdf_propio); 
+      if (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off") { 
+          $conteudo = sc_strip_script($this->opciones); 
+          $conteudo_original = sc_strip_script($this->opciones); 
           if ($conteudo === "") 
           { 
               $conteudo = "&nbsp;" ;  
@@ -7185,19 +7013,19 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'] && !empty($conteudo)) 
           { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'regenerar_pdf_propio', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'regenerar_pdf_propio', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'opciones', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'opciones', $str_tem_display, $conteudo_original); 
           } 
               $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'])
           {
-              $this->SC_nowrap = "NOWRAP";
+              $this->SC_nowrap = "";
           }
           else
           {
-              $this->SC_nowrap = "NOWRAP";
+              $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_regenerar_pdf_propio_grid_line . "\"  style=\"" . $this->Css_Cmp['css_regenerar_pdf_propio_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"  ><span id=\"id_sc_field_regenerar_pdf_propio_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_opciones_grid_line . "\"  style=\"" . $this->Css_Cmp['css_opciones_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_opciones_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_idfacven()
@@ -8132,6 +7960,75 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_estado_grid_line . "\"  style=\"" . $this->Css_Cmp['css_estado_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_estado_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_copiar()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off") { 
+          $conteudo = $this->copiar; 
+          $conteudo_original = $this->copiar; 
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__copy_32.png"))
+          { 
+              $conteudo = "&nbsp;" ;  
+          } 
+          else 
+          { 
+              if ($this->Ini->Export_img_zip)
+              {
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__copy_32.png";
+                  $conteudo = "<img border=\"\" src=\"scriptcase__NM__ico__NM__copy_32.png\"/>"; 
+              }
+              elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img) 
+              { 
+                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__copy_32.png";
+                  $tmp_copiar = fopen($loc_img_word, "rb"); 
+                  $reg_copiar = fread($tmp_copiar, filesize($loc_img_word)); 
+                  fclose($tmp_copiar);  
+                  $conteudo = "<img border=\"0\" src=\"data:image/jpeg;base64," . base64_encode($reg_copiar) . "\"/>" ; 
+              } 
+              else 
+              { 
+                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__copy_32.png\"/>" ; 
+              } 
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'copiar', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'copiar', $str_tem_display, $conteudo_original); 
+          } 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_copiar_grid_line . "\"  style=\"" . $this->Css_Cmp['css_copiar_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
+ if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Ind_lig_mult']++;
+       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_copiar_@scinf_control_copiar_facturapos']) ? $this->Ini->sc_lig_target['C_@scinf_copiar_@scinf_control_copiar_facturapos'] : (isset($this->Ini->sc_lig_target['C_@scinf_copiar']) ? $this->Ini->sc_lig_target['C_@scinf_copiar'] : null);
+       if (isset($this->Ini->sc_lig_md5["control_copiar_facturapos"]) && $this->Ini->sc_lig_md5["control_copiar_facturapos"] == "S") {
+           $Parms_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?gidfacven?#?" . str_replace("'", "@aspass@", $this->idfacven) . "?@?gdoc?#?" . str_replace("'", "@aspass@", $this->numero2) . "?@?gidtercero?#?" . str_replace("'", "@aspass@", $this->idcli) . "?@?NM_btn_insert?#?N?@?NM_btn_update?#?N?@?NM_btn_delete?#?N?@?NM_btn_navega?#?N?@?";
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['under_dashboard'] && isset($linkTarget))
+           {
+               if ('' != $Parms_Lig)
+               {
+                   $Parms_Lig .= '*scout';
+               }
+               $Parms_Lig .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['remove_border'] ? '1' : '0');
+           }
+           $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_facturaven_pos@SC_par@" . md5($Parms_Lig);
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+       } else {
+           $Md5_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?gidfacven?#?" . str_replace("'", "@aspass@", $this->idfacven) . "?@?gdoc?#?" . str_replace("'", "@aspass@", $this->numero2) . "?@?gidtercero?#?" . str_replace("'", "@aspass@", $this->idcli) . "?@?NM_btn_insert?#?N?@?NM_btn_update?#?N?@?NM_btn_delete?#?N?@?NM_btn_navega?#?N?@?";
+       }
+   $nm_saida->saida("<a  id=\"id_sc_field_copiar_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_control_copiar_facturapos_edit . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : '_self') . "', '', '0', '0', '', 'control_copiar_facturapos', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, ' Duplicar documento')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_copiar_grid_line . "\" style=\"" . $this->Css_Cmp['css_copiar_grid_line'] . "\">" . $conteudo . "</a>\r\n");
+} else {
+   $nm_saida->saida(" <span id=\"id_sc_field_copiar_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
+       } 
+   $nm_saida->saida("</TD>\r\n");
+      }
+ }
  function NM_grid_existeentns()
  {
       global $nm_saida;
@@ -8214,7 +8111,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 51;
+   $this->NM_colspan  = 49;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -8994,10 +8891,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -9030,19 +8923,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -9171,6 +9056,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -9322,10 +9211,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -9358,19 +9243,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -9499,6 +9376,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -9650,10 +9531,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -9686,19 +9563,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -9827,6 +9696,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -9978,10 +9851,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -10014,19 +9883,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -10155,6 +10016,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -10306,10 +10171,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -10342,19 +10203,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -10483,6 +10336,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -10634,10 +10491,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -10670,19 +10523,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -10811,6 +10656,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -10960,10 +10809,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -10996,19 +10841,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -11137,6 +10974,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -11286,10 +11127,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -11322,19 +11159,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -11463,6 +11292,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -11612,10 +11445,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -11648,19 +11477,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -11789,6 +11610,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -11938,10 +11763,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -11974,19 +11795,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -12115,6 +11928,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -12255,10 +12072,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -12291,19 +12104,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -12432,6 +12237,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -12572,10 +12381,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -12608,19 +12413,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -12749,6 +12546,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -12889,10 +12690,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -12925,19 +12722,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -13066,6 +12855,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -13206,10 +12999,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -13242,19 +13031,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -13383,6 +13164,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -13523,10 +13308,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -13559,19 +13340,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -13700,6 +13473,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -13840,10 +13617,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -13876,19 +13649,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -14017,6 +13782,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -14157,10 +13926,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -14193,19 +13958,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -14334,6 +14091,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
     }
@@ -14474,10 +14235,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
         $colspan++;
@@ -14510,19 +14267,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
         $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -14654,6 +14403,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "existeentns" && (!isset($this->NM_cmp_hidden['existeentns']) || $this->NM_cmp_hidden['existeentns'] != "off"))
     {
         $colspan++;
@@ -14755,10 +14508,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -14791,19 +14540,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -14932,6 +14673,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -15031,10 +14776,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -15067,19 +14808,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -15208,6 +14941,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -15307,10 +15044,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -15343,19 +15076,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -15484,6 +15209,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -15583,10 +15312,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -15619,19 +15344,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -15760,6 +15477,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -15859,10 +15580,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -15895,19 +15612,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -16036,6 +15745,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -16135,10 +15848,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -16171,19 +15880,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -16312,6 +16013,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -16411,10 +16116,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -16447,19 +16148,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -16588,6 +16281,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -16687,10 +16384,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -16723,19 +16416,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -16864,6 +16549,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -16963,10 +16652,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -16999,19 +16684,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -17140,6 +16817,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -17239,10 +16920,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -17275,19 +16952,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -17416,6 +17085,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -17515,10 +17188,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "imprimircopia" && (!isset($this->NM_cmp_hidden['imprimircopia']) || $this->NM_cmp_hidden['imprimircopia'] != "off"))
     {
        $colspan++;
@@ -17551,19 +17220,11 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "whatsapp_propio" && (!isset($this->NM_cmp_hidden['whatsapp_propio']) || $this->NM_cmp_hidden['whatsapp_propio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "ver_xml_propio" && (!isset($this->NM_cmp_hidden['ver_xml_propio']) || $this->NM_cmp_hidden['ver_xml_propio'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "envio_dataico" && (!isset($this->NM_cmp_hidden['envio_dataico']) || $this->NM_cmp_hidden['envio_dataico'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "regenerar_pdf_propio" && (!isset($this->NM_cmp_hidden['regenerar_pdf_propio']) || $this->NM_cmp_hidden['regenerar_pdf_propio'] != "off"))
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -17692,6 +17353,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "estado" && (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
     }
@@ -18191,54 +17856,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               $nm_saida->saida("          <img id=\"NM_sep_4\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Asentar'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Asentar";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Asentar un documento";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_into_32.png\"  id=\"sc_Asentar_top\" onClick=\"sc_btn_Asentar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_5";
-              $nm_saida->saida("          <img id=\"NM_sep_5\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Reversar'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Reversar";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Desasentar una factura";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_6";
-              $nm_saida->saida("          <img id=\"NM_sep_6\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Eliminar'] == "on" && !$this->grid_emb_form) 
       { 
                $btn_value = "Eliminar";
@@ -18259,8 +17876,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_7";
-              $nm_saida->saida("          <img id=\"NM_sep_7\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_5";
+              $nm_saida->saida("          <img id=\"NM_sep_5\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['copiar_documento_como'] == "on" && !$this->grid_emb_form) 
@@ -18290,8 +17907,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_8";
-              $nm_saida->saida("          <img id=\"NM_sep_8\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_6";
+              $nm_saida->saida("          <img id=\"NM_sep_6\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_fe'] == "on" && !$this->grid_emb_form) 
@@ -18314,8 +17931,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_9";
-              $nm_saida->saida("          <img id=\"NM_sep_9\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_7";
+              $nm_saida->saida("          <img id=\"NM_sep_7\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
           if ($this->nmgp_botoes['reload'] == "on")
@@ -18329,32 +17946,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_10";
-              $nm_saida->saida("          <img id=\"NM_sep_10\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_copiar_rango'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Duplicar";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Duplicar Rango";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_copy_32.png\"  id=\"sc_btn_copiar_rango_top\" onClick=\"sc_btn_btn_copiar_rango();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_11";
-              $nm_saida->saida("          <img id=\"NM_sep_11\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_8";
+              $nm_saida->saida("          <img id=\"NM_sep_8\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_reenviar'] == "on" && !$this->grid_emb_form) 
@@ -18377,8 +17970,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_12";
-              $nm_saida->saida("          <img id=\"NM_sep_12\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_9";
+              $nm_saida->saida("          <img id=\"NM_sep_9\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_hka_tech'] == "on" && !$this->grid_emb_form) 
@@ -18401,8 +17994,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_13";
-              $nm_saida->saida("          <img id=\"NM_sep_13\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_10";
+              $nm_saida->saida("          <img id=\"NM_sep_10\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_pdf'] == "on" && !$this->grid_emb_form) 
@@ -18425,8 +18018,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_14";
-              $nm_saida->saida("          <img id=\"NM_sep_14\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_11";
+              $nm_saida->saida("          <img id=\"NM_sep_11\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_calculadora'] == "on" && !$this->grid_emb_form) 
@@ -18451,8 +18044,20 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__plasma_tv_32.png\"  id=\"sc_btn_calculadora_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_grupos_calculadora') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'blank_grupos_calculadora');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_vigencia_certificado'] == "on" && !$this->grid_emb_form) 
+      { 
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_vigencia_certificado", "sc_btn_btn_vigencia_certificado();", "sc_btn_btn_vigencia_certificado();", "sc_btn_vigencia_certificado_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
+          $NM_btn = true;
+      } 
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
+      if (!$this->Ini->SC_Link_View && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sc_modal'])
+      {
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Volver", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+            $nm_saida->saida("           $Cod_Btn \r\n");
+            $NM_btn = true;
+      }
           if (is_file("grid_facturaven_pos_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_facturaven_pos_help.txt"); 
@@ -19099,8 +18704,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_15";
-              $nm_saida->saida("          <img id=\"NM_sep_15\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_12";
+              $nm_saida->saida("          <img id=\"NM_sep_12\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['filter'] == "on"  && !$this->grid_emb_form)
@@ -19114,8 +18719,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_16";
-              $nm_saida->saida("          <img id=\"NM_sep_16\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_13";
+              $nm_saida->saida("          <img id=\"NM_sep_13\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19123,8 +18728,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_17";
-              $nm_saida->saida("          <img id=\"NM_sep_17\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_14";
+              $nm_saida->saida("          <img id=\"NM_sep_14\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['SC_btn_0'] == "on" && !$this->grid_emb_form) 
@@ -19154,56 +18759,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_18";
-              $nm_saida->saida("          <img id=\"NM_sep_18\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Asentar'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Asentar";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Asentar un documento";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_into_32.png\"  id=\"sc_Asentar_top\" onClick=\"sc_btn_Asentar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_19";
-              $nm_saida->saida("          <img id=\"NM_sep_19\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Reversar'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Reversar";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Desasentar una factura";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_20";
-              $nm_saida->saida("          <img id=\"NM_sep_20\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_15";
+              $nm_saida->saida("          <img id=\"NM_sep_15\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Eliminar'] == "on" && !$this->grid_emb_form) 
@@ -19226,8 +18783,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_21";
-              $nm_saida->saida("          <img id=\"NM_sep_21\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_16";
+              $nm_saida->saida("          <img id=\"NM_sep_16\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['copiar_documento_como'] == "on" && !$this->grid_emb_form) 
@@ -19257,8 +18814,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_22";
-              $nm_saida->saida("          <img id=\"NM_sep_22\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_17";
+              $nm_saida->saida("          <img id=\"NM_sep_17\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_fe'] == "on" && !$this->grid_emb_form) 
@@ -19281,8 +18838,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_23";
-              $nm_saida->saida("          <img id=\"NM_sep_23\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_18";
+              $nm_saida->saida("          <img id=\"NM_sep_18\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
           if ($this->nmgp_botoes['reload'] == "on")
@@ -19296,32 +18853,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_24";
-              $nm_saida->saida("          <img id=\"NM_sep_24\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_copiar_rango'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Duplicar";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Duplicar Rango";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_copy_32.png\"  id=\"sc_btn_copiar_rango_top\" onClick=\"sc_btn_btn_copiar_rango();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_25";
-              $nm_saida->saida("          <img id=\"NM_sep_25\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_19";
+              $nm_saida->saida("          <img id=\"NM_sep_19\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_reenviar'] == "on" && !$this->grid_emb_form) 
@@ -19344,8 +18877,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_26";
-              $nm_saida->saida("          <img id=\"NM_sep_26\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_20";
+              $nm_saida->saida("          <img id=\"NM_sep_20\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_hka_tech'] == "on" && !$this->grid_emb_form) 
@@ -19368,8 +18901,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_27";
-              $nm_saida->saida("          <img id=\"NM_sep_27\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_21";
+              $nm_saida->saida("          <img id=\"NM_sep_21\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_pdf'] == "on" && !$this->grid_emb_form) 
@@ -19392,10 +18925,38 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_28";
-              $nm_saida->saida("          <img id=\"NM_sep_28\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_22";
+              $nm_saida->saida("          <img id=\"NM_sep_22\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_calculadora'] == "on" && !$this->grid_emb_form) 
+      { 
+           if (isset($this->Ini->sc_lig_md5["blank_grupos_calculadora"]) && $this->Ini->sc_lig_md5["blank_grupos_calculadora"] == "S") {
+               $Parms_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scout";
+               $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_facturaven_pos@SC_par@" . md5($Parms_Lig);
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+           } else {
+               $Md5_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scout";
+           }
+               $btn_value = "btn_calculadora";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
+               {
+                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+               $btn_hint = "Terminal Restaurante";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
+               {
+                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__plasma_tv_32.png\"  id=\"sc_btn_calculadora_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_grupos_calculadora') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'blank_grupos_calculadora');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
+          $NM_btn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_vigencia_certificado'] == "on" && !$this->grid_emb_form) 
+      { 
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_vigencia_certificado", "sc_btn_btn_vigencia_certificado();", "sc_btn_btn_vigencia_certificado();", "sc_btn_vigencia_certificado_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
+          $NM_btn = true;
+      } 
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if (is_file("grid_facturaven_pos_help.txt") && !$this->grid_emb_form)
@@ -19417,38 +18978,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                  }
              }
           }
-      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['b_sair'] || $this->grid_emb_form || $this->grid_emb_form_full || (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dashboard_info']['under_dashboard']))
-      {
-         $this->nmgp_botoes['exit'] = "off"; 
-      }
-      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opc_psq'])
-      {
-         if ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") 
-         { 
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Volver", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-            $nm_saida->saida("           $Cod_Btn \r\n");
-            $NM_btn = true;
-         } 
-         elseif (!$this->Ini->SC_Link_View && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") 
-         { 
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Volver", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-            $nm_saida->saida("           $Cod_Btn \r\n");
-            $NM_btn = true;
-         } 
-      }
-      elseif ($this->nmgp_botoes['exit'] == "on")
-      {
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sc_modal'])
-        {
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Volver", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-        }
-        else
-        {
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Volver", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-        }
-         $nm_saida->saida("           $Cod_Btn \r\n");
-         $NM_btn = true;
-      }
       }
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
@@ -21930,6 +21459,25 @@ $nm_saida->saida("       scJs_alert('" . $mensagem . "', $jsonParams);\r\n");
    $nm_saida->saida("   { \r\n");
    $nm_saida->saida("       \r\n");
    $nm_saida->saida("   } \r\n");
+   $nm_saida->saida("   var Crtl_btn_btn_vigencia_certificado = false;\r\n");
+   $nm_saida->saida("   function sc_btn_btn_vigencia_certificado()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       if (Crtl_btn_btn_vigencia_certificado) {return;}\r\n");
+   $nm_saida->saida("       document.F4.target = \"_self\";\r\n");
+   $nm_saida->saida("       scJs_confirm('¿Desea consultar la vigencia de su certificado digital?', sc_btn_btn_vigencia_certificado_ok, sc_btn_btn_vigencia_certificado_cancel)\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function sc_btn_btn_vigencia_certificado_ok()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       Crtl_btn_btn_vigencia_certificado = true;\r\n");
+   $nm_saida->saida("       document.F4.rec.value = \"\";\r\n");
+   $nm_saida->saida("       document.F4.nm_call_php.value = \"btn_vigencia_certificado\";\r\n");
+   $nm_saida->saida("       document.F4.nmgp_opcao.value = \"formphp\" ;\r\n");
+   $nm_saida->saida("       document.F4.submit() ;\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function sc_btn_btn_vigencia_certificado_cancel()\r\n");
+   $nm_saida->saida("   {\r\n");
+   $nm_saida->saida("       return;\r\n");
+   $nm_saida->saida("   }\r\n");
    $nm_saida->saida("   function nm_marca_check_grid(obj_mark)\r\n");
    $nm_saida->saida("   {\r\n");
    $nm_saida->saida("      $(\".sc-ui-check-run\").prop(\"checked\", $(obj_mark).prop(\"checked\"));\r\n");
@@ -25986,14 +25534,14 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 									$vfechavalidacion = date("Y-m-d H:i:s");
 									$vuuid = "";
 									
-									$opciones = array(
+									$this->opciones = array(
 									  'http'=>array(
 										'method'=>"GET",
 										'header'=>"auth-token:".$vparametros["dataico_auth"]
 									  )
 									);
 
-									$contexto = stream_context_create($opciones);
+									$contexto = stream_context_create($this->opciones);
 									$vurl_consulta = $vparametros["url"];
 									$vurl_consulta .= "?number=".$vencabezado["prefijo"].$vencabezado["numero"];
 									

@@ -168,7 +168,6 @@ function Sel_cmp_process()
       $tab_ger_campos['direccion2'] = "on";
       $tab_ger_campos['total'] = "on";
       $tab_ger_campos['editarpos'] = "on";
-      $tab_ger_campos['copiar'] = "on";
       $tab_ger_campos['imprimircopia'] = "on";
       $tab_ger_campos['a4'] = "on";
       $tab_ger_campos['pdf'] = "on";
@@ -182,14 +181,10 @@ function Sel_cmp_process()
       $tab_blk_campos[] = "restaurante";
       $tab_ger_campos['pedido'] = "on";
       $tab_blk_campos[] = "pedido";
-      $tab_ger_campos['whatsapp_propio'] = "on";
-      $tab_blk_campos[] = "whatsapp_propio";
-      $tab_ger_campos['ver_xml_propio'] = "on";
-      $tab_blk_campos[] = "ver_xml_propio";
       $tab_ger_campos['envio_dataico'] = "on";
       $tab_blk_campos[] = "envio_dataico";
-      $tab_ger_campos['regenerar_pdf_propio'] = "on";
-      $tab_blk_campos[] = "regenerar_pdf_propio";
+      $tab_ger_campos['opciones'] = "on";
+      $tab_blk_campos[] = "opciones";
       $tab_ger_campos['idfacven'] = "on";
       $tab_ger_campos['numfacven'] = "on";
       $tab_ger_campos['fechavenc'] = "on";
@@ -216,6 +211,7 @@ function Sel_cmp_process()
       $tab_ger_campos['fecha_validacion'] = "on";
       $tab_ger_campos['cufe'] = "on";
       $tab_ger_campos['estado'] = "on";
+      $tab_ger_campos['copiar'] = "on";
       $tab_ger_campos['existeentns'] = "on";
       $tab_ger_campos['imprimir'] = "on";
 

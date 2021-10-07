@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210922"; 
-      $this->nm_hr_ult_alt   = "175015"; 
+      $this->nm_dt_ult_alt   = "20210927"; 
+      $this->nm_hr_ult_alt   = "211758"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_enviar_fes_propio_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQFUD1BeHuBiDMNOVcFeDuFGVEF7DcBqVINUDSrYD5BqDEvsVkXeH5BmZuBODcXGZ9F7HAveHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQBqD1veHuF7DMvmVcFCDur/HIJeHQJmZSFaD1rKHuFUDEBOZSJqDuFaDoFUHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwD5JwHuNOVIFCDWF/DoFGDcBqZ1FaHAN7D5BiDMzGVkXeDWFqDoXGDcXOZSFGHAveV5BOHuNODkFCDWXCDoFGD9BsVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcXKV5X7HMFaHQXOZSB/HIBeV5JwHgNOHEJGH5BmDoXGD9JKZSFUDSN7V5JwDMrYVcFeDWJeHIFGDcBqZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVorqHQBqZkBiHAvCD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5FaDMvmZSJqDuX7VoB/HQBsZkFGZ1rYD5BqHgBOHEXeDWFqZuBODcJeZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQBqD1veVWXGHuzGVcrsDWFaHMB/DcBqVIJsHABYV5JsHgveHEBUDWX7HMFGD9NwDQBqHIrKHQJwDMvmDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuFaHQXODQFUHIrwHuXGHuNOZSNiDWXCHMX7HQBsZ1F7HAN7V5FaDMzGHEBUHEFqVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQX7Z1N7VWJeHuvmVcBODWFaVoX7DcNwH9B/HANOV5FaDErKZSJqV5FaDoBOD9NwH9X7Z1rwV5JeHuvmVcBOV5FGDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1F7DSrYD5rqHgvsHErCDWXCZuFaHQNwDQFUHIrwD5B/HuzGDkBOHEFYVEF7HQBsH9B/HABYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMJeHgveDkXKDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKH5B3VEF7HQXGZSFaHArYHQF7DErKHEXeV5FqVoJeD9XsDQB/Z1rwV5FGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1980,9 +1980,22 @@ $vtoken_password = "";
 $vordencompra = "";
 $vordenfecha  = "";
 
+$venvio_credenciales = "";
+$vplantillas_correo  = "";
+$vcopia_factura_a    = "";
+$vplantilla_pordefecto = "";
+$vplantilla_existe   = false;
+$vcabecera = "";
+$vcuerpo   = "";
+$vbotones  = "";
+$vpie      = "";
+$vnombre_emisor = "";
+$vcorreo_emisor = "";
+$vnit_emisor    = "";
 
 
-$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_pdfs, url_api_sendmail from webservicefe order by idwebservicefe desc limit 1";
+
+$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_pdfs, url_api_sendmail,envio_credenciales,plantillas_correo,copia_factura_a,plantilla_pordefecto, (select d.razonsoc from datosemp d where d.iddatos='1') as nombre_emisor, (select d.correo from datosemp d where d.iddatos='1') as correo_emisor, (select d.nit from datosemp d where d.iddatos='1') as nit_emisor from webservicefe order by idwebservicefe desc limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2024,6 +2037,13 @@ if(isset($this->vserv[0][0]))
 	}
 	
 	$vvalidar_correo_enlinea = $this->vserv[0][5];
+	$venvio_credenciales = $this->vserv[0][8];
+	$vplantillas_correo  = $this->vserv[0][9];
+	$vcopia_factura_a    = $this->vserv[0][10];
+	$vplantilla_pordefecto = $this->vserv[0][11];
+	$vnombre_emisor      = $this->vserv[0][12];
+	$vcorreo_emisor      = $this->vserv[0][13];
+	$vnit_emisor         = $this->vserv[0][14];
 }
 
 if(isset($this->vserv[0][6]))
@@ -2042,6 +2062,51 @@ if(empty($vservidor) or empty($vtoken))
 }
 else
 {
+	
+	if($vplantillas_correo=="SI" and $vplantilla_pordefecto>0)
+	{
+		$vsql = "select html_header, html_body, html_buttons, html_footer from plantillas_correo_propio where id='".$vplantilla_pordefecto."'";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiPlantilla = array();
+      $this->vsiplantilla = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiPlantilla[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiplantilla[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiPlantilla = false;
+          $this->vSiPlantilla_erro = $this->Db->ErrorMsg();
+          $this->vsiplantilla = false;
+          $this->vsiplantilla_erro = $this->Db->ErrorMsg();
+      } 
+;
+		
+		if(isset($this->vsiplantilla[0][0]) and isset($this->vsiplantilla[0][1]) and isset($this->vsiplantilla[0][2]) and isset($this->vsiplantilla[0][3]))
+		{
+			$vplantilla_existe = true;
+			$vcabecera = $this->vsiplantilla[0][0];
+			$vcuerpo   = $this->vsiplantilla[0][1];
+			$vbotones  = $this->vsiplantilla[0][2];
+			$vpie      = $this->vsiplantilla[0][3];
+		}
+	}
+	
 	$vsql = "select f.fechaven,f.numfacven,r.resolucion,TIME(f.creado) as hora,r.prefijo,t.documento,t.dv,t.nombres,t.tel_cel,t.direccion,if(t.regimen='SIM','2','1') as regimen,if(t.tipo_documento='13','3','6') as tipodoc,if(t.tipo='NAT','1','2') as tipopersona,'' as ciudad, if(f.credito='1','2','1') as formapago,coalesce(f.fechavenc,f.fechaven),coalesce(TIMESTAMPDIFF(DAY, f.fechaven, f.fechavenc),1) AS dias_credito,f.total,t.urlmail,(dr.direc) as direccion2,(select ml.id from municipalities ml where ml.code=(select concat(m.codigo_dep,m.codigo_mu) from municipio m where m.idmun=t.idmuni limit 1) limit 1) as codigomu, f.observaciones,r.texto_encabezado, r.texto_pie_pagina,dr.correo, t.correo_notificafe, t.celular_notificafe,f.idcli, coalesce(f.orden_compra,'') as orden_compra, coalesce(f.orden_fecha,'') as orden_fecha from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero left join direccion dr on dr.iddireccion=f.dircliente  where f.idfacven='".$vidfacven."'";
 	 
       $nm_select = $vsql; 
@@ -2128,6 +2193,11 @@ else
 	$vdatos["notes"] =  $vobservaciones;
 	$vdatos["sendmail"] =  true;
 	
+	if($venvio_credenciales=="SI")
+	{
+		$vdatos["send_customer_credentials"] =  false;
+	}
+
 	
 	if(!empty($vordencompra) and !empty($vordenfecha))
 	{
@@ -2161,6 +2231,33 @@ else
 	$vdatos["payment_form"]["payment_method_id"] =  $vmetodopago;
 	$vdatos["payment_form"]["payment_due_date"] =  $vvencimiento;
 	$vdatos["payment_form"]["duration_measure"] =  $vdiascredito;
+	
+	if($vplantillas_correo=="SI" and $vplantilla_pordefecto>0)
+	{
+		if($vplantilla_existe)
+		{
+			$vdatos["html_header"] =  $vcabecera;
+			$vdatos["html_header"] = str_replace("vNombreCliente",$vnombre,$vdatos["html_header"]);
+			$vdatos["html_header"] = str_replace("vNit",$vccnit,$vdatos["html_header"]);
+			$vdatos["html_header"] = str_replace("vNombreEmisor",$vnombre_emisor,$vdatos["html_header"]);
+			
+			$vdatos["html_body"]   =  $vcuerpo;
+			$vdatos["html_body"] = str_replace("vNumeroDocumento",$vprefijo.$vnumero,$vdatos["html_body"]);
+			$vdatos["html_body"] = str_replace("vFechaDocumento",$vfecha.' '.$vhora,$vdatos["html_body"]);
+			$vdatos["html_body"] = str_replace("vTotalDocumento",number_format($vtotal),$vdatos["html_body"]);
+			
+			$vurl_pdf_factura = "https://www.facilwebnube.com/apidian2021/public/index.php/api/download/".$vnit_emisor."/FES-".$vprefijo.$vnumero.".pdf";
+			$vurl_aceptar     = "https://www.facilwebnube.com/apidian2021/public/index.php/accept-reject-document/".$vnit_emisor."/".$vccnit."/".$vprefijo."/".$vnumero."/".$vfecha;
+			
+			$vdatos["html_buttons"]=  $vbotones;
+			$vdatos["html_buttons"] = str_replace("https://vUrlPdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
+			$vdatos["html_buttons"] = str_replace("https://vUrlAceptar",$vurl_aceptar,$vdatos["html_buttons"]);
+			
+			
+			$vdatos["html_footer"] =  $vpie;
+			$vdatos["html_footer"] = str_replace("vCorreoEmisor",$vcorreo_emisor,$vdatos["html_footer"]);
+		}
+	}
 		
 	$vdescripcion = '';
 	$vporciva = '';

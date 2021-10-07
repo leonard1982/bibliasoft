@@ -16,8 +16,6 @@
 .css_total_tot_ger {text-align: right;}
 .css_editarpos_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_editarpos_grid_line {text-align: left;}
-.css_copiar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
-.css_copiar_grid_line {text-align: center;}
 .css_imprimircopia_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_imprimircopia_grid_line {text-align: left;}
 .css_a4_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
@@ -34,14 +32,10 @@
 .css_restaurante_grid_line {text-align: left;}
 .css_pedido_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_pedido_grid_line {vertical-align: top;text-align: right;}
-.css_whatsapp_propio_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
-.css_whatsapp_propio_grid_line {text-align: center;}
-.css_ver_xml_propio_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
-.css_ver_xml_propio_grid_line {text-align: left;}
 .css_envio_dataico_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_envio_dataico_grid_line {text-align: left;}
-.css_regenerar_pdf_propio_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
-.css_regenerar_pdf_propio_grid_line {text-align: left;}
+.css_opciones_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_opciones_grid_line {text-align: left;}
 .css_idfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_idfacven_grid_line {vertical-align: top;text-align: right;}
 .css_numfacven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
@@ -100,6 +94,8 @@
 .css_cufe_grid_line {vertical-align: top;text-align: left;}
 .css_estado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_estado_grid_line {vertical-align: top;text-align: left;}
+.css_copiar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_copiar_grid_line {text-align: center;}
 .css_existeentns_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_existeentns_grid_line {text-align: left;}
 .css_imprimir_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}

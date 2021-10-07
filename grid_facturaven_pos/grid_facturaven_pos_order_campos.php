@@ -125,16 +125,6 @@ function Ord_cmp_init()
        $tab_def_campos['editarpos'] = "";
    }
    $tab_labels["editarpos"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["editarpos"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["editarpos"] : "Editar";
-   $tab_ger_campos['copiar'] = "on";
-   if ($use_alias == "S")
-   {
-       $tab_def_campos['copiar'] = "copiar";
-   }
-   else
-   {
-       $tab_def_campos['copiar'] = "";
-   }
-   $tab_labels["copiar"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["copiar"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["copiar"] : "Duplicar";
    $tab_ger_campos['imprimircopia'] = "on";
    if ($use_alias == "S")
    {
@@ -208,26 +198,6 @@ function Ord_cmp_init()
    $tab_ger_campos['pedido'] = "on";
    $tab_def_campos['pedido'] = "pedido";
    $tab_labels["pedido"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["pedido"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["pedido"] : "Pedido";
-   $tab_ger_campos['whatsapp_propio'] = "on";
-   if ($use_alias == "S")
-   {
-       $tab_def_campos['whatsapp_propio'] = "whatsapp_propio";
-   }
-   else
-   {
-       $tab_def_campos['whatsapp_propio'] = "";
-   }
-   $tab_labels["whatsapp_propio"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["whatsapp_propio"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["whatsapp_propio"] : "WhatsApp";
-   $tab_ger_campos['ver_xml_propio'] = "on";
-   if ($use_alias == "S")
-   {
-       $tab_def_campos['ver_xml_propio'] = "ver_xml_propio";
-   }
-   else
-   {
-       $tab_def_campos['ver_xml_propio'] = "";
-   }
-   $tab_labels["ver_xml_propio"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["ver_xml_propio"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["ver_xml_propio"] : "JSON";
    $tab_ger_campos['envio_dataico'] = "on";
    if ($use_alias == "S")
    {
@@ -238,18 +208,17 @@ function Ord_cmp_init()
        $tab_def_campos['envio_dataico'] = "";
    }
    $tab_labels["envio_dataico"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["envio_dataico"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["envio_dataico"] : "Acción";
-   $tab_ger_campos['regenerar_pdf_propio'] = "on";
+   $tab_ger_campos['opciones'] = "on";
    if ($use_alias == "S")
    {
-       $tab_def_campos['regenerar_pdf_propio'] = "regenerar_pdf_propio";
+       $tab_def_campos['opciones'] = "opciones";
    }
    else
    {
-       $tab_def_campos['regenerar_pdf_propio'] = "";
+       $tab_def_campos['opciones'] = "";
    }
-   $tab_labels["regenerar_pdf_propio"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["regenerar_pdf_propio"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["regenerar_pdf_propio"] : "Regenerar";
+   $tab_labels["opciones"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["opciones"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["opciones"] : "Opciones";
    $tab_ger_campos['editarpos'] = "none";
-   $tab_ger_campos['copiar'] = "none";
    $tab_ger_campos['imprimircopia'] = "none";
    $tab_ger_campos['a4'] = "none";
    $tab_ger_campos['pdf'] = "none";
@@ -257,10 +226,8 @@ function Ord_cmp_init()
    $tab_ger_campos['enviar_propio'] = "none";
    $tab_ger_campos['reenviar'] = "none";
    $tab_ger_campos['restaurante'] = "none";
-   $tab_ger_campos['whatsapp_propio'] = "none";
-   $tab_ger_campos['ver_xml_propio'] = "none";
    $tab_ger_campos['envio_dataico'] = "none";
-   $tab_ger_campos['regenerar_pdf_propio'] = "none";
+   $tab_ger_campos['opciones'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['field_display'] as $NM_cada_field => $NM_cada_opc)

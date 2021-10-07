@@ -100,6 +100,148 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    cursor: pointer;
   }
  </style>
+<style type="text/css">
+	.sc.switch {
+		position: relative;
+		display: inline-flex;
+	}
+
+	.sc.switch span {
+		display: inline-block;
+		margin-right: 5px;
+	}
+
+	.sc.switch span {
+		background: #DFDFDF;
+		width: 22px;
+		height: 14px;
+		display: block;
+		position: relative;
+		top: 0px;
+		left: 0;
+		border-radius: 15px;
+		padding: 0 3px;
+		transition: all .2s linear;
+		box-shadow: 0px 0px 2px rgba(164, 164, 164, 0.8) inset;
+	}
+
+	.sc.switch span:before {
+		content: '\2713';
+		display: inline-block;
+		color: white;
+		font-size: 10px;
+		z-index: 0;
+		position: absolute;
+		top: 0;
+		left: 4px;
+	}
+
+	.sc.switch span:after {
+		content: '';
+		background: white;
+		width: 12px;
+		height: 12px;
+		display: block;
+		position: absolute;
+		top: 1px;
+		left: 1px;
+		border-radius: 15px;
+		transition: all .2s linear;
+		z-index: 1;
+	}
+
+	.sc.switch input {
+		margin-right: 10px;
+		cursor: pointer;
+		z-index: 2;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	.sc.switch input:disabled + span {
+		opacity: 0.35;
+	}
+
+	.sc.switch input:checked + span {
+		background: #66AFE9;
+	}
+
+	.sc.switch input:checked + span:after {
+		left: calc(100% - 1px);
+		transform: translateX(-100%);
+	}
+
+	.sc.radio {
+		position: relative;
+		display: inline-flex;
+	}
+
+	.sc.radio span {
+		display: inline-block;
+		margin-right: 5px;
+	}
+
+	.sc.radio span {
+		background: #ffffff;
+		border: 1px solid #66AFE9;
+		width: 12px;
+		height: 12px;
+		display: block;
+		position: relative;
+		top: 0px;
+		left: 0;
+		border-radius: 15px;
+		transition: all .2s;
+		box-shadow: 0px 0px 2px rgba(164, 164, 164, 0.8) inset;
+	}
+
+	.sc.radio span:after {
+		content: '';
+		background: #66AFE9;
+		width: 12px;
+		height: 12px;
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 15px;
+		transition: all .2s;
+		z-index: 1;
+		transform: scale(0);
+	}
+
+	.sc.radio input {
+		cursor: pointer;
+		z-index: 2;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	.sc.radio input:disabled + span {
+		opacity: 0.35;
+	}
+
+	.sc.radio input:checked + span {
+		background: #66AFE9;
+	}
+
+	.sc.radio input:checked + span:after {
+		transform: translateX(-100%);
+		transform: scale(1);
+	}
+</style>
 <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/css/select2.min.css" type="text/css" />
 <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/js/select2.full.min.js"></script>
  <SCRIPT type="text/javascript" src="<?php echo $this->Ini->url_lib_js; ?>scInput.js"></SCRIPT>
@@ -684,6 +826,10 @@ var pag_ativa = "form_webservicefe_mob_form0";
             'title' => "Pruebas",
             'class' => $nmgp_num_form == "form_webservicefe_mob_form1" ? "scTabActive" : "scTabInactive",
         ),
+        'form_webservicefe_mob_form2' => array(
+            'title' => "Adicionales",
+            'class' => $nmgp_num_form == "form_webservicefe_mob_form2" ? "scTabActive" : "scTabInactive",
+        ),
     );
         if (!empty($this->Ini->nm_hidden_pages)) {
                 foreach ($this->Ini->nm_hidden_pages as $pageName => $pageStatus) {
@@ -692,6 +838,9 @@ var pag_ativa = "form_webservicefe_mob_form0";
                         }
                         if ('Pruebas' == $pageName && 'off' == $pageStatus) {
                                 $this->tabCssClass['form_webservicefe_mob_form1']['class'] = 'scTabInactive';
+                        }
+                        if ('Adicionales' == $pageName && 'off' == $pageStatus) {
+                                $this->tabCssClass['form_webservicefe_mob_form2']['class'] = 'scTabInactive';
                         }
                 }
                 $displayingPage = false;
@@ -725,6 +874,14 @@ var pag_ativa = "form_webservicefe_mob_form0";
    <li id="id_form_webservicefe_mob_form1" class="<?php echo $css_celula; ?> sc-form-page">
     <a href="javascript: sc_exib_ocult_pag ('form_webservicefe_mob_form1')">
      Pruebas
+    </a>
+   </li>
+<?php
+    $css_celula = $this->tabCssClass["form_webservicefe_mob_form2"]['class'];
+?>
+   <li id="id_form_webservicefe_mob_form2" class="<?php echo $css_celula; ?> sc-form-page">
+    <a href="javascript: sc_exib_ocult_pag ('form_webservicefe_mob_form2')">
+     Adicionales
     </a>
    </li>
 </ul>

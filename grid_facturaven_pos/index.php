@@ -109,11 +109,10 @@ class grid_facturaven_pos_ini
    var $Gd_missing;
    var $sc_site_ssl;
    var $link_blank_recursos_facturatech_callback_blk;
-   var $link_control_copiar_facturapos_edit;
    var $link_pdfreport_facturaven_cons;
    var $link_grid_facturaven_pos_detalle_cons_emb;
    var $link_control_reenviar_factura_edit;
-   var $link_control_mandar_whatsapp_propio_edit;
+   var $link_control_copiar_facturapos_edit;
    var $link_impresion_pos_pdf_cons;
    var $nm_cont_lin;
    var $nm_limite_lin;
@@ -234,8 +233,8 @@ class grid_facturaven_pos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210922"; 
-      $this->nm_hr_ult_alt   = "174356"; 
+      $this->nm_dt_ult_alt   = "20211006"; 
+      $this->nm_hr_ult_alt   = "202401"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -383,9 +382,7 @@ class grid_facturaven_pos_ini
             if(!empty($img_width) && !empty($img_height)){
                 $sc_obj_img->setWidth($img_width);
                 $sc_obj_img->setHeight($img_height);
-            }
-                $sc_obj_img->setManterAspecto(true);
-            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            }            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
             echo $out1_img_cache;
                exit;
             }
@@ -744,11 +741,10 @@ class grid_facturaven_pos_ini
           }
       }
       $this->link_blank_recursos_facturatech_callback_blk =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('blank_recursos_facturatech_callback') . "/" ; 
-      $this->link_control_copiar_facturapos_edit =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('control_copiar_facturapos') . "/" ; 
       $this->link_pdfreport_facturaven_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('pdfreport_facturaven') . "/" ; 
       $this->link_grid_facturaven_pos_detalle_cons_emb =  $this->root . $this->path_link  . "" . SC_dir_app_name('grid_facturaven_pos_detalle') . "/index.php" ; 
       $this->link_control_reenviar_factura_edit =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('control_reenviar_factura') . "/" ; 
-      $this->link_control_mandar_whatsapp_propio_edit =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('control_mandar_whatsapp_propio') . "/" ; 
+      $this->link_control_copiar_facturapos_edit =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('control_copiar_facturapos') . "/" ; 
       $this->link_impresion_pos_pdf_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('impresion_pos_pdf') . "/" ; 
       if ($Tp_init == "Path_sub")
       {
@@ -1168,6 +1164,16 @@ class grid_facturaven_pos_ini
       $this->arr_buttons_usr['btn_calculadora']['image']            = "scriptcase__NM__ico__NM__plasma_tv_32.png";
       $this->arr_buttons_usr['btn_calculadora']['has_fa']            = "true";
       $this->arr_buttons_usr['btn_calculadora']['fontawesomeicon']            = "";
+
+      $this->arr_buttons_usr['btn_vigencia_certificado']['hint']             = "¿Desea consultar la vigencia de su certificado digital?";
+      $this->arr_buttons_usr['btn_vigencia_certificado']['type']             = "button";
+      $this->arr_buttons_usr['btn_vigencia_certificado']['value']            = "Vigencia Certificado";
+      $this->arr_buttons_usr['btn_vigencia_certificado']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons_usr['btn_vigencia_certificado']['display_position'] = "text_right";
+      $this->arr_buttons_usr['btn_vigencia_certificado']['style']            = "youtube";
+      $this->arr_buttons_usr['btn_vigencia_certificado']['image']            = "";
+      $this->arr_buttons_usr['btn_vigencia_certificado']['has_fa']            = "true";
+      $this->arr_buttons_usr['btn_vigencia_certificado']['fontawesomeicon']            = "fas fa-certificate";
       $this->str_google_fonts= isset($str_google_fonts)?$str_google_fonts:'';
       $this->regionalDefault();
       $this->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
@@ -1280,7 +1286,7 @@ class grid_facturaven_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDQX7Z1N7D5rqHgrYDkBOV5FYHIBiD9XOH9FaD1rKD5JeDEBOHArCHEFaHMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYV5X7HgNOHEXeHEB3ZuJeHQXGDQX7Z1rwHurqDMvmDkFCH5FqHINUDcJUVIJsHArKHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9B/HANOD5NUDMBYZSJGH5F/ZuB/D9NwH9X7HArYVWJeHgrKVcBOV5F/VoJwD9XOZ1F7Z1BeD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBqHQXOZ9rqZ1BYV5JeHuzGVcXKDur/DoFGHQNmH9FaD1rwHQX7DEvsDkFeV5FqZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDuBqHAvmV5BODMvmVcFKV5BmVoBqD9BsZkFGHArKHQBqDErKHEXeV5XCHIBqHQNmDQJsD1BeV5FGDMvsVcFCDWF/DoF7D9XOZSBOHArKHQFaHgrKHArCHEB3ZuXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDuFaD1BeV5raHuvmVcB/V5X7VoJwD9BiZkFGD1rKV5XGHgBeHEXeH5FYHIrqD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuFaZ1rwVWJeHgrYDkB/DWFaVoX7DcFYH9FaHArKHQFaHgveZSJ3HEFqHINUHQFYDQFUHIrKHuBODMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBqD9NwH9X7DSBYD5JsHgrYDkBODWF/VoB/DcBqH9FaD1rKZMFaDErKVkXeDWX7ZuBODcBwDQX7Z1N7V5raHuzGVcFKV5X7VoFGHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuzGVcXKHEFYHIJsHQNmVIraZ1rYHuJwDENOHENiV5FaVoX7D9NmH9BiZ1BYHuFUHgvOVIBsH5XCHMB/HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmZ1BiHANOHQJwDEBODkFeH5FYVoFGHQJKDQJsDSBYHQF7DMvOVIB/DWFYDoFUHQBsZSB/D1rKV5FGHgBYHEXeH5F/HIF7HQJeDQFaHArYHuBODMvsV9FeDuFqHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'])  
       { 
@@ -5861,7 +5867,6 @@ class grid_facturaven_pos_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "direccion2";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "total";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "editarpos";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "copiar";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "imprimircopia";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "a4";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "pdf";
@@ -5870,10 +5875,8 @@ class grid_facturaven_pos_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "reenviar";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "restaurante";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "pedido";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "whatsapp_propio";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "ver_xml_propio";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "envio_dataico";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "regenerar_pdf_propio";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "opciones";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "idfacven";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "numfacven";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "fechavenc";
@@ -5900,6 +5903,7 @@ class grid_facturaven_pos_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "fecha_validacion";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "cufe";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "estado";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "copiar";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "existeentns";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'][] = "imprimir";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['field_order'];
@@ -5933,6 +5937,7 @@ class grid_facturaven_pos_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['usr_cmp_sel']['fecha_validacion'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['usr_cmp_sel']['cufe'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['usr_cmp_sel']['estado'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['usr_cmp_sel']['copiar'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['usr_cmp_sel']['existeentns'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['usr_cmp_sel']['imprimir'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['usr_cmp_sel'];
@@ -6292,6 +6297,10 @@ class grid_facturaven_pos_apl
           if ($nm_call_php == "btn_pdf")
           { 
               $this->btn_pdf();
+          } 
+          if ($nm_call_php == "btn_vigencia_certificado")
+          { 
+              $this->btn_vigencia_certificado();
           } 
           $this->Db->Close(); 
           exit;
@@ -7171,11 +7180,11 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -7786,11 +7795,11 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -8216,11 +8225,11 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -8572,11 +8581,11 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -10209,11 +10218,11 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -10587,11 +10596,11 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -12007,11 +12016,11 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -13320,11 +13329,11 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_trans_fe = $this->rs_grid->fields[37] ;  
        $this->nomcli = $this->rs_grid->fields[38] ;  
        $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->numfe = $this->rs_grid->fields[40] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[41] ;  
-       $this->celular_ws = $this->rs_grid->fields[42] ;  
-       $this->dircliente = $this->rs_grid->fields[43] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
+       $this->celular_ws = $this->rs_grid->fields[41] ;  
+       $this->dircliente = $this->rs_grid->fields[42] ;  
        $this->dircliente = (string)$this->dircliente;
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -13578,6 +13587,141 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
         echo "</script>";
     }
 ?>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
+      $this->SC_redir_btn = false;
+   }
+   function btn_vigencia_certificado() 
+   {
+      global 
+      $nm_apl_dependente;
+      $this->SC_redir_btn = true;
+      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig'];
+      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'];
+      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_filtro'];
+      $nm_f_saida = "./";
+?>
+     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+      <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+      <head>
+       <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
+?>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+}
+?>
+        <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
+        <script type="text/javascript">
+          var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+          var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+          var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+        </script>
+        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
+        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+      </head>
+      <body class="scGridPage">
+      <table class="scGridTabela" align="center"><tr><td>
+<?php
+      $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  $vtk = "";
+$vsql = "select tokenempresa from webservicefe where idwebservicefe=1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vToken = array();
+      $vtoken = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vToken[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vtoken[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vToken = false;
+          $vToken_erro = $this->Db->ErrorMsg();
+          $vtoken = false;
+          $vtoken_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($vtoken[0][0]))
+{
+	$vtk = $vtoken[0][0];
+}
+
+if(!empty($vtk))
+{
+	$curl = curl_init();
+	curl_setopt_array($curl, array(
+	  CURLOPT_URL => 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/certificate-end-date',
+	  CURLOPT_RETURNTRANSFER => true,
+	  CURLOPT_ENCODING => '',
+	  CURLOPT_MAXREDIRS => 10,
+	  CURLOPT_TIMEOUT => 0,
+	  CURLOPT_FOLLOWLOCATION => true,
+	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	  CURLOPT_CUSTOMREQUEST => 'PUT',
+	  CURLOPT_HTTPHEADER => array(
+		'Content-Type: application/json',
+		'cache-control: no-cache',
+		'Connection: keep-alive',
+		'Accept-Encoding: gzip, deflate',
+		'Host: localhost',
+		'accept: application/json',
+		'X-CSRF-TOKEN: ',
+		'Authorization: Bearer '.$vtk
+	  ),
+	));
+
+	$response = curl_exec($curl);
+
+	curl_close($curl);
+	echo "<div style='padding: 8px;border-radius: 5px;color:white;background:#5877b9;font-size:25px;'>";
+	echo "Su certificado digital está vigente hasta: ".$response;
+	echo "</div>";
+}
+else
+{
+	echo "<div style='padding: 8px;border-radius: 5px;color:white;background:#5877b9;font-size:25px;'>";
+	echo "No tiene configurado un token de factura electrónica.";
+	echo "</div>";
+}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
+?>
+      </td></tr><tr><td align="center">
+      <form name="F4" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value="volta_grid"/>
+      <input type=hidden name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page);?>"/>
+      <input type=submit name="nmgp_bok" value="<?php echo $this->Ini->Nm_lang['lang_btns_cfrm'] ?>"/>
+      </form>
       </td></tr></table>
       </body>
       </html>
@@ -16892,14 +17036,14 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 									$vfechavalidacion = date("Y-m-d H:i:s");
 									$vuuid = "";
 									
-									$opciones = array(
+									$this->opciones = array(
 									  'http'=>array(
 										'method'=>"GET",
 										'header'=>"auth-token:".$vparametros["dataico_auth"]
 									  )
 									);
 
-									$contexto = stream_context_create($opciones);
+									$contexto = stream_context_create($this->opciones);
 									$vurl_consulta = $vparametros["url"];
 									$vurl_consulta .= "?number=".$vencabezado["prefijo"].$vencabezado["numero"];
 									

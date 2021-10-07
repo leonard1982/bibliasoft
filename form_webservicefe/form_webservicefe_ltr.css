@@ -46,3 +46,15 @@
 .css_url_api_sendmail_label { }
 .css_url_api_sendmail_line { }
 .css_url_api_sendmail_obj { }
+.css_envio_credenciales_label { }
+.css_envio_credenciales_line { }
+.css_envio_credenciales_obj { }
+.css_plantillas_correo_label { }
+.css_plantillas_correo_line { }
+.css_plantillas_correo_obj { }
+.css_copia_factura_a_label { }
+.css_copia_factura_a_line { }
+.css_copia_factura_a_obj { }
+.css_plantilla_pordefecto_label { }
+.css_plantilla_pordefecto_line {text-align:left;}
+.css_plantilla_pordefecto_obj {text-align:left;}

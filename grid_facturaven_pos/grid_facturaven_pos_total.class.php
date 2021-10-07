@@ -1411,7 +1411,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_fecha($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -1826,7 +1826,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_sc_free_group_by($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -2280,7 +2280,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_formapago($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -2698,7 +2698,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_porcliente($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -3116,7 +3116,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_porpj($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -3534,7 +3534,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_portipo($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -3951,7 +3951,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_porvendedor($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -4369,7 +4369,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_porasentada($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -4787,7 +4787,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_pagada($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -5204,7 +5204,7 @@ class grid_facturaven_pos_total
    //----- 
    function Calc_resumo_porbanco($destino_resumo)
    {
-      global $nm_lang, $editarpos, $copiar, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $whatsapp_propio, $ver_xml_propio, $envio_dataico, $regenerar_pdf_propio, $existeentns, $imprimir, $idcli, $pedido, $resolucion, $vendedor, $banco;
+      global $nm_lang, $editarpos, $imprimircopia, $a4, $pdf, $enviar_tech, $enviar_propio, $reenviar, $restaurante, $envio_dataico, $opciones, $copiar, $existeentns, $imprimir, $whatsapp_propio, $ver_xml_propio, $regenerar_pdf_propio, $idcli, $pedido, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']))
@@ -9157,14 +9157,14 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 									$vfechavalidacion = date("Y-m-d H:i:s");
 									$vuuid = "";
 									
-									$opciones = array(
+									$this->opciones = array(
 									  'http'=>array(
 										'method'=>"GET",
 										'header'=>"auth-token:".$vparametros["dataico_auth"]
 									  )
 									);
 
-									$contexto = stream_context_create($opciones);
+									$contexto = stream_context_create($this->opciones);
 									$vurl_consulta = $vparametros["url"];
 									$vurl_consulta .= "?number=".$vencabezado["prefijo"].$vencabezado["numero"];
 									

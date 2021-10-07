@@ -42,6 +42,12 @@ function scFocusField(sField) {
       case 'enviar_cliente':
         sc_exib_ocult_pag('form_webservicefe_form1');
         break;
+      case 'envio_credenciales':
+      case 'copia_factura_a':
+      case 'plantillas_correo':
+      case 'plantilla_pordefecto':
+        sc_exib_ocult_pag('form_webservicefe_form2');
+        break;
     }
   }
 
@@ -92,6 +98,10 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["password_prueba" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["enviar_dian" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["enviar_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["envio_credenciales" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["copia_factura_a" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["plantillas_correo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["plantilla_pordefecto" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -191,6 +201,30 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["enviar_cliente" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["envio_credenciales" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["envio_credenciales" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["copia_factura_a" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["copia_factura_a" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["plantillas_correo" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["plantillas_correo" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["plantilla_pordefecto" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["plantilla_pordefecto" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -203,6 +237,9 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("modo" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("plantilla_pordefecto" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("proveedor" + iSeq == fieldName) {
@@ -283,8 +320,22 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_url_api_sendmail' + iSeqRow).bind('blur', function() { sc_form_webservicefe_url_api_sendmail_onblur(this, iSeqRow) })
                                               .bind('change', function() { sc_form_webservicefe_url_api_sendmail_onchange(this, iSeqRow) })
                                               .bind('focus', function() { sc_form_webservicefe_url_api_sendmail_onfocus(this, iSeqRow) });
+  $('#id_sc_field_envio_credenciales' + iSeqRow).bind('blur', function() { sc_form_webservicefe_envio_credenciales_onblur(this, iSeqRow) })
+                                                .bind('change', function() { sc_form_webservicefe_envio_credenciales_onchange(this, iSeqRow) })
+                                                .bind('focus', function() { sc_form_webservicefe_envio_credenciales_onfocus(this, iSeqRow) });
+  $('#id_sc_field_plantillas_correo' + iSeqRow).bind('blur', function() { sc_form_webservicefe_plantillas_correo_onblur(this, iSeqRow) })
+                                               .bind('change', function() { sc_form_webservicefe_plantillas_correo_onchange(this, iSeqRow) })
+                                               .bind('focus', function() { sc_form_webservicefe_plantillas_correo_onfocus(this, iSeqRow) });
+  $('#id_sc_field_copia_factura_a' + iSeqRow).bind('blur', function() { sc_form_webservicefe_copia_factura_a_onblur(this, iSeqRow) })
+                                             .bind('change', function() { sc_form_webservicefe_copia_factura_a_onchange(this, iSeqRow) })
+                                             .bind('focus', function() { sc_form_webservicefe_copia_factura_a_onfocus(this, iSeqRow) });
+  $('#id_sc_field_plantilla_pordefecto' + iSeqRow).bind('blur', function() { sc_form_webservicefe_plantilla_pordefecto_onblur(this, iSeqRow) })
+                                                  .bind('change', function() { sc_form_webservicefe_plantilla_pordefecto_onchange(this, iSeqRow) })
+                                                  .bind('focus', function() { sc_form_webservicefe_plantilla_pordefecto_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-enviar_dian' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-enviar_cliente' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-envio_credenciales' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-plantillas_correo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
 } // scJQEventsAdd
 
 function sc_form_webservicefe_idwebservicefe_onchange(oThis, iSeqRow) {
@@ -516,12 +567,71 @@ function sc_form_webservicefe_url_api_sendmail_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_webservicefe_envio_credenciales_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_validate_envio_credenciales();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_envio_credenciales_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_webservicefe_envio_credenciales_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_plantillas_correo_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_validate_plantillas_correo();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_plantillas_correo_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_webservicefe_plantillas_correo_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_copia_factura_a_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_validate_copia_factura_a();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_copia_factura_a_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_webservicefe_copia_factura_a_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_plantilla_pordefecto_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_validate_plantilla_pordefecto();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_plantilla_pordefecto_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_webservicefe_plantilla_pordefecto_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_page(page, status) {
 	if ("0" == page) {
 		displayChange_page_0(status);
 	}
 	if ("1" == page) {
 		displayChange_page_1(status);
+	}
+	if ("2" == page) {
+		displayChange_page_2(status);
 	}
 }
 
@@ -533,12 +643,19 @@ function displayChange_page_1(status) {
 	displayChange_block("1", status);
 }
 
+function displayChange_page_2(status) {
+	displayChange_block("2", status);
+}
+
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
 	}
 	if ("1" == block) {
 		displayChange_block_1(status);
+	}
+	if ("2" == block) {
+		displayChange_block_2(status);
 	}
 }
 
@@ -564,6 +681,13 @@ function displayChange_block_1(status) {
 	displayChange_field("enviar_cliente", "", status);
 }
 
+function displayChange_block_2(status) {
+	displayChange_field("envio_credenciales", "", status);
+	displayChange_field("copia_factura_a", "", status);
+	displayChange_field("plantillas_correo", "", status);
+	displayChange_field("plantilla_pordefecto", "", status);
+}
+
 function displayChange_row(row, status) {
 	displayChange_field_proveedor(row, status);
 	displayChange_field_modo(row, status);
@@ -581,6 +705,10 @@ function displayChange_row(row, status) {
 	displayChange_field_password_prueba(row, status);
 	displayChange_field_enviar_dian(row, status);
 	displayChange_field_enviar_cliente(row, status);
+	displayChange_field_envio_credenciales(row, status);
+	displayChange_field_copia_factura_a(row, status);
+	displayChange_field_plantillas_correo(row, status);
+	displayChange_field_plantilla_pordefecto(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -631,6 +759,18 @@ function displayChange_field(field, row, status) {
 	}
 	if ("enviar_cliente" == field) {
 		displayChange_field_enviar_cliente(row, status);
+	}
+	if ("envio_credenciales" == field) {
+		displayChange_field_envio_credenciales(row, status);
+	}
+	if ("copia_factura_a" == field) {
+		displayChange_field_copia_factura_a(row, status);
+	}
+	if ("plantillas_correo" == field) {
+		displayChange_field_plantillas_correo(row, status);
+	}
+	if ("plantilla_pordefecto" == field) {
+		displayChange_field_plantilla_pordefecto(row, status);
 	}
 }
 
@@ -706,9 +846,34 @@ function displayChange_field_enviar_dian(row, status) {
 function displayChange_field_enviar_cliente(row, status) {
 }
 
+function displayChange_field_envio_credenciales(row, status) {
+}
+
+function displayChange_field_copia_factura_a(row, status) {
+}
+
+function displayChange_field_plantillas_correo(row, status) {
+}
+
+function displayChange_field_plantilla_pordefecto(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_plantilla_pordefecto__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_plantilla_pordefecto" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "plantilla_pordefecto");
+	}
+}
+
 function scRecreateSelect2() {
 	displayChange_field_proveedor("all", "on");
 	displayChange_field_modo("all", "on");
+	displayChange_field_plantilla_pordefecto("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -885,6 +1050,9 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "modo" == specificField) {
     scJQSelect2Add_modo(seqRow);
   }
+  if (null == specificField || "plantilla_pordefecto" == specificField) {
+    scJQSelect2Add_plantilla_pordefecto(seqRow);
+  }
 } // scJQSelect2Add
 
 function scJQSelect2Add_proveedor(seqRow) {
@@ -923,6 +1091,24 @@ function scJQSelect2Add_modo(seqRow) {
   );
 } // scJQSelect2Add
 
+function scJQSelect2Add_plantilla_pordefecto(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_plantilla_pordefecto_obj" : "#id_sc_field_plantilla_pordefecto" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_plantilla_pordefecto_obj',
+      dropdownCssClass: 'css_plantilla_pordefecto_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -932,6 +1118,7 @@ function scJQElementsAdd(iLine) {
   scJQSelect2Add(iLine);
   setTimeout(function () { if ('function' == typeof displayChange_field_proveedor) { displayChange_field_proveedor(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_modo) { displayChange_field_modo(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_plantilla_pordefecto) { displayChange_field_plantilla_pordefecto(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)

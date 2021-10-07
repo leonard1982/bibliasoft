@@ -147,6 +147,93 @@ class form_webservicefe_mob_help
 </html>
 <?php
         }
+        if ($nm_cod_campo ==  "envio_credenciales")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Envío Credenciales</b><br>" . nl2br("Envia las credenciales de acceso a un portal de la nube para ver las facturas de desarrollo propio."); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "plantillas_correo")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Activar el uso de plantillas de correo</b><br>" . nl2br("Activa la opcion de enviar el correo de la factura electronica con plantillas personalizadas."); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "plantilla_pordefecto")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Plantilla Por Defecto</b><br>" . nl2br("Lista de plantillas a seleccionar en desarrollo propio."); ?>
+</body>
+</html>
+<?php
+        }
     }
 }
 if (!empty($_GET))
