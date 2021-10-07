@@ -5589,19 +5589,6 @@ ALTER TABLE `configuraciones` ADD `cal_valores_decimales` INT NOT NULL DEFAULT '
 
 ALTER TABLE `facturaven` ADD `orden_compra` VARCHAR(50) NULL DEFAULT NULL AFTER `monto_utilidad`, ADD `orden_fecha` DATE NULL DEFAULT NULL AFTER `orden_compra`;
 
-
-
-ALTER TABLE `webservicefe` ADD `envio_credenciales` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Activa la opción de enviar credenciales de acceso al clientes de factura electrónica antes de recibir la factura o documento. Aplica para desarrollo propio.' AFTER `url_api_sendmail`, ADD `plantillas_correo` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Activa la opción de usar plantillas de correo electrónica de factura electrónica en desarrollo propio.' AFTER `envio_credenciales`, ADD `copia_factura_a` VARCHAR(120) NULL DEFAULT NULL COMMENT 'correo para enviar copia de factura electrónica al enviar el documento electrónico. Aplica para desarrollo propio.' AFTER `plantillas_correo`;
-
-ALTER TABLE `webservicefe` ADD `plantilla_pordefecto` INT NOT NULL DEFAULT '0' COMMENT 'El id del registro de la tabla donde está la plantilla a usar en el correo de factura electrónica de desarrollo propio.' AFTER `copia_factura_a`;
-
-CREATE TABLE `plantillas_correo_propio` ( `id` INT NOT NULL AUTO_INCREMENT , `contenido` TEXT NULL DEFAULT NULL , `creado` DATETIME NULL DEFAULT NULL , `actualizado` DATETIME NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
-
-ALTER TABLE `plantillas_correo_propio` ADD `descripcion` VARCHAR(50) NULL DEFAULT NULL AFTER `actualizado`;
-
-ALTER TABLE `plantillas_correo_propio` ADD `html_header` TEXT NULL DEFAULT NULL AFTER `descripcion`, ADD `html_body` TEXT NULL DEFAULT NULL AFTER `html_header`, ADD `html_buttons` TEXT NULL DEFAULT NULL AFTER `html_body`, ADD `html_footer` TEXT NULL DEFAULT NULL AFTER `html_buttons`;
-
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
