@@ -218,7 +218,7 @@ class blank_cargar_terceros_desde_excel_ini
       $this->nm_hr_criacao   = "091132"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211007"; 
-      $this->nm_hr_ult_alt   = "152915"; 
+      $this->nm_hr_ult_alt   = "153746"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_cargar_terceros_desde_excel_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_cargar_terceros_desde_excel']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_cargar_terceros_desde_excel']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9FUD1BeV5FGDMvOVcBOH5XCVEX7HQJmZkFGZ1NOV5XGHgrKZSJ3V5XCHMBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIFUD9NwH9BiDSBYVWBOHuNOVIFCDWJeDoXGDcNmZ1X7HIBeHQX7DEBeHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcJeZSX7HArYV5BOHgrKDkBODWFaVoX7DcNwH9FaD1rKV5FaDErKVkXeH5FYVoB/D9NwH9X7Z1rwV5BqHgrYDkBOH5XCDoraD9XOH9B/D1rKV5FaDMNKZSXeDWFqZuJeDcJeZSX7HABYD5rqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXsH9BiD1BeHuFGHuzGVIBODWJeHIF7HQBsZSB/HANOHQBqHgNKDkXKDWXCVoBiHQXsZ9F7HAveHurqDMrYV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5XGDMvOVcBUDWB3VEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoJwHQXsDQFGHANOVWJwHuNOZSNiH5FqVoraHQNmZSB/DSBOD5JeHgBeZSJ3V5FaDoJsD9JKH9BiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQFUHArYHQBqDMzGZSJqDuFGVENUDcJUH9FaHABYV5FaHgveHErCDuFaHMFaHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGD1rKZMBqDErKDkXKDWFqZuFaHQFYDQJwDSzGVWBOHuzGDkBOV5FYHMB/D9BsZ1X7HANOHuB/HgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMBYZSXeDWX7DoJeDcBwZSX7HArYV5BOHgrYDkFCH5XCDoraD9XOZSB/D1rwV5FaDErKVkXeV5FaDoXGDcXOZSX7D1veD5JwHuzGDkBOH5XCDoraDcNwH9B/HArYZMXGDMBYZSXeDWFqVoX7HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHuNUHgrKDkB/H5B3VoF7HQBqZkFGZ1BeHuX7DEBOHArsH5FGVoFGD9NmDQX7HIBeD5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5XGDMvOVcBUDWB3VEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoB/HQXGDQFUHArYVWJsDMvmV9FeDur/DoraHQXGZSBOHAvCZMBOHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1962,7 +1962,6 @@ class blank_cargar_terceros_desde_excel_apl
 	<br>
 	<h3>Importar terceros desde Excel</h3>
 	<p>El formato del archivo de Excel debe cumplir con el formato de la siguiente plantilla. </p>
-	<a href="<?php echo sc_url_library('prj', 'varios', 'plantilla_importar_terceros_ejemplo.xls'); ?>">Click aquí para descargar la plantilla - ejemplo.</a><br><br>
 	<a href="<?php echo sc_url_library('prj', 'varios', 'plantilla_importar_terceros.xlsx'); ?>">Click aquí para descargar la plantilla a diligenciar.</a>
 	<br>
 	<br>
@@ -2340,7 +2339,9 @@ if(isset($_POST["submit"]))
 												nombre1         = '".$vnombre1."',
 												nombre2         = '".$vnombre2."',
 												apellido1       = '".$vapellido1."',
-												apellido2       = '".$vapellido2."'
+												apellido2       = '".$vapellido2."',
+												correo_notificafe='".$vurlmail."',
+												celular_notificafe=".$telefono."
 												";
 								
 								$vsql2 = "UPDATE terceros u
@@ -2374,7 +2375,9 @@ if(isset($_POST["submit"]))
 												u.nombre1         = '".$vnombre1."',
 												u.nombre2         = '".$vnombre2."',
 												u.apellido1       = '".$vapellido1."',
-												u.apellido2       = '".$vapellido2."'
+												u.apellido2       = '".$vapellido2."',
+												u.correo_notificafe='".$vurlmail."',
+												u.celular_notificafe=".$telefono.
 												
 												where u.documento='".$documento."'
 												";
@@ -2821,8 +2824,8 @@ if(isset($_POST["submit"]))
 										}
 									}
 								}
-							}
-						}
+							}//termina si no está vacio el codigo
+						}//termina si no es titutlo
 						
 					}
 					else
