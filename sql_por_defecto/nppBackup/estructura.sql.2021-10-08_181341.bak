@@ -5601,7 +5601,6 @@ ALTER TABLE `plantillas_correo_propio` ADD `descripcion` VARCHAR(50) NULL DEFAUL
 
 ALTER TABLE `plantillas_correo_propio` ADD `html_header` TEXT NULL DEFAULT NULL AFTER `descripcion`, ADD `html_body` TEXT NULL DEFAULT NULL AFTER `html_header`, ADD `html_buttons` TEXT NULL DEFAULT NULL AFTER `html_body`, ADD `html_footer` TEXT NULL DEFAULT NULL AFTER `html_buttons`;
 
-ALTER TABLE `configuraciones` ADD `validar_codbarras` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Valida el código de barras al leerlo en venta rápida y permite seleccionar posteriormente el precio y digitar la cantidad' AFTER `cal_cantidades_decimales`;
 
 COMMIT;
 

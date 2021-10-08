@@ -61,6 +61,7 @@ function scFocusField(sField) {
       case 'ver_busqueda_refinada':
       case 'cal_valores_decimales':
       case 'cal_cantidades_decimales':
+      case 'validar_codbarras':
         sc_exib_ocult_pag('form_configuraciones_form2');
         break;
       case 'ver_grupo':
@@ -147,6 +148,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["ver_busqueda_refinada" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["cal_valores_decimales" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["cal_cantidades_decimales" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["validar_codbarras" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ver_grupo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ver_codigo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ver_imagen" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -371,6 +373,12 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["cal_cantidades_decimales" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["validar_codbarras" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["validar_codbarras" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["ver_grupo" + iSeqRow]["blur"]) {
@@ -653,6 +661,9 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_cal_cantidades_decimales' + iSeqRow).bind('blur', function() { sc_form_configuraciones_cal_cantidades_decimales_onblur(this, iSeqRow) })
                                                       .bind('change', function() { sc_form_configuraciones_cal_cantidades_decimales_onchange(this, iSeqRow) })
                                                       .bind('focus', function() { sc_form_configuraciones_cal_cantidades_decimales_onfocus(this, iSeqRow) });
+  $('#id_sc_field_validar_codbarras' + iSeqRow).bind('blur', function() { sc_form_configuraciones_validar_codbarras_onblur(this, iSeqRow) })
+                                               .bind('change', function() { sc_form_configuraciones_validar_codbarras_onchange(this, iSeqRow) })
+                                               .bind('focus', function() { sc_form_configuraciones_validar_codbarras_onfocus(this, iSeqRow) });
   $('#id_sc_field_probarnube' + iSeqRow).bind('change', function() { sc_form_configuraciones_probarnube_onchange(this, iSeqRow) });
   $('.sc-ui-checkbox-caja_movil' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-pago_automatico' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -674,6 +685,7 @@ function scJQEventsAdd(iSeqRow) {
   $('.sc-ui-checkbox-columna_npedido' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-columna_reg_pdf_propio' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_busqueda_refinada' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-validar_codbarras' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_grupo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_codigo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-ver_imagen' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -1454,6 +1466,20 @@ function sc_form_configuraciones_cal_cantidades_decimales_onfocus(oThis, iSeqRow
   scCssFocus(oThis);
 }
 
+function sc_form_configuraciones_validar_codbarras_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_validate_validar_codbarras();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_validar_codbarras_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_configuraciones_validar_codbarras_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_configuraciones_probarnube_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
@@ -1553,6 +1579,7 @@ function displayChange_block_3(status) {
 	displayChange_field("ver_busqueda_refinada", "", status);
 	displayChange_field("cal_valores_decimales", "", status);
 	displayChange_field("cal_cantidades_decimales", "", status);
+	displayChange_field("validar_codbarras", "", status);
 }
 
 function displayChange_block_4(status) {
@@ -1607,6 +1634,7 @@ function displayChange_row(row, status) {
 	displayChange_field_ver_busqueda_refinada(row, status);
 	displayChange_field_cal_valores_decimales(row, status);
 	displayChange_field_cal_cantidades_decimales(row, status);
+	displayChange_field_validar_codbarras(row, status);
 	displayChange_field_ver_grupo(row, status);
 	displayChange_field_ver_codigo(row, status);
 	displayChange_field_ver_imagen(row, status);
@@ -1727,6 +1755,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("cal_cantidades_decimales" == field) {
 		displayChange_field_cal_cantidades_decimales(row, status);
+	}
+	if ("validar_codbarras" == field) {
+		displayChange_field_validar_codbarras(row, status);
 	}
 	if ("ver_grupo" == field) {
 		displayChange_field_ver_grupo(row, status);
@@ -1896,6 +1927,9 @@ function displayChange_field_cal_valores_decimales(row, status) {
 }
 
 function displayChange_field_cal_cantidades_decimales(row, status) {
+}
+
+function displayChange_field_validar_codbarras(row, status) {
 }
 
 function displayChange_field_ver_grupo(row, status) {

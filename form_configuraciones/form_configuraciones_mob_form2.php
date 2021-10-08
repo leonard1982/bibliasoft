@@ -1808,6 +1808,110 @@ $ver_busqueda_refinada_look = "";
 
 <?php } 
 ?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['validar_codbarras']))
+   {
+       $this->nm_new_label['validar_codbarras'] = "Validar Codbarras";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $validar_codbarras = $this->validar_codbarras;
+   $sStyleHidden_validar_codbarras = '';
+   if (isset($this->nmgp_cmp_hidden['validar_codbarras']) && $this->nmgp_cmp_hidden['validar_codbarras'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['validar_codbarras']);
+       $sStyleHidden_validar_codbarras = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_validar_codbarras = 'display: none;';
+   $sStyleReadInp_validar_codbarras = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['validar_codbarras']) && $this->nmgp_cmp_readonly['validar_codbarras'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['validar_codbarras']);
+       $sStyleReadLab_validar_codbarras = '';
+       $sStyleReadInp_validar_codbarras = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['validar_codbarras']) && $this->nmgp_cmp_hidden['validar_codbarras'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="validar_codbarras" value="<?php echo $this->form_encode_input($this->validar_codbarras) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->validar_codbarras_1 = explode(";", trim($this->validar_codbarras));
+  } 
+  else
+  {
+      if (empty($this->validar_codbarras))
+      {
+          $this->validar_codbarras_1= array(); 
+          $this->validar_codbarras= "NO";
+      } 
+      else
+      {
+          $this->validar_codbarras_1= $this->validar_codbarras; 
+          $this->validar_codbarras= ""; 
+          foreach ($this->validar_codbarras_1 as $cada_validar_codbarras)
+          {
+             if (!empty($validar_codbarras))
+             {
+                 $this->validar_codbarras.= ";"; 
+             } 
+             $this->validar_codbarras.= $cada_validar_codbarras; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_validar_codbarras_line" id="hidden_field_data_validar_codbarras" style="<?php echo $sStyleHidden_validar_codbarras; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_validar_codbarras_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_validar_codbarras_label" style=""><span id="id_label_validar_codbarras"><?php echo $this->nm_new_label['validar_codbarras']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["validar_codbarras"]) &&  $this->nmgp_cmp_readonly["validar_codbarras"] == "on") { 
+
+$validar_codbarras_look = "";
+ if ($this->validar_codbarras == "SI") { $validar_codbarras_look .= "SI" ;} 
+ if (empty($validar_codbarras_look)) { $validar_codbarras_look = $this->validar_codbarras; }
+?>
+<input type="hidden" name="validar_codbarras" value="<?php echo $this->form_encode_input($validar_codbarras) . "\">" . $validar_codbarras_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$validar_codbarras_look = "";
+ if ($this->validar_codbarras == "SI") { $validar_codbarras_look .= "SI" ;} 
+ if (empty($validar_codbarras_look)) { $validar_codbarras_look = $this->validar_codbarras; }
+?>
+<span id="id_read_on_validar_codbarras" class="css_validar_codbarras_line" style="<?php echo $sStyleReadLab_validar_codbarras; ?>"><?php echo $this->form_format_readonly("validar_codbarras", $this->form_encode_input($validar_codbarras_look)); ?></span><span id="id_read_off_validar_codbarras" class="css_read_off_validar_codbarras css_validar_codbarras_line" style="<?php echo $sStyleReadInp_validar_codbarras; ?>"><?php echo "<div id=\"idAjaxCheckbox_validar_codbarras\" style=\"display: inline-block\" class=\"css_validar_codbarras_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_validar_codbarras_line"><?php $tempOptionId = "id-opt-validar_codbarras" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-validar_codbarras sc-ui-checkbox-validar_codbarras" name="validar_codbarras[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['Lookup_validar_codbarras'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->validar_codbarras_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('validar_codbarras')", "nm_mostra_mens('validar_codbarras')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_validar_codbarras_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_validar_codbarras_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
 
 
 

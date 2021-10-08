@@ -5952,29 +5952,12 @@ if($this->asentada =="1")
 			}
 		}
 		
-		if($this->sc_temp_gproveedor=="FACILWEB")
+		
+		if(empty($this->cufe ))
 		{
-			if($this->si_electronica =="FE")
-			{
-				$this->editarpos  = "";
-			}
-			else
-			{
-				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' title='Reversar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /></a>";
-			}
+			$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' title='Reversar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /></a>";
 		}
 		
-		if($this->sc_temp_gproveedor=="DATAICO")
-		{
-			if($this->si_electronica =="FE")
-			{
-				$this->editarpos  = "";
-			}
-			else
-			{
-				$this->editarpos  = "<a onclick='fReversarDoc(\"".$this->idfacven ."\");' title='Reversar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_out_32.png' /></a>";
-			}
-		}
 	}
 }
 else

@@ -1708,7 +1708,7 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
  $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2020/public/api/ubl2.1/numbering-range',
+  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/numbering-range',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -1749,7 +1749,7 @@ if(isset($vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->G
 				$curl2 = curl_init();
 
 				curl_setopt_array($curl2, array(
-				  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2020/public/api/ubl2.1/config/resolution',
+				  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/resolution',
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => '',
 				  CURLOPT_MAXREDIRS => 10,
@@ -1877,7 +1877,7 @@ if(isset($vrespuesta->ResponseDian->Envelope->Body->GetNumberingRangeResponse->G
 			$curl2 = curl_init();
 
 			curl_setopt_array($curl2, array(
-			  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2020/public/api/ubl2.1/config/resolution',
+			  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/resolution',
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => '',
 			  CURLOPT_MAXREDIRS => 10,
@@ -2907,7 +2907,7 @@ if(isset($this->vtoken[0][0]))
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
-	  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2020/public/api/ubl2.1/numbering-range',
+	  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/numbering-range',
 	  CURLOPT_RETURNTRANSFER => true,
 	  CURLOPT_ENCODING => '',
 	  CURLOPT_MAXREDIRS => 10,

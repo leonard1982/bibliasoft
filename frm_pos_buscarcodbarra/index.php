@@ -217,8 +217,8 @@ class frm_pos_buscarcodbarra_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "174314"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210909"; 
-      $this->nm_hr_ult_alt   = "171332"; 
+      $this->nm_dt_ult_alt   = "20210914"; 
+      $this->nm_hr_ult_alt   = "110231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class frm_pos_buscarcodbarra_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_buscarcodbarra']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_buscarcodbarra']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQJsHAvOVWJwHgrYZSJqDuX7VEX7HQBiZ1FGHINKZMBODErKVkJGH5BmDoXGHQNwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXOH9BiHABYD5BODMBODkBsHEX7VorqD9BiH9FaHIBeHQX7HgveZSJ3HEXCZuFaHQXGDuFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkJGDWr/VoFGDcXOZSFGHAveV5JwHuzGDkB/V5X7VoBOD9BiZ1FaD1rwD5rqDMBYHEJGDWr/DoF7D9XsZSX7D1veV5X7HgvsVcFCDWJeVoX7DcBqZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcXKDuX7HIraHQXOZ1F7D1rwHuJsDErKHEBUHEFqHIFGD9FYDQFUHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqDSzGV5XGDMrYVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBOZSJqV5FaVoJsDcBwDQFaHANOV5X7DMBOZSNiDWXCVoBiHQBsH9B/DSBeHQJsHgNKHErCV5FaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZ9F7HANOHuB/HgrwVIBODWFaDoX7DcJUZ1B/Z1NOV5FaHgvsZSJGH5F/VoBiHQNmDuBqHANOVWBOHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMJwHQNmH9FUDSvCVWJsHuvmV9FeDWrmVEraHQXOZ1B/Z1BeHQrqHgveZSJqH5X/ZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSFaHAN7V5X7DMNKZSJGDWF/DoB/D9NwZSFUZ1rwV5X7HuBYVcFCH5FqVoBqDcBqZ1FaHAN7D5rqDEBOZSXeH5F/DorqDcJeDQFGHANOV5BOHgvsV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1BODSrYZMBqDEBeHArsDWB3ZuXGHQFYDQJwHAveV5JwHuNOV9BUDWXCVoF7D9JmZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5BqHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYDkB/DWFYDoJeHQXOZ1B/DSvmZMBqHgveHEBUH5FYHIX7D9XsDQJwHIrKHQJeHgvOVcBODWJeHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2007,6 +2007,7 @@ if (!isset($this->sc_temp_gidbanco)) {$this->sc_temp_gidbanco = (isset($_SESSION
 	$vdescuento  = 0;
 	$vdesgeneral= "NO";
 	$veditable   = "NO";
+	$vlista_precios = "";
 	
 	$vsqld = "select porcentaje,activo from programar_descuentos_generales where desde <= '".date("Y-m-d H:i:s")."' and hasta>'".date("Y-m-d H:i:s")."' and activo='SI' and cajas_afectadas like '%".$this->sc_temp_gidbanco."%'";
 
@@ -2091,7 +2092,7 @@ if (!isset($this->sc_temp_gidbanco)) {$this->sc_temp_gidbanco = (isset($_SESSION
 		break;
 	}
 
-	$vsql = "SELECT p.idprod,".$vtipocodigo.",concat(".$vtipocodigo.",' - ',p.nompro,' -- ',if('".$ventaunidad."'='MAYOR',coalesce((select um.descripcion_um from  unidades_medida um where um.codigo_um=p.unimay limit 1),p.unimay),coalesce((select um.descripcion_um from  unidades_medida um where um.codigo_um=p.unimen limit 1),p.unimen))) as nompro,i.trifa,if('".$ventaunidad."'='MAYOR',".$vtipomay.",".$vtipomen.") as preciomen,p.unimen,p.costomen,p.unidmaymen,p.recmayamen,if('".$ventaunidad."'='MAYOR',p.unimay,p.unimen) as unidad,precio_editable from  productos p inner join iva i on p.idiva=i.idiva where (p.codigobar='".$codbarras."' or p.codigobar2='".$codbarras."' or p.codigobar3='".$codbarras."' or p.codigoprod='".$codbarras."')";
+	$vsql = "SELECT p.idprod,".$vtipocodigo.",concat(".$vtipocodigo.",' - ',p.nompro,' -- ',if('".$ventaunidad."'='MAYOR',coalesce((select um.descripcion_um from  unidades_medida um where um.codigo_um=p.unimay limit 1),p.unimay),coalesce((select um.descripcion_um from  unidades_medida um where um.codigo_um=p.unimen limit 1),p.unimen))) as nompro,i.trifa,if('".$ventaunidad."'='MAYOR',".$vtipomay.",".$vtipomen.") as preciomen,p.unimen,p.costomen,p.unidmaymen,p.recmayamen,if('".$ventaunidad."'='MAYOR',p.unimay,p.unimen) as unidad,precio_editable, p.preciomen as precio1, p.preciomen2 as precio2, p.preciomen3 as precio3 from  productos p inner join iva i on p.idiva=i.idiva where (p.codigobar='".$codbarras."' or p.codigobar2='".$codbarras."' or p.codigobar3='".$codbarras."' or p.codigoprod='".$codbarras."')";
 	
 	 
       $nm_select = $vsql; 
@@ -2136,6 +2137,10 @@ if (!isset($this->sc_temp_gidbanco)) {$this->sc_temp_gidbanco = (isset($_SESSION
 			$recmayamen  = $this->vdata[0][8];
 			$vunidad     = $this->vdata[0][9];
 			$veditable   = $this->vdata[0][10];
+		
+			$vlista_precios  = "<option value='".$this->vdata[0][11]."'>PRECIO 1</option>";
+			$vlista_precios .= "<option value='".$this->vdata[0][12]."'>PRECIO 2</option>";
+			$vlista_precios .= "<option value='".$this->vdata[0][13]."'>PRECIO 3</option>";
 		
 			if($ventaunidad=="MAYOR")
 			{
@@ -2320,7 +2325,8 @@ if (!isset($this->sc_temp_gidbanco)) {$this->sc_temp_gidbanco = (isset($_SESSION
 		"vsql"        =>$vsql,
 		"descuento"   =>$vdescuento,
 		"gdescuento"  =>$vdesgeneral,
-		"precio_editable"=>$veditable
+		"precio_editable"=>$veditable,
+		"lista_precios"=>$vlista_precios
 	));
 }
 if (isset($this->sc_temp_gidbanco)) {$_SESSION['gidbanco'] = $this->sc_temp_gidbanco;}

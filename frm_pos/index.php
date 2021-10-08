@@ -217,8 +217,8 @@ class frm_pos_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "163114"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210922"; 
-      $this->nm_hr_ult_alt   = "171402"; 
+      $this->nm_dt_ult_alt   = "20211008"; 
+      $this->nm_hr_ult_alt   = "180855"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class frm_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDuBqHAN7VWBODMvOVcFKDur/VoFGHQBiZSB/HIrwV5JsDMBYHEJGDurmDoBOHQNwZSBiZ1BYHQJeDMrwV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBqHQJKZ9F7D1BeHQrqHuzGVcFeH5XCVoB/D9BsZ1FGHANOHQBOHgBYHEBUH5X/DoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSFaHAN7V5X7DMNKZSJGDWF/DoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuvmZSNiHEX/DoXGDcNmZ1rqD1rKHQF7DEBOHEXeDuXKZuFaDcBiH9FUZ1rwHuF7HgvOVcBUHEFYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWB3VEFGHQNmVINUHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJwHAN7HQJsHuvmDkBsDur/DoF7D9BiZkFGHAzGZMFaDErKDkXKDWXCVoFaHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDQFUDSBYHQB/DMrYZSJqH5FqVErqHQXOH9BqHIBeHuXGHgBOZSJ3H5FGZuBOD9FYDQX7D1veHQNUDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWF/DoF7DcXGDQFUD1veD5JsHuBYV9FeV5FYHIF7HQNmZSBOHAvsZMBODErKVkXeHEFaZuXGHQBiDQFGD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDErKVkXeV5FqDoFUD9NwDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFGHQBiZ1X7DSNOHQFaHgNKVkJqDWrGZuFaHQXsDQFUDSBYVWJwHuvmVcFCDuX7VoBqHQXOZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5BqHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrwDkBOHEX7HIJeHQXGZ1FGHANOD5JeDEvsHEFiDuFaZuBqDcBiH9FUHIrKVWJeHgrwDkBODWF/DoXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1949,9 +1949,10 @@ if (!isset($this->sc_temp_gdescripciongrupo)) {$this->sc_temp_gdescripciongrupo 
 if (!isset($_SESSION['gsiescajero'])) {$_SESSION['gsiescajero'] = "";}
 if (!isset($this->sc_temp_gsiescajero)) {$this->sc_temp_gsiescajero = (isset($_SESSION['gsiescajero'])) ? $_SESSION['gsiescajero'] : "";}
   $vporcentaje_propina_sugerida = 0;
+$vvalidar_codbarras = "NO";
 
  
-      $nm_select = "SELECT valor_propina_sugerida FROM configuraciones order by idconfiguraciones desc limit 1"; 
+      $nm_select = "SELECT valor_propina_sugerida, validar_codbarras FROM configuraciones order by idconfiguraciones desc limit 1"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vConfiguraciones = array();
@@ -1984,6 +1985,7 @@ if (!isset($this->sc_temp_gsiescajero)) {$this->sc_temp_gsiescajero = (isset($_S
 if(isset($this->vconfiguraciones[0][0]))
 {
 	$vporcentaje_propina_sugerida = $this->vconfiguraciones[0][0];
+	$vvalidar_codbarras = $this->vconfiguraciones[0][1];
 }
 
 ;
@@ -2072,10 +2074,10 @@ $this->JS();
 			<label>GRUPOS</label>
 		</td>
         -->
-		<td width='60px'>
+		<td width='60px'  style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
 			<label>UNIDAD</label>
 		</td>
-		<td>
+		<td  style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
 			<label>PRECIO</label>
 		</td>
 		<td width='200px'>
@@ -2088,6 +2090,7 @@ $this->JS();
 			<input type="hidden" id="idfactura" value="<?php if(isset($_GET['gidfactura'])){ echo $_GET['gidfactura'];} ?>"/>
 			<input type="hidden" id="isiescajero" value="<?php if(isset($this->sc_temp_gsiescajero)){ echo $this->sc_temp_gsiescajero;} ?>"/>
 			<input type="hidden" id="siesadmin" value="<?php if(isset($this->sc_temp_gdescripciongrupo)){ echo $this->sc_temp_gdescripciongrupo;} ?>"/>
+			<input type="hidden" id="validar_codbarras" value="<?php if(isset($vvalidar_codbarras)){ echo $vvalidar_codbarras;} ?>"/>
 			
 			<label>CODBARRA</label>
 		</td>
@@ -2117,13 +2120,13 @@ $this->JS();
 			<a id="ventagrupos"  style="cursor:pointer;"><img src='../_lib/img/scriptcase__NM__ico__NM__cubes_32.png' width='40px' /></a>
 		</td>
         -->
-		<td>
+		<td style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
 			<select id="ventaunidad" style="width:100px;">
 				<option>MENOR</option>
 				<option>MAYOR</option>
 			</select>
 		</td>
-		<td>
+		<td  style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
 			<select id="sc_precio" style="width:100px;">
 				<option value='1'>PRECIO1</option>
 				<option value='2'>PRECIO2</option>
@@ -2455,6 +2458,22 @@ $this->JS();
     <input id="dpassword" type="password" size="25" autocomplete="false" placeholder="Contraseña"/>
 	<br><br>
 	<button id="idautorizar">Autorizar</button>
+	</center>
+</div>
+	
+<div id="dialog2" title="Ingresar Producto">
+	<center>
+	<input type="hidden" id="codbarras_tmp" value=""/>
+	<p><b id="codbarra_nombrepro"></b></p>
+	<br>
+	<select id="sc_codbarra_precio" class="form-control">
+	</select>
+	<br>
+	<input id="codbarra_precio" class="form-control" style="text-align:center;" type="text" size="25" autocomplete="false" required />
+	<br>
+    <input id="codbarra_cantidad" class="form-control" style="text-align:center;" type="number" size="25" autocomplete="false" placeholder="1"/>
+	<br><br>
+	<button id="idautorizar2" class="btn btn-primary">Agregar</button>
 	</center>
 </div>
 </div>
@@ -3443,13 +3462,29 @@ function fAgregarItemDetalle(idfactura,articulo,precio,cantidad=1,iva=0,descuent
 }
 
 
-function fAutorizar(){
+function fAutorizar()
+{
 
 	console.log("autorizar");
 
 	$("#dialog").show();
 	
 	$( "#dialog").dialog();
+}
+	
+function fAutorizar2()
+{
+
+	console.log("autorizar codigo de barras");
+	
+	$("#validar_codbarras").val("SI");
+	$("#codbarra_cantidad").val("1");
+	$("#codbarra_precio").val("");
+	$("#codbarras_tmp").val("");
+
+	$("#dialog2").show();
+	
+	$( "#dialog2").dialog();
 }
 
 function fEditarCantidad(id,accion=true,event="",iddet,idfacven,cantidad)
@@ -3888,6 +3923,65 @@ function fCambiarDireccion()
 
 $(document).ready(function(){
 	
+	$("#idautorizar2").click(function(e){
+
+		e.preventDefault();
+
+		$("#validar_codbarras").val("NO");
+		$("#ventaitemcantidad").val($("#codbarra_cantidad").val());
+		$("#ventaitemprecio").val($("#codbarra_precio").val());
+		$("#txt_articulo").val($("#codbarras_tmp").val());
+		$("#txt_articulo").keypress(function(){
+		
+			$("#validar_codbarras").val("SI");
+			
+		}).trigger(e);
+		$("#dialog2").hide();
+		$("#dialog2").dialog("close");
+
+	});
+	
+	$("#codbarra_cantidad").keypress(function(e){
+
+		var code = (e.keyCode ? e.keyCode : e.which);
+
+		if(code == 13) {
+
+			$("#validar_codbarras").val("NO");
+			$("#ventaitemcantidad").val($("#codbarra_cantidad").val());
+			$("#ventaitemprecio").val($("#codbarra_precio").val());
+			$("#txt_articulo").val($("#codbarras_tmp").val());
+			$("#txt_articulo").keypress(function(){
+			
+				$("#validar_codbarras").val("SI");
+			
+			}).trigger(e);
+			$("#dialog2").hide();
+			$("#dialog2").dialog("close");
+
+		 	return false;
+		}
+
+	});
+	
+	$("#codbarra_precio").keypress(function(e){
+
+		var code = (e.keyCode ? e.keyCode : e.which);
+
+		if(code == 13) {
+
+			$("#codbarra_cantidad").select();
+
+		 	return false;
+		}
+
+	});
+	
+	$("#sc_codbarra_precio").change(function(){
+		
+		$("#codbarra_precio").val($("#sc_codbarra_precio").val());
+	});
+	
 	$("#tipod").change(function(){
 		
 		if($("#tipod").val()=="AIU")
@@ -4261,6 +4355,8 @@ $(document).ready(function(){
 
 
 	$("#dialog").hide();
+	
+	$("#dialog2").hide();
 
 	function fValidarUsuario(usuario,clave){
 		
@@ -4775,10 +4871,12 @@ $(document).ready(function(){
 			if(code == 13)
 			{
 	
+				var validar_codbarras = $("#validar_codbarras").val();
 				var codbarras = this.value;
 				var vventaunidad = $("#ventaunidad").val();
 				$("#iventaunidad").val(vventaunidad);
 				var tipoprecio = $('#sc_precio').val();
+				
 
 			 	
 				if(!$.isEmptyObject(this.value))
@@ -5213,36 +5311,50 @@ $(document).ready(function(){
 
 										$("#idbodega").val('1');
 
-										fAgregarItemDetalle
-										(
-												idfactura,
-												articulo,
-												precio,
-												cantidad,
-												iva,
-												descuento,
-												costo,
-												tasaiva,
-												idfila,
-												vunidmaymen,
-												vrecmayamen
-										);
-
 										
-										c = parseFloat(c);
-										c = c.toFixed(3);
-										
-										fAgregarFilaTabla
-										(
-												filas, 
-												o.nompro,
-												c,
-												p,
-												d,
-												t
-										);
+										if(validar_codbarras=="NO")
+										{
+											fAgregarItemDetalle
+											(
+													idfactura,
+													articulo,
+													precio,
+													cantidad,
+													iva,
+													descuento,
+													costo,
+													tasaiva,
+													idfila,
+													vunidmaymen,
+													vrecmayamen
+											);
 
-										fRecalcular();
+
+											c = parseFloat(c);
+											c = c.toFixed(3);
+
+											fAgregarFilaTabla
+											(
+													filas, 
+													o.nompro,
+													c,
+													p,
+													d,
+													t
+											);
+
+											fRecalcular();
+										}
+										else
+										{
+											fAutorizar2();
+											
+											$("#codbarra_nombrepro").text("");
+											$("#codbarras_tmp").val(codbarras);
+											$("#codbarra_nombrepro").text(o.nompro);
+											$("#sc_codbarra_precio").html(o.lista_precios);
+											$("#codbarra_precio").val($("#sc_codbarra_precio").val());
+										}
 
 									}else{ 
 

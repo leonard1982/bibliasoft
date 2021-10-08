@@ -541,6 +541,10 @@ if (!isset($gPermisosUsuario) && isset($gpermisosusuario))
 {
     $_SESSION["gPermisosUsuario"] = $gpermisosusuario;
 }
+if (!isset($gOS) && isset($gos)) 
+{
+    $_SESSION["gOS"] = $gos;
+}
 if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['menu']['session_timeout']['redir']))
 {
     unset($_SESSION['sc_session']['SC_parm_violation']);
@@ -811,7 +815,7 @@ $this->nm_bases_vfp       = array("vfp");
 $this->nm_bases_odbc      = array("odbc");
 $this->nm_bases_progress  = array("pdo_progress_odbc", "progress");
 $_SESSION['scriptcase']['sc_num_page'] = 1;
-$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9X7HAN7D5BqDMrYVIB/DuX7HMX7DcNwH9BqZ1vmD5BODErKHEBUDuJeHIJwHQJeDuFaHABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBOZSJ3V5FaVoBqHQXOH9BiZ1N7HQF7HuBYVcFeV5BmVEraDcBqZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7Z1BYD5JwHuNOVIFCH5XKDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuraDMvOV9BUDWXKVoF7HQBiZ1BiHAzGD5BOHgveHArCH5FGDoBqHQBiDuBqHABYHurqDMBYVIB/H5B3VErqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMFaHQJeDuFaDSrwHuFGHgvOV9FeDWJeHIraD9XGZ1FGHAzGD5BOHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BqHgBYHArsDWrGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoBiDcBqZkFUZ1rYV5X7DErKHArCHEB3ZuFaHQJKDQFGDSBYHQB/HuBYVIBsV5X7DorqHQNwZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQFaHINaV5JeDMBYVcXKDWF/VoBqHQBiVINUHANOV5B/HgBeVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoX7D9BsVINUDSrYV5FGHgNOZSXeHEB3DoXGHQXODQJsDSrwD5BODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDEBOHEXeDWFqVoBiD9NmDuBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCH5FGDoBqHQBiDuBqHArYHQJeDMvOV9BUDWXKVoF7HQBsZkBiHAzGD5BOHgNKHArCDWr/HMJeDcXGDQBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1F7HABYD5BqHgBOHEFiHEFqHMB/D9XsDQJwHAveV5FUDMBOVcBUDur/DoBiHQXOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5BqHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVIFCDWXCDoF7DcJUH9BOHIveV5X7HgBeHArCV5FaVoJeD9NmDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
  $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
 if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['menu']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['menu']['glo_nm_conexao']))
 { 
@@ -4324,6 +4328,10 @@ if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("blank_fin_sesion
 }
 /* Elementos de menú */
 $_SESSION['scriptcase']['menu']['contr_erro'] = 'on';
+if (!isset($_SESSION['gOS'])) {$_SESSION['gOS'] = "";}
+if (!isset($this->sc_temp_gOS)) {$this->sc_temp_gOS = (isset($_SESSION['gOS'])) ? $_SESSION['gOS'] : "";}
+if (!isset($_SESSION['gtipo_empresa'])) {$_SESSION['gtipo_empresa'] = "";}
+if (!isset($this->sc_temp_gtipo_empresa)) {$this->sc_temp_gtipo_empresa = (isset($_SESSION['gtipo_empresa'])) ? $_SESSION['gtipo_empresa'] : "";}
   $FILTRO = "WHERE CURDATE() BETWEEN start_date AND end_date ORDER BY id DESC";
 $sql = "SELECT title as message,start_date, end_date,start_time FROM calendar ". $FILTRO;
 $vmensaje = "";
@@ -4375,6 +4383,126 @@ if(!empty($this->ds )){
 		'toast' => false
 		);
 	$this->nm_mens_alert[] = $vmensaje;$this->nm_params_alert[] = $params;}
+
+if($this->sc_temp_gtipo_empresa=="NUBE")
+{
+	$vsql = "select tokenempresa,tokenpassword from webservicefe where tokenempresa is not null and tokenempresa <> '' and proveedor='FACILWEB'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vTokenEmp = array();
+      $this->vtokenemp = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vTokenEmp[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vtokenemp[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vTokenEmp = false;
+          $this->vTokenEmp_erro = $this->Db->ErrorMsg();
+          $this->vtokenemp = false;
+          $this->vtokenemp_erro = $this->Db->ErrorMsg();
+      } 
+;
+	
+	if(isset($this->vtokenemp[0][0]))
+	{
+		if($this->sc_temp_gOS=="WIN")
+		{
+
+		}
+		else
+		{
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/certificate-end-date',
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => '',
+			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_TIMEOUT => 0,
+			  CURLOPT_FOLLOWLOCATION => true,
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => 'PUT',
+			  CURLOPT_HTTPHEADER => array(
+				'Content-Type: application/json',
+				'cache-control: no-cache',
+				'Connection: keep-alive',
+				'Accept-Encoding: gzip, deflate',
+				'Host: localhost',
+				'accept: application/json',
+				'X-CSRF-TOKEN: ',
+				'Authorization: Bearer '.$this->vtokenemp[0][0]
+			  ),
+			));
+
+			$response = curl_exec($curl);
+			curl_close($curl);
+			
+			$vabuscar = "/";
+			$vpos = strpos($response, $vabuscar);
+			if ($vpos === false)
+			{
+				
+			}
+			else
+			{
+				$vpartes = explode($vabuscar,$response);
+				$vdia    = "";
+				$vmes    = "";
+				$vanio   = "";
+				
+				if(isset($vpartes[0]))
+				{
+					$vdia = $vpartes[0];
+				}
+				
+				if(isset($vpartes[1]))
+				{
+					$vmes = $vpartes[1];
+				}
+				
+				if(isset($vpartes[2]))
+				{
+					$vanio = $vpartes[2];
+				}
+				
+				if(!empty($vdia) and !empty($vmes) and !empty($vanio))
+				{
+					if(checkdate($vdia,$vmes,$vanio))
+					{
+						$vfecha_actual = date("Y-m-d");
+						$vfecha_certificado = $vanio."-".$vmes."-".$vdia;
+						
+						$fecha1= new DateTime($vfecha_actual);
+						$fecha2= new DateTime($vfecha_certificado);
+						$diff = $fecha1->diff($fecha2);
+						
+						$vdias_faltantes = $diff->days;
+
+						if(intval($vdias_faltantes)<=15)
+						{
+							$this->nm_mens_alert[] = 'Faltan '.$diff->days .' días para el vencimiento de su certificado digital, comuníquese con el area comercial para renovar su plan.';$this->nm_params_alert[] = array();}
+					}
+				}
+			}
+		}
+	}
+}
+if (isset($this->sc_temp_gtipo_empresa)) {$_SESSION['gtipo_empresa'] = $this->sc_temp_gtipo_empresa;}
+if (isset($this->sc_temp_gOS)) {$_SESSION['gOS'] = $this->sc_temp_gOS;}
 $_SESSION['scriptcase']['menu']['contr_erro'] = 'off';
 if ($this->Db)
 {
