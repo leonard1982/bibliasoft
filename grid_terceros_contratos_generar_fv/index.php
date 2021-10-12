@@ -229,8 +229,8 @@ class grid_terceros_contratos_generar_fv_ini
       $this->nm_dt_criacao   = "20200311"; 
       $this->nm_hr_criacao   = "151455"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20211012"; 
+      $this->nm_hr_ult_alt   = "170952"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1005,7 +1005,7 @@ class grid_terceros_contratos_generar_fv_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_contratos_generar_fv']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_contratos_generar_fv']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDQFaHIrwV5FGHuNOVcFKDWFYVEX7HQBiZSBqHIveV5FaHgveHENiDWBmZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGD1rwZMFaDEBeZSXeDWr/VoB/D9FYDuFaD1vOVWJwHgvsVIBOH5XCHMrqDcFYZ1rqHABYV5FGHgNKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODuX7VoX7D9JmZ1B/D1rKD5BiDEvsHEFiDWFqDoJeDcJeZSX7HABYV5BOHuNODkFCH5FqVoJwDcBqH9B/Z1BeV5FUDEvsHEBUDWr/DoraD9NmDQJsZ1rwV5BqHgrYDkBODuX7DoraD9BsZSB/HArYD5XGDMBYHEJGDWr/DoFUDcBwH9FGHAvCD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcrsHEFYDoXGDcFYZSBqZ1NOV5JsHgBOVkJqV5FaZuBOHQXODQJsDSN7D5XGDMBOVcFKHEFYHMJwDcJUZ1F7HIBeHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMXGHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDuX7HMBOHQBiH9FaHArYHuBqDEBOHArCDuFYHMFaDcXGH9X7HArYD5JsDMvODkBsDuFqHIFGD9BiZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKH9BiZ1N7HuBiDMvmV9BUDWJeVEFGD9BsZkFGHAN7ZMJeDEvsZSJGDWFqHIJwHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DorqHQNwZ9XGD1BeHQF7HuzGVIB/DWJeHMFaHQBsH9B/HIBeHQX7DENOHEXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUD9NmDQJsHABYV5BOHgvsDkBODWFYVoX7D9BsH9FaD1rwD5BiDMBYZSXeV5FaVoBiD9NmDQJwHANOV5FUHuBYVcFKV5X7VoFGDcNwH9B/HIBeV5FaDEBOVkXeDWFqDoJeDcJeDQFGHANOV5raHgrKVIFCDWBmDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JeHuvmVcFCDWFaDoFUHQNmH9BqD1rKHQrqDMzGHEXeDWX7VoBqD9FYDQJsHABYHQXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHAvOV5JeDMvOV9BUDWJeHMBiD9BsVIraD1rwV5X7HgBeHEFiDWB3DoXGD9NwDQFGHAveHuB/DMzGVIFCH5FqVoBOHQBqZ1FaHIveHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -5781,6 +5781,50 @@ else
 {
 	if($vsidetalle>0)
 	{
+		$vproveedor = "";
+		$vservidor1 = "";
+		$vtoken     = "";
+		$vpassword  = "";
+		
+		$vsql = "select proveedor, servidor1, tokenempresa, tokenpassword from webservicefe where idwebservicefe='1'";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vTFE = array();
+      $this->vtfe = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vTFE[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vtfe[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vTFE = false;
+          $this->vTFE_erro = $this->Db->ErrorMsg();
+          $this->vtfe = false;
+          $this->vtfe_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->vtfe[0][0]))
+		{
+			$vproveedor = $this->vtfe[0][0];
+			$vservidor1 = $this->vtfe[0][1];
+			$vtoken     = $this->vtfe[0][2];
+			$vpassword  = $this->vtfe[0][3];
+		}
+		
 		
 		$vdia_limite = "05";
 		$vsql = "select dia_limite_pago from configuraciones where idconfiguraciones='1'";
@@ -5934,8 +5978,9 @@ else
 		if(isset($this->vsicliente[0][0]))
 		{
 
-			$vsql = "INSERT INTO facturaven_contratos set numfacven=(select if(coalesce(max(f.numfacven),0)=0,if((select r.primerfactura from resdian r where Idres='".$vresolucion."')>0,(select r.primerfactura from resdian r where  Idres='".$vresolucion."'),1),coalesce(max(f.numfacven),0)+1)  from facturaven_contratos f where f.resolucion='".$vresolucion."'),credito='".$vcredito."',fechaven='".$vfecha."',idcli=(select c.idtercero from terceros c where c.documento='".$vcliente."'),formapago='EFECTIVO',vendedor='".$vasesor."',resolucion='".$vresolucion."',asentada='1',pagada='NO',espos='SI',subtotal='0',valoriva='0',total='0',banco='".$vbanco."',tipo='".$vtipodoc."',observaciones=NULL, direccion = '".$vdirecc."', numcontrato='".$vcontrato."', codigo_mun='".$vcodmun."', codigo_dep='".$vcoddep."'";
+			$vsql = "INSERT INTO facturaven_contratos set numfacven=(select if(coalesce(max(f.numfacven),0)=0,if((select r.primerfactura from resdian r where Idres='".$vresolucion."')>0,(select r.primerfactura from resdian r where  Idres='".$vresolucion."'),1),coalesce(max(f.numfacven),0)+1)  from facturaven_contratos f where f.resolucion='".$vresolucion."'),credito='".$vcredito."',fechaven='".$vfecha."',idcli=(select c.idtercero from terceros c where c.documento='".$vcliente."'),formapago='EFECTIVO',vendedor='".$vasesor."',resolucion='".$vresolucion."',asentada='1',pagada='NO',espos='SI',subtotal='0',valoriva='0',total='0',banco='".$vbanco."',tipo='".$vtipodoc."',observaciones=NULL, direccion = '".$vdirecc."', numcontrato='".$vcontrato."', codigo_mun='".$vcodmun."', codigo_dep='".$vcoddep."', proveedor='".$vproveedor."', token='".$vtoken."', password='".$vpassword."', servidor='".$vservidor1."'";
 
+			
 			
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -7969,14 +8014,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
            $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['embutida_form'])
        {
