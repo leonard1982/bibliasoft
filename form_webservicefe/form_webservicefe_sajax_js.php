@@ -3806,6 +3806,53 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_webservicefe_validate_plantilla_pordefecto_cb
 
+  // ---------- Event onchange proveedor_anterior
+  function do_ajax_form_webservicefe_event_proveedor_anterior_onchange()
+  {
+    var var_proveedor_anterior = scAjaxGetFieldSelect("proveedor_anterior");
+    var var_servidor_anterior1 = scAjaxGetFieldText("servidor_anterior1");
+    var var_servidor_anterior2 = scAjaxGetFieldText("servidor_anterior2");
+    var var_servidor_anterior3 = scAjaxGetFieldText("servidor_anterior3");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_form_webservicefe_event_proveedor_anterior_onchange(var_proveedor_anterior, var_servidor_anterior1, var_servidor_anterior2, var_servidor_anterior3, var_script_case_init, do_ajax_form_webservicefe_event_proveedor_anterior_onchange_cb);
+  } // do_ajax_form_webservicefe_event_proveedor_anterior_onchange
+
+  function do_ajax_form_webservicefe_event_proveedor_anterior_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "proveedor_anterior";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_form_webservicefe_event_proveedor_anterior_onchange_cb_after_alert);
+  } // do_ajax_form_webservicefe_event_proveedor_anterior_onchange_cb
+  function do_ajax_form_webservicefe_event_proveedor_anterior_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    scAjaxRedir();
+  } // do_ajax_form_webservicefe_event_proveedor_anterior_onchange_cb_after_alert
+
   // ---------- Event onchange proveedor
   function do_ajax_form_webservicefe_event_proveedor_onchange()
   {

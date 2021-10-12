@@ -295,6 +295,12 @@ function scEventControl_onFocus(oField, iSeq) {
   if ("plantilla_pordefecto" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
+  if ("proveedor_anterior" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
   if ("proveedor" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
@@ -366,6 +372,7 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_plantilla_pordefecto' + iSeqRow).bind('blur', function() { sc_form_webservicefe_plantilla_pordefecto_onblur(this, iSeqRow) })
                                                   .bind('focus', function() { sc_form_webservicefe_plantilla_pordefecto_onfocus(this, iSeqRow) });
   $('#id_sc_field_proveedor_anterior' + iSeqRow).bind('blur', function() { sc_form_webservicefe_proveedor_anterior_onblur(this, iSeqRow) })
+                                                .bind('change', function() { sc_form_webservicefe_proveedor_anterior_onchange(this, iSeqRow) })
                                                 .bind('focus', function() { sc_form_webservicefe_proveedor_anterior_onfocus(this, iSeqRow) });
   $('#id_sc_field_servidor_anterior1' + iSeqRow).bind('blur', function() { sc_form_webservicefe_servidor_anterior1_onblur(this, iSeqRow) })
                                                 .bind('focus', function() { sc_form_webservicefe_servidor_anterior1_onfocus(this, iSeqRow) });
@@ -590,6 +597,10 @@ function sc_form_webservicefe_plantilla_pordefecto_onfocus(oThis, iSeqRow) {
 function sc_form_webservicefe_proveedor_anterior_onblur(oThis, iSeqRow) {
   do_ajax_form_webservicefe_mob_validate_proveedor_anterior();
   scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_proveedor_anterior_onchange(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_event_proveedor_anterior_onchange();
 }
 
 function sc_form_webservicefe_proveedor_anterior_onfocus(oThis, iSeqRow) {

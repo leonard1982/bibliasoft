@@ -295,6 +295,12 @@ function scEventControl_onFocus(oField, iSeq) {
   if ("plantilla_pordefecto" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
+  if ("proveedor_anterior" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
   if ("proveedor" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
@@ -701,6 +707,7 @@ function sc_form_webservicefe_proveedor_anterior_onblur(oThis, iSeqRow) {
 
 function sc_form_webservicefe_proveedor_anterior_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  do_ajax_form_webservicefe_event_proveedor_anterior_onchange();
 }
 
 function sc_form_webservicefe_proveedor_anterior_onfocus(oThis, iSeqRow) {

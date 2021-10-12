@@ -293,7 +293,7 @@ class form_webservicefe_mob_ini
       $this->nm_hr_criacao   = "103008"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211012"; 
-      $this->nm_hr_ult_alt   = "154952"; 
+      $this->nm_hr_ult_alt   = "155757"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -949,7 +949,7 @@ class form_webservicefe_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQFGHANKV5XGHgvOVcBUDWB3VEF7DcJUH9B/HABYV5BOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFaHMFaHQBqZ1BODSrYV5BqDMBYZSXeV5FaVoB/DcJeDQX7HIBeHuXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwVWXGHgrKVcBODWJeVoFGDcJUZ1FaHAN7ZMBqDEBeHEXeH5FYVoB/DcBwH9X7HABYV5raHuNOVcBOV5X7VoBOHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMBODMzGDkXKH5FYVoX7D9NwDQX7Z1BYHQB/DMBYVcBODWJeDoBiD9BiZ1X7HABYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAzGD5BqHgveHArsDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcrsDWJeDoFGHQJmZ1BODSNOD5FaDENOVkXeDuJeVoFGHQFYH9FUDSN7V5X7DMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZSX7HIBeHuF7HgrKDkB/Dur/HIF7HQNmZ1F7HAvmZMJeHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoF7HQXOZSBOHABYHQX7HgNKHErsDWr/VoXGHQFYDQX7HArYD5JsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwVWXGHgrKVcBODWJeVoFGDcJUZ1FaHAN7ZMBqDEBeHEXeH5FYVoB/DcBwH9X7HABYV5raHuNOVcBOV5X7VoBOHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKZMB/DMveHErsDuJeZuJeD9JKH9X7HAN7HQNUHgrwDkFCHEFYHMX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAzGD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuF7HgvsV9BUDWF/VorqDcNmZ1B/DSBeHuB/DEBeZSJ3DWFqHMBiHQFYDuFaZ1BYHQJeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1840,6 +1840,14 @@ ob_start();
             $plantilla_pordefecto = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_webservicefe_mob_event_proveedor_anterior_onchange' == $_POST['rs'])
+        {
+            $proveedor_anterior = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $servidor_anterior1 = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $servidor_anterior2 = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $servidor_anterior3 = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][4]);
+        }
         if ('ajax_form_webservicefe_mob_event_proveedor_onchange' == $_POST['rs'])
         {
             $proveedor = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -2397,6 +2405,7 @@ ob_start();
     sajax_export("ajax_form_webservicefe_mob_validate_copia_factura_a");
     sajax_export("ajax_form_webservicefe_mob_validate_plantillas_correo");
     sajax_export("ajax_form_webservicefe_mob_validate_plantilla_pordefecto");
+    sajax_export("ajax_form_webservicefe_mob_event_proveedor_anterior_onchange");
     sajax_export("ajax_form_webservicefe_mob_event_proveedor_onchange");
     sajax_export("ajax_form_webservicefe_mob_submit_form");
     sajax_export("ajax_form_webservicefe_mob_navigate_form");
@@ -2917,6 +2926,28 @@ ob_start();
         $inicial_form_webservicefe_mob->contr_form_webservicefe_mob->controle();
         exit;
     } // ajax_validate_plantilla_pordefecto
+
+    function ajax_form_webservicefe_mob_event_proveedor_anterior_onchange($proveedor_anterior, $servidor_anterior1, $servidor_anterior2, $servidor_anterior3, $script_case_init)
+    {
+        global $inicial_form_webservicefe_mob;
+        //register_shutdown_function("form_webservicefe_mob_pack_ajax_response");
+        $inicial_form_webservicefe_mob->contr_form_webservicefe_mob->NM_ajax_flag          = true;
+        $inicial_form_webservicefe_mob->contr_form_webservicefe_mob->NM_ajax_opcao         = 'event_proveedor_anterior_onchange';
+        $inicial_form_webservicefe_mob->contr_form_webservicefe_mob->NM_ajax_info['param'] = array(
+                  'proveedor_anterior' => NM_utf8_urldecode($proveedor_anterior),
+                  'servidor_anterior1' => NM_utf8_urldecode($servidor_anterior1),
+                  'servidor_anterior2' => NM_utf8_urldecode($servidor_anterior2),
+                  'servidor_anterior3' => NM_utf8_urldecode($servidor_anterior3),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_webservicefe_mob->contr_form_webservicefe_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_webservicefe_mob->contr_form_webservicefe_mob->controle();
+        exit;
+    } // ajax_event_proveedor_anterior_onchange
 
     function ajax_form_webservicefe_mob_event_proveedor_onchange($proveedor, $servidor1, $servidor2, $servidor3, $tokenempresa, $tokenpassword, $servidor_prueba1, $servidor_prueba2, $servidor_prueba3, $token_prueba, $password_prueba, $url_api_pdfs, $url_api_sendmail, $script_case_init)
     {

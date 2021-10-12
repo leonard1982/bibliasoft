@@ -1325,6 +1325,10 @@ class form_webservicefe_apl
       if ($this->NM_ajax_flag && 'event_' == substr($this->NM_ajax_opcao, 0, 6))
       {
           $this->nm_tira_formatacao();
+          if ('event_proveedor_anterior_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->proveedor_anterior_onChange();
+          }
           if ('event_proveedor_onchange' == $this->NM_ajax_opcao)
           {
               $this->proveedor_onChange();
@@ -5845,6 +5849,88 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
         }
 
 //
+function proveedor_anterior_onChange()
+{
+$_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'on';
+  
+$original_proveedor_anterior = $this->proveedor_anterior;
+$original_servidor_anterior1 = $this->servidor_anterior1;
+$original_servidor_anterior2 = $this->servidor_anterior2;
+$original_servidor_anterior3 = $this->servidor_anterior3;
+
+if(!empty($this->proveedor_anterior ))
+{
+	$vsql = "SELECT servidor_anterior1, servidor_anterior2, servidor_anterior3 FROM webservicefe_proveedores where proveedor='".$this->proveedor_anterior ."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDatos = array();
+      $this->vdatos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDatos = false;
+          $this->vDatos_erro = $this->Db->ErrorMsg();
+          $this->vdatos = false;
+          $this->vdatos_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vdatos[0][0]))
+	{
+		$this->servidor_anterior1  = $this->vdatos[0][0];
+		$this->servidor_anterior2  = $this->vdatos[0][1];
+		$this->servidor_anterior3  = $this->vdatos[0][2];
+	}
+}
+else
+{
+	$this->servidor_anterior1  = "";
+	$this->servidor_anterior2  = "";
+	$this->servidor_anterior3  = "";
+}
+
+$modificado_proveedor_anterior = $this->proveedor_anterior;
+$modificado_servidor_anterior1 = $this->servidor_anterior1;
+$modificado_servidor_anterior2 = $this->servidor_anterior2;
+$modificado_servidor_anterior3 = $this->servidor_anterior3;
+$this->nm_formatar_campos('proveedor_anterior', 'servidor_anterior1', 'servidor_anterior2', 'servidor_anterior3');
+if ($original_proveedor_anterior !== $modificado_proveedor_anterior || isset($this->nmgp_cmp_readonly['proveedor_anterior']) || (isset($bFlagRead_proveedor_anterior) && $bFlagRead_proveedor_anterior))
+{
+    $this->ajax_return_values_proveedor_anterior(true);
+}
+if ($original_servidor_anterior1 !== $modificado_servidor_anterior1 || isset($this->nmgp_cmp_readonly['servidor_anterior1']) || (isset($bFlagRead_servidor_anterior1) && $bFlagRead_servidor_anterior1))
+{
+    $this->ajax_return_values_servidor_anterior1(true);
+}
+if ($original_servidor_anterior2 !== $modificado_servidor_anterior2 || isset($this->nmgp_cmp_readonly['servidor_anterior2']) || (isset($bFlagRead_servidor_anterior2) && $bFlagRead_servidor_anterior2))
+{
+    $this->ajax_return_values_servidor_anterior2(true);
+}
+if ($original_servidor_anterior3 !== $modificado_servidor_anterior3 || isset($this->nmgp_cmp_readonly['servidor_anterior3']) || (isset($bFlagRead_servidor_anterior3) && $bFlagRead_servidor_anterior3))
+{
+    $this->ajax_return_values_servidor_anterior3(true);
+}
+$this->NM_ajax_info['event_field'] = 'proveedor';
+form_webservicefe_pack_ajax_response();
+exit;
+$_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
+}
 function proveedor_onChange()
 {
 $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'on';
