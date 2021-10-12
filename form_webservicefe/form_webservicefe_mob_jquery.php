@@ -48,6 +48,14 @@ function scFocusField(sField) {
       case 'plantilla_pordefecto':
         sc_exib_ocult_pag('form_webservicefe_mob_form2');
         break;
+      case 'proveedor_anterior':
+      case 'servidor_anterior1':
+      case 'servidor_anterior2':
+      case 'servidor_anterior3':
+      case 'token_anterior':
+      case 'password_anterior':
+        sc_exib_ocult_pag('form_webservicefe_mob_form3');
+        break;
     }
   }
 
@@ -102,6 +110,12 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["copia_factura_a" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["plantillas_correo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["plantilla_pordefecto" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["proveedor_anterior" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["servidor_anterior1" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["servidor_anterior2" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["servidor_anterior3" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["token_anterior" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["password_anterior" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -225,6 +239,42 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["plantilla_pordefecto" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["proveedor_anterior" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["proveedor_anterior" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor_anterior1" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor_anterior1" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor_anterior2" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor_anterior2" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor_anterior3" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor_anterior3" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["token_anterior" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["token_anterior" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["password_anterior" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["password_anterior" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -312,6 +362,18 @@ function scJQEventsAdd(iSeqRow) {
                                              .bind('focus', function() { sc_form_webservicefe_copia_factura_a_onfocus(this, iSeqRow) });
   $('#id_sc_field_plantilla_pordefecto' + iSeqRow).bind('blur', function() { sc_form_webservicefe_plantilla_pordefecto_onblur(this, iSeqRow) })
                                                   .bind('focus', function() { sc_form_webservicefe_plantilla_pordefecto_onfocus(this, iSeqRow) });
+  $('#id_sc_field_proveedor_anterior' + iSeqRow).bind('blur', function() { sc_form_webservicefe_proveedor_anterior_onblur(this, iSeqRow) })
+                                                .bind('focus', function() { sc_form_webservicefe_proveedor_anterior_onfocus(this, iSeqRow) });
+  $('#id_sc_field_servidor_anterior1' + iSeqRow).bind('blur', function() { sc_form_webservicefe_servidor_anterior1_onblur(this, iSeqRow) })
+                                                .bind('focus', function() { sc_form_webservicefe_servidor_anterior1_onfocus(this, iSeqRow) });
+  $('#id_sc_field_servidor_anterior2' + iSeqRow).bind('blur', function() { sc_form_webservicefe_servidor_anterior2_onblur(this, iSeqRow) })
+                                                .bind('focus', function() { sc_form_webservicefe_servidor_anterior2_onfocus(this, iSeqRow) });
+  $('#id_sc_field_servidor_anterior3' + iSeqRow).bind('blur', function() { sc_form_webservicefe_servidor_anterior3_onblur(this, iSeqRow) })
+                                                .bind('focus', function() { sc_form_webservicefe_servidor_anterior3_onfocus(this, iSeqRow) });
+  $('#id_sc_field_token_anterior' + iSeqRow).bind('blur', function() { sc_form_webservicefe_token_anterior_onblur(this, iSeqRow) })
+                                            .bind('focus', function() { sc_form_webservicefe_token_anterior_onfocus(this, iSeqRow) });
+  $('#id_sc_field_password_anterior' + iSeqRow).bind('blur', function() { sc_form_webservicefe_password_anterior_onblur(this, iSeqRow) })
+                                               .bind('focus', function() { sc_form_webservicefe_password_anterior_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-enviar_dian' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-enviar_cliente' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-envio_credenciales' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -522,6 +584,66 @@ function sc_form_webservicefe_plantilla_pordefecto_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_webservicefe_proveedor_anterior_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_validate_proveedor_anterior();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_proveedor_anterior_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_servidor_anterior1_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_validate_servidor_anterior1();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_servidor_anterior1_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_servidor_anterior2_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_validate_servidor_anterior2();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_servidor_anterior2_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_servidor_anterior3_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_validate_servidor_anterior3();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_servidor_anterior3_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_token_anterior_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_validate_token_anterior();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_token_anterior_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_password_anterior_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_validate_password_anterior();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_password_anterior_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_page(page, status) {
 	if ("0" == page) {
 		displayChange_page_0(status);
@@ -531,6 +653,9 @@ function displayChange_page(page, status) {
 	}
 	if ("2" == page) {
 		displayChange_page_2(status);
+	}
+	if ("3" == page) {
+		displayChange_page_3(status);
 	}
 }
 
@@ -546,6 +671,10 @@ function displayChange_page_2(status) {
 	displayChange_block("2", status);
 }
 
+function displayChange_page_3(status) {
+	displayChange_block("3", status);
+}
+
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
@@ -555,6 +684,9 @@ function displayChange_block(block, status) {
 	}
 	if ("2" == block) {
 		displayChange_block_2(status);
+	}
+	if ("3" == block) {
+		displayChange_block_3(status);
 	}
 }
 
@@ -587,6 +719,15 @@ function displayChange_block_2(status) {
 	displayChange_field("plantilla_pordefecto", "", status);
 }
 
+function displayChange_block_3(status) {
+	displayChange_field("proveedor_anterior", "", status);
+	displayChange_field("servidor_anterior1", "", status);
+	displayChange_field("servidor_anterior2", "", status);
+	displayChange_field("servidor_anterior3", "", status);
+	displayChange_field("token_anterior", "", status);
+	displayChange_field("password_anterior", "", status);
+}
+
 function displayChange_row(row, status) {
 	displayChange_field_proveedor(row, status);
 	displayChange_field_modo(row, status);
@@ -608,6 +749,12 @@ function displayChange_row(row, status) {
 	displayChange_field_copia_factura_a(row, status);
 	displayChange_field_plantillas_correo(row, status);
 	displayChange_field_plantilla_pordefecto(row, status);
+	displayChange_field_proveedor_anterior(row, status);
+	displayChange_field_servidor_anterior1(row, status);
+	displayChange_field_servidor_anterior2(row, status);
+	displayChange_field_servidor_anterior3(row, status);
+	displayChange_field_token_anterior(row, status);
+	displayChange_field_password_anterior(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -670,6 +817,24 @@ function displayChange_field(field, row, status) {
 	}
 	if ("plantilla_pordefecto" == field) {
 		displayChange_field_plantilla_pordefecto(row, status);
+	}
+	if ("proveedor_anterior" == field) {
+		displayChange_field_proveedor_anterior(row, status);
+	}
+	if ("servidor_anterior1" == field) {
+		displayChange_field_servidor_anterior1(row, status);
+	}
+	if ("servidor_anterior2" == field) {
+		displayChange_field_servidor_anterior2(row, status);
+	}
+	if ("servidor_anterior3" == field) {
+		displayChange_field_servidor_anterior3(row, status);
+	}
+	if ("token_anterior" == field) {
+		displayChange_field_token_anterior(row, status);
+	}
+	if ("password_anterior" == field) {
+		displayChange_field_password_anterior(row, status);
 	}
 }
 
@@ -767,6 +932,24 @@ function displayChange_field_plantilla_pordefecto(row, status) {
 		}
 		scJQSelect2Add(row, "plantilla_pordefecto");
 	}
+}
+
+function displayChange_field_proveedor_anterior(row, status) {
+}
+
+function displayChange_field_servidor_anterior1(row, status) {
+}
+
+function displayChange_field_servidor_anterior2(row, status) {
+}
+
+function displayChange_field_servidor_anterior3(row, status) {
+}
+
+function displayChange_field_token_anterior(row, status) {
+}
+
+function displayChange_field_password_anterior(row, status) {
 }
 
 function scRecreateSelect2() {

@@ -77,6 +77,12 @@ class form_webservicefe_apl
    var $copia_factura_a;
    var $plantilla_pordefecto;
    var $plantilla_pordefecto_1;
+   var $proveedor_anterior;
+   var $servidor_anterior1;
+   var $servidor_anterior2;
+   var $servidor_anterior3;
+   var $token_anterior;
+   var $password_anterior;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -181,6 +187,10 @@ class form_webservicefe_apl
           {
               $this->nmgp_url_saida = $this->NM_ajax_info['param']['nmgp_url_saida'];
           }
+          if (isset($this->NM_ajax_info['param']['password_anterior']))
+          {
+              $this->password_anterior = $this->NM_ajax_info['param']['password_anterior'];
+          }
           if (isset($this->NM_ajax_info['param']['password_prueba']))
           {
               $this->password_prueba = $this->NM_ajax_info['param']['password_prueba'];
@@ -196,6 +206,10 @@ class form_webservicefe_apl
           if (isset($this->NM_ajax_info['param']['proveedor']))
           {
               $this->proveedor = $this->NM_ajax_info['param']['proveedor'];
+          }
+          if (isset($this->NM_ajax_info['param']['proveedor_anterior']))
+          {
+              $this->proveedor_anterior = $this->NM_ajax_info['param']['proveedor_anterior'];
           }
           if (isset($this->NM_ajax_info['param']['script_case_init']))
           {
@@ -213,6 +227,18 @@ class form_webservicefe_apl
           {
               $this->servidor3 = $this->NM_ajax_info['param']['servidor3'];
           }
+          if (isset($this->NM_ajax_info['param']['servidor_anterior1']))
+          {
+              $this->servidor_anterior1 = $this->NM_ajax_info['param']['servidor_anterior1'];
+          }
+          if (isset($this->NM_ajax_info['param']['servidor_anterior2']))
+          {
+              $this->servidor_anterior2 = $this->NM_ajax_info['param']['servidor_anterior2'];
+          }
+          if (isset($this->NM_ajax_info['param']['servidor_anterior3']))
+          {
+              $this->servidor_anterior3 = $this->NM_ajax_info['param']['servidor_anterior3'];
+          }
           if (isset($this->NM_ajax_info['param']['servidor_prueba1']))
           {
               $this->servidor_prueba1 = $this->NM_ajax_info['param']['servidor_prueba1'];
@@ -224,6 +250,10 @@ class form_webservicefe_apl
           if (isset($this->NM_ajax_info['param']['servidor_prueba3']))
           {
               $this->servidor_prueba3 = $this->NM_ajax_info['param']['servidor_prueba3'];
+          }
+          if (isset($this->NM_ajax_info['param']['token_anterior']))
+          {
+              $this->token_anterior = $this->NM_ajax_info['param']['token_anterior'];
           }
           if (isset($this->NM_ajax_info['param']['token_prueba']))
           {
@@ -1114,6 +1144,12 @@ class form_webservicefe_apl
       if (isset($this->url_api_sendmail)) { $this->nm_limpa_alfa($this->url_api_sendmail); }
       if (isset($this->copia_factura_a)) { $this->nm_limpa_alfa($this->copia_factura_a); }
       if (isset($this->plantilla_pordefecto)) { $this->nm_limpa_alfa($this->plantilla_pordefecto); }
+      if (isset($this->proveedor_anterior)) { $this->nm_limpa_alfa($this->proveedor_anterior); }
+      if (isset($this->servidor_anterior1)) { $this->nm_limpa_alfa($this->servidor_anterior1); }
+      if (isset($this->servidor_anterior2)) { $this->nm_limpa_alfa($this->servidor_anterior2); }
+      if (isset($this->servidor_anterior3)) { $this->nm_limpa_alfa($this->servidor_anterior3); }
+      if (isset($this->token_anterior)) { $this->nm_limpa_alfa($this->token_anterior); }
+      if (isset($this->password_anterior)) { $this->nm_limpa_alfa($this->password_anterior); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1257,6 +1293,30 @@ class form_webservicefe_apl
           if ('validate_plantilla_pordefecto' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'plantilla_pordefecto');
+          }
+          if ('validate_proveedor_anterior' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'proveedor_anterior');
+          }
+          if ('validate_servidor_anterior1' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'servidor_anterior1');
+          }
+          if ('validate_servidor_anterior2' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'servidor_anterior2');
+          }
+          if ('validate_servidor_anterior3' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'servidor_anterior3');
+          }
+          if ('validate_token_anterior' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'token_anterior');
+          }
+          if ('validate_password_anterior' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'password_anterior');
           }
           form_webservicefe_pack_ajax_response();
           exit;
@@ -1925,6 +1985,24 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'plantilla_pordefecto':
                return "Plantilla Por Defecto";
                break;
+           case 'proveedor_anterior':
+               return "Proveedor Anterior";
+               break;
+           case 'servidor_anterior1':
+               return "Servidor Anterior 1";
+               break;
+           case 'servidor_anterior2':
+               return "Servidor Anterior 2";
+               break;
+           case 'servidor_anterior3':
+               return "Servidor Anterior 3";
+               break;
+           case 'token_anterior':
+               return "Token Anterior";
+               break;
+           case 'password_anterior':
+               return "Password Anterior";
+               break;
            case 'idwebservicefe':
                return "Idwebservicefe";
                break;
@@ -2013,6 +2091,18 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_plantillas_correo($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'plantilla_pordefecto' == $filtro)
         $this->ValidateField_plantilla_pordefecto($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'proveedor_anterior' == $filtro)
+        $this->ValidateField_proveedor_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'servidor_anterior1' == $filtro)
+        $this->ValidateField_servidor_anterior1($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'servidor_anterior2' == $filtro)
+        $this->ValidateField_servidor_anterior2($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'servidor_anterior3' == $filtro)
+        $this->ValidateField_servidor_anterior3($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'token_anterior' == $filtro)
+        $this->ValidateField_token_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'password_anterior' == $filtro)
+        $this->ValidateField_password_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
           if (!empty($this->sc_force_zero))
@@ -2690,6 +2780,198 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_plantilla_pordefecto
 
+    function ValidateField_proveedor_anterior(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->proveedor_anterior) > 100) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Proveedor Anterior " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['proveedor_anterior']))
+              {
+                  $Campos_Erros['proveedor_anterior'] = array();
+              }
+              $Campos_Erros['proveedor_anterior'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['proveedor_anterior']) || !is_array($this->NM_ajax_info['errList']['proveedor_anterior']))
+              {
+                  $this->NM_ajax_info['errList']['proveedor_anterior'] = array();
+              }
+              $this->NM_ajax_info['errList']['proveedor_anterior'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'proveedor_anterior';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_proveedor_anterior
+
+    function ValidateField_servidor_anterior1(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->servidor_anterior1) > 300) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Servidor Anterior 1 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['servidor_anterior1']))
+              {
+                  $Campos_Erros['servidor_anterior1'] = array();
+              }
+              $Campos_Erros['servidor_anterior1'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['servidor_anterior1']) || !is_array($this->NM_ajax_info['errList']['servidor_anterior1']))
+              {
+                  $this->NM_ajax_info['errList']['servidor_anterior1'] = array();
+              }
+              $this->NM_ajax_info['errList']['servidor_anterior1'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'servidor_anterior1';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_servidor_anterior1
+
+    function ValidateField_servidor_anterior2(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->servidor_anterior2) > 300) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Servidor Anterior 2 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['servidor_anterior2']))
+              {
+                  $Campos_Erros['servidor_anterior2'] = array();
+              }
+              $Campos_Erros['servidor_anterior2'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['servidor_anterior2']) || !is_array($this->NM_ajax_info['errList']['servidor_anterior2']))
+              {
+                  $this->NM_ajax_info['errList']['servidor_anterior2'] = array();
+              }
+              $this->NM_ajax_info['errList']['servidor_anterior2'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'servidor_anterior2';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_servidor_anterior2
+
+    function ValidateField_servidor_anterior3(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->servidor_anterior3) > 300) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Servidor Anterior 3 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['servidor_anterior3']))
+              {
+                  $Campos_Erros['servidor_anterior3'] = array();
+              }
+              $Campos_Erros['servidor_anterior3'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['servidor_anterior3']) || !is_array($this->NM_ajax_info['errList']['servidor_anterior3']))
+              {
+                  $this->NM_ajax_info['errList']['servidor_anterior3'] = array();
+              }
+              $this->NM_ajax_info['errList']['servidor_anterior3'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 300 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'servidor_anterior3';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_servidor_anterior3
+
+    function ValidateField_token_anterior(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->token_anterior) > 150) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Token Anterior " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['token_anterior']))
+              {
+                  $Campos_Erros['token_anterior'] = array();
+              }
+              $Campos_Erros['token_anterior'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['token_anterior']) || !is_array($this->NM_ajax_info['errList']['token_anterior']))
+              {
+                  $this->NM_ajax_info['errList']['token_anterior'] = array();
+              }
+              $this->NM_ajax_info['errList']['token_anterior'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'token_anterior';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_token_anterior
+
+    function ValidateField_password_anterior(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->password_anterior) > 150) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Password Anterior " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['password_anterior']))
+              {
+                  $Campos_Erros['password_anterior'] = array();
+              }
+              $Campos_Erros['password_anterior'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['password_anterior']) || !is_array($this->NM_ajax_info['errList']['password_anterior']))
+              {
+                  $this->NM_ajax_info['errList']['password_anterior'] = array();
+              }
+              $this->NM_ajax_info['errList']['password_anterior'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 150 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'password_anterior';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_password_anterior
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -2733,6 +3015,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     $this->nmgp_dados_form['copia_factura_a'] = $this->copia_factura_a;
     $this->nmgp_dados_form['plantillas_correo'] = $this->plantillas_correo;
     $this->nmgp_dados_form['plantilla_pordefecto'] = $this->plantilla_pordefecto;
+    $this->nmgp_dados_form['proveedor_anterior'] = $this->proveedor_anterior;
+    $this->nmgp_dados_form['servidor_anterior1'] = $this->servidor_anterior1;
+    $this->nmgp_dados_form['servidor_anterior2'] = $this->servidor_anterior2;
+    $this->nmgp_dados_form['servidor_anterior3'] = $this->servidor_anterior3;
+    $this->nmgp_dados_form['token_anterior'] = $this->token_anterior;
+    $this->nmgp_dados_form['password_anterior'] = $this->password_anterior;
     $this->nmgp_dados_form['idwebservicefe'] = $this->idwebservicefe;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe']['dados_form'] = $this->nmgp_dados_form;
    }
@@ -3220,6 +3508,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->ajax_return_values_copia_factura_a();
           $this->ajax_return_values_plantillas_correo();
           $this->ajax_return_values_plantilla_pordefecto();
+          $this->ajax_return_values_proveedor_anterior();
+          $this->ajax_return_values_servidor_anterior1();
+          $this->ajax_return_values_servidor_anterior2();
+          $this->ajax_return_values_servidor_anterior3();
+          $this->ajax_return_values_token_anterior();
+          $this->ajax_return_values_password_anterior();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
@@ -3947,6 +4241,102 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe']['Lookup_planti
           }
    }
 
+          //----- proveedor_anterior
+   function ajax_return_values_proveedor_anterior($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("proveedor_anterior", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->proveedor_anterior);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['proveedor_anterior'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- servidor_anterior1
+   function ajax_return_values_servidor_anterior1($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior1", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior1);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['servidor_anterior1'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- servidor_anterior2
+   function ajax_return_values_servidor_anterior2($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior2", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior2);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['servidor_anterior2'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- servidor_anterior3
+   function ajax_return_values_servidor_anterior3($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior3", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior3);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['servidor_anterior3'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- token_anterior
+   function ajax_return_values_token_anterior($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("token_anterior", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->token_anterior);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['token_anterior'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- password_anterior
+   function ajax_return_values_password_anterior($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("password_anterior", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->password_anterior);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['password_anterior'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
     function fetchUniqueUploadName($originalName, $uploadDir, $fieldName)
     {
         $originalName = trim($originalName);
@@ -4165,6 +4555,12 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
       $NM_val_form['copia_factura_a'] = $this->copia_factura_a;
       $NM_val_form['plantillas_correo'] = $this->plantillas_correo;
       $NM_val_form['plantilla_pordefecto'] = $this->plantilla_pordefecto;
+      $NM_val_form['proveedor_anterior'] = $this->proveedor_anterior;
+      $NM_val_form['servidor_anterior1'] = $this->servidor_anterior1;
+      $NM_val_form['servidor_anterior2'] = $this->servidor_anterior2;
+      $NM_val_form['servidor_anterior3'] = $this->servidor_anterior3;
+      $NM_val_form['token_anterior'] = $this->token_anterior;
+      $NM_val_form['password_anterior'] = $this->password_anterior;
       $NM_val_form['idwebservicefe'] = $this->idwebservicefe;
       if ($this->idwebservicefe === "" || is_null($this->idwebservicefe))  
       { 
@@ -4301,6 +4697,48 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               $this->copia_factura_a = "null"; 
               $NM_val_null[] = "copia_factura_a";
           } 
+          $this->proveedor_anterior_before_qstr = $this->proveedor_anterior;
+          $this->proveedor_anterior = substr($this->Db->qstr($this->proveedor_anterior), 1, -1); 
+          if ($this->proveedor_anterior == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->proveedor_anterior = "null"; 
+              $NM_val_null[] = "proveedor_anterior";
+          } 
+          $this->servidor_anterior1_before_qstr = $this->servidor_anterior1;
+          $this->servidor_anterior1 = substr($this->Db->qstr($this->servidor_anterior1), 1, -1); 
+          if ($this->servidor_anterior1 == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->servidor_anterior1 = "null"; 
+              $NM_val_null[] = "servidor_anterior1";
+          } 
+          $this->servidor_anterior2_before_qstr = $this->servidor_anterior2;
+          $this->servidor_anterior2 = substr($this->Db->qstr($this->servidor_anterior2), 1, -1); 
+          if ($this->servidor_anterior2 == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->servidor_anterior2 = "null"; 
+              $NM_val_null[] = "servidor_anterior2";
+          } 
+          $this->servidor_anterior3_before_qstr = $this->servidor_anterior3;
+          $this->servidor_anterior3 = substr($this->Db->qstr($this->servidor_anterior3), 1, -1); 
+          if ($this->servidor_anterior3 == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->servidor_anterior3 = "null"; 
+              $NM_val_null[] = "servidor_anterior3";
+          } 
+          $this->token_anterior_before_qstr = $this->token_anterior;
+          $this->token_anterior = substr($this->Db->qstr($this->token_anterior), 1, -1); 
+          if ($this->token_anterior == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->token_anterior = "null"; 
+              $NM_val_null[] = "token_anterior";
+          } 
+          $this->password_anterior_before_qstr = $this->password_anterior;
+          $this->password_anterior = substr($this->Db->qstr($this->password_anterior), 1, -1); 
+          if ($this->password_anterior == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->password_anterior = "null"; 
+              $NM_val_null[] = "password_anterior";
+          } 
       }
       if ($this->nmgp_opcao == "alterar") 
       {
@@ -4367,37 +4805,37 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto"; 
+                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto, proveedor_anterior = '$this->proveedor_anterior', servidor_anterior1 = '$this->servidor_anterior1', servidor_anterior2 = '$this->servidor_anterior2', servidor_anterior3 = '$this->servidor_anterior3', token_anterior = '$this->token_anterior', password_anterior = '$this->password_anterior'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto"; 
+                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto, proveedor_anterior = '$this->proveedor_anterior', servidor_anterior1 = '$this->servidor_anterior1', servidor_anterior2 = '$this->servidor_anterior2', servidor_anterior3 = '$this->servidor_anterior3', token_anterior = '$this->token_anterior', password_anterior = '$this->password_anterior'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto"; 
+                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto, proveedor_anterior = '$this->proveedor_anterior', servidor_anterior1 = '$this->servidor_anterior1', servidor_anterior2 = '$this->servidor_anterior2', servidor_anterior3 = '$this->servidor_anterior3', token_anterior = '$this->token_anterior', password_anterior = '$this->password_anterior'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto"; 
+                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto, proveedor_anterior = '$this->proveedor_anterior', servidor_anterior1 = '$this->servidor_anterior1', servidor_anterior2 = '$this->servidor_anterior2', servidor_anterior3 = '$this->servidor_anterior3', token_anterior = '$this->token_anterior', password_anterior = '$this->password_anterior'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto"; 
+                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto, proveedor_anterior = '$this->proveedor_anterior', servidor_anterior1 = '$this->servidor_anterior1', servidor_anterior2 = '$this->servidor_anterior2', servidor_anterior3 = '$this->servidor_anterior3', token_anterior = '$this->token_anterior', password_anterior = '$this->password_anterior'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto"; 
+                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto, proveedor_anterior = '$this->proveedor_anterior', servidor_anterior1 = '$this->servidor_anterior1', servidor_anterior2 = '$this->servidor_anterior2', servidor_anterior3 = '$this->servidor_anterior3', token_anterior = '$this->token_anterior', password_anterior = '$this->password_anterior'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto"; 
+                  $SC_fields_update[] = "proveedor = '$this->proveedor', servidor1 = '$this->servidor1', servidor2 = '$this->servidor2', tokenempresa = '$this->tokenempresa', tokenpassword = '$this->tokenpassword', servidor_prueba1 = '$this->servidor_prueba1', servidor_prueba2 = '$this->servidor_prueba2', token_prueba = '$this->token_prueba', password_prueba = '$this->password_prueba', modo = '$this->modo', enviar_dian = $this->enviar_dian, enviar_cliente = $this->enviar_cliente, servidor3 = '$this->servidor3', servidor_prueba3 = '$this->servidor_prueba3', url_api_pdfs = '$this->url_api_pdfs', url_api_sendmail = '$this->url_api_sendmail', envio_credenciales = '$this->envio_credenciales', plantillas_correo = '$this->plantillas_correo', copia_factura_a = '$this->copia_factura_a', plantilla_pordefecto = $this->plantilla_pordefecto, proveedor_anterior = '$this->proveedor_anterior', servidor_anterior1 = '$this->servidor_anterior1', servidor_anterior2 = '$this->servidor_anterior2', servidor_anterior3 = '$this->servidor_anterior3', token_anterior = '$this->token_anterior', password_anterior = '$this->password_anterior'"; 
               } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
@@ -4472,6 +4910,12 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               $this->url_api_pdfs = $this->url_api_pdfs_before_qstr;
               $this->url_api_sendmail = $this->url_api_sendmail_before_qstr;
               $this->copia_factura_a = $this->copia_factura_a_before_qstr;
+              $this->proveedor_anterior = $this->proveedor_anterior_before_qstr;
+              $this->servidor_anterior1 = $this->servidor_anterior1_before_qstr;
+              $this->servidor_anterior2 = $this->servidor_anterior2_before_qstr;
+              $this->servidor_anterior3 = $this->servidor_anterior3_before_qstr;
+              $this->token_anterior = $this->token_anterior_before_qstr;
+              $this->password_anterior = $this->password_anterior_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
               }   
@@ -4523,6 +4967,18 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               elseif (isset($this->copia_factura_a)) { $this->nm_limpa_alfa($this->copia_factura_a); }
               if     (isset($NM_val_form) && isset($NM_val_form['plantilla_pordefecto'])) { $this->plantilla_pordefecto = $NM_val_form['plantilla_pordefecto']; }
               elseif (isset($this->plantilla_pordefecto)) { $this->nm_limpa_alfa($this->plantilla_pordefecto); }
+              if     (isset($NM_val_form) && isset($NM_val_form['proveedor_anterior'])) { $this->proveedor_anterior = $NM_val_form['proveedor_anterior']; }
+              elseif (isset($this->proveedor_anterior)) { $this->nm_limpa_alfa($this->proveedor_anterior); }
+              if     (isset($NM_val_form) && isset($NM_val_form['servidor_anterior1'])) { $this->servidor_anterior1 = $NM_val_form['servidor_anterior1']; }
+              elseif (isset($this->servidor_anterior1)) { $this->nm_limpa_alfa($this->servidor_anterior1); }
+              if     (isset($NM_val_form) && isset($NM_val_form['servidor_anterior2'])) { $this->servidor_anterior2 = $NM_val_form['servidor_anterior2']; }
+              elseif (isset($this->servidor_anterior2)) { $this->nm_limpa_alfa($this->servidor_anterior2); }
+              if     (isset($NM_val_form) && isset($NM_val_form['servidor_anterior3'])) { $this->servidor_anterior3 = $NM_val_form['servidor_anterior3']; }
+              elseif (isset($this->servidor_anterior3)) { $this->nm_limpa_alfa($this->servidor_anterior3); }
+              if     (isset($NM_val_form) && isset($NM_val_form['token_anterior'])) { $this->token_anterior = $NM_val_form['token_anterior']; }
+              elseif (isset($this->token_anterior)) { $this->nm_limpa_alfa($this->token_anterior); }
+              if     (isset($NM_val_form) && isset($NM_val_form['password_anterior'])) { $this->password_anterior = $NM_val_form['password_anterior']; }
+              elseif (isset($this->password_anterior)) { $this->nm_limpa_alfa($this->password_anterior); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -4530,7 +4986,7 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('proveedor', 'modo', 'servidor1', 'servidor2', 'servidor3', 'tokenempresa', 'tokenpassword', 'url_api_pdfs', 'url_api_sendmail', 'servidor_prueba1', 'servidor_prueba2', 'servidor_prueba3', 'token_prueba', 'password_prueba', 'enviar_dian', 'enviar_cliente', 'envio_credenciales', 'copia_factura_a', 'plantillas_correo', 'plantilla_pordefecto'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('proveedor', 'modo', 'servidor1', 'servidor2', 'servidor3', 'tokenempresa', 'tokenpassword', 'url_api_pdfs', 'url_api_sendmail', 'servidor_prueba1', 'servidor_prueba2', 'servidor_prueba3', 'token_prueba', 'password_prueba', 'enviar_dian', 'enviar_cliente', 'envio_credenciales', 'copia_factura_a', 'plantillas_correo', 'plantilla_pordefecto', 'proveedor_anterior', 'servidor_anterior1', 'servidor_anterior2', 'servidor_anterior3', 'token_anterior', 'password_anterior'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -4578,39 +5034,39 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES ('$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES ('$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior) VALUES (" . $NM_seq_auto . "'$this->proveedor', '$this->servidor1', '$this->servidor2', '$this->tokenempresa', '$this->tokenpassword', '$this->servidor_prueba1', '$this->servidor_prueba2', '$this->token_prueba', '$this->password_prueba', '$this->modo', $this->enviar_dian, $this->enviar_cliente, '$this->servidor3', '$this->servidor_prueba3', '$this->url_api_pdfs', '$this->url_api_sendmail', '$this->envio_credenciales', '$this->plantillas_correo', '$this->copia_factura_a', $this->plantilla_pordefecto, '$this->proveedor_anterior', '$this->servidor_anterior1', '$this->servidor_anterior2', '$this->servidor_anterior3', '$this->token_anterior', '$this->password_anterior')"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -4768,6 +5224,12 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               $this->url_api_pdfs = $this->url_api_pdfs_before_qstr;
               $this->url_api_sendmail = $this->url_api_sendmail_before_qstr;
               $this->copia_factura_a = $this->copia_factura_a_before_qstr;
+              $this->proveedor_anterior = $this->proveedor_anterior_before_qstr;
+              $this->servidor_anterior1 = $this->servidor_anterior1_before_qstr;
+              $this->servidor_anterior2 = $this->servidor_anterior2_before_qstr;
+              $this->servidor_anterior3 = $this->servidor_anterior3_before_qstr;
+              $this->token_anterior = $this->token_anterior_before_qstr;
+              $this->password_anterior = $this->password_anterior_before_qstr;
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe']['db_changed'] = true;
@@ -4792,6 +5254,12 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               $this->url_api_pdfs = $this->url_api_pdfs_before_qstr;
               $this->url_api_sendmail = $this->url_api_sendmail_before_qstr;
               $this->copia_factura_a = $this->copia_factura_a_before_qstr;
+              $this->proveedor_anterior = $this->proveedor_anterior_before_qstr;
+              $this->servidor_anterior1 = $this->servidor_anterior1_before_qstr;
+              $this->servidor_anterior2 = $this->servidor_anterior2_before_qstr;
+              $this->servidor_anterior3 = $this->servidor_anterior3_before_qstr;
+              $this->token_anterior = $this->token_anterior_before_qstr;
+              $this->password_anterior = $this->password_anterior_before_qstr;
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
               } 
@@ -5002,23 +5470,23 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idwebservicefe, proveedor, servidor1, servidor2, tokenempresa, tokenpassword, servidor_prueba1, servidor_prueba2, token_prueba, password_prueba, modo, enviar_dian, enviar_cliente, servidor3, servidor_prueba3, url_api_pdfs, url_api_sendmail, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, proveedor_anterior, servidor_anterior1, servidor_anterior2, servidor_anterior3, token_anterior, password_anterior from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = "idwebservicefe='1'";
@@ -5188,6 +5656,18 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               $this->nmgp_dados_select['copia_factura_a'] = $this->copia_factura_a;
               $this->plantilla_pordefecto = $rs->fields[20] ; 
               $this->nmgp_dados_select['plantilla_pordefecto'] = $this->plantilla_pordefecto;
+              $this->proveedor_anterior = $rs->fields[21] ; 
+              $this->nmgp_dados_select['proveedor_anterior'] = $this->proveedor_anterior;
+              $this->servidor_anterior1 = $rs->fields[22] ; 
+              $this->nmgp_dados_select['servidor_anterior1'] = $this->servidor_anterior1;
+              $this->servidor_anterior2 = $rs->fields[23] ; 
+              $this->nmgp_dados_select['servidor_anterior2'] = $this->servidor_anterior2;
+              $this->servidor_anterior3 = $rs->fields[24] ; 
+              $this->nmgp_dados_select['servidor_anterior3'] = $this->servidor_anterior3;
+              $this->token_anterior = $rs->fields[25] ; 
+              $this->nmgp_dados_select['token_anterior'] = $this->token_anterior;
+              $this->password_anterior = $rs->fields[26] ; 
+              $this->nmgp_dados_select['password_anterior'] = $this->password_anterior;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->idwebservicefe = (string)$this->idwebservicefe; 
               $this->enviar_dian = (string)$this->enviar_dian; 
@@ -5256,6 +5736,18 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
               $this->nmgp_dados_form["copia_factura_a"] = $this->copia_factura_a;
               $this->plantilla_pordefecto = "";  
               $this->nmgp_dados_form["plantilla_pordefecto"] = $this->plantilla_pordefecto;
+              $this->proveedor_anterior = "";  
+              $this->nmgp_dados_form["proveedor_anterior"] = $this->proveedor_anterior;
+              $this->servidor_anterior1 = "";  
+              $this->nmgp_dados_form["servidor_anterior1"] = $this->servidor_anterior1;
+              $this->servidor_anterior2 = "";  
+              $this->nmgp_dados_form["servidor_anterior2"] = $this->servidor_anterior2;
+              $this->servidor_anterior3 = "";  
+              $this->nmgp_dados_form["servidor_anterior3"] = $this->servidor_anterior3;
+              $this->token_anterior = "";  
+              $this->nmgp_dados_form["token_anterior"] = $this->token_anterior;
+              $this->password_anterior = "";  
+              $this->nmgp_dados_form["password_anterior"] = $this->password_anterior;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
@@ -5546,6 +6038,7 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
         include_once("form_webservicefe_form0.php");
         include_once("form_webservicefe_form1.php");
         include_once("form_webservicefe_form2.php");
+        include_once("form_webservicefe_form3.php");
         $this->hideFormPages();
  }
 
@@ -5554,6 +6047,7 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
                         'Pag1' => '0',
                         'Pag2' => '1',
                         'Pag3' => '2',
+                        'Pag4' => '3',
                 );
 
                 $this->Ini->nm_page_blocks = array(
@@ -5566,12 +6060,16 @@ $_SESSION['scriptcase']['form_webservicefe']['contr_erro'] = 'off';
                         'Pag3' => array(
                                 2 => 'on',
                         ),
+                        'Pag4' => array(
+                                3 => 'on',
+                        ),
                 );
 
                 $this->Ini->nm_block_page = array(
                         0 => 'Pag1',
                         1 => 'Pag2',
                         2 => 'Pag3',
+                        3 => 'Pag4',
                 );
 
                 if (!empty($this->Ini->nm_hidden_blocos)) {

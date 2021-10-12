@@ -825,6 +825,10 @@ var pag_ativa = "form_webservicefe_form0";
             'title' => "Adicionales",
             'class' => $nmgp_num_form == "form_webservicefe_form2" ? "scTabActive" : "scTabInactive",
         ),
+        'form_webservicefe_form3' => array(
+            'title' => "Proveedor Anterior",
+            'class' => $nmgp_num_form == "form_webservicefe_form3" ? "scTabActive" : "scTabInactive",
+        ),
     );
         if (!empty($this->Ini->nm_hidden_pages)) {
                 foreach ($this->Ini->nm_hidden_pages as $pageName => $pageStatus) {
@@ -836,6 +840,9 @@ var pag_ativa = "form_webservicefe_form0";
                         }
                         if ('Adicionales' == $pageName && 'off' == $pageStatus) {
                                 $this->tabCssClass['form_webservicefe_form2']['class'] = 'scTabInactive';
+                        }
+                        if ('Proveedor Anterior' == $pageName && 'off' == $pageStatus) {
+                                $this->tabCssClass['form_webservicefe_form3']['class'] = 'scTabInactive';
                         }
                 }
                 $displayingPage = false;
@@ -877,6 +884,14 @@ var pag_ativa = "form_webservicefe_form0";
    <li id="id_form_webservicefe_form2" class="<?php echo $css_celula; ?> sc-form-page">
     <a href="javascript: sc_exib_ocult_pag ('form_webservicefe_form2')">
      Adicionales
+    </a>
+   </li>
+<?php
+    $css_celula = $this->tabCssClass["form_webservicefe_form3"]['class'];
+?>
+   <li id="id_form_webservicefe_form3" class="<?php echo $css_celula; ?> sc-form-page">
+    <a href="javascript: sc_exib_ocult_pag ('form_webservicefe_form3')">
+     Proveedor Anterior
     </a>
    </li>
 </ul>

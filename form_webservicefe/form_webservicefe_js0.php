@@ -481,6 +481,10 @@ function sc_exib_ocult_pag(N_pagina)
     document.getElementById('form_webservicefe_form2').style.height='0px';
     document.getElementById('form_webservicefe_form2').style.display='none';
     document.getElementById('form_webservicefe_form2').style.overflow='scroll';
+    document.getElementById('form_webservicefe_form3').style.width='1px';
+    document.getElementById('form_webservicefe_form3').style.height='0px';
+    document.getElementById('form_webservicefe_form3').style.display='none';
+    document.getElementById('form_webservicefe_form3').style.overflow='scroll';
 <?php
     if (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe']['pdf_view']) {
 ?>
