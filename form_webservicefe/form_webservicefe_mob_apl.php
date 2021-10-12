@@ -5866,7 +5866,7 @@ $original_servidor_anterior3 = $this->servidor_anterior3;
 
 if(!empty($this->proveedor_anterior ))
 {
-	$vsql = "SELECT servidor_anterior1, servidor_anterior2, servidor_anterior3 FROM webservicefe_proveedores where proveedor='".$this->proveedor_anterior ."'";
+	$vsql = "SELECT servidor1, servidor2, servidor3 FROM webservicefe_proveedores where proveedor='".$this->proveedor_anterior ."'";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
