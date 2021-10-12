@@ -78,6 +78,7 @@ class form_webservicefe_mob_apl
    var $plantilla_pordefecto;
    var $plantilla_pordefecto_1;
    var $proveedor_anterior;
+   var $proveedor_anterior_1;
    var $servidor_anterior1;
    var $servidor_anterior2;
    var $servidor_anterior3;
@@ -1285,22 +1286,6 @@ class form_webservicefe_mob_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'enviar_cliente');
           }
-          if ('validate_envio_credenciales' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'envio_credenciales');
-          }
-          if ('validate_copia_factura_a' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'copia_factura_a');
-          }
-          if ('validate_plantillas_correo' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'plantillas_correo');
-          }
-          if ('validate_plantilla_pordefecto' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'plantilla_pordefecto');
-          }
           if ('validate_proveedor_anterior' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'proveedor_anterior');
@@ -1324,6 +1309,22 @@ class form_webservicefe_mob_apl
           if ('validate_password_anterior' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'password_anterior');
+          }
+          if ('validate_envio_credenciales' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'envio_credenciales');
+          }
+          if ('validate_copia_factura_a' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'copia_factura_a');
+          }
+          if ('validate_plantillas_correo' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'plantillas_correo');
+          }
+          if ('validate_plantilla_pordefecto' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'plantilla_pordefecto');
           }
           form_webservicefe_mob_pack_ajax_response();
           exit;
@@ -1959,18 +1960,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'enviar_cliente':
                return "Enviar Cliente";
                break;
-           case 'envio_credenciales':
-               return "Envío Credenciales";
-               break;
-           case 'copia_factura_a':
-               return "Enviar copia de factura electrónica a";
-               break;
-           case 'plantillas_correo':
-               return "Activar el uso de plantillas de correo";
-               break;
-           case 'plantilla_pordefecto':
-               return "Plantilla Por Defecto";
-               break;
            case 'proveedor_anterior':
                return "Proveedor Anterior";
                break;
@@ -1988,6 +1977,18 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                break;
            case 'password_anterior':
                return "Password Anterior";
+               break;
+           case 'envio_credenciales':
+               return "Envío Credenciales";
+               break;
+           case 'copia_factura_a':
+               return "Enviar copia de factura electrónica a";
+               break;
+           case 'plantillas_correo':
+               return "Activar el uso de plantillas de correo";
+               break;
+           case 'plantilla_pordefecto':
+               return "Plantilla Por Defecto";
                break;
            case 'idwebservicefe':
                return "Idwebservicefe";
@@ -2069,14 +2070,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_enviar_dian($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'enviar_cliente' == $filtro)
         $this->ValidateField_enviar_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'envio_credenciales' == $filtro)
-        $this->ValidateField_envio_credenciales($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'copia_factura_a' == $filtro)
-        $this->ValidateField_copia_factura_a($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'plantillas_correo' == $filtro)
-        $this->ValidateField_plantillas_correo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'plantilla_pordefecto' == $filtro)
-        $this->ValidateField_plantilla_pordefecto($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'proveedor_anterior' == $filtro)
         $this->ValidateField_proveedor_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'servidor_anterior1' == $filtro)
@@ -2089,6 +2082,14 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_token_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'password_anterior' == $filtro)
         $this->ValidateField_password_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'envio_credenciales' == $filtro)
+        $this->ValidateField_envio_credenciales($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'copia_factura_a' == $filtro)
+        $this->ValidateField_copia_factura_a($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'plantillas_correo' == $filtro)
+        $this->ValidateField_plantillas_correo($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'plantilla_pordefecto' == $filtro)
+        $this->ValidateField_plantilla_pordefecto($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
           if (!empty($this->sc_force_zero))
@@ -2616,177 +2617,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_enviar_cliente
 
-    function ValidateField_envio_credenciales(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->envio_credenciales == "" && $this->nmgp_opcao != "excluir")
-      { 
-          $this->envio_credenciales = "NO";
-      } 
-      else 
-      { 
-          if (is_array($this->envio_credenciales))
-          {
-              $x = 0; 
-              $this->envio_credenciales_1 = array(); 
-              foreach ($this->envio_credenciales as $ind => $dados_envio_credenciales_1 ) 
-              {
-                  if ($dados_envio_credenciales_1 != "") 
-                  {
-                      $this->envio_credenciales_1[] = $dados_envio_credenciales_1;
-                  } 
-              } 
-              $this->envio_credenciales = ""; 
-              foreach ($this->envio_credenciales_1 as $dados_envio_credenciales_1 ) 
-              { 
-                   if ($x != 0)
-                   { 
-                       $this->envio_credenciales .= ";";
-                   } 
-                   $this->envio_credenciales .= $dados_envio_credenciales_1;
-                   $x++ ; 
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'envio_credenciales';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_envio_credenciales
-
-    function ValidateField_copia_factura_a(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (trim($this->copia_factura_a) != "")  
-          { 
-              if ($teste_validade->Email($this->copia_factura_a) == false)  
-              { 
-                  $hasError = true;
-                      $Campos_Crit .= "Enviar copia de factura electrónica a; " ; 
-                  if (!isset($Campos_Erros['copia_factura_a']))
-                  {
-                      $Campos_Erros['copia_factura_a'] = array();
-                  }
-                  $Campos_Erros['copia_factura_a'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                      if (!isset($this->NM_ajax_info['errList']['copia_factura_a']) || !is_array($this->NM_ajax_info['errList']['copia_factura_a']))
-                      {
-                          $this->NM_ajax_info['errList']['copia_factura_a'] = array();
-                      }
-                      $this->NM_ajax_info['errList']['copia_factura_a'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'copia_factura_a';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_copia_factura_a
-
-    function ValidateField_plantillas_correo(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->plantillas_correo == "" && $this->nmgp_opcao != "excluir")
-      { 
-          $this->plantillas_correo = "NO";
-      } 
-      else 
-      { 
-          if (is_array($this->plantillas_correo))
-          {
-              $x = 0; 
-              $this->plantillas_correo_1 = array(); 
-              foreach ($this->plantillas_correo as $ind => $dados_plantillas_correo_1 ) 
-              {
-                  if ($dados_plantillas_correo_1 != "") 
-                  {
-                      $this->plantillas_correo_1[] = $dados_plantillas_correo_1;
-                  } 
-              } 
-              $this->plantillas_correo = ""; 
-              foreach ($this->plantillas_correo_1 as $dados_plantillas_correo_1 ) 
-              { 
-                   if ($x != 0)
-                   { 
-                       $this->plantillas_correo .= ";";
-                   } 
-                   $this->plantillas_correo .= $dados_plantillas_correo_1;
-                   $x++ ; 
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'plantillas_correo';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_plantillas_correo
-
-    function ValidateField_plantilla_pordefecto(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->plantilla_pordefecto) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto']) && !in_array($this->plantilla_pordefecto, $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['plantilla_pordefecto']))
-                   {
-                       $Campos_Erros['plantilla_pordefecto'] = array();
-                   }
-                   $Campos_Erros['plantilla_pordefecto'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['plantilla_pordefecto']) || !is_array($this->NM_ajax_info['errList']['plantilla_pordefecto']))
-                   {
-                       $this->NM_ajax_info['errList']['plantilla_pordefecto'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['plantilla_pordefecto'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'plantilla_pordefecto';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_plantilla_pordefecto
-
     function ValidateField_proveedor_anterior(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
+      if ($this->proveedor_anterior == "" && $this->nmgp_opcao != "excluir")
       { 
-          if (NM_utf8_strlen($this->proveedor_anterior) > 100) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "Proveedor Anterior " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['proveedor_anterior']))
-              {
-                  $Campos_Erros['proveedor_anterior'] = array();
-              }
-              $Campos_Erros['proveedor_anterior'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['proveedor_anterior']) || !is_array($this->NM_ajax_info['errList']['proveedor_anterior']))
-              {
-                  $this->NM_ajax_info['errList']['proveedor_anterior'] = array();
-              }
-              $this->NM_ajax_info['errList']['proveedor_anterior'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
@@ -2958,6 +2794,156 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_password_anterior
 
+    function ValidateField_envio_credenciales(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->envio_credenciales == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->envio_credenciales = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->envio_credenciales))
+          {
+              $x = 0; 
+              $this->envio_credenciales_1 = array(); 
+              foreach ($this->envio_credenciales as $ind => $dados_envio_credenciales_1 ) 
+              {
+                  if ($dados_envio_credenciales_1 != "") 
+                  {
+                      $this->envio_credenciales_1[] = $dados_envio_credenciales_1;
+                  } 
+              } 
+              $this->envio_credenciales = ""; 
+              foreach ($this->envio_credenciales_1 as $dados_envio_credenciales_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->envio_credenciales .= ";";
+                   } 
+                   $this->envio_credenciales .= $dados_envio_credenciales_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'envio_credenciales';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_envio_credenciales
+
+    function ValidateField_copia_factura_a(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (trim($this->copia_factura_a) != "")  
+          { 
+              if ($teste_validade->Email($this->copia_factura_a) == false)  
+              { 
+                  $hasError = true;
+                      $Campos_Crit .= "Enviar copia de factura electrónica a; " ; 
+                  if (!isset($Campos_Erros['copia_factura_a']))
+                  {
+                      $Campos_Erros['copia_factura_a'] = array();
+                  }
+                  $Campos_Erros['copia_factura_a'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                      if (!isset($this->NM_ajax_info['errList']['copia_factura_a']) || !is_array($this->NM_ajax_info['errList']['copia_factura_a']))
+                      {
+                          $this->NM_ajax_info['errList']['copia_factura_a'] = array();
+                      }
+                      $this->NM_ajax_info['errList']['copia_factura_a'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'copia_factura_a';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_copia_factura_a
+
+    function ValidateField_plantillas_correo(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->plantillas_correo == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->plantillas_correo = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->plantillas_correo))
+          {
+              $x = 0; 
+              $this->plantillas_correo_1 = array(); 
+              foreach ($this->plantillas_correo as $ind => $dados_plantillas_correo_1 ) 
+              {
+                  if ($dados_plantillas_correo_1 != "") 
+                  {
+                      $this->plantillas_correo_1[] = $dados_plantillas_correo_1;
+                  } 
+              } 
+              $this->plantillas_correo = ""; 
+              foreach ($this->plantillas_correo_1 as $dados_plantillas_correo_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->plantillas_correo .= ";";
+                   } 
+                   $this->plantillas_correo .= $dados_plantillas_correo_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'plantillas_correo';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_plantillas_correo
+
+    function ValidateField_plantilla_pordefecto(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->plantilla_pordefecto) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto']) && !in_array($this->plantilla_pordefecto, $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['plantilla_pordefecto']))
+                   {
+                       $Campos_Erros['plantilla_pordefecto'] = array();
+                   }
+                   $Campos_Erros['plantilla_pordefecto'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['plantilla_pordefecto']) || !is_array($this->NM_ajax_info['errList']['plantilla_pordefecto']))
+                   {
+                       $this->NM_ajax_info['errList']['plantilla_pordefecto'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['plantilla_pordefecto'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'plantilla_pordefecto';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_plantilla_pordefecto
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -2997,16 +2983,16 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     $this->nmgp_dados_form['password_prueba'] = $this->password_prueba;
     $this->nmgp_dados_form['enviar_dian'] = $this->enviar_dian;
     $this->nmgp_dados_form['enviar_cliente'] = $this->enviar_cliente;
-    $this->nmgp_dados_form['envio_credenciales'] = $this->envio_credenciales;
-    $this->nmgp_dados_form['copia_factura_a'] = $this->copia_factura_a;
-    $this->nmgp_dados_form['plantillas_correo'] = $this->plantillas_correo;
-    $this->nmgp_dados_form['plantilla_pordefecto'] = $this->plantilla_pordefecto;
     $this->nmgp_dados_form['proveedor_anterior'] = $this->proveedor_anterior;
     $this->nmgp_dados_form['servidor_anterior1'] = $this->servidor_anterior1;
     $this->nmgp_dados_form['servidor_anterior2'] = $this->servidor_anterior2;
     $this->nmgp_dados_form['servidor_anterior3'] = $this->servidor_anterior3;
     $this->nmgp_dados_form['token_anterior'] = $this->token_anterior;
     $this->nmgp_dados_form['password_anterior'] = $this->password_anterior;
+    $this->nmgp_dados_form['envio_credenciales'] = $this->envio_credenciales;
+    $this->nmgp_dados_form['copia_factura_a'] = $this->copia_factura_a;
+    $this->nmgp_dados_form['plantillas_correo'] = $this->plantillas_correo;
+    $this->nmgp_dados_form['plantilla_pordefecto'] = $this->plantilla_pordefecto;
     $this->nmgp_dados_form['idwebservicefe'] = $this->idwebservicefe;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['dados_form'] = $this->nmgp_dados_form;
    }
@@ -3490,16 +3476,16 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->ajax_return_values_password_prueba();
           $this->ajax_return_values_enviar_dian();
           $this->ajax_return_values_enviar_cliente();
-          $this->ajax_return_values_envio_credenciales();
-          $this->ajax_return_values_copia_factura_a();
-          $this->ajax_return_values_plantillas_correo();
-          $this->ajax_return_values_plantilla_pordefecto();
           $this->ajax_return_values_proveedor_anterior();
           $this->ajax_return_values_servidor_anterior1();
           $this->ajax_return_values_servidor_anterior2();
           $this->ajax_return_values_servidor_anterior3();
           $this->ajax_return_values_token_anterior();
           $this->ajax_return_values_password_anterior();
+          $this->ajax_return_values_envio_credenciales();
+          $this->ajax_return_values_copia_factura_a();
+          $this->ajax_return_values_plantillas_correo();
+          $this->ajax_return_values_plantilla_pordefecto();
           $this->ajax_return_values_idwebservicefe();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
@@ -3930,6 +3916,155 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_en
           }
    }
 
+          //----- proveedor_anterior
+   function ajax_return_values_proveedor_anterior($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("proveedor_anterior", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->proveedor_anterior);
+              $aLookup = array();
+              $this->_tmp_lookup_proveedor_anterior = $this->proveedor_anterior;
+
+$aLookup[] = array(form_webservicefe_mob_pack_protect_string('FACILWEB') => str_replace('<', '&lt;',form_webservicefe_mob_pack_protect_string("FACILWEB")));
+$aLookup[] = array(form_webservicefe_mob_pack_protect_string('DATAICO') => str_replace('<', '&lt;',form_webservicefe_mob_pack_protect_string("DATAICO")));
+$aLookup[] = array(form_webservicefe_mob_pack_protect_string('CADENA S. A.') => str_replace('<', '&lt;',form_webservicefe_mob_pack_protect_string("CADENA S. A.")));
+$aLookup[] = array(form_webservicefe_mob_pack_protect_string('THE FACTORY HKA') => str_replace('<', '&lt;',form_webservicefe_mob_pack_protect_string("THE FACTORY HKA")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_proveedor_anterior'][] = 'FACILWEB';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_proveedor_anterior'][] = 'DATAICO';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_proveedor_anterior'][] = 'CADENA S. A.';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_proveedor_anterior'][] = 'THE FACTORY HKA';
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"proveedor_anterior\"";
+          if (isset($this->NM_ajax_info['select_html']['proveedor_anterior']) && !empty($this->NM_ajax_info['select_html']['proveedor_anterior']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['proveedor_anterior']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->proveedor_anterior == $sValue)
+                  {
+                      $this->_tmp_lookup_proveedor_anterior = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['proveedor_anterior'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['proveedor_anterior']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['proveedor_anterior']['valList'][$i] = form_webservicefe_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['proveedor_anterior']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['proveedor_anterior']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['proveedor_anterior']['labList'] = $aLabel;
+          }
+   }
+
+          //----- servidor_anterior1
+   function ajax_return_values_servidor_anterior1($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior1", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior1);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['servidor_anterior1'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- servidor_anterior2
+   function ajax_return_values_servidor_anterior2($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior2", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior2);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['servidor_anterior2'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- servidor_anterior3
+   function ajax_return_values_servidor_anterior3($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior3", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior3);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['servidor_anterior3'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- token_anterior
+   function ajax_return_values_token_anterior($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("token_anterior", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->token_anterior);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['token_anterior'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- password_anterior
+   function ajax_return_values_password_anterior($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("password_anterior", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->password_anterior);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['password_anterior'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
           //----- envio_credenciales
    function ajax_return_values_envio_credenciales($bForce = false)
    {
@@ -4228,102 +4363,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_pl
           }
    }
 
-          //----- proveedor_anterior
-   function ajax_return_values_proveedor_anterior($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("proveedor_anterior", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->proveedor_anterior);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['proveedor_anterior'] = array(
-                       'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
-          //----- servidor_anterior1
-   function ajax_return_values_servidor_anterior1($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior1", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior1);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['servidor_anterior1'] = array(
-                       'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
-          //----- servidor_anterior2
-   function ajax_return_values_servidor_anterior2($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior2", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior2);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['servidor_anterior2'] = array(
-                       'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
-          //----- servidor_anterior3
-   function ajax_return_values_servidor_anterior3($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("servidor_anterior3", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->servidor_anterior3);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['servidor_anterior3'] = array(
-                       'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
-          //----- token_anterior
-   function ajax_return_values_token_anterior($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("token_anterior", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->token_anterior);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['token_anterior'] = array(
-                       'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
-          //----- password_anterior
-   function ajax_return_values_password_anterior($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("password_anterior", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->password_anterior);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['password_anterior'] = array(
-                       'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
           //----- idwebservicefe
    function ajax_return_values_idwebservicefe($bForce = false)
    {
@@ -4555,16 +4594,16 @@ $_SESSION['scriptcase']['form_webservicefe_mob']['contr_erro'] = 'off';
       $NM_val_form['password_prueba'] = $this->password_prueba;
       $NM_val_form['enviar_dian'] = $this->enviar_dian;
       $NM_val_form['enviar_cliente'] = $this->enviar_cliente;
-      $NM_val_form['envio_credenciales'] = $this->envio_credenciales;
-      $NM_val_form['copia_factura_a'] = $this->copia_factura_a;
-      $NM_val_form['plantillas_correo'] = $this->plantillas_correo;
-      $NM_val_form['plantilla_pordefecto'] = $this->plantilla_pordefecto;
       $NM_val_form['proveedor_anterior'] = $this->proveedor_anterior;
       $NM_val_form['servidor_anterior1'] = $this->servidor_anterior1;
       $NM_val_form['servidor_anterior2'] = $this->servidor_anterior2;
       $NM_val_form['servidor_anterior3'] = $this->servidor_anterior3;
       $NM_val_form['token_anterior'] = $this->token_anterior;
       $NM_val_form['password_anterior'] = $this->password_anterior;
+      $NM_val_form['envio_credenciales'] = $this->envio_credenciales;
+      $NM_val_form['copia_factura_a'] = $this->copia_factura_a;
+      $NM_val_form['plantillas_correo'] = $this->plantillas_correo;
+      $NM_val_form['plantilla_pordefecto'] = $this->plantilla_pordefecto;
       $NM_val_form['idwebservicefe'] = $this->idwebservicefe;
       if ($this->idwebservicefe === "" || is_null($this->idwebservicefe))  
       { 
@@ -4992,7 +5031,7 @@ $_SESSION['scriptcase']['form_webservicefe_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('proveedor', 'modo', 'servidor1', 'servidor2', 'servidor3', 'tokenempresa', 'tokenpassword', 'url_api_pdfs', 'url_api_sendmail', 'servidor_prueba1', 'servidor_prueba2', 'servidor_prueba3', 'token_prueba', 'password_prueba', 'enviar_dian', 'enviar_cliente', 'envio_credenciales', 'copia_factura_a', 'plantillas_correo', 'plantilla_pordefecto', 'proveedor_anterior', 'servidor_anterior1', 'servidor_anterior2', 'servidor_anterior3', 'token_anterior', 'password_anterior'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('proveedor', 'modo', 'servidor1', 'servidor2', 'servidor3', 'tokenempresa', 'tokenpassword', 'url_api_pdfs', 'url_api_sendmail', 'servidor_prueba1', 'servidor_prueba2', 'servidor_prueba3', 'token_prueba', 'password_prueba', 'enviar_dian', 'enviar_cliente', 'proveedor_anterior', 'servidor_anterior1', 'servidor_anterior2', 'servidor_anterior3', 'token_anterior', 'password_anterior', 'envio_credenciales', 'copia_factura_a', 'plantillas_correo', 'plantilla_pordefecto'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -6052,8 +6091,8 @@ $_SESSION['scriptcase']['form_webservicefe_mob']['contr_erro'] = 'off';
                 $this->Ini->nm_page_names = array(
                         'Pag1' => '0',
                         'Pag2' => '1',
-                        'Pag3' => '2',
-                        'Pag4' => '3',
+                        'Pag4' => '2',
+                        'Pag3' => '3',
                 );
 
                 $this->Ini->nm_page_blocks = array(
@@ -6063,10 +6102,10 @@ $_SESSION['scriptcase']['form_webservicefe_mob']['contr_erro'] = 'off';
                         'Pag2' => array(
                                 1 => 'on',
                         ),
-                        'Pag3' => array(
+                        'Pag4' => array(
                                 2 => 'on',
                         ),
-                        'Pag4' => array(
+                        'Pag3' => array(
                                 3 => 'on',
                         ),
                 );
@@ -6074,8 +6113,8 @@ $_SESSION['scriptcase']['form_webservicefe_mob']['contr_erro'] = 'off';
                 $this->Ini->nm_block_page = array(
                         0 => 'Pag1',
                         1 => 'Pag2',
-                        2 => 'Pag3',
-                        3 => 'Pag4',
+                        2 => 'Pag4',
+                        3 => 'Pag3',
                 );
 
                 if (!empty($this->Ini->nm_hidden_blocos)) {
@@ -6510,6 +6549,17 @@ function sc_file_size($file, $format = false)
    {
        $nmgp_def_dados  = "";
        $nmgp_def_dados .= "SI?#?1?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_proveedor_anterior()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "FACILWEB?#?FACILWEB?#??@?";
+       $nmgp_def_dados .= "DATAICO?#?DATAICO?#??@?";
+       $nmgp_def_dados .= "CADENA S. A.?#?CADENA S. A.?#??@?";
+       $nmgp_def_dados .= "THE FACTORY HKA?#?THE FACTORY HKA?#??@?";
        $todo = explode("?@?", $nmgp_def_dados);
        return $todo;
 

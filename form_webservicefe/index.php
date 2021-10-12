@@ -293,8 +293,8 @@ class form_webservicefe_ini
       $this->nm_dt_criacao   = "20181028"; 
       $this->nm_hr_criacao   = "103008"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210924"; 
-      $this->nm_hr_ult_alt   = "180540"; 
+      $this->nm_dt_ult_alt   = "20211012"; 
+      $this->nm_hr_ult_alt   = "154952"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -951,7 +951,7 @@ class form_webservicefe_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOH9X7DSvCV5BqDMrYDkBsDWF/HIFGHQJmH9FaD1rwHQBiDMvCZSXeV5XCZuBqD9JKDQFGHIrKVWBODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEBUHEB7ZuXGHQFYDQFaD1veHQBODMNOVcXKDWFaHIraDcJUZ1B/HIBeV5X7HgrKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWF/VoraD9XOZSB/Z1rYD5BiDEvsZSXeDWFqDorqD9NwZSX7HABYV5BOHuBYVIBOHEFYVoBqDcJUZ1B/HANOV5FaHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoF7DcBiDQBqHIrwVWBODMvOVcBODuFGVoF7DcFYH9BqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5BOHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcB/DWF/HMJwHQXOZ1BODSvOZMBOHgrKVkJGHEXCDoF7HQNmZSFGD1veHuFUDMNOVIBODur/DoNUDcFYH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsH9FGHIrKHuXGDMvmVcBOV5X7HMrqHQXGZ1FaHAN7V5JeDEBeDkXKDWFqHIF7HQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKD5XGHgrKVkJ3V5FqHMJwHQBiDQJwHIrwD5XGHgrKVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoB/D9NwH9X7Z1BYV5raHuBYDkBODWFYVoBOD9XOH9B/HArYD5XGDEvsVkXeHEFqDoF7DcBwDQX7HAN7D5JwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVEF7D9XGZkBiHArKZMBqHgNKVkJGH5FYDoJsHQFYDQFaHINaV5JeHgvsDkB/HEF/DoXGHQNwZSFaHArKV5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWFGDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoFUHQNwZ1B/DSNOHQJeHgveHEBUDWXCHIJwD9JKZ9F7HAN7VWJwDMNOVcFKDuX7DoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1792,26 +1792,6 @@ ob_start();
             $enviar_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
-        if ('ajax_form_webservicefe_validate_envio_credenciales' == $_POST['rs'])
-        {
-            $envio_credenciales = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_webservicefe_validate_copia_factura_a' == $_POST['rs'])
-        {
-            $copia_factura_a = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_webservicefe_validate_plantillas_correo' == $_POST['rs'])
-        {
-            $plantillas_correo = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_form_webservicefe_validate_plantilla_pordefecto' == $_POST['rs'])
-        {
-            $plantilla_pordefecto = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
         if ('ajax_form_webservicefe_validate_proveedor_anterior' == $_POST['rs'])
         {
             $proveedor_anterior = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1840,6 +1820,26 @@ ob_start();
         if ('ajax_form_webservicefe_validate_password_anterior' == $_POST['rs'])
         {
             $password_anterior = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_webservicefe_validate_envio_credenciales' == $_POST['rs'])
+        {
+            $envio_credenciales = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_webservicefe_validate_copia_factura_a' == $_POST['rs'])
+        {
+            $copia_factura_a = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_webservicefe_validate_plantillas_correo' == $_POST['rs'])
+        {
+            $plantillas_correo = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_webservicefe_validate_plantilla_pordefecto' == $_POST['rs'])
+        {
+            $plantilla_pordefecto = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_form_webservicefe_event_proveedor_onchange' == $_POST['rs'])
@@ -1877,16 +1877,16 @@ ob_start();
             $password_prueba = NM_utf8_urldecode($_POST['rsargs'][13]);
             $enviar_dian = NM_utf8_urldecode($_POST['rsargs'][14]);
             $enviar_cliente = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $envio_credenciales = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $copia_factura_a = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $plantillas_correo = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $plantilla_pordefecto = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $proveedor_anterior = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $servidor_anterior1 = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $servidor_anterior2 = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $servidor_anterior3 = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $token_anterior = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $password_anterior = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $proveedor_anterior = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $servidor_anterior1 = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $servidor_anterior2 = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $servidor_anterior3 = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $token_anterior = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $password_anterior = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $envio_credenciales = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $copia_factura_a = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $plantillas_correo = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $plantilla_pordefecto = NM_utf8_urldecode($_POST['rsargs'][25]);
             $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][26]);
             $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][27]);
             $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][28]);
@@ -2355,6 +2355,7 @@ ob_start();
     $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['select_html']['modo'] = "class=\"sc-js-input scFormObjectOdd css_modo_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_modo\" name=\"modo\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
     $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['select_html']['enviar_dian'] = " onClick=\"\" ";
     $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['select_html']['enviar_cliente'] = " onClick=\"\" ";
+    $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['select_html']['proveedor_anterior'] = "class=\"sc-js-input scFormObjectOdd css_proveedor_anterior_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_proveedor_anterior\" name=\"proveedor_anterior\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
     $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['select_html']['envio_credenciales'] = " onClick=\"\" ";
     $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['select_html']['plantillas_correo'] = " onClick=\"\" ";
     $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['select_html']['plantilla_pordefecto'] = "class=\"sc-js-input scFormObjectOdd css_plantilla_pordefecto_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_plantilla_pordefecto\" name=\"plantilla_pordefecto\" size=\"1\" alt=\"{type: 'select', enterTab: false}\"";
@@ -2387,16 +2388,16 @@ ob_start();
     sajax_export("ajax_form_webservicefe_validate_password_prueba");
     sajax_export("ajax_form_webservicefe_validate_enviar_dian");
     sajax_export("ajax_form_webservicefe_validate_enviar_cliente");
-    sajax_export("ajax_form_webservicefe_validate_envio_credenciales");
-    sajax_export("ajax_form_webservicefe_validate_copia_factura_a");
-    sajax_export("ajax_form_webservicefe_validate_plantillas_correo");
-    sajax_export("ajax_form_webservicefe_validate_plantilla_pordefecto");
     sajax_export("ajax_form_webservicefe_validate_proveedor_anterior");
     sajax_export("ajax_form_webservicefe_validate_servidor_anterior1");
     sajax_export("ajax_form_webservicefe_validate_servidor_anterior2");
     sajax_export("ajax_form_webservicefe_validate_servidor_anterior3");
     sajax_export("ajax_form_webservicefe_validate_token_anterior");
     sajax_export("ajax_form_webservicefe_validate_password_anterior");
+    sajax_export("ajax_form_webservicefe_validate_envio_credenciales");
+    sajax_export("ajax_form_webservicefe_validate_copia_factura_a");
+    sajax_export("ajax_form_webservicefe_validate_plantillas_correo");
+    sajax_export("ajax_form_webservicefe_validate_plantilla_pordefecto");
     sajax_export("ajax_form_webservicefe_event_proveedor_onchange");
     sajax_export("ajax_form_webservicefe_submit_form");
     sajax_export("ajax_form_webservicefe_navigate_form");
@@ -2728,82 +2729,6 @@ ob_start();
         exit;
     } // ajax_validate_enviar_cliente
 
-    function ajax_form_webservicefe_validate_envio_credenciales($envio_credenciales, $script_case_init)
-    {
-        global $inicial_form_webservicefe;
-        //register_shutdown_function("form_webservicefe_pack_ajax_response");
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_flag          = true;
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_opcao         = 'validate_envio_credenciales';
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param'] = array(
-                  'envio_credenciales' => NM_utf8_urldecode($envio_credenciales),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_webservicefe->contr_form_webservicefe->controle();
-        exit;
-    } // ajax_validate_envio_credenciales
-
-    function ajax_form_webservicefe_validate_copia_factura_a($copia_factura_a, $script_case_init)
-    {
-        global $inicial_form_webservicefe;
-        //register_shutdown_function("form_webservicefe_pack_ajax_response");
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_flag          = true;
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_opcao         = 'validate_copia_factura_a';
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param'] = array(
-                  'copia_factura_a' => NM_utf8_urldecode($copia_factura_a),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_webservicefe->contr_form_webservicefe->controle();
-        exit;
-    } // ajax_validate_copia_factura_a
-
-    function ajax_form_webservicefe_validate_plantillas_correo($plantillas_correo, $script_case_init)
-    {
-        global $inicial_form_webservicefe;
-        //register_shutdown_function("form_webservicefe_pack_ajax_response");
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_flag          = true;
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_opcao         = 'validate_plantillas_correo';
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param'] = array(
-                  'plantillas_correo' => NM_utf8_urldecode($plantillas_correo),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_webservicefe->contr_form_webservicefe->controle();
-        exit;
-    } // ajax_validate_plantillas_correo
-
-    function ajax_form_webservicefe_validate_plantilla_pordefecto($plantilla_pordefecto, $script_case_init)
-    {
-        global $inicial_form_webservicefe;
-        //register_shutdown_function("form_webservicefe_pack_ajax_response");
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_flag          = true;
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_opcao         = 'validate_plantilla_pordefecto';
-        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param'] = array(
-                  'plantilla_pordefecto' => NM_utf8_urldecode($plantilla_pordefecto),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_webservicefe->contr_form_webservicefe->controle();
-        exit;
-    } // ajax_validate_plantilla_pordefecto
-
     function ajax_form_webservicefe_validate_proveedor_anterior($proveedor_anterior, $script_case_init)
     {
         global $inicial_form_webservicefe;
@@ -2918,6 +2843,82 @@ ob_start();
         exit;
     } // ajax_validate_password_anterior
 
+    function ajax_form_webservicefe_validate_envio_credenciales($envio_credenciales, $script_case_init)
+    {
+        global $inicial_form_webservicefe;
+        //register_shutdown_function("form_webservicefe_pack_ajax_response");
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_flag          = true;
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_opcao         = 'validate_envio_credenciales';
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param'] = array(
+                  'envio_credenciales' => NM_utf8_urldecode($envio_credenciales),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_webservicefe->contr_form_webservicefe->controle();
+        exit;
+    } // ajax_validate_envio_credenciales
+
+    function ajax_form_webservicefe_validate_copia_factura_a($copia_factura_a, $script_case_init)
+    {
+        global $inicial_form_webservicefe;
+        //register_shutdown_function("form_webservicefe_pack_ajax_response");
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_flag          = true;
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_opcao         = 'validate_copia_factura_a';
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param'] = array(
+                  'copia_factura_a' => NM_utf8_urldecode($copia_factura_a),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_webservicefe->contr_form_webservicefe->controle();
+        exit;
+    } // ajax_validate_copia_factura_a
+
+    function ajax_form_webservicefe_validate_plantillas_correo($plantillas_correo, $script_case_init)
+    {
+        global $inicial_form_webservicefe;
+        //register_shutdown_function("form_webservicefe_pack_ajax_response");
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_flag          = true;
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_opcao         = 'validate_plantillas_correo';
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param'] = array(
+                  'plantillas_correo' => NM_utf8_urldecode($plantillas_correo),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_webservicefe->contr_form_webservicefe->controle();
+        exit;
+    } // ajax_validate_plantillas_correo
+
+    function ajax_form_webservicefe_validate_plantilla_pordefecto($plantilla_pordefecto, $script_case_init)
+    {
+        global $inicial_form_webservicefe;
+        //register_shutdown_function("form_webservicefe_pack_ajax_response");
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_flag          = true;
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_opcao         = 'validate_plantilla_pordefecto';
+        $inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param'] = array(
+                  'plantilla_pordefecto' => NM_utf8_urldecode($plantilla_pordefecto),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_webservicefe->contr_form_webservicefe->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_webservicefe->contr_form_webservicefe->controle();
+        exit;
+    } // ajax_validate_plantilla_pordefecto
+
     function ajax_form_webservicefe_event_proveedor_onchange($proveedor, $servidor1, $servidor2, $servidor3, $tokenempresa, $tokenpassword, $servidor_prueba1, $servidor_prueba2, $servidor_prueba3, $token_prueba, $password_prueba, $url_api_pdfs, $url_api_sendmail, $script_case_init)
     {
         global $inicial_form_webservicefe;
@@ -2949,7 +2950,7 @@ ob_start();
         exit;
     } // ajax_event_proveedor_onchange
 
-    function ajax_form_webservicefe_submit_form($proveedor, $modo, $servidor1, $servidor2, $servidor3, $tokenempresa, $tokenpassword, $url_api_pdfs, $url_api_sendmail, $servidor_prueba1, $servidor_prueba2, $servidor_prueba3, $token_prueba, $password_prueba, $enviar_dian, $enviar_cliente, $envio_credenciales, $copia_factura_a, $plantillas_correo, $plantilla_pordefecto, $proveedor_anterior, $servidor_anterior1, $servidor_anterior2, $servidor_anterior3, $token_anterior, $password_anterior, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_webservicefe_submit_form($proveedor, $modo, $servidor1, $servidor2, $servidor3, $tokenempresa, $tokenpassword, $url_api_pdfs, $url_api_sendmail, $servidor_prueba1, $servidor_prueba2, $servidor_prueba3, $token_prueba, $password_prueba, $enviar_dian, $enviar_cliente, $proveedor_anterior, $servidor_anterior1, $servidor_anterior2, $servidor_anterior3, $token_anterior, $password_anterior, $envio_credenciales, $copia_factura_a, $plantillas_correo, $plantilla_pordefecto, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_webservicefe;
         //register_shutdown_function("form_webservicefe_pack_ajax_response");
@@ -2972,16 +2973,16 @@ ob_start();
                   'password_prueba' => NM_utf8_urldecode($password_prueba),
                   'enviar_dian' => NM_utf8_urldecode($enviar_dian),
                   'enviar_cliente' => NM_utf8_urldecode($enviar_cliente),
-                  'envio_credenciales' => NM_utf8_urldecode($envio_credenciales),
-                  'copia_factura_a' => NM_utf8_urldecode($copia_factura_a),
-                  'plantillas_correo' => NM_utf8_urldecode($plantillas_correo),
-                  'plantilla_pordefecto' => NM_utf8_urldecode($plantilla_pordefecto),
                   'proveedor_anterior' => NM_utf8_urldecode($proveedor_anterior),
                   'servidor_anterior1' => NM_utf8_urldecode($servidor_anterior1),
                   'servidor_anterior2' => NM_utf8_urldecode($servidor_anterior2),
                   'servidor_anterior3' => NM_utf8_urldecode($servidor_anterior3),
                   'token_anterior' => NM_utf8_urldecode($token_anterior),
                   'password_anterior' => NM_utf8_urldecode($password_anterior),
+                  'envio_credenciales' => NM_utf8_urldecode($envio_credenciales),
+                  'copia_factura_a' => NM_utf8_urldecode($copia_factura_a),
+                  'plantillas_correo' => NM_utf8_urldecode($plantillas_correo),
+                  'plantilla_pordefecto' => NM_utf8_urldecode($plantilla_pordefecto),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),

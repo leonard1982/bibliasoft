@@ -3436,159 +3436,11 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_webservicefe_mob_validate_enviar_cliente_cb
 
-  // ---------- Validate envio_credenciales
-  function do_ajax_form_webservicefe_mob_validate_envio_credenciales()
-  {
-    var nomeCampo_envio_credenciales = "envio_credenciales";
-    var var_envio_credenciales = scAjaxGetFieldCheckbox(nomeCampo_envio_credenciales, ";");
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_webservicefe_mob_validate_envio_credenciales(var_envio_credenciales, var_script_case_init, do_ajax_form_webservicefe_mob_validate_envio_credenciales_cb);
-  } // do_ajax_form_webservicefe_mob_validate_envio_credenciales
-
-  function do_ajax_form_webservicefe_mob_validate_envio_credenciales_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "envio_credenciales";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_webservicefe_mob_validate_envio_credenciales_cb
-
-  // ---------- Validate copia_factura_a
-  function do_ajax_form_webservicefe_mob_validate_copia_factura_a()
-  {
-    var nomeCampo_copia_factura_a = "copia_factura_a";
-    var var_copia_factura_a = scAjaxGetFieldText(nomeCampo_copia_factura_a);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_webservicefe_mob_validate_copia_factura_a(var_copia_factura_a, var_script_case_init, do_ajax_form_webservicefe_mob_validate_copia_factura_a_cb);
-  } // do_ajax_form_webservicefe_mob_validate_copia_factura_a
-
-  function do_ajax_form_webservicefe_mob_validate_copia_factura_a_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "copia_factura_a";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_webservicefe_mob_validate_copia_factura_a_cb
-
-  // ---------- Validate plantillas_correo
-  function do_ajax_form_webservicefe_mob_validate_plantillas_correo()
-  {
-    var nomeCampo_plantillas_correo = "plantillas_correo";
-    var var_plantillas_correo = scAjaxGetFieldCheckbox(nomeCampo_plantillas_correo, ";");
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_webservicefe_mob_validate_plantillas_correo(var_plantillas_correo, var_script_case_init, do_ajax_form_webservicefe_mob_validate_plantillas_correo_cb);
-  } // do_ajax_form_webservicefe_mob_validate_plantillas_correo
-
-  function do_ajax_form_webservicefe_mob_validate_plantillas_correo_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "plantillas_correo";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_webservicefe_mob_validate_plantillas_correo_cb
-
-  // ---------- Validate plantilla_pordefecto
-  function do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto()
-  {
-    var nomeCampo_plantilla_pordefecto = "plantilla_pordefecto";
-    var var_plantilla_pordefecto = scAjaxGetFieldSelect(nomeCampo_plantilla_pordefecto);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_webservicefe_mob_validate_plantilla_pordefecto(var_plantilla_pordefecto, var_script_case_init, do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto_cb);
-  } // do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto
-
-  function do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "plantilla_pordefecto";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto_cb
-
   // ---------- Validate proveedor_anterior
   function do_ajax_form_webservicefe_mob_validate_proveedor_anterior()
   {
     var nomeCampo_proveedor_anterior = "proveedor_anterior";
-    var var_proveedor_anterior = scAjaxGetFieldText(nomeCampo_proveedor_anterior);
+    var var_proveedor_anterior = scAjaxGetFieldSelect(nomeCampo_proveedor_anterior);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_webservicefe_mob_validate_proveedor_anterior(var_proveedor_anterior, var_script_case_init, do_ajax_form_webservicefe_mob_validate_proveedor_anterior_cb);
   } // do_ajax_form_webservicefe_mob_validate_proveedor_anterior
@@ -3805,6 +3657,154 @@ sajax_show_javascript();
     scAjaxSetMaster();
     scAjaxSetFocus();
   } // do_ajax_form_webservicefe_mob_validate_password_anterior_cb
+
+  // ---------- Validate envio_credenciales
+  function do_ajax_form_webservicefe_mob_validate_envio_credenciales()
+  {
+    var nomeCampo_envio_credenciales = "envio_credenciales";
+    var var_envio_credenciales = scAjaxGetFieldCheckbox(nomeCampo_envio_credenciales, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_webservicefe_mob_validate_envio_credenciales(var_envio_credenciales, var_script_case_init, do_ajax_form_webservicefe_mob_validate_envio_credenciales_cb);
+  } // do_ajax_form_webservicefe_mob_validate_envio_credenciales
+
+  function do_ajax_form_webservicefe_mob_validate_envio_credenciales_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "envio_credenciales";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_webservicefe_mob_validate_envio_credenciales_cb
+
+  // ---------- Validate copia_factura_a
+  function do_ajax_form_webservicefe_mob_validate_copia_factura_a()
+  {
+    var nomeCampo_copia_factura_a = "copia_factura_a";
+    var var_copia_factura_a = scAjaxGetFieldText(nomeCampo_copia_factura_a);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_webservicefe_mob_validate_copia_factura_a(var_copia_factura_a, var_script_case_init, do_ajax_form_webservicefe_mob_validate_copia_factura_a_cb);
+  } // do_ajax_form_webservicefe_mob_validate_copia_factura_a
+
+  function do_ajax_form_webservicefe_mob_validate_copia_factura_a_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "copia_factura_a";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_webservicefe_mob_validate_copia_factura_a_cb
+
+  // ---------- Validate plantillas_correo
+  function do_ajax_form_webservicefe_mob_validate_plantillas_correo()
+  {
+    var nomeCampo_plantillas_correo = "plantillas_correo";
+    var var_plantillas_correo = scAjaxGetFieldCheckbox(nomeCampo_plantillas_correo, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_webservicefe_mob_validate_plantillas_correo(var_plantillas_correo, var_script_case_init, do_ajax_form_webservicefe_mob_validate_plantillas_correo_cb);
+  } // do_ajax_form_webservicefe_mob_validate_plantillas_correo
+
+  function do_ajax_form_webservicefe_mob_validate_plantillas_correo_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "plantillas_correo";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_webservicefe_mob_validate_plantillas_correo_cb
+
+  // ---------- Validate plantilla_pordefecto
+  function do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto()
+  {
+    var nomeCampo_plantilla_pordefecto = "plantilla_pordefecto";
+    var var_plantilla_pordefecto = scAjaxGetFieldSelect(nomeCampo_plantilla_pordefecto);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_webservicefe_mob_validate_plantilla_pordefecto(var_plantilla_pordefecto, var_script_case_init, do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto_cb);
+  } // do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto
+
+  function do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "plantilla_pordefecto";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_webservicefe_mob_validate_plantilla_pordefecto_cb
 
   // ---------- Event onchange proveedor
   function do_ajax_form_webservicefe_mob_event_proveedor_onchange()
@@ -4172,16 +4172,16 @@ function scJs_sweetalert_params(params) {
     var var_password_prueba = scAjaxGetFieldText("password_prueba");
     var var_enviar_dian = scAjaxGetFieldCheckbox("enviar_dian", ";");
     var var_enviar_cliente = scAjaxGetFieldCheckbox("enviar_cliente", ";");
-    var var_envio_credenciales = scAjaxGetFieldCheckbox("envio_credenciales", ";");
-    var var_copia_factura_a = scAjaxGetFieldText("copia_factura_a");
-    var var_plantillas_correo = scAjaxGetFieldCheckbox("plantillas_correo", ";");
-    var var_plantilla_pordefecto = scAjaxGetFieldSelect("plantilla_pordefecto");
-    var var_proveedor_anterior = scAjaxGetFieldText("proveedor_anterior");
+    var var_proveedor_anterior = scAjaxGetFieldSelect("proveedor_anterior");
     var var_servidor_anterior1 = scAjaxGetFieldText("servidor_anterior1");
     var var_servidor_anterior2 = scAjaxGetFieldText("servidor_anterior2");
     var var_servidor_anterior3 = scAjaxGetFieldText("servidor_anterior3");
     var var_token_anterior = scAjaxGetFieldText("token_anterior");
     var var_password_anterior = scAjaxGetFieldText("password_anterior");
+    var var_envio_credenciales = scAjaxGetFieldCheckbox("envio_credenciales", ";");
+    var var_copia_factura_a = scAjaxGetFieldText("copia_factura_a");
+    var var_plantillas_correo = scAjaxGetFieldCheckbox("plantillas_correo", ";");
+    var var_plantilla_pordefecto = scAjaxGetFieldSelect("plantilla_pordefecto");
     var var_idwebservicefe = scAjaxGetFieldText("idwebservicefe");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
@@ -4192,7 +4192,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_webservicefe_mob_submit_form(var_proveedor, var_modo, var_servidor1, var_servidor2, var_servidor3, var_tokenempresa, var_tokenpassword, var_url_api_pdfs, var_url_api_sendmail, var_servidor_prueba1, var_servidor_prueba2, var_servidor_prueba3, var_token_prueba, var_password_prueba, var_enviar_dian, var_enviar_cliente, var_envio_credenciales, var_copia_factura_a, var_plantillas_correo, var_plantilla_pordefecto, var_proveedor_anterior, var_servidor_anterior1, var_servidor_anterior2, var_servidor_anterior3, var_token_anterior, var_password_anterior, var_idwebservicefe, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_webservicefe_mob_submit_form_cb);
+    x_ajax_form_webservicefe_mob_submit_form(var_proveedor, var_modo, var_servidor1, var_servidor2, var_servidor3, var_tokenempresa, var_tokenpassword, var_url_api_pdfs, var_url_api_sendmail, var_servidor_prueba1, var_servidor_prueba2, var_servidor_prueba3, var_token_prueba, var_password_prueba, var_enviar_dian, var_enviar_cliente, var_proveedor_anterior, var_servidor_anterior1, var_servidor_anterior2, var_servidor_anterior3, var_token_anterior, var_password_anterior, var_envio_credenciales, var_copia_factura_a, var_plantillas_correo, var_plantilla_pordefecto, var_idwebservicefe, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_webservicefe_mob_submit_form_cb);
   } // do_ajax_form_webservicefe_mob_submit_form
 
   function do_ajax_form_webservicefe_mob_submit_form_cb(sResp)
@@ -4233,16 +4233,16 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("password_prueba");
       scAjaxHideErrorDisplay("enviar_dian");
       scAjaxHideErrorDisplay("enviar_cliente");
-      scAjaxHideErrorDisplay("envio_credenciales");
-      scAjaxHideErrorDisplay("copia_factura_a");
-      scAjaxHideErrorDisplay("plantillas_correo");
-      scAjaxHideErrorDisplay("plantilla_pordefecto");
       scAjaxHideErrorDisplay("proveedor_anterior");
       scAjaxHideErrorDisplay("servidor_anterior1");
       scAjaxHideErrorDisplay("servidor_anterior2");
       scAjaxHideErrorDisplay("servidor_anterior3");
       scAjaxHideErrorDisplay("token_anterior");
       scAjaxHideErrorDisplay("password_anterior");
+      scAjaxHideErrorDisplay("envio_credenciales");
+      scAjaxHideErrorDisplay("copia_factura_a");
+      scAjaxHideErrorDisplay("plantillas_correo");
+      scAjaxHideErrorDisplay("plantilla_pordefecto");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['dashboard_info']['under_dashboard']) {
@@ -4315,16 +4315,16 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob'][
     scAjaxHideErrorDisplay("password_prueba");
     scAjaxHideErrorDisplay("enviar_dian");
     scAjaxHideErrorDisplay("enviar_cliente");
-    scAjaxHideErrorDisplay("envio_credenciales");
-    scAjaxHideErrorDisplay("copia_factura_a");
-    scAjaxHideErrorDisplay("plantillas_correo");
-    scAjaxHideErrorDisplay("plantilla_pordefecto");
     scAjaxHideErrorDisplay("proveedor_anterior");
     scAjaxHideErrorDisplay("servidor_anterior1");
     scAjaxHideErrorDisplay("servidor_anterior2");
     scAjaxHideErrorDisplay("servidor_anterior3");
     scAjaxHideErrorDisplay("token_anterior");
     scAjaxHideErrorDisplay("password_anterior");
+    scAjaxHideErrorDisplay("envio_credenciales");
+    scAjaxHideErrorDisplay("copia_factura_a");
+    scAjaxHideErrorDisplay("plantillas_correo");
+    scAjaxHideErrorDisplay("plantilla_pordefecto");
     var var_idwebservicefe = document.F2.idwebservicefe.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -4425,16 +4425,16 @@ if ($this->Embutida_form)
   ajax_field_list[13] = "password_prueba";
   ajax_field_list[14] = "enviar_dian";
   ajax_field_list[15] = "enviar_cliente";
-  ajax_field_list[16] = "envio_credenciales";
-  ajax_field_list[17] = "copia_factura_a";
-  ajax_field_list[18] = "plantillas_correo";
-  ajax_field_list[19] = "plantilla_pordefecto";
-  ajax_field_list[20] = "proveedor_anterior";
-  ajax_field_list[21] = "servidor_anterior1";
-  ajax_field_list[22] = "servidor_anterior2";
-  ajax_field_list[23] = "servidor_anterior3";
-  ajax_field_list[24] = "token_anterior";
-  ajax_field_list[25] = "password_anterior";
+  ajax_field_list[16] = "proveedor_anterior";
+  ajax_field_list[17] = "servidor_anterior1";
+  ajax_field_list[18] = "servidor_anterior2";
+  ajax_field_list[19] = "servidor_anterior3";
+  ajax_field_list[20] = "token_anterior";
+  ajax_field_list[21] = "password_anterior";
+  ajax_field_list[22] = "envio_credenciales";
+  ajax_field_list[23] = "copia_factura_a";
+  ajax_field_list[24] = "plantillas_correo";
+  ajax_field_list[25] = "plantilla_pordefecto";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -4459,16 +4459,16 @@ if ($this->Embutida_form)
     "password_prueba": {"label": "Password Prueba", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "enviar_dian": {"label": "Enviar Dian", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "enviar_cliente": {"label": "Enviar Cliente", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "envio_credenciales": {"label": "Envío Credenciales", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "copia_factura_a": {"label": "Enviar copia de factura electrónica a", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "plantillas_correo": {"label": "Activar el uso de plantillas de correo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "plantilla_pordefecto": {"label": "Plantilla Por Defecto", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "proveedor_anterior": {"label": "Proveedor Anterior", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "servidor_anterior1": {"label": "Servidor Anterior 1", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "servidor_anterior2": {"label": "Servidor Anterior 2", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "servidor_anterior3": {"label": "Servidor Anterior 3", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "token_anterior": {"label": "Token Anterior", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "password_anterior": {"label": "Password Anterior", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "password_anterior": {"label": "Password Anterior", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "envio_credenciales": {"label": "Envío Credenciales", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "copia_factura_a": {"label": "Enviar copia de factura electrónica a", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "plantillas_correo": {"label": "Activar el uso de plantillas de correo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "plantilla_pordefecto": {"label": "Plantilla Por Defecto", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -4503,16 +4503,16 @@ if ($this->Embutida_form)
     "password_prueba": new Array(),
     "enviar_dian": new Array(),
     "enviar_cliente": new Array(),
-    "envio_credenciales": new Array(),
-    "copia_factura_a": new Array(),
-    "plantillas_correo": new Array(),
-    "plantilla_pordefecto": new Array(),
     "proveedor_anterior": new Array(),
     "servidor_anterior1": new Array(),
     "servidor_anterior2": new Array(),
     "servidor_anterior3": new Array(),
     "token_anterior": new Array(),
-    "password_anterior": new Array()
+    "password_anterior": new Array(),
+    "envio_credenciales": new Array(),
+    "copia_factura_a": new Array(),
+    "plantillas_correo": new Array(),
+    "plantilla_pordefecto": new Array()
   };
   ajax_field_mult["proveedor"][1] = "proveedor";
   ajax_field_mult["modo"][1] = "modo";
@@ -4530,16 +4530,16 @@ if ($this->Embutida_form)
   ajax_field_mult["password_prueba"][1] = "password_prueba";
   ajax_field_mult["enviar_dian"][1] = "enviar_dian";
   ajax_field_mult["enviar_cliente"][1] = "enviar_cliente";
-  ajax_field_mult["envio_credenciales"][1] = "envio_credenciales";
-  ajax_field_mult["copia_factura_a"][1] = "copia_factura_a";
-  ajax_field_mult["plantillas_correo"][1] = "plantillas_correo";
-  ajax_field_mult["plantilla_pordefecto"][1] = "plantilla_pordefecto";
   ajax_field_mult["proveedor_anterior"][1] = "proveedor_anterior";
   ajax_field_mult["servidor_anterior1"][1] = "servidor_anterior1";
   ajax_field_mult["servidor_anterior2"][1] = "servidor_anterior2";
   ajax_field_mult["servidor_anterior3"][1] = "servidor_anterior3";
   ajax_field_mult["token_anterior"][1] = "token_anterior";
   ajax_field_mult["password_anterior"][1] = "password_anterior";
+  ajax_field_mult["envio_credenciales"][1] = "envio_credenciales";
+  ajax_field_mult["copia_factura_a"][1] = "copia_factura_a";
+  ajax_field_mult["plantillas_correo"][1] = "plantillas_correo";
+  ajax_field_mult["plantilla_pordefecto"][1] = "plantilla_pordefecto";
 
   var ajax_field_id = {
     "proveedor": new Array("hidden_field_label_proveedor", "hidden_field_data_proveedor"),
@@ -4558,16 +4558,16 @@ if ($this->Embutida_form)
     "password_prueba": new Array("hidden_field_label_password_prueba", "hidden_field_data_password_prueba"),
     "enviar_dian": new Array("hidden_field_label_enviar_dian", "hidden_field_data_enviar_dian"),
     "enviar_cliente": new Array("hidden_field_label_enviar_cliente", "hidden_field_data_enviar_cliente"),
-    "envio_credenciales": new Array("hidden_field_label_envio_credenciales", "hidden_field_data_envio_credenciales"),
-    "copia_factura_a": new Array("hidden_field_label_copia_factura_a", "hidden_field_data_copia_factura_a"),
-    "plantillas_correo": new Array("hidden_field_label_plantillas_correo", "hidden_field_data_plantillas_correo"),
-    "plantilla_pordefecto": new Array("hidden_field_label_plantilla_pordefecto", "hidden_field_data_plantilla_pordefecto"),
     "proveedor_anterior": new Array("hidden_field_label_proveedor_anterior", "hidden_field_data_proveedor_anterior"),
     "servidor_anterior1": new Array("hidden_field_label_servidor_anterior1", "hidden_field_data_servidor_anterior1"),
     "servidor_anterior2": new Array("hidden_field_label_servidor_anterior2", "hidden_field_data_servidor_anterior2"),
     "servidor_anterior3": new Array("hidden_field_label_servidor_anterior3", "hidden_field_data_servidor_anterior3"),
     "token_anterior": new Array("hidden_field_label_token_anterior", "hidden_field_data_token_anterior"),
-    "password_anterior": new Array("hidden_field_label_password_anterior", "hidden_field_data_password_anterior")
+    "password_anterior": new Array("hidden_field_label_password_anterior", "hidden_field_data_password_anterior"),
+    "envio_credenciales": new Array("hidden_field_label_envio_credenciales", "hidden_field_data_envio_credenciales"),
+    "copia_factura_a": new Array("hidden_field_label_copia_factura_a", "hidden_field_data_copia_factura_a"),
+    "plantillas_correo": new Array("hidden_field_label_plantillas_correo", "hidden_field_data_plantillas_correo"),
+    "plantilla_pordefecto": new Array("hidden_field_label_plantilla_pordefecto", "hidden_field_data_plantilla_pordefecto")
   };
 
   var ajax_read_only = {
@@ -4587,16 +4587,16 @@ if ($this->Embutida_form)
     "password_prueba": "off",
     "enviar_dian": "off",
     "enviar_cliente": "off",
-    "envio_credenciales": "off",
-    "copia_factura_a": "off",
-    "plantillas_correo": "off",
-    "plantilla_pordefecto": "off",
     "proveedor_anterior": "off",
     "servidor_anterior1": "off",
     "servidor_anterior2": "off",
     "servidor_anterior3": "off",
     "token_anterior": "off",
-    "password_anterior": "off"
+    "password_anterior": "off",
+    "envio_credenciales": "off",
+    "copia_factura_a": "off",
+    "plantillas_correo": "off",
+    "plantilla_pordefecto": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -4880,77 +4880,9 @@ if ($this->Embutida_form)
 
       return;
     }
-    if ("envio_credenciales" == sIndex)
-    {
-      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("copia_factura_a" == sIndex)
-    {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("plantillas_correo" == sIndex)
-    {
-      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("plantilla_pordefecto" == sIndex)
-    {
-      scAjaxSetFieldSelect(sIndex, aValue, null);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
     if ("proveedor_anterior" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5036,6 +4968,74 @@ if ($this->Embutida_form)
     if ("password_anterior" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("envio_credenciales" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("copia_factura_a" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("plantillas_correo" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("plantilla_pordefecto" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

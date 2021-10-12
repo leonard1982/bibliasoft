@@ -11,7 +11,7 @@
     <TD colspan="1" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont">Configuración Adicional Desarrollo Propio</TD>
+       <TD align="" valign="" class="scFormBlockFont">Proveedor Anterior</TD>
        
       </TR>
      </TABLE>
@@ -26,89 +26,68 @@
 
 
    <?php
-   if (!isset($this->nm_new_label['envio_credenciales']))
+   if (!isset($this->nm_new_label['proveedor_anterior']))
    {
-       $this->nm_new_label['envio_credenciales'] = "Envío Credenciales";
+       $this->nm_new_label['proveedor_anterior'] = "Proveedor Anterior";
    }
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $envio_credenciales = $this->envio_credenciales;
-   $sStyleHidden_envio_credenciales = '';
-   if (isset($this->nmgp_cmp_hidden['envio_credenciales']) && $this->nmgp_cmp_hidden['envio_credenciales'] == 'off')
+   $proveedor_anterior = $this->proveedor_anterior;
+   $sStyleHidden_proveedor_anterior = '';
+   if (isset($this->nmgp_cmp_hidden['proveedor_anterior']) && $this->nmgp_cmp_hidden['proveedor_anterior'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['envio_credenciales']);
-       $sStyleHidden_envio_credenciales = 'display: none;';
+       unset($this->nmgp_cmp_hidden['proveedor_anterior']);
+       $sStyleHidden_proveedor_anterior = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_envio_credenciales = 'display: none;';
-   $sStyleReadInp_envio_credenciales = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['envio_credenciales']) && $this->nmgp_cmp_readonly['envio_credenciales'] == 'on')
+   $sStyleReadLab_proveedor_anterior = 'display: none;';
+   $sStyleReadInp_proveedor_anterior = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['proveedor_anterior']) && $this->nmgp_cmp_readonly['proveedor_anterior'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['envio_credenciales']);
-       $sStyleReadLab_envio_credenciales = '';
-       $sStyleReadInp_envio_credenciales = 'display: none;';
+       unset($this->nmgp_cmp_readonly['proveedor_anterior']);
+       $sStyleReadLab_proveedor_anterior = '';
+       $sStyleReadInp_proveedor_anterior = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['envio_credenciales']) && $this->nmgp_cmp_hidden['envio_credenciales'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="envio_credenciales" value="<?php echo $this->form_encode_input($this->envio_credenciales) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['proveedor_anterior']) && $this->nmgp_cmp_hidden['proveedor_anterior'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="proveedor_anterior" value="<?php echo $this->form_encode_input($this->proveedor_anterior) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->envio_credenciales_1 = explode(";", trim($this->envio_credenciales));
-  } 
-  else
-  {
-      if (empty($this->envio_credenciales))
-      {
-          $this->envio_credenciales_1= array(); 
-          $this->envio_credenciales= "NO";
-      } 
-      else
-      {
-          $this->envio_credenciales_1= $this->envio_credenciales; 
-          $this->envio_credenciales= ""; 
-          foreach ($this->envio_credenciales_1 as $cada_envio_credenciales)
-          {
-             if (!empty($envio_credenciales))
-             {
-                 $this->envio_credenciales.= ";"; 
-             } 
-             $this->envio_credenciales.= $cada_envio_credenciales; 
-          } 
-      } 
-  } 
-?> 
 
-    <TD class="scFormDataOdd css_envio_credenciales_line" id="hidden_field_data_envio_credenciales" style="<?php echo $sStyleHidden_envio_credenciales; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_envio_credenciales_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_envio_credenciales_label" style=""><span id="id_label_envio_credenciales"><?php echo $this->nm_new_label['envio_credenciales']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["envio_credenciales"]) &&  $this->nmgp_cmp_readonly["envio_credenciales"] == "on") { 
+    <TD class="scFormDataOdd css_proveedor_anterior_line" id="hidden_field_data_proveedor_anterior" style="<?php echo $sStyleHidden_proveedor_anterior; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_proveedor_anterior_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_proveedor_anterior_label" style=""><span id="id_label_proveedor_anterior"><?php echo $this->nm_new_label['proveedor_anterior']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["proveedor_anterior"]) &&  $this->nmgp_cmp_readonly["proveedor_anterior"] == "on") { 
 
-$envio_credenciales_look = "";
- if ($this->envio_credenciales == "SI") { $envio_credenciales_look .= "SI" ;} 
- if (empty($envio_credenciales_look)) { $envio_credenciales_look = $this->envio_credenciales; }
+$proveedor_anterior_look = "";
+ if ($this->proveedor_anterior == "FACILWEB") { $proveedor_anterior_look .= "FACILWEB" ;} 
+ if ($this->proveedor_anterior == "DATAICO") { $proveedor_anterior_look .= "DATAICO" ;} 
+ if ($this->proveedor_anterior == "CADENA S. A.") { $proveedor_anterior_look .= "CADENA S. A." ;} 
+ if ($this->proveedor_anterior == "THE FACTORY HKA") { $proveedor_anterior_look .= "THE FACTORY HKA" ;} 
+ if (empty($proveedor_anterior_look)) { $proveedor_anterior_look = $this->proveedor_anterior; }
 ?>
-<input type="hidden" name="envio_credenciales" value="<?php echo $this->form_encode_input($envio_credenciales) . "\">" . $envio_credenciales_look . ""; ?>
+<input type="hidden" name="proveedor_anterior" value="<?php echo $this->form_encode_input($proveedor_anterior) . "\">" . $proveedor_anterior_look . ""; ?>
 <?php } else { ?>
-
 <?php
 
-$envio_credenciales_look = "";
- if ($this->envio_credenciales == "SI") { $envio_credenciales_look .= "SI" ;} 
- if (empty($envio_credenciales_look)) { $envio_credenciales_look = $this->envio_credenciales; }
+$proveedor_anterior_look = "";
+ if ($this->proveedor_anterior == "FACILWEB") { $proveedor_anterior_look .= "FACILWEB" ;} 
+ if ($this->proveedor_anterior == "DATAICO") { $proveedor_anterior_look .= "DATAICO" ;} 
+ if ($this->proveedor_anterior == "CADENA S. A.") { $proveedor_anterior_look .= "CADENA S. A." ;} 
+ if ($this->proveedor_anterior == "THE FACTORY HKA") { $proveedor_anterior_look .= "THE FACTORY HKA" ;} 
+ if (empty($proveedor_anterior_look)) { $proveedor_anterior_look = $this->proveedor_anterior; }
 ?>
-<span id="id_read_on_envio_credenciales" class="css_envio_credenciales_line" style="<?php echo $sStyleReadLab_envio_credenciales; ?>"><?php echo $this->form_format_readonly("envio_credenciales", $this->form_encode_input($envio_credenciales_look)); ?></span><span id="id_read_off_envio_credenciales" class="css_read_off_envio_credenciales css_envio_credenciales_line" style="<?php echo $sStyleReadInp_envio_credenciales; ?>"><?php echo "<div id=\"idAjaxCheckbox_envio_credenciales\" style=\"display: inline-block\" class=\"css_envio_credenciales_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_envio_credenciales_line"><?php $tempOptionId = "id-opt-envio_credenciales" . $sc_seq_vert . "-1"; ?>
- <div class="sc switch">
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-envio_credenciales sc-ui-checkbox-envio_credenciales" name="envio_credenciales[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_envio_credenciales'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->envio_credenciales_1))  { echo " checked" ;} ?> onClick="" ><span></span>
-<label for="<?php echo $tempOptionId ?>">SI</label> </div>
-</TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('envio_credenciales')", "nm_mostra_mens('envio_credenciales')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_envio_credenciales_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_envio_credenciales_text"></span></td></tr></table></td></tr></table> </TD>
+<span id="id_read_on_proveedor_anterior" class="css_proveedor_anterior_line"  style="<?php echo $sStyleReadLab_proveedor_anterior; ?>"><?php echo $this->form_format_readonly("proveedor_anterior", $this->form_encode_input($proveedor_anterior_look)); ?></span><span id="id_read_off_proveedor_anterior" class="css_read_off_proveedor_anterior<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap; <?php echo $sStyleReadInp_proveedor_anterior; ?>">
+ <span id="idAjaxSelect_proveedor_anterior" class="<?php echo $this->classes_100perc_fields['span_select'] ?>"><select class="sc-js-input scFormObjectOdd css_proveedor_anterior_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_proveedor_anterior" name="proveedor_anterior" size="1" alt="{type: 'select', enterTab: false}">
+ <option  value="FACILWEB" <?php  if ($this->proveedor_anterior == "FACILWEB") { echo " selected" ;} ?>>FACILWEB</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_proveedor_anterior'][] = 'FACILWEB'; ?>
+ <option  value="DATAICO" <?php  if ($this->proveedor_anterior == "DATAICO") { echo " selected" ;} ?>>DATAICO</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_proveedor_anterior'][] = 'DATAICO'; ?>
+ <option  value="CADENA S. A." <?php  if ($this->proveedor_anterior == "CADENA S. A.") { echo " selected" ;} ?>>CADENA S. A.</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_proveedor_anterior'][] = 'CADENA S. A.'; ?>
+ <option  value="THE FACTORY HKA" <?php  if ($this->proveedor_anterior == "THE FACTORY HKA") { echo " selected" ;} ?>>THE FACTORY HKA</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_proveedor_anterior'][] = 'THE FACTORY HKA'; ?>
+ </select></span>
+</span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_proveedor_anterior_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_proveedor_anterior_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 
@@ -130,48 +109,46 @@ $envio_credenciales_look = "";
 
 
    <?php
-    if (!isset($this->nm_new_label['copia_factura_a']))
+    if (!isset($this->nm_new_label['servidor_anterior1']))
     {
-        $this->nm_new_label['copia_factura_a'] = "Enviar copia de factura electrónica a";
+        $this->nm_new_label['servidor_anterior1'] = "Servidor Anterior 1";
     }
 ?>
 <?php
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $copia_factura_a = $this->copia_factura_a;
-   $sStyleHidden_copia_factura_a = '';
-   if (isset($this->nmgp_cmp_hidden['copia_factura_a']) && $this->nmgp_cmp_hidden['copia_factura_a'] == 'off')
+   $servidor_anterior1 = $this->servidor_anterior1;
+   $sStyleHidden_servidor_anterior1 = '';
+   if (isset($this->nmgp_cmp_hidden['servidor_anterior1']) && $this->nmgp_cmp_hidden['servidor_anterior1'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['copia_factura_a']);
-       $sStyleHidden_copia_factura_a = 'display: none;';
+       unset($this->nmgp_cmp_hidden['servidor_anterior1']);
+       $sStyleHidden_servidor_anterior1 = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_copia_factura_a = 'display: none;';
-   $sStyleReadInp_copia_factura_a = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['copia_factura_a']) && $this->nmgp_cmp_readonly['copia_factura_a'] == 'on')
+   $sStyleReadLab_servidor_anterior1 = 'display: none;';
+   $sStyleReadInp_servidor_anterior1 = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['servidor_anterior1']) && $this->nmgp_cmp_readonly['servidor_anterior1'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['copia_factura_a']);
-       $sStyleReadLab_copia_factura_a = '';
-       $sStyleReadInp_copia_factura_a = 'display: none;';
+       unset($this->nmgp_cmp_readonly['servidor_anterior1']);
+       $sStyleReadLab_servidor_anterior1 = '';
+       $sStyleReadInp_servidor_anterior1 = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['copia_factura_a']) && $this->nmgp_cmp_hidden['copia_factura_a'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="copia_factura_a" value="<?php echo $this->form_encode_input($copia_factura_a) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['servidor_anterior1']) && $this->nmgp_cmp_hidden['servidor_anterior1'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="servidor_anterior1" value="<?php echo $this->form_encode_input($servidor_anterior1) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_copia_factura_a_line" id="hidden_field_data_copia_factura_a" style="<?php echo $sStyleHidden_copia_factura_a; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_copia_factura_a_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_copia_factura_a_label" style=""><span id="id_label_copia_factura_a"><?php echo $this->nm_new_label['copia_factura_a']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["copia_factura_a"]) &&  $this->nmgp_cmp_readonly["copia_factura_a"] == "on") { 
+    <TD class="scFormDataOdd css_servidor_anterior1_line" id="hidden_field_data_servidor_anterior1" style="<?php echo $sStyleHidden_servidor_anterior1; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_servidor_anterior1_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_servidor_anterior1_label" style=""><span id="id_label_servidor_anterior1"><?php echo $this->nm_new_label['servidor_anterior1']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["servidor_anterior1"]) &&  $this->nmgp_cmp_readonly["servidor_anterior1"] == "on") { 
 
  ?>
-<input type="hidden" name="copia_factura_a" value="<?php echo $this->form_encode_input($copia_factura_a) . "\">" . $copia_factura_a . ""; ?>
+<input type="hidden" name="servidor_anterior1" value="<?php echo $this->form_encode_input($servidor_anterior1) . "\">" . $servidor_anterior1 . ""; ?>
 <?php } else { ?>
-<span id="id_read_on_copia_factura_a" class="sc-ui-readonly-copia_factura_a css_copia_factura_a_line" style="<?php echo $sStyleReadLab_copia_factura_a; ?>"><?php echo $this->form_format_readonly("copia_factura_a", $this->form_encode_input($this->copia_factura_a)); ?></span><span id="id_read_off_copia_factura_a" class="css_read_off_copia_factura_a<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_copia_factura_a; ?>">
- <input class="sc-js-input scFormObjectOdd css_copia_factura_a_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_copia_factura_a" type=text name="copia_factura_a" value="<?php echo $this->form_encode_input($copia_factura_a) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=50"; } ?> maxlength=120 alt="{enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: 'correo@dominio.com', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ><img src="../_lib/img/scriptcase__NM__nm_transparent.gif" style="vertical-align: middle; display: none" class="sc-js-ui-statusimg" id="id_sc_status_copia_factura_a" />&nbsp;<?php if ($this->nmgp_opcao != "novo"){ ?><?php echo nmButtonOutput($this->arr_buttons, "bemail", "if (document.F1.copia_factura_a.value != '') {window.open('mailto:' + document.F1.copia_factura_a.value); }", "if (document.F1.copia_factura_a.value != '') {window.open('mailto:' + document.F1.copia_factura_a.value); }", "copia_factura_a_mail", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-<?php } ?>
-</span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_copia_factura_a_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_copia_factura_a_text"></span></td></tr></table></td></tr></table> </TD>
+<span id="id_read_on_servidor_anterior1" class="sc-ui-readonly-servidor_anterior1 css_servidor_anterior1_line" style="<?php echo $sStyleReadLab_servidor_anterior1; ?>"><?php echo $this->form_format_readonly("servidor_anterior1", $this->form_encode_input($this->servidor_anterior1)); ?></span><span id="id_read_off_servidor_anterior1" class="css_read_off_servidor_anterior1<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_servidor_anterior1; ?>">
+ <input class="sc-js-input scFormObjectOdd css_servidor_anterior1_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_servidor_anterior1" type=text name="servidor_anterior1" value="<?php echo $this->form_encode_input($servidor_anterior1) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=80"; } ?> maxlength=300 alt="{datatype: 'text', maxLength: 300, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_servidor_anterior1_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_servidor_anterior1_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 
@@ -193,348 +170,229 @@ $envio_credenciales_look = "";
 
 
    <?php
-   if (!isset($this->nm_new_label['plantillas_correo']))
-   {
-       $this->nm_new_label['plantillas_correo'] = "Activar el uso de plantillas de correo";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $plantillas_correo = $this->plantillas_correo;
-   $sStyleHidden_plantillas_correo = '';
-   if (isset($this->nmgp_cmp_hidden['plantillas_correo']) && $this->nmgp_cmp_hidden['plantillas_correo'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['plantillas_correo']);
-       $sStyleHidden_plantillas_correo = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_plantillas_correo = 'display: none;';
-   $sStyleReadInp_plantillas_correo = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['plantillas_correo']) && $this->nmgp_cmp_readonly['plantillas_correo'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['plantillas_correo']);
-       $sStyleReadLab_plantillas_correo = '';
-       $sStyleReadInp_plantillas_correo = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['plantillas_correo']) && $this->nmgp_cmp_hidden['plantillas_correo'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="plantillas_correo" value="<?php echo $this->form_encode_input($this->plantillas_correo) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->plantillas_correo_1 = explode(";", trim($this->plantillas_correo));
-  } 
-  else
-  {
-      if (empty($this->plantillas_correo))
-      {
-          $this->plantillas_correo_1= array(); 
-          $this->plantillas_correo= "NO";
-      } 
-      else
-      {
-          $this->plantillas_correo_1= $this->plantillas_correo; 
-          $this->plantillas_correo= ""; 
-          foreach ($this->plantillas_correo_1 as $cada_plantillas_correo)
-          {
-             if (!empty($plantillas_correo))
-             {
-                 $this->plantillas_correo.= ";"; 
-             } 
-             $this->plantillas_correo.= $cada_plantillas_correo; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormDataOdd css_plantillas_correo_line" id="hidden_field_data_plantillas_correo" style="<?php echo $sStyleHidden_plantillas_correo; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_plantillas_correo_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_plantillas_correo_label" style=""><span id="id_label_plantillas_correo"><?php echo $this->nm_new_label['plantillas_correo']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["plantillas_correo"]) &&  $this->nmgp_cmp_readonly["plantillas_correo"] == "on") { 
-
-$plantillas_correo_look = "";
- if ($this->plantillas_correo == "SI") { $plantillas_correo_look .= "SI" ;} 
- if (empty($plantillas_correo_look)) { $plantillas_correo_look = $this->plantillas_correo; }
-?>
-<input type="hidden" name="plantillas_correo" value="<?php echo $this->form_encode_input($plantillas_correo) . "\">" . $plantillas_correo_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$plantillas_correo_look = "";
- if ($this->plantillas_correo == "SI") { $plantillas_correo_look .= "SI" ;} 
- if (empty($plantillas_correo_look)) { $plantillas_correo_look = $this->plantillas_correo; }
-?>
-<span id="id_read_on_plantillas_correo" class="css_plantillas_correo_line" style="<?php echo $sStyleReadLab_plantillas_correo; ?>"><?php echo $this->form_format_readonly("plantillas_correo", $this->form_encode_input($plantillas_correo_look)); ?></span><span id="id_read_off_plantillas_correo" class="css_read_off_plantillas_correo css_plantillas_correo_line" style="<?php echo $sStyleReadInp_plantillas_correo; ?>"><?php echo "<div id=\"idAjaxCheckbox_plantillas_correo\" style=\"display: inline-block\" class=\"css_plantillas_correo_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_plantillas_correo_line"><?php $tempOptionId = "id-opt-plantillas_correo" . $sc_seq_vert . "-1"; ?>
- <div class="sc switch">
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-plantillas_correo sc-ui-checkbox-plantillas_correo" name="plantillas_correo[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantillas_correo'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->plantillas_correo_1))  { echo " checked" ;} ?> onClick="" ><span></span>
-<label for="<?php echo $tempOptionId ?>">SI</label> </div>
-</TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('plantillas_correo')", "nm_mostra_mens('plantillas_correo')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_plantillas_correo_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_plantillas_correo_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['plantilla_pordefecto']))
-   {
-       $this->nm_new_label['plantilla_pordefecto'] = "Plantilla Por Defecto";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $plantilla_pordefecto = $this->plantilla_pordefecto;
-   $sStyleHidden_plantilla_pordefecto = '';
-   if (isset($this->nmgp_cmp_hidden['plantilla_pordefecto']) && $this->nmgp_cmp_hidden['plantilla_pordefecto'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['plantilla_pordefecto']);
-       $sStyleHidden_plantilla_pordefecto = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_plantilla_pordefecto = 'display: none;';
-   $sStyleReadInp_plantilla_pordefecto = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['plantilla_pordefecto']) && $this->nmgp_cmp_readonly['plantilla_pordefecto'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['plantilla_pordefecto']);
-       $sStyleReadLab_plantilla_pordefecto = '';
-       $sStyleReadInp_plantilla_pordefecto = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['plantilla_pordefecto']) && $this->nmgp_cmp_hidden['plantilla_pordefecto'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="plantilla_pordefecto" value="<?php echo $this->form_encode_input($this->plantilla_pordefecto) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_plantilla_pordefecto_line" id="hidden_field_data_plantilla_pordefecto" style="<?php echo $sStyleHidden_plantilla_pordefecto; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_plantilla_pordefecto_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_plantilla_pordefecto_label" style=""><span id="id_label_plantilla_pordefecto"><?php echo $this->nm_new_label['plantilla_pordefecto']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["plantilla_pordefecto"]) &&  $this->nmgp_cmp_readonly["plantilla_pordefecto"] == "on") { 
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto'] = array(); 
-}
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto'] = array(); 
+    if (!isset($this->nm_new_label['servidor_anterior2']))
+    {
+        $this->nm_new_label['servidor_anterior2'] = "Servidor Anterior 2";
     }
-   $enviar_dian_val_str = "";
-   if (!empty($this->enviar_dian))
-   {
-       if (is_array($this->enviar_dian))
-       {
-           $Tmp_array = $this->enviar_dian;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->enviar_dian);
-       }
-       $enviar_dian_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $enviar_dian_val_str)
-          {
-             $enviar_dian_val_str .= ", ";
-          }
-          $enviar_dian_val_str .= $Tmp_val_cmp;
-       }
-   }
-   $enviar_cliente_val_str = "";
-   if (!empty($this->enviar_cliente))
-   {
-       if (is_array($this->enviar_cliente))
-       {
-           $Tmp_array = $this->enviar_cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->enviar_cliente);
-       }
-       $enviar_cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $enviar_cliente_val_str)
-          {
-             $enviar_cliente_val_str .= ", ";
-          }
-          $enviar_cliente_val_str .= $Tmp_val_cmp;
-       }
-   }
-   $envio_credenciales_val_str = "''";
-   if (!empty($this->envio_credenciales))
-   {
-       if (is_array($this->envio_credenciales))
-       {
-           $Tmp_array = $this->envio_credenciales;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->envio_credenciales);
-       }
-       $envio_credenciales_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $envio_credenciales_val_str)
-          {
-             $envio_credenciales_val_str .= ", ";
-          }
-          $envio_credenciales_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $plantillas_correo_val_str = "''";
-   if (!empty($this->plantillas_correo))
-   {
-       if (is_array($this->plantillas_correo))
-       {
-           $Tmp_array = $this->plantillas_correo;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->plantillas_correo);
-       }
-       $plantillas_correo_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $plantillas_correo_val_str)
-          {
-             $plantillas_correo_val_str .= ", ";
-          }
-          $plantillas_correo_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $nm_comando = "SELECT id, descripcion  FROM plantillas_correo_propio  ORDER BY descripcion";
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-   $x = 0; 
-   $plantilla_pordefecto_look = ""; 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->plantilla_pordefecto_1))
-          {
-              foreach ($this->plantilla_pordefecto_1 as $tmp_plantilla_pordefecto)
-              {
-                  if (trim($tmp_plantilla_pordefecto) === trim($cadaselect[1])) { $plantilla_pordefecto_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->plantilla_pordefecto) === trim($cadaselect[1])) { $plantilla_pordefecto_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-
 ?>
-<input type="hidden" name="plantilla_pordefecto" value="<?php echo $this->form_encode_input($plantilla_pordefecto) . "\">" . $plantilla_pordefecto_look . ""; ?>
-<?php } else { ?>
 <?php
-   $todo = $this->Form_lookup_plantilla_pordefecto();
-   $x = 0 ; 
-   $plantilla_pordefecto_look = ""; 
-   while (!empty($todo[$x])) 
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $servidor_anterior2 = $this->servidor_anterior2;
+   $sStyleHidden_servidor_anterior2 = '';
+   if (isset($this->nmgp_cmp_hidden['servidor_anterior2']) && $this->nmgp_cmp_hidden['servidor_anterior2'] == 'off')
    {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->plantilla_pordefecto_1))
-          {
-              foreach ($this->plantilla_pordefecto_1 as $tmp_plantilla_pordefecto)
-              {
-                  if (trim($tmp_plantilla_pordefecto) === trim($cadaselect[1])) { $plantilla_pordefecto_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->plantilla_pordefecto) === trim($cadaselect[1])) { $plantilla_pordefecto_look .= $cadaselect[0]; } 
-          $x++; 
+       unset($this->nmgp_cmp_hidden['servidor_anterior2']);
+       $sStyleHidden_servidor_anterior2 = 'display: none;';
    }
-          if (empty($plantilla_pordefecto_look))
-          {
-              $plantilla_pordefecto_look = $this->plantilla_pordefecto;
-          }
-   $x = 0; 
-   echo "<span id=\"id_read_on_plantilla_pordefecto\" class=\"css_plantilla_pordefecto_line\" style=\"" .  $sStyleReadLab_plantilla_pordefecto . "\">" . $this->form_format_readonly("plantilla_pordefecto", $this->form_encode_input($plantilla_pordefecto_look)) . "</span><span id=\"id_read_off_plantilla_pordefecto\" class=\"css_read_off_plantilla_pordefecto" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_plantilla_pordefecto . "\">";
-   echo " <span id=\"idAjaxSelect_plantilla_pordefecto\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_plantilla_pordefecto_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_plantilla_pordefecto\" name=\"plantilla_pordefecto\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
-   echo "\r" ; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['form_webservicefe_mob']['Lookup_plantilla_pordefecto'][] = ''; 
-   echo "  <option value=\"\">" . str_replace("<", "&lt;","Seleccione") . "</option>" ; 
-   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   $bTestReadOnly = true;
+   $sStyleReadLab_servidor_anterior2 = 'display: none;';
+   $sStyleReadInp_servidor_anterior2 = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['servidor_anterior2']) && $this->nmgp_cmp_readonly['servidor_anterior2'] == 'on')
    {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          echo "  <option value=\"$cadaselect[1]\"" ; 
-          if (trim($this->plantilla_pordefecto) === trim($cadaselect[1])) 
-          {
-              echo " selected" ; 
-          }
-          if (strtoupper($cadaselect[2]) == "S") 
-          {
-              if (empty($this->plantilla_pordefecto)) 
-              {
-                  echo " selected" ;
-              } 
-           } 
-          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
-          echo "\r" ; 
-          $x++ ; 
-   }  ; 
-   echo " </select></span>" ; 
-   echo "\r" ; 
-   echo "</span>";
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['servidor_anterior2']);
+       $sStyleReadLab_servidor_anterior2 = '';
+       $sStyleReadInp_servidor_anterior2 = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['servidor_anterior2']) && $this->nmgp_cmp_hidden['servidor_anterior2'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="servidor_anterior2" value="<?php echo $this->form_encode_input($servidor_anterior2) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_servidor_anterior2_line" id="hidden_field_data_servidor_anterior2" style="<?php echo $sStyleHidden_servidor_anterior2; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_servidor_anterior2_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_servidor_anterior2_label" style=""><span id="id_label_servidor_anterior2"><?php echo $this->nm_new_label['servidor_anterior2']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["servidor_anterior2"]) &&  $this->nmgp_cmp_readonly["servidor_anterior2"] == "on") { 
+
+ ?>
+<input type="hidden" name="servidor_anterior2" value="<?php echo $this->form_encode_input($servidor_anterior2) . "\">" . $servidor_anterior2 . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_servidor_anterior2" class="sc-ui-readonly-servidor_anterior2 css_servidor_anterior2_line" style="<?php echo $sStyleReadLab_servidor_anterior2; ?>"><?php echo $this->form_format_readonly("servidor_anterior2", $this->form_encode_input($this->servidor_anterior2)); ?></span><span id="id_read_off_servidor_anterior2" class="css_read_off_servidor_anterior2<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_servidor_anterior2; ?>">
+ <input class="sc-js-input scFormObjectOdd css_servidor_anterior2_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_servidor_anterior2" type=text name="servidor_anterior2" value="<?php echo $this->form_encode_input($servidor_anterior2) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=80"; } ?> maxlength=300 alt="{datatype: 'text', maxLength: 300, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_servidor_anterior2_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_servidor_anterior2_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
 ?> 
-<?php  }?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('plantilla_pordefecto')", "nm_mostra_mens('plantilla_pordefecto')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_plantilla_pordefecto_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_plantilla_pordefecto_text"></span></td></tr></table></td></tr></table> </TD>
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['servidor_anterior3']))
+    {
+        $this->nm_new_label['servidor_anterior3'] = "Servidor Anterior 3";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $servidor_anterior3 = $this->servidor_anterior3;
+   $sStyleHidden_servidor_anterior3 = '';
+   if (isset($this->nmgp_cmp_hidden['servidor_anterior3']) && $this->nmgp_cmp_hidden['servidor_anterior3'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['servidor_anterior3']);
+       $sStyleHidden_servidor_anterior3 = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_servidor_anterior3 = 'display: none;';
+   $sStyleReadInp_servidor_anterior3 = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['servidor_anterior3']) && $this->nmgp_cmp_readonly['servidor_anterior3'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['servidor_anterior3']);
+       $sStyleReadLab_servidor_anterior3 = '';
+       $sStyleReadInp_servidor_anterior3 = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['servidor_anterior3']) && $this->nmgp_cmp_hidden['servidor_anterior3'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="servidor_anterior3" value="<?php echo $this->form_encode_input($servidor_anterior3) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_servidor_anterior3_line" id="hidden_field_data_servidor_anterior3" style="<?php echo $sStyleHidden_servidor_anterior3; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_servidor_anterior3_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_servidor_anterior3_label" style=""><span id="id_label_servidor_anterior3"><?php echo $this->nm_new_label['servidor_anterior3']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["servidor_anterior3"]) &&  $this->nmgp_cmp_readonly["servidor_anterior3"] == "on") { 
+
+ ?>
+<input type="hidden" name="servidor_anterior3" value="<?php echo $this->form_encode_input($servidor_anterior3) . "\">" . $servidor_anterior3 . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_servidor_anterior3" class="sc-ui-readonly-servidor_anterior3 css_servidor_anterior3_line" style="<?php echo $sStyleReadLab_servidor_anterior3; ?>"><?php echo $this->form_format_readonly("servidor_anterior3", $this->form_encode_input($this->servidor_anterior3)); ?></span><span id="id_read_off_servidor_anterior3" class="css_read_off_servidor_anterior3<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_servidor_anterior3; ?>">
+ <input class="sc-js-input scFormObjectOdd css_servidor_anterior3_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_servidor_anterior3" type=text name="servidor_anterior3" value="<?php echo $this->form_encode_input($servidor_anterior3) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=80"; } ?> maxlength=300 alt="{datatype: 'text', maxLength: 300, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_servidor_anterior3_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_servidor_anterior3_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['token_anterior']))
+    {
+        $this->nm_new_label['token_anterior'] = "Token Anterior";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $token_anterior = $this->token_anterior;
+   $sStyleHidden_token_anterior = '';
+   if (isset($this->nmgp_cmp_hidden['token_anterior']) && $this->nmgp_cmp_hidden['token_anterior'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['token_anterior']);
+       $sStyleHidden_token_anterior = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_token_anterior = 'display: none;';
+   $sStyleReadInp_token_anterior = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['token_anterior']) && $this->nmgp_cmp_readonly['token_anterior'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['token_anterior']);
+       $sStyleReadLab_token_anterior = '';
+       $sStyleReadInp_token_anterior = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['token_anterior']) && $this->nmgp_cmp_hidden['token_anterior'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="token_anterior" value="<?php echo $this->form_encode_input($token_anterior) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_token_anterior_line" id="hidden_field_data_token_anterior" style="<?php echo $sStyleHidden_token_anterior; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_token_anterior_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_token_anterior_label" style=""><span id="id_label_token_anterior"><?php echo $this->nm_new_label['token_anterior']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["token_anterior"]) &&  $this->nmgp_cmp_readonly["token_anterior"] == "on") { 
+
+ ?>
+<input type="hidden" name="token_anterior" value="<?php echo $this->form_encode_input($token_anterior) . "\">" . $token_anterior . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_token_anterior" class="sc-ui-readonly-token_anterior css_token_anterior_line" style="<?php echo $sStyleReadLab_token_anterior; ?>"><?php echo $this->form_format_readonly("token_anterior", $this->form_encode_input($this->token_anterior)); ?></span><span id="id_read_off_token_anterior" class="css_read_off_token_anterior<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_token_anterior; ?>">
+ <input class="sc-js-input scFormObjectOdd css_token_anterior_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_token_anterior" type=text name="token_anterior" value="<?php echo $this->form_encode_input($token_anterior) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=52"; } ?> maxlength=150 alt="{datatype: 'text', maxLength: 150, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_token_anterior_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_token_anterior_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['password_anterior']))
+    {
+        $this->nm_new_label['password_anterior'] = "Password Anterior";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $password_anterior = $this->password_anterior;
+   $sStyleHidden_password_anterior = '';
+   if (isset($this->nmgp_cmp_hidden['password_anterior']) && $this->nmgp_cmp_hidden['password_anterior'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['password_anterior']);
+       $sStyleHidden_password_anterior = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_password_anterior = 'display: none;';
+   $sStyleReadInp_password_anterior = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['password_anterior']) && $this->nmgp_cmp_readonly['password_anterior'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['password_anterior']);
+       $sStyleReadLab_password_anterior = '';
+       $sStyleReadInp_password_anterior = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['password_anterior']) && $this->nmgp_cmp_hidden['password_anterior'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="password_anterior" value="<?php echo $this->form_encode_input($password_anterior) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_password_anterior_line" id="hidden_field_data_password_anterior" style="<?php echo $sStyleHidden_password_anterior; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_password_anterior_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_password_anterior_label" style=""><span id="id_label_password_anterior"><?php echo $this->nm_new_label['password_anterior']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["password_anterior"]) &&  $this->nmgp_cmp_readonly["password_anterior"] == "on") { 
+
+ ?>
+<input type="hidden" name="password_anterior" value="<?php echo $this->form_encode_input($password_anterior) . "\">" . $password_anterior . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_password_anterior" class="sc-ui-readonly-password_anterior css_password_anterior_line" style="<?php echo $sStyleReadLab_password_anterior; ?>"><?php echo $this->form_format_readonly("password_anterior", $this->form_encode_input($this->password_anterior)); ?></span><span id="id_read_off_password_anterior" class="css_read_off_password_anterior<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_password_anterior; ?>">
+ <input class="sc-js-input scFormObjectOdd css_password_anterior_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_password_anterior" type=text name="password_anterior" value="<?php echo $this->form_encode_input($password_anterior) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=52"; } ?> maxlength=150 alt="{datatype: 'text', maxLength: 150, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_password_anterior_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_password_anterior_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 

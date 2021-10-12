@@ -827,11 +827,11 @@ var pag_ativa = "form_webservicefe_mob_form0";
             'class' => $nmgp_num_form == "form_webservicefe_mob_form1" ? "scTabActive" : "scTabInactive",
         ),
         'form_webservicefe_mob_form2' => array(
-            'title' => "Adicionales",
+            'title' => "Proveedor Anterior",
             'class' => $nmgp_num_form == "form_webservicefe_mob_form2" ? "scTabActive" : "scTabInactive",
         ),
         'form_webservicefe_mob_form3' => array(
-            'title' => "Proveedor Anterior",
+            'title' => "Adicionales",
             'class' => $nmgp_num_form == "form_webservicefe_mob_form3" ? "scTabActive" : "scTabInactive",
         ),
     );
@@ -843,10 +843,10 @@ var pag_ativa = "form_webservicefe_mob_form0";
                         if ('Pruebas' == $pageName && 'off' == $pageStatus) {
                                 $this->tabCssClass['form_webservicefe_mob_form1']['class'] = 'scTabInactive';
                         }
-                        if ('Adicionales' == $pageName && 'off' == $pageStatus) {
+                        if ('Proveedor Anterior' == $pageName && 'off' == $pageStatus) {
                                 $this->tabCssClass['form_webservicefe_mob_form2']['class'] = 'scTabInactive';
                         }
-                        if ('Proveedor Anterior' == $pageName && 'off' == $pageStatus) {
+                        if ('Adicionales' == $pageName && 'off' == $pageStatus) {
                                 $this->tabCssClass['form_webservicefe_mob_form3']['class'] = 'scTabInactive';
                         }
                 }
@@ -888,7 +888,7 @@ var pag_ativa = "form_webservicefe_mob_form0";
 ?>
    <li id="id_form_webservicefe_mob_form2" class="<?php echo $css_celula; ?> sc-form-page">
     <a href="javascript: sc_exib_ocult_pag ('form_webservicefe_mob_form2')">
-     Adicionales
+     Proveedor Anterior
     </a>
    </li>
 <?php
@@ -896,7 +896,7 @@ var pag_ativa = "form_webservicefe_mob_form0";
 ?>
    <li id="id_form_webservicefe_mob_form3" class="<?php echo $css_celula; ?> sc-form-page">
     <a href="javascript: sc_exib_ocult_pag ('form_webservicefe_mob_form3')">
-     Proveedor Anterior
+     Adicionales
     </a>
    </li>
 </ul>
