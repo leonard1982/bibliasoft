@@ -329,8 +329,13 @@ function Sel_processa_out()
 
       $this->Sel_css($bol_css_all);
 
+if(isset($bol_sel_campos_include) && $bol_sel_campos_include && $_SESSION['scriptcase']['proc_mobile'])
+{
 ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript" src="../_lib/lib/js/nm_touchfix.jquery.js"></script>
+<?php
+}
+?><script language="javascript" type="text/javascript">
 
 <?php
 if ($this->embbed)

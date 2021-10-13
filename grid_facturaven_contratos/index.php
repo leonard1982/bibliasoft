@@ -233,8 +233,8 @@ class grid_facturaven_contratos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1276,7 +1276,7 @@ class grid_facturaven_contratos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsH9X7D1BeHuJeDMNODkFCDur/DoFUHQXGZ1FGZ1BeHuXGHgNKHEFiDuFaZuFaD9NwH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcXOZSBiHArYD5BqDMrYVcFKHEX7VoX7D9BiZ1B/Z1BOZMJeHgrKHEXeH5F/HMBiHQBiZSFUD1BOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBqD9NwH9X7DSBYD5JsHgrYDkBODWF/VoB/DcBqH9FaD1rKZMFaDErKVkXeDWX7ZuBODcBwDQX7Z1N7V5raHgvsDkBOV5X7DoJsD9BiZ1rqHAN7D5NUDEvsHEFiV5FaDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDENOHEJqDuJeHIFGDcJeDuBqHAN7HuJeHgvsVIB/DuFGVENUHQNwH9B/HANOZMJeDEvsHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BqHgBYHErsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZkBiHANOHuB/HgvsVkJqDWX7HMJeDcXGZSBiD1veV5JwDMzGVcXKH5FqDoraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsH9X7Z1BYHuBOHgrwVcBOV5BmVEFGDcFYH9BqHArYHQF7DEvsHENiDuJeVoXGHQFYH9BiHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgrKHEXeDWXCHIrqDcJeH9BiD1veHurqHuzGV9BUDurGVoF7HQNmZ1B/HArYD5BOHgBYHArCV5XCHMX7HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaVoBODcJeDQX7D1BeVWJsHuBYVcFCDWJeVoB/D9BiZSB/HArYV5FUDMNKZSXeH5FYDoB/D9XsH9FGD1veV5BOHgvsVcFCH5XCVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBOVkJqH5F/HIBqHQJeDQX7DSrwVWJeHgvOZSNiH5XCHMFaHQBsVINUD1rKHuJwDMzGHEFiHEFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBOHQBiDuBqD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7V5X7DErKHArCH5FGVoFGD9NmZSFGHANOV5FGHuNOV9FeH5FqDoJsD9BsZ1FGD1rwD5rqDMNKZSJqDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -9717,11 +9717,20 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contrat
       $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'on';
 if (!isset($_SESSION['gIdfac'])) {$_SESSION['gIdfac'] = "";}
 if (!isset($this->sc_temp_gIdfac)) {$this->sc_temp_gIdfac = (isset($_SESSION['gIdfac'])) ? $_SESSION['gIdfac'] : "";}
-   
-      $nm_select = "select proveedor, servidor1, tokenempresa as usuario, tokenpassword from webservicefe order by idwebservicefe ASC limit 1 "; 
+  $vproveedor        = '';
+$TokenEnterprise   = '';
+$TokenAutorizacion = '';
+$vServidor         = '';
+$vPFe              = '';
+$vPref             = '';
+
+$vsql = "select proveedor, token, password, servidor from facturaven_contratos where idfacven='".$this->idfacven ."'";
+ 
+      $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->dcx = array();
+      $this->vDatos = array();
+      $this->vdatos = array();
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -9730,7 +9739,8 @@ if (!isset($this->sc_temp_gIdfac)) {$this->sc_temp_gIdfac = (isset($_SESSION['gI
           { 
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
-                        $this->dcx[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
                  }
                  $SCy++; 
                  $SCrx->MoveNext();
@@ -9739,14 +9749,60 @@ if (!isset($this->sc_temp_gIdfac)) {$this->sc_temp_gIdfac = (isset($_SESSION['gI
       } 
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
-          $this->dcx = false;
-          $this->dcx_erro = $this->Db->ErrorMsg();
+          $this->vDatos = false;
+          $this->vDatos_erro = $this->Db->ErrorMsg();
+          $this->vdatos = false;
+          $this->vdatos_erro = $this->Db->ErrorMsg();
       } 
 ;
-	if(isset($this->dcx[0][0]))
-		{
-		if ($this->dcx[0][0]=='CADENA S. A.')
-			{
+if(isset($this->vdatos[0][0]))
+{
+	$vproveedor = $this->vdatos[0][0];
+	$TokenEnterprise = $this->vdatos[0][1];
+	$TokenAutorizacion = $this->vdatos[0][2];
+	$vServidor = $this->vdatos[0][3];
+}
+
+ 
+      $nm_select = "SELECT prefijo, prefijo_fe FROM resdian WHERE Idres = $this->resolucion  "; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_res = array();
+     if ($this->resolucion !== "")
+     { 
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds_res[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_res = false;
+          $this->ds_res_erro = $this->Db->ErrorMsg();
+      } 
+     } 
+;
+if(isset($this->ds_res[0][1]))
+{
+	$vPref = $this->ds_res[0][0];
+	$vPFe  = $this->ds_res[0][1];
+}
+
+if($vPFe=='FE')
+{
+	switch($vproveedor)
+	{
+		case 'CADENA S. A.':
 			 
       $nm_select = "select idfacven from facturaven where numfacven=$this->numfacven   and resolucion=$this->resolucion  "; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -9780,7 +9836,7 @@ if (!isset($this->sc_temp_gIdfac)) {$this->sc_temp_gIdfac = (isset($_SESSION['gI
      } 
 ;
 			if(isset($this->dt_idf[0][0]))
-				{
+			{
 				$vidfacven=$this->dt_idf[0][0];
 				$this->sc_temp_gIdfac = $vidfacven;
 				 if (isset($this->sc_temp_gIdfac)) {$_SESSION['gIdfac'] = $this->sc_temp_gIdfac;}
@@ -9788,100 +9844,25 @@ if (!isset($this->sc_temp_gIdfac)) {$this->sc_temp_gIdfac = (isset($_SESSION['gI
  {
 $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('blank_pdf_facturatech') . "/", $this->nm_location, "_blank?#?" . NM_encode_input("") . "?@?","_self", 440, 630);
  };
-				}
+			}
 			else
-				{
+			{
 				echo "Factura no se puede procesar!!!";
 				goto error;
-				}
-			
 			}
-		}
+		break;
 
+		case 'FACILWEB':
 
+		break;
 
+		case 'THE FACTORY HKA':
 
-$TokenEnterprise = '';
-$TokenAutorizacion = '';
-$vServidor='';
-$vPFe= '';
- 
-      $nm_select = "SELECT prefijo, prefijo_fe FROM resdian WHERE Idres = $this->resolucion  "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->ds_res = array();
-     if ($this->resolucion !== "")
-     { 
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $this->ds_res[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds_res = false;
-          $this->ds_res_erro = $this->Db->ErrorMsg();
-      } 
-     } 
-;
-if(isset($this->ds_res[0][1]))
-	{
-	$vPref=$this->ds_res[0][0];
-	$vPFe=$this->ds_res[0][1];
-	}
-
-if($vPFe=='FE')
-	{
-	 
-      $nm_select = "select servidor1, servidor2, tokenempresa, tokenpassword from webservicefe order by idwebservicefe desc limit 1"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->ds_fv = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $this->ds_fv[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds_fv = false;
-          $this->ds_fv_erro = $this->Db->ErrorMsg();
-      } 
-;
-	if(isset($this->ds_fv[0][0]) and (isset($this->ds_fv[0][1])) and (isset($this->ds_fv[0][2])) and (isset($this->ds_fv[0][3])))
-		{
-		if(!empty(($this->ds_fv[0][0])) and (!empty($this->ds_fv[0][1])) and (!empty($this->ds_fv[0][2])) and (!empty($this->ds_fv[0][3])))
-			{
 			error_reporting(E_ERROR);
 			$WebService = new WebService();
 			$options = array('exceptions' => true, 'trace' => true);
 
 			$params;
-			$TokenEnterprise = $this->ds_fv[0][2];
-			$TokenAutorizacion = $this->ds_fv[0][3];
-			$vServidor=$this->ds_fv[0][0];
-
-
 			$params = array (
 						'tokenEmpresa'	=>$TokenEnterprise,
 						'tokenPassword'	=>$TokenAutorizacion,
@@ -9891,37 +9872,36 @@ if($vPFe=='FE')
 
 
 			if($descargas["codigo"]==200 or $descargas["codigo"]==201)
-				{
+			{
 				$salida="NO";
 				if($salida=="NO")
-					{
+				{
 					$decoded = base64_decode($descargas["documento"]);
 					$file = $vPref.$this->numfacven .'.pdf';
 					file_put_contents($file, $decoded);
 					echo "<a id='ver' href='$file' style='display:none;'>Factura: documento $file </a>";
 					echo "<script>window.onload = function(){document.getElementById('ver').click();};</script>";
-					}
+				}
 				else
-					{
+				{
 					$decoded = base64_decode($descargas["documento"]);
 					header('Content-Type: application/pdf');
 					echo $decoded;
-					}
-				}
-			else
-				{
-				echo "No se puede descargar!"."<br>";
 				}
 			}
-	
-		}
-	
-	}
+			else
+			{
+				echo "No se puede descargar!"."<br>";
+			}
 
+		break;
+	}			
+
+}
 else
-	{
+{
 	echo "Documento ".$vPref." - ".$this->numfacven ." No contiene resolución de F. Electrónica!"."<br>";
-	}
+}
 error:;
 if (isset($this->sc_temp_gIdfac)) {$_SESSION['gIdfac'] = $this->sc_temp_gIdfac;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
@@ -16721,14 +16701,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos'][$path_
            $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_facturaven_contratos']['embutida_form'])
        {

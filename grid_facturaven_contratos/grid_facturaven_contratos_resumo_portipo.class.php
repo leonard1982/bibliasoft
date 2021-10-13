@@ -4592,7 +4592,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       if (!$this->Ini->Export_html_zip && $this->Print_All && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['doc_word']) 
       {
-          $nm_saida->saida(" <BODY class=\"" . $this->css_scGridPage . "\" style=\"-webkit-print-color-adjust: exact;\">\r\n");
+          $nm_saida->saida(" <BODY id=\"grid_summary\" class=\"" . $this->css_scGridPage . "\" style=\"-webkit-print-color-adjust: exact;\">\r\n");
           $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $summary_width . ">\r\n");
           $nm_saida->saida("     <TR>\r\n");
           $nm_saida->saida("       <TD align=\"center\">\r\n");
@@ -4618,7 +4618,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['dashboard_info']['remove_margin'] ? 'margin: 0;' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['dashboard_info']['remove_border'] ? 'border-width: 0;' : '';
           $vertical_center = '';
-          $nm_saida->saida(" <BODY class=\"" . $this->css_scGridPage . "\" style=\"" . $remove_margin . $vertical_center . "\">\r\n");
+          $nm_saida->saida(" <BODY id=\"grid_summary\" class=\"" . $this->css_scGridPage . "\" style=\"" . $remove_margin . $vertical_center . "\">\r\n");
       }
       $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['opcao'] == "pdf")

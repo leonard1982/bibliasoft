@@ -600,7 +600,7 @@ class grid_facturaven_contratos_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['mostra_edit'] = "N";
        }
    }
-   if ($this->Ini->SC_Link_View || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['opc_psq'])
+   if ($this->Ini->SC_Link_View || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['opc_psq'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['psq_edit'] == 'N'))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['mostra_edit'] = "N";
    }
@@ -2904,7 +2904,7 @@ $nm_saida->saida("}\r\n");
            {
                $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
            }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
@@ -2938,7 +2938,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        }
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['opcao'] == "pdf" && !$this->Print_All)
@@ -18322,7 +18322,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18346,7 +18346,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__garbage_delete_32.png\"  id=\"sc_Eliminar_top\" onClick=\"sc_btn_Eliminar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__garbage_delete_32.png\"  id=\"sc_Eliminar_top\" onClick=\"sc_btn_Eliminar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18370,7 +18370,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18394,7 +18394,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_fe_top\" onClick=\"sc_btn_btn_pdf_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_fe_top\" onClick=\"sc_btn_btn_pdf_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18418,7 +18418,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_from_client_32.png\"  id=\"sc_btn_consultar_estado_fe_top\" onClick=\"sc_btn_btn_consultar_estado_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_from_client_32.png\"  id=\"sc_btn_consultar_estado_fe_top\" onClick=\"sc_btn_btn_consultar_estado_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18442,7 +18442,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__nav_refresh_green_32.png\"  id=\"sc_btn_recargar_top\" onClick=\"sc_btn_btn_recargar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__nav_refresh_green_32.png\"  id=\"sc_btn_recargar_top\" onClick=\"sc_btn_btn_recargar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -18488,7 +18488,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__document_refresh_24.png\"  id=\"sc_btn_regenerar_estado_top\" onClick=\"sc_btn_btn_regenerar_estado();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__document_refresh_24.png\"  id=\"sc_btn_regenerar_estado_top\" onClick=\"sc_btn_btn_regenerar_estado();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
           $nm_saida->saida("         </td> \r\n");
@@ -18703,14 +18703,14 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_facturaven_contratos_help.txt") && !$this->grid_emb_form)
@@ -19152,7 +19152,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__data_out_32.png\"  id=\"sc_Reversar_top\" onClick=\"sc_btn_Reversar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19176,7 +19176,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__garbage_delete_32.png\"  id=\"sc_Eliminar_top\" onClick=\"sc_btn_Eliminar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__garbage_delete_32.png\"  id=\"sc_Eliminar_top\" onClick=\"sc_btn_Eliminar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19200,7 +19200,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19224,7 +19224,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_fe_top\" onClick=\"sc_btn_btn_pdf_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_fe_top\" onClick=\"sc_btn_btn_pdf_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19248,7 +19248,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_from_client_32.png\"  id=\"sc_btn_consultar_estado_fe_top\" onClick=\"sc_btn_btn_consultar_estado_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_from_client_32.png\"  id=\"sc_btn_consultar_estado_fe_top\" onClick=\"sc_btn_btn_consultar_estado_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19272,7 +19272,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__nav_refresh_green_32.png\"  id=\"sc_btn_recargar_top\" onClick=\"sc_btn_btn_recargar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__nav_refresh_green_32.png\"  id=\"sc_btn_recargar_top\" onClick=\"sc_btn_btn_recargar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19318,7 +19318,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__document_refresh_24.png\"  id=\"sc_btn_regenerar_estado_top\" onClick=\"sc_btn_btn_regenerar_estado();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__document_refresh_24.png\"  id=\"sc_btn_regenerar_estado_top\" onClick=\"sc_btn_btn_regenerar_estado();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
           $nm_saida->saida("         </td> \r\n");
@@ -19533,14 +19533,14 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_facturaven_contratos_help.txt") && !$this->grid_emb_form)
@@ -19689,7 +19689,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -19739,7 +19740,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['fast_search'][1] == 'eq')
