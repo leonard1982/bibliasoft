@@ -1670,7 +1670,7 @@ switch($this->enviada )
 	break;
 }
 
-if(!empty($this->cufe ))
+if(empty($this->cufe ))
 {
 	$this->enviar  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
 }
