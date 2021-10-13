@@ -19005,30 +19005,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
               $nm_saida->saida("          <img id=\"NM_sep_5\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_fe'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Enviar Factura";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Enviar Factura Electrónica";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_6";
-              $nm_saida->saida("          <img id=\"NM_sep_6\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_pdf_fe'] == "on" && !$this->grid_emb_form) 
       { 
                $btn_value = "Ver PDF FE";
@@ -19049,8 +19025,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_7";
-              $nm_saida->saida("          <img id=\"NM_sep_7\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_6";
+              $nm_saida->saida("          <img id=\"NM_sep_6\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_consultar_estado_fe'] == "on" && !$this->grid_emb_form) 
@@ -19073,8 +19049,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_8";
-              $nm_saida->saida("          <img id=\"NM_sep_8\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_7";
+              $nm_saida->saida("          <img id=\"NM_sep_7\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_recargar'] == "on" && !$this->grid_emb_form) 
@@ -19097,8 +19073,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_9";
-              $nm_saida->saida("          <img id=\"NM_sep_9\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_8";
+              $nm_saida->saida("          <img id=\"NM_sep_8\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_fv_periodo'] == "on" && !$this->grid_emb_form) 
@@ -19119,8 +19095,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_10";
-              $nm_saida->saida("          <img id=\"NM_sep_10\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_9";
+              $nm_saida->saida("          <img id=\"NM_sep_9\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_regenerar_estado'] == "on" && !$this->grid_emb_form) 
@@ -19765,6 +19741,15 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
+              $NM_ult_sep = "NM_sep_10";
+              $nm_saida->saida("          <img id=\"NM_sep_10\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+          }
+      }
+      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
+      {
+          if ($NM_btn)
+          {
+              $NM_btn = false;
               $NM_ult_sep = "NM_sep_11";
               $nm_saida->saida("          <img id=\"NM_sep_11\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
@@ -19776,15 +19761,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
               $NM_btn = false;
               $NM_ult_sep = "NM_sep_12";
               $nm_saida->saida("          <img id=\"NM_sep_12\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_13";
-              $nm_saida->saida("          <img id=\"NM_sep_13\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Reversar'] == "on" && !$this->grid_emb_form) 
@@ -19807,8 +19783,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_14";
-              $nm_saida->saida("          <img id=\"NM_sep_14\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_13";
+              $nm_saida->saida("          <img id=\"NM_sep_13\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Eliminar'] == "on" && !$this->grid_emb_form) 
@@ -19831,32 +19807,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_15";
-              $nm_saida->saida("          <img id=\"NM_sep_15\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_fe'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "Enviar Factura";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Enviar Factura Electrónica";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_fe_top\" onClick=\"sc_btn_btn_enviar_fe();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_16";
-              $nm_saida->saida("          <img id=\"NM_sep_16\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_14";
+              $nm_saida->saida("          <img id=\"NM_sep_14\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_pdf_fe'] == "on" && !$this->grid_emb_form) 
@@ -19879,8 +19831,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_17";
-              $nm_saida->saida("          <img id=\"NM_sep_17\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_15";
+              $nm_saida->saida("          <img id=\"NM_sep_15\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_consultar_estado_fe'] == "on" && !$this->grid_emb_form) 
@@ -19903,8 +19855,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_18";
-              $nm_saida->saida("          <img id=\"NM_sep_18\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_16";
+              $nm_saida->saida("          <img id=\"NM_sep_16\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_recargar'] == "on" && !$this->grid_emb_form) 
@@ -19927,8 +19879,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_19";
-              $nm_saida->saida("          <img id=\"NM_sep_19\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_17";
+              $nm_saida->saida("          <img id=\"NM_sep_17\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_fv_periodo'] == "on" && !$this->grid_emb_form) 
@@ -19949,8 +19901,8 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_20";
-              $nm_saida->saida("          <img id=\"NM_sep_20\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_18";
+              $nm_saida->saida("          <img id=\"NM_sep_18\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_regenerar_estado'] == "on" && !$this->grid_emb_form) 
