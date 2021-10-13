@@ -549,7 +549,7 @@ function fEnviarPropio(idfacven,bd)
 			}
 		});
 		
-		$.post("../blank_enviar_fes_propio/index.php",{
+		$.post("../blank_enviar_fes/index.php",{
 			
 			idfacven:idfacven,
 			bd:bd
