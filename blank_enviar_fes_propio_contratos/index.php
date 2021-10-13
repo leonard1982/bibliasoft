@@ -218,7 +218,7 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211013"; 
-      $this->nm_hr_ult_alt   = "172426"; 
+      $this->nm_hr_ult_alt   = "174148"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDuBqHAveV5FUHgvOVIB/Dur/VoF7HQFYZkBiHArKD5JwDMzGHENiHEXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZSBODSNOV5JwDErKHEBUDuFaZuXGDcXOZSFUD1veHuBODMNOVcFeDWFYHIrqDcNwH9BqDSNOV5JwHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGHEXeV5XCZuBOD9JKDQX7HArYV5BOHgrYDkBODWF/DoraD9XOH9BOZ1BeD5BqDErKVkXeV5FaDoBOD9JKDQX7Z1rwV5raHgvsDkBOV5X7DoJsD9BiZ1rqHAN7D5NUDEvsHEFiV5FaDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveD5FaHuzGZSJqDWF/HIrqHQBiZ1BiHArKHuXGDMvCZSJqHEXCDoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBqHQBiDQBqHAvOV5BqDMvmVcFKV5BmVoBqD9BsZkFGHArKD5FaHgNOHEFiHEFqVoXGHQXODuFaHIrwVWJsHuBOVcBUH5FqHIX7DcFYZkFGD1rKHQJsHgBOHEBUDuFaHIJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZSFUZ1rwHQJsDMBYVcB/DWB3VENUHQNmZSFaHAN7V5BqDMvCZSXeDWr/HMBqHQJeDQFGHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQBqHABYHuBiHgvOVIFCDWrmVorqD9XOZ1rqHAN7D5BOHgBOZSJ3H5F/VoFGD9XsDQJwHINaVWBODMvsVcFKH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9B/HArYV5FUDEvsVkXeHEFqDoraD9NwH9FUZ1rwD5JeHgrKVcFCH5FqVoJwD9XOZ1rqHAN7D5FaDErKHEFiHEFqDoB/DcXOZSX7D1BeV5JwHuNOVIFCH5XCVoX7DcBqZ1FaD1rKD5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1rqD1rwV5BqHgBeZSJ3H5F/HMJeDcBwH9X7Z1vCV5JeHgrKV9FeH5FqHMrqHQNmH9B/Z1BOD5BOHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAzGD5BqHgveHArsH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFKV5X/VorqHQNmVIJsHAN7HQX7HgveHENiV5FaDoJsHQJeDQFaDSrwV5X7HgrwVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2279,7 +2279,7 @@ else
 	$vbasetotales     = array();
 	$vporcentajesivas = array();
 	
-	$vsql = "select m.nompro,d.adicional,d.cantidad,d.valorunit,d.iva,d.valorpar,d.obs,b.bodega,m.codigoprod from facturaven k inner join detalleventa d on d.numfac=k.idfacven inner join productos m on d.idpro=m.idprod inner join bodegas b on d.idbod=b.idbodega where k.idfacven='".$vidfacven."'";
+	$vsql = "select m.nompro,d.adicional,d.cantidad,d.valorunit,d.iva,d.valorpar,d.obs,b.bodega,m.codigoprod from facturaven_contratos k inner join detalleventa d on d.numfac=k.idfacven inner join productos m on d.idpro=m.idprod inner join bodegas b on d.idbod=b.idbodega where k.idfacven='".$vidfacven."'";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2716,7 +2716,7 @@ else
 								$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 							}
 
-							$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+							$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2735,7 +2735,7 @@ else
          $rf->Close();
       ;
 
-							$vsql = "select cufe from facturaven where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
+							$vsql = "select cufe from facturaven_contratos where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
 							 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2831,7 +2831,7 @@ else
 													$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 												}
 
-												$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."'  WHERE idfacven='".$vidfacven."'";
+												$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."'  WHERE idfacven='".$vidfacven."'";
 												
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2850,7 +2850,7 @@ else
          $rf->Close();
       ;
 
-												$vsql = "select cufe from facturaven where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
+												$vsql = "select cufe from facturaven_contratos where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
 												 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2938,7 +2938,7 @@ else
 									$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 								}
 
-								$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+								$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 								
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2957,7 +2957,7 @@ else
          $rf->Close();
       ;
 
-								$vsql = "select cufe from facturaven where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
+								$vsql = "select cufe from facturaven_contratos where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
 								 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3055,7 +3055,7 @@ else
 														$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 													}
 
-													$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+													$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 													
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3074,7 +3074,7 @@ else
          $rf->Close();
       ;
 
-													$vsql = "select cufe from facturaven where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
+													$vsql = "select cufe from facturaven_contratos where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
 													 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3286,7 +3286,7 @@ else
 						$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 					}
 
-					$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+					$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 					
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3305,7 +3305,7 @@ else
          $rf->Close();
       ;
 
-					$vsql = "select cufe from facturaven where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
+					$vsql = "select cufe from facturaven_contratos where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3401,7 +3401,7 @@ else
 											$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 										}
 
-										$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+										$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 										
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3420,7 +3420,7 @@ else
          $rf->Close();
       ;
 
-										$vsql = "select cufe from facturaven where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
+										$vsql = "select cufe from facturaven_contratos where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
 										 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3508,7 +3508,7 @@ else
 							$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml;  
 						}
 
-						$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+						$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 						
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3527,7 +3527,7 @@ else
          $rf->Close();
       ;
 
-						$vsql = "select cufe from facturaven where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
+						$vsql = "select cufe from facturaven_contratos where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
 						 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3623,7 +3623,7 @@ else
 												$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 											}
 
-											$vsql="UPDATE facturaven SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+											$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
 											
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3642,7 +3642,7 @@ else
          $rf->Close();
       ;
 
-											$vsql = "select cufe from facturaven where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
+											$vsql = "select cufe from facturaven_contratos where idfacven='".$vidfacven."' and cufe is not null and cufe <> ''";
 											 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
