@@ -218,7 +218,7 @@ class blank_enviar_fes_ini
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211013"; 
-      $this->nm_hr_ult_alt   = "153050"; 
+      $this->nm_hr_ult_alt   = "160317"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_enviar_fes_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuFaZ1N7HuFUHuBOV9FeDWJeHIFUHQXOZkFGZ1BeV5BqHgveVkJqDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHEFiDWrGVoFGD9FYDQX7Z1BYHQrqHuzGVIBODWFaHIBiHQBiZ1FaHANOV5XGDMveHEJqDuFaHMBiHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwD5JwHuNOVIFCDWF/DoFGDcBqZ1FaHAN7D5BiDMzGVkXeDWFqDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGZSJqDWr/HMFGHQJKDuFaZ1BYV5raDMrYVcFKDWJeDoNUHQBiH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAzGD5JeHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBODMBYZSJqDuX7HINUDcJUZSBOHArKHQJsDMzGVkJqDuFaHIraD9JKZ9F7HArYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmH9BiDSNaV5BqHgrwDkBsDurGVoFGHQNmZSBqDSNOD5JwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoJsHQJmZSBqZ1vOZMFaHgBODkXKDWr/DoFUHQNwZSFUHIrKD5JsDMBYVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBODWFYDoJsD9BiZSB/DSrYD5NUDErKVkJqV5FaVoBODcBwDQFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFYDoXGD9BsZSBqHAzGD5BqDMvCHErCDuFaHMJsHQFYZSBiHANOHuFGHuBYVIFCHEFYVoB/HQXOZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5BOHgveZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMzGDkB/DuX7HMJsDcJUZ1F7HANOD5BiHgBeVkXeHEFqHIraHQXsDuFaHANOD5JsDMzGDkBsDWFYDoJsHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1931,7 +1931,13 @@ class blank_enviar_fes_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
-  if(isset($_POST["idfacven"]))
+  date_default_timezone_set('America/Bogota');
+setlocale(LC_ALL, 'es_CO');
+setlocale(LC_MONETARY, 'es_CO');
+
+
+
+if(isset($_POST["idfacven"]))
 {
 	$vidfacven = $_POST["idfacven"];
 	
@@ -1989,10 +1995,114 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'off';
        } 
        exit;
    } 
+function fDigito($vdoc)
+{
+$_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
+  
+	$long=strlen($vdoc);
+	$str=$vdoc;
+	$arr = str_split($str);
+	switch ($long)
+	{
+	case 4:
+	$valor=$arr[3]*3+$arr[2]*7+$arr[1]*13+$arr[0]*17;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 5:
+	$valor=$arr[0]*19+$arr[1]*17+$arr[2]*13+$arr[3]*7+$arr[4]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 6:
+	$valor=$arr[0]*23+$arr[1]*19+$arr[2]*17+$arr[3]*13+$arr[4]*7+$arr[5]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 7:
+	$valor=$arr[0]*29+$arr[1]*23+$arr[2]*19+$arr[3]*17+$arr[4]*13+$arr[5]*7+$arr[6]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 8:
+	$valor=$arr[0]*37+$arr[1]*29+$arr[2]*23+$arr[3]*19+$arr[4]*17+$arr[5]*13+$arr[6]*7+$arr[7]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 9:
+	$valor=$arr[0]*41+$arr[1]*37+$arr[2]*29+$arr[3]*23+$arr[4]*19+$arr[5]*17+$arr[6]*13+$arr[7]*7+$arr[8]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 10:
+	$valor=$arr[0]*43+$arr[1]*41+$arr[2]*37+$arr[3]*29+$arr[4]*23+$arr[5]*19+$arr[6]*17+$arr[7]*13+$arr[8]*7+$arr[9]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+	}
+
+$_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'off';
+}
 function fEnviarFV($vidfacven)
 	{
 $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
   
+			
 		$vmensaje = "";
 		$vcufe	  = "";	
 		$vconsecutivo = "";
@@ -2017,6 +2127,114 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
 		$vServidor  = "";
 		$TokenEnterprise = "";
 		$TokenAutorizacion = "";
+		
+		$vvalidar_correo_enlinea = "NO";
+		$venvio_credenciales     = "NO";
+		$vplantillas_correo      = "";
+		$vcopia_factura_a        = "";
+		$vplantilla_pordefecto   = "";
+		$vnombre_emisor          = "";
+		$vcorreo_emisor          = "";
+		$vnit_emisor             = "";
+		$vurl_api_pdfs           = "";
+		$vurl_api_sendmail       = "";
+		
+		$vplantilla_existe = false;
+		$vcabecera = "";
+		$vcuerpo   = "";
+		$vbotones  = "";
+		$vpie      = "";
+		
+		
+		$vsql = "select (select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, envio_credenciales, plantillas_correo, copia_factura_a, plantilla_pordefecto, (select d.razonsoc from datosemp d where d.iddatos='1') as nombre_emisor, (select d.correo from datosemp d where d.iddatos='1') as correo_emisor, (select d.nit from datosemp d where d.iddatos='1') as nit_emisor, url_api_pdfs, url_api_sendmail from webservicefe order by idwebservicefe desc limit 1";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vServ = array();
+      $vserv = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vServ[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vserv[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vServ = false;
+          $vServ_erro = $this->Db->ErrorMsg();
+          $vserv = false;
+          $vserv_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($vserv[0][0]))
+		{
+
+			$vvalidar_correo_enlinea = $vserv[0][0];
+			$venvio_credenciales     = $vserv[0][1];
+			$vplantillas_correo      = $vserv[0][2];
+			$vcopia_factura_a        = $vserv[0][3];
+			$vplantilla_pordefecto   = $vserv[0][4];
+			$vnombre_emisor          = $vserv[0][5];
+			$vcorreo_emisor          = $vserv[0][6];
+			$vnit_emisor             = $vserv[0][7];
+			$vurl_api_pdfs           = $vserv[0][8];
+			$vurl_api_sendmail       = $vserv[0][9];
+		}
+		
+		if($vplantillas_correo=="SI" and $vplantilla_pordefecto>0)
+		{
+			$vsql = "select html_header, html_body, html_buttons, html_footer from plantillas_correo_propio where id='".$vplantilla_pordefecto."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vSiPlantilla = array();
+      $vsiplantilla = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vSiPlantilla[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vsiplantilla[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vSiPlantilla = false;
+          $vSiPlantilla_erro = $this->Db->ErrorMsg();
+          $vsiplantilla = false;
+          $vsiplantilla_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+			if(isset($vsiplantilla[0][0]) and isset($vsiplantilla[0][1]) and isset($vsiplantilla[0][2]) and isset($vsiplantilla[0][3]))
+			{
+				$vplantilla_existe = true;
+				$vcabecera = $vsiplantilla[0][0];
+				$vcuerpo   = $vsiplantilla[0][1];
+				$vbotones  = $vsiplantilla[0][2];
+				$vpie      = $vsiplantilla[0][3];
+			}
+		}
 		
 		$vsql="UPDATE facturaven_contratos SET avisos='DOCUMENTO EN PROCESO DE ENVÍO, NO RESETEAR!!!', enviada='PR' WHERE idfacven='".$vidfacven."'";
 		
