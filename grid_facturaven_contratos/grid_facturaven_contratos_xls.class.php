@@ -881,7 +881,7 @@ function fEnviarPropio(idfacven,bd)
 			}
 		});
 		
-		$.post("../blank_enviar_fes/index.php",{
+		$.post("../blank_enviar_fes_propio_contratos/index.php",{
 			
 			idfacven:idfacven,
 			bd:bd
@@ -2184,7 +2184,14 @@ switch($this->enviada )
 	break;
 }
 
-$this->enviar  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+if(!empty($this->cufe ))
+{
+	$this->enviar  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+}
+else
+{
+	$this->enviar  = "";
+}
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_col)
