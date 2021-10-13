@@ -809,11 +809,499 @@ if (!isset($_SESSION['gcontador_grid_fe'])) {$_SESSION['gcontador_grid_fe'] = ""
 if (!isset($this->sc_temp_gcontador_grid_fe)) {$this->sc_temp_gcontador_grid_fe = (isset($_SESSION['gcontador_grid_fe'])) ? $_SESSION['gcontador_grid_fe'] : "";}
   $this->sc_temp_gcontador_grid_fe=1;
 
+?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
+<script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+<?php
+
 ;
 ;
 ;
 ;
 ;
+
+;
+;
+;
+
+?>
+<script>
+
+function fEnviarTech(idfacven)
+{
+	if(confirm('¿Desea firmar el documento electrónico?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_fe_factura_tech_ajax/index.php",{idfacven:idfacven},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			if(confirm(r))
+			{
+			   nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+			   nm_gp_submit_ajax ('igual', 'breload');
+			}
+		});
+	}
+}
+	
+function fEnviarPropio(idfacven,bd)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_enviar_fes_propio/index.php",{
+			
+			idfacven:idfacven,
+			bd:bd
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="Documento enviado con éxito!!!")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
+	}
+}
+	
+function fRegenerarPDFPropio(idfacven,bd,cufe)
+{
+	if(!$.isEmptyObject(cufe))
+	{
+		if(confirm('¿Desea regenerar el PDF del documento?'))
+		{
+			$.blockUI({ 
+				message: 'Espere por favor...', 
+				css: { 
+					border: 'none', 
+					padding: '15px', 
+					backgroundColor: '#000', 
+					'-webkit-border-radius': '10px', 
+					'-moz-border-radius': '10px', 
+					opacity: .5, 
+					color: '#fff'
+				}
+			});
+
+			$.post("../blank_envio_propio_regenerar/index.php",{
+
+				idfacven:idfacven,
+				bd:bd
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(confirm('PDF regenerado con éxito.'))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+
+			});
+		}
+	}
+	else
+	{
+		alert('El documento no ha sido enviado electrónicamente.');
+	}
+}
+	
+function fJSONPropio(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_propio_xml/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
+function fJSONDataico(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_dataico_json/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
+function fReenviarPropio(idfacven)
+{
+
+	$.post("../blank_correo_reenvio/index.php",{
+
+		idfacven:idfacven
+
+	},function(r){
+
+		console.log(r);
+		var correo = "";
+		
+		if(correo = prompt("Correo Electrónico",r))
+		{
+			if(correo == null || correo == "")
+			{
+			   alert("Debe digitar un correo.");
+			}
+			else
+			{
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+				
+				$.post("../blank_correo_reenvio2/index.php",{
+
+					idfacven:idfacven,
+					correo:correo
+
+				},function(r2){
+
+					$.unblockUI();
+					
+					console.log(r2);
+					alert(r2);
+				});
+			}
+		}
+
+	});
+}
+	
+function fReenviarDataico(idfacven)
+{
+	$.post("../blank_correo_reenvio/index.php",{
+
+		idfacven:idfacven
+
+	},function(r){
+
+		console.log(r);
+		var correo = "";
+		
+		if(correo = prompt("Correo Electrónico",r))
+		{
+			if(correo == null || correo == "")
+			{
+			   alert("Debe digitar un correo.");
+			}
+			else
+			{
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+				
+				$.post("../blank_reenvio_dataico/index.php",{
+
+					idfacven:idfacven,
+					correo:correo
+
+				},function(r2){
+
+					$.unblockUI();
+					
+					console.log(r2);
+					alert(r2);
+				});
+			}
+		}
+
+	});
+}
+	
+function fAsentarDoc(idfacven)
+{
+	if(confirm('¿Desea asentar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_asentar/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			nm_gp_submit_ajax ('igual', 'breload');
+			
+			
+		});
+	}
+}
+	
+	
+function fReversarDoc(idfacven)
+{
+	if(confirm('¿Desea reversar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_reversar/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			nm_gp_submit_ajax ('igual', 'breload');
+			
+			
+		});
+	}
+}
+	
+function fConsultarEstadoTech(empresa,id)
+{
+	if(confirm('¿Desea enviar el documento a la electrónico?'))
+	{
+		if($("#a_"+id).css("display")=="none")
+		{
+			$("#a_"+id).css("display","block");
+			$("#i_"+id).css("display","none");
+			$("#p_"+id).css("display","none");
+
+			var url = "../scripts/tech/?empresa="+empresa+"&id="+id;
+			$.get(url,{empresa:empresa,id:id},function(r){
+				
+				console.log(r);
+				
+				if(r=="0")
+				{
+					$("#p_"+id).css("display","none");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","block");
+					alert("Hay problemas de conexión con la DIAN.");
+				}
+				
+				if(r=="1")
+				{
+					$("#p_"+id).css("display","block");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","none");
+					alert("Documento enviado con éxito.");
+				}
+				
+				if(r=="2")
+				{
+					$("#p_"+id).css("display","none");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","block");
+					alert("El documento no ha sido enviado electrónicamente.");
+				}
+				
+			});
+		}
+	}
+}
+	
+function fEnvioDataico(idfacven)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_envio_dataico/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="ok")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
+	}
+}
+	
+$(document).ajaxStart(function(){
+	
+    
+    
+}).ajaxStop(function(){
+    
+    
+    
+});
+</script>
+
+<?php
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
       if  (!empty($this->nm_where_dinamico)) 
@@ -1695,6 +2183,8 @@ switch($this->enviada )
 		$this->NM_field_style["anio"] = "background-color:#89a0d1;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
 	break;
 }
+
+$this->enviar  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_col)
@@ -2468,6 +2958,34 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
                   }
                   else {
                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['enviar'])) ? $this->New_label['enviar'] : "Enviar"; 
+          if ($Cada_col == "enviar" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
                   }
                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
@@ -3705,6 +4223,26 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->ing_terceros);
          $this->Xls_col++;
    }
+   //----- enviar
+   function NM_export_enviar()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->enviar = html_entity_decode($this->enviar, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->enviar = strip_tags($this->enviar);
+         $this->enviar = NM_charset_to_utf8($this->enviar);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->enviar, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->enviar, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- idfacven
    function NM_export_idfacven()
    {
@@ -4549,6 +5087,18 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
+         $this->Xls_col++;
+   }
+   //----- enviar
+   function NM_sub_cons_enviar()
+   {
+         $this->enviar = html_entity_decode($this->enviar, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->enviar = strip_tags($this->enviar);
+         $this->enviar = NM_charset_to_utf8($this->enviar);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->enviar;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
    //----- idfacven

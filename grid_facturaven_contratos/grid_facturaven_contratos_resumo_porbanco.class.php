@@ -429,11 +429,499 @@ if (!isset($_SESSION['gcontador_grid_fe'])) {$_SESSION['gcontador_grid_fe'] = ""
 if (!isset($this->sc_temp_gcontador_grid_fe)) {$this->sc_temp_gcontador_grid_fe = (isset($_SESSION['gcontador_grid_fe'])) ? $_SESSION['gcontador_grid_fe'] : "";}
   $this->sc_temp_gcontador_grid_fe=1;
 
+?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
+<script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+<?php
+
 ;
 ;
 ;
 ;
 ;
+
+;
+;
+;
+
+?>
+<script>
+
+function fEnviarTech(idfacven)
+{
+	if(confirm('¿Desea firmar el documento electrónico?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_fe_factura_tech_ajax/index.php",{idfacven:idfacven},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			if(confirm(r))
+			{
+			   nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+			   nm_gp_submit_ajax ('igual', 'breload');
+			}
+		});
+	}
+}
+	
+function fEnviarPropio(idfacven,bd)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_enviar_fes_propio/index.php",{
+			
+			idfacven:idfacven,
+			bd:bd
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="Documento enviado con éxito!!!")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
+	}
+}
+	
+function fRegenerarPDFPropio(idfacven,bd,cufe)
+{
+	if(!$.isEmptyObject(cufe))
+	{
+		if(confirm('¿Desea regenerar el PDF del documento?'))
+		{
+			$.blockUI({ 
+				message: 'Espere por favor...', 
+				css: { 
+					border: 'none', 
+					padding: '15px', 
+					backgroundColor: '#000', 
+					'-webkit-border-radius': '10px', 
+					'-moz-border-radius': '10px', 
+					opacity: .5, 
+					color: '#fff'
+				}
+			});
+
+			$.post("../blank_envio_propio_regenerar/index.php",{
+
+				idfacven:idfacven,
+				bd:bd
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(confirm('PDF regenerado con éxito.'))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+
+			});
+		}
+	}
+	else
+	{
+		alert('El documento no ha sido enviado electrónicamente.');
+	}
+}
+	
+function fJSONPropio(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_propio_xml/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
+function fJSONDataico(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_dataico_json/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
+function fReenviarPropio(idfacven)
+{
+
+	$.post("../blank_correo_reenvio/index.php",{
+
+		idfacven:idfacven
+
+	},function(r){
+
+		console.log(r);
+		var correo = "";
+		
+		if(correo = prompt("Correo Electrónico",r))
+		{
+			if(correo == null || correo == "")
+			{
+			   alert("Debe digitar un correo.");
+			}
+			else
+			{
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+				
+				$.post("../blank_correo_reenvio2/index.php",{
+
+					idfacven:idfacven,
+					correo:correo
+
+				},function(r2){
+
+					$.unblockUI();
+					
+					console.log(r2);
+					alert(r2);
+				});
+			}
+		}
+
+	});
+}
+	
+function fReenviarDataico(idfacven)
+{
+	$.post("../blank_correo_reenvio/index.php",{
+
+		idfacven:idfacven
+
+	},function(r){
+
+		console.log(r);
+		var correo = "";
+		
+		if(correo = prompt("Correo Electrónico",r))
+		{
+			if(correo == null || correo == "")
+			{
+			   alert("Debe digitar un correo.");
+			}
+			else
+			{
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+				
+				$.post("../blank_reenvio_dataico/index.php",{
+
+					idfacven:idfacven,
+					correo:correo
+
+				},function(r2){
+
+					$.unblockUI();
+					
+					console.log(r2);
+					alert(r2);
+				});
+			}
+		}
+
+	});
+}
+	
+function fAsentarDoc(idfacven)
+{
+	if(confirm('¿Desea asentar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_asentar/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			nm_gp_submit_ajax ('igual', 'breload');
+			
+			
+		});
+	}
+}
+	
+	
+function fReversarDoc(idfacven)
+{
+	if(confirm('¿Desea reversar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_reversar/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			nm_gp_submit_ajax ('igual', 'breload');
+			
+			
+		});
+	}
+}
+	
+function fConsultarEstadoTech(empresa,id)
+{
+	if(confirm('¿Desea enviar el documento a la electrónico?'))
+	{
+		if($("#a_"+id).css("display")=="none")
+		{
+			$("#a_"+id).css("display","block");
+			$("#i_"+id).css("display","none");
+			$("#p_"+id).css("display","none");
+
+			var url = "../scripts/tech/?empresa="+empresa+"&id="+id;
+			$.get(url,{empresa:empresa,id:id},function(r){
+				
+				console.log(r);
+				
+				if(r=="0")
+				{
+					$("#p_"+id).css("display","none");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","block");
+					alert("Hay problemas de conexión con la DIAN.");
+				}
+				
+				if(r=="1")
+				{
+					$("#p_"+id).css("display","block");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","none");
+					alert("Documento enviado con éxito.");
+				}
+				
+				if(r=="2")
+				{
+					$("#p_"+id).css("display","none");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","block");
+					alert("El documento no ha sido enviado electrónicamente.");
+				}
+				
+			});
+		}
+	}
+}
+	
+function fEnvioDataico(idfacven)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_envio_dataico/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="ok")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
+	}
+}
+	
+$(document).ajaxStart(function(){
+	
+    
+    
+}).ajaxStop(function(){
+    
+    
+    
+});
+</script>
+
+<?php
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
        $this->SC_Buf_onInit = ob_get_clean();; 
@@ -638,6 +1126,10 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['ing_terceros']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['ing_terceros'] = "Ing Terceros"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['enviar']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['enviar'] = "Enviar"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['idfacven']))
        {
@@ -6276,11 +6768,499 @@ if (!isset($_SESSION['gcontador_grid_fe'])) {$_SESSION['gcontador_grid_fe'] = ""
 if (!isset($this->sc_temp_gcontador_grid_fe)) {$this->sc_temp_gcontador_grid_fe = (isset($_SESSION['gcontador_grid_fe'])) ? $_SESSION['gcontador_grid_fe'] : "";}
   $this->sc_temp_gcontador_grid_fe=1;
 
+?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
+<script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+<?php
+
 ;
 ;
 ;
 ;
 ;
+
+;
+;
+;
+
+?>
+<script>
+
+function fEnviarTech(idfacven)
+{
+	if(confirm('¿Desea firmar el documento electrónico?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_fe_factura_tech_ajax/index.php",{idfacven:idfacven},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			if(confirm(r))
+			{
+			   nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+			   nm_gp_submit_ajax ('igual', 'breload');
+			}
+		});
+	}
+}
+	
+function fEnviarPropio(idfacven,bd)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_enviar_fes_propio/index.php",{
+			
+			idfacven:idfacven,
+			bd:bd
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="Documento enviado con éxito!!!")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
+	}
+}
+	
+function fRegenerarPDFPropio(idfacven,bd,cufe)
+{
+	if(!$.isEmptyObject(cufe))
+	{
+		if(confirm('¿Desea regenerar el PDF del documento?'))
+		{
+			$.blockUI({ 
+				message: 'Espere por favor...', 
+				css: { 
+					border: 'none', 
+					padding: '15px', 
+					backgroundColor: '#000', 
+					'-webkit-border-radius': '10px', 
+					'-moz-border-radius': '10px', 
+					opacity: .5, 
+					color: '#fff'
+				}
+			});
+
+			$.post("../blank_envio_propio_regenerar/index.php",{
+
+				idfacven:idfacven,
+				bd:bd
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(confirm('PDF regenerado con éxito.'))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+
+			});
+		}
+	}
+	else
+	{
+		alert('El documento no ha sido enviado electrónicamente.');
+	}
+}
+	
+function fJSONPropio(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_propio_xml/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
+function fJSONDataico(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_dataico_json/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+	
+function fReenviarPropio(idfacven)
+{
+
+	$.post("../blank_correo_reenvio/index.php",{
+
+		idfacven:idfacven
+
+	},function(r){
+
+		console.log(r);
+		var correo = "";
+		
+		if(correo = prompt("Correo Electrónico",r))
+		{
+			if(correo == null || correo == "")
+			{
+			   alert("Debe digitar un correo.");
+			}
+			else
+			{
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+				
+				$.post("../blank_correo_reenvio2/index.php",{
+
+					idfacven:idfacven,
+					correo:correo
+
+				},function(r2){
+
+					$.unblockUI();
+					
+					console.log(r2);
+					alert(r2);
+				});
+			}
+		}
+
+	});
+}
+	
+function fReenviarDataico(idfacven)
+{
+	$.post("../blank_correo_reenvio/index.php",{
+
+		idfacven:idfacven
+
+	},function(r){
+
+		console.log(r);
+		var correo = "";
+		
+		if(correo = prompt("Correo Electrónico",r))
+		{
+			if(correo == null || correo == "")
+			{
+			   alert("Debe digitar un correo.");
+			}
+			else
+			{
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+				
+				$.post("../blank_reenvio_dataico/index.php",{
+
+					idfacven:idfacven,
+					correo:correo
+
+				},function(r2){
+
+					$.unblockUI();
+					
+					console.log(r2);
+					alert(r2);
+				});
+			}
+		}
+
+	});
+}
+	
+function fAsentarDoc(idfacven)
+{
+	if(confirm('¿Desea asentar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_asentar/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			nm_gp_submit_ajax ('igual', 'breload');
+			
+			
+		});
+	}
+}
+	
+	
+function fReversarDoc(idfacven)
+{
+	if(confirm('¿Desea reversar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_reversar/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			nm_gp_submit_ajax ('igual', 'breload');
+			
+			
+		});
+	}
+}
+	
+function fConsultarEstadoTech(empresa,id)
+{
+	if(confirm('¿Desea enviar el documento a la electrónico?'))
+	{
+		if($("#a_"+id).css("display")=="none")
+		{
+			$("#a_"+id).css("display","block");
+			$("#i_"+id).css("display","none");
+			$("#p_"+id).css("display","none");
+
+			var url = "../scripts/tech/?empresa="+empresa+"&id="+id;
+			$.get(url,{empresa:empresa,id:id},function(r){
+				
+				console.log(r);
+				
+				if(r=="0")
+				{
+					$("#p_"+id).css("display","none");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","block");
+					alert("Hay problemas de conexión con la DIAN.");
+				}
+				
+				if(r=="1")
+				{
+					$("#p_"+id).css("display","block");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","none");
+					alert("Documento enviado con éxito.");
+				}
+				
+				if(r=="2")
+				{
+					$("#p_"+id).css("display","none");
+					$("#a_"+id).css("display","none");
+					$("#i_"+id).css("display","block");
+					alert("El documento no ha sido enviado electrónicamente.");
+				}
+				
+			});
+		}
+	}
+}
+	
+function fEnvioDataico(idfacven)
+{
+	if(confirm('¿Desea Enviar el documento?'))
+	{
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		$.post("../blank_envio_dataico/index.php",{
+			
+			idfacven:idfacven
+			   
+			},function(r){
+
+			$.unblockUI();
+			console.log(r);
+			
+			if(r=="ok")
+			{
+			    nm_gp_submit_ajax ('igual', 'breload');
+			}
+			else
+			{
+				if(confirm(r))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+			}
+		});
+	}
+}
+	
+$(document).ajaxStart(function(){
+	
+    
+    
+}).ajaxStop(function(){
+    
+    
+    
+});
+</script>
+
+<?php
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
      if  (!empty($this->nm_where_dinamico)) 
@@ -6588,6 +7568,8 @@ switch($this->enviada )
 		$this->NM_field_style["anio"] = "background-color:#89a0d1;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
 	break;
 }
+
+$this->enviar  = "<a onclick='fEnviarPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
             $this->banco_orig = $this->banco;

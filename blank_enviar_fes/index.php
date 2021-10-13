@@ -217,8 +217,8 @@ class blank_enviar_fes_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20211013"; 
+      $this->nm_hr_ult_alt   = "153050"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_enviar_fes_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKH9FUD1BeHQrqHuBYVcFCH5XCVoF7DcFYZSFaDSrYHuBOHgNOHEJqDWBmZuJeD9FYDuBqHAveV5JeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqHuNOVcFCDuFGVEX7HQNmH9BqD1rwHQFUHgNKVkJGDWXCVoXGHQBiDQB/D1veD5XGHuNOVcBOH5XCDoJeHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5X7HuNOVcFKDWFaDoJsD9JmH9BOZ1BeV5FaDEBOVkJGDWXCVoXGDcJeDQFGHANOV5raHgrKVIBODWFYVoFGHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrwVIBsDuFqHMFGD9BiZ1X7HAvCZMBqHgNKHEBUDWr/VoJwHQFYDuFaHIrKHQNUDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHANKVWBODMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHENiDWr/VoBOHQFYDQFaD1BeD5rqHgvsDkBOH5XCVoX7HQBsZSB/HAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuFaZ1N7HuFUHuBOV9FeDWJeHIFUHQXOZkFGZ1BeV5BqHgveVkJqDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHEFiDWrGVoFGD9FYDQX7Z1BYHQrqHuzGVIBODWFaHIBiHQBiZ1FaHANOV5XGDMveHEJqDuFaHMBiHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwD5JwHuNOVIFCDWF/DoFGDcBqZ1FaHAN7D5BiDMzGVkXeDWFqDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGZSJqDWr/HMFGHQJKDuFaZ1BYV5raDMrYVcFKDWJeDoNUHQBiH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAzGD5JeHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBODMBYZSJqDuX7HINUDcJUZSBOHArKHQJsDMzGVkJqDuFaHIraD9JKZ9F7HArYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2013,6 +2013,10 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
 		$vidcli = "";
 		$vobserv= "";
 		$v_pj   = "";
+		$vproveedor = "";
+		$vServidor  = "";
+		$TokenEnterprise = "";
+		$TokenAutorizacion = "";
 		
 		$vsql="UPDATE facturaven_contratos SET avisos='DOCUMENTO EN PROCESO DE ENVÍO, NO RESETEAR!!!', enviada='PR' WHERE idfacven='".$vidfacven."'";
 		
@@ -2033,7 +2037,7 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
          $rf->Close();
       ;
 
-		$vsql = "select coalesce(fc.cufe,''), numfacven, fc.total, fc.fechaven, fc.credito, fc.fechavenc, fc.direccion,fc.numcontrato, fc.codigo_mun, fc.codigo_dep, fc.enviada, fc.periodo, fc.anio, (select d.departamento from departamento d where d.codigo=fc.codigo_dep limit 1) as depart, (select m.municipio from municipio m where m.codigo_mu=fc.codigo_mun and m.codigo_dep=fc.codigo_dep limit 1) as munic, fc.resolucion,fc.idcli,fc.observaciones,(select r.prefijo from resdian r where r.Idres=fc.resolucion limit 1) as pj from facturaven_contratos fc where fc.idfacven='".$vidfacven."'";
+		$vsql = "select coalesce(fc.cufe,''), numfacven, fc.total, fc.fechaven, fc.credito, fc.fechavenc, fc.direccion,fc.numcontrato, fc.codigo_mun, fc.codigo_dep, fc.enviada, fc.periodo, fc.anio, (select d.departamento from departamento d where d.codigo=fc.codigo_dep limit 1) as depart, (select m.municipio from municipio m where m.codigo_mu=fc.codigo_mun and m.codigo_dep=fc.codigo_dep limit 1) as munic, fc.resolucion,fc.idcli,fc.observaciones,(select r.prefijo from resdian r where r.Idres=fc.resolucion limit 1) as pj, fc.proveedor, fc.token, fc.password, fc.servidor from facturaven_contratos fc where fc.idfacven='".$vidfacven."'";
 
 		 
       $nm_select = $vsql; 
@@ -2086,75 +2090,79 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
 			$vidcli   = $vdfv[0][16];
 			$vobserv  = $vdfv[0][17];
 			$v_pj     = $vdfv[0][18];
+			$vproveedor = $vdfv[0][19];
+			$vServidor  = $vdfv[0][20];
+			$TokenEnterprise   = $vdfv[0][21];
+			$TokenAutorizacion = $vdfv[0][22];
 
 			if(!empty($vcufe))
 			{
 			}
 			else
 			{
-			$TokenEnterprise = '';
-			$TokenAutorizacion = '';
-			$vServidor='';
-			$vPFe= '';
+				$TokenEnterprise = '';
+				$TokenAutorizacion = '';
+				$vServidor='';
+				$vPFe= '';
 
-			$vrango="F4NN-1"; 
+				$vrango="F4NN-1"; 
 
-			$vcorreo = "easeing@outlook.com.com";
-			$vaccion = "Enviar";
+				$vcorreo = "easeing@outlook.com.com";
+				$vaccion = "Enviar";
 
-			$ciuu="";
-			$vcorreo="";
-			$nitodoc="";
-			$tel="";
-			$codImp="";
-			$zonpos="";
-			$nomcomerc="";
-			$nombr="";
-			$vdv="";
-			$tipodoc="";
-			$obligac="";
-			$ti_per="";
+				$ciuu="";
+				$vcorreo="";
+				$nitodoc="";
+				$tel="";
+				$codImp="";
+				$zonpos="";
+				$nomcomerc="";
+				$nombr="";
+				$vdv="";
+				$tipodoc="";
+				$obligac="";
+				$ti_per="";
 
-			$cant	="";
-			$codbp	="";
-			$desc	="";
-			$codest	="";
-			$base	="";
-			$codImp	="";
-			$Timp	="";
-			$Timp	="";
-			$eliva	="";
-			$tot	="";
-			$tot	="";
-			$valun	="";
-			$valun	="";
-			$sec	="";
+				$cant	="";
+				$codbp	="";
+				$desc	="";
+				$codest	="";
+				$base	="";
+				$codImp	="";
+				$Timp	="";
+				$Timp	="";
+				$eliva	="";
+				$tot	="";
+				$tot	="";
+				$valun	="";
+				$valun	="";
+				$sec	="";
 
-			$max    = "";
+				$max    = "";
 
-			$decoded = '';
-			$vestado = '';
-			$vavisos = '';
-			$eldesc	 = 0;
-			$t		 = 0;
-			$elmonto = 0;
-			$bas_br	 = 0;
+				$decoded = '';
+				$vestado = '';
+				$vavisos = '';
+				$eldesc	 = 0;
+				$t		 = 0;
+				$elmonto = 0;
+				$bas_br	 = 0;
 
-			$t_reg	 ='';
-			$vEsfac	 ='NO';
+				$t_reg	 ='';
+				$vEsfac	 ='NO';
 
-			$lafechadevencimiento = '';
+				$lafechadevencimiento = '';
 
-			$a=0;
-			$b=1;
-			$c=0;
-			$d=0;
-			$vtotalingresosparaterceros = 0;
-			$vobs = new strings();
+				$a=0;
+				$b=1;
+				$c=0;
+				$d=0;
+				$vtotalingresosparaterceros = 0;
+				$vobs = new strings();
 
-			$vprimerfac=1;
+				$vprimerfac=1;
 
-			 
+				 
       $nm_select = "SELECT prefijo, prefijo_fe, pref_factura, primerfactura FROM resdian WHERE Idres = $vresolucion"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2183,71 +2191,33 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
           $ds_res_erro = $this->Db->ErrorMsg();
       } 
 ;
-			if(isset($ds_res[0][1]))
+				if(isset($ds_res[0][1]))
 				{
-				$vPref	=$ds_res[0][0];
-				$vPFe	=$ds_res[0][1];
-				$vEsfac	=$ds_res[0][2];
-				$vprimerfac = $ds_res[0][3];
-				$vrango = $vPref."-"."$vprimerfac";
+					$vPref	=$ds_res[0][0];
+					$vPFe	=$ds_res[0][1];
+					$vEsfac	=$ds_res[0][2];
+					$vprimerfac = $ds_res[0][3];
+					$vrango = $vPref."-"."$vprimerfac";
 				}
 
-			if($vPFe=='FE' and $vEsfac=='SI')
+				if($vPFe=='FE' and $vEsfac=='SI')
 				{
-				 
-      $nm_select = "select servidor1, servidor2, tokenempresa, tokenpassword from webservicefe order by idwebservicefe desc limit 1"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $ds_fv = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $ds_fv[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $ds_fv = false;
-          $ds_fv_erro = $this->Db->ErrorMsg();
-      } 
-;
-				if(isset($ds_fv[0][0]) and (isset($ds_fv[0][1])) and (isset($ds_fv[0][2])) and (isset($ds_fv[0][3])))
-					{
-					if(!empty(($ds_fv[0][0])) and (!empty($ds_fv[0][1])) and (!empty($ds_fv[0][2])) and (!empty($ds_fv[0][3])))
-						{
 
+					error_reporting(E_ERROR);
+					$WebService = new WebService();
+					$factura = new FacturaGeneral();
+					$cliente= new Cliente();
+					$destinatario = new Destinatario();
+					$direccion = new Direccion();
+					$det_tributario = new Tributos();
+					$emaildest = new Strings();
 
-						error_reporting(E_ERROR);
-						$WebService = new WebService();
-						$factura = new FacturaGeneral();
-						$cliente= new Cliente();
-						$destinatario = new Destinatario();
-						$direccion = new Direccion();
-						$det_tributario = new Tributos();
-						$emaildest = new Strings();
-						$vServidor=$ds_fv[0][0];
+					$options = array('exceptions' => true, 'trace' => true);
+					$params;
+					$enviarAdjunto = false;
 
-						$options = array('exceptions' => true, 'trace' => true);
-
-						$params;
-						$TokenEnterprise = $ds_fv[0][2];
-						$TokenAutorizacion = $ds_fv[0][3];
-
-
-
-						$enviarAdjunto = false;
-
-			$sql_fe="select coalesce((select codigo_ciiu from ciiu_tercero where id_tercero=$vidcli),'0010') as ciiu, t.urlmail, t.documento, t.tel_cel, coalesce((select cod_det_trib from det_trib_x_tercero where id_tercero=$vidcli),'ZY') as det_tri,  t.idmuni, t.direccion, t.codigo_postal, t.nombre_comercil, t.nombres, t.dv, t.tipo_documento,coalesce((select codigo_rt from resp_trib_x_tercero where id_tercero=$vidcli order by id_resp_tr_ter ASC LIMIT 1),'R-99-PN') as obligacion, (if(t.tipo='NAT',2,1)) as tipo_per, (if(t.regimen='SIM', 49, 48)) as regimen_ter from terceros t where t.idtercero=$vidcli ";
-				 
+					$sql_fe="select coalesce((select codigo_ciiu from ciiu_tercero where id_tercero=$vidcli),'0010') as ciiu, t.urlmail, t.documento, t.tel_cel, coalesce((select cod_det_trib from det_trib_x_tercero where id_tercero=$vidcli),'ZY') as det_tri,  t.idmuni, t.direccion, t.codigo_postal, t.nombre_comercil, t.nombres, t.dv, t.tipo_documento,coalesce((select codigo_rt from resp_trib_x_tercero where id_tercero=$vidcli order by id_resp_tr_ter ASC LIMIT 1),'R-99-PN') as obligacion, (if(t.tipo='NAT',2,1)) as tipo_per, (if(t.regimen='SIM', 49, 48)) as regimen_ter from terceros t where t.idtercero=$vidcli ";
+					 
       $nm_select = $sql_fe; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2274,120 +2244,119 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
       } 
 ;	
 
-				if(isset($ds_fe[0][1]) and !empty($ds_fe[0][1]))
+					if(isset($ds_fe[0][1]) and !empty($ds_fe[0][1]))
 					{
-					$a=1;
-					if(isset($ds_fe[0][0]) and !empty($ds_fe[0][0]))
-						{
-						$b=1;
-						}
-					if(isset($ds_fe[0][4]) and !empty($ds_fe[0][4]))
-						{
-						$c=1;
-						}
-					if(isset($ds_fe[0][12]) and !empty($ds_fe[0][12]))
-						{
-						$d=1;
-						}	
-					if($b==1 and $c==1 and $d==1)
-						{
-						if(!isset($ds_fe[0][8]) or empty($ds_fe[0][8]))
+						$a=1;
+						if(isset($ds_fe[0][0]) and !empty($ds_fe[0][0]))
 							{
-							$nomcomerc	= $ds_fe[0][9];
+							$b=1;
+							}
+						if(isset($ds_fe[0][4]) and !empty($ds_fe[0][4]))
+							{
+							$c=1;
+							}
+						if(isset($ds_fe[0][12]) and !empty($ds_fe[0][12]))
+							{
+							$d=1;
+							}	
+						if($b==1 and $c==1 and $d==1)
+							{
+							if(!isset($ds_fe[0][8]) or empty($ds_fe[0][8]))
+								{
+								$nomcomerc	= $ds_fe[0][9];
+								}
+							else
+								{
+								$nomcomerc	=$ds_fe[0][8];
+								}
+							$ciuu		=$ds_fe[0][0];
+							$vcorreo	=$ds_fe[0][1];
+							$nitodoc	=$ds_fe[0][2];
+							$tel		=$ds_fe[0][3];
+							$codImp		=$ds_fe[0][4];
+							$idmu		=$ds_fe[0][5];
+							$zonpos		=$ds_fe[0][7];
+
+							$nombr		=$ds_fe[0][9];
+							$vdv		=$ds_fe[0][10];
+							$tipodoc	=$ds_fe[0][11];
+							$obligac	=$ds_fe[0][12];
+							$ti_per		=$ds_fe[0][13];
+							$t_reg		=$ds_fe[0][14];
 							}
 						else
 							{
-							$nomcomerc	=$ds_fe[0][8];
-							}
-						$ciuu		=$ds_fe[0][0];
-						$vcorreo	=$ds_fe[0][1];
-						$nitodoc	=$ds_fe[0][2];
-						$tel		=$ds_fe[0][3];
-						$codImp		=$ds_fe[0][4];
-						$idmu		=$ds_fe[0][5];
-						$zonpos		=$ds_fe[0][7];
+							$vmensaje .= "Datos incompletos del cliente, ";
+							if($b==0)
+								{
+								}
+							if($c==0)
+								{
+								}
+							if($d==0)
+								{
+								}
 
-						$nombr		=$ds_fe[0][9];
-						$vdv		=$ds_fe[0][10];
-						$tipodoc	=$ds_fe[0][11];
-						$obligac	=$ds_fe[0][12];
-						$ti_per		=$ds_fe[0][13];
-						$t_reg		=$ds_fe[0][14];
-						}
+							if(!isset($ds_fe[0][8]) or empty($ds_fe[0][8]))
+								{
+								$nomcomerc	= $ds_fe[0][9];
+								}
+							else
+								{
+								$nomcomerc	=$ds_fe[0][8];
+								}
+
+							$ciuu		=$ds_fe[0][0];
+							$vcorreo	=$ds_fe[0][1];
+							$nitodoc	=$ds_fe[0][2];
+							$tel		=$ds_fe[0][3];
+							$codImp		=$ds_fe[0][4];
+							$idmu		=$ds_fe[0][5];
+							$zonpos		=$ds_fe[0][7];
+
+							$nombr		=$ds_fe[0][9];
+							$vdv		=$ds_fe[0][10];
+							$tipodoc	=$ds_fe[0][11];
+							$obligac	=$ds_fe[0][12];
+							$ti_per		=$ds_fe[0][13];
+							$t_reg		=$ds_fe[0][14];
+							}
+
+					}
 					else
-						{
-						$vmensaje .= "Datos incompletos del cliente, ";
-						if($b==0)
-							{
-							}
-						if($c==0)
-							{
-							}
-						if($d==0)
-							{
-							}
-
-						if(!isset($ds_fe[0][8]) or empty($ds_fe[0][8]))
-							{
-							$nomcomerc	= $ds_fe[0][9];
-							}
-						else
-							{
-							$nomcomerc	=$ds_fe[0][8];
-							}
-
-						$ciuu		=$ds_fe[0][0];
-						$vcorreo	=$ds_fe[0][1];
-						$nitodoc	=$ds_fe[0][2];
-						$tel		=$ds_fe[0][3];
-						$codImp		=$ds_fe[0][4];
-						$idmu		=$ds_fe[0][5];
-						$zonpos		=$ds_fe[0][7];
-
-						$nombr		=$ds_fe[0][9];
-						$vdv		=$ds_fe[0][10];
-						$tipodoc	=$ds_fe[0][11];
-						$obligac	=$ds_fe[0][12];
-						$ti_per		=$ds_fe[0][13];
-						$t_reg		=$ds_fe[0][14];
-						}
-
-					}
-				else
 					{
-					if(isset($ds_fe[0][0]) and !empty($ds_fe[0][0]))
-						{
-						$b=1;
-						}
-					if(isset($ds_fe[0][4]) and !empty($ds_fe[0][4]))
-						{
-						$c=1;
-						}
-					if(isset($ds_fe[0][12]) and !empty($ds_fe[0][12]))
-						{
-						$d=1;
-						}
-
-					$vmensaje .= "No configurado el email, documento: ";
-						
-						if($c==0)
+						if(isset($ds_fe[0][0]) and !empty($ds_fe[0][0]))
 							{
+							$b=1;
 							}
-						if($d==0)
+						if(isset($ds_fe[0][4]) and !empty($ds_fe[0][4]))
 							{
+							$c=1;
+							}
+						if(isset($ds_fe[0][12]) and !empty($ds_fe[0][12]))
+							{
+							$d=1;
 							}
 
+						$vmensaje .= "No configurado el email, documento: ";
+							
+							if($c==0)
+								{
+								}
+							if($d==0)
+								{
+								}
 
-						goto error_DC;
+
+							goto error_DC;
 
 					}
 
-
-			if(!empty($vmensaje))
-			{
-				$vmensaje .= $v_pj."/".$vconsecutivo;
-				$vsql="UPDATE facturaven_contratos SET avisos='".$vmensaje."', enviada='PT' WHERE idfacven='".$vidfacven."'";
-				
+					if(!empty($vmensaje))
+					{
+						$vmensaje .= $v_pj."/".$vconsecutivo;
+						$vsql="UPDATE facturaven_contratos SET avisos='".$vmensaje."', enviada='PT' WHERE idfacven='".$vidfacven."'";
+						
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2404,129 +2373,129 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
          }
          $rf->Close();
       ;
-			}
-			else
-			{
+					}
+					else
+					{
 
-				if($vaccion=="Enviar")
-				{
+						if($vaccion=="Enviar")
+						{
 
-					$factura = new FacturaGeneral();
-					$factura->cliente = new Cliente();
-					$factura->cantidadDecimales = "2";
-					$destinatarios = new Destinatario();	
-						$destinatarios->canalDeEntrega = "0";
+							$factura = new FacturaGeneral();
+							$factura->cliente = new Cliente();
+							$factura->cantidadDecimales = "2";
+							$destinatarios = new Destinatario();	
+								$destinatarios->canalDeEntrega = "0";
 
-						$correodestinatario = new strings();	 
-							$correodestinatario->string = $vcorreo;
+								$correodestinatario = new strings();	 
+									$correodestinatario->string = $vcorreo;
 
-						$destinatarios->email = $correodestinatario;
-						$destinatarios->nitProveedorReceptor = $nitodoc;
-						$destinatarios->telefono = $tel;	
+								$destinatarios->email = $correodestinatario;
+								$destinatarios->nitProveedorReceptor = $nitodoc;
+								$destinatarios->telefono = $tel;	
 
-					$factura->cliente->destinatario[0] = $destinatarios;
+							$factura->cliente->destinatario[0] = $destinatarios;
 
-					$tributos1 = new Tributos();	
-						$tributos1->codigoImpuesto = $codImp;
+							$tributos1 = new Tributos();	
+								$tributos1->codigoImpuesto = $codImp;
 
-					$extensible1 = new Extensibles();
-						$extensible1->controlInterno1 = "";
-						$extensible1->controlInterno2 = "";
-						$extensible1->nombre = "";
-						$extensible1->valor = "";
+							$extensible1 = new Extensibles();
+								$extensible1->controlInterno1 = "";
+								$extensible1->controlInterno2 = "";
+								$extensible1->nombre = "";
+								$extensible1->valor = "";
 
-						$tributos1->extras[0] = $extensible1;
+								$tributos1->extras[0] = $extensible1;
 
-					$factura->cliente->detallesTributarios[0] = $tributos1;
+							$factura->cliente->detallesTributarios[0] = $tributos1;
 
-					$DireccionFiscal[0] = new Direccion();	
-					$DireccionFiscal[0]->aCuidadoDe = "";
-					$DireccionFiscal[0]->aLaAtencionDe = "";
-					$DireccionFiscal[0]->bloque = "";
-					$DireccionFiscal[0]->buzon = "";
-					$DireccionFiscal[0]->calle = "";
-					$DireccionFiscal[0]->calleAdicional = "";
-					$DireccionFiscal[0]->ciudad = $Nciudad;
-					$DireccionFiscal[0]->codigoDepartamento = $cdep;
-					$DireccionFiscal[0]->correccionHusoHorario = "";
-					$DireccionFiscal[0]->departamento = $Ndep;
-					$DireccionFiscal[0]->departamentoOrg = "";
-					$DireccionFiscal[0]->habitacion = "";
-					$DireccionFiscal[0]->distrito = "";
-					$DireccionFiscal[0]->lenguaje = "es";
-					$DireccionFiscal[0]->municipio = $cdepmun;
-					$DireccionFiscal[0]->nombreEdificio = "";
-					$DireccionFiscal[0]->numeroParcela = "";
-					$DireccionFiscal[0]->pais = "CO";
-					$DireccionFiscal[0]->piso = "";
-					$DireccionFiscal[0]->region = "";
-					$DireccionFiscal[0]->subDivision = "";
-					$DireccionFiscal[0]->ubicacion = "";
-					$DireccionFiscal[0]->zonaPostal = $zonpos;	
-					$DireccionFiscal[0]->direccion  = $dir;
+							$DireccionFiscal[0] = new Direccion();	
+							$DireccionFiscal[0]->aCuidadoDe = "";
+							$DireccionFiscal[0]->aLaAtencionDe = "";
+							$DireccionFiscal[0]->bloque = "";
+							$DireccionFiscal[0]->buzon = "";
+							$DireccionFiscal[0]->calle = "";
+							$DireccionFiscal[0]->calleAdicional = "";
+							$DireccionFiscal[0]->ciudad = $Nciudad;
+							$DireccionFiscal[0]->codigoDepartamento = $cdep;
+							$DireccionFiscal[0]->correccionHusoHorario = "";
+							$DireccionFiscal[0]->departamento = $Ndep;
+							$DireccionFiscal[0]->departamentoOrg = "";
+							$DireccionFiscal[0]->habitacion = "";
+							$DireccionFiscal[0]->distrito = "";
+							$DireccionFiscal[0]->lenguaje = "es";
+							$DireccionFiscal[0]->municipio = $cdepmun;
+							$DireccionFiscal[0]->nombreEdificio = "";
+							$DireccionFiscal[0]->numeroParcela = "";
+							$DireccionFiscal[0]->pais = "CO";
+							$DireccionFiscal[0]->piso = "";
+							$DireccionFiscal[0]->region = "";
+							$DireccionFiscal[0]->subDivision = "";
+							$DireccionFiscal[0]->ubicacion = "";
+							$DireccionFiscal[0]->zonaPostal = $zonpos;	
+							$DireccionFiscal[0]->direccion  = $dir;
 
-					$DireccionFiscal[1] = new Direccion();	
-					$DireccionFiscal[1]->aCuidadoDe = "";
-					$DireccionFiscal[1]->aLaAtencionDe = "";
-					$DireccionFiscal[1]->bloque = "";
-					$DireccionFiscal[1]->buzon = "";
-					$DireccionFiscal[1]->calle = "";
-					$DireccionFiscal[1]->calleAdicional = "";
-					$DireccionFiscal[1]->ciudad = $Nciudad;
-					$DireccionFiscal[1]->codigoDepartamento = $cdep;
-					$DireccionFiscal[1]->correccionHusoHorario = "";
-					$DireccionFiscal[1]->departamento = $Ndep;
-					$DireccionFiscal[1]->departamentoOrg = "";
-					$DireccionFiscal[1]->habitacion = "";
-					$DireccionFiscal[1]->distrito = "";
-					$DireccionFiscal[1]->lenguaje = "es";
-					$DireccionFiscal[1]->municipio = $cdepmun;
-					$DireccionFiscal[1]->nombreEdificio = "";
-					$DireccionFiscal[1]->numeroParcela = "";
-					$DireccionFiscal[1]->pais = "CO";
-					$DireccionFiscal[1]->piso = "";
-					$DireccionFiscal[1]->region = "";
-					$DireccionFiscal[1]->subDivision = "";
-					$DireccionFiscal[1]->ubicacion = "";
-					$DireccionFiscal[1]->zonaPostal = $zonpos;	
-					$DireccionFiscal[1]->direccion  = $dir;
+							$DireccionFiscal[1] = new Direccion();	
+							$DireccionFiscal[1]->aCuidadoDe = "";
+							$DireccionFiscal[1]->aLaAtencionDe = "";
+							$DireccionFiscal[1]->bloque = "";
+							$DireccionFiscal[1]->buzon = "";
+							$DireccionFiscal[1]->calle = "";
+							$DireccionFiscal[1]->calleAdicional = "";
+							$DireccionFiscal[1]->ciudad = $Nciudad;
+							$DireccionFiscal[1]->codigoDepartamento = $cdep;
+							$DireccionFiscal[1]->correccionHusoHorario = "";
+							$DireccionFiscal[1]->departamento = $Ndep;
+							$DireccionFiscal[1]->departamentoOrg = "";
+							$DireccionFiscal[1]->habitacion = "";
+							$DireccionFiscal[1]->distrito = "";
+							$DireccionFiscal[1]->lenguaje = "es";
+							$DireccionFiscal[1]->municipio = $cdepmun;
+							$DireccionFiscal[1]->nombreEdificio = "";
+							$DireccionFiscal[1]->numeroParcela = "";
+							$DireccionFiscal[1]->pais = "CO";
+							$DireccionFiscal[1]->piso = "";
+							$DireccionFiscal[1]->region = "";
+							$DireccionFiscal[1]->subDivision = "";
+							$DireccionFiscal[1]->ubicacion = "";
+							$DireccionFiscal[1]->zonaPostal = $zonpos;	
+							$DireccionFiscal[1]->direccion  = $dir;
 
-					$factura->cliente->direccionFiscal  = $DireccionFiscal[0];
-					$factura->cliente->direccionCliente = $DireccionFiscal[1];
-					$factura->cliente->telefono = $tel;
-					$factura->cliente->email = $vcorreo;
-
-
-					$InfoLegalCliente = new InformacionLegalCliente();
-						$InfoLegalCliente->codigoEstablecimiento = "00001";
-						$InfoLegalCliente->nombreRegistroRUT = $nombr;
-						$InfoLegalCliente->numeroIdentificacion = $nitodoc;
-						$InfoLegalCliente->numeroIdentificacionDV = $vdv;
-						$InfoLegalCliente->tipoIdentificacion = $tipodoc;	
-
-					$factura->cliente->informacionLegalCliente = $InfoLegalCliente;
+							$factura->cliente->direccionFiscal  = $DireccionFiscal[0];
+							$factura->cliente->direccionCliente = $DireccionFiscal[1];
+							$factura->cliente->telefono = $tel;
+							$factura->cliente->email = $vcorreo;
 
 
-					$factura->cliente->nombreRazonSocial  = $nombr;
-					$factura->cliente->notificar = "SI";
-					$factura->cliente->numeroDocumento = $nitodoc;
-					$factura->cliente->numeroIdentificacionDV = $vdv;
+							$InfoLegalCliente = new InformacionLegalCliente();
+								$InfoLegalCliente->codigoEstablecimiento = "00001";
+								$InfoLegalCliente->nombreRegistroRUT = $nombr;
+								$InfoLegalCliente->numeroIdentificacion = $nitodoc;
+								$InfoLegalCliente->numeroIdentificacionDV = $vdv;
+								$InfoLegalCliente->tipoIdentificacion = $tipodoc;	
 
-					$obligacionesCliente = new Obligaciones();
-						$obligacionesCliente->obligaciones = $obligac;
-						$obligacionesCliente->regimen = $t_reg;
-
-					$factura->cliente->responsabilidadesRut[0] = $obligacionesCliente;
-
-					$factura->cliente->tipoIdentificacion = $tipodoc;
-					$factura->cliente->tipoPersona = $ti_per;
+							$factura->cliente->informacionLegalCliente = $InfoLegalCliente;
 
 
-					$factura->consecutivoDocumento = $vconsecutivo;
-					
+							$factura->cliente->nombreRazonSocial  = $nombr;
+							$factura->cliente->notificar = "SI";
+							$factura->cliente->numeroDocumento = $nitodoc;
+							$factura->cliente->numeroIdentificacionDV = $vdv;
+
+							$obligacionesCliente = new Obligaciones();
+								$obligacionesCliente->obligaciones = $obligac;
+								$obligacionesCliente->regimen = $t_reg;
+
+							$factura->cliente->responsabilidadesRut[0] = $obligacionesCliente;
+
+							$factura->cliente->tipoIdentificacion = $tipodoc;
+							$factura->cliente->tipoPersona = $ti_per;
 
 
-					 
+							$factura->consecutivoDocumento = $vconsecutivo;
+							
+
+
+							 
       $nm_select = "select round(d.cantidad,2) as cantidad, p.codigobar, d.descr, p.codigoprod, (d.valorpar-(d.descuento+d.iva)) as base, (if(iv.tipo_impuesto='CONSUMO','02','01')) as codigoimpuesto, d.adicional as porciva, d.iva, d.adicional1 as porcdesc, (d.valorpar/((d.adicional/100)+1)) as bas_br,p.idprod FROM detalleventa d inner join productos p on d.idpro=p.idprod inner join iva iv on p.idiva=iv.idiva where d.numfac='".$vidfacven."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2578,61 +2547,61 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
       } 
 ;
 
-							if(isset($vdetalle[0][0]))
-							{	
+									if(isset($vdetalle[0][0]))
+									{	
 
 
-								for($i=0;$i<count($vdetalle );$i++)
-								{
-									$cant	=$vdetalle[$i][0];
-									$codbp	=$vdetalle[$i][1];
-									$desc	=$vdetalle[$i][2];
-									$codest	=$vdetalle[$i][3];
-									$base	=$vdetalle[$i][4];
-									$codImp	=$vdetalle[$i][5];
-									$Timp	=$vdetalle[$i][6];
-									$Timp	=$Timp.".00";
-									$eliva	=$vdetalle[$i][7];
-									$eldesc	=$vdetalle[$i][8];
-									$bas_br	=$vdetalle[$i][9];
-									$vidprod=$vdetalle[$i][10]; 
-									$tot	=$base+$eliva;
-									$tot	=strval ($tot);
-									$valun	=round(($base/$cant), 2);
-									$sec=$i+1;
-									$sec=strval($sec);
+										for($i=0;$i<count($vdetalle );$i++)
+										{
+											$cant	=$vdetalle[$i][0];
+											$codbp	=$vdetalle[$i][1];
+											$desc	=$vdetalle[$i][2];
+											$codest	=$vdetalle[$i][3];
+											$base	=$vdetalle[$i][4];
+											$codImp	=$vdetalle[$i][5];
+											$Timp	=$vdetalle[$i][6];
+											$Timp	=$Timp.".00";
+											$eliva	=$vdetalle[$i][7];
+											$eldesc	=$vdetalle[$i][8];
+											$bas_br	=$vdetalle[$i][9];
+											$vidprod=$vdetalle[$i][10]; 
+											$tot	=$base+$eliva;
+											$tot	=strval ($tot);
+											$valun	=round(($base/$cant), 2);
+											$sec=$i+1;
+											$sec=strval($sec);
 
 
-									$factDetalle[$i] = new FacturaDetalle();
-										$factDetalle[$i]->cantidadPorEmpaque = "1";
-										$factDetalle[$i]->cantidadReal = $cant;
-										$factDetalle[$i]->cantidadRealUnidadMedida = "WSD"; 
-										$factDetalle[$i]->cantidadUnidades = $cant;
-										$factDetalle[$i]->codigoProducto = $codbp;
-										$factDetalle[$i]->descripcion = $desc;
-										$factDetalle[$i]->descripcionTecnica = $desc;
-										$factDetalle[$i]->estandarCodigo = "999";
-										$factDetalle[$i]->estandarCodigoProducto = $codest;
+											$factDetalle[$i] = new FacturaDetalle();
+												$factDetalle[$i]->cantidadPorEmpaque = "1";
+												$factDetalle[$i]->cantidadReal = $cant;
+												$factDetalle[$i]->cantidadRealUnidadMedida = "WSD"; 
+												$factDetalle[$i]->cantidadUnidades = $cant;
+												$factDetalle[$i]->codigoProducto = $codbp;
+												$factDetalle[$i]->descripcion = $desc;
+												$factDetalle[$i]->descripcionTecnica = $desc;
+												$factDetalle[$i]->estandarCodigo = "999";
+												$factDetalle[$i]->estandarCodigoProducto = $codest;
 
 
-											if($eldesc>0)
-											{
-											$elmonto	= round($bas_br*(round(($eldesc/100), 2)), 2);
-											$eldesc		= round($eldesc+0, 2);
+													if($eldesc>0)
+													{
+													$elmonto	= round($bas_br*(round(($eldesc/100), 2)), 2);
+													$eldesc		= round($eldesc+0, 2);
 
-											$descuentos[$t] = new cargosDescuentos();
-													$descuentos[$t]->descripcion = "DESCUENTO COMERCIAL";
-													$descuentos[$t]->indicador = 0;
-													$descuentos[$t]->monto = $elmonto;
-													$descuentos[$t]->montoBase = round($bas_br, 2);
-													$descuentos[$t]->porcentaje = $eldesc;
-													$descuentos[$t]->secuencia = $t+1;
+													$descuentos[$t] = new cargosDescuentos();
+															$descuentos[$t]->descripcion = "DESCUENTO COMERCIAL";
+															$descuentos[$t]->indicador = 0;
+															$descuentos[$t]->monto = $elmonto;
+															$descuentos[$t]->montoBase = round($bas_br, 2);
+															$descuentos[$t]->porcentaje = $eldesc;
+															$descuentos[$t]->secuencia = $t+1;
 
-											$factDetalle[$i]->cargosDescuentos[0] = $descuentos[$t];
-											$t=$t+1;
-											}
+													$factDetalle[$i]->cargosDescuentos[0] = $descuentos[$t];
+													$t=$t+1;
+													}
 
-										 
+												 
       $nm_select = "select t.documento,t.dv,t.tipo_documento from productos p inner join terceros t on p.idpro1=t.idtercero where p.idprod='".$vidprod."' and p.tipo_producto='RE'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2666,71 +2635,71 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
       } 
 ;
 
-										if(isset($vcodman[0][0]))
-										{
-											$vid_mandatorio = $vcodman[0][0];
-											$vdv_mandatorio = $vcodman[0][1];
-											$vid_tipo       = $vcodman[0][2];
+												if(isset($vcodman[0][0]))
+												{
+													$vid_mandatorio = $vcodman[0][0];
+													$vdv_mandatorio = $vcodman[0][1];
+													$vid_tipo       = $vcodman[0][2];
 
-											$factDetalle[$i]->mandatorioNumeroIdentificacion   = $vid_mandatorio;
-											$factDetalle[$i]->mandatorioNumeroIdentificacionDV = $vdv_mandatorio;
-											$factDetalle[$i]->mandatorioTipoIdentificacion     = $vid_tipo;
+													$factDetalle[$i]->mandatorioNumeroIdentificacion   = $vid_mandatorio;
+													$factDetalle[$i]->mandatorioNumeroIdentificacionDV = $vdv_mandatorio;
+													$factDetalle[$i]->mandatorioTipoIdentificacion     = $vid_tipo;
 
-											$vtotalingresosparaterceros += $tot;
+													$vtotalingresosparaterceros += $tot;
+												}
+
+												$impdet[$i] = new FacturaImpuestos;
+													$impdet[$i]->baseImponibleTOTALImp = $base;
+													$impdet[$i]->codigoTOTALImp = $codImp;
+													$impdet[$i]->controlInterno = "";
+													$impdet[$i]->porcentajeTOTALImp = $Timp;
+													$impdet[$i]->unidadMedida = "";
+													$impdet[$i]->unidadMedidaTributo = "";
+													$impdet[$i]->valorTOTALImp = $eliva;
+													$impdet[$i]->valorTributoUnidad = "";
+
+												$factDetalle[$i]->impuestosDetalles[0] = $impdet[$i];
+
+
+												$impTot[$i] = new ImpuestosTotales;
+													$impTot[$i]->codigoTOTALImp = $codImp;
+													$impTot[$i]->montoTotal = $eliva;
+
+												$factDetalle[$i]->impuestosTotales[0] = $impTot[$i];
+
+												$factDetalle[$i]->marca = "HKA";
+												$factDetalle[$i]->muestraGratis = "0";
+												$factDetalle[$i]->precioTotal = $tot;
+												$factDetalle[$i]->precioTotalSinImpuestos = $base;
+												$factDetalle[$i]->precioVentaUnitario = $valun;
+												$factDetalle[$i]->secuencia = $sec;
+												$factDetalle[$i]->unidadMedida = "WSD";		
+
+												$factura->detalleDeFactura [$i] = $factDetalle[$i]; 
+
+											}
 										}
 
-										$impdet[$i] = new FacturaImpuestos;
-											$impdet[$i]->baseImponibleTOTALImp = $base;
-											$impdet[$i]->codigoTOTALImp = $codImp;
-											$impdet[$i]->controlInterno = "";
-											$impdet[$i]->porcentajeTOTALImp = $Timp;
-											$impdet[$i]->unidadMedida = "";
-											$impdet[$i]->unidadMedidaTributo = "";
-											$impdet[$i]->valorTOTALImp = $eliva;
-											$impdet[$i]->valorTributoUnidad = "";
+										$vfechaemision     = $vfechaven.date(' H:i:s');
+										$vfechaemision     = date_create($vfechaemision);
+										$vfechaemision     = date_format($vfechaemision,'Y-m-d H:i:s');	
 
-										$factDetalle[$i]->impuestosDetalles[0] = $impdet[$i];
+								$factura->fechaEmision = $vfechaemision;
 
+							if($vcredito==1)
+								{
+								$lafechadevencimiento	 = $vfechavenc;
+								$lafechadevencimiento	 = date_create($lafechadevencimiento);
+								$lafechadevencimiento	 = date_format($lafechadevencimiento, 'Y-m-d');
 
-										$impTot[$i] = new ImpuestosTotales;
-											$impTot[$i]->codigoTOTALImp = $codImp;
-											$impTot[$i]->montoTotal = $eliva;
-
-										$factDetalle[$i]->impuestosTotales[0] = $impTot[$i];
-
-										$factDetalle[$i]->marca = "HKA";
-										$factDetalle[$i]->muestraGratis = "0";
-										$factDetalle[$i]->precioTotal = $tot;
-										$factDetalle[$i]->precioTotalSinImpuestos = $base;
-										$factDetalle[$i]->precioVentaUnitario = $valun;
-										$factDetalle[$i]->secuencia = $sec;
-										$factDetalle[$i]->unidadMedida = "WSD";		
-
-										$factura->detalleDeFactura [$i] = $factDetalle[$i]; 
-
-									}
+								$factura->fechaVencimiento = $lafechadevencimiento;
 								}
 
-								$vfechaemision     = $vfechaven.date(' H:i:s');
-								$vfechaemision     = date_create($vfechaemision);
-								$vfechaemision     = date_format($vfechaemision,'Y-m-d H:i:s');	
-
-						$factura->fechaEmision = $vfechaemision;
-
-					if($vcredito==1)
-						{
-						$lafechadevencimiento	 = $vfechavenc;
-						$lafechadevencimiento	 = date_create($lafechadevencimiento);
-						$lafechadevencimiento	 = date_format($lafechadevencimiento, 'Y-m-d');
-
-						$factura->fechaVencimiento = $lafechadevencimiento;
-						}
 
 
 
 
-
-					 
+							 
       $nm_select = "select sum(valorpar-(descuento+iva)) as base, (if(iv.tipo_impuesto='CONSUMO','02','01')) as codigoimpuesto, iv.trifa as porcentaje, sum(iva) as iva from detalleventa d inner join productos p on d.idpro=p.idprod inner join iva iv on p.idiva=iv.idiva where numfac='".$vidfacven."' group by iv.tipo_impuesto,iv.trifa"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2796,7 +2765,7 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
 								}
 							}
 
-						 
+							 
       $nm_select = "select (if(iv.tipo_impuesto='CONSUMO','02','01')) as codigoimpuesto, sum(iva) as iva, sum(valorpar-(descuento+iva)) as base from detalleventa d inner join productos p on d.idpro=p.idprod inner join iva iv on p.idiva=iv.idiva where numfac='".$vidfacven."' group by iv.tipo_impuesto"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2833,22 +2802,22 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
       } 
 ;
 
-						if(isset($dt_imptfac[0][0]))
+							if(isset($dt_imptfac[0][0]))
 							{
-							$codImp		=$dt_imptfac[0][0];
-							$codImp		=strval($codImp);
-							$eliva		=$dt_imptfac[0][1];
-							$base		=$dt_imptfac[0][2];
-							$tot		=$base+$eliva;
+								$codImp		=$dt_imptfac[0][0];
+								$codImp		=strval($codImp);
+								$eliva		=$dt_imptfac[0][1];
+								$base		=$dt_imptfac[0][2];
+								$tot		=$base+$eliva;
 
 
-							$impTot[$i] = new ImpuestosTotales;
-							$impTot[$i]->codigoTOTALImp = $codImp;
-							$impTot[$i]->montoTotal = $eliva;
-							}
+								$impTot[$i] = new ImpuestosTotales;
+								$impTot[$i]->codigoTOTALImp = $codImp;
+								$impTot[$i]->montoTotal = $eliva;
+								}
 
 
-					 
+							 
       $nm_select = "SELECT count(*) from detalleventa where numfac='".$vidfacven."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2878,27 +2847,24 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
       } 
 ;
 							if(isset($ds_cont[0][0]))
-								{
+							{
 								$totalitems=$ds_cont[0][0];
-								}
+							}
 							else
-								{
+							{
 								$totalitems='1';
-								}
+							}
 
+							$factura->impuestosTotales[0] = $impTot[$i];
 
+							$vultimopago    = "";
+							$vnumeroatrasos = 0;
+							$vsaldoatrasos  = 0;
+							$vtotalapagar   = 0;
+							$vidcontra      = 0;
 
-
-					$factura->impuestosTotales[0] = $impTot[$i];
-
-					$vultimopago    = "";
-					$vnumeroatrasos = 0;
-					$vsaldoatrasos  = 0;
-					$vtotalapagar   = 0;
-					$vidcontra      = 0;
-
-					$vsql = "select id_contrato from terceros_contratos_factura where factura='".$vidfacven."' limit 1";
-					 
+							$vsql = "select id_contrato from terceros_contratos_factura where factura='".$vidfacven."' limit 1";
+							 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2928,15 +2894,15 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
           $vidcontrato_erro = $this->Db->ErrorMsg();
       } 
 ;
-					if(isset($vidcontrato[0][0]))
-					{
-						$vidcontra = $vidcontrato[0][0];
-					}
+							if(isset($vidcontrato[0][0]))
+							{
+								$vidcontra = $vidcontrato[0][0];
+							}
 
-					if($vidcontra>0)
-					{
-						$vsql = "select fecha_ultimopago from terceros_contratos where id_ter_cont='".$vidcontra."'";
-						 
+							if($vidcontra>0)
+							{
+								$vsql = "select fecha_ultimopago from terceros_contratos where id_ter_cont='".$vidcontra."'";
+								 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2966,13 +2932,13 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
           $vfechult_erro = $this->Db->ErrorMsg();
       } 
 ;
-						if(isset($vfechult[0][0]))
-						{
-							$vultimopago = $vfechult[0][0];
-						}
+								if(isset($vfechult[0][0]))
+								{
+									$vultimopago = $vfechult[0][0];
+								}
 
-						$vsql = "select count(*) from terceros_contratos_factura where id_contrato='".$vidcontra."' and deperiodo='SI' and saldo>0 and factura <>'".$vidfacven."'";
-						 
+								$vsql = "select count(*) from terceros_contratos_factura where id_contrato='".$vidcontra."' and deperiodo='SI' and saldo>0 and factura <>'".$vidfacven."'";
+								 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3002,13 +2968,13 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
           $vatrasos_erro = $this->Db->ErrorMsg();
       } 
 ;
-						if(isset($vatrasos[0][0]))
-						{
-							$vnumeroatrasos = $vatrasos[0][0];
-						}
+								if(isset($vatrasos[0][0]))
+								{
+									$vnumeroatrasos = $vatrasos[0][0];
+								}
 
-						$vsql = "select sum(saldo) from terceros_contratos_factura where id_contrato='".$vidcontra."' and deperiodo='SI' and saldo>0 and factura <>'".$vidfacven."'";
-						 
+								$vsql = "select sum(saldo) from terceros_contratos_factura where id_contrato='".$vidcontra."' and deperiodo='SI' and saldo>0 and factura <>'".$vidfacven."'";
+								 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3038,210 +3004,221 @@ $_SESSION['scriptcase']['blank_enviar_fes']['contr_erro'] = 'on';
           $vatrasossal_erro = $this->Db->ErrorMsg();
       } 
 ;
-						if(isset($vatrasossal[0][0]))
-						{
-							$vsaldoatrasos  = $vatrasossal[0][0];
-						}
-					}
+								if(isset($vatrasossal[0][0]))
+								{
+									$vsaldoatrasos  = $vatrasossal[0][0];
+								}
+							}
 
-					$vtotalapagar   = $vsaldoatrasos + $tot;
+							$vtotalapagar   = $vsaldoatrasos + $tot;
 
-					if(!empty($vobserv))
-					{
-						$vobs->string[0] = $vobserv;
-						if($vtotalingresosparaterceros>0)
-						{
-							$vobs->string[1] = "Total ingresos para terceros: $".number_format($vtotalingresosparaterceros);
-							$vobs->string[2] = "Último pago: ".$vultimopago;
-							$vobs->string[3] = "Número de atrasos: ".$vnumeroatrasos;
-							$vobs->string[4] = "Saldo atrasos: $".number_format($vsaldoatrasos);
-							$vobs->string[5] = "<b>TOTAL A PAGAR: $".number_format($vtotalapagar)."</b>";
-							$vobs->string[6] = "Número usuario: ".$vnumerocontrato;
-						}
-						else
-						{
-							$vobs->string[1] = "Último pago: ".$vultimopago;
-							$vobs->string[2] = "Número de atrasos: ".$vnumeroatrasos;
-							$vobs->string[3] = "Saldo atrasos: $".number_format($vsaldoatrasos);
-							$vobs->string[4] = "<b>TOTAL A PAGAR: $".number_format($vtotalapagar)."</b>";
-							$vobs->string[5] = "Número usuario: ".$vnumerocontrato;
-						}
-					}
-					else
-					{
-						if($vtotalingresosparaterceros>0)
-						{
-							$vobs->string[0] = "Total ingresos para terceros: $".number_format($vtotalingresosparaterceros);
-							$vobs->string[1] = "Último pago: ".$vultimopago;
-							$vobs->string[2] = "Número de atrasos: ".$vnumeroatrasos;
-							$vobs->string[3] = "Saldo atrasos: $".number_format($vsaldoatrasos);
-							$vobs->string[4] = "<b>TOTAL A PAGAR: $".number_format($vtotalapagar)."</b>";
-							$vobs->string[5] = "Número usuario: ".$vnumerocontrato;
-						}
-						else
-						{
-							$vobs->string[0] = "Último pago: ".$vultimopago;
-							$vobs->string[1] = "Número de atrasos: ".$vnumeroatrasos;
-							$vobs->string[2] = "Saldo atrasos: $".number_format($vsaldoatrasos);
-							$vobs->string[3] = "<b>TOTAL A PAGAR: $".number_format($vtotalapagar)."</b>";
-							$vobs->string[4] = "Número usuario: ".$vnumerocontrato;
-						}
-					}
-
-					if(isset($vobs->string[0]))
-					{
-						$factura->informacionAdicional = $vobs;
-					}
-
-					if($vcredito==1)
-						{
-						$pagos = new MediosDePago();
-						$pagos->medioPago = "ZZZ";
-						$pagos->metodoDePago = "2";
-						$pagos->numeroDeReferencia = "01";
-						$pagos->fechaDeVencimiento = $lafechadevencimiento;
-						}
-					else
-						{
-						$pagos = new MediosDePago();
-						$pagos->medioPago = "ZZZ";
-						$pagos->metodoDePago = "1";
-						$pagos->numeroDeReferencia = "01";	
-						}
-
-					$factura->mediosDePago[0] = $pagos;
-
-					$factura->moneda = "COP";
-					$factura->redondeoAplicado = "0.00"	;
-					$factura->rangoNumeracion = $vrango;
-
-					$factura->tipoOperacion = "10";
-					$factura->totalBaseImponible = $base;
-					$factura->totalBrutoConImpuesto = $tot;
-					$factura->totalMonto =$tot;
-					$factura->totalProductos=$totalitems;
-					$factura->totalSinImpuestos=$base;
-
-
-					$factura->tipoDocumento="01";
-
-					if ($enviarAdjunto == "TRUE")
-					{
-						$adjuntos="1";
-					}
-					else
-					{
-						$adjuntos="0";
-					}
-
-
-					 $params = array(
-						 'tokenEmpresa' =>  $TokenEnterprise,
-						 'tokenPassword' =>$TokenAutorizacion,
-						 'factura' => $factura ,
-						 'adjuntos' => $adjuntos);
-
-
-					$resultado = $WebService->enviar($vServidor,$options,$params);
-
-					 $vmensaje .= "Resultado de la Emisión\n";
-					if($resultado["codigo"]==200 or $resultado["codigo"]==201)
-					{
-							$vmensaje .=  "La factura: ".$vPref."-".$vconsecutivo." se ha enviado con éxito!\n";
-
-						error_reporting(E_ERROR);
-						$WebService2 = new WebService();
-						$options2 = array('exceptions' => true, 'trace' => true);
-
-						$params2 = array (
-										'tokenEmpresa'	=>$TokenEnterprise,
-										'tokenPassword'	=>$TokenAutorizacion,
-										'documento'		=>$vPref.$vconsecutivo);
-
-						$descargas = $WebService2->Descargas($vServidor,$options2,$params2,'pdf');
-
-						if($descargas["codigo"]==200 or $descargas["codigo"]==201)
-						{
-							$decoded 	= $descargas["documento"];
-							$decoded	= strval($decoded);
-							$vcufe		= $resultado["cufe"];
-							$vcufe		=  strval($vcufe);
-							$vestado	= $resultado["codigo"];
-							$vestado	=  strval($vestado);
-							$vavisos	=  implode(";", $resultado);
-							$vqr        = strval($resultado["qr"]);
-							$vfechavalidacion = $resultado["fechaRespuesta"];
-							$vfechavalidacion = substr($vfechavalidacion, 0, 18);
-
-							
-							$sql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', estado='".$vestado."', avisos=null,qr_base64='".$vqr."',fecha_validacion='".$vfechavalidacion."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven) WHERE idfacven='".$vidfacven."'";
-							
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-						}
-					}
-					else
-					{
-							$vavisos =  implode(";", $resultado);
-							$sql="UPDATE facturaven_contratos SET avisos='".$vavisos."', enviada='PT' WHERE idfacven='".$vidfacven."'";
-							
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-							if($resultado["codigo"]==101)
+							if(!empty($vobserv))
 							{
-								$vmensaje .= "La factura: ".$vPref."-".$vconsecutivo." no se puede enviar porque ya ha sido enviada.\n";
-
+								$vobs->string[0] = $vobserv;
+								if($vtotalingresosparaterceros>0)
+								{
+									$vobs->string[1] = "Total ingresos para terceros: $".number_format($vtotalingresosparaterceros);
+									$vobs->string[2] = "Último pago: ".$vultimopago;
+									$vobs->string[3] = "Número de atrasos: ".$vnumeroatrasos;
+									$vobs->string[4] = "Saldo atrasos: $".number_format($vsaldoatrasos);
+									$vobs->string[5] = "<b>TOTAL A PAGAR: $".number_format($vtotalapagar)."</b>";
+									$vobs->string[6] = "Número usuario: ".$vnumerocontrato;
+								}
+								else
+								{
+									$vobs->string[1] = "Último pago: ".$vultimopago;
+									$vobs->string[2] = "Número de atrasos: ".$vnumeroatrasos;
+									$vobs->string[3] = "Saldo atrasos: $".number_format($vsaldoatrasos);
+									$vobs->string[4] = "<b>TOTAL A PAGAR: $".number_format($vtotalapagar)."</b>";
+									$vobs->string[5] = "Número usuario: ".$vnumerocontrato;
+								}
 							}
 							else
 							{
-								print_r("Código: " .$resultado["codigo"] ."</br>Mensaje:  " .$resultado["mensaje"] ."</br>Fecha de Respuesta:  " .$resultado["fechaRespuesta"] ."</br>Mensaje Validación:  " );
-								for($i = 0; $i < $max;$i++)
+								if($vtotalingresosparaterceros>0)
 								{
-									print_r("</br>" .$resultado["mensajesValidacion"]->string[$i]  );
+									$vobs->string[0] = "Total ingresos para terceros: $".number_format($vtotalingresosparaterceros);
+									$vobs->string[1] = "Último pago: ".$vultimopago;
+									$vobs->string[2] = "Número de atrasos: ".$vnumeroatrasos;
+									$vobs->string[3] = "Saldo atrasos: $".number_format($vsaldoatrasos);
+									$vobs->string[4] = "<b>TOTAL A PAGAR: $".number_format($vtotalapagar)."</b>";
+									$vobs->string[5] = "Número usuario: ".$vnumerocontrato;
 								}
-
-								echo "<br><br>";
-								print_r($resultado);
+								else
+								{
+									$vobs->string[0] = "Último pago: ".$vultimopago;
+									$vobs->string[1] = "Número de atrasos: ".$vnumeroatrasos;
+									$vobs->string[2] = "Saldo atrasos: $".number_format($vsaldoatrasos);
+									$vobs->string[3] = "<b>TOTAL A PAGAR: $".number_format($vtotalapagar)."</b>";
+									$vobs->string[4] = "Número usuario: ".$vnumerocontrato;
+								}
 							}
-						}
-				}
-			}
 
-			error_DC:
-						;
+							if(isset($vobs->string[0]))
+							{
+								$factura->informacionAdicional = $vobs;
+							}
+
+							if($vcredito==1)
+							{
+								$pagos = new MediosDePago();
+								$pagos->medioPago = "ZZZ";
+								$pagos->metodoDePago = "2";
+								$pagos->numeroDeReferencia = "01";
+								$pagos->fechaDeVencimiento = $lafechadevencimiento;
+							}
+							else
+							{
+								$pagos = new MediosDePago();
+								$pagos->medioPago = "ZZZ";
+								$pagos->metodoDePago = "1";
+								$pagos->numeroDeReferencia = "01";	
+							}
+
+							$factura->mediosDePago[0] = $pagos;
+
+							$factura->moneda = "COP";
+							$factura->redondeoAplicado = "0.00"	;
+							$factura->rangoNumeracion = $vrango;
+
+							$factura->tipoOperacion = "10";
+							$factura->totalBaseImponible = $base;
+							$factura->totalBrutoConImpuesto = $tot;
+							$factura->totalMonto =$tot;
+							$factura->totalProductos=$totalitems;
+							$factura->totalSinImpuestos=$base;
+
+
+							$factura->tipoDocumento="01";
+
+							if ($enviarAdjunto == "TRUE")
+							{
+								$adjuntos="1";
+							}
+							else
+							{
+								$adjuntos="0";
+							}
+
+
+							 $params = array(
+								 'tokenEmpresa' =>  $TokenEnterprise,
+								 'tokenPassword' =>$TokenAutorizacion,
+								 'factura' => $factura ,
+								 'adjuntos' => $adjuntos);
+
+
+							switch($vproveedor)
+							{
+								case 'THE FACTORY HKA':
+									$resultado = $WebService->enviar($vServidor,$options,$params);
+
+									 $vmensaje .= "Resultado de la Emisión\n";
+									if($resultado["codigo"]==200 or $resultado["codigo"]==201)
+									{
+											$vmensaje .=  "La factura: ".$vPref."-".$vconsecutivo." se ha enviado con éxito!\n";
+
+										error_reporting(E_ERROR);
+										$WebService2 = new WebService();
+										$options2 = array('exceptions' => true, 'trace' => true);
+
+										$params2 = array (
+														'tokenEmpresa'	=>$TokenEnterprise,
+														'tokenPassword'	=>$TokenAutorizacion,
+														'documento'		=>$vPref.$vconsecutivo);
+
+										$descargas = $WebService2->Descargas($vServidor,$options2,$params2,'pdf');
+
+										if($descargas["codigo"]==200 or $descargas["codigo"]==201)
+										{
+											$decoded 	= $descargas["documento"];
+											$decoded	= strval($decoded);
+											$vcufe		= $resultado["cufe"];
+											$vcufe		=  strval($vcufe);
+											$vestado	= $resultado["codigo"];
+											$vestado	=  strval($vestado);
+											$vavisos	=  implode(";", $resultado);
+											$vqr        = strval($resultado["qr"]);
+											$vfechavalidacion = $resultado["fechaRespuesta"];
+											$vfechavalidacion = substr($vfechavalidacion, 0, 18);
+
+
+											$sql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', estado='".$vestado."', avisos=null,qr_base64='".$vqr."',fecha_validacion='".$vfechavalidacion."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven) WHERE idfacven='".$vidfacven."'";
+											
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+										}
+									}
+									else
+									{
+										$vavisos =  implode(";", $resultado);
+										$sql="UPDATE facturaven_contratos SET avisos='".$vavisos."', enviada='PT' WHERE idfacven='".$vidfacven."'";
+										
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+										if($resultado["codigo"]==101)
+										{
+											$vmensaje .= "La factura: ".$vPref."-".$vconsecutivo." no se puede enviar porque ya ha sido enviada.\n";
+
+										}
+										else
+										{
+											print_r("Código: " .$resultado["codigo"] ."</br>Mensaje:  " .$resultado["mensaje"] ."</br>Fecha de Respuesta:  " .$resultado["fechaRespuesta"] ."</br>Mensaje Validación:  " );
+											for($i = 0; $i < $max;$i++)
+											{
+												print_r("</br>" .$resultado["mensajesValidacion"]->string[$i]  );
+											}
+
+											echo "<br><br>";
+											print_r($resultado);
+										}
+									}
+								break;
+									
+								case 'FACILWEB':
+									
+									$vmensaje .= "LISTO";
+									
+								break;
+							
+							}
+							
 						}
 					}
+
+					error_DC:
+					;
 				}
-			else
+				else
 				{
 					$vmensaje .=  "EL DOCUMENTO NO ES FACTURA DE FACTURACIÓN ELECTRÓNICA!\n";
 				}

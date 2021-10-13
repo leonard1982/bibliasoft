@@ -30,6 +30,8 @@
 .css_avisos_grid_line {text-align: center;}
 .css_ing_terceros_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_ing_terceros_grid_line {vertical-align: top;text-align: right;}
+.css_enviar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_enviar_grid_line {text-align: right;}
 .css_idfacven_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_idfacven_grid_line {vertical-align: top;text-align: right;}
 .css_numfacven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
