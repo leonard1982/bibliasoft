@@ -402,6 +402,8 @@ class grid_terceros_contratos_generar_fv_grid
    $this->nmgp_botoes['qsearch'] = "on";
    $this->nmgp_botoes['groupby'] = "on";
    $this->nmgp_botoes['gridsave'] = "on";
+   $this->nmgp_botoes['gridsavesession'] = "on";
+   $this->nmgp_botoes['reload'] = "on";
    $this->nmgp_botoes['btn_generar_facturas'] = "on";
    $this->nmgp_botoes['btn_lista_facturas'] = "on";
    $this->Cmps_ord_def['numero_contrato'] = " desc";
@@ -8385,6 +8387,21 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
               $nm_saida->saida("          <img id=\"NM_sep_2\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
+          if ($this->nmgp_botoes['reload'] == "on")
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "breload", "nm_gp_submit_ajax ('igual', 'breload');", "nm_gp_submit_ajax ('igual', 'breload');", "reload_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
+      {
+          if ($NM_btn)
+          {
+              $NM_btn = false;
+              $NM_ult_sep = "NM_sep_3";
+              $nm_saida->saida("          <img id=\"NM_sep_3\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+          }
+      }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_lista_facturas'] == "on" && !$this->grid_emb_form) 
       { 
            if (isset($this->Ini->sc_lig_md5["grid_facturaven_contratos"]) && $this->Ini->sc_lig_md5["grid_facturaven_contratos"] == "S") {
@@ -8966,8 +8983,8 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_3";
-              $nm_saida->saida("          <img id=\"NM_sep_3\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_4";
+              $nm_saida->saida("          <img id=\"NM_sep_4\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_generar_facturas'] == "on" && !$this->grid_emb_form) 
@@ -8981,8 +8998,23 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_4";
-              $nm_saida->saida("          <img id=\"NM_sep_4\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_5";
+              $nm_saida->saida("          <img id=\"NM_sep_5\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+          }
+      }
+          if ($this->nmgp_botoes['reload'] == "on")
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "breload", "nm_gp_submit_ajax ('igual', 'breload');", "nm_gp_submit_ajax ('igual', 'breload');", "reload_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
+      {
+          if ($NM_btn)
+          {
+              $NM_btn = false;
+              $NM_ult_sep = "NM_sep_6";
+              $nm_saida->saida("          <img id=\"NM_sep_6\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_lista_facturas'] == "on" && !$this->grid_emb_form) 
