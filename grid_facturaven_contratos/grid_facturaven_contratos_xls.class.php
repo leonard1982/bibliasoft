@@ -2082,7 +2082,6 @@ if($this->tiene_nota >0)
 	$vTnota = 'SI';
 }
 
-
 if($this->tipo =="FV")
 {
 $this->NM_field_style["tipo"] = "background-color:#cad9e9;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -2183,6 +2182,7 @@ switch($this->enviada )
 		$this->NM_field_style["anio"] = "background-color:#89a0d1;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
 	break;
 }
+
 
 if(empty($this->cufe ))
 {
