@@ -653,11 +653,9 @@ function Loading() {
 				<table width="100%" cellspacing="0" cellpadding="0" border="0">
 				<tbody>
 				<tr>
-				<td width="93px" valign="top">
-				<div>
-					<img src="js/invoceERP_ribbon_empty.png" width="93" height="165">
-				</div>
-				</td>
+				</tr>
+					<td colspan="5"><span style="font-weight:bold; font-size:20px;"><?php echo $nombre_razonsocial; ?></span></td>
+				<tr>
 				<td>
 				<strong>
 				<div class="UserLogo">
@@ -665,12 +663,10 @@ function Loading() {
 				</div>
 				</strong>
 				</td>
-				<td>
+				<td colspan="2">
 				<strong>
 				<div class="UserDetails">
 				<span style="color:#000; font-size:12px;">
-					<span style="font-weight:bold; font-size:20px;"><?php echo $nombre_razonsocial; ?></span>
-					<br>
 					NIT <?php echo $ccnit; ?>
 					<br>
 					<?php echo $vregimen; ?>
@@ -1122,11 +1118,11 @@ function Loading() {
 								echo "<br><table class='datoscontrato' >";
 								
 								echo "<tr>";
-								echo "<td><b>Número Usuario: </b></td><td style='text-align:center;'>".$vnumerocontrato."</td>";
+								echo "<td><b>Número Usuario: </b></td><td style='text-align:right;'>".$vnumerocontrato."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Número de atrasos: </b</td><td style='text-align:center;'>".$vnumeroatrasos."</td>";
+								echo "<td><b>Número de atrasos: </b</td><td style='text-align:right;'>".$vnumeroatrasos."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
@@ -1134,7 +1130,7 @@ function Loading() {
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Último pago: </b</td><td style='text-align:center;'>".$vultimopago."</td>";
+								echo "<td><b>Último pago: </b</td><td style='text-align:right;'>".$vultimopago."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
@@ -1142,11 +1138,11 @@ function Loading() {
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Fecha límite de pago: </b</td><td style='text-align:center;'>".$vfechalimite."</td>";
+								echo "<td><b>Fecha límite de pago: </b</td><td style='text-align:right;'>".$vfechalimite."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Fecha de corte: </b</td><td style='text-align:center;'>".$vfechacorte."</td>";
+								echo "<td><b>Fecha de corte: </b</td><td style='text-align:right;'>".$vfechacorte."</td>";
 								echo "</tr>";
 								
 								echo "</table>";
