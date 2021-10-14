@@ -39,8 +39,8 @@ class grid_facturaven_contratos_pesq
    {
       global $bprocessa;
       include("../_lib/css/" . $this->Ini->str_schema_filter . "_filter.php");
-      $this->Ini->Str_btn_filter = "scriptcase8_BlueWood/scriptcase8_BlueWood" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
-      $this->Str_btn_filter_css  = "scriptcase8_BlueWood/scriptcase8_BlueWood.css";
+      $this->Ini->Str_btn_filter = "scriptcase9_BlueBerry/scriptcase9_BlueBerry" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
+      $this->Str_btn_filter_css  = "scriptcase9_BlueBerry/scriptcase9_BlueBerry.css";
       $this->Ini->str_google_fonts = (isset($str_google_fonts) && !empty($str_google_fonts))?$str_google_fonts:'';
       include($this->Ini->path_btn . $this->Ini->Str_btn_filter);
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['path_libs_php'] = $this->Ini->path_lib_php;
