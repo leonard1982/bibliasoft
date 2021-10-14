@@ -218,7 +218,7 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211014"; 
-      $this->nm_hr_ult_alt   = "120022"; 
+      $this->nm_hr_ult_alt   = "120133"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZSX7DSrwHuF7HgrwVcFeDuFqVEraHQBsVIJsHAN7V5JsHgveDkB/DuJeHIFGDcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKZMBqHgveVkXeDWFqHMBODcBiDQJsDSrwVWXGHuNOVcBODur/VoF7HQXGZSB/HIveD5JeHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGHEXeV5XCZuBOD9JKDQX7HArYV5BOHgrYDkBODWF/DoraD9XOH9BOZ1BeD5BqDErKVkXeV5FaDoBOD9JKDQX7Z1rwV5raHgvsDkBOV5X7DoJsD9BiZ1rqHAN7D5NUDEvsHEFiV5FaDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveD5rqHgrwVcFeHEF/DoFUHQBiH9B/DSBeHQraHgvsHEFiDuJeZuBODcJeH9X7HIrKHuFGHgrwVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoF7HQNwZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBiH9FUHIrwD5JwDMvmVcFCH5XKVorqHQNmZ1B/DSvmD5XGHgNOHArCH5F/HMJsHQNmH9X7DSrwD5BOHuzGDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiH9X7Z1vCVWJeDMvmVIBOHEBmVEX7D9JmZSBqZ1NOHuBqHgvsHEFiDuXKZuFaDcJeDuBqD1vOV5BqDMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9FiV5FYHMJeDcNmZSBOZ1BeV5FaHgNKHENiHEXCHIFUHQBiDQX7Z1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBODWFYDoJsD9BiZSB/DSrYD5NUDErKVkJqV5FaVoBODcBwDQFGD1BeV5raHuzGVcrsDWJeVoraD9XOZ1F7DSrYD5FaDMNKZSXeH5FYDoB/D9XsH9FGD1veV5BOHgvsVcFCH5XCVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcrsDWJeVoBqHQNwVINUHIBeHuFGDEvsVkJqHEFqVoB/HQNmZSX7HAvOVWBqHuzGVcrsDWFYVoBqDcFYZ1X7DSrYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5BOHgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuzGDkB/H5XCVoraHQBsH9BqZ1vOD5JeHgNKVkXeDWFqHIX7HQXODuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2645,40 +2645,40 @@ else
 	{
 		if($vtotalingresosparaterceros>0)
 		{
-			$vobservaciones .= "\nTotal ingresos para terceros: $".number_format($vtotalingresosparaterceros)."\n";
-			$vobservaciones .= "Último pago: ".$vultimopago."\n";
-			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."\n";
-			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."\n";
-			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."\n";
-			$vobservaciones .= "Número usuario: ".$vnumerocontrato."\n";
+			$vobservaciones .= "<br>Total ingresos para terceros: $".number_format($vtotalingresosparaterceros)."<br>";
+			$vobservaciones .= "Último pago: ".$vultimopago."<br>";
+			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."<br>";
+			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."<br>";
+			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."<br>";
+			$vobservaciones .= "Número usuario: ".$vnumerocontrato."<br>";
 		}
 		else
 		{
-			$vobservaciones .= "\nÚltimo pago: ".$vultimopago."\n";
-			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."\n";
-			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."\n";
-			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."\n";
-			$vobservaciones .= "Número usuario: ".$vnumerocontrato."\n";
+			$vobservaciones .= "<br>Último pago: ".$vultimopago."<br>";
+			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."<br>";
+			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."<br>";
+			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."<br>";
+			$vobservaciones .= "Número usuario: ".$vnumerocontrato."<br>";
 		}
 	}
 	else
 	{
 		if($vtotalingresosparaterceros>0)
 		{
-			$vobservaciones .= "\nTotal ingresos para terceros: $".number_format($vtotalingresosparaterceros)."\n";
-			$vobservaciones .= "Último pago: ".$vultimopago."\n";
-			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."\n";
-			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."\n";
-			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."\n";
-			$vobservaciones .= "Número usuario: ".$vnumerocontrato."\n";
+			$vobservaciones .= "<br>Total ingresos para terceros: $".number_format($vtotalingresosparaterceros)."<br>";
+			$vobservaciones .= "Último pago: ".$vultimopago."<br>";
+			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."<br>";
+			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."<br>";
+			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."<br>";
+			$vobservaciones .= "Número usuario: ".$vnumerocontrato."<br>";
 		}
 		else
 		{
-			$vobservaciones .= "\nÚltimo pago: ".$vultimopago."\n";
-			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."\n";
-			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."\n";;
-			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."\n";
-			$vobservaciones .= "Número usuario: ".$vnumerocontrato."\n";
+			$vobservaciones .= "<br>Último pago: ".$vultimopago."<br>";
+			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."<br>";
+			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."<br>";;
+			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."<br>";
+			$vobservaciones .= "Número usuario: ".$vnumerocontrato."<br>";
 		}
 	}
 	
