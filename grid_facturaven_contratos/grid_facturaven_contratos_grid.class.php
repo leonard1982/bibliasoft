@@ -672,6 +672,8 @@ class grid_facturaven_contratos_grid
    $this->nmgp_botoes['qsearch'] = "on";
    $this->nmgp_botoes['groupby'] = "on";
    $this->nmgp_botoes['gridsave'] = "on";
+   $this->nmgp_botoes['gridsavesession'] = "on";
+   $this->nmgp_botoes['reload'] = "on";
    $this->nmgp_botoes['SC_btn_0'] = "on";
    $this->nmgp_botoes['Eliminar'] = "on";
    $this->nmgp_botoes['SC_btn_1'] = "on";
@@ -19060,21 +19062,12 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
               $nm_saida->saida("          <img id=\"NM_sep_7\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_recargar'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "btn_recargar";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__nav_refresh_green_32.png\"  id=\"sc_btn_recargar_top\" onClick=\"sc_btn_btn_recargar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
+          if ($this->nmgp_botoes['reload'] == "on")
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "breload", "nm_gp_submit_ajax ('igual', 'breload');", "nm_gp_submit_ajax ('igual', 'breload');", "reload_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
       {
           if ($NM_btn)
@@ -19866,21 +19859,12 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
               $nm_saida->saida("          <img id=\"NM_sep_16\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_recargar'] == "on" && !$this->grid_emb_form) 
-      { 
-               $btn_value = "btn_recargar";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__nav_refresh_green_32.png\"  id=\"sc_btn_recargar_top\" onClick=\"sc_btn_btn_recargar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
+          if ($this->nmgp_botoes['reload'] == "on")
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "breload", "nm_gp_submit_ajax ('igual', 'breload');", "nm_gp_submit_ajax ('igual', 'breload');", "reload_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
       {
           if ($NM_btn)
