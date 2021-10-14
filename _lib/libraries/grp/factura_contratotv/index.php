@@ -1118,31 +1118,31 @@ function Loading() {
 								echo "<br><table class='datoscontrato' >";
 								
 								echo "<tr>";
-								echo "<td><b>Número Usuario: </b></td><td style='text-align:right;'>".$vnumerocontrato."</td>";
+								echo "<td class='Pad TableITemA TableITemB TableITemD TableITemC'><b>Número Usuario: </b></td><td style='text-align:right;'  class='Pad TableITemA TableITemB TableITemD TableITemC'>".$vnumerocontrato."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Número de atrasos: </b</td><td style='text-align:right;'>".$vnumeroatrasos."</td>";
+								echo "<td  class='Pad TableITemA TableITemB TableITemD TableITemC'><b>Número de atrasos: </b</td><td style='text-align:right;'  class='Pad TableITemA TableITemB TableITemD TableITemC'>".$vnumeroatrasos."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Saldo atrasos: </b</td><td style='text-align:right;'>$".number_format($vsaldoatrasos)."</td>";
+								echo "<td  class='Pad TableITemA TableITemB TableITemD TableITemC'><b>Saldo atrasos: </b</td><td style='text-align:right;'  class='Pad TableITemA TableITemB TableITemD TableITemC'>$".number_format($vsaldoatrasos)."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Último pago: </b</td><td style='text-align:right;'>".$vultimopago."</td>";
+								echo "<td  class='Pad TableITemA TableITemB TableITemD TableITemC'><b>Último pago: </b</td><td style='text-align:right;'  class='Pad TableITemA TableITemB TableITemD TableITemC'>".$vultimopago."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>TOTAL A PAGAR: </td><td style='text-align:right;'>$".number_format($vtotalapagar)."</b></td>";
+								echo "<td  class='Pad TableITemA TableITemB TableITemD TableITemC'><b>TOTAL A PAGAR: </td><td style='text-align:right;'  class='Pad TableITemA TableITemB TableITemD TableITemC'>$".number_format($vtotalapagar)."</b></td>";
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Fecha límite de pago: </b</td><td style='text-align:right;'>".$vfechalimite."</td>";
+								echo "<td  class='Pad TableITemA TableITemB TableITemD TableITemC'><b>Fecha límite de pago: </b</td><td style='text-align:right;'  class='Pad TableITemA TableITemB TableITemD TableITemC'>".$vfechalimite."</td>";
 								echo "</tr>";
 								
 								echo "<tr>";
-								echo "<td><b>Fecha de corte: </b</td><td style='text-align:right;'>".$vfechacorte."</td>";
+								echo "<td  class='Pad TableITemA TableITemB TableITemD TableITemC'><b>Fecha de corte: </b</td><td style='text-align:right;'  class='Pad TableITemA TableITemB TableITemD TableITemC'>".$vfechacorte."</td>";
 								echo "</tr>";
 								
 								echo "</table>";
