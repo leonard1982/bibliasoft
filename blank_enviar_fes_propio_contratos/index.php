@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211013"; 
-      $this->nm_hr_ult_alt   = "175648"; 
+      $this->nm_dt_ult_alt   = "20211014"; 
+      $this->nm_hr_ult_alt   = "120022"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQJwDSBYD5F7DMzGVcB/HEF/HMJsHQBiH9BqHIBOZMXGHgNKDkB/DuFaHINUDcBwZSFUHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBeVkJ3H5F/ZuJeHQNwH9BiDSNaVWJsHgvOVIBODWFaVEF7HQBiZ1FGHIrwHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5X7HuNOVcFKDWFaDoJsD9JmH9BOZ1BeV5FaDEBOVkJGDWXCVoXGDcJeDQFGHANOV5raHgrKVIBODWFYVoFGDcNwH9FaHArKD5XGDEBOZSJGDWF/VoXGD9XsZSFUZ1rwV5FGHuNODkBOV5F/VENUD9XOZSB/HABYZMB/DEBOZSJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1rwD5JsHuNOZSrCV5X/VENUHQXOZSBOHArKD5NUHgBOHEFiHEFaHMB/DcBwZSFGHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHAvOV5JeDMvOV9BUH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FqHMXGDcXGZSFGHAvmVWXGDMvsVcFCDWJeVoX7D9XGZ1rqD1rKHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZSX7DSrwHuF7HgrwVcFeDuFqVEraHQBsVIJsHAN7V5JsHgveDkB/DuJeHIFGDcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKZMBqHgveVkXeDWFqHMBODcBiDQJsDSrwVWXGHuNOVcBODur/VoF7HQXGZSB/HIveD5JeHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGHEXeV5XCZuBOD9JKDQX7HArYV5BOHgrYDkBODWF/DoraD9XOH9BOZ1BeD5BqDErKVkXeV5FaDoBOD9JKDQX7Z1rwV5raHgvsDkBOV5X7DoJsD9BiZ1rqHAN7D5NUDEvsHEFiV5FaDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveD5rqHgrwVcFeHEF/DoFUHQBiH9B/DSBeHQraHgvsHEFiDuJeZuBODcJeH9X7HIrKHuFGHgrwVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoF7HQNwZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBiH9FUHIrwD5JwDMvmVcFCH5XKVorqHQNmZ1B/DSvmD5XGHgNOHArCH5F/HMJsHQNmH9X7DSrwD5BOHuzGDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1993,6 +1993,14 @@ $vnombre_emisor = "";
 $vcorreo_emisor = "";
 $vnit_emisor    = "";
 
+$vtotalingresosparaterceros = 0;
+$vultimopago    = "";
+$vnumeroatrasos = 0;
+$vsaldoatrasos  = 0;
+$vtotalapagar   = 0;
+$vnumerocontrato= "";
+$vidcontra      = 0;
+
 
 
 $vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_pdfs, url_api_sendmail,envio_credenciales,plantillas_correo,copia_factura_a,plantilla_pordefecto, (select d.razonsoc from datosemp d where d.iddatos='1') as nombre_emisor, (select d.correo from datosemp d where d.iddatos='1') as correo_emisor, (select d.nit from datosemp d where d.iddatos='1') as nit_emisor from webservicefe order by idwebservicefe desc limit 1";
@@ -2188,7 +2196,6 @@ else
 	$vdatos["time"] =  $vhora;
 	$vdatos["resolution_number"] =  $vresolucion;
 	$vdatos["prefix"] =  $vprefijo;
-	$vdatos["notes"] =  $vobservaciones;
 	$vdatos["sendmail"] =  true;
 	
 	if($venvio_credenciales=="SI")
@@ -2277,7 +2284,9 @@ else
 	$vbasetotales     = array();
 	$vporcentajesivas = array();
 	
-	$vsql = "select m.nompro,d.adicional,d.cantidad,d.valorunit,d.iva,d.valorpar,d.obs,b.bodega,m.codigoprod from facturaven_contratos k inner join detalleventa d on d.numfac=k.idfacven inner join productos m on d.idpro=m.idprod inner join bodegas b on d.idbod=b.idbodega where k.idfacven='".$vidfacven."'";
+	$vtotalventa = 0;
+	
+	$vsql = "select m.nompro,d.adicional,d.cantidad,d.valorunit,d.iva,d.valorpar,d.obs,b.bodega,m.codigoprod, m.idprod from facturaven_contratos k inner join detalleventa d on d.numfac=k.idfacven inner join productos m on d.idpro=m.idprod inner join bodegas b on d.idbod=b.idbodega where k.idfacven='".$vidfacven."'";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2324,6 +2333,7 @@ else
 			}
 			$vbodega      = $this->r3[$i][7];
 			$vcodigo      = $this->r3[$i][8];
+			$vidprod      = $this->r3[$i][9];
 			
 			if($vcanlista>=1)
 			{
@@ -2427,12 +2437,252 @@ else
 			$vdatos["invoice_lines"][$contador]["type_item_identification_id"] = 4;
 			$vdatos["invoice_lines"][$contador]["price_amount"] = $vparcvta/$vcanlista;
 			$vdatos["invoice_lines"][$contador]["base_quantity"] = $vcanlista;	
+			
+			 
+      $nm_select = "select t.documento,t.dv,t.tipo_documento from productos p inner join terceros t on p.idpro1=t.idtercero where p.idprod='".$vidprod."' and p.tipo_producto='RE'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vCodMan = array();
+      $this->vcodman = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vCodMan[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vcodman[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vCodMan = false;
+          $this->vCodMan_erro = $this->Db->ErrorMsg();
+          $this->vcodman = false;
+          $this->vcodman_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+			if(isset($this->vcodman[0][0]))
+			{
+				$vid_mandatorio = $this->vcodman[0][0];
+				$vdv_mandatorio = $this->vcodman[0][1];
+				$vid_tipo       = $this->vcodman[0][2];
+
+				$vdatos["invoice_lines"][$contador]["agentparty"]    = $vid_mandatorio ;
+				$vdatos["invoice_lines"][$contador]["agentparty_dv"] = $this->fDigito($vdv_mandatorio);
+				
+				$vtotalingresosparaterceros += $vparcvta;
+			}
+			
+			$vtotalventa += $vparcvta;
 
 			$contador++;
 		}
 		
 	}
 	
+	
+	$vsql = "select id_contrato from terceros_contratos_factura where factura='".$vidfacven."' limit 1";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vIdContrato = array();
+      $this->vidcontrato = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vIdContrato[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vidcontrato[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vIdContrato = false;
+          $this->vIdContrato_erro = $this->Db->ErrorMsg();
+          $this->vidcontrato = false;
+          $this->vidcontrato_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vidcontrato[0][0]))
+	{
+		$vidcontra = $this->vidcontrato[0][0];
+	}
+
+	if($vidcontra>0)
+	{
+		$vsql = "select fecha_ultimopago from terceros_contratos where id_ter_cont='".$vidcontra."'";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vFechUlt = array();
+      $this->vfechult = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vFechUlt[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vfechult[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vFechUlt = false;
+          $this->vFechUlt_erro = $this->Db->ErrorMsg();
+          $this->vfechult = false;
+          $this->vfechult_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->vfechult[0][0]))
+		{
+			$vultimopago = $this->vfechult[0][0];
+		}
+
+		$vsql = "select count(*) from terceros_contratos_factura where id_contrato='".$vidcontra."' and deperiodo='SI' and saldo>0 and factura <>'".$vidfacven."'";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vAtrasos = array();
+      $this->vatrasos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vAtrasos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vatrasos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vAtrasos = false;
+          $this->vAtrasos_erro = $this->Db->ErrorMsg();
+          $this->vatrasos = false;
+          $this->vatrasos_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->vatrasos[0][0]))
+		{
+			$vnumeroatrasos = $this->vatrasos[0][0];
+		}
+
+		$vsql = "select sum(saldo) from terceros_contratos_factura where id_contrato='".$vidcontra."' and deperiodo='SI' and saldo>0 and factura <>'".$vidfacven."'";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vAtrasosSal = array();
+      $this->vatrasossal = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vAtrasosSal[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vatrasossal[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vAtrasosSal = false;
+          $this->vAtrasosSal_erro = $this->Db->ErrorMsg();
+          $this->vatrasossal = false;
+          $this->vatrasossal_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->vatrasossal[0][0]))
+		{
+			$vsaldoatrasos  = $this->vatrasossal[0][0];
+		}
+	}
+
+	$vtotalapagar   = $vsaldoatrasos + $vtotalventa;
+	
+	if(!empty($vobservaciones))
+	{
+		if($vtotalingresosparaterceros>0)
+		{
+			$vobservaciones .= "\nTotal ingresos para terceros: $".number_format($vtotalingresosparaterceros)."\n";
+			$vobservaciones .= "Último pago: ".$vultimopago."\n";
+			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."\n";
+			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."\n";
+			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."\n";
+			$vobservaciones .= "Número usuario: ".$vnumerocontrato."\n";
+		}
+		else
+		{
+			$vobservaciones .= "\nÚltimo pago: ".$vultimopago."\n";
+			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."\n";
+			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."\n";
+			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."\n";
+			$vobservaciones .= "Número usuario: ".$vnumerocontrato."\n";
+		}
+	}
+	else
+	{
+		if($vtotalingresosparaterceros>0)
+		{
+			$vobservaciones .= "\nTotal ingresos para terceros: $".number_format($vtotalingresosparaterceros)."\n";
+			$vobservaciones .= "Último pago: ".$vultimopago."\n";
+			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."\n";
+			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."\n";
+			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."\n";
+			$vobservaciones .= "Número usuario: ".$vnumerocontrato."\n";
+		}
+		else
+		{
+			$vobservaciones .= "\nÚltimo pago: ".$vultimopago."\n";
+			$vobservaciones .= "Número de atrasos: ".$vnumeroatrasos."\n";
+			$vobservaciones .= "Saldo atrasos: $".number_format($vsaldoatrasos)."\n";;
+			$vobservaciones .= "TOTAL A PAGAR: $".number_format($vtotalapagar)."\n";
+			$vobservaciones .= "Número usuario: ".$vnumerocontrato."\n";
+		}
+	}
+	
+	$vdatos["notes"] =  $vobservaciones;
 	
 	$vdatos["allowance_charges"][0]["discount_id"] =  1;
 	$vdatos["allowance_charges"][0]["charge_indicator"] =  false;
