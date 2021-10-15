@@ -217,8 +217,8 @@ class blank_listas_fe_periodo_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "175201"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_listas_fe_periodo_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_listas_fe_periodo']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_listas_fe_periodo']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuFaHABYHQFaDMvsVcBUDWF/HIJeDcJUZ1F7Z1BeHQFGDMzGDkB/DWF/HMX7HQXGDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmZ9F7HAN7HuFUDMvsVcFeHEX7VEF7HQXGZkBiD1rwD5XGDErKDkXKHEFqZuXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwD5rqHuvmVcFCH5FqVENUDcBqZ1FaD1rwD5BiDMzGVkXeDWFqDoFUD9NwDQJsHABYV5BOHuvmVcBOV5X7DoNUD9BsVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWFaVENUHQXOZ1rqHIBeV5JeDMzGVkJGDuFaHIBqHQNmDQX7DSNaVWBODMvsVcBUH5XCHIraHQXGZSBOZ1BeHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiHINKD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrwV9BUH5B3VEraD9BsZkFGHIBeZMFaHgrKHENiH5F/HIB/DcXGH9BiHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQJwHANOHQNUHuBYV9FiV5FYDorqHQNmH9BOHArYV5X7DMvCHEJGDWXCVoBqHQBiZSBiHANOHQJeHuNOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJeD9FYDuFaHIBeD5F7DMvOVIBsDWrmVErqD9BiZSB/HAvCZMBOHgvsZSXeV5FqDoraDcJeDuFaDSrwVWJwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHuNOVcFKHEFYVoFGD9BiZ1F7HABYD5JeDMNKZSXeDWXCVoB/DcXOZSFGHAveD5JwHuzGVIBOHEFYVoraDcJUZ1F7Z1BOV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsDWFqDorqHQFYH9BiDSN7D5rqDMNOV9BUDWJeDoXGDcNmZSB/HArYHQF7HgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHArsDWBmDoBqHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQBsZ1rqHArKHQraHgvCHEJqDWXCDoJeD9JKDQX7DSN7HuraHuBYVcBOH5XCVoraDcNwH9BqHABYHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1935,9 +1935,11 @@ class blank_listas_fe_periodo_apl
 	$vanio    = $_POST["anio"];
 	$vperiodo = $_POST["periodo"];
 	$vzona    = $_POST["zona"];
+	$vnombre  = "";
+	$vfactura = "";
 	$vidfacven= 0;
 	
-	$vsql = "select distinct tcf.factura from terceros_contratos_factura tcf inner join facturaven_contratos f on tcf.factura=f.idfacven where YEAR(tcf.fecha_factura)='".$vanio."' and MONTH(tcf.fecha_factura)='".$vperiodo."' and tcf.deperiodo='SI' and (f.cufe is null or f.cufe = '') and f.enviada='NO' and (select zc.codigo from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1)='".$vzona."' order by f.idfacven asc limit 1";
+	$vsql = "select distinct tcf.factura, t.nombres from terceros_contratos_factura tcf inner join facturaven_contratos f on tcf.factura=f.idfacven left join terceros t on f.idcli=t.idtercero where YEAR(tcf.fecha_factura)='".$vanio."' and MONTH(tcf.fecha_factura)='".$vperiodo."' and tcf.deperiodo='SI' and (f.cufe is null or f.cufe = '') and f.enviada='NO' and (select zc.codigo from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1)='".$vzona."' order by f.idfacven asc limit 1";
 	
 	 
       $nm_select = $vsql; 
@@ -1972,9 +1974,10 @@ class blank_listas_fe_periodo_apl
 	if(isset($this->vdatos[0][0]))
 	{
 		$vidfacven = $this->vdatos[0][0];
+		$vnombre   = $this->vdatos[0][1];
 	}
 	
-	echo json_encode(array("idfacven"=>$vidfacven,"zona"=>$vzona,"periodo"=>$vperiodo,"anio"=>$vanio,"sql"=>$vsql));
+	echo json_encode(array("idfacven"=>$vidfacven,"zona"=>$vzona,"periodo"=>$vperiodo,"anio"=>$vanio,"sql"=>$vsql,"nombre_cliente"=>$vnombre));
 }
 $_SESSION['scriptcase']['blank_listas_fe_periodo']['contr_erro'] = 'off'; 
 //--- 
