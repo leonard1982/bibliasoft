@@ -449,6 +449,14 @@ if (!isset($this->sc_temp_gcontador_grid_fe)) {$this->sc_temp_gcontador_grid_fe 
 ;
 
 ?>
+
+<style>
+#sc_btn_enviar_fv_periodo_top{
+	
+	color:white !important;
+}
+</style>
+
 <script>
 
 function fEnviarTech(idfacven)
@@ -6788,6 +6796,14 @@ if (!isset($this->sc_temp_gcontador_grid_fe)) {$this->sc_temp_gcontador_grid_fe 
 ;
 
 ?>
+
+<style>
+#sc_btn_enviar_fv_periodo_top{
+	
+	color:white !important;
+}
+</style>
+
 <script>
 
 function fEnviarTech(idfacven)
