@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211014"; 
-      $this->nm_hr_ult_alt   = "181203"; 
+      $this->nm_dt_ult_alt   = "20211015"; 
+      $this->nm_hr_ult_alt   = "151812"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDQFUHAveHuFGHgrKZSNiDWJeHMFaHQJmH9BOD1rwHuB/HgveHErCDWFqZuBqHQNwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXODQFUHABYV5JwHgrwVcFeHEFYDoJeHQXGZ1X7HANOZMJeHgveHEBUDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDMBYHEXeV5XCVoJwDcXOZSX7HABYD5NUHuBYVIBOHEFYVoB/D9XOZSBOZ1BeV5BqDMzGHEJGH5FYDoFUD9NwDQJwHANOV5JwHuzGVcFKHEFYVoraDcNwH9B/D1rwD5FaDEBOVkJGH5F/DoJeDcJeDQFGD1veV5JwHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQB/D1veHQF7HuvmVcrsH5XKVoX7HQBsH9BOHABYHuFUDEBeDkXKDuJeVoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBOHQBiDuBqD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvmZMXGDEBeVkXeHEFqHIrqDcXGH9X7HIrKHQJeDMNODkB/DWF/VoraHQNmZ1F7D1NaZMBODEvsHEFiH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwH9FGHArYV5raHgrwVcXKV5X7DoFUDcFYH9FaHAN7D5NUHgNOHEJGDWFGZuB/D9NwZSFGHAN7VWJeHuvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwV9FeDuX7VEFGDcBqZSB/HIveV5FUDEBOVkXeHEXCDoJeD9NwDQFUHANKVWBOHgvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeH9X7HIBeV5FUHuNOVIBOHEX7VoJwDcJUZ1B/Z1NOZMBqDEBeHEXeDWX7DoJeDcXOZSX7HAN7D5JwHuzGDkB/V5X7VorqD9XOZSB/Z1BeD5BqDEBeHEXeV5FaDoFUDcJeZSX7Z1rwD5NUHuBYVcrsDWJeVoB/D9BiZ1F7Z1BeD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FaHAzGD5BqDMvCHEXeDuFaDoJsHQXsZSX7Z1vCV5BqDMBODkBsDWJeHIXGHQXOZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAzGZMFaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BOHuvmVcFCH5XCDoFUHQBsZ1BOHAN7HQFUDEBOVkJGDuJeHMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2965,7 +2965,7 @@ else
 								$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 							}
 
-							$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+							$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven) WHERE idfacven='".$vidfacven."'";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3078,7 +3078,7 @@ else
 												$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 											}
 
-											$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."'  WHERE idfacven='".$vidfacven."'";
+											$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven)  WHERE idfacven='".$vidfacven."'";
 											
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3180,7 +3180,7 @@ else
 									$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 								}
 
-								$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+								$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven) WHERE idfacven='".$vidfacven."'";
 								
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3295,7 +3295,7 @@ else
 													$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 												}
 
-												$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+												$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven)  WHERE idfacven='".$vidfacven."'";
 												
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3521,7 +3521,7 @@ else
 						$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 					}
 
-					$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+					$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven) WHERE idfacven='".$vidfacven."'";
 					
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3634,7 +3634,7 @@ else
 										$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 									}
 
-									$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+									$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven)  WHERE idfacven='".$vidfacven."'";
 									
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3736,7 +3736,7 @@ else
 							$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml;  
 						}
 
-						$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+						$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven) WHERE idfacven='".$vidfacven."'";
 						
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3849,7 +3849,7 @@ else
 											$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
 										}
 
-										$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfacven='".$vidfacven."'";
+										$vsql="UPDATE facturaven_contratos SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechaven,' ".date("H:i:s")."'),avisos=null, proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."',enviada='SI',periodo=MONTH(fechaven),anio=YEAR(fechaven) WHERE idfacven='".$vidfacven."'";
 										
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
