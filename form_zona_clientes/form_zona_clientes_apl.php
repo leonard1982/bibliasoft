@@ -3241,7 +3241,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_zona_clientes']['Lookup_resol
 
    $unformatted_value_idzona_cliente_ = $this->idzona_cliente_;
 
-   $nm_comando = "SELECT Idres,prefijo  FROM resdian  WHERE activa='SI' and resolucion>0 and prefijo_fe='FE' ORDER BY prefijo";
+   $nm_comando = "SELECT Idres,concat(prefijo,' - ',if(activa='NO','NO ACTIVA','ACTIVA')) as prefijo FROM resdian  WHERE  resolucion>0 and prefijo_fe='FE' and pref_factura='SI' ORDER BY prefijo";
 
    $this->idzona_cliente_ = $old_value_idzona_cliente_;
 
@@ -4283,7 +4283,7 @@ else
 
    $unformatted_value_idzona_cliente_ = $this->idzona_cliente_;
 
-   $nm_comando = "SELECT Idres,prefijo  FROM resdian  WHERE activa='SI' and resolucion>0 and prefijo_fe='FE' ORDER BY prefijo";
+   $nm_comando = "SELECT Idres,concat(prefijo,' - ',if(activa='NO','NO ACTIVA','ACTIVA')) as prefijo FROM resdian  WHERE  resolucion>0 and prefijo_fe='FE' and pref_factura='SI' ORDER BY prefijo";
 
    $this->idzona_cliente_ = $old_value_idzona_cliente_;
 
@@ -5345,7 +5345,8 @@ $_SESSION['scriptcase']['form_zona_clientes']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -5697,7 +5698,7 @@ else
 
    $unformatted_value_idzona_cliente_ = $this->idzona_cliente_;
 
-   $nm_comando = "SELECT Idres,prefijo  FROM resdian  WHERE activa='SI' and resolucion>0 and prefijo_fe='FE' ORDER BY prefijo";
+   $nm_comando = "SELECT Idres,concat(prefijo,' - ',if(activa='NO','NO ACTIVA','ACTIVA')) as prefijo FROM resdian  WHERE  resolucion>0 and prefijo_fe='FE' and pref_factura='SI' ORDER BY prefijo";
 
    $this->idzona_cliente_ = $old_value_idzona_cliente_;
 

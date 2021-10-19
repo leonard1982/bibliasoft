@@ -1701,7 +1701,7 @@ else
 
    $unformatted_value_idzona_cliente_ = $this->idzona_cliente_;
 
-   $nm_comando = "SELECT Idres,prefijo  FROM resdian  WHERE activa='SI' and resolucion>0 and prefijo_fe='FE' ORDER BY prefijo";
+   $nm_comando = "SELECT Idres,concat(prefijo,' - ',if(activa='NO','NO ACTIVA','ACTIVA')) as prefijo FROM resdian  WHERE  resolucion>0 and prefijo_fe='FE' and pref_factura='SI' ORDER BY prefijo";
 
    $this->idzona_cliente_ = $old_value_idzona_cliente_;
 
