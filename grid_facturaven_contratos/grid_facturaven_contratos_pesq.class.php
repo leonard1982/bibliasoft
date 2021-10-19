@@ -3291,7 +3291,7 @@ foreach ($Arr_format as $Part_date)
 <?php
       $resolucion_look = substr($this->Db->qstr($resolucion), 1, -1); 
       $nmgp_def_dados = "" ; 
-      $nm_comando = "SELECT Idres,concat(prefijo,' - ',if(activa='NO','NO ACTIVA','ACTIVA')) as prefijo FROM resdian  WHERE activa='SI' and resolucion>0 and prefijo_fe='FE' and pref_factura='SI' ORDER BY prefijo"; 
+      $nm_comando = "SELECT Idres,concat(prefijo,' - ',if(activa='NO','NO ACTIVA','ACTIVA')) as prefijo FROM resdian  WHERE  resolucion>0 and prefijo_fe='FE' and pref_factura='SI' ORDER BY prefijo"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
