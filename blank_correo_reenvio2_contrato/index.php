@@ -218,7 +218,7 @@ class blank_correo_reenvio2_contrato_ini
       $this->nm_hr_criacao   = "115749"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211020"; 
-      $this->nm_hr_ult_alt   = "142144"; 
+      $this->nm_hr_ult_alt   = "142437"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_correo_reenvio2_contrato_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2_contrato']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2_contrato']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDQFUHArYHuX7HgrKVIFCDuX7DoNUD9BiZ1X7D1NaD5XGHgBeVkJGDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZ1rqHABYZMJeDENOHENiDWXCDoJeHQFYH9FGHAN7D5rqDMvmVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBOH5FqVoraD9XOZSFaHAN7V5FaDEBOZSJqV5FaDoJeDcBwDQX7HABYD5NUHuBYVIBOHEFYVoraHQNmZSBOZ1BeD5rqDEBOZSXeV5XCZuFaD9NwH9X7HArYVWJsHuNOZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiD9XOZ1BiHABYHuBqHgrKZSJqH5F/HIrqHQXODuBqHArYV5BODMNODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoX7HQNmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NmH9X7D1veHQBODMzGVIB/DWB3VEF7HQNwZ1FaD1rwV5FaHgNKHEFiDWr/HIrqDcBwZSX7HIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQFGHAN7HQFaDMvOVcB/DuX7HIX7D9BiH9FaHAvsD5XGHgveHEFiHEXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQXGZ1BiHIveV5XGDEBeHEXeDuFYVoFGDcXGDQFUHABYHQB/DMvmV9BUDWXKDoXGHQBqZ1rqHAN7HQBqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMBYZSXeV5FaDoJeD9NwH9X7HABYV5JwHgrYDkFCDWJeDoraDcJUZ1B/Z1NOZMBqDEBeHEXeV5XKDoJeDcXOZSX7D1BeV5JwHuNOVIFCH5XCVoX7DcBqZ1FaD1rKD5FaHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoBqDcBiDQJsDSzGV5JeDMrYZSJqDWFaHMFGHQFYZkFGHANOV5FaDErKHArCDuJeHIrqHQFYZSBiHABYVWJwDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5XGDMvOVcBUDWrmVorqHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuFaDcJeH9FUHArYD5rqDMBYVIFCDWJeDoNUD9BiZ1F7DSNOD5BiDMzGVkJGDWX7DoBqHQXsDQFUDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2192,12 +2192,8 @@ class blank_correo_reenvio2_contrato_apl
 		}
 		else
 		{
-			
-			$this->vdata = '{"prefix": "'.$vprefijo.'","number": "'.$vnumero.'","alternate_email": "'.$vemail.'","html_header": "'.$vdatos["html_header"].'","html_body": "'.$vdatos["html_body"].'","html_buttons": "'.$vdatos["html_buttons"].'","html_footer": "'.$vdatos["html_footer"].'"}';
 		
 			$curl = curl_init();
-			
-			echo $vdatos["html_header"];
 			
 			$vdconexion = array(
 			  CURLOPT_URL => $vurl_api_sendmail,
@@ -2212,7 +2208,10 @@ class blank_correo_reenvio2_contrato_apl
 				"prefix": "'.$vprefijo.'",
 				"number": "'.$vnumero.'",
 				"alternate_email": "'.$vemail.'",
-				"html_header": '.$vdatos["html_header"].'
+				"html_header":"<p>Señor(es), '.$vnombre_emisor.' con NIT '.$vccnit.' </p><p style=\'margin-bottom: 5px !important; margin-top: 5px !important;\'>Le informamos ha recibido un documento electronico de '.$vnombre_emisor.'.</p>",
+    "html_body": "",
+    "html_footer":"<p>Antes de imprimir este correo, valore si realmente es necesario. El medioambiente es cosa de todos.</p><hr><p style=\'text-align: justify\'>Por favor, no responda directamente a este correo. La cuenta de correo <strong>'.$vcorreo_emisor.'</strong> tiene propósito exclusivamente informativo y no puede ser empleada como destino en comunicaciones.</p><p style=\'text-align: justify;\'>Aviso de confidencialidad: Esta comunicación y los documentos que en su caso lleve anexos, son para uso exclusivo del destinatario arriba indicado y contienen información privilegiada y confidencial. Si Usted no es el destinatario original, queda informado de que, la divulgación, distribución o reproducción o cualquier otro uso tanto de la comunicación como de su contenido, sin la autorización del remitente, está terminantemente prohibida. En caso de haber recibido esta comunicación por error, notifíqueselo inmediatamente al remitente, absténgase de leerlo, copiarlo, remitirlo o entregarlo a un tercero y proceda a su destrucción. Las comunicaciones por medio de Internet no permiten asegurar ni garantizar su integridad y seguridad, o su correcta recepción, por lo que el emisor no asume responsabilidad alguna por tales circunstancias.</p>",
+    "html_buttons": "<table style=\'width: 100%; border-collapse: collapse;\' border=\'0\'><tbody><tr><td style=\'width: 257.172px;\'><p style=\'margin-bottom: 10px !important; padding-bottom: 10px !important; text-align: center;\'><a style=\'font-weight: bold; text-decoration: none; border: 2px solid #0880e8; padding: 10px 32px; color: #0880e8; border-radius: 50px; background: #fff; margin-bottom: 10px !important; text-align: center;\' href=\''.$vurl_pdf_factura.'\'>Ver factura</a></p></td><td style=\'width: 540.828px; text-align: center;\'></td></tr></tbody></table>",
 			  }',
 			  CURLOPT_HTTPHEADER => array(
 				'Content-Type: application/json',
