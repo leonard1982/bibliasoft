@@ -218,7 +218,7 @@ class blank_correo_reenvio2_contrato_ini
       $this->nm_hr_criacao   = "115749"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211020"; 
-      $this->nm_hr_ult_alt   = "114601"; 
+      $this->nm_hr_ult_alt   = "115815"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_correo_reenvio2_contrato_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2_contrato']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2_contrato']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZSBiZ1BYD5rqDMvmVIBsDuX7DoXGHQJmVINUD1vsD5XGHgvsHEFiH5FYVoJeD9JKH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmH9FGD1vOVWXGDMvmDkBsH5FqHMBqHQXOZ1BODSNOZMB/HgBOVkJ3HEFqDoJsD9JKZSX7Z1N7V5BqDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDorqD9XsDQJsHArYD5NUHuvmDkB/V5X7VoBqD9BsH9FaHAN7D5XGDMzGHEXeV5FaDoFUD9NwH9X7HABYD5JwHuNOVIFCDWF/DoFGD9BsVIJsHAN7D5BiDMBYZSXeV5FaVoBiD9NmDQJwHANOV5FUHuBYVcFKV5FGDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQrqDMBYVIFCDWFYDoJsHQXGZSFaHArYHuX7DEBeDkXKDWF/HMJsHQJeDuBOZ1zGVWJeHgrKVcFCDWJeHMrqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHANOV5raDMBOVIBsHEBmDoXGHQNwZ1FaDSvOD5JeDMBYHEXeDuFaHIrqHQFYDQX7DSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXGDuFaD1veHuBODMBYDkBsDWrmVEF7DcJUZkBiD1rwHuX7DMveDkXKH5FYHIJeHQFYDQFUHAN7V5BODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiH5FYHMBqHQNmDQJsZ1BYHQJwDMzGVcB/HEFYHMFUD9BiZ1BiD1rKHQFaHgNOVkJ3DWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaDoF7D9XsZSFGHANOV5BOHgrKVcBOV5X7VoJwD9XOZSB/HArYV5FaDEBOVkJGDWXCVoXGD9XsZ9F7HANOV5raHgvsDkBOV5X7DoJsD9BiZ1rqHAN7D5NUDEvsHEFiV5XKVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQBqHIrKVWJwHuBOVcBUDWXCHIraHQBqZ1rqHAvsD5BqHgBeVkJqDurmZuB/HQXsDuFaZ1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHAvOV5JeDMvOZSNiDWXCHMBiD9BsVIraD1rwV5X7HgBeHENiDWXCHMXGD9NmDQBqHAveHQJeHuvmV9FeHEX7VoX7D9XOZ1BOHANOV5JsDErKVkJ3HEXKZuB/HQXsDQFaHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1962,6 +1962,11 @@ class blank_correo_reenvio2_contrato_apl
 	$vcorreo_emisor = "";
 	$vnit_emisor    = "";
 	
+	$vdatos["html_header"] = "";
+	$vdatos["html_body"]   = "";
+	$vdatos["html_buttons"]= "";
+	$vdatos["html_footer"] = "";
+	
 	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_pdfs, url_api_sendmail,envio_credenciales,plantillas_correo,copia_factura_a,plantilla_pordefecto, (select d.razonsoc from datosemp d where d.iddatos='1') as nombre_emisor, (select d.correo from datosemp d where d.iddatos='1') as correo_emisor, (select d.nit from datosemp d where d.iddatos='1') as nit_emisor from webservicefe order by idwebservicefe desc limit 1";
 	 
       $nm_select = $vsql; 
@@ -2150,7 +2155,11 @@ class blank_correo_reenvio2_contrato_apl
 					  CURLOPT_POSTFIELDS =>'{
 						"prefix": "'.$vprefijo.'",
 						"number": "'.$vnumero.'",
-						"alternate_email": "'.$vemail.'"
+						"alternate_email": "'.$vemail.'",
+						"html_header": "'.$vdatos["html_header"].'",
+						"html_body": "'.$vdatos["html_body"].'",
+						"html_buttons": "'.$vdatos["html_buttons"].'",
+						"html_footer": "'.$vdatos["html_footer"].'"
 					}
 					',
 					  CURLOPT_HTTPHEADER => array(
@@ -2198,7 +2207,11 @@ class blank_correo_reenvio2_contrato_apl
 			  CURLOPT_POSTFIELDS =>'{
 				"prefix": "'.$vprefijo.'",
 				"number": "'.$vnumero.'",
-				"alternate_email": "'.$vemail.'"
+				"alternate_email": "'.$vemail.'",
+				"html_header": "'.$vdatos["html_header"].'",
+				"html_body": "'.$vdatos["html_body"].'",
+				"html_buttons": "'.$vdatos["html_buttons"].'",
+				"html_footer": "'.$vdatos["html_footer"].'"
 			}
 			',
 			  CURLOPT_HTTPHEADER => array(
