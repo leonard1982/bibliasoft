@@ -218,7 +218,7 @@ class blank_correo_reenvio2_contrato_ini
       $this->nm_hr_criacao   = "115749"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211020"; 
-      $this->nm_hr_ult_alt   = "131350"; 
+      $this->nm_hr_ult_alt   = "131654"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_correo_reenvio2_contrato_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2_contrato']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2_contrato']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsH9FUHAvmVWJeDMvOVIBODWFYHMFGHQXGZ1X7Z1BeD5BiDEBOVkJ3DuJeVoX7HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1rqHIveD5JwHgNKVkJ3HEFqHMBqD9NmDQB/D1BeHurqHuBOVcBOV5F/HMrqHQJmZkBiHAzGD5BOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMBYZSXeV5FaDoJeD9NwH9X7HABYV5JwHgrYDkFCDWJeDoraDcJUZ1B/Z1NOZMBqDEBeHEXeV5XKDoJeDcXOZSX7D1BeV5JwHuNOVIFCH5XCVoX7DcBqZ1FaD1rKD5FaHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoF7HQNmDQBOZ1BYVWJeDMvsVcB/DWrmVEF7HQXOZ1F7DSrYV5BODMNKZSJqDuFaHMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBqHQBiDQBqHAvmV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5JwDEBeHErCDuFaDoXGHQNmH9X7Z1N7HurqDMBYVcrsH5FqHMrqDcJUH9FaHAvCZMB/HgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmZ9F7HArYHuB/HuNODkBsV5F/VEF7HQXOZ1BOHArYD5F7DMzGZSJ3DWFqDorqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1rqHIBOD5XGDEvsHEXeDWX7HIBOHQFYZSX7HABYV5X7DMzGVcFeDuFqHIJeD9XOVIJsD1rKHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5X7HuNOVcFKDWFaDoJsD9JmH9BOZ1BeD5rqDEBOZSJGDWr/DoJeDcBwDQX7Z1rwV5raHuzGVIBODWFYDoraD9BsZSFaHANOV5JeDEBODkB/DWr/DoFUDcJeZSX7Z1rwD5NUHuBYVcrsDWJeVoB/D9BiZ1F7Z1BOV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDuX/ZuFaDcJeH9BiHABYHuB/HgrYDkFCDWFYHIF7HQNmZkBiHAvCZMXGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoB/HQBiZ1FGHIBeHQraHgBYHErsH5FGZuBODcBwDQFaD1BeVWJwDMrYZSNiDWJeVEX7DcNmZ1B/HIBeHuBOHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2200,13 +2200,11 @@ class blank_correo_reenvio2_contrato_apl
 		{
 			
 			$this->vdata = '{"prefix": "'.$vprefijo.'","number": "'.$vnumero.'","alternate_email": "'.$vemail.'","html_header": "'.$vdatos["html_header"].'","html_body": "'.$vdatos["html_body"].'","html_buttons": "'.$vdatos["html_buttons"].'","html_footer": "'.$vdatos["html_footer"].'"}';
-			
-			echo json_encode($this->vdata);
 		
 			$curl = curl_init();
 
 			curl_setopt_array($curl, array(
-			  CURLOPT_URL => $vurl_api_sendmail,
+			  CURLOPT_URL => 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/send-email',
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => '',
 			  CURLOPT_MAXREDIRS => 10,
@@ -2214,7 +2212,17 @@ class blank_correo_reenvio2_contrato_apl
 			  CURLOPT_FOLLOWLOCATION => true,
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => 'POST',
-			  CURLOPT_POSTFIELDS => json_encode($this->vdata),
+			  CURLOPT_POSTFIELDS =>'{
+				"prefix": "CHFE",
+				"number": "13078",
+				"alternate_email": "leo2904.trabajo@gmail.com",
+				"html_header":"<p>Señor(es), EDGAR  ALEXANDER SOLANO ESPINOSA/EDGAR SOLANO EDGAR SOLANO SOLANO ESPINOSA identificado con NIT 88217248 </p><p style=\'margin-bottom: 5px !important; margin-top: 5px !important;\'>Le informamos ha recibido un documento electronico de LEONARDO ALFONSO NAVARRO ROJAS.</p>",
+				"html_body": "",
+				"html_footer":"<p>Antes de imprimir este correo, valore si realmente es necesario. El medioambiente es cosa de todos.</p><hr><p style=\'text-align: justify\'>Por favor, no responda directamente a este correo. La cuenta de correo <strong>vCorreoEmisor</strong> tiene propósito exclusivamente informativo y no puede ser empleada como destino en comunicaciones.</p><p style=\'text-align: justify;\'>Aviso de confidencialidad: Esta comunicación y los documentos que en su caso lleve anexos, son para uso exclusivo del destinatario arriba indicado y contienen información privilegiada y confidencial. Si Usted no es el destinatario original, queda informado de que, la divulgación, distribución o reproducción o cualquier otro uso tanto de la comunicación como de su contenido, sin la autorización del remitente, está terminantemente prohibida. En caso de haber recibido esta comunicación por error, notifíqueselo inmediatamente al remitente, absténgase de leerlo, copiarlo, remitirlo o entregarlo a un tercero y proceda a su destrucción. Las comunicaciones por medio de Internet no permiten asegurar ni garantizar su integridad y seguridad, o su correcta recepción, por lo que el emisor no asume responsabilidad alguna por tales circunstancias.</p>",
+				"html_buttons": "<table style=\'width: 100%; border-collapse: collapse;\' border=\'0\'><tbody><tr><td style=\'width: 257.172px;\'><p style=\'margin-bottom: 10px !important; padding-bottom: 10px !important; text-align: center;\'><a style=\'font-weight: bold; text-decoration: none; border: 2px solid #0880e8; padding: 10px 32px; color: #0880e8; border-radius: 50px; background: #fff; margin-bottom: 10px !important; text-align: center;\' href=\'https://www.facilwebnube.com/apidian2021/public/index.php/api/download/900584677/FES-CHFE13072.pdf\'>Ver factura</a></p></td><td style=\'width: 540.828px; text-align: center;\'><a style=\'font-weight: bold; text-decoration: none; border: 2px solid #0880e8; padding: 10px 32px; color: #0880e8; border-radius: 50px; background: #fff; text-align: center;\' href=\'https://www.facilwebnube.com/apidian2021/public/index.php/accept-reject-document/900584677/6/FF/108/2021-10-09\'>Aceptar y/o Rechazar documento</a></td></tr></tbody></table>",
+				"base64graphicrepresentation": ""
+			}
+			',
 			  CURLOPT_HTTPHEADER => array(
 				'Content-Type: application/json',
 				'accept: application/json',
