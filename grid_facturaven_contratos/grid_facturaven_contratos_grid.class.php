@@ -212,8 +212,6 @@ class grid_facturaven_contratos_grid
    var $imprimir;
    var $imprimircopia;
    var $copiar;
-   var $anio;
-   var $periodo;
    var $zona;
    var $barrio;
    var $fechaven;
@@ -255,6 +253,8 @@ class grid_facturaven_contratos_grid
    var $enviada_a_tns;
    var $factura_tns;
    var $cufe;
+   var $periodo;
+   var $anio;
    var $enviada;
    var $tiene_nota;
    var $look_credito;
@@ -1312,15 +1312,6 @@ $(document).ajaxStart(function(){
 </script>
 
 <?php
-
-$this->opciones  = "<div class='dropdown'>
-  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-    <i class='fas fa-ellipsis-v'></i>
-  </button>
-  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
-  </div>
-</div>";
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
        $this->SC_Buf_onInit = ob_get_clean();; 
@@ -2019,27 +2010,27 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT anio, periodo, zona, barrio, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), usuario_crea, str_replace (convert(char(10),inicio,102), '.', '-') + ' ' + convert(char(8),inicio,20), str_replace (convert(char(10),fin,102), '.', '-') + ' ' + convert(char(8),fin,20), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT zona, barrio, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), usuario_crea, str_replace (convert(char(10),inicio,102), '.', '-') + ' ' + convert(char(8),inicio,20), str_replace (convert(char(10),fin,102), '.', '-') + ' ' + convert(char(8),fin,20), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT anio, periodo, zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT anio, periodo, zona, barrio, convert(char(23),fechaven,121), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, convert(char(23),fechavenc,121), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, convert(char(23),creado,121), convert(char(23),editado,121), usuario_crea, convert(char(23),inicio,121), convert(char(23),fin,121), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT zona, barrio, convert(char(23),fechaven,121), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, convert(char(23),fechavenc,121), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, convert(char(23),creado,121), convert(char(23),editado,121), usuario_crea, convert(char(23),inicio,121), convert(char(23),fin,121), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT anio, periodo, zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT anio, periodo, zona, barrio, EXTEND(fechaven, YEAR TO DAY), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), usuario_crea, EXTEND(inicio, YEAR TO FRACTION), EXTEND(fin, YEAR TO FRACTION), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT zona, barrio, EXTEND(fechaven, YEAR TO DAY), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), usuario_crea, EXTEND(inicio, YEAR TO FRACTION), EXTEND(fin, YEAR TO FRACTION), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT anio, periodo, zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_resumo'])) 
@@ -2105,7 +2096,7 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
    }
    if (empty($nmgp_order_by))
    {
-       $nmgp_order_by = " order by anio";
+       $nmgp_order_by = " order by zona";
    }
    $nmgp_select .= $nmgp_order_by; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['order_grid'] = $nmgp_order_by;
@@ -2131,86 +2122,86 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
    }  
    else 
    { 
-       $this->anio = $this->rs_grid->fields[0] ;  
-       $this->anio = (string)$this->anio;
-       $this->periodo = $this->rs_grid->fields[1] ;  
-       $this->periodo = (string)$this->periodo;
-       $this->zona = $this->rs_grid->fields[2] ;  
-       $this->barrio = $this->rs_grid->fields[3] ;  
-       $this->fechaven = $this->rs_grid->fields[4] ;  
-       $this->numero2 = $this->rs_grid->fields[5] ;  
-       $this->idcli = $this->rs_grid->fields[6] ;  
+       $this->zona = $this->rs_grid->fields[0] ;  
+       $this->barrio = $this->rs_grid->fields[1] ;  
+       $this->fechaven = $this->rs_grid->fields[2] ;  
+       $this->numero2 = $this->rs_grid->fields[3] ;  
+       $this->idcli = $this->rs_grid->fields[4] ;  
        $this->idcli = (string)$this->idcli;
-       $this->direccion2 = $this->rs_grid->fields[7] ;  
-       $this->total = $this->rs_grid->fields[8] ;  
+       $this->direccion2 = $this->rs_grid->fields[5] ;  
+       $this->total = $this->rs_grid->fields[6] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
-       $this->numcontrato = $this->rs_grid->fields[9] ;  
+       $this->numcontrato = $this->rs_grid->fields[7] ;  
        $this->numcontrato = (string)$this->numcontrato;
-       $this->ing_terceros = $this->rs_grid->fields[10] ;  
+       $this->ing_terceros = $this->rs_grid->fields[8] ;  
        $this->ing_terceros =  str_replace(",", ".", $this->ing_terceros);
        $this->ing_terceros = (string)$this->ing_terceros;
-       $this->idfacven = $this->rs_grid->fields[11] ;  
+       $this->idfacven = $this->rs_grid->fields[9] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->numfacven = $this->rs_grid->fields[12] ;  
+       $this->numfacven = $this->rs_grid->fields[10] ;  
        $this->numfacven = (string)$this->numfacven;
-       $this->credito = $this->rs_grid->fields[13] ;  
+       $this->credito = $this->rs_grid->fields[11] ;  
        $this->credito = (string)$this->credito;
-       $this->fechavenc = $this->rs_grid->fields[14] ;  
-       $this->subtotal = $this->rs_grid->fields[15] ;  
+       $this->fechavenc = $this->rs_grid->fields[12] ;  
+       $this->subtotal = $this->rs_grid->fields[13] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[16] ;  
+       $this->valoriva = $this->rs_grid->fields[14] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->pagada = $this->rs_grid->fields[17] ;  
-       $this->asentada = $this->rs_grid->fields[18] ;  
+       $this->pagada = $this->rs_grid->fields[15] ;  
+       $this->asentada = $this->rs_grid->fields[16] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[19] ;  
-       $this->saldo = $this->rs_grid->fields[20] ;  
+       $this->observaciones = $this->rs_grid->fields[17] ;  
+       $this->saldo = $this->rs_grid->fields[18] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
-       $this->adicional = $this->rs_grid->fields[21] ;  
+       $this->adicional = $this->rs_grid->fields[19] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->adicional2 = $this->rs_grid->fields[22] ;  
+       $this->adicional2 = $this->rs_grid->fields[20] ;  
        $this->adicional2 = (string)$this->adicional2;
-       $this->adicional3 = $this->rs_grid->fields[23] ;  
+       $this->adicional3 = $this->rs_grid->fields[21] ;  
        $this->adicional3 = (string)$this->adicional3;
-       $this->resolucion = $this->rs_grid->fields[24] ;  
+       $this->resolucion = $this->rs_grid->fields[22] ;  
        $this->resolucion = (string)$this->resolucion;
-       $this->vendedor = $this->rs_grid->fields[25] ;  
+       $this->vendedor = $this->rs_grid->fields[23] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->creado = $this->rs_grid->fields[26] ;  
-       $this->editado = $this->rs_grid->fields[27] ;  
-       $this->usuario_crea = $this->rs_grid->fields[28] ;  
+       $this->creado = $this->rs_grid->fields[24] ;  
+       $this->editado = $this->rs_grid->fields[25] ;  
+       $this->usuario_crea = $this->rs_grid->fields[26] ;  
        $this->usuario_crea = (string)$this->usuario_crea;
-       $this->inicio = $this->rs_grid->fields[29] ;  
-       $this->fin = $this->rs_grid->fields[30] ;  
-       $this->banco = $this->rs_grid->fields[31] ;  
+       $this->inicio = $this->rs_grid->fields[27] ;  
+       $this->fin = $this->rs_grid->fields[28] ;  
+       $this->banco = $this->rs_grid->fields[29] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[32] ;  
+       $this->dias_decredito = $this->rs_grid->fields[30] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->tipo = $this->rs_grid->fields[33] ;  
-       $this->cod_cuenta = $this->rs_grid->fields[34] ;  
-       $this->base_iva_19 = $this->rs_grid->fields[35] ;  
+       $this->tipo = $this->rs_grid->fields[31] ;  
+       $this->cod_cuenta = $this->rs_grid->fields[32] ;  
+       $this->base_iva_19 = $this->rs_grid->fields[33] ;  
        $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
        $this->base_iva_19 = (string)$this->base_iva_19;
-       $this->valor_iva_19 = $this->rs_grid->fields[36] ;  
+       $this->valor_iva_19 = $this->rs_grid->fields[34] ;  
        $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
        $this->valor_iva_19 = (string)$this->valor_iva_19;
-       $this->base_iva_5 = $this->rs_grid->fields[37] ;  
+       $this->base_iva_5 = $this->rs_grid->fields[35] ;  
        $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
        $this->base_iva_5 = (string)$this->base_iva_5;
-       $this->valor_iva_5 = $this->rs_grid->fields[38] ;  
+       $this->valor_iva_5 = $this->rs_grid->fields[36] ;  
        $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
        $this->valor_iva_5 = (string)$this->valor_iva_5;
-       $this->excento = $this->rs_grid->fields[39] ;  
+       $this->excento = $this->rs_grid->fields[37] ;  
        $this->excento =  str_replace(",", ".", $this->excento);
        $this->excento = (string)$this->excento;
-       $this->enviada_a_tns = $this->rs_grid->fields[40] ;  
-       $this->factura_tns = $this->rs_grid->fields[41] ;  
-       $this->cufe = $this->rs_grid->fields[42] ;  
+       $this->enviada_a_tns = $this->rs_grid->fields[38] ;  
+       $this->factura_tns = $this->rs_grid->fields[39] ;  
+       $this->cufe = $this->rs_grid->fields[40] ;  
+       $this->periodo = $this->rs_grid->fields[41] ;  
+       $this->periodo = (string)$this->periodo;
+       $this->anio = $this->rs_grid->fields[42] ;  
+       $this->anio = (string)$this->anio;
        $this->enviada = $this->rs_grid->fields[43] ;  
        $this->tiene_nota = $this->rs_grid->fields[44] ;  
        $this->tiene_nota = (string)$this->tiene_nota;
@@ -2238,13 +2229,13 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
        if (!isset($this->vendedor)) { $this->vendedor = ""; }
        if (!isset($this->tipo)) { $this->tipo = ""; }
        if (!isset($this->banco)) { $this->banco = ""; }
-       $GLOBALS["idcli"] = $this->rs_grid->fields[6] ;  
+       $GLOBALS["idcli"] = $this->rs_grid->fields[4] ;  
        $GLOBALS["idcli"] = (string)$GLOBALS["idcli"] ;
-       $GLOBALS["resolucion"] = $this->rs_grid->fields[24] ;  
+       $GLOBALS["resolucion"] = $this->rs_grid->fields[22] ;  
        $GLOBALS["resolucion"] = (string)$GLOBALS["resolucion"] ;
-       $GLOBALS["vendedor"] = $this->rs_grid->fields[25] ;  
+       $GLOBALS["vendedor"] = $this->rs_grid->fields[23] ;  
        $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"] ;
-       $GLOBALS["banco"] = $this->rs_grid->fields[31] ;  
+       $GLOBALS["banco"] = $this->rs_grid->fields[29] ;  
        $GLOBALS["banco"] = (string)$GLOBALS["banco"] ;
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['SC_Ind_Groupby'] == "fecha")
        {
@@ -2402,49 +2393,49 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['final']++ ; 
            $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['final']; 
            $this->rs_grid->MoveNext(); 
-           $this->anio = $this->rs_grid->fields[0] ;  
-           $this->periodo = $this->rs_grid->fields[1] ;  
-           $this->zona = $this->rs_grid->fields[2] ;  
-           $this->barrio = $this->rs_grid->fields[3] ;  
-           $this->fechaven = $this->rs_grid->fields[4] ;  
-           $this->numero2 = $this->rs_grid->fields[5] ;  
-           $this->idcli = $this->rs_grid->fields[6] ;  
-           $this->direccion2 = $this->rs_grid->fields[7] ;  
-           $this->total = $this->rs_grid->fields[8] ;  
-           $this->numcontrato = $this->rs_grid->fields[9] ;  
-           $this->ing_terceros = $this->rs_grid->fields[10] ;  
-           $this->idfacven = $this->rs_grid->fields[11] ;  
-           $this->numfacven = $this->rs_grid->fields[12] ;  
-           $this->credito = $this->rs_grid->fields[13] ;  
-           $this->fechavenc = $this->rs_grid->fields[14] ;  
-           $this->subtotal = $this->rs_grid->fields[15] ;  
-           $this->valoriva = $this->rs_grid->fields[16] ;  
-           $this->pagada = $this->rs_grid->fields[17] ;  
-           $this->asentada = $this->rs_grid->fields[18] ;  
-           $this->observaciones = $this->rs_grid->fields[19] ;  
-           $this->saldo = $this->rs_grid->fields[20] ;  
-           $this->adicional = $this->rs_grid->fields[21] ;  
-           $this->adicional2 = $this->rs_grid->fields[22] ;  
-           $this->adicional3 = $this->rs_grid->fields[23] ;  
-           $this->resolucion = $this->rs_grid->fields[24] ;  
-           $this->vendedor = $this->rs_grid->fields[25] ;  
-           $this->creado = $this->rs_grid->fields[26] ;  
-           $this->editado = $this->rs_grid->fields[27] ;  
-           $this->usuario_crea = $this->rs_grid->fields[28] ;  
-           $this->inicio = $this->rs_grid->fields[29] ;  
-           $this->fin = $this->rs_grid->fields[30] ;  
-           $this->banco = $this->rs_grid->fields[31] ;  
-           $this->dias_decredito = $this->rs_grid->fields[32] ;  
-           $this->tipo = $this->rs_grid->fields[33] ;  
-           $this->cod_cuenta = $this->rs_grid->fields[34] ;  
-           $this->base_iva_19 = $this->rs_grid->fields[35] ;  
-           $this->valor_iva_19 = $this->rs_grid->fields[36] ;  
-           $this->base_iva_5 = $this->rs_grid->fields[37] ;  
-           $this->valor_iva_5 = $this->rs_grid->fields[38] ;  
-           $this->excento = $this->rs_grid->fields[39] ;  
-           $this->enviada_a_tns = $this->rs_grid->fields[40] ;  
-           $this->factura_tns = $this->rs_grid->fields[41] ;  
-           $this->cufe = $this->rs_grid->fields[42] ;  
+           $this->zona = $this->rs_grid->fields[0] ;  
+           $this->barrio = $this->rs_grid->fields[1] ;  
+           $this->fechaven = $this->rs_grid->fields[2] ;  
+           $this->numero2 = $this->rs_grid->fields[3] ;  
+           $this->idcli = $this->rs_grid->fields[4] ;  
+           $this->direccion2 = $this->rs_grid->fields[5] ;  
+           $this->total = $this->rs_grid->fields[6] ;  
+           $this->numcontrato = $this->rs_grid->fields[7] ;  
+           $this->ing_terceros = $this->rs_grid->fields[8] ;  
+           $this->idfacven = $this->rs_grid->fields[9] ;  
+           $this->numfacven = $this->rs_grid->fields[10] ;  
+           $this->credito = $this->rs_grid->fields[11] ;  
+           $this->fechavenc = $this->rs_grid->fields[12] ;  
+           $this->subtotal = $this->rs_grid->fields[13] ;  
+           $this->valoriva = $this->rs_grid->fields[14] ;  
+           $this->pagada = $this->rs_grid->fields[15] ;  
+           $this->asentada = $this->rs_grid->fields[16] ;  
+           $this->observaciones = $this->rs_grid->fields[17] ;  
+           $this->saldo = $this->rs_grid->fields[18] ;  
+           $this->adicional = $this->rs_grid->fields[19] ;  
+           $this->adicional2 = $this->rs_grid->fields[20] ;  
+           $this->adicional3 = $this->rs_grid->fields[21] ;  
+           $this->resolucion = $this->rs_grid->fields[22] ;  
+           $this->vendedor = $this->rs_grid->fields[23] ;  
+           $this->creado = $this->rs_grid->fields[24] ;  
+           $this->editado = $this->rs_grid->fields[25] ;  
+           $this->usuario_crea = $this->rs_grid->fields[26] ;  
+           $this->inicio = $this->rs_grid->fields[27] ;  
+           $this->fin = $this->rs_grid->fields[28] ;  
+           $this->banco = $this->rs_grid->fields[29] ;  
+           $this->dias_decredito = $this->rs_grid->fields[30] ;  
+           $this->tipo = $this->rs_grid->fields[31] ;  
+           $this->cod_cuenta = $this->rs_grid->fields[32] ;  
+           $this->base_iva_19 = $this->rs_grid->fields[33] ;  
+           $this->valor_iva_19 = $this->rs_grid->fields[34] ;  
+           $this->base_iva_5 = $this->rs_grid->fields[35] ;  
+           $this->valor_iva_5 = $this->rs_grid->fields[36] ;  
+           $this->excento = $this->rs_grid->fields[37] ;  
+           $this->enviada_a_tns = $this->rs_grid->fields[38] ;  
+           $this->factura_tns = $this->rs_grid->fields[39] ;  
+           $this->cufe = $this->rs_grid->fields[40] ;  
+           $this->periodo = $this->rs_grid->fields[41] ;  
+           $this->anio = $this->rs_grid->fields[42] ;  
            $this->enviada = $this->rs_grid->fields[43] ;  
            $this->tiene_nota = $this->rs_grid->fields[44] ;  
            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['SC_Gb_Free_orig']))
@@ -3717,10 +3708,6 @@ $nm_saida->saida("}\r\n");
 
    $compl_css_emb = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['embutida']) ? "grid_facturaven_contratos_" : "";
    $this->css_sep = " ";
-   $this->css_anio_label = $compl_css_emb . "css_anio_label";
-   $this->css_anio_grid_line = $compl_css_emb . "css_anio_grid_line";
-   $this->css_periodo_label = $compl_css_emb . "css_periodo_label";
-   $this->css_periodo_grid_line = $compl_css_emb . "css_periodo_grid_line";
    $this->css_zona_label = $compl_css_emb . "css_zona_label";
    $this->css_zona_grid_line = $compl_css_emb . "css_zona_grid_line";
    $this->css_barrio_label = $compl_css_emb . "css_barrio_label";
@@ -4101,22 +4088,6 @@ $nm_saida->saida("}\r\n");
              $NM_seq_lab++;
          }
      } 
-   } 
- }
- function NM_label_anio()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['anio'])) ? $this->New_label['anio'] : "Año"; 
-   if (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_anio_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_anio_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_periodo()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "Periodo"; 
-   if (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_periodo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_periodo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_zona()
@@ -4533,10 +4504,6 @@ $nm_saida->saida("}\r\n");
    $this->sc_where_atual   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq'];
    $this->sc_where_filtro  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq_filtro'];
 // 
-   $SC_Label = (isset($this->New_label['anio'])) ? $this->New_label['anio'] : "Año"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['anio'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "Periodo"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['periodo'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['zona'])) ? $this->New_label['zona'] : "Zona"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['zona'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['barrio'])) ? $this->New_label['barrio'] : "Barrio"; 
@@ -5052,86 +5019,86 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['p
               }
           }
           $this->Lin_impressas++;
-          $this->anio = $this->rs_grid->fields[0] ;  
-          $this->anio = (string)$this->anio;
-          $this->periodo = $this->rs_grid->fields[1] ;  
-          $this->periodo = (string)$this->periodo;
-          $this->zona = $this->rs_grid->fields[2] ;  
-          $this->barrio = $this->rs_grid->fields[3] ;  
-          $this->fechaven = $this->rs_grid->fields[4] ;  
-          $this->numero2 = $this->rs_grid->fields[5] ;  
-          $this->idcli = $this->rs_grid->fields[6] ;  
+          $this->zona = $this->rs_grid->fields[0] ;  
+          $this->barrio = $this->rs_grid->fields[1] ;  
+          $this->fechaven = $this->rs_grid->fields[2] ;  
+          $this->numero2 = $this->rs_grid->fields[3] ;  
+          $this->idcli = $this->rs_grid->fields[4] ;  
           $this->idcli = (string)$this->idcli;
-          $this->direccion2 = $this->rs_grid->fields[7] ;  
-          $this->total = $this->rs_grid->fields[8] ;  
+          $this->direccion2 = $this->rs_grid->fields[5] ;  
+          $this->total = $this->rs_grid->fields[6] ;  
           $this->total =  str_replace(",", ".", $this->total);
           $this->total = (string)$this->total;
-          $this->numcontrato = $this->rs_grid->fields[9] ;  
+          $this->numcontrato = $this->rs_grid->fields[7] ;  
           $this->numcontrato = (string)$this->numcontrato;
-          $this->ing_terceros = $this->rs_grid->fields[10] ;  
+          $this->ing_terceros = $this->rs_grid->fields[8] ;  
           $this->ing_terceros =  str_replace(",", ".", $this->ing_terceros);
           $this->ing_terceros = (string)$this->ing_terceros;
-          $this->idfacven = $this->rs_grid->fields[11] ;  
+          $this->idfacven = $this->rs_grid->fields[9] ;  
           $this->idfacven = (string)$this->idfacven;
-          $this->numfacven = $this->rs_grid->fields[12] ;  
+          $this->numfacven = $this->rs_grid->fields[10] ;  
           $this->numfacven = (string)$this->numfacven;
-          $this->credito = $this->rs_grid->fields[13] ;  
+          $this->credito = $this->rs_grid->fields[11] ;  
           $this->credito = (string)$this->credito;
-          $this->fechavenc = $this->rs_grid->fields[14] ;  
-          $this->subtotal = $this->rs_grid->fields[15] ;  
+          $this->fechavenc = $this->rs_grid->fields[12] ;  
+          $this->subtotal = $this->rs_grid->fields[13] ;  
           $this->subtotal =  str_replace(",", ".", $this->subtotal);
           $this->subtotal = (string)$this->subtotal;
-          $this->valoriva = $this->rs_grid->fields[16] ;  
+          $this->valoriva = $this->rs_grid->fields[14] ;  
           $this->valoriva =  str_replace(",", ".", $this->valoriva);
           $this->valoriva = (string)$this->valoriva;
-          $this->pagada = $this->rs_grid->fields[17] ;  
-          $this->asentada = $this->rs_grid->fields[18] ;  
+          $this->pagada = $this->rs_grid->fields[15] ;  
+          $this->asentada = $this->rs_grid->fields[16] ;  
           $this->asentada = (string)$this->asentada;
-          $this->observaciones = $this->rs_grid->fields[19] ;  
-          $this->saldo = $this->rs_grid->fields[20] ;  
+          $this->observaciones = $this->rs_grid->fields[17] ;  
+          $this->saldo = $this->rs_grid->fields[18] ;  
           $this->saldo =  str_replace(",", ".", $this->saldo);
           $this->saldo = (string)$this->saldo;
-          $this->adicional = $this->rs_grid->fields[21] ;  
+          $this->adicional = $this->rs_grid->fields[19] ;  
           $this->adicional =  str_replace(",", ".", $this->adicional);
           $this->adicional = (string)$this->adicional;
-          $this->adicional2 = $this->rs_grid->fields[22] ;  
+          $this->adicional2 = $this->rs_grid->fields[20] ;  
           $this->adicional2 = (string)$this->adicional2;
-          $this->adicional3 = $this->rs_grid->fields[23] ;  
+          $this->adicional3 = $this->rs_grid->fields[21] ;  
           $this->adicional3 = (string)$this->adicional3;
-          $this->resolucion = $this->rs_grid->fields[24] ;  
+          $this->resolucion = $this->rs_grid->fields[22] ;  
           $this->resolucion = (string)$this->resolucion;
-          $this->vendedor = $this->rs_grid->fields[25] ;  
+          $this->vendedor = $this->rs_grid->fields[23] ;  
           $this->vendedor = (string)$this->vendedor;
-          $this->creado = $this->rs_grid->fields[26] ;  
-          $this->editado = $this->rs_grid->fields[27] ;  
-          $this->usuario_crea = $this->rs_grid->fields[28] ;  
+          $this->creado = $this->rs_grid->fields[24] ;  
+          $this->editado = $this->rs_grid->fields[25] ;  
+          $this->usuario_crea = $this->rs_grid->fields[26] ;  
           $this->usuario_crea = (string)$this->usuario_crea;
-          $this->inicio = $this->rs_grid->fields[29] ;  
-          $this->fin = $this->rs_grid->fields[30] ;  
-          $this->banco = $this->rs_grid->fields[31] ;  
+          $this->inicio = $this->rs_grid->fields[27] ;  
+          $this->fin = $this->rs_grid->fields[28] ;  
+          $this->banco = $this->rs_grid->fields[29] ;  
           $this->banco = (string)$this->banco;
-          $this->dias_decredito = $this->rs_grid->fields[32] ;  
+          $this->dias_decredito = $this->rs_grid->fields[30] ;  
           $this->dias_decredito = (string)$this->dias_decredito;
-          $this->tipo = $this->rs_grid->fields[33] ;  
-          $this->cod_cuenta = $this->rs_grid->fields[34] ;  
-          $this->base_iva_19 = $this->rs_grid->fields[35] ;  
+          $this->tipo = $this->rs_grid->fields[31] ;  
+          $this->cod_cuenta = $this->rs_grid->fields[32] ;  
+          $this->base_iva_19 = $this->rs_grid->fields[33] ;  
           $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
           $this->base_iva_19 = (string)$this->base_iva_19;
-          $this->valor_iva_19 = $this->rs_grid->fields[36] ;  
+          $this->valor_iva_19 = $this->rs_grid->fields[34] ;  
           $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
           $this->valor_iva_19 = (string)$this->valor_iva_19;
-          $this->base_iva_5 = $this->rs_grid->fields[37] ;  
+          $this->base_iva_5 = $this->rs_grid->fields[35] ;  
           $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
           $this->base_iva_5 = (string)$this->base_iva_5;
-          $this->valor_iva_5 = $this->rs_grid->fields[38] ;  
+          $this->valor_iva_5 = $this->rs_grid->fields[36] ;  
           $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
           $this->valor_iva_5 = (string)$this->valor_iva_5;
-          $this->excento = $this->rs_grid->fields[39] ;  
+          $this->excento = $this->rs_grid->fields[37] ;  
           $this->excento =  str_replace(",", ".", $this->excento);
           $this->excento = (string)$this->excento;
-          $this->enviada_a_tns = $this->rs_grid->fields[40] ;  
-          $this->factura_tns = $this->rs_grid->fields[41] ;  
-          $this->cufe = $this->rs_grid->fields[42] ;  
+          $this->enviada_a_tns = $this->rs_grid->fields[38] ;  
+          $this->factura_tns = $this->rs_grid->fields[39] ;  
+          $this->cufe = $this->rs_grid->fields[40] ;  
+          $this->periodo = $this->rs_grid->fields[41] ;  
+          $this->periodo = (string)$this->periodo;
+          $this->anio = $this->rs_grid->fields[42] ;  
+          $this->anio = (string)$this->anio;
           $this->enviada = $this->rs_grid->fields[43] ;  
           $this->tiene_nota = $this->rs_grid->fields[44] ;  
           $this->tiene_nota = (string)$this->tiene_nota;
@@ -5159,13 +5126,13 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['p
                   $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
               }
           }
-          $GLOBALS["idcli"] = $this->rs_grid->fields[6] ;  
+          $GLOBALS["idcli"] = $this->rs_grid->fields[4] ;  
           $GLOBALS["idcli"] = (string)$GLOBALS["idcli"];
-          $GLOBALS["resolucion"] = $this->rs_grid->fields[24] ;  
+          $GLOBALS["resolucion"] = $this->rs_grid->fields[22] ;  
           $GLOBALS["resolucion"] = (string)$GLOBALS["resolucion"];
-          $GLOBALS["vendedor"] = $this->rs_grid->fields[25] ;  
+          $GLOBALS["vendedor"] = $this->rs_grid->fields[23] ;  
           $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"];
-          $GLOBALS["banco"] = $this->rs_grid->fields[31] ;  
+          $GLOBALS["banco"] = $this->rs_grid->fields[29] ;  
           $GLOBALS["banco"] = (string)$GLOBALS["banco"];
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['SC_Ind_Groupby'] == "fecha")
           {
@@ -5647,6 +5614,14 @@ else
 {
 	$this->enviar  = "";
 }
+$this->opciones  = "<div class='dropdown'>
+  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-ellipsis-v'></i>
+  </button>
+  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
+  </div>
+</div>";
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['proc_pdf'])
@@ -5922,73 +5897,6 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
    { 
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['opcao']       = "igual" ; 
    } 
- }
- function NM_grid_anio()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off") { 
-          $conteudo = sc_strip_script($this->anio); 
-          $conteudo_original = sc_strip_script($this->anio); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'anio', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'anio', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-              $Style_anio = "";
-          if (isset($this->NM_field_style["anio"]) && !empty($this->NM_field_style["anio"]))
-          {
-              $Style_anio .= $this->NM_field_style["anio"];
-          }
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_anio_grid_line . "\"  style=\"" . $this->Css_Cmp['css_anio_grid_line'] . $Style_anio . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_anio_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
- function NM_grid_periodo()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off") { 
-          $conteudo = NM_encode_input(sc_strip_script($this->periodo)); 
-          $conteudo_original = NM_encode_input(sc_strip_script($this->periodo)); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          else    
-          { 
-              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'periodo', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'periodo', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_periodo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_periodo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_periodo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
  }
  function NM_grid_zona()
  {
@@ -7866,7 +7774,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 52;
+   $this->NM_colspan  = 50;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -8696,14 +8604,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -9068,14 +8968,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -9440,14 +9332,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -9812,14 +9696,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -10184,14 +10060,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -10556,14 +10424,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -10926,14 +10786,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -11296,14 +11148,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -11666,14 +11510,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -12036,14 +11872,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -12397,14 +12225,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -12758,14 +12578,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -13119,14 +12931,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -13480,14 +13284,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -13841,14 +13637,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -14202,14 +13990,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -14563,14 +14343,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -14924,14 +14696,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-        $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-        $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
         $colspan++;
@@ -15249,14 +15013,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -15569,14 +15325,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -15889,14 +15637,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -16209,14 +15949,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -16529,14 +16261,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -16849,14 +16573,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -17169,14 +16885,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -17489,14 +17197,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -17809,14 +17509,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -18129,14 +17821,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;
@@ -18449,14 +18133,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_cmp)
    {
-    if ($Cada_cmp == "anio" && (!isset($this->NM_cmp_hidden['anio']) || $this->NM_cmp_hidden['anio'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "periodo" && (!isset($this->NM_cmp_hidden['periodo']) || $this->NM_cmp_hidden['periodo'] != "off"))
-    {
-       $colspan++;
-    }
     if ($Cada_cmp == "zona" && (!isset($this->NM_cmp_hidden['zona']) || $this->NM_cmp_hidden['zona'] != "off"))
     {
        $colspan++;

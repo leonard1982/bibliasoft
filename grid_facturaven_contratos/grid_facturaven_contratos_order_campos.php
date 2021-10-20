@@ -94,12 +94,6 @@ function Ord_cmp_init()
    $tab_ger_campos = array();
    $tab_def_campos = array();
    $tab_labels     = array();
-   $tab_ger_campos['anio'] = "on";
-   $tab_def_campos['anio'] = "anio";
-   $tab_labels["anio"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["anio"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["anio"] : "Año";
-   $tab_ger_campos['periodo'] = "on";
-   $tab_def_campos['periodo'] = "periodo";
-   $tab_labels["periodo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["periodo"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["periodo"] : "Periodo";
    $tab_ger_campos['zona'] = "on";
    $tab_def_campos['zona'] = "zona";
    $tab_labels["zona"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["zona"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["zona"] : "Zona";

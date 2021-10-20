@@ -160,11 +160,7 @@ function Sel_cmp_process()
       $tab_ger_campos = array();
       $tab_blk_campos = array();
 
-            $tab_ger_campos['anio'] = "on";
-      $tab_blk_campos[] = "anio";
-      $tab_ger_campos['periodo'] = "on";
-      $tab_blk_campos[] = "periodo";
-      $tab_ger_campos['zona'] = "on";
+            $tab_ger_campos['zona'] = "on";
       $tab_blk_campos[] = "zona";
       $tab_ger_campos['barrio'] = "on";
       $tab_blk_campos[] = "barrio";

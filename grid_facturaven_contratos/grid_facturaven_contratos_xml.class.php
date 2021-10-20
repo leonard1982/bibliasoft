@@ -993,15 +993,6 @@ $(document).ajaxStart(function(){
 </script>
 
 <?php
-
-$this->opciones  = "<div class='dropdown'>
-  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-    <i class='fas fa-ellipsis-v'></i>
-  </button>
-  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
-  </div>
-</div>";
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
       if  (!empty($this->nm_where_dinamico)) 
@@ -1053,27 +1044,27 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
       $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT anio, periodo, zona, barrio, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), usuario_crea, str_replace (convert(char(10),inicio,102), '.', '-') + ' ' + convert(char(8),inicio,20), str_replace (convert(char(10),fin,102), '.', '-') + ' ' + convert(char(8),fin,20), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT zona, barrio, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), usuario_crea, str_replace (convert(char(10),inicio,102), '.', '-') + ' ' + convert(char(8),inicio,20), str_replace (convert(char(10),fin,102), '.', '-') + ' ' + convert(char(8),fin,20), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT anio, periodo, zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT anio, periodo, zona, barrio, convert(char(23),fechaven,121), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, convert(char(23),fechavenc,121), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, convert(char(23),creado,121), convert(char(23),editado,121), usuario_crea, convert(char(23),inicio,121), convert(char(23),fin,121), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT zona, barrio, convert(char(23),fechaven,121), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, convert(char(23),fechavenc,121), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, convert(char(23),creado,121), convert(char(23),editado,121), usuario_crea, convert(char(23),inicio,121), convert(char(23),fin,121), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT anio, periodo, zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT anio, periodo, zona, barrio, EXTEND(fechaven, YEAR TO DAY), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), usuario_crea, EXTEND(inicio, YEAR TO FRACTION), EXTEND(fin, YEAR TO FRACTION), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT zona, barrio, EXTEND(fechaven, YEAR TO DAY), numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), usuario_crea, EXTEND(inicio, YEAR TO FRACTION), EXTEND(fin, YEAR TO FRACTION), banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT anio, periodo, zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
+          $nmgp_select = "SELECT zona, barrio, fechaven, numero2, idcli, direccion2, total, numcontrato, ing_terceros, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, tipo, cod_cuenta, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, enviada_a_tns, factura_tns, cufe, periodo, anio, enviada, tiene_nota from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      direccion as direccion2,     (MONTH(fechaven)) as periodo,     (YEAR(fechaven)) as anio,     (select b.descripcion from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = f.idfacven limit 1) as barrio,     (select zc.nombre from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join zona_clientes zc on tc.zona=zc.codigo where tcf.factura = f.idfacven limit 1) as zona, numcontrato,     enviada,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, coalesce((select sum(v.valorpar-v.iva) from detalleventa v left join productos p on v.idpro=p.idprod where v.numfac=idfacven and v.adicional='0' and p.tipo_producto='RE'),0) as ing_terceros,     (SELECT fc.numero_nota FROM facturaven_contratos fc WHERE fc.idfacven=f.idfacven limit 1) as tiene_nota FROM      facturaven_contratos f WHERE           espos = 'SI' ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq'];
@@ -1138,91 +1129,89 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          {
              $this->xml_registro = "<grid_facturaven_contratos";
          }
-         $this->anio = $rs->fields[0] ;  
-         $this->anio = (string)$this->anio;
-         $this->periodo = $rs->fields[1] ;  
-         $this->periodo = (string)$this->periodo;
-         $this->zona = $rs->fields[2] ;  
-         $this->barrio = $rs->fields[3] ;  
-         $this->fechaven = $rs->fields[4] ;  
-         $this->numero2 = $rs->fields[5] ;  
-         $this->idcli = $rs->fields[6] ;  
+         $this->zona = $rs->fields[0] ;  
+         $this->barrio = $rs->fields[1] ;  
+         $this->fechaven = $rs->fields[2] ;  
+         $this->numero2 = $rs->fields[3] ;  
+         $this->idcli = $rs->fields[4] ;  
          $this->idcli = (string)$this->idcli;
-         $this->direccion2 = $rs->fields[7] ;  
-         $this->total = $rs->fields[8] ;  
+         $this->direccion2 = $rs->fields[5] ;  
+         $this->total = $rs->fields[6] ;  
          $this->total =  str_replace(",", ".", $this->total);
          $this->total = (string)$this->total;
-         $this->numcontrato = $rs->fields[9] ;  
+         $this->numcontrato = $rs->fields[7] ;  
          $this->numcontrato = (string)$this->numcontrato;
-         $this->ing_terceros = $rs->fields[10] ;  
+         $this->ing_terceros = $rs->fields[8] ;  
          $this->ing_terceros =  str_replace(",", ".", $this->ing_terceros);
          $this->ing_terceros = (string)$this->ing_terceros;
-         $this->idfacven = $rs->fields[11] ;  
+         $this->idfacven = $rs->fields[9] ;  
          $this->idfacven = (string)$this->idfacven;
-         $this->numfacven = $rs->fields[12] ;  
+         $this->numfacven = $rs->fields[10] ;  
          $this->numfacven = (string)$this->numfacven;
-         $this->credito = $rs->fields[13] ;  
+         $this->credito = $rs->fields[11] ;  
          $this->credito = (string)$this->credito;
-         $this->fechavenc = $rs->fields[14] ;  
-         $this->subtotal = $rs->fields[15] ;  
+         $this->fechavenc = $rs->fields[12] ;  
+         $this->subtotal = $rs->fields[13] ;  
          $this->subtotal =  str_replace(",", ".", $this->subtotal);
          $this->subtotal = (string)$this->subtotal;
-         $this->valoriva = $rs->fields[16] ;  
+         $this->valoriva = $rs->fields[14] ;  
          $this->valoriva =  str_replace(",", ".", $this->valoriva);
          $this->valoriva = (string)$this->valoriva;
-         $this->pagada = $rs->fields[17] ;  
-         $this->asentada = $rs->fields[18] ;  
+         $this->pagada = $rs->fields[15] ;  
+         $this->asentada = $rs->fields[16] ;  
          $this->asentada = (string)$this->asentada;
-         $this->observaciones = $rs->fields[19] ;  
-         $this->saldo = $rs->fields[20] ;  
+         $this->observaciones = $rs->fields[17] ;  
+         $this->saldo = $rs->fields[18] ;  
          $this->saldo =  str_replace(",", ".", $this->saldo);
          $this->saldo = (string)$this->saldo;
-         $this->adicional = $rs->fields[21] ;  
+         $this->adicional = $rs->fields[19] ;  
          $this->adicional =  str_replace(",", ".", $this->adicional);
          $this->adicional = (string)$this->adicional;
-         $this->adicional2 = $rs->fields[22] ;  
+         $this->adicional2 = $rs->fields[20] ;  
          $this->adicional2 = (string)$this->adicional2;
-         $this->adicional3 = $rs->fields[23] ;  
+         $this->adicional3 = $rs->fields[21] ;  
          $this->adicional3 = (string)$this->adicional3;
-         $this->resolucion = $rs->fields[24] ;  
+         $this->resolucion = $rs->fields[22] ;  
          $this->resolucion = (string)$this->resolucion;
-         $this->vendedor = $rs->fields[25] ;  
+         $this->vendedor = $rs->fields[23] ;  
          $this->vendedor = (string)$this->vendedor;
-         $this->creado = $rs->fields[26] ;  
-         $this->editado = $rs->fields[27] ;  
-         $this->usuario_crea = $rs->fields[28] ;  
+         $this->creado = $rs->fields[24] ;  
+         $this->editado = $rs->fields[25] ;  
+         $this->usuario_crea = $rs->fields[26] ;  
          $this->usuario_crea = (string)$this->usuario_crea;
-         $this->inicio = $rs->fields[29] ;  
-         $this->fin = $rs->fields[30] ;  
-         $this->banco = $rs->fields[31] ;  
+         $this->inicio = $rs->fields[27] ;  
+         $this->fin = $rs->fields[28] ;  
+         $this->banco = $rs->fields[29] ;  
          $this->banco = (string)$this->banco;
-         $this->dias_decredito = $rs->fields[32] ;  
+         $this->dias_decredito = $rs->fields[30] ;  
          $this->dias_decredito = (string)$this->dias_decredito;
-         $this->tipo = $rs->fields[33] ;  
-         $this->cod_cuenta = $rs->fields[34] ;  
-         $this->base_iva_19 = $rs->fields[35] ;  
+         $this->tipo = $rs->fields[31] ;  
+         $this->cod_cuenta = $rs->fields[32] ;  
+         $this->base_iva_19 = $rs->fields[33] ;  
          $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
          $this->base_iva_19 = (string)$this->base_iva_19;
-         $this->valor_iva_19 = $rs->fields[36] ;  
+         $this->valor_iva_19 = $rs->fields[34] ;  
          $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
          $this->valor_iva_19 = (string)$this->valor_iva_19;
-         $this->base_iva_5 = $rs->fields[37] ;  
+         $this->base_iva_5 = $rs->fields[35] ;  
          $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
          $this->base_iva_5 = (string)$this->base_iva_5;
-         $this->valor_iva_5 = $rs->fields[38] ;  
+         $this->valor_iva_5 = $rs->fields[36] ;  
          $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
          $this->valor_iva_5 = (string)$this->valor_iva_5;
-         $this->excento = $rs->fields[39] ;  
+         $this->excento = $rs->fields[37] ;  
          $this->excento =  str_replace(",", ".", $this->excento);
          $this->excento = (string)$this->excento;
-         $this->enviada_a_tns = $rs->fields[40] ;  
-         $this->factura_tns = $rs->fields[41] ;  
-         $this->cufe = $rs->fields[42] ;  
+         $this->enviada_a_tns = $rs->fields[38] ;  
+         $this->factura_tns = $rs->fields[39] ;  
+         $this->cufe = $rs->fields[40] ;  
+         $this->periodo = $rs->fields[41] ;  
+         $this->periodo = (string)$this->periodo;
+         $this->anio = $rs->fields[42] ;  
+         $this->anio = (string)$this->anio;
          $this->enviada = $rs->fields[43] ;  
          $this->tiene_nota = $rs->fields[44] ;  
          $this->tiene_nota = (string)$this->tiene_nota;
-         $this->Orig_anio = $this->anio;
-         $this->Orig_periodo = $this->periodo;
          $this->Orig_zona = $this->zona;
          $this->Orig_barrio = $this->barrio;
          $this->Orig_fechaven = $this->fechaven;
@@ -1264,6 +1253,8 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          $this->Orig_enviada_a_tns = $this->enviada_a_tns;
          $this->Orig_factura_tns = $this->factura_tns;
          $this->Orig_cufe = $this->cufe;
+         $this->Orig_periodo = $this->periodo;
+         $this->Orig_anio = $this->anio;
          $this->Orig_enviada = $this->enviada;
          $this->Orig_tiene_nota = $this->tiene_nota;
          //----- lookup - idcli
@@ -1410,6 +1401,15 @@ else
 {
 	$this->enviar  = "";
 }
+
+$this->opciones  = "<div class='dropdown'>
+  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-ellipsis-v'></i>
+  </button>
+  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
+  </div>
+</div>";
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'] as $Cada_col)
@@ -1646,49 +1646,6 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['export_sel_columns']['usr_cmp_sel']);
       }
       $rs->Close();
-   }
-   //----- anio
-   function NM_export_anio()
-   {
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['anio'])) ? $this->New_label['anio'] : "Año"; 
-         }
-         else
-         {
-             $SC_Label = "anio"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->anio) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->anio) . "\"";
-         }
-   }
-   //----- periodo
-   function NM_export_periodo()
-   {
-             nmgp_Form_Num_Val($this->periodo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "Periodo"; 
-         }
-         else
-         {
-             $SC_Label = "periodo"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->periodo) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->periodo) . "\"";
-         }
    }
    //----- zona
    function NM_export_zona()
