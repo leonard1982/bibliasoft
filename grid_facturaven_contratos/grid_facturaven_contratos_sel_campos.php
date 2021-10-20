@@ -187,6 +187,8 @@ function Sel_cmp_process()
       $tab_ger_campos['ing_terceros'] = "on";
       $tab_ger_campos['enviar'] = "on";
       $tab_blk_campos[] = "enviar";
+      $tab_ger_campos['opciones'] = "on";
+      $tab_blk_campos[] = "opciones";
       $tab_ger_campos['idfacven'] = "on";
       $tab_ger_campos['numfacven'] = "on";
       $tab_ger_campos['credito'] = "on";

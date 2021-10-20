@@ -155,6 +155,11 @@ class grid_facturaven_contratos_xml
           $_SESSION['gIdfac'] = $gIdfac;
           nm_limpa_str_grid_facturaven_contratos($_SESSION["gIdfac"]);
       }
+      if (isset($gproveedor)) 
+      {
+          $_SESSION['gproveedor'] = $gproveedor;
+          nm_limpa_str_grid_facturaven_contratos($_SESSION["gproveedor"]);
+      }
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->New_Format  = true;
@@ -722,7 +727,7 @@ function fJSONDataico(idfacven,bd)
 function fReenviarPropio(idfacven)
 {
 
-	$.post("../blank_correo_reenvio/index.php",{
+	$.post("../blank_correo_reenvio_contrato/index.php",{
 
 		idfacven:idfacven
 
@@ -752,7 +757,7 @@ function fReenviarPropio(idfacven)
 					}
 				});
 				
-				$.post("../blank_correo_reenvio2/index.php",{
+				$.post("../blank_correo_reenvio2_contrato/index.php",{
 
 					idfacven:idfacven,
 					correo:correo
@@ -988,6 +993,15 @@ $(document).ajaxStart(function(){
 </script>
 
 <?php
+
+$this->opciones  = "<div class='dropdown'>
+  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-ellipsis-v'></i>
+  </button>
+  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
+  </div>
+</div>";
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
       if  (!empty($this->nm_where_dinamico)) 
@@ -2018,6 +2032,31 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->enviar) . "\"";
+         }
+   }
+   //----- opciones
+   function NM_export_opciones()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->opciones))
+         {
+             $this->opciones = sc_convert_encoding($this->opciones, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+         }
+         else
+         {
+             $SC_Label = "opciones"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->opciones) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->opciones) . "\"";
          }
    }
    //----- idfacven

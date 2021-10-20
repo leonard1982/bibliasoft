@@ -233,8 +233,8 @@ class grid_facturaven_contratos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211019"; 
-      $this->nm_hr_ult_alt   = "120238"; 
+      $this->nm_dt_ult_alt   = "20211020"; 
+      $this->nm_hr_ult_alt   = "111019"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1276,8 +1276,170 @@ class grid_facturaven_contratos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDQFGD1BeHQB/HuNOVcFCDuX7HMFaD9XOZ1rqD1rKHuBODMBYZSXeH5F/HMJwD9NmH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDMzGVkXeDuFYVoB/HQJeDuFaZ1rwV5JwDMvOVcXKH5B7VoFGDcFYZSFaD1rKHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9B/HANOD5NUDMBYZSJGH5F/ZuB/D9NwH9X7HArYVWJeHgrKVcBOV5F/VoJwDcBqH9B/Z1BeV5FUDEvsHEBUDWr/DoraD9NmDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBODcNmZSBqZ1vmZMB/DEBeHArCDWFqZuBODcXOZSFUD1veHuBiHgrYDkBODWJeHMJwHQBsZSBqHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAzGD5BqHgveHArsHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWFYHMJeHQBiH9FaD1rKD5BOHgBOVkJqDWrGDoXGD9JKZSFUHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZSX7HABYHQrqHgrwDkBsV5X7VENUD9XGZ1X7HAN7HQFaHgvsDkXKDWFGZuJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsD9NmDQB/HAvmV5JeDMzGV9FeDuX7HIJsHQXOH9FaHAvCZMBqDENOHArCV5FaHIraHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7HAN7V5FUHgvsDkFCH5XCVEraD9XOZSB/HABYZMBqDMzGHEXeV5XCDoFUDcJeZSX7Z1rwD5NUHuBYVcrsDWJeVoB/D9BiZ1F7Z1BeD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1FaHABYV5JwHgNOZSJ3V5FqHMB/D9JKDuBqD1veHuX7HgrKVcFeV5F/HIF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHANOHuB/DMvOVIBsH5FqDoJsDcNmZkBiHABYV5FGDMzGVkJqH5BmDoBOHQJeDQFaD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
+      if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['initialize'])  
+      { 
+          $this->conectDB();
+          $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'on';
+if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
+if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
+  $vsql = "SELECT proveedor, if(modo='PRUEBAS',servidor_prueba1,servidor1) as server1, if(modo='PRUEBAS',servidor_prueba2,servidor2) as server2, if(modo='PRUEBAS',token_prueba,tokenempresa) as tk_empresa, if(modo='PRUEBAS',password_prueba,tokenpassword) as tk_password, modo, enviar_dian, enviar_cliente FROM webservicefe where idwebservicefe='1'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vWS = array();
+      $this->vws = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vWS[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vws[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vWS = false;
+          $this->vWS_erro = $this->Db->ErrorMsg();
+          $this->vws = false;
+          $this->vws_erro = $this->Db->ErrorMsg();
+      } 
+;	
+if(isset($this->vws[0][0]))
+{
+	$this->sc_temp_gproveedor = $this->vws[0][0];
+}
+
+$vsql = "SELECT prefijo,fec_vencimiento, ultima_fac,Idres FROM resdian WHERE fecha>0 and activa='SI' and prefijo<>'00' and rangofac>0 and resolucion>0";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiActivaPJ = array();
+      $this->vsiactivapj = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiActivaPJ[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiactivapj[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiActivaPJ = false;
+          $this->vSiActivaPJ_erro = $this->Db->ErrorMsg();
+          $this->vsiactivapj = false;
+          $this->vsiactivapj_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vsiactivapj[0][0]))
+{
+	$vmensaje    = "";
+	$vreg        = count($this->vsiactivapj );
+	
+	for($i=0;$i<$vreg;$i++)
+	{
+		$vprefijo    = $this->vsiactivapj[$i][0];
+		$vfechavence = $this->vsiactivapj[$i][1];
+		$vfechavence = date_create($vfechavence);
+		$vfechavence2= date_format($vfechavence,"Y-m-d"); 
+		$vfechavence = date_format($vfechavence,"Ymd");
+		$vultimafac  = $this->vsiactivapj[$i][2];
+		$vidres      = $this->vsiactivapj[$i][3];
+		$vnumero     = 0;
+		$vfechaactual= date("Ymd");
+		$vfechaactual2 = date("Y-m-d");
+		
+		$vsql = "select max(numfacven) from facturaven where resolucion='".$vidres."'";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vNum = array();
+      $this->vnum = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vNum[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vnum[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vNum = false;
+          $this->vNum_erro = $this->Db->ErrorMsg();
+          $this->vnum = false;
+          $this->vnum_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->vnum[0][0]))
+		{
+			$vnumero = $this->vnum[0][0];
+		}
+		
+		if($vultimafac<$vnumero)
+		{
+			$vmensaje   .= "LA RESOLUCION DEL PREFIJO: ".$vprefijo." HA LLEGADO AL LÍMITE EN SU NUMERACIÓN <br> ";
+		}
+		
+		$vndiferencia = $vultimafac-$vnumero;
+		if($vndiferencia<=10)
+		{
+			$vmensaje   .= "LA RESOLUCION DEL PREFIJO: ".$vprefijo." ESTA LLEGADO AL LÍMITE,LE QUEDAN ".$vndiferencia." DOCUMENTOS RESTANTES  <br> ";
+		}
+		
+		if($vfechavence<$vfechaactual)
+		{
+			$vmensaje   .= "LA RESOLUCION DEL PREFIJO: ".$vprefijo." ESTÁ VENCIDA <br> ";
+		}
+		
+		$vfecha1= new DateTime($vfechaactual2);
+		$vfecha2= new DateTime($vfechavence2);
+		$vdiff = $vfecha1->diff($vfecha2);
+
+		if($vdiff->days<=7)
+		{
+			$vmensaje   .= "LA RESOLUCION DEL PREFIJO: ".$vprefijo." LE QUEDAN ".$vdiff->days." DÍAS PARA VENCERCE <br> ";
+		}
+	}
+	
+	if(!empty($vmensaje))
+	{
+		$this->nm_mens_alert[] = $vmensaje;$this->nm_params_alert[] = array();}
+}
+if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
+$_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
+          $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['initialize'] = false;
+          $this->Db->Close(); 
+      } 
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
       {
@@ -1436,6 +1598,10 @@ class grid_facturaven_contratos_ini
           if (!isset($_SESSION['gIdfac'])) 
           {
               $this->nm_falta_var .= "gIdfac; ";
+          }
+          if (!isset($_SESSION['gproveedor'])) 
+          {
+              $this->nm_falta_var .= "gproveedor; ";
           }
       }
 // 
@@ -4158,6 +4324,11 @@ class grid_facturaven_contratos_apl
               $_SESSION['gIdfac'] = $gIdfac;
               nm_limpa_str_grid_facturaven_contratos($_SESSION["gIdfac"]);
           }
+          if (isset($gproveedor)) 
+          {
+              $_SESSION['gproveedor'] = $gproveedor;
+              nm_limpa_str_grid_facturaven_contratos($_SESSION["gproveedor"]);
+          }
       } 
       if ($Parms_form_pdf)
       { 
@@ -6291,6 +6462,7 @@ class grid_facturaven_contratos_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'][] = "avisos";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'][] = "ing_terceros";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'][] = "enviar";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'][] = "opciones";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'][] = "idfacven";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'][] = "numfacven";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['field_order'][] = "credito";
@@ -16056,6 +16228,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos'][$path_
    {
        $_SESSION['gIdfac'] = $gIdfac;
    }
+   if (isset($gproveedor)) 
+   {
+       $_SESSION['gproveedor'] = $gproveedor;
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -16231,6 +16407,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos'][$path_
            {
                $_SESSION['gIdfac'] = $gIdfac;
                nm_limpa_str_grid_facturaven_contratos($_SESSION["gIdfac"]);
+           }
+           if (isset($gproveedor)) 
+           {
+               $_SESSION['gproveedor'] = $gproveedor;
+               nm_limpa_str_grid_facturaven_contratos($_SESSION["gproveedor"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -16628,6 +16809,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos'][$path_
        if (!isset($_SESSION["gIdfac"])) 
        {
            $_SESSION["gIdfac"] = "";
+       }
+       if (isset($_POST["gproveedor"])) 
+       {
+           $_SESSION["gproveedor"] = $_POST["gproveedor"];
+           nm_limpa_str_grid_facturaven_contratos($_SESSION["gproveedor"]);
+       }
+       if (isset($_GET["gproveedor"])) 
+       {
+           $_SESSION["gproveedor"] = $_GET["gproveedor"];
+           nm_limpa_str_grid_facturaven_contratos($_SESSION["gproveedor"]);
+       }
+       if (!isset($_SESSION["gproveedor"])) 
+       {
+           $_SESSION["gproveedor"] = "";
        }
        if (isset($nmgp_lig_edit_lapis)) 
        {

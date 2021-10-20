@@ -146,6 +146,11 @@ class grid_facturaven_contratos_json
           $_SESSION['gIdfac'] = $gIdfac;
           nm_limpa_str_grid_facturaven_contratos($_SESSION["gIdfac"]);
       }
+      if (isset($gproveedor)) 
+      {
+          $_SESSION['gproveedor'] = $gproveedor;
+          nm_limpa_str_grid_facturaven_contratos($_SESSION["gproveedor"]);
+      }
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->Json_use_label = false;
@@ -567,7 +572,7 @@ function fJSONDataico(idfacven,bd)
 function fReenviarPropio(idfacven)
 {
 
-	$.post("../blank_correo_reenvio/index.php",{
+	$.post("../blank_correo_reenvio_contrato/index.php",{
 
 		idfacven:idfacven
 
@@ -597,7 +602,7 @@ function fReenviarPropio(idfacven)
 					}
 				});
 				
-				$.post("../blank_correo_reenvio2/index.php",{
+				$.post("../blank_correo_reenvio2_contrato/index.php",{
 
 					idfacven:idfacven,
 					correo:correo
@@ -833,6 +838,15 @@ $(document).ajaxStart(function(){
 </script>
 
 <?php
+
+$this->opciones  = "<div class='dropdown'>
+  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-ellipsis-v'></i>
+  </button>
+  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
+  </div>
+</div>";
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
       if  (!empty($this->nm_where_dinamico)) 
@@ -1611,6 +1625,21 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->enviar;
+   }
+   //----- opciones
+   function NM_export_opciones()
+   {
+         $this->opciones = NM_charset_to_utf8($this->opciones);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+         }
+         else
+         {
+             $SC_Label = "opciones"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->opciones;
    }
    //----- idfacven
    function NM_export_idfacven()

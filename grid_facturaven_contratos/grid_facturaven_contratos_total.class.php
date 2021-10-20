@@ -1653,7 +1653,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_fecha($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -2176,7 +2176,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_sc_free_group_by($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -2738,7 +2738,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_formapago($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -3264,7 +3264,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_porcliente($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -3790,7 +3790,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_porpj($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -4316,7 +4316,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_portipo($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -4841,7 +4841,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_porvendedor($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -5367,7 +5367,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_porasentada($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -5893,7 +5893,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_pagada($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))
@@ -6418,7 +6418,7 @@ class grid_facturaven_contratos_total
    //----- 
    function Calc_resumo_porbanco($destino_resumo)
    {
-      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
+      global $nm_lang, $a4, $nc, $pdf_nc, $avisos, $enviar, $opciones, $editarpos, $existeentns, $imprimir, $imprimircopia, $copiar, $idcli, $resolucion, $vendedor, $banco;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']))

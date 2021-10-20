@@ -206,6 +206,7 @@ class grid_facturaven_contratos_grid
    var $pdf_nc;
    var $avisos;
    var $enviar;
+   var $opciones;
    var $editarpos;
    var $existeentns;
    var $imprimir;
@@ -1045,7 +1046,7 @@ function fJSONDataico(idfacven,bd)
 function fReenviarPropio(idfacven)
 {
 
-	$.post("../blank_correo_reenvio/index.php",{
+	$.post("../blank_correo_reenvio_contrato/index.php",{
 
 		idfacven:idfacven
 
@@ -1075,7 +1076,7 @@ function fReenviarPropio(idfacven)
 					}
 				});
 				
-				$.post("../blank_correo_reenvio2/index.php",{
+				$.post("../blank_correo_reenvio2_contrato/index.php",{
 
 					idfacven:idfacven,
 					correo:correo
@@ -1311,6 +1312,15 @@ $(document).ajaxStart(function(){
 </script>
 
 <?php
+
+$this->opciones  = "<div class='dropdown'>
+  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-ellipsis-v'></i>
+  </button>
+  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
+  </div>
+</div>";
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
        $this->SC_Buf_onInit = ob_get_clean();; 
@@ -3741,6 +3751,8 @@ $nm_saida->saida("}\r\n");
    $this->css_ing_terceros_grid_line = $compl_css_emb . "css_ing_terceros_grid_line";
    $this->css_enviar_label = $compl_css_emb . "css_enviar_label";
    $this->css_enviar_grid_line = $compl_css_emb . "css_enviar_grid_line";
+   $this->css_opciones_label = $compl_css_emb . "css_opciones_label";
+   $this->css_opciones_grid_line = $compl_css_emb . "css_opciones_grid_line";
    $this->css_idfacven_label = $compl_css_emb . "css_idfacven_label";
    $this->css_idfacven_grid_line = $compl_css_emb . "css_idfacven_grid_line";
    $this->css_numfacven_label = $compl_css_emb . "css_numfacven_label";
@@ -4219,6 +4231,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_enviar_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_enviar_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
+ function NM_label_opciones()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+   if (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_opciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_opciones_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_idfacven()
  {
    global $nm_saida;
@@ -4545,6 +4565,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['ing_terceros'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['enviar'])) ? $this->New_label['enviar'] : "Enviar"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['enviar'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['opciones'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idfacven'])) ? $this->New_label['idfacven'] : "Idfacven"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['labels']['idfacven'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['numfacven'])) ? $this->New_label['numfacven'] : "No"; 
@@ -6670,6 +6692,35 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_enviar_grid_line . "\"  style=\"" . $this->Css_Cmp['css_enviar_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_enviar_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_opciones()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off") { 
+          $conteudo = sc_strip_script($this->opciones); 
+          $conteudo_original = sc_strip_script($this->opciones); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'opciones', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'opciones', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_opciones_grid_line . "\"  style=\"" . $this->Css_Cmp['css_opciones_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"  ><span id=\"id_sc_field_opciones_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_idfacven()
  {
       global $nm_saida;
@@ -7815,7 +7866,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 51;
+   $this->NM_colspan  = 52;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -8717,6 +8768,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -9082,6 +9137,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -9453,6 +9512,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -9818,6 +9881,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -10189,6 +10256,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -10554,6 +10625,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -10923,6 +10998,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -11286,6 +11365,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -11655,6 +11738,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -12021,6 +12108,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -12375,6 +12466,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -12735,6 +12830,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -13089,6 +13188,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -13449,6 +13552,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -13803,6 +13910,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -14163,6 +14274,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -14517,6 +14632,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
         $colspan++;
     }
@@ -14877,6 +14996,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
         $colspan++;
@@ -15198,6 +15321,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -15511,6 +15638,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
        $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -15830,6 +15961,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -16143,6 +16278,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
        $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -16462,6 +16601,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -16775,6 +16918,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
        $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -17094,6 +17241,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -17407,6 +17558,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
        $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -17726,6 +17881,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -18042,6 +18201,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
     {
        $colspan++;
@@ -18355,6 +18518,10 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
        $colspan++;
     }
     if ($Cada_cmp == "enviar" && (!isset($this->NM_cmp_hidden['enviar']) || $this->NM_cmp_hidden['enviar'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "opciones" && (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off"))
     {
        $colspan++;
     }
@@ -20866,6 +21033,72 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    $nm_saida->saida("      ind_time = setTimeout(\"obj.style.display='none'\", 300);\r\n");
    $nm_saida->saida("      return ind_time;\r\n");
    $nm_saida->saida("   }\r\n");
+   if (isset($this->Ini->nm_mens_alert) && !empty($this->Ini->nm_mens_alert))
+   {
+       if (isset($this->nm_mens_alert) && !empty($this->nm_mens_alert))
+       {
+           $this->nm_mens_alert   = array_merge($this->Ini->nm_mens_alert, $this->nm_mens_alert);
+           $this->nm_params_alert = array_merge($this->Ini->nm_params_alert, $this->nm_params_alert);
+       }
+       else
+       {
+           $this->nm_mens_alert   = $this->Ini->nm_mens_alert;
+           $this->nm_params_alert = $this->Ini->nm_params_alert;
+       }
+   }
+   if (isset($this->nm_mens_alert) && !empty($this->nm_mens_alert))
+   {
+       foreach ($this->nm_mens_alert as $i_alert => $mensagem)
+       {
+           $alertParams = array();
+           if (isset($this->nm_params_alert[$i_alert]))
+           {
+               foreach ($this->nm_params_alert[$i_alert] as $paramName => $paramValue)
+               {
+                   if (in_array($paramName, array('title', 'timer', 'confirmButtonText', 'confirmButtonFA', 'confirmButtonFAPos', 'cancelButtonText', 'cancelButtonFA', 'cancelButtonFAPos', 'footer', 'width', 'padding')))
+                   {
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+                   elseif (in_array($paramName, array('showConfirmButton', 'showCancelButton', 'toast')) && in_array($paramValue, array(true, false)))
+                   {
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+                   elseif ('position' == $paramName && in_array($paramValue, array('top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', 'bottom-end')))
+                   {
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+                   elseif ('type' == $paramName && in_array($paramValue, array('warning', 'error', 'success', 'info', 'question')))
+                   {
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+                   elseif ('background' == $paramName)
+                   {
+                       $image_param = $paramValue;
+                       preg_match_all('/url\(([\s])?(["|\'])?(.*?)(["|\'])?([\s])?\)/i', $paramValue, $matches, PREG_PATTERN_ORDER);
+                       if (isset($matches[3])) {
+                           foreach ($matches[3] as $match) {
+                               if ('http:' != substr($match, 0, 5) && 'https:' != substr($match, 0, 6) && '/' != substr($match, 0, 1)) {
+                                   $image_param = str_replace($match, "{$this->Ini->path_img_global}/{$match}", $image_param);
+                               }
+                           }
+                       }
+                       $paramValue = $image_param;
+                       $alertParams[$paramName] = NM_charset_to_utf8($paramValue);
+                   }
+               }
+           }
+           $jsonParams = json_encode($alertParams);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['ajax_nav'])
+           { 
+               $this->Ini->Arr_result['AlertJS'][] = NM_charset_to_utf8($mensagem);
+               $this->Ini->Arr_result['AlertJSParam'][] = $alertParams;
+           } 
+           else 
+           { 
+$nm_saida->saida("       scJs_alert('" . $mensagem . "', $jsonParams);\r\n");
+           } 
+       }
+   }
    $str_pbfile = $this->Ini->root . $this->Ini->path_imag_temp . '/sc_pb_' . session_id() . '.tmp';
    if (@is_file($str_pbfile) && $flag_apaga_pdf_log)
    {

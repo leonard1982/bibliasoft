@@ -294,6 +294,11 @@ class grid_facturaven_contratos_xls
           $_SESSION['gIdfac'] = $gIdfac;
           nm_limpa_str_grid_facturaven_contratos($_SESSION["gIdfac"]);
       }
+      if (isset($gproveedor)) 
+      {
+          $_SESSION['gproveedor'] = $gproveedor;
+          nm_limpa_str_grid_facturaven_contratos($_SESSION["gproveedor"]);
+      }
       $this->Use_phpspreadsheet = (phpversion() >=  "7.3.9" && is_dir($this->Ini->path_third . '/phpspreadsheet')) ? true : false;
       $this->SC_top = array();
       $this->SC_bot = array();
@@ -1044,7 +1049,7 @@ function fJSONDataico(idfacven,bd)
 function fReenviarPropio(idfacven)
 {
 
-	$.post("../blank_correo_reenvio/index.php",{
+	$.post("../blank_correo_reenvio_contrato/index.php",{
 
 		idfacven:idfacven
 
@@ -1074,7 +1079,7 @@ function fReenviarPropio(idfacven)
 					}
 				});
 				
-				$.post("../blank_correo_reenvio2/index.php",{
+				$.post("../blank_correo_reenvio2_contrato/index.php",{
 
 					idfacven:idfacven,
 					correo:correo
@@ -1310,6 +1315,15 @@ $(document).ajaxStart(function(){
 </script>
 
 <?php
+
+$this->opciones  = "<div class='dropdown'>
+  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-ellipsis-v'></i>
+  </button>
+  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
+  </div>
+</div>";
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
       if  (!empty($this->nm_where_dinamico)) 
@@ -3008,6 +3022,34 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+          if ($Cada_col == "opciones" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
           $SC_Label = (isset($this->New_label['idfacven'])) ? $this->New_label['idfacven'] : "Idfacven"; 
           if ($Cada_col == "idfacven" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -4258,6 +4300,26 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          }
          $this->Xls_col++;
    }
+   //----- opciones
+   function NM_export_opciones()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->opciones = html_entity_decode($this->opciones, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->opciones = strip_tags($this->opciones);
+         $this->opciones = NM_charset_to_utf8($this->opciones);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->opciones, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->opciones, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- idfacven
    function NM_export_idfacven()
    {
@@ -5111,6 +5173,18 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          $this->enviar = strip_tags($this->enviar);
          $this->enviar = NM_charset_to_utf8($this->enviar);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->enviar;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- opciones
+   function NM_sub_cons_opciones()
+   {
+         $this->opciones = html_entity_decode($this->opciones, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->opciones = strip_tags($this->opciones);
+         $this->opciones = NM_charset_to_utf8($this->opciones);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->opciones;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";

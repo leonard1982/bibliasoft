@@ -139,6 +139,11 @@ class grid_facturaven_contratos_rtf
           $_SESSION['gIdfac'] = $gIdfac;
           nm_limpa_str_grid_facturaven_contratos($_SESSION["gIdfac"]);
       }
+      if (isset($gproveedor)) 
+      {
+          $_SESSION['gproveedor'] = $gproveedor;
+          nm_limpa_str_grid_facturaven_contratos($_SESSION["gproveedor"]);
+      }
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
@@ -653,7 +658,7 @@ function fJSONDataico(idfacven,bd)
 function fReenviarPropio(idfacven)
 {
 
-	$.post("../blank_correo_reenvio/index.php",{
+	$.post("../blank_correo_reenvio_contrato/index.php",{
 
 		idfacven:idfacven
 
@@ -683,7 +688,7 @@ function fReenviarPropio(idfacven)
 					}
 				});
 				
-				$.post("../blank_correo_reenvio2/index.php",{
+				$.post("../blank_correo_reenvio2_contrato/index.php",{
 
 					idfacven:idfacven,
 					correo:correo
@@ -919,6 +924,15 @@ $(document).ajaxStart(function(){
 </script>
 
 <?php
+
+$this->opciones  = "<div class='dropdown'>
+  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-ellipsis-v'></i>
+  </button>
+  <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  <a style='cursor:pointer;'  class='dropdown-item'  onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'>Reenviar al Correo</a>
+  </div>
+</div>";
 if (isset($this->sc_temp_gcontador_grid_fe)) {$_SESSION['gcontador_grid_fe'] = $this->sc_temp_gcontador_grid_fe;}
 $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off'; 
       if  (!empty($this->nm_where_dinamico)) 
@@ -1064,6 +1078,14 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
           }
           $SC_Label = (isset($this->New_label['enviar'])) ? $this->New_label['enviar'] : "Enviar"; 
           if ($Cada_col == "enviar" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              $SC_Label = str_replace('<', '&lt;', $SC_Label);
+              $SC_Label = str_replace('>', '&gt;', $SC_Label);
+              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
+          }
+          $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+          if ($Cada_col == "opciones" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $SC_Label = NM_charset_to_utf8($SC_Label);
               $SC_Label = str_replace('<', '&lt;', $SC_Label);
@@ -1866,6 +1888,16 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
          $this->enviar = str_replace('<', '&lt;', $this->enviar);
          $this->enviar = str_replace('>', '&gt;', $this->enviar);
          $this->Texto_tag .= "<td>" . $this->enviar . "</td>\r\n";
+   }
+   //----- opciones
+   function NM_export_opciones()
+   {
+         $this->opciones = html_entity_decode($this->opciones, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->opciones = strip_tags($this->opciones);
+         $this->opciones = NM_charset_to_utf8($this->opciones);
+         $this->opciones = str_replace('<', '&lt;', $this->opciones);
+         $this->opciones = str_replace('>', '&gt;', $this->opciones);
+         $this->Texto_tag .= "<td>" . $this->opciones . "</td>\r\n";
    }
    //----- idfacven
    function NM_export_idfacven()

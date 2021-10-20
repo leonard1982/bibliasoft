@@ -177,11 +177,22 @@ function Ord_cmp_init()
        $tab_def_campos['enviar'] = "";
    }
    $tab_labels["enviar"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["enviar"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["enviar"] : "Enviar";
+   $tab_ger_campos['opciones'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['opciones'] = "opciones";
+   }
+   else
+   {
+       $tab_def_campos['opciones'] = "";
+   }
+   $tab_labels["opciones"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["opciones"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_contratos']['labels']["opciones"] : "Opciones";
    $tab_ger_campos['a4'] = "none";
    $tab_ger_campos['nc'] = "none";
    $tab_ger_campos['pdf_nc'] = "none";
    $tab_ger_campos['avisos'] = "none";
    $tab_ger_campos['enviar'] = "none";
+   $tab_ger_campos['opciones'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_contratos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_contratos']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_contratos']['field_display'] as $NM_cada_field => $NM_cada_opc)
