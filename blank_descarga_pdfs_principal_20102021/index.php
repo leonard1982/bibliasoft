@@ -1,16 +1,16 @@
 <?php
-   include_once('blank_descarga_pdfs_principal_session.php');
+   include_once('blank_descarga_pdfs_principal_20102021_session.php');
    @ini_set('session.cookie_httponly', 1);
    @ini_set('session.use_only_cookies', 1);
    @ini_set('session.cookie_secure', 0);
    @session_start() ;
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil']          = "conn_mysql";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_prod']       = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_conf']       = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imagens']    = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp']  = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_cache']      = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_doc']        = "";
+   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_perfil']          = "conn_mysql";
+   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_prod']       = "";
+   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_conf']       = "";
+   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imagens']    = "";
+   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imag_temp']  = "";
+   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_cache']      = "";
+   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_doc']        = "";
     //check publication with the prod
     $NM_dir_atual = getcwd();
     if (empty($NM_dir_atual))
@@ -30,33 +30,33 @@
     $str_path_apl_dir = substr($str_path_sys, 0, strrpos($str_path_sys, "/"));
     $str_path_apl_dir = substr($str_path_apl_dir, 0, strrpos($str_path_apl_dir, "/")+1);
     //check prod
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_prod']))
+    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_prod']))
     {
-            /*check prod*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_prod'] = $str_path_apl_url . "_lib/prod";
+            /*check prod*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_prod'] = $str_path_apl_url . "_lib/prod";
     }
     //check img
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imagens']))
+    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imagens']))
     {
-            /*check img*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imagens'] = $str_path_apl_url . "_lib/file/img";
+            /*check img*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imagens'] = $str_path_apl_url . "_lib/file/img";
     }
     //check tmp
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp']))
+    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imag_temp']))
     {
-            /*check tmp*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
+            /*check tmp*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
     }
     //check cache
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_cache']))
+    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_cache']))
     {
-            /*check tmp*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_cache'] = $str_path_apl_dir . "_lib/file/cache";
+            /*check tmp*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_cache'] = $str_path_apl_dir . "_lib/file/cache";
     }
     //check doc
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_doc']))
+    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_doc']))
     {
-            /*check doc*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_doc'] = $str_path_apl_dir . "_lib/file/doc";
+            /*check doc*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_doc'] = $str_path_apl_dir . "_lib/file/doc";
     }
     //end check publication with the prod
 //
-class blank_descarga_pdfs_principal_ini
+class blank_descarga_pdfs_principal_20102021_ini
 {
    var $nm_cod_apl;
    var $nm_nome_apl;
@@ -203,8 +203,8 @@ class blank_descarga_pdfs_principal_ini
       $_SESSION['scriptcase']['charset_entities']['EUC-JP'] = 'EUC-JP';
       $_SESSION['scriptcase']['charset_entities']['KOI8-R'] = 'KOI8-R';
       $_SESSION['scriptcase']['trial_version'] = 'N';
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['decimal_db'] = "."; 
-      $this->nm_cod_apl      = "blank_descarga_pdfs_principal"; 
+      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['decimal_db'] = "."; 
+      $this->nm_cod_apl      = "blank_descarga_pdfs_principal_20102021"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
       $this->nm_grupo        = "FACILWEBv2"; 
@@ -217,8 +217,8 @@ class blank_descarga_pdfs_principal_ini
       $this->nm_dt_criacao   = "20180904"; 
       $this->nm_hr_criacao   = "084030"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211021"; 
-      $this->nm_hr_ult_alt   = "150551"; 
+      $this->nm_dt_ult_alt   = ""; 
+      $this->nm_hr_ult_alt   = ""; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -240,12 +240,12 @@ class blank_descarga_pdfs_principal_ini
       $this->sc_site_ssl     = $this->appIsSsl();
       $this->sc_protocolo    = $this->sc_site_ssl ? 'https://' : 'http://';
       $this->sc_protocolo    = "";
-      $this->path_prod       = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_prod'];
-      $this->path_conf       = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_conf'];
-      $this->path_imagens    = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imagens'];
-      $this->path_imag_temp  = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'];
-      $this->path_cache  = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_cache'];
-      $this->path_doc        = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_doc'];
+      $this->path_prod       = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_prod'];
+      $this->path_conf       = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_conf'];
+      $this->path_imagens    = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imagens'];
+      $this->path_imag_temp  = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imag_temp'];
+      $this->path_cache  = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_cache'];
+      $this->path_doc        = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_doc'];
       if (!isset($_SESSION['scriptcase']['str_lang']) || empty($_SESSION['scriptcase']['str_lang']))
       {
           $_SESSION['scriptcase']['str_lang'] = "es";
@@ -256,10 +256,10 @@ class blank_descarga_pdfs_principal_ini
       }
       $this->str_lang        = $_SESSION['scriptcase']['str_lang'];
       $this->str_conf_reg    = $_SESSION['scriptcase']['str_conf_reg'];
-      if (!isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['save_session']['save_grid_state_session']))
+      if (!isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['save_session']['save_grid_state_session']))
       { 
-          $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['save_session']['save_grid_state_session'] = false;
-          $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['save_session']['data'] = '';
+          $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['save_session']['save_grid_state_session'] = false;
+          $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['save_session']['data'] = '';
       } 
       $this->str_schema_all    = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
       $_SESSION['scriptcase']['erro']['str_schema'] = $this->str_schema_all . "_error.css";
@@ -277,7 +277,7 @@ class blank_descarga_pdfs_principal_ini
       $str_path_web          = str_replace('//', '/', $str_path_web);
       $this->root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
       $this->path_aplicacao  = substr($str_path_sys, 0, strrpos($str_path_sys, '/'));
-      $this->path_aplicacao  = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/')) . '/blank_descarga_pdfs_principal';
+      $this->path_aplicacao  = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/')) . '/blank_descarga_pdfs_principal_20102021';
       $this->path_embutida   = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/') + 1);
       $this->path_aplicacao .= '/';
       $this->path_link       = substr($str_path_web, 0, strrpos($str_path_web, '/'));
@@ -294,7 +294,7 @@ class blank_descarga_pdfs_principal_ini
       $this->path_lib_php    = $this->root . $this->path_link . "_lib/lib/php";
       $this->path_lib_js     = $this->root . $this->path_link . "_lib/lib/js";
       $pos_path = strrpos($this->path_prod, "/");
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['path_grid_sv'] = $this->root . substr($this->path_prod, 0, $pos_path) . "/conf/grid_sv/";
+      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['path_grid_sv'] = $this->root . substr($this->path_prod, 0, $pos_path) . "/conf/grid_sv/";
       $this->path_lang       = "../_lib/lang/";
       $this->path_lang_js    = "../_lib/js/";
       $this->path_chart_theme = $this->root . $this->path_link . "_lib/chart/";
@@ -307,11 +307,11 @@ class blank_descarga_pdfs_principal_ini
       $this->path_adodb      = $this->root . $this->path_prod . "/third/adodb";
       $_SESSION['scriptcase']['dir_temp'] = $this->root . $this->path_imag_temp;
       $this->Cmp_Sql_Time     = array();
-      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['lang'])) {
-          $this->str_lang = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['lang'];
+      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['lang'])) {
+          $this->str_lang = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['lang'];
       }
-      elseif (!isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['actual_lang']) || $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['actual_lang'] != $this->str_lang) {
-          $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['actual_lang'] = $this->str_lang;
+      elseif (!isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['actual_lang']) || $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['actual_lang'] != $this->str_lang) {
+          $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['actual_lang'] = $this->str_lang;
           setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
@@ -329,15 +329,15 @@ class blank_descarga_pdfs_principal_ini
       }
       if (!class_exists('Services_JSON'))
       {
-          include_once("blank_descarga_pdfs_principal_json.php");
+          include_once("blank_descarga_pdfs_principal_20102021_json.php");
       }
-      $this->SC_Link_View = (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Link_View'])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Link_View'] : false;
+      $this->SC_Link_View = (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_Link_View'])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_Link_View'] : false;
       if (isset($_GET['SC_Link_View']) && !empty($_GET['SC_Link_View']) && is_numeric($_GET['SC_Link_View']))
       {
-          if ($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida'])
+          if ($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['embutida'])
           {
               $this->SC_Link_View = true;
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Link_View'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_Link_View'] = true;
           }
       }
             if (isset($_POST['nmgp_opcao']) && 'ajax_check_file' == $_POST['nmgp_opcao'] ){
@@ -348,8 +348,8 @@ class blank_descarga_pdfs_principal_ini
                break;
                }
 
-    $out1_img_cache = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'] . $file_name;
-    $orig_img = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp']. '/'.basename($_POST['AjaxCheckImg']);
+    $out1_img_cache = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imag_temp'] . $file_name;
+    $orig_img = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imag_temp']. '/'.basename($_POST['AjaxCheckImg']);
     copy($__file_download, $_SERVER['DOCUMENT_ROOT'].$orig_img);
     echo $orig_img . '_@@NM@@_';
     if(file_exists($out1_img_cache)){
@@ -370,7 +370,7 @@ class blank_descarga_pdfs_principal_ini
             }
       if (isset($_POST['nmgp_opcao']) && $_POST['nmgp_opcao'] == "ajax_save_ancor")
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['ancor_save'] = $_POST['ancor_save'];
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['ancor_save'] = $_POST['ancor_save'];
           $oJson = new Services_JSON();
           if ($_SESSION['scriptcase']['sem_session']) {
               unset($_SESSION['sc_session']);
@@ -418,74 +418,74 @@ class blank_descarga_pdfs_principal_ini
           }
       }
       global $under_dashboard, $dashboard_app, $own_widget, $parent_widget, $compact_mode, $remove_margin, $remove_border;
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard']))
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['under_dashboard']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard'] = false;
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['dashboard_app']   = '';
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['own_widget']      = '';
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['parent_widget']   = '';
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['compact_mode']    = false;
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_margin']   = false;
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_border']   = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['under_dashboard'] = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['dashboard_app']   = '';
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['own_widget']      = '';
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['parent_widget']   = '';
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['compact_mode']    = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['remove_margin']   = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['remove_border']   = false;
       }
       if (isset($_GET['under_dashboard']) && 1 == $_GET['under_dashboard'])
       {
           if (isset($_GET['own_widget']) && 'dbifrm_widget' == substr($_GET['own_widget'], 0, 13)) {
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['own_widget'] = $_GET['own_widget'];
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['own_widget'] = $_GET['own_widget'];
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['under_dashboard'] = true;
               if (isset($_GET['dashboard_app'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['dashboard_app'] = $_GET['dashboard_app'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['dashboard_app'] = $_GET['dashboard_app'];
               }
               if (isset($_GET['parent_widget'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['parent_widget'] = $_GET['parent_widget'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['parent_widget'] = $_GET['parent_widget'];
               }
               if (isset($_GET['compact_mode'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['compact_mode'] = 1 == $_GET['compact_mode'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['compact_mode'] = 1 == $_GET['compact_mode'];
               }
               if (isset($_GET['remove_margin'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_margin'] = 1 == $_GET['remove_margin'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['remove_margin'] = 1 == $_GET['remove_margin'];
               }
               if (isset($_GET['remove_border'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_border'] = 1 == $_GET['remove_border'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['remove_border'] = 1 == $_GET['remove_border'];
               }
           }
       }
       elseif (isset($under_dashboard) && 1 == $under_dashboard)
       {
           if (isset($own_widget) && 'dbifrm_widget' == substr($own_widget, 0, 13)) {
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['own_widget'] = $own_widget;
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['own_widget'] = $own_widget;
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['under_dashboard'] = true;
               if (isset($dashboard_app)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['dashboard_app'] = $dashboard_app;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['dashboard_app'] = $dashboard_app;
               }
               if (isset($parent_widget)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['parent_widget'] = $parent_widget;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['parent_widget'] = $parent_widget;
               }
               if (isset($compact_mode)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['compact_mode'] = 1 == $compact_mode;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['compact_mode'] = 1 == $compact_mode;
               }
               if (isset($remove_margin)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_margin'] = 1 == $remove_margin;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['remove_margin'] = 1 == $remove_margin;
               }
               if (isset($remove_border)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_border'] = 1 == $remove_border;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['remove_border'] = 1 == $remove_border;
               }
           }
       }
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['maximized']))
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['maximized']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['maximized'] = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['maximized'] = false;
       }
       if (isset($_GET['maximized']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
       }
-      if ($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard'])
+      if ($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['under_dashboard'])
       {
-          $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['dashboard_app'];
-          if ('' != $sTmpDashboardApp && isset($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["blank_descarga_pdfs_principal"]))
+          $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['dashboard_info']['dashboard_app'];
+          if ('' != $sTmpDashboardApp && isset($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["blank_descarga_pdfs_principal_20102021"]))
           {
-              foreach ($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["blank_descarga_pdfs_principal"] as $sTmpTargetLink => $sTmpTargetWidget)
+              foreach ($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["blank_descarga_pdfs_principal_20102021"] as $sTmpTargetLink => $sTmpTargetWidget)
               {
                   if (isset($this->sc_lig_target[$sTmpTargetLink]))
                   {
@@ -502,7 +502,7 @@ class blank_descarga_pdfs_principal_ini
       if (!is_file($this->root . $str_path . 'devel/class/xmlparser/nmXmlparserIniSys.class.php'))
       {
           unset($_SESSION['scriptcase']['nm_sc_retorno']);
-          unset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']);
+          unset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao']);
       }
       include($this->path_lang . $this->str_lang . ".lang.php");
       include($this->path_lang . "config_region.php");
@@ -546,7 +546,7 @@ class blank_descarga_pdfs_principal_ini
          }
       }
       $_SESSION['sc_session']['SC_download_violation'] = $this->Nm_lang['lang_errm_fnfd'];
-      if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir']))
+      if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir']))
       {
           unset($_SESSION['sc_session']['SC_parm_violation']);
           echo "<html>";
@@ -580,7 +580,7 @@ class blank_descarga_pdfs_principal_ini
               echo "<div><font size=6>" . $this->Nm_lang['lang_othr_prod_incp'] . "</font></div>";exit;
           } 
       } 
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['path_doc'] = $this->path_doc; 
+      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['path_doc'] = $this->path_doc; 
       $_SESSION['scriptcase']['nm_path_prod'] = $this->root . $this->path_prod . "/"; 
       if (empty($this->path_imag_cab))
       {
@@ -721,7 +721,7 @@ class blank_descarga_pdfs_principal_ini
           echo "   </b></td>";
           echo " </tr>";
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -766,13 +766,13 @@ class blank_descarga_pdfs_principal_ini
       $opsys = strtolower(php_uname());
 
 // 
-      include_once($this->path_aplicacao . "blank_descarga_pdfs_principal_erro.class.php"); 
-      $this->Erro = new blank_descarga_pdfs_principal_erro();
+      include_once($this->path_aplicacao . "blank_descarga_pdfs_principal_20102021_erro.class.php"); 
+      $this->Erro = new blank_descarga_pdfs_principal_20102021_erro();
       include_once($this->path_adodb . "/adodb.inc.php"); 
       $this->sc_Include($this->path_libs . "/nm_sec_prod.php", "F", "nm_reg_prod") ; 
       $this->sc_Include($this->path_libs . "/nm_ini_perfil.php", "F", "perfil_lib") ; 
 // 
- if(function_exists('set_php_timezone')) set_php_timezone('blank_descarga_pdfs_principal'); 
+ if(function_exists('set_php_timezone')) set_php_timezone('blank_descarga_pdfs_principal_20102021'); 
 // 
       $this->sc_Include($this->path_lib_php . "/nm_functions.php", "", "") ; 
       $this->sc_Include($this->path_lib_php . "/nm_api.php", "", "") ; 
@@ -803,7 +803,7 @@ class blank_descarga_pdfs_principal_ini
       include($this->path_btn . $this->Str_btn_grid);
       $_SESSION['scriptcase']['erro']['str_schema_dir'] = $this->str_schema_all . "_error" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->sc_tem_trans_banco = false;
-      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'])) {
+      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir'])) {
           $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
           $SS_cod_html .= "<HTML>\r\n";
@@ -815,7 +815,7 @@ class blank_descarga_pdfs_principal_ini
           }
           $SS_cod_html .= "   <META http-equiv=\"Expires\" content=\"Fri, Jan 01 1900 00:00:00 GMT\"/>\r\n";
           $SS_cod_html .= "    <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n";
-          if ($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir_tp'] == "R") {
+          if ($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir_tp'] == "R") {
               $SS_cod_html .= "  </HEAD>\r\n";
               $SS_cod_html .= "   <body>\r\n";
           }
@@ -830,14 +830,14 @@ class blank_descarga_pdfs_principal_ini
               $SS_cod_html .= $this->Nm_lang['lang_errm_expired_session'] . "\r\n";
               $SS_cod_html .= "     <form name=\"Fsession_redir\" method=\"post\"\r\n";
               $SS_cod_html .= "           target=\"_self\">\r\n";
-              $SS_cod_html .= "           <input type=\"button\" name=\"sc_sai_seg\" value=\"OK\" onclick=\"sc_session_redir('" . $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'] . "');\">\r\n";
+              $SS_cod_html .= "           <input type=\"button\" name=\"sc_sai_seg\" value=\"OK\" onclick=\"sc_session_redir('" . $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir'] . "');\">\r\n";
               $SS_cod_html .= "     </form>\r\n";
               $SS_cod_html .= "    </td></tr></table>\r\n";
               $SS_cod_html .= "    </div></td></tr></table>\r\n";
           }
           $SS_cod_html .= "    <script type=\"text/javascript\">\r\n";
-          if ($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir_tp'] == "R") {
-              $SS_cod_html .= "      sc_session_redir('" . $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'] . "');\r\n";
+          if ($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir_tp'] == "R") {
+              $SS_cod_html .= "      sc_session_redir('" . $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir'] . "');\r\n";
           }
           $SS_cod_html .= "      function sc_session_redir(url_redir)\r\n";
           $SS_cod_html .= "      {\r\n";
@@ -861,7 +861,7 @@ class blank_descarga_pdfs_principal_ini
           $SS_cod_html .= "    </script>\r\n";
           $SS_cod_html .= " </body>\r\n";
           $SS_cod_html .= "</HTML>\r\n";
-          unset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']);
+          unset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']);
           unset($_SESSION['sc_session']);
       }
       if (isset($SS_cod_html) && isset($_GET['nmgp_opcao']) && (substr($_GET['nmgp_opcao'], 0, 14) == "ajax_aut_comp_" || substr($_GET['nmgp_opcao'], 0, 13) == "ajax_autocomp"))
@@ -906,9 +906,9 @@ class blank_descarga_pdfs_principal_ini
       $this->nm_ttf_rus  = array("pl", "ru", "sk", "cz", "el", "mk");
       $this->nm_ttf_thai = array("thai");
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['seq_dir'] = 0; 
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXOZSBiHIrwV5BqDMBOVIBsV5FYDoFGD9BsZ1FGHINKV5X7HgNKDkXKDWXCHMBiHQJeDuFaHAvmVWJsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWFqHIJeHQFYH9FUHABYD5JwHgrKVIBOHEF/HMFaD9XGZ1FGHIBeHuXGDMveHEXeDWr/HIBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQJsHABYV5BqHgvsDkBODWFaVoX7DcJUH9B/HABYD5BiDErKHEFiH5F/VoBOD9NwZSFUZ1rwV5JeHuzGVIBOHEFYDoJsDcBqH9B/DSrYD5BqDMBYHEXeDuX/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHABYD5FaDMNOVIBOH5XCVoJwHQBsZSBqHIveHuFaDEBOZSJGH5X/ZuFaD9NmH9FUD1BeD5FaHgvOVIB/HEF/HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHABYHQJwDEBODkFeH5FYVoFGHQJKDQBqHIrKHuF7DMvsVcBOH5XCVorqHQJmZSBOHAvmZMJeDMzGVkJqH5FYZuJeD9NmDQJsHArYV5JwDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['seq_dir'] = 0; 
+      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['sub_dir'] = array(); 
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiH9BiZ1BYD5JeDMrwV9FeDur/DorqHQBqZ1rqHABYHuBODMveHEXeDuFYDoFUHQBiDuBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMveHEFKV5B7ZuJeDcXOZSX7HINaD5F7HgrKVIBsDuB7VEX7D9BsZkFGDSrYHuJeDErKHErsH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaVoFaDcBwDQFGD1BeV5FGHgvsVcFCDWJeDoF7DcBqZ1BOZ1BeD5BqDMzGHEFiDWXCDoXGDcXOZSFGHAveV5BOHuvmVcBOV5F/VoBqD9JmZ1FaHArKD5NUDEBOHENiV5XKDoJeHQBiDQBqHAvOV5JeDMvOZSNiDWB3VoX7HQNmZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBODkB/DWF/HIraDcBiH9FUD1veVWBODMvODkBsH5XCDoJeD9BsZSBqD1rKHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAzGD5BqHgveDkXKDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFKH5XCHIJeHQBsZ1rqHAvmZMBqHgBYHEXeHEXCHIFUHQFYH9X7HAN7HuFUDMzGZSNiDur/HMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -920,7 +920,7 @@ class blank_descarga_pdfs_principal_ini
           echo "   </b></td>";
           echo " </tr>";
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -969,26 +969,26 @@ class blank_descarga_pdfs_principal_ini
       {
           foreach ($_SESSION['scriptcase']['sc_connection'] as $NM_con_orig => $NM_con_dest)
           {
-              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']) && $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'] == $NM_con_orig)
+              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao']) && $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao'] == $NM_con_orig)
               {
-/*NM*/            $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'] = $NM_con_dest;
+/*NM*/            $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao'] = $NM_con_dest;
               }
-              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil']) && $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil'] == $NM_con_orig)
+              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_perfil']) && $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_perfil'] == $NM_con_orig)
               {
-/*NM*/            $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil'] = $NM_con_dest;
+/*NM*/            $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_perfil'] = $NM_con_dest;
               }
-              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_con_' . $NM_con_orig]))
+              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_con_' . $NM_con_orig]))
               {
-                  $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_con_' . $NM_con_orig] = $NM_con_dest;
+                  $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_con_' . $NM_con_orig] = $NM_con_dest;
               }
           }
       }
-      $con_devel             = (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'])) ? $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'] : ""; 
+      $con_devel             = (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao'])) ? $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao'] : ""; 
       $perfil_trab           = ""; 
       $this->nm_falta_var    = ""; 
       $this->nm_falta_var_db = ""; 
       $nm_crit_perfil        = false;
-      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']))
+      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao']))
       {
           if (!isset($_GET['nmgp_opcao']) || ('pdf' != $_GET['nmgp_opcao'] && 'pdf_res' != $_GET['nmgp_opcao'])) {
               ob_start();
@@ -1009,9 +1009,9 @@ class blank_descarga_pdfs_principal_ini
               $nm_crit_perfil = true;
           }
       }
-      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil']))
+      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_perfil']))
       {
-          $perfil_trab = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil'];
+          $perfil_trab = $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_perfil'];
       }
       elseif (isset($_SESSION['scriptcase']['glo_perfil']) && !empty($_SESSION['scriptcase']['glo_perfil']))
       {
@@ -1030,8 +1030,12 @@ class blank_descarga_pdfs_principal_ini
       {
           $perfil_trab = $con_devel;
       }
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida_init']) 
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['embutida_init']) 
       {
+          if (!isset($_SESSION['gcodzona2'])) 
+          {
+              $this->nm_falta_var .= "gcodzona2; ";
+          }
       }
 // 
       if (!isset($_SESSION['scriptcase']['glo_tpbanco']))
@@ -1164,23 +1168,23 @@ class blank_descarga_pdfs_principal_ini
       }
       if (isset($_SESSION['scriptcase']['glo_decimal_db']) && !empty($_SESSION['scriptcase']['glo_decimal_db']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['decimal_db'] = $_SESSION['scriptcase']['glo_decimal_db']; 
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['decimal_db'] = $_SESSION['scriptcase']['glo_decimal_db']; 
       }
       if (isset($_SESSION['scriptcase']['glo_date_separator']) && !empty($_SESSION['scriptcase']['glo_date_separator']))
       {
           $SC_temp = trim($_SESSION['scriptcase']['glo_date_separator']);
           if (strlen($SC_temp) == 2)
           {
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date']  = substr($SC_temp, 0, 1); 
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date1'] = substr($SC_temp, 1, 1); 
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date']  = substr($SC_temp, 0, 1); 
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date1'] = substr($SC_temp, 1, 1); 
           }
           else
            {
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date']  = $SC_temp; 
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date1'] = $SC_temp; 
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date']  = $SC_temp; 
+              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date1'] = $SC_temp; 
           }
-          $this->date_delim  = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date'];
-          $this->date_delim1 = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date1'];
+          $this->date_delim  = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date'];
+          $this->date_delim1 = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date1'];
       }
 // 
       if (!empty($this->nm_falta_var) || !empty($this->nm_falta_var_db) || $nm_crit_perfil)
@@ -1341,7 +1345,7 @@ class blank_descarga_pdfs_principal_ini
               echo " </tr>";
           }
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -1397,9 +1401,9 @@ class blank_descarga_pdfs_principal_ini
    {
       global $glo_senha_protect;
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
-      if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']))
+      if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1409,7 +1413,7 @@ class blank_descarga_pdfs_principal_ini
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
       } 
-      if (!$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida'])
+      if (!$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['embutida'])
       {
           if (substr($_POST['nmgp_opcao'], 0, 5) == "ajax_")
           {
@@ -1451,13 +1455,13 @@ class blank_descarga_pdfs_principal_ini
           $this->Db->Execute("alter session set nls_time_format         = 'hh24:mi:ss'");
           $this->Db->Execute("alter session set nls_time_tz_format      = 'hh24:mi:ss'");
           $this->Db->Execute("alter session set nls_numeric_characters  = '.,'");
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['decimal_db'] = "."; 
+          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['decimal_db'] = "."; 
       } 
       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
       {
           $this->Db->Execute("SET DATESTYLE TO ISO");
       } 
-      if (!$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida'])
+      if (!$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['embutida'])
       {
           if (substr($_POST['nmgp_opcao'], 0, 5) == "ajax_")
           {
@@ -1516,10 +1520,10 @@ class blank_descarga_pdfs_principal_ini
                $delim  = "#";
                $delim1 = "#";
            }
-           if (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date']))
+           if (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date']))
            {
-               $delim  = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date'];
-               $delim1 = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date1'];
+               $delim  = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date'];
+               $delim1 = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_sep_date1'];
            }
            return $delim . $var . $delim1;
        }
@@ -1575,12 +1579,12 @@ class blank_descarga_pdfs_principal_ini
 	}
    function Get_Gb_date_format($GB, $cmp)
    {
-       return (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Gb_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Gb_date_format'][$GB][$cmp] : "";
+       return (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_Gb_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_Gb_date_format'][$GB][$cmp] : "";
    }
 
    function Get_Gb_prefix_date_format($GB, $cmp)
    {
-       return (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Gb_prefix_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Gb_prefix_date_format'][$GB][$cmp] : "";
+       return (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_Gb_prefix_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['SC_Gb_prefix_date_format'][$GB][$cmp] : "";
    }
 
    function GB_date_format($val, $format, $prefix, $conf_region="S", $mask="")
@@ -1802,7 +1806,7 @@ class blank_descarga_pdfs_principal_ini
 }
 //===============================================================================
 //
-class blank_descarga_pdfs_principal_apl
+class blank_descarga_pdfs_principal_20102021_apl
 {
    var $Ini;
    var $Erro;
@@ -1823,15 +1827,15 @@ class blank_descarga_pdfs_principal_apl
    {
       global $nm_saida, $nm_url_saida, $script_case_init, $glo_senha_protect;
 
-      $this->Ini = new blank_descarga_pdfs_principal_ini(); 
+      $this->Ini = new blank_descarga_pdfs_principal_20102021_ini(); 
       $this->Ini->init();
       $this->Change_Menu = false;
-      if (isset($_SESSION['scriptcase']['menu_atual']) && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_descarga_pdfs_principal']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['blank_descarga_pdfs_principal']['sc_outra_jan']))
+      if (isset($_SESSION['scriptcase']['menu_atual']) && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan']))
       {
           $this->sc_init_menu = "x";
-          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['blank_descarga_pdfs_principal']))
+          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['blank_descarga_pdfs_principal_20102021']))
           {
-              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['blank_descarga_pdfs_principal'];
+              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['blank_descarga_pdfs_principal_20102021'];
           }
           elseif (isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']]))
           {
@@ -1844,10 +1848,10 @@ class blank_descarga_pdfs_principal_apl
                   }
               }
           }
-          if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal']))
+          if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal_20102021']))
           {
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_descarga_pdfs_principal') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal']['label'] = "" . $this->Ini->Nm_lang['lang_othr_blank_title'] . "";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal_20102021']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_descarga_pdfs_principal_20102021') . "/";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal_20102021']['label'] = "" . $this->Ini->Nm_lang['lang_othr_blank_title'] . "";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -1855,7 +1859,7 @@ class blank_descarga_pdfs_principal_apl
               $achou = false;
               foreach ($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu] as $apl => $parms)
               {
-                  if ($apl == "blank_descarga_pdfs_principal")
+                  if ($apl == "blank_descarga_pdfs_principal_20102021")
                   {
                       $achou = true;
                   }
@@ -1870,9 +1874,9 @@ class blank_descarga_pdfs_principal_apl
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal']['exit'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal_20102021']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal_20102021']['exit'] != '')
       {
-          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page]       = $_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal']['exit'];
+          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page]       = $_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal_20102021']['exit'];
           $_SESSION['scriptcase']['sc_force_url_saida'][$this->Ini->sc_page] = true;
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
@@ -1923,17 +1927,36 @@ class blank_descarga_pdfs_principal_apl
                                   $this->Ini->Nm_lang['lang_shrt_days_frid'],
                                   $this->Ini->Nm_lang['lang_shrt_days_satd']);
       $this->Db = $this->Ini->Db; 
-      include_once($this->Ini->path_aplicacao . "blank_descarga_pdfs_principal_erro.class.php"); 
-      $this->Erro      = new blank_descarga_pdfs_principal_erro();
+      include_once($this->Ini->path_aplicacao . "blank_descarga_pdfs_principal_20102021_erro.class.php"); 
+      $this->Erro      = new blank_descarga_pdfs_principal_20102021_erro();
       $this->Erro->Ini = $this->Ini;
 //
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
-      $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
+      $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'on';
+if (!isset($_SESSION['gcodzona2'])) {$_SESSION['gcodzona2'] = "";}
+if (!isset($this->sc_temp_gcodzona2)) {$this->sc_temp_gcodzona2 = (isset($_SESSION['gcodzona2'])) ? $_SESSION['gcodzona2'] : "";}
   ;
 $vperiodo = date("m");
-$vanio    = date("Y");
-$vzona    = "01";
+$vanio = date("Y");
+
+
+     $nm_select = "TRUNCATE TABLE descarga_pdfs_fe"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
 ?>
 <meta name="viewport" content="width=device-width,height=device-height, user-scalable=no" charset="UTF-8">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2025,69 +2048,16 @@ function fLista(anio,periodo,zona)
 	});	
 }
 	
-function fVerPdfs(anio,periodo,zona)
-{
-	$.post("../blank_pdfs_periodo_generados/index.php",{
-
-		anio:anio,
-		periodo:periodo,
-		zona:zona
-	},function(r){
-
-		$("#idmensaje").html(r);
-	});
-}
-	
-function fGenerarPdfs(anio,periodo,zona,idres)
-{
-	$.post("../blank_generar_pdfs/index.php",{
-
-		anio:anio,
-		periodo:periodo,
-		zona:zona,
-		idres:idres
-		
-	},function(r){
-
-		$("#idmensaje").html(r);
-	});
-}
-	
 $(document).ready(function(){
 	
-	var anio    = $("#anio").val();
-	var periodo = $("#periodo").val();
-	var zona    = "<?php echo $vzona; ?>";
-	
-	fVerPdfs(anio,periodo,zona);
-	
 	$("#btnrecalcular").click(function(){
-		
-		var anio    = $("#anio").val();
-		var periodo = $("#periodo").val();
-		var zona    = "<?php echo $vzona; ?>";
-		var idres   = $("#zona").val();
-	
-		fGenerarPdfs(anio,periodo,zona,idres);
-		
-	});
-	
-	$("#anio").click(function(){
 	
 		var anio    = $("#anio").val();
 		var periodo = $("#periodo").val();
-		var zona    = "<?php echo $vzona; ?>";
-
-		fVerPdfs(anio,periodo,zona);
-	});
+		var codzona = $("#zona").val();
 	
-	$("#periodo").click(function(){
+		fLista(anio,periodo,codzona);
 	
-		var anio    = $("#anio").val();
-		var periodo = $("#periodo").val();
-		var zona    = "<?php echo $vzona; ?>";
-
-		fVerPdfs(anio,periodo,zona);
 	});
 });
 </script>
@@ -2149,13 +2119,13 @@ $(document).ready(function(){
 				
 			<tr>
 			<td>
-				<label>Prefijo</label>
+				<label>Zona</label>
 			</td>
 			<td>
 				<select id="zona" name="zona" class="form-control">
 				<?php
 
-				$vsql = "select z.resolucion, concat(r.prefijo,' -- ',z.nombre) as nombre, z.codigo from zona_clientes z inner join resdian r on z.resolucion=r.Idres";
+				$vsql = "select codigo, nombre from zona_clientes";
 				 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2188,11 +2158,16 @@ $(document).ready(function(){
 ;
 				if(isset($this->vzonas[0][0]))
 				{
-					$vzona = $this->vzonas[0][2];
-						
 					for($i=0;$i<count($this->vzonas );$i++)
 					{
-						echo "<option value='".$this->vzonas[$i][0]."'>".$this->vzonas[$i][1]."</option>";
+						if($this->sc_temp_gcodzona2==$this->vzonas[$i][0])
+						{
+							echo "<option value='".$this->vzonas[$i][0]."' selected='selected'>".$this->vzonas[$i][1]."</option>";
+						}
+						else
+						{
+							echo "<option value='".$this->vzonas[$i][0]."'>".$this->vzonas[$i][1]."</option>";
+						}
 					}
 				}
 				?>
@@ -2211,7 +2186,8 @@ $(document).ready(function(){
 		<p id="idmensaje"></p>
 	</div>
 <?php
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off'; 
+if (isset($this->sc_temp_gcodzona2)) {$_SESSION['gcodzona2'] = $this->sc_temp_gcodzona2;}
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
        if ($this->Change_Menu)
@@ -2260,7 +2236,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
    } 
 function fPagarFacVen($idfactura,$formapago=1,$retorno=true,$vidrecibo=0,$sipropina="NO")
 {
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'on';
   
 	$estado     = 1;
 	$tot        = "";
@@ -2504,11 +2480,11 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
 			)
 		);
 	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'off';
 }
 function fAsentar($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true,$retorno_mensajes=false)
 {
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'on';
   
 	$tot        = "";
 	$vfecha      = "";
@@ -3407,11 +3383,11 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
 			)
 		);
 	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'off';
 }
 function fAsentarContratos($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true,$retorno_mensajes=false)
 {
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'on';
   
 	$tot        = "";
 	$vfecha      = "";
@@ -4310,11 +4286,11 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
 			)
 		);
 	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'off';
 }
 function fPagarPedido($id,$formapago=1,$retorno=true)
 {
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'on';
   
 	$estado     = 1;
 	$tot        = "";
@@ -4489,11 +4465,11 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
 			)
 		);
 	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'off';
 }
 function fAsentarPedido($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true)
 {
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'on';
   
 	
 	$tot        = "";
@@ -4727,7 +4703,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
 			)
 		);
 	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
+$_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'off';
 }
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
@@ -4773,7 +4749,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
    SC_dir_app_ini('FACILWEBv2');
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
+   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] = 'off';
    $Sc_lig_md5 = false;
    $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
    $_SESSION['scriptcase']['sem_session'] = false;
@@ -4799,7 +4775,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                      $_SESSION['sc_session']['SC_parm_violation'] = true;
                  }
             }
-            nm_limpa_str_blank_descarga_pdfs_principal($nmgp_val);
+            nm_limpa_str_blank_descarga_pdfs_principal_20102021($nmgp_val);
             $nmgp_val = NM_decode_input($nmgp_val);
             $$nmgp_var = $nmgp_val;
        }
@@ -4826,7 +4802,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                      $_SESSION['sc_session']['SC_parm_violation'] = true;
                  }
             }
-            nm_limpa_str_blank_descarga_pdfs_principal($nmgp_val);
+            nm_limpa_str_blank_descarga_pdfs_principal_20102021($nmgp_val);
             $nmgp_val = NM_decode_input($nmgp_val);
             $$nmgp_var = $nmgp_val;
        }
@@ -4854,29 +4830,43 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
        if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
            $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
        }
        if (isset($apl_def)) {
-           if ($apl_def[0] != "blank_descarga_pdfs_principal") {
+           if ($apl_def[0] != "blank_descarga_pdfs_principal_20102021") {
                $_SESSION['scriptcase']['sem_session'] = true;
                if (strtolower(substr($apl_def[0], 0 , 7)) == "http://" || strtolower(substr($apl_def[0], 0 , 8)) == "https://" || substr($apl_def[0], 0 , 2) == "..") {
-                   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'] = $apl_def[0];
+                   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir'] = $apl_def[0];
                }
                else {
-                   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'] = $path_aplicacao . "/" . SC_dir_app_name($apl_def[0]) . "/index.php";
+                   $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir'] = $path_aplicacao . "/" . SC_dir_app_name($apl_def[0]) . "/index.php";
                }
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
-               $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir_tp'] = $Redir_tp;
+               $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['redir_tp'] = $Redir_tp;
            }
            if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+               $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
            }
        }
    }
    if (isset($SC_lig_apl_orig) && !$Sc_lig_md5 && (!isset($nmgp_parms) || ($nmgp_parms != "SC_null" && substr($nmgp_parms, 0, 8) != "OrScLink")))
    {
        $_SESSION['sc_session']['SC_parm_violation'] = true;
+   }
+   if (isset($_POST["gcodzona2"])) 
+   {
+       $_SESSION["gcodzona2"] = $_POST["gcodzona2"];
+       nm_limpa_str_blank_descarga_pdfs_principal_20102021($_SESSION["gcodzona2"]);
+   }
+   if (isset($_GET["gcodzona2"])) 
+   {
+       $_SESSION["gcodzona2"] = $_GET["gcodzona2"];
+       nm_limpa_str_blank_descarga_pdfs_principal_20102021($_SESSION["gcodzona2"]);
+   }
+   if (!isset($_SESSION["gcodzona2"])) 
+   {
+       $_SESSION["gcodzona2"] = "";
    }
    if (!empty($glo_perfil))  
    { 
@@ -4915,10 +4905,10 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
        $script_case_init = rand(2, 10000);
    }
    $salva_iframe = false;
-   if (isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu']))
+   if (isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['iframe_menu']))
    {
-       $salva_iframe = $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'];
-       unset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu']);
+       $salva_iframe = $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['iframe_menu'];
+       unset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['iframe_menu']);
    }
    if (isset($nm_run_menu) && $nm_run_menu == 1)
    {
@@ -4933,13 +4923,13 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                 }
             }
         }
-        $_SESSION['scriptcase']['sc_apl_menu_atual'] = "blank_descarga_pdfs_principal";
+        $_SESSION['scriptcase']['sc_apl_menu_atual'] = "blank_descarga_pdfs_principal_20102021";
         $achou = false;
         if (isset($_SESSION['sc_session'][$script_case_init]))
         {
             foreach ($_SESSION['sc_session'][$script_case_init] as $nome_apl => $resto)
             {
-                if ($nome_apl == 'blank_descarga_pdfs_principal' || $achou)
+                if ($nome_apl == 'blank_descarga_pdfs_principal_20102021' || $achou)
                 {
                     unset($_SESSION['sc_session'][$script_case_init][$nome_apl]);
                     if (!empty($_SESSION['sc_session'][$script_case_init][$nome_apl]))
@@ -4963,50 +4953,50 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                 }
             }
         }
-        $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] = true;
+        $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['iframe_menu'] = true;
    }
    else
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] = $salva_iframe;
+       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['iframe_menu'] = $salva_iframe;
    }
 
-   if (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize']))
+   if (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['initialize']))
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = true;
+       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['initialize'] = true;
    }
    elseif (!isset($_SERVER['HTTP_REFERER']))
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = false;
+       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['initialize'] = false;
    }
    elseif (false === strpos($_SERVER['HTTP_REFERER'], '.php'))
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = true;
+       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['initialize'] = true;
    }
    else
    {
        $sReferer = substr($_SERVER['HTTP_REFERER'], 0, strpos($_SERVER['HTTP_REFERER'], '.php'));
        $sReferer = substr($sReferer, strrpos($sReferer, '/') + 1);
-       if ('blank_descarga_pdfs_principal' == $sReferer || 'blank_descarga_pdfs_principal_' == substr($sReferer, 0, 30))
+       if ('blank_descarga_pdfs_principal_20102021' == $sReferer || 'blank_descarga_pdfs_principal_20102021_' == substr($sReferer, 0, 39))
        {
-           $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = false;
+           $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['initialize'] = false;
        }
        else
        {
-           $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = true;
+           $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['initialize'] = true;
        }
    }
 
    $_POST['script_case_init'] = $script_case_init;
-   if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'blank_descarga_pdfs_principal')
+   if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'blank_descarga_pdfs_principal_20102021')
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan'] = true;
+       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['sc_outra_jan'] = true;
         unset($_SESSION['scriptcase']['sc_outra_jan']);
    }
-   $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['menu_desenv'] = false;   
+   $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal_20102021']['menu_desenv'] = false;   
    if (!defined("SC_ERROR_HANDLER"))
    {
        define("SC_ERROR_HANDLER", 1);
-       include_once(dirname(__FILE__) . "/blank_descarga_pdfs_principal_erro.php");
+       include_once(dirname(__FILE__) . "/blank_descarga_pdfs_principal_20102021_erro.php");
    }
    if (!empty($nmgp_parms)) 
    { 
@@ -5026,19 +5016,24 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                     $cadapar[0] = substr($cadapar[0], 11);
                     $cadapar[1] = $_SESSION[$cadapar[1]];
                 }
-                nm_limpa_str_blank_descarga_pdfs_principal($cadapar[1]);
+                nm_limpa_str_blank_descarga_pdfs_principal_20102021($cadapar[1]);
                 if ($cadapar[1] == "@ ") {$cadapar[1] = trim($cadapar[1]); }
                 $Tmp_par   = $cadapar[0];;
                 $$Tmp_par = $cadapar[1];
             }
             $ix++;
        }
+       if (isset($gcodzona2)) 
+       {
+           $_SESSION['gcodzona2'] = $gcodzona2;
+           nm_limpa_str_blank_descarga_pdfs_principal_20102021($_SESSION["gcodzona2"]);
+       }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  
-   $contr_blank_descarga_pdfs_principal = new blank_descarga_pdfs_principal_apl();
-   $contr_blank_descarga_pdfs_principal->controle();
+   $contr_blank_descarga_pdfs_principal_20102021 = new blank_descarga_pdfs_principal_20102021_apl();
+   $contr_blank_descarga_pdfs_principal_20102021->controle();
 //
-   function nm_limpa_str_blank_descarga_pdfs_principal(&$str)
+   function nm_limpa_str_blank_descarga_pdfs_principal_20102021(&$str)
    {
        if (get_magic_quotes_gpc())
        {

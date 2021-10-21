@@ -1,16 +1,16 @@
 <?php
-   include_once('blank_descarga_pdfs_principal_session.php');
+   include_once('blank_generar_pdfs_session.php');
    @ini_set('session.cookie_httponly', 1);
    @ini_set('session.use_only_cookies', 1);
    @ini_set('session.cookie_secure', 0);
    @session_start() ;
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil']          = "conn_mysql";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_prod']       = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_conf']       = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imagens']    = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp']  = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_cache']      = "";
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_doc']        = "";
+   $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_perfil']          = "conn_mysql";
+   $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_prod']       = "";
+   $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_conf']       = "";
+   $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imagens']    = "";
+   $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imag_temp']  = "";
+   $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_cache']      = "";
+   $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_doc']        = "";
     //check publication with the prod
     $NM_dir_atual = getcwd();
     if (empty($NM_dir_atual))
@@ -30,33 +30,33 @@
     $str_path_apl_dir = substr($str_path_sys, 0, strrpos($str_path_sys, "/"));
     $str_path_apl_dir = substr($str_path_apl_dir, 0, strrpos($str_path_apl_dir, "/")+1);
     //check prod
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_prod']))
+    if(empty($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_prod']))
     {
-            /*check prod*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_prod'] = $str_path_apl_url . "_lib/prod";
+            /*check prod*/$_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_prod'] = $str_path_apl_url . "_lib/prod";
     }
     //check img
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imagens']))
+    if(empty($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imagens']))
     {
-            /*check img*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imagens'] = $str_path_apl_url . "_lib/file/img";
+            /*check img*/$_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imagens'] = $str_path_apl_url . "_lib/file/img";
     }
     //check tmp
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp']))
+    if(empty($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imag_temp']))
     {
-            /*check tmp*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
+            /*check tmp*/$_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
     }
     //check cache
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_cache']))
+    if(empty($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_cache']))
     {
-            /*check tmp*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_cache'] = $str_path_apl_dir . "_lib/file/cache";
+            /*check tmp*/$_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_cache'] = $str_path_apl_dir . "_lib/file/cache";
     }
     //check doc
-    if(empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_doc']))
+    if(empty($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_doc']))
     {
-            /*check doc*/$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_doc'] = $str_path_apl_dir . "_lib/file/doc";
+            /*check doc*/$_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_doc'] = $str_path_apl_dir . "_lib/file/doc";
     }
     //end check publication with the prod
 //
-class blank_descarga_pdfs_principal_ini
+class blank_generar_pdfs_ini
 {
    var $nm_cod_apl;
    var $nm_nome_apl;
@@ -203,8 +203,8 @@ class blank_descarga_pdfs_principal_ini
       $_SESSION['scriptcase']['charset_entities']['EUC-JP'] = 'EUC-JP';
       $_SESSION['scriptcase']['charset_entities']['KOI8-R'] = 'KOI8-R';
       $_SESSION['scriptcase']['trial_version'] = 'N';
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['decimal_db'] = "."; 
-      $this->nm_cod_apl      = "blank_descarga_pdfs_principal"; 
+      $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['decimal_db'] = "."; 
+      $this->nm_cod_apl      = "blank_generar_pdfs"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
       $this->nm_grupo        = "FACILWEBv2"; 
@@ -214,11 +214,11 @@ class blank_descarga_pdfs_principal_ini
       $this->nm_script_type  = "PHP";
       $this->nm_versao_sc    = "v9"; 
       $this->nm_tp_lic_sc    = "ep_bronze"; 
-      $this->nm_dt_criacao   = "20180904"; 
-      $this->nm_hr_criacao   = "084030"; 
+      $this->nm_dt_criacao   = "20210123"; 
+      $this->nm_hr_criacao   = "170159"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211021"; 
-      $this->nm_hr_ult_alt   = "150551"; 
+      $this->nm_hr_ult_alt   = "150142"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -240,12 +240,12 @@ class blank_descarga_pdfs_principal_ini
       $this->sc_site_ssl     = $this->appIsSsl();
       $this->sc_protocolo    = $this->sc_site_ssl ? 'https://' : 'http://';
       $this->sc_protocolo    = "";
-      $this->path_prod       = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_prod'];
-      $this->path_conf       = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_conf'];
-      $this->path_imagens    = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imagens'];
-      $this->path_imag_temp  = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'];
-      $this->path_cache  = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_cache'];
-      $this->path_doc        = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_doc'];
+      $this->path_prod       = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_prod'];
+      $this->path_conf       = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_conf'];
+      $this->path_imagens    = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imagens'];
+      $this->path_imag_temp  = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imag_temp'];
+      $this->path_cache  = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_cache'];
+      $this->path_doc        = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_doc'];
       if (!isset($_SESSION['scriptcase']['str_lang']) || empty($_SESSION['scriptcase']['str_lang']))
       {
           $_SESSION['scriptcase']['str_lang'] = "es";
@@ -256,10 +256,10 @@ class blank_descarga_pdfs_principal_ini
       }
       $this->str_lang        = $_SESSION['scriptcase']['str_lang'];
       $this->str_conf_reg    = $_SESSION['scriptcase']['str_conf_reg'];
-      if (!isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['save_session']['save_grid_state_session']))
+      if (!isset($_SESSION['scriptcase']['blank_generar_pdfs']['save_session']['save_grid_state_session']))
       { 
-          $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['save_session']['save_grid_state_session'] = false;
-          $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['save_session']['data'] = '';
+          $_SESSION['scriptcase']['blank_generar_pdfs']['save_session']['save_grid_state_session'] = false;
+          $_SESSION['scriptcase']['blank_generar_pdfs']['save_session']['data'] = '';
       } 
       $this->str_schema_all    = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
       $_SESSION['scriptcase']['erro']['str_schema'] = $this->str_schema_all . "_error.css";
@@ -277,7 +277,7 @@ class blank_descarga_pdfs_principal_ini
       $str_path_web          = str_replace('//', '/', $str_path_web);
       $this->root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
       $this->path_aplicacao  = substr($str_path_sys, 0, strrpos($str_path_sys, '/'));
-      $this->path_aplicacao  = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/')) . '/blank_descarga_pdfs_principal';
+      $this->path_aplicacao  = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/')) . '/blank_generar_pdfs';
       $this->path_embutida   = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/') + 1);
       $this->path_aplicacao .= '/';
       $this->path_link       = substr($str_path_web, 0, strrpos($str_path_web, '/'));
@@ -294,7 +294,7 @@ class blank_descarga_pdfs_principal_ini
       $this->path_lib_php    = $this->root . $this->path_link . "_lib/lib/php";
       $this->path_lib_js     = $this->root . $this->path_link . "_lib/lib/js";
       $pos_path = strrpos($this->path_prod, "/");
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['path_grid_sv'] = $this->root . substr($this->path_prod, 0, $pos_path) . "/conf/grid_sv/";
+      $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['path_grid_sv'] = $this->root . substr($this->path_prod, 0, $pos_path) . "/conf/grid_sv/";
       $this->path_lang       = "../_lib/lang/";
       $this->path_lang_js    = "../_lib/js/";
       $this->path_chart_theme = $this->root . $this->path_link . "_lib/chart/";
@@ -307,11 +307,11 @@ class blank_descarga_pdfs_principal_ini
       $this->path_adodb      = $this->root . $this->path_prod . "/third/adodb";
       $_SESSION['scriptcase']['dir_temp'] = $this->root . $this->path_imag_temp;
       $this->Cmp_Sql_Time     = array();
-      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['lang'])) {
-          $this->str_lang = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['lang'];
+      if (isset($_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['lang'])) {
+          $this->str_lang = $_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['lang'];
       }
-      elseif (!isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['actual_lang']) || $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['actual_lang'] != $this->str_lang) {
-          $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['actual_lang'] = $this->str_lang;
+      elseif (!isset($_SESSION['scriptcase']['blank_generar_pdfs']['actual_lang']) || $_SESSION['scriptcase']['blank_generar_pdfs']['actual_lang'] != $this->str_lang) {
+          $_SESSION['scriptcase']['blank_generar_pdfs']['actual_lang'] = $this->str_lang;
           setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
@@ -329,15 +329,15 @@ class blank_descarga_pdfs_principal_ini
       }
       if (!class_exists('Services_JSON'))
       {
-          include_once("blank_descarga_pdfs_principal_json.php");
+          include_once("blank_generar_pdfs_json.php");
       }
-      $this->SC_Link_View = (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Link_View'])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Link_View'] : false;
+      $this->SC_Link_View = (isset($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_Link_View'])) ? $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_Link_View'] : false;
       if (isset($_GET['SC_Link_View']) && !empty($_GET['SC_Link_View']) && is_numeric($_GET['SC_Link_View']))
       {
-          if ($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida'])
+          if ($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['embutida'])
           {
               $this->SC_Link_View = true;
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Link_View'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_Link_View'] = true;
           }
       }
             if (isset($_POST['nmgp_opcao']) && 'ajax_check_file' == $_POST['nmgp_opcao'] ){
@@ -348,8 +348,8 @@ class blank_descarga_pdfs_principal_ini
                break;
                }
 
-    $out1_img_cache = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'] . $file_name;
-    $orig_img = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp']. '/'.basename($_POST['AjaxCheckImg']);
+    $out1_img_cache = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imag_temp'] . $file_name;
+    $orig_img = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imag_temp']. '/'.basename($_POST['AjaxCheckImg']);
     copy($__file_download, $_SERVER['DOCUMENT_ROOT'].$orig_img);
     echo $orig_img . '_@@NM@@_';
     if(file_exists($out1_img_cache)){
@@ -370,7 +370,7 @@ class blank_descarga_pdfs_principal_ini
             }
       if (isset($_POST['nmgp_opcao']) && $_POST['nmgp_opcao'] == "ajax_save_ancor")
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['ancor_save'] = $_POST['ancor_save'];
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['ancor_save'] = $_POST['ancor_save'];
           $oJson = new Services_JSON();
           if ($_SESSION['scriptcase']['sem_session']) {
               unset($_SESSION['sc_session']);
@@ -418,74 +418,74 @@ class blank_descarga_pdfs_principal_ini
           }
       }
       global $under_dashboard, $dashboard_app, $own_widget, $parent_widget, $compact_mode, $remove_margin, $remove_border;
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard']))
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['under_dashboard']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard'] = false;
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['dashboard_app']   = '';
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['own_widget']      = '';
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['parent_widget']   = '';
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['compact_mode']    = false;
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_margin']   = false;
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_border']   = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['under_dashboard'] = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['dashboard_app']   = '';
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['own_widget']      = '';
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['parent_widget']   = '';
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['compact_mode']    = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['remove_margin']   = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['remove_border']   = false;
       }
       if (isset($_GET['under_dashboard']) && 1 == $_GET['under_dashboard'])
       {
           if (isset($_GET['own_widget']) && 'dbifrm_widget' == substr($_GET['own_widget'], 0, 13)) {
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['own_widget'] = $_GET['own_widget'];
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['own_widget'] = $_GET['own_widget'];
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['under_dashboard'] = true;
               if (isset($_GET['dashboard_app'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['dashboard_app'] = $_GET['dashboard_app'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['dashboard_app'] = $_GET['dashboard_app'];
               }
               if (isset($_GET['parent_widget'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['parent_widget'] = $_GET['parent_widget'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['parent_widget'] = $_GET['parent_widget'];
               }
               if (isset($_GET['compact_mode'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['compact_mode'] = 1 == $_GET['compact_mode'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['compact_mode'] = 1 == $_GET['compact_mode'];
               }
               if (isset($_GET['remove_margin'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_margin'] = 1 == $_GET['remove_margin'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['remove_margin'] = 1 == $_GET['remove_margin'];
               }
               if (isset($_GET['remove_border'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_border'] = 1 == $_GET['remove_border'];
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['remove_border'] = 1 == $_GET['remove_border'];
               }
           }
       }
       elseif (isset($under_dashboard) && 1 == $under_dashboard)
       {
           if (isset($own_widget) && 'dbifrm_widget' == substr($own_widget, 0, 13)) {
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['own_widget'] = $own_widget;
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['own_widget'] = $own_widget;
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['under_dashboard'] = true;
               if (isset($dashboard_app)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['dashboard_app'] = $dashboard_app;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['dashboard_app'] = $dashboard_app;
               }
               if (isset($parent_widget)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['parent_widget'] = $parent_widget;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['parent_widget'] = $parent_widget;
               }
               if (isset($compact_mode)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['compact_mode'] = 1 == $compact_mode;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['compact_mode'] = 1 == $compact_mode;
               }
               if (isset($remove_margin)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_margin'] = 1 == $remove_margin;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['remove_margin'] = 1 == $remove_margin;
               }
               if (isset($remove_border)) {
-                  $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['remove_border'] = 1 == $remove_border;
+                  $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['remove_border'] = 1 == $remove_border;
               }
           }
       }
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['maximized']))
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['maximized']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['maximized'] = false;
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['maximized'] = false;
       }
       if (isset($_GET['maximized']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
       }
-      if ($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['under_dashboard'])
+      if ($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['under_dashboard'])
       {
-          $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['dashboard_info']['dashboard_app'];
-          if ('' != $sTmpDashboardApp && isset($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["blank_descarga_pdfs_principal"]))
+          $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['dashboard_info']['dashboard_app'];
+          if ('' != $sTmpDashboardApp && isset($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["blank_generar_pdfs"]))
           {
-              foreach ($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["blank_descarga_pdfs_principal"] as $sTmpTargetLink => $sTmpTargetWidget)
+              foreach ($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["blank_generar_pdfs"] as $sTmpTargetLink => $sTmpTargetWidget)
               {
                   if (isset($this->sc_lig_target[$sTmpTargetLink]))
                   {
@@ -502,7 +502,7 @@ class blank_descarga_pdfs_principal_ini
       if (!is_file($this->root . $str_path . 'devel/class/xmlparser/nmXmlparserIniSys.class.php'))
       {
           unset($_SESSION['scriptcase']['nm_sc_retorno']);
-          unset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']);
+          unset($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao']);
       }
       include($this->path_lang . $this->str_lang . ".lang.php");
       include($this->path_lang . "config_region.php");
@@ -546,7 +546,7 @@ class blank_descarga_pdfs_principal_ini
          }
       }
       $_SESSION['sc_session']['SC_download_violation'] = $this->Nm_lang['lang_errm_fnfd'];
-      if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir']))
+      if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir']))
       {
           unset($_SESSION['sc_session']['SC_parm_violation']);
           echo "<html>";
@@ -580,7 +580,7 @@ class blank_descarga_pdfs_principal_ini
               echo "<div><font size=6>" . $this->Nm_lang['lang_othr_prod_incp'] . "</font></div>";exit;
           } 
       } 
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['path_doc'] = $this->path_doc; 
+      $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['path_doc'] = $this->path_doc; 
       $_SESSION['scriptcase']['nm_path_prod'] = $this->root . $this->path_prod . "/"; 
       if (empty($this->path_imag_cab))
       {
@@ -721,7 +721,7 @@ class blank_descarga_pdfs_principal_ini
           echo "   </b></td>";
           echo " </tr>";
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -766,13 +766,13 @@ class blank_descarga_pdfs_principal_ini
       $opsys = strtolower(php_uname());
 
 // 
-      include_once($this->path_aplicacao . "blank_descarga_pdfs_principal_erro.class.php"); 
-      $this->Erro = new blank_descarga_pdfs_principal_erro();
+      include_once($this->path_aplicacao . "blank_generar_pdfs_erro.class.php"); 
+      $this->Erro = new blank_generar_pdfs_erro();
       include_once($this->path_adodb . "/adodb.inc.php"); 
       $this->sc_Include($this->path_libs . "/nm_sec_prod.php", "F", "nm_reg_prod") ; 
       $this->sc_Include($this->path_libs . "/nm_ini_perfil.php", "F", "perfil_lib") ; 
 // 
- if(function_exists('set_php_timezone')) set_php_timezone('blank_descarga_pdfs_principal'); 
+ if(function_exists('set_php_timezone')) set_php_timezone('blank_generar_pdfs'); 
 // 
       $this->sc_Include($this->path_lib_php . "/nm_functions.php", "", "") ; 
       $this->sc_Include($this->path_lib_php . "/nm_api.php", "", "") ; 
@@ -803,7 +803,7 @@ class blank_descarga_pdfs_principal_ini
       include($this->path_btn . $this->Str_btn_grid);
       $_SESSION['scriptcase']['erro']['str_schema_dir'] = $this->str_schema_all . "_error" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->sc_tem_trans_banco = false;
-      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'])) {
+      if (isset($_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir'])) {
           $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
           $SS_cod_html .= "<HTML>\r\n";
@@ -815,7 +815,7 @@ class blank_descarga_pdfs_principal_ini
           }
           $SS_cod_html .= "   <META http-equiv=\"Expires\" content=\"Fri, Jan 01 1900 00:00:00 GMT\"/>\r\n";
           $SS_cod_html .= "    <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n";
-          if ($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir_tp'] == "R") {
+          if ($_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir_tp'] == "R") {
               $SS_cod_html .= "  </HEAD>\r\n";
               $SS_cod_html .= "   <body>\r\n";
           }
@@ -830,14 +830,14 @@ class blank_descarga_pdfs_principal_ini
               $SS_cod_html .= $this->Nm_lang['lang_errm_expired_session'] . "\r\n";
               $SS_cod_html .= "     <form name=\"Fsession_redir\" method=\"post\"\r\n";
               $SS_cod_html .= "           target=\"_self\">\r\n";
-              $SS_cod_html .= "           <input type=\"button\" name=\"sc_sai_seg\" value=\"OK\" onclick=\"sc_session_redir('" . $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'] . "');\">\r\n";
+              $SS_cod_html .= "           <input type=\"button\" name=\"sc_sai_seg\" value=\"OK\" onclick=\"sc_session_redir('" . $_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir'] . "');\">\r\n";
               $SS_cod_html .= "     </form>\r\n";
               $SS_cod_html .= "    </td></tr></table>\r\n";
               $SS_cod_html .= "    </div></td></tr></table>\r\n";
           }
           $SS_cod_html .= "    <script type=\"text/javascript\">\r\n";
-          if ($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir_tp'] == "R") {
-              $SS_cod_html .= "      sc_session_redir('" . $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'] . "');\r\n";
+          if ($_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir_tp'] == "R") {
+              $SS_cod_html .= "      sc_session_redir('" . $_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir'] . "');\r\n";
           }
           $SS_cod_html .= "      function sc_session_redir(url_redir)\r\n";
           $SS_cod_html .= "      {\r\n";
@@ -861,7 +861,7 @@ class blank_descarga_pdfs_principal_ini
           $SS_cod_html .= "    </script>\r\n";
           $SS_cod_html .= " </body>\r\n";
           $SS_cod_html .= "</HTML>\r\n";
-          unset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']);
+          unset($_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']);
           unset($_SESSION['sc_session']);
       }
       if (isset($SS_cod_html) && isset($_GET['nmgp_opcao']) && (substr($_GET['nmgp_opcao'], 0, 14) == "ajax_aut_comp_" || substr($_GET['nmgp_opcao'], 0, 13) == "ajax_autocomp"))
@@ -906,9 +906,9 @@ class blank_descarga_pdfs_principal_ini
       $this->nm_ttf_rus  = array("pl", "ru", "sk", "cz", "el", "mk");
       $this->nm_ttf_thai = array("thai");
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['seq_dir'] = 0; 
-      $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXOZSBiHIrwV5BqDMBOVIBsV5FYDoFGD9BsZ1FGHINKV5X7HgNKDkXKDWXCHMBiHQJeDuFaHAvmVWJsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWFqHIJeHQFYH9FUHABYD5JwHgrKVIBOHEF/HMFaD9XGZ1FGHIBeHuXGDMveHEXeDWr/HIBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQJsHABYV5BqHgvsDkBODWFaVoX7DcJUH9B/HABYD5BiDErKHEFiH5F/VoBOD9NwZSFUZ1rwV5JeHuzGVIBOHEFYDoJsDcBqH9B/DSrYD5BqDMBYHEXeDuX/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHABYD5FaDMNOVIBOH5XCVoJwHQBsZSBqHIveHuFaDEBOZSJGH5X/ZuFaD9NmH9FUD1BeD5FaHgvOVIB/HEF/HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHABYHQJwDEBODkFeH5FYVoFGHQJKDQBqHIrKHuF7DMvsVcBOH5XCVorqHQJmZSBOHAvmZMJeDMzGVkJqH5FYZuJeD9NmDQJsHArYV5JwDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['seq_dir'] = 0; 
+      $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['sub_dir'] = array(); 
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwDQBqD1veV5JeHuNOV9FeV5X7DoFUDcNmZkFGDSBOZMBqHgveHEXeHEFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcFYZ1BOHAN7HuFGHgrKZSXeDWrGVoFGD9NwZSX7Z1NaV5BODMzGVIBsHEFYDoJeHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeH9X7HIBeV5FUHuNOVIBOHEX7VoJwDcJUH9B/HArYV5FUDMzGHEJGDWr/DoraD9NwH9FUZ1rwV5JeHgrKVcFKDWF/VoFGHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKD5BqDMBYHEJqDuJeHIXGD9NmZSFUD1BeHuXGDMvmDkBODuX7HIrqHQNwZSFaHArYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAzGD5BqHgveDkXKDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWF/HMFGD9XOZ1FGD1vsD5BODEvsHAFKV5FqVoJsHQNmH9FUHABYV5BOHuBOVcrsDWFYHIBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -920,7 +920,7 @@ class blank_descarga_pdfs_principal_ini
           echo "   </b></td>";
           echo " </tr>";
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -969,26 +969,26 @@ class blank_descarga_pdfs_principal_ini
       {
           foreach ($_SESSION['scriptcase']['sc_connection'] as $NM_con_orig => $NM_con_dest)
           {
-              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']) && $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'] == $NM_con_orig)
+              if (isset($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao']) && $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao'] == $NM_con_orig)
               {
-/*NM*/            $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'] = $NM_con_dest;
+/*NM*/            $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao'] = $NM_con_dest;
               }
-              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil']) && $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil'] == $NM_con_orig)
+              if (isset($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_perfil']) && $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_perfil'] == $NM_con_orig)
               {
-/*NM*/            $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil'] = $NM_con_dest;
+/*NM*/            $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_perfil'] = $NM_con_dest;
               }
-              if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_con_' . $NM_con_orig]))
+              if (isset($_SESSION['scriptcase']['blank_generar_pdfs']['glo_con_' . $NM_con_orig]))
               {
-                  $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_con_' . $NM_con_orig] = $NM_con_dest;
+                  $_SESSION['scriptcase']['blank_generar_pdfs']['glo_con_' . $NM_con_orig] = $NM_con_dest;
               }
           }
       }
-      $con_devel             = (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'])) ? $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'] : ""; 
+      $con_devel             = (isset($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao'])) ? $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao'] : ""; 
       $perfil_trab           = ""; 
       $this->nm_falta_var    = ""; 
       $this->nm_falta_var_db = ""; 
       $nm_crit_perfil        = false;
-      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']))
+      if (isset($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao']))
       {
           if (!isset($_GET['nmgp_opcao']) || ('pdf' != $_GET['nmgp_opcao'] && 'pdf_res' != $_GET['nmgp_opcao'])) {
               ob_start();
@@ -1009,9 +1009,9 @@ class blank_descarga_pdfs_principal_ini
               $nm_crit_perfil = true;
           }
       }
-      if (isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil']))
+      if (isset($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_perfil']))
       {
-          $perfil_trab = $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_perfil'];
+          $perfil_trab = $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_perfil'];
       }
       elseif (isset($_SESSION['scriptcase']['glo_perfil']) && !empty($_SESSION['scriptcase']['glo_perfil']))
       {
@@ -1030,7 +1030,7 @@ class blank_descarga_pdfs_principal_ini
       {
           $perfil_trab = $con_devel;
       }
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida_init']) 
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['embutida_init']) 
       {
       }
 // 
@@ -1164,23 +1164,23 @@ class blank_descarga_pdfs_principal_ini
       }
       if (isset($_SESSION['scriptcase']['glo_decimal_db']) && !empty($_SESSION['scriptcase']['glo_decimal_db']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['decimal_db'] = $_SESSION['scriptcase']['glo_decimal_db']; 
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['decimal_db'] = $_SESSION['scriptcase']['glo_decimal_db']; 
       }
       if (isset($_SESSION['scriptcase']['glo_date_separator']) && !empty($_SESSION['scriptcase']['glo_date_separator']))
       {
           $SC_temp = trim($_SESSION['scriptcase']['glo_date_separator']);
           if (strlen($SC_temp) == 2)
           {
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date']  = substr($SC_temp, 0, 1); 
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date1'] = substr($SC_temp, 1, 1); 
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date']  = substr($SC_temp, 0, 1); 
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date1'] = substr($SC_temp, 1, 1); 
           }
           else
            {
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date']  = $SC_temp; 
-              $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date1'] = $SC_temp; 
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date']  = $SC_temp; 
+              $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date1'] = $SC_temp; 
           }
-          $this->date_delim  = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date'];
-          $this->date_delim1 = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date1'];
+          $this->date_delim  = $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date'];
+          $this->date_delim1 = $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date1'];
       }
 // 
       if (!empty($this->nm_falta_var) || !empty($this->nm_falta_var_db) || $nm_crit_perfil)
@@ -1341,7 +1341,7 @@ class blank_descarga_pdfs_principal_ini
               echo " </tr>";
           }
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -1397,9 +1397,9 @@ class blank_descarga_pdfs_principal_ini
    {
       global $glo_senha_protect;
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
-      if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao']))
+      if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1409,7 +1409,7 @@ class blank_descarga_pdfs_principal_ini
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
       } 
-      if (!$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida'])
+      if (!$_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['embutida'])
       {
           if (substr($_POST['nmgp_opcao'], 0, 5) == "ajax_")
           {
@@ -1451,13 +1451,13 @@ class blank_descarga_pdfs_principal_ini
           $this->Db->Execute("alter session set nls_time_format         = 'hh24:mi:ss'");
           $this->Db->Execute("alter session set nls_time_tz_format      = 'hh24:mi:ss'");
           $this->Db->Execute("alter session set nls_numeric_characters  = '.,'");
-          $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['decimal_db'] = "."; 
+          $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['decimal_db'] = "."; 
       } 
       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
       {
           $this->Db->Execute("SET DATESTYLE TO ISO");
       } 
-      if (!$_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['embutida'])
+      if (!$_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['embutida'])
       {
           if (substr($_POST['nmgp_opcao'], 0, 5) == "ajax_")
           {
@@ -1516,10 +1516,10 @@ class blank_descarga_pdfs_principal_ini
                $delim  = "#";
                $delim1 = "#";
            }
-           if (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date']))
+           if (isset($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date']))
            {
-               $delim  = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date'];
-               $delim1 = $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_sep_date1'];
+               $delim  = $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date'];
+               $delim1 = $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_sep_date1'];
            }
            return $delim . $var . $delim1;
        }
@@ -1575,12 +1575,12 @@ class blank_descarga_pdfs_principal_ini
 	}
    function Get_Gb_date_format($GB, $cmp)
    {
-       return (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Gb_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Gb_date_format'][$GB][$cmp] : "";
+       return (isset($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_Gb_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_Gb_date_format'][$GB][$cmp] : "";
    }
 
    function Get_Gb_prefix_date_format($GB, $cmp)
    {
-       return (isset($_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Gb_prefix_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal']['SC_Gb_prefix_date_format'][$GB][$cmp] : "";
+       return (isset($_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_Gb_prefix_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['SC_Gb_prefix_date_format'][$GB][$cmp] : "";
    }
 
    function GB_date_format($val, $format, $prefix, $conf_region="S", $mask="")
@@ -1802,7 +1802,7 @@ class blank_descarga_pdfs_principal_ini
 }
 //===============================================================================
 //
-class blank_descarga_pdfs_principal_apl
+class blank_generar_pdfs_apl
 {
    var $Ini;
    var $Erro;
@@ -1823,15 +1823,15 @@ class blank_descarga_pdfs_principal_apl
    {
       global $nm_saida, $nm_url_saida, $script_case_init, $glo_senha_protect;
 
-      $this->Ini = new blank_descarga_pdfs_principal_ini(); 
+      $this->Ini = new blank_generar_pdfs_ini(); 
       $this->Ini->init();
       $this->Change_Menu = false;
-      if (isset($_SESSION['scriptcase']['menu_atual']) && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_descarga_pdfs_principal']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['blank_descarga_pdfs_principal']['sc_outra_jan']))
+      if (isset($_SESSION['scriptcase']['menu_atual']) && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_generar_pdfs']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['blank_generar_pdfs']['sc_outra_jan']))
       {
           $this->sc_init_menu = "x";
-          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['blank_descarga_pdfs_principal']))
+          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['blank_generar_pdfs']))
           {
-              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['blank_descarga_pdfs_principal'];
+              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['blank_generar_pdfs'];
           }
           elseif (isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']]))
           {
@@ -1844,10 +1844,10 @@ class blank_descarga_pdfs_principal_apl
                   }
               }
           }
-          if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal']))
+          if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_generar_pdfs']))
           {
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_descarga_pdfs_principal') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_descarga_pdfs_principal']['label'] = "" . $this->Ini->Nm_lang['lang_othr_blank_title'] . "";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_generar_pdfs']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_generar_pdfs') . "/";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['blank_generar_pdfs']['label'] = "" . $this->Ini->Nm_lang['lang_othr_blank_title'] . "";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -1855,7 +1855,7 @@ class blank_descarga_pdfs_principal_apl
               $achou = false;
               foreach ($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu] as $apl => $parms)
               {
-                  if ($apl == "blank_descarga_pdfs_principal")
+                  if ($apl == "blank_generar_pdfs")
                   {
                       $achou = true;
                   }
@@ -1870,15 +1870,16 @@ class blank_descarga_pdfs_principal_apl
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal']['exit'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['blank_generar_pdfs']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['blank_generar_pdfs']['exit'] != '')
       {
-          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page]       = $_SESSION['scriptcase']['sc_apl_conf']['blank_descarga_pdfs_principal']['exit'];
+          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page]       = $_SESSION['scriptcase']['sc_apl_conf']['blank_generar_pdfs']['exit'];
           $_SESSION['scriptcase']['sc_force_url_saida'][$this->Ini->sc_page] = true;
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
 
       $this->Ini->sc_Include($this->Ini->path_libs . "/nm_gc.php", "F", "nm_gc") ; 
       nm_gc($this->Ini->path_libs);
+      include_once($this->Ini->path_aplicacao . 'webservice_receptor2.php');
       $this->nm_data = new nm_data("es");
       $_SESSION['scriptcase']['sc_tab_meses']['int'] = array(
                                   $this->Ini->Nm_lang['lang_mnth_janu'],
@@ -1923,295 +1924,72 @@ class blank_descarga_pdfs_principal_apl
                                   $this->Ini->Nm_lang['lang_shrt_days_frid'],
                                   $this->Ini->Nm_lang['lang_shrt_days_satd']);
       $this->Db = $this->Ini->Db; 
-      include_once($this->Ini->path_aplicacao . "blank_descarga_pdfs_principal_erro.class.php"); 
-      $this->Erro      = new blank_descarga_pdfs_principal_erro();
+      include_once($this->Ini->path_aplicacao . "blank_generar_pdfs_erro.class.php"); 
+      $this->Erro      = new blank_generar_pdfs_erro();
       $this->Erro->Ini = $this->Ini;
 //
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
-      $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
-  ;
-$vperiodo = date("m");
-$vanio    = date("Y");
-$vzona    = "01";
-?>
-<meta name="viewport" content="width=device-width,height=device-height, user-scalable=no" charset="UTF-8">
-<meta name="mobile-web-app-capable" content="yes">
-<meta http-equiv="Expires" content="0" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta name="MobileOptimized" content="320">
-<meta name="HandheldFriendly" content="True">
+      $_SESSION['scriptcase']['blank_generar_pdfs']['contr_erro'] = 'on';
+ $vperiodo   = "";
+$vanio      = "";
+$vzona      = "";
+$vidres     = "";
 
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery-1.11.1.js'); ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js/bootstrap/css', 'bootstrap.min.css'); ?>">
-<script src="<?php echo sc_url_library('prj', 'js/bootstrap/js', 'bootstrap.min.js'); ?>"></script>
-
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
-
-<script>
-$(document).ajaxStart(function(){
-	
-		$.blockUI({ 
-			message: 'Espere por favor...', 
-			css: { 
-				border: 'none', 
-				padding: '15px', 
-				backgroundColor: '#000', 
-				'-webkit-border-radius': '10px', 
-				'-moz-border-radius': '10px', 
-				opacity: .5, 
-				color: '#fff'
-			}
-		});
-
-}).ajaxStop(function(){
-
-		$.unblockUI();
-
-});
-	
-function fEnviar(prefijo,numero,funcion,anio,periodo,zona)
+if(isset($_POST["periodo"]))
 {
-	$.get("../blank_descarga_pdfs/index.php",{
-			
-		prefijo:prefijo,
-		numero:numero,
-		anio:anio,
-		periodo:periodo,
-		zona:zona
-
-	},function(r){
-
-	    console.log(r);
-		if(!$.isEmptyObject(r))
-		{
-			$("#idmensaje").html(r);
-		}
-	
-		funcion(anio,periodo,zona);
-	
-	});	
+	$vperiodo = $_POST["periodo"];
 }
-	
-function fLista(anio,periodo,zona)
+
+if(isset($_POST["anio"]))
 {
-	$.get("../blank_descarga_pdfs_consulta/index.php",{
-			
-		anio:anio,
-		periodo:periodo,
-	    zona:zona
-
-	},function(r){
-
-		console.log(r);
-		var datos = JSON.parse(r);
-		console.log(datos);
-		if($.isEmptyObject(datos.mensaje))
-		{
-			fEnviar(datos.prefijo,datos.numero,fLista,anio,periodo,zona);
-		}
-		else if(datos.mensaje==2)
-		{
-			$.unblockUI();	
-			$("#idmensaje").html("Proceso terminado con éxito.");
-			alert("Proceso terminado con éxito.");
-		}
-	});	
+	$vanio = $_POST["anio"];
 }
-	
-function fVerPdfs(anio,periodo,zona)
+
+if(isset($_POST["zona"]))
 {
-	$.post("../blank_pdfs_periodo_generados/index.php",{
-
-		anio:anio,
-		periodo:periodo,
-		zona:zona
-	},function(r){
-
-		$("#idmensaje").html(r);
-	});
+	$vzona = $_POST["zona"];
 }
-	
-function fGenerarPdfs(anio,periodo,zona,idres)
-{
-	$.post("../blank_generar_pdfs/index.php",{
 
-		anio:anio,
-		periodo:periodo,
-		zona:zona,
-		idres:idres
+if(isset($_POST["idres"]))
+{
+	$vidres = $_POST["idres"];
+}
+
+
+if(!empty($vperiodo) and !empty($vanio) and !empty($vzona) and !empty($vidres))
+{
 		
-	},function(r){
+	$vruta = getcwd();
 
-		$("#idmensaje").html(r);
-	});
+	if (!file_exists($vruta.'/pdfs'))
+	{
+		chdir('../');
+		$vruta = getcwd();
+	}
+
+	$vruta2 = $vruta.'/pdfs/'.$vzona."/".$vanio."/".$vperiodo;
+
+	if (!file_exists($vruta2))
+	{
+		mkdir($vruta2, 0777, true);
+	}
+
+	$vruta_archivo = $vruta2."/".$vanio."_".$vperiodo.".pdf";
+	$vurl = "http://tvchinacota.facturaelectronicafacilweb.com:9192/_lib/libraries/grp/factura_contratotv/facturas_periodo.php?idempresa=inventario_facturacion&periodo=".$vperiodo."&anio=".$vanio."&idres=".$vidres;
+	
+	file_put_contents($vruta_archivo, fopen($vurl, 'r'));
+	
+	echo "<div>";
+	echo "Descarga aquí el archivo en PDF <a href='".$vruta_archivo."'>".$vanio."_".$vperiodo.".pdf"."</a>";
+	echo "</div><br>";
 }
-	
-$(document).ready(function(){
-	
-	var anio    = $("#anio").val();
-	var periodo = $("#periodo").val();
-	var zona    = "<?php echo $vzona; ?>";
-	
-	fVerPdfs(anio,periodo,zona);
-	
-	$("#btnrecalcular").click(function(){
-		
-		var anio    = $("#anio").val();
-		var periodo = $("#periodo").val();
-		var zona    = "<?php echo $vzona; ?>";
-		var idres   = $("#zona").val();
-	
-		fGenerarPdfs(anio,periodo,zona,idres);
-		
-	});
-	
-	$("#anio").click(function(){
-	
-		var anio    = $("#anio").val();
-		var periodo = $("#periodo").val();
-		var zona    = "<?php echo $vzona; ?>";
+else
+{
+	echo "No hay parametro";
+}
 
-		fVerPdfs(anio,periodo,zona);
-	});
-	
-	$("#periodo").click(function(){
-	
-		var anio    = $("#anio").val();
-		var periodo = $("#periodo").val();
-		var zona    = "<?php echo $vzona; ?>";
-
-		fVerPdfs(anio,periodo,zona);
-	});
-});
-</script>
-<!------ Include the above in your HEAD tag ---------->
-<div class="container">
-    	<div class="row">
-			<br>
-			<table>
-			<tr>
-			<td>
-			<h2>Descargar Facturas del Periodo.</h2>
-			</td>
-			</tr>
-				
-			<tr>
-			<td>
-				<label>Año</label>
-			</td>
-			<td>
-			<select id="anio" name="anio" class="form-control">
-				<?php
-				for($i=2020;$i<=2030;$i++)
-				{
-					if($vanio==$i)
-					{
-						echo "<option value='".$i."' selected='selected'>$i</option>";
-					}
-					else
-					{
-						echo "<option value='".$i."'>$i</option>";
-					}
-				}
-				?>
-			</select>
-			</td>
-			</tr>
-			
-			<tr>
-			<td>
-				<label>Periodo</label>
-			</td>
-			<td>
-			<select id="periodo" name="periodo" class="form-control">
-				<option value="1" <?php if($vperiodo==1){echo "selected='selected'";} ?>>Enero</option>
-				<option value="2" <?php if($vperiodo==2){echo "selected='selected'";} ?>>Febrero</option>
-				<option value="3" <?php if($vperiodo==3){echo "selected='selected'";} ?>>Marzo</option>
-				<option value="4" <?php if($vperiodo==4){echo "selected='selected'";} ?>>Abril</option>
-				<option value="5" <?php if($vperiodo==5){echo "selected='selected'";} ?>>Mayo</option>
-				<option value="6" <?php if($vperiodo==6){echo "selected='selected'";} ?>>Junio</option>
-				<option value="7" <?php if($vperiodo==7){echo "selected='selected'";} ?>>Julio</option>
-				<option value="8" <?php if($vperiodo==8){echo "selected='selected'";} ?>>Agosto</option>
-				<option value="9" <?php if($vperiodo==9){echo "selected='selected'";} ?>>Septiembre</option>
-				<option value="10" <?php if($vperiodo==10){echo "selected='selected'";} ?>>Octubre</option>
-				<option value="11" <?php if($vperiodo==11){echo "selected='selected'";} ?>>Noviembre</option>
-				<option value="12" <?php if($vperiodo==12){echo "selected='selected'";} ?>>Diciembre</option>
-			</select>
-			</td>
-			</tr>
-				
-			<tr>
-			<td>
-				<label>Prefijo</label>
-			</td>
-			<td>
-				<select id="zona" name="zona" class="form-control">
-				<?php
-
-				$vsql = "select z.resolucion, concat(r.prefijo,' -- ',z.nombre) as nombre, z.codigo from zona_clientes z inner join resdian r on z.resolucion=r.Idres";
-				 
-      $nm_select = $vsql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vZonas = array();
-      $this->vzonas = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $this->vZonas[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $this->vzonas[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vZonas = false;
-          $this->vZonas_erro = $this->Db->ErrorMsg();
-          $this->vzonas = false;
-          $this->vzonas_erro = $this->Db->ErrorMsg();
-      } 
-;
-				if(isset($this->vzonas[0][0]))
-				{
-					$vzona = $this->vzonas[0][2];
-						
-					for($i=0;$i<count($this->vzonas );$i++)
-					{
-						echo "<option value='".$this->vzonas[$i][0]."'>".$this->vzonas[$i][1]."</option>";
-					}
-				}
-				?>
-			</select>
-			</td>
-			</tr>
-				
-			<tr>
-			<td colspan="2" align="right">
-			<br>
-			<input type="button" id="btnrecalcular" class="btn btn-primary" value="Descargar"/>
-			</td>
-			</tr>
-			</table>
-		</div>
-		<p id="idmensaje"></p>
-	</div>
-<?php
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off'; 
+$_SESSION['scriptcase']['blank_generar_pdfs']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
        if ($this->Change_Menu)
@@ -2258,2477 +2036,6 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
        } 
        exit;
    } 
-function fPagarFacVen($idfactura,$formapago=1,$retorno=true,$vidrecibo=0,$sipropina="NO")
-{
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
-  
-	$estado     = 1;
-	$tot        = "";
-	$resolucion = "";
-	$numero     = "";
-	$vfecha      = "";
-	$res        = "";
-	$vvendedor  = "";
-	$vbanco     = 1;
-	$vporcentaje_propina_tercero = 0;
-
-	if(!empty($idfactura))
-	{
-		 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
-      }
-      else
-      { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
-      }
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatos = array();
-      $vdatos = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
-                 $SCrx->fields[4] = str_replace(',', '.', $SCrx->fields[4]);
-                 $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
-                 $SCrx->fields[10] = str_replace(',', '.', $SCrx->fields[10]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
-                 $SCrx->fields[3] = (string)$SCrx->fields[3];
-                 $SCrx->fields[4] = (strpos(strtolower($SCrx->fields[4]), "e")) ? (float)$SCrx->fields[4] : $SCrx->fields[4];
-                 $SCrx->fields[4] = (string)$SCrx->fields[4];
-                 $SCrx->fields[9] = (strpos(strtolower($SCrx->fields[9]), "e")) ? (float)$SCrx->fields[9] : $SCrx->fields[9];
-                 $SCrx->fields[9] = (string)$SCrx->fields[9];
-                 $SCrx->fields[10] = (strpos(strtolower($SCrx->fields[10]), "e")) ? (float)$SCrx->fields[10] : $SCrx->fields[10];
-                 $SCrx->fields[10] = (string)$SCrx->fields[10];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatos = false;
-          $vDatos_erro = $this->Db->ErrorMsg();
-          $vdatos = false;
-          $vdatos_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-		if(isset($vdatos[0][0]))
-		{
-
-			$vfecha      = $vdatos[0][5]; 
-			$tot        = round($vdatos[0][0]);
-			$resolucion = $vdatos[0][1];
-			$res        = $vdatos[0][1];
-			$numero     = $vdatos[0][2];
-			$vvendedor  = $vdatos[0][3];
-			$vbanco     = $vdatos[0][4];
-			$vcreado    = $vdatos[0][6];
-			$vtipo      = $vdatos[0][7];
-			$vpj        = $vdatos[0][8];
-			$vidcli     = $vdatos[0][9];
-			$vporcentaje_propina_tercero = $vdatos[0][10];
-			
-			$vdoc       = $vpj."/".$numero;
-			$vsql1      = "";
-			$vsql2      = "";
-
-			switch($formapago)
-			{
-				case 	2:
-				
-					$vdetalle = "FAC. CONTADO";
-					$vnota    = "VENTA";
-					$vsqlrc   = "";
-				
-					if($vidrecibo>0)
-					{
-						$vdetalle = "R. CAJA";
-						$vnota    = "FACTURA VENTA CONTADO";
-						$vsqlrc   = " ,idrc='".$vidrecibo."'";
-					}
-
-					$vsql1 = "insert into caja  set fecha='".$vfecha."', detalle='".$vdetalle."',  nota='".$vnota."', documento='".$numero."', cantidad='".$tot."',  cierredia='NO', resolucion='".$res."', banco='".$vbanco."',creado='".$vcreado."', usuario='".$vvendedor."',tipodoc='".$vtipo."',doc='".$vdoc."',id_tercero='".$vidcli."' ".$vsqlrc;
-					
-					
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-					
-					$vsql2 = "update facturaven set pagada='SI', saldo='0',valor_propina='0',porcentaje_propina_sugerida='0',aplica_propina='NO' where idfacven='".$idfactura."'";
-					
-					$vporcentaje_propina_sugerida = 0;
-					
-					if($sipropina=="SI")
-					{
-
-						 
-      $nm_select = "SELECT valor_propina_sugerida FROM configuraciones order by idconfiguraciones desc limit 1"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vConfiguraciones = array();
-      $vconfiguraciones = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vConfiguraciones[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vconfiguraciones[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vConfiguraciones = false;
-          $vConfiguraciones_erro = $this->Db->ErrorMsg();
-          $vconfiguraciones = false;
-          $vconfiguraciones_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-						if(isset($vconfiguraciones[0][0]))
-						{
-							$vporcentaje_propina_sugerida = $vconfiguraciones[0][0];
-							
-							if($vporcentaje_propina_tercero>0)
-							{
-								$vporcentaje_propina_sugerida = $vporcentaje_propina_tercero;
-							}
-							
-							if($vporcentaje_propina_sugerida>0)
-							{
-								$vvalor_propina = $tot * ($vporcentaje_propina_sugerida/100);
-								$vvalor_propina = $vvalor_propina/100;
-								$vvalor_propina = ceil($vvalor_propina);
-								$vvalor_propina = $vvalor_propina*100;
-								
-								$vsql2 = "update facturaven set pagada='SI', saldo='0',valor_propina='".$vvalor_propina."',porcentaje_propina_sugerida='".$vporcentaje_propina_sugerida."',aplica_propina='SI'	where idfacven='".$idfactura."'";
-							}
-						}
-					}
-					
-					
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-				
-					$estado = 2; 
-						
-				break;
-
-				case 1:
-				
-					$estado = 2;
-
-				break;
-
-			}
-		}
-	}
-	
-	if($retorno)
-	{
-		echo  json_encode(
-			
-			array(
-				
-				"funcion"=>"fPagarFacVen",
-				"estado"=>$estado,
-				"idfactura"=>$idfactura,
-				"formapago"=>$formapago,
-				"numerofac"=>$numero,
-				"fecha"=>$vfecha,
-				"resolucion"=>$resolucion,
-				"total"=>$tot,
-				"vsql1"=>$vsql1,
-				"vsql2"=>$vsql2,
-				"vendedor"=>$vvendedor,
-				"banco"=>$vbanco
-			)
-		);
-	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
-}
-function fAsentar($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true,$retorno_mensajes=false)
-{
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
-  
-	$tot        = "";
-	$vfecha      = "";
-	$idtercero  = "";
-	$estado     = 1;
-	$vsql1      = "";
-	$vsql2      = "";
-	$vsql3      = "";
-	$resolucion = "";
-	$res        = "";
-	
-	$vtotal     = 0;
-	$vidcli     = "";
-	$vfechaven  = "";
-	$vestado    = 1;
-	$vcupo      = 0;
-	$vsaldo     = 0;
-	$vdias_credito = 0;
-	$vsaldo_disponible = 0;
-	$vcredito   = "";
-	$vasentada  = "";
-	$vsicomprobante = "NO";
-	$vpucdeudores = "";
-	$vpucbanco    = "";
-	$vmensajes    = "";
-	$sipucdetalle = true;
-	$vnomcli = "";
-	$vnumfac = "";
-	
-	 
-      $nm_select = "select habilitar_comprobantes from configuraciones order by idconfiguraciones desc limit 1"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vSiGenerarComprobante = array();
-      $vsigenerarcomprobante = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vSiGenerarComprobante[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vsigenerarcomprobante[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vSiGenerarComprobante = false;
-          $vSiGenerarComprobante_erro = $this->Db->ErrorMsg();
-          $vsigenerarcomprobante = false;
-          $vsigenerarcomprobante_erro = $this->Db->ErrorMsg();
-      } 
-;
-	
-	if(isset($vsigenerarcomprobante[0][0]))
-	{
-		$vsicomprobante = $vsigenerarcomprobante[0][0];
-		
-		if($vsicomprobante=="SI")
-		{
-			 
-      $nm_select = "select p.codigobar,p.nompro,gc.puc_ingresos from productos p left join grupos_contables gc on p.cod_cuenta=gc.codigo left join detalleventa d on d.idpro=p.idprod where d.numfac='".$idfactura."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vSiPUCProducto = array();
-      $vsipucproducto = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vSiPUCProducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vsipucproducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vSiPUCProducto = false;
-          $vSiPUCProducto_erro = $this->Db->ErrorMsg();
-          $vsipucproducto = false;
-          $vsipucproducto_erro = $this->Db->ErrorMsg();
-      } 
-;
-			
-			if(isset($vsipucproducto[0][0]))
-			{
-				for($i=0;$i<count($vsipucproducto );$i++)
-				{
-					if(empty(trim($vsipucproducto[$i][2])))
-					{
-						$vmensajes .= "Debe parametrizar la cuenta contable del producto: ".$vsipucproducto[$i][0]." - ".$vsipucproducto[$i][1]."<br>";
-						
-						$sipucdetalle = false;
-					}
-				}
-			}
-		}
-	}
-	
-	
-	 
-      $nm_select = "select f.total,f.fechaven,f.idcli,f.numfacven,f.resolucion,f.credito,f.asentada,f.observaciones,(select t.puc_auxiliar_deudores from terceros t where t.idtercero=f.idcli) as puc_auxiliar_deudores,(select b.puc from bancos b where b.idcaja_vta=f.banco) as puc_caja,(select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,concat(f.tipo,'/',(select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numf  from facturaven f where f.idfacven='".$idfactura."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatos = array();
-      $vdatos = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatos = false;
-          $vDatos_erro = $this->Db->ErrorMsg();
-          $vdatos = false;
-          $vdatos_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-	if(isset($vdatos[0][0]))
-	{
-		$tot        = $vdatos[0][0];
-		$vfecha      = $vdatos[0][1];
-		$idtercero  = $vdatos[0][2];
-		$numero     = $vdatos[0][3];
-		$resolucion = $vdatos[0][4];
-		$res        = $vdatos[0][4];
-		$vcredito   = $vdatos[0][5];
-		$vasentada  = $vdatos[0][6];
-		$vobserv    = $vdatos[0][7];
-		$vpucdeudores = $vdatos[0][8];
-		$vpucbanco    = $vdatos[0][9];
-		$vnomcli = $vdatos[0][10];
-		$vnumfac = $vdatos[0][11];
-		
-	
-		
-		if($asentar=="SI" and $vasentada==0)
-		{
-			if($vcredito==2)
-			{
-				if($vsicomprobante=="SI")
-				{
-					if(!empty($vpucbanco) and $sipucdetalle)
-					{
-						$vsql1 = "update facturaven set asentada='1', adicional2='".$pagado."',	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
-						
-						if($pagado==0)
-						{
-							$vsql1 = "update facturaven set asentada='1', adicional2=total,	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
-						}
-
-						
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-						if($vobserv=="TEMPORAL")
-						{
-						
-     $nm_select = "update facturaven set observaciones=null where idfacven='".$idfactura."'"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-						}
-
-
-						$vsql2 = "update terceros set fechultcomp='".$vfecha."' where idtercero='".$idtercero."'";
-
-						
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-						$estado = 2;
-					}
-					else
-					{
-						$vmensajes .= "Debe configurar la cuenta de caja.<br>";
-					}
-				}
-				else
-				{
-					$vsql1 = "update facturaven set asentada='1', adicional2='".$pagado."',	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
-					
-					if($pagado==0)
-					{
-						$vsql1 = "update facturaven set asentada='1', adicional2=total,	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
-					}
-					
-					
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-					if($vobserv=="TEMPORAL")
-					{
-						
-     $nm_select = "update facturaven set observaciones=null where idfacven='".$idfactura."'"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-					}
-					$vsql2 = "update terceros set fechultcomp='".$vfecha."' where idtercero='".$idtercero."'";
-					
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-					$estado = 2;
-				}
-			}
-			
-			if($vcredito==1) 
-			{
-				if($vsicomprobante=="SI")
-				{
-					if(!empty($vpucdeudores)  and $sipucdetalle)
-					{
-
-						 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_select = "select total,idcli,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20) from facturaven where idfacven='".$idfactura."'"; 
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_select = "select total,idcli,convert(char(23),fechaven,121) from facturaven where idfacven='".$idfactura."'"; 
-      }
-      else
-      { 
-          $nm_select = "select total,idcli,fechaven from facturaven where idfacven='".$idfactura."'"; 
-      }
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vSaldoCliente = array();
-      $vsaldocliente = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vSaldoCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vsaldocliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vSaldoCliente = false;
-          $vSaldoCliente_erro = $this->Db->ErrorMsg();
-          $vsaldocliente = false;
-          $vsaldocliente_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-						if(isset($vsaldocliente[0][0]))
-						{
-							$vtotal    = $vsaldocliente[0][0];
-							$vidcli    = $vsaldocliente[0][1];
-							$vfechaven = $vsaldocliente[0][2];
-
-							 
-      $nm_select = "select cupo,saldo,dias_credito,credito from terceros where idtercero='".$vidcli."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatosCliente = array();
-      $vdatoscliente = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatosCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatoscliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatosCliente = false;
-          $vDatosCliente_erro = $this->Db->ErrorMsg();
-          $vdatoscliente = false;
-          $vdatoscliente_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-							if(isset($vdatoscliente[0][0]))
-							{
-								$vcupo  = $vdatoscliente[0][0];
-								$vsaldo = $vdatoscliente[0][1];
-								$vdias_credito = $vdatoscliente[0][2];
-								$vcredito = $vdatoscliente[0][3];
-
-								if($vcredito == "SI")
-								{
-									if($vcupo > 0)
-									{
-										$vsaldo_disponible = $vcupo - $vsaldo;
-
-										if($vsaldo_disponible < $vtotal)
-										{
-											$vestado = 3; 
-											$vmensajes .= "El cliente: $vnomcli no tiene cupo disponible, documento: $vnumfac.<br>";
-										}
-										else
-										{
-											
-     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-											
-     $nm_select = "UPDATE facturaven set asentada=1 where idfacven=$idfactura"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-										}
-									}
-									else 
-									{
-										
-     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-										
-     $nm_select = "UPDATE facturaven set asentada=1 where idfacven=$idfactura"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-									}
-								}
-								else
-								{
-									$vestado = 2;
-									$vmensajes .= "El cliente: $vnomcli no tiene crédito configurado, documento: $vnumfac.<br>";
-								}
-							}
-						}
-					}
-					else
-					{
-						$vmensajes .= "Debe configurar la cuenta del tercero/cliente: $vnomcli.<br>";
-					}
-				}
-				else
-				{
-					 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_select = "select total,idcli,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20) from facturaven where idfacven='".$idfactura."'"; 
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_select = "select total,idcli,convert(char(23),fechaven,121) from facturaven where idfacven='".$idfactura."'"; 
-      }
-      else
-      { 
-          $nm_select = "select total,idcli,fechaven from facturaven where idfacven='".$idfactura."'"; 
-      }
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vSaldoCliente = array();
-      $vsaldocliente = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vSaldoCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vsaldocliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vSaldoCliente = false;
-          $vSaldoCliente_erro = $this->Db->ErrorMsg();
-          $vsaldocliente = false;
-          $vsaldocliente_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-					if(isset($vsaldocliente[0][0]))
-					{
-						$vtotal    = $vsaldocliente[0][0];
-						$vidcli    = $vsaldocliente[0][1];
-						$vfechaven = $vsaldocliente[0][2];
-
-						 
-      $nm_select = "select cupo,saldo,dias_credito,credito from terceros where idtercero='".$vidcli."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatosCliente = array();
-      $vdatoscliente = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatosCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatoscliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatosCliente = false;
-          $vDatosCliente_erro = $this->Db->ErrorMsg();
-          $vdatoscliente = false;
-          $vdatoscliente_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-						if(isset($vdatoscliente[0][0]))
-						{
-							$vcupo  = $vdatoscliente[0][0];
-							$vsaldo = $vdatoscliente[0][1];
-							$vdias_credito = $vdatoscliente[0][2];
-							$vcredito = $vdatoscliente[0][3];
-
-							if($vcredito == "SI")
-							{
-								if($vcupo > 0)
-								{
-									$vsaldo_disponible = $vcupo - $vsaldo;
-
-									if($vsaldo_disponible < $vtotal)
-									{
-										$vestado = 3; 
-										$vmensajes .= "El cliente: $vnomcli no tiene cupo disponible, documento: $vnumfac.<br>";
-									}
-									else
-									{
-										
-     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-										
-     $nm_select = "UPDATE facturaven set asentada=1 where idfacven=$idfactura"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-									}
-								}
-								else 
-								{
-									
-     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-									
-     $nm_select = "UPDATE facturaven set asentada=1 where idfacven=$idfactura"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-								}
-							}
-							else
-							{
-								$vestado = 2;
-								$vmensajes .= "El cliente: $vnomcli no tiene crédito configurado, documento: $vnumfac.<br>";
-							}
-						}
-					}
-				}
-			}
-
-		}
-		else if($asentar=="NO" and $vasentada==1)
-		{
-
-			if($vcredito==2)
-			{
-				$vsql1 = "update 
-						facturaven 
-						set 
-						asentada='0', 
-						adicional2='".$pagado."',
-						adicional3='".$vueltos."',
-						pagada='NO', 
-						saldo=total
-						where 
-						idfacven='".$idfactura."'";
-
-				
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$vsql3 = "delete from caja where resolucion=".$res." and documento='".$numero."'";
-				
-     $nm_select = $vsql3; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$vsql2 = "update 
-						  terceros 
-						  set 
-						  fechultcomp=(select f.fechaven from facturaven f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1)  
-						  where idtercero='".$idtercero."'";
-
-				
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$estado = 2;
-			}
-			else
-			{
-				$vsql1 = "update 
-						facturaven 
-						set 
-						asentada='0'
-						where 
-						idfacven='".$idfactura."'";
-
-				
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$vsql2 = "update 
-						  terceros 
-						  set 
-						  fechultcomp=(select f.fechaven from facturaven f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1),
-						  saldo = (saldo+$tot)
-						  where idtercero='".$idtercero."'";
-
-				
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$estado = 2;
-			}
-		}
-	}
-	
-	if($retorno_mensajes)
-	{
-		echo $vmensajes;
-	}
-	
-	
-	if($retorno)
-	{
-		echo json_encode(
-			
-			array(
-				
-				"funcion"=>"fAsentar",
-				"estado"=>$estado,
-				"idfactura"=>$idfactura,
-				"asentar"=>$asentar,
-				"pagado"=>$pagado,
-				"vueltos"=>$vueltos,
-				"total"=>$tot,
-				"fecha"=>$vfecha,
-				"idtercero"=>$idtercero,
-				"numerofac"=>$numero,
-				"resolucion"=>$resolucion,
-				"vsql1"=>$vsql1,
-				"vsql2"=>$vsql2,
-				"vsql3"=>$vsql3,
-				"total"=>$vtotal,
-				"idcli"=>$vidcli,
-				"fechaven"=>$vfechaven,
-				"estado"=>$estado,
-				"descrip_estado"=>"1 ok, 2 no tiene configurado credito, 3 no tiene cupo disponible.",
-				"cupo"=>$vcupo,
-				"saldo"=>$vsaldo,
-				"dias_credito"=>$vdias_credito,
-				"saldo_disponible"=>number_format($vsaldo_disponible),
-				"credito"=>$vcredito,
-				"mensajes"=>$vmensajes
-			)
-		);
-	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
-}
-function fAsentarContratos($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true,$retorno_mensajes=false)
-{
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
-  
-	$tot        = "";
-	$vfecha      = "";
-	$idtercero  = "";
-	$estado     = 1;
-	$vsql1      = "";
-	$vsql2      = "";
-	$vsql3      = "";
-	$resolucion = "";
-	$res        = "";
-	
-	$vtotal     = 0;
-	$vidcli     = "";
-	$vfechaven  = "";
-	$vestado    = 1;
-	$vcupo      = 0;
-	$vsaldo     = 0;
-	$vdias_credito = 0;
-	$vsaldo_disponible = 0;
-	$vcredito   = "";
-	$vasentada  = "";
-	$vsicomprobante = "NO";
-	$vpucdeudores = "";
-	$vpucbanco    = "";
-	$vmensajes    = "";
-	$sipucdetalle = true;
-	$vnomcli = "";
-	$vnumfac = "";
-	
-	 
-      $nm_select = "select habilitar_comprobantes from configuraciones order by idconfiguraciones desc limit 1"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vSiGenerarComprobante = array();
-      $vsigenerarcomprobante = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vSiGenerarComprobante[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vsigenerarcomprobante[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vSiGenerarComprobante = false;
-          $vSiGenerarComprobante_erro = $this->Db->ErrorMsg();
-          $vsigenerarcomprobante = false;
-          $vsigenerarcomprobante_erro = $this->Db->ErrorMsg();
-      } 
-;
-	
-	if(isset($vsigenerarcomprobante[0][0]))
-	{
-		$vsicomprobante = $vsigenerarcomprobante[0][0];
-		
-		if($vsicomprobante=="SI")
-		{
-			 
-      $nm_select = "select p.codigobar,p.nompro,gc.puc_ingresos from productos p left join grupos_contables gc on p.cod_cuenta=gc.codigo left join detalleventa d on d.idpro=p.idprod where d.numfac='".$idfactura."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vSiPUCProducto = array();
-      $vsipucproducto = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vSiPUCProducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vsipucproducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vSiPUCProducto = false;
-          $vSiPUCProducto_erro = $this->Db->ErrorMsg();
-          $vsipucproducto = false;
-          $vsipucproducto_erro = $this->Db->ErrorMsg();
-      } 
-;
-			
-			if(isset($vsipucproducto[0][0]))
-			{
-				for($i=0;$i<count($vsipucproducto );$i++)
-				{
-					if(empty(trim($vsipucproducto[$i][2])))
-					{
-						$vmensajes .= "Debe parametrizar la cuenta contable del producto: ".$vsipucproducto[$i][0]." - ".$vsipucproducto[$i][1]."<br>";
-						
-						$sipucdetalle = false;
-					}
-				}
-			}
-		}
-	}
-	
-	
-	 
-      $nm_select = "select f.total,f.fechaven,f.idcli,f.numfacven,f.resolucion,f.credito,f.asentada,f.observaciones,(select t.puc_auxiliar_deudores from terceros t where t.idtercero=f.idcli) as puc_auxiliar_deudores,(select b.puc from bancos b where b.idcaja_vta=f.banco) as puc_caja,(select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,concat(f.tipo,'/',(select r.prefijo from resdian r where r.Idres=f.resolucion),'/',f.numfacven) as numf  from facturaven_contratos f where f.idfacven='".$idfactura."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatos = array();
-      $vdatos = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatos = false;
-          $vDatos_erro = $this->Db->ErrorMsg();
-          $vdatos = false;
-          $vdatos_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-	if(isset($vdatos[0][0]))
-	{
-		$tot        = $vdatos[0][0];
-		$vfecha      = $vdatos[0][1];
-		$idtercero  = $vdatos[0][2];
-		$numero     = $vdatos[0][3];
-		$resolucion = $vdatos[0][4];
-		$res        = $vdatos[0][4];
-		$vcredito   = $vdatos[0][5];
-		$vasentada  = $vdatos[0][6];
-		$vobserv    = $vdatos[0][7];
-		$vpucdeudores = $vdatos[0][8];
-		$vpucbanco    = $vdatos[0][9];
-		$vnomcli = $vdatos[0][10];
-		$vnumfac = $vdatos[0][11];
-		
-	
-		
-		if($asentar=="SI" and $vasentada==0)
-		{
-			if($vcredito==2)
-			{
-				if($vsicomprobante=="SI")
-				{
-					if(!empty($vpucbanco) and $sipucdetalle)
-					{
-						$vsql1 = "update facturaven_contratos set asentada='1', adicional2='".$pagado."',	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
-						
-						if($pagado==0)
-						{
-							$vsql1 = "update facturaven_contratos set asentada='1', adicional2=total,	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
-						}
-
-						
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-						if($vobserv=="TEMPORAL")
-						{
-						
-     $nm_select = "update facturaven_contratos set observaciones=null where idfacven='".$idfactura."'"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-						}
-
-
-						$vsql2 = "update terceros set fechultcomp='".$vfecha."' where idtercero='".$idtercero."'";
-
-						
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-						$estado = 2;
-					}
-					else
-					{
-						$vmensajes .= "Debe configurar la cuenta de caja.<br>";
-					}
-				}
-				else
-				{
-					$vsql1 = "update facturaven_contratos set asentada='1', adicional2='".$pagado."',	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
-					
-					if($pagado==0)
-					{
-						$vsql1 = "update facturaven_contratos set asentada='1', adicional2=total,	adicional3='".$vueltos."' where idfacven='".$idfactura."'";
-					}
-					
-					
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-					if($vobserv=="TEMPORAL")
-					{
-						
-     $nm_select = "update facturaven_contratos set observaciones=null where idfacven='".$idfactura."'"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-					}
-					$vsql2 = "update terceros set fechultcomp='".$vfecha."' where idtercero='".$idtercero."'";
-					
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-					$estado = 2;
-				}
-			}
-			
-			if($vcredito==1) 
-			{
-				if($vsicomprobante=="SI")
-				{
-					if(!empty($vpucdeudores)  and $sipucdetalle)
-					{
-
-						 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_select = "select total,idcli,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20) from facturaven_contratos where idfacven='".$idfactura."'"; 
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_select = "select total,idcli,convert(char(23),fechaven,121) from facturaven_contratos where idfacven='".$idfactura."'"; 
-      }
-      else
-      { 
-          $nm_select = "select total,idcli,fechaven from facturaven_contratos where idfacven='".$idfactura."'"; 
-      }
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vSaldoCliente = array();
-      $vsaldocliente = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vSaldoCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vsaldocliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vSaldoCliente = false;
-          $vSaldoCliente_erro = $this->Db->ErrorMsg();
-          $vsaldocliente = false;
-          $vsaldocliente_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-						if(isset($vsaldocliente[0][0]))
-						{
-							$vtotal    = $vsaldocliente[0][0];
-							$vidcli    = $vsaldocliente[0][1];
-							$vfechaven = $vsaldocliente[0][2];
-
-							 
-      $nm_select = "select cupo,saldo,dias_credito,credito from terceros where idtercero='".$vidcli."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatosCliente = array();
-      $vdatoscliente = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatosCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatoscliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatosCliente = false;
-          $vDatosCliente_erro = $this->Db->ErrorMsg();
-          $vdatoscliente = false;
-          $vdatoscliente_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-							if(isset($vdatoscliente[0][0]))
-							{
-								$vcupo  = $vdatoscliente[0][0];
-								$vsaldo = $vdatoscliente[0][1];
-								$vdias_credito = $vdatoscliente[0][2];
-								$vcredito = $vdatoscliente[0][3];
-
-								if($vcredito == "SI")
-								{
-									if($vcupo > 0)
-									{
-										$vsaldo_disponible = $vcupo - $vsaldo;
-
-										if($vsaldo_disponible < $vtotal)
-										{
-											$vestado = 3; 
-											$vmensajes .= "El cliente: $vnomcli no tiene cupo disponible, documento: $vnumfac.<br>";
-										}
-										else
-										{
-											
-     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-											
-     $nm_select = "UPDATE facturaven_contratos set asentada=1 where idfacven=$idfactura"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-										}
-									}
-									else 
-									{
-										
-     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-										
-     $nm_select = "UPDATE facturaven_contratos set asentada=1 where idfacven=$idfactura"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-									}
-								}
-								else
-								{
-									$vestado = 2;
-									$vmensajes .= "El cliente: $vnomcli no tiene crédito configurado, documento: $vnumfac.<br>";
-								}
-							}
-						}
-					}
-					else
-					{
-						$vmensajes .= "Debe configurar la cuenta del tercero/cliente: $vnomcli.<br>";
-					}
-				}
-				else
-				{
-					 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_select = "select total,idcli,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20) from facturaven_contratos where idfacven='".$idfactura."'"; 
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_select = "select total,idcli,convert(char(23),fechaven,121) from facturaven_contratos where idfacven='".$idfactura."'"; 
-      }
-      else
-      { 
-          $nm_select = "select total,idcli,fechaven from facturaven_contratos where idfacven='".$idfactura."'"; 
-      }
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vSaldoCliente = array();
-      $vsaldocliente = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vSaldoCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vsaldocliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vSaldoCliente = false;
-          $vSaldoCliente_erro = $this->Db->ErrorMsg();
-          $vsaldocliente = false;
-          $vsaldocliente_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-					if(isset($vsaldocliente[0][0]))
-					{
-						$vtotal    = $vsaldocliente[0][0];
-						$vidcli    = $vsaldocliente[0][1];
-						$vfechaven = $vsaldocliente[0][2];
-
-						 
-      $nm_select = "select cupo,saldo,dias_credito,credito from terceros where idtercero='".$vidcli."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatosCliente = array();
-      $vdatoscliente = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatosCliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatoscliente[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatosCliente = false;
-          $vDatosCliente_erro = $this->Db->ErrorMsg();
-          $vdatoscliente = false;
-          $vdatoscliente_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-						if(isset($vdatoscliente[0][0]))
-						{
-							$vcupo  = $vdatoscliente[0][0];
-							$vsaldo = $vdatoscliente[0][1];
-							$vdias_credito = $vdatoscliente[0][2];
-							$vcredito = $vdatoscliente[0][3];
-
-							if($vcredito == "SI")
-							{
-								if($vcupo > 0)
-								{
-									$vsaldo_disponible = $vcupo - $vsaldo;
-
-									if($vsaldo_disponible < $vtotal)
-									{
-										$vestado = 3; 
-										$vmensajes .= "El cliente: $vnomcli no tiene cupo disponible, documento: $vnumfac.<br>";
-									}
-									else
-									{
-										
-     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-										
-     $nm_select = "UPDATE facturaven_contratos set asentada=1 where idfacven=$idfactura"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-									}
-								}
-								else 
-								{
-									
-     $nm_select = "UPDATE terceros set saldo=(saldo+$vtotal),fechultcomp='".$vfechaven."' where idtercero=$vidcli"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-									
-     $nm_select = "UPDATE facturaven_contratos set asentada=1 where idfacven=$idfactura"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-								}
-							}
-							else
-							{
-								$vestado = 2;
-								$vmensajes .= "El cliente: $vnomcli no tiene crédito configurado, documento: $vnumfac.<br>";
-							}
-						}
-					}
-				}
-			}
-
-		}
-		else if($asentar=="NO" and $vasentada==1)
-		{
-
-			if($vcredito==2)
-			{
-				$vsql1 = "update 
-						facturaven_contratos 
-						set 
-						asentada='0', 
-						adicional2='".$pagado."',
-						adicional3='".$vueltos."',
-						pagada='NO', 
-						saldo=total
-						where 
-						idfacven='".$idfactura."'";
-
-				
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$vsql3 = "delete from caja where resolucion=".$res." and documento='".$numero."'";
-				
-     $nm_select = $vsql3; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$vsql2 = "update 
-						  terceros 
-						  set 
-						  fechultcomp=(select f.fechaven from facturaven_contratos f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1)  
-						  where idtercero='".$idtercero."'";
-
-				
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$estado = 2;
-			}
-			else
-			{
-				$vsql1 = "update 
-						facturaven_contratos 
-						set 
-						asentada='0'
-						where 
-						idfacven='".$idfactura."'";
-
-				
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$vsql2 = "update 
-						  terceros 
-						  set 
-						  fechultcomp=(select f.fechaven from facturaven f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1),
-						  saldo = (saldo+$tot)
-						  where idtercero='".$idtercero."'";
-
-				
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-				$estado = 2;
-			}
-		}
-	}
-	
-	if($retorno_mensajes)
-	{
-		echo $vmensajes;
-	}
-	
-	
-	if($retorno)
-	{
-		echo json_encode(
-			
-			array(
-				
-				"funcion"=>"fAsentar",
-				"estado"=>$estado,
-				"idfactura"=>$idfactura,
-				"asentar"=>$asentar,
-				"pagado"=>$pagado,
-				"vueltos"=>$vueltos,
-				"total"=>$tot,
-				"fecha"=>$vfecha,
-				"idtercero"=>$idtercero,
-				"numerofac"=>$numero,
-				"resolucion"=>$resolucion,
-				"vsql1"=>$vsql1,
-				"vsql2"=>$vsql2,
-				"vsql3"=>$vsql3,
-				"total"=>$vtotal,
-				"idcli"=>$vidcli,
-				"fechaven"=>$vfechaven,
-				"estado"=>$estado,
-				"descrip_estado"=>"1 ok, 2 no tiene configurado credito, 3 no tiene cupo disponible.",
-				"cupo"=>$vcupo,
-				"saldo"=>$vsaldo,
-				"dias_credito"=>$vdias_credito,
-				"saldo_disponible"=>number_format($vsaldo_disponible),
-				"credito"=>$vcredito,
-				"mensajes"=>$vmensajes
-			)
-		);
-	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
-}
-function fPagarPedido($id,$formapago=1,$retorno=true)
-{
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
-  
-	$estado     = 1;
-	$tot        = "";
-	$resolucion = "";
-	$numero     = "";
-	$vfecha      = "";
-	$res        = "";
-
-	if(!empty($id))
-	{
-		 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_select = "select p.total,p.prefijo_ped,p.numpedido,str_replace (convert(char(10),p.fechaven,102), '.', '-') + ' ' + convert(char(8),p.fechaven,20),p.fechadocu,r.prefijo,p.idcli from pedidos p inner join resdian r on  p.prefijo_ped=r.Idres where p.idpedido='".$id."'"; 
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_select = "select p.total,p.prefijo_ped,p.numpedido,convert(char(23),p.fechaven,121),p.fechadocu,r.prefijo,p.idcli from pedidos p inner join resdian r on  p.prefijo_ped=r.Idres where p.idpedido='".$id."'"; 
-      }
-      else
-      { 
-          $nm_select = "select p.total,p.prefijo_ped,p.numpedido,p.fechaven,p.fechadocu,r.prefijo,p.idcli from pedidos p inner join resdian r on  p.prefijo_ped=r.Idres where p.idpedido='".$id."'"; 
-      }
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatos = array();
-      $vdatos = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[6] = str_replace(',', '.', $SCrx->fields[6]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 $SCrx->fields[6] = (strpos(strtolower($SCrx->fields[6]), "e")) ? (float)$SCrx->fields[6] : $SCrx->fields[6];
-                 $SCrx->fields[6] = (string)$SCrx->fields[6];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatos = false;
-          $vDatos_erro = $this->Db->ErrorMsg();
-          $vdatos = false;
-          $vdatos_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-		if(isset($vdatos[0][0]))
-		{
-
-			$vfecha      = $vdatos[0][3]; 
-			$tot        = $vdatos[0][0];
-			$resolucion = $vdatos[0][1];
-			$res        = $vdatos[0][1];
-			$numero     = $vdatos[0][2];
-			$vcreado    = $vdatos[0][4];
-			$vdoc       = $vdatos[0][5];
-			$vidcli     = $vdatos[0][6];
-			$vdoc       = $vdoc."/".$numero;
-			$vsql1      = "";
-			$vsql2      = "";
-
-			switch($formapago)
-			{
-				case 	2:
-
-					$vsql1 = "insert into caja 
-							  set 
-							  fecha='".$vfecha."',
-							  detalle='FAC. CONTADO',
-							  nota='VENTA',
-							  cantidad='".$tot."',
-							  cierredia='NO',
-							  resolucion='".$res."',
-							  idpedido='".$id."',
-							  creado='".$vcreado."',
-							  tipodoc='PV',
-							  doc='".$vdoc."',
-							  id_tercero='".$vidcli."'
-							  ";
-
-					
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-				
-					$vsql2 = "update 
-							pedidos
-							set 
-							saldo='0'
-							where 
-							idpedido='".$id."'";
-
-					
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-				
-					$estado = 2; 
-						
-				break;
-
-				case 1:
-				
-					$estado = 2;
-
-				break;
-
-			}
-		}
-	}
-	
-	if($retorno)
-	{
-		echo  json_encode(
-			
-			array(
-				
-				"funcion"=>"fPagarPedido",
-				"estado"=>$estado,
-				"idpedido"=>$id,
-				"formapago"=>$formapago,
-				"numerofac"=>$numero,
-				"fecha"=>$vfecha,
-				"resolucion"=>$resolucion,
-				"total"=>$tot,
-				"vsql1"=>$vsql1,
-				"vsql2"=>$vsql2
-			)
-		);
-	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
-}
-function fAsentarPedido($idfactura,$asentar="NO",$pagado=0,$vueltos=0,$retorno=true)
-{
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'on';
-  
-	
-	$tot        = "";
-	$vfecha      = "";
-	$idtercero  = "";
-	$estado     = 1;
-	$vsql1      = "";
-	$vsql2      = "";
-	$vsql3      = "";
-	$resolucion = "";
-	$res        = "";
-	
-	 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_select = "select total,str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20),idcli,numpedido,prefijo_ped from pedidos where idpedido='".$idfactura."'"; 
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_select = "select total,convert(char(23),fechaven,121),idcli,numpedido,prefijo_ped from pedidos where idpedido='".$idfactura."'"; 
-      }
-      else
-      { 
-          $nm_select = "select total,fechaven,idcli,numpedido,prefijo_ped from pedidos where idpedido='".$idfactura."'"; 
-      }
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $vDatos = array();
-      $vdatos = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
-                 $SCrx->fields[4] = str_replace(',', '.', $SCrx->fields[4]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
-                 $SCrx->fields[3] = (string)$SCrx->fields[3];
-                 $SCrx->fields[4] = (strpos(strtolower($SCrx->fields[4]), "e")) ? (float)$SCrx->fields[4] : $SCrx->fields[4];
-                 $SCrx->fields[4] = (string)$SCrx->fields[4];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $vDatos = false;
-          $vDatos_erro = $this->Db->ErrorMsg();
-          $vdatos = false;
-          $vdatos_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-	if(isset($vdatos[0][0]))
-	{
-		$tot        = $vdatos[0][0];
-		$vfecha      = $vdatos[0][1];
-		$idtercero  = $vdatos[0][2];
-		$numero     = $vdatos[0][3];
-		$resolucion = $vdatos[0][4];
-		$res        = $vdatos[0][4];
-		
-		if($asentar=="SI")
-		{
-
-			$vsql1 = "update 
-					pedidos 
-					set 
-					asentada='1', 
-					adicional2='".$pagado."',
-					adicional3='".$vueltos."'
-					where 
-					idpedido='".$idfactura."'";
-
-			
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-			$vsql2 = "update 
-					  terceros 
-					  set 
-					  fechultcomp='".$vfecha."' 
-					  where idtercero='".$idtercero."'";
-
-			
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-			$estado = 2;
-
-		}
-		else
-		{
-
-			$vsql1 = "update 
-					pedidos
-					set 
-					asentada='0', 
-					adicional2='".$pagado."',
-					adicional3='".$vueltos."',
-					saldo=total
-					where 
-					idfacven='".$idfactura."'";
-
-			
-     $nm_select = $vsql1; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-			$vsql3 = "delete from caja where resolucion=".$res." and idpedido='".$idfactura."'";
-			
-     $nm_select = $vsql3; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-			$vsql2 = "update 
-					  terceros 
-					  set 
-					  fechultcomp=(select f.fechaven from facturaven f where f.idcli='".$idtercero."' order by f.idfacven desc limit 1)  
-					  where idtercero='".$idtercero."'";
-
-			
-     $nm_select = $vsql2; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-			$estado = 2;
-		}
-	}
-	
-	if($retorno)
-	{
-		echo json_encode(
-			
-			array(
-				
-				"funcion"=>"fAsentar",
-				"estado"=>$estado,
-				"idpedido"=>$idfactura,
-				"asentar"=>$asentar,
-				"pagado"=>$pagado,
-				"vueltos"=>$vueltos,
-				"total"=>$tot,
-				"fecha"=>$vfecha,
-				"idtercero"=>$idtercero,
-				"numerofac"=>$numero,
-				"resolucion"=>$resolucion,
-				"vsql1"=>$vsql1,
-				"vsql2"=>$vsql2,
-				"vsql3"=>$vsql3
-			)
-		);
-	}
-$_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
-}
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
        $dt_out = $dt_in;
@@ -4773,7 +2080,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
    SC_dir_app_ini('FACILWEBv2');
-   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
+   $_SESSION['scriptcase']['blank_generar_pdfs']['contr_erro'] = 'off';
    $Sc_lig_md5 = false;
    $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
    $_SESSION['scriptcase']['sem_session'] = false;
@@ -4799,7 +2106,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                      $_SESSION['sc_session']['SC_parm_violation'] = true;
                  }
             }
-            nm_limpa_str_blank_descarga_pdfs_principal($nmgp_val);
+            nm_limpa_str_blank_generar_pdfs($nmgp_val);
             $nmgp_val = NM_decode_input($nmgp_val);
             $$nmgp_var = $nmgp_val;
        }
@@ -4826,7 +2133,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                      $_SESSION['sc_session']['SC_parm_violation'] = true;
                  }
             }
-            nm_limpa_str_blank_descarga_pdfs_principal($nmgp_val);
+            nm_limpa_str_blank_generar_pdfs($nmgp_val);
             $nmgp_val = NM_decode_input($nmgp_val);
             $$nmgp_var = $nmgp_val;
        }
@@ -4854,23 +2161,23 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
        if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
            $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_generar_pdfs']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
        }
        if (isset($apl_def)) {
-           if ($apl_def[0] != "blank_descarga_pdfs_principal") {
+           if ($apl_def[0] != "blank_generar_pdfs") {
                $_SESSION['scriptcase']['sem_session'] = true;
                if (strtolower(substr($apl_def[0], 0 , 7)) == "http://" || strtolower(substr($apl_def[0], 0 , 8)) == "https://" || substr($apl_def[0], 0 , 2) == "..") {
-                   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'] = $apl_def[0];
+                   $_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir'] = $apl_def[0];
                }
                else {
-                   $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir'] = $path_aplicacao . "/" . SC_dir_app_name($apl_def[0]) . "/index.php";
+                   $_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir'] = $path_aplicacao . "/" . SC_dir_app_name($apl_def[0]) . "/index.php";
                }
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
-               $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['redir_tp'] = $Redir_tp;
+               $_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['redir_tp'] = $Redir_tp;
            }
            if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+               $_SESSION['scriptcase']['blank_generar_pdfs']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
            }
        }
    }
@@ -4915,10 +2222,10 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
        $script_case_init = rand(2, 10000);
    }
    $salva_iframe = false;
-   if (isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu']))
+   if (isset($_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['iframe_menu']))
    {
-       $salva_iframe = $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'];
-       unset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu']);
+       $salva_iframe = $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['iframe_menu'];
+       unset($_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['iframe_menu']);
    }
    if (isset($nm_run_menu) && $nm_run_menu == 1)
    {
@@ -4933,13 +2240,13 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                 }
             }
         }
-        $_SESSION['scriptcase']['sc_apl_menu_atual'] = "blank_descarga_pdfs_principal";
+        $_SESSION['scriptcase']['sc_apl_menu_atual'] = "blank_generar_pdfs";
         $achou = false;
         if (isset($_SESSION['sc_session'][$script_case_init]))
         {
             foreach ($_SESSION['sc_session'][$script_case_init] as $nome_apl => $resto)
             {
-                if ($nome_apl == 'blank_descarga_pdfs_principal' || $achou)
+                if ($nome_apl == 'blank_generar_pdfs' || $achou)
                 {
                     unset($_SESSION['sc_session'][$script_case_init][$nome_apl]);
                     if (!empty($_SESSION['sc_session'][$script_case_init][$nome_apl]))
@@ -4963,50 +2270,50 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                 }
             }
         }
-        $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] = true;
+        $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['iframe_menu'] = true;
    }
    else
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['iframe_menu'] = $salva_iframe;
+       $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['iframe_menu'] = $salva_iframe;
    }
 
-   if (!isset($_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize']))
+   if (!isset($_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['initialize']))
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = true;
+       $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['initialize'] = true;
    }
    elseif (!isset($_SERVER['HTTP_REFERER']))
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = false;
+       $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['initialize'] = false;
    }
    elseif (false === strpos($_SERVER['HTTP_REFERER'], '.php'))
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = true;
+       $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['initialize'] = true;
    }
    else
    {
        $sReferer = substr($_SERVER['HTTP_REFERER'], 0, strpos($_SERVER['HTTP_REFERER'], '.php'));
        $sReferer = substr($sReferer, strrpos($sReferer, '/') + 1);
-       if ('blank_descarga_pdfs_principal' == $sReferer || 'blank_descarga_pdfs_principal_' == substr($sReferer, 0, 30))
+       if ('blank_generar_pdfs' == $sReferer || 'blank_generar_pdfs_' == substr($sReferer, 0, 19))
        {
-           $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = false;
+           $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['initialize'] = false;
        }
        else
        {
-           $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['initialize'] = true;
+           $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['initialize'] = true;
        }
    }
 
    $_POST['script_case_init'] = $script_case_init;
-   if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'blank_descarga_pdfs_principal')
+   if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'blank_generar_pdfs')
    {
-       $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['sc_outra_jan'] = true;
+       $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['sc_outra_jan'] = true;
         unset($_SESSION['scriptcase']['sc_outra_jan']);
    }
-   $_SESSION['sc_session'][$script_case_init]['blank_descarga_pdfs_principal']['menu_desenv'] = false;   
+   $_SESSION['sc_session'][$script_case_init]['blank_generar_pdfs']['menu_desenv'] = false;   
    if (!defined("SC_ERROR_HANDLER"))
    {
        define("SC_ERROR_HANDLER", 1);
-       include_once(dirname(__FILE__) . "/blank_descarga_pdfs_principal_erro.php");
+       include_once(dirname(__FILE__) . "/blank_generar_pdfs_erro.php");
    }
    if (!empty($nmgp_parms)) 
    { 
@@ -5026,7 +2333,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
                     $cadapar[0] = substr($cadapar[0], 11);
                     $cadapar[1] = $_SESSION[$cadapar[1]];
                 }
-                nm_limpa_str_blank_descarga_pdfs_principal($cadapar[1]);
+                nm_limpa_str_blank_generar_pdfs($cadapar[1]);
                 if ($cadapar[1] == "@ ") {$cadapar[1] = trim($cadapar[1]); }
                 $Tmp_par   = $cadapar[0];;
                 $$Tmp_par = $cadapar[1];
@@ -5035,10 +2342,10 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal']['contr_erro'] = 'off';
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  
-   $contr_blank_descarga_pdfs_principal = new blank_descarga_pdfs_principal_apl();
-   $contr_blank_descarga_pdfs_principal->controle();
+   $contr_blank_generar_pdfs = new blank_generar_pdfs_apl();
+   $contr_blank_generar_pdfs->controle();
 //
-   function nm_limpa_str_blank_descarga_pdfs_principal(&$str)
+   function nm_limpa_str_blank_generar_pdfs(&$str)
    {
        if (get_magic_quotes_gpc())
        {
