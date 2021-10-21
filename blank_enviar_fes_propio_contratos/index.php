@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211015"; 
-      $this->nm_hr_ult_alt   = "154200"; 
+      $this->nm_dt_ult_alt   = "20211021"; 
+      $this->nm_hr_ult_alt   = "122046"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_enviar_fes_propio_contratos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_contratos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiH9FGHArYHQF7HgvOVIB/HEF/HMJsHQXOZ1B/HIBeHQraHgrKHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveZSXeV5XCHIF7HQFYZ9XGHAveHuBqDMvOV9FeDWF/HMXGDcNwH9B/D1zGD5XGHgvCHAFKV5FqDoF7HQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwD5JwHuNOVIFCDWF/DoFGDcBqZ1FaHAN7D5BiDMzGVkXeDWFqDoXGDcXOZSFGHAveV5BOHuNODkFCDWXCDoFGD9BsH9BOZ1BeD5rqDEBOZSXeV5XCZuFaD9NwH9X7HArYVWJsHuNODkFCH5B7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuXGHgvsVcB/H5B3VEX7D9XGZkBiHANOHQFaHgBeHArCV5FaVoFGHQBiH9X7DSvCVWBOHgrKVIFCDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoF7HQNwZkFGHArKV5FUDMrYZSXeV5FqHIJsD9FYDQB/DSBYHuBqHuNODkBsHEF/VENUDcNmZSFaD1rwZMB/HgNKHErsDuJeZuXGD9NwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDuBqHANOHuFGHgrYDkBOH5XCVENUD9BiZ1B/Z1rYD5BiDENOHENiH5FYDoBqDcXGZ9F7HANOHQJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHENiH5F/HMXGDcJeDuFaDSN7HuBODMrYVIBOHEBmVEF7HQBsH9BqHIrwV5JwHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGHEXeV5XCZuBOD9JKDQX7HArYV5BOHgrYDkBODWF/DoraD9XOH9BOZ1BeD5BqDErKVkXeV5FaDoBOD9JKDQX7Z1rwV5raHgvsDkBOV5X7DoJsD9BiZ1rqHAN7D5NUDEvsHEFiV5FaDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJwHuvmVcB/HEFYHIFGHQXGZSB/D1rKZMB/HgNKHArsDWX7HIFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBqHQBiDQBqHAvmV5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQX7HgNKZSXeV5XKDoJeD9JKDQFGDSzGVWXGHgrwV9FeDWF/DoJsHQBsZSBOHArYV5BqDENOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2003,6 +2003,8 @@ $vtotalapagar   = 0;
 $vnumerocontrato= "";
 $vidcontra      = 0;
 
+$vfechavence    = "";
+
 
 
 $vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_pdfs, url_api_sendmail,envio_credenciales,plantillas_correo,copia_factura_a,plantilla_pordefecto, (select d.razonsoc from datosemp d where d.iddatos='1') as nombre_emisor, (select d.correo from datosemp d where d.iddatos='1') as correo_emisor, (select d.nit from datosemp d where d.iddatos='1') as nit_emisor from webservicefe order by idwebservicefe desc limit 1";
@@ -2241,8 +2243,42 @@ else
 	
 	$vdatos["payment_form"]["payment_form_id"] =  $vformapago;
 	$vdatos["payment_form"]["payment_method_id"] =  $vmetodopago;
-	$vdatos["payment_form"]["payment_due_date"] =  $vvencimiento;
-	$vdatos["payment_form"]["duration_measure"] =  $vdiascredito;
+	
+	if($vformapago==2 and $vvenvimiento==$vfecha)
+	{
+		$vfechavence  = date_create($vfecha);
+		$vfechavence  = date_format($vfechavence,"Y-m");
+		$vfechavence  = $vfechavence."-05";
+		$vfechavence  = date("Y-m-d",strtotime($vfechavence."+ 1 month"));
+		
+		$fecha1= new DateTime($vfecha);
+		$fecha2= new DateTime($vfechavence);
+		$diff = $fecha1->diff($fecha2);
+		
+		$vdatos["payment_form"]["payment_due_date"] =  $vfechavence;
+		
+		if($diff->days>0)
+		{
+			$vdatos["payment_form"]["duration_measure"] =  $diff->days;
+		}
+		else
+		{
+			$vdatos["payment_form"]["duration_measure"] =  $vdiascredito;
+		}
+	}
+	else
+	{
+		$vdatos["payment_form"]["payment_due_date"] =  $vvencimiento;
+		$vdatos["payment_form"]["duration_measure"] =  $vdiascredito;
+	}
+	
+	if($vformapago==1)
+	{
+		$vdatos["payment_form"]["payment_due_date"] =  $vvencimiento;
+		$vdatos["payment_form"]["duration_measure"] =  $vdiascredito;
+	}
+	
+	
 	
 	if($vplantillas_correo=="SI" and $vplantilla_pordefecto>0)
 	{
@@ -2258,7 +2294,7 @@ else
 			$vdatos["html_body"] = str_replace("vFechaDocumento",$vfecha.' '.$vhora,$vdatos["html_body"]);
 			$vdatos["html_body"] = str_replace("vTotalDocumento",number_format($vtotal),$vdatos["html_body"]);
 			
-			$vurl_pdf_factura = "http://191.102.67.221:9192/_lib/libraries/grp/factura_contratotv/index.php?idempresa=inventario_facturacion&id=".$vidfacven;
+			$vurl_pdf_factura = "http://tvchinacota.facturaelectronicafacilweb.com:9192/_lib/libraries/grp/factura_contratotv/index.php?idempresa=inventario_facturacion&id=".$vidfacven;
 			$vurl_aceptar     = "https://www.facilwebnube.com/apidian2021/public/index.php/accept-reject-document/".$vnit_emisor."/".$vccnit."/".$vprefijo."/".$vnumero."/".$vfecha;
 			
 			$vdatos["html_buttons"]=  $vbotones;
@@ -3046,6 +3082,26 @@ else
 										if ($pos === false)
 										{
 											echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#f00000;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string."</div>";
+											
+											$vmen = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+											$vsql="UPDATE facturaven_contratos SET avisos='".$vmen."', enviada='PT' WHERE idfacven='".$vidfacven."'";
+											
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
 										}
 										else
 										{
@@ -3262,6 +3318,26 @@ else
 											{
 												echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#f00000;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string."</div>";
 												
+												$vmen = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+												$vsql="UPDATE facturaven_contratos SET avisos='".$vmen."', enviada='PT' WHERE idfacven='".$vidfacven."'";
+												
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+												
 												
 											}
 											else
@@ -3358,26 +3434,6 @@ else
 												}
 											}
 										}
-										
-										$vmen = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
-										$vsql="UPDATE facturaven_contratos SET avisos='".$vmen."', enviada='PT' WHERE idfacven='".$vidfacven."'";
-										
-     $nm_select = $vsql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
 									}
 								}
 							}
@@ -3602,6 +3658,26 @@ else
 								if ($pos === false)
 								{
 									echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#f00000;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string."</div>";
+									
+									$vmen = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+									$vsql="UPDATE facturaven_contratos SET avisos='".$vmen."', enviada='PT' WHERE idfacven='".$vidfacven."'";
+									
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
 								}
 								else
 								{
@@ -3817,6 +3893,26 @@ else
 									if ($pos === false)
 									{
 										echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#f00000;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string."</div>";
+										
+										$vmen = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+										$vsql="UPDATE facturaven_contratos SET avisos='".$vmen."', enviada='PT' WHERE idfacven='".$vidfacven."'";
+										
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
 									}
 									else
 									{
@@ -3912,26 +4008,6 @@ else
 										}
 									}
 								}
-								
-								$vmen = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
-								$vsql="UPDATE facturaven_contratos SET avisos='".$vmen."', enviada='PT' WHERE idfacven='".$vidfacven."'";
-								
-     $nm_select = $vsql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
 							}
 						}
 					}
