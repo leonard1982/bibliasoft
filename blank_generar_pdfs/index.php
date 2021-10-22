@@ -218,7 +218,7 @@ class blank_generar_pdfs_ini
       $this->nm_hr_criacao   = "170159"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211021"; 
-      $this->nm_hr_ult_alt   = "184548"; 
+      $this->nm_hr_ult_alt   = "190229"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -908,7 +908,7 @@ class blank_generar_pdfs_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_generar_pdfs']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZSFGHAvCVWJsHgrwDkB/DWFaVEraHQXOH9FaHANOD5NUDMvCVkJGDWF/VoJwHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7ZMB/HgvCHArCDWB3ZuJeHQNwH9BiHIBeHuraHuvmDkFCH5FqHMX7HQNmZkFGHANOV5FGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGZSXeDWFqVoBiDcBwDQFGHANOV5FUHuzGVIB/V5X7VorqDcJUZ1F7HANOD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuBODcXOZSFUHABYVWJeHgrKVcFKHEFYVoF7DcNmVINUD1rwHuFGDEvsZSJqDuFaHIB/DcJeH9FGDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHAvOV5JeDMvOZSNiDWFaHMBiD9BsVIraD1rwV5X7HgBeHENiH5FYHMXGHQFYDQFGHAveV5FGHgrKVIFCH5XCHIFUD9JmZ1B/Z1BOD5BODMveHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwH9FGHArYVWXGDMvsVcBUDuX7VoFGHQNwH9BqDSvmD5XGHgrKVkXeDuFaHMBqHQJKDQX7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDENOHArsHEFqDoraDcXGZSX7Z1BYHuraHuBYV9FeV5FYHIFUDcJUZSB/D1rwHQFUHgvsDkXKDWrGDoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwZSX7HABYD5NUHgrKVcFCDWJeVoB/D9XOZSBOZ1BeD5BqDMzGHEFiDWXCDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JeDMvmVIBsDur/HMXGHQXGH9BqHIBeD5JeHgvsHEXeH5X/ZuBqHQNwDQJsHANOD5BOHgrKDkFCHEFYHIX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAvCD5BOHgBeHEFiV5B3DoF7D9XsDuFaHAveVWJwDMzGDkBODWFaDoNUDcJUH9BqD1vsZMB/DMvCHEJGDuFaDoJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1969,7 +1969,7 @@ if(!empty($vperiodo) and !empty($vanio) and !empty($vzona) and !empty($vidres))
 	}
 
 	$vruta2 = $vruta.'/pdfs/'.$vzona."/".$vanio."/".$vperiodo;
-	$vruta3 = $vzona."/".$vanio."/".$vperiodo;
+	$vruta3 = $vzona."/".$vanio."/".$vperiodo."/".$vanio."_".$vperiodo.".pdf";
 
 	if (!file_exists($vruta2))
 	{
@@ -1979,7 +1979,7 @@ if(!empty($vperiodo) and !empty($vanio) and !empty($vzona) and !empty($vidres))
 	$vruta_archivo = './pdfs/'.$vruta2."/".$vanio."_".$vperiodo.".pdf";
 	$vurl = "http://tvchinacota.facturaelectronicafacilweb.com:9192/_lib/libraries/grp/factura_contratotv/facturas_periodo.php?idempresa=inventario_facturacion&periodo=".$vperiodo."&anio=".$vanio."&idres=".$vidres;
 	
-	$vconsulta = 'C:/"Program Files"/wkhtmltopdf/bin/wkhtmltopdf.exe --quiet --margin-top 0 --margin-left 3mm --margin-right 3 --margin-bottom 0 "'.$vurl.'" c:/facilweb/htdocs/pdfs/'.$vruta3.'/';
+	$vconsulta = 'C:/"Program Files"/wkhtmltopdf/bin/wkhtmltopdf.exe --quiet --margin-top 0 --margin-left 3mm --margin-right 3 --margin-bottom 0 "'.$vurl.'" c:/facilweb/htdocs/pdfs/'.$vruta3;
 	
 	
 	$vsi = shell_exec($vconsulta);
