@@ -1,4 +1,1 @@
 solucionesn,pos,FM
-hola
-si 
-como no
