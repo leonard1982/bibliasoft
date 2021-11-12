@@ -230,8 +230,8 @@ class grid_productos_nube_ini
       $this->nm_dt_criacao   = "20190924"; 
       $this->nm_hr_criacao   = "213511"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -806,6 +806,8 @@ class grid_productos_nube_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -940,7 +942,7 @@ class grid_productos_nube_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_productos_nube']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_productos_nube']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeH9FGHANOHQFaHgvOVcFKDWFaHMBOD9BiZ1rqHIBeV5XGHgNOZSJGDWBmDoBqDcXOZSBiD1veV5JeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKVWXGHuNOZSNiDWF/DoX7D9JmVIJsHAN7HuB/HgNOHEJqHEFqHIFGHQFYH9BiD1BeV5FGDMBYVcBUDur/HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwD9XOZ1rqHAN7D5FaDMzGHEBUDWFqDoF7D9NmDQJsZ1rwV5BqHgrYDkBOV5F/VEraDcBqZSB/D1zGV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEraHQNwH9BqHABYV5FUHgrKHEXeH5FGZuXGHQXsDQBqHIrwV5FaHuNODkBsDWF/HMBqHQNwZSBqHArYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiHINKD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBOV9FiV5FYDoX7HQNmVINUHIBeHQFUDEBOVkJqHEXCHIBqHQBiDQFaHArYHuBiDMvmV9FeH5XCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOH9FUHArYD5BqHgrKDkBsDWJeHIJsHQFYZkFGD1rwZMB/HgNODkB/H5F/DoJsDcXGDQJwD1NKV5BODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCV5B3VoFGDcBiDQFGDSBYV5raHgvOZSNiDuX7HMFaD9JmZ1BiHAzGZMBqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeD5BqDErKVkXeV5FaVoFaD9NmDQX7D1BeVWJsHuNODkFCH5FqVoJwD9BsZSFaHArYD5F7DMzGHAFKV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcJeH9FUD1BeHuX7DMzGV9FeDWJeHIraHQXOZSBOHAN7V5B/HgrKVkJGH5FYHMJwHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBqHQBiDQBqHAvmVWBODMvmVcFKV5BmVoBqD9BsZkFGHArKV5FUDMvCHErCH5FYVoXGD9XsZSBiHAvOVWJwHuNOVcFCDur/HIX7HQFYZkFGHAN7D5JwHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2442,6 +2444,8 @@ class grid_productos_nube_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2854,11 +2858,16 @@ class grid_productos_nube_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube']['tot_geral']);
@@ -3313,7 +3322,7 @@ class grid_productos_nube_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -4213,22 +4222,23 @@ $_SESSION['scriptcase']['grid_productos_nube']['contr_erro'] = 'off';
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_grid_titl'] ?> - productos :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -5010,14 +5020,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_nube'][$path_doc_md
            $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_productos_nube']['embutida_form'])
        {

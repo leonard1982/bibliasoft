@@ -28,9 +28,12 @@ class grid_reporte_caja_grid
    var $NM_raiz_img; 
    var $NM_opcao; 
    var $NM_flag_antigo; 
-   var $NM_cmp_hidden = array();
-   var $nmgp_botoes = array();
-   var $Cmps_ord_def = array();
+   var $NM_cmp_hidden   = array();
+   var $nmgp_botoes     = array();
+   var $nm_btn_exist    = array();
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array();
+   var $Cmps_ord_def    = array();
    var $nmgp_label_quebras = array();
    var $nmgp_prim_pag_pdf;
    var $Campos_Mens_erro;
@@ -306,7 +309,7 @@ class grid_reporte_caja_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['mostra_edit'] = "N";
        }
    }
-   if ($this->Ini->SC_Link_View || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'])
+   if ($this->Ini->SC_Link_View || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['psq_edit'] == 'N'))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['mostra_edit'] = "N";
    }
@@ -1175,6 +1178,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            { 
                $nm_saida->saida("   function sc_session_redir(url_redir)\r\n");
                $nm_saida->saida("   {\r\n");
+           $nm_saida->saida("       if (typeof(sc_session_redir_mobile) === typeof(function(){})) { sc_session_redir_mobile(url_redir); }\r\n");
                $nm_saida->saida("       if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')\r\n");
                $nm_saida->saida("       {\r\n");
                $nm_saida->saida("           window.parent.sc_session_redir(url_redir);\r\n");
@@ -1288,6 +1292,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("  }\r\n");
            $nm_saida->saida("  function SC_init_jquery(isScrollNav){ \r\n");
            $nm_saida->saida("   \$(function(){ \r\n");
+           $nm_saida->saida("     NM_btn_disable();\r\n");
            $nm_saida->saida("     $('#id_F0_bot').keyup(function(e) {\r\n");
            $nm_saida->saida("       var keyPressed = e.charCode || e.keyCode || e.which;\r\n");
            $nm_saida->saida("       if (13 == keyPressed) {\r\n");
@@ -1821,7 +1826,7 @@ $nm_saida->saida("}\r\n");
            {
                $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
            }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_slide\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
@@ -1855,7 +1860,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_slide\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        }
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opcao'] != "pdf" && !$this->Print_All)
@@ -6529,6 +6534,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       if ($this->nmgp_botoes['print'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $Tem_pdf_res = "n";
+              $this->nm_btn_exist['print'][] = "print_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=PC&nm_cor=PB&password=n&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid&nm_all_modules=grid&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -6544,6 +6550,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
           $nm_saida->saida("           $Cod_Btn\r\n");
       if ($this->nmgp_botoes['pdf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['pdf'][] = "email_pdf_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
       $Tem_gb_pdf  = "s";
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['SC_Ind_Groupby'] == "sc_free_total")
@@ -6551,7 +6558,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
           $Tem_gb_pdf = "n";
       }
       $Tem_pdf_res = "n";
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_pdf_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailpdf", "", "", "email_pdf_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_config_pdf.php?export_ajax=S&nm_opc=pdf&nm_target=&nm_cor=cor&papel=1&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid&nm_all_modules=grid&password=n&summary_export_columns=N&origem=cons&language=es&conf_socor=S&nm_label_group=S&nm_all_cab=N&nm_all_label=N&&pdf_zip=Nnm_orient_grid=4&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6559,9 +6566,10 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['doc'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['doc'][] = "email_doc_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
       $Tem_word_res = "n";
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_doc_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemaildoc", "", "", "email_doc_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&export_ajax=S&nm_opc=doc_word&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6569,8 +6577,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['xls'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['xls'][] = "email_xls_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_xls_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxls", "", "", "email_xls_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=xls&sAdd=&nm_opc=xls&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6578,8 +6587,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['xml'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['xml'][] = "email_xml_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_xml_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxml", "", "", "email_xml_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=xml&sAdd=&nm_opc=xml&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6587,8 +6597,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['json'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['json'][] = "email_json_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_json_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailjson", "", "", "email_json_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=json&sAdd=&nm_opc=json&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6596,8 +6607,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['csv'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['csv'][] = "email_csv_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_csv_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailcsv", "", "", "email_csv_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=csv&sAdd=&nm_opc=csv&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6605,8 +6617,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['rtf'][] = "email_rtf_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_rtf_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailrtf", "", "", "email_rtf_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=rtf&sAdd=&nm_opc=rtf&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6627,6 +6640,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
           $Tem_gb_pdf = "n";
       }
       $Tem_pdf_res = "n";
+              $this->nm_btn_exist['pdf'][] = "pdf_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=0&apapel=0&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid&nm_all_modules=grid&nm_label_group=S&nm_all_cab=N&nm_all_label=N&nm_orient_grid=4&password=n&summary_export_columns=N&pdf_zip=N&origem=cons&language=es&conf_socor=S&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -6656,6 +6670,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['exit'] == "on")
       {
+          $this->nm_btn_exist['exit'][] = "sai_bot";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('busca', '0', '');", "nm_gp_move('busca', '0', '');", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
@@ -6717,6 +6732,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       if ($this->nmgp_botoes['print'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $Tem_pdf_res = "n";
+              $this->nm_btn_exist['print'][] = "print_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=PC&nm_cor=PB&password=n&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid&nm_all_modules=grid&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -6732,6 +6748,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
           $nm_saida->saida("           $Cod_Btn\r\n");
       if ($this->nmgp_botoes['pdf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['pdf'][] = "email_pdf_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
       $Tem_gb_pdf  = "s";
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['SC_Ind_Groupby'] == "sc_free_total")
@@ -6739,7 +6756,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
           $Tem_gb_pdf = "n";
       }
       $Tem_pdf_res = "n";
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_pdf_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailpdf", "", "", "email_pdf_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_config_pdf.php?export_ajax=S&nm_opc=pdf&nm_target=&nm_cor=cor&papel=1&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid&nm_all_modules=grid&password=n&summary_export_columns=N&origem=cons&language=es&conf_socor=S&nm_label_group=S&nm_all_cab=N&nm_all_label=N&&pdf_zip=Nnm_orient_grid=4&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6747,9 +6764,10 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['doc'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['doc'][] = "email_doc_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
       $Tem_word_res = "n";
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_doc_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemaildoc", "", "", "email_doc_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&export_ajax=S&nm_opc=doc_word&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6757,8 +6775,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['xls'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['xls'][] = "email_xls_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_xls_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxls", "", "", "email_xls_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=xls&sAdd=&nm_opc=xls&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6766,8 +6785,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['xml'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['xml'][] = "email_xml_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_xml_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailxml", "", "", "email_xml_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=xml&sAdd=&nm_opc=xml&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6775,8 +6795,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['json'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['json'][] = "email_json_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_json_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailjson", "", "", "email_json_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=json&sAdd=&nm_opc=json&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6784,8 +6805,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['csv'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['csv'][] = "email_csv_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_csv_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailcsv", "", "", "email_csv_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=csv&sAdd=&nm_opc=csv&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6793,8 +6815,9 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['rtf'][] = "email_rtf_bot";
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_bot = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_email_rtf_bot\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bemailrtf", "", "", "email_rtf_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_export_email.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&sType=rtf&sAdd=&nm_opc=rtf&nm_target=0&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6815,6 +6838,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
           $Tem_gb_pdf = "n";
       }
       $Tem_pdf_res = "n";
+              $this->nm_btn_exist['pdf'][] = "pdf_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_caja/grid_reporte_caja_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=0&apapel=0&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid&nm_all_modules=grid&nm_label_group=S&nm_all_cab=N&nm_all_label=N&nm_orient_grid=4&password=n&summary_export_columns=N&pdf_zip=N&origem=cons&language=es&conf_socor=S&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_reporte_caja&KeepThis=true&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -6844,6 +6868,7 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
       }
       if ($this->nmgp_botoes['exit'] == "on")
       {
+          $this->nm_btn_exist['exit'][] = "sai_bot";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('busca', '0', '');", "nm_gp_move('busca', '0', '');", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
@@ -6946,7 +6971,8 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -6996,7 +7022,8 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['fast_search'][1] == 'eq')
@@ -7243,6 +7270,17 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
    $nm_saida->saida("      NM_obj_ant = obj;\r\n");
    $nm_saida->saida("      ind_time = setTimeout(\"obj.style.display='none'\", 300);\r\n");
    $nm_saida->saida("      return ind_time;\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+       $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+       $nm_saida->saida("     $('#div_" . $cada_id . "').addClass('disabled');\r\n");
+         }
+      }
+   }
    $nm_saida->saida("   }\r\n");
    $str_pbfile = $this->Ini->root . $this->Ini->path_imag_temp . '/sc_pb_' . session_id() . '.tmp';
    if (@is_file($str_pbfile) && $flag_apaga_pdf_log)

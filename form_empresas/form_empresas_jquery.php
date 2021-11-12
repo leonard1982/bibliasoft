@@ -66,6 +66,9 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["correo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["comentario" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["entorno" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["nomina" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["codempresa" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["nombre_empresa_nomina" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -159,6 +162,24 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["entorno" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["nomina" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["nomina" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["codempresa" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["codempresa" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["nombre_empresa_nomina" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["nombre_empresa_nomina" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -247,11 +268,21 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_celular' + iSeqRow).bind('blur', function() { sc_form_empresas_celular_onblur(this, iSeqRow) })
                                      .bind('change', function() { sc_form_empresas_celular_onchange(this, iSeqRow) })
                                      .bind('focus', function() { sc_form_empresas_celular_onfocus(this, iSeqRow) });
+  $('#id_sc_field_codempresa' + iSeqRow).bind('blur', function() { sc_form_empresas_codempresa_onblur(this, iSeqRow) })
+                                        .bind('change', function() { sc_form_empresas_codempresa_onchange(this, iSeqRow) })
+                                        .bind('focus', function() { sc_form_empresas_codempresa_onfocus(this, iSeqRow) });
+  $('#id_sc_field_nomina' + iSeqRow).bind('blur', function() { sc_form_empresas_nomina_onblur(this, iSeqRow) })
+                                    .bind('change', function() { sc_form_empresas_nomina_onchange(this, iSeqRow) })
+                                    .bind('focus', function() { sc_form_empresas_nomina_onfocus(this, iSeqRow) });
+  $('#id_sc_field_nombre_empresa_nomina' + iSeqRow).bind('blur', function() { sc_form_empresas_nombre_empresa_nomina_onblur(this, iSeqRow) })
+                                                   .bind('change', function() { sc_form_empresas_nombre_empresa_nomina_onchange(this, iSeqRow) })
+                                                   .bind('focus', function() { sc_form_empresas_nombre_empresa_nomina_onfocus(this, iSeqRow) });
   $('#id_sc_field_entorno' + iSeqRow).bind('blur', function() { sc_form_empresas_entorno_onblur(this, iSeqRow) })
                                      .bind('change', function() { sc_form_empresas_entorno_onchange(this, iSeqRow) })
                                      .bind('focus', function() { sc_form_empresas_entorno_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-sinmovimiento' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-predeterminada' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-nomina' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
 } // scJQEventsAdd
 
 function sc_form_empresas_idempresa_onblur(oThis, iSeqRow) {
@@ -476,6 +507,48 @@ function sc_form_empresas_celular_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_empresas_codempresa_onblur(oThis, iSeqRow) {
+  do_ajax_form_empresas_validate_codempresa();
+  scCssBlur(oThis);
+}
+
+function sc_form_empresas_codempresa_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_empresas_codempresa_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_empresas_nomina_onblur(oThis, iSeqRow) {
+  do_ajax_form_empresas_validate_nomina();
+  scCssBlur(oThis);
+}
+
+function sc_form_empresas_nomina_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_empresas_nomina_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_empresas_nombre_empresa_nomina_onblur(oThis, iSeqRow) {
+  do_ajax_form_empresas_validate_nombre_empresa_nomina();
+  scCssBlur(oThis);
+}
+
+function sc_form_empresas_nombre_empresa_nomina_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_empresas_nombre_empresa_nomina_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_empresas_entorno_onblur(oThis, iSeqRow) {
   do_ajax_form_empresas_validate_entorno();
   scCssBlur(oThis);
@@ -493,6 +566,9 @@ function sc_form_empresas_entorno_onfocus(oThis, iSeqRow) {
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
+	}
+	if ("1" == block) {
+		displayChange_block_1(status);
 	}
 }
 
@@ -514,6 +590,12 @@ function displayChange_block_0(status) {
 	displayChange_field("entorno", "", status);
 }
 
+function displayChange_block_1(status) {
+	displayChange_field("nomina", "", status);
+	displayChange_field("codempresa", "", status);
+	displayChange_field("nombre_empresa_nomina", "", status);
+}
+
 function displayChange_row(row, status) {
 	displayChange_field_idempresa(row, status);
 	displayChange_field_nit(row, status);
@@ -530,6 +612,9 @@ function displayChange_row(row, status) {
 	displayChange_field_correo(row, status);
 	displayChange_field_comentario(row, status);
 	displayChange_field_entorno(row, status);
+	displayChange_field_nomina(row, status);
+	displayChange_field_codempresa(row, status);
+	displayChange_field_nombre_empresa_nomina(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -577,6 +662,15 @@ function displayChange_field(field, row, status) {
 	}
 	if ("entorno" == field) {
 		displayChange_field_entorno(row, status);
+	}
+	if ("nomina" == field) {
+		displayChange_field_nomina(row, status);
+	}
+	if ("codempresa" == field) {
+		displayChange_field_codempresa(row, status);
+	}
+	if ("nombre_empresa_nomina" == field) {
+		displayChange_field_nombre_empresa_nomina(row, status);
 	}
 }
 
@@ -659,6 +753,15 @@ function displayChange_field_entorno(row, status) {
 		}
 		scJQSelect2Add(row, "entorno");
 	}
+}
+
+function displayChange_field_nomina(row, status) {
+}
+
+function displayChange_field_codempresa(row, status) {
+}
+
+function displayChange_field_nombre_empresa_nomina(row, status) {
 }
 
 function scRecreateSelect2() {

@@ -283,6 +283,12 @@ class form_comprobantes_detalle_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_comprobantes_detalle']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_comprobantes_detalle']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_comprobantes_detalle']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_comprobantes_detalle']['embutida_parms'];
@@ -1977,10 +1983,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1993,17 +2002,17 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_comprobantes_detalle'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'comprobante' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'comprobante' == $filtro)) || (is_array($filtro) && in_array('comprobante', $filtro)))
         $this->ValidateField_comprobante($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'plan_cuenta' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'plan_cuenta' == $filtro)) || (is_array($filtro) && in_array('plan_cuenta', $filtro)))
         $this->ValidateField_plan_cuenta($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'valor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'valor' == $filtro)) || (is_array($filtro) && in_array('valor', $filtro)))
         $this->ValidateField_valor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo' == $filtro)) || (is_array($filtro) && in_array('tipo', $filtro)))
         $this->ValidateField_tipo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tercero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tercero' == $filtro)) || (is_array($filtro) && in_array('tercero', $filtro)))
         $this->ValidateField_tercero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'observacion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'observacion' == $filtro)) || (is_array($filtro) && in_array('observacion', $filtro)))
         $this->ValidateField_observacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
@@ -4850,7 +4859,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_comprobantes_detalle']['Looku
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -5870,5 +5880,30 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-3");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-4");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-5", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-6");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

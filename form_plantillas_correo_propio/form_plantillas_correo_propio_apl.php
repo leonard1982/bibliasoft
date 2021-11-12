@@ -291,6 +291,12 @@ class form_plantillas_correo_propio_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_plantillas_correo_propio']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_plantillas_correo_propio']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_plantillas_correo_propio']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_plantillas_correo_propio']['embutida_parms'];
@@ -1735,10 +1741,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1751,17 +1760,17 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_plantillas_correo_propio'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'id' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id' == $filtro)) || (is_array($filtro) && in_array('id', $filtro)))
         $this->ValidateField_id($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'descripcion' == $filtro)) || (is_array($filtro) && in_array('descripcion', $filtro)))
         $this->ValidateField_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'html_header' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'html_header' == $filtro)) || (is_array($filtro) && in_array('html_header', $filtro)))
         $this->ValidateField_html_header($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'html_body' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'html_body' == $filtro)) || (is_array($filtro) && in_array('html_body', $filtro)))
         $this->ValidateField_html_body($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'html_buttons' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'html_buttons' == $filtro)) || (is_array($filtro) && in_array('html_buttons', $filtro)))
         $this->ValidateField_html_buttons($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'html_footer' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'html_footer' == $filtro)) || (is_array($filtro) && in_array('html_footer', $filtro)))
         $this->ValidateField_html_footer($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
@@ -5277,5 +5286,48 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-11");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-12");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-13");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-14");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

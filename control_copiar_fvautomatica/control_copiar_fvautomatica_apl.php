@@ -308,6 +308,12 @@ class control_copiar_fvautomatica_apl
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['control_copiar_fvautomatica']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['control_copiar_fvautomatica']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['control_copiar_fvautomatica']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['control_copiar_fvautomatica']['embutida_parms'];
@@ -1939,10 +1945,13 @@ $_SESSION['scriptcase']['control_copiar_fvautomatica']['contr_erro'] = 'off';
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1955,15 +1964,15 @@ $_SESSION['scriptcase']['control_copiar_fvautomatica']['contr_erro'] = 'off';
               $this->NM_ajax_info['errList']['geral_control_copiar_fvautomatica'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'mensaje' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'mensaje' == $filtro)) || (is_array($filtro) && in_array('mensaje', $filtro)))
         $this->ValidateField_mensaje($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'prefijo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'prefijo' == $filtro)) || (is_array($filtro) && in_array('prefijo', $filtro)))
         $this->ValidateField_prefijo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cliente' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cliente' == $filtro)) || (is_array($filtro) && in_array('cliente', $filtro)))
         $this->ValidateField_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'direccion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'direccion' == $filtro)) || (is_array($filtro) && in_array('direccion', $filtro)))
         $this->ValidateField_direccion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'observaciones' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'observaciones' == $filtro)) || (is_array($filtro) && in_array('observaciones', $filtro)))
         $this->ValidateField_observaciones($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (empty($Campos_Crit) && empty($Campos_Falta))
@@ -4014,7 +4023,8 @@ $_SESSION['scriptcase']['control_copiar_fvautomatica']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -4810,5 +4820,21 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
        exit;
    }
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "btn_volver":
+                return array("sc_btn_volver_bot");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-1");
+                break;
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-2");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

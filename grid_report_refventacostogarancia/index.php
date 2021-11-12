@@ -228,8 +228,8 @@ class grid_report_refventacostogarancia_ini
       $this->nm_dt_criacao   = "20180808"; 
       $this->nm_hr_criacao   = "093549"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -825,6 +825,8 @@ class grid_report_refventacostogarancia_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -950,7 +952,7 @@ class grid_report_refventacostogarancia_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_report_refventacostogarancia']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_report_refventacostogarancia']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQJwHAN7D5JsDMrwVcBODWJeVEFGHQBsZkFUZ1rYHQX7DEBOHArCDWX7DoB/D9JKDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNwH9FGHANOD5BqHuBYVIBODWBmVoFGDcBqZ1B/D1rKHQBODMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaDoJeDcBwDQFGHAveV5JwHuzGVIFCH5XCVoJwD9XOZSB/HArYV5BqDEvsVkXeDWFqVoBiD9NmDQJsHArYV5FGHuNODkFCH5FqVENUD9BsH9B/HIBeD5NUDErKVkXeDWX7VoBiDcJeZSX7DSBYV5FUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQFYDQBqHAveV5X7HuBYVcFKDWFaDoNUHQXGZkBiD1rKD5BqDErKHEFiV5XKDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWBmZuJeHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1X7HIveV5B/DEBOVkJ3V5FqVoJeHQXsDuFaDSN7V5JeHgvsVIB/HEFYDoXGHQJmZ1BOHANOHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQX7HIrwHQBODMvsVcFCDWFaHIFGHQXGZ1BiHAzGZMJeHgBOHErCHEFaVoBOHQXsH9FUHAvOVWBOHgvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBOZSJqH5XCVoBOHQXGH9FaHIBeZMFaHgNOVkJ3DuFYDoF7D9NmDQJwHArYHuJeDMzGDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7VoX7DcJUZ1FaHArKD5FaDErKVkJGH5F/DoFUD9NwH9X7HABYD5JeHuBYVIBODWFYDoJsD9BiZ1F7HABYD5rqDEBOZSJGH5FYZuFaD9XsZSX7HIrwV5FUHuzGVIBODWFaDoJsDcBqH9B/DSrYD5NUHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQXOZ1X7DSNOHQBiHgNKHENiHEB3ZuXGHQFYZ9XGHIrKV5raDMvmVIFCDWJeHINUDcJUZ1B/HIBOD5JeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAzGD5BqHgveDkXKDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqVoB/D9XOZ1FaD1rwHQrqDEBODkXKH5F/ZuFaDcJeH9BiHAN7VWXGHgrKDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4894,7 +4896,7 @@ class grid_report_refventacostogarancia_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['graf_disp']        = array('Bar', 'Pie', 'Line', 'Area');
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -4976,6 +4978,8 @@ class grid_report_refventacostogarancia_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -5486,11 +5490,16 @@ class grid_report_refventacostogarancia_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_orig'] = " where f.asentada='1'";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['tot_geral']);
@@ -5991,7 +6000,7 @@ class grid_report_refventacostogarancia_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -6805,22 +6814,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Referencia Venta/Costo/Ganancia :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -7602,14 +7612,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia'
            $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_report_refventacostogarancia']['embutida_form'])
        {

@@ -251,6 +251,12 @@ class blank_reporte_caja_filtro_mob_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['blank_reporte_caja_filtro_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['blank_reporte_caja_filtro_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['blank_reporte_caja_filtro_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['blank_reporte_caja_filtro_mob']['embutida_parms'];
@@ -1691,10 +1697,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1707,9 +1716,9 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_blank_reporte_caja_filtro_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'desde' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'desde' == $filtro)) || (is_array($filtro) && in_array('desde', $filtro)))
         $this->ValidateField_desde($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'hasta' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'hasta' == $filtro)) || (is_array($filtro) && in_array('hasta', $filtro)))
         $this->ValidateField_hasta($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -1775,9 +1784,15 @@ else
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "No hay datos para mostrar.";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_blank_reporte_caja_filtro_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_blank_reporte_caja_filtro_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_blank_reporte_caja_filtro_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "No hay datos para mostrar.";
  }
 ;
@@ -2686,7 +2701,8 @@ $_SESSION['scriptcase']['blank_reporte_caja_filtro_mob']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -3509,5 +3525,24 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
        exit;
    }
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "limpiar":
+                return array("sc_limpiar_bot");
+                break;
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-1", "sub_form_b.sc-unique-btn-2");
+                break;
+            case "help":
+                return array("sc_b_hlp_b");
+                break;
+            case "exit":
+                return array("Bsair_b.sc-unique-btn-3", "Bsair_b.sc-unique-btn-4");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

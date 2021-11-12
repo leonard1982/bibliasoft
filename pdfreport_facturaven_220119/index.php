@@ -220,8 +220,8 @@ class pdfreport_facturaven_220119_ini
       $this->nm_dt_criacao   = "20180108"; 
       $this->nm_hr_criacao   = "115428"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -786,6 +786,8 @@ class pdfreport_facturaven_220119_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -910,7 +912,7 @@ class pdfreport_facturaven_220119_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['pdfreport_facturaven_220119']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['pdfreport_facturaven_220119']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYH9FUHANKVWBODMzGVcXKV5X7VEF7HQBsZkFGD1rKV5XGDMzGVkJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcBqZ1B/HIBeD5JwHgvCHArsH5FYVoBiHQXsZ9F7HANOHQNUDMBYVcB/DuX7VoJwHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/D9NwDQJsD1veD5JeHuzGVIBODWFYVorqD9BsH9FaHAN7ZMB/DMNKZSXeDWXCDoraDcJeZSFGD1veVWJwHuzGVIBODWFaVErqDcJUZ1B/Z1NOD5BiHgveDkXKDWrGDoBOHQBiDuBqHAvOVWBqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoBqHQBiZ1FGHABYZMFaDEvsHErCHEXCVoFGHQXOH9FGD1BeHuFUDMvOVcrsH5XCHMXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVorqHQBqZ1BiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBiHgvsDkBsV5X7HIJsD9BiZkBiHArKHQBiDENOHEJqDuXKZuBqD9NmZSX7DSrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwDQJsHIrwVWJsDMrYV9FeV5FYVoFGHQNwVINUHArKD5XGDErKHArCDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9XOH9BODSrYHQNUHgveHErsH5F/HINUHQXGDQFUHArYV5BODMvmV9BUDWFaDoF7HQNmZSB/DSrYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5JeHgrKVcFKDWF/VoX7DcJUZ1FaHArKD5FaDErKVkJGH5F/DoFUDcBwH9X7HArYV5FGHuBYVcrsDWFYVoX7DcBqZ1FaHANOV5FaDEBOVkJqV5XKDoJeHQBiZ9XGHANKV5XGDMvOV9BUHEX/DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1X7HIBeZMBODMvCHArCH5FGZuXGDcBwDQX7HIrKD5JsHuBYVIBOH5XKVoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAvCZMXGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuB/HuBOV9FeH5XKVorqHQBiZ1BOHANOHQNUDEvsZSJ3DWr/VoXGDcXOZ9F7D1vOV5BODMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['pdfreport_facturaven_220119']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['pdfreport_facturaven_220119']['initialize'])  
       { 
@@ -2058,10 +2060,15 @@ class pdfreport_facturaven_220119_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_pesq_filtro'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['Grid_search']       = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119']['tot_geral']);
@@ -2647,22 +2654,23 @@ $_SESSION['scriptcase']['pdfreport_facturaven_220119']['contr_erro'] = 'off';
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_chart_titl'] ?> - facturaven :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -3651,14 +3659,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_facturaven_220119'][$pat
            $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['pdfreport_facturaven_220119']['embutida_form'])
        {

@@ -234,7 +234,7 @@ class grid_facturaven_contratos_ini
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211020"; 
-      $this->nm_hr_ult_alt   = "111901"; 
+      $this->nm_hr_ult_alt   = "111946"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1042,6 +1042,8 @@ class grid_facturaven_contratos_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
       $_SESSION['scriptcase']['str_button_all'] = $str_button;
@@ -1276,7 +1278,7 @@ class grid_facturaven_contratos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwZ9F7HANOHuX7HuzGZSNiDuX7HMBOHQBsZ1F7D1rwV5JwDEvsHEFiV5XKZuXGD9NmDQB/HIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDENOHENiHEFqHIJwHQBiDQJsHAN7V5JeHuNOVcFCDuX7VoBiHQBiZkFGZ1BeZMB/DEBOHArsDWXCVoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaVoBODcJeDQX7D1BeVWJsHuBYVcFCDWJeVoB/D9BiZSB/HArYV5FUDMNKZSXeH5FYDoB/D9XsH9FGD1veV5BOHgvsVcFCH5XCVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMveHEBUHEB7DoJeDcBwZSFGDSBYHQFaHuzGVcB/HEX/VEraHQXOVINUHAN7D5FaDMBYHArCH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBOHQBiZ9XGHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHuBqDEvsHEXeDWX7VoBOHQNwDuBOZ1BYHQFaDMNODkB/DWFaDoFGD9XGZ1FGDSNOHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDuFaZ1rwV5JeHuvmZSNiDWXCDoFUHQNmH9FaD1zGV5X7HgNOVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEF7HQJmZSBqHIBeV5BqHgveHErCV5XCDoJsD9NwH9FUD1NKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwD5JeHgvsVcBOH5FqVENUD9BiZ1FaHAN7D5NUDEvsVkXeDWFqVoBiDcXOZSX7D1BeV5JwHuNOVIFCH5XCVoX7DcBqZ1FaD1rKD5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBiDQJwDSBYV5raHuNOVcFCDWXCHIXGDcJUZ1FaHArYHQBODEvsZSJGDWXCVoBqDcBiDQB/HIrwVWJsHuzGVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoX7HQBqZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9XsZSX7DSBYD5FaDMvOV9BUDWFaVEFGHQBsVIJsDSrYHuXGDMvCHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_contratos']['initialize'])  
       { 
@@ -6261,7 +6263,7 @@ class grid_facturaven_contratos_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['graf_disp']        = array('Bar', 'Pie', 'Line', 'Area');
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -6343,6 +6345,8 @@ class grid_facturaven_contratos_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
       $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
@@ -6942,11 +6946,16 @@ class grid_facturaven_contratos_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['tot_geral']);
@@ -7476,7 +7485,7 @@ class grid_facturaven_contratos_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -15816,22 +15825,23 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <HEAD>
  <TITLE>Facturas de venta contrato :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 

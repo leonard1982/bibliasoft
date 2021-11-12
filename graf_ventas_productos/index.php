@@ -225,8 +225,8 @@ class graf_ventas_productos_ini
       $this->nm_dt_criacao   = "20210115"; 
       $this->nm_hr_criacao   = "121453"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -830,6 +830,8 @@ class graf_ventas_productos_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -955,7 +957,7 @@ class graf_ventas_productos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['graf_ventas_productos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['graf_ventas_productos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDQFaHIvsVWBqHuBOVcFKDWJeVENUHQBiH9FaHAvCV5X7HgNKHEFiV5XCZuFaD9NwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQFYZSX7D1BeD5JwDMrYV9FeDWFaVEraHQNmH9BOHIBeHQrqHgNOHEJGDWF/VoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeDWX7VoBODcXOZSFGHAN7D5JwHuNOVIFCH5XCVoB/D9XOH9BOZ1BeD5BqDErKVkXeV5FaVoFaD9NmDQX7D1BeVWJsHuNODkFCH5B7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJsHuvmVIBOV5F/DorqHQXOH9BqDSvmZMBODMveHErCHEFqDoBOHQBiH9X7D1BeHQJwHuvmDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5JeDMvsVcBUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuBOHQXODQFaZ1zGV5BOHgvOVcFeDuFqHMF7D9XOZ1FGDSBeHuB/HgNOHErCH5FYHMX7DcXGDQBqHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSFGHAN7V5XGHgrwVcFeV5X7HIJsDcBqZ1FaHAN7HQFUHgNKDkXKDWFqVoBiHQJKDuFaHIBeHuXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBqDMvOV9FeDWF/HMBqDcJUZ1F7Z1BeD5BOHgBeVkJqDuJeHIF7HQNwDQJwHAveVWJwDMBOVIBODWFYHMJeHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBODWFaDorqDcNwH9FaHANOV5FaDEBOVkJGH5F/DoraD9NwZSFUZ1rwV5JeHuzGVIBOV5X7DoNUD9BiZ1B/D1rwZMB/DEBOZSJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuXGDEBOVkXeHEFqHMFGHQBiDQB/DSBYHQNUDMNOV9FeDuFqHMFGD9JmZkBiDSrYHQX7HgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAzGD5BqHgveDkXKDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuX7HMJsD9BsH9FaHAzGZMBODMzGHEXeDuJeVoFGHQNwZSX7HIrwHuX7DMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2446,7 +2448,7 @@ class graf_ventas_productos_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['graf_disp']        = array('Bar');
           $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -2528,6 +2530,8 @@ class graf_ventas_productos_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2932,10 +2936,15 @@ class graf_ventas_productos_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_orig'] = " where f.tipo = 'FV'";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_pesq_filtro'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['Grid_search']       = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['tot_geral']);
@@ -3329,7 +3338,7 @@ class graf_ventas_productos_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -5146,22 +5155,23 @@ SCEOT;
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_chart_title'] ?>  :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -5955,14 +5965,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos'][$path_doc_
            $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['graf_ventas_productos']['embutida_form'])
        {

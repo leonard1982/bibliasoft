@@ -217,8 +217,8 @@ class blank_fe_factura_tech__ini
       $this->nm_dt_criacao   = "20200603"; 
       $this->nm_hr_criacao   = "152108"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -784,6 +784,8 @@ class blank_fe_factura_tech__ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -908,7 +910,7 @@ class blank_fe_factura_tech__ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_fe_factura_tech_']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_fe_factura_tech_']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDuBqD1NKVWBODMzGVcXKH5XCHMraHQBsH9BOD1rKHuJeHgrKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIBiHQBsZkBiHIveHQF7DMBYVkJqDWr/HIJeDcXGH9BiHANOHuJeHuNOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBODWF/DoraDcNwH9B/HANOD5NUDMBYZSJGH5F/ZuB/D9NwH9X7HArYV5raHuBYVcFKDWFYVoBqD9JmZ1X7Z1BOV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsH5F/VoBqDcXGZSFUZ1rwV5FaHuvmVIBODWF/HMrqHQXOZ1FGDSNOHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMXGHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcXKH5XCHIJsD9JmH9B/Z1NOV5FUHgBOZSJGDWr/HIB/HQFYH9X7D1veV5JeDMzGVIB/DWJeHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQX7Z1N7D5B/HgvOVIBOH5B7VoF7HQBsZ1BOHAN7V5BOHgvsHErsDWX7HIrqDcBwDuFaHAN7HuJwHuBYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJeDcXGZ9F7HABYHQNUHuBOVcFKHEBmVEraDcJUZkBiHINKZMB/DEBeZSJGH5FYDoJsHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwH9X7HABYV5raHgrKVIBODWFaVoBqD9BiZ1rqHArYD5XGDMBYHEJqV5FaZuFaDcBwDQX7D1BeD5BOHgrYZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiD9BiH9BODSrYHQFaDMNKZSJ3DWXCHMFGDcBwDQFUHIrwD5BqDMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoX7HQBqZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcXGDQFaHANOD5NUDMrYVcFCHEFYHIFGD9BiH9B/DSBeV5XGHgNOHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2162,6 +2164,13 @@ if(isset($this->dse[0][0]))
                  $SCrx->fields[46] = str_replace(',', '.', $SCrx->fields[46]);
                  $SCrx->fields[51] = str_replace(',', '.', $SCrx->fields[51]);
                  $SCrx->fields[52] = str_replace(',', '.', $SCrx->fields[52]);
+                 $SCrx->fields[60] = str_replace(',', '.', $SCrx->fields[60]);
+                 $SCrx->fields[61] = str_replace(',', '.', $SCrx->fields[61]);
+                 $SCrx->fields[62] = str_replace(',', '.', $SCrx->fields[62]);
+                 $SCrx->fields[63] = str_replace(',', '.', $SCrx->fields[63]);
+                 $SCrx->fields[64] = str_replace(',', '.', $SCrx->fields[64]);
+                 $SCrx->fields[65] = str_replace(',', '.', $SCrx->fields[65]);
+                 $SCrx->fields[68] = str_replace(',', '.', $SCrx->fields[68]);
                  $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
                  $SCrx->fields[0] = (string)$SCrx->fields[0];
                  $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
@@ -2218,6 +2227,20 @@ if(isset($this->dse[0][0]))
                  $SCrx->fields[51] = (string)$SCrx->fields[51];
                  $SCrx->fields[52] = (strpos(strtolower($SCrx->fields[52]), "e")) ? (float)$SCrx->fields[52] : $SCrx->fields[52];
                  $SCrx->fields[52] = (string)$SCrx->fields[52];
+                 $SCrx->fields[60] = (strpos(strtolower($SCrx->fields[60]), "e")) ? (float)$SCrx->fields[60] : $SCrx->fields[60];
+                 $SCrx->fields[60] = (string)$SCrx->fields[60];
+                 $SCrx->fields[61] = (strpos(strtolower($SCrx->fields[61]), "e")) ? (float)$SCrx->fields[61] : $SCrx->fields[61];
+                 $SCrx->fields[61] = (string)$SCrx->fields[61];
+                 $SCrx->fields[62] = (strpos(strtolower($SCrx->fields[62]), "e")) ? (float)$SCrx->fields[62] : $SCrx->fields[62];
+                 $SCrx->fields[62] = (string)$SCrx->fields[62];
+                 $SCrx->fields[63] = (strpos(strtolower($SCrx->fields[63]), "e")) ? (float)$SCrx->fields[63] : $SCrx->fields[63];
+                 $SCrx->fields[63] = (string)$SCrx->fields[63];
+                 $SCrx->fields[64] = (strpos(strtolower($SCrx->fields[64]), "e")) ? (float)$SCrx->fields[64] : $SCrx->fields[64];
+                 $SCrx->fields[64] = (string)$SCrx->fields[64];
+                 $SCrx->fields[65] = (strpos(strtolower($SCrx->fields[65]), "e")) ? (float)$SCrx->fields[65] : $SCrx->fields[65];
+                 $SCrx->fields[65] = (string)$SCrx->fields[65];
+                 $SCrx->fields[68] = (strpos(strtolower($SCrx->fields[68]), "e")) ? (float)$SCrx->fields[68] : $SCrx->fields[68];
+                 $SCrx->fields[68] = (string)$SCrx->fields[68];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                         $this->dsf[$SCy] [$SCx] = $SCrx->fields[$SCx];

@@ -28,9 +28,12 @@ class grid_report_refventacostogarancia_grid
    var $NM_opcao; 
    var $NM_flag_antigo; 
    var $nm_campos_cab = array();
-   var $NM_cmp_hidden = array();
-   var $nmgp_botoes = array();
-   var $Cmps_ord_def = array();
+   var $NM_cmp_hidden   = array();
+   var $nmgp_botoes     = array();
+   var $nm_btn_exist    = array();
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array();
+   var $Cmps_ord_def    = array();
    var $nmgp_label_quebras = array();
    var $nmgp_prim_pag_pdf;
    var $Campos_Mens_erro;
@@ -433,7 +436,7 @@ class grid_report_refventacostogarancia_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['mostra_edit'] = "N";
        }
    }
-   if ($this->Ini->SC_Link_View || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_psq'])
+   if ($this->Ini->SC_Link_View || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_psq'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['psq_edit'] == 'N'))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['mostra_edit'] = "N";
    }
@@ -1758,6 +1761,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            { 
                $nm_saida->saida("   function sc_session_redir(url_redir)\r\n");
                $nm_saida->saida("   {\r\n");
+           $nm_saida->saida("       if (typeof(sc_session_redir_mobile) === typeof(function(){})) { sc_session_redir_mobile(url_redir); }\r\n");
                $nm_saida->saida("       if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')\r\n");
                $nm_saida->saida("       {\r\n");
                $nm_saida->saida("           window.parent.sc_session_redir(url_redir);\r\n");
@@ -1892,6 +1896,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("  }\r\n");
            $nm_saida->saida("  function SC_init_jquery(isScrollNav){ \r\n");
            $nm_saida->saida("   \$(function(){ \r\n");
+           $nm_saida->saida("     NM_btn_disable();\r\n");
            if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['qsearch'] == "on")
            {
                $nm_saida->saida("     \$('#SC_fast_search_top').keyup(function(e) {\r\n");
@@ -2507,7 +2512,7 @@ $nm_saida->saida("}\r\n");
            {
                $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
            }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
@@ -2541,7 +2546,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        }
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opcao'] != "pdf" && !$this->Print_All)
@@ -8579,6 +8584,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       {
       $pos_path = strrpos($this->Ini->path_prod, "/");
       $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
+              $this->nm_btn_exist['sel_col'][] = "selcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -8597,6 +8603,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $UseAlias =  "S";
           }
+              $this->nm_btn_exist['sort_col'][] = "ordcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -8618,6 +8625,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           }
           if ($Q_count > 1 || $Q_free)
           {
+              $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -8649,7 +8657,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       {
           $Tem_pdf_res = "n";
       }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['pdf'][] = "pdf_top";
+          $nm_saida->saida("            <div id=\"div_pdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=0&apapel=0&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=S&nm_all_cab=N&nm_all_label=N&nm_orient_grid=2&password=n&summary_export_columns=N&pdf_zip=N&origem=cons&language=es&conf_socor=S&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_report_refventacostogarancia&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -8672,7 +8681,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $Tem_word_res = "n";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_word_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['word'][] = "word_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -8695,7 +8705,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $Xls_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xls'][] = "xls_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_move('xls', '1', '$Xls_mod_export');", "nm_gp_move('xls', '1', '$Xls_mod_export');", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -8723,7 +8734,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $Xml_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xml'][] = "xml_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -8746,7 +8758,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $Csv_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_csv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['csv'][] = "csv_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -8755,7 +8768,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_rtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['rtf'][] = "rtf_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -8778,7 +8792,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
               $Tem_pdf_res = "n";
           }
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_print_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['print'][] = "print_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=PC&nm_cor=PB&password=n&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -8797,7 +8812,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $NM_btn = false;
               $NM_ult_sep = "NM_sep_1";
-              $nm_saida->saida("          <img id=\"NM_sep_1\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $nm_saida->saida("          <img id=\"NM_sep_1\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['SC_Ind_Groupby'] != "_NM_SC_")
@@ -8807,6 +8822,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['SC_Gb_Free_cmp']))
             { }
             else {
+              $this->nm_btn_exist['summary'][] = "res_top";
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_resumo'])) {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
@@ -8829,6 +8845,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
           $nm_saida->saida("            <div id='id_save_grid_div_top' style='display:inline-block'>\r\n");
           }
+              $this->nm_btn_exist['gridsave'][] = "save_grid_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgridsave", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "save_grid_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
@@ -8845,7 +8862,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $NM_btn = false;
               $NM_ult_sep = "NM_sep_2";
-              $nm_saida->saida("          <img id=\"NM_sep_2\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $nm_saida->saida("          <img id=\"NM_sep_2\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
           if (is_file("grid_report_refventacostogarancia_help.txt") && !$this->grid_emb_form)
@@ -8873,6 +8890,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       }
       if ($this->nmgp_botoes['exit'] == "on")
       {
+          $this->nm_btn_exist['exit'][] = "sai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('busca', '0', '');", "nm_gp_move('busca', '0', '');", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
@@ -8933,6 +8951,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
           {
               $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['qt_lin_grid'];
+              $this->nm_btn_exist['goto'][] = "brec_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "birpara", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "brec_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $Page_Atu   = ceil($this->nmgp_reg_inicial / $Reg_Page);
@@ -8968,6 +8987,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['first'][] = "first_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -8982,6 +9002,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           }
           if ($this->nmgp_botoes['back'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['back'][] = "back_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -9040,12 +9061,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           }
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['forward'][] = "forward_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['last'][] = "last_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -9058,14 +9081,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_report_refventacostogarancia_help.txt") && !$this->grid_emb_form)
@@ -9206,7 +9229,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       {
           $Tem_pdf_res = "n";
       }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['pdf'][] = "pdf_top";
+          $nm_saida->saida("            <div id=\"div_pdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=0&apapel=0&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=S&nm_all_cab=N&nm_all_label=N&nm_orient_grid=2&password=n&summary_export_columns=N&pdf_zip=N&origem=cons&language=es&conf_socor=S&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_report_refventacostogarancia&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9229,7 +9253,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $Tem_word_res = "n";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_word_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['word'][] = "word_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9252,7 +9277,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $Xls_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xls'][] = "xls_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_move('xls', '1', '$Xls_mod_export');", "nm_gp_move('xls', '1', '$Xls_mod_export');", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9280,7 +9306,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $Xml_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xml'][] = "xml_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9303,7 +9330,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $Csv_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_csv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['csv'][] = "csv_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9312,7 +9340,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_rtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['rtf'][] = "rtf_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9335,7 +9364,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
               $Tem_pdf_res = "n";
           }
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_print_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['print'][] = "print_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=PC&nm_cor=PB&password=n&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9360,7 +9390,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['filter'] == "on"  && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_pesq_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+           $this->nm_btn_exist['filter'][] = "pesq_top";
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'grid');", "nm_gp_move('busca', '0', 'grid');", "pesq_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
            $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9374,9 +9405,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       if ($this->nmgp_botoes['sel_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_selcmp_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
       $pos_path = strrpos($this->Ini->path_prod, "/");
       $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
+              $this->nm_btn_exist['sel_col'][] = "selcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9397,7 +9429,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           {
               $UseAlias =  "S";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_ordcmp_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['sort_col'][] = "ordcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9411,7 +9444,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       if ($this->nmgp_botoes['groupby'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_sel_groupby_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
           $Q_free  = false;
           $Q_count = 0;
           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['SC_All_Groupby'] as $QB => $Tp)
@@ -9427,6 +9460,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           }
           if ($Q_count > 1 || $Q_free)
           {
+              $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_report_refventacostogarancia/grid_report_refventacostogarancia_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -9441,7 +9475,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
             { }
             else {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_res_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['summary'][] = "res_top";
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['where_resumo'])) {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
@@ -9467,11 +9502,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
               $save_grid_format = 'extended';
           }
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_save_grid_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
           if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
           {
           $nm_saida->saida("            <div id='id_save_grid_div_top' style='display:inline-block'>\r\n");
           }
+              $this->nm_btn_exist['gridsave'][] = "save_grid_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgridsave", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "save_grid_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
@@ -9524,6 +9560,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       }
       if ($this->nmgp_botoes['exit'] == "on")
       {
+          $this->nm_btn_exist['exit'][] = "sai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('busca', '0', '');", "nm_gp_move('busca', '0', '');", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
@@ -9581,6 +9618,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
       {
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['first'][] = "first_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -9595,6 +9633,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
           }
           if ($this->nmgp_botoes['back'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['back'][] = "back_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -9613,24 +9652,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['forward'][] = "forward_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['last'][] = "last_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -9785,7 +9826,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -9835,7 +9877,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogarancia']['fast_search'][1] == 'eq')
@@ -10215,6 +10258,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_report_refventacostogaran
    $nm_saida->saida("      NM_obj_ant = obj;\r\n");
    $nm_saida->saida("      ind_time = setTimeout(\"obj.style.display='none'\", 300);\r\n");
    $nm_saida->saida("      return ind_time;\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+       $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+       $nm_saida->saida("     $('#div_" . $cada_id . "').addClass('disabled');\r\n");
+         }
+      }
+   }
    $nm_saida->saida("   }\r\n");
    $str_pbfile = $this->Ini->root . $this->Ini->path_imag_temp . '/sc_pb_' . session_id() . '.tmp';
    if (@is_file($str_pbfile) && $flag_apaga_pdf_log)

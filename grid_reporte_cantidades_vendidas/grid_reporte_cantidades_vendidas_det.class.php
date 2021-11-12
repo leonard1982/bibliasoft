@@ -7,7 +7,10 @@ class grid_reporte_cantidades_vendidas_det
    var $Db;
    var $nm_data;
    var $NM_raiz_img; 
-   var $nmgp_botoes; 
+   var $nmgp_botoes     = array(); 
+   var $nm_btn_exist    = array(); 
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array(); 
    var $nm_location;
    var $f_fechaven;
    var $factura;
@@ -48,7 +51,8 @@ class grid_reporte_cantidades_vendidas_det
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_cantidades_vendidas']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_cantidades_vendidas']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_cantidades_vendidas']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -98,7 +102,8 @@ class grid_reporte_cantidades_vendidas_det
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_cantidades_vendidas']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_cantidades_vendidas']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_cantidades_vendidas']['fast_search'][1] == 'eq')
@@ -424,7 +429,7 @@ $nm_saida->saida("</script>\r\n");
    if (!$this->Ini->Export_html_zip && !$this->Ini->Export_det_zip && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_cantidades_vendidas']['det_print'] == "print")
    {
        $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
-       $nm_saida->saida("  <body class=\"scGridPage\"  style=\"-webkit-print-color-adjust: exact;\">\r\n");
+       $nm_saida->saida("  <body id=\"grid_detail\" class=\"scGridPage\"  style=\"-webkit-print-color-adjust: exact;\">\r\n");
        $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" >\r\n");
        $nm_saida->saida("     <TR>\r\n");
        $nm_saida->saida("       <TD>\r\n");
@@ -447,7 +452,7 @@ $nm_saida->saida("</script>\r\n");
    }
    else
    {
-       $nm_saida->saida("  <body class=\"scGridPage\">\r\n");
+       $nm_saida->saida("  <body id=\"grid_detail\" class=\"scGridPage\">\r\n");
    }
    $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
            $nm_saida->saida("  <div id=\"id_div_process\" style=\"display: none; margin: 10px; whitespace: nowrap\" class=\"scFormProcessFixed\"><span class=\"scFormProcess\"><img border=\"0\" src=\"" . $this->Ini->path_icones . "/scriptcase__NM__ajax_load.gif\" align=\"absmiddle\" />&nbsp;" . $this->Ini->Nm_lang['lang_othr_prcs'] . "...</span></div>\r\n");
@@ -786,6 +791,9 @@ $nm_saida->saida("</script>\r\n");
    $nm_saida->saida(" <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
    $nm_saida->saida("</form> \r\n");
    $nm_saida->saida("<script language=JavaScript>\r\n");
+   $nm_saida->saida("   $(function(){ \r\n");
+   $nm_saida->saida("       NM_btn_disable();\r\n");
+   $nm_saida->saida("   }); \r\n");
    $nm_saida->saida("   function nm_submit_modal(parms, t_parent) \r\n");
    $nm_saida->saida("   { \r\n");
    $nm_saida->saida("      if (t_parent == 'S' && typeof parent.tb_show == 'function')\r\n");
@@ -845,6 +853,16 @@ $nm_saida->saida("</script>\r\n");
    $nm_saida->saida("          document.Fprint.submit() ;\r\n");
    $nm_saida->saida("      }\r\n");
    $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+           $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+         }
+      }
+   }
+   $nm_saida->saida("   }\r\n");
    $nm_saida->saida("</script>\r\n");
    $nm_saida->saida("</body>\r\n");
    $nm_saida->saida("</html>\r\n");
@@ -861,14 +879,17 @@ $nm_saida->saida("</script>\r\n");
        $nm_saida->saida("          <td class=\"scGridToolbarPadding\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
        if ($this->nmgp_botoes['det_pdf'] == "on")
        {
+         $this->nm_btn_exist['det_pdf'][] = "Dpdf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "Dpdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_cantidades_vendidas/grid_reporte_cantidades_vendidas_config_pdf.php?nm_opc=pdf_det&nm_target=0&nm_cor=cor&papel=1&orientacao=1&largura=1200&conf_larg=S&conf_fonte=10&language=es&conf_socor=S&sc_ver_93=" . s . "&password=n&pdf_zip=N&KeepThis=false&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
        }
        if ($this->nmgp_botoes['det_print'] == "on")
        {
+         $this->nm_btn_exist['det_print'][] = "Dprint_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "Dprint_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_cantidades_vendidas/grid_reporte_cantidades_vendidas_config_print.php?nm_opc=detalhe&nm_cor=PB&password=n&language=es&KeepThis=true&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
        }
+         $this->nm_btn_exist['det_exit'][] = "sc_b_sai_top";
        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F3.submit();", "document.F3.submit();", "sc_b_sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
        $nm_saida->saida("           $Cod_Btn \r\n");
        $nm_saida->saida("         </td> \r\n");
@@ -888,14 +909,17 @@ $nm_saida->saida("</script>\r\n");
        $nm_saida->saida("     <td class=\"scGridToolbarPadding\" nowrap valign=\"middle\" align=\"left\" width=\"33%\">\r\n");
        if ($this->nmgp_botoes['det_pdf'] == "on")
        {
+         $this->nm_btn_exist['det_pdf'][] = "Dpdf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "Dpdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_cantidades_vendidas/grid_reporte_cantidades_vendidas_config_pdf.php?nm_opc=pdf_det&nm_target=0&nm_cor=cor&papel=1&orientacao=1&largura=1200&conf_larg=S&conf_fonte=10&language=es&conf_socor=S&sc_ver_93=" . s . "&password=n&pdf_zip=N&KeepThis=false&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
        }
        if ($this->nmgp_botoes['det_print'] == "on")
        {
+         $this->nm_btn_exist['det_print'][] = "Dprint_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "Dprint_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_reporte_cantidades_vendidas/grid_reporte_cantidades_vendidas_config_print.php?nm_opc=detalhe&nm_cor=PB&password=n&language=es&KeepThis=true&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
        }
+         $this->nm_btn_exist['det_exit'][] = "sc_b_sai_top";
        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F3.submit();", "document.F3.submit();", "sc_b_sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
        $nm_saida->saida("           $Cod_Btn \r\n");
        $nm_saida->saida("     </td>\r\n");

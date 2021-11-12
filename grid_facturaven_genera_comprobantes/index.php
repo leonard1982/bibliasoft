@@ -230,8 +230,8 @@ class grid_facturaven_genera_comprobantes_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -941,6 +941,8 @@ class grid_facturaven_genera_comprobantes_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "facilweb_azul2_iconos";
       $_SESSION['scriptcase']['str_button_all'] = $str_button;
@@ -1133,7 +1135,7 @@ class grid_facturaven_genera_comprobantes_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_genera_comprobantes']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_genera_comprobantes']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDQFUHIrKHQB/HuBOVcFKHEF/VoF7D9JmVIJsHABYHQBODEvsVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNOHEJGH5FYHIXGD9XsDuBOZ1zGV5BODMBYDkBsDWFaHMXGDcNmZSBOD1rKZMJeHgvsHArCDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUDcBwH9X7HArYV5FGHuBYVcrsDWFYVoX7DcBqZ1FaHANOV5FaDEBOVkJqV5FaVoBqDcBwDQX7Z1N7D5JwHuzGVIBODWFaVoJwDcBqH9B/Z1BeV5X7DErKHEBUDWr/DoB/DcJeH9X7HArYD5NUHuBYVcFKDWFYVoFGHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMzGVIB/DWXCVoraHQNmH9FaHAN7HQF7DErKHArCV5XKZuFaD9FYDQJsHIBeHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBODkB/DuFaHIraHQXODQFGD1veD5JeHgrKVcFKH5FqHMJeD9BiZ1F7D1rKHQFUDENOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwH9X7DSBYV5FUHuNOVIBsH5XCVoF7HQNmH9B/Z1NOHuFGHgrKZSJqH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHENiH5F/ZuFaHQFYZSX7HANOHuJeDMrYVIBsV5X7VErqHQBqZ1FaHArYZMFaDMveHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaVoBODcJeDQX7D1BeVWJsHuBYVcFCDWJeVoB/D9BiZSB/HArYV5FUDMNKZSXeDuFaVoB/D9XsH9X7HABYV5BOHgvsVcB/V5X7VoBqD9BsH9B/Z1rYD5BqDErKVkXeV5FaDorqDcJeDQX7Z1N7VWJsHgrKVcFCH5B7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JeHuvmVIBsHEFYHIJsD9XOZ1FGZ1NOD5BqHgvsDkFeV5FqDoB/DcBwH9FGD1BeD5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHAvOV5JeDMvOZSNiDur/HMBiD9BsVIraD1rwV5X7HgBeHErCH5F/HIJwHQXGDQFGHABYHuNUHuzGVcrsDWXCDoF7D9BsH9B/HINaZMBOHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_genera_comprobantes']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_genera_comprobantes']['initialize'])  
       { 
@@ -4879,7 +4881,7 @@ class grid_facturaven_genera_comprobantes_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['graf_disp']        = array('Bar', 'Pie', 'Line', 'Area');
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -4961,6 +4963,8 @@ class grid_facturaven_genera_comprobantes_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "facilweb_azul2_iconos";
       $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
@@ -5474,11 +5478,16 @@ class grid_facturaven_genera_comprobantes_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_orig'] = " where tipo='FV' and asentada=1 and total >0";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes']['tot_geral']);
@@ -5996,7 +6005,7 @@ class grid_facturaven_genera_comprobantes_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -11478,22 +11487,23 @@ $_SESSION['scriptcase']['grid_facturaven_genera_comprobantes']['contr_erro'] = '
 <HEAD>
  <TITLE>Lista de Facturas de Venta - Generar Comprobantes de Contabilidad :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobantes'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -12344,14 +12354,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_genera_comprobante
            $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_facturaven_genera_comprobantes']['embutida_form'])
        {

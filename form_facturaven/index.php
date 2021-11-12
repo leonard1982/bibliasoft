@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -300,9 +301,9 @@ class form_facturaven_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20171228"; 
       $this->nm_hr_criacao   = "114359"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_autor_alt    = "edgar"; 
+      $this->nm_dt_ult_alt   = "20211111"; 
+      $this->nm_hr_ult_alt   = "171105"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -535,8 +536,7 @@ class form_facturaven_ini
           }
       }
       if (isset($_SESSION['scriptcase']['form_facturaven']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -1106,7 +1106,7 @@ class form_facturaven_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDuBqHIrKVWXGDMvmV9BUH5FqDoJsD9XOZSBqHAN7HQJwDEBODkFeH5FYVoFGHQJKDQBqHArYHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsVcXKDWXCHMFGDcNmZ1X7HAN7V5FaHgveHEJqH5BmDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSB/Z1BeD5XGDEBOHEJqV5FaVoBODcJeDQX7D1BeVWJsHuBYVcFCDWJeVoB/D9BiZSB/HArYV5FUHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoFGHQJKZSX7DSrwHuBqDMzGVcrsDur/VEraD9BsZ1F7DSrYD5JwDEvsVkJ3HEXCHIJeHQXOZSX7D1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHANKVWBODMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCV5FaHMFGHQXsDQX7HAN7V5X7DMNOVcFCDWF/DoFGD9XGZ1B/HIrwD5BqHgrKHErsDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeH9X7Z1rwV5JwHgrKDkB/DWFaVoBOHQBiH9B/HIveD5JeDErKHEBUDWX7HIF7D9NmDQFUDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQBqHAveV5JwHgvsDkB/DWF/DoF7HQXGZ1BOD1rKHQFaHgNOHErCDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HANOD5FaDErKVkXeV5FqDoFUDcBwH9X7HArYV5FGHuBYVcrsDWFYVoX7DcBqZ1FaHANOV5FaDEBODkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1F7D1rwZMFaDMBYDkXKHEFqDoB/D9JKH9FGDSN7V5JeHgrKVcFeDWFaHMJwHQBiZSFaHABYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAzGD5BOHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaHuNOVcBUHEFYDoJsHQXOZkFGZ1NOHQXGDMveVkJqDWX7ZuJsDcBwDQX7HABYHQJeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2828,6 +2828,11 @@ ob_start();
     sajax_export("ajax_form_facturaven_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_facturaven->contr_form_facturaven->controle();
 //
     function nm_limpa_str_form_facturaven(&$str)
@@ -3857,6 +3862,10 @@ ob_start();
       global $inicial_form_facturaven;
       $aResp = array();
 
+      if (isset($inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['empty_filter'];
@@ -3953,6 +3962,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['btnDisabled']) && '' != $inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['btnDisabled'])
+         {
+            form_facturaven_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['btnLabel']) && '' != $inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['btnLabel'])
+         {
+            form_facturaven_pack_btn_label($aResp);
          }
          if (isset($inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['varList']) && !empty($inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['varList']))
          {
@@ -4057,8 +4074,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -4307,6 +4329,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_facturaven_pack_master_value
+
+   function form_facturaven_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_facturaven;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_facturaven_pack_ajax_alert
+
+   function form_facturaven_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_facturaven;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_facturaven->contr_form_facturaven->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_facturaven_pack_ajax_alert
 
    function form_facturaven_pack_ajax_alert(&$aResp)
    {

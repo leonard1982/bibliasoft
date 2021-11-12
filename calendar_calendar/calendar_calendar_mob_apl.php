@@ -318,6 +318,12 @@ class calendar_calendar_mob_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['calendar_calendar_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['calendar_calendar_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['calendar_calendar_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['calendar_calendar_mob']['embutida_parms'];
@@ -1931,11 +1937,14 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->scFormFocusErrorName = '';
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1953,67 +1962,67 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $_SESSION['sc_session'][$this->Ini->sc_page]['calendar_calendar_mob']['bypass_required_time']['start_time'] = true;
           $_SESSION['sc_session'][$this->Ini->sc_page]['calendar_calendar_mob']['bypass_required_time']['end_time'] = true;
       }
-      if ('' == $filtro || 'title' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'title' == $filtro)) || (is_array($filtro) && in_array('title', $filtro)))
         $this->ValidateField_title($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "title";
 
-      if ('' == $filtro || 'description' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'description' == $filtro)) || (is_array($filtro) && in_array('description', $filtro)))
         $this->ValidateField_description($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "description";
 
-      if ('' == $filtro || 'category' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'category' == $filtro)) || (is_array($filtro) && in_array('category', $filtro)))
         $this->ValidateField_category($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "category";
 
-      if ('' == $filtro || 'id_api' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_api' == $filtro)) || (is_array($filtro) && in_array('id_api', $filtro)))
         $this->ValidateField_id_api($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "id_api";
 
-      if ('' == $filtro || 'event_color' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'event_color' == $filtro)) || (is_array($filtro) && in_array('event_color', $filtro)))
         $this->ValidateField_event_color($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "event_color";
 
-      if ('' == $filtro || 'start_date' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'start_date' == $filtro)) || (is_array($filtro) && in_array('start_date', $filtro)))
         $this->ValidateField_start_date($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "start_date";
 
-      if ('' == $filtro || 'end_date' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'end_date' == $filtro)) || (is_array($filtro) && in_array('end_date', $filtro)))
         $this->ValidateField_end_date($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "end_date";
 
-      if ('' == $filtro || 'start_time' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'start_time' == $filtro)) || (is_array($filtro) && in_array('start_time', $filtro)))
         $this->ValidateField_start_time($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "start_time";
 
-      if ('' == $filtro || 'end_time' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'end_time' == $filtro)) || (is_array($filtro) && in_array('end_time', $filtro)))
         $this->ValidateField_end_time($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "end_time";
 
-      if ('' == $filtro || '__calend_all_day__' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || '__calend_all_day__' == $filtro)) || (is_array($filtro) && in_array('__calend_all_day__', $filtro)))
         $this->ValidateField___calend_all_day__($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "__calend_all_day__";
 
-      if ('' == $filtro || 'recurrence' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'recurrence' == $filtro)) || (is_array($filtro) && in_array('recurrence', $filtro)))
         $this->ValidateField_recurrence($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "recurrence";
 
-      if ('' == $filtro || 'period' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'period' == $filtro)) || (is_array($filtro) && in_array('period', $filtro)))
         $this->ValidateField_period($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "period";
 
-      if ('' == $filtro || 'recur_info' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'recur_info' == $filtro)) || (is_array($filtro) && in_array('recur_info', $filtro)))
         $this->ValidateField_recur_info($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "recur_info";
@@ -5143,7 +5152,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['calendar_calendar_mob']['Lookup_pe
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -8128,5 +8138,33 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_b.sc-unique-btn-1", "sc_b_new_b.sc-unique-btn-9");
+                break;
+            case "insert":
+                return array("sc_b_ins_b.sc-unique-btn-2", "sc_b_ins_b.sc-unique-btn-10");
+                break;
+            case "update":
+                return array("sc_b_upd_b.sc-unique-btn-3", "sc_b_upd_b.sc-unique-btn-11");
+                break;
+            case "delete":
+                return array("sc_b_del_b.sc-unique-btn-4", "sc_b_del_b.sc-unique-btn-12");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-5", "sys_separator.sc-unique-btn-13");
+                break;
+            case "help":
+                return array("sc_b_hlp_b");
+                break;
+            case "exit":
+                return array("sc_b_sai_b.sc-unique-btn-6", "sc_b_sai_b.sc-unique-btn-8", "sc_b_sai_b.sc-unique-btn-14", "sc_b_sai_b.sc-unique-btn-16", "sc_b_sai_b.sc-unique-btn-7", "sc_b_sai_b.sc-unique-btn-15");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

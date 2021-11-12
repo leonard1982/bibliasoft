@@ -438,6 +438,12 @@ class form_etiquetas_mob_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_etiquetas_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_etiquetas_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_etiquetas_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_etiquetas_mob']['embutida_parms'];
@@ -2262,10 +2268,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2278,75 +2287,75 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_etiquetas_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'idetiqueta' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idetiqueta' == $filtro)) || (is_array($filtro) && in_array('idetiqueta', $filtro)))
         $this->ValidateField_idetiqueta($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre_configuracion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_configuracion' == $filtro)) || (is_array($filtro) && in_array('nombre_configuracion', $filtro)))
         $this->ValidateField_nombre_configuracion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'titulo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'titulo' == $filtro)) || (is_array($filtro) && in_array('titulo', $filtro)))
         $this->ValidateField_titulo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idfamilia' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idfamilia' == $filtro)) || (is_array($filtro) && in_array('idfamilia', $filtro)))
         $this->ValidateField_idfamilia($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigo' == $filtro)) || (is_array($filtro) && in_array('codigo', $filtro)))
         $this->ValidateField_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nompro' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nompro' == $filtro)) || (is_array($filtro) && in_array('nompro', $filtro)))
         $this->ValidateField_nompro($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'descripcion' == $filtro)) || (is_array($filtro) && in_array('descripcion', $filtro)))
         $this->ValidateField_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'size_letra_descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'size_letra_descripcion' == $filtro)) || (is_array($filtro) && in_array('size_letra_descripcion', $filtro)))
         $this->ValidateField_size_letra_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_letra' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_letra' == $filtro)) || (is_array($filtro) && in_array('tipo_letra', $filtro)))
         $this->ValidateField_tipo_letra($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'columnas' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'columnas' == $filtro)) || (is_array($filtro) && in_array('columnas', $filtro)))
         $this->ValidateField_columnas($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_codigo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_codigo' == $filtro)) || (is_array($filtro) && in_array('tipo_codigo', $filtro)))
         $this->ValidateField_tipo_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_imagen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_imagen' == $filtro)) || (is_array($filtro) && in_array('tipo_imagen', $filtro)))
         $this->ValidateField_tipo_imagen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'altura' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'altura' == $filtro)) || (is_array($filtro) && in_array('altura', $filtro)))
         $this->ValidateField_altura($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'anchura' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'anchura' == $filtro)) || (is_array($filtro) && in_array('anchura', $filtro)))
         $this->ValidateField_anchura($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'precio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'precio' == $filtro)) || (is_array($filtro) && in_array('precio', $filtro)))
         $this->ValidateField_precio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_codigo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_codigo' == $filtro)) || (is_array($filtro) && in_array('ver_codigo', $filtro)))
         $this->ValidateField_ver_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_descripcion' == $filtro)) || (is_array($filtro) && in_array('ver_descripcion', $filtro)))
         $this->ValidateField_ver_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'personalizado1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'personalizado1' == $filtro)) || (is_array($filtro) && in_array('personalizado1', $filtro)))
         $this->ValidateField_personalizado1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'personalizado2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'personalizado2' == $filtro)) || (is_array($filtro) && in_array('personalizado2', $filtro)))
         $this->ValidateField_personalizado2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'personalizado3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'personalizado3' == $filtro)) || (is_array($filtro) && in_array('personalizado3', $filtro)))
         $this->ValidateField_personalizado3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'espaciado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'espaciado' == $filtro)) || (is_array($filtro) && in_array('espaciado', $filtro)))
         $this->ValidateField_espaciado($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ancho_descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ancho_descripcion' == $filtro)) || (is_array($filtro) && in_array('ancho_descripcion', $filtro)))
         $this->ValidateField_ancho_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'size_letra_codigo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'size_letra_codigo' == $filtro)) || (is_array($filtro) && in_array('size_letra_codigo', $filtro)))
         $this->ValidateField_size_letra_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'size_letra_precio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'size_letra_precio' == $filtro)) || (is_array($filtro) && in_array('size_letra_precio', $filtro)))
         $this->ValidateField_size_letra_precio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'size_letra_perso1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'size_letra_perso1' == $filtro)) || (is_array($filtro) && in_array('size_letra_perso1', $filtro)))
         $this->ValidateField_size_letra_perso1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'size_letra_perso2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'size_letra_perso2' == $filtro)) || (is_array($filtro) && in_array('size_letra_perso2', $filtro)))
         $this->ValidateField_size_letra_perso2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'size_letra_perso3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'size_letra_perso3' == $filtro)) || (is_array($filtro) && in_array('size_letra_perso3', $filtro)))
         $this->ValidateField_size_letra_perso3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'posicion_codigo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'posicion_codigo' == $filtro)) || (is_array($filtro) && in_array('posicion_codigo', $filtro)))
         $this->ValidateField_posicion_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'posicion_descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'posicion_descripcion' == $filtro)) || (is_array($filtro) && in_array('posicion_descripcion', $filtro)))
         $this->ValidateField_posicion_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'posicion_precio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'posicion_precio' == $filtro)) || (is_array($filtro) && in_array('posicion_precio', $filtro)))
         $this->ValidateField_posicion_precio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'posicion_perso1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'posicion_perso1' == $filtro)) || (is_array($filtro) && in_array('posicion_perso1', $filtro)))
         $this->ValidateField_posicion_perso1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'posicion_perso2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'posicion_perso2' == $filtro)) || (is_array($filtro) && in_array('posicion_perso2', $filtro)))
         $this->ValidateField_posicion_perso2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'posicion_perso3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'posicion_perso3' == $filtro)) || (is_array($filtro) && in_array('posicion_perso3', $filtro)))
         $this->ValidateField_posicion_perso3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'alineacion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'alineacion' == $filtro)) || (is_array($filtro) && in_array('alineacion', $filtro)))
         $this->ValidateField_alineacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'copias' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'copias' == $filtro)) || (is_array($filtro) && in_array('copias', $filtro)))
         $this->ValidateField_copias($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
@@ -9354,7 +9363,8 @@ $_SESSION['scriptcase']['form_etiquetas_mob']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -10870,5 +10880,54 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-15");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-16");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-17");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4", "sc_b_upd_t.sc-unique-btn-18");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5", "sc_b_del_t.sc-unique-btn-19");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-23", "sc_b_sai_t.sc-unique-btn-25", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-24", "sc_b_sai_t.sc-unique-btn-26");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-11", "sc_b_ini_b.sc-unique-btn-27");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-12", "sc_b_ret_b.sc-unique-btn-28");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-13", "sc_b_avc_b.sc-unique-btn-29");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-14", "sc_b_fim_b.sc-unique-btn-30");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-20");
+                break;
+            case "copy":
+                return array("sc_b_clone_t.sc-unique-btn-21");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

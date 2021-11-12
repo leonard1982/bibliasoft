@@ -50,8 +50,8 @@ jQuery.fn.openInModalPane = function(params) {
             clickAction: function() {},
             preserveClick: (typeof params.preserveClick === 'undefined') ? false : params.preserveClick,
             execClickBeforeReady: (typeof params.execClickBeforeReady === 'undefined') ? false : params.execClickBeforeReady,
-            isFrame: (typeof params.isFrame === 'undefined') ? '' : 'nm-modalpane-isframe',
-            holdAjax: (typeof params.holdAjax === 'undefined') ? '' : 'nm-modalpane-holdajax',
+            isFrame: (typeof params.isFrame === 'undefined' || params.isFrame === false) ? '' : ' nm-modalpane-isframe ',
+            holdAjax: (typeof params.holdAjax === 'undefined' || params.holdAjax === false) ? '' : ' nm-modalpane-holdajax ',
             paneTitleText: (typeof params.paneTitleText === 'undefined' || params.paneTitleText === false) ? '' : params.paneTitleText,
             onClose: (typeof params.onClose === 'function') ? function(e,f,g) {
                 var ret = params.onClose(e,f,g);
@@ -120,12 +120,16 @@ jQuery.fn.openInModalPane = function(params) {
             if (options.openingButton === true) {
                 $($('.' + options.toolbarClass + ' .' + options.toolbarPaddingClass)[0]).append(' <a class="scButton_default" id="__mp_button_' + baseID + '" style="vertical-align: middle; display:inline-block;">' + options.paneTitleText + '</a>');
                 options.openingButton = '#__mp_button_' + baseID;
+            } else if (typeof options.openingButton === 'function') {
+                options.openingButton = options.openingButton(options, baseID);
             }
             openButton = $(options.openingButton);
             clickAction = openButton.attr('onclick');
             options.clickAction = function() {
                 try {
-                    eval(clickAction.replace('return', 'var dummyvarreplace = "";'));
+                    if (clickAction && clickAction.replace) {
+                        eval(clickAction.replace('return', 'var dummyvarreplace = "";'));
+                    }
                 } catch (ex) {
                     console.log(ex)
                 }
@@ -167,6 +171,7 @@ jQuery.fn.toggleModalPane = function(state, fromPop) {
     var _self = $(this[0]).closest('.modal-pane-container');
     var didPop = (typeof fromPop === 'undefined' || fromPop === false) ? false : fromPop;
     scBtnGrpHideMobile();
+    $('a.selected').removeClass('selected');
     if (_self[0]) {
         var baseID = _self[0].hasAttribute('id') ? _self.attr('id') : false;
         var paneHoldAjax = false;

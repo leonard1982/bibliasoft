@@ -2752,7 +2752,7 @@ foreach ($Arr_format as $Part_date)
 
 ?>
         <SPAN id="id_css_fechayhora"  class="scFilterFieldFontOdd">
- <?php echo $date_format_show ?>         </SPAN>
+ <br><?php echo $date_format_show ?>         </SPAN>
                   <br />
         <SPAN id="id_vis_fechayhora"  <?php echo $str_display_fechayhora; ?> class="scFilterFieldFontOdd">
          <?php echo $date_sep_bw ?> 

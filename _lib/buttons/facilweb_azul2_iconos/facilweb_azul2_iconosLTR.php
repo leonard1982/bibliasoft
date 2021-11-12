@@ -1170,4 +1170,49 @@
   $this->arr_buttons['bjson']['style'] = 'default';
   $this->arr_buttons['bjson']['image'] = 'sys__NM__nm_teste_bxml.gif';
 
+  $this->arr_buttons['bstepretorna']['hint']             = $Nm_lang['lang_btns_stepprev_hint'];
+  $this->arr_buttons['bstepretorna']['type']             = 'button';
+  $this->arr_buttons['bstepretorna']['value']            = $Nm_lang['lang_btns_stepprev'];
+  $this->arr_buttons['bstepretorna']['display']          = 'only_text';
+  $this->arr_buttons['bstepretorna']['display_position'] = 'text_right';
+  $this->arr_buttons['bstepretorna']['fontawesomeicon']  = 'fas fa-arrow-left';
+  $this->arr_buttons['bstepretorna']['style'] = 'default';
+  $this->arr_buttons['bstepretorna']['image'] = 'scriptcase__NM__nm_scriptcase8_saphir_bretorna.gif';
+
+  $this->arr_buttons['bstepavanca']['hint']             = $Nm_lang['lang_btns_stepnext_hint'];
+  $this->arr_buttons['bstepavanca']['type']             = 'button';
+  $this->arr_buttons['bstepavanca']['value']            = $Nm_lang['lang_btns_stepnext'];
+  $this->arr_buttons['bstepavanca']['display']          = 'only_text';
+  $this->arr_buttons['bstepavanca']['display_position'] = 'text_right';
+  $this->arr_buttons['bstepavanca']['fontawesomeicon']  = 'fas fa-arrow-right';
+  $this->arr_buttons['bstepavanca']['style'] = 'default';
+  $this->arr_buttons['bstepavanca']['image'] = 'scriptcase__NM__nm_scriptcase8_saphir_bcons_avanca.gif';
+
+  $this->arr_buttons['bfilref_apply']['hint']             = $Nm_lang['lang_btns_bfilref_apply_hint'];
+  $this->arr_buttons['bfilref_apply']['type']             = 'image';
+  $this->arr_buttons['bfilref_apply']['value']            = $Nm_lang['lang_btns_bfilref_apply'];
+  $this->arr_buttons['bfilref_apply']['display']          = 'only_text';
+  $this->arr_buttons['bfilref_apply']['display_position'] = 'text_right';
+  $this->arr_buttons['bfilref_apply']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_apply']['style'] = 'disabledSCImage';
+  $this->arr_buttons['bfilref_apply']['image'] = 'scriptcase__NM__gear_find_32.png';
+
+  $this->arr_buttons['bfilref_limpar']['hint']             = $Nm_lang['lang_btns_bfilref_limpar_hint'];
+  $this->arr_buttons['bfilref_limpar']['type']             = 'button';
+  $this->arr_buttons['bfilref_limpar']['value']            = $Nm_lang['lang_btns_bfilref_limpar'];
+  $this->arr_buttons['bfilref_limpar']['display']          = 'only_text';
+  $this->arr_buttons['bfilref_limpar']['display_position'] = 'text_right';
+  $this->arr_buttons['bfilref_limpar']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_limpar']['style'] = 'default';
+  $this->arr_buttons['bfilref_limpar']['image'] = 'sys__NM__nm_teste_blimpar.gif';
+
+  $this->arr_buttons['bfilref_close']['hint']             = $Nm_lang['lang_btns_bfilref_close_hint'];
+  $this->arr_buttons['bfilref_close']['type']             = 'image';
+  $this->arr_buttons['bfilref_close']['value']            = $Nm_lang['lang_btns_bfilref_close'];
+  $this->arr_buttons['bfilref_close']['display']          = 'only_text';
+  $this->arr_buttons['bfilref_close']['display_position'] = 'text_right';
+  $this->arr_buttons['bfilref_close']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_close']['style'] = 'disabledSCImage';
+  $this->arr_buttons['bfilref_close']['image'] = 'scriptcase__NM__escape_geral.png';
+
 ?>

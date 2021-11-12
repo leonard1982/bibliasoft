@@ -78,6 +78,7 @@ function scFocusField(sField) {
       case 'id_linea':
       case 'codigobar2':
       case 'codigobar3':
+      case 'para_registro_fe':
         sc_exib_ocult_pag('form_productos_form1');
         break;
     }
@@ -168,6 +169,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["id_linea" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["codigobar2" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["codigobar3" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["para_registro_fe" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -489,6 +491,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["codigobar3" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["para_registro_fe" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["para_registro_fe" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["idpro1" + iSeqRow]["autocomp"]) {
     return true;
   }
@@ -549,6 +557,9 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("id_linea" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("para_registro_fe" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("codigoprod" + iSeq == fieldName) {
@@ -804,6 +815,9 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_ubicacion' + iSeqRow).bind('blur', function() { sc_form_productos_ubicacion_onblur(this, iSeqRow) })
                                        .bind('change', function() { sc_form_productos_ubicacion_onchange(this, iSeqRow) })
                                        .bind('focus', function() { sc_form_productos_ubicacion_onfocus(this, iSeqRow) });
+  $('#id_sc_field_para_registro_fe' + iSeqRow).bind('blur', function() { sc_form_productos_para_registro_fe_onblur(this, iSeqRow) })
+                                              .bind('change', function() { sc_form_productos_para_registro_fe_onchange(this, iSeqRow) })
+                                              .bind('focus', function() { sc_form_productos_para_registro_fe_onfocus(this, iSeqRow) });
   $('#id_sc_field_sugerido_mayor' + iSeqRow).bind('blur', function() { sc_form_productos_sugerido_mayor_onblur(this, iSeqRow) })
                                             .bind('change', function() { sc_form_productos_sugerido_mayor_onchange(this, iSeqRow) })
                                             .bind('focus', function() { sc_form_productos_sugerido_mayor_onfocus(this, iSeqRow) });
@@ -1544,6 +1558,20 @@ function sc_form_productos_ubicacion_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_productos_para_registro_fe_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_para_registro_fe();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_para_registro_fe_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_para_registro_fe_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_productos_sugerido_mayor_onblur(oThis, iSeqRow) {
   do_ajax_form_productos_validate_sugerido_mayor();
   scCssBlur(oThis);
@@ -1803,6 +1831,7 @@ function displayChange_block_8(status) {
 	displayChange_field("id_linea", "", status);
 	displayChange_field("codigobar2", "", status);
 	displayChange_field("codigobar3", "", status);
+	displayChange_field("para_registro_fe", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -1860,6 +1889,7 @@ function displayChange_row(row, status) {
 	displayChange_field_id_linea(row, status);
 	displayChange_field_codigobar2(row, status);
 	displayChange_field_codigobar3(row, status);
+	displayChange_field_para_registro_fe(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -2024,6 +2054,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("codigobar3" == field) {
 		displayChange_field_codigobar3(row, status);
+	}
+	if ("para_registro_fe" == field) {
+		displayChange_field_para_registro_fe(row, status);
 	}
 }
 
@@ -2357,6 +2390,21 @@ function displayChange_field_codigobar2(row, status) {
 function displayChange_field_codigobar3(row, status) {
 }
 
+function displayChange_field_para_registro_fe(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_para_registro_fe__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_para_registro_fe" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "para_registro_fe");
+	}
+}
+
 function scRecreateSelect2() {
 	displayChange_field_idgrup("all", "on");
 	displayChange_field_tipo_producto("all", "on");
@@ -2372,6 +2420,7 @@ function scRecreateSelect2() {
 	displayChange_field_cod_cuenta("all", "on");
 	displayChange_field_id_marca("all", "on");
 	displayChange_field_id_linea("all", "on");
+	displayChange_field_para_registro_fe("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -2916,6 +2965,9 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "id_linea" == specificField) {
     scJQSelect2Add_id_linea(seqRow);
   }
+  if (null == specificField || "para_registro_fe" == specificField) {
+    scJQSelect2Add_para_registro_fe(seqRow);
+  }
 } // scJQSelect2Add
 
 function scJQSelect2Add_idgrup(seqRow) {
@@ -3170,6 +3222,25 @@ function scJQSelect2Add_id_linea(seqRow) {
   );
 } // scJQSelect2Add
 
+function scJQSelect2Add_para_registro_fe(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_para_registro_fe_obj" : "#id_sc_field_para_registro_fe" + seqRow;
+  $(elemSelector).select2(
+    {
+      minimumResultsForSearch: Infinity,
+      containerCssClass: 'css_para_registro_fe_obj',
+      dropdownCssClass: 'css_para_registro_fe_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -3192,6 +3263,7 @@ function scJQElementsAdd(iLine) {
   setTimeout(function () { if ('function' == typeof displayChange_field_cod_cuenta) { displayChange_field_cod_cuenta(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_id_marca) { displayChange_field_id_marca(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_id_linea) { displayChange_field_id_linea(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_para_registro_fe) { displayChange_field_para_registro_fe(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)

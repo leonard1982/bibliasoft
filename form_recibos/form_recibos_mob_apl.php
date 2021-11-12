@@ -364,6 +364,12 @@ class form_recibos_mob_apl
       {
           $_SESSION['gidcliente'] = $this->gidcliente;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_recibos_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_recibos_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_recibos_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_recibos_mob']['embutida_parms'];
@@ -1710,7 +1716,7 @@ class form_recibos_mob_apl
                   {
                       chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                   }
-                  elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                  elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                   {
                       chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                   }
@@ -1730,7 +1736,7 @@ class form_recibos_mob_apl
                   {
                       chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                   }
-                  elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                  elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                   {
                       chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                   }
@@ -3643,10 +3649,13 @@ $_SESSION['scriptcase']['form_recibos_mob']['contr_erro'] = 'off';
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -3659,31 +3668,31 @@ $_SESSION['scriptcase']['form_recibos_mob']['contr_erro'] = 'off';
               $this->NM_ajax_info['errList']['geral_form_recibos_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'fecha' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha' == $filtro)) || (is_array($filtro) && in_array('fecha', $filtro)))
         $this->ValidateField_fecha($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'prefijo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'prefijo' == $filtro)) || (is_array($filtro) && in_array('prefijo', $filtro)))
         $this->ValidateField_prefijo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numero' == $filtro)) || (is_array($filtro) && in_array('numero', $filtro)))
         $this->ValidateField_numero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'asentado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'asentado' == $filtro)) || (is_array($filtro) && in_array('asentado', $filtro)))
         $this->ValidateField_asentado($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_cliente' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_cliente' == $filtro)) || (is_array($filtro) && in_array('id_cliente', $filtro)))
         $this->ValidateField_id_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'total' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'total' == $filtro)) || (is_array($filtro) && in_array('total', $filtro)))
         $this->ValidateField_total($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'descuentos' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'descuentos' == $filtro)) || (is_array($filtro) && in_array('descuentos', $filtro)))
         $this->ValidateField_descuentos($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'monto_a_pagar' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'monto_a_pagar' == $filtro)) || (is_array($filtro) && in_array('monto_a_pagar', $filtro)))
         $this->ValidateField_monto_a_pagar($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'observaciones' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'observaciones' == $filtro)) || (is_array($filtro) && in_array('observaciones', $filtro)))
         $this->ValidateField_observaciones($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_recibo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_recibo' == $filtro)) || (is_array($filtro) && in_array('id_recibo', $filtro)))
         $this->ValidateField_id_recibo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_usuario' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_usuario' == $filtro)) || (is_array($filtro) && in_array('id_usuario', $filtro)))
         $this->ValidateField_id_usuario($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'detalle' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'detalle' == $filtro)) || (is_array($filtro) && in_array('detalle', $filtro)))
         $this->ValidateField_detalle($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'formapago' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'formapago' == $filtro)) || (is_array($filtro) && in_array('formapago', $filtro)))
         $this->ValidateField_formapago($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -6268,7 +6277,7 @@ $_SESSION['scriptcase']['form_recibos_mob']['contr_erro'] = 'off';
           { 
               $rs1->Close(); 
               $this->actualizado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->actualizado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->actualizado_hora =  date('H') . ":" . date('i') . ":" . date('s');
               $NM_val_form['actualizado'] = $this->actualizado;
               $this->NM_ajax_changed['actualizado'] = true;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -6490,7 +6499,7 @@ $_SESSION['scriptcase']['form_recibos_mob']['contr_erro'] = 'off';
               $NM_cmp_auto = "id_recibo, ";
           } 
               $this->creado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->creado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->creado_hora =  date('H') . ":" . date('i') . ":" . date('s');
           $bInsertOk = true;
           $aInsertOk = array(); 
           $bInsertOk = $bInsertOk && empty($aInsertOk);
@@ -7418,7 +7427,7 @@ $_SESSION['scriptcase']['form_recibos_mob']['contr_erro'] = 'off';
               $this->id_recibo = "";  
               $this->nmgp_dados_form["id_recibo"] = $this->id_recibo;
               $this->fecha =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->fecha_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->fecha_hora =  date('H') . ":" . date('i') . ":" . date('s');
               $this->nmgp_dados_form["fecha"] = $this->fecha;
               $this->prefijo = "";  
               $this->nmgp_dados_form["prefijo"] = $this->prefijo;
@@ -8084,7 +8093,8 @@ $_SESSION['scriptcase']['form_recibos_mob']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -9561,5 +9571,57 @@ if (parent && parent.scAjaxDetailValue)
         }
         return $image_param;
     } // sc_ajax_alert_image
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-16");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-17");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-18");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4", "sc_b_upd_t.sc-unique-btn-19");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5", "sc_b_del_t.sc-unique-btn-20");
+                break;
+            case "btn_asentar":
+                return array("sc_btn_asentar_top");
+                break;
+            case "btn_reversar":
+                return array("sc_btn_reversar_top");
+                break;
+            case "pdf":
+                return array("sc_b_pdf_t.sc-unique-btn-6", "sc_b_pdf_t.sc-unique-btn-21");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-23", "sc_b_sai_t.sc-unique-btn-25", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11", "sc_b_sai_t.sc-unique-btn-24", "sc_b_sai_t.sc-unique-btn-26");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-12", "sc_b_ini_b.sc-unique-btn-27");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-13", "sc_b_ret_b.sc-unique-btn-28");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-14", "sc_b_avc_b.sc-unique-btn-29");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-15", "sc_b_fim_b.sc-unique-btn-30");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

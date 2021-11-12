@@ -320,6 +320,12 @@ class form_pedidos_cambia_clienteyvendedor_mob_apl
       {
           $_SESSION['gusuario_logueo'] = $this->gusuario_logueo;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_pedidos_cambia_clienteyvendedor_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_pedidos_cambia_clienteyvendedor_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_pedidos_cambia_clienteyvendedor_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_pedidos_cambia_clienteyvendedor_mob']['embutida_parms'];
@@ -2031,10 +2037,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2047,19 +2056,19 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_pedidos_cambia_clienteyvendedor_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'fechaven' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fechaven' == $filtro)) || (is_array($filtro) && in_array('fechaven', $filtro)))
         $this->ValidateField_fechaven($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'prefijo_ped' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'prefijo_ped' == $filtro)) || (is_array($filtro) && in_array('prefijo_ped', $filtro)))
         $this->ValidateField_prefijo_ped($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numpedido' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numpedido' == $filtro)) || (is_array($filtro) && in_array('numpedido', $filtro)))
         $this->ValidateField_numpedido($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idcli' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idcli' == $filtro)) || (is_array($filtro) && in_array('idcli', $filtro)))
         $this->ValidateField_idcli($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'vendedor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'vendedor' == $filtro)) || (is_array($filtro) && in_array('vendedor', $filtro)))
         $this->ValidateField_vendedor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'disponible_en_movil' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'disponible_en_movil' == $filtro)) || (is_array($filtro) && in_array('disponible_en_movil', $filtro)))
         $this->ValidateField_disponible_en_movil($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idpedido' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idpedido' == $filtro)) || (is_array($filtro) && in_array('idpedido', $filtro)))
         $this->ValidateField_idpedido($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -5914,7 +5923,8 @@ $_SESSION['scriptcase']['form_pedidos_cambia_clienteyvendedor_mob']['contr_erro'
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -7591,5 +7601,21 @@ if (parent && parent.scAjaxDetailValue)
             $this->NM_non_ajax_info['ajaxJavascript'][] = array($sJsFunc, $aParam);
         }
     } // sc_ajax_javascript
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-1", "sc_b_upd_t.sc-unique-btn-5");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-2", "sc_b_sai_t.sc-unique-btn-4", "sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-7");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

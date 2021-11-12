@@ -189,6 +189,10 @@ var Nav_binicio     = "<?php echo $this->arr_buttons['binicio']['type']; ?>";
 var Nav_bavanca     = "<?php echo $this->arr_buttons['bavanca']['type']; ?>";
 var Nav_bretorna    = "<?php echo $this->arr_buttons['bretorna']['type']; ?>";
 var Nav_bfinal      = "<?php echo $this->arr_buttons['bfinal']['type']; ?>";
+var Nav_binicio_macro_disabled  = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['first']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['first'] : 'off'); ?>";
+var Nav_bavanca_macro_disabled  = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['forward']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['forward'] : 'off'); ?>";
+var Nav_bretorna_macro_disabled = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['back']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['back'] : 'off'); ?>";
+var Nav_bfinal_macro_disabled   = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['last']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['last'] : 'off'); ?>";
 function nav_atualiza(str_ret, str_ava, str_pos)
 {
 <?php
@@ -205,13 +209,13 @@ function nav_atualiza(str_ret, str_ava, str_pos)
     if ($this->nmgp_botoes['first'] == "on")
     {
 ?>
-       $("#sc_b_ini_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_binicio_macro_disabled) { $("#sc_b_ini_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
     if ($this->nmgp_botoes['back'] == "on")
     {
 ?>
-       $("#sc_b_ret_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bretorna_macro_disabled) { $("#sc_b_ret_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
 ?>
@@ -239,13 +243,13 @@ function nav_atualiza(str_ret, str_ava, str_pos)
     if ($this->nmgp_botoes['last'] == "on")
     {
 ?>
-       $("#sc_b_fim_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bfinal_macro_disabled) { $("#sc_b_fim_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
     if ($this->nmgp_botoes['forward'] == "on")
     {
 ?>
-       $("#sc_b_avc_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bavanca_macro_disabled) { $("#sc_b_avc_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
 ?>
@@ -857,10 +861,21 @@ $regenerar_look = "";
      <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
 
 <?php
-           if ($opcao_botoes != "novo") {
+    if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['btn_grid_asientos'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "btn_grid_asientos", "scBtnFn_btn_grid_asientos()", "scBtnFn_btn_grid_asientos()", "sc_btn_grid_asientos_bot", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['btn_grid_asientos']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['btn_grid_asientos']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label']['btn_grid_asientos']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label']['btn_grid_asientos']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label']['btn_grid_asientos'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "btn_grid_asientos", "scBtnFn_btn_grid_asientos()", "scBtnFn_btn_grid_asientos()", "sc_btn_grid_asientos_bot", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -869,21 +884,43 @@ $regenerar_look = "";
        <?php
         $sCondStyle = '';
 ?>
-       <?php
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-3';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label']['']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label']['']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label'][''];
+        }
+?>
+<?php
 if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_form))
 {
     if ($NM_btn)
     {
         $NM_btn = false;
         $NM_ult_sep = "NM_sep_2";
-        echo "<img id=\"NM_sep_2\" style=\"vertical-align: middle\" src=\"" . $this->Ini->path_botoes . $this->Ini->Img_sep_form . "\" />";
+        echo "<img id=\"NM_sep_2\" class=\"NM_toolbar_sep\" style=\"vertical-align: middle\" src=\"" . $this->Ini->path_botoes . $this->Ini->Img_sep_form . "\" />";
     }
 }
 ?>
 <?php
         $sCondStyle = ($this->nmgp_botoes['ok'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bok", "scBtnFn_sys_format_ok()", "scBtnFn_sys_format_ok()", "sub_form_b", "", "Generar", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "Generar", "sc-unique-btn-4", "", "");?>
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-4';
+        $buttonMacroLabel = "Generar";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['ok']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_disabled']['ok']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label']['ok']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label']['ok']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['btn_label']['ok'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bok", "scBtnFn_sys_format_ok()", "scBtnFn_sys_format_ok()", "sub_form_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "Generar", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1084,26 +1121,41 @@ scAjax_displayEmptyForm();
 <script type="text/javascript">
 	function scBtnFn_btn_grid_asientos() {
 		if ($("#sc_btn_grid_asientos_bot").length && $("#sc_btn_grid_asientos_bot").is(":visible")) {
+		    if ($("#sc_btn_grid_asientos_bot").hasClass("disabled")) {
+		        return;
+		    }
 			sc_btn_btn_grid_asientos()
 			 return;
 		}
 	}
 	function scBtnFn_sys_separator() {
 		if ($("#sys_separator.sc-unique-btn-1").length && $("#sys_separator.sc-unique-btn-1").is(":visible")) {
+		    if ($("#sys_separator.sc-unique-btn-1").hasClass("disabled")) {
+		        return;
+		    }
 			return false;
 			 return;
 		}
 		if ($("#sys_separator.sc-unique-btn-3").length && $("#sys_separator.sc-unique-btn-3").is(":visible")) {
+		    if ($("#sys_separator.sc-unique-btn-3").hasClass("disabled")) {
+		        return;
+		    }
 			return false;
 			 return;
 		}
 	}
 	function scBtnFn_sys_format_ok() {
 		if ($("#sub_form_b.sc-unique-btn-2").length && $("#sub_form_b.sc-unique-btn-2").is(":visible")) {
+		    if ($("#sub_form_b.sc-unique-btn-2").hasClass("disabled")) {
+		        return;
+		    }
 			nm_atualiza('alterar');
 			 return;
 		}
 		if ($("#sub_form_b.sc-unique-btn-4").length && $("#sub_form_b.sc-unique-btn-4").is(":visible")) {
+		    if ($("#sub_form_b.sc-unique-btn-4").hasClass("disabled")) {
+		        return;
+		    }
 			nm_atualiza('alterar');
 			 return;
 		}

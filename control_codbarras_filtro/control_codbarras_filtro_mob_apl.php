@@ -313,6 +313,12 @@ class control_codbarras_filtro_mob_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['control_codbarras_filtro_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['control_codbarras_filtro_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['control_codbarras_filtro_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['control_codbarras_filtro_mob']['embutida_parms'];
@@ -1892,10 +1898,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1908,31 +1917,31 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_control_codbarras_filtro_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'familia' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'familia' == $filtro)) || (is_array($filtro) && in_array('familia', $filtro)))
         $this->ValidateField_familia($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigo' == $filtro)) || (is_array($filtro) && in_array('codigo', $filtro)))
         $this->ValidateField_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'descripcion' == $filtro)) || (is_array($filtro) && in_array('descripcion', $filtro)))
         $this->ValidateField_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tamanio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tamanio' == $filtro)) || (is_array($filtro) && in_array('tamanio', $filtro)))
         $this->ValidateField_tamanio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipoletra' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipoletra' == $filtro)) || (is_array($filtro) && in_array('tipoletra', $filtro)))
         $this->ValidateField_tipoletra($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numerocolumnas' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numerocolumnas' == $filtro)) || (is_array($filtro) && in_array('numerocolumnas', $filtro)))
         $this->ValidateField_numerocolumnas($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipocodbarras' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipocodbarras' == $filtro)) || (is_array($filtro) && in_array('tipocodbarras', $filtro)))
         $this->ValidateField_tipocodbarras($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipoimagen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipoimagen' == $filtro)) || (is_array($filtro) && in_array('tipoimagen', $filtro)))
         $this->ValidateField_tipoimagen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'altura' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'altura' == $filtro)) || (is_array($filtro) && in_array('altura', $filtro)))
         $this->ValidateField_altura($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'vercodigo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'vercodigo' == $filtro)) || (is_array($filtro) && in_array('vercodigo', $filtro)))
         $this->ValidateField_vercodigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'verdescripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'verdescripcion' == $filtro)) || (is_array($filtro) && in_array('verdescripcion', $filtro)))
         $this->ValidateField_verdescripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'verprecio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'verprecio' == $filtro)) || (is_array($filtro) && in_array('verprecio', $filtro)))
         $this->ValidateField_verprecio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'titulopersonalizado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'titulopersonalizado' == $filtro)) || (is_array($filtro) && in_array('titulopersonalizado', $filtro)))
         $this->ValidateField_titulopersonalizado($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (empty($Campos_Crit) && empty($Campos_Falta))
@@ -3915,7 +3924,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['control_codbarras_filtro_mob']['Lo
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -4779,5 +4789,24 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
        exit;
    }
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "help":
+                return array("sc_b_hlp_b");
+                break;
+            case "exit":
+                return array("Bsair_b.sc-unique-btn-1", "Bsair_b.sc-unique-btn-5", "Bsair_b.sc-unique-btn-2", "Bsair_b.sc-unique-btn-6");
+                break;
+            case "resetar":
+                return array("sc_resetar_bot");
+                break;
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-3", "sub_form_b.sc-unique-btn-4");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

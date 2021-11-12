@@ -27,9 +27,12 @@ class grid_recibos_detalle_grid
    var $NM_raiz_img; 
    var $NM_opcao; 
    var $NM_flag_antigo; 
-   var $NM_cmp_hidden = array();
-   var $nmgp_botoes = array();
-   var $Cmps_ord_def = array();
+   var $NM_cmp_hidden   = array();
+   var $nmgp_botoes     = array();
+   var $nm_btn_exist    = array();
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array();
+   var $Cmps_ord_def    = array();
    var $nmgp_label_quebras = array();
    var $nmgp_prim_pag_pdf;
    var $Campos_Mens_erro;
@@ -249,7 +252,7 @@ class grid_recibos_detalle_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['mostra_edit'] = "N";
        }
    }
-   if ($this->Ini->SC_Link_View || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['opc_psq'])
+   if ($this->Ini->SC_Link_View || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['opc_psq'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['psq_edit'] == 'N'))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['mostra_edit'] = "N";
    }
@@ -1267,6 +1270,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            { 
                $nm_saida->saida("   function sc_session_redir(url_redir)\r\n");
                $nm_saida->saida("   {\r\n");
+           $nm_saida->saida("       if (typeof(sc_session_redir_mobile) === typeof(function(){})) { sc_session_redir_mobile(url_redir); }\r\n");
                $nm_saida->saida("       if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')\r\n");
                $nm_saida->saida("       {\r\n");
                $nm_saida->saida("           window.parent.sc_session_redir(url_redir);\r\n");
@@ -1401,6 +1405,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("  }\r\n");
            $nm_saida->saida("  function SC_init_jquery(isScrollNav){ \r\n");
            $nm_saida->saida("   \$(function(){ \r\n");
+           $nm_saida->saida("     NM_btn_disable();\r\n");
            $nm_saida->saida("    $(\"#fast_search_f0_top\").select2({\r\n");
            $nm_saida->saida("        containerCssClass: 'scGridQuickSearchDivResult',\r\n");
            $nm_saida->saida("        dropdownCssClass: 'scGridQuickSearchDivDropdown',\r\n");
@@ -1965,7 +1970,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-       $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+       $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['opcao'] != "pdf" && !$this->Print_All)
        { 
@@ -3599,19 +3604,22 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['proc_p
            } else {
                $Md5_Lig  = "NM_cancel_insert_new*scin1*scoutNM_cancel_return_new*scin1*scoutnmgp_opcao*scinnovo*scoutNM_btn_insert*scinS*scoutNM_btn_new*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
            }
+         $this->nm_btn_exist['new'][] = "sc_b_new_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bnovo", "nm_gp_submit1('" .  $this->Ini->link_form_recibos_detalle . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_recibos_detalle'); return false;;", "nm_gp_submit1('" .  $this->Ini->link_form_recibos_detalle . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_recibos_detalle'); return false;;", "sc_b_new_top", "", "Agregar Detalle", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Agregar Detalle", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
         }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_agregar_facturas'] == "on" && !$this->grid_emb_form) 
       { 
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_agregar_facturas", "sc_btn_btn_agregar_facturas();", "sc_btn_btn_agregar_facturas();", "sc_btn_agregar_facturas_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $this->nm_btn_exist['btn_agregar_facturas'][] = "sc_btn_agregar_facturas_top";
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_agregar_facturas", "sc_btn_btn_agregar_facturas();", "sc_btn_btn_agregar_facturas();", "sc_btn_agregar_facturas_top", "", "Agregar Facturas del Cliente", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $NM_btn = true;
       } 
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_eliminar'] == "on" && !$this->grid_emb_form) 
       { 
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_eliminar", "sc_btn_btn_eliminar();", "sc_btn_btn_eliminar();", "sc_btn_eliminar_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $this->nm_btn_exist['btn_eliminar'][] = "sc_btn_eliminar_top";
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_eliminar", "sc_btn_btn_eliminar();", "sc_btn_btn_eliminar();", "sc_btn_eliminar_top", "", "Eliminar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $NM_btn = true;
       } 
@@ -3773,19 +3781,22 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['proc_p
            } else {
                $Md5_Lig  = "NM_cancel_insert_new*scin1*scoutNM_cancel_return_new*scin1*scoutnmgp_opcao*scinnovo*scoutNM_btn_insert*scinS*scoutNM_btn_new*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
            }
+         $this->nm_btn_exist['new'][] = "sc_b_new_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bnovo", "nm_gp_submit1('" .  $this->Ini->link_form_recibos_detalle . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_recibos_detalle'); return false;;", "nm_gp_submit1('" .  $this->Ini->link_form_recibos_detalle . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_recibos_detalle'); return false;;", "sc_b_new_top", "", "Agregar Detalle", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Agregar Detalle", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
         }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_agregar_facturas'] == "on" && !$this->grid_emb_form) 
       { 
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_agregar_facturas", "sc_btn_btn_agregar_facturas();", "sc_btn_btn_agregar_facturas();", "sc_btn_agregar_facturas_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $this->nm_btn_exist['btn_agregar_facturas'][] = "sc_btn_agregar_facturas_top";
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_agregar_facturas", "sc_btn_btn_agregar_facturas();", "sc_btn_btn_agregar_facturas();", "sc_btn_agregar_facturas_top", "", "Agregar Facturas del Cliente", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $NM_btn = true;
       } 
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_eliminar'] == "on" && !$this->grid_emb_form) 
       { 
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_eliminar", "sc_btn_btn_eliminar();", "sc_btn_btn_eliminar();", "sc_btn_eliminar_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $this->nm_btn_exist['btn_eliminar'][] = "sc_btn_eliminar_top";
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_eliminar", "sc_btn_btn_eliminar();", "sc_btn_btn_eliminar();", "sc_btn_eliminar_top", "", "Eliminar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $NM_btn = true;
       } 
@@ -3824,6 +3835,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['proc_p
       }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['opc_psq'])
       {
+          $this->nm_btn_exist['exit'][] = "sai_top";
          if ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") 
          { 
             $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -3947,7 +3959,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['proc_p
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -3997,7 +4010,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['proc_p
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['fast_search'][1] == 'eq')
@@ -4249,6 +4263,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_recibos_detalle']['proc_p
    $nm_saida->saida("      NM_obj_ant = obj;\r\n");
    $nm_saida->saida("      ind_time = setTimeout(\"obj.style.display='none'\", 300);\r\n");
    $nm_saida->saida("      return ind_time;\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+       $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+       $nm_saida->saida("     $('#div_" . $cada_id . "').addClass('disabled');\r\n");
+         }
+      }
+   }
    $nm_saida->saida("   }\r\n");
    $str_pbfile = $this->Ini->root . $this->Ini->path_imag_temp . '/sc_pb_' . session_id() . '.tmp';
    if (@is_file($str_pbfile) && $flag_apaga_pdf_log)

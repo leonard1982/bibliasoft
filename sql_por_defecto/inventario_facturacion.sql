@@ -23565,6 +23565,15 @@ ALTER TABLE `webservicefe` ADD `proveedor_anterior` VARCHAR(100) NULL DEFAULT NU
 
 ALTER TABLE `facturaven_contratos` ADD `proveedor` VARCHAR(40) NULL DEFAULT NULL AFTER `aviso_nota`, ADD `token` VARCHAR(150) NULL DEFAULT NULL AFTER `proveedor`, ADD `password` VARCHAR(150) NULL DEFAULT NULL AFTER `token`, ADD `servidor` VARCHAR(300) NULL DEFAULT NULL AFTER `password`;
 
+
+CREATE TABLE `facturaven_clasificacion` ( `id` INT NOT NULL AUTO_INCREMENT , `descripcion` VARCHAR(60) NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+INSERT INTO `facturaven_clasificacion` (`id`, `descripcion`) VALUES (NULL, 'Sin Clasificación');
+
+ALTER TABLE `facturaven` ADD `id_clasificacion` INT NOT NULL DEFAULT '1' AFTER `orden_fecha`;
+
+ALTER TABLE `facturaven_automaticas` ADD `id_clasificacion` INT NOT NULL DEFAULT '1' AFTER `id_trans_fe`;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

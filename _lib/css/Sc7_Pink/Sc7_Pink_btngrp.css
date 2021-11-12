@@ -1,6 +1,7 @@
-.SC_SubMenuApp .scBtnGrpBackground { background-color: #F9E7E7; border-color: #737373; border-style: solid; border-width: 1px; border-collapse: collapse; padding: 0; z-index: 99999; text-align: left }
-.SC_SubMenuApp .scBtnGrpText { padding: 4px 25px 4px 15px; cursor: pointer; white-space: nowrap; color: #666666 }
-.SC_SubMenuApp .scBtnGrpTextOver { background-color: #feafb4 }
+.SC_SubMenuApp .scBtnGrpBackground { background-color: #F9E7E7; border-color: #737373; border-style: solid; border-width: 1px; border-collapse: collapse; opacity: 1; filter: alpha(opacity=100); padding: 0; z-index: 99999; text-align: left }
+.SC_SubMenuApp .scBtnGrpText { padding: 4px 25px 4px 15px; opacity: 1; filter: alpha(opacity=100); cursor: pointer; white-space: nowrap; color: #666666 }
+.SC_SubMenuApp .scBtnGrpTextOver { background-color: #feafb4; opacity: 1; filter: alpha(opacity=100) }
+.SC_SubMenuApp .scBtnGrpText .disabled, .SC_SubMenuApp .scBtnGrpText:disabled { color: #666666; opacity: 0.4; filter: alpha(opacity=40) }
 .SC_SubMenuApp .scBtnGrpLink { color: #666666; font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-shadow: 12px; text-decoration: none }
 .SC_SubMenuButton .scBtnGrpBackground { text-align: left }
 .SC_SubMenuButton { z-index: 1000 }

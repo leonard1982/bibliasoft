@@ -229,8 +229,8 @@ class grid_caja_280521_ini
       $this->nm_dt_criacao   = "20180525"; 
       $this->nm_hr_criacao   = "183024"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210625"; 
-      $this->nm_hr_ult_alt   = "103902"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -884,6 +884,8 @@ class grid_caja_280521_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -1026,7 +1028,7 @@ class grid_caja_280521_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_caja_280521']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_caja_280521']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwDQJwHIrKHuFUHgrKVcBUDur/HMF7D9BiH9FaHArYZMBOHgBYHEJGDuFaHMBqHQJKZ9XGHIrwHQXGDMrwV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMzGZSNiDWFYVEFGHQXGZ1F7HANOD5BqHgrKHEJGDuFaHMBiD9NmDQFGD1veHQF7DMvOVcFCDuX7VEFGHQBiZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeD5rqDMBYHEXeHEXCDoraDcXOZ9F7HAvmVWBODMvOVcBUH5XKVoX7HQNmZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKV5BmVEraDcJUZ1FaHAN7HuBqHgNODkB/DWr/HIX7D9NmDQB/D1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMBYHEJqV5XKZuB/HQXOZSBiZ1BYV5BqHgrYDkBsH5XCHIJsHQNwH9BqDSBeHQJsHgveHEJqDWX7HMBiDcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOZSFGHAN7D5BOHuNOVIBOHEFYDoJeD9JmZ1FGHIBeHuJeDMveHEJGDWFqVoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7ZMJeHgvsHArCDuFYDoFUHQBiH9FUHAN7D5NUHuvmVIBsDWBmVErqHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7VoBqDcBqZ1B/DSNOD5NUDMNKDkB/DWrGZuJeHQBiDQBqD1vOV5BODMvOV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBqZ1X7Z1BeD5rqDMBYVkXeHEFaHMX7D9FYDQBOZ1BYHQJwHuvmDkFCH5B3VorqDcJUZ1BiHIveHuX7HgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHArsDWBmDoJeHQJeDQFaHAveD5NUHgNKDkBOV5FYHMBiDcNwH9B/Z1rYHQBqDMvCHArsDWFqDoXGD9NwH9X7Z1BYV5FUHuNODkBsDWF/HMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4627,7 +4629,7 @@ class grid_caja_280521_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['graf_disp']        = array('Bar', 'Pie', 'Line', 'Area', 'Gauge', 'Radar', 'Funnel', 'Pyramid');
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -4709,6 +4711,8 @@ class grid_caja_280521_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -5192,6 +5196,9 @@ class grid_caja_280521_apl
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opcao'] = 'pesq';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['orig_pesq'] = 'grid';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_refresh'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_interativ'] = "";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search'] = array();
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados'] = array();
           } 
       } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opcao'] == "interativ_search")
@@ -5223,11 +5230,16 @@ class grid_caja_280521_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_interativ'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['sc_total']);
@@ -5721,7 +5733,7 @@ class grid_caja_280521_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -6315,39 +6327,45 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
        $cmd_sql = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_sql'][$tmp[0]];
        $vls     = "";
        $bol_numeric = false;
-       if ($tmp[3] != "clear_interativ")
-       {
-           $vls  = explode("_VLS_", $tmp[3]);
-           if($tmp[2] == "nn" || $tmp[2] == "bw")
+       if ($tmp[3] == "clear_interativ_all") {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search'] = array();
+       }
+       else {
+           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search'][$tmp[0]]);
+           if ($tmp[3] != "clear_interativ")
            {
-               $bol_numeric = true;
-               $delim  = "";
-               $delim1 = "";
-           }
-           else
-           {
-               $delim  = "'";
-               $delim1 = "'";
-           }
-           if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
-           {
-               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+               $vls  = explode("_VLS_", $tmp[3]);
+               if($tmp[2] == "nn" || $tmp[2] == "bw")
                {
-                   $delim  = "#";
-                   $delim1 = "#";
+                   $bol_numeric = true;
+                   $delim  = "";
+                   $delim1 = "";
                }
-               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_sep_date']))
+               else
                {
-                   $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_sep_date'];
-                   $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_sep_date1'];
+                   $delim  = "'";
+                   $delim1 = "'";
+               }
+               if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
+               {
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+                   {
+                       $delim  = "#";
+                       $delim1 = "#";
+                   }
+                   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_sep_date']))
+                   {
+                       $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_sep_date'];
+                       $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_sep_date1'];
+                   }
                }
            }
        }
-       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search'][$tmp[0]]);
        if (!empty($vls))
        {
            $prep = "";
            $bol_has_empty = false;
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search'][$tmp[0]]['tp_obj'] = $tmp[2];
            foreach ($vls as $cada_val)
            {
                $cada_val = NM_charset_decode($cada_val);
@@ -6360,6 +6378,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
                }
                $cada_val = substr($this->Db->qstr($cada_val), 1, -1);
                $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search'][$tmp[0]]['lab'][$tmp[1]][] = $descr;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search'][$tmp[0]]['val_sel'][] = $cada_val;
                if ($cada_val == "")
                {
                    $bol_has_empty = true;
@@ -6467,7 +6486,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           {
               if (!$prim)
               {
-                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_interativ'] .= " and ";
+                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_interativ'] .= " AND ";
               }
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq_interativ'] .= "(" . $val['val'] . ")";
               $prim = false;
@@ -6485,6 +6504,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_pesq'] = $tmp_cmd;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['refresh_interativ'] = (isset($tmp[5])) ? $tmp[5] : "S";
       if(isset($tmp[4]) && $tmp[4] == 'N')
       {
           $this->Arr_result['interativ_search'] = array();
@@ -6622,22 +6642,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Movimiento de caja :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -7442,14 +7463,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521'][$path_doc_md5][
            $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_caja_280521']['embutida_form'])
        {

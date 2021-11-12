@@ -113,6 +113,7 @@ if ((isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['p
 {
 ?>
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+ <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" />
 <?php
 }
 ?>
@@ -147,6 +148,7 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
 {
     $pos = "right";
 }
+$colspan = ($_SESSION['scriptcase']['proc_mobile']) ? 1 : 2;
 ?>
 <table id="main_table" class="exportConfig" style="position: relative; top: 20px; <?php echo $pos; ?>: 20px">
 <tr>
@@ -154,16 +156,16 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
 
   <div id="tabs">
     <ul class="scAppDivTabLine" style="display:<?php echo ($hasSelColumns)?"":"none"; ?>">
-      <li class="scTabActive"><a href="#tabs-general"><?php echo $tradutor[$language]['titulo']; ?></a></li>
-      <li class="scTabInactive"><a href="#tabs-sel-columns"><?php echo $tradutor[$language]['titulo_colunas']; ?></a></li>
+      <li class="scTabActive scGridToolbar" id="ctrl_tabs-general" style="font-weight: bold;cursor: pointer;" onclick="change_tabs('tabs-general', 'tabs-sel-columns')"><?php echo $tradutor[$language]['titulo']; ?></li>
+      <li class="scTabInactive scGridToolbar" id="ctrl_tabs-sel-columns" style="font-weight: bold;cursor: pointer;" onclick="change_tabs('tabs-sel-columns', 'tabs-general')"><?php echo $tradutor[$language]['titulo_colunas']; ?></li>
     </ul>
     <div id="tabs-general" style="padding: 0px; margin: 0px">
 
       <table class="scGridBorder" width='100%' cellspacing="0" cellpadding="0">
           <tr style="display:<?php echo ($hasSelColumns)?"none":""; ?>">
-            <td colspan=2 class="scGridLabelVert"><?php echo $tradutor[$language]['titulo']; ?></td>
+            <td colspan=<?php echo $colspan; ?> class="scGridLabelVert"><?php echo $tradutor[$language]['titulo']; ?></td>
           </tr>
-          <tr><td nowrap class='scGridToolbar' colspan=2 style='font-weight: bold;'><?php echo $tradutor[$language]['group_general']; ?></td></tr>
+          <tr><td nowrap class='scGridToolbar' colspan=<?php echo $colspan; ?> style='font-weight: bold;'><?php echo $tradutor[$language]['group_general']; ?></td></tr>
           <?php
            if (count($all_modules) < 2)
           {
@@ -194,8 +196,14 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
              <tr id="id_sel_modules_rc" <?php echo $sDisplay ?>>
                <td nowrap class="scGridFieldOddFont" align="left">
                 <?php echo $tradutor[$language]['modules']; ?>
-               </td>
-               <td nowrap class="scGridFieldOddFont" align="left" nowrap>
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "               <br>";
+    }
+    else {
+        echo "               </td><td nowrap class=\"scGridFieldOddFont\" align=\"left\">";
+    }
+?>
                 <div class="input-group input-group-horizontal">
           <?php
                foreach ($all_modules as $cada_mod)
@@ -216,8 +224,14 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
              <tr id="id_sel_modules_pc" <?php echo $sDisplay ?>>
                <td nowrap class="scGridFieldOddFont" align="left">
                 <?php echo $tradutor[$language]['modules']; ?>
-               </td>
-               <td nowrap class="scGridFieldOddFont" align="left">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "               <br>";
+    }
+    else {
+        echo "               </td><td nowrap class=\"scGridFieldOddFont\" align=\"left\">";
+    }
+?>
                 <div class="input-group input-group-horizontal">
                  <label><input type=checkbox id="id_tem_res_cons_pc" name="tem_res_cons_pc[]" disabled checked value="grid"><?php echo $tradutor[$language]['mod_grid'] ?></label>
                </div>
@@ -239,8 +253,14 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
            <tr<?php echo $Opt_display ?>>
              <td nowrap class="scGridFieldOddFont" align="left">
                  <?php echo $tradutor[$language]['modoimp']; ?>
-             </td>
-             <td nowrap class="scGridFieldOddFont" align="left">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "             <br>";
+    }
+    else {
+        echo "             </td><td nowrap class=\"scGridFieldOddFont\" align=\"left\">";
+    }
+?>
               <div class="input-group input-group-vertical">
               <?php
                    $ckeck = ($opc == "PC") ? "checked" : "";
@@ -260,8 +280,14 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
            <tr<?php echo $Opt_display ?>>
              <td nowrap class="scGridFieldOddFont" align="left">
                  <?php echo $tradutor[$language]['cor']; ?>
-             </td>
-             <td nowrap class="scGridFieldOddFont" align="left">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "             <br>";
+    }
+    else {
+        echo "             </td><td nowrap class=\"scGridFieldOddFont\" align=\"left\">";
+    }
+?>
               <div class="input-group input-group-vertical">
               <?php
                    $ckeck = ($cor == "PB") ? "checked" : "";
@@ -282,8 +308,14 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
        <tr>
          <td nowrap class="scGridFieldOddFont" align="left">
              <?php echo $tradutor[$language]['password']; ?>
-         </td>
-         <td nowrap class="scGridFieldOddFont" align="left">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "         <br>";
+    }
+    else {
+        echo "         </td><td nowrap class=\"scGridFieldOddFont\" align=\"left\">";
+    }
+?>
            <input type=password name="password" value="" size=30> </td>
       </tr>
       <?php
@@ -316,9 +348,15 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
   </div>
   <div class="buttons">
     <?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <table><tr><td>";
+    }
     echo  $_SESSION['scriptcase']['bg_btn_popup']['bok'];
     echo  "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
     echo  $_SESSION['scriptcase']['bg_btn_popup']['btbremove'];
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    </td></tr></table>";
+    }
     ?>
   </div>
 
@@ -373,20 +411,17 @@ function ajusta_window()
   self.parent.tb_resize(altura + 150, largura + 40);
 }
 
-$('#tabs > ul > li').click(function() {
-  if($(this).find("a").length)
-  {
-    $('#tabs > ul > li').removeClass("scTabActive");
-    $('#tabs > ul > li').addClass("scTabInactive");
+function change_tabs(tab_on, tab_off) {
+    $('#ctrl_' + tab_off).removeClass("scTabActive");
+    $('#ctrl_' + tab_off).addClass("scTabInactive");
+    $('#ctrl_' + tab_on).removeClass("scTabInactive");
+    $('#ctrl_' + tab_on).addClass("scTabActive");
+    $('#' + tab_off).hide();
+    $('#' + tab_on).show();
+}
 
-    $(this).removeClass("scTabInactive");
-    $(this).addClass("scTabActive");
-
-    $('#tabs > div').hide();
-    $($(this).find("a").attr("href")).show();
-  }
-});
 $( document ).ready(function() {
+    adjustMobile();
    setTimeout("ajusta_window();$('#tabs > ul > li:first-child').click();", 50);
 <?php
   if ($password == "s")
@@ -554,10 +589,23 @@ $( document ).ready(function() {
     $('#bsair').click();
 
   }
+
+function adjustMobile()
+{
+    <?php
+    if($_SESSION['scriptcase']['proc_mobile'])
+    {
+    ?>
+    $('.scAppDivTabLine').css('background-color', $('.scGridPage').css('background-color'));
+    <?php
+    }
+    ?>
+}
 </script>
 <script>
-        //colocado aqui devido a execução modal não executar o ready do jquery
-      setTimeout("ajusta_window()", 50);
+    //colocado aqui devido a execução modal não executar o ready do jquery
+    adjustMobile();
+    setTimeout("ajusta_window()", 50);
 </script>
 </body>
 </html>

@@ -246,6 +246,12 @@ class recalcular_mob_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['recalcular_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['recalcular_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['recalcular_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['recalcular_mob']['embutida_parms'];
@@ -1645,10 +1651,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1661,7 +1670,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_recalcular_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'hola' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'hola' == $filtro)) || (is_array($filtro) && in_array('hola', $filtro)))
         $this->ValidateField_hola($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (empty($Campos_Crit) && empty($Campos_Falta))
@@ -2551,7 +2560,8 @@ $_SESSION['scriptcase']['recalcular_mob']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -3237,5 +3247,21 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
        exit;
    }
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-1", "sub_form_b.sc-unique-btn-4");
+                break;
+            case "help":
+                return array("sc_b_hlp_b");
+                break;
+            case "exit":
+                return array("Bsair_b.sc-unique-btn-2", "Bsair_b.sc-unique-btn-5", "Bsair_b.sc-unique-btn-3", "Bsair_b.sc-unique-btn-6");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

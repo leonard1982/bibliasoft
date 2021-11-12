@@ -10,6 +10,10 @@
 .css_tipo_negocio_grid_line {vertical-align: top;text-align: right;}
 .css_predeterminada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_predeterminada_grid_line {vertical-align: top;text-align: right;}
+.css_nomina_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_nomina_grid_line {vertical-align: top;text-align: right;}
+.css_codempresa_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codempresa_grid_line {vertical-align: top;text-align: right;}
 .css_idempresa_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_idempresa_grid_line {vertical-align: top;text-align: right;}
 .css_nombre_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}

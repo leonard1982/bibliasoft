@@ -313,6 +313,12 @@ class autoriza_borrado_apl
       {
           $_SESSION['par_numero'] = $this->par_numero;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['autoriza_borrado']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['autoriza_borrado']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['autoriza_borrado']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['autoriza_borrado']['embutida_parms'];
@@ -1928,10 +1934,13 @@ $_SESSION['scriptcase']['autoriza_borrado']['contr_erro'] = 'off';
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1944,13 +1953,13 @@ $_SESSION['scriptcase']['autoriza_borrado']['contr_erro'] = 'off';
               $this->NM_ajax_info['errList']['geral_autoriza_borrado'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'usuario' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'usuario' == $filtro)) || (is_array($filtro) && in_array('usuario', $filtro)))
         $this->ValidateField_usuario($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'clave' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'clave' == $filtro)) || (is_array($filtro) && in_array('clave', $filtro)))
         $this->ValidateField_clave($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_detalle' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_detalle' == $filtro)) || (is_array($filtro) && in_array('id_detalle', $filtro)))
         $this->ValidateField_id_detalle($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'producto' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'producto' == $filtro)) || (is_array($filtro) && in_array('producto', $filtro)))
         $this->ValidateField_producto($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (empty($Campos_Crit) && empty($Campos_Falta))
@@ -3216,7 +3225,8 @@ $_SESSION['scriptcase']['autoriza_borrado']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -3967,5 +3977,18 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
         }
         return $image_param;
     } // sc_ajax_alert_image
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-1");
+                break;
+            case "volver":
+                return array("sc_Volver_bot");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

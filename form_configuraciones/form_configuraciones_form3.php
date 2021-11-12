@@ -1496,18 +1496,27 @@ scAjax_displayEmptyForm();
 <script type="text/javascript">
 	function scBtnFn_sys_format_alt() {
 		if ($("#sc_b_upd_t.sc-unique-btn-1").length && $("#sc_b_upd_t.sc-unique-btn-1").is(":visible")) {
+		    if ($("#sc_b_upd_t.sc-unique-btn-1").hasClass("disabled")) {
+		        return;
+		    }
 			nm_atualiza ('alterar');
 			 return;
 		}
 	}
 	function scBtnFn_activar() {
 		if ($("#sc_activar_top").length && $("#sc_activar_top").is(":visible")) {
+		    if ($("#sc_activar_top").hasClass("disabled")) {
+		        return;
+		    }
 			sc_btn_activar()
 			 return;
 		}
 	}
 	function scBtnFn_sys_format_sai_modal() {
 		if ($("#sc_b_sai_t.sc-unique-btn-2").length && $("#sc_b_sai_t.sc-unique-btn-2").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-2").hasClass("disabled")) {
+		        return;
+		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}

@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -293,8 +294,8 @@ class control_copiar_pedidoafactura_ini
       $this->nm_dt_criacao   = "20191122"; 
       $this->nm_hr_criacao   = "220137"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210709"; 
-      $this->nm_hr_ult_alt   = "163610"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -969,7 +970,7 @@ class control_copiar_pedidoafactura_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDuFaZ1BYVWJwDMNOVIBODuFGVoX7D9BiZ1FGZ1BeHuJwHgBOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VErqDcBqZSFaHABYHuJwDErKHErCDuJeHIXGHQJKH9BiHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/D1rwD5FaDEBOVkJGH5F/DoJeD9XsZSX7HIBeV5raHgvsDkBOV5X7VorqD9JmZ1B/HABYD5XGDMNKZSJGDWF/VoB/DcBwDQJsDSBYD5JsHuNODkBODWFaDorqDcBqZ1B/D1rwZMB/DEvsHEJGDWr/DoraHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHuX7HuzGVIB/H5XCDorqD9BsZ1rqHIBOZMFaDEBeVkXeV5FqVoFaD9NmH9X7HIrKD5JeDMvOVcrsDur/HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWB3VEX7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQFaDSrwV5BqDMzGV9FeH5XCHMF7DcFYZSBqD1rwHQJsDEBOHENiHEXCHIBiHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeZSBiHIrKD5JwDMzGV9BUH5XCVoBqDcFYZ1FGDSvmD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeHEX7VoBOD9BiH9BqDSrYHuJsDEBeHEJqDuJeZuBqHQNmDQBqHIrKD5FaDMBYVcXKDur/HMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDoF7D9XsZSX7Z1N7VWJsHuzGVIBOV5X7DoJeDcNwH9B/D1rwD5FaDErKHEFiHEFqDoraD9NwH9FUZ1rwV5JeHgrKVcBOH5XCDoFGDcJUZ1F7Z1BeD5NUDMzGVkXeDWX7DoF7D9NmDQJwHABYV5BOHgvsV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBqZ1B/DSBeZMFaDErKHEBUDWr/VoJwD9FYH9BiZ1BYHuraHuvmV9FeDWJeVoraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAvCZMXGHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJwDMzGDkBsHEX7VEF7DcNmZSBOHIBeHuFUHgNKDkB/DWF/DoXGDcXGH9FGHAN7HuBqDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2330,6 +2331,11 @@ ob_start();
     sajax_export("ajax_control_copiar_pedidoafactura_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->controle();
 //
     function nm_limpa_str_control_copiar_pedidoafactura(&$str)
@@ -2567,6 +2573,10 @@ ob_start();
       global $inicial_control_copiar_pedidoafactura;
       $aResp = array();
 
+      if (isset($inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['empty_filter'];
@@ -2663,6 +2673,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['btnDisabled']) && '' != $inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['btnDisabled'])
+         {
+            control_copiar_pedidoafactura_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['btnLabel']) && '' != $inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['btnLabel'])
+         {
+            control_copiar_pedidoafactura_pack_btn_label($aResp);
          }
          if (isset($inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['varList']) && !empty($inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['varList']))
          {
@@ -2767,8 +2785,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -3017,6 +3040,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // control_copiar_pedidoafactura_pack_master_value
+
+   function control_copiar_pedidoafactura_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_control_copiar_pedidoafactura;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // control_copiar_pedidoafactura_pack_ajax_alert
+
+   function control_copiar_pedidoafactura_pack_btn_label(&$aResp)
+   {
+      global $inicial_control_copiar_pedidoafactura;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_control_copiar_pedidoafactura->contr_control_copiar_pedidoafactura->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // control_copiar_pedidoafactura_pack_ajax_alert
 
    function control_copiar_pedidoafactura_pack_ajax_alert(&$aResp)
    {

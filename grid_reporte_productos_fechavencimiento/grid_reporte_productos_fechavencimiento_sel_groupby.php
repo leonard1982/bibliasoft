@@ -668,7 +668,7 @@ if ($bSummaryPage && $_SESSION['sc_session'][$sc_init]['grid_reporte_productos_f
   .sc_ui_sortable {
    list-style-type: none;
    margin: 0;
-   min-width: 225px;
+   min-width: 120px;
   }
   .sc_ui_sortable li {
    margin: 0 3px 3px 3px;
@@ -680,7 +680,7 @@ if ($bSummaryPage && $_SESSION['sc_session'][$sc_init]['grid_reporte_productos_f
    margin-left: -1.3em;
   }
   .sc_ui_ulist {
-   min-width: 225px;
+   min-width: 120px;
   }
   .sc_ui_ulist_total {
    width: 250px;
@@ -1368,6 +1368,13 @@ $(function() {
    {
 ?>
    <?php echo nmButtonOutput($this->arr_buttons, "bsair_appdiv", "self.parent.tb_remove(); buttonunselectedGROUP();", "self.parent.tb_remove(); buttonunselectedGROUP();", "Bsair_gb", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   elseif ($_SESSION['scriptcase']['proc_mobile'])
+   {
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "closeAllModalPanes();", "closeAllModalPanes();", "Bsair_gb", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }

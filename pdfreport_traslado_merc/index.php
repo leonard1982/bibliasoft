@@ -220,8 +220,8 @@ class pdfreport_traslado_merc_ini
       $this->nm_dt_criacao   = "20180106"; 
       $this->nm_hr_criacao   = "150029"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -786,6 +786,8 @@ class pdfreport_traslado_merc_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -910,7 +912,7 @@ class pdfreport_traslado_merc_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['pdfreport_traslado_merc']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['pdfreport_traslado_merc']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQX7HArYVWBODMNODkBODWJeHIraHQBqZ1X7HABYV5JeHgNOHArCH5FYHIJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1rqDSvOD5XGDENOHEJGDuFaZuBqDcBwDQFGHANOVWJeDMNOVcXKV5X7HIraHQBiZSB/Z1rYD5BqDEBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkFCDWXCDoNUDcJUZSFaHAN7V5FaDErKHEFiV5FaDoJeD9NmDQB/Z1rwVWJsHuzGVIBODWFaVoFGD9BsZ1F7HABYV5B/DEBOZSJqV5FaVoFGDcBwDQFGHANOV5FGDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFGD9BiZ1rqHABYHQraHgBOZSJGH5FGDoBqHQBiZ9F7DSBYHuB/HgrKVIB/HEBmVorqD9BiZ1F7HANOHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMXGHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcXKDuX7DoF7DcFYZkBiHIveV5X7HgrKVkJqHEXCVoFGHQJeDQFUDSBYD5NUDMBYDkFCDWFYDoXGHQBqZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQFaHIrKHQFaHuzGV9BUDWFYDoF7D9BiZkFGHABYHuBOHgNOZSJqDWX7HIBqD9NwZ9F7HIrKVWJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveVWXGHgrwVIB/DWFYHIJsHQJmH9FaHIBeHQFGDMvCHErsDWr/DoJsHQJKDuFaZ1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSJGDWF/VoFaDcBwH9FGHANOD5JwHuzGVcFKV5X7VoX7D9BiZ1X7Z1BeZMB/DErKVkXeDWX7DoXGD9XsDQJsHArYD5JsHuNODkB/V5X7DoXGDcJUZ1FaHAN7D5rqHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQXGZ1X7D1rKV5FGDMNKZSJ3DWrGDoBODcJeZSBiZ1rwV5JeDMBYVIBsV5FGVEX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHIveHQJwDEBODkFeH5FYVoFGHQJKDQJwD1veHuBODMvmDkFCH5FqDoX7HQBiZ1FGHAvCZMBOHgrKHEFiDWXCHIBOHQBiZSFUZ1rwHQBODMNOVcFeH5XCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2034,10 +2036,15 @@ class pdfreport_traslado_merc_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_orig'] = " where idmov=" . $_SESSION['par_idmov'] . "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_pesq_filtro'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['Grid_search']       = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc']['tot_geral']);
@@ -2475,22 +2482,23 @@ else
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_chart_titl'] ?> - movimiento :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -3387,14 +3395,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_traslado_merc'][$path_do
            $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['pdfreport_traslado_merc']['embutida_form'])
        {

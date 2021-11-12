@@ -362,6 +362,12 @@ class form_devolucionenventa_apl
       {
           $_SESSION['idpref'] = $this->idpref;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_devolucionenventa']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_devolucionenventa']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_devolucionenventa']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_devolucionenventa']['embutida_parms'];
@@ -2083,10 +2089,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2099,31 +2108,31 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_devolucionenventa'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'numerodev' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numerodev' == $filtro)) || (is_array($filtro) && in_array('numerodev', $filtro)))
         $this->ValidateField_numerodev($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha' == $filtro)) || (is_array($filtro) && in_array('fecha', $filtro)))
         $this->ValidateField_fecha($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'resolucion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'resolucion' == $filtro)) || (is_array($filtro) && in_array('resolucion', $filtro)))
         $this->ValidateField_resolucion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numfacven' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numfacven' == $filtro)) || (is_array($filtro) && in_array('numfacven', $filtro)))
         $this->ValidateField_numfacven($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'costopro' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'costopro' == $filtro)) || (is_array($filtro) && in_array('costopro', $filtro)))
         $this->ValidateField_costopro($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fechafactura' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fechafactura' == $filtro)) || (is_array($filtro) && in_array('fechafactura', $filtro)))
         $this->ValidateField_fechafactura($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'vdesc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'vdesc' == $filtro)) || (is_array($filtro) && in_array('vdesc', $filtro)))
         $this->ValidateField_vdesc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'vparc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'vparc' == $filtro)) || (is_array($filtro) && in_array('vparc', $filtro)))
         $this->ValidateField_vparc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'viva' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'viva' == $filtro)) || (is_array($filtro) && in_array('viva', $filtro)))
         $this->ValidateField_viva($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'vunit' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'vunit' == $filtro)) || (is_array($filtro) && in_array('vunit', $filtro)))
         $this->ValidateField_vunit($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'observa' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'observa' == $filtro)) || (is_array($filtro) && in_array('observa', $filtro)))
         $this->ValidateField_observa($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'actualiza' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'actualiza' == $filtro)) || (is_array($filtro) && in_array('actualiza', $filtro)))
         $this->ValidateField_actualiza($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'detalle' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'detalle' == $filtro)) || (is_array($filtro) && in_array('detalle', $filtro)))
         $this->ValidateField_detalle($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -6646,9 +6655,15 @@ else
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Producto no existe en factura!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_devolucionenventa' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_devolucionenventa';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_devolucionenventa';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Producto no existe en factura!";
  }
 ;
@@ -7102,7 +7117,8 @@ $_SESSION['scriptcase']['form_devolucionenventa']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -8130,5 +8146,42 @@ if (parent && parent.scAjaxDetailValue)
         }
         return $image_param;
     } // sc_ajax_alert_image
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-4", "sc_b_sai_t.sc-unique-btn-5", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-8");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-9");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-10");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-11");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-12");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

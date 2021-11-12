@@ -220,8 +220,8 @@ class pdfreport_remision_mediacarta_ini
       $this->nm_dt_criacao   = "20180108"; 
       $this->nm_hr_criacao   = "115428"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -788,6 +788,8 @@ class pdfreport_remision_mediacarta_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -912,7 +914,7 @@ class pdfreport_remision_mediacarta_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['pdfreport_remision_mediacarta']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['pdfreport_remision_mediacarta']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsH9X7D1BeVWXGDMNOV9FeDWFYHIBiDcJUZkBiHINKZMJeDEBOZSJGDWr/ZuJeHQNwDQBOZ1BYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaD1BeHQBOHgvsV9FeHEFYVoBODcBqZSBqHIBeD5BqDEBOZSJGH5X/ZuXGDcXGDuFaZ1zGVWJeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDoBODcBwDQJsHAN7V5BOHgrKVcFCDWXCVoraD9XOZSFaD1rKD5BiDErKVkXeDWFqVoFGD9JKDQFGD1BeD5BqHuNODkBOV5F/VoJwD9BsZ1B/HArYV5B/DEBeHEXeDWX7DoF7DcJeDQFGHANOVWJsHgvsV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQBqHIrwHuBiDMBYVcBUH5XCVEraHQBsVINUHAN7D5BiHgBOZSJGDWFqHIrqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWBmZuJeHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuB/HgBeVkJ3V5FqVoFGHQXODQFGHANOHuX7HgrYDkFCDWFaVoF7HQXOZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwZSBiDSzGV5BqDMrYDkBsDWBmVoX7HQNwH9B/HAN7D5F7HgNKHEFiHEFaVoJeDcBiDQFGHAN7HuBODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCDuXKVoFGD9JKDQB/HAN7D5JeDMrYVcBODWF/VoBiD9XOZ1F7DSNOD5XGHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkFCDWXCDoNUDcJUZSFaHAN7V5FaDErKHEFiV5FaDoJeD9NmDQB/Z1rwV5BOHgrKVcBOV5FYDoFGD9XOH9B/DSrYD5FaDEBOVkJqV5FaVoFGDcBwDQX7D1veD5BqHgvsVcBOH5FqVoB/D9XOZSFaD1rKD5NUHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIFGD9XsDQJsZ1N7D5NUHgvOVIBsV5X7HIXGD9BiH9FaDSrYD5NUHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMF7D9JmVIJsHAN7HuBqHgrKHEFiDWX7VoX7HQXsZSFGHIrwHQrqDMvmVIFCDWJeHMBqD9BsZSFaHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2036,10 +2038,15 @@ class pdfreport_remision_mediacarta_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_orig'] = " where nremision=" . $_SESSION['par_numfacventa'] . "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_pesq_filtro'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['Grid_search']       = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta']['tot_geral']);
@@ -2477,22 +2484,23 @@ else
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_chart_titl'] ?> - facturaven :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -3389,14 +3397,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['pdfreport_remision_mediacarta'][$p
            $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['pdfreport_remision_mediacarta']['embutida_form'])
        {

@@ -1630,11 +1630,11 @@ class graf_ventas_productos_grafico
 
       if ($_SESSION['scriptcase']['fusioncharts_new'])
       {
-         $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/oem_fs/FusionCharts/js/fusioncharts.js\"></script>\r\n");
+         $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts-suite-xt-rdl/js/fusioncharts.js\"></script>\r\n");
       }
       else
       {
-         $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts_xt_ol/FusionCharts/js/fusioncharts.js\"></script>\r\n");
+         $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts-suite-xt-rdl/js/fusioncharts.js\"></script>\r\n");
       }
    }
 
@@ -1862,16 +1862,19 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
   $(".sc-ui-sumcfg-close").click(function() {
    scHideChartConfig();
   });
+  $(".sc-ui-chart-option-type").click(function() {
+   if ($(this).hasClass("sc-ui-chart-option-type-hover")) {
+    scChangeChartType($(this).attr("id").substr(12));
+    scHideChartSelection();
+   }
+  });
  });
  var sc_groupby_info, sc_summ_info, sc_chart_type = "<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['chart_combination_type'] ?>", fc_chart_type = "<?php echo $this->getChartType($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['bmulti'], $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['bcomb']) ?>";
  function scBindChartTypeClick(sSelector) {
-  $(sSelector).addClass("sc-ui-chart-option-type-hover").click(function() {
-   scChangeChartType($(this).attr("id").substr(12));
-   scHideChartSelection();
-  });
+  $(sSelector).addClass("sc-ui-chart-option-type-hover");
  }
  function scUnbindChartTypeClick(sSelector) {
-  $(sSelector).removeClass("sc-ui-chart-option-type-hover").unbind("click");
+  $(sSelector).removeClass("sc-ui-chart-option-type-hover");
  }
  function scChartTypeIcon(sSelector, sIcon) {
   $(sSelector).find("img").attr("src", "<?php echo $this->Ini->path_img_global ?>/" + sIcon);
@@ -2518,6 +2521,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
     scDisableCombination3dChart();
     scDisableScatterChart();
     scDisableBubbleChart();
+    scDisableOverlappedBar2dChart();
+    scDisableOverlappedColumn2dChart();
    }
    else {
     scDisableAngularGaugeChart();
@@ -2529,6 +2534,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
     scDisableFunnel3dChart();
     if (2 != metricCount) {
      scDisableScatterChart();
+     scDisableOverlappedBar2dChart();
+     scDisableOverlappedColumn2dChart();
     }
     if (3 != metricCount) {
      scDisableBubbleChart();
@@ -2556,13 +2563,20 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
  function scEnableAllCharts() {
   scEnableBar2dChart();
   scEnableBar3dChart();
+  scEnableScrollBar2dChart();
+  scEnableOverlappedBar2dChart();
   scEnableColumn2dChart();
   scEnableColumn3dChart();
+  scEnableScrollColumn2dChart();
+  scEnableOverlappedColumn2dChart();
   scEnableLineChart();
   scEnableSplineChart();
   scEnableStepChart();
+  scEnableScrollLine2dChart();
+  scEnableZoomLineChart();
   scEnableAreaChart();
   scEnableAreaSplineChart();
+  scEnableScrollArea2dChart();
   scEnablePie2dChart();
   scEnablePie3dChart();
   scEnableDoughnut2dChart();
@@ -2588,13 +2602,20 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
  function scDisableAllCharts() {
   scDisableBar2dChart();
   scDisableBar3dChart();
+  scDisableScrollBar2dChart();
+  scDisableOverlappedBar2dChart();
   scDisableColumn2dChart();
   scDisableColumn3dChart();
+  scDisableScrollColumn2dChart();
+  scDisableOverlappedColumn2dChart();
   scDisableLineChart();
   scDisableSplineChart();
   scDisableStepChart();
+  scDisableScrollLine2dChart();
+  scDisableZoomLineChart();
   scDisableAreaChart();
   scDisableAreaSplineChart();
+  scDisableScrollArea2dChart();
   scDisablePie2dChart();
   scDisablePie3dChart();
   scDisableDoughnut2dChart();
@@ -2625,6 +2646,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
   scBindChartTypeClick("#sc-id-chart-bar3d");
   scChartTypeIcon("#sc-id-chart-bar3d", "scriptcase__NM__ct_bar_bar_3d.png");
  }
+ function scEnableScrollBar2dChart() {
+  scBindChartTypeClick("#sc-id-chart-scrollbar2d");
+  scChartTypeIcon("#sc-id-chart-scrollbar2d", "scriptcase__NM__ct_bar_bar_2d_scroll.png");
+ }
+ function scEnableOverlappedBar2dChart() {
+  scBindChartTypeClick("#sc-id-chart-overlappedbar2d");
+  scChartTypeIcon("#sc-id-chart-overlappedbar2d", "scriptcase__NM__ct_bar_bar_2d_overlap.png");
+ }
  function scEnableColumn2dChart() {
   scBindChartTypeClick("#sc-id-chart-column2d");
   scChartTypeIcon("#sc-id-chart-column2d", "scriptcase__NM__ct_bar_col_2d.png");
@@ -2633,6 +2662,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
  function scEnableColumn3dChart() {
   scBindChartTypeClick("#sc-id-chart-column3d");
   scChartTypeIcon("#sc-id-chart-column3d", "scriptcase__NM__ct_bar_col_3d.png");
+ }
+ function scEnableScrollColumn2dChart() {
+  scBindChartTypeClick("#sc-id-chart-scrollcolumn2d");
+  scChartTypeIcon("#sc-id-chart-scrollcolumn2d", "scriptcase__NM__ct_bar_col_2d_scroll.png");
+ }
+ function scEnableOverlappedColumn2dChart() {
+  scBindChartTypeClick("#sc-id-chart-overlappedcolumn2d");
+  scChartTypeIcon("#sc-id-chart-overlappedcolumn2d", "scriptcase__NM__ct_bar_col_2d_overlap.png");
  }
  function scEnableLineChart() {
   scBindChartTypeClick("#sc-id-chart-line");
@@ -2647,6 +2684,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
   scBindChartTypeClick("#sc-id-chart-step");
   scChartTypeIcon("#sc-id-chart-step", "scriptcase__NM__ct_line_step.png");
  }
+ function scEnableScrollLine2dChart() {
+  scBindChartTypeClick("#sc-id-chart-scrollline2d");
+  scChartTypeIcon("#sc-id-chart-scrollline2d", "scriptcase__NM__ct_line_line_scroll.png");
+ }
+ function scEnableZoomLineChart() {
+  scBindChartTypeClick("#sc-id-chart-zoomline");
+  scChartTypeIcon("#sc-id-chart-zoomline", "scriptcase__NM__ct_line_line_zoom.png");
+ }
  function scEnableAreaChart() {
   scBindChartTypeClick("#sc-id-chart-area");
   scChartTypeIcon("#sc-id-chart-area", "scriptcase__NM__ct_area_area.png");
@@ -2655,6 +2700,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
  function scEnableAreaSplineChart() {
   scBindChartTypeClick("#sc-id-chart-areaspline");
   scChartTypeIcon("#sc-id-chart-areaspline", "scriptcase__NM__ct_area_spline.png");
+ }
+ function scEnableScrollArea2dChart() {
+  scBindChartTypeClick("#sc-id-chart-scrollarea2d");
+  scChartTypeIcon("#sc-id-chart-scrollarea2d", "scriptcase__NM__ct_area_area_scroll.png");
  }
  function scEnablePie2dChart() {
   scBindChartTypeClick("#sc-id-chart-pie2d");
@@ -2751,6 +2800,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
   scUnbindChartTypeClick("#sc-id-chart-bar3d");
   scChartTypeIcon("#sc-id-chart-bar3d", "scriptcase__NM__ct_bar_bar_3d_off.png");
  }
+ function scDisableScrollBar2dChart() {
+  scUnbindChartTypeClick("#sc-id-chart-scrollbar2d");
+  scChartTypeIcon("#sc-id-chart-scrollbar2d", "scriptcase__NM__ct_bar_bar_2d_scroll_off.png");
+ }
+ function scDisableOverlappedBar2dChart() {
+  scUnbindChartTypeClick("#sc-id-chart-overlappedbar2d");
+  scChartTypeIcon("#sc-id-chart-overlappedbar2d", "scriptcase__NM__ct_bar_bar_2d_overlap_off.png");
+ }
  function scDisableColumn2dChart() {
   scUnbindChartTypeClick("#sc-id-chart-column2d");
   scChartTypeIcon("#sc-id-chart-column2d", "scriptcase__NM__ct_bar_col_2d_off.png");
@@ -2759,6 +2816,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
  function scDisableColumn3dChart() {
   scUnbindChartTypeClick("#sc-id-chart-column3d");
   scChartTypeIcon("#sc-id-chart-column3d", "scriptcase__NM__ct_bar_col_3d_off.png");
+ }
+ function scDisableScrollColumn2dChart() {
+  scUnbindChartTypeClick("#sc-id-chart-scrollcolumn2d");
+  scChartTypeIcon("#sc-id-chart-scrollcolumn2d", "scriptcase__NM__ct_bar_col_2d_scroll_off.png");
+ }
+ function scDisableOverlappedColumn2dChart() {
+  scUnbindChartTypeClick("#sc-id-chart-overlappedcolumn2d");
+  scChartTypeIcon("#sc-id-chart-overlappedcolumn2d", "scriptcase__NM__ct_bar_col_2d_overlap_off.png");
  }
  function scDisableLineChart() {
   scUnbindChartTypeClick("#sc-id-chart-line");
@@ -2773,6 +2838,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
   scUnbindChartTypeClick("#sc-id-chart-step");
   scChartTypeIcon("#sc-id-chart-step", "scriptcase__NM__ct_line_step_off.png");
  }
+ function scDisableScrollLine2dChart() {
+  scUnbindChartTypeClick("#sc-id-chart-scrollline2d");
+  scChartTypeIcon("#sc-id-chart-scrollline2d", "scriptcase__NM__ct_line_line_scroll_off.png");
+ }
+ function scDisableZoomLineChart() {
+  scUnbindChartTypeClick("#sc-id-chart-zoomline");
+  scChartTypeIcon("#sc-id-chart-zoomline", "scriptcase__NM__ct_line_line_zoom_off.png");
+ }
  function scDisableAreaChart() {
   scUnbindChartTypeClick("#sc-id-chart-area");
   scChartTypeIcon("#sc-id-chart-area", "scriptcase__NM__ct_area_area_off.png");
@@ -2781,6 +2854,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
  function scDisableAreaSplineChart() {
   scUnbindChartTypeClick("#sc-id-chart-areaspline");
   scChartTypeIcon("#sc-id-chart-areaspline", "scriptcase__NM__ct_area_spline_off.png");
+ }
+ function scDisableScrollArea2dChart() {
+  scUnbindChartTypeClick("#sc-id-chart-scrollarea2d");
+  scChartTypeIcon("#sc-id-chart-scrollarea2d", "scriptcase__NM__ct_area_area_scroll_off.png");
  }
  function scDisablePie2dChart() {
   scUnbindChartTypeClick("#sc-id-chart-pie2d");
@@ -3287,8 +3364,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
       $nm_saida->saida("    <option value=\"2\"" . $sAnaliticSelected . ">" . $translate[$language]['analitico'] . "</option>\r\n");
       $nm_saida->saida("  </select>\r\n");
       $nm_saida->saida("  &nbsp; &nbsp;\r\n");
+if (!$_SESSION['scriptcase']['proc_mobile']) {
       $nm_saida->saida("  " . $translate[$language]['largura'] . "\r\n");
       $nm_saida->saida("  <input id=\"sc-id-chart-width\" type=\"text\" size=\"5\" value=\"" . $iChartWidth . "\" class=\"css_toolbar_obj\" style=\"text-align: right\" />\r\n");
+} else {
+      $nm_saida->saida("  <input id=\"sc-id-chart-width\" type=\"text\" size=\"5\" value=\"" . $iChartWidth . "\" style=\"display: none;\" />\r\n");
+}
       $nm_saida->saida("  &nbsp; &nbsp;\r\n");
       $nm_saida->saida("  " . $translate[$language]['altura'] . "\r\n");
       $nm_saida->saida("  <input id=\"sc-id-chart-height\" type=\"text\" size=\"5\" value=\"" . $iChartHeight . "\" class=\"css_toolbar_obj\" style=\"text-align: right\" />\r\n");
@@ -3370,7 +3451,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
               }
           }
           $sPhantomImg   = "";
-          $sPDFHtmlCall  = "  FusionCharts.ready(function() {";
+          $sPDFHtmlCall  = " FusionCharts.options.license({";
+          $sPDFHtmlCall .= "   key: 'hzH5vmaD8A1C5B3E1C1F1I2C4A5A1B3f1C-9yI2J3A4yE2B2E2lozG1C3C8df1wC4B3I4dC-22A-16B5B2D3G1A4D4I1C11A4B2C2sH-9uD1H4C1B1A-13D-11lB4H3A33epB9c2D5B4lnC-7B2A5A7A1C7A5C5F1H4A2A2B10D7E2g==',";
+          $sPDFHtmlCall .= "   creditLabel: false,";
+          $sPDFHtmlCall .= " });";
+          $sPDFHtmlCall .= "  FusionCharts.ready(function() {";
           $sPDFHtmlCall .= "   myChart = new FusionCharts({";
           $sPDFHtmlCall .= "    'type': '" . $this->getChartType($bMulti, $bComb) . "',";
           $sPDFHtmlCall .= "    'renderAt': '" . $sDivId . "',";
@@ -3395,7 +3480,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
       {
          $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\">\r\n");
          $nm_saida->saida("$sCombId\r\n");
-         $nm_saida->saida("  FusionCharts.setCurrentRenderer(\"javascript\");\r\n");
          $nm_saida->saida("$sPDFHtmlCall\r\n");
          $nm_saida->saida("</script>\r\n");
       }
@@ -3403,7 +3487,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
       {
          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['charts_html']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['charts_html'])
          {
-             $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['charts_html'] = "  FusionCharts.setCurrentRenderer('javascript');";
          }
          $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['charts_html'] .= $sPDFHtmlCall;
       }
@@ -3489,7 +3572,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
        @fwrite($fPhantomChart, "<head>\r\n");
        @fwrite($fPhantomChart, $_SESSION['nm_session']['charset'] . "\r\n");
        if ($_SESSION['scriptcase']['fusioncharts_new']) {
-           @fwrite($fPhantomChart, "<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts_xt_ol/FusionCharts/js/fusioncharts.js\"></script>\r\n");
+           @fwrite($fPhantomChart, "<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts-suite-xt-rdl/js/fusioncharts.js\"></script>\r\n");
        }
        else {
            @fwrite($fPhantomChart, "<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts_xt_ol/" . $this->getChartModule() . "/js/fusioncharts.js\"></script>\r\n");
@@ -3502,8 +3585,13 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
        @fwrite($fPhantomChart, "  d.setTime(d.getTime() + (24*60*60*1000));\r\n");
        @fwrite($fPhantomChart, "  var expires = \"expires=\"+ d.toUTCString();\r\n");
        @fwrite($fPhantomChart, "  document.cookie = \"PHPSESSID_=;\"+ Math.random().toString(36).substring(2) +\";\" + expires + \";path=/\";\r\n");
+       @fwrite($fPhantomChart, "  FusionCharts.options.license({\r\n");
+       @fwrite($fPhantomChart, "    key: 'hzH5vmaD8A1C5B3E1C1F1I2C4A5A1B3f1C-9yI2J3A4yE2B2E2lozG1C3C8df1wC4B3I4dC-22A-16B5B2D3G1A4D4I1C11A4B2C2sH-9uD1H4C1B1A-13D-11lB4H3A33epB9c2D5B4lnC-7B2A5A7A1C7A5C5F1H4A2A2B10D7E2g==',\r\n");
+       @fwrite($fPhantomChart, "    creditLabel: false,\r\n");
+       @fwrite($fPhantomChart, "  });\r\n");
        @fwrite($fPhantomChart, "  FusionCharts.ready(function() {\r\n");
        @fwrite($fPhantomChart, "   var myChart = new FusionCharts({\r\n");
+       @fwrite($fPhantomChart, "    'creditLabel': false,\r\n");
        @fwrite($fPhantomChart, "    'type': '" . $this->getChartType($bMulti, $bComb) . "',\r\n");
        @fwrite($fPhantomChart, "    'renderAt': 'sc-id-fusionchart',\r\n");
        @fwrite($fPhantomChart, "    'width': '" . $width . "',\r\n");
@@ -3980,6 +4068,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
                case 'scatter':
                    $newChartType = "scatter";
                    break;
+               case 'scrollarea':
+               case 'scrollarea2d':
+                   $newChartType = "scrollarea2d";
+                   break;
+               case 'scrollbar2d':
+                   $newChartType = "scrollbar2d";
+                   break;
+               case 'overlappedbar2d':
+                   $newChartType = "overlappedbar2d";
+                   break;
+               case 'scrollcolumn2d':
+                   $newChartType = "scrollcolumn2d";
+                   break;
+               case 'overlappedcolumn2d':
+                   $newChartType = "overlappedcolumn2d";
+                   break;
+               case 'scrollline':
+               case 'scrollline2d':
+                   $newChartType = "scrollline2d";
+                   break;
                case 'spline';
                case 'msspline';
                    $newChartType = $multiMetrics || $multiDimensions  ? "msspline" : "spline";
@@ -4003,6 +4111,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['respo
                case 'step';
                case 'msstepline';
                    $newChartType = "msstepline";
+                   break;
+               case 'zoomline':
+                   $newChartType = "zoomline";
                    break;
            }
            return $newChartType;

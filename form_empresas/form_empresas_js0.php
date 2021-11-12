@@ -37,6 +37,18 @@
 <div id="id_div_process_block" style="display: none; margin: 10px; whitespace: nowrap"><span class="scFormProcess"><img border="0" src="<?php echo $this->Ini->path_icones; ?>/scriptcase__NM__ajax_load.gif" align="absmiddle" />&nbsp;<?php echo $this->Ini->Nm_lang['lang_othr_prcs']; ?>...</span></div>
 <div id="id_fatal_error" class="scFormLabelOdd" style="display: none; position: absolute"></div>
 <script type="text/javascript"> 
+<?php
+  if (isset($this->nm_mens_alert) && !empty($this->nm_mens_alert))
+  {
+      foreach ($this->nm_mens_alert as $i_alert => $mensagem)
+      {
+          $alertParams = isset($this->nm_params_alert[$i_alert]) ? $this->sc_ajax_alert_params($this->nm_params_alert[$i_alert]) : array();
+          $jsonParams  = json_encode($alertParams);
+          echo "scJs_alert('" . html_entity_decode($mensagem, ENT_COMPAT, $_SESSION['scriptcase']['charset']) . "', null, $jsonParams);";
+          echo "sc_userSweetAlertDisplayed = true;";
+      }
+  }
+?> 
  NM_tp_critica(1);
 function nm_gp_submit(apl_lig, apl_saida, parms, opc, target, modal_h, modal_w, apl_name) 
 { 
@@ -182,7 +194,7 @@ function nm_move(x, y, z)
         } 
         document.F2.nmgp_cond_fast_search.value = scAjaxGetFieldText("nmgp_cond_fast_search_" + y); 
     }
-    if ("novo" == x || "edit_novo" == x)
+    if ("novo" == x || "edit_novo" == x || "reload_novo" == x)
     {
 <?php
        $NM_parm_ifr = (isset($NM_run_iframe) && $NM_run_iframe == 1) ? "NM_run_iframe?#?1?@?" : "";

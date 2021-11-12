@@ -2805,7 +2805,72 @@ sajax_show_javascript();
   }
 
   function scAjax_formReload() {
-    nm_move('igual');
+<?php
+    if ($this->nmgp_opcao == 'novo') {
+        echo "      nm_move('reload_novo');";
+    } else {
+        echo "      nm_move('igual');";
+    }
+?>
+  }
+  
+  function scBtnDisabled()
+  {
+    var btnNameNav, hasNavButton = false;
+
+    if (typeof oResp.btnDisabled != undefined) {
+      for (var btnName in oResp.btnDisabled) {
+        btnNameNav = btnName.substring(0, 9);
+
+        if ("on" == oResp.btnDisabled[btnName]) {
+          $("#" + btnName).addClass("disabled");
+
+          if ("sc_b_ini_" == btnNameNav) {
+            Nav_binicio_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_ret_" == btnNameNav) {
+            Nav_bretorna_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_avc_" == btnNameNav) {
+            Nav_bavanca_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_fim_" == btnNameNav) {
+            Nav_bfinal_macro_disabled = "on";
+            hasNavButton = true;
+          }
+        } else {
+          $("#" + btnName).removeClass("disabled");
+
+          if ("sc_b_ini_" == btnNameNav) {
+            Nav_binicio_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_ret_" == btnNameNav) {
+            Nav_bretorna_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_avc_" == btnNameNav) {
+            Nav_bavanca_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_fim_" == btnNameNav) {
+            Nav_bfinal_macro_disabled = "off";
+            hasNavButton = true;
+          }
+        }
+      }
+    }
+
+    if (hasNavButton) {
+      nav_atualiza(Nav_permite_ret, Nav_permite_ava, 't');
+      nav_atualiza(Nav_permite_ret, Nav_permite_ava, 'b');
+    }
+  }
+
+  function scBtnLabel()
+  {
+    if (typeof oResp.btnLabel != undefined) {
+      for (var btnName in oResp.btnLabel) {
+        $("#" + btnName).find(".btn-label").html(oResp.btnLabel[btnName]);
+      }
+    }
   }
 
   var scFormHasChanged = false;
@@ -3126,7 +3191,7 @@ sajax_show_javascript();
   function do_ajax_form_detallepedido_validate_adicional_(iNumLinha)
   {
     var nomeCampo_adicional_ = "adicional_" + iNumLinha;
-    var var_adicional_ = scAjaxGetFieldHidden(nomeCampo_adicional_);
+    var var_adicional_ = scAjaxGetFieldText(nomeCampo_adicional_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_detallepedido_validate_adicional_(var_adicional_, iNumLinha, var_script_case_init, do_ajax_form_detallepedido_validate_adicional__cb);
   } // do_ajax_form_detallepedido_validate_adicional_
@@ -3944,6 +4009,76 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_detallepedido_refresh_idpro__cb
 
+  // ---------- Event onchange adicional_
+  function do_ajax_form_detallepedido_event_adicional__onchange(iSeqForm)
+  {
+    var var_valorunit_ = scAjaxGetFieldText("valorunit_" + iSeqForm);
+    var var_costop_ = scAjaxGetFieldText("costop_" + iSeqForm);
+    var var_idpro_ = scAjaxGetFieldText("id_ac_idpro_" + iSeqForm);
+    var var_adicional1_ = scAjaxGetFieldText("adicional1_" + iSeqForm);
+    var var_descuento_ = scAjaxGetFieldHidden("descuento_" + iSeqForm);
+    var var_valorpar_ = scAjaxGetFieldHidden("valorpar_" + iSeqForm);
+    var var_adicional_ = scAjaxGetFieldText("adicional_" + iSeqForm);
+    var var_iva_ = scAjaxGetFieldHidden("iva_" + iSeqForm);
+    var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iSeqForm);
+    var var_idbod_ = scAjaxGetFieldSelect("idbod_" + iSeqForm);
+    var var_unidadmayor_ = scAjaxGetFieldSelect("unidadmayor_" + iSeqForm);
+    var var_factor_ = scAjaxGetFieldText("factor_" + iSeqForm);
+    var var_stockubica_ = scAjaxGetFieldHidden("stockubica_" + iSeqForm);
+    var var_unidad_ = scAjaxGetFieldHidden("unidad_" + iSeqForm);
+    var var_script_case_init = document.F2.script_case_init.value;
+    var var_nmgp_refresh_row = iSeqForm;
+    scAjaxProcOn(true);
+    x_ajax_form_detallepedido_event_adicional__onchange(var_valorunit_, var_costop_, var_idpro_, var_adicional1_, var_descuento_, var_valorpar_, var_adicional_, var_iva_, var_cantidad_, var_idbod_, var_unidadmayor_, var_factor_, var_stockubica_, var_unidad_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallepedido_event_adicional__onchange_cb);
+  } // do_ajax_form_detallepedido_event_adicional__onchange
+
+  function do_ajax_form_detallepedido_event_adicional__onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "adicional_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "adicional_";
+    }
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "adicional_");
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "adicional_");
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_form_detallepedido_event_adicional__onchange_cb_after_alert);
+  } // do_ajax_form_detallepedido_event_adicional__onchange_cb
+  function do_ajax_form_detallepedido_event_adicional__onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    scAjaxRedir();
+  } // do_ajax_form_detallepedido_event_adicional__onchange_cb_after_alert
+
   // ---------- Event onclick autorizarborrado_
   function do_ajax_form_detallepedido_event_autorizarborrado__onclick(iSeqForm)
   {
@@ -3989,6 +4124,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4011,7 +4148,7 @@ sajax_show_javascript();
     var var_adicional1_ = scAjaxGetFieldText("adicional1_" + iSeqForm);
     var var_descuento_ = scAjaxGetFieldHidden("descuento_" + iSeqForm);
     var var_valorpar_ = scAjaxGetFieldHidden("valorpar_" + iSeqForm);
-    var var_adicional_ = scAjaxGetFieldHidden("adicional_" + iSeqForm);
+    var var_adicional_ = scAjaxGetFieldText("adicional_" + iSeqForm);
     var var_iva_ = scAjaxGetFieldHidden("iva_" + iSeqForm);
     var var_idbod_ = scAjaxGetFieldSelect("idbod_" + iSeqForm);
     var var_unidadmayor_ = scAjaxGetFieldSelect("unidadmayor_" + iSeqForm);
@@ -4055,6 +4192,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4111,6 +4250,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4165,6 +4306,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4226,6 +4369,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4285,6 +4430,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4345,6 +4492,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4361,6 +4510,7 @@ sajax_show_javascript();
   function do_ajax_form_detallepedido_event_idpro__onchange(iSeqForm)
   {
     var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iSeqForm);
+    var var_adicional_ = scAjaxGetFieldText("adicional_" + iSeqForm);
     var var_idpro_ = scAjaxGetFieldText("id_ac_idpro_" + iSeqForm);
     var var_valorunit_ = scAjaxGetFieldText("valorunit_" + iSeqForm);
     var var_unidadmayor_ = scAjaxGetFieldSelect("unidadmayor_" + iSeqForm);
@@ -4370,7 +4520,6 @@ sajax_show_javascript();
     var var_adicional1_ = scAjaxGetFieldText("adicional1_" + iSeqForm);
     var var_descuento_ = scAjaxGetFieldHidden("descuento_" + iSeqForm);
     var var_valorpar_ = scAjaxGetFieldHidden("valorpar_" + iSeqForm);
-    var var_adicional_ = scAjaxGetFieldHidden("adicional_" + iSeqForm);
     var var_iva_ = scAjaxGetFieldHidden("iva_" + iSeqForm);
     var var_colores_ = scAjaxGetFieldSelect("colores_" + iSeqForm);
     var var_tallas_ = scAjaxGetFieldSelect("tallas_" + iSeqForm);
@@ -4378,7 +4527,7 @@ sajax_show_javascript();
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
-    x_ajax_form_detallepedido_event_idpro__onchange(var_cantidad_, var_idpro_, var_valorunit_, var_unidadmayor_, var_costop_, var_factor_, var_idbod_, var_adicional1_, var_descuento_, var_valorpar_, var_adicional_, var_iva_, var_colores_, var_tallas_, var_sabor_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallepedido_event_idpro__onchange_cb);
+    x_ajax_form_detallepedido_event_idpro__onchange(var_cantidad_, var_adicional_, var_idpro_, var_valorunit_, var_unidadmayor_, var_costop_, var_factor_, var_idbod_, var_adicional1_, var_descuento_, var_valorpar_, var_iva_, var_colores_, var_tallas_, var_sabor_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallepedido_event_idpro__onchange_cb);
   } // do_ajax_form_detallepedido_event_idpro__onchange
 
   function do_ajax_form_detallepedido_event_idpro__onchange_cb(sResp)
@@ -4414,6 +4563,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4476,6 +4627,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4537,6 +4690,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4558,7 +4713,7 @@ sajax_show_javascript();
     var var_adicional1_ = scAjaxGetFieldText("adicional1_" + iSeqForm);
     var var_descuento_ = scAjaxGetFieldHidden("descuento_" + iSeqForm);
     var var_valorpar_ = scAjaxGetFieldHidden("valorpar_" + iSeqForm);
-    var var_adicional_ = scAjaxGetFieldHidden("adicional_" + iSeqForm);
+    var var_adicional_ = scAjaxGetFieldText("adicional_" + iSeqForm);
     var var_iva_ = scAjaxGetFieldHidden("iva_" + iSeqForm);
     var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iSeqForm);
     var var_idbod_ = scAjaxGetFieldSelect("idbod_" + iSeqForm);
@@ -4604,6 +4759,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4625,7 +4782,7 @@ sajax_show_javascript();
     var var_adicional1_ = scAjaxGetFieldText("adicional1_" + iSeqForm);
     var var_descuento_ = scAjaxGetFieldHidden("descuento_" + iSeqForm);
     var var_valorpar_ = scAjaxGetFieldHidden("valorpar_" + iSeqForm);
-    var var_adicional_ = scAjaxGetFieldHidden("adicional_" + iSeqForm);
+    var var_adicional_ = scAjaxGetFieldText("adicional_" + iSeqForm);
     var var_iva_ = scAjaxGetFieldHidden("iva_" + iSeqForm);
     var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iSeqForm);
     var var_idbod_ = scAjaxGetFieldSelect("idbod_" + iSeqForm);
@@ -4672,6 +4829,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5228,7 +5387,7 @@ function scJs_sweetalert_params(params) {
     var var_unidad_ = scAjaxGetFieldHidden("unidad_" + iNumLinha);
     var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iNumLinha);
     var var_valorunit_ = scAjaxGetFieldText("valorunit_" + iNumLinha);
-    var var_adicional_ = scAjaxGetFieldHidden("adicional_" + iNumLinha);
+    var var_adicional_ = scAjaxGetFieldText("adicional_" + iNumLinha);
     var var_descuento_ = scAjaxGetFieldHidden("descuento_" + iNumLinha);
     var var_valorpar_ = scAjaxGetFieldHidden("valorpar_" + iNumLinha);
     var var_unidadmayor_ = scAjaxGetFieldSelect("unidadmayor_" + iNumLinha);
@@ -5435,6 +5594,8 @@ if (isset($this->Embutida_form) && $this->Embutida_form) {
     scAjaxSetNavpage();
     scAjaxShowDebug();
     scAjaxSetDisplay(true);
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel(true);
     scAjaxSetMaster();
     scAjaxAlert(do_ajax_form_detallepedido_submit_form_cb_after_alert);
@@ -6438,7 +6599,7 @@ else
     }
     if ("adicional_" == sIndex)
     {
-      scAjaxSetFieldLabel(sIndex, aValue);
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

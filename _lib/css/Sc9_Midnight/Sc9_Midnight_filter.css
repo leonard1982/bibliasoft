@@ -59,3 +59,49 @@
 .ui-slider-horizontal > .ui-state-hover { background-image: none; opacity: 1; filter: alpha(opacity=100); border-collapse: collapse }
 .ui-slider-horizontal > .ui-state-active { background-image: none; opacity: 1; filter: alpha(opacity=100); border-collapse: collapse }
 .scFilterPage .ui-menu .ui-menu-item, .scFilterTable .select2-container--default .select2-selection--single .select2-selection__rendered, .scFormPage .select2-container--default .select2-results__option[aria-selected="true"] { color: #aab8c5 }
+
+#id_div_interativ_search {
+  position: relative;
+}
+
+.scGridRefinedSearchCollapse {
+  cursor: pointer;
+
+  position: absolute;
+  top: calc(24px / 4);
+  right: -14px;
+
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(9 30 66 / 8%), 0 2px 4px 1px rgb(9 30 66 / 8%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+  transition: all .3s ease;
+}
+
+.scGridRefinedSearchCollapse:hover {
+  filter: brightness(90%);
+}
+
+.scGridRefinedSearchCollapse i {
+  margin: 0;
+  padding: 0;
+  transition: transform .3s ease;
+}
+
+#id_div_interativ_search.is-closed .scGridRefinedSearchCollapse i {
+  transform: rotate(180deg);
+}
+#id_div_interativ_search.is-closed{
+  position: absolute;
+}
+#id_div_interativ_search.is-closed #id_div_interativ_search_content {
+  display:none;
+}
+                

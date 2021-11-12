@@ -1707,11 +1707,11 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
 
       if ($_SESSION['scriptcase']['fusioncharts_new'])
       {
-         $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/oem_fs/FusionCharts/js/fusioncharts.js\"></script>\r\n");
+         $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts-suite-xt-rdl/js/fusioncharts.js\"></script>\r\n");
       }
       else
       {
-         $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts_xt_ol/FusionCharts/js/fusioncharts.js\"></script>\r\n");
+         $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts-suite-xt-rdl/js/fusioncharts.js\"></script>\r\n");
       }
    }
 
@@ -1864,8 +1864,12 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
       $nm_saida->saida("    <option value=\"2\"" . $sAnaliticSelected . ">" . $translate[$language]['analitico'] . "</option>\r\n");
       $nm_saida->saida("  </select>\r\n");
       $nm_saida->saida("  &nbsp; &nbsp;\r\n");
+if (!$_SESSION['scriptcase']['proc_mobile']) {
       $nm_saida->saida("  " . $translate[$language]['largura'] . "\r\n");
       $nm_saida->saida("  <input id=\"sc-id-chart-width\" type=\"text\" size=\"5\" value=\"" . $iChartWidth . "\" class=\"css_toolbar_obj\" style=\"text-align: right\" />\r\n");
+} else {
+      $nm_saida->saida("  <input id=\"sc-id-chart-width\" type=\"text\" size=\"5\" value=\"" . $iChartWidth . "\" style=\"display: none;\" />\r\n");
+}
       $nm_saida->saida("  &nbsp; &nbsp;\r\n");
       $nm_saida->saida("  " . $translate[$language]['altura'] . "\r\n");
       $nm_saida->saida("  <input id=\"sc-id-chart-height\" type=\"text\" size=\"5\" value=\"" . $iChartHeight . "\" class=\"css_toolbar_obj\" style=\"text-align: right\" />\r\n");
@@ -1947,7 +1951,11 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
               }
           }
           $sPhantomImg   = "";
-          $sPDFHtmlCall  = "  FusionCharts.ready(function() {";
+          $sPDFHtmlCall  = " FusionCharts.options.license({";
+          $sPDFHtmlCall .= "   key: 'hzH5vmaD8A1C5B3E1C1F1I2C4A5A1B3f1C-9yI2J3A4yE2B2E2lozG1C3C8df1wC4B3I4dC-22A-16B5B2D3G1A4D4I1C11A4B2C2sH-9uD1H4C1B1A-13D-11lB4H3A33epB9c2D5B4lnC-7B2A5A7A1C7A5C5F1H4A2A2B10D7E2g==',";
+          $sPDFHtmlCall .= "   creditLabel: false,";
+          $sPDFHtmlCall .= " });";
+          $sPDFHtmlCall .= "  FusionCharts.ready(function() {";
           $sPDFHtmlCall .= "   var myChart = new FusionCharts({";
           $sPDFHtmlCall .= "    'type': '" . $this->getChartType($bMulti, $bComb) . "',";
           $sPDFHtmlCall .= "    'renderAt': '" . $sDivId . "',";
@@ -1971,7 +1979,6 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
       if ("N" == $isPDF)
       {
          $nm_saida->saida("<script type=\"text/javascript\" language=\"javascript\">\r\n");
-         $nm_saida->saida("  FusionCharts.setCurrentRenderer(\"javascript\");\r\n");
          $nm_saida->saida("$sPDFHtmlCall\r\n");
          $nm_saida->saida("</script>\r\n");
       }
@@ -1979,7 +1986,6 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
       {
          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inve_final_resumen']['charts_html']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inve_final_resumen']['charts_html'])
          {
-             $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inve_final_resumen']['charts_html'] = "  FusionCharts.setCurrentRenderer('javascript');";
          }
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inve_final_resumen']['charts_html'] .= $sPDFHtmlCall;
       }
@@ -2065,7 +2071,7 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
        @fwrite($fPhantomChart, "<head>\r\n");
        @fwrite($fPhantomChart, $_SESSION['nm_session']['charset'] . "\r\n");
        if ($_SESSION['scriptcase']['fusioncharts_new']) {
-           @fwrite($fPhantomChart, "<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts_xt_ol/FusionCharts/js/fusioncharts.js\"></script>\r\n");
+           @fwrite($fPhantomChart, "<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts-suite-xt-rdl/js/fusioncharts.js\"></script>\r\n");
        }
        else {
            @fwrite($fPhantomChart, "<script type=\"text/javascript\" language=\"javascript\" src=\"" . $this->Ini->path_prod . "/third/fusioncharts_xt_ol/" . $this->getChartModule() . "/js/fusioncharts.js\"></script>\r\n");
@@ -2078,8 +2084,13 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
        @fwrite($fPhantomChart, "  d.setTime(d.getTime() + (24*60*60*1000));\r\n");
        @fwrite($fPhantomChart, "  var expires = \"expires=\"+ d.toUTCString();\r\n");
        @fwrite($fPhantomChart, "  document.cookie = \"PHPSESSID_=;\"+ Math.random().toString(36).substring(2) +\";\" + expires + \";path=/\";\r\n");
+       @fwrite($fPhantomChart, "  FusionCharts.options.license({\r\n");
+       @fwrite($fPhantomChart, "    key: 'hzH5vmaD8A1C5B3E1C1F1I2C4A5A1B3f1C-9yI2J3A4yE2B2E2lozG1C3C8df1wC4B3I4dC-22A-16B5B2D3G1A4D4I1C11A4B2C2sH-9uD1H4C1B1A-13D-11lB4H3A33epB9c2D5B4lnC-7B2A5A7A1C7A5C5F1H4A2A2B10D7E2g==',\r\n");
+       @fwrite($fPhantomChart, "    creditLabel: false,\r\n");
+       @fwrite($fPhantomChart, "  });\r\n");
        @fwrite($fPhantomChart, "  FusionCharts.ready(function() {\r\n");
        @fwrite($fPhantomChart, "   var myChart = new FusionCharts({\r\n");
+       @fwrite($fPhantomChart, "    'creditLabel': false,\r\n");
        @fwrite($fPhantomChart, "    'type': '" . $this->getChartType($bMulti, $bComb) . "',\r\n");
        @fwrite($fPhantomChart, "    'renderAt': 'sc-id-fusionchart',\r\n");
        @fwrite($fPhantomChart, "    'width': '" . $width . "',\r\n");
@@ -2543,6 +2554,26 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
                case 'scatter':
                    $newChartType = "scatter";
                    break;
+               case 'scrollarea':
+               case 'scrollarea2d':
+                   $newChartType = "scrollarea2d";
+                   break;
+               case 'scrollbar2d':
+                   $newChartType = "scrollbar2d";
+                   break;
+               case 'overlappedbar2d':
+                   $newChartType = "overlappedbar2d";
+                   break;
+               case 'scrollcolumn2d':
+                   $newChartType = "scrollcolumn2d";
+                   break;
+               case 'overlappedcolumn2d':
+                   $newChartType = "overlappedcolumn2d";
+                   break;
+               case 'scrollline':
+               case 'scrollline2d':
+                   $newChartType = "scrollline2d";
+                   break;
                case 'spline';
                case 'msspline';
                    $newChartType = $multiMetrics || $multiDimensions  ? "msspline" : "spline";
@@ -2566,6 +2597,9 @@ $_SESSION['scriptcase']['grid_inve_final_resumen']['contr_erro'] = 'off';
                case 'step';
                case 'msstepline';
                    $newChartType = "msstepline";
+                   break;
+               case 'zoomline':
+                   $newChartType = "zoomline";
                    break;
            }
            return $newChartType;

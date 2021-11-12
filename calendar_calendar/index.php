@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -297,8 +298,8 @@ class calendar_calendar_ini
       $this->nm_dt_criacao   = "20210115"; 
       $this->nm_hr_criacao   = "113332"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -952,7 +953,7 @@ class calendar_calendar_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDQFaZ1BYD5BOHuBOVcFKDWF/HMrqDcNmZ1BiD1rKHuFUHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvmVcFKV5BmVoBqD9BsZkFGHArKHQrqHgrKZSJGHEFqVoX7HQBiH9BiHABYHuraHuNODkFCDWFYDoJeD9BiZSBODSNOHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBOH5FqVoB/D9BsZ1F7HArYV5FUDMzGHEFiDWX7DoJeDcXOZSX7D1BeV5FUHuNOVcFKDWFYDoJsDcJUZ1F7HABYD5XGHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZSFaHINKZMJeHgveHEBUH5FYHINUD9JKZSBiHANOHQJwDMvODkBsV5F/HMB/HQBiZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVorqHQBqZ1BiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKVWBODMvsV9FeDuFqHMJsHQJmH9BqHIrwHuB/DEBOHEBUDWr/HMFaD9JKH9BiHIrwHuNUHuNODkBOV5X7HIrqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODuFaZ1BYHurqDMrYV9FeDuFqDoXGDcJUH9FaDSrYHQX7HgveVkJ3V5XCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHENiH5BmZuXGDcXGDQX7HABYD5JsDMvOZSNiH5XKVEFGDcBqZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsDkBODWFaDoJeDcJUZ1B/Z1NOV5B/DMBYHEJGDWr/DoFUDcJeZSX7HArYD5rqHgrKVcBOV5F/DoNUDcBqZ1FaHAvCV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoJsHQJmZSBqHAN7V5JwHgrKHEXeH5FGZuB/D9FYDuBqHIrKVWXGHuvmVcFCDWFYHIrqD9XGZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAvCZMXGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5XGHuBYZSJqDuX7HMFGDcJUZkFGD1rwHuFUHgveHErCDWXCDoJsHQXOZ9XGHIrKVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2300,6 +2301,11 @@ ob_start();
     sajax_export("ajax_calendar_calendar_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_calendar_calendar->contr_calendar_calendar->controle();
 //
     function nm_limpa_str_calendar_calendar(&$str)
@@ -2636,6 +2642,10 @@ ob_start();
       global $inicial_calendar_calendar;
       $aResp = array();
 
+      if (isset($inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['empty_filter'];
@@ -2732,6 +2742,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['btnDisabled']) && '' != $inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['btnDisabled'])
+         {
+            calendar_calendar_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['btnLabel']) && '' != $inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['btnLabel'])
+         {
+            calendar_calendar_pack_btn_label($aResp);
          }
          if (isset($inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['varList']) && !empty($inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['varList']))
          {
@@ -2836,8 +2854,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -3086,6 +3109,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // calendar_calendar_pack_master_value
+
+   function calendar_calendar_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_calendar_calendar;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // calendar_calendar_pack_ajax_alert
+
+   function calendar_calendar_pack_btn_label(&$aResp)
+   {
+      global $inicial_calendar_calendar;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_calendar_calendar->contr_calendar_calendar->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // calendar_calendar_pack_ajax_alert
 
    function calendar_calendar_pack_ajax_alert(&$aResp)
    {

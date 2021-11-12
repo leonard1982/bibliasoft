@@ -287,6 +287,12 @@ class nota_credito_apl
       {
           $_SESSION['gIdfac'] = $_GET["gidfac"];
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['nota_credito']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['nota_credito']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['nota_credito']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['nota_credito']['embutida_parms'];
@@ -1774,10 +1780,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1790,15 +1799,15 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_nota_credito'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'prefijo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'prefijo' == $filtro)) || (is_array($filtro) && in_array('prefijo', $filtro)))
         $this->ValidateField_prefijo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numero' == $filtro)) || (is_array($filtro) && in_array('numero', $filtro)))
         $this->ValidateField_numero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'factura' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'factura' == $filtro)) || (is_array($filtro) && in_array('factura', $filtro)))
         $this->ValidateField_factura($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha_nota' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha_nota' == $filtro)) || (is_array($filtro) && in_array('fecha_nota', $filtro)))
         $this->ValidateField_fecha_nota($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'obs' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'obs' == $filtro)) || (is_array($filtro) && in_array('obs', $filtro)))
         $this->ValidateField_obs($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -4341,7 +4350,8 @@ $_SESSION['scriptcase']['nota_credito']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -5145,5 +5155,24 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
         }
         return $image_param;
     } // sc_ajax_alert_image
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "help":
+                return array("sc_b_hlp_b");
+                break;
+            case "exit":
+                return array("Bsair_b.sc-unique-btn-1", "Bsair_b.sc-unique-btn-2");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-3");
+                break;
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-4");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

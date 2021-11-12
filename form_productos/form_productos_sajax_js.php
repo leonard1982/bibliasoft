@@ -2805,7 +2805,72 @@ sajax_show_javascript();
   }
 
   function scAjax_formReload() {
-    nm_move('igual');
+<?php
+    if ($this->nmgp_opcao == 'novo') {
+        echo "      nm_move('reload_novo');";
+    } else {
+        echo "      nm_move('igual');";
+    }
+?>
+  }
+  
+  function scBtnDisabled()
+  {
+    var btnNameNav, hasNavButton = false;
+
+    if (typeof oResp.btnDisabled != undefined) {
+      for (var btnName in oResp.btnDisabled) {
+        btnNameNav = btnName.substring(0, 9);
+
+        if ("on" == oResp.btnDisabled[btnName]) {
+          $("#" + btnName).addClass("disabled");
+
+          if ("sc_b_ini_" == btnNameNav) {
+            Nav_binicio_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_ret_" == btnNameNav) {
+            Nav_bretorna_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_avc_" == btnNameNav) {
+            Nav_bavanca_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_fim_" == btnNameNav) {
+            Nav_bfinal_macro_disabled = "on";
+            hasNavButton = true;
+          }
+        } else {
+          $("#" + btnName).removeClass("disabled");
+
+          if ("sc_b_ini_" == btnNameNav) {
+            Nav_binicio_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_ret_" == btnNameNav) {
+            Nav_bretorna_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_avc_" == btnNameNav) {
+            Nav_bavanca_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_fim_" == btnNameNav) {
+            Nav_bfinal_macro_disabled = "off";
+            hasNavButton = true;
+          }
+        }
+      }
+    }
+
+    if (hasNavButton) {
+      nav_atualiza(Nav_permite_ret, Nav_permite_ava, 't');
+      nav_atualiza(Nav_permite_ret, Nav_permite_ava, 'b');
+    }
+  }
+
+  function scBtnLabel()
+  {
+    if (typeof oResp.btnLabel != undefined) {
+      for (var btnName in oResp.btnLabel) {
+        $("#" + btnName).find(".btn-label").html(oResp.btnLabel[btnName]);
+      }
+    }
   }
 
   var scFormHasChanged = false;
@@ -4826,6 +4891,43 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_productos_validate_codigobar3_cb
 
+  // ---------- Validate para_registro_fe
+  function do_ajax_form_productos_validate_para_registro_fe()
+  {
+    var nomeCampo_para_registro_fe = "para_registro_fe";
+    var var_para_registro_fe = scAjaxGetFieldSelect(nomeCampo_para_registro_fe);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_para_registro_fe(var_para_registro_fe, var_script_case_init, do_ajax_form_productos_validate_para_registro_fe_cb);
+  } // do_ajax_form_productos_validate_para_registro_fe
+
+  function do_ajax_form_productos_validate_para_registro_fe_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "para_registro_fe";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_para_registro_fe_cb
+
   // ---------- Event onchange codigoprod
   function do_ajax_form_productos_event_codigoprod_onchange()
   {
@@ -4859,6 +4961,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4905,6 +5009,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4956,6 +5062,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5001,6 +5109,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5046,6 +5156,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5091,6 +5203,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5136,6 +5250,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5191,6 +5307,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5236,6 +5354,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5281,6 +5401,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5331,6 +5453,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5376,6 +5500,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5422,6 +5548,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5467,6 +5595,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5513,6 +5643,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5558,6 +5690,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5603,6 +5737,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5654,6 +5790,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -6014,6 +6152,7 @@ function scJs_sweetalert_params(params) {
     var var_id_linea = scAjaxGetFieldSelect("id_linea");
     var var_codigobar2 = scAjaxGetFieldText("codigobar2");
     var var_codigobar3 = scAjaxGetFieldText("codigobar3");
+    var var_para_registro_fe = scAjaxGetFieldSelect("para_registro_fe");
     var var_imagen_ul_name = scAjaxSpecCharProtect(document.F1.imagen_ul_name.value);//.replace(/[+]/g, "__NM_PLUS__");
     var var_imagen_ul_type = document.F1.imagen_ul_type.value;
     var var_imagen_salva = scAjaxSpecCharProtect(document.F1.imagen_salva.value);//.replace(/[+]/g, "__NM_PLUS__");
@@ -6027,7 +6166,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_productos_submit_form(var_codigoprod, var_codigobar, var_nompro, var_idgrup, var_idpro1, var_tipo_producto, var_idpro2, var_otro, var_otro2, var_precio_editable, var_maneja_tcs_lfs, var_stockmen, var_unidmaymen, var_unimay, var_unimen, var_unidad_ma, var_unidad_, var_multiple_escala, var_en_base_a, var_costomen, var_costo_prom, var_recmayamen, var_idiva, var_existencia, var_u_menor, var_ubicacion, var_activo, var_colores, var_confcolor, var_tallas, var_conftalla, var_sabores, var_sabor, var_fecha_vencimiento, var_lote, var_serial_codbarras, var_relleno, var_control_costo, var_por_preciominimo, var_sugerido_mayor, var_sugerido_menor, var_preciofull, var_precio2, var_preciomay, var_preciomen, var_preciomen2, var_preciomen3, var_imagen, var_cod_cuenta, var_idprod, var_id_marca, var_id_linea, var_codigobar2, var_codigobar3, var_imagen_ul_name, var_imagen_ul_type, var_imagen_salva, var_imagen_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_productos_submit_form_cb);
+    x_ajax_form_productos_submit_form(var_codigoprod, var_codigobar, var_nompro, var_idgrup, var_idpro1, var_tipo_producto, var_idpro2, var_otro, var_otro2, var_precio_editable, var_maneja_tcs_lfs, var_stockmen, var_unidmaymen, var_unimay, var_unimen, var_unidad_ma, var_unidad_, var_multiple_escala, var_en_base_a, var_costomen, var_costo_prom, var_recmayamen, var_idiva, var_existencia, var_u_menor, var_ubicacion, var_activo, var_colores, var_confcolor, var_tallas, var_conftalla, var_sabores, var_sabor, var_fecha_vencimiento, var_lote, var_serial_codbarras, var_relleno, var_control_costo, var_por_preciominimo, var_sugerido_mayor, var_sugerido_menor, var_preciofull, var_precio2, var_preciomay, var_preciomen, var_preciomen2, var_preciomen3, var_imagen, var_cod_cuenta, var_idprod, var_id_marca, var_id_linea, var_codigobar2, var_codigobar3, var_para_registro_fe, var_imagen_ul_name, var_imagen_ul_type, var_imagen_salva, var_imagen_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_productos_submit_form_cb);
   } // do_ajax_form_productos_submit_form
 
   function do_ajax_form_productos_submit_form_cb(sResp)
@@ -6106,6 +6245,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("id_linea");
       scAjaxHideErrorDisplay("codigobar2");
       scAjaxHideErrorDisplay("codigobar3");
+      scAjaxHideErrorDisplay("para_registro_fe");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['dashboard_info']['under_dashboard']) {
@@ -6139,6 +6279,8 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['dashbo
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxAlert(do_ajax_form_productos_submit_form_cb_after_alert);
@@ -6223,6 +6365,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['dashbo
     scAjaxHideErrorDisplay("id_linea");
     scAjaxHideErrorDisplay("codigobar2");
     scAjaxHideErrorDisplay("codigobar3");
+    scAjaxHideErrorDisplay("para_registro_fe");
     var var_idprod = document.F2.idprod.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -6430,6 +6573,7 @@ if ($this->Embutida_form)
   ajax_field_list[51] = "id_linea";
   ajax_field_list[52] = "codigobar2";
   ajax_field_list[53] = "codigobar3";
+  ajax_field_list[54] = "para_registro_fe";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -6496,7 +6640,8 @@ if ($this->Embutida_form)
     "id_marca": {"label": "Marca", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "id_linea": {"label": "Linea", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "codigobar2": {"label": "Código barras 2", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "codigobar3": {"label": "Código barras 3", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "codigobar3": {"label": "Código barras 3", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "para_registro_fe": {"label": "Para Registro Fe", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -6578,7 +6723,8 @@ if ($this->Embutida_form)
     "id_marca": new Array(),
     "id_linea": new Array(),
     "codigobar2": new Array(),
-    "codigobar3": new Array()
+    "codigobar3": new Array(),
+    "para_registro_fe": new Array()
   };
   ajax_field_mult["codigoprod"][1] = "codigoprod";
   ajax_field_mult["codigobar"][1] = "codigobar";
@@ -6634,6 +6780,7 @@ if ($this->Embutida_form)
   ajax_field_mult["id_linea"][1] = "id_linea";
   ajax_field_mult["codigobar2"][1] = "codigobar2";
   ajax_field_mult["codigobar3"][1] = "codigobar3";
+  ajax_field_mult["para_registro_fe"][1] = "para_registro_fe";
 
   var ajax_field_id = {
     "codigoprod": new Array("hidden_field_label_codigoprod", "hidden_field_data_codigoprod"),
@@ -6683,7 +6830,8 @@ if ($this->Embutida_form)
     "id_marca": new Array("hidden_field_label_id_marca", "hidden_field_data_id_marca"),
     "id_linea": new Array("hidden_field_label_id_linea", "hidden_field_data_id_linea"),
     "codigobar2": new Array("hidden_field_label_codigobar2", "hidden_field_data_codigobar2"),
-    "codigobar3": new Array("hidden_field_label_codigobar3", "hidden_field_data_codigobar3")
+    "codigobar3": new Array("hidden_field_label_codigobar3", "hidden_field_data_codigobar3"),
+    "para_registro_fe": new Array("hidden_field_label_para_registro_fe", "hidden_field_data_para_registro_fe")
   };
 
   var ajax_read_only = {
@@ -6740,7 +6888,8 @@ if ($this->Embutida_form)
     "id_marca": "off",
     "id_linea": "off",
     "codigobar2": "off",
-    "codigobar3": "off"
+    "codigobar3": "off",
+    "para_registro_fe": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -7652,6 +7801,23 @@ if ($this->Embutida_form)
     if ("codigobar3" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("para_registro_fe" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

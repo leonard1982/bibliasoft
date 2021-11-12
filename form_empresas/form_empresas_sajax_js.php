@@ -2805,7 +2805,72 @@ sajax_show_javascript();
   }
 
   function scAjax_formReload() {
-    nm_move('igual');
+<?php
+    if ($this->nmgp_opcao == 'novo') {
+        echo "      nm_move('reload_novo');";
+    } else {
+        echo "      nm_move('igual');";
+    }
+?>
+  }
+  
+  function scBtnDisabled()
+  {
+    var btnNameNav, hasNavButton = false;
+
+    if (typeof oResp.btnDisabled != undefined) {
+      for (var btnName in oResp.btnDisabled) {
+        btnNameNav = btnName.substring(0, 9);
+
+        if ("on" == oResp.btnDisabled[btnName]) {
+          $("#" + btnName).addClass("disabled");
+
+          if ("sc_b_ini_" == btnNameNav) {
+            Nav_binicio_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_ret_" == btnNameNav) {
+            Nav_bretorna_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_avc_" == btnNameNav) {
+            Nav_bavanca_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_fim_" == btnNameNav) {
+            Nav_bfinal_macro_disabled = "on";
+            hasNavButton = true;
+          }
+        } else {
+          $("#" + btnName).removeClass("disabled");
+
+          if ("sc_b_ini_" == btnNameNav) {
+            Nav_binicio_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_ret_" == btnNameNav) {
+            Nav_bretorna_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_avc_" == btnNameNav) {
+            Nav_bavanca_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_fim_" == btnNameNav) {
+            Nav_bfinal_macro_disabled = "off";
+            hasNavButton = true;
+          }
+        }
+      }
+    }
+
+    if (hasNavButton) {
+      nav_atualiza(Nav_permite_ret, Nav_permite_ava, 't');
+      nav_atualiza(Nav_permite_ret, Nav_permite_ava, 'b');
+    }
+  }
+
+  function scBtnLabel()
+  {
+    if (typeof oResp.btnLabel != undefined) {
+      for (var btnName in oResp.btnLabel) {
+        $("#" + btnName).find(".btn-label").html(oResp.btnLabel[btnName]);
+      }
+    }
   }
 
   var scFormHasChanged = false;
@@ -3401,6 +3466,117 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_empresas_validate_entorno_cb
 
+  // ---------- Validate nomina
+  function do_ajax_form_empresas_validate_nomina()
+  {
+    var nomeCampo_nomina = "nomina";
+    var var_nomina = scAjaxGetFieldCheckbox(nomeCampo_nomina, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_empresas_validate_nomina(var_nomina, var_script_case_init, do_ajax_form_empresas_validate_nomina_cb);
+  } // do_ajax_form_empresas_validate_nomina
+
+  function do_ajax_form_empresas_validate_nomina_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "nomina";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_empresas_validate_nomina_cb
+
+  // ---------- Validate codempresa
+  function do_ajax_form_empresas_validate_codempresa()
+  {
+    var nomeCampo_codempresa = "codempresa";
+    var var_codempresa = scAjaxGetFieldText(nomeCampo_codempresa);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_empresas_validate_codempresa(var_codempresa, var_script_case_init, do_ajax_form_empresas_validate_codempresa_cb);
+  } // do_ajax_form_empresas_validate_codempresa
+
+  function do_ajax_form_empresas_validate_codempresa_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "codempresa";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_empresas_validate_codempresa_cb
+
+  // ---------- Validate nombre_empresa_nomina
+  function do_ajax_form_empresas_validate_nombre_empresa_nomina()
+  {
+    var nomeCampo_nombre_empresa_nomina = "nombre_empresa_nomina";
+    var var_nombre_empresa_nomina = scAjaxGetFieldText(nomeCampo_nombre_empresa_nomina);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_empresas_validate_nombre_empresa_nomina(var_nombre_empresa_nomina, var_script_case_init, do_ajax_form_empresas_validate_nombre_empresa_nomina_cb);
+  } // do_ajax_form_empresas_validate_nombre_empresa_nomina
+
+  function do_ajax_form_empresas_validate_nombre_empresa_nomina_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "nombre_empresa_nomina";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_empresas_validate_nombre_empresa_nomina_cb
+
   // ---------- Event onclick predeterminada
   function do_ajax_form_empresas_event_predeterminada_onclick()
   {
@@ -3433,6 +3609,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -3755,6 +3933,9 @@ function scJs_sweetalert_params(params) {
     var var_correo = scAjaxGetFieldText("correo");
     var var_comentario = scAjaxGetFieldText("comentario");
     var var_entorno = scAjaxGetFieldSelect("entorno");
+    var var_nomina = scAjaxGetFieldCheckbox("nomina", ";");
+    var var_codempresa = scAjaxGetFieldText("codempresa");
+    var var_nombre_empresa_nomina = scAjaxGetFieldText("nombre_empresa_nomina");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -3764,7 +3945,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_empresas_submit_form(var_idempresa, var_nit, var_nombre, var_nombre_empresa, var_observaciones, var_creada, var_creada_hora, var_sinmovimiento, var_copiada_como, var_tipo_negocio, var_predeterminada, var_password, var_celular, var_correo, var_comentario, var_entorno, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_empresas_submit_form_cb);
+    x_ajax_form_empresas_submit_form(var_idempresa, var_nit, var_nombre, var_nombre_empresa, var_observaciones, var_creada, var_creada_hora, var_sinmovimiento, var_copiada_como, var_tipo_negocio, var_predeterminada, var_password, var_celular, var_correo, var_comentario, var_entorno, var_nomina, var_codempresa, var_nombre_empresa_nomina, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_empresas_submit_form_cb);
   } // do_ajax_form_empresas_submit_form
 
   function do_ajax_form_empresas_submit_form_cb(sResp)
@@ -3804,6 +3985,9 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("correo");
       scAjaxHideErrorDisplay("comentario");
       scAjaxHideErrorDisplay("entorno");
+      scAjaxHideErrorDisplay("nomina");
+      scAjaxHideErrorDisplay("codempresa");
+      scAjaxHideErrorDisplay("nombre_empresa_nomina");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas']['dashboard_info']['under_dashboard']) {
@@ -3830,6 +4014,8 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas']['dashboa
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxAlert(do_ajax_form_empresas_submit_form_cb_after_alert);
@@ -3875,6 +4061,9 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas']['dashboa
     scAjaxHideErrorDisplay("correo");
     scAjaxHideErrorDisplay("comentario");
     scAjaxHideErrorDisplay("entorno");
+    scAjaxHideErrorDisplay("nomina");
+    scAjaxHideErrorDisplay("codempresa");
+    scAjaxHideErrorDisplay("nombre_empresa_nomina");
     var var_idempresa = document.F2.idempresa.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -3989,9 +4178,13 @@ if ($this->Embutida_form)
   ajax_field_list[12] = "correo";
   ajax_field_list[13] = "comentario";
   ajax_field_list[14] = "entorno";
+  ajax_field_list[15] = "nomina";
+  ajax_field_list[16] = "codempresa";
+  ajax_field_list[17] = "nombre_empresa_nomina";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
+  ajax_block_list[1] = "1";
 
   var ajax_error_list = {
     "idempresa": {"label": "Id", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -4008,16 +4201,21 @@ if ($this->Embutida_form)
     "celular": {"label": "Celular", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "correo": {"label": "Correo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "comentario": {"label": "Comentarios", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "entorno": {"label": "Entorno", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "entorno": {"label": "Entorno", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "nomina": {"label": "Activar Nómina", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "codempresa": {"label": "Código Empresa Nómina", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "nombre_empresa_nomina": {"label": "Nombre BD Nómina", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
   var ajax_block_id = {
-    "0": "hidden_bloco_0"
+    "0": "hidden_bloco_0",
+    "1": "hidden_bloco_1"
   };
 
   var ajax_block_tab = {
-    "hidden_bloco_0": ""
+    "hidden_bloco_0": "",
+    "hidden_bloco_1": ""
   };
 
   var ajax_field_mult = {
@@ -4035,7 +4233,10 @@ if ($this->Embutida_form)
     "celular": new Array(),
     "correo": new Array(),
     "comentario": new Array(),
-    "entorno": new Array()
+    "entorno": new Array(),
+    "nomina": new Array(),
+    "codempresa": new Array(),
+    "nombre_empresa_nomina": new Array()
   };
   ajax_field_mult["idempresa"][1] = "idempresa";
   ajax_field_mult["nit"][1] = "nit";
@@ -4052,6 +4253,9 @@ if ($this->Embutida_form)
   ajax_field_mult["correo"][1] = "correo";
   ajax_field_mult["comentario"][1] = "comentario";
   ajax_field_mult["entorno"][1] = "entorno";
+  ajax_field_mult["nomina"][1] = "nomina";
+  ajax_field_mult["codempresa"][1] = "codempresa";
+  ajax_field_mult["nombre_empresa_nomina"][1] = "nombre_empresa_nomina";
 
   var ajax_field_id = {
     "nit": new Array("hidden_field_label_nit", "hidden_field_data_nit"),
@@ -4065,7 +4269,9 @@ if ($this->Embutida_form)
     "celular": new Array("hidden_field_label_celular", "hidden_field_data_celular"),
     "correo": new Array("hidden_field_label_correo", "hidden_field_data_correo"),
     "comentario": new Array("hidden_field_label_comentario", "hidden_field_data_comentario"),
-    "entorno": new Array("hidden_field_label_entorno", "hidden_field_data_entorno")
+    "entorno": new Array("hidden_field_label_entorno", "hidden_field_data_entorno"),
+    "nomina": new Array("hidden_field_label_nomina", "hidden_field_data_nomina"),
+    "codempresa": new Array("hidden_field_label_codempresa", "hidden_field_data_codempresa")
   };
 
   var ajax_read_only = {
@@ -4083,7 +4289,10 @@ if ($this->Embutida_form)
     "celular": "off",
     "correo": "off",
     "comentario": "off",
-    "entorno": "off"
+    "entorno": "off",
+    "nomina": "off",
+    "codempresa": "off",
+    "nombre_empresa_nomina": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -4336,6 +4545,57 @@ if ($this->Embutida_form)
     if ("entorno" == sIndex)
     {
       scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("nomina" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("codempresa" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("nombre_empresa_nomina" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

@@ -771,26 +771,41 @@ scAjax_displayEmptyForm();
 <script type="text/javascript">
 	function scBtnFn_sys_format_alt() {
 		if ($("#sc_b_upd_t.sc-unique-btn-1").length && $("#sc_b_upd_t.sc-unique-btn-1").is(":visible")) {
+		    if ($("#sc_b_upd_t.sc-unique-btn-1").hasClass("disabled")) {
+		        return;
+		    }
 			nm_atualiza ('alterar');
 			 return;
 		}
 	}
 	function scBtnFn_sys_format_hlp() {
 		if ($("#sc_b_hlp_t").length && $("#sc_b_hlp_t").is(":visible")) {
+		    if ($("#sc_b_hlp_t").hasClass("disabled")) {
+		        return;
+		    }
 			window.open('<?php echo $this->url_webhelp; ?>', '', 'resizable, scrollbars'); 
 			 return;
 		}
 	}
 	function scBtnFn_sys_format_sai() {
 		if ($("#sc_b_sai_t.sc-unique-btn-2").length && $("#sc_b_sai_t.sc-unique-btn-2").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-2").hasClass("disabled")) {
+		        return;
+		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
 		if ($("#sc_b_sai_t.sc-unique-btn-3").length && $("#sc_b_sai_t.sc-unique-btn-3").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-3").hasClass("disabled")) {
+		        return;
+		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
 		if ($("#sc_b_sai_t.sc-unique-btn-4").length && $("#sc_b_sai_t.sc-unique-btn-4").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-4").hasClass("disabled")) {
+		        return;
+		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}

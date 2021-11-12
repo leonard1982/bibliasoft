@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -296,8 +297,8 @@ class form_pagar_venta_pos_ini
       $this->nm_dt_criacao   = "20180113"; 
       $this->nm_hr_criacao   = "184019"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -1011,7 +1012,7 @@ class form_pagar_venta_pos_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDuFaHANOHQJeHgvsV9BUH5XCVEF7HQBqZ1BOD1rKV5JwDMBYZSJ3H5FGDoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/HQBiZSFUHArYV5XGDMBOVcXKDWXCVEF7HQBiZ1rqHANOV5JsDENOHEFiDuFYVoFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSFGHAveV5FUHgrKDkBODWFaVoX7DcNwH9FaHANOV5FaDEBOVkJGH5F/DoraDcXOZSFGHAveV5JwHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQB/DSN7HuFGDMNODkBsV5X7DoJsHQNmH9FaDSrYV5FGHgvsVkJGDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHErsDurmDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcNmZ1F7D1zGD5JeHgvsVkXeV5XCVoX7D9NwDQX7HArYVWFaHuNOVcFeDuX7HMrqD9BiZ1BiHANOHuFUDEBOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDQJsDSrwHQB/DMzGVcrsDWXCVEraHQBsZ1FGHABYHQJwDEBODkFeH5FYVoFGHQJKDQBqHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1rqHArYD5FaDErKZSJ3V5XCHIraDcXGZSFGHABYVWBqDMvmVIBsV5X7HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5JwHuzGVIBOV5FYVoJwD9XOZ1F7HABYV5BODMBYHEJGDWr/DoFUD9NmH9X7HABYD5NUHuBYVcFKDWFaVoJwD9XOZ1F7Z1BeD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiDcFYH9B/D1rwHuFGDMzGHEJqDWXCZuB/HQJKDuBqDSBYD5JwHuvmVIFCHEX/VEraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHIveHQJwDEBODkFeH5FYVoFGHQJKDQFaD1BeD5JwHgvsDkB/H5FqVEF7DcBqZ1B/D1rKHuX7DEBOHEJqDWF/ZuJeD9NmDQX7Z1rwHuJeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2395,6 +2396,11 @@ ob_start();
     sajax_export("ajax_form_pagar_venta_pos_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->controle();
 //
     function nm_limpa_str_form_pagar_venta_pos(&$str)
@@ -2756,6 +2762,10 @@ ob_start();
       global $inicial_form_pagar_venta_pos;
       $aResp = array();
 
+      if (isset($inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['empty_filter'];
@@ -2852,6 +2862,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['btnDisabled']) && '' != $inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['btnDisabled'])
+         {
+            form_pagar_venta_pos_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['btnLabel']) && '' != $inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['btnLabel'])
+         {
+            form_pagar_venta_pos_pack_btn_label($aResp);
          }
          if (isset($inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['varList']) && !empty($inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['varList']))
          {
@@ -2956,8 +2974,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -3206,6 +3229,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_pagar_venta_pos_pack_master_value
+
+   function form_pagar_venta_pos_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_pagar_venta_pos;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_pagar_venta_pos_pack_ajax_alert
+
+   function form_pagar_venta_pos_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_pagar_venta_pos;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_pagar_venta_pos->contr_form_pagar_venta_pos->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_pagar_venta_pos_pack_ajax_alert
 
    function form_pagar_venta_pos_pack_ajax_alert(&$aResp)
    {

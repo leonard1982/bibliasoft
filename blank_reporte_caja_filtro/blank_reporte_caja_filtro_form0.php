@@ -191,6 +191,10 @@ var Nav_binicio     = "<?php echo $this->arr_buttons['binicio']['type']; ?>";
 var Nav_bavanca     = "<?php echo $this->arr_buttons['bavanca']['type']; ?>";
 var Nav_bretorna    = "<?php echo $this->arr_buttons['bretorna']['type']; ?>";
 var Nav_bfinal      = "<?php echo $this->arr_buttons['bfinal']['type']; ?>";
+var Nav_binicio_macro_disabled  = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['first']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['first'] : 'off'); ?>";
+var Nav_bavanca_macro_disabled  = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['forward']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['forward'] : 'off'); ?>";
+var Nav_bretorna_macro_disabled = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['back']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['back'] : 'off'); ?>";
+var Nav_bfinal_macro_disabled   = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['last']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['last'] : 'off'); ?>";
 function nav_atualiza(str_ret, str_ava, str_pos)
 {
 <?php
@@ -207,13 +211,13 @@ function nav_atualiza(str_ret, str_ava, str_pos)
     if ($this->nmgp_botoes['first'] == "on")
     {
 ?>
-       $("#sc_b_ini_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_binicio_macro_disabled) { $("#sc_b_ini_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
     if ($this->nmgp_botoes['back'] == "on")
     {
 ?>
-       $("#sc_b_ret_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bretorna_macro_disabled) { $("#sc_b_ret_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
 ?>
@@ -241,13 +245,13 @@ function nav_atualiza(str_ret, str_ava, str_pos)
     if ($this->nmgp_botoes['last'] == "on")
     {
 ?>
-       $("#sc_b_fim_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bfinal_macro_disabled) { $("#sc_b_fim_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
     if ($this->nmgp_botoes['forward'] == "on")
     {
 ?>
-       $("#sc_b_avc_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bavanca_macro_disabled) { $("#sc_b_avc_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
 ?>
@@ -765,10 +769,21 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
      <td nowrap align="center" valign="middle" width="33%" class="scFormToolbarPadding"> 
 
 <?php
-           if ($opcao_botoes != "novo") {
+    if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['limpiar'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "limpiar", "scBtnFn_limpiar()", "scBtnFn_limpiar()", "sc_limpiar_bot", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['limpiar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['limpiar']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_label']['limpiar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_label']['limpiar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_label']['limpiar'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "limpiar", "scBtnFn_limpiar()", "scBtnFn_limpiar()", "sc_limpiar_bot", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -777,7 +792,18 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
        <?php
         $sCondStyle = ($this->nmgp_botoes['ok'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bok", "scBtnFn_sys_format_ok()", "scBtnFn_sys_format_ok()", "sub_form_b", "", "Generar", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-1", "", "");?>
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-1';
+        $buttonMacroLabel = "Generar";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['ok']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_disabled']['ok']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_label']['ok']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_label']['ok']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['blank_reporte_caja_filtro']['btn_label']['ok'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bok", "scBtnFn_sys_format_ok()", "scBtnFn_sys_format_ok()", "sub_form_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -980,12 +1006,18 @@ scAjax_displayEmptyForm();
 <script type="text/javascript">
 	function scBtnFn_limpiar() {
 		if ($("#sc_limpiar_bot").length && $("#sc_limpiar_bot").is(":visible")) {
+		    if ($("#sc_limpiar_bot").hasClass("disabled")) {
+		        return;
+		    }
 			sc_btn_limpiar()
 			 return;
 		}
 	}
 	function scBtnFn_sys_format_ok() {
 		if ($("#sub_form_b.sc-unique-btn-1").length && $("#sub_form_b.sc-unique-btn-1").is(":visible")) {
+		    if ($("#sub_form_b.sc-unique-btn-1").hasClass("disabled")) {
+		        return;
+		    }
 			nm_atualiza('alterar');
 			 return;
 		}

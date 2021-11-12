@@ -334,6 +334,12 @@ class seleccionarproducto_apl
       {
           $_SESSION['sum_iva'] = $this->sum_iva;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['seleccionarproducto']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['seleccionarproducto']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['seleccionarproducto']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['seleccionarproducto']['embutida_parms'];
@@ -1947,11 +1953,14 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->scFormFocusErrorName = '';
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1964,57 +1973,57 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_seleccionarproducto'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'producto' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'producto' == $filtro)) || (is_array($filtro) && in_array('producto', $filtro)))
         $this->ValidateField_producto($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "producto";
 
-      if ('' == $filtro || 'cantidad' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cantidad' == $filtro)) || (is_array($filtro) && in_array('cantidad', $filtro)))
         $this->ValidateField_cantidad($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "cantidad";
 
-      if ('' == $filtro || 'precio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'precio' == $filtro)) || (is_array($filtro) && in_array('precio', $filtro)))
         $this->ValidateField_precio($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "precio";
 
-      if ('' == $filtro || 'stock' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'stock' == $filtro)) || (is_array($filtro) && in_array('stock', $filtro)))
         $this->ValidateField_stock($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "stock";
 
-      if ('' == $filtro || 'iva' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'iva' == $filtro)) || (is_array($filtro) && in_array('iva', $filtro)))
         $this->ValidateField_iva($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "iva";
 
-      if ('' == $filtro || 'tdescuento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tdescuento' == $filtro)) || (is_array($filtro) && in_array('tdescuento', $filtro)))
         $this->ValidateField_tdescuento($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "tdescuento";
 
-      if ('' == $filtro || 'descuento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'descuento' == $filtro)) || (is_array($filtro) && in_array('descuento', $filtro)))
         $this->ValidateField_descuento($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "descuento";
 
-      if ('' == $filtro || 'sidescuento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sidescuento' == $filtro)) || (is_array($filtro) && in_array('sidescuento', $filtro)))
         $this->ValidateField_sidescuento($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "sidescuento";
 
-      if ('' == $filtro || 'tiva' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tiva' == $filtro)) || (is_array($filtro) && in_array('tiva', $filtro)))
         $this->ValidateField_tiva($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "tiva";
 
-      if ('' == $filtro || 'subtotal' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'subtotal' == $filtro)) || (is_array($filtro) && in_array('subtotal', $filtro)))
         $this->ValidateField_subtotal($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "subtotal";
 
-      if ('' == $filtro || 'ahorro' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ahorro' == $filtro)) || (is_array($filtro) && in_array('ahorro', $filtro)))
         $this->ValidateField_ahorro($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $this->scFormFocusErrorName && ( !empty($Campos_Crit) || !empty($Campos_Falta) ))
           $this->scFormFocusErrorName = "ahorro";
@@ -2035,9 +2044,15 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Excede existencia!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_seleccionarproducto' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_seleccionarproducto';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_seleccionarproducto';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Excede existencia!";
  }
 ;
@@ -4018,9 +4033,15 @@ if($this->cantidad >0 and $this->cantidad !="")
 		  
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Excede existencia!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_seleccionarproducto' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_seleccionarproducto';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_seleccionarproducto';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Excede existencia!";
  }
 ;
@@ -4289,9 +4310,15 @@ else
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Producto sin precio!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_seleccionarproducto' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_seleccionarproducto';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_seleccionarproducto';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Producto sin precio!";
  }
 ;
@@ -4608,7 +4635,8 @@ $_SESSION['scriptcase']['seleccionarproducto']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -5432,5 +5460,21 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
             $this->NM_ajax_info['focus'] = $aFocus[$sFieldName];
         }
     } // sc_set_focus
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-1");
+                break;
+            case "help":
+                return array("sc_b_hlp_b");
+                break;
+            case "exit":
+                return array("Bsair_b.sc-unique-btn-2", "Bsair_b.sc-unique-btn-3");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

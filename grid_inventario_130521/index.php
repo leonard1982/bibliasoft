@@ -228,8 +228,8 @@ class grid_inventario_130521_ini
       $this->nm_dt_criacao   = "20171215"; 
       $this->nm_hr_criacao   = "120023"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -825,6 +825,8 @@ class grid_inventario_130521_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -950,7 +952,7 @@ class grid_inventario_130521_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_inventario_130521']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_inventario_130521']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDuBqHArYVWXGHgvsVIBsV5FYHMBOD9BiZ1X7HArKD5rqHgNKVkJqDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErsDuFaHIBiHQJKH9BiHArYHQBOHgrwDkFCDWB3VErqDcNwH9B/D1rKHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODuX7VoX7D9JmZ1B/D1rKD5BiDEBeHEXeV5XCZuBODcBwDQX7Z1N7VWJsHgvsVcFCDWJeDoFGD9BsH9BOZ1BOD5BOHgveDkB/DWBmZuB/HQBiZ9XGHAvOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuXGHQNwH9X7HIvsVWBqHgrKZSNiDWJeDoJeHQJmH9B/DSNOV5FUDEvsVkJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHErsDurmDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9BiZ1F7DSBeV5FaHgvsVkXeDuFYHIBiD9JKDQJsHArYHQFaDMBYVcB/HEFYVEX7DcJUVIJsHArYHuBOHgvCHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDuFaD1BeHQJwHgrwVcXKDWFaHMF7DcFYH9B/HANOD5BqDEBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIBiHQXOZ1FGD1rwD5FaHgNKDkB/DWFqHIJwHQXGDQX7DSvCVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwD5BqHuNOVIFCDWF/DoraD9BsZSFaD1rKD5NUDErKVkXeHEFqDoB/DcXOZ9F7HAvOV5BqDMvOVcBUH5XKVoX7HQNmZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMveVkJ3H5X/DoJeDcJeDuFaHANOV5BOHgvsVIFCHEX/VoX7HQFYZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5XGHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMrYVIBODWBmVEX7D9JmZSBOHIBeD5BqDErKHErsH5FYHIraHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4545,7 +4547,7 @@ class grid_inventario_130521_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['graf_disp']        = array('Bar', 'Pie', 'Line', 'Area');
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -4627,6 +4629,8 @@ class grid_inventario_130521_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -5018,6 +5022,9 @@ class grid_inventario_130521_apl
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['opcao'] = 'pesq';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['orig_pesq'] = 'grid';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['interativ_refresh'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_interativ'] = "";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['interativ_search'] = array();
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['int_search_dados'] = array();
           } 
       } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['opcao'] == "interativ_search")
@@ -5049,11 +5056,16 @@ class grid_inventario_130521_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_interativ'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['sc_total']);
@@ -5555,7 +5567,7 @@ class grid_inventario_130521_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -6798,39 +6810,45 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
        $cmd_sql = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['int_search_sql'][$tmp[0]];
        $vls     = "";
        $bol_numeric = false;
-       if ($tmp[3] != "clear_interativ")
-       {
-           $vls  = explode("_VLS_", $tmp[3]);
-           if($tmp[2] == "nn" || $tmp[2] == "bw")
+       if ($tmp[3] == "clear_interativ_all") {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['interativ_search'] = array();
+       }
+       else {
+           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['interativ_search'][$tmp[0]]);
+           if ($tmp[3] != "clear_interativ")
            {
-               $bol_numeric = true;
-               $delim  = "";
-               $delim1 = "";
-           }
-           else
-           {
-               $delim  = "'";
-               $delim1 = "'";
-           }
-           if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
-           {
-               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+               $vls  = explode("_VLS_", $tmp[3]);
+               if($tmp[2] == "nn" || $tmp[2] == "bw")
                {
-                   $delim  = "#";
-                   $delim1 = "#";
+                   $bol_numeric = true;
+                   $delim  = "";
+                   $delim1 = "";
                }
-               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['SC_sep_date']))
+               else
                {
-                   $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['SC_sep_date'];
-                   $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['SC_sep_date1'];
+                   $delim  = "'";
+                   $delim1 = "'";
+               }
+               if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
+               {
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+                   {
+                       $delim  = "#";
+                       $delim1 = "#";
+                   }
+                   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['SC_sep_date']))
+                   {
+                       $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['SC_sep_date'];
+                       $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['SC_sep_date1'];
+                   }
                }
            }
        }
-       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['interativ_search'][$tmp[0]]);
        if (!empty($vls))
        {
            $prep = "";
            $bol_has_empty = false;
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['interativ_search'][$tmp[0]]['tp_obj'] = $tmp[2];
            foreach ($vls as $cada_val)
            {
                $cada_val = NM_charset_decode($cada_val);
@@ -6843,6 +6861,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
                }
                $cada_val = substr($this->Db->qstr($cada_val), 1, -1);
                $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['interativ_search'][$tmp[0]]['lab'][$tmp[1]][] = $descr;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['interativ_search'][$tmp[0]]['val_sel'][] = $cada_val;
                if ($cada_val == "")
                {
                    $bol_has_empty = true;
@@ -6968,7 +6987,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           {
               if (!$prim)
               {
-                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_interativ'] .= " and ";
+                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_interativ'] .= " AND ";
               }
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq_interativ'] .= "(" . $val['val'] . ")";
               $prim = false;
@@ -6986,6 +7005,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['where_pesq'] = $tmp_cmd;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521']['refresh_interativ'] = (isset($tmp[5])) ? $tmp[5] : "S";
       if(isset($tmp[4]) && $tmp[4] == 'N')
       {
           $this->Arr_result['interativ_search'] = array();
@@ -7127,22 +7147,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_grid_titl'] ?> -Rotación del inventario :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -7924,14 +7945,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_130521'][$path_doc
            $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_inventario_130521']['embutida_form'])
        {

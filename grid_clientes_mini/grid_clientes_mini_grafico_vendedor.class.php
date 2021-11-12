@@ -688,6 +688,26 @@ class grid_clientes_mini_grafico
                case 'scatter':
                    $newChartType = "scatter";
                    break;
+               case 'scrollarea':
+               case 'scrollarea2d':
+                   $newChartType = "scrollarea2d";
+                   break;
+               case 'scrollbar2d':
+                   $newChartType = "scrollbar2d";
+                   break;
+               case 'overlappedbar2d':
+                   $newChartType = "overlappedbar2d";
+                   break;
+               case 'scrollcolumn2d':
+                   $newChartType = "scrollcolumn2d";
+                   break;
+               case 'overlappedcolumn2d':
+                   $newChartType = "overlappedcolumn2d";
+                   break;
+               case 'scrollline':
+               case 'scrollline2d':
+                   $newChartType = "scrollline2d";
+                   break;
                case 'spline';
                case 'msspline';
                    $newChartType = $multiMetrics || $multiDimensions  ? "msspline" : "spline";
@@ -711,6 +731,9 @@ class grid_clientes_mini_grafico
                case 'step';
                case 'msstepline';
                    $newChartType = "msstepline";
+                   break;
+               case 'zoomline':
+                   $newChartType = "zoomline";
                    break;
            }
            return $newChartType;

@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -292,8 +293,8 @@ class form_casos_notificaciones_mob_ini
       $this->nm_dt_criacao   = "20200225"; 
       $this->nm_hr_criacao   = "211730"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -950,7 +951,7 @@ class form_casos_notificaciones_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQB/HABYD5BqDMzGV9BUDWJeHMJwHQXGZ1BOD1rKHQFGDErKHArsH5FGZuFaD9XsDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKZMFaDEBeHEFiV5FqHMJwDcJeDQFGD1veHQJwDMNODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoB/D9NwH9X7Z1BYV5raHgvsDkBODWFaVoFGD9BsH9FaD1rwD5BiDEBOVkXeV5FaZuFaD9JKDQX7HAN7D5BqHgvsDkBODWFaVoBqD9JmZ1B/Z1BeV5FUDMzGHEJGH5FYDoFUD9XsDQX7Z1rwV5X7DMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VorqDcFYZSB/DSrYHuX7DMveVkXeV5FaHIFUD9XsH9FUHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHANKVWBODMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCHEXCVoFGHQJKZSFGHAN7V5BODMNOZSJqDuX7HMX7HQXOZSB/HArYZMXGDMvCZSXeHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQJsHIBeHuBOHuBOVIFCDur/HIFGHQBiZ1FGHAN7D5rqDMBYZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIXGHQJmZSFaHAN7ZMBqHgNOVkJqH5FYHMXGD9JKZSFUHIrwV5BqDMvOVIBsH5FqDoJsD9BsZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5JwHuzGVIBOV5FYVoJwDcBqH9B/HABYD5JeDEBOZSJGH5FYDoFUD9XsH9X7Z1rwVWJsHuvmVcBODWF/DoFGDcBqH9B/HABYD5rqDEBeHEXeV5FaVoBiDcBwDQFGD1BeV5raHuNOVcBOV5X7VoBOHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKHQXGHgveVkJ3V5FqHMFGDcJeZSBiZ1zGVWBqHgrKVcBODWrmVEF7HQNmH9BqD1rKZMJeDEBeHErsDWX7HIFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBqHQBiDQBqHAvmVWBODMvmVcFKV5BmVoBqD9BsZkFGHAvsZMXGDENOHArsDWrGZuBqHQXOZSBiDSvCVWJwHuzGVcXKDWXCDoraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2241,6 +2242,11 @@ ob_start();
     sajax_export("ajax_form_casos_notificaciones_mob_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->controle();
 //
     function nm_limpa_str_form_casos_notificaciones_mob(&$str)
@@ -2381,6 +2387,10 @@ ob_start();
       global $inicial_form_casos_notificaciones_mob;
       $aResp = array();
 
+      if (isset($inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['empty_filter'];
@@ -2477,6 +2487,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['btnDisabled'])
+         {
+            form_casos_notificaciones_mob_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['btnLabel']) && '' != $inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['btnLabel'])
+         {
+            form_casos_notificaciones_mob_pack_btn_label($aResp);
          }
          if (isset($inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['varList']) && !empty($inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['varList']))
          {
@@ -2581,8 +2599,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2831,6 +2854,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_casos_notificaciones_mob_pack_master_value
+
+   function form_casos_notificaciones_mob_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_casos_notificaciones_mob;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_casos_notificaciones_mob_pack_ajax_alert
+
+   function form_casos_notificaciones_mob_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_casos_notificaciones_mob;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_casos_notificaciones_mob->contr_form_casos_notificaciones_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_casos_notificaciones_mob_pack_ajax_alert
 
    function form_casos_notificaciones_mob_pack_ajax_alert(&$aResp)
    {

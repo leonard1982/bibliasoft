@@ -149,7 +149,8 @@ class grid_facturaven_pos_pesq
              $asentada_cond, $asentada,
              $banco_cond, $banco,
              $resolucion_cond, $resolucion,
-             $vendedor_cond, $vendedor;
+             $vendedor_cond, $vendedor,
+             $id_clasificacion_cond, $id_clasificacion;
       $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
   $fechaven  = date("Y-m-d");
 $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
@@ -439,7 +440,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       $nm_esp_postgres = array();
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $Nm_numeric[] = "idfacven";$Nm_numeric[] = "numfacven";$Nm_numeric[] = "credito";$Nm_numeric[] = "idcli";$Nm_numeric[] = "subtotal";$Nm_numeric[] = "valoriva";$Nm_numeric[] = "total";$Nm_numeric[] = "asentada";$Nm_numeric[] = "saldo";$Nm_numeric[] = "adicional";$Nm_numeric[] = "adicional2";$Nm_numeric[] = "adicional3";$Nm_numeric[] = "resolucion";$Nm_numeric[] = "vendedor";$Nm_numeric[] = "usuario_crea";$Nm_numeric[] = "banco";$Nm_numeric[] = "dias_decredito";$Nm_numeric[] = "pedido";$Nm_numeric[] = "dircliente";
+      $Nm_numeric[] = "idfacven";$Nm_numeric[] = "numfacven";$Nm_numeric[] = "credito";$Nm_numeric[] = "idcli";$Nm_numeric[] = "subtotal";$Nm_numeric[] = "valoriva";$Nm_numeric[] = "total";$Nm_numeric[] = "asentada";$Nm_numeric[] = "saldo";$Nm_numeric[] = "adicional";$Nm_numeric[] = "adicional2";$Nm_numeric[] = "adicional3";$Nm_numeric[] = "resolucion";$Nm_numeric[] = "vendedor";$Nm_numeric[] = "usuario_crea";$Nm_numeric[] = "banco";$Nm_numeric[] = "dias_decredito";$Nm_numeric[] = "pedido";$Nm_numeric[] = "dircliente";$Nm_numeric[] = "id_clasificacion";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       if (in_array($campo_join, $Nm_numeric))
       {
@@ -1954,6 +1955,8 @@ function scJQCalendarAdd() {
   str_out += 'SC_resolucion#NMF#' + search_get_select('SC_resolucion') + '@NMF@';
   str_out += 'SC_vendedor_cond#NMF#' + search_get_sel_txt('SC_vendedor_cond') + '@NMF@';
   str_out += 'SC_vendedor#NMF#' + search_get_select('SC_vendedor') + '@NMF@';
+  str_out += 'SC_id_clasificacion_cond#NMF#' + search_get_sel_txt('SC_id_clasificacion_cond') + '@NMF@';
+  str_out += 'SC_id_clasificacion#NMF#' + search_get_select('SC_id_clasificacion') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2222,6 +2225,7 @@ function nm_open_popup(parms)
              $banco_cond, $banco,
              $resolucion_cond, $resolucion,
              $vendedor_cond, $vendedor,
+             $id_clasificacion_cond, $id_clasificacion,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2279,6 +2283,8 @@ function nm_open_popup(parms)
           $resolucion_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['resolucion_cond']; 
           $vendedor = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor']; 
           $vendedor_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor_cond']; 
+          $id_clasificacion = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['id_clasificacion']; 
+          $id_clasificacion_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['id_clasificacion_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['NM_operador']; 
       } 
       if (!isset($tipo_cond) || empty($tipo_cond))
@@ -2309,6 +2315,10 @@ function nm_open_popup(parms)
       {
          $vendedor_cond = "eq";
       }
+      if (!isset($id_clasificacion_cond) || empty($id_clasificacion_cond))
+      {
+         $id_clasificacion_cond = "eq";
+      }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
@@ -2319,6 +2329,7 @@ function nm_open_popup(parms)
       $str_hide_banco = (in_array($banco_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_resolucion = (in_array($resolucion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_vendedor = (in_array($vendedor_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_id_clasificacion = (in_array($id_clasificacion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
       $str_display_tipo = ('bw' == $tipo_cond) ? $display_aberto : $display_fechado;
       $str_display_fechaven = ('bw' == $fechaven_cond) ? $display_aberto : $display_fechado;
@@ -2327,6 +2338,7 @@ function nm_open_popup(parms)
       $str_display_banco = ('bw' == $banco_cond) ? $display_aberto : $display_fechado;
       $str_display_resolucion = ('bw' == $resolucion_cond) ? $display_aberto : $display_fechado;
       $str_display_vendedor = ('bw' == $vendedor_cond) ? $display_aberto : $display_fechado;
+      $str_display_id_clasificacion = ('bw' == $id_clasificacion_cond) ? $display_aberto : $display_fechado;
 
       if (!isset($tipo) || $tipo == "")
       {
@@ -2424,6 +2436,20 @@ function nm_open_popup(parms)
          else
          {
          $vendedor = substr($vendedor, 0, $tmp_pos);
+         }
+      }
+      if (!isset($id_clasificacion) || $id_clasificacion == "")
+      {
+          $id_clasificacion = "";
+      }
+      if (isset($id_clasificacion) && !empty($id_clasificacion))
+      {
+         $tmp_pos = strpos($id_clasificacion, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $id_clasificacion = substr($id_clasificacion, 0, $tmp_pos);
          }
       }
 ?>
@@ -3024,7 +3050,100 @@ foreach ($Arr_format as $Part_date)
       </TABLE>
      </TD>
 
-   </tr>
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_id_clasificacion_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['id_clasificacion'])) ? $this->New_label['id_clasificacion'] : "Clasificación"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_id_clasificacion_cond" name="id_clasificacion_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_id_clasificacion" <?php echo $str_hide_id_clasificacion?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['id_clasificacion'])) ? $this->New_label['id_clasificacion'] : "Clasificación";
+ $nmgp_tab_label .= "id_clasificacion?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+
+<?php
+      $id_clasificacion_look = substr($this->Db->qstr($id_clasificacion), 1, -1); 
+      $nmgp_def_dados = "" ; 
+      $nm_comando = "SELECT id, descripcion  FROM facturaven_clasificacion  ORDER BY descripcion"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['id_clasificacion'] = array();
+         while (!$rs->EOF) 
+         { 
+            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['id_clasificacion'][] = trim($rs->fields[0]);
+            $nmgp_def_dados .= trim($rs->fields[1]) . "?#?" ; 
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?N?@?" ; 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+?>
+   <span id="idAjaxSelect_id_clasificacion">
+      <SELECT class="scFilterObjectOdd" id="SC_id_clasificacion" name="id_clasificacion"  size="1">
+       <OPTION value="">Seleccione</OPTION>
+<?php
+      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
+      $nm_opcoes  = explode("?@?", $nm_opcoesx);
+      foreach ($nm_opcoes as $nm_opcao)
+      {
+         if (!empty($nm_opcao))
+         {
+            $temp_bug_list = explode("?#?", $nm_opcao);
+            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
+            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
+            if ("" != $id_clasificacion)
+            {
+                    $id_clasificacion_sel = ($nm_opc_cod === $id_clasificacion) ? "selected" : "";
+            }
+            else
+            {
+               $id_clasificacion_sel = ("S" == $nm_opc_sel) ? "selected" : "";
+            }
+            $nm_sc_valor = $nm_opc_val;
+            $nm_opc_val = $nm_sc_valor;
+?>
+       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $id_clasificacion_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
+<?php
+         }
+      }
+?>
+      </SELECT>
+   </span>
+<?php
+?>
+        
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+
+    <TD class="scFilterLabelOdd" colspan="3" >&nbsp;</TD>   </tr>
    </TABLE>
   </TD>
  </TR>
@@ -3554,6 +3673,9 @@ foreach ($Arr_format as $Part_date)
    document.F1.vendedor_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_vendedor'), document.F1.vendedor_cond, 'vendedor');
    document.F1.vendedor.value = "";
+   document.F1.id_clasificacion_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_id_clasificacion'), document.F1.id_clasificacion_cond, 'id_clasificacion');
+   document.F1.id_clasificacion.value = "";
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -3572,6 +3694,9 @@ foreach ($Arr_format as $Part_date)
     }
     if (Field == 'all' || Field == 'tipo') {
        Sc_carga_select2_tipo();
+    }
+    if (Field == 'all' || Field == 'id_clasificacion') {
+       Sc_carga_select2_id_clasificacion();
     }
  }
  function Sc_carga_select2_asentada()
@@ -3637,6 +3762,21 @@ foreach ($Arr_format as $Part_date)
  function Sc_carga_select2_tipo()
  {
   $("#SC_tipo").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_id_clasificacion()
+ {
+  $("#SC_id_clasificacion").select2(
     {
       language: {
         noResults: function() {
@@ -3832,6 +3972,8 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_resolucion'] = 'select';
       $tp_fields['SC_vendedor_cond'] = 'cond';
       $tp_fields['SC_vendedor'] = 'select';
+      $tp_fields['SC_id_clasificacion_cond'] = 'cond';
+      $tp_fields['SC_id_clasificacion'] = 'select';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -3981,7 +4123,8 @@ foreach ($Arr_format as $Part_date)
              $asentada_cond, $asentada,
              $banco_cond, $banco,
              $resolucion_cond, $resolucion,
-             $vendedor_cond, $vendedor, $nmgp_tab_label;
+             $vendedor_cond, $vendedor,
+             $id_clasificacion_cond, $id_clasificacion, $nmgp_tab_label;
 
       $C_formatado = true;
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
@@ -4034,6 +4177,11 @@ foreach ($Arr_format as $Part_date)
       {
           $vendedor_input_2 = $vendedor;
       }
+      $id_clasificacion_cond_salva = $id_clasificacion_cond; 
+      if (!isset($id_clasificacion_input_2) || $id_clasificacion_input_2 == "")
+      {
+          $id_clasificacion_input_2 = $id_clasificacion;
+      }
       $tmp_pos = strpos($tipo, "##@@");
       if ($tmp_pos === false) {
           $L_lookup = $tipo;
@@ -4084,6 +4232,16 @@ foreach ($Arr_format as $Part_date)
       if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['vendedor'])) {
           if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= " Vendedor : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
       }
+      $tmp_pos = strpos($id_clasificacion, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $id_clasificacion;
+      }
+      else {
+          $L_lookup = substr($id_clasificacion, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['psq_check_ret']['id_clasificacion'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Clasificación : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['tipo'] = $tipo; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['tipo_cond'] = $tipo_cond_salva; 
@@ -4110,6 +4268,9 @@ foreach ($Arr_format as $Part_date)
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor'] = $vendedor; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor_cond'] = $vendedor_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['id_clasificacion'] = $id_clasificacion; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['id_clasificacion_cond'] = $id_clasificacion_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
@@ -4222,6 +4383,12 @@ foreach ($Arr_format as $Part_date)
           $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
       }
       $this->cmp_formatado['vendedor'] = $Conteudo;
+      $Conteudo = $id_clasificacion;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['id_clasificacion'] = $Conteudo;
 
       //----- $tipo
       $this->Date_part = false;
@@ -4318,6 +4485,13 @@ foreach ($Arr_format as $Part_date)
       {
          $this->monta_condicao("vendedor", $vendedor_cond, $vendedor, "", "vendedor");
       }
+
+      //----- $id_clasificacion
+      $this->Date_part = false;
+      if (isset($id_clasificacion))
+      {
+         $this->monta_condicao("id_clasificacion", $id_clasificacion_cond, $id_clasificacion, "", "id_clasificacion");
+      }
    }
 
    /**
@@ -4329,6 +4503,7 @@ foreach ($Arr_format as $Part_date)
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['fast_search']);
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] = "";
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['int_search_dados'] = array();
       if ("" == $this->comando_filtro)
       {
           $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_orig'];
@@ -4540,6 +4715,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
          case "banco" : return ('class="scFilterObjectOdd"'); break;
          case "resolucion" : return ('class="scFilterObjectEven"'); break;
          case "vendedor" : return ('class="scFilterObjectEven"'); break;
+         case "id_clasificacion" : return ('class="scFilterObjectOdd"'); break;
          default       : return ("");
       }
    }

@@ -72,17 +72,6 @@ class grid_ventas_por_cliente_total
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
       }
-      if ($rt->fields[0] == 0)
-      { 
-          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['interativ_search']))
-          {
-              $Contrl_Interat = 1;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_sem_interativ'];
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['interativ_search'] = array();
-              $this->quebra_geral_sc_free_group_by();
-          }
-          
-      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['tot_geral'][0] = "" . $this->Ini->Nm_lang['lang_msgs_totl'] . ""; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['tot_geral'][1] = $rt->fields[0] ; 
       $rt->fields[1] = str_replace(",", ".", $rt->fields[1]);

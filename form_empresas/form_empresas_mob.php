@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -295,8 +296,8 @@ class form_empresas_mob_ini
       $this->nm_dt_criacao   = "20181002"; 
       $this->nm_hr_criacao   = "212938"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210910"; 
-      $this->nm_hr_ult_alt   = "105557"; 
+      $this->nm_dt_ult_alt   = "20211025"; 
+      $this->nm_hr_ult_alt   = "175651"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -953,7 +954,7 @@ class form_empresas_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKH9X7HIrwV5FaDMNOZSJqHEFYHIJeHQBsZ1FaHArYHuBqDEBeHErCV5XCHIrqHQJKH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcXGZSFGDSBYV5JwHuBOVcBOH5B7VorqHQJmZkBiHArYD5JeHgBOHArsH5BmZuBOD9NwDQJsHArYVWJeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBOD9XsZSFGHANOD5F7HgrYDkBODWFYDoXGD9XOZ1rqHAN7V5FaDErKZSXeDWX7DoXGDcXOZSX7Z1BYV5JwHgvsZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQJwHABYD5rqHuNODkB/DWFYHMFUHQXOZSBqDSrYHQNUDMzGVkXeV5B7DoXGHQNwDQJsD1BeHQBODMvmV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5JeDMvsV9BUDWXKVorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIrqD9NwH9X7HArYV5JeDMrYVcFKV5FYVEX7D9XOH9BqHANOZMJwDMvCHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQX7D1veD5rqDMzGVcBOV5X7DoraD9XGZ1FaD1zGZMXGDEvsVkJqDuXKDoJeD9XsZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXOH9X7D1BeHQNUHuBYVIBODWFaDoJsD9JmZ1BiHIveHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWF/VoraD9XOZSB/Z1rYD5BiDMzGHEXeV5FqDoBOD9NwH9X7HABYV5BqHgvsVcFCH5FqVoJwD9BsZ1B/Z1BeD5F7HgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiD9XGZ1rqHABYV5FGHgNOHEFiDWX7HIXGDcBwZSBiDSrwVWBqHgrKZSJqH5FqVErqD9XGZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAvCZMXGHgBeHEFiV5B3DoF7D9XsDuFaHAveV5JwHuzGVcFeDWFaVEraHQBiH9BqHArYV5FGDMzGVkJ3DWX7ZuB/D9FYH9FUHIrwHuJeDMBOVcFKHEFYVoB/HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -1857,6 +1858,21 @@ ob_start();
             $entorno = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_empresas_mob_validate_nomina' == $_POST['rs'])
+        {
+            $nomina = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_empresas_mob_validate_codempresa' == $_POST['rs'])
+        {
+            $codempresa = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_empresas_mob_validate_nombre_empresa_nomina' == $_POST['rs'])
+        {
+            $nombre_empresa_nomina = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_empresas_mob_event_predeterminada_onclick' == $_POST['rs'])
         {
             $predeterminada = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1881,14 +1897,17 @@ ob_start();
             $correo = NM_utf8_urldecode($_POST['rsargs'][13]);
             $comentario = NM_utf8_urldecode($_POST['rsargs'][14]);
             $entorno = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $nomina = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $codempresa = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $nombre_empresa_nomina = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][26]);
         }
         if ('ajax_form_empresas_mob_navigate_form' == $_POST['rs'])
         {
@@ -2381,6 +2400,7 @@ ob_start();
     $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['select_html']['tipo_negocio'] = "class=\"sc-js-input scFormObjectOdd css_tipo_negocio_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_tipo_negocio\" name=\"tipo_negocio\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
     $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['select_html']['predeterminada'] = " onClick=\"do_ajax_form_empresas_mob_event_predeterminada_onclick();\" ";
     $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['select_html']['entorno'] = "class=\"sc-js-input scFormObjectOdd css_entorno_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_entorno\" name=\"entorno\" size=\"1\" alt=\"{type: \'select\', enterTab: false}\"";
+    $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['select_html']['nomina'] = " onClick=\"\" ";
 
     if (!defined('SC_SAJAX_LOADED'))
     {
@@ -2409,10 +2429,18 @@ ob_start();
     sajax_export("ajax_form_empresas_mob_validate_correo");
     sajax_export("ajax_form_empresas_mob_validate_comentario");
     sajax_export("ajax_form_empresas_mob_validate_entorno");
+    sajax_export("ajax_form_empresas_mob_validate_nomina");
+    sajax_export("ajax_form_empresas_mob_validate_codempresa");
+    sajax_export("ajax_form_empresas_mob_validate_nombre_empresa_nomina");
     sajax_export("ajax_form_empresas_mob_event_predeterminada_onclick");
     sajax_export("ajax_form_empresas_mob_submit_form");
     sajax_export("ajax_form_empresas_mob_navigate_form");
     sajax_handle_client_request();
+
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
 
     $inicial_form_empresas_mob->contr_form_empresas_mob->controle();
 //
@@ -2722,6 +2750,63 @@ ob_start();
         exit;
     } // ajax_validate_entorno
 
+    function ajax_form_empresas_mob_validate_nomina($nomina, $script_case_init)
+    {
+        global $inicial_form_empresas_mob;
+        //register_shutdown_function("form_empresas_mob_pack_ajax_response");
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_flag          = true;
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_opcao         = 'validate_nomina';
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['param'] = array(
+                  'nomina' => NM_utf8_urldecode($nomina),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_empresas_mob->contr_form_empresas_mob->controle();
+        exit;
+    } // ajax_validate_nomina
+
+    function ajax_form_empresas_mob_validate_codempresa($codempresa, $script_case_init)
+    {
+        global $inicial_form_empresas_mob;
+        //register_shutdown_function("form_empresas_mob_pack_ajax_response");
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_flag          = true;
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_opcao         = 'validate_codempresa';
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['param'] = array(
+                  'codempresa' => NM_utf8_urldecode($codempresa),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_empresas_mob->contr_form_empresas_mob->controle();
+        exit;
+    } // ajax_validate_codempresa
+
+    function ajax_form_empresas_mob_validate_nombre_empresa_nomina($nombre_empresa_nomina, $script_case_init)
+    {
+        global $inicial_form_empresas_mob;
+        //register_shutdown_function("form_empresas_mob_pack_ajax_response");
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_flag          = true;
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_opcao         = 'validate_nombre_empresa_nomina';
+        $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['param'] = array(
+                  'nombre_empresa_nomina' => NM_utf8_urldecode($nombre_empresa_nomina),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_empresas_mob->contr_form_empresas_mob->controle();
+        exit;
+    } // ajax_validate_nombre_empresa_nomina
+
     function ajax_form_empresas_mob_event_predeterminada_onclick($predeterminada, $idempresa, $script_case_init)
     {
         global $inicial_form_empresas_mob;
@@ -2742,7 +2827,7 @@ ob_start();
         exit;
     } // ajax_event_predeterminada_onclick
 
-    function ajax_form_empresas_mob_submit_form($idempresa, $nit, $nombre, $nombre_empresa, $observaciones, $creada, $creada_hora, $sinmovimiento, $copiada_como, $tipo_negocio, $predeterminada, $password, $celular, $correo, $comentario, $entorno, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_empresas_mob_submit_form($idempresa, $nit, $nombre, $nombre_empresa, $observaciones, $creada, $creada_hora, $sinmovimiento, $copiada_como, $tipo_negocio, $predeterminada, $password, $celular, $correo, $comentario, $entorno, $nomina, $codempresa, $nombre_empresa_nomina, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_empresas_mob;
         //register_shutdown_function("form_empresas_mob_pack_ajax_response");
@@ -2765,6 +2850,9 @@ ob_start();
                   'correo' => NM_utf8_urldecode($correo),
                   'comentario' => NM_utf8_urldecode($comentario),
                   'entorno' => NM_utf8_urldecode($entorno),
+                  'nomina' => NM_utf8_urldecode($nomina),
+                  'codempresa' => NM_utf8_urldecode($codempresa),
+                  'nombre_empresa_nomina' => NM_utf8_urldecode($nombre_empresa_nomina),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),
@@ -2815,6 +2903,10 @@ ob_start();
       global $inicial_form_empresas_mob;
       $aResp = array();
 
+      if (isset($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['empty_filter'];
@@ -2911,6 +3003,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['btnDisabled'])
+         {
+            form_empresas_mob_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['btnLabel']) && '' != $inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['btnLabel'])
+         {
+            form_empresas_mob_pack_btn_label($aResp);
          }
          if (isset($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['varList']) && !empty($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['varList']))
          {
@@ -3015,8 +3115,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -3265,6 +3370,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_empresas_mob_pack_master_value
+
+   function form_empresas_mob_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_empresas_mob;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_empresas_mob_pack_ajax_alert
+
+   function form_empresas_mob_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_empresas_mob;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_empresas_mob->contr_form_empresas_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_empresas_mob_pack_ajax_alert
 
    function form_empresas_mob_pack_ajax_alert(&$aResp)
    {

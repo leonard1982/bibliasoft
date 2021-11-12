@@ -195,7 +195,7 @@ function nmButtonOutput($arr_buttons, $sBtn, $sClick, $sHref, $sId, $sName, $sVa
         switch($arr_buttons[$sBtn]['display'])
         {
             case 'only_text':
-                $sCodigo .= $sValue;
+                $sCodigo .= '<span class="btn-label">' . $sValue . '</span>';
                 break;
             case 'only_img':
                 $sCodigo .= "<img src=\"" . $spath . "/" . $arr_buttons[$sBtn]['image'] . "\" ". $sIdImg ." align='absmiddle' border='0'>\r\n";
@@ -203,7 +203,7 @@ function nmButtonOutput($arr_buttons, $sBtn, $sClick, $sHref, $sId, $sName, $sVa
             case 'text_img':
                 if($arr_buttons[$sBtn]['display_position'] == 'img_right')
                 {
-                    $sCodigo .= $sValue;
+                    $sCodigo .= '<span class="btn-label">' . $sValue . '</span>';
 
                     if(!empty($arr_buttons[$sBtn]['image']))
                     {
@@ -216,7 +216,7 @@ function nmButtonOutput($arr_buttons, $sBtn, $sClick, $sHref, $sId, $sName, $sVa
                     {
                         $sCodigo .= "<img src=\"" . $spath . "/" . $arr_buttons[$sBtn]['image'] . "\" ". $sIdImg ." align='absmiddle' border='0'>&nbsp;&nbsp;\r\n";
                     }
-                    $sCodigo .= $sValue;
+                    $sCodigo .= '<span class="btn-label">' . $sValue . '</span>';
                 }
                 break;
             case 'only_fontawesomeicon':
@@ -228,7 +228,7 @@ function nmButtonOutput($arr_buttons, $sBtn, $sClick, $sHref, $sId, $sName, $sVa
             case 'text_fontawesomeicon':
                 if($arr_buttons[$sBtn]['display_position'] == 'img_right')
                 {
-                    $sCodigo .= $sValue;
+                    $sCodigo .= '<span class="btn-label">' . $sValue . '</span>';
                     if(!empty($arr_buttons[$sBtn]['fontawesomeicon']))
                     {
                         $sCodigo .= "&nbsp;&nbsp;<i class='icon_fa ". $arr_buttons[$sBtn]['fontawesomeicon'] ."'></i>\r\n";
@@ -240,7 +240,7 @@ function nmButtonOutput($arr_buttons, $sBtn, $sClick, $sHref, $sId, $sName, $sVa
                     {
                         $sCodigo .= "<i class='icon_fa ". $arr_buttons[$sBtn]['fontawesomeicon'] ."'></i>&nbsp;&nbsp;\r\n";
                     }
-                    $sCodigo .= $sValue;
+                    $sCodigo .= '<span class="btn-label">' . $sValue . '</span>';
                 }
                 break;
         }
@@ -292,7 +292,7 @@ function nmButtonOutput($arr_buttons, $sBtn, $sClick, $sHref, $sId, $sName, $sVa
 				$sCodigo .= "<img src=\"" . $spath . "/" . $arr_buttons[$sBtn]['image'] . "\" ". $sIdImg ." align='absmiddle' border='0'>&nbsp;&nbsp;\r\n";
 			}
 		}
-        $sCodigo .= "<a" . $sId . $sHref . $sTarget . $sClassL . $sHint . $sStyle . $sClick . ">" . $sValue . "</a>\r\n";
+        $sCodigo .= "<a" . $sId . $sHref . $sTarget . $sClassL . $sHint . $sStyle . $sClick . ">" . '<span class="btn-label">' . $sValue . '</span>' . "</a>\r\n";
     }
     return $sCodigo;
 }

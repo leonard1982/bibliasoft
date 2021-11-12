@@ -186,6 +186,10 @@ var Nav_binicio     = "<?php echo $this->arr_buttons['binicio']['type']; ?>";
 var Nav_bavanca     = "<?php echo $this->arr_buttons['bavanca']['type']; ?>";
 var Nav_bretorna    = "<?php echo $this->arr_buttons['bretorna']['type']; ?>";
 var Nav_bfinal      = "<?php echo $this->arr_buttons['bfinal']['type']; ?>";
+var Nav_binicio_macro_disabled  = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['first']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['first'] : 'off'); ?>";
+var Nav_bavanca_macro_disabled  = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['forward']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['forward'] : 'off'); ?>";
+var Nav_bretorna_macro_disabled = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['back']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['back'] : 'off'); ?>";
+var Nav_bfinal_macro_disabled   = "<?php echo (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['last']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['last'] : 'off'); ?>";
 function nav_atualiza(str_ret, str_ava, str_pos)
 {
 <?php
@@ -202,13 +206,13 @@ function nav_atualiza(str_ret, str_ava, str_pos)
     if ($this->nmgp_botoes['first'] == "on")
     {
 ?>
-       $("#sc_b_ini_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_binicio_macro_disabled) { $("#sc_b_ini_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
     if ($this->nmgp_botoes['back'] == "on")
     {
 ?>
-       $("#sc_b_ret_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bretorna_macro_disabled) { $("#sc_b_ret_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
 ?>
@@ -236,13 +240,13 @@ function nav_atualiza(str_ret, str_ava, str_pos)
     if ($this->nmgp_botoes['last'] == "on")
     {
 ?>
-       $("#sc_b_fim_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bfinal_macro_disabled) { $("#sc_b_fim_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
     if ($this->nmgp_botoes['forward'] == "on")
     {
 ?>
-       $("#sc_b_avc_" + str_pos).prop("disabled", false).removeClass("disabled");
+       if ("off" == Nav_bavanca_macro_disabled) { $("#sc_b_avc_" + str_pos).prop("disabled", false).removeClass("disabled"); }
 <?php
     }
 ?>
@@ -726,7 +730,18 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
     if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['update'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "balterar", "scBtnFn_sys_format_alt()", "scBtnFn_sys_format_alt()", "sc_b_upd_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-1", "", "");?>
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-1';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['update']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['update']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['update']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['update']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['update'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "balterar", "scBtnFn_sys_format_alt()", "scBtnFn_sys_format_alt()", "sc_b_upd_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -734,7 +749,18 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
     if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['Imprimir'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "imprimir", "scBtnFn_Imprimir()", "scBtnFn_Imprimir()", "sc_Imprimir_top", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['imprimir']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['imprimir']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['imprimir']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['imprimir']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['imprimir'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "imprimir", "scBtnFn_Imprimir()", "scBtnFn_Imprimir()", "sc_Imprimir_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -746,7 +772,18 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
     if ('' != $this->url_webhelp) {
         $sCondStyle = '';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "scBtnFn_sys_format_hlp()", "scBtnFn_sys_format_hlp()", "sc_b_hlp_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['help']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['help']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['help']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['help']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['help'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bhelp", "scBtnFn_sys_format_hlp()", "scBtnFn_sys_format_hlp()", "sc_b_hlp_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -754,7 +791,18 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
     if ((!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
         $sCondStyle = (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $nm_apl_dependente != 1 && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] != "R" && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-2", "", "");?>
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-2';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['exit']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -762,7 +810,18 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
     if ((!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
         $sCondStyle = (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] == "R" || $this->aba_iframe || $this->nmgp_botoes['exit'] != "on") && ($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] != "F" && $this->nmgp_botoes['exit'] == "on") && ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-3", "", "");?>
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-3';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['exit']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -770,7 +829,18 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
     if ((!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
         $sCondStyle = (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] == "R" || $this->aba_iframe || $this->nmgp_botoes['exit'] != "on") && ($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['run_iframe'] != "F" && $this->nmgp_botoes['exit'] == "on") && ($nm_apl_dependente != 1 || $this->nmgp_botoes['exit'] != "on") && ((!$this->aba_iframe || $this->is_calendar_app) && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-4", "", "");?>
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-4';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['exit']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['exit'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1942,7 +2012,18 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
     if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['last'] == "on") ? '' : 'display: none;';
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bfinal", "scBtnFn_sys_format_fim()", "scBtnFn_sys_format_fim()", "sc_b_fim_b", "", "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "sc-unique-btn-5", "", "");?>
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-5';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['last']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_disabled']['last']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['last']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['last']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_remision']['btn_label']['last'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bfinal", "scBtnFn_sys_format_fim()", "scBtnFn_sys_format_fim()", "sc_b_fim_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -2171,38 +2252,59 @@ scAjax_displayEmptyForm();
 <script type="text/javascript">
 	function scBtnFn_sys_format_alt() {
 		if ($("#sc_b_upd_t.sc-unique-btn-1").length && $("#sc_b_upd_t.sc-unique-btn-1").is(":visible")) {
+		    if ($("#sc_b_upd_t.sc-unique-btn-1").hasClass("disabled")) {
+		        return;
+		    }
 			nm_atualiza ('alterar');
 			 return;
 		}
 	}
 	function scBtnFn_Imprimir() {
 		if ($("#sc_Imprimir_top").length && $("#sc_Imprimir_top").is(":visible")) {
+		    if ($("#sc_Imprimir_top").hasClass("disabled")) {
+		        return;
+		    }
 			sc_btn_Imprimir()
 			 return;
 		}
 	}
 	function scBtnFn_sys_format_hlp() {
 		if ($("#sc_b_hlp_t").length && $("#sc_b_hlp_t").is(":visible")) {
+		    if ($("#sc_b_hlp_t").hasClass("disabled")) {
+		        return;
+		    }
 			window.open('<?php echo $this->url_webhelp; ?>', '', 'resizable, scrollbars'); 
 			 return;
 		}
 	}
 	function scBtnFn_sys_format_sai() {
 		if ($("#sc_b_sai_t.sc-unique-btn-2").length && $("#sc_b_sai_t.sc-unique-btn-2").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-2").hasClass("disabled")) {
+		        return;
+		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
 		if ($("#sc_b_sai_t.sc-unique-btn-3").length && $("#sc_b_sai_t.sc-unique-btn-3").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-3").hasClass("disabled")) {
+		        return;
+		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
 		if ($("#sc_b_sai_t.sc-unique-btn-4").length && $("#sc_b_sai_t.sc-unique-btn-4").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-4").hasClass("disabled")) {
+		        return;
+		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
 	}
 	function scBtnFn_sys_format_fim() {
 		if ($("#sc_b_fim_b.sc-unique-btn-5").length && $("#sc_b_fim_b.sc-unique-btn-5").is(":visible")) {
+		    if ($("#sc_b_fim_b.sc-unique-btn-5").hasClass("disabled")) {
+		        return;
+		    }
 			nm_move ('final');
 			 return;
 		}

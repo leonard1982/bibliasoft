@@ -511,6 +511,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+ <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" />
 <?php
 }
 ?>
@@ -539,6 +540,8 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
 {
     $pos = "right";
 }
+$colspan   = ($_SESSION['scriptcase']['proc_mobile']) ? 1 : 2;
+$align_btn = ($_SESSION['scriptcase']['proc_mobile']) ? "left" : "center";
 ?>
 <table id="main_table" class="exportConfig" style="position: relative; top: 20px; <?php echo $pos; ?>: 20px">
 <tr>
@@ -600,8 +603,14 @@ foreach ($disp as $graf_disp) {
 }
 ?>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['modo_gera']; ?></b>
      <br />
 <?php
@@ -629,15 +638,21 @@ foreach ($disp as $graf_disp) {
      <b><?php echo $tradutor[$language]['largura']; ?></b>
      <br />
      <input type="text" size="10" name="largura" value="<?php echo NM_encode_input($largura); ?>" />
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['altura']; ?></b>
      <br />
      <input type="text" size="10" name="altura" value="<?php echo NM_encode_input($altura); ?>" />
     </td>
    </tr>
    <tr>
-    <td class="scGridFieldOddFont" colspan="2">
+    <td class="scGridFieldOddFont" colspan="<?php echo $colspan; ?>">
      <b><?php echo $tradutor[$language]['order']; ?></b>
      <br />
      <select  name="order"  size=1>
@@ -674,8 +689,14 @@ foreach ($disp as $graf_disp) {
       <option value="Horizontal"<?php if ('Horizontal' == $barra_orien) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_orien_horiz']; ?></option>
       <option value="Vertical"<?php   if ('Vertical'   == $barra_orien) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_orien_verti']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['barra_dimen']; ?></b>
      <br />
      <select name="barra_dimen">
@@ -693,8 +714,14 @@ foreach ($disp as $graf_disp) {
       <option value="On"<?php      if ('On'      == $barra_empil) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_empil_ativa']; ?></option>
       <option value="Percent"<?php if ('Percent' == $barra_empil) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_empil_perce']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['barra_sobre']; ?></b>
      <br />
      <select name="barra_sobre">
@@ -711,8 +738,14 @@ foreach ($disp as $graf_disp) {
       <option value="Normal"<?php   if ('Normal'   == $barra_inver) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_sobre_nao']; ?></option>
       <option value="Reversed"<?php if ('Reversed' == $barra_inver) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_sobre_sim']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['barra_agrup']; ?></b>
      <br />
      <select name="barra_agrup">
@@ -731,8 +764,14 @@ foreach ($disp as $graf_disp) {
       <option value="Cone"<?php     if ('Cone'     == $barra_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_forma_cone']; ?></option>
       <option value="Pyramid"<?php  if ('Pyramid'  == $barra_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_forma_piram']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont" style="display: none">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\" style=\"display: none\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['barra_funil']; ?></b>
      <br />
      <select name="barra_funil">
@@ -752,8 +791,14 @@ foreach ($disp as $graf_disp) {
       <option value="Pie"<?php   if ('Pie'   == $pizza_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['pizza_forma_pizza']; ?></option>
       <option value="Donut"<?php if ('Donut' == $pizza_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['pizza_forma_donut']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['pizza_dimen']; ?></b>
      <br />
      <select name="pizza_dimen">
@@ -771,8 +816,14 @@ foreach ($disp as $graf_disp) {
       <option value="Asc"<?php  if ('Asc'  == $pizza_orden) { echo ' selected'; } ?>><?php echo $tradutor[$language]['pizza_orden_ascen']; ?></option>
       <option value="Desc"<?php if ('Desc' == $pizza_orden) { echo ' selected'; } ?>><?php echo $tradutor[$language]['pizza_orden_desce']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['pizza_valor']; ?></b>
      <br />
      <select name="pizza_valor">
@@ -805,7 +856,7 @@ foreach ($disp as $graf_disp) {
       <option value="Step"<?php   if ('Step'   == $linha_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['linha_forma_degra']; ?></option>
      </select>
     </td>
-    <td class="scGridFieldOddFont" colspan="2">
+    <td class="scGridFieldOddFont" colspan="<?php echo $colspan; ?>">
      <b><?php echo $tradutor[$language]['linha_agrup']; ?></b>
      <br />
      <select name="linha_agrup">
@@ -835,8 +886,14 @@ foreach ($disp as $graf_disp) {
       <option value="Area"<?php   if ('Area'   == $area_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['area_forma_area']; ?></option>
       <option value="Spline"<?php if ('Spline' == $area_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['area_forma_splin']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['area_empil']; ?></b>
      <br />
      <select name="area_empil">
@@ -854,8 +911,14 @@ foreach ($disp as $graf_disp) {
       <option value="Normal"<?php if ('Normal' == $area_agrup) { echo ' selected'; } ?>><?php echo $tradutor[$language]['area_agrup_conju']; ?></option>
       <option value="Series"<?php if ('Series' == $area_agrup) { echo ' selected'; } ?>><?php echo $tradutor[$language]['area_agrup_serie']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont" style="display: none">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\" style=\"display: none\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['area_inver']; ?></b>
      <br />
      <select name="area_inver">
@@ -875,8 +938,14 @@ foreach ($disp as $graf_disp) {
       <option value="Normal"<?php   if ('Normal'   == $marca_inver) { echo ' selected'; } ?>><?php echo $tradutor[$language]['marca_inver_norma']; ?></option>
       <option value="Reversed"<?php if ('Reversed' == $marca_inver) { echo ' selected'; } ?>><?php echo $tradutor[$language]['marca_inver_inver']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['marca_agrup']; ?></b>
      <br />
      <select name="marca_agrup">
@@ -909,8 +978,14 @@ foreach ($disp as $graf_disp) {
       <option value="Line"<?php if ('Line' == $radar_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['linha_forma_linha']; ?></option>
       <option value="Area"<?php if ('Area' == $radar_forma) { echo ' selected'; } ?>><?php echo $tradutor[$language]['area_forma_area'];   ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['area_empil']; ?></b>
      <br />
      <select name="radar_empil">
@@ -944,8 +1019,14 @@ foreach ($disp as $graf_disp) {
       <option value="2d"<?php if ('2d' == $funil_dimen) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_dimen_2d']; ?></option>
       <option value="3d"<?php if ('3d' == $funil_dimen) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_dimen_3d']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont" style="display: none">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\" style=\"display: none\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['barra_inver']; ?></b>
      <br />
      <select name="funil_inver">
@@ -965,8 +1046,14 @@ foreach ($disp as $graf_disp) {
       <option value="2d"<?php if ('2d' == $pyram_dimen) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_dimen_2d']; ?></option>
       <option value="3d"<?php if ('3d' == $pyram_dimen) { echo ' selected'; } ?>><?php echo $tradutor[$language]['barra_dimen_3d']; ?></option>
      </select>
-    </td>
-    <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <br>";
+    }
+    else {
+        echo "    </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
      <b><?php echo $tradutor[$language]['pizza_valor']; ?></b>
      <br />
      <select name="pyram_valor">
@@ -976,7 +1063,7 @@ foreach ($disp as $graf_disp) {
     </td>
    </tr>
    <tr>
-    <td class="scGridFieldOddFont" colspan="2">
+    <td class="scGridFieldOddFont" colspan="<?php echo $colspan; ?>">
      <b><?php echo $tradutor[$language]['pyram_slice']; ?></b>
      <br />
      <select name="pyram_forma">
@@ -989,7 +1076,7 @@ foreach ($disp as $graf_disp) {
 
  </td></tr>
  <tr>
-  <td class="scGridToolbar" style="text-align: center">
+  <td class="scGridToolbar" style="text-align: <?php echo $align_btn ?>">
    <?php echo $_SESSION['scriptcase']['bg_btn_popup']['bok']; ?>
    &nbsp; &nbsp; &nbsp;
    <?php echo $_SESSION['scriptcase']['bg_btn_popup']['btbremove']; ?>

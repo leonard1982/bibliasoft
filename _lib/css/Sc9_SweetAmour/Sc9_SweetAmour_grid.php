@@ -39,4 +39,6 @@ $refinedsearch_campo_close_icon = 'scriptcase__NM__btn__NM__scriptcase9_Rhino__N
 $str_resume_label_sort = 'scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_sort.png';
 $str_resume_label_sort_asc = 'scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_sort_asc.png';
 $str_resume_label_sort_desc = 'scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_sort_desc.png';
+$scGridRefinedSearchExpandFAIcon = 'fas fa-chevron-right';
+$scGridRefinedSearchCollapseFAIcon = 'fas fa-chevron-left';
 ?>

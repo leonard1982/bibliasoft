@@ -11,6 +11,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -285,8 +286,8 @@ class form_bodegas_ini
       $this->nm_dt_criacao   = "20171208"; 
       $this->nm_hr_criacao   = "122826"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -944,7 +945,7 @@ class form_bodegas_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZ9F7HArYV5FGDMBYV9FeDWF/VEFGHQXOH9B/HArYZMB/DMzGVkJ3HEFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcFYZkBiD1zGZMXGHgBeVkJGDWr/VoBqHQFYH9X7Z1rwD5XGDMrYVIBsDWJeVENUHQXGVIJsD1rwHuJsHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVIBOV5X7VoX7D9BsZ1BOZ1BeD5F7DEBOZSXeH5F/VoB/DcBwZSX7HArYV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBqDcNmZkFGHABYZMBODEBOZSJ3H5X/ZuJeDcXGDuBqD1veHuX7DMvODkBsV5X7HMraHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiHINKD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuBYDkBsHEX/VEX7HQXGH9BOD1rwHQBODMvCZSJqDWXCHMBiHQFYZSFUDSN7V5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYH9FGHANKVWJsHuBYVcB/HEFYHMFaD9BiZ1B/Z1NOV5JsHgrKHEFiDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1F7DSvOZMJeDENOHEXeV5FqZuXGHQJeDQB/HANOV5X7DMNOZSNiDuFGVEX7D9JmZSFaHAN7HQJeHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVIBOV5X7VoX7D9BsZ1BOZ1BeD5F7DEBOZSXeH5F/VoB/DcBwZSX7HArYV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIraD9JmH9BqHIveHQraDMvCHArsH5F/VoJsD9NmDQFaD1BeVWJsDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoX7HQBqZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcXGDQB/HAN7V5JwHuzGVIBsH5XKVENUHQNmZ1FGZ1rYHuB/HgBeHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['form_bodegas']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['form_bodegas']['ordem_cmp'] = ""; 
@@ -2239,6 +2240,11 @@ ob_start();
     sajax_export("ajax_form_bodegas_table_refresh");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_bodegas->contr_form_bodegas->controle();
 //
     function nm_limpa_str_form_bodegas(&$str)
@@ -2426,6 +2432,10 @@ ob_start();
       global $inicial_form_bodegas;
       $aResp = array();
 
+      if (isset($inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['empty_filter'];
@@ -2522,6 +2532,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['btnDisabled']) && '' != $inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['btnDisabled'])
+         {
+            form_bodegas_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['btnLabel']) && '' != $inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['btnLabel'])
+         {
+            form_bodegas_pack_btn_label($aResp);
          }
          if (isset($inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['varList']) && !empty($inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['varList']))
          {
@@ -2626,8 +2644,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2876,6 +2899,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_bodegas_pack_master_value
+
+   function form_bodegas_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_bodegas;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_bodegas_pack_ajax_alert
+
+   function form_bodegas_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_bodegas;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_bodegas->contr_form_bodegas->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_bodegas_pack_ajax_alert
 
    function form_bodegas_pack_ajax_alert(&$aResp)
    {

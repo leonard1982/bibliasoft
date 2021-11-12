@@ -228,8 +228,8 @@ class Grid_ajuste_Inv_fisico_ini
       $this->nm_dt_criacao   = "20171221"; 
       $this->nm_hr_criacao   = "095308"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -861,6 +861,8 @@ class Grid_ajuste_Inv_fisico_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -986,7 +988,7 @@ class Grid_ajuste_Inv_fisico_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['Grid_ajuste_Inv_fisico']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['Grid_ajuste_Inv_fisico']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQJsHIBeV5BOHgrKVcFeDuFGVEX7DcNmZSB/Z1rYV5JeHgNOHEJGHEFqHIJwDcJeZSBiZ1BYHQNUDMBOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuvmVIB/DWJeHINUHQXGZkBiHAN7ZMJeDMvCDkB/HEB7ZuXGHQFYH9BiZ1N7HuB/HuBYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/HQXsZSFGHANOD5BqHgrKVcXKV5X7VoB/D9JmZSFaHArYD5JeDEvsHEFiDWFqDoFUHQNwDQX7Z1N7VWJeHgrYDkBODWF/DoFGD9XOH9B/DSrYD5rqDEBODkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1NOZMBqDEBOVkJqH5F/VoXGDcBiDQB/DSBYV5JwHgrwVIFCDur/DoJeD9JmZ1B/HAN7HQBODErKHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHErsDurmDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBsZkFGZ1NOHQX7DMveVkXeDuFYVoB/HQXOH9FUHABYV5JeHuBOVcFKHEF/HMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiZSX7DSN7HuBqHgrwZSNiH5B7VoFGHQJmZ1FaHArYHQF7HgvCHArCDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHEFiDWrGDoJeHQXGDuBqHAveHQJwDMBOV9FeDWF/HINUHQBiZ1B/HIrwHuFaHgvsDkXKHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9BqHIBeD5XGDEBeHEXeH5F/DoFUDcJeDQX7DSN7VWJwHuzGDkFCH5XCDoraDcNwH9BqDSrYV5FUDEvsVkJqV5FaVoBOD9JKDQFGD1BeD5BqHgvsDkBOV5FGDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMzGVcXKDWFYHIJsHQNmZ1BOZ1BeV5JsDEvsHEBUH5FYHIF7HQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBOHQBiZ9XGHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1NOD5BiDEBOHEFiDuJeVoX7HQNwDuFaD1vOVWXGDMvOVcFCDuFGVEraDcFYZ1B/HABYHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2418,6 +2420,8 @@ class Grid_ajuste_Inv_fisico_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2816,11 +2820,16 @@ class Grid_ajuste_Inv_fisico_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_orig'] = " where idtipotran =3 and cantidad=0";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico']['tot_geral']);
@@ -3325,7 +3334,7 @@ class Grid_ajuste_Inv_fisico_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -3974,22 +3983,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Ver Notas de Ajuste x Inv. físico :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -4775,14 +4785,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['Grid_ajuste_Inv_fisico'][$path_doc
            $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['Grid_ajuste_Inv_fisico']['embutida_form'])
        {

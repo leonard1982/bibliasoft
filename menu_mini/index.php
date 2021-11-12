@@ -162,6 +162,7 @@ $path_link      = substr($path_link, 0, strrpos($path_link, '/')) . '/';
 $path_btn       = $str_root . $path_link . "_lib/buttons/";
 $path_imag_cab  = $path_link . "_lib/img";
 $this->force_mobile = false;
+$this->menu_orientacao = 'vertical';
 $this->path_botoes    = '../_lib/img';
 $this->path_imag_apl  = $str_root . $path_link . "_lib/img";
 $path_help      = $path_link . "_lib/webhelp/";
@@ -757,6 +758,15 @@ if (isset($_SESSION['scriptcase']['sc_apl_seg']['blank_fin_sesion']) && strtolow
     $menu_mini_menuData['data'] .= "item_15|.|" . $nm_var_lab[4] . "|menu_mini_form_php.php?sc_item_menu=item_15&sc_apl_menu=blank_fin_sesion&sc_apl_link=" . urlencode($menu_mini_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu_mini']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[4] . "|scriptcase__NM__ico__NM__exit_32.png|" . $this->menu_mini_target('_parent') . "|" . "\n";
 }
 
+if(isset($_SESSION['scriptcase']['force_menu_orientacao']) && !empty($_SESSION['scriptcase']['force_menu_orientacao']))
+{
+    $this->menu_orientacao = $_SESSION['scriptcase']['force_menu_orientacao'];
+}
+elseif($this->force_mobile || ($_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile']))
+{
+    $this->menu_orientacao = 'horizontal';
+    $this->mobile_menu_toolbar = '';
+}
 
 $menu_mini_menuData['data'] = array();
 $str_disabled = "N";
@@ -1140,7 +1150,7 @@ if ($menu_mini_menuData['iframe'])
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->str_schema_all ?>_menuH.css<?php if (@is_file($this->path_css . $this->str_schema_all . '_menuH.css')) { echo '?scp=' . md5($this->path_css . $this->str_schema_all . '_menuH.css'); } ?>" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $Str_btn_css ?>" /> 
  <link rel="stylesheet" href="<?php echo $_SESSION['scriptcase']['menu_mini']['glo_nm_path_prod']; ?>/third/font-awesome/css/all.min.css" type="text/css" media="screen" />
-<link rel="stylesheet" type="text/css" href="../_lib/css/_menuTheme/usr_Scriptcase_Menupaypalprata_vert_<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir']; ?>.css<?php if (@is_file($this->path_css . '_menuTheme/' . "usr_Scriptcase_Menupaypalprata" . '_' . vert . '.css')) { echo '?scp=' . md5($this->path_css . '_menuTheme/' . "usr_Scriptcase_Menupaypalprata" . '_' . vert . '.css'); } ?>" />
+<link rel="stylesheet" type="text/css" href="../_lib/css/_menuTheme/usr_Scriptcase_Menupaypalprata_<?php echo ($this->menu_orientacao!='vertical')?'hor':'vert'; ?>_<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir']; ?>.css<?php if (@is_file($this->path_css . '_menuTheme/' . "usr_Scriptcase_Menupaypalprata" . '_' . (($this->menu_orientacao!='vertical')?'hor':'vert') . '.css')) { echo '?scp=' . md5($this->path_css . '_menuTheme/' . "usr_Scriptcase_Menupaypalprata" . '_' . (($this->menu_orientacao=='horizontal')?'hor':'vert') . '.css'); } ?>" />
 <style>
    .scTabText {
    }    <?php
@@ -1188,8 +1198,21 @@ if ($menu_mini_menuData['iframe'])
     ?>
 </style>
 <script type="text/javascript">
+<?php
+
+if ($this->menu_orientacao=='horizontal')
+{
+ ?>
  var is_menu_vertical = false;
-is_menu_vertical = true;
+ <?php
+}
+else
+{
+ ?>
+ var is_menu_vertical = true;
+ <?php
+}
+?>
  function sc_session_redir(url_redir)
  {
      if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')
@@ -1375,17 +1398,25 @@ $Str = str_replace("y", "Y", $Str);
 $nm_data_fixa = date($Str); 
 ?>
 <?php
-$qtd_col = 2;
-if(is_array($bg_line_degrade) && count($bg_line_degrade)>0)
+if($this->menu_orientacao=='vertical')
 {
-    $qtd_col = $qtd_col + count($bg_line_degrade);
+  $qtd_col = 2;
+  if(is_array($bg_line_degrade) && count($bg_line_degrade)>0)
+  {
+      $qtd_col = $qtd_col + count($bg_line_degrade);
+  }
+  $larg_table = "100%";
+  $col_span   = ' colspan="'. $qtd_col .'"';
 }
-$larg_table = "100%";
-$col_span   = ' colspan="'. $qtd_col .'"';
+else
+{
+  $larg_table = "100%";
+  $col_span   = "";
+}
 $strAlign = 'align=\'center\'';
 ?>
 <?php
-$str_bmenu = nmButtonOutput($this->arr_buttons, "bmenu", "showMenu();", "showMenu();", "bmenu", "", "" . $this->Nm_lang['lang_btns_menu'] . "", "position:absolute; top:0px; left:0px; z-index:9999;", "absmiddle", "", "0px", $this->path_botoes, "", "" . $this->Nm_lang['lang_btns_menu_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+$str_bmenu = nmButtonOutput($this->arr_buttons, "bmenu", "showMenu();", "showMenu();", "bmenu", "", "" . $this->Nm_lang['lang_btns_menu'] . "", "position:absolute; top:0px; left:0px; z-index:102;", "absmiddle", "", "0px", $this->path_botoes, "", "" . $this->Nm_lang['lang_btns_menu_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 if($this->force_mobile || ($_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile']))
 {
     $menu_mobile_hide          = $mobile_menu_mobile_hide;
@@ -1417,57 +1448,94 @@ if($menu_mobile_hide == 'S')
         $('#bmenu').<?php echo $str_btn_display; ?>();
         $('#idMenuCell').<?php echo $str_menu_display; ?>();
         $('#id_toolbar').<?php echo $str_menu_display; ?>();
-        if($('#bmenu').length)
-        {
-            if($('.scMenuHHeader').length)
-            {
-                  $(".scMenuHHeader").css("padding-left", $('#bmenu').outerWidth());
-            }
-            else if($('.scMenuToolbar').length)
-            {
-                  $(".scMenuToolbar").css("padding-left", $('#bmenu').outerWidth());
-            }
-        }
         <?php
-                if($menutree_mobile_float == 'S')
-                {
-                ?>
+                    if($this->menu_orientacao != 'vertical')
+                    {
+                        if($menu_mobile_hide_icon == 'N')
+                        {
+                        ?>
+                            $("#idDivMenu").css("padding-left", $('#bmenu').outerWidth());
+                        <?php
+                        }
+                    }
+                    else
+                    {
+                        if($menu_mobile_hide_icon == 'N')
+                        {
+                        ?>
+                            $("#idMenuToolbar").css("padding-left", $('#bmenu').outerWidth());
+                        <?php
+                        }
+                    }
+                    if($menutree_mobile_float == 'S')
+                    {
+                    ?>
                     str_html_menu    = $('#idMenuCell').html();
                     str_html_toolbar = '';
                     if($('#idMenuToolbar').length)
                     {
                       str_html_toolbar = $('#idMenuToolbar').html();
                     }
-                    $('#idMenuCell').remove()
-                    $('#id_toolbar').remove()
-                    $( 'body' ).prepend( "<div id='idMenuCell' style='position:absolute; top:0px; left:0px;z-index:9999;display:<?php echo (($menu_mobile_inicial_state =='escondido')?'none':''); ?>'>"+ str_html_menu + "<div>" + str_html_toolbar +"</div></div>" );
+                    $('#idMenuCell').remove();
+                    $('#idMenuToolbar').remove();
+                    $( 'body' ).prepend( "<div id='idMenuFLoat' style='height:0px;'><div id='idMenuCell' style='position:absolute; z-index: 101'>"+ str_html_menu + "</div><div id='id_toolbar' style='position:absolute; z-index: 100;'>" + str_html_toolbar +"</div></div>" );
                     <?php
-                    if($menu_mobile_hide_icon != 'S')
+                    if($this->menu_orientacao == 'vertical')
                     {
-                        if($menu_mobile_hide_icon_menu_position == 'right')
+                        ?>
+                            $("#idMenuCell").css("padding-top", $('#bmenu').outerHeight());
+                            $("#idMenuCell").css("left", '0px');
+                            $("#id_toolbar").css("padding-left", $('#bmenu').outerWidth());
+                            $("#id_toolbar").css("display", 'flex');
+                        <?php
+                        if($menu_mobile_hide_icon == 'S')
                         {
                         ?>
-                          $('#idMenuCell').css('left', $('#bmenu').outerWidth());
+                            $("#id_toolbar").css("padding-left", '0px');
                         <?php
                         }
-                        else
+                        ?>
+                        if($( '#id_toolbar' ).width() < 1  || $( '#id_toolbar' ).width() > $( window ).width())
                         {
-                          ?>
-                          $('#idMenuCell').css('top', $('#bmenu').outerHeight());
-                          <?php
+                            $('#id_toolbar').css('display', 'block');
+                            $('#id_toolbar').css('padding-left', $('#idMenuCell').outerWidth());
+                            <?php
+                            if($menu_mobile_hide_icon == 'S')
+                            {
+                            ?>
+                                $("#id_toolbar").css("padding-top", '0px');
+                            <?php
+                            }
+                        ?>
                         }
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                            $("#id_toolbar").css("top", $('#idMenuCell').outerHeight());
+                            <?php
+                            if($menu_mobile_hide_icon == 'S')
+                            {
+                            ?>
+                                $("#id_toolbar").css("padding-left", '0px');
+                            <?php
+                            }
+                    }
+                    if($menu_mobile_inicial_state =='escondido')
+                    {
+                        ?>
+                            $("#idMenuCell").hide();
+                            $("#id_toolbar").hide();
+                        <?php
                     }
                 }
-                elseif($menu_mobile_hide_icon == 'S')
-                {
-                ?>
-                  $("#idDivMenu").css("padding-left", $('#bmenu').outerWidth());
-                <?php
-                }
-                ?>
+           ?>
     });
     function showMenu()
     {
+      if (!$('#idMenuCell').is(':visible')) { $('body').append('<div class="menu-outclick-overlay" style="height: 100vh; width: 100vw; position: fixed; z-index: 90; top: 0; left: 0;" ></div>');}
+      $('.menu-outclick-overlay').on('click', function () {HideMenu();});
       <?php
       if($menu_mobile_hide_icon == 'S')
       {
@@ -1489,6 +1557,7 @@ if($menu_mobile_hide == 'S')
     }
     function HideMenu()
     {
+      $('.menu-outclick-overlay').remove();
       <?php
       if($menu_mobile_hide_icon == 'S')
       {
@@ -1615,7 +1684,7 @@ echo $str_bmenu;
 function expandMenu()
 {
     $('#idMenuHeader').hide();
-    $('#idMenuCell').hide();
+    $('#<?php echo ($this->menu_orientacao=='vertical')?'idMenuCell':'idMenuLine'; ?>').hide();
     $('#id_toolbar').hide();
     $('#id_expand').hide();
     $('#id_collapse').show();
@@ -1624,7 +1693,7 @@ function expandMenu()
 function collapseMenu()
 {
     $('#idMenuHeader').show();
-    $('#idMenuCell').show();
+    $('#<?php echo ($this->menu_orientacao=='vertical')?'idMenuCell':'idMenuLine'; ?>').show();
     $('#id_toolbar').show();
     $('#id_expand').show();
     $('#id_collapse').hide();
@@ -1853,6 +1922,10 @@ function mudaIframe(str_id)
     {
         if (Tab_iframes[i] == str_id) 
         {
+            if($('#iframe_' + Tab_iframes[i]).length < 1)
+            {
+                $('#Iframe_control').append('<iframe id="iframe_'+ Tab_iframes[i] +'" name="menu_mini_'+ Tab_iframes[i] +'_iframe" frameborder="0" class="scMenuIframe" style="display: none; width: 100%; height: 100%;" src=""></iframe>');
+            }
             $('#iframe_' + Tab_iframes[i]).show();
             Aba_atual    = str_id;
             $('#aba_td_' + Aba_atual).removeClass( 'scTabInactive' );
@@ -1977,6 +2050,10 @@ function scTabScroll(axis) {
       str_target_sv = str_id + "_iframe";
       str_id        = str_id.replace("menu_mini_","");
   }
+    if($('#Iframe_control').length && $('#' + str_id).parent().length < 0)
+    {
+        $('#Iframe_control').append('<iframe id="iframe_btn_1" name="menu_btn_1_iframe" frameborder="0" class="scMenuIframe" style="display: none;" src=""></iframe>');
+    }
   if($('#' + str_id).parent().length)
   {
       if(!$('#' + str_id).parent().hasClass('menu__item--active'))
@@ -2055,8 +2132,21 @@ $fixMainMenuPosition = ($this->force_mobile || ($_SESSION['scriptcase']['device_
 </table>
     </td>
   </tr>
-<?php echo $this->nm_show_toolbarmenu($col_span, $saida_apl, $menu_mini_menuData, $path_imag_cab); ?>  <tr class="scMenuHTableCss" id='idMenuLine'>
+<?php echo ($this->menu_orientacao=='vertical')?$this->nm_show_toolbarmenu($col_span, $saida_apl, $menu_mini_menuData, $path_imag_cab):''; ?>  <tr class="scMenuHTableCss" id='idMenuLine'>
+  <?php
+  if($this->menu_orientacao != 'vertical')
+  {
+    ?>
+      <td <?php echo $strAlign; ?> valign="middle" class="scMenuLine" style="width:100%; height:30;padding: 0px;" id='idMenuCell'>
+    <?php
+  }
+  else
+  {
+    ?>
       <td <?php echo $strAlign; ?> valign="middle" class="scMenuLine" style="vertical-align:middle;" id='idMenuCell'>
+    <?php
+  }
+  ?>
        <table style="border-collapse: collapse; border-width: 0" cellpadding=0 cellspacing=0><tr><td style="padding: 0">
 <div id="scScrollFix" style="height: 1px"></div>
 <script type="text/javascript">
@@ -2072,7 +2162,19 @@ function fnScrollFix() {
 setTimeout("fnScrollFix()", 1000);
 </script>
 <div id="idDivMenu">
-<table style='<?php $menutree_mobile_float == 'S'?'':'width:100%'; ?>'><tr><?php
+<?php
+  if($this->menu_orientacao != 'horizontal')    
+  {    
+    ?>    
+<table style='width:100%'><tr>
+    <?php    
+  }    
+  else    
+  {    
+    ?>    
+<table style='<?php $menutree_mobile_float == 'S'?'':'width:100%'; ?>'><tr>
+    <?php    
+  }    
 echo $this->menu_mini_escreveMenu($menu_mini_menuData['data'], $path_imag_cab, $strAlign);
 ?></tr></table>
 </div>
@@ -2083,11 +2185,44 @@ if ($menu_mini_menuData['iframe'])
 {
 ?>
     </td>
-<?php echo $this->nm_gera_degrade(2, $bg_line_degrade, $path_imag_cab); ?>    <td style="border-width: 1px; width: 100%; height: 100%; padding: 0px">
+<?php
+if($this->menu_orientacao != 'vertical')
+{
+?>
+  </tr>
+<?php echo $this->nm_show_toolbarmenu('', $saida_apl, $menu_mini_menuData, $path_imag_cab); ?><?php echo $this->nm_gera_degrade(1, $bg_line_degrade, $path_imag_cab); ?>  <tr>
+        <td id="links_abas" style="display: none;">
+          <div id="id_links_abas" style="display: none; padding-top: 30px;" class='scTabLine'>
+            <div class='scTabScroll left' style='float:left;display:none;' onmousedown='scTabScroll("left");' onmouseup='scTabScroll("stop");' onmouseout='scTabScroll("stop");'></div>
+            <div class='scTabScroll right' style='float:right;display:none;'onmousedown='scTabScroll("right");' onmouseup='scTabScroll("stop");' onmouseout='scTabScroll("stop");'></div>
+            <div id='div_contrl_abas' class='scTabCtrl' style='overflow:hidden;white-space: normal;'>
+              <ul id='contrl_abas' style='margin:0px; padding:0px;'></ul>
+            </div>
+          </div>
+        </td>
+        </tr><tr>
+<?php
+}
+else
+{
+    echo $this->nm_gera_degrade(2, $bg_line_degrade, $path_imag_cab);
+}
+?>
+<?php
+if($this->menu_orientacao != 'vertical')
+{
+?>
+    <td id="Iframe_control_td" style="border-width: 1px; height: 100%; padding: 0px;vertical-align:top;text-align:center;">
+<?php
+}
+else
+{
+?>
+    <td style="border-width: 1px; width: 100%; height: 100%; padding: 0px">
       <table cellspacing=0 cellpadding=0 width='100%' height='100%'>
         <tr>
         <td id="links_abas" style="display: none;">
-          <div id="id_links_abas" style="display: none;" class='scTabLine'>
+          <div id="id_links_abas" style="display: none; padding-top: 30px;" class='scTabLine'>
             <div class='scTabScroll left' style='float:left;display:none;' onmousedown='scTabScroll("left");' onmouseup='scTabScroll("stop");' onmouseout='scTabScroll("stop");'></div>
             <div class='scTabScroll right' style='float:right;display:none;'onmousedown='scTabScroll("right");' onmouseup='scTabScroll("stop");' onmouseout='scTabScroll("stop");'></div>
             <div id='div_contrl_abas' class='scTabCtrl' style='overflow:hidden;white-space: normal;'>
@@ -2097,6 +2232,9 @@ if ($menu_mini_menuData['iframe'])
         </td>
         </tr><tr>
         <td width='100%' height='100%' style='vertical-align:top;text-align:center;'>
+<?php
+}
+?>
     <div id="Iframe_control" style='width:100%; height:100%; margin:0px; padding:0px;'>
 <?php
 $link_default = "";
@@ -2112,22 +2250,21 @@ else
 ?>
       <iframe id="iframe_menu_mini" name="menu_mini_iframe" frameborder="0" class="scMenuIframe" style="width: 100%; height: 100%;"  src="<?php echo $SCR; ?>" <?php echo $link_default ?>></iframe>
 <?php
- foreach ($menu_mini_menuData['data'] as $ind => $dados_menu)
- {
-     if ($dados_menu['link'] != "#")
-     {
-         echo "      <iframe id=\"iframe_" . $dados_menu['id'] . "\" name= \"menu_mini_" . $dados_menu['id'] . "_iframe\" frameborder=\"0\" class=\"scMenuIframe\" style=\"display: none;width: 100%; height: 100%;\" src=\"\"></iframe>
-";
-     }
- }
 }
 ?></div></td>
   </tr>
+<?php
+  if($this->menu_orientacao=='vertical')
+  {
+  ?>
 </table>
 </td>
 </tr>
+  <?php
+  }
+?>
   <tr>
-    <td style="padding: 0px" <?php echo $col_span ?>>
+    <td style="padding: 0px" <?php if($this->menu_orientacao == 'vertical'){ echo $col_span; } ?>>
 <style>
 #rod_col1 { margin:0px; padding: 3px 0px 0px 5px; float:left; overflow:hidden;}
 #rod_col2 { margin:0px; padding: 3px 5px 0px 0px; float:right; overflow:hidden; text-align:right;}
@@ -2177,7 +2314,7 @@ function menu_mini_escreveMenu($arr_menu, $path_imag_cab = '', $strAlign = '')
           <span></span>
       </div>
       <div class='menu__container'>
-        <ul id="css3menu1" class="topmenu menu__list" style="width:100%;">
+        <ul id="css3menu1" class="topmenu menu__list" style="<?php echo ($this->menu_orientacao=='vertical')?'width:100%;':''; ?>" >
         <?php
             for ($i = 0; $i < sizeof($aMenuItemList); $i++) {
                 if (0 == $aMenuItemList[$i]['level']) {
@@ -2348,6 +2485,10 @@ function menu_mini_target($str_target)
 
 function nm_show_toolbarmenu($col_span, $saida_apl, $menu_mini_menuData, $path_imag_cab)
 {
+    if(!empty($this->mobile_menu_toolbar) && ($this->force_mobile || ($_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])))
+    {
+        return;
+    }
 }
 
    function nm_prot_aspas($str_item)

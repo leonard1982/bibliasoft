@@ -789,6 +789,12 @@ class terceros_mob_apl
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['terceros_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['terceros_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['terceros_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['terceros_mob']['embutida_parms'];
@@ -5733,10 +5739,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -5749,161 +5758,161 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_terceros_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'tipo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo' == $filtro)) || (is_array($filtro) && in_array('tipo', $filtro)))
         $this->ValidateField_tipo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'regimen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'regimen' == $filtro)) || (is_array($filtro) && in_array('regimen', $filtro)))
         $this->ValidateField_regimen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_documento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_documento' == $filtro)) || (is_array($filtro) && in_array('tipo_documento', $filtro)))
         $this->ValidateField_tipo_documento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'documento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'documento' == $filtro)) || (is_array($filtro) && in_array('documento', $filtro)))
         $this->ValidateField_documento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'dv' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'dv' == $filtro)) || (is_array($filtro) && in_array('dv', $filtro)))
         $this->ValidateField_dv($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'imagenter' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'imagenter' == $filtro)) || (is_array($filtro) && in_array('imagenter', $filtro)))
         $this->ValidateField_imagenter($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigo_tercero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigo_tercero' == $filtro)) || (is_array($filtro) && in_array('codigo_tercero', $filtro)))
         $this->ValidateField_codigo_tercero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'sexo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sexo' == $filtro)) || (is_array($filtro) && in_array('sexo', $filtro)))
         $this->ValidateField_sexo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'notificar' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'notificar' == $filtro)) || (is_array($filtro) && in_array('notificar', $filtro)))
         $this->ValidateField_notificar($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre1' == $filtro)) || (is_array($filtro) && in_array('nombre1', $filtro)))
         $this->ValidateField_nombre1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre2' == $filtro)) || (is_array($filtro) && in_array('nombre2', $filtro)))
         $this->ValidateField_nombre2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'apellido1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'apellido1' == $filtro)) || (is_array($filtro) && in_array('apellido1', $filtro)))
         $this->ValidateField_apellido1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'apellido2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'apellido2' == $filtro)) || (is_array($filtro) && in_array('apellido2', $filtro)))
         $this->ValidateField_apellido2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tel_cel' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tel_cel' == $filtro)) || (is_array($filtro) && in_array('tel_cel', $filtro)))
         $this->ValidateField_tel_cel($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'urlmail' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'urlmail' == $filtro)) || (is_array($filtro) && in_array('urlmail', $filtro)))
         $this->ValidateField_urlmail($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idtercero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idtercero' == $filtro)) || (is_array($filtro) && in_array('idtercero', $filtro)))
         $this->ValidateField_idtercero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'r_social' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'r_social' == $filtro)) || (is_array($filtro) && in_array('r_social', $filtro)))
         $this->ValidateField_r_social($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombres' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombres' == $filtro)) || (is_array($filtro) && in_array('nombres', $filtro)))
         $this->ValidateField_nombres($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre_comercil' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_comercil' == $filtro)) || (is_array($filtro) && in_array('nombre_comercil', $filtro)))
         $this->ValidateField_nombre_comercil($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'representante' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'representante' == $filtro)) || (is_array($filtro) && in_array('representante', $filtro)))
         $this->ValidateField_representante($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'direccion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'direccion' == $filtro)) || (is_array($filtro) && in_array('direccion', $filtro)))
         $this->ValidateField_direccion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'departamento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'departamento' == $filtro)) || (is_array($filtro) && in_array('departamento', $filtro)))
         $this->ValidateField_departamento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idmuni' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idmuni' == $filtro)) || (is_array($filtro) && in_array('idmuni', $filtro)))
         $this->ValidateField_idmuni($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ciudad' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ciudad' == $filtro)) || (is_array($filtro) && in_array('ciudad', $filtro)))
         $this->ValidateField_ciudad($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigo_postal' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigo_postal' == $filtro)) || (is_array($filtro) && in_array('codigo_postal', $filtro)))
         $this->ValidateField_codigo_postal($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'observaciones' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'observaciones' == $filtro)) || (is_array($filtro) && in_array('observaciones', $filtro)))
         $this->ValidateField_observaciones($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'lenguaje' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'lenguaje' == $filtro)) || (is_array($filtro) && in_array('lenguaje', $filtro)))
         $this->ValidateField_lenguaje($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'c_postal' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'c_postal' == $filtro)) || (is_array($filtro) && in_array('c_postal', $filtro)))
         $this->ValidateField_c_postal($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'correo_notificafe' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'correo_notificafe' == $filtro)) || (is_array($filtro) && in_array('correo_notificafe', $filtro)))
         $this->ValidateField_correo_notificafe($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'celular_notificafe' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'celular_notificafe' == $filtro)) || (is_array($filtro) && in_array('celular_notificafe', $filtro)))
         $this->ValidateField_celular_notificafe($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cliente' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cliente' == $filtro)) || (is_array($filtro) && in_array('cliente', $filtro)))
         $this->ValidateField_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'proveedor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'proveedor' == $filtro)) || (is_array($filtro) && in_array('proveedor', $filtro)))
         $this->ValidateField_proveedor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'empleado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'empleado' == $filtro)) || (is_array($filtro) && in_array('empleado', $filtro)))
         $this->ValidateField_empleado($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'es_tecnico' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'es_tecnico' == $filtro)) || (is_array($filtro) && in_array('es_tecnico', $filtro)))
         $this->ValidateField_es_tecnico($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'activo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'activo' == $filtro)) || (is_array($filtro) && in_array('activo', $filtro)))
         $this->ValidateField_activo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'credito' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'credito' == $filtro)) || (is_array($filtro) && in_array('credito', $filtro)))
         $this->ValidateField_credito($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cupo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cupo' == $filtro)) || (is_array($filtro) && in_array('cupo', $filtro)))
         $this->ValidateField_cupo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cupodis' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cupodis' == $filtro)) || (is_array($filtro) && in_array('cupodis', $filtro)))
         $this->ValidateField_cupodis($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'dias_credito' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'dias_credito' == $filtro)) || (is_array($filtro) && in_array('dias_credito', $filtro)))
         $this->ValidateField_dias_credito($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'dias_mora' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'dias_mora' == $filtro)) || (is_array($filtro) && in_array('dias_mora', $filtro)))
         $this->ValidateField_dias_mora($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'efec_retencion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'efec_retencion' == $filtro)) || (is_array($filtro) && in_array('efec_retencion', $filtro)))
         $this->ValidateField_efec_retencion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'listaprecios' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'listaprecios' == $filtro)) || (is_array($filtro) && in_array('listaprecios', $filtro)))
         $this->ValidateField_listaprecios($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'loatiende' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'loatiende' == $filtro)) || (is_array($filtro) && in_array('loatiende', $filtro)))
         $this->ValidateField_loatiende($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'autorizado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'autorizado' == $filtro)) || (is_array($filtro) && in_array('autorizado', $filtro)))
         $this->ValidateField_autorizado($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'relleno2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'relleno2' == $filtro)) || (is_array($filtro) && in_array('relleno2', $filtro)))
         $this->ValidateField_relleno2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nacimiento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nacimiento' == $filtro)) || (is_array($filtro) && in_array('nacimiento', $filtro)))
         $this->ValidateField_nacimiento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'detalle_tributario' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'detalle_tributario' == $filtro)) || (is_array($filtro) && in_array('detalle_tributario', $filtro)))
         $this->ValidateField_detalle_tributario($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'responsabilidad_fiscal' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'responsabilidad_fiscal' == $filtro)) || (is_array($filtro) && in_array('responsabilidad_fiscal', $filtro)))
         $this->ValidateField_responsabilidad_fiscal($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ciiu' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ciiu' == $filtro)) || (is_array($filtro) && in_array('ciiu', $filtro)))
         $this->ValidateField_ciiu($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'sucur_cliente' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sucur_cliente' == $filtro)) || (is_array($filtro) && in_array('sucur_cliente', $filtro)))
         $this->ValidateField_sucur_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'sucursales' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sucursales' == $filtro)) || (is_array($filtro) && in_array('sucursales', $filtro)))
         $this->ValidateField_sucursales($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fechault' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fechault' == $filtro)) || (is_array($filtro) && in_array('fechault', $filtro)))
         $this->ValidateField_fechault($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'saldo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'saldo' == $filtro)) || (is_array($filtro) && in_array('saldo', $filtro)))
         $this->ValidateField_saldo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'afiliacion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'afiliacion' == $filtro)) || (is_array($filtro) && in_array('afiliacion', $filtro)))
         $this->ValidateField_afiliacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'es_cajero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'es_cajero' == $filtro)) || (is_array($filtro) && in_array('es_cajero', $filtro)))
         $this->ValidateField_es_cajero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cupo_vendedor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cupo_vendedor' == $filtro)) || (is_array($filtro) && in_array('cupo_vendedor', $filtro)))
         $this->ValidateField_cupo_vendedor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'autoretenedor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'autoretenedor' == $filtro)) || (is_array($filtro) && in_array('autoretenedor', $filtro)))
         $this->ValidateField_autoretenedor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'creditoprov' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'creditoprov' == $filtro)) || (is_array($filtro) && in_array('creditoprov', $filtro)))
         $this->ValidateField_creditoprov($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'dias' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'dias' == $filtro)) || (is_array($filtro) && in_array('dias', $filtro)))
         $this->ValidateField_dias($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'url' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'url' == $filtro)) || (is_array($filtro) && in_array('url', $filtro)))
         $this->ValidateField_url($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'contacto' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'contacto' == $filtro)) || (is_array($filtro) && in_array('contacto', $filtro)))
         $this->ValidateField_contacto($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'telefonos_prov' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'telefonos_prov' == $filtro)) || (is_array($filtro) && in_array('telefonos_prov', $filtro)))
         $this->ValidateField_telefonos_prov($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'email' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'email' == $filtro)) || (is_array($filtro) && in_array('email', $filtro)))
         $this->ValidateField_email($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fechultcomp' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fechultcomp' == $filtro)) || (is_array($filtro) && in_array('fechultcomp', $filtro)))
         $this->ValidateField_fechultcomp($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'saldoapagar' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'saldoapagar' == $filtro)) || (is_array($filtro) && in_array('saldoapagar', $filtro)))
         $this->ValidateField_saldoapagar($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigo_ter' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigo_ter' == $filtro)) || (is_array($filtro) && in_array('codigo_ter', $filtro)))
         $this->ValidateField_codigo_ter($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'zona_clientes' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'zona_clientes' == $filtro)) || (is_array($filtro) && in_array('zona_clientes', $filtro)))
         $this->ValidateField_zona_clientes($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'clasificacion_clientes' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'clasificacion_clientes' == $filtro)) || (is_array($filtro) && in_array('clasificacion_clientes', $filtro)))
         $this->ValidateField_clasificacion_clientes($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'puc_auxiliar_deudores' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'puc_auxiliar_deudores' == $filtro)) || (is_array($filtro) && in_array('puc_auxiliar_deudores', $filtro)))
         $this->ValidateField_puc_auxiliar_deudores($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'puc_retefuente_ventas' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_ventas' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_ventas', $filtro)))
         $this->ValidateField_puc_retefuente_ventas($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'puc_retefuente_servicios_clie' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_servicios_clie' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_servicios_clie', $filtro)))
         $this->ValidateField_puc_retefuente_servicios_clie($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'puc_auxiliar_proveedores' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'puc_auxiliar_proveedores' == $filtro)) || (is_array($filtro) && in_array('puc_auxiliar_proveedores', $filtro)))
         $this->ValidateField_puc_auxiliar_proveedores($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'puc_retefuente_compras' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_compras' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_compras', $filtro)))
         $this->ValidateField_puc_retefuente_compras($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'puc_retefuente_servicios_prov' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_servicios_prov' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_servicios_prov', $filtro)))
         $this->ValidateField_puc_retefuente_servicios_prov($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'archivos' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'archivos' == $filtro)) || (is_array($filtro) && in_array('archivos', $filtro)))
         $this->ValidateField_archivos($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'es_restaurante' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'es_restaurante' == $filtro)) || (is_array($filtro) && in_array('es_restaurante', $filtro)))
         $this->ValidateField_es_restaurante($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'porcentaje_propina_sugerida' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'porcentaje_propina_sugerida' == $filtro)) || (is_array($filtro) && in_array('porcentaje_propina_sugerida', $filtro)))
         $this->ValidateField_porcentaje_propina_sugerida($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      $this->upload_img_doc($Campos_Crit, $Campos_Falta, $Campos_Erros) ; 
+      $this->upload_img_doc($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
 //---
@@ -5963,9 +5972,15 @@ if($this->sc_evento == "alterar" || $this->sc_evento == "update")
 			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Documento y/o tercero ya registrado!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Documento y/o tercero ya registrado!";
  }
 ;
@@ -5983,9 +5998,15 @@ if($this->sc_evento == "alterar" || $this->sc_evento == "update")
 			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Debe llenar mínimo primer Nombre y primer Apellido!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Debe llenar mínimo primer Nombre y primer Apellido!";
  }
 ;
@@ -6009,9 +6030,15 @@ if($this->sc_evento == "alterar" || $this->sc_evento == "update")
 				
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Debe llenar mínimo Nombre Comercial!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Debe llenar mínimo Nombre Comercial!";
  }
 ;
@@ -6052,9 +6079,15 @@ else
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Documento y/o tercero ya registrado!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Documento y/o tercero ya registrado!";
  }
 ;
@@ -6073,9 +6106,15 @@ else
 				
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Debe llenar mínimo primer Nombre y primer Apellido!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Debe llenar mínimo primer Nombre y primer Apellido!";
  }
 ;
@@ -6099,9 +6138,15 @@ else
 				
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Debe llenar mínimo Nombre Comercial!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Debe llenar mínimo Nombre Comercial!";
  }
 ;
@@ -9255,7 +9300,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
     } // ValidateField_porcentaje_propina_sugerida
 //
 //--------------------------------------------------------------------------------------
-   function upload_img_doc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros) 
+   function upload_img_doc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser;
      if (!empty($Campos_Crit) || !empty($Campos_Falta))
@@ -17217,9 +17262,15 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Persona Jurídica, debe llenar el campo 'Nombre Comercial'!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Persona Jurídica, debe llenar el campo 'Nombre Comercial'!";
  }
 ;
@@ -17312,9 +17363,15 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Persona Jurídica, debe llenar el campo 'Nombre Comercial'!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Persona Jurídica, debe llenar el campo 'Nombre Comercial'!";
  }
 ;
@@ -17470,9 +17527,15 @@ if(isset($this->ds_ter[0][0]) or isset($this->ds_ter[0][1]) or isset($this->ds_t
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Tercero ya tiene Movimiento, NO se puede Borrar";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_terceros_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_terceros_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Tercero ya tiene Movimiento, NO se puede Borrar";
  }
 ;
@@ -25914,7 +25977,8 @@ $(function() {
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -28908,5 +28972,54 @@ if (parent && parent.scAjaxDetailValue)
             $this->NM_ajax_info['readOnly'][$sFieldDateTime . $iSeq] = $sStatus;
         }
     } // sc_field_readonly
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-17");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-18");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-19");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4", "sc_b_upd_t.sc-unique-btn-20");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5", "sc_b_del_t.sc-unique-btn-21");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-6", "sys_separator.sc-unique-btn-22");
+                break;
+            case "copy":
+                return array("sc_b_clone_t.sc-unique-btn-7", "sc_b_clone_t.sc-unique-btn-23");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11", "sc_b_sai_t.sc-unique-btn-24", "sc_b_sai_t.sc-unique-btn-25", "sc_b_sai_t.sc-unique-btn-27", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-12", "sc_b_sai_t.sc-unique-btn-26", "sc_b_sai_t.sc-unique-btn-28");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-13", "sc_b_ini_b.sc-unique-btn-29");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-14", "sc_b_ret_b.sc-unique-btn-30");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-15", "sc_b_avc_b.sc-unique-btn-31");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-16", "sc_b_fim_b.sc-unique-btn-32");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

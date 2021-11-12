@@ -51,7 +51,7 @@ scGridLabelVert:hover .scGridLabelLink,.scGridLabelFont:hover .scGridLabelLink {
 #TB_window { border-style: none; background-color: #FEFEFF }
 .scBtnPassField { margin: 10px 5px }
 #first_bot,#first_top,#back_bot,#back_top,#forward_bot,#forward_top,#last_bot,#last_top { margin: 0 5px }
-.scGridRefinedSearchPadding { padding: 20px; background-color: #FEFEFF; background-image: none; border-color: #ABB1D9; border-style: none; border-width: 1px 1px 0 0 }
+.scGridRefinedSearchPadding { padding: 5px; background-color: #FEFEFF; background-image: none; border-color: #ABB1D9; border-style: none; border-width: 1px 1px 0 0 }
 .scGridRefinedSearchMoldura { background-color: #fafbfe; background-image: none; opacity: 1; filter: alpha(opacity=100); border-color: #ABB1D9; border-style: none; border-width: 0; border-collapse: collapse }
 .scGridRefinedSearchMoldura > div { margin: 0 0 20px 0 }
 .scGridRefinedSearchMoldura .scAppDivToolbarInput[type=checkbox], .scGridRefinedSearchMoldura .scAppDivToolbarInput[type=radio], .scGridFilterTagListFilterInputs .scAppDivToolbarInput[type=checkbox], .scGridFilterTagListFilterInputs .scAppDivToolbarInput[type=radio], #table_dyn_search .scAppDivToolbarInput[type=checkbox], #table_dyn_search .scAppDivToolbarInput[type=radio] { height: 13px !important; position: relative; display: inline-block; top: 2px }
@@ -74,6 +74,12 @@ scGridLabelVert:hover .scGridLabelLink,.scGridLabelFont:hover .scGridLabelLink {
 .ui-slider-horizontal > .ui-state-active { background-image: none; opacity: 1; filter: alpha(opacity=100); border-collapse: collapse }
 .scGridRefinedSearchRangeValues { background-image: none; opacity: 1; filter: alpha(opacity=100); padding: 4px; color: #2E2F36; font-family: Leelawadee, Ebrima, 'Bahnschrift Light', Gadugi, 'Nirmala UI', 'Segoe UI', Verdana; font-size: 13px; text-decoration: none }
 .scGridRefinedSearchQuantidade { background-image: none; opacity: 1; filter: alpha(opacity=100); border-style: none; padding: 0 2px; color: #313a46; font-family: Leelawadee, Ebrima, 'Bahnschrift Light', Gadugi, 'Nirmala UI', 'Segoe UI', Verdana; font-size: 12px; text-decoration: none }
+.scGridRefinedSearchCollapse { text-align: right }
+.scGridRefinedSearchCollapse i { background-image: none; color: #7d7d7d; margin: 10px 0; padding: 5px; border-style: solid; border-width: 0 }
+.scGridRefinedSearchCollapse i:hover { cursor: pointer; background-image: none }
+.scGridRefinedSearchExpand { text-align: right }
+.scGridRefinedSearchExpand i { background-image: none; color: #7d7d7d; margin: 10px 0; padding: 5px; border-style: solid; border-width: 0 }
+.scGridRefinedSearchExpand i:hover { cursor: pointer; background-image: none }
 .scAjaxDiv { background-image: none; opacity: 1; filter: alpha(opacity=100); color: #6c757d; font-family: Leelawadee, Ebrima, 'Bahnschrift Light', Gadugi, 'Nirmala UI', 'Segoe UI', Verdana; font-size: 13px; text-decoration: none; border-collapse: collapse; border-style: none }
 .scGridSummarySearchMoldura { background-color: #FFFFFF; background-image: none; opacity: 1; filter: alpha(opacity=100); border-color: #ABB1D9; border-style: solid; border-width: 0; border-collapse: collapse; padding: 5px 10px; margin: 0; width: calc(100% - 40px) !important }
 .scGridSummarySearchCampo { background-image: none; opacity: 1; filter: alpha(opacity=100); border-style: none; border-collapse: collapse; margin: 20px 10px }

@@ -1473,7 +1473,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
 </HEAD>
-<BODY class="scGridPage">
+<BODY id="grid_search" class="scGridPage">
 <FORM style="display:none;" name="form_ok" method="POST" action="<?php echo $NM_retorno; ?>" target="_self">
 <INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
 <INPUT type="hidden" name="nmgp_opcao" value="pesq"> 
@@ -1545,7 +1545,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 $vertical_center = '';
 ?>
-<BODY class="scFilterPage" style="<?php echo $vertical_center ?>">
+<BODY id="grid_search" class="scFilterPage" style="<?php echo $vertical_center ?>">
 <?php echo $this->Ini->Ajax_result_set ?>
 <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_js . "/browserSniffer.js" ?>"></SCRIPT>
         <script type="text/javascript">
@@ -2351,7 +2351,7 @@ foreach ($Arr_format as $Part_date)
 
 ?>
         <SPAN id="id_css_fechacom"  class="scFilterFieldFontEven">
- <?php echo $date_format_show ?>         </SPAN>
+ <br><?php echo $date_format_show ?>         </SPAN>
                   <br />
         <SPAN id="id_vis_fechacom"  <?php echo $str_display_fechacom; ?> class="scFilterFieldFontEven">
          <?php echo $date_sep_bw ?> 
@@ -3411,6 +3411,7 @@ foreach ($Arr_format as $Part_date)
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_contado']['fast_search']);
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_contado']['where_pesq_interativ'] = "";
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_contado']['interativ_search'] = array();
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_contado']['int_search_dados'] = array();
       if ("" == $this->comando_filtro)
       {
           $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_contado']['where_orig'];

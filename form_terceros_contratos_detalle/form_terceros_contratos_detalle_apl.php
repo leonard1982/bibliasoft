@@ -367,6 +367,12 @@ class form_terceros_contratos_detalle_apl
       {
           $_SESSION['gIdcontrato'] = $_GET["gidcontrato"];
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_terceros_contratos_detalle']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_terceros_contratos_detalle']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_terceros_contratos_detalle']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_terceros_contratos_detalle']['embutida_parms'];
@@ -2176,10 +2182,13 @@ $_SESSION['scriptcase']['form_terceros_contratos_detalle']['contr_erro'] = 'off'
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2192,31 +2201,31 @@ $_SESSION['scriptcase']['form_terceros_contratos_detalle']['contr_erro'] = 'off'
               $this->NM_ajax_info['errList']['geral_form_terceros_contratos_detalle'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'id_detalle_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_detalle_' == $filtro)) || (is_array($filtro) && in_array('id_detalle_', $filtro)))
         $this->ValidateField_id_detalle_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_contrato_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_contrato_' == $filtro)) || (is_array($filtro) && in_array('id_contrato_', $filtro)))
         $this->ValidateField_id_contrato_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_producto_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_producto_' == $filtro)) || (is_array($filtro) && in_array('id_producto_', $filtro)))
         $this->ValidateField_id_producto_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'valor_mensualidad_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'valor_mensualidad_' == $filtro)) || (is_array($filtro) && in_array('valor_mensualidad_', $filtro)))
         $this->ValidateField_valor_mensualidad_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cantidad_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cantidad_' == $filtro)) || (is_array($filtro) && in_array('cantidad_', $filtro)))
         $this->ValidateField_cantidad_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'valorunit_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'valorunit_' == $filtro)) || (is_array($filtro) && in_array('valorunit_', $filtro)))
         $this->ValidateField_valorunit_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'valor_imp_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'valor_imp_' == $filtro)) || (is_array($filtro) && in_array('valor_imp_', $filtro)))
         $this->ValidateField_valor_imp_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tarifa_imp_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tarifa_imp_' == $filtro)) || (is_array($filtro) && in_array('tarifa_imp_', $filtro)))
         $this->ValidateField_tarifa_imp_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigo_imp_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigo_imp_' == $filtro)) || (is_array($filtro) && in_array('codigo_imp_', $filtro)))
         $this->ValidateField_codigo_imp_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'desc_imp_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'desc_imp_' == $filtro)) || (is_array($filtro) && in_array('desc_imp_', $filtro)))
         $this->ValidateField_desc_imp_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'descr_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'descr_' == $filtro)) || (is_array($filtro) && in_array('descr_', $filtro)))
         $this->ValidateField_descr_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cod_producto_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cod_producto_' == $filtro)) || (is_array($filtro) && in_array('cod_producto_', $filtro)))
         $this->ValidateField_cod_producto_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'rec_terc_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'rec_terc_' == $filtro)) || (is_array($filtro) && in_array('rec_terc_', $filtro)))
         $this->ValidateField_rec_terc_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
@@ -4173,9 +4182,15 @@ else
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Producto NO existe!!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_terceros_contratos_detalle' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_terceros_contratos_detalle';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_terceros_contratos_detalle';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Producto NO existe!!";
  }
 ;
@@ -4376,9 +4391,15 @@ else
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Producto NO existe!!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_terceros_contratos_detalle' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_terceros_contratos_detalle';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_terceros_contratos_detalle';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Producto NO existe!!";
  }
 ;
@@ -6608,7 +6629,8 @@ $_SESSION['scriptcase']['form_terceros_contratos_detalle']['contr_erro'] = 'off'
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -7464,5 +7486,24 @@ if (parent && parent.scAjaxDetailValue)
         $this->NM_ajax_info['masterValue'][$sIndex] = $sValue;
         $_SESSION['sc_session'][$this->Ini->sc_page]['form_terceros_contratos_detalle']['masterValue'] = $this->NM_ajax_info['masterValue'];
     } // sc_master_value
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-1");
+                break;
+            case "new":
+                return array("sc_b_new_b.sc-unique-btn-2", "sc_b_new_b.sc-unique-btn-3");
+                break;
+            case "insert":
+                return array("sc_b_ins_b.sc-unique-btn-4");
+                break;
+            case "exit":
+                return array("sc_b_sai_b.sc-unique-btn-5");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

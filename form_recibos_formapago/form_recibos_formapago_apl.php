@@ -323,6 +323,12 @@ class form_recibos_formapago_apl
       {
           $_SESSION['gidrecibo'] = $this->gidrecibo;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_recibos_formapago']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_recibos_formapago']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_recibos_formapago']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_recibos_formapago']['embutida_parms'];
@@ -1932,10 +1938,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1948,19 +1957,19 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_recibos_formapago'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'id_formapago' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_formapago' == $filtro)) || (is_array($filtro) && in_array('id_formapago', $filtro)))
         $this->ValidateField_id_formapago($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'monto' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'monto' == $filtro)) || (is_array($filtro) && in_array('monto', $filtro)))
         $this->ValidateField_monto($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre_banco' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_banco' == $filtro)) || (is_array($filtro) && in_array('nombre_banco', $filtro)))
         $this->ValidateField_nombre_banco($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numero_cheque' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numero_cheque' == $filtro)) || (is_array($filtro) && in_array('numero_cheque', $filtro)))
         $this->ValidateField_numero_cheque($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha_cheque' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha_cheque' == $filtro)) || (is_array($filtro) && in_array('fecha_cheque', $filtro)))
         $this->ValidateField_fecha_cheque($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_banco_caja' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_banco_caja' == $filtro)) || (is_array($filtro) && in_array('id_banco_caja', $filtro)))
         $this->ValidateField_id_banco_caja($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_recibos_formapago' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_recibos_formapago' == $filtro)) || (is_array($filtro) && in_array('id_recibos_formapago', $filtro)))
         $this->ValidateField_id_recibos_formapago($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -3593,7 +3602,7 @@ else
           { 
               $rs1->Close(); 
               $this->editado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->editado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->editado_hora =  date('H') . ":" . date('i') . ":" . date('s');
               $NM_val_form['editado'] = $this->editado;
               $this->NM_ajax_changed['editado'] = true;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -3799,7 +3808,7 @@ else
               $NM_cmp_auto = "id_recibos_formapago, ";
           } 
               $this->creado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->creado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->creado_hora =  date('H') . ":" . date('i') . ":" . date('s');
           $bInsertOk = true;
           $aInsertOk = array(); 
           $bInsertOk = $bInsertOk && empty($aInsertOk);
@@ -5226,7 +5235,8 @@ exit;
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -6571,5 +6581,51 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5");
+                break;
+            case "btn_traer_total":
+                return array("sc_btn_traer_total_top");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-11");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-12");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-13");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-14");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

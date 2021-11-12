@@ -157,6 +157,10 @@ td.scGridBlockFont tr > td {
     overflow: scroll;
     max-width: 100vw;
     max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
     flex-grow: 1;
     position: relative;
     padding: 0px;
@@ -667,30 +671,31 @@ tr > .scFilterLabelEven {
     border: solid 1px rgba(0,0,0,0.07) !important;
     margin: 10px 0 !important;
     border-radius: 3px;
-    filter: brightness(.99);
+    /*filter: brightness(.99);*/
     /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
 }
-
-.scFilterLabelOdd > .SC_Cond_Selector,
-.scFilterLabelEven > .SC_Cond_Selector {
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*right: 0;*/
-    background: transparent;
-    border: solid 0px rgba(0,0,0,0.1);
-    border-width: 0 0px 1px 0px;
-    border-radius: 0;
-    width: auto !important;
-    margin-top: 10px;
-    margin-right: 10px;
-    font-weight: bold;
-    color: inherit;
-    text-align: right;
-    padding: 5px;
-    max-width: 50%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+@supports not (-webkit-touch-callout: none) {
+    .scFilterLabelOdd > .SC_Cond_Selector,
+    .scFilterLabelEven > .SC_Cond_Selector {
+        /*position: absolute;*/
+        /*top: 0;*/
+        /*right: 0;*/
+        background: transparent;
+        border: solid 0px rgba(0,0,0,0.1);
+        border-width: 0 0px 1px 0px;
+        border-radius: 0;
+        width: auto !important;
+        margin-top: 10px;
+        margin-right: 10px;
+        font-weight: bold;
+        color: inherit;
+        text-align: right;
+        padding: 5px;
+        max-width: 50%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
 
 .SC_Field_label_Mob {
@@ -783,6 +788,9 @@ body #TB_iframeContent {
     margin-bottom: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
+    width: 100vw !important;
+    height: auto !important;
+    flex-grow: 1;
 }
 
 .sc.switch > input + span {
@@ -945,4 +953,283 @@ div#id_grid_search_add_tag {
 
 .scFilterBorder > table {
     width: 100vw;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    body {
+        padding: 0;
+    }
+
+    .section_label {
+        width: 90%;
+    }
+
+
+    div#barch > div.chart_holder {
+        width: calc(100% - 20px);
+    }
+
+    .container-line {
+        width: 90%;
+    }
+    .indicator {
+        min-width: 40%;
+    }
+}
+.swap-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 80px;
+}
+.swap-buttons .button-choice {
+    display: block;
+    margin: 10px;
+}
+.swap-buttons .button-choice input {
+    display: none;
+}
+.label-choice-button:before {
+    display: none;
+}
+
+.label-choice-button:after {
+    display: none;
+}
+.swap-buttons .button-choice .label-choice-button {
+    display: block;
+    border-radius: 50px;
+    line-height: 40px;
+    padding: 0 20px;
+    height: auto;
+    font-size: 16px;
+    color: #797979;
+    background: transparent;
+}
+.swap-buttons .button-choice .label-choice-button:hover {
+    background:#dee2e8;
+}
+.swap-buttons .button-choice .label-choice-button:active {
+    background:#dee2e8;
+}
+.swap-buttons .button-choice input:checked + .label-choice-button {
+    background:#dee2e8;
+    color: #1e293b;
+}
+
+.groupped-indicators {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px;
+    width: 980px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.groupped-indicators .label-group {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+}
+
+.group-indicator-container {}
+
+.groupped-indicators .group-indicator-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+}
+
+.groupped-indicators .group-indicator-container > div {
+    flex-grow: 1;
+    max-width: 50%;
+    padding: 50px 0 0 0;
+}
+
+
+.scGridLabelVert {
+    width: 40vw;
+    max-width: 40vw;
+    min-width: 40vw;
+}
+
+.scGridLabelVert span {
+    white-space: normal !important;
+    word-break: break-all !important;
+}
+
+.scFilterLabelEven > span, .scFilterLabelOdd > span {
+    white-space: normal;
+}
+
+.scFilterPage input {
+    max-width: 100% !important;
+}
+
+.ui-dropdownchecklist-item label {
+    max-width: 80vw;
+    white-space: break-spaces;
+}
+
+#table_dyn_search {
+    width: 100%;
+}
+#table_dyn_search > tr {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+#table_dyn_search > tr > td:last-child{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+#table_dyn_search > tr > td:first-child{
+    background: #dedede;
+}
+
+.modal-pane-content .scAppDivToolbar {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.modal-pane-content .scAppDivToolbar > a,
+.modal-pane-content .scAppDivToolbar > button {
+    height: 35px;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.scGridQuickSearchDivToolbar > * {
+    text-align: center;
+    margin: 4px;
+}
+
+.scGridQuickSearchDivToolbar {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.scGridSummarySearchObjeto {
+    height: auto !important;
+}
+
+.searchInputSpacer {
+    display: block !important;
+    height: 10px;
+}
+
+.totalization_fields > tbody > tr,
+.totalization_fields > tr {
+    display: flex;
+    flex-direction: column;
+}
+
+div#sc-id-combination-content {
+    height: auto !important;
+    padding-top: 40px !important;
+}
+
+div#sc-id-combination-table {
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+}
+
+div#sc-id-hide-comb-table {
+    position: fixed;
+    width: 100vw;
+}
+
+.ui-sortable-handle {
+    height: auto !important;
+}
+
+#app_int_search_close, #app_int_search_open {
+    display: none !important;
+}
+
+.scGridSummarySearchCleanBtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    margin: 0 !important;
+    padding: 10px 30px;
+}
+
+.scGridSummarySearchCleanBtn > * {
+    text-align: center;
+    margin: 5px 0;
+}
+
+div#TB_Resumo_Search {
+    width: 100vw !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+
+a.scGridFilterTagIconCol {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+div#div_descr_refin_search {
+    /* display: flex; */
+    /* flex-direction: row; */
+    position: sticky;
+    left: 0;
+}
+
+.scGridFilterTagList {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 100vw;
+}
+
+a#app_int_search_all_cancel {
+    height: 30px;
+    display: inline-flex !important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+
+span.scGridFilterTagListItemLabel {
+    font-size: 11px;
+}
+
+#app_int_search_toggle {
+    display: none;
+}
+
+#ref_search_btn_bar, #sum_search_btn_bar {
+    position: sticky;
+    left: 0;
+    font-size: 13px !important;
 }

@@ -227,8 +227,8 @@ class reporte_recibos_ing_caja_ini
       $this->nm_dt_criacao   = "20201105"; 
       $this->nm_hr_criacao   = "103620"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -842,6 +842,8 @@ class reporte_recibos_ing_caja_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -967,7 +969,7 @@ class reporte_recibos_ing_caja_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['reporte_recibos_ing_caja']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['reporte_recibos_ing_caja']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDQFaHAvmV5XGHgrKDkB/DuFGVENUD9XGZ1BOHANOHQJeHgNKZSXeDWX7HMBqHQNmDQFGD1BeHQFaHuNOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMNOVcFCDWF/HIXGHQJmZSFaHIveHQNUDEBOZSJqDWB3DoXGD9NwH9FUHIrwVWJwHuBYVcB/DWJeHIJeHQXGZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHuzGVIBODWFYVorqD9BsH9FaHAN7ZMB/DMzGHEJqV5FaDoJeDcBwDQX7D1BeD5BqHgvsVIBOV5X7VoFGDcNwH9B/DSrYV5FUDMzGZSJqV5FaDoF7DcJeDQX7DSN7V5FUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXOZSX7DSBYV5BODMvOVIFCDWF/HMXGD9XOZSBqZ1rYHQNUHgvCHEJGDWF/HMXGD9NmH9BiDSBYHuJwDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHANKVWBODMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDuJeHMFaHQFYH9BiHIrwHQJsDMvOV9FeDWJeHMBqHQXOZkBiHABYHQFGDENOHErCDWr/HMJsDcXGDQFGD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwZ9XGHArYHQJwHgrKVIBODWJeHIBiHQBsZ1X7HAvmZMBOHgBeZSXeHEB7DoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1X7D1rwHQBiHgveHEXeDWFqDoB/HQBiDuFaDSBYHuJwHgrKVcFKDuFGVENUHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/D9NwH9X7HABYV5JeHuNODkFCDWJeVENUDcJUZ1BOZ1BeD5XGDMzGHEXeH5FYVoXGDcJeH9X7Z1rwV5BqHgrYDkBOHEFYDoJsDcJUH9BOZ1BeD5rqDMBYHEXeHEXCDoraHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHQrqHuBOVcBUDuFGDoXGHQBiVIJsHArYD5JeDEBeHErCDuJeHMBiDcXGZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHANKV5BODMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHErCHEFqHIB/HQJKH9X7HANOHuB/DMvOV9FeV5FYDoFUDcNwH9BqHABYD5FaHgvsZSJ3DWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2412,6 +2414,8 @@ class reporte_recibos_ing_caja_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2798,11 +2802,16 @@ class reporte_recibos_ing_caja_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_orig'] = " where id_recibo = " . $_SESSION['par_idrc'] . "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja']['tot_geral']);
@@ -3246,7 +3255,7 @@ class reporte_recibos_ing_caja_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -3943,22 +3952,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_grid_titl'] ?> - recibos_ing_caja :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -4763,14 +4773,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_recibos_ing_caja'][$path_d
            $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['reporte_recibos_ing_caja']['embutida_form'])
        {

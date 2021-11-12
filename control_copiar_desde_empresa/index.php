@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -296,8 +297,8 @@ class control_copiar_desde_empresa_ini
       $this->nm_dt_criacao   = "20210408"; 
       $this->nm_hr_criacao   = "173501"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -955,7 +956,7 @@ class control_copiar_desde_empresa_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQJwHArYHQFaDMNOVcB/HEFYHMFGDcBqH9BqHIrwHQJwDEBODkFeH5FYVoFGHQJKDQBqHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSrYHQJeHgrKDkXKDuFaVoJeDcXGZ9F7DSBYHQJeDMBODkBsV5FGVEX7D9XGZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsDkBOV5X7DoJsD9BiZ1rqHAN7D5FaDEBOHENiV5FaDoF7D9XsZSFGHAveD5BqHgvsVcFCDWJeVoJwDcJUZ1F7HArYD5JeDMzGHEFiDWFqDoFUDcBwDQX7Z1BYV5JeHuzGVIBODWFYVoFGDcBqZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVEX7D9XOZ1B/HIveV5XGDEBOVkJGDWF/ZuFaHQNmH9X7Z1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHEJqH5F/DoBOD9NwDQFaHAN7HQBqHuzGZSNiH5XKVEFGDcNmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQX7HIrKVWJsHuzGVIFCDWJeVErqHQBsH9B/Z1NOHQJwDEBODkFeH5FYVoFGHQJKDQBqHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1X7D1rwHuJwDEvsHErCDWFGZuBqHQFYDQFUHArYD5F7DMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDoF7D9XsZSX7Z1N7VWJsHuzGVIBOV5X7DoJeDcNwH9B/D1rwD5FaDErKHEFiHEFqDoraD9NwH9FUZ1rwD5JsHgrKVcFCH5FqDoNUDcJUZ1BOZ1BeV5FaDEBOHEJGDWF/DoJeDcBwDQFGD1BeV5FUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9FYH9FUDSN7D5XGDMvsV9FeDuFqHMFaD9JmZSBODSNOV5BODEvsDkXKHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHArsDWBmDoJeHQJeDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGD1rKD5rqDMzGHErCHEB7DoBODcXGDuFaHArYHQJeHuBYVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2292,6 +2293,11 @@ ob_start();
     sajax_export("ajax_control_copiar_desde_empresa_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->controle();
 //
     function nm_limpa_str_control_copiar_desde_empresa(&$str)
@@ -2467,6 +2473,10 @@ ob_start();
       global $inicial_control_copiar_desde_empresa;
       $aResp = array();
 
+      if (isset($inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['empty_filter'];
@@ -2563,6 +2573,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['btnDisabled']) && '' != $inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['btnDisabled'])
+         {
+            control_copiar_desde_empresa_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['btnLabel']) && '' != $inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['btnLabel'])
+         {
+            control_copiar_desde_empresa_pack_btn_label($aResp);
          }
          if (isset($inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['varList']) && !empty($inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['varList']))
          {
@@ -2667,8 +2685,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2917,6 +2940,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // control_copiar_desde_empresa_pack_master_value
+
+   function control_copiar_desde_empresa_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_control_copiar_desde_empresa;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // control_copiar_desde_empresa_pack_ajax_alert
+
+   function control_copiar_desde_empresa_pack_btn_label(&$aResp)
+   {
+      global $inicial_control_copiar_desde_empresa;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_control_copiar_desde_empresa->contr_control_copiar_desde_empresa->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // control_copiar_desde_empresa_pack_ajax_alert
 
    function control_copiar_desde_empresa_pack_ajax_alert(&$aResp)
    {

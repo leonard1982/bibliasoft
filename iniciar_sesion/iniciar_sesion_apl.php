@@ -549,6 +549,12 @@ class iniciar_sesion_apl
       {
           $_SESSION['gidbanco'] = $this->gidbanco;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['iniciar_sesion']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['iniciar_sesion']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['iniciar_sesion']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['iniciar_sesion']['embutida_parms'];
@@ -2457,10 +2463,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2473,19 +2482,19 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_iniciar_sesion'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'licencia' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'licencia' == $filtro)) || (is_array($filtro) && in_array('licencia', $filtro)))
         $this->ValidateField_licencia($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'empresa' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'empresa' == $filtro)) || (is_array($filtro) && in_array('empresa', $filtro)))
         $this->ValidateField_empresa($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'usuario' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'usuario' == $filtro)) || (is_array($filtro) && in_array('usuario', $filtro)))
         $this->ValidateField_usuario($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'password' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'password' == $filtro)) || (is_array($filtro) && in_array('password', $filtro)))
         $this->ValidateField_password($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'version_actual' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'version_actual' == $filtro)) || (is_array($filtro) && in_array('version_actual', $filtro)))
         $this->ValidateField_version_actual($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'logo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'logo' == $filtro)) || (is_array($filtro) && in_array('logo', $filtro)))
         $this->ValidateField_logo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'administrar' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'administrar' == $filtro)) || (is_array($filtro) && in_array('administrar', $filtro)))
         $this->ValidateField_administrar($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (empty($Campos_Crit) && empty($Campos_Falta))
@@ -3748,7 +3757,8 @@ $_SESSION['scriptcase']['iniciar_sesion']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -4488,5 +4498,21 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
        exit;
    }
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "help":
+                return array("sc_b_hlp_b");
+                break;
+            case "exit":
+                return array("Bsair_b.sc-unique-btn-1", "Bsair_b.sc-unique-btn-2");
+                break;
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-3");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

@@ -225,8 +225,8 @@ class grid_reciboingreso_seleccionar_factura_ini
       $this->nm_dt_criacao   = "20191216"; 
       $this->nm_hr_criacao   = "110757"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -800,6 +800,8 @@ class grid_reciboingreso_seleccionar_factura_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -925,7 +927,7 @@ class grid_reciboingreso_seleccionar_factura_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_reciboingreso_seleccionar_factura']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_reciboingreso_seleccionar_factura']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQX7HANOHuBODMvsV9BUDWFaHMJsHQXGH9FaHIveV5BOHgNOZSJ3V5XKDoJeDcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXODQFaZ1N7D5JsDMvsV9FeH5XCDorqHQBiZkFGHAvCZMJeDMzGVkJqDuXKDoXGD9NwH9X7DSrwHurqDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBqD9NwH9X7DSBYD5JsHgrYDkFCDWJeDoraDcBqH9B/DSrYD5F7DEBOZSXeHEFqVoBiDcBwZSFGHANOD5JwHuzGDkBOV5X7VoJwD9XOH9B/HArYV5FGDMzGHEXeH5FYDoF7D9JKDQX7Z1rwD5NUHgvsVcFCDWJeVoJwDcJUZSB/HABYD5rqDEvsHEBUDWFqDoJeDcJeDuBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEBUDWXCHIX7DcXGDQJwHIrKV5BqHgrKVcXKDur/HIXGD9XGZ1BOHANOZMJeHgveHENiH5FYVoFaDcBiDQFaDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNOHErCDuXKVoFGHQFYDQBqHABYHuBiDMvODkBODurGDoXGDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOH9BiHArYHuB/HuBOVcXKH5FqDoX7HQNmZSFaHArKV5XGHgNKHENiDWrGZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/DcJeH9BiD1BeD5XGHgrYDkBOHEX7HMF7HQBiZ1BiHArKD5FaHgBOHArCV5B7ZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSFGHANOD5JwHgvsDkBOHEFYVoBOD9BsH9B/DSrYV5FUDMzGZSJGDWr/VoB/D9NwZSX7Z1rwV5raHuzGDkBODWFYDoJeDcJUZ1B/D1rwD5rqDEBeHEXeV5FaVoBiDcJeDQFGHANOV5raHgrKVIBODWFaVoBqD9BiZ1rqHArYD5XGDMBYHAFKV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1rqHAN7D5XGDEBOVkXeDWFqZuB/DcJeZ9XGHANOD5F7DMNOVIFCDWF/HMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoX7HQBqZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9XsDuBqD1NKVWJwDMNODkB/DWJeDoJsHQNwZSB/HIBeZMJeHgNKDkXKDWr/DoFUD9NwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2341,6 +2343,8 @@ class grid_reciboingreso_seleccionar_factura_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2723,11 +2727,16 @@ class grid_reciboingreso_seleccionar_factura_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_orig'] = " where f.asentada='1' and f.total>0";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura']['tot_geral']);
@@ -3171,7 +3180,7 @@ class grid_reciboingreso_seleccionar_factura_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -3832,22 +3841,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Remisiones/Facturas :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_factura'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -4629,14 +4639,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reciboingreso_seleccionar_fac
            $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_reciboingreso_seleccionar_factura']['embutida_form'])
        {

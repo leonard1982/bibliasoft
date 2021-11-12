@@ -11,6 +11,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -284,8 +285,8 @@ class form_productos_editarprecios_ini
       $this->nm_dt_criacao   = "20180804"; 
       $this->nm_hr_criacao   = "100926"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -942,7 +943,7 @@ class form_productos_editarprecios_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQFGHIrKD5JwDMBOVcrsH5B3VErqDcJUZ1BOHAN7D5NUHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMJeDcJUZSBODSrYHuBqHgveZSJ3DuFaHIrqHQXsDQFGHArYHuJeDMNOVcFKDWJeHMJeDcFYZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5JwHuzGVIBOV5FYVoJwD9XOZ1rqHAN7D5FaDMzGHEBUDWFqDoF7D9NmDQJsZ1rwV5BqHgrYDkBODWFYDoNUD9JmZ1FaD1rKD5NUDErKVkJGDWF/DoJeDcBwDQX7D1BeD5BqHuNODkFCH5B7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGDSrYZMBOHgvsHErsDuJeDoBOD9NmDQFUDSN7HuBOHgrwDkFCHEX/VErqDcJUH9BqHArYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMXGHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcrsDWF/HIF7DcFYZkFGHABYHuFaDEvsZSJqDWX7VoBiDcBwDQJsHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDuBqHAveHuJwHuNOV9FeHEF/DoFGD9XGZ1B/Z1BeHuJwDMvCZSXeV5FaHIX7D9JKDQJsZ1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQB/HAN7HQJeHuNODkBsDur/VErqHQNmH9BOHAN7ZMFaDErKHEJGDWX7HMBiHQXsDQBqD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoB/D9NwH9X7Z1BYV5raHuzGVcrsDWJeVoraDcJUZ1rqHArYD5rqDEvsHEFiV5FaDoXGDcXOZSX7HABYD5JsHuvmVcFCH5XCVoB/D9XOZSFaHArKD5XGDMzGHEXeH5FYVoXGD9XsZSFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoBOD9XsDQFGHAN7HurqDMNOV9BUH5FqVEF7HQNmZSFaDSrYD5NUHgNKHEBUDWX7DoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBOHQBiZ9XGHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHIveHuFUHgveVkJ3DWrGZuB/D9JKZSFGHIrwHuFGDMvmV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['form_productos_editarprecios']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['form_productos_editarprecios']['ordem_cmp'] = ""; 
@@ -2326,6 +2327,11 @@ ob_start();
     sajax_export("ajax_form_productos_editarprecios_table_refresh");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_productos_editarprecios->contr_form_productos_editarprecios->controle();
 //
     function nm_limpa_str_form_productos_editarprecios(&$str)
@@ -2681,6 +2687,10 @@ ob_start();
       global $inicial_form_productos_editarprecios;
       $aResp = array();
 
+      if (isset($inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['empty_filter'];
@@ -2777,6 +2787,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['btnDisabled']) && '' != $inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['btnDisabled'])
+         {
+            form_productos_editarprecios_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['btnLabel']) && '' != $inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['btnLabel'])
+         {
+            form_productos_editarprecios_pack_btn_label($aResp);
          }
          if (isset($inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['varList']) && !empty($inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['varList']))
          {
@@ -2881,8 +2899,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -3131,6 +3154,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_productos_editarprecios_pack_master_value
+
+   function form_productos_editarprecios_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_productos_editarprecios;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_productos_editarprecios_pack_ajax_alert
+
+   function form_productos_editarprecios_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_productos_editarprecios;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_productos_editarprecios->contr_form_productos_editarprecios->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_productos_editarprecios_pack_ajax_alert
 
    function form_productos_editarprecios_pack_ajax_alert(&$aResp)
    {

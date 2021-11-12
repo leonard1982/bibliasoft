@@ -3588,7 +3588,7 @@ foreach ($Arr_format as $Part_date)
 
 ?>
         <SPAN id="id_css_fecha_contrato"  class="scFilterFieldFontOdd">
- <?php echo $date_format_show ?>         </SPAN>
+ <br><?php echo $date_format_show ?>         </SPAN>
                   <br />
         <SPAN id="id_vis_fecha_contrato"  <?php echo $str_display_fecha_contrato; ?> class="scFilterFieldFontOdd">
          <?php echo $date_sep_bw ?> 
@@ -3756,7 +3756,7 @@ foreach ($Arr_format as $Part_date)
 
 ?>
         <SPAN id="id_css_fecha_inicio"  class="scFilterFieldFontEven">
- <?php echo $date_format_show ?>         </SPAN>
+ <br><?php echo $date_format_show ?>         </SPAN>
                   <br />
         <SPAN id="id_vis_fecha_inicio"  <?php echo $str_display_fecha_inicio; ?> class="scFilterFieldFontEven">
          <?php echo $date_sep_bw ?> 
@@ -3924,7 +3924,7 @@ foreach ($Arr_format as $Part_date)
 
 ?>
         <SPAN id="id_css_fecha_corte"  class="scFilterFieldFontOdd">
- <?php echo $date_format_show ?>         </SPAN>
+ <br><?php echo $date_format_show ?>         </SPAN>
                   <br />
         <SPAN id="id_vis_fecha_corte"  <?php echo $str_display_fecha_corte; ?> class="scFilterFieldFontOdd">
          <?php echo $date_sep_bw ?> 

@@ -37,3 +37,26 @@ ALTER TABLE `webservicefe` ADD `proveedor_anterior` VARCHAR(100) NULL DEFAULT NU
 ALTER TABLE `facturaven_contratos` ADD `proveedor` VARCHAR(40) NULL DEFAULT NULL AFTER `aviso_nota`, ADD `token` VARCHAR(150) NULL DEFAULT NULL AFTER `proveedor`, ADD `password` VARCHAR(150) NULL DEFAULT NULL AFTER `token`, ADD `servidor` VARCHAR(300) NULL DEFAULT NULL AFTER `password`;
 
 UPDATE `webservicefe_proveedores` SET `servidor1` = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice' WHERE `webservicefe_proveedores`.`idwebservicefe_proveedor` = 4;
+
+ALTER TABLE facilweb.empresas ADD `codempresa` VARCHAR(30) NULL DEFAULT NULL AFTER `celular`, ADD `nomina` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `codempresa`;
+
+ALTER TABLE facilweb.empresas ADD `nombre_empresa_nomina` VARCHAR(200) NULL DEFAULT NULL AFTER `nomina`;
+
+
+CREATE TABLE `facturaven_clasificacion` ( `id` INT NOT NULL AUTO_INCREMENT , `descripcion` VARCHAR(60) NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+INSERT INTO `facturaven_clasificacion` (`id`, `descripcion`) VALUES (NULL, 'Sin Clasificación');
+
+ALTER TABLE `facturaven` ADD `id_clasificacion` INT NOT NULL DEFAULT '1' AFTER `orden_fecha`;
+
+ALTER TABLE `facturaven_automaticas` ADD `id_clasificacion` INT NOT NULL DEFAULT '1' AFTER `id_trans_fe`;
+
+
+
+ALTER TABLE `terceros` ADD `archivo_cedula` VARCHAR(300) NULL DEFAULT NULL AFTER `celular_notificafe`, ADD `archivo_rut` VARCHAR(300) NULL DEFAULT NULL AFTER `archivo_cedula`, ADD `archivo_nit` VARCHAR(300) NULL DEFAULT NULL AFTER `archivo_rut`, ADD `archivo_pago` VARCHAR(300) NULL DEFAULT NULL AFTER `archivo_nit`;
+
+ALTER TABLE `terceros` ADD `id_plan` INT NOT NULL DEFAULT '0' AFTER `archivo_pago`, ADD `valor_plan` DECIMAL(12.2) NOT NULL DEFAULT '0' AFTER `id_plan`, ADD `fecha_registro_fe` DATETIME NULL DEFAULT NULL AFTER `valor_plan`;
+
+ALTER TABLE `productos` ADD `para_registro_fe` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Para uso netamente de soluciones navarro' AFTER `ubicacion`;
+
+ALTER TABLE `terceros` ADD `nombre_contador` VARCHAR(120) NULL DEFAULT NULL AFTER `fecha_registro_fe`;

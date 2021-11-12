@@ -40,4 +40,6 @@ $refinedsearch_campo_close_icon = 'scriptcase__NM__btn__NM__scriptcase9_Rhino__N
 $str_resume_label_sort = 'scriptcase__NM__SortDefault.png';
 $str_resume_label_sort_asc = 'scriptcase__NM__SortAscDefault.png';
 $str_resume_label_sort_desc = 'scriptcase__NM__SortDescDefault.png';
+$scGridRefinedSearchExpandFAIcon = 'fas fa-chevron-right';
+$scGridRefinedSearchCollapseFAIcon = 'fas fa-chevron-left';
 ?>

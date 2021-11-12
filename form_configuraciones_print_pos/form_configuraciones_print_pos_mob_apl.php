@@ -336,6 +336,12 @@ class form_configuraciones_print_pos_mob_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_configuraciones_print_pos_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_configuraciones_print_pos_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_configuraciones_print_pos_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_configuraciones_print_pos_mob']['embutida_parms'];
@@ -1860,10 +1866,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1876,35 +1885,35 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_configuraciones_print_pos_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'idconfprintpos' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idconfprintpos' == $filtro)) || (is_array($filtro) && in_array('idconfprintpos', $filtro)))
         $this->ValidateField_idconfprintpos($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_doc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_doc' == $filtro)) || (is_array($filtro) && in_array('tipo_doc', $filtro)))
         $this->ValidateField_tipo_doc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'texto_fuente' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'texto_fuente' == $filtro)) || (is_array($filtro) && in_array('texto_fuente', $filtro)))
         $this->ValidateField_texto_fuente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'texto_tamanio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'texto_tamanio' == $filtro)) || (is_array($filtro) && in_array('texto_tamanio', $filtro)))
         $this->ValidateField_texto_tamanio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'porcentajeopx' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'porcentajeopx' == $filtro)) || (is_array($filtro) && in_array('porcentajeopx', $filtro)))
         $this->ValidateField_porcentajeopx($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'logo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'logo' == $filtro)) || (is_array($filtro) && in_array('logo', $filtro)))
         $this->ValidateField_logo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'texto_cabecera' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'texto_cabecera' == $filtro)) || (is_array($filtro) && in_array('texto_cabecera', $filtro)))
         $this->ValidateField_texto_cabecera($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'texto_pie' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'texto_pie' == $filtro)) || (is_array($filtro) && in_array('texto_pie', $filtro)))
         $this->ValidateField_texto_pie($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'archo_ticket' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'archo_ticket' == $filtro)) || (is_array($filtro) && in_array('archo_ticket', $filtro)))
         $this->ValidateField_archo_ticket($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ticket_pjopx' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ticket_pjopx' == $filtro)) || (is_array($filtro) && in_array('ticket_pjopx', $filtro)))
         $this->ValidateField_ticket_pjopx($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'predeterminada' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'predeterminada' == $filtro)) || (is_array($filtro) && in_array('predeterminada', $filtro)))
         $this->ValidateField_predeterminada($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_vista' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_vista' == $filtro)) || (is_array($filtro) && in_array('tipo_vista', $filtro)))
         $this->ValidateField_tipo_vista($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'impresion_directa' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'impresion_directa' == $filtro)) || (is_array($filtro) && in_array('impresion_directa', $filtro)))
         $this->ValidateField_impresion_directa($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_impresora' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_impresora' == $filtro)) || (is_array($filtro) && in_array('tipo_impresora', $filtro)))
         $this->ValidateField_tipo_impresora($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre_impresora' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_impresora' == $filtro)) || (is_array($filtro) && in_array('nombre_impresora', $filtro)))
         $this->ValidateField_nombre_impresora($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
@@ -5860,7 +5869,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_print_pos_mob
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -6928,5 +6938,54 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-15");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-16");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-17");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4", "sc_b_upd_t.sc-unique-btn-18");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5", "sc_b_del_t.sc-unique-btn-19");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-23", "sc_b_sai_t.sc-unique-btn-25", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-24", "sc_b_sai_t.sc-unique-btn-26");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-11", "sc_b_ini_b.sc-unique-btn-27");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-12", "sc_b_ret_b.sc-unique-btn-28");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-13", "sc_b_avc_b.sc-unique-btn-29");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-14", "sc_b_fim_b.sc-unique-btn-30");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-20");
+                break;
+            case "copy":
+                return array("sc_b_clone_t.sc-unique-btn-21");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

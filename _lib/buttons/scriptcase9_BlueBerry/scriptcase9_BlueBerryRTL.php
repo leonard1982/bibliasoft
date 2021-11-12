@@ -14,7 +14,7 @@
   $this->arr_buttons['bcons_inicio']['value']            = $Nm_lang['lang_btns_frst'];
   $this->arr_buttons['bcons_inicio']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bcons_inicio']['display_position'] = 'img_right';
-  $this->arr_buttons['bcons_inicio']['fontawesomeicon']  = 'fas fa-step-backward';
+  $this->arr_buttons['bcons_inicio']['fontawesomeicon']  = '';
   $this->arr_buttons['bcons_inicio']['style'] = 'fontawesome';
   $this->arr_buttons['bcons_inicio']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_last_enabled.png';
 
@@ -23,7 +23,7 @@
   $this->arr_buttons['bcons_retorna']['value']            = $Nm_lang['lang_btns_prev'];
   $this->arr_buttons['bcons_retorna']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bcons_retorna']['display_position'] = 'img_right';
-  $this->arr_buttons['bcons_retorna']['fontawesomeicon']  = 'fas fa-arrow-left';
+  $this->arr_buttons['bcons_retorna']['fontawesomeicon']  = '';
   $this->arr_buttons['bcons_retorna']['style'] = 'fontawesome';
   $this->arr_buttons['bcons_retorna']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_right_enabled.png';
 
@@ -32,7 +32,7 @@
   $this->arr_buttons['bcons_avanca']['value']            = $Nm_lang['lang_btns_next'];
   $this->arr_buttons['bcons_avanca']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bcons_avanca']['display_position'] = 'img_right';
-  $this->arr_buttons['bcons_avanca']['fontawesomeicon']  = 'fas fa-arrow-right';
+  $this->arr_buttons['bcons_avanca']['fontawesomeicon']  = '';
   $this->arr_buttons['bcons_avanca']['style'] = 'fontawesome';
   $this->arr_buttons['bcons_avanca']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_left_enabled.png';
 
@@ -41,7 +41,7 @@
   $this->arr_buttons['bcons_final']['value']            = $Nm_lang['lang_btns_last'];
   $this->arr_buttons['bcons_final']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bcons_final']['display_position'] = 'img_right';
-  $this->arr_buttons['bcons_final']['fontawesomeicon']  = 'fas fa-step-forward';
+  $this->arr_buttons['bcons_final']['fontawesomeicon']  = '';
   $this->arr_buttons['bcons_final']['style'] = 'fontawesome';
   $this->arr_buttons['bcons_final']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_first_enabled.png';
 
@@ -59,7 +59,7 @@
   $this->arr_buttons['bprint']['value']            = $Nm_lang['lang_btns_prnt'];
   $this->arr_buttons['bprint']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bprint']['display_position'] = 'img_right';
-  $this->arr_buttons['bprint']['fontawesomeicon']  = 'fas fa-print';
+  $this->arr_buttons['bprint']['fontawesomeicon']  = '';
   $this->arr_buttons['bprint']['style'] = 'default';
   $this->arr_buttons['bprint']['image'] = 'grp__NM__printer2.png';
 
@@ -68,7 +68,7 @@
   $this->arr_buttons['bresumo']['value']            = $Nm_lang['lang_btns_smry'];
   $this->arr_buttons['bresumo']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bresumo']['display_position'] = 'img_right';
-  $this->arr_buttons['bresumo']['fontawesomeicon']  = 'fas fa-th-list';
+  $this->arr_buttons['bresumo']['fontawesomeicon']  = '';
   $this->arr_buttons['bresumo']['style'] = 'default';
   $this->arr_buttons['bresumo']['image'] = 'sys__NM__nm_teste_bresumo.gif';
 
@@ -77,7 +77,7 @@
   $this->arr_buttons['bsort']['value']            = $Nm_lang['lang_btns_sort'];
   $this->arr_buttons['bsort']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsort']['display_position'] = 'img_right';
-  $this->arr_buttons['bsort']['fontawesomeicon']  = 'fas fa-sort-alpha-down';
+  $this->arr_buttons['bsort']['fontawesomeicon']  = '';
   $this->arr_buttons['bsort']['style'] = 'default';
   $this->arr_buttons['bsort']['image'] = 'scriptcase__NM__sorting.png';
 
@@ -86,7 +86,7 @@
   $this->arr_buttons['bcolumns']['value']            = $Nm_lang['lang_btns_clmn'];
   $this->arr_buttons['bcolumns']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcolumns']['display_position'] = 'img_right';
-  $this->arr_buttons['bcolumns']['fontawesomeicon']  = 'fas fa-columns';
+  $this->arr_buttons['bcolumns']['fontawesomeicon']  = '';
   $this->arr_buttons['bcolumns']['style'] = 'default';
   $this->arr_buttons['bcolumns']['image'] = 'sys__NM__nm_teste_bcolumns.gif';
 
@@ -95,7 +95,7 @@
   $this->arr_buttons['bdynamicsearch']['value']            = $Nm_lang['lang_btns_dynamicsearch'];
   $this->arr_buttons['bdynamicsearch']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bdynamicsearch']['display_position'] = 'img_right';
-  $this->arr_buttons['bdynamicsearch']['fontawesomeicon']  = 'fas fa-search';
+  $this->arr_buttons['bdynamicsearch']['fontawesomeicon']  = '';
   $this->arr_buttons['bdynamicsearch']['style'] = 'default';
   $this->arr_buttons['bdynamicsearch']['image'] = 'sys__NM__nm_teste_bdynamicsearch.gif';
 
@@ -104,7 +104,7 @@
   $this->arr_buttons['bgridsave']['value']            = $Nm_lang['lang_btns_gridsave'];
   $this->arr_buttons['bgridsave']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bgridsave']['display_position'] = 'img_right';
-  $this->arr_buttons['bgridsave']['fontawesomeicon']  = 'fas fa-save';
+  $this->arr_buttons['bgridsave']['fontawesomeicon']  = '';
   $this->arr_buttons['bgridsave']['style'] = 'default';
   $this->arr_buttons['bgridsave']['image'] = 'sys__NM__nm_teste_bgridsave.gif';
 
@@ -113,7 +113,7 @@
   $this->arr_buttons['bgroupby']['value']            = $Nm_lang['lang_btns_gbrl'];
   $this->arr_buttons['bgroupby']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bgroupby']['display_position'] = 'img_right';
-  $this->arr_buttons['bgroupby']['fontawesomeicon']  = 'fas fa-layer-group';
+  $this->arr_buttons['bgroupby']['fontawesomeicon']  = '';
   $this->arr_buttons['bgroupby']['style'] = 'default';
   $this->arr_buttons['bgroupby']['image'] = 'sys__NM__nm_teste_bgroupby.gif';
 
@@ -122,7 +122,7 @@
   $this->arr_buttons['bcons_detalhes']['value']            = $Nm_lang['lang_btns_lens'];
   $this->arr_buttons['bcons_detalhes']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bcons_detalhes']['display_position'] = 'img_right';
-  $this->arr_buttons['bcons_detalhes']['fontawesomeicon']  = 'fas fa-ellipsis-h';
+  $this->arr_buttons['bcons_detalhes']['fontawesomeicon']  = '';
   $this->arr_buttons['bcons_detalhes']['style'] = 'fontawesome';
   $this->arr_buttons['bcons_detalhes']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_details.png';
 
@@ -131,7 +131,7 @@
   $this->arr_buttons['bqt_linhas']['value']            = $Nm_lang['lang_btns_rows'];
   $this->arr_buttons['bqt_linhas']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bqt_linhas']['display_position'] = 'img_right';
-  $this->arr_buttons['bqt_linhas']['fontawesomeicon']  = 'fas fa-eye';
+  $this->arr_buttons['bqt_linhas']['fontawesomeicon']  = '';
   $this->arr_buttons['bqt_linhas']['style'] = 'default';
   $this->arr_buttons['bqt_linhas']['image'] = 'sys__NM__nm_teste_bqt_linhas.gif';
 
@@ -140,7 +140,7 @@
   $this->arr_buttons['bgraf']['value']            = $Nm_lang['lang_btns_chrt'];
   $this->arr_buttons['bgraf']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bgraf']['display_position'] = 'img_right';
-  $this->arr_buttons['bgraf']['fontawesomeicon']  = 'fas fa-chart-bar';
+  $this->arr_buttons['bgraf']['fontawesomeicon']  = '';
   $this->arr_buttons['bgraf']['style'] = 'fontawesome';
   $this->arr_buttons['bgraf']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_charts.png';
 
@@ -149,7 +149,7 @@
   $this->arr_buttons['bconf_graf']['value']            = $Nm_lang['lang_btns_chrt_stng'];
   $this->arr_buttons['bconf_graf']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bconf_graf']['display_position'] = 'img_right';
-  $this->arr_buttons['bconf_graf']['fontawesomeicon']  = 'fas fa-cog';
+  $this->arr_buttons['bconf_graf']['fontawesomeicon']  = '';
   $this->arr_buttons['bconf_graf']['style'] = 'default';
   $this->arr_buttons['bconf_graf']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_set_charts.png';
 
@@ -167,7 +167,7 @@
   $this->arr_buttons['blink_resumogrid']['value']            = $Nm_lang['lang_btns_smry_drll'];
   $this->arr_buttons['blink_resumogrid']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['blink_resumogrid']['display_position'] = 'img_right';
-  $this->arr_buttons['blink_resumogrid']['fontawesomeicon']  = 'fas fa-ellipsis-h';
+  $this->arr_buttons['blink_resumogrid']['fontawesomeicon']  = '';
   $this->arr_buttons['blink_resumogrid']['style'] = 'default';
   $this->arr_buttons['blink_resumogrid']['image'] = 'sys__NM__nm_teste_blink_resumogrid.gif';
 
@@ -176,7 +176,7 @@
   $this->arr_buttons['brot_resumo']['value']            = $Nm_lang['lang_btns_smry_rtte'];
   $this->arr_buttons['brot_resumo']['display']          = 'only_text';
   $this->arr_buttons['brot_resumo']['display_position'] = 'img_right';
-  $this->arr_buttons['brot_resumo']['fontawesomeicon']  = 'fas fa-undo';
+  $this->arr_buttons['brot_resumo']['fontawesomeicon']  = '';
   $this->arr_buttons['brot_resumo']['style'] = 'default';
   $this->arr_buttons['brot_resumo']['image'] = 'sys__NM__nm_teste_brot_resumo.gif';
 
@@ -185,7 +185,7 @@
   $this->arr_buttons['smry_conf']['value']            = $Nm_lang['lang_btns_smry_conf'];
   $this->arr_buttons['smry_conf']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['smry_conf']['display_position'] = 'img_right';
-  $this->arr_buttons['smry_conf']['fontawesomeicon']  = 'fas fa-cogs';
+  $this->arr_buttons['smry_conf']['fontawesomeicon']  = '';
   $this->arr_buttons['smry_conf']['style'] = 'default';
   $this->arr_buttons['smry_conf']['image'] = 'sys__NM__nm_teste_smry_conf.gif';
 
@@ -203,7 +203,7 @@
   $this->arr_buttons['bcons_apply']['value']            = $Nm_lang['lang_btns_apply'];
   $this->arr_buttons['bcons_apply']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcons_apply']['display_position'] = 'text_right';
-  $this->arr_buttons['bcons_apply']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['bcons_apply']['fontawesomeicon']  = '';
   $this->arr_buttons['bcons_apply']['style'] = 'check';
   $this->arr_buttons['bcons_apply']['image'] = 'scriptcase__NM__nm_scriptcase8_BlueWood_bcons_apply.gif';
 
@@ -212,7 +212,7 @@
   $this->arr_buttons['bcons_cancel']['value']            = $Nm_lang['lang_btns_cncl'];
   $this->arr_buttons['bcons_cancel']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcons_cancel']['display_position'] = 'text_right';
-  $this->arr_buttons['bcons_cancel']['fontawesomeicon']  = 'fas fa-ban';
+  $this->arr_buttons['bcons_cancel']['fontawesomeicon']  = '';
   $this->arr_buttons['bcons_cancel']['style'] = 'cancel';
   $this->arr_buttons['bcons_cancel']['image'] = 'scriptcase__NM__nm_scriptcase8_BlueWood_bcons_cancel.gif';
 
@@ -230,7 +230,7 @@
   $this->arr_buttons['bemailpdf']['value']            = $Nm_lang['lang_btns_email_pdfc'];
   $this->arr_buttons['bemailpdf']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemailpdf']['display_position'] = 'text_right';
-  $this->arr_buttons['bemailpdf']['fontawesomeicon']  = 'fas fa-file-pdf';
+  $this->arr_buttons['bemailpdf']['fontawesomeicon']  = '';
   $this->arr_buttons['bemailpdf']['style'] = 'default';
   $this->arr_buttons['bemailpdf']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemailpdf.gif';
 
@@ -239,7 +239,7 @@
   $this->arr_buttons['bemailrtf']['value']            = $Nm_lang['lang_btns_email_rtff'];
   $this->arr_buttons['bemailrtf']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemailrtf']['display_position'] = 'text_right';
-  $this->arr_buttons['bemailrtf']['fontawesomeicon']  = 'fas fa-file-alt';
+  $this->arr_buttons['bemailrtf']['fontawesomeicon']  = '';
   $this->arr_buttons['bemailrtf']['style'] = 'default';
   $this->arr_buttons['bemailrtf']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemailrtf.gif';
 
@@ -248,7 +248,7 @@
   $this->arr_buttons['bemailxls']['value']            = $Nm_lang['lang_btns_email_xlsf'];
   $this->arr_buttons['bemailxls']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemailxls']['display_position'] = 'text_right';
-  $this->arr_buttons['bemailxls']['fontawesomeicon']  = 'fas fa-file-excel';
+  $this->arr_buttons['bemailxls']['fontawesomeicon']  = '';
   $this->arr_buttons['bemailxls']['style'] = 'default';
   $this->arr_buttons['bemailxls']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemailxls.gif';
 
@@ -257,7 +257,7 @@
   $this->arr_buttons['bemailxml']['value']            = $Nm_lang['lang_btns_email_xmlf'];
   $this->arr_buttons['bemailxml']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemailxml']['display_position'] = 'text_right';
-  $this->arr_buttons['bemailxml']['fontawesomeicon']  = 'fas fa-file-code';
+  $this->arr_buttons['bemailxml']['fontawesomeicon']  = '';
   $this->arr_buttons['bemailxml']['style'] = 'default';
   $this->arr_buttons['bemailxml']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemailxml.gif';
 
@@ -266,7 +266,7 @@
   $this->arr_buttons['bemailjson']['value']            = $Nm_lang['lang_btns_email_json'];
   $this->arr_buttons['bemailjson']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemailjson']['display_position'] = 'text_right';
-  $this->arr_buttons['bemailjson']['fontawesomeicon']  = 'fas fa-file-code';
+  $this->arr_buttons['bemailjson']['fontawesomeicon']  = '';
   $this->arr_buttons['bemailjson']['style'] = 'default';
   $this->arr_buttons['bemailjson']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemailxml.gif';
 
@@ -275,7 +275,7 @@
   $this->arr_buttons['bemailcsv']['value']            = $Nm_lang['lang_btns_email_csvf'];
   $this->arr_buttons['bemailcsv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemailcsv']['display_position'] = 'text_right';
-  $this->arr_buttons['bemailcsv']['fontawesomeicon']  = 'fas fa-file-excel';
+  $this->arr_buttons['bemailcsv']['fontawesomeicon']  = '';
   $this->arr_buttons['bemailcsv']['style'] = 'default';
   $this->arr_buttons['bemailcsv']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemailcsv.gif';
 
@@ -284,7 +284,7 @@
   $this->arr_buttons['bemaildoc']['value']            = $Nm_lang['lang_btns_email_word'];
   $this->arr_buttons['bemaildoc']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemaildoc']['display_position'] = 'text_right';
-  $this->arr_buttons['bemaildoc']['fontawesomeicon']  = 'fas fa-file-word';
+  $this->arr_buttons['bemaildoc']['fontawesomeicon']  = '';
   $this->arr_buttons['bemaildoc']['style'] = 'default';
   $this->arr_buttons['bemaildoc']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemaildoc.gif';
 
@@ -293,7 +293,7 @@
   $this->arr_buttons['bemailimg']['value']            = $Nm_lang['lang_btns_email_img'];
   $this->arr_buttons['bemailimg']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemailimg']['display_position'] = 'text_right';
-  $this->arr_buttons['bemailimg']['fontawesomeicon']  = 'fas fa-file-image';
+  $this->arr_buttons['bemailimg']['fontawesomeicon']  = '';
   $this->arr_buttons['bemailimg']['style'] = 'default';
   $this->arr_buttons['bemailimg']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemailimg.gif';
 
@@ -302,7 +302,7 @@
   $this->arr_buttons['bemailhtml']['value']            = $Nm_lang['lang_btns_email_html'];
   $this->arr_buttons['bemailhtml']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bemailhtml']['display_position'] = 'text_right';
-  $this->arr_buttons['bemailhtml']['fontawesomeicon']  = 'fas fa-file-code';
+  $this->arr_buttons['bemailhtml']['fontawesomeicon']  = '';
   $this->arr_buttons['bemailhtml']['style'] = 'default';
   $this->arr_buttons['bemailhtml']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bemailhtml.gif';
 
@@ -311,7 +311,7 @@
   $this->arr_buttons['bexportemail']['value']            = $Nm_lang['lang_btns_mail'];
   $this->arr_buttons['bexportemail']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bexportemail']['display_position'] = 'img_right';
-  $this->arr_buttons['bexportemail']['fontawesomeicon']  = 'fas fa-at';
+  $this->arr_buttons['bexportemail']['fontawesomeicon']  = '';
   $this->arr_buttons['bexportemail']['style'] = 'default';
   $this->arr_buttons['bexportemail']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bdownload.gif';
 
@@ -320,7 +320,7 @@
   $this->arr_buttons['bpdf']['value']            = $Nm_lang['lang_btns_pdfc'];
   $this->arr_buttons['bpdf']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bpdf']['display_position'] = 'img_right';
-  $this->arr_buttons['bpdf']['fontawesomeicon']  = 'fas fa-file-pdf';
+  $this->arr_buttons['bpdf']['fontawesomeicon']  = '';
   $this->arr_buttons['bpdf']['style'] = 'default';
   $this->arr_buttons['bpdf']['image'] = 'sys__NM__nm_teste_bpdf.gif';
 
@@ -329,7 +329,7 @@
   $this->arr_buttons['brtf']['value']            = $Nm_lang['lang_btns_rtff'];
   $this->arr_buttons['brtf']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['brtf']['display_position'] = 'img_right';
-  $this->arr_buttons['brtf']['fontawesomeicon']  = 'fas fa-file-alt';
+  $this->arr_buttons['brtf']['fontawesomeicon']  = '';
   $this->arr_buttons['brtf']['style'] = 'default';
   $this->arr_buttons['brtf']['image'] = 'sys__NM__nm_teste_brtf.gif';
 
@@ -338,7 +338,7 @@
   $this->arr_buttons['bexcel']['value']            = $Nm_lang['lang_btns_xlsf'];
   $this->arr_buttons['bexcel']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bexcel']['display_position'] = 'img_right';
-  $this->arr_buttons['bexcel']['fontawesomeicon']  = 'fas fa-file-excel';
+  $this->arr_buttons['bexcel']['fontawesomeicon']  = '';
   $this->arr_buttons['bexcel']['style'] = 'default';
   $this->arr_buttons['bexcel']['image'] = 'sys__NM__nm_teste_bexcel.gif';
 
@@ -347,7 +347,7 @@
   $this->arr_buttons['bxml']['value']            = $Nm_lang['lang_btns_xmlf'];
   $this->arr_buttons['bxml']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bxml']['display_position'] = 'img_right';
-  $this->arr_buttons['bxml']['fontawesomeicon']  = 'fas fa-file-code';
+  $this->arr_buttons['bxml']['fontawesomeicon']  = '';
   $this->arr_buttons['bxml']['style'] = 'default';
   $this->arr_buttons['bxml']['image'] = 'sys__NM__nm_teste_bxml.gif';
 
@@ -356,7 +356,7 @@
   $this->arr_buttons['bjson']['value']            = $Nm_lang['lang_btns_json'];
   $this->arr_buttons['bjson']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bjson']['display_position'] = 'img_right';
-  $this->arr_buttons['bjson']['fontawesomeicon']  = 'fas fa-file-code';
+  $this->arr_buttons['bjson']['fontawesomeicon']  = '';
   $this->arr_buttons['bjson']['style'] = 'default';
   $this->arr_buttons['bjson']['image'] = 'sys__NM__nm_teste_bxml.gif';
 
@@ -365,7 +365,7 @@
   $this->arr_buttons['bcsv']['value']            = $Nm_lang['lang_btns_csvf'];
   $this->arr_buttons['bcsv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcsv']['display_position'] = 'img_right';
-  $this->arr_buttons['bcsv']['fontawesomeicon']  = 'fas fa-file-excel';
+  $this->arr_buttons['bcsv']['fontawesomeicon']  = '';
   $this->arr_buttons['bcsv']['style'] = 'default';
   $this->arr_buttons['bcsv']['image'] = 'sys__NM__nm_teste_bcsv.gif';
 
@@ -374,7 +374,7 @@
   $this->arr_buttons['bword']['value']            = $Nm_lang['lang_btns_word'];
   $this->arr_buttons['bword']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bword']['display_position'] = 'img_right';
-  $this->arr_buttons['bword']['fontawesomeicon']  = 'fas fa-file-word';
+  $this->arr_buttons['bword']['fontawesomeicon']  = '';
   $this->arr_buttons['bword']['style'] = 'default';
   $this->arr_buttons['bword']['image'] = 'sys__NM__nm_teste_bword.gif';
 
@@ -383,7 +383,7 @@
   $this->arr_buttons['bimg']['value']            = $Nm_lang['lang_btns_img'];
   $this->arr_buttons['bimg']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bimg']['display_position'] = 'text_right';
-  $this->arr_buttons['bimg']['fontawesomeicon']  = 'fas fa-file-image';
+  $this->arr_buttons['bimg']['fontawesomeicon']  = '';
   $this->arr_buttons['bimg']['style'] = 'default';
   $this->arr_buttons['bimg']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bimg.gif';
 
@@ -392,7 +392,7 @@
   $this->arr_buttons['bexport']['value']            = $Nm_lang['lang_btns_expo'];
   $this->arr_buttons['bexport']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bexport']['display_position'] = 'img_right';
-  $this->arr_buttons['bexport']['fontawesomeicon']  = 'fas fa-file-export';
+  $this->arr_buttons['bexport']['fontawesomeicon']  = '';
   $this->arr_buttons['bexport']['style'] = 'default';
   $this->arr_buttons['bexport']['image'] = 'sys__NM__nm_teste_bexport.gif';
 
@@ -401,7 +401,7 @@
   $this->arr_buttons['bexportview']['value']            = $Nm_lang['lang_btns_expv'];
   $this->arr_buttons['bexportview']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bexportview']['display_position'] = 'img_right';
-  $this->arr_buttons['bexportview']['fontawesomeicon']  = 'fas fa-eye';
+  $this->arr_buttons['bexportview']['fontawesomeicon']  = '';
   $this->arr_buttons['bexportview']['style'] = 'default';
   $this->arr_buttons['bexportview']['image'] = 'sys__NM__nm_teste_bexportview.gif';
 
@@ -410,7 +410,7 @@
   $this->arr_buttons['bdownload']['value']            = $Nm_lang['lang_btns_down'];
   $this->arr_buttons['bdownload']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bdownload']['display_position'] = 'img_right';
-  $this->arr_buttons['bdownload']['fontawesomeicon']  = 'fas fa-cloud-download-alt';
+  $this->arr_buttons['bdownload']['fontawesomeicon']  = '';
   $this->arr_buttons['bdownload']['style'] = 'default';
   $this->arr_buttons['bdownload']['image'] = 'sys__NM__nm_teste_bdownload.gif';
 
@@ -419,7 +419,7 @@
   $this->arr_buttons['binicio']['value']            = $Nm_lang['lang_btns_frst'];
   $this->arr_buttons['binicio']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['binicio']['display_position'] = 'img_right';
-  $this->arr_buttons['binicio']['fontawesomeicon']  = 'fas fa-step-backward';
+  $this->arr_buttons['binicio']['fontawesomeicon']  = '';
   $this->arr_buttons['binicio']['style'] = 'fontawesome';
   $this->arr_buttons['binicio']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_last_enabled.png';
 
@@ -428,7 +428,7 @@
   $this->arr_buttons['bretorna']['value']            = $Nm_lang['lang_btns_prev'];
   $this->arr_buttons['bretorna']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bretorna']['display_position'] = 'img_right';
-  $this->arr_buttons['bretorna']['fontawesomeicon']  = 'fas fa-arrow-left';
+  $this->arr_buttons['bretorna']['fontawesomeicon']  = '';
   $this->arr_buttons['bretorna']['style'] = 'fontawesome';
   $this->arr_buttons['bretorna']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_right_enabled.png';
 
@@ -437,7 +437,7 @@
   $this->arr_buttons['bavanca']['value']            = $Nm_lang['lang_btns_next'];
   $this->arr_buttons['bavanca']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bavanca']['display_position'] = 'img_right';
-  $this->arr_buttons['bavanca']['fontawesomeicon']  = 'fas fa-arrow-right';
+  $this->arr_buttons['bavanca']['fontawesomeicon']  = '';
   $this->arr_buttons['bavanca']['style'] = 'fontawesome';
   $this->arr_buttons['bavanca']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_left_enabled.png';
 
@@ -446,7 +446,7 @@
   $this->arr_buttons['bfinal']['value']            = $Nm_lang['lang_btns_last'];
   $this->arr_buttons['bfinal']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bfinal']['display_position'] = 'img_right';
-  $this->arr_buttons['bfinal']['fontawesomeicon']  = 'fas fa-step-forward';
+  $this->arr_buttons['bfinal']['fontawesomeicon']  = '';
   $this->arr_buttons['bfinal']['style'] = 'fontawesome';
   $this->arr_buttons['bfinal']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_first_enabled.png';
 
@@ -455,7 +455,7 @@
   $this->arr_buttons['bincluir']['value']            = $Nm_lang['lang_btns_inst'];
   $this->arr_buttons['bincluir']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bincluir']['display_position'] = 'img_right';
-  $this->arr_buttons['bincluir']['fontawesomeicon']  = 'fas fa-plus';
+  $this->arr_buttons['bincluir']['fontawesomeicon']  = '';
   $this->arr_buttons['bincluir']['style'] = 'ok';
   $this->arr_buttons['bincluir']['image'] = 'sys__NM__nm_teste_bincluir.gif';
 
@@ -464,7 +464,7 @@
   $this->arr_buttons['bexcluir']['value']            = $Nm_lang['lang_btns_dele'];
   $this->arr_buttons['bexcluir']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bexcluir']['display_position'] = 'img_right';
-  $this->arr_buttons['bexcluir']['fontawesomeicon']  = 'fas fa-trash';
+  $this->arr_buttons['bexcluir']['fontawesomeicon']  = '';
   $this->arr_buttons['bexcluir']['style'] = 'danger';
   $this->arr_buttons['bexcluir']['image'] = 'sys__NM__nm_teste_bexcluir.gif';
 
@@ -473,7 +473,7 @@
   $this->arr_buttons['balterar']['value']            = $Nm_lang['lang_btns_updt'];
   $this->arr_buttons['balterar']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['balterar']['display_position'] = 'img_right';
-  $this->arr_buttons['balterar']['fontawesomeicon']  = 'fas fa-save';
+  $this->arr_buttons['balterar']['fontawesomeicon']  = '';
   $this->arr_buttons['balterar']['style'] = 'default';
   $this->arr_buttons['balterar']['image'] = 'sys__NM__nm_teste_balterar.gif';
 
@@ -482,7 +482,7 @@
   $this->arr_buttons['bexcluirsel']['value']            = $Nm_lang['lang_btns_dl_sel'];
   $this->arr_buttons['bexcluirsel']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bexcluirsel']['display_position'] = 'img_right';
-  $this->arr_buttons['bexcluirsel']['fontawesomeicon']  = 'fas fa-trash';
+  $this->arr_buttons['bexcluirsel']['fontawesomeicon']  = '';
   $this->arr_buttons['bexcluirsel']['style'] = 'danger';
   $this->arr_buttons['bexcluirsel']['image'] = 'sys__NM__nm_teste_bexcluirsel.gif';
 
@@ -491,7 +491,7 @@
   $this->arr_buttons['balterarsel']['value']            = $Nm_lang['lang_btns_sv_sel'];
   $this->arr_buttons['balterarsel']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['balterarsel']['display_position'] = 'img_right';
-  $this->arr_buttons['balterarsel']['fontawesomeicon']  = 'fas fa-save';
+  $this->arr_buttons['balterarsel']['fontawesomeicon']  = '';
   $this->arr_buttons['balterarsel']['style'] = 'default';
   $this->arr_buttons['balterarsel']['image'] = 'sys__NM__nm_teste_balterarsel.gif';
 
@@ -500,7 +500,7 @@
   $this->arr_buttons['bnovo']['value']            = $Nm_lang['lang_btns_neww'];
   $this->arr_buttons['bnovo']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bnovo']['display_position'] = 'img_right';
-  $this->arr_buttons['bnovo']['fontawesomeicon']  = 'fas fa-plus';
+  $this->arr_buttons['bnovo']['fontawesomeicon']  = '';
   $this->arr_buttons['bnovo']['style'] = 'ok';
   $this->arr_buttons['bnovo']['image'] = 'sys__NM__nm_teste_bnovo.gif';
 
@@ -509,7 +509,7 @@
   $this->arr_buttons['bform_editar']['value']            = $Nm_lang['lang_btns_pncl'];
   $this->arr_buttons['bform_editar']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bform_editar']['display_position'] = 'img_right';
-  $this->arr_buttons['bform_editar']['fontawesomeicon']  = 'fas fa-edit';
+  $this->arr_buttons['bform_editar']['fontawesomeicon']  = '';
   $this->arr_buttons['bform_editar']['style'] = 'fontawesome';
   $this->arr_buttons['bform_editar']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_edit.png';
 
@@ -518,7 +518,7 @@
   $this->arr_buttons['bform_captura']['value']            = $Nm_lang['lang_btns_rtrv_grid'];
   $this->arr_buttons['bform_captura']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bform_captura']['display_position'] = 'img_right';
-  $this->arr_buttons['bform_captura']['fontawesomeicon']  = 'fas fa-search';
+  $this->arr_buttons['bform_captura']['fontawesomeicon']  = '';
   $this->arr_buttons['bform_captura']['style'] = 'fontawesome';
   $this->arr_buttons['bform_captura']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_search.png';
 
@@ -527,7 +527,7 @@
   $this->arr_buttons['bform_lookuplink']['value']            = $Nm_lang['lang_btns_rtrv_form'];
   $this->arr_buttons['bform_lookuplink']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bform_lookuplink']['display_position'] = 'img_right';
-  $this->arr_buttons['bform_lookuplink']['fontawesomeicon']  = 'fas fa-edit';
+  $this->arr_buttons['bform_lookuplink']['fontawesomeicon']  = '';
   $this->arr_buttons['bform_lookuplink']['style'] = 'default';
   $this->arr_buttons['bform_lookuplink']['image'] = 'sys__NM__nm_teste_bform_lookuplink.gif';
 
@@ -536,7 +536,7 @@
   $this->arr_buttons['bok']['value']            = $Nm_lang['lang_btns_cfrm'];
   $this->arr_buttons['bok']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bok']['display_position'] = 'img_right';
-  $this->arr_buttons['bok']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['bok']['fontawesomeicon']  = '';
   $this->arr_buttons['bok']['style'] = 'ok';
   $this->arr_buttons['bok']['image'] = 'sys__NM__nm_teste_bok.gif';
 
@@ -545,7 +545,7 @@
   $this->arr_buttons['bcalendario']['value']            = $Nm_lang['lang_btns_cldr'];
   $this->arr_buttons['bcalendario']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bcalendario']['display_position'] = 'img_right';
-  $this->arr_buttons['bcalendario']['fontawesomeicon']  = 'fas fa-calendar-alt';
+  $this->arr_buttons['bcalendario']['fontawesomeicon']  = '';
   $this->arr_buttons['bcalendario']['style'] = 'fontawesome';
   $this->arr_buttons['bcalendario']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_date.png';
 
@@ -554,7 +554,7 @@
   $this->arr_buttons['bcalculadora']['value']            = $Nm_lang['lang_btns_calc'];
   $this->arr_buttons['bcalculadora']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bcalculadora']['display_position'] = 'img_right';
-  $this->arr_buttons['bcalculadora']['fontawesomeicon']  = 'fas fa-calculator';
+  $this->arr_buttons['bcalculadora']['fontawesomeicon']  = '';
   $this->arr_buttons['bcalculadora']['style'] = 'fontawesome';
   $this->arr_buttons['bcalculadora']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_calc.png';
 
@@ -563,7 +563,7 @@
   $this->arr_buttons['bajaxcapt']['value']            = $Nm_lang['lang_btns_ajax'];
   $this->arr_buttons['bajaxcapt']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bajaxcapt']['display_position'] = 'img_right';
-  $this->arr_buttons['bajaxcapt']['fontawesomeicon']  = 'fas fa-search';
+  $this->arr_buttons['bajaxcapt']['fontawesomeicon']  = '';
   $this->arr_buttons['bajaxcapt']['style'] = 'fontawesome';
   $this->arr_buttons['bajaxcapt']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_search.png';
 
@@ -572,7 +572,7 @@
   $this->arr_buttons['bajaxclose']['value']            = $Nm_lang['lang_btns_ajax_close'];
   $this->arr_buttons['bajaxclose']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bajaxclose']['display_position'] = 'img_right';
-  $this->arr_buttons['bajaxclose']['fontawesomeicon']  = 'fas fa-times';
+  $this->arr_buttons['bajaxclose']['fontawesomeicon']  = '';
   $this->arr_buttons['bajaxclose']['style'] = 'fontawesome';
   $this->arr_buttons['bajaxclose']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_close.png';
 
@@ -581,7 +581,7 @@
   $this->arr_buttons['bcaptchareload']['value']            = $Nm_lang['lang_btns_cptc_rfim'];
   $this->arr_buttons['bcaptchareload']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bcaptchareload']['display_position'] = 'img_right';
-  $this->arr_buttons['bcaptchareload']['fontawesomeicon']  = 'fas fa-sync-alt';
+  $this->arr_buttons['bcaptchareload']['fontawesomeicon']  = '';
   $this->arr_buttons['bcaptchareload']['style'] = 'fontawesome';
   $this->arr_buttons['bcaptchareload']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_refresh.png';
 
@@ -590,7 +590,7 @@
   $this->arr_buttons['bsrch_mtmf']['value']            = $Nm_lang['lang_btns_srch_mtmf'];
   $this->arr_buttons['bsrch_mtmf']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsrch_mtmf']['display_position'] = 'img_right';
-  $this->arr_buttons['bsrch_mtmf']['fontawesomeicon']  = 'fas fa-search';
+  $this->arr_buttons['bsrch_mtmf']['fontawesomeicon']  = '';
   $this->arr_buttons['bsrch_mtmf']['style'] = 'ok';
   $this->arr_buttons['bsrch_mtmf']['image'] = 'sys__NM__nm_teste_bsrch_mtmf.gif';
 
@@ -599,7 +599,7 @@
   $this->arr_buttons['bcopy']['value']            = $Nm_lang['lang_btns_copy'];
   $this->arr_buttons['bcopy']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcopy']['display_position'] = 'img_right';
-  $this->arr_buttons['bcopy']['fontawesomeicon']  = 'fas fa-copy';
+  $this->arr_buttons['bcopy']['fontawesomeicon']  = '';
   $this->arr_buttons['bcopy']['style'] = 'default';
   $this->arr_buttons['bcopy']['image'] = 'sys__NM__nm_teste_bcopy.gif';
 
@@ -608,7 +608,7 @@
   $this->arr_buttons['bcresumo']['value']            = $Nm_lang['lang_btns_smry'];
   $this->arr_buttons['bcresumo']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcresumo']['display_position'] = 'text_right';
-  $this->arr_buttons['bcresumo']['fontawesomeicon']  = 'fas fa-th-list';
+  $this->arr_buttons['bcresumo']['fontawesomeicon']  = '';
   $this->arr_buttons['bcresumo']['style'] = 'ok';
   $this->arr_buttons['bcresumo']['image'] = 'scriptcase__NM__nm_scriptcase8_BlueWood_bcresumo.gif';
 
@@ -617,7 +617,7 @@
   $this->arr_buttons['bcsort']['value']            = $Nm_lang['lang_btns_sort'];
   $this->arr_buttons['bcsort']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcsort']['display_position'] = 'text_right';
-  $this->arr_buttons['bcsort']['fontawesomeicon']  = 'fas fa-sort-amount-down';
+  $this->arr_buttons['bcsort']['fontawesomeicon']  = '';
   $this->arr_buttons['bcsort']['style'] = 'default';
   $this->arr_buttons['bcsort']['image'] = 'scriptcase__NM__sc_ico_order_b.png';
 
@@ -626,7 +626,7 @@
   $this->arr_buttons['bctype']['value']            = $Nm_lang['lang_btns_ctype'];
   $this->arr_buttons['bctype']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bctype']['display_position'] = 'text_right';
-  $this->arr_buttons['bctype']['fontawesomeicon']  = 'fas fa-chart-pie';
+  $this->arr_buttons['bctype']['fontawesomeicon']  = '';
   $this->arr_buttons['bctype']['style'] = 'default';
   $this->arr_buttons['bctype']['image'] = 'scriptcase__NM__nm_scriptcase8_BlueWood_bctype.gif';
 
@@ -635,7 +635,7 @@
   $this->arr_buttons['bcpersonalite']['value']            = $Nm_lang['lang_btns_ctpersonalite'];
   $this->arr_buttons['bcpersonalite']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcpersonalite']['display_position'] = 'text_right';
-  $this->arr_buttons['bcpersonalite']['fontawesomeicon']  = 'fas fa-cog';
+  $this->arr_buttons['bcpersonalite']['fontawesomeicon']  = '';
   $this->arr_buttons['bcpersonalite']['style'] = 'default';
   $this->arr_buttons['bcpersonalite']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_set_charts.png';
 
@@ -644,7 +644,7 @@
   $this->arr_buttons['bchart_bar']['value']            = $Nm_lang['lang_btns_ctbar'];
   $this->arr_buttons['bchart_bar']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bchart_bar']['display_position'] = 'text_right';
-  $this->arr_buttons['bchart_bar']['fontawesomeicon']  = 'fas fa-chart-bar';
+  $this->arr_buttons['bchart_bar']['fontawesomeicon']  = '';
   $this->arr_buttons['bchart_bar']['style'] = 'icons';
   $this->arr_buttons['bchart_bar']['image'] = 'scriptcase__NM__sc_ico_bar_c.png';
 
@@ -653,7 +653,7 @@
   $this->arr_buttons['bchart_line']['value']            = $Nm_lang['lang_btns_ctline'];
   $this->arr_buttons['bchart_line']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bchart_line']['display_position'] = 'text_right';
-  $this->arr_buttons['bchart_line']['fontawesomeicon']  = 'fas fa-chart-line';
+  $this->arr_buttons['bchart_line']['fontawesomeicon']  = '';
   $this->arr_buttons['bchart_line']['style'] = 'icons';
   $this->arr_buttons['bchart_line']['image'] = 'scriptcase__NM__sc_ico_line_c.png';
 
@@ -662,7 +662,7 @@
   $this->arr_buttons['bchart_area']['value']            = $Nm_lang['lang_btns_ctarea'];
   $this->arr_buttons['bchart_area']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bchart_area']['display_position'] = 'text_right';
-  $this->arr_buttons['bchart_area']['fontawesomeicon']  = 'fas fa-chart-area';
+  $this->arr_buttons['bchart_area']['fontawesomeicon']  = '';
   $this->arr_buttons['bchart_area']['style'] = 'icons';
   $this->arr_buttons['bchart_area']['image'] = 'scriptcase__NM__sc_ico_area_c.png';
 
@@ -671,7 +671,7 @@
   $this->arr_buttons['bchart_pizza']['value']            = $Nm_lang['lang_btns_ctpizza'];
   $this->arr_buttons['bchart_pizza']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bchart_pizza']['display_position'] = 'text_right';
-  $this->arr_buttons['bchart_pizza']['fontawesomeicon']  = 'fas fa-chart-pie';
+  $this->arr_buttons['bchart_pizza']['fontawesomeicon']  = '';
   $this->arr_buttons['bchart_pizza']['style'] = 'icons';
   $this->arr_buttons['bchart_pizza']['image'] = 'scriptcase__NM__sc_ico_pizza_c.png';
 
@@ -680,7 +680,7 @@
   $this->arr_buttons['bchart_combo']['value']            = $Nm_lang['lang_btns_ctcombo'];
   $this->arr_buttons['bchart_combo']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bchart_combo']['display_position'] = 'text_right';
-  $this->arr_buttons['bchart_combo']['fontawesomeicon']  = 'fas fa-shapes';
+  $this->arr_buttons['bchart_combo']['fontawesomeicon']  = '';
   $this->arr_buttons['bchart_combo']['style'] = 'icons';
   $this->arr_buttons['bchart_combo']['image'] = 'scriptcase__NM__sc_ico_combo_c.png';
 
@@ -689,7 +689,7 @@
   $this->arr_buttons['bchart_stack']['value']            = $Nm_lang['lang_btns_ctstack'];
   $this->arr_buttons['bchart_stack']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bchart_stack']['display_position'] = 'text_right';
-  $this->arr_buttons['bchart_stack']['fontawesomeicon']  = 'fas fa-layer-group';
+  $this->arr_buttons['bchart_stack']['fontawesomeicon']  = '';
   $this->arr_buttons['bchart_stack']['style'] = 'icons';
   $this->arr_buttons['bchart_stack']['image'] = 'scriptcase__NM__sc_ico_stack_c.png';
 
@@ -698,7 +698,7 @@
   $this->arr_buttons['bpesquisa']['value']            = $Nm_lang['lang_btns_srch'];
   $this->arr_buttons['bpesquisa']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bpesquisa']['display_position'] = 'img_right';
-  $this->arr_buttons['bpesquisa']['fontawesomeicon']  = 'fas fa-search';
+  $this->arr_buttons['bpesquisa']['fontawesomeicon']  = '';
   $this->arr_buttons['bpesquisa']['style'] = 'ok';
   $this->arr_buttons['bpesquisa']['image'] = 'sys__NM__nm_teste_bpesquisa.gif';
 
@@ -707,7 +707,7 @@
   $this->arr_buttons['blimpar']['value']            = $Nm_lang['lang_btns_clea'];
   $this->arr_buttons['blimpar']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['blimpar']['display_position'] = 'img_right';
-  $this->arr_buttons['blimpar']['fontawesomeicon']  = 'fas fa-broom';
+  $this->arr_buttons['blimpar']['fontawesomeicon']  = '';
   $this->arr_buttons['blimpar']['style'] = 'default';
   $this->arr_buttons['blimpar']['image'] = 'sys__NM__nm_teste_blimpar.gif';
 
@@ -716,7 +716,7 @@
   $this->arr_buttons['bsalvar']['value']            = $Nm_lang['lang_btns_save'];
   $this->arr_buttons['bsalvar']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsalvar']['display_position'] = 'img_right';
-  $this->arr_buttons['bsalvar']['fontawesomeicon']  = 'fas fa-save';
+  $this->arr_buttons['bsalvar']['fontawesomeicon']  = '';
   $this->arr_buttons['bsalvar']['style'] = 'small';
   $this->arr_buttons['bsalvar']['image'] = 'sys__NM__nm_teste_bsalvar.gif';
 
@@ -725,7 +725,7 @@
   $this->arr_buttons['bedit_filter']['value']            = $Nm_lang['lang_btns_srch_edit'];
   $this->arr_buttons['bedit_filter']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bedit_filter']['display_position'] = 'img_right';
-  $this->arr_buttons['bedit_filter']['fontawesomeicon']  = 'fas fa-save';
+  $this->arr_buttons['bedit_filter']['fontawesomeicon']  = '';
   $this->arr_buttons['bedit_filter']['style'] = 'default';
   $this->arr_buttons['bedit_filter']['image'] = 'sys__NM__nm_teste_bedit_filter.gif';
 
@@ -734,7 +734,7 @@
   $this->arr_buttons['bquick_search']['value']            = $Nm_lang['lang_btns_quck_srch'];
   $this->arr_buttons['bquick_search']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bquick_search']['display_position'] = 'img_right';
-  $this->arr_buttons['bquick_search']['fontawesomeicon']  = 'fas fa-search';
+  $this->arr_buttons['bquick_search']['fontawesomeicon']  = '';
   $this->arr_buttons['bquick_search']['style'] = 'fontawesome';
   $this->arr_buttons['bquick_search']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_search.png';
 
@@ -743,7 +743,7 @@
   $this->arr_buttons['bquick_clean']['value']            = $Nm_lang['lang_btns_quck_clean'];
   $this->arr_buttons['bquick_clean']['display']          = 'only_text';
   $this->arr_buttons['bquick_clean']['display_position'] = 'img_right';
-  $this->arr_buttons['bquick_clean']['fontawesomeicon']  = 'fas fa-broom';
+  $this->arr_buttons['bquick_clean']['fontawesomeicon']  = '';
   $this->arr_buttons['bquick_clean']['style'] = 'default';
   $this->arr_buttons['bquick_clean']['image'] = '';
 
@@ -761,7 +761,7 @@
   $this->arr_buttons['blimparsummaryall']['value']            = $Nm_lang['lang_btns_clean_summary_all'];
   $this->arr_buttons['blimparsummaryall']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['blimparsummaryall']['display_position'] = 'text_right';
-  $this->arr_buttons['blimparsummaryall']['fontawesomeicon']  = 'fas fa-broom';
+  $this->arr_buttons['blimparsummaryall']['fontawesomeicon']  = '';
   $this->arr_buttons['blimparsummaryall']['style'] = 'cancel';
   $this->arr_buttons['blimparsummaryall']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_blimparsummaryall.gif';
 
@@ -770,7 +770,7 @@
   $this->arr_buttons['boksummary']['value']            = $Nm_lang['lang_btns_ok_summary'];
   $this->arr_buttons['boksummary']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['boksummary']['display_position'] = 'text_right';
-  $this->arr_buttons['boksummary']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['boksummary']['fontawesomeicon']  = '';
   $this->arr_buttons['boksummary']['style'] = 'ok';
   $this->arr_buttons['boksummary']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_boksummary.gif';
 
@@ -779,7 +779,7 @@
   $this->arr_buttons['bmd_incluir']['value']            = $Nm_lang['lang_btns_mdtl_inst'];
   $this->arr_buttons['bmd_incluir']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bmd_incluir']['display_position'] = 'img_right';
-  $this->arr_buttons['bmd_incluir']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['bmd_incluir']['fontawesomeicon']  = '';
   $this->arr_buttons['bmd_incluir']['style'] = 'fontawesome';
   $this->arr_buttons['bmd_incluir']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_done.png';
 
@@ -788,7 +788,7 @@
   $this->arr_buttons['bmd_excluir']['value']            = $Nm_lang['lang_btns_mdtl_dele'];
   $this->arr_buttons['bmd_excluir']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bmd_excluir']['display_position'] = 'img_right';
-  $this->arr_buttons['bmd_excluir']['fontawesomeicon']  = 'fas fa-trash';
+  $this->arr_buttons['bmd_excluir']['fontawesomeicon']  = '';
   $this->arr_buttons['bmd_excluir']['style'] = 'fontawesome';
   $this->arr_buttons['bmd_excluir']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_delete.png';
 
@@ -797,7 +797,7 @@
   $this->arr_buttons['bmd_alterar']['value']            = $Nm_lang['lang_btns_mdtl_updt'];
   $this->arr_buttons['bmd_alterar']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bmd_alterar']['display_position'] = 'img_right';
-  $this->arr_buttons['bmd_alterar']['fontawesomeicon']  = 'fas fa-save';
+  $this->arr_buttons['bmd_alterar']['fontawesomeicon']  = '';
   $this->arr_buttons['bmd_alterar']['style'] = 'fontawesome';
   $this->arr_buttons['bmd_alterar']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_refresh.png';
 
@@ -806,7 +806,7 @@
   $this->arr_buttons['bmd_novo']['value']            = $Nm_lang['lang_btns_copy'];
   $this->arr_buttons['bmd_novo']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bmd_novo']['display_position'] = 'img_right';
-  $this->arr_buttons['bmd_novo']['fontawesomeicon']  = 'fas fa-copy';
+  $this->arr_buttons['bmd_novo']['fontawesomeicon']  = '';
   $this->arr_buttons['bmd_novo']['style'] = 'fontawesome';
   $this->arr_buttons['bmd_novo']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_copy.png';
 
@@ -815,7 +815,7 @@
   $this->arr_buttons['bmd_cancelar']['value']            = $Nm_lang['lang_btns_mdtl_cncl'];
   $this->arr_buttons['bmd_cancelar']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bmd_cancelar']['display_position'] = 'img_right';
-  $this->arr_buttons['bmd_cancelar']['fontawesomeicon']  = 'fas fa-times';
+  $this->arr_buttons['bmd_cancelar']['fontawesomeicon']  = '';
   $this->arr_buttons['bmd_cancelar']['style'] = 'fontawesome';
   $this->arr_buttons['bmd_cancelar']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_close.png';
 
@@ -824,7 +824,7 @@
   $this->arr_buttons['bmd_edit']['value']            = $Nm_lang['lang_btns_mdtl_edit'];
   $this->arr_buttons['bmd_edit']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bmd_edit']['display_position'] = 'img_right';
-  $this->arr_buttons['bmd_edit']['fontawesomeicon']  = 'fas fa-edit';
+  $this->arr_buttons['bmd_edit']['fontawesomeicon']  = '';
   $this->arr_buttons['bmd_edit']['style'] = 'fontawesome';
   $this->arr_buttons['bmd_edit']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_edit.png';
 
@@ -833,7 +833,7 @@
   $this->arr_buttons['bfacebook']['value']            = '{Facebook}';
   $this->arr_buttons['bfacebook']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bfacebook']['display_position'] = 'img_right';
-  $this->arr_buttons['bfacebook']['fontawesomeicon']  = 'fab fa-facebook-f';
+  $this->arr_buttons['bfacebook']['fontawesomeicon']  = '';
   $this->arr_buttons['bfacebook']['style'] = 'facebook';
   $this->arr_buttons['bfacebook']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_facebook.png';
 
@@ -842,7 +842,7 @@
   $this->arr_buttons['bgoogle']['value']            = '{Google}';
   $this->arr_buttons['bgoogle']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bgoogle']['display_position'] = 'img_right';
-  $this->arr_buttons['bgoogle']['fontawesomeicon']  = 'fab fa-google';
+  $this->arr_buttons['bgoogle']['fontawesomeicon']  = '';
   $this->arr_buttons['bgoogle']['style'] = 'google';
   $this->arr_buttons['bgoogle']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_google_plus.png';
 
@@ -851,7 +851,7 @@
   $this->arr_buttons['bpaypal']['value']            = '{Paypal}';
   $this->arr_buttons['bpaypal']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bpaypal']['display_position'] = 'img_right';
-  $this->arr_buttons['bpaypal']['fontawesomeicon']  = 'fab fa-paypal';
+  $this->arr_buttons['bpaypal']['fontawesomeicon']  = '';
   $this->arr_buttons['bpaypal']['style'] = 'paypal';
   $this->arr_buttons['bpaypal']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_paypal.png';
 
@@ -860,7 +860,7 @@
   $this->arr_buttons['btwitter']['value']            = '{Twitter}';
   $this->arr_buttons['btwitter']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['btwitter']['display_position'] = 'img_right';
-  $this->arr_buttons['btwitter']['fontawesomeicon']  = 'fab fa-twitter';
+  $this->arr_buttons['btwitter']['fontawesomeicon']  = '';
   $this->arr_buttons['btwitter']['style'] = 'twitter';
   $this->arr_buttons['btwitter']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_twitter.png';
 
@@ -869,7 +869,7 @@
   $this->arr_buttons['bmenu']['value']            = '{Menu}';
   $this->arr_buttons['bmenu']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bmenu']['display_position'] = 'text_right';
-  $this->arr_buttons['bmenu']['fontawesomeicon']  = 'fas fa-bars';
+  $this->arr_buttons['bmenu']['fontawesomeicon']  = '';
   $this->arr_buttons['bmenu']['style'] = 'icons';
   $this->arr_buttons['bmenu']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_nav.png';
 
@@ -887,7 +887,7 @@
   $this->arr_buttons['bsair']['value']            = $Nm_lang['lang_btns_exit'];
   $this->arr_buttons['bsair']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsair']['display_position'] = 'img_right';
-  $this->arr_buttons['bsair']['fontawesomeicon']  = 'fas fa-sign-out-alt';
+  $this->arr_buttons['bsair']['fontawesomeicon']  = '';
   $this->arr_buttons['bsair']['style'] = 'danger';
   $this->arr_buttons['bsair']['image'] = 'sys__NM__nm_teste_bsair.gif';
 
@@ -896,7 +896,7 @@
   $this->arr_buttons['bvoltar']['value']            = $Nm_lang['lang_btns_back'];
   $this->arr_buttons['bvoltar']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bvoltar']['display_position'] = 'img_right';
-  $this->arr_buttons['bvoltar']['fontawesomeicon']  = 'fas fa-arrow-left';
+  $this->arr_buttons['bvoltar']['fontawesomeicon']  = '';
   $this->arr_buttons['bvoltar']['style'] = 'default';
   $this->arr_buttons['bvoltar']['image'] = 'sys__NM__nm_teste_bvoltar.gif';
 
@@ -905,7 +905,7 @@
   $this->arr_buttons['bcancelar']['value']            = $Nm_lang['lang_btns_cncl'];
   $this->arr_buttons['bcancelar']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcancelar']['display_position'] = 'img_right';
-  $this->arr_buttons['bcancelar']['fontawesomeicon']  = 'fas fa-ban';
+  $this->arr_buttons['bcancelar']['fontawesomeicon']  = '';
   $this->arr_buttons['bcancelar']['style'] = 'danger';
   $this->arr_buttons['bcancelar']['image'] = 'sys__NM__nm_teste_bcancelar.gif';
 
@@ -914,7 +914,7 @@
   $this->arr_buttons['bapply']['value']            = $Nm_lang['lang_btns_apply'];
   $this->arr_buttons['bapply']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bapply']['display_position'] = 'img_right';
-  $this->arr_buttons['bapply']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['bapply']['fontawesomeicon']  = '';
   $this->arr_buttons['bapply']['style'] = 'ok';
   $this->arr_buttons['bapply']['image'] = 'sys__NM__nm_teste_bapply.gif';
 
@@ -923,7 +923,7 @@
   $this->arr_buttons['brestore']['value']            = $Nm_lang['lang_btns_restore'];
   $this->arr_buttons['brestore']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['brestore']['display_position'] = 'img_right';
-  $this->arr_buttons['brestore']['fontawesomeicon']  = 'fas fa-undo';
+  $this->arr_buttons['brestore']['fontawesomeicon']  = '';
   $this->arr_buttons['brestore']['style'] = 'default';
   $this->arr_buttons['brestore']['image'] = 'sys__NM__nm_teste_brestore.gif';
 
@@ -932,7 +932,7 @@
   $this->arr_buttons['bzipcode']['value']            = $Nm_lang['lang_btns_zpcd'];
   $this->arr_buttons['bzipcode']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bzipcode']['display_position'] = 'text_right';
-  $this->arr_buttons['bzipcode']['fontawesomeicon']  = 'fas fa-map-marker-alt';
+  $this->arr_buttons['bzipcode']['fontawesomeicon']  = '';
   $this->arr_buttons['bzipcode']['style'] = 'fontawesome';
   $this->arr_buttons['bzipcode']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_place.png';
 
@@ -968,7 +968,7 @@
   $this->arr_buttons['bsrgb']['value']            = $Nm_lang['lang_btns_srgb'];
   $this->arr_buttons['bsrgb']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bsrgb']['display_position'] = 'img_right';
-  $this->arr_buttons['bsrgb']['fontawesomeicon']  = 'fas fa-palette';
+  $this->arr_buttons['bsrgb']['fontawesomeicon']  = '';
   $this->arr_buttons['bsrgb']['style'] = 'fontawesome';
   $this->arr_buttons['bsrgb']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_color.png';
 
@@ -977,7 +977,7 @@
   $this->arr_buttons['berrm_clse']['value']            = $Nm_lang['lang_btns_errm_clse'];
   $this->arr_buttons['berrm_clse']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['berrm_clse']['display_position'] = 'img_right';
-  $this->arr_buttons['berrm_clse']['fontawesomeicon']  = 'fas fa-times';
+  $this->arr_buttons['berrm_clse']['fontawesomeicon']  = '';
   $this->arr_buttons['berrm_clse']['style'] = 'danger';
   $this->arr_buttons['berrm_clse']['image'] = 'sys__NM__nm_teste_berrm_clse.gif';
 
@@ -986,7 +986,7 @@
   $this->arr_buttons['bemail']['value']            = $Nm_lang['lang_btns_emai'];
   $this->arr_buttons['bemail']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bemail']['display_position'] = 'img_right';
-  $this->arr_buttons['bemail']['fontawesomeicon']  = 'fas fa-envelope';
+  $this->arr_buttons['bemail']['fontawesomeicon']  = '';
   $this->arr_buttons['bemail']['style'] = 'fontawesome';
   $this->arr_buttons['bemail']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_mail.png';
 
@@ -1004,7 +1004,7 @@
   $this->arr_buttons['bmessageclose']['value']            = $Nm_lang['lang_btns_mess_clse'];
   $this->arr_buttons['bmessageclose']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bmessageclose']['display_position'] = 'img_right';
-  $this->arr_buttons['bmessageclose']['fontawesomeicon']  = 'fas fa-times';
+  $this->arr_buttons['bmessageclose']['fontawesomeicon']  = '';
   $this->arr_buttons['bmessageclose']['style'] = 'cancel';
   $this->arr_buttons['bmessageclose']['image'] = 'sys__NM__nm_teste_bmessageclose.gif';
 
@@ -1013,7 +1013,7 @@
   $this->arr_buttons['bgooglemaps']['value']            = $Nm_lang['lang_btns_maps'];
   $this->arr_buttons['bgooglemaps']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bgooglemaps']['display_position'] = 'img_right';
-  $this->arr_buttons['bgooglemaps']['fontawesomeicon']  = 'fas fa-map';
+  $this->arr_buttons['bgooglemaps']['fontawesomeicon']  = '';
   $this->arr_buttons['bgooglemaps']['style'] = 'default';
   $this->arr_buttons['bgooglemaps']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_google.png';
 
@@ -1022,7 +1022,7 @@
   $this->arr_buttons['bclear']['value']            = $Nm_lang['lang_btns_clear'];
   $this->arr_buttons['bclear']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bclear']['display_position'] = 'text_right';
-  $this->arr_buttons['bclear']['fontawesomeicon']  = 'fas fa-broom';
+  $this->arr_buttons['bclear']['fontawesomeicon']  = '';
   $this->arr_buttons['bclear']['style'] = 'default';
   $this->arr_buttons['bclear']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bclear.gif';
 
@@ -1031,7 +1031,7 @@
   $this->arr_buttons['byoutube']['value']            = $Nm_lang['lang_btns_yutb'];
   $this->arr_buttons['byoutube']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['byoutube']['display_position'] = 'img_right';
-  $this->arr_buttons['byoutube']['fontawesomeicon']  = 'fab fa-youtube';
+  $this->arr_buttons['byoutube']['fontawesomeicon']  = '';
   $this->arr_buttons['byoutube']['style'] = 'youtube';
   $this->arr_buttons['byoutube']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_youtube.png';
 
@@ -1040,7 +1040,7 @@
   $this->arr_buttons['bpassfld_up']['value']            = $Nm_lang['lang_btns_bpassfld_up'];
   $this->arr_buttons['bpassfld_up']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bpassfld_up']['display_position'] = 'text_right';
-  $this->arr_buttons['bpassfld_up']['fontawesomeicon']  = 'fas fa-caret-up';
+  $this->arr_buttons['bpassfld_up']['fontawesomeicon']  = '';
   $this->arr_buttons['bpassfld_up']['style'] = 'fontawesome';
   $this->arr_buttons['bpassfld_up']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_come_up.png';
 
@@ -1049,7 +1049,7 @@
   $this->arr_buttons['bpassfld_down']['value']            = $Nm_lang['lang_btns_bpassfld_down'];
   $this->arr_buttons['bpassfld_down']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bpassfld_down']['display_position'] = 'text_right';
-  $this->arr_buttons['bpassfld_down']['fontawesomeicon']  = 'fas fa-caret-down';
+  $this->arr_buttons['bpassfld_down']['fontawesomeicon']  = '';
   $this->arr_buttons['bpassfld_down']['style'] = 'fontawesome';
   $this->arr_buttons['bpassfld_down']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_come_down.png';
 
@@ -1058,7 +1058,7 @@
   $this->arr_buttons['bpassfld_rightall']['value']            = $Nm_lang['lang_btns_bpassfld_rightall'];
   $this->arr_buttons['bpassfld_rightall']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bpassfld_rightall']['display_position'] = 'text_right';
-  $this->arr_buttons['bpassfld_rightall']['fontawesomeicon']  = 'fas fa-forward';
+  $this->arr_buttons['bpassfld_rightall']['fontawesomeicon']  = '';
   $this->arr_buttons['bpassfld_rightall']['style'] = 'fontawesome';
   $this->arr_buttons['bpassfld_rightall']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_rewind.png';
 
@@ -1067,7 +1067,7 @@
   $this->arr_buttons['bpassfld_right']['value']            = $Nm_lang['lang_btns_bpassfld_right'];
   $this->arr_buttons['bpassfld_right']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bpassfld_right']['display_position'] = 'text_right';
-  $this->arr_buttons['bpassfld_right']['fontawesomeicon']  = 'fas fa-caret-right';
+  $this->arr_buttons['bpassfld_right']['fontawesomeicon']  = '';
   $this->arr_buttons['bpassfld_right']['style'] = 'fontawesome';
   $this->arr_buttons['bpassfld_right']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_left_enabled.png';
 
@@ -1076,7 +1076,7 @@
   $this->arr_buttons['bpassfld_leftall']['value']            = $Nm_lang['lang_btns_bpassfld_leftall'];
   $this->arr_buttons['bpassfld_leftall']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bpassfld_leftall']['display_position'] = 'text_right';
-  $this->arr_buttons['bpassfld_leftall']['fontawesomeicon']  = 'fas fa-backward';
+  $this->arr_buttons['bpassfld_leftall']['fontawesomeicon']  = '';
   $this->arr_buttons['bpassfld_leftall']['style'] = 'fontawesome';
   $this->arr_buttons['bpassfld_leftall']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_foward.png';
 
@@ -1085,7 +1085,7 @@
   $this->arr_buttons['bpassfld_left']['value']            = $Nm_lang['lang_btns_bpassfld_left'];
   $this->arr_buttons['bpassfld_left']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['bpassfld_left']['display_position'] = 'text_right';
-  $this->arr_buttons['bpassfld_left']['fontawesomeicon']  = 'fas fa-caret-left';
+  $this->arr_buttons['bpassfld_left']['fontawesomeicon']  = '';
   $this->arr_buttons['bpassfld_left']['style'] = 'fontawesome';
   $this->arr_buttons['bpassfld_left']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_right_enabled.png';
 
@@ -1094,7 +1094,7 @@
   $this->arr_buttons['breload']['value']            = $Nm_lang['lang_btns_reload'];
   $this->arr_buttons['breload']['display']          = 'only_fontawesomeicon';
   $this->arr_buttons['breload']['display_position'] = 'img_right';
-  $this->arr_buttons['breload']['fontawesomeicon']  = 'fas fa-sync-alt';
+  $this->arr_buttons['breload']['fontawesomeicon']  = '';
   $this->arr_buttons['breload']['style'] = 'default';
   $this->arr_buttons['breload']['image'] = 'scriptcase__NM__nm_scriptcase9_BlueBerry_refresh.png.png';
 
@@ -1103,7 +1103,7 @@
   $this->arr_buttons['bapply_appdiv']['value']            = $Nm_lang['lang_btns_apply'];
   $this->arr_buttons['bapply_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bapply_appdiv']['display_position'] = 'img_right';
-  $this->arr_buttons['bapply_appdiv']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['bapply_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['bapply_appdiv']['style'] = 'check';
   $this->arr_buttons['bapply_appdiv']['image'] = 'sys__NM__nm_teste_bapply.gif';
 
@@ -1112,7 +1112,7 @@
   $this->arr_buttons['bok_appdiv']['value']            = $Nm_lang['lang_btns_cfrm'];
   $this->arr_buttons['bok_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bok_appdiv']['display_position'] = 'img_right';
-  $this->arr_buttons['bok_appdiv']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['bok_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['bok_appdiv']['style'] = 'check';
   $this->arr_buttons['bok_appdiv']['image'] = 'sys__NM__nm_teste_bok.gif';
 
@@ -1121,7 +1121,7 @@
   $this->arr_buttons['brestore_appdiv']['value']            = $Nm_lang['lang_btns_restore'];
   $this->arr_buttons['brestore_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['brestore_appdiv']['display_position'] = 'img_right';
-  $this->arr_buttons['brestore_appdiv']['fontawesomeicon']  = 'fas fa-undo';
+  $this->arr_buttons['brestore_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['brestore_appdiv']['style'] = 'small';
   $this->arr_buttons['brestore_appdiv']['image'] = 'sys__NM__nm_teste_brestore.gif';
 
@@ -1130,7 +1130,7 @@
   $this->arr_buttons['blimpar_appdiv']['value']            = $Nm_lang['lang_btns_clea'];
   $this->arr_buttons['blimpar_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['blimpar_appdiv']['display_position'] = 'text_right';
-  $this->arr_buttons['blimpar_appdiv']['fontawesomeicon']  = 'fas fa-broom';
+  $this->arr_buttons['blimpar_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['blimpar_appdiv']['style'] = 'small';
   $this->arr_buttons['blimpar_appdiv']['image'] = 'scriptcase__NM__nm_scriptcase9_SweetBlue_blimpar_appdiv.gif';
 
@@ -1139,7 +1139,7 @@
   $this->arr_buttons['bsair_appdiv']['value']            = $Nm_lang['lang_btns_exit'];
   $this->arr_buttons['bsair_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsair_appdiv']['display_position'] = 'img_right';
-  $this->arr_buttons['bsair_appdiv']['fontawesomeicon']  = 'fas fa-times';
+  $this->arr_buttons['bsair_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['bsair_appdiv']['style'] = 'cancel';
   $this->arr_buttons['bsair_appdiv']['image'] = 'sys__NM__nm_teste_bsair.gif';
 
@@ -1148,7 +1148,7 @@
   $this->arr_buttons['bcancelar_appdiv']['value']            = $Nm_lang['lang_btns_cncl'];
   $this->arr_buttons['bcancelar_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcancelar_appdiv']['display_position'] = 'img_right';
-  $this->arr_buttons['bcancelar_appdiv']['fontawesomeicon']  = 'fas fa-ban';
+  $this->arr_buttons['bcancelar_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['bcancelar_appdiv']['style'] = 'cancel';
   $this->arr_buttons['bcancelar_appdiv']['image'] = 'sys__NM__nm_teste_bcancelar.gif';
 
@@ -1157,7 +1157,7 @@
   $this->arr_buttons['bsalvar_appdiv']['value']            = $Nm_lang['lang_btns_save'];
   $this->arr_buttons['bsalvar_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsalvar_appdiv']['display_position'] = 'text_right';
-  $this->arr_buttons['bsalvar_appdiv']['fontawesomeicon']  = 'fas fa-save';
+  $this->arr_buttons['bsalvar_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['bsalvar_appdiv']['style'] = 'small';
   $this->arr_buttons['bsalvar_appdiv']['image'] = 'scriptcase__NM__nm_scriptcase9_SweetBlue_bsalvar_appdiv.gif';
 
@@ -1166,7 +1166,7 @@
   $this->arr_buttons['bexcluir_appdiv']['value']            = $Nm_lang['lang_btns_dele'];
   $this->arr_buttons['bexcluir_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bexcluir_appdiv']['display_position'] = 'text_right';
-  $this->arr_buttons['bexcluir_appdiv']['fontawesomeicon']  = 'fas fa-trash';
+  $this->arr_buttons['bexcluir_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['bexcluir_appdiv']['style'] = 'small';
   $this->arr_buttons['bexcluir_appdiv']['image'] = 'scriptcase__NM__nm_scriptcase9_SweetBlue_bexcluir_appdiv.gif';
 
@@ -1175,7 +1175,7 @@
   $this->arr_buttons['bedit_filter_appdiv']['value']            = $Nm_lang['lang_btns_srch_edit'];
   $this->arr_buttons['bedit_filter_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bedit_filter_appdiv']['display_position'] = 'img_right';
-  $this->arr_buttons['bedit_filter_appdiv']['fontawesomeicon']  = 'fas fa-save';
+  $this->arr_buttons['bedit_filter_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['bedit_filter_appdiv']['style'] = 'small';
   $this->arr_buttons['bedit_filter_appdiv']['image'] = 'sys__NM__nm_teste_bedit_filter.gif';
 
@@ -1184,7 +1184,7 @@
   $this->arr_buttons['bnovo_appdiv']['value']            = $Nm_lang['lang_btns_neww'];
   $this->arr_buttons['bnovo_appdiv']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bnovo_appdiv']['display_position'] = 'img_right';
-  $this->arr_buttons['bnovo_appdiv']['fontawesomeicon']  = 'fas fa-plus';
+  $this->arr_buttons['bnovo_appdiv']['fontawesomeicon']  = '';
   $this->arr_buttons['bnovo_appdiv']['style'] = 'check';
   $this->arr_buttons['bnovo_appdiv']['image'] = 'sys__NM__nm_teste_bnovo.gif';
 
@@ -1193,7 +1193,7 @@
   $this->arr_buttons['bcalendarimport']['value']            = $Nm_lang['lang_btns_import'];
   $this->arr_buttons['bcalendarimport']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcalendarimport']['display_position'] = 'text_right';
-  $this->arr_buttons['bcalendarimport']['fontawesomeicon']  = 'fas fa-file-import';
+  $this->arr_buttons['bcalendarimport']['fontawesomeicon']  = '';
   $this->arr_buttons['bcalendarimport']['style'] = 'default';
   $this->arr_buttons['bcalendarimport']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bcalendarimport.gif';
 
@@ -1202,7 +1202,7 @@
   $this->arr_buttons['bcalendarexport']['value']            = $Nm_lang['lang_btns_expo'];
   $this->arr_buttons['bcalendarexport']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcalendarexport']['display_position'] = 'text_right';
-  $this->arr_buttons['bcalendarexport']['fontawesomeicon']  = 'fas fa-file-export';
+  $this->arr_buttons['bcalendarexport']['fontawesomeicon']  = '';
   $this->arr_buttons['bcalendarexport']['style'] = 'default';
   $this->arr_buttons['bcalendarexport']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bcalendarexport.gif';
 
@@ -1211,7 +1211,7 @@
   $this->arr_buttons['bcalendarcancel']['value']            = $Nm_lang['lang_btns_cncl'];
   $this->arr_buttons['bcalendarcancel']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcalendarcancel']['display_position'] = 'text_right';
-  $this->arr_buttons['bcalendarcancel']['fontawesomeicon']  = 'fas fa-ban';
+  $this->arr_buttons['bcalendarcancel']['fontawesomeicon']  = '';
   $this->arr_buttons['bcalendarcancel']['style'] = 'danger';
   $this->arr_buttons['bcalendarcancel']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bcalendarcancel.gif';
 
@@ -1220,7 +1220,7 @@
   $this->arr_buttons['bcalendarimport_google']['value']            = $Nm_lang['lang_btns_import_google'];
   $this->arr_buttons['bcalendarimport_google']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcalendarimport_google']['display_position'] = 'text_right';
-  $this->arr_buttons['bcalendarimport_google']['fontawesomeicon']  = 'fas fa-file-import';
+  $this->arr_buttons['bcalendarimport_google']['fontawesomeicon']  = '';
   $this->arr_buttons['bcalendarimport_google']['style'] = 'default';
   $this->arr_buttons['bcalendarimport_google']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bcalendarimport_google.gif';
 
@@ -1229,7 +1229,7 @@
   $this->arr_buttons['bcalendarexport_google']['value']            = $Nm_lang['lang_btns_export_google'];
   $this->arr_buttons['bcalendarexport_google']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bcalendarexport_google']['display_position'] = 'text_right';
-  $this->arr_buttons['bcalendarexport_google']['fontawesomeicon']  = 'fas fa-file-export';
+  $this->arr_buttons['bcalendarexport_google']['fontawesomeicon']  = '';
   $this->arr_buttons['bcalendarexport_google']['style'] = 'default';
   $this->arr_buttons['bcalendarexport_google']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_bcalendarexport_google.gif';
 
@@ -1238,7 +1238,7 @@
   $this->arr_buttons['bsweetalert_ok']['value']            = $Nm_lang['lang_btns_cfrm'];
   $this->arr_buttons['bsweetalert_ok']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsweetalert_ok']['display_position'] = 'text_right';
-  $this->arr_buttons['bsweetalert_ok']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['bsweetalert_ok']['fontawesomeicon']  = '';
   $this->arr_buttons['bsweetalert_ok']['style'] = 'sweetalertok';
   $this->arr_buttons['bsweetalert_ok']['image'] = 'scriptcase__NM__nm_scriptcase9_SweetBlue_bsweetalert_ok.gif';
 
@@ -1247,7 +1247,7 @@
   $this->arr_buttons['bsweetalert_cancel']['value']            = $Nm_lang['lang_btns_cncl'];
   $this->arr_buttons['bsweetalert_cancel']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsweetalert_cancel']['display_position'] = 'text_right';
-  $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']  = 'fas fa-ban';
+  $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']  = '';
   $this->arr_buttons['bsweetalert_cancel']['style'] = 'sweetalertcancel';
   $this->arr_buttons['bsweetalert_cancel']['image'] = 'scriptcase__NM__nm_scriptcase9_SweetBlue_bsweetalert_cancel.gif';
 
@@ -1256,8 +1256,53 @@
   $this->arr_buttons['bgridsavesession']['value']            = $Nm_lang['lang_btns_gridsavesession'];
   $this->arr_buttons['bgridsavesession']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bgridsavesession']['display_position'] = 'img_right';
-  $this->arr_buttons['bgridsavesession']['fontawesomeicon']  = 'fas fa-thumbtack';
+  $this->arr_buttons['bgridsavesession']['fontawesomeicon']  = '';
   $this->arr_buttons['bgridsavesession']['style'] = 'default';
   $this->arr_buttons['bgridsavesession']['image'] = 'sys__NM__nm_teste_bgridsave.gif';
+
+  $this->arr_buttons['bstepretorna']['hint']             = $Nm_lang['lang_btns_stepprev_hint'];
+  $this->arr_buttons['bstepretorna']['type']             = 'button';
+  $this->arr_buttons['bstepretorna']['value']            = $Nm_lang['lang_btns_stepprev'];
+  $this->arr_buttons['bstepretorna']['display']          = 'only_text';
+  $this->arr_buttons['bstepretorna']['display_position'] = 'img_right';
+  $this->arr_buttons['bstepretorna']['fontawesomeicon']  = 'fas fa-arrow-right';
+  $this->arr_buttons['bstepretorna']['style'] = 'default';
+  $this->arr_buttons['bstepretorna']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_right_enabled.png';
+
+  $this->arr_buttons['bstepavanca']['hint']             = $Nm_lang['lang_btns_stepnext_hint'];
+  $this->arr_buttons['bstepavanca']['type']             = 'button';
+  $this->arr_buttons['bstepavanca']['value']            = $Nm_lang['lang_btns_stepnext'];
+  $this->arr_buttons['bstepavanca']['display']          = 'only_text';
+  $this->arr_buttons['bstepavanca']['display_position'] = 'img_right';
+  $this->arr_buttons['bstepavanca']['fontawesomeicon']  = 'fas fa-arrow-left';
+  $this->arr_buttons['bstepavanca']['style'] = 'default';
+  $this->arr_buttons['bstepavanca']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_left_enabled.png';
+
+  $this->arr_buttons['bfilref_apply']['hint']             = $Nm_lang['lang_btns_bfilref_apply_hint'];
+  $this->arr_buttons['bfilref_apply']['type']             = 'button';
+  $this->arr_buttons['bfilref_apply']['value']            = $Nm_lang['lang_btns_bfilref_apply'];
+  $this->arr_buttons['bfilref_apply']['display']          = 'text_fontawesomeicon';
+  $this->arr_buttons['bfilref_apply']['display_position'] = 'img_right';
+  $this->arr_buttons['bfilref_apply']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_apply']['style'] = 'ok';
+  $this->arr_buttons['bfilref_apply']['image'] = 'sys__NM__nm_teste_bpesquisa.gif';
+
+  $this->arr_buttons['bfilref_limpar']['hint']             = $Nm_lang['lang_btns_bfilref_limpar_hint'];
+  $this->arr_buttons['bfilref_limpar']['type']             = 'button';
+  $this->arr_buttons['bfilref_limpar']['value']            = $Nm_lang['lang_btns_bfilref_limpar'];
+  $this->arr_buttons['bfilref_limpar']['display']          = 'text_fontawesomeicon';
+  $this->arr_buttons['bfilref_limpar']['display_position'] = 'img_right';
+  $this->arr_buttons['bfilref_limpar']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_limpar']['style'] = 'default';
+  $this->arr_buttons['bfilref_limpar']['image'] = 'sys__NM__nm_teste_blimpar.gif';
+
+  $this->arr_buttons['bfilref_close']['hint']             = $Nm_lang['lang_btns_bfilref_close_hint'];
+  $this->arr_buttons['bfilref_close']['type']             = 'button';
+  $this->arr_buttons['bfilref_close']['value']            = $Nm_lang['lang_btns_bfilref_close'];
+  $this->arr_buttons['bfilref_close']['display']          = 'text_fontawesomeicon';
+  $this->arr_buttons['bfilref_close']['display_position'] = 'img_right';
+  $this->arr_buttons['bfilref_close']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_close']['style'] = 'default';
+  $this->arr_buttons['bfilref_close']['image'] = 'scriptcase__NM__nm_scriptcase9_Rhino_close.png';
 
 ?>

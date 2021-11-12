@@ -1114,6 +1114,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
      else
      {
        $('#Bsair').click();
+       $('#Bsair').mousedown();
      }
    <?php
    }
@@ -1387,6 +1388,13 @@ else
    {
 ?>
    <?php echo nmButtonOutput($this->arr_buttons, "bsair_appdiv", "self.parent.tb_remove()", "self.parent.tb_remove()", "Bsair", "", "", "", "absmiddle", "", "0px", $this->path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   elseif ($_SESSION['scriptcase']['proc_mobile'])
+   {
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "closeAllModalPanes();", "closeAllModalPanes();", "Bsair", "", "", "", "absmiddle", "", "0px", $this->path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }

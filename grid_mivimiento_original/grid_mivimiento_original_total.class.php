@@ -84,17 +84,6 @@ class grid_mivimiento_original_total
          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
          exit ; 
       }
-      if ($rt->fields[0] == 0)
-      { 
-          if (!isset($Contrl_Interat) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['where_pesq_filtro']) && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['where_pesq_fast']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['interativ_search']))
-          {
-              $Contrl_Interat = 1;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['where_sem_interativ'];
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['interativ_search'] = array();
-              $this->quebra_geral_sc_free_total();
-          }
-          
-      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['tot_geral'][0] = "" . $this->Ini->Nm_lang['lang_msgs_totl'] . ""; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_mivimiento_original']['tot_geral'][1] = $rt->fields[0] ; 
       $rt->Close(); 

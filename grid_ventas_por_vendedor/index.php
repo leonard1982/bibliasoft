@@ -227,8 +227,8 @@ class grid_ventas_por_vendedor_ini
       $this->nm_dt_criacao   = "20190518"; 
       $this->nm_hr_criacao   = "191948"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -804,6 +804,8 @@ class grid_ventas_por_vendedor_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -929,7 +931,7 @@ class grid_ventas_por_vendedor_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_ventas_por_vendedor']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_ventas_por_vendedor']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwZ9F7HAN7V5JwHgrKVcFeDuX7DoraHQNmZ1B/Z1BeD5F7HgBYHErCHEFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9JmZ1F7HABYHQFaDErKZSXeHEFqVoFaDcBwDuFaHAN7VWJsDMrYV9FeH5XCVoX7DcNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwD9BiZSB/HArYV5FUDEvsHEFiDWX7DoXGDcXOZSFGHAveV5JwHuzGVIB/V5X7VErqDcJUZ1B/Z1NOV5B/DMzGHEXeH5F/DoB/D9NwZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMzGDkBsV5FYVoJwD9BsZ1X7HArYV5XGDMBYHAFKV5FqHIF7HQXOH9X7D1vOVWBqDMNODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUDurGVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsDcXGZSBiHAvmVWJwHgrKVcXKDur/HIrqHQBsH9BqHIveV5FUDMvCHErCDuFaVoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOZSX7Z1N7HQJsHuBYVcBOV5FYHMFaHQBiZ1FGD1rKHuFGDEBeHEJqDWr/VoFaDcJeH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsD9XsH9BiDSrwV5X7DMvODkB/DWrmVorqHQXGZ1FUZ1rYZMFaDMzGZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaZuBODcBwDQX7Z1N7VWJsHgvsVcFCH5FqVoJwD9XOZ1F7Z1BeD5XGDMNKZSJGDWXCVoB/D9XsH9X7D1veD5JwHgrKVcFKV5X7VoX7HQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuNOVIFCDWFaVEX7D9BsZ1X7HIveHQJsHgBYHEFiH5BmDoXGHQXsH9BiHAveD5NUHgNKDkBOV5FYHMBiHQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBqHQBiDQBqHAvmVWBODMvmVcFKV5BmVoBqD9BsZkFGHArKD5NUDEBOHEXeHEXCVoBiHQJeDQBqHArYHuFUDMvOVcXKHEFYVoX7HQBiVINUDSrYHQraDMBYZSJqH5F/DoFUHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4285,7 +4287,7 @@ class grid_ventas_por_vendedor_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['graf_disp']        = array('Bar', 'Pie', 'Line', 'Area');
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -4367,6 +4369,8 @@ class grid_ventas_por_vendedor_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -4756,6 +4760,9 @@ class grid_ventas_por_vendedor_apl
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['opcao'] = 'pesq';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['orig_pesq'] = 'grid';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['interativ_refresh'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_interativ'] = "";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['interativ_search'] = array();
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['int_search_dados'] = array();
           } 
       } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['opcao'] == "interativ_search")
@@ -4787,11 +4794,16 @@ class grid_ventas_por_vendedor_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_interativ'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['sc_total']);
@@ -5310,7 +5322,7 @@ class grid_ventas_por_vendedor_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -5908,39 +5920,45 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
        $cmd_sql = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['int_search_sql'][$tmp[0]];
        $vls     = "";
        $bol_numeric = false;
-       if ($tmp[3] != "clear_interativ")
-       {
-           $vls  = explode("_VLS_", $tmp[3]);
-           if($tmp[2] == "nn" || $tmp[2] == "bw")
+       if ($tmp[3] == "clear_interativ_all") {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['interativ_search'] = array();
+       }
+       else {
+           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['interativ_search'][$tmp[0]]);
+           if ($tmp[3] != "clear_interativ")
            {
-               $bol_numeric = true;
-               $delim  = "";
-               $delim1 = "";
-           }
-           else
-           {
-               $delim  = "'";
-               $delim1 = "'";
-           }
-           if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
-           {
-               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+               $vls  = explode("_VLS_", $tmp[3]);
+               if($tmp[2] == "nn" || $tmp[2] == "bw")
                {
-                   $delim  = "#";
-                   $delim1 = "#";
+                   $bol_numeric = true;
+                   $delim  = "";
+                   $delim1 = "";
                }
-               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['SC_sep_date']))
+               else
                {
-                   $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['SC_sep_date'];
-                   $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['SC_sep_date1'];
+                   $delim  = "'";
+                   $delim1 = "'";
+               }
+               if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
+               {
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+                   {
+                       $delim  = "#";
+                       $delim1 = "#";
+                   }
+                   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['SC_sep_date']))
+                   {
+                       $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['SC_sep_date'];
+                       $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['SC_sep_date1'];
+                   }
                }
            }
        }
-       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['interativ_search'][$tmp[0]]);
        if (!empty($vls))
        {
            $prep = "";
            $bol_has_empty = false;
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['interativ_search'][$tmp[0]]['tp_obj'] = $tmp[2];
            foreach ($vls as $cada_val)
            {
                $cada_val = NM_charset_decode($cada_val);
@@ -5953,6 +5971,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
                }
                $cada_val = substr($this->Db->qstr($cada_val), 1, -1);
                $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['interativ_search'][$tmp[0]]['lab'][$tmp[1]][] = $descr;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['interativ_search'][$tmp[0]]['val_sel'][] = $cada_val;
                if ($cada_val == "")
                {
                    $bol_has_empty = true;
@@ -6078,7 +6097,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           {
               if (!$prim)
               {
-                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_interativ'] .= " and ";
+                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_interativ'] .= " AND ";
               }
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq_interativ'] .= "(" . $val['val'] . ")";
               $prim = false;
@@ -6096,6 +6115,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['where_pesq'] = $tmp_cmd;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor']['refresh_interativ'] = (isset($tmp[5])) ? $tmp[5] : "S";
       if(isset($tmp[4]) && $tmp[4] == 'N')
       {
           $this->Arr_result['interativ_search'] = array();
@@ -6237,22 +6257,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Ventas por Vendedor :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -7034,14 +7055,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_vendedor'][$path_d
            $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_ventas_por_vendedor']['embutida_form'])
        {

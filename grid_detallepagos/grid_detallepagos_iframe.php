@@ -203,6 +203,7 @@ if (@is_file($_str_btn_file))
  {
 ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
  }
 ?>
@@ -362,7 +363,7 @@ $NM_volta   = (!isset($aParams['nmgp_opcao']) || 'pdf_res' != $aParams['nmgp_opc
            {
                $file_to_test .= '/stretch/';
            }
-           elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+           elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
            {
                $file_to_test .= '/centos8/';
            }

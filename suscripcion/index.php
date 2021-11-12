@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -295,8 +296,8 @@ class suscripcion_ini
       $this->nm_dt_criacao   = "20210104"; 
       $this->nm_hr_criacao   = "182236"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -990,7 +991,7 @@ class suscripcion_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYH9X7Z1rwVWXGDMNOZSNiDWXCVEX7HQNmZSBqZ1NOD5BqHgNOHENiDWr/ZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1X7HArKHQrqDMvCZSJ3V5FaHIBqHQFYDuBqHAveHQNUDMNOZSJqH5XCHMBOD9JmZSB/D1rKHQFGDEBOZSJGDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoFGD9BiZ1FaD1rwD5rqDErKVkXeHEFqDoBODcJeZSX7DSBYV5JwHuNOZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiD9BiZkFGDSrYD5FaDEBOHENiH5FYHMJeD9XsZ9XGHAveHQrqHuvmZSNiDWF/HMBOHQNmH9BqHAN7HuFaHgBeVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHErsDurmDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQXGZSBqHANOD5JeHgveZSXeDWr/HIrqD9NwZSBiDSN7HuJeHuzGVcBUHEFYHMJeHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiZ9XGHArYV5JwDMNOVcFCDWJeDoJsDcJUZ1rqHIveD5BqHgNKHEBUDWrGZuXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoBqDcXGZ9F7HIrKHuJwDMBYDkBsHEFGVEraHQJmH9BODSNOD5FaHgBOHEJGH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9FaD1rwZMFaDErKZSXeH5FYDoJeD9JKDQFGHAveV5FGHuvmVcBOV5X7DoJsHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFaDoFUHQJmVINUHABYZMB/DMzGDkB/DWXCHIFGDcBiDQJwHABYV5FaHuvmVIFCDWFaHMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoX7HQBqZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NwZ9F7D1NKVWJwDMBOZSNiH5B3VEF7D9XOZSBODSrYD5XGHgNKZSXeHEFaHIFGD9FYDQX7HANOHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2266,6 +2267,11 @@ ob_start();
     sajax_export("ajax_suscripcion_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_suscripcion->contr_suscripcion->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_suscripcion->contr_suscripcion->controle();
 //
     function nm_limpa_str_suscripcion(&$str)
@@ -2361,6 +2367,10 @@ ob_start();
       global $inicial_suscripcion;
       $aResp = array();
 
+      if (isset($inicial_suscripcion->contr_suscripcion->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_suscripcion->contr_suscripcion->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_suscripcion->contr_suscripcion->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_suscripcion->contr_suscripcion->NM_ajax_info['empty_filter'];
@@ -2457,6 +2467,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_suscripcion->contr_suscripcion->NM_ajax_info['btnDisabled']) && '' != $inicial_suscripcion->contr_suscripcion->NM_ajax_info['btnDisabled'])
+         {
+            suscripcion_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_suscripcion->contr_suscripcion->NM_ajax_info['btnLabel']) && '' != $inicial_suscripcion->contr_suscripcion->NM_ajax_info['btnLabel'])
+         {
+            suscripcion_pack_btn_label($aResp);
          }
          if (isset($inicial_suscripcion->contr_suscripcion->NM_ajax_info['varList']) && !empty($inicial_suscripcion->contr_suscripcion->NM_ajax_info['varList']))
          {
@@ -2561,8 +2579,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2811,6 +2834,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // suscripcion_pack_master_value
+
+   function suscripcion_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_suscripcion;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_suscripcion->contr_suscripcion->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // suscripcion_pack_ajax_alert
+
+   function suscripcion_pack_btn_label(&$aResp)
+   {
+      global $inicial_suscripcion;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_suscripcion->contr_suscripcion->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // suscripcion_pack_ajax_alert
 
    function suscripcion_pack_ajax_alert(&$aResp)
    {

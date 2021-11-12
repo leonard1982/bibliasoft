@@ -204,6 +204,7 @@ if ((isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['p
 {
 ?>
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+ <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" />
 <?php
 }
 ?>
@@ -239,6 +240,7 @@ if ($_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'")
     $pos = "right";
 }
 $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
+$colspan = ($_SESSION['scriptcase']['proc_mobile']) ? 1 : 2;
 ?>
 <table id="main_table" class="exportConfig" style="position: relative; <?php echo $top; ?> <?php echo $pos; ?>: 20px">
 <tr>
@@ -246,15 +248,14 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
 
   <div id="tabs">
     <ul class="scAppDivTabLine" style="display:<?php echo ($hasSelColumns)?"":"none"; ?>">
-      <li class="scTabActive"><a href="#tabs-general"><?php echo $tradutor[$language]['titulo']; ?></a></li>
-      <li class="scTabInactive"><a href="#tabs-sel-columns"><?php echo $tradutor[$language]['titulo_colunas']; ?></a></li>
+      <li class="scTabActive scGridToolbar" id="ctrl_tabs-general" style="font-weight: bold;cursor: pointer;" onclick="change_tabs('tabs-general', 'tabs-sel-columns')"><?php echo $tradutor[$language]['titulo']; ?></li>
+      <li class="scTabInactive scGridToolbar" id="ctrl_tabs-sel-columns" style="font-weight: bold;cursor: pointer;" onclick="change_tabs('tabs-sel-columns', 'tabs-general')"><?php echo $tradutor[$language]['titulo_colunas']; ?></li>
     </ul>
     <div id="tabs-general" style="padding: 0px; margin: 0px">
 
-
         <table class="scGridBorder" width='100%' cellspacing="0" cellpadding="0">
           <tr style="display:<?php echo ($hasSelColumns)?"none":""; ?>">
-            <td colspan=2 class="scGridLabelVert"><?php echo $tradutor[$language]['titulo']; ?></td>
+            <td colspan=<?php echo $colspan; ?> class="scGridLabelVert"><?php echo $tradutor[$language]['titulo']; ?></td>
           </tr>
         <?php
         $ckeck_grid  = (in_array("grid", $ini_pdf_res)) ? true : false;
@@ -262,14 +263,20 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
         {
             $Opt_display = (($origem == 'cons' && !in_array("tem_res_cons", $SC_conf_opt)) || ($origem == 'res' && !in_array("tem_res_res", $SC_conf_opt))) ? ' style="display: none"' : '';
         ?>
-          <tr><td class='scGridToolbar' colspan=2 style='font-weight: bold;'><?php echo $tradutor[$language]['group_general']; ?></td></tr>
+          <tr><td class='scGridToolbar' colspan=<?php echo $colspan; ?> style='font-weight: bold;'><?php echo $tradutor[$language]['group_general']; ?></td></tr>
 
          <tr<?php echo $Opt_display ?>>
 
            <td class="scGridFieldOddFont" align="left">
             <?php echo $tradutor[$language]['modules']; ?>
-           </td>
-           <td class="scGridFieldOddFont" align="left">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\" align=\"left\">";
+    }
+?>
             <div class="input-group input-group-horizontal">
         <?php
            foreach ($all_modules as $cada_mod)
@@ -296,13 +303,19 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
          <tr<?php echo $Opt_display ?>>
            <td class="scGridFieldOddFont">
              <?php echo $tradutor[$language]['tp_imp']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
              <select  name="cor_imp"  size=1>
                <option value="cor"      <?php if ($cor == "cor")  { echo " selected" ;} ?>><?php echo $tradutor[$language]['color']; ?></option>
                <option value="pb"       <?php if ($cor == "pb")  { echo " selected" ;} ?>><?php echo $tradutor[$language]['econm']; ?></option>
              </select>
-           </td>
+          </td>
          </tr>
         <?php
         if ($conf_socor == "N")
@@ -312,8 +325,14 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
          <tr<?php echo $Opt_display ?>>
            <td class="scGridFieldOddFont">
              <?php echo $tradutor[$language]['tp_pap']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
         <?php
           if (!isset($_SESSION['scriptcase']['sc_tp_pdf']) || $_SESSION['scriptcase']['sc_tp_pdf'] == "pd4ml")
           {
@@ -379,17 +398,23 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
           }
         ?>
              </select>
-           </td>
+         </td>
         </tr>
          <tr id='customiz_papel' style='display: none'>
            <td class="scGridFieldOddFont" align=right>
             <font size="1">
              <?php echo $tradutor[$language]['alt_papel'] . " x " . $tradutor[$language]['larg_papel']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
              <input type=text name="alt_papel"  size=2 maxlength=4 value="<?php echo NM_encode_input($apapel); ?>">&nbsp;x&nbsp;
              <input type=text name="larg_papel" size=2 maxlength=4 value="<?php echo NM_encode_input($lpapel); ?>">&nbsp;mm
-           </td>
+         </td>
         </tr>
         <?php
         }
@@ -401,13 +426,19 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
          <tr<?php echo $Opt_display ?>>
            <td class="scGridFieldOddFont">
              <?php echo $tradutor[$language]['orient']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
              <select  name="orientacao"  size=1>
                <option value="portrait" <?php if ($orientacao == "1")  { echo " selected" ;} ?>><?php echo $tradutor[$language]['retrato']; ?></option>
                <option value="landscape"<?php if ($orientacao == "2")  { echo " selected" ;} ?>><?php echo $tradutor[$language]['paisag']; ?></option>
              </select>
-           </td>
+         </td>
         </tr>
         <?php
         }
@@ -435,10 +466,16 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
          <tr>
            <td class="scGridFieldOddFont">
              <?php echo $tradutor[$language]['largura']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
              <input type="text" name="largura" value="<?php echo NM_encode_input($largura); ?>" size=6 maxlength=4>
-           </td>
+         </td>
         </tr>
              <input type="hidden" name="fonte" value="<?php echo NM_encode_input($fonte); ?>">
         <?php
@@ -452,9 +489,14 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
          <tr id="outras_opcoes">
            <td class="scGridFieldOddFont">
              <?php echo $tradutor[$language]['other_options']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
-
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
             <div class="input-group input-group-vertical">
               <?php
                 if ($bookmarks != "XX" && $conf_socor == "N")
@@ -498,7 +540,7 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
                 <label id="id_grid_zip" <?php echo $sDisplay; ?>><input type="checkbox" id="id_pdf_zip" name="pdf_zip" value="<?php echo $pdf_zip; ?>" <?php echo $check; ?>><?php echo $tradutor[$language]['format_zip']; ?></label>
 
              </div>
-           </td>
+         </td>
         </tr>
          <?php
 
@@ -510,8 +552,14 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
          <tr<?php echo $Opt_display ?>>
            <td class="scGridFieldOddFont">
              <?php echo $tradutor[$language]['page_break']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
             <div class="input-group input-group-vertical">
         <?php
            $ix_lab = 0;
@@ -527,7 +575,7 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
            }
         ?>
             </div>
-           </td>
+         </td>
         </tr>
         <?php
         }
@@ -541,12 +589,18 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
          <tr id="outras_opcoes"<?php echo $Opt_display ?>>
            <td class="scGridFieldOddFont">
              <?php echo $tradutor[$language]['other_options']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
             <div class="input-group input-group-vertical">
                 <label id="id_grid_zip" <?php echo $sDisplay; ?>><input type="checkbox" id="id_pdf_zip" name="pdf_zip" value="<?php echo $pdf_zip; ?>" <?php echo $check; ?>><?php echo $tradutor[$language]['format_zip']; ?></label>
             </div>
-           </td>
+         </td>
         </tr>
    <?php
    }
@@ -560,9 +614,16 @@ $top = ($opc != 'pdf_det') ? ' top: 20px;' : '';
          <tr>
            <td class="scGridFieldOddFont" align="left">
                <?php echo $tradutor[$language]['password']; ?>
-           </td>
-           <td class="scGridFieldOddFont" align="left">
-             <input type=password name="password" value="" size=30> </td>
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\" align=\"left\">";
+    }
+?>
+             <input type=password name="password" value="" size=30>
+         </td>
         </tr>
         <?php
         }
@@ -583,7 +644,7 @@ if ($ver_93 == "n")
                      ? ' style="display: none"' : '';
          ?>
 
-         <tr<?php echo $sDisplay; ?>><td class='scGridToolbar' style='font-weight: bold;' colspan=2><?php echo $tradutor[$language]['group_chart']; ?></td></tr>
+         <tr<?php echo $sDisplay; ?>><td class='scGridToolbar' style='font-weight: bold;' colspan=<?php echo $colspan; ?>><?php echo $tradutor[$language]['group_chart']; ?></td></tr>
 
          <?php
          $sDisplay = $is_chart_app? ' style="display: none"' : $sDisplay;
@@ -591,16 +652,22 @@ if ($ver_93 == "n")
          <tr<?php echo $sDisplay; ?>>
            <td class="scGridFieldOddFont">
              <?php echo $tradutor[$language]['create']; ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
              <select  name="create"  size=1 onchange='hide_level(this);'>
                <option value="S"<?php if ($createCharts == "S")  { echo " selected" ;} ?>><?php echo $tradutor[$language]['sim']; ?></option>
                <option value="N"<?php if ($createCharts == "N")  { echo " selected" ;} ?>><?php echo $tradutor[$language]['nao']; ?></option>
              </select>
-           </td>
+         </td>
         </tr>
 
-        <?php
+<?php
 }
         if ($script_case_init != "N" && isset($_SESSION['sc_session'][$script_case_init][$app_name]['Labels_GB']) && !empty($_SESSION['sc_session'][$script_case_init][$app_name]['Labels_GB']))
         {
@@ -622,7 +689,7 @@ if ($ver_93 == "s")
       </table>
       <br />
       <table class="scGridBorder" width='100%' cellspacing="0" cellpadding="0">
-         <tr<?php echo $sDisplay; ?>><td class='scGridToolbar' style='font-weight: bold;' colspan=2><?php echo $tradutor[$language]['group_chart']; ?></td></tr>
+         <tr<?php echo $sDisplay; ?>><td class='scGridToolbar' style='font-weight: bold;' colspan=<?php echo $colspan; ?>><?php echo $tradutor[$language]['group_chart']; ?></td></tr>
 <?php
 }
 ?>
@@ -630,8 +697,14 @@ if ($ver_93 == "s")
          <tr id='id_chart_level' <?php echo $sDisplay; ?>>
            <td class="scGridFieldOddFont">
              <?php echo wordwrap($tradutor[$language]['chart_level'], 25, "<br>", true); ?>
-           </td>
-           <td class="scGridFieldOddFont">
+<?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "           <br>";
+    }
+    else {
+        echo "           </td><td class=\"scGridFieldOddFont\">";
+    }
+?>
             <div class="input-group input-group-vertical">
         <?php
             $ult = count($_SESSION['sc_session'][$script_case_init][$app_name]['Labels_GB']) - 1;
@@ -644,7 +717,7 @@ if ($ver_93 == "s")
             }
         ?>
             </div>
-           </td>
+         </td>
         </tr>
         <?php
          }
@@ -652,8 +725,6 @@ if ($ver_93 == "s")
         ?>
 
         </table>
-
-
     </div>
     <div id="tabs-sel-columns" style="padding: 0px; margin: 0px; display:none">
 
@@ -676,9 +747,15 @@ if ($ver_93 == "s")
   </div>
   <div class="buttons">
     <?php
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    <table><tr><td>";
+    }
     echo  $_SESSION['scriptcase']['bg_btn_popup']['bok'];
     echo  "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
     echo  $_SESSION['scriptcase']['bg_btn_popup']['btbremove'];
+    if ($_SESSION['scriptcase']['proc_mobile']) {
+        echo "    </td></tr></table>";
+    }
     ?>
   </div>
 
@@ -777,30 +854,27 @@ function ajusta_window()
     bFixed = true;
     if (navigator.userAgent.indexOf("Chrome/") > 0)
     {
-      self.parent.tb_resize(altura + 180, largura + 50);
+      if (self.parent.tb_resize) self.parent.tb_resize(altura + 180, largura + 50);
       setTimeout("ajusta_window()", 50);
       return;
     }
   }
   mt.width( largura );
-  self.parent.tb_resize(altura + 180, largura + 50);
+  if (self.parent.tb_resize) self.parent.tb_resize(altura + 180, largura + 50);
 }
 
-$('#tabs > ul > li').click(function() {
-  if($(this).find("a").length)
-  {
-    $('#tabs > ul > li').removeClass("scTabActive");
-    $('#tabs > ul > li').addClass("scTabInactive");
+function change_tabs(tab_on, tab_off) {
+    $('#ctrl_' + tab_off).removeClass("scTabActive");
+    $('#ctrl_' + tab_off).addClass("scTabInactive");
+    $('#ctrl_' + tab_on).removeClass("scTabInactive");
+    $('#ctrl_' + tab_on).addClass("scTabActive");
+    $('#' + tab_off).hide();
+    $('#' + tab_on).show();
+}
 
-    $(this).removeClass("scTabInactive");
-    $(this).addClass("scTabActive");
-
-    $('#tabs > div').hide();
-    $($(this).find("a").attr("href")).show();
-  }
-});
 $( document ).ready(function() {
    setTimeout("ajusta_window();", 50);
+   adjustMobile();
 <?php
    if (isset($tem_out_opc) && !$tem_out_opc)
    {
@@ -1063,10 +1137,23 @@ if ($ver_93 == "n")
      }
   }
 
+  function adjustMobile()
+  {
+      <?php
+      if($_SESSION['scriptcase']['proc_mobile'])
+      {
+      ?>
+            $('.scAppDivTabLine').css('background-color', $('.scGridPage').css('background-color'));
+      <?php
+      }
+      ?>
+  }
+
 </script>
 <script>
      //colocado aqui devido a execu�ao modal naoo executar o ready do jquery
      window.onload = function(){
+         adjustMobile();
          setTimeout("ajusta_window()", 50);
          if (document.getElementById('id_all_cab') && document.getElementById('id_all_label')) {
              control_all_cab();

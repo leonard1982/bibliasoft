@@ -112,6 +112,12 @@ function Ord_cmp_init()
    $tab_ger_campos['predeterminada'] = "on";
    $tab_def_campos['predeterminada'] = "predeterminada";
    $tab_labels["predeterminada"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_empresas']['labels']["predeterminada"])) ? $_SESSION['sc_session'][$sc_init]['grid_empresas']['labels']["predeterminada"] : "Predeterminada";
+   $tab_ger_campos['nomina'] = "on";
+   $tab_def_campos['nomina'] = "nomina";
+   $tab_labels["nomina"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_empresas']['labels']["nomina"])) ? $_SESSION['sc_session'][$sc_init]['grid_empresas']['labels']["nomina"] : "Nómina";
+   $tab_ger_campos['codempresa'] = "on";
+   $tab_def_campos['codempresa'] = "codempresa";
+   $tab_labels["codempresa"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_empresas']['labels']["codempresa"])) ? $_SESSION['sc_session'][$sc_init]['grid_empresas']['labels']["codempresa"] : "Cod Nómina";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_empresas']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_empresas']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_empresas']['field_display'] as $NM_cada_field => $NM_cada_opc)
@@ -429,7 +435,7 @@ if (!$embbed)
   .sc_ui_sortable_ord {
    list-style-type: none;
    margin: 0;
-   min-width: 225px;
+   min-width: 120px;
   }
   .sc_ui_sortable_ord li {
    margin: 0 3px 3px 3px;
@@ -566,6 +572,13 @@ if (!$embbed)
    {
 ?>
    <?php echo nmButtonOutput($this->arr_buttons, "bsair_appdiv", "self.parent.tb_remove(); buttonunselectedOF();", "self.parent.tb_remove(); buttonunselectedOF();", "Bsair_ord", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   elseif ($_SESSION['scriptcase']['proc_mobile'])
+   {
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "closeAllModalPanes();", "closeAllModalPanes();", "Bsair_ord", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }

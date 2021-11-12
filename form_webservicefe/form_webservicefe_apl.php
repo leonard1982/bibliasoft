@@ -384,6 +384,12 @@ class form_webservicefe_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_webservicefe']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_webservicefe']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_webservicefe']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_webservicefe']['embutida_parms'];
@@ -2040,10 +2046,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2056,57 +2065,57 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_webservicefe'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'proveedor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'proveedor' == $filtro)) || (is_array($filtro) && in_array('proveedor', $filtro)))
         $this->ValidateField_proveedor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'modo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'modo' == $filtro)) || (is_array($filtro) && in_array('modo', $filtro)))
         $this->ValidateField_modo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor1' == $filtro)) || (is_array($filtro) && in_array('servidor1', $filtro)))
         $this->ValidateField_servidor1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor2' == $filtro)) || (is_array($filtro) && in_array('servidor2', $filtro)))
         $this->ValidateField_servidor2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor3' == $filtro)) || (is_array($filtro) && in_array('servidor3', $filtro)))
         $this->ValidateField_servidor3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tokenempresa' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tokenempresa' == $filtro)) || (is_array($filtro) && in_array('tokenempresa', $filtro)))
         $this->ValidateField_tokenempresa($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tokenpassword' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tokenpassword' == $filtro)) || (is_array($filtro) && in_array('tokenpassword', $filtro)))
         $this->ValidateField_tokenpassword($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'url_api_pdfs' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'url_api_pdfs' == $filtro)) || (is_array($filtro) && in_array('url_api_pdfs', $filtro)))
         $this->ValidateField_url_api_pdfs($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'url_api_sendmail' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'url_api_sendmail' == $filtro)) || (is_array($filtro) && in_array('url_api_sendmail', $filtro)))
         $this->ValidateField_url_api_sendmail($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor_prueba1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor_prueba1' == $filtro)) || (is_array($filtro) && in_array('servidor_prueba1', $filtro)))
         $this->ValidateField_servidor_prueba1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor_prueba2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor_prueba2' == $filtro)) || (is_array($filtro) && in_array('servidor_prueba2', $filtro)))
         $this->ValidateField_servidor_prueba2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor_prueba3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor_prueba3' == $filtro)) || (is_array($filtro) && in_array('servidor_prueba3', $filtro)))
         $this->ValidateField_servidor_prueba3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'token_prueba' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'token_prueba' == $filtro)) || (is_array($filtro) && in_array('token_prueba', $filtro)))
         $this->ValidateField_token_prueba($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'password_prueba' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'password_prueba' == $filtro)) || (is_array($filtro) && in_array('password_prueba', $filtro)))
         $this->ValidateField_password_prueba($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'enviar_dian' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'enviar_dian' == $filtro)) || (is_array($filtro) && in_array('enviar_dian', $filtro)))
         $this->ValidateField_enviar_dian($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'enviar_cliente' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'enviar_cliente' == $filtro)) || (is_array($filtro) && in_array('enviar_cliente', $filtro)))
         $this->ValidateField_enviar_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'proveedor_anterior' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'proveedor_anterior' == $filtro)) || (is_array($filtro) && in_array('proveedor_anterior', $filtro)))
         $this->ValidateField_proveedor_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor_anterior1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor_anterior1' == $filtro)) || (is_array($filtro) && in_array('servidor_anterior1', $filtro)))
         $this->ValidateField_servidor_anterior1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor_anterior2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor_anterior2' == $filtro)) || (is_array($filtro) && in_array('servidor_anterior2', $filtro)))
         $this->ValidateField_servidor_anterior2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'servidor_anterior3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'servidor_anterior3' == $filtro)) || (is_array($filtro) && in_array('servidor_anterior3', $filtro)))
         $this->ValidateField_servidor_anterior3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'token_anterior' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'token_anterior' == $filtro)) || (is_array($filtro) && in_array('token_anterior', $filtro)))
         $this->ValidateField_token_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'password_anterior' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'password_anterior' == $filtro)) || (is_array($filtro) && in_array('password_anterior', $filtro)))
         $this->ValidateField_password_anterior($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'envio_credenciales' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'envio_credenciales' == $filtro)) || (is_array($filtro) && in_array('envio_credenciales', $filtro)))
         $this->ValidateField_envio_credenciales($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'copia_factura_a' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'copia_factura_a' == $filtro)) || (is_array($filtro) && in_array('copia_factura_a', $filtro)))
         $this->ValidateField_copia_factura_a($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'plantillas_correo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'plantillas_correo' == $filtro)) || (is_array($filtro) && in_array('plantillas_correo', $filtro)))
         $this->ValidateField_plantillas_correo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'plantilla_pordefecto' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'plantilla_pordefecto' == $filtro)) || (is_array($filtro) && in_array('plantilla_pordefecto', $filtro)))
         $this->ValidateField_plantilla_pordefecto($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
@@ -7230,5 +7239,21 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-1");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-2", "sc_b_sai_t.sc-unique-btn-4", "sc_b_sai_t.sc-unique-btn-3");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

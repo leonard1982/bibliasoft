@@ -397,6 +397,12 @@ class form_detalle_ric_apl
       {
           $_SESSION['gTotalpa'] = $_GET["gtotalpa"];
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_detalle_ric']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_detalle_ric']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_detalle_ric']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_detalle_ric']['embutida_parms'];
@@ -2221,10 +2227,13 @@ class form_detalle_ric_apl
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade, $sc_seq_vert;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2237,21 +2246,21 @@ class form_detalle_ric_apl
               $this->NM_ajax_info['errList']['geral_form_detalle_ric'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'idrc_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idrc_' == $filtro)) || (is_array($filtro) && in_array('idrc_', $filtro)))
         $this->ValidateField_idrc_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idfact_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idfact_' == $filtro)) || (is_array($filtro) && in_array('idfact_', $filtro)))
         $this->ValidateField_idfact_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idbanco_caja_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idbanco_caja_' == $filtro)) || (is_array($filtro) && in_array('idbanco_caja_', $filtro)))
         $this->ValidateField_idbanco_caja_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idfp_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idfp_' == $filtro)) || (is_array($filtro) && in_array('idfp_', $filtro)))
         $this->ValidateField_idfp_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'monto_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'monto_' == $filtro)) || (is_array($filtro) && in_array('monto_', $filtro)))
         $this->ValidateField_monto_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'banco_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'banco_' == $filtro)) || (is_array($filtro) && in_array('banco_', $filtro)))
         $this->ValidateField_banco_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numcheque_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numcheque_' == $filtro)) || (is_array($filtro) && in_array('numcheque_', $filtro)))
         $this->ValidateField_numcheque_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fechacob_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fechacob_' == $filtro)) || (is_array($filtro) && in_array('fechacob_', $filtro)))
         $this->ValidateField_fechacob_($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -3944,9 +3953,15 @@ if($this->ds[0][0]=='NO')
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Corregir";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_detalle_ric' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_detalle_ric';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_detalle_ric';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Corregir";
  }
 ;
@@ -3957,9 +3972,15 @@ else
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Recibo está asentado no se puede modificar";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_detalle_ric' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_detalle_ric';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_detalle_ric';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Recibo está asentado no se puede modificar";
  }
 ;
@@ -4008,9 +4029,15 @@ else
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Recibo está asentado no se puede modificar";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_detalle_ric' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_detalle_ric';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_detalle_ric';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Recibo está asentado no se puede modificar";
  }
 ;
@@ -4057,9 +4084,15 @@ else
 	
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Recibo está asentado no se puede modificar";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_detalle_ric' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_detalle_ric';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_detalle_ric';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Recibo está asentado no se puede modificar";
  }
 ;
@@ -6348,7 +6381,8 @@ $_SESSION['scriptcase']['form_detalle_ric']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -7642,5 +7676,30 @@ if (parent && parent.scAjaxDetailValue)
             }
         }
     } // sc_ajax_message
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-2");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-3");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-4");
+                break;
+            case "balterarsel":
+                return array("sc_b_upd_t.sc-unique-btn-5");
+                break;
+            case "bexcluirsel":
+                return array("sc_b_del_t.sc-unique-btn-6");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-7");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

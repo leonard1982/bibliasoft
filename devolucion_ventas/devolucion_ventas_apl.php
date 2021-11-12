@@ -327,6 +327,12 @@ class devolucion_ventas_apl
       {
           $_SESSION['idpref'] = $this->idpref;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['devolucion_ventas']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['devolucion_ventas']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['devolucion_ventas']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['devolucion_ventas']['embutida_parms'];
@@ -1952,10 +1958,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1968,27 +1977,27 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_devolucion_ventas'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'numerodev' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numerodev' == $filtro)) || (is_array($filtro) && in_array('numerodev', $filtro)))
         $this->ValidateField_numerodev($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha' == $filtro)) || (is_array($filtro) && in_array('fecha', $filtro)))
         $this->ValidateField_fecha($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'resolucion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'resolucion' == $filtro)) || (is_array($filtro) && in_array('resolucion', $filtro)))
         $this->ValidateField_resolucion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numfacven' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numfacven' == $filtro)) || (is_array($filtro) && in_array('numfacven', $filtro)))
         $this->ValidateField_numfacven($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fechafactura' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fechafactura' == $filtro)) || (is_array($filtro) && in_array('fechafactura', $filtro)))
         $this->ValidateField_fechafactura($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'confirma' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'confirma' == $filtro)) || (is_array($filtro) && in_array('confirma', $filtro)))
         $this->ValidateField_confirma($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'vdesc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'vdesc' == $filtro)) || (is_array($filtro) && in_array('vdesc', $filtro)))
         $this->ValidateField_vdesc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'vparc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'vparc' == $filtro)) || (is_array($filtro) && in_array('vparc', $filtro)))
         $this->ValidateField_vparc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'viva' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'viva' == $filtro)) || (is_array($filtro) && in_array('viva', $filtro)))
         $this->ValidateField_viva($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'vunit' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'vunit' == $filtro)) || (is_array($filtro) && in_array('vunit', $filtro)))
         $this->ValidateField_vunit($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'observa' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'observa' == $filtro)) || (is_array($filtro) && in_array('observa', $filtro)))
         $this->ValidateField_observa($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -4549,7 +4558,8 @@ $_SESSION['scriptcase']['devolucion_ventas']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -5522,5 +5532,21 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
             $this->NM_non_ajax_info['ajaxJavascript'][] = array($sJsFunc, $aParam);
         }
     } // sc_ajax_javascript
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "ok":
+                return array("sub_form_b.sc-unique-btn-1");
+                break;
+            case "help":
+                return array("sc_b_hlp_b");
+                break;
+            case "exit":
+                return array("Bsair_b.sc-unique-btn-2", "Bsair_b.sc-unique-btn-3");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

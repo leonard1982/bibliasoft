@@ -225,8 +225,8 @@ class form_hacerpagos_seleccionar_cuenta_ini
       $this->nm_dt_criacao   = "20191017"; 
       $this->nm_hr_criacao   = "221936"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -800,6 +800,8 @@ class form_hacerpagos_seleccionar_cuenta_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -925,7 +927,7 @@ class form_hacerpagos_seleccionar_cuenta_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['form_hacerpagos_seleccionar_cuenta']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['form_hacerpagos_seleccionar_cuenta']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9FUHIrwD5JeDMrwVcBOV5X7HMFUHQNwVIJsD1rwV5JwDEvsHArsHEFqVoX7DcBwDuBqHArYV5XGDMzGV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoFUDcXGDQX7HABYHuBiHuBYVcBUH5FqHMX7HQBsZ1BOHIveV5B/DMzGHErCHEXCHIrqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSB/Z1BeD5XGDEBOHEJqV5FaVoJeDcJeDQX7D1BeD5JwHuzGVIFCDWXCVoB/DcJUH9B/Z1BeD5JeDMNKZSJGH5FYVoB/D9XsDQJsHABYV5FGHgvsDkBOHEFYVoraD9BsZSB/HABYD5XGDMNKZSXeH5FYZuB/DcBwDQX7Z1N7VWJsHgvsV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiD9JmH9B/DSBeV5B/DMveHEJqHEFqDoFUHQFYH9FUHArYHQB/HgvOVcrsDWFYVEraDcBqH9B/HIrwHQXGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BqHgBYHErsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoraDcBqZkFGD1zGD5JeHgrKZSXeH5FGZuJeD9JKDQBqHIrKV5XGHuzGVcFeDWF/VErqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiH9X7HANOV5JwHgvOVIBsDurGVEF7DcBqZ1B/HABYZMFaDMzGZSJqHEFqHMFaHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgrKHEJqH5FYVoBOHQBiH9FUHAveV5BqHuBOVcBUDur/DoFUHQXGZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5JwHuzGVIBOV5FYVoJwD9JmZ1F7HABYD5rqDMzGHEJGDWr/DoBODcJeDQX7HIrwV5JwHuzGDkB/V5X7VoFGDcJUZ1B/HIrwV5FaDMBYZSXeH5FYVoXGD9XsZSX7Z1N7V5FUHuzGVIB/V5X7VoBqD9BiZ1B/HArYV5FUDEvsHEFiDWFGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQJwHINaV5XGDMvOV9BUDur/HMFaD9XOZ1FaHANOV5FGDMvCHErsDWFqDoBOHQNmDuFaZ1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHAvOV5JeDMvOZSNiDur/HMBiD9BsVIraD1rwV5X7HgBeHErCDWX7DoraD9NwDuFaHIrKV5BOHgvsVIFCDuX7HIJeD9BiZ1FaHABYZMJeHgvCHEXeHEXCHMJeHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2341,6 +2343,8 @@ class form_hacerpagos_seleccionar_cuenta_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2746,11 +2750,16 @@ class form_hacerpagos_seleccionar_cuenta_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta']['tot_geral']);
@@ -3194,7 +3203,7 @@ class form_hacerpagos_seleccionar_cuenta_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -3952,22 +3961,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Cuentas por pagar :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -4749,14 +4759,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos_seleccionar_cuenta
            $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['form_hacerpagos_seleccionar_cuenta']['embutida_form'])
        {

@@ -229,8 +229,8 @@ class grid_empresas_ini
       $this->nm_dt_criacao   = "20191025"; 
       $this->nm_hr_criacao   = "161556"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20211025"; 
+      $this->nm_hr_ult_alt   = "172102"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -824,6 +824,8 @@ class grid_empresas_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -958,7 +960,7 @@ class grid_empresas_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_empresas']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_empresas']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDQBqD1BeHuJwHuvmVcFeDuFqHIBiD9XOZSBOHIveHuXGDMBYVkXeDWFqHMJsHQNmDQFUHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNOHENiDWB3DoXGDcBiDuFaHABYD5rqDMzGDkBsDWFaHMFUD9XGZ1X7Z1BeD5XGDENOHEBUDWFGDoBqDcBiDQFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUDcBwDQX7Z1BYV5JeHuzGVIBODWFYVoFGDcBqZ1FaD1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsHEFqDoB/HQFYH9X7Z1BYD5BqHuNODkBOV5F/VoBOD9XGZ1X7Z1BeZMXGDMzGHEJqDWFqVoJwD9NmDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDEBOVkJ3DuJeVoB/D9NwDQFaDSN7D5JeHuBOVcFKDWFYHIJsHQNwZ1FaHAN7ZMB/HgrKVkJqDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYZ9F7HArYVWJsDMNODkBOHEFYHMJsD9XOH9BqZ1NOHuJsHgvsZSJqHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErsHEFqVoBiDcXGH9FGHAN7HuFUDMBOVcB/H5XCHMX7D9XOZkFUZ1rYD5JeHgBOHEXeDWXCHIX7HQXsZ9XGHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDuFaDoJeD9JKDQX7D1veV5raHgrKVcBOV5FYVorqD9XOZSB/HArYD5JeDMBYHEJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuJeHgrKHArCV5XCHIFGD9NmDQJwHANOHQNUDMNOVcFKHEX7HIJsHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHIveHQJwDEBODkFeH5FYVoFGHQJKDQBqD1BeV5FUDMNOVcFCDWF/VorqHQNmZ1rqD1rKD5FaHgBYHErCH5F/VoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2458,6 +2460,8 @@ class grid_empresas_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2552,6 +2556,8 @@ class grid_empresas_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['field_order'][] = "sinmovimiento";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['field_order'][] = "tipo_negocio";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['field_order'][] = "predeterminada";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['field_order'][] = "nomina";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['field_order'][] = "codempresa";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['field_order'][] = "idempresa";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['field_order'][] = "nombre";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['field_order'][] = "observaciones";
@@ -2861,11 +2867,16 @@ class grid_empresas_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['tot_geral']);
@@ -3320,7 +3331,7 @@ class grid_empresas_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -3577,11 +3588,13 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['sc_sql
        $this->sinmovimiento = $this->rs_grid->fields[3] ;  
        $this->tipo_negocio = $this->rs_grid->fields[4] ;  
        $this->predeterminada = $this->rs_grid->fields[5] ;  
-       $this->idempresa = $this->rs_grid->fields[6] ;  
+       $this->nomina = $this->rs_grid->fields[6] ;  
+       $this->codempresa = $this->rs_grid->fields[7] ;  
+       $this->idempresa = $this->rs_grid->fields[8] ;  
        $this->idempresa = (string)$this->idempresa;
-       $this->nombre = $this->rs_grid->fields[7] ;  
-       $this->observaciones = $this->rs_grid->fields[8] ;  
-       $this->actualizada = $this->rs_grid->fields[9] ;  
+       $this->nombre = $this->rs_grid->fields[9] ;  
+       $this->observaciones = $this->rs_grid->fields[10] ;  
+       $this->actualizada = $this->rs_grid->fields[11] ;  
       $_SESSION['scriptcase']['grid_empresas']['contr_erro'] = 'on';
   ?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
@@ -4470,22 +4483,23 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <HEAD>
  <TITLE>Lista de Empresas :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -5394,14 +5408,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas'][$path_doc_md5][1] 
            $_SESSION['sc_session'][$script_case_init]['grid_empresas']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_empresas']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_empresas']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_empresas']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_empresas']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_empresas']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_empresas']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_empresas']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_empresas']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_empresas']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_empresas']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_empresas']['embutida_form'])
        {

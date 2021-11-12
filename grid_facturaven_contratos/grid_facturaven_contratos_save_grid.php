@@ -1263,6 +1263,13 @@ else
 ?>
 <?php
    }
+   elseif ($_SESSION['scriptcase']['proc_mobile'])
+   {
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "closeAllModalPanes();", "closeAllModalPanes();", "Bsair", "", "", "", "absmiddle", "", "0px", $this->path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
    else
    {
 ?>

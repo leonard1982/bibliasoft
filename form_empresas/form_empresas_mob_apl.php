@@ -71,6 +71,10 @@ class form_empresas_mob_apl
    var $correo;
    var $comentario;
    var $celular;
+   var $codempresa;
+   var $nomina;
+   var $nomina_1;
+   var $nombre_empresa_nomina;
    var $entorno;
    var $entorno_1;
    var $nm_data;
@@ -120,6 +124,10 @@ class form_empresas_mob_apl
           if (isset($this->NM_ajax_info['param']['celular']))
           {
               $this->celular = $this->NM_ajax_info['param']['celular'];
+          }
+          if (isset($this->NM_ajax_info['param']['codempresa']))
+          {
+              $this->codempresa = $this->NM_ajax_info['param']['codempresa'];
           }
           if (isset($this->NM_ajax_info['param']['comentario']))
           {
@@ -208,6 +216,14 @@ class form_empresas_mob_apl
           if (isset($this->NM_ajax_info['param']['nombre_empresa']))
           {
               $this->nombre_empresa = $this->NM_ajax_info['param']['nombre_empresa'];
+          }
+          if (isset($this->NM_ajax_info['param']['nombre_empresa_nomina']))
+          {
+              $this->nombre_empresa_nomina = $this->NM_ajax_info['param']['nombre_empresa_nomina'];
+          }
+          if (isset($this->NM_ajax_info['param']['nomina']))
+          {
+              $this->nomina = $this->NM_ajax_info['param']['nomina'];
           }
           if (isset($this->NM_ajax_info['param']['observaciones']))
           {
@@ -364,6 +380,12 @@ class form_empresas_mob_apl
       if (isset($_GET["gnit"]) && isset($this->gnit)) 
       {
           $_SESSION['gnit'] = $this->gnit;
+      }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_empresas_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_empresas_mob']['opc_ant'] = "inicio";
       }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_empresas_mob']['embutida_parms']))
       { 
@@ -1150,6 +1172,8 @@ class form_empresas_mob_apl
       if (isset($this->correo)) { $this->nm_limpa_alfa($this->correo); }
       if (isset($this->comentario)) { $this->nm_limpa_alfa($this->comentario); }
       if (isset($this->celular)) { $this->nm_limpa_alfa($this->celular); }
+      if (isset($this->codempresa)) { $this->nm_limpa_alfa($this->codempresa); }
+      if (isset($this->nombre_empresa_nomina)) { $this->nm_limpa_alfa($this->nombre_empresa_nomina); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1288,6 +1312,18 @@ class form_empresas_mob_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'entorno');
           }
+          if ('validate_nomina' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nomina');
+          }
+          if ('validate_codempresa' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'codempresa');
+          }
+          if ('validate_nombre_empresa_nomina' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nombre_empresa_nomina');
+          }
           form_empresas_mob_pack_ajax_response();
           exit;
       }
@@ -1342,6 +1378,24 @@ class form_empresas_mob_apl
                           $this->predeterminada .= ";";
                       } 
                       $this->predeterminada .= $dados_predeterminada_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->nomina))
+          {
+              $x = 0; 
+              $this->nomina_1 = $this->nomina;
+              $this->nomina = ""; 
+              if ($this->nomina_1 != "") 
+              { 
+                  foreach ($this->nomina_1 as $dados_nomina_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->nomina .= ";";
+                      } 
+                      $this->nomina .= $dados_nomina_1;
                       $x++ ; 
                   } 
               } 
@@ -1887,6 +1941,15 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'entorno':
                return "Entorno";
                break;
+           case 'nomina':
+               return "Activar Nómina";
+               break;
+           case 'codempresa':
+               return "Código Empresa Nómina";
+               break;
+           case 'nombre_empresa_nomina':
+               return "Nombre BD Nómina";
+               break;
            case 'actualizada':
                return "Actualizada";
                break;
@@ -1919,10 +1982,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1935,36 +2001,42 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_empresas_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'idempresa' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idempresa' == $filtro)) || (is_array($filtro) && in_array('idempresa', $filtro)))
         $this->ValidateField_idempresa($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nit' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nit' == $filtro)) || (is_array($filtro) && in_array('nit', $filtro)))
         $this->ValidateField_nit($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre' == $filtro)) || (is_array($filtro) && in_array('nombre', $filtro)))
         $this->ValidateField_nombre($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre_empresa' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_empresa' == $filtro)) || (is_array($filtro) && in_array('nombre_empresa', $filtro)))
         $this->ValidateField_nombre_empresa($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'observaciones' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'observaciones' == $filtro)) || (is_array($filtro) && in_array('observaciones', $filtro)))
         $this->ValidateField_observaciones($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'creada' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'creada' == $filtro)) || (is_array($filtro) && in_array('creada', $filtro)))
         $this->ValidateField_creada($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'sinmovimiento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sinmovimiento' == $filtro)) || (is_array($filtro) && in_array('sinmovimiento', $filtro)))
         $this->ValidateField_sinmovimiento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'copiada_como' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'copiada_como' == $filtro)) || (is_array($filtro) && in_array('copiada_como', $filtro)))
         $this->ValidateField_copiada_como($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_negocio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_negocio' == $filtro)) || (is_array($filtro) && in_array('tipo_negocio', $filtro)))
         $this->ValidateField_tipo_negocio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'predeterminada' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'predeterminada' == $filtro)) || (is_array($filtro) && in_array('predeterminada', $filtro)))
         $this->ValidateField_predeterminada($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'password' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'password' == $filtro)) || (is_array($filtro) && in_array('password', $filtro)))
         $this->ValidateField_password($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'celular' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'celular' == $filtro)) || (is_array($filtro) && in_array('celular', $filtro)))
         $this->ValidateField_celular($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'correo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'correo' == $filtro)) || (is_array($filtro) && in_array('correo', $filtro)))
         $this->ValidateField_correo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'comentario' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'comentario' == $filtro)) || (is_array($filtro) && in_array('comentario', $filtro)))
         $this->ValidateField_comentario($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'entorno' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'entorno' == $filtro)) || (is_array($filtro) && in_array('entorno', $filtro)))
         $this->ValidateField_entorno($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'nomina' == $filtro)) || (is_array($filtro) && in_array('nomina', $filtro)))
+        $this->ValidateField_nomina($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'codempresa' == $filtro)) || (is_array($filtro) && in_array('codempresa', $filtro)))
+        $this->ValidateField_codempresa($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_empresa_nomina' == $filtro)) || (is_array($filtro) && in_array('nombre_empresa_nomina', $filtro)))
+        $this->ValidateField_nombre_empresa_nomina($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
 //---
@@ -1984,9 +2056,15 @@ if (!isset($this->sc_temp_gnombre_archivo_empresa)) {$this->sc_temp_gnombre_arch
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "No se puede borrar la base de datos predeterminada.";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_empresas_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_empresas_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_empresas_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "No se puede borrar la base de datos predeterminada.";
  }
 ;
@@ -1996,9 +2074,15 @@ if (!isset($this->sc_temp_gnombre_archivo_empresa)) {$this->sc_temp_gnombre_arch
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "No se puede borrar la base de datos donde ha iniciado sesión.";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_empresas_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_empresas_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_empresas_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "No se puede borrar la base de datos donde ha iniciado sesión.";
  }
 ;
@@ -2767,6 +2851,154 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_entorno
 
+    function ValidateField_nomina(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nomina == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->nomina = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->nomina))
+          {
+              $x = 0; 
+              $this->nomina_1 = array(); 
+              foreach ($this->nomina as $ind => $dados_nomina_1 ) 
+              {
+                  if ($dados_nomina_1 != "") 
+                  {
+                      $this->nomina_1[] = $dados_nomina_1;
+                  } 
+              } 
+              $this->nomina = ""; 
+              foreach ($this->nomina_1 as $dados_nomina_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->nomina .= ";";
+                   } 
+                   $this->nomina .= $dados_nomina_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'nomina';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_nomina
+
+    function ValidateField_codempresa(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->codempresa) > 30) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Código Empresa Nómina " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 30 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['codempresa']))
+              {
+                  $Campos_Erros['codempresa'] = array();
+              }
+              $Campos_Erros['codempresa'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 30 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['codempresa']) || !is_array($this->NM_ajax_info['errList']['codempresa']))
+              {
+                  $this->NM_ajax_info['errList']['codempresa'] = array();
+              }
+              $this->NM_ajax_info['errList']['codempresa'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 30 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "abcdefghijklmnopqrstuvwxyz0123456789Ã§_*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789Ã‡_*";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->codempresa ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->codempresa, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Código Empresa Nómina " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['codempresa']))
+              {
+                  $Campos_Erros['codempresa'] = array();
+              }
+              $Campos_Erros['codempresa'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['codempresa']) || !is_array($this->NM_ajax_info['errList']['codempresa']))
+              {
+                  $this->NM_ajax_info['errList']['codempresa'] = array();
+              }
+              $this->NM_ajax_info['errList']['codempresa'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'codempresa';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_codempresa
+
+    function ValidateField_nombre_empresa_nomina(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->nombre_empresa_nomina) > 200) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Nombre BD Nómina " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 200 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['nombre_empresa_nomina']))
+              {
+                  $Campos_Erros['nombre_empresa_nomina'] = array();
+              }
+              $Campos_Erros['nombre_empresa_nomina'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 200 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['nombre_empresa_nomina']) || !is_array($this->NM_ajax_info['errList']['nombre_empresa_nomina']))
+              {
+                  $this->NM_ajax_info['errList']['nombre_empresa_nomina'] = array();
+              }
+              $this->NM_ajax_info['errList']['nombre_empresa_nomina'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 200 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'nombre_empresa_nomina';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_nombre_empresa_nomina
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -2805,6 +3037,9 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['correo'] = $this->correo;
     $this->nmgp_dados_form['comentario'] = $this->comentario;
     $this->nmgp_dados_form['entorno'] = $this->entorno;
+    $this->nmgp_dados_form['nomina'] = $this->nomina;
+    $this->nmgp_dados_form['codempresa'] = $this->codempresa;
+    $this->nmgp_dados_form['nombre_empresa_nomina'] = $this->nombre_empresa_nomina;
     $this->nmgp_dados_form['actualizada'] = $this->actualizada;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['dados_form'] = $this->nmgp_dados_form;
    }
@@ -3388,6 +3623,9 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
           $this->ajax_return_values_correo();
           $this->ajax_return_values_comentario();
           $this->ajax_return_values_entorno();
+          $this->ajax_return_values_nomina();
+          $this->ajax_return_values_codempresa();
+          $this->ajax_return_values_nombre_empresa_nomina();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
@@ -3624,6 +3862,27 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['Lookup_copiad
              $predeterminada_val_str .= ", ";
           }
           $predeterminada_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $nomina_val_str = "''";
+   if (!empty($this->nomina))
+   {
+       if (is_array($this->nomina))
+       {
+           $Tmp_array = $this->nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->nomina);
+       }
+       $nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $nomina_val_str)
+          {
+             $nomina_val_str .= ", ";
+          }
+          $nomina_val_str .= "'$Tmp_val_cmp'";
        }
    }
    $nm_comando = "SELECT nombre, nombre_empresa  FROM empresas  ORDER BY nombre_empresa";
@@ -3962,6 +4221,85 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['Lookup_entorn
           }
    }
 
+          //----- nomina
+   function ajax_return_values_nomina($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("nomina", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->nomina);
+              $aLookup = array();
+              $this->_tmp_lookup_nomina = $this->nomina;
+
+$aLookup[] = array(form_empresas_mob_pack_protect_string('SI') => str_replace('<', '&lt;',form_empresas_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['Lookup_nomina'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['nomina']) && !empty($this->NM_ajax_info['select_html']['nomina']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['nomina']);
+          }
+          $this->NM_ajax_info['fldList']['nomina'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-nomina',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['nomina']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['nomina']['valList'][$i] = form_empresas_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['nomina']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['nomina']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['nomina']['labList'] = $aLabel;
+          }
+   }
+
+          //----- codempresa
+   function ajax_return_values_codempresa($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("codempresa", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->codempresa);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['codempresa'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- nombre_empresa_nomina
+   function ajax_return_values_nombre_empresa_nomina($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("nombre_empresa_nomina", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->nombre_empresa_nomina);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['nombre_empresa_nomina'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
     function fetchUniqueUploadName($originalName, $uploadDir, $fieldName)
     {
         $originalName = trim($originalName);
@@ -4059,6 +4397,8 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 	if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
 	{  
 		$this->entorno ="escritorio";
+		
+		$this->Ini->nm_hidden_blocos[1] = "off"; $this->NM_ajax_info['blockDisplay']['1'] = 'off';
 	}
 	else
 	{
@@ -4066,7 +4406,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 	}
 
 }
-
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     if (($original_entorno != $this->entorno || (isset($bFlagRead_entorno) && $bFlagRead_entorno)))
@@ -4189,6 +4528,7 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_nombre = $this->nombre;
     $original_nombre_empresa = $this->nombre_empresa;
+    $original_nombre_empresa_nomina = $this->nombre_empresa_nomina;
 }
   $indicio = strtolower($this->nombre_empresa );
 $indicio = trim($indicio);
@@ -4196,6 +4536,11 @@ $indicio = str_replace(" ","_",$indicio);
 $indicio = "inventario_".$indicio;
 
 $this->nombre  = $indicio;
+
+
+$vnombre_nomina = $this->nombre ;
+$vnombre_nomina = str_replace("inventario","nomina",$vnombre_nomina);
+$this->nombre_empresa_nomina  = $vnombre_nomina;
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     if (($original_nombre != $this->nombre || (isset($bFlagRead_nombre) && $bFlagRead_nombre)))
@@ -4205,6 +4550,284 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     if (($original_nombre_empresa != $this->nombre_empresa || (isset($bFlagRead_nombre_empresa) && $bFlagRead_nombre_empresa)))
     {
         $this->ajax_return_values_nombre_empresa(true);
+    }
+    if (($original_nombre_empresa_nomina != $this->nombre_empresa_nomina || (isset($bFlagRead_nombre_empresa_nomina) && $bFlagRead_nombre_empresa_nomina)))
+    {
+        $this->ajax_return_values_nombre_empresa_nomina(true);
+    }
+}
+$_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off'; 
+    }
+    if ("alterar" == $this->nmgp_opcao) {
+      $this->sc_evento = $this->nmgp_opcao;
+      $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_codempresa = $this->codempresa;
+    $original_nombre = $this->nombre;
+    $original_nombre_empresa_nomina = $this->nombre_empresa_nomina;
+    $original_nomina = $this->nomina;
+}
+  if($this->nomina =="SI")
+{
+	$vnombre_nomina = $this->nombre_empresa_nomina ;
+	
+	if(empty(trim($vnombre_nomina)))
+	{
+		$vnombre_nomina = $this->nombre ;
+		$vnombre_nomina = str_replace("inventario","nomina",$vnombre_nomina);
+		$this->nombre_empresa_nomina  = $vnombre_nomina;
+	}
+
+	$vsql = "SHOW DATABASES like '".$vnombre_nomina."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiNomina = array();
+      $this->vsinomina = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiNomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsinomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiNomina = false;
+          $this->vSiNomina_erro = $this->Db->ErrorMsg();
+          $this->vsinomina = false;
+          $this->vsinomina_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(!isset($this->vsinomina[0][0]))
+	{
+		$vconsulta = "mysqldbcopy --source=root:,.Facilweb2020@localhost:3306 --destination=root:,.Facilweb2020@localhost:3306 nomina_copia:".$vnombre_nomina;
+		shell_exec($vconsulta);
+		$this->nm_mens_alert[] = "Se creó la base de datos de nómina: ".$vnombre_nomina; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Se creó la base de datos de nómina: ".$vnombre_nomina); }}
+	else
+	{
+		if(!empty($this->codempresa ))
+		{
+			$this->codempresa  = str_replace("_*","",$this->codempresa );
+			$this->nm_mens_alert[] = "Se activó la base de datos de nómina."; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Se activó la base de datos de nómina."); }}
+		else
+		{
+			
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Debe diligencias el campo 'Código Empresa Nómina'.";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_empresas_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_empresas_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "Debe diligencias el campo 'Código Empresa Nómina'.";
+ }
+;
+		}
+	}
+}
+else
+{
+	$vnombre_nomina = $this->nombre_empresa_nomina ;
+	
+	if(empty(trim($vnombre_nomina)))
+	{
+		$vnombre_nomina = $this->nombre ;
+		$vnombre_nomina = str_replace("inventario","nomina",$vnombre_nomina);
+		$this->nombre_empresa_nomina  = $vnombre_nomina;
+	}
+
+	$vsql = "SHOW DATABASES like '".$vnombre_nomina."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiNomina = array();
+      $this->vsinomina = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiNomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsinomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiNomina = false;
+          $this->vSiNomina_erro = $this->Db->ErrorMsg();
+          $this->vsinomina = false;
+          $this->vsinomina_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vsinomina[0][0]))
+	{
+		if(!empty($this->codempresa ))
+		{
+			$this->codempresa  = $this->codempresa ."_*";
+		}
+	}
+}
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_codempresa != $this->codempresa || (isset($bFlagRead_codempresa) && $bFlagRead_codempresa)))
+    {
+        $this->ajax_return_values_codempresa(true);
+    }
+    if (($original_nombre != $this->nombre || (isset($bFlagRead_nombre) && $bFlagRead_nombre)))
+    {
+        $this->ajax_return_values_nombre(true);
+    }
+    if (($original_nombre_empresa_nomina != $this->nombre_empresa_nomina || (isset($bFlagRead_nombre_empresa_nomina) && $bFlagRead_nombre_empresa_nomina)))
+    {
+        $this->ajax_return_values_nombre_empresa_nomina(true);
+    }
+    if (($original_nomina != $this->nomina || (isset($bFlagRead_nomina) && $bFlagRead_nomina)))
+    {
+        $this->ajax_return_values_nomina(true);
+    }
+}
+$_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off'; 
+    }
+    if ("excluir" == $this->nmgp_opcao) {
+      $this->sc_evento = $this->nmgp_opcao;
+      $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_nombre = $this->nombre;
+    $original_nombre_empresa_nomina = $this->nombre_empresa_nomina;
+}
+if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
+if (!isset($this->sc_temp_gnombre_archivo_empresa)) {$this->sc_temp_gnombre_archivo_empresa = (isset($_SESSION['gnombre_archivo_empresa'])) ? $_SESSION['gnombre_archivo_empresa'] : "";}
+  $nomempresa = $this->sc_temp_gnombre_archivo_empresa;
+
+chdir('../copias');
+$vruta = getcwd();
+
+$carpeta = $vruta;
+
+if (!file_exists($carpeta)) {
+	mkdir($carpeta, 0777, true);
+}
+
+if (!file_exists($vruta.'/'.$this->sc_temp_gnit)) {
+	mkdir($vruta.'/'.$this->sc_temp_gnit, 0777, true);
+}
+
+chdir('../');
+$vruta = getcwd();
+
+shell_exec('"'.$vruta.'\mysql\bin\mysqldump.exe" --user=copia --password=copia --no-create-info  --skip-extended-insert  --complete-insert  '.$nomempresa.' > "'.$vruta.'/copias/'.$this->sc_temp_gnit.'/eliminada_'.$nomempresa.'_fecha_'.date('Y-m-d').'_hora_'.date('H-i-s').'.sql"');
+
+
+$vnombre_nomina = $this->nombre_empresa_nomina ;
+
+$vsql = "SHOW DATABASES like '".$vnombre_nomina."'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiNomina = array();
+      $this->vsinomina = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiNomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsinomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiNomina = false;
+          $this->vSiNomina_erro = $this->Db->ErrorMsg();
+          $this->vsinomina = false;
+          $this->vsinomina_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vsinomina[0][0]))
+{
+	shell_exec('"'.$vruta.'\mysql\bin\mysqldump.exe" --user=root --password=,.Facilweb2020 --no-create-info  --skip-extended-insert  --complete-insert  '.$vnombre_nomina.' > "'.$vruta.'/copias/'.$this->sc_temp_gnit.'/eliminada_'.$vnombre_nomina.'_fecha_'.date('Y-m-d').'_hora_'.date('H-i-s').'.sql"');
+	
+	
+     $nm_select ="DROP DATABASE ".$vnombre_nomina; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_empresas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+}
+
+
+
+     $nm_select ="DROP DATABASE ".$this->nombre ; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_empresas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+if (isset($this->sc_temp_gnombre_archivo_empresa)) { $_SESSION['gnombre_archivo_empresa'] = $this->sc_temp_gnombre_archivo_empresa;}
+if (isset($this->sc_temp_gnit)) { $_SESSION['gnit'] = $this->sc_temp_gnit;}
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_nombre != $this->nombre || (isset($bFlagRead_nombre) && $bFlagRead_nombre)))
+    {
+        $this->ajax_return_values_nombre(true);
+    }
+    if (($original_nombre_empresa_nomina != $this->nombre_empresa_nomina || (isset($bFlagRead_nombre_empresa_nomina) && $bFlagRead_nombre_empresa_nomina)))
+    {
+        $this->ajax_return_values_nombre_empresa_nomina(true);
     }
 }
 $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off'; 
@@ -4255,6 +4878,9 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
       $NM_val_form['correo'] = $this->correo;
       $NM_val_form['comentario'] = $this->comentario;
       $NM_val_form['entorno'] = $this->entorno;
+      $NM_val_form['nomina'] = $this->nomina;
+      $NM_val_form['codempresa'] = $this->codempresa;
+      $NM_val_form['nombre_empresa_nomina'] = $this->nombre_empresa_nomina;
       $NM_val_form['actualizada'] = $this->actualizada;
       if ($this->idempresa === "" || is_null($this->idempresa))  
       { 
@@ -4373,6 +4999,25 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               $this->celular = "null"; 
               $NM_val_null[] = "celular";
           } 
+          $this->codempresa_before_qstr = $this->codempresa;
+          $this->codempresa = substr($this->Db->qstr($this->codempresa), 1, -1); 
+          if ($this->codempresa == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->codempresa = "null"; 
+              $NM_val_null[] = "codempresa";
+          } 
+          if ($this->nomina == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->nomina = "null"; 
+              $NM_val_null[] = "nomina";
+          } 
+          $this->nombre_empresa_nomina_before_qstr = $this->nombre_empresa_nomina;
+          $this->nombre_empresa_nomina = substr($this->Db->qstr($this->nombre_empresa_nomina), 1, -1); 
+          if ($this->nombre_empresa_nomina == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->nombre_empresa_nomina = "null"; 
+              $NM_val_null[] = "nombre_empresa_nomina";
+          } 
       }
       if ($this->nmgp_opcao == "alterar") 
       {
@@ -4471,37 +5116,37 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular'"; 
+                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular', codempresa = '$this->codempresa', nomina = '$this->nomina', nombre_empresa_nomina = '$this->nombre_empresa_nomina'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular'"; 
+                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular', codempresa = '$this->codempresa', nomina = '$this->nomina', nombre_empresa_nomina = '$this->nombre_empresa_nomina'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = TO_DATE('$this->creada', 'yyyy-mm-dd hh24:mi:ss'), tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular'"; 
+                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = TO_DATE('$this->creada', 'yyyy-mm-dd hh24:mi:ss'), tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular', codempresa = '$this->codempresa', nomina = '$this->nomina', nombre_empresa_nomina = '$this->nombre_empresa_nomina'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular'"; 
+                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular', codempresa = '$this->codempresa', nomina = '$this->nomina', nombre_empresa_nomina = '$this->nombre_empresa_nomina'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular'"; 
+                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular', codempresa = '$this->codempresa', nomina = '$this->nomina', nombre_empresa_nomina = '$this->nombre_empresa_nomina'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular'"; 
+                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular', codempresa = '$this->codempresa', nomina = '$this->nomina', nombre_empresa_nomina = '$this->nombre_empresa_nomina'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular'"; 
+                  $SC_fields_update[] = "nombre = '$this->nombre', nombre_empresa = '$this->nombre_empresa', observaciones = '$this->observaciones', creada = '$this->creada', tipo_negocio = '$this->tipo_negocio', predeterminada = '$this->predeterminada', password = '$this->password', nit = '$this->nit', correo = '$this->correo', comentario = '$this->comentario', celular = '$this->celular', codempresa = '$this->codempresa', nomina = '$this->nomina', nombre_empresa_nomina = '$this->nombre_empresa_nomina'"; 
               } 
               if (isset($NM_val_form['actualizada']) && $NM_val_form['actualizada'] != $this->nmgp_dados_select['actualizada']) 
               { 
@@ -4590,6 +5235,8 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               $this->correo = $this->correo_before_qstr;
               $this->comentario = $this->comentario_before_qstr;
               $this->celular = $this->celular_before_qstr;
+              $this->codempresa = $this->codempresa_before_qstr;
+              $this->nombre_empresa_nomina = $this->nombre_empresa_nomina_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
               }   
@@ -4627,6 +5274,10 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               elseif (isset($this->comentario)) { $this->nm_limpa_alfa($this->comentario); }
               if     (isset($NM_val_form) && isset($NM_val_form['celular'])) { $this->celular = $NM_val_form['celular']; }
               elseif (isset($this->celular)) { $this->nm_limpa_alfa($this->celular); }
+              if     (isset($NM_val_form) && isset($NM_val_form['codempresa'])) { $this->codempresa = $NM_val_form['codempresa']; }
+              elseif (isset($this->codempresa)) { $this->nm_limpa_alfa($this->codempresa); }
+              if     (isset($NM_val_form) && isset($NM_val_form['nombre_empresa_nomina'])) { $this->nombre_empresa_nomina = $NM_val_form['nombre_empresa_nomina']; }
+              elseif (isset($this->nombre_empresa_nomina)) { $this->nm_limpa_alfa($this->nombre_empresa_nomina); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -4634,7 +5285,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('idempresa', 'nit', 'nombre', 'nombre_empresa', 'observaciones', 'creada', 'sinmovimiento', 'copiada_como', 'tipo_negocio', 'predeterminada', 'password', 'celular', 'correo', 'comentario', 'entorno'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('idempresa', 'nit', 'nombre', 'nombre_empresa', 'observaciones', 'creada', 'sinmovimiento', 'copiada_como', 'tipo_negocio', 'predeterminada', 'password', 'celular', 'correo', 'comentario', 'entorno', 'nomina', 'codempresa', 'nombre_empresa_nomina'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -4731,7 +5382,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", '$this->actualizada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES ('$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES ('$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
@@ -4747,7 +5398,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", '$this->actualizada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
@@ -4763,7 +5414,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", '$this->actualizada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
@@ -4779,7 +5430,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", TO_DATE('$this->actualizada', 'yyyy-mm-dd hh24:mi:ss')";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
@@ -4795,7 +5446,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", '$this->actualizada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
@@ -4811,7 +5462,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", '$this->actualizada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
@@ -4827,7 +5478,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", '$this->actualizada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
@@ -4843,7 +5494,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", TO_DATE('$this->actualizada', 'yyyy-mm-dd hh24:mi:ss')";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               else
               {
@@ -4859,7 +5510,7 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", actualizada";
                        $compl_insert_val .= ", '$this->actualizada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "nombre, nombre_empresa, observaciones, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina $compl_insert) VALUES (" . $NM_seq_auto . "'$this->nombre', '$this->nombre_empresa', '$this->observaciones', '$this->copiada_como', '$this->sinmovimiento', '$this->tipo_negocio', '$this->predeterminada', '$this->password', '$this->nit', '$this->correo', '$this->comentario', '$this->celular', '$this->codempresa', '$this->nomina', '$this->nombre_empresa_nomina' $compl_insert_val)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -5012,6 +5663,8 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               $this->correo = $this->correo_before_qstr;
               $this->comentario = $this->comentario_before_qstr;
               $this->celular = $this->celular_before_qstr;
+              $this->codempresa = $this->codempresa_before_qstr;
+              $this->nombre_empresa_nomina = $this->nombre_empresa_nomina_before_qstr;
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['db_changed'] = true;
@@ -5031,6 +5684,8 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               $this->correo = $this->correo_before_qstr;
               $this->comentario = $this->comentario_before_qstr;
               $this->celular = $this->celular_before_qstr;
+              $this->codempresa = $this->codempresa_before_qstr;
+              $this->nombre_empresa_nomina = $this->nombre_empresa_nomina_before_qstr;
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
               } 
@@ -5194,8 +5849,11 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
         $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'on';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
+    $original_codempresa = $this->codempresa;
     $original_copiada_como = $this->copiada_como;
     $original_nombre = $this->nombre;
+    $original_nombre_empresa_nomina = $this->nombre_empresa_nomina;
+    $original_nomina = $this->nomina;
     $original_sinmovimiento = $this->sinmovimiento;
 }
 if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
@@ -5284,10 +5942,84 @@ else
 		$nomempresa = $this->copiada_como ;
 		shell_exec("mysqldump  -u root -p,.Facilweb2020 $nomempresa | mysql -u root -p,.Facilweb2020 ".$this->nombre );
 	}
+	
+	if($this->nomina =="SI")
+	{
+		if(!empty($this->codempresa ))
+		{
+			$vnombre_nomina = $this->nombre_empresa_nomina ;
+		
+			if(empty(trim($vnombre_nomina)))
+			{
+				$vnombre_nomina = $this->nombre ;
+				$vnombre_nomina = str_replace("inventario","nomina",$vnombre_nomina);
+				$this->nombre_empresa_nomina  = $vnombre_nomina;
+			}
+
+			$vsql = "SHOW DATABASES like '".$vnombre_nomina."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiNomina = array();
+      $this->vsinomina = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiNomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsinomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiNomina = false;
+          $this->vSiNomina_erro = $this->Db->ErrorMsg();
+          $this->vsinomina = false;
+          $this->vsinomina_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(!isset($this->vsinomina[0][0]))
+			{
+				$vconsulta = "mysqldbcopy --source=root:,.Facilweb2020@localhost:3306 --destination=root:,.Facilweb2020@localhost:3306 nomina_copia:".$vnombre_nomina;
+				shell_exec($vconsulta);
+				$this->nm_mens_alert[] = "Se ha creado la base de datos de nómina."; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Se ha creado la base de datos de nómina."); }}
+		}
+		else
+		{
+			
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Debe diligencias el campo 'Código Empresa Nómina'.";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_empresas_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_empresas_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "Debe diligencias el campo 'Código Empresa Nómina'.";
+ }
+;
+		}
+	}
 }
 if (isset($this->sc_temp_gnit)) { $_SESSION['gnit'] = $this->sc_temp_gnit;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
+    if (($original_codempresa != $this->codempresa || (isset($bFlagRead_codempresa) && $bFlagRead_codempresa)))
+    {
+        $this->ajax_return_values_codempresa(true);
+    }
     if (($original_copiada_como != $this->copiada_como || (isset($bFlagRead_copiada_como) && $bFlagRead_copiada_como)))
     {
         $this->ajax_return_values_copiada_como(true);
@@ -5296,66 +6028,17 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     {
         $this->ajax_return_values_nombre(true);
     }
+    if (($original_nombre_empresa_nomina != $this->nombre_empresa_nomina || (isset($bFlagRead_nombre_empresa_nomina) && $bFlagRead_nombre_empresa_nomina)))
+    {
+        $this->ajax_return_values_nombre_empresa_nomina(true);
+    }
+    if (($original_nomina != $this->nomina || (isset($bFlagRead_nomina) && $bFlagRead_nomina)))
+    {
+        $this->ajax_return_values_nomina(true);
+    }
     if (($original_sinmovimiento != $this->sinmovimiento || (isset($bFlagRead_sinmovimiento) && $bFlagRead_sinmovimiento)))
     {
         $this->ajax_return_values_sinmovimiento(true);
-    }
-}
-$_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off'; 
-    }
-    if ("delete" == $this->sc_evento && $this->nmgp_opcao != "nada") {
-      $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'on';
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    $original_nombre = $this->nombre;
-}
-if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
-if (!isset($this->sc_temp_gnombre_archivo_empresa)) {$this->sc_temp_gnombre_archivo_empresa = (isset($_SESSION['gnombre_archivo_empresa'])) ? $_SESSION['gnombre_archivo_empresa'] : "";}
-  $nomempresa = $this->sc_temp_gnombre_archivo_empresa;
-
-chdir('../copias');
-$vruta = getcwd();
-
-$carpeta = $vruta;
-
-if (!file_exists($carpeta)) {
-	mkdir($carpeta, 0777, true);
-}
-
-if (!file_exists($vruta.'/'.$this->sc_temp_gnit)) {
-	mkdir($vruta.'/'.$this->sc_temp_gnit, 0777, true);
-}
-
-chdir('../');
-$vruta = getcwd();
-
-shell_exec('"'.$vruta.'\mysql\bin\mysqldump.exe" --user=copia --password=copia --no-create-info  --skip-extended-insert  --complete-insert  '.$nomempresa.' > "'.$vruta.'/copias/'.$this->sc_temp_gnit.'/eliminada_'.$nomempresa.'_fecha_'.date('Y-m-d').'_hora_'.date('H-i-s').'.sql"');
-
-
-
-     $nm_select ="DROP DATABASE ".$this->nombre ; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_empresas_mob_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-if (isset($this->sc_temp_gnombre_archivo_empresa)) { $_SESSION['gnombre_archivo_empresa'] = $this->sc_temp_gnombre_archivo_empresa;}
-if (isset($this->sc_temp_gnit)) { $_SESSION['gnit'] = $this->sc_temp_gnit;}
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    if (($original_nombre != $this->nombre || (isset($bFlagRead_nombre) && $bFlagRead_nombre)))
-    {
-        $this->ajax_return_values_nombre(true);
     }
 }
 $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off'; 
@@ -5426,23 +6109,23 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, creada, actualizada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, creada, actualizada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, creada, actualizada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, creada, actualizada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, TO_DATE(TO_CHAR(creada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, TO_DATE(TO_CHAR(creada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, creada, actualizada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, creada, actualizada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, creada, actualizada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idempresa, nombre, nombre_empresa, observaciones, creada, actualizada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, password, nit, correo, comentario, celular, codempresa, nomina, nombre_empresa_nomina from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -5636,6 +6319,12 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_select['comentario'] = $this->comentario;
               $this->celular = $rs->fields[14] ; 
               $this->nmgp_dados_select['celular'] = $this->celular;
+              $this->codempresa = $rs->fields[15] ; 
+              $this->nmgp_dados_select['codempresa'] = $this->codempresa;
+              $this->nomina = $rs->fields[16] ; 
+              $this->nmgp_dados_select['nomina'] = $this->nomina;
+              $this->nombre_empresa_nomina = $rs->fields[17] ; 
+              $this->nmgp_dados_select['nombre_empresa_nomina'] = $this->nombre_empresa_nomina;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->idempresa = (string)$this->idempresa; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['parms'] = "idempresa?#?$this->idempresa?@?";
@@ -5691,6 +6380,12 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["comentario"] = $this->comentario;
               $this->celular = "";  
               $this->nmgp_dados_form["celular"] = $this->celular;
+              $this->codempresa = "";  
+              $this->nmgp_dados_form["codempresa"] = $this->codempresa;
+              $this->nomina = "NO";  
+              $this->nmgp_dados_form["nomina"] = $this->nomina;
+              $this->nombre_empresa_nomina = "";  
+              $this->nmgp_dados_form["nombre_empresa_nomina"] = $this->nombre_empresa_nomina;
               $this->entorno = "";  
               $this->nmgp_dados_form["entorno"] = $this->entorno;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_empresas_mob']['dados_form'] = $this->nmgp_dados_form;
@@ -6224,7 +6919,8 @@ $_SESSION['scriptcase']['form_empresas_mob']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -6768,6 +7464,27 @@ else
           $predeterminada_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $nomina_val_str = "''";
+   if (!empty($this->nomina))
+   {
+       if (is_array($this->nomina))
+       {
+           $Tmp_array = $this->nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->nomina);
+       }
+       $nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $nomina_val_str)
+          {
+             $nomina_val_str .= ", ";
+          }
+          $nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT nombre, nombre_empresa  FROM empresas  ORDER BY nombre_empresa";
 
    $this->idempresa = $old_value_idempresa;
@@ -6828,6 +7545,14 @@ else
        $nmgp_def_dados  = "";
        $nmgp_def_dados .= "Escritorio?#?escritorio?#?N?@?";
        $nmgp_def_dados .= "Nube?#?nube?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_nomina()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
        $todo = explode("?@?", $nmgp_def_dados);
        return $todo;
 
@@ -7472,6 +8197,57 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
        exit;
    }
 }
+    function sc_ajax_alert($sMessage, $params = array())
+    {
+        if ($this->NM_ajax_flag)
+        {
+            $this->NM_ajax_info['ajaxAlert']['message'] = NM_charset_to_utf8($sMessage);
+            $this->NM_ajax_info['ajaxAlert']['params']  = $this->sc_ajax_alert_params($params);
+        }
+    } // sc_ajax_alert
+
+    function sc_ajax_alert_params($params)
+    {
+        $paramList = array();
+        foreach ($params as $paramName => $paramValue)
+        {
+            if (in_array($paramName, array('title', 'timer', 'confirmButtonText', 'confirmButtonFA', 'confirmButtonFAPos', 'cancelButtonText', 'cancelButtonFA', 'cancelButtonFAPos', 'footer', 'width', 'padding', 'position')))
+            {
+                $paramList[$paramName] = NM_charset_to_utf8($paramValue);
+            }
+            elseif (in_array($paramName, array('showConfirmButton', 'showCancelButton', 'toast')) && in_array($paramValue, array(true, false)))
+            {
+                $paramList[$paramName] = NM_charset_to_utf8($paramValue);
+            }
+            elseif ('position' == $paramName && in_array($paramValue, array('top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', 'bottom-end')))
+            {
+                $paramList[$paramName] = NM_charset_to_utf8($paramValue);
+            }
+            elseif ('type' == $paramName && in_array($paramValue, array('warning', 'error', 'success', 'info', 'question')))
+            {
+                $paramList[$paramName] = NM_charset_to_utf8($paramValue);
+            }
+            elseif ('background' == $paramName)
+            {
+                $paramList[$paramName] = $this->sc_ajax_alert_image(NM_charset_to_utf8($paramValue));
+            }
+        }
+        return $paramList;
+    } // sc_ajax_alert_params
+
+    function sc_ajax_alert_image($background)
+    {
+        $image_param = $background;
+        preg_match_all('/url\(([\s])?(["|\'])?(.*?)(["|\'])?([\s])?\)/i', $background, $matches, PREG_PATTERN_ORDER);
+        if (isset($matches[3])) {
+            foreach ($matches[3] as $match) {
+                if ('http:' != substr($match, 0, 5) && 'https:' != substr($match, 0, 6) && '/' != substr($match, 0, 1)) {
+                    $image_param = str_replace($match, "{$this->Ini->path_img_global}/{$match}", $image_param);
+                }
+            }
+        }
+        return $image_param;
+    } // sc_ajax_alert_image
     function sc_ajax_message($sMessage, $sTitle = '', $sParam = '', $sRedirPar = '')
     {
         if ($this->NM_ajax_flag)
@@ -7510,5 +8286,30 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
             }
         }
     } // sc_ajax_message
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-8");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-9");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-3", "sc_b_upd_t.sc-unique-btn-10");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-4", "sc_b_del_t.sc-unique-btn-11");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-5", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-12", "sc_b_sai_t.sc-unique-btn-14", "sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-13");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

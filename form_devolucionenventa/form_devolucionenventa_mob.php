@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -293,8 +294,8 @@ class form_devolucionenventa_mob_ini
       $this->nm_dt_criacao   = "20180119"; 
       $this->nm_hr_criacao   = "073725"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -971,7 +972,7 @@ class form_devolucionenventa_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeZSBiHANOHQBOHuvmVIBsDWJeDoJsDcJUZ1FaHABYD5F7HgvsHArCDuFYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErCDWXCHMXGD9NwDQX7HANOHuNUDMNODkBsV5FYVErqD9BsZSBqD1zGZMBqDEBODkXKDuFaVoJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwD5JsHgrKVcFCDWF/VoraD9BsZ1rqHArYD5rqDEBeHEXeV5FaVoBiDcBwDQX7Z1N7VWJeHgrKVcBOV5F/VENUDcBqZ1BOZ1BeV5X7DEBOZSXeDWrGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQBqDEvsVkXeDuFaVoJwD9NmDuBqHIrKV5XGDMNOVcFKV5X7VoBiDcNmZ1rqHIBeD5NUDENOHEFiDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHErsDurmDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQJmZSFaD1rwHuJwDEBODkB/DuJeDoF7DcBwDQX7HIrwD5JwHuBYVIBOHEFYVoBiHQXGZSBqHANOHuX7DErKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiH9BiDSBYHuJwHgrKDkB/DWFaVoX7D9XGZ1rqHIBeD5JwHgveDkB/DuJeHIXGD9NmZ9F7DSBYHuJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsH5FYHIFGD9NwDQX7HAN7V5FGHuNOVIFCDur/VoX7HQBqZkFGDSBOD5BqDEvsZSJGDurmZuFaD9JKDQJwHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSX7D1veD5JwHuBYVIBOV5X7DoJeD9BiZ1B/D1rwV5JeDEBOZSXeV5XCVoB/D9XsH9FGHAN7D5JwHuNOVIFCH5XCVoB/DcNwH9B/Z1rYD5FaDMBYDkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NwZ9F7HAveV5FaDMvmVIFCDuX7DoX7HQXGZ1FGHAN7HQBOHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoFGDcJUZSBqHAN7HQraDEvsVkXeDWr/HMXGD9FYDQFGD1veVWBODMvmVIBODuX7HMFUHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2406,6 +2407,11 @@ ob_start();
     sajax_export("ajax_form_devolucionenventa_mob_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->controle();
 //
     function nm_limpa_str_form_devolucionenventa_mob(&$str)
@@ -2886,6 +2892,10 @@ ob_start();
       global $inicial_form_devolucionenventa_mob;
       $aResp = array();
 
+      if (isset($inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['empty_filter'];
@@ -2982,6 +2992,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['btnDisabled'])
+         {
+            form_devolucionenventa_mob_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['btnLabel']) && '' != $inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['btnLabel'])
+         {
+            form_devolucionenventa_mob_pack_btn_label($aResp);
          }
          if (isset($inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['varList']) && !empty($inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['varList']))
          {
@@ -3086,8 +3104,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -3336,6 +3359,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_devolucionenventa_mob_pack_master_value
+
+   function form_devolucionenventa_mob_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_devolucionenventa_mob;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_devolucionenventa_mob_pack_ajax_alert
+
+   function form_devolucionenventa_mob_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_devolucionenventa_mob;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_devolucionenventa_mob->contr_form_devolucionenventa_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_devolucionenventa_mob_pack_ajax_alert
 
    function form_devolucionenventa_mob_pack_ajax_alert(&$aResp)
    {

@@ -115,6 +115,7 @@ function Ord_cmp_init()
    $tab_ger_campos['observaciones'] = "on";
    $tab_def_campos['observaciones'] = "observaciones";
    $tab_labels["observaciones"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_log']['labels']["observaciones"])) ? $_SESSION['sc_session'][$sc_init]['grid_log']['labels']["observaciones"] : "Observaciones";
+   $tab_ger_campos['observaciones'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_log']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_log']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_log']['field_display'] as $NM_cada_field => $NM_cada_opc)
@@ -432,7 +433,7 @@ if (!$embbed)
   .sc_ui_sortable_ord {
    list-style-type: none;
    margin: 0;
-   min-width: 225px;
+   min-width: 120px;
   }
   .sc_ui_sortable_ord li {
    margin: 0 3px 3px 3px;
@@ -569,6 +570,13 @@ if (!$embbed)
    {
 ?>
    <?php echo nmButtonOutput($this->arr_buttons, "bsair_appdiv", "self.parent.tb_remove(); buttonunselectedOF();", "self.parent.tb_remove(); buttonunselectedOF();", "Bsair_ord", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   elseif ($_SESSION['scriptcase']['proc_mobile'])
+   {
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "closeAllModalPanes();", "closeAllModalPanes();", "Bsair_ord", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }

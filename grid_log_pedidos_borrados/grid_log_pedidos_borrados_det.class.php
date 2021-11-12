@@ -7,7 +7,10 @@ class grid_log_pedidos_borrados_det
    var $Db;
    var $nm_data;
    var $NM_raiz_img; 
-   var $nmgp_botoes; 
+   var $nmgp_botoes     = array(); 
+   var $nm_btn_exist    = array(); 
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array(); 
    var $nm_location;
    var $anio;
    var $periodo;
@@ -829,6 +832,9 @@ $nm_saida->saida("</script>\r\n");
    $nm_saida->saida(" <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
    $nm_saida->saida("</form> \r\n");
    $nm_saida->saida("<script language=JavaScript>\r\n");
+   $nm_saida->saida("   $(function(){ \r\n");
+   $nm_saida->saida("       NM_btn_disable();\r\n");
+   $nm_saida->saida("   }); \r\n");
    $nm_saida->saida("   function nm_submit_modal(parms, t_parent) \r\n");
    $nm_saida->saida("   { \r\n");
    $nm_saida->saida("      if (t_parent == 'S' && typeof parent.tb_show == 'function')\r\n");
@@ -892,6 +898,16 @@ $nm_saida->saida("</script>\r\n");
    $nm_saida->saida("   {\r\n");
    $nm_saida->saida("   return false;\r\n");
    $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+           $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+         }
+      }
+   }
+   $nm_saida->saida("   }\r\n");
    $nm_saida->saida("</script>\r\n");
    $nm_saida->saida("</body>\r\n");
    $nm_saida->saida("</html>\r\n");
@@ -908,14 +924,17 @@ $nm_saida->saida("</script>\r\n");
        $nm_saida->saida("          <td class=\"scGridToolbarPadding\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
        if ($this->nmgp_botoes['det_pdf'] == "on")
        {
+         $this->nm_btn_exist['det_pdf'][] = "Dpdf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "Dpdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_log_pedidos_borrados/grid_log_pedidos_borrados_config_pdf.php?nm_opc=pdf_det&nm_target=0&nm_cor=cor&papel=8&orientacao=1&largura=1200&conf_larg=S&conf_fonte=10&language=es&conf_socor=N&sc_ver_93=" . s . "&password=n&pdf_zip=N&KeepThis=false&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
        }
        if ($this->nmgp_botoes['det_print'] == "on")
        {
+         $this->nm_btn_exist['det_print'][] = "Dprint_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "Dprint_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_log_pedidos_borrados/grid_log_pedidos_borrados_config_print.php?nm_opc=detalhe&nm_cor=CO&password=n&language=es&KeepThis=true&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
        }
+         $this->nm_btn_exist['det_exit'][] = "sc_b_sai_top";
        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F3.submit();", "document.F3.submit();", "sc_b_sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
        $nm_saida->saida("           $Cod_Btn \r\n");
        $nm_saida->saida("         </td> \r\n");
@@ -935,14 +954,17 @@ $nm_saida->saida("</script>\r\n");
        $nm_saida->saida("     <td class=\"scGridToolbarPadding\" nowrap valign=\"middle\" align=\"left\" width=\"33%\">\r\n");
        if ($this->nmgp_botoes['det_pdf'] == "on")
        {
+         $this->nm_btn_exist['det_pdf'][] = "Dpdf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "Dpdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_log_pedidos_borrados/grid_log_pedidos_borrados_config_pdf.php?nm_opc=pdf_det&nm_target=0&nm_cor=cor&papel=8&orientacao=1&largura=1200&conf_larg=S&conf_fonte=10&language=es&conf_socor=N&sc_ver_93=" . s . "&password=n&pdf_zip=N&KeepThis=false&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
        }
        if ($this->nmgp_botoes['det_print'] == "on")
        {
+         $this->nm_btn_exist['det_print'][] = "Dprint_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "Dprint_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_log_pedidos_borrados/grid_log_pedidos_borrados_config_print.php?nm_opc=detalhe&nm_cor=CO&password=n&language=es&KeepThis=true&TB_iframe=true&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
        }
+         $this->nm_btn_exist['det_exit'][] = "sc_b_sai_top";
        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F3.submit();", "document.F3.submit();", "sc_b_sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
        $nm_saida->saida("           $Cod_Btn \r\n");
        $nm_saida->saida("     </td>\r\n");

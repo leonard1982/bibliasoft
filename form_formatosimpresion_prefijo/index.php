@@ -11,6 +11,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -284,8 +285,8 @@ class form_formatosimpresion_prefijo_ini
       $this->nm_dt_criacao   = "20181015"; 
       $this->nm_hr_criacao   = "121222"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -942,7 +943,7 @@ class form_formatosimpresion_prefijo_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOZSX7HABYHuF7DMBOVcFKV5X7DorqDcFYZkFGHIrwD5JeDEvsZSXeDuFaHMBiD9NmDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJsHABYHuFGHgvOV9BUHEFYDoXGHQNmZkBiHAvmD5XGDEvsHEBUDWXCDoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSX7HAN7V5JwHuzGVIBOV5FYVoB/D9BiZ1F7Z1BeD5JeDEBeHEXeV5FqDoBOD9NwH9X7HABYV5BqHuvmVcBOV5X7DoJsDcNwH9FaHArKD5XGDMzGHEXeDWXCVoXGD9JKH9X7Z1NaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoFaD9XsH9BiHABYHQBqDMBOVcFKH5XCDoJsD9JmVIJsHABYD5XGHgNKVkJGHEXCVoBOD9XsZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDQBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKD5NUHgveHArsDWXCHIBiDcBwDQX7HANOVWBOHuBOVIBODurGVEFGHQXGZ1BiDSrYV5FaHgrKHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDQFaZ1zGVWBqDMvOVcrsDur/HIF7HQBqZ1rqHArKHQJeDErKHEBUDuFaDoXGHQFYZSX7HIrKHuraDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuF7HuvmDkBOH5XCDoBiHQNwH9BqDSBeHQrqDMBYHEJGDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HANOD5FaDErKVkXeV5FqDoFUDcBwH9X7Z1rwV5BOHuNOVcBODWFaVENUD9BsH9FaD1rwV5JeDEBOHEJGDWF/DoJeDcBwDQFGD1BeD5BqHuNODkBOV5F/VoJwD9XOZ1rqHAN7V5FaDMzGVkXeHEFqVoJsD9XsZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHENiHEFqVoFaD9XsDQB/HAN7VWBODMzGDkBOV5X7VEF7D9BiZSFaD1rwZMBqHgrKHEJqDWFGDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBOHQBiZ9XGHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGD1rKHuFaDENOVkXeHEXCVoBiHQJeDuBqHAveHuraDMBOVIBsHEX7HMX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $_SESSION['sc_session'][$this->sc_page]['form_formatosimpresion_prefijo']['ordem_cmp'] = "idformatoimpresion_prefijo"; 
       $_SESSION['sc_session'][$this->sc_page]['form_formatosimpresion_prefijo']['ordem_ord'] = " desc"; 
@@ -2276,6 +2277,11 @@ ob_start();
     sajax_export("ajax_form_formatosimpresion_prefijo_table_refresh");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->controle();
 //
     function nm_limpa_str_form_formatosimpresion_prefijo(&$str)
@@ -2547,6 +2553,10 @@ ob_start();
       global $inicial_form_formatosimpresion_prefijo;
       $aResp = array();
 
+      if (isset($inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['empty_filter'];
@@ -2643,6 +2653,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['btnDisabled']) && '' != $inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['btnDisabled'])
+         {
+            form_formatosimpresion_prefijo_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['btnLabel']) && '' != $inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['btnLabel'])
+         {
+            form_formatosimpresion_prefijo_pack_btn_label($aResp);
          }
          if (isset($inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['varList']) && !empty($inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['varList']))
          {
@@ -2747,8 +2765,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2997,6 +3020,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_formatosimpresion_prefijo_pack_master_value
+
+   function form_formatosimpresion_prefijo_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_formatosimpresion_prefijo;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_formatosimpresion_prefijo_pack_ajax_alert
+
+   function form_formatosimpresion_prefijo_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_formatosimpresion_prefijo;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_formatosimpresion_prefijo->contr_form_formatosimpresion_prefijo->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_formatosimpresion_prefijo_pack_ajax_alert
 
    function form_formatosimpresion_prefijo_pack_ajax_alert(&$aResp)
    {

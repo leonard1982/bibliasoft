@@ -137,6 +137,8 @@ class form_productos_apl
    var $out_imagen;
    var $out1_imagen;
    var $ubicacion;
+   var $para_registro_fe;
+   var $para_registro_fe_1;
    var $sugerido_mayor;
    var $sugerido_menor;
    var $confcolor;
@@ -362,6 +364,10 @@ class form_productos_apl
           if (isset($this->NM_ajax_info['param']['otro2']))
           {
               $this->otro2 = $this->NM_ajax_info['param']['otro2'];
+          }
+          if (isset($this->NM_ajax_info['param']['para_registro_fe']))
+          {
+              $this->para_registro_fe = $this->NM_ajax_info['param']['para_registro_fe'];
           }
           if (isset($this->NM_ajax_info['param']['por_preciominimo']))
           {
@@ -622,6 +628,12 @@ class form_productos_apl
       if (isset($_GET["regimen_emp"]) && isset($this->regimen_emp)) 
       {
           $_SESSION['regimen_emp'] = $this->regimen_emp;
+      }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_productos']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_productos']['opc_ant'] = "inicio";
       }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_productos']['embutida_parms']))
       { 
@@ -1566,8 +1578,10 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     $original_confcolor = $this->confcolor;
     $original_conftalla = $this->conftalla;
     $original_idiva = $this->idiva;
+    $original_para_registro_fe = $this->para_registro_fe;
     $original_sabor = $this->sabor;
 }
+if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
 if (!isset($this->sc_temp_regimen_emp)) {$this->sc_temp_regimen_emp = (isset($_SESSION['regimen_emp'])) ? $_SESSION['regimen_emp'] : "";}
   if ($this->sc_temp_regimen_emp==0)
 	{
@@ -1577,7 +1591,17 @@ if (!isset($this->sc_temp_regimen_emp)) {$this->sc_temp_regimen_emp = (isset($_S
 	$this->nmgp_cmp_hidden["conftalla"] = "off"; $this->NM_ajax_info['fieldDisplay']['conftalla'] = 'off';
 	$this->nmgp_cmp_hidden["sabor"] = "off"; $this->NM_ajax_info['fieldDisplay']['sabor'] = 'off';
 	}
+
+if($this->sc_temp_gnit!="88261176")
+{
+	$this->nmgp_cmp_hidden["para_registro_fe"] = "off"; $this->NM_ajax_info['fieldDisplay']['para_registro_fe'] = 'off';
+}
+else
+{
+	$this->nmgp_cmp_hidden["para_registro_fe"] = "on"; $this->NM_ajax_info['fieldDisplay']['para_registro_fe'] = 'on';
+}
 if (isset($this->sc_temp_regimen_emp)) { $_SESSION['regimen_emp'] = $this->sc_temp_regimen_emp;}
+if (isset($this->sc_temp_gnit)) { $_SESSION['gnit'] = $this->sc_temp_gnit;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     if (($original_confcolor != $this->confcolor || (isset($bFlagRead_confcolor) && $bFlagRead_confcolor)))
@@ -1591,6 +1615,10 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     if (($original_idiva != $this->idiva || (isset($bFlagRead_idiva) && $bFlagRead_idiva)))
     {
         $this->ajax_return_values_idiva(true);
+    }
+    if (($original_para_registro_fe != $this->para_registro_fe || (isset($bFlagRead_para_registro_fe) && $bFlagRead_para_registro_fe)))
+    {
+        $this->ajax_return_values_para_registro_fe(true);
     }
     if (($original_sabor != $this->sabor || (isset($bFlagRead_sabor) && $bFlagRead_sabor)))
     {
@@ -2104,6 +2132,10 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
           if ('validate_codigobar3' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'codigobar3');
+          }
+          if ('validate_para_registro_fe' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'para_registro_fe');
           }
           form_productos_pack_ajax_response();
           exit;
@@ -3845,6 +3877,9 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
            case 'codigobar3':
                return "Código barras 3";
                break;
+           case 'para_registro_fe':
+               return "Para Registro Fe";
+               break;
            case 'costomay':
                return "Costo compra al mayor";
                break;
@@ -3910,10 +3945,13 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -3926,115 +3964,117 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               $this->NM_ajax_info['errList']['geral_form_productos'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'codigoprod' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigoprod' == $filtro)) || (is_array($filtro) && in_array('codigoprod', $filtro)))
         $this->ValidateField_codigoprod($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigobar' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigobar' == $filtro)) || (is_array($filtro) && in_array('codigobar', $filtro)))
         $this->ValidateField_codigobar($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nompro' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nompro' == $filtro)) || (is_array($filtro) && in_array('nompro', $filtro)))
         $this->ValidateField_nompro($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idgrup' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idgrup' == $filtro)) || (is_array($filtro) && in_array('idgrup', $filtro)))
         $this->ValidateField_idgrup($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idpro1' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idpro1' == $filtro)) || (is_array($filtro) && in_array('idpro1', $filtro)))
         $this->ValidateField_idpro1($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_producto' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_producto' == $filtro)) || (is_array($filtro) && in_array('tipo_producto', $filtro)))
         $this->ValidateField_tipo_producto($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idpro2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idpro2' == $filtro)) || (is_array($filtro) && in_array('idpro2', $filtro)))
         $this->ValidateField_idpro2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'otro' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'otro' == $filtro)) || (is_array($filtro) && in_array('otro', $filtro)))
         $this->ValidateField_otro($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'otro2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'otro2' == $filtro)) || (is_array($filtro) && in_array('otro2', $filtro)))
         $this->ValidateField_otro2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'precio_editable' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'precio_editable' == $filtro)) || (is_array($filtro) && in_array('precio_editable', $filtro)))
         $this->ValidateField_precio_editable($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'maneja_tcs_lfs' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'maneja_tcs_lfs' == $filtro)) || (is_array($filtro) && in_array('maneja_tcs_lfs', $filtro)))
         $this->ValidateField_maneja_tcs_lfs($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'stockmen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'stockmen' == $filtro)) || (is_array($filtro) && in_array('stockmen', $filtro)))
         $this->ValidateField_stockmen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'unidmaymen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'unidmaymen' == $filtro)) || (is_array($filtro) && in_array('unidmaymen', $filtro)))
         $this->ValidateField_unidmaymen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'unimay' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'unimay' == $filtro)) || (is_array($filtro) && in_array('unimay', $filtro)))
         $this->ValidateField_unimay($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'unimen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'unimen' == $filtro)) || (is_array($filtro) && in_array('unimen', $filtro)))
         $this->ValidateField_unimen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'unidad_ma' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'unidad_ma' == $filtro)) || (is_array($filtro) && in_array('unidad_ma', $filtro)))
         $this->ValidateField_unidad_ma($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'unidad_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'unidad_' == $filtro)) || (is_array($filtro) && in_array('unidad_', $filtro)))
         $this->ValidateField_unidad_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'multiple_escala' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'multiple_escala' == $filtro)) || (is_array($filtro) && in_array('multiple_escala', $filtro)))
         $this->ValidateField_multiple_escala($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'en_base_a' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'en_base_a' == $filtro)) || (is_array($filtro) && in_array('en_base_a', $filtro)))
         $this->ValidateField_en_base_a($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'costomen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'costomen' == $filtro)) || (is_array($filtro) && in_array('costomen', $filtro)))
         $this->ValidateField_costomen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'costo_prom' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'costo_prom' == $filtro)) || (is_array($filtro) && in_array('costo_prom', $filtro)))
         $this->ValidateField_costo_prom($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'recmayamen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'recmayamen' == $filtro)) || (is_array($filtro) && in_array('recmayamen', $filtro)))
         $this->ValidateField_recmayamen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idiva' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idiva' == $filtro)) || (is_array($filtro) && in_array('idiva', $filtro)))
         $this->ValidateField_idiva($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'existencia' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'existencia' == $filtro)) || (is_array($filtro) && in_array('existencia', $filtro)))
         $this->ValidateField_existencia($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'u_menor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'u_menor' == $filtro)) || (is_array($filtro) && in_array('u_menor', $filtro)))
         $this->ValidateField_u_menor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ubicacion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ubicacion' == $filtro)) || (is_array($filtro) && in_array('ubicacion', $filtro)))
         $this->ValidateField_ubicacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'activo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'activo' == $filtro)) || (is_array($filtro) && in_array('activo', $filtro)))
         $this->ValidateField_activo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'colores' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'colores' == $filtro)) || (is_array($filtro) && in_array('colores', $filtro)))
         $this->ValidateField_colores($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'confcolor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'confcolor' == $filtro)) || (is_array($filtro) && in_array('confcolor', $filtro)))
         $this->ValidateField_confcolor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tallas' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tallas' == $filtro)) || (is_array($filtro) && in_array('tallas', $filtro)))
         $this->ValidateField_tallas($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'conftalla' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'conftalla' == $filtro)) || (is_array($filtro) && in_array('conftalla', $filtro)))
         $this->ValidateField_conftalla($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'sabores' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sabores' == $filtro)) || (is_array($filtro) && in_array('sabores', $filtro)))
         $this->ValidateField_sabores($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'sabor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sabor' == $filtro)) || (is_array($filtro) && in_array('sabor', $filtro)))
         $this->ValidateField_sabor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha_vencimiento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha_vencimiento' == $filtro)) || (is_array($filtro) && in_array('fecha_vencimiento', $filtro)))
         $this->ValidateField_fecha_vencimiento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'lote' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'lote' == $filtro)) || (is_array($filtro) && in_array('lote', $filtro)))
         $this->ValidateField_lote($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'serial_codbarras' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'serial_codbarras' == $filtro)) || (is_array($filtro) && in_array('serial_codbarras', $filtro)))
         $this->ValidateField_serial_codbarras($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'relleno' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'relleno' == $filtro)) || (is_array($filtro) && in_array('relleno', $filtro)))
         $this->ValidateField_relleno($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'control_costo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'control_costo' == $filtro)) || (is_array($filtro) && in_array('control_costo', $filtro)))
         $this->ValidateField_control_costo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'por_preciominimo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'por_preciominimo' == $filtro)) || (is_array($filtro) && in_array('por_preciominimo', $filtro)))
         $this->ValidateField_por_preciominimo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'sugerido_mayor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sugerido_mayor' == $filtro)) || (is_array($filtro) && in_array('sugerido_mayor', $filtro)))
         $this->ValidateField_sugerido_mayor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'sugerido_menor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'sugerido_menor' == $filtro)) || (is_array($filtro) && in_array('sugerido_menor', $filtro)))
         $this->ValidateField_sugerido_menor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciofull' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciofull' == $filtro)) || (is_array($filtro) && in_array('preciofull', $filtro)))
         $this->ValidateField_preciofull($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'precio2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'precio2' == $filtro)) || (is_array($filtro) && in_array('precio2', $filtro)))
         $this->ValidateField_precio2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciomay' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciomay' == $filtro)) || (is_array($filtro) && in_array('preciomay', $filtro)))
         $this->ValidateField_preciomay($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciomen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciomen' == $filtro)) || (is_array($filtro) && in_array('preciomen', $filtro)))
         $this->ValidateField_preciomen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciomen2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciomen2' == $filtro)) || (is_array($filtro) && in_array('preciomen2', $filtro)))
         $this->ValidateField_preciomen2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciomen3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciomen3' == $filtro)) || (is_array($filtro) && in_array('preciomen3', $filtro)))
         $this->ValidateField_preciomen3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'imagen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'imagen' == $filtro)) || (is_array($filtro) && in_array('imagen', $filtro)))
         $this->ValidateField_imagen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cod_cuenta' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cod_cuenta' == $filtro)) || (is_array($filtro) && in_array('cod_cuenta', $filtro)))
         $this->ValidateField_cod_cuenta($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idprod' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idprod' == $filtro)) || (is_array($filtro) && in_array('idprod', $filtro)))
         $this->ValidateField_idprod($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_marca' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_marca' == $filtro)) || (is_array($filtro) && in_array('id_marca', $filtro)))
         $this->ValidateField_id_marca($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_linea' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_linea' == $filtro)) || (is_array($filtro) && in_array('id_linea', $filtro)))
         $this->ValidateField_id_linea($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigobar2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigobar2' == $filtro)) || (is_array($filtro) && in_array('codigobar2', $filtro)))
         $this->ValidateField_codigobar2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigobar3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigobar3' == $filtro)) || (is_array($filtro) && in_array('codigobar3', $filtro)))
         $this->ValidateField_codigobar3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      $this->upload_img_doc($Campos_Crit, $Campos_Falta, $Campos_Erros) ; 
+      if ((!is_array($filtro) && ('' == $filtro || 'para_registro_fe' == $filtro)) || (is_array($filtro) && in_array('para_registro_fe', $filtro)))
+        $this->ValidateField_para_registro_fe($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      $this->upload_img_doc($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (!isset($this->NM_ajax_flag) || 'validate_' != substr($this->NM_ajax_opcao, 0, 9))
       {
@@ -4092,9 +4132,15 @@ if(isset($this->dat_conf[0][0]))
 			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Almenos uno de los precios de venta por unidad mayor, está por debajo del Valor mínimo de Venta!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_productos' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_productos';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_productos';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Almenos uno de los precios de venta por unidad mayor, está por debajo del Valor mínimo de Venta!";
  }
 ;
@@ -4105,9 +4151,15 @@ if(isset($this->dat_conf[0][0]))
 			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Almenos uno de los precios de venta por detal, está por debajo del Valor mínimo de Venta!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_productos' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_productos';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_productos';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Almenos uno de los precios de venta por detal, está por debajo del Valor mínimo de Venta!";
  }
 ;
@@ -4126,9 +4178,15 @@ if($this->unidmaymen =='SI')
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Almenos uno de los campos obligatorios para menejo de escala está sin diligenciar!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_productos' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_productos';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_productos';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Almenos uno de los campos obligatorios para menejo de escala está sin diligenciar!";
  }
 ;
@@ -4170,9 +4228,15 @@ if($this->sc_evento == "alterar" || $this->sc_evento == "update")
 			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Código de Barras o Código de Producto ya está asignado al producto: '".$this->ds_pr1[0][1]."'";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_productos' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_productos';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_productos';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Código de Barras o Código de Producto ya está asignado al producto: '".$this->ds_pr1[0][1]."'";
  }
 ;
@@ -4213,9 +4277,15 @@ else
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Código de Barras o Código de Producto ya está asignado al producto: '".$this->ds_pr[0][0]."'";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_productos' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_productos';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_productos';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Código de Barras o Código de Producto ya está asignado al producto: '".$this->ds_pr[0][0]."'";
  }
 ;
@@ -6668,9 +6738,26 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
     } // ValidateField_codigobar3
+
+    function ValidateField_para_registro_fe(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->para_registro_fe == "" && $this->nmgp_opcao != "excluir")
+      { 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'para_registro_fe';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_para_registro_fe
 //
 //--------------------------------------------------------------------------------------
-   function upload_img_doc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros) 
+   function upload_img_doc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser;
      if (!empty($Campos_Crit) || !empty($Campos_Falta))
@@ -6869,6 +6956,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
     $this->nmgp_dados_form['id_linea'] = $this->id_linea;
     $this->nmgp_dados_form['codigobar2'] = $this->codigobar2;
     $this->nmgp_dados_form['codigobar3'] = $this->codigobar3;
+    $this->nmgp_dados_form['para_registro_fe'] = $this->para_registro_fe;
     $this->nmgp_dados_form['costomay'] = $this->costomay;
     $this->nmgp_dados_form['stockmay'] = $this->stockmay;
     if (empty($this->imagenprod))
@@ -7718,6 +7806,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
           $this->ajax_return_values_id_linea();
           $this->ajax_return_values_codigobar2();
           $this->ajax_return_values_codigobar3();
+          $this->ajax_return_values_para_registro_fe();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
@@ -10771,6 +10860,71 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_linea'
           }
    }
 
+          //----- para_registro_fe
+   function ajax_return_values_para_registro_fe($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("para_registro_fe", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->para_registro_fe);
+              $aLookup = array();
+              $this->_tmp_lookup_para_registro_fe = $this->para_registro_fe;
+
+$aLookup[] = array(form_productos_pack_protect_string('SI') => str_replace('<', '&lt;',form_productos_pack_protect_string("SI")));
+$aLookup[] = array(form_productos_pack_protect_string('NO') => str_replace('<', '&lt;',form_productos_pack_protect_string("NO")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_para_registro_fe'][] = 'SI';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_para_registro_fe'][] = 'NO';
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"para_registro_fe\"";
+          if (isset($this->NM_ajax_info['select_html']['para_registro_fe']) && !empty($this->NM_ajax_info['select_html']['para_registro_fe']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['para_registro_fe']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->para_registro_fe == $sValue)
+                  {
+                      $this->_tmp_lookup_para_registro_fe = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['para_registro_fe'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['para_registro_fe']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['para_registro_fe']['valList'][$i] = form_productos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['para_registro_fe']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['para_registro_fe']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['para_registro_fe']['labList'] = $aLabel;
+          }
+   }
+
     function fetchUniqueUploadName($originalName, $uploadDir, $fieldName)
     {
         $originalName = trim($originalName);
@@ -11677,9 +11831,15 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
           
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_productos' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_productos';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_productos';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
  }
 ;
@@ -11738,9 +11898,15 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
           
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_productos' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_productos';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_productos';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
  }
 ;
@@ -11838,6 +12004,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
       $NM_val_form['id_linea'] = $this->id_linea;
       $NM_val_form['codigobar2'] = $this->codigobar2;
       $NM_val_form['codigobar3'] = $this->codigobar3;
+      $NM_val_form['para_registro_fe'] = $this->para_registro_fe;
       $NM_val_form['costomay'] = $this->costomay;
       $NM_val_form['stockmay'] = $this->stockmay;
       $NM_val_form['imagenprod'] = $this->imagenprod;
@@ -12185,6 +12352,11 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               $this->ubicacion = "null"; 
               $NM_val_null[] = "ubicacion";
           } 
+          if ($this->para_registro_fe == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->para_registro_fe = "null"; 
+              $NM_val_null[] = "para_registro_fe";
+          } 
       }
       if ($this->nmgp_opcao == "alterar") 
       {
@@ -12255,37 +12427,37 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
               } 
               if (isset($NM_val_form['costomay']) && $NM_val_form['costomay'] != $this->nmgp_dados_select['costomay']) 
               { 
@@ -12577,7 +12749,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('codigoprod', 'codigobar', 'nompro', 'idgrup', 'idpro1', 'tipo_producto', 'idpro2', 'otro', 'otro2', 'precio_editable', 'maneja_tcs_lfs', 'stockmen', 'unidmaymen', 'unimay', 'unimen', 'unidad_ma', 'unidad_', 'multiple_escala', 'en_base_a', 'costomen', 'costo_prom', 'recmayamen', 'idiva', 'existencia', 'u_menor', 'ubicacion', 'activo', 'colores', 'confcolor', 'tallas', 'conftalla', 'sabores', 'sabor', 'fecha_vencimiento', 'lote', 'serial_codbarras', 'relleno', 'control_costo', 'por_preciominimo', 'sugerido_mayor', 'sugerido_menor', 'preciofull', 'precio2', 'preciomay', 'preciomen', 'preciomen2', 'preciomen3', 'cod_cuenta', 'idprod', 'id_marca', 'id_linea', 'codigobar2', 'codigobar3'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('codigoprod', 'codigobar', 'nompro', 'idgrup', 'idpro1', 'tipo_producto', 'idpro2', 'otro', 'otro2', 'precio_editable', 'maneja_tcs_lfs', 'stockmen', 'unidmaymen', 'unimay', 'unimen', 'unidad_ma', 'unidad_', 'multiple_escala', 'en_base_a', 'costomen', 'costo_prom', 'recmayamen', 'idiva', 'existencia', 'u_menor', 'ubicacion', 'activo', 'colores', 'confcolor', 'tallas', 'conftalla', 'sabores', 'sabor', 'fecha_vencimiento', 'lote', 'serial_codbarras', 'relleno', 'control_costo', 'por_preciominimo', 'sugerido_mayor', 'sugerido_menor', 'preciofull', 'precio2', 'preciomay', 'preciomen', 'preciomen2', 'preciomen3', 'cod_cuenta', 'idprod', 'id_marca', 'id_linea', 'codigobar2', 'codigobar3', 'para_registro_fe'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -12652,7 +12824,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, #$this->ultima_compra#, '$this->n_ultcompra', #$this->ultima_venta#, '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, #$this->ultima_compra#, '$this->n_ultcompra', #$this->ultima_venta#, '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco == "pdo_sqlsrv")
               { 
@@ -12673,7 +12845,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
@@ -12694,7 +12866,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
@@ -12715,7 +12887,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
@@ -12736,7 +12908,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', EMPTY_BLOB(), $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', EMPTY_BLOB(), $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
@@ -12757,7 +12929,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', null, $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, EXTEND('$this->ultima_compra', YEAR TO DAY), '$this->n_ultcompra', EXTEND('$this->ultima_venta', YEAR TO DAY), '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', null, $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, EXTEND('$this->ultima_compra', YEAR TO DAY), '$this->n_ultcompra', EXTEND('$this->ultima_venta', YEAR TO DAY), '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               {
@@ -12778,7 +12950,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
@@ -12799,7 +12971,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
@@ -12820,7 +12992,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco =='pdo_ibm')
               {
@@ -12841,7 +13013,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', EMPTY_BLOB(), $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', EMPTY_BLOB(), $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               else
               {
@@ -12862,7 +13034,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -13881,23 +14053,23 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, str_replace (convert(char(10),ultima_compra,102), '.', '-') + ' ' + convert(char(8),ultima_compra,20), n_ultcompra, str_replace (convert(char(10),ultima_venta,102), '.', '-') + ' ' + convert(char(8),ultima_venta,20), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, str_replace (convert(char(10),ultima_compra,102), '.', '-') + ' ' + convert(char(8),ultima_compra,20), n_ultcompra, str_replace (convert(char(10),ultima_venta,102), '.', '-') + ' ' + convert(char(8),ultima_venta,20), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, convert(char(23),ultima_compra,121), n_ultcompra, convert(char(23),ultima_venta,121), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, convert(char(23),ultima_compra,121), n_ultcompra, convert(char(23),ultima_venta,121), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, LOTOFILE(imagenprod, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_imagenprod', 'client'), imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, EXTEND(ultima_compra, YEAR TO DAY), n_ultcompra, EXTEND(ultima_venta, YEAR TO DAY), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, LOTOFILE(imagenprod, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_imagenprod', 'client'), imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, EXTEND(ultima_compra, YEAR TO DAY), n_ultcompra, EXTEND(ultima_venta, YEAR TO DAY), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -14181,6 +14353,8 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               $this->nmgp_dados_select['imagen'] = $this->imagen;
               $this->ubicacion = $rs->fields[56] ; 
               $this->nmgp_dados_select['ubicacion'] = $this->ubicacion;
+              $this->para_registro_fe = $rs->fields[57] ; 
+              $this->nmgp_dados_select['para_registro_fe'] = $this->para_registro_fe;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->nm_troca_decimal(",", ".");
               $this->idprod = (string)$this->idprod; 
@@ -14351,6 +14525,8 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               $this->nmgp_dados_form["imagen"] = $this->imagen;
               $this->ubicacion = "";  
               $this->nmgp_dados_form["ubicacion"] = $this->ubicacion;
+              $this->para_registro_fe = "NO";  
+              $this->nmgp_dados_form["para_registro_fe"] = $this->para_registro_fe;
               $this->sugerido_mayor = "";  
               $this->nmgp_dados_form["sugerido_mayor"] = $this->sugerido_mayor;
               $this->sugerido_menor = "";  
@@ -14435,6 +14611,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                   $this->costo_prom = $this->nmgp_dados_select['costo_prom'];  
                   $this->imagen = $this->nmgp_dados_select['imagen'];  
                   $this->ubicacion = $this->nmgp_dados_select['ubicacion'];  
+                  $this->para_registro_fe = $this->nmgp_dados_select['para_registro_fe'];  
               }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['foreign_key']))
@@ -16684,7 +16861,8 @@ $(function() {
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -18047,6 +18225,15 @@ else
    return $todo;
 
    }
+   function Form_lookup_para_registro_fe()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $nmgp_def_dados .= "NO?#?NO?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
    function SC_fast_search($in_fields, $arg_search, $data_search)
    {
       $fields = (strpos($in_fields, "SC_all_Cmp") !== false) ? array("SC_all_Cmp") : explode(";", $in_fields);
@@ -19085,6 +19272,7 @@ if (parent && parent.scAjaxDetailValue)
                         'id_linea' => 'id_linea',
                         'codigobar2' => 'codigobar2',
                         'codigobar3' => 'codigobar3',
+                        'para_registro_fe' => 'para_registro_fe',
                        );
         if (isset($aFocus[$sFieldName]))
         {
@@ -19167,5 +19355,66 @@ if (parent && parent.scAjaxDetailValue)
             $this->NM_ajax_info['readOnly'][$sFieldDateTime . $iSeq] = $sStatus;
         }
     } // sc_field_readonly
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5");
+                break;
+            case "sc_btn_0":
+                return array("sc_sc_btn_0_top");
+                break;
+            case "sc_btn_1":
+                return array("sc_sc_btn_1_top");
+                break;
+            case "sc_btn_2":
+                return array("sc_sc_btn_2_top");
+                break;
+            case "escalas":
+                return array("sc_escalas_top");
+                break;
+            case "recalcular":
+                return array("sc_recalcular_top");
+                break;
+            case "breload":
+                return array("sc_b_reload_t.sc-unique-btn-6");
+                break;
+            case "copy":
+                return array("sc_b_clone_t.sc-unique-btn-7");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-12");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-13");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-14");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-15");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-16");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

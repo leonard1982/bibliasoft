@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -293,8 +294,8 @@ class control_seleccionar_cajas_mob_ini
       $this->nm_dt_criacao   = "20190314"; 
       $this->nm_hr_criacao   = "165237"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -969,7 +970,7 @@ class control_seleccionar_cajas_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQFaHAN7D5FaDMBYVIBsH5XCDoFUD9BiZSB/DSNOHQJwDEBODkFeH5FYVoFGHQJKDQBqHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIBeD5NUDMveHErsHEFqZuBOHQXOZSBiHANOHQBqDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDoF7D9XsZSX7Z1N7VWJsHuzGVIBOV5X7DoJeDcNwH9FaD1rwV5FaDEBOHEFiDWFqDoF7DcJeZSX7DSBYV5JwHuNOVIBODWFaVoX7DcNwH9B/D1rwD5NUDEBeVkXeDWX7DoXGDcXOZSX7Z1BYV5JwHgvsZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQBqD1BeHQFaDMzGVcFeDWFaDoXGDcJUVIJsHIBeV5FaHgveHEJqHEXCDoBOHQXsH9BiHArYVWBODMzGVcBUDWFYHMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOVcBUDurGVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQXsDQFGHArYVWJwDMvsVcrsDWFYHMBODcFYH9FaDSvOZMXGHgNOHENiDuFaHIB/DcBwDuBqHArYHuFGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeH9BiHIBeHuBiHuzGDkFCH5FqDoFGD9BsZ1BiHIBeHuFaDEBOVkJ3DuFYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9XGZ1FGDSrYV5XGHgrKHEBUHEFqZuBqHQNmDQJsHAN7HuraHuNOVIFCDuX7VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeZSX7Z1rwD5NUHuBYVcrsDWJeVoraD9BsZ1X7Z1BeD5JeDMzGHEXeDuFYVoB/DcJeZSX7D1BeD5BqHuNODkBOV5F/VoB/D9XOZSBOZ1BeD5rqDMBYHEXeHEXCDoraD9NwZSFUZ1rwD5F7HuNODkBODWrmDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HIBeD5NUDENOVkXeHEFqHMXGHQFYZSX7HAN7HuBqDMrYDkBsDWF/HMJeHQNwZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5XGHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcXKH5FqHIJeDcJUH9BqDSBeHQXGHgveVkJGDWX7VoBqDcBiH9FGHAN7HQrqDMvOVcFeV5F/HIraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2282,6 +2283,11 @@ ob_start();
     sajax_export("ajax_control_seleccionar_cajas_mob_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->controle();
 //
     function nm_limpa_str_control_seleccionar_cajas_mob(&$str)
@@ -2396,6 +2402,10 @@ ob_start();
       global $inicial_control_seleccionar_cajas_mob;
       $aResp = array();
 
+      if (isset($inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['empty_filter'];
@@ -2492,6 +2502,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['btnDisabled'])
+         {
+            control_seleccionar_cajas_mob_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['btnLabel']) && '' != $inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['btnLabel'])
+         {
+            control_seleccionar_cajas_mob_pack_btn_label($aResp);
          }
          if (isset($inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['varList']) && !empty($inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['varList']))
          {
@@ -2596,8 +2614,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2846,6 +2869,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // control_seleccionar_cajas_mob_pack_master_value
+
+   function control_seleccionar_cajas_mob_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_control_seleccionar_cajas_mob;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // control_seleccionar_cajas_mob_pack_ajax_alert
+
+   function control_seleccionar_cajas_mob_pack_btn_label(&$aResp)
+   {
+      global $inicial_control_seleccionar_cajas_mob;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_control_seleccionar_cajas_mob->contr_control_seleccionar_cajas_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // control_seleccionar_cajas_mob_pack_ajax_alert
 
    function control_seleccionar_cajas_mob_pack_ajax_alert(&$aResp)
    {

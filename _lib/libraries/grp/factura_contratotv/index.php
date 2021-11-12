@@ -51,6 +51,9 @@ $vidcontra      = 0;
 $vnumerocontrato= "";
 $vfechacorte    = "";
 $vfechalimite   = "";
+	
+$vfechavence    = "";
+$vurlmail       = ""; 
 
 //traemos las librerias
 include_once 'php/baseDeDatos.php';
@@ -108,7 +111,7 @@ if($r1 = mysqli_fetch_array($consulta))
 $vsql3 = "select k.qr_base64 as qr,t.nombres,t.documento,k.direccion,t.tel_cel,t.ciudad,concat(r.prefijo,'-',k.numfacven) as numfe,
 k.fechaven,k.fecha_validacion as sn_fe_validacion,k.fechavenc,k.observaciones,total as neto,k.subtotal as vrbase,k.valoriva as vriva,
 k.formapago as fpago,k.cufe,r.prefijo,k.resolucion,r.prefijo_fe,if(k.credito=2,'CONTADO','CRÉDITO') as formapago,(dr.direc) as direccion2,(dr.telefono) as telefono2,(dr.ciudad) as ciudad2, 
-(select concat(m.municipio,' - ',(select d.departamento from departamento d where d.codigo=k.codigo_dep limit 1)) from municipio m where m.codigo_mu=k.codigo_mun and m.codigo_dep=k.codigo_dep limit 1) as municipio
+(select concat(m.municipio,' - ',(select d.departamento from departamento d where d.codigo=k.codigo_dep limit 1)) from municipio m where m.codigo_mu=k.codigo_mun and m.codigo_dep=k.codigo_dep limit 1) as municipio, t.urlmail
 from facturaven_contratos k left join terceros t on k.idcli=t.idtercero left join resdian r on k.resolucion=r.Idres left join direccion dr on dr.iddireccion=k.dircliente where k.idfacven='".$vid."'";
 
 //conexion a tns
@@ -165,6 +168,10 @@ if($r3 = mysqli_fetch_array($consulta3))
 	}
 	
 	$vfechayhora        = $r3[7];
+	$vfechavence        = date_create($vfechayhora);
+	$vfechavence        = date_format($vfechavence,"Y-m");
+	$vfechavence        = $vfechavence."-05";
+	$vfechavence        = date("Y-m-d",strtotime($vfechavence."+ 1 month"));
 	//$vfechayhora = date_create($vfechayhora);
 	//$fechayhora  = date_format($vfechayhora,'d-m-Y');
 	$vvalidacion        = $r3[8];
@@ -190,6 +197,7 @@ if($r3 = mysqli_fetch_array($consulta3))
 	{
 		$vciudad_cliente = $r3[23];
 	}
+	$vurlmail            = $r3[24];
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -650,11 +658,12 @@ function Loading() {
 				<div class="invoice-container rounded-container">
 				<div class="invoice-box">
 				<div class="invoice-container-left">
+				<br>
 				<table width="100%" cellspacing="0" cellpadding="0" border="0">
 				<tbody>
 				<tr>
 				</tr>
-					<td colspan="5"><span style="font-weight:bold; font-size:20px;"><?php echo $nombre_razonsocial; ?></span></td>
+					<td colspan="5"><center><span style="font-weight:bold; font-size:20px;"><?php echo $nombre_razonsocial; ?></span></center></td>
 				<tr>
 				<td>
 				<strong>
@@ -671,15 +680,15 @@ function Loading() {
 					<br>
 					<?php echo $vregimen; ?>
 					<br>
-					<?php echo $direccion; ?>
+					<?php if($vsn_pjfe=="MAFE"){echo "Calle 14 # 8-26 Barrio Centro";}else{echo $direccion;} ?>
 					<br>
-					Tel: <?php echo $celular; ?>
+					Tel: <?php if($vsn_pjfe=="MAFE"){echo "3158274103";}else{echo "3209123953";} ?>
 					<br>
 					<?php echo $correo; ?>
 					<br>
 					<?php echo $pagina_web; ?>
 					<br>
-					<?php echo $ciudad; ?>
+					<?php if($vsn_pjfe=="MAFE"){echo "Málaga";}else{echo $ciudad;} ?>
 					<br>
 					<?php
 					if(!empty($vcufe))
@@ -787,6 +796,19 @@ function Loading() {
 				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Ciudad</td>
 				<td class="Pad3" style="color:#000; font-size:12px;"><?php echo $vciudad_cliente; ?></td>
 				</tr>
+					
+				<tr>
+				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Correo</td>
+				<td class="Pad3" style="color:#000; font-size:12px;"  colspan="3">
+				<?php 
+					if(!empty($vurlmail))
+					{
+						echo $vurlmail;
+					}
+				?>
+				</td>
+				</tr>
+					
 				<tr style="visibility:collapse; display:none;">
 				<td class="ItemHeader Pad3" style="color:#000; font-size:12px; text-align:left;">Order Reference / Orden de Compra Prefijo</td>
 				<td class="Pad3" style="color:#000; font-size:12px; border-top: 1px solid #ccc;">
@@ -828,7 +850,7 @@ function Loading() {
 				<td class="Pad TableITemA TableITemB ItemHeader" style="text-align:center; font-size:12px; border-bottom: 1px solid #fff;" width="33%">Vencimiento</td>
 				<td class="Pad TableITemA" style="text-align:center; font-size:12px;">
 				<span style="text-align:center; color:#000; font-size:12px;">
-				<?php echo $vvencimiento; ?>
+				<?php echo $vfechavence; ?>
 				</span>
 				</td>
 				</tr>
@@ -1080,7 +1102,6 @@ function Loading() {
 						<td style="padding-left:10px;">
 							<?php echo strtoupper(CifrasEnLetras::convertirCifrasEnLetras($vtotal)); ?> PESOS M/CTE
 							<br>
-							<br>
 						</td>
 						</tr>
 						<tr>
@@ -1102,14 +1123,11 @@ function Loading() {
 							</tr>
 							</tbody>
 							</table>
-							<br>
-							<br>
 						</td>
 						</tr>
 						<tr>
 						<td>
 							<strong>Observaciones: </strong>
-							<br>
 						</td>
 						</tr>
 						<tr>
@@ -1205,6 +1223,8 @@ function Loading() {
 				</div>
 				</div>
 				</div>
+				<br>
+				<br>
 				<div class="invfooter" style="margin-left: 10px;">
 				<div class="text" style=" font-size:11px">
 				<?php if(!empty($vpie_pagina)){echo $vpie_pagina;} ?>

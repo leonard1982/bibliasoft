@@ -225,8 +225,8 @@ class reporte_detallecompra_ini
       $this->nm_dt_criacao   = "20180219"; 
       $this->nm_hr_criacao   = "104235"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -801,6 +801,8 @@ class reporte_detallecompra_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -926,7 +928,7 @@ class reporte_detallecompra_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['reporte_detallecompra']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['reporte_detallecompra']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSFUHIrwV5JeDMvOVcXKDWXCHMF7HQFYZ1FaD1rwHQraDEBeVkXeH5FYVoXGHQJKZ9F7HArYVWJsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEBUDWr/VoX7DcBwDuBqHANOHuBqDMrwVcB/DuX7HIF7HQXGH9B/DSBOD5BOHgvCHArsH5FYVoFaHQBiDQFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9FaHAN7V5FaDErKHEFiV5FaDoJeD9NmDQJsHABYV5raHgrKVcFKDWFYVENUDcBqZ1B/HIrwV5FGDMzGHEXeH5FYDoB/D9XsDQFGHAveV5BOHgvsV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiDcBqZSBOHIveHQXGHgveHErsDWF/VoBiDcBiDQJwDSzGVWJeDMvOVcXKDWFYDoFGHQNwH9FaHIBeHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMXGHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcXKH5FqHMX7D9XOH9B/HANOD5XGHgveHArsH5BmZuFaD9JKZSBiZ1BYHQrqHuBYVcBOHEX7HMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXOZSX7D1BeHQJwDMrYVcXKDWF/HMFGHQXOZSBOHIveZMXGDMveHEFiV5FqHIFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7D1rwD5XGDEBOHAFKV5FqHIF7HQNmH9FUHAN7D5JwHuBOVcXKDuX7HMJwHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/D9NwH9X7HABYV5JeHuNODkFCDWJeVENUDcJUZ1BOZ1BeV5B/DMzGHEJGH5F/DoraD9XsDQJsHIBeD5JwHgvsDkBOV5X7DoXGD9XOZ1rqHAN7D5NUHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoB/HQBiDQX7Z1N7V5FUHuNOVcXKV5X7HIFUHQNmVINUDSvOD5BqDErKZSJqDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBOHQBiZ9XGHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1rqHAN7D5FaHgNKZSJGDWXCHMBqD9NmDQBqHAN7VWJeHuBYVcFeV5X7HMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2385,6 +2387,8 @@ class reporte_detallecompra_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2776,11 +2780,16 @@ class reporte_detallecompra_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_orig'] = " where idfaccom=" . $_SESSION['par_idfaccom'] . "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra']['tot_geral']);
@@ -3285,7 +3294,7 @@ class reporte_detallecompra_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -4135,22 +4144,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_grid_titl'] ?> - detallecompra :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -4955,14 +4965,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['reporte_detallecompra'][$path_doc_
            $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['reporte_detallecompra']['embutida_form'])
        {

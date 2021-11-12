@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -292,8 +293,8 @@ class control_reenviar_factura_mob_ini
       $this->nm_dt_criacao   = "20201210"; 
       $this->nm_hr_criacao   = "142034"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -950,7 +951,7 @@ class control_reenviar_factura_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDuFaDSrwHQJeHuNODkFCH5FqHMBODcBqZkBiHIveHuBqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvmVcFKV5BmVoBqD9BsZkFGHArKHQBODMBYHEJqHEFqHIJwD9FYDQFaZ1BYD5F7DMzGVIB/DWXCHMX7HQBsZ1F7D1rwD5NUHgveDkB/H5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/D1rwD5FaDEBOVkJGH5F/DoJeD9XsZSX7HIBeV5raHuzGVIBODWFYDoraD9BsZSFaHANOV5JeDMBYHEJGDWr/DoFUDcBwH9X7HArYV5FGHuBYVcrsDWFYVoX7DcBqZ1BOZ1BeV5X7DEBOZSXeDWrGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BqHgrKHEFiDWX7VoXGHQXsDQBqHIrKD5JwDMvOV9BUDWF/DoF7D9XOZkFGHIBOZMFaHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAvsZMXGHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcXKDWJeHMX7D9BsZ1F7HINKZMFaHgBODkB/DWXCDorqHQJeDuBqHABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDuBqHAN7D5FaHuzGDkBOHEFYDoJsDcJUZ1BODSrYHQF7HgBOZSXeDWFGZuXGDcBiH9FGHIrKD5F7HgrKVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIF7HQXsDQB/DSvCVWJsDMrYVIBsDuX7HIX7D9BsVINUHArKV5B/DMveVkJGH5F/VoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqH9B/Z1BeV5FUDEvsHEBUDWr/DoB/D9XsDQB/Z1rwV5BOHgrKVcBODWFYDoJsD9BiZSB/DSrYD5NUDErKVkJqV5FaVoBODcJeDQX7D1BeVWJsHuBYVcFCDWJeVoB/DcNwH9B/Z1rYD5FaDMBYDkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNwDQBqHANOHuXGHuvmVcBOHEBmVEF7D9BsZ1BODSNOHQFaHgrKHEJqH5F/HMFaHQFYDuBqDSBYD5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5XGDMvOVcBUDWrmVEX7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuJeD9FYDQBqHABYHuBqDMBYV9BUH5XKVoFGHQBsZSBqDSNOV5JeDENOHEBUDWX7HIraDcJeDQFUDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2247,6 +2248,11 @@ ob_start();
     sajax_export("ajax_control_reenviar_factura_mob_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->controle();
 //
     function nm_limpa_str_control_reenviar_factura_mob(&$str)
@@ -2362,6 +2368,10 @@ ob_start();
       global $inicial_control_reenviar_factura_mob;
       $aResp = array();
 
+      if (isset($inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['empty_filter'];
@@ -2458,6 +2468,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['btnDisabled'])
+         {
+            control_reenviar_factura_mob_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['btnLabel']) && '' != $inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['btnLabel'])
+         {
+            control_reenviar_factura_mob_pack_btn_label($aResp);
          }
          if (isset($inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['varList']) && !empty($inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['varList']))
          {
@@ -2562,8 +2580,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2812,6 +2835,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // control_reenviar_factura_mob_pack_master_value
+
+   function control_reenviar_factura_mob_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_control_reenviar_factura_mob;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // control_reenviar_factura_mob_pack_ajax_alert
+
+   function control_reenviar_factura_mob_pack_btn_label(&$aResp)
+   {
+      global $inicial_control_reenviar_factura_mob;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_control_reenviar_factura_mob->contr_control_reenviar_factura_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // control_reenviar_factura_mob_pack_ajax_alert
 
    function control_reenviar_factura_mob_pack_ajax_alert(&$aResp)
    {

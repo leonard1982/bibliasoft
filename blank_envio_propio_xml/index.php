@@ -217,8 +217,8 @@ class blank_envio_propio_xml_ini
       $this->nm_dt_criacao   = "20210213"; 
       $this->nm_hr_criacao   = "094026"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210723"; 
-      $this->nm_hr_ult_alt   = "165801"; 
+      $this->nm_dt_ult_alt   = "20211028"; 
+      $this->nm_hr_ult_alt   = "180018"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -784,6 +784,8 @@ class blank_envio_propio_xml_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -908,7 +910,7 @@ class blank_envio_propio_xml_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_propio_xml']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_propio_xml']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuBqHAveHuraHuBOVcFeDuFGVoFGHQBqZ1X7Z1BOZMB/DMBYVkJ3DuJeDoXGDcXOZSFUDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBODkB/DWFGDoJeHQFYH9BiD1BOD5F7DMvODkBsHEFGVEX7DcBqH9BqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9B/HArYV5FUDEvsVkXeHEFqDoB/DcXOZSFGHAveV5BOHuNODkFCDWXCDoFGD9BsH9BOZ1BeZMXGDEBOHEXeDuX/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBOVWBqHuBYZSJqDWJeDoraDcNwH9BqHAvCD5XGHgNKHEFiHEFqHIFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDQBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQFUHgNOZSJ3DuJeZuB/HQXGDuFaD1BeV5XGHuvmDkBsH5B7VErqHQNwZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwZSFUHAveV5raHgrYZSJqH5XCDoJsHQJmZkFGD1NaZMB/DEBeHArCH5F/HIXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuB/HQXODuFaZ1BYVWXGHgrwDkB/DWrmVErqDcNmVINUDSrYHuB/DErKHEJqHEFqZuXGHQBiH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHgrKVcBOV5F/VErqD9JmZ1B/Z1BeD5BiDErKHEBUDWr/DoB/D9NwDQJsDSBYV5JwHgrYDkFCDur/DoXGD9BsZ1FUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeHEFGVEX7HQXGZSBqHArYHQFUHgNKHErsHEFqDoF7HQBiDQFUHIrwD5XGHuBYVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5XGDMvOVcBUDWrmVEX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBqD9NwZ9F7HAN7D5BOHuzGVIBsHEF/HIX7D9JmZkFGZ1BeHQBiHgBeHEJGDuJeDoBqHQJeDQX7HAN7V5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2029,7 +2031,7 @@ if(empty($vservidor) or empty($vtoken))
 }
 else
 {
-	$vsql = "select f.fechaven,f.numfacven,r.resolucion,TIME(f.creado) as hora,r.prefijo,t.documento,t.dv,t.nombres,t.tel_cel,t.direccion,if(t.regimen='SIM','2','1') as regimen,if(t.tipo_documento='13','3','6') as tipodoc,if(t.tipo='NAT','1','2') as tipopersona,'' as ciudad, if(f.credito='1','2','1') as formapago,coalesce(f.fechavenc,f.fechaven),coalesce(TIMESTAMPDIFF(DAY, f.fechaven, f.fechavenc),1) AS dias_credito,f.total,t.urlmail,(dr.direc) as direccion2,(select ml.id from municipalities ml where ml.code=(select concat(m.codigo_dep,m.codigo_mu) from municipio m where m.idmun=t.idmuni limit 1) limit 1) as codigomu, f.observaciones,r.texto_encabezado, r.texto_pie_pagina,dr.correo, t.correo_notificafe, t.celular_notificafe from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero left join direccion dr on dr.iddireccion=f.dircliente  where f.idfacven='".$vidfacven."'";
+	$vsql = "select f.fechaven,f.numfacven,r.resolucion,TIME(f.creado) as hora,r.prefijo,t.documento,t.dv,t.nombres,t.tel_cel,t.direccion,if(t.regimen='SIM','2','1') as regimen,if(t.tipo_documento='13','3','6') as tipodoc,if(t.tipo='NAT','1','2') as tipopersona,'' as ciudad, if(f.credito='1','2','1') as formapago,coalesce(f.fechavenc,f.fechaven),coalesce(TIMESTAMPDIFF(DAY, f.fechaven, f.fechavenc),1) AS dias_credito,f.total,t.urlmail,(dr.direc) as direccion2,(select ml.id from municipalities ml where ml.code=(select concat(m.codigo_dep,m.codigo_mu) from municipio m where m.idmun=t.idmuni limit 1) limit 1) as codigomu, f.observaciones,r.texto_encabezado, r.texto_pie_pagina,dr.correo, t.correo_notificafe, t.celular_notificafe,coalesce((select mc.id from municipalities mc where mc.code=(select concat(dcc.codigo_dep,dcc.codigo_mu) from municipio dcc where dcc.idmun=dr.idmuni)),(select mc.id from municipalities mc where mc.code=(select concat(dcc.codigo_dep,dcc.codigo_mu) from municipio dcc where dcc.idmun=t.idmuni))) as municipalidad from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero left join direccion dr on dr.iddireccion=f.dircliente  where f.idfacven='".$vidfacven."'";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2090,6 +2092,14 @@ else
 		if($this->r2[0][21]!="TEMPORAL" and !empty($this->r2[0][21]))
 		{
 			$vobservaciones = trim($this->r2[0][21]);
+		}
+		
+		if(isset($this->r2[0][27]))
+		{
+			if($this->r2[0][27]>0)
+			{
+				$vciudad = $this->r2[0][27];
+			}
 		}
 		
 		$vtexto_encabezado = $this->r2[0][22];

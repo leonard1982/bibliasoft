@@ -1641,7 +1641,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
 </HEAD>
-<BODY class="scGridPage">
+<BODY id="grid_search" class="scGridPage">
 <FORM style="display:none;" name="form_ok" method="POST" action="<?php echo $NM_retorno; ?>" target="_self">
 <INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
 <INPUT type="hidden" name="nmgp_opcao" value="pesq"> 
@@ -1683,6 +1683,32 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Pragma" content="no-cache" />
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
  <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
+          <?php 
+           if ($_SESSION['scriptcase']['proc_mobile']) {  
+               $sc_app_data = json_encode([ 
+                   'appType' => 'search', 
+                   'improvements' => true, 
+                   'displayOptionsButton' => false, 
+                   'displayScrollUp' => true, 
+                   'scrollUpPosition' => 'R', 
+                   'toolbarOrientation' => 'H', 
+                   'mobilePanes' => 'true', 
+                   'navigationBarButtons' => unserialize('a:5:{i:0;s:14:"sys_format_ini";i:1;s:14:"sys_format_ret";i:2;s:15:"sys_format_rows";i:3;s:14:"sys_format_ava";i:4;s:14:"sys_format_fim";}'), 
+                   'langs' => [ 
+                       'lang_refined_search' => html_entity_decode($this->Ini->Nm_lang['lang_refined_search'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
+                       'lang_summary_search_button' => html_entity_decode($this->Ini->Nm_lang['lang_summary_search_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
+                       'lang_details_button' => html_entity_decode($this->Ini->Nm_lang['lang_details_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
+                   ], 
+               ]); ?> 
+        <input type="hidden" id="sc-mobile-app-data" value='<?php echo $sc_app_data; ?>' />
+        <script type="text/javascript" src="../_lib/lib/js/nm_modal_panes.jquery.js"></script>
+        <script type="text/javascript" src="../_lib/lib/js/nm_mobile.js"></script>
+        <link rel='stylesheet' href='../_lib/lib/css/nm_mobile.css' type='text/css'/>
+    <script>
+        $(document).ready(function(){
+            bootstrapMobile();
+        });
+    </script>          <?php } ?>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
  <script type="text/javascript" src="../_lib/lib/js/scInput.js"></script>
@@ -1713,7 +1739,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 $vertical_center = '';
 ?>
-<BODY class="scFilterPage" style="<?php echo $vertical_center ?>">
+<BODY id="grid_search" class="scFilterPage" style="<?php echo $vertical_center ?>">
 <?php echo $this->Ini->Ajax_result_set ?>
 <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_js . "/browserSniffer.js" ?>"></SCRIPT>
         <script type="text/javascript">
@@ -3127,8 +3153,6 @@ foreach ($Arr_format as $Part_date)
   <TD class="scFilterTableTd">
    <table width="100%" class="scFilterToolbar"><tr>
     <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
-    </td>
-    <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
    <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
@@ -3229,6 +3253,8 @@ foreach ($Arr_format as $Part_date)
 <?php
    }
 ?>
+    </td>
+    <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
     </td>
     <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
     </td>
@@ -4415,6 +4441,7 @@ foreach ($Arr_format as $Part_date)
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos']['fast_search']);
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos']['where_pesq_interativ'] = "";
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos']['interativ_search'] = array();
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos']['int_search_dados'] = array();
       if ("" == $this->comando_filtro)
       {
           $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos']['where_orig'];

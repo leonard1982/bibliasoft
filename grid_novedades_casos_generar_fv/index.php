@@ -225,8 +225,8 @@ class grid_novedades_casos_generar_fv_ini
       $this->nm_dt_criacao   = "20201021"; 
       $this->nm_hr_criacao   = "180337"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210804"; 
-      $this->nm_hr_ult_alt   = "153717"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -801,6 +801,8 @@ class grid_novedades_casos_generar_fv_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -926,7 +928,7 @@ class grid_novedades_casos_generar_fv_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_novedades_casos_generar_fv']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_novedades_casos_generar_fv']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQX7DSBYHurqDMBYVcXKH5B7VEraDcJUVIJsHABYV5JwHgveHArCDuJeZuBqHQNwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuB/DMNKZSXeDWXCVoB/HQBiDuFaZ1zGV5JeHgrKVIBODWFYDoFUHQNmH9B/Z1NOHQXGDMBYHEJqHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSXeV5XCDoB/D9NmH9X7HABYD5JsHgvsVcBOH5XCDoraD9XOH9BOZ1BeD5rqDMBYHEJGH5FYDoB/D9NwZSFUZ1rwD5XGHgrKVcBOV5F/DoraD9XOZSB/HABYD5XGDMNKZSXeDWXCZuBOHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFGHuzGDkB/DuX7VEF7HQXGZ1BOHAzGZMXGDEvsHEFiDWX7HIBiHQFYDQFUD1veV5JwDMvOVcFiV5FYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWB3VEX7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQJsD1NKV5XGHgrwVcBOV5BmVoX7HQFYZkBiDSrYHuBqDEBOHEFKV5FqHMBqHQXODQX7HIrwVWXGHuBOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDuFaDSBYVWBOHgrKVcFCDWFYHIrqHQBiZ1X7Z1BeV5BqDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNOHEJGH5FYHIF7D9NwDQFaZ1BYHuJwDMBOVcBOHEX7VorqHQNmH9BqHIrwHuX7DMzGVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaVoBiD9XsZSFGHAN7D5JwHgrKVcFKDWFaDoNUDcJUZ1FaD1rwD5BiDMBYZSXeDWX7DoXGD9XsZSFGD1BeV5raHgrKDkBODWFYDoJsDcJUZ1FaHAN7D5NUDErKVkJqV5FaVoBOD9NmZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHENiV5FaHMJsDcBwH9FGD1BeHQrqDMzGVcFKH5B7DoXGHQBsZSBOHAN7HQX7HgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEF7D9XOZSBqHAN7D5BiDMzGHErCHEFaHMB/HQXsH9FGHAvOVWBODMzGVcFiV5FYVoBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2359,6 +2361,8 @@ class grid_novedades_casos_generar_fv_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2715,11 +2719,16 @@ class grid_novedades_casos_generar_fv_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_orig'] = " where c.codigo_cliente='" . $_SESSION['gid_contrato'] . "' and c.factura =0 and cn.valor>0 and c.fecha_cierre is not null";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv']['tot_geral']);
@@ -3148,7 +3157,7 @@ class grid_novedades_casos_generar_fv_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -3797,22 +3806,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Novedades del Contrato N: <?php echo $_SESSION['gid_numcontrato'] ?> :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -4640,14 +4650,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_novedades_casos_generar_fv'][
            $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_novedades_casos_generar_fv']['embutida_form'])
        {

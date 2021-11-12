@@ -356,6 +356,12 @@ class form_producto_precioscompra_apl
       {
           $_SESSION['gtmpidprod'] = $this->gtmpidprod;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_producto_precioscompra']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_producto_precioscompra']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_producto_precioscompra']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_producto_precioscompra']['embutida_parms'];
@@ -2097,10 +2103,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2113,31 +2122,31 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_producto_precioscompra'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'codigobar' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigobar' == $filtro)) || (is_array($filtro) && in_array('codigobar', $filtro)))
         $this->ValidateField_codigobar($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codigoprod' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigoprod' == $filtro)) || (is_array($filtro) && in_array('codigoprod', $filtro)))
         $this->ValidateField_codigoprod($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nompro' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nompro' == $filtro)) || (is_array($filtro) && in_array('nompro', $filtro)))
         $this->ValidateField_nompro($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciomen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciomen' == $filtro)) || (is_array($filtro) && in_array('preciomen', $filtro)))
         $this->ValidateField_preciomen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciomen2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciomen2' == $filtro)) || (is_array($filtro) && in_array('preciomen2', $filtro)))
         $this->ValidateField_preciomen2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciomen3' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciomen3' == $filtro)) || (is_array($filtro) && in_array('preciomen3', $filtro)))
         $this->ValidateField_preciomen3($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'precio2' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'precio2' == $filtro)) || (is_array($filtro) && in_array('precio2', $filtro)))
         $this->ValidateField_precio2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciomay' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciomay' == $filtro)) || (is_array($filtro) && in_array('preciomay', $filtro)))
         $this->ValidateField_preciomay($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'preciofull' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'preciofull' == $filtro)) || (is_array($filtro) && in_array('preciofull', $filtro)))
         $this->ValidateField_preciofull($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'precio_editable' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'precio_editable' == $filtro)) || (is_array($filtro) && in_array('precio_editable', $filtro)))
         $this->ValidateField_precio_editable($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha_vencimiento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha_vencimiento' == $filtro)) || (is_array($filtro) && in_array('fecha_vencimiento', $filtro)))
         $this->ValidateField_fecha_vencimiento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'lote' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'lote' == $filtro)) || (is_array($filtro) && in_array('lote', $filtro)))
         $this->ValidateField_lote($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'serial_codbarras' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'serial_codbarras' == $filtro)) || (is_array($filtro) && in_array('serial_codbarras', $filtro)))
         $this->ValidateField_serial_codbarras($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
@@ -4123,9 +4132,15 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra']['Loo
           
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_producto_precioscompra' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_producto_precioscompra';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_producto_precioscompra';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
  }
 ;
@@ -4184,9 +4199,15 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra']['Loo
           
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_producto_precioscompra' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_producto_precioscompra';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_producto_precioscompra';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
  }
 ;
@@ -4245,9 +4266,15 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra']['Loo
           
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_producto_precioscompra' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_producto_precioscompra';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_producto_precioscompra';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
  }
 ;
@@ -6369,7 +6396,8 @@ $_SESSION['scriptcase']['form_producto_precioscompra']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -7082,5 +7110,21 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-1");
+                break;
+            case "out":
+                return array("sc_out_top");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-2");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

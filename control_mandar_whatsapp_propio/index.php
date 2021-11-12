@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -293,8 +294,8 @@ class control_mandar_whatsapp_propio_ini
       $this->nm_dt_criacao   = "20210604"; 
       $this->nm_hr_criacao   = "144626"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210707"; 
-      $this->nm_hr_ult_alt   = "094158"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -952,7 +953,7 @@ class control_mandar_whatsapp_propio_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKH9X7HAN7HuXGHgrwVcXKH5FqVEFGD9XOH9BqHIBeV5BqDMveHEFiDuFYHIFGHQXsDQJwHAveHurqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuNUDMBYVcFeDuX7VEF7HQBqZ1F7Z1rYHQJeDMBYHArsH5F/VoBOHQBiH9FGHIrwHQNUDMBYVcB/DWFYDoFUHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5FGHuNODkBOV5F/VENUD9XOZSB/Z1BeV5FGDMNKZSXeV5FqDoraD9XsH9X7D1veV5FUHuzGVIB/V5X7VEF7D9JmZ1F7HABYZMB/DErKZSXeDWX7DoBOD9NwDQB/Z1rwV5JeHuzGVIBOV5X7VorqD9JmZ1B/Z1BOV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVENUHQJmVINUD1rKHuBODEBeHEXeH5FYHMJwD9NwZSBiHArYD5JsHgrKVcFKDWF/VoBiD9JmZ1BiHIveHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZ1BiHINKD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuBYVIFCDWFaVoBiDcFYZ1F7HArYZMFaHgNKHENiDuFaHINUHQNwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQJsDSBYHuB/DMNODkB/H5XCVErqD9BsH9BOHABYD5NUDEBeHENiDWr/HMBiHQFYDQB/HAvCVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveV5FUHgrKZSNiHEFYHMFUDcBqZkBiHAzGD5BODMBYZSXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/D1rwD5FaDEBOVkJGH5F/DoJeD9XsZSX7HIBeV5raHuNOVcBODWFaDoJsDcJUZ1F7HABYD5XGDMNKZSJGDuFaVoJeDcJeDQFGD1veV5BqHgvsVcFCDWXCVorqDcNwH9FaHArKD5XGDEBOZSJGDWF/VoXGD9XsZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYZuJsDcXGZSX7DSrwHQB/DMzGVcFeHEFYDoXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHIveHQJwDEBODkFeH5FYVoFGHQJKDQB/DSBYHuXGDMNOVcFKV5FYVEraHQNwVINUDSrYHQFUDMvCZSXeDWFGDoJeHQNwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2277,6 +2278,11 @@ ob_start();
     sajax_export("ajax_control_mandar_whatsapp_propio_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->controle();
 //
     function nm_limpa_str_control_mandar_whatsapp_propio(&$str)
@@ -2392,6 +2398,10 @@ ob_start();
       global $inicial_control_mandar_whatsapp_propio;
       $aResp = array();
 
+      if (isset($inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['empty_filter'];
@@ -2488,6 +2498,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['btnDisabled']) && '' != $inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['btnDisabled'])
+         {
+            control_mandar_whatsapp_propio_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['btnLabel']) && '' != $inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['btnLabel'])
+         {
+            control_mandar_whatsapp_propio_pack_btn_label($aResp);
          }
          if (isset($inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['varList']) && !empty($inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['varList']))
          {
@@ -2592,8 +2610,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2842,6 +2865,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // control_mandar_whatsapp_propio_pack_master_value
+
+   function control_mandar_whatsapp_propio_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_control_mandar_whatsapp_propio;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // control_mandar_whatsapp_propio_pack_ajax_alert
+
+   function control_mandar_whatsapp_propio_pack_btn_label(&$aResp)
+   {
+      global $inicial_control_mandar_whatsapp_propio;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_control_mandar_whatsapp_propio->contr_control_mandar_whatsapp_propio->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // control_mandar_whatsapp_propio_pack_ajax_alert
 
    function control_mandar_whatsapp_propio_pack_ajax_alert(&$aResp)
    {

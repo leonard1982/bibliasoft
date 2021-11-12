@@ -55,7 +55,6 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["idpro_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["desc_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["obs_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["existencia_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["colores_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["elcolor_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tallas_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -100,12 +99,6 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["obs_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["existencia_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["existencia_" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["colores_" + iSeqRow]["blur"]) {
@@ -266,6 +259,12 @@ function scEventControl_onFocus(oField, iSeq) {
   if ("unidadmayor_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
+  if ("adicional_" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
   if ("colores_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
@@ -387,9 +386,7 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_elsabor_' + iSeqRow).bind('blur', function() { sc_form_detalleventa_elsabor__onblur(this, iSeqRow) })
                                       .bind('change', function() { sc_form_detalleventa_elsabor__onchange(this, iSeqRow) })
                                       .bind('focus', function() { sc_form_detalleventa_elsabor__onfocus(this, iSeqRow) });
-  $('#id_sc_field_existencia_' + iSeqRow).bind('blur', function() { sc_form_detalleventa_existencia__onblur(this, iSeqRow) })
-                                         .bind('change', function() { sc_form_detalleventa_existencia__onchange(this, iSeqRow) })
-                                         .bind('focus', function() { sc_form_detalleventa_existencia__onfocus(this, iSeqRow) });
+  $('#id_sc_field_existencia_' + iSeqRow).bind('change', function() { sc_form_detalleventa_existencia__onchange(this, iSeqRow) });
   $('#id_sc_field_latalla_' + iSeqRow).bind('blur', function() { sc_form_detalleventa_latalla__onblur(this, iSeqRow) })
                                       .bind('change', function() { sc_form_detalleventa_latalla__onchange(this, iSeqRow) })
                                       .bind('focus', function() { sc_form_detalleventa_latalla__onfocus(this, iSeqRow) });
@@ -590,6 +587,7 @@ function sc_form_detalleventa_adicional__onblur(oThis, iSeqRow) {
 
 function sc_form_detalleventa_adicional__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  do_ajax_form_detalleventa_event_adicional__onchange(iSeqRow);
   nm_check_insert(iSeqRow);
 }
 
@@ -718,19 +716,8 @@ function sc_form_detalleventa_elsabor__onfocus(oThis, iSeqRow) {
   scCssFocus(oThis, iSeqRow);
 }
 
-function sc_form_detalleventa_existencia__onblur(oThis, iSeqRow) {
-  do_ajax_form_detalleventa_validate_existencia_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
 function sc_form_detalleventa_existencia__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detalleventa_existencia__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_detalleventa_latalla__onblur(oThis, iSeqRow) {
@@ -804,7 +791,6 @@ function displayChange_block_0(status) {
 	displayChange_field("idpro_", "", status);
 	displayChange_field("desc_", "", status);
 	displayChange_field("obs_", "", status);
-	displayChange_field("existencia_", "", status);
 	displayChange_field("colores_", "", status);
 	displayChange_field("elcolor_", "", status);
 	displayChange_field("tallas_", "", status);
@@ -831,7 +817,6 @@ function displayChange_row(row, status) {
 	displayChange_field_idpro_(row, status);
 	displayChange_field_desc_(row, status);
 	displayChange_field_obs_(row, status);
-	displayChange_field_existencia_(row, status);
 	displayChange_field_colores_(row, status);
 	displayChange_field_elcolor_(row, status);
 	displayChange_field_tallas_(row, status);
@@ -865,9 +850,6 @@ function displayChange_field(field, row, status) {
 	}
 	if ("obs_" == field) {
 		displayChange_field_obs_(row, status);
-	}
-	if ("existencia_" == field) {
-		displayChange_field_existencia_(row, status);
 	}
 	if ("colores_" == field) {
 		displayChange_field_colores_(row, status);
@@ -938,9 +920,6 @@ function displayChange_field_desc_(row, status) {
 }
 
 function displayChange_field_obs_(row, status) {
-}
-
-function displayChange_field_existencia_(row, status) {
 }
 
 function displayChange_field_colores_(row, status) {

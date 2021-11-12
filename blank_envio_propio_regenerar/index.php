@@ -217,8 +217,8 @@ class blank_envio_propio_regenerar_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210902"; 
-      $this->nm_hr_ult_alt   = "172357"; 
+      $this->nm_dt_ult_alt   = "20211028"; 
+      $this->nm_hr_ult_alt   = "143741"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -784,6 +784,8 @@ class blank_envio_propio_regenerar_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -908,7 +910,7 @@ class blank_envio_propio_regenerar_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_propio_regenerar']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_envio_propio_regenerar']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQX7D1BOV5BqHuBYVIBsHEFYHIFUD9JmZSFaHIveHuXGDMveHEFiDWFqHIraHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMJeHQFYZ9F7HAvOVWJwHuBOVcBODWFYVoBiDcJUZ1rqHANOHQNUHgveHErsDWFqZuBOHQNwH9FGHAN7D5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDorqD9XsDQJsHArYD5NUHuvmDkB/V5X7DoraD9BsZSFaHANOV5JeDEBOZSJqV5FaDoBOD9NwH9X7Z1rwV5JeHuvmVcBOV5X7VoJwD9XOZSB/HArYV5BODMzGHEXeV5XCVoB/D9NwH9X7HArYV5BODMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NwZ9F7HANOD5JeHgrKDkBODuX7VEX7D9XGZ1rqHArKHQXGDMBYDkXKHEFqDoraHQXODQFaHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqDSzGV5JeDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHEBUH5FGDoBqHQFYZSBiHIrwHuFGHgrKDkB/DWXCDoF7HQNmZ1B/DSNOHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsH9BiZ1BYHuJwDMvsVcFCDWFaHINUDcBqZ1B/HIveHuJeHgNOHEBUHEFqDoBODcBwDQX7HArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBOHEFiDWr/VoJsD9JKZSFGHArYVWBODMvOVcXKV5FGDoXGD9JmH9BODSrYHQFaHgBOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWJeDoJeDcBqZ1B/Z1NOV5JsDMNKZSXeDWFqVoBiD9NmH9X7DSBYV5JwHgrYDkFCDWXCVoX7D9BsH9FaHArKV5JeDEBOZSJqV5FaDoJeDcBwDQX7HIrwD5JwHuNOVIBODWFYVoX7DcBqZ1FaHAvCV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsDWF/HIXGHQNwZSFUZ1rwHuF7HgvOVcFeDWFYVoX7DcJUVIJsHAN7HQF7HgNOZSJ3V5XCHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBOHQBiZ9XGHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSrYD5BiDEvsDkXKHEFqHIBiD9FYDQJsZ1NaVWJwHuvmDkBODur/HIFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1977,6 +1979,21 @@ $vidtercero = "";
 $vurl_api_pdfs = "";
 $vurl_api_sendmail = "";
 $vtoken_password = "";
+$vordencompra = "";
+$vordenfecha  = "";
+
+$venvio_credenciales = "NO";
+$vplantillas_correo  = "";
+$vcopia_factura_a    = "";
+$vplantilla_pordefecto = "";
+$vplantilla_existe   = false;
+$vcabecera = "";
+$vcuerpo   = "";
+$vbotones  = "";
+$vpie      = "";
+$vnombre_emisor = "";
+$vcorreo_emisor = "";
+$vnit_emisor    = "";
 
 
 
@@ -2040,7 +2057,7 @@ if(empty($vservidor) or empty($vtoken))
 }
 else
 {
-	$vsql = "select f.fechaven,f.numfacven,r.resolucion,TIME(f.creado) as hora,r.prefijo,t.documento,t.dv,t.nombres,t.tel_cel,t.direccion,if(t.regimen='SIM','2','1') as regimen,if(t.tipo_documento='13','3','6') as tipodoc,if(t.tipo='NAT','1','2') as tipopersona,'' as ciudad, if(f.credito='1','2','1') as formapago,coalesce(f.fechavenc,f.fechaven),coalesce(TIMESTAMPDIFF(DAY, f.fechaven, f.fechavenc),1) AS dias_credito,f.total,t.urlmail,(dr.direc) as direccion2,(select ml.id from municipalities ml where ml.code=(select concat(m.codigo_dep,m.codigo_mu) from municipio m where m.idmun=t.idmuni limit 1) limit 1) as codigomu, f.observaciones,r.texto_encabezado, r.texto_pie_pagina,dr.correo, t.correo_notificafe, t.celular_notificafe,f.idcli from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero left join direccion dr on dr.iddireccion=f.dircliente  where f.idfacven='".$vidfacven."'";
+	$vsql = "select f.fechaven,f.numfacven,r.resolucion,TIME(f.creado) as hora,r.prefijo,t.documento,t.dv,t.nombres,t.tel_cel,t.direccion,if(t.regimen='SIM','2','1') as regimen,if(t.tipo_documento='13','3','6') as tipodoc,if(t.tipo='NAT','1','2') as tipopersona,'' as ciudad, if(f.credito='1','2','1') as formapago,coalesce(f.fechavenc,f.fechaven),coalesce(TIMESTAMPDIFF(DAY, f.fechaven, f.fechavenc),1) AS dias_credito,f.total,t.urlmail,(dr.direc) as direccion2,(select ml.id from municipalities ml where ml.code=(select concat(m.codigo_dep,m.codigo_mu) from municipio m where m.idmun=t.idmuni limit 1) limit 1) as codigomu, f.observaciones,r.texto_encabezado, r.texto_pie_pagina,dr.correo, t.correo_notificafe, t.celular_notificafe,f.idcli, coalesce(f.orden_compra,'') as orden_compra, coalesce(f.orden_fecha,'') as orden_fecha, coalesce((select mc.id from municipalities mc where mc.code=(select concat(dcc.codigo_dep,dcc.codigo_mu) from municipio dcc where dcc.idmun=dr.idmuni)),(select mc.id from municipalities mc where mc.code=(select concat(dcc.codigo_dep,dcc.codigo_mu) from municipio dcc where dcc.idmun=t.idmuni))) as municipalidad  from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero left join direccion dr on dr.iddireccion=f.dircliente  where f.idfacven='".$vidfacven."'";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2106,6 +2123,16 @@ else
 		$vtexto_encabezado = $this->r2[0][22];
 		$vtexto_pie_pagina = $this->r2[0][23];
 		$vidtercero = $this->r2[0][27];
+		$vordencompra = $this->r2[0][28];
+		$vordenfecha  = $this->r2[0][29];
+		
+		if(isset($this->r2[0][30]))
+		{
+			if($this->r2[0][30]>0)
+			{
+				$vciudad = $this->r2[0][30];
+			}
+		}
 	}
 	
 	$curl = curl_init();
@@ -2132,6 +2159,12 @@ else
 	if(!empty($vtexto_pie_pagina))
 	{
 		$vdatos["foot_note"] =  $vtexto_pie_pagina;
+	}
+	
+	if(!empty($vordencompra) and !empty($vordenfecha))
+	{
+		$vdatos["order_reference"]["id_order"] =  $vordencompra;
+		$vdatos["order_reference"]["issue_date_order"] =  $vordenfecha;
 	}
 	
 	$vdatos["customer"]["identification_number"] =  $vccnit;

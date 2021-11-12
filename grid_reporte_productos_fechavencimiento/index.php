@@ -227,8 +227,8 @@ class grid_reporte_productos_fechavencimiento_ini
       $this->nm_dt_criacao   = "20190121"; 
       $this->nm_hr_criacao   = "073658"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -803,6 +803,8 @@ class grid_reporte_productos_fechavencimiento_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -928,7 +930,7 @@ class grid_reporte_productos_fechavencimiento_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_reporte_productos_fechavencimiento']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_reporte_productos_fechavencimiento']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDuBqHABYHuB/DMvOVcFeH5FqHMJsDcFYH9B/DSrYV5JeDENOHEJqDuFaHMB/DcBiH9FGHAveV5FGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiDuFaHMX7DcJeZSFGD1BeVWXGDMvOVcFCDWF/HIXGHQBsVINUHArYD5BOHgNKHErCDWX7HMJsHQNmDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUD9NwH9X7HABYV5JeHuNODkFCDWJeVENUDcJUZ1BOZ1BeD5BqDErKVkXeV5FaVoFaD9NmDQX7D1BeVWJsHuNODkFCH5FqVoJwDcJUZSB/HArYD5rqDEBeHEFiDWX7ZuBODcBwDQX7Z1N7V5FGHuvmVcBOV5FYDoFGDcJUZ1B/Z1NOZMB/DEBODkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQX7Z1N7HQBqDMrYDkBsH5FqDoFUDcJUH9BqZ1vOZMBqDENOHEXeH5FYHMXGHQNmDuFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBOHErsDWX7HMFGHQBiDQBqD1veV5raHuvmVcBODuFqVorqD9XOZ1BiHAN7V5JwHgrKHEBUDuFaDoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwDQB/DSN7HuFUDMzGZSJ3V5FYHIFUHQXGZ1B/HIrwHQFaDMvCVkJ3HEFaDoFUDcBiDuFaZ1N7VWJwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveVWXGHgrwVcFeV5BmVEF7HQNwZSBqD1rwZMFaDEvsZSXeDuJeDoJsD9XsDQJwHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDuFaDoJeD9JKDQX7D1veV5raHuzGVIBODWFYVorqD9BsH9FaHAN7ZMB/DMzGHEJqV5FaDoBOD9NwH9X7Z1rwD5JsHuBYVcBOH5FqVENUD9BsH9FaD1rwD5BiDMzGVkXeDWFqDoF7D9JKDQJsHArYVWJeHgrKVcBOV5F/VoBqD9JmZ1B/Z1rYV5JeDMzGHEXeV5XCZuFaD9XsZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCV5FqHIFUDcBwDQB/HAvCVWBqHgvsDkBsDur/HMXGHQXOZSB/DSrYV5B/HgNKVkXeDWr/HMFaHQXOZSX7HIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHANKV5BODMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHArsDWrGZuJeD9XsZ9XGHIrwHQFaDMrYVcFKHEX7HMB/HQBiVIJsD1rwHuX7HgNOHEBUDWFqVoFGD9JKDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4297,7 +4299,7 @@ class grid_reporte_productos_fechavencimiento_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['graf_disp']        = array('Bar', 'Pie', 'Line', 'Area');
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -4379,6 +4381,8 @@ class grid_reporte_productos_fechavencimiento_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -4803,11 +4807,16 @@ class grid_reporte_productos_fechavencimiento_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento']['tot_geral']);
@@ -5308,7 +5317,7 @@ class grid_reporte_productos_fechavencimiento_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -6010,22 +6019,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Vencimiento de Productos :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencimiento'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -6807,14 +6817,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_productos_fechavencim
            $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_reporte_productos_fechavencimiento']['embutida_form'])
        {

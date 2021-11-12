@@ -227,8 +227,8 @@ class ventas_periodo_ini
       $this->nm_dt_criacao   = "20210115"; 
       $this->nm_hr_criacao   = "144106"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -833,6 +833,8 @@ class ventas_periodo_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -958,7 +960,7 @@ class ventas_periodo_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['ventas_periodo']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['ventas_periodo']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOH9FGHAvCV5BOHuBYDkBsDWJeDoBiDcJUZ1rqHAN7D5JeDENOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVorqHQBqZ1FaHANOZMBqHgNKVkJGDWFqDoBODcBwDuFaHArYHuFGDMBOVcFiV5FYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaZuBODcBwDQX7Z1N7VWJsHgvsVcFCH5FqVoJwD9XOZ1F7HArYD5XGDEBeHEXeV5FaVoFaD9XsZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBOVIBsDWFaHMBqHQBsZSFaDSrYV5XGHgrKVkJ3HEFqVoBODcBiDQFGDSBYHuJeHgrwDkBODuFqDoFUHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVorqHQBqZ1BiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHAveV5FGDMBOVcFKH5B7VoX7D9BsZSB/Z1vmZMBOHgBeDkB/DWr/HMB/HQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYH9X7Z1BYV5JeHgrKVcrsHEX/VoX7D9XOVIJsD1rKZMBOHgrKHErsDWFqZuBqD9XsZSFGHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQB/HIrwV5XGHuvmZSNiDWrmVErqDcFYZSBOHAN7HQFaDEvsVkXeDWXCDoFUHQFYH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDEvsVkXeDWFqVoBiD9NmDQJsHArYV5BqHgrYDkFCDWXCDoraD9XOZSB/DSrYD5FaDMzGHEFiV5XKVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQraHgNKHArsDWFqDoBqDcXGH9X7HIvsVWBqDMBOVcFeDWFaVoBqHQNmZ1B/HArYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5XGHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvODkBOH5FqHINUHQXGZSB/HIveZMFaHgBOHErCHEFqHIJwD9XsH9FGDSBYD5JwHgvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2454,7 +2456,7 @@ class ventas_periodo_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['graf_disp']        = array('Bar');
           $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -2536,6 +2538,8 @@ class ventas_periodo_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2947,10 +2951,15 @@ class ventas_periodo_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_orig'] = " where tipo = 'FV'";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_pesq_filtro'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['Grid_search']       = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['tot_geral']);
@@ -3344,7 +3353,7 @@ class ventas_periodo_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -5182,22 +5191,23 @@ SCEOT;
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_chart_title'] ?> facturaven :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -5991,14 +6001,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo'][$path_doc_md5][1]
            $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['ventas_periodo']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['ventas_periodo']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['ventas_periodo']['embutida_form'])
        {

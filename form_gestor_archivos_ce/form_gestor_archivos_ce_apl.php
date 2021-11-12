@@ -355,6 +355,12 @@ class form_gestor_archivos_ce_apl
       {
           $_SESSION['gnumeroce'] = $this->gnumeroce;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_gestor_archivos_ce']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_gestor_archivos_ce']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_gestor_archivos_ce']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_gestor_archivos_ce']['embutida_parms'];
@@ -1910,10 +1916,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1926,29 +1935,29 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_gestor_archivos_ce'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'id_gestor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_gestor' == $filtro)) || (is_array($filtro) && in_array('id_gestor', $filtro)))
         $this->ValidateField_id_gestor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha' == $filtro)) || (is_array($filtro) && in_array('fecha', $filtro)))
         $this->ValidateField_fecha($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre' == $filtro)) || (is_array($filtro) && in_array('nombre', $filtro)))
         $this->ValidateField_nombre($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo' == $filtro)) || (is_array($filtro) && in_array('tipo', $filtro)))
         $this->ValidateField_tipo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'editado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'editado' == $filtro)) || (is_array($filtro) && in_array('editado', $filtro)))
         $this->ValidateField_editado($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'peso' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'peso' == $filtro)) || (is_array($filtro) && in_array('peso', $filtro)))
         $this->ValidateField_peso($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'usuario' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'usuario' == $filtro)) || (is_array($filtro) && in_array('usuario', $filtro)))
         $this->ValidateField_usuario($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'descripcion' == $filtro)) || (is_array($filtro) && in_array('descripcion', $filtro)))
         $this->ValidateField_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cctercero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cctercero' == $filtro)) || (is_array($filtro) && in_array('cctercero', $filtro)))
         $this->ValidateField_cctercero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipodoc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipodoc' == $filtro)) || (is_array($filtro) && in_array('tipodoc', $filtro)))
         $this->ValidateField_tipodoc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numero' == $filtro)) || (is_array($filtro) && in_array('numero', $filtro)))
         $this->ValidateField_numero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      $this->upload_img_doc($Campos_Crit, $Campos_Falta, $Campos_Erros) ; 
+      $this->upload_img_doc($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
 //---
@@ -2515,7 +2524,7 @@ $_SESSION['scriptcase']['form_gestor_archivos_ce']['contr_erro'] = 'off';
     } // ValidateField_numero
 //
 //--------------------------------------------------------------------------------------
-   function upload_img_doc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros) 
+   function upload_img_doc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser;
      if (!empty($Campos_Crit) || !empty($Campos_Falta))
@@ -3940,7 +3949,7 @@ $_SESSION['scriptcase']['form_gestor_archivos_ce']['contr_erro'] = 'off';
           { 
               $rs1->Close(); 
               $this->editado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->editado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->editado_hora =  date('H') . ":" . date('i') . ":" . date('s');
               $NM_val_form['editado'] = $this->editado;
               $this->NM_ajax_changed['editado'] = true;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -4195,7 +4204,7 @@ $_SESSION['scriptcase']['form_gestor_archivos_ce']['contr_erro'] = 'off';
               $NM_cmp_auto = "id_gestor, ";
           } 
               $this->editado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->editado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->editado_hora =  date('H') . ":" . date('i') . ":" . date('s');
           $bInsertOk = true;
           $aInsertOk = array(); 
           $bInsertOk = $bInsertOk && empty($aInsertOk);
@@ -4973,7 +4982,7 @@ $_SESSION['scriptcase']['form_gestor_archivos_ce']['contr_erro'] = 'off';
               $this->id_gestor = "";  
               $this->nmgp_dados_form["id_gestor"] = $this->id_gestor;
               $this->fecha =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->fecha_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->fecha_hora =  date('H') . ":" . date('i') . ":" . date('s');
               $this->nmgp_dados_form["fecha"] = $this->fecha;
               $this->nombre = "";  
               $this->nombre_ul_name = "" ;  
@@ -5226,7 +5235,8 @@ $_SESSION['scriptcase']['form_gestor_archivos_ce']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -5992,5 +6002,30 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-3");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-4");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-5", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-6");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

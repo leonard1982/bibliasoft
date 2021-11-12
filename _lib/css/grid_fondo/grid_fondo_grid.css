@@ -71,6 +71,12 @@ scGridLabelVert:hover .scGridLabelLink,.scGridLabelFont:hover .scGridLabelLink {
 .ui-slider-horizontal > .ui-state-active { background-image: none; opacity: 1; filter: alpha(opacity=100); border-collapse: collapse }
 .scGridRefinedSearchRangeValues { background-image: none; opacity: 1; filter: alpha(opacity=100); padding: 4px; color: #333333; font-family: Arial, sans-serif; font-size: 12px; text-decoration: none }
 .scGridRefinedSearchQuantidade { background-image: none; opacity: 1; filter: alpha(opacity=100); border-style: solid; border-width: 0; padding: 0 2px; color: #404061; font-family: Arial, sans-serif; font-size: 12px; text-decoration: none }
+.scGridRefinedSearchCollapse { text-align: right }
+.scGridRefinedSearchCollapse i { background-image: none; color: #7d7d7d; margin: 10px 0; padding: 5px; border-style: solid; border-width: 0 }
+.scGridRefinedSearchCollapse i:hover { cursor: pointer; background-image: none }
+.scGridRefinedSearchExpand { text-align: right }
+.scGridRefinedSearchExpand i { background-image: none; color: #7d7d7d; margin: 10px 0; padding: 5px; border-style: solid; border-width: 0 }
+.scGridRefinedSearchExpand i:hover { cursor: pointer; background-image: none }
 .scAjaxDiv { background-color: #fefabb; background-image: none; opacity: 1; filter: alpha(opacity=100); color: #000000; font-family: Arial, sans-serif; font-size: 12px; text-shadow: 20px; text-decoration: none; border-collapse: collapse; border-color: #D8C754; border-style: solid; border-width: 1px }
 .scGridSummarySearchMoldura { background-image: none; opacity: 1; filter: alpha(opacity=100); border-color: #D2D2D2; border-style: solid; border-width: 0 0 1px 0; border-collapse: collpase; padding: 5px 10px; margin: 0 }
 .scGridSummarySearchCampo { background-image: none; opacity: 1; filter: alpha(opacity=100); border-style: none; border-collapse: collapse; margin: 20px 0 }

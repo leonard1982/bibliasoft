@@ -447,7 +447,7 @@ if (!$embbed)
   .sc_ui_sortable_ord {
    list-style-type: none;
    margin: 0;
-   min-width: 225px;
+   min-width: 120px;
   }
   .sc_ui_sortable_ord li {
    margin: 0 3px 3px 3px;
@@ -584,6 +584,13 @@ if (!$embbed)
    {
 ?>
    <?php echo nmButtonOutput($this->arr_buttons, "bsair_appdiv", "self.parent.tb_remove(); buttonunselectedOF();", "self.parent.tb_remove(); buttonunselectedOF();", "Bsair_ord", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   elseif ($_SESSION['scriptcase']['proc_mobile'])
+   {
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "closeAllModalPanes();", "closeAllModalPanes();", "Bsair_ord", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }

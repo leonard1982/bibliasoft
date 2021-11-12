@@ -385,6 +385,12 @@ class form_terceros_cuentas_porcobrar_mob_apl
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_terceros_cuentas_porcobrar_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_terceros_cuentas_porcobrar_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_terceros_cuentas_porcobrar_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_terceros_cuentas_porcobrar_mob']['embutida_parms'];
@@ -2152,10 +2158,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2168,45 +2177,45 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_terceros_cuentas_porcobrar_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'titulo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'titulo' == $filtro)) || (is_array($filtro) && in_array('titulo', $filtro)))
         $this->ValidateField_titulo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'prefijo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'prefijo' == $filtro)) || (is_array($filtro) && in_array('prefijo', $filtro)))
         $this->ValidateField_prefijo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numero' == $filtro)) || (is_array($filtro) && in_array('numero', $filtro)))
         $this->ValidateField_numero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha' == $filtro)) || (is_array($filtro) && in_array('fecha', $filtro)))
         $this->ValidateField_fecha($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'banco' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'banco' == $filtro)) || (is_array($filtro) && in_array('banco', $filtro)))
         $this->ValidateField_banco($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cod_cuenta' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cod_cuenta' == $filtro)) || (is_array($filtro) && in_array('cod_cuenta', $filtro)))
         $this->ValidateField_cod_cuenta($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo' == $filtro)) || (is_array($filtro) && in_array('tipo', $filtro)))
         $this->ValidateField_tipo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_cuenta_origen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo_cuenta_origen' == $filtro)) || (is_array($filtro) && in_array('tipo_cuenta_origen', $filtro)))
         $this->ValidateField_tipo_cuenta_origen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tercero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tercero' == $filtro)) || (is_array($filtro) && in_array('tercero', $filtro)))
         $this->ValidateField_tercero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numero_documento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numero_documento' == $filtro)) || (is_array($filtro) && in_array('numero_documento', $filtro)))
         $this->ValidateField_numero_documento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'valor_total' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'valor_total' == $filtro)) || (is_array($filtro) && in_array('valor_total', $filtro)))
         $this->ValidateField_valor_total($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'saldo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'saldo' == $filtro)) || (is_array($filtro) && in_array('saldo', $filtro)))
         $this->ValidateField_saldo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'concepto' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'concepto' == $filtro)) || (is_array($filtro) && in_array('concepto', $filtro)))
         $this->ValidateField_concepto($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'asentada' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'asentada' == $filtro)) || (is_array($filtro) && in_array('asentada', $filtro)))
         $this->ValidateField_asentada($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'observaciones' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'observaciones' == $filtro)) || (is_array($filtro) && in_array('observaciones', $filtro)))
         $this->ValidateField_observaciones($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'usuario' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'usuario' == $filtro)) || (is_array($filtro) && in_array('usuario', $filtro)))
         $this->ValidateField_usuario($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'automatico' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'automatico' == $filtro)) || (is_array($filtro) && in_array('automatico', $filtro)))
         $this->ValidateField_automatico($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'pagada' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'pagada' == $filtro)) || (is_array($filtro) && in_array('pagada', $filtro)))
         $this->ValidateField_pagada($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idtercero_cuenta' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idtercero_cuenta' == $filtro)) || (is_array($filtro) && in_array('idtercero_cuenta', $filtro)))
         $this->ValidateField_idtercero_cuenta($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ie' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ie' == $filtro)) || (is_array($filtro) && in_array('ie', $filtro)))
         $this->ValidateField_ie($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -5452,9 +5461,15 @@ if($this->automatico =='SI')
    
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "No se puede editar una cuenta de tercero que ha sido generada automaticamente por FACILWEB.";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_terceros_cuentas_porcobrar_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_terceros_cuentas_porcobrar_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_terceros_cuentas_porcobrar_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "No se puede editar una cuenta de tercero que ha sido generada automaticamente por FACILWEB.";
  }
 ;
@@ -9038,7 +9053,8 @@ $_SESSION['scriptcase']['form_terceros_cuentas_porcobrar_mob']['contr_erro'] = '
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -10847,5 +10863,54 @@ if (parent && parent.scAjaxDetailValue)
             $this->NM_ajax_info['readOnly'][$sFieldDateTime . $iSeq] = $sStatus;
         }
     } // sc_field_readonly
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-15");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-16");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-17");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4", "sc_b_upd_t.sc-unique-btn-18");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5", "sc_b_del_t.sc-unique-btn-19");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-23", "sc_b_sai_t.sc-unique-btn-25", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-24", "sc_b_sai_t.sc-unique-btn-26");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-11", "sc_b_ini_b.sc-unique-btn-27");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-12", "sc_b_ret_b.sc-unique-btn-28");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-13", "sc_b_avc_b.sc-unique-btn-29");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-14", "sc_b_fim_b.sc-unique-btn-30");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-20");
+                break;
+            case "copy":
+                return array("sc_b_clone_t.sc-unique-btn-21");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

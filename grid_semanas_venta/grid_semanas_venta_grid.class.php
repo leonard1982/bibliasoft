@@ -28,9 +28,12 @@ class grid_semanas_venta_grid
    var $NM_opcao; 
    var $NM_flag_antigo; 
    var $nm_campos_cab = array();
-   var $NM_cmp_hidden = array();
-   var $nmgp_botoes = array();
-   var $Cmps_ord_def = array();
+   var $NM_cmp_hidden   = array();
+   var $nmgp_botoes     = array();
+   var $nm_btn_exist    = array();
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array();
+   var $Cmps_ord_def    = array();
    var $nmgp_label_quebras = array();
    var $nmgp_prim_pag_pdf;
    var $Campos_Mens_erro;
@@ -173,10 +176,18 @@ class grid_semanas_venta_grid
        if (!$this->Proc_link_res && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opcao'] != 'pdf' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opcao_print'] != 'print')
        { 
        $nm_saida->saida("     <TR>\r\n");
-       $nm_saida->saida("      <TD class=\"scGridRefinedSearchPadding\" valign='top'>\r\n");
+       $nm_saida->saida("      <TD id=\"div_refin_search\" class=\"scGridRefinedSearchPadding\" valign='top'>\r\n");
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['ajax_nav'])
+           { 
+               $_SESSION['scriptcase']['saida_html'] = "";
+           } 
            $this->html_interativ_search();
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['ajax_nav'])
            { 
+               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['refresh_interativ']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['refresh_interativ'] == "S") {
+                   $this->Ini->Arr_result['setValue'][] = array('field' => 'div_refin_search', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+               }
+               unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['refresh_interativ']);
                $tb_disp = (!empty($this->nm_grid_sem_reg) && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_int_search']) ? 'none' : '';
                $this->Ini->Arr_result['setDisplay'][] = array('field' => 'TB_Interativ_Search', 'value' => $tb_disp);
            } 
@@ -411,7 +422,7 @@ class grid_semanas_venta_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['mostra_edit'] = "N";
        }
    }
-   if ($this->Ini->SC_Link_View || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_psq'])
+   if ($this->Ini->SC_Link_View || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_psq'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['psq_edit'] == 'N'))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['mostra_edit'] = "N";
    }
@@ -1530,6 +1541,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            { 
                $nm_saida->saida("   function sc_session_redir(url_redir)\r\n");
                $nm_saida->saida("   {\r\n");
+           $nm_saida->saida("       if (typeof(sc_session_redir_mobile) === typeof(function(){})) { sc_session_redir_mobile(url_redir); }\r\n");
                $nm_saida->saida("       if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')\r\n");
                $nm_saida->saida("       {\r\n");
                $nm_saida->saida("           window.parent.sc_session_redir(url_redir);\r\n");
@@ -1664,6 +1676,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("  }\r\n");
            $nm_saida->saida("  function SC_init_jquery(isScrollNav){ \r\n");
            $nm_saida->saida("   \$(function(){ \r\n");
+           $nm_saida->saida("     NM_btn_disable();\r\n");
            if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['qsearch'] == "on")
            {
                $nm_saida->saida("     \$('#SC_fast_search_top').keyup(function(e) {\r\n");
@@ -2215,7 +2228,7 @@ $nm_saida->saida("}\r\n");
            {
                $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
            }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
@@ -2249,7 +2262,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        }
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opcao'] != "pdf" && !$this->Print_All)
@@ -5430,6 +5443,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       {
       $pos_path = strrpos($this->Ini->path_prod, "/");
       $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
+              $this->nm_btn_exist['sel_col'][] = "selcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -5448,6 +5462,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $UseAlias =  "S";
           }
+              $this->nm_btn_exist['sort_col'][] = "ordcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -5469,6 +5484,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           }
           if ($Q_count > 1 || $Q_free)
           {
+              $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -5500,7 +5516,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       {
           $Tem_pdf_res = "n";
       }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['pdf'][] = "pdf_top";
+          $nm_saida->saida("            <div id=\"div_pdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=0&apapel=0&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=S&nm_all_cab=N&nm_all_label=N&nm_orient_grid=2&password=n&summary_export_columns=N&pdf_zip=N&origem=cons&language=es&conf_socor=S&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_semanas_venta&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5523,7 +5540,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $Tem_word_res = "n";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_word_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['word'][] = "word_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5546,7 +5564,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $Xls_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xls'][] = "xls_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_xls_conf('xls', '$Xls_mod_export', '','N');", "nm_gp_xls_conf('xls', '$Xls_mod_export', '','N');", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5574,7 +5593,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $Xml_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xml'][] = "xml_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5597,7 +5617,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $Csv_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_csv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['csv'][] = "csv_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5606,7 +5627,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_rtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['rtf'][] = "rtf_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5629,7 +5651,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
               $Tem_pdf_res = "n";
           }
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_print_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['print'][] = "print_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=PC&nm_cor=PB&password=n&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5648,7 +5671,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $NM_btn = false;
               $NM_ult_sep = "NM_sep_1";
-              $nm_saida->saida("          <img id=\"NM_sep_1\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $nm_saida->saida("          <img id=\"NM_sep_1\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
           $nm_saida->saida("         </td> \r\n");
@@ -5660,6 +5683,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['SC_Gb_Free_cmp']))
             { }
             else {
+              $this->nm_btn_exist['summary'][] = "res_top";
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
@@ -5682,6 +5706,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
           $nm_saida->saida("            <div id='id_save_grid_div_top' style='display:inline-block'>\r\n");
           }
+              $this->nm_btn_exist['gridsave'][] = "save_grid_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgridsave", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "save_grid_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
@@ -5717,6 +5742,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       }
       if ($this->nmgp_botoes['exit'] == "on")
       {
+          $this->nm_btn_exist['exit'][] = "sai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('busca', '0', '');", "nm_gp_move('busca', '0', '');", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
@@ -5775,6 +5801,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
           {
               $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['qt_lin_grid'];
+              $this->nm_btn_exist['goto'][] = "brec_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "birpara", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "brec_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $Page_Atu   = ceil($this->nmgp_reg_inicial / $Reg_Page);
@@ -5810,6 +5837,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['first'][] = "first_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -5824,6 +5852,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           }
           if ($this->nmgp_botoes['back'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['back'][] = "back_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -5882,12 +5911,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           }
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['forward'][] = "forward_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['last'][] = "last_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -5900,14 +5931,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_semanas_venta_help.txt") && !$this->grid_emb_form)
@@ -6048,7 +6079,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       {
           $Tem_pdf_res = "n";
       }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['pdf'][] = "pdf_top";
+          $nm_saida->saida("            <div id=\"div_pdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=0&apapel=0&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=S&nm_all_cab=N&nm_all_label=N&nm_orient_grid=2&password=n&summary_export_columns=N&pdf_zip=N&origem=cons&language=es&conf_socor=S&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_semanas_venta&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6071,7 +6103,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $Tem_word_res = "n";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_word_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['word'][] = "word_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6094,7 +6127,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $Xls_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xls'][] = "xls_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_xls_conf('xls', '$Xls_mod_export', '','N');", "nm_gp_xls_conf('xls', '$Xls_mod_export', '','N');", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6122,7 +6156,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $Xml_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xml'][] = "xml_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6145,7 +6180,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $Csv_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_csv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['csv'][] = "csv_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6154,7 +6190,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_rtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['rtf'][] = "rtf_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6177,7 +6214,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
               $Tem_pdf_res = "n";
           }
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_print_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['print'][] = "print_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=PC&nm_cor=PB&password=n&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6202,7 +6240,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['filter'] == "on"  && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_pesq_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+           $this->nm_btn_exist['filter'][] = "pesq_top";
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'grid');", "nm_gp_move('busca', '0', 'grid');", "pesq_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
            $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6216,9 +6255,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       if ($this->nmgp_botoes['sel_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_selcmp_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
       $pos_path = strrpos($this->Ini->path_prod, "/");
       $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
+              $this->nm_btn_exist['sel_col'][] = "selcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6239,7 +6279,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           {
               $UseAlias =  "S";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_ordcmp_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['sort_col'][] = "ordcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6253,7 +6294,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       if ($this->nmgp_botoes['groupby'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_sel_groupby_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
           $Q_free  = false;
           $Q_count = 0;
           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['SC_All_Groupby'] as $QB => $Tp)
@@ -6269,6 +6310,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           }
           if ($Q_count > 1 || $Q_free)
           {
+              $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_semanas_venta/grid_semanas_venta_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -6283,7 +6325,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
             { }
             else {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_res_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['summary'][] = "res_top";
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
@@ -6309,11 +6352,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
               $save_grid_format = 'extended';
           }
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_save_grid_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
           if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
           {
           $nm_saida->saida("            <div id='id_save_grid_div_top' style='display:inline-block'>\r\n");
           }
+              $this->nm_btn_exist['gridsave'][] = "save_grid_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgridsave", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "save_grid_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
@@ -6366,6 +6410,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       }
       if ($this->nmgp_botoes['exit'] == "on")
       {
+          $this->nm_btn_exist['exit'][] = "sai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('busca', '0', '');", "nm_gp_move('busca', '0', '');", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
@@ -6423,6 +6468,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       {
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['first'][] = "first_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -6437,6 +6483,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
           }
           if ($this->nmgp_botoes['back'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['back'][] = "back_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -6455,24 +6502,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['forward'][] = "forward_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['last'][] = "last_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -6627,7 +6676,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -6677,7 +6727,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['fast_search'][1] == 'eq')
@@ -6698,7 +6749,16 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
    function html_interativ_search()
    {
        global $nm_saida;
+       $bol_refin_use_modal = false;
+       if($_SESSION['scriptcase']['proc_mobile'])
+       {
+           $bol_refin_use_modal = false;
+       }
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label'] = array();
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_dados']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_dados'] = array();
+       }
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_sql']   = array();
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']))
        {
@@ -6717,6 +6777,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad'] = (isset($this->New_label['unidad'])) ? $this->New_label['unidad'] : 'Unidad';
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_sql']['unidad']   = "unidad";
        $tb_disp = (empty($this->nm_grid_sem_reg)) ? '' : 'none';
+       $nm_saida->saida("     <script>\r\n");
+       $nm_saida->saida("         var Tab_obj_int_mult = {};\r\n");
+       $nm_saida->saida("     </script>\r\n");
        $nm_saida->saida(" <table id=\"TB_Interativ_Search\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top; width: 100%; display:" . $tb_disp . ";\" valign=\"top\" cellspacing=0 cellpadding=0>\r\n");
        $nm_saida->saida("   <tr id=\"NM_Interativ_Search\">\r\n");
        $nm_saida->saida("   <td valign=\"top\"> \r\n");
@@ -6724,21 +6787,29 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $nm_saida->saida("     <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
        $nm_saida->saida("     <input type=\"hidden\" name=\"nmgp_opcao\" value=\"interativ_search\"/> \r\n");
        $nm_saida->saida("     <input type=\"hidden\" name=\"parm\" value=\"\"/> \r\n");
-       $nm_saida->saida("    <div id='id_div_interativ_search' class='scGridRefinedSearchMoldura' style='min-width:200px;'>\r\n");
-       $lin_obj = $this->interativ_search_codigo();
+       $nm_saida->saida("    <div id='id_div_interativ_search' class=''>\r\n");
+           $disp_btn_collapse = 'none'; 
+           if('N' == 'S') 
+           { 
+               $disp_btn_collapse = ''; 
+           } 
+$nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSearchCollapse' style='display: " . $disp_btn_collapse . "' onclick='nm_proc_int_search_toggle(false);'><i class='icon_fa " . $this->Ini->scGridRefinedSearchCollapseFAIcon . "'></i></div> \r\n");
+       $nm_saida->saida("        <div id='id_div_interativ_search_content' class='scGridRefinedSearchMoldura' style='min-width:200px;'>\r\n");
+       $nm_saida->saida("            <div id='id_div_interativ_search_fields'>\r\n");
+       $lin_obj = $this->interativ_search_codigo($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_descripcion();
+       $lin_obj = $this->interativ_search_descripcion($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_existencia();
+       $lin_obj = $this->interativ_search_existencia($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_demanda_semanal();
+       $lin_obj = $this->interativ_search_demanda_semanal($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_semanas_venta();
+       $lin_obj = $this->interativ_search_semanas_venta($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_unidad();
+       $lin_obj = $this->interativ_search_unidad($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_bar();
-       $nm_saida->saida("" . $lin_obj . "\r\n");
+       $nm_saida->saida("            </div>\r\n");
+       $nm_saida->saida("        </div>\r\n");
        $nm_saida->saida("    </div>\r\n");
        $nm_saida->saida("    </form>\r\n");
        $nm_saida->saida("   </td>\r\n");
@@ -6749,6 +6820,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
    }
    function refresh_interativ_search()
    {
+       $bol_refin_use_modal = false;
+       if($_SESSION['scriptcase']['proc_mobile'])
+       {
+           $bol_refin_use_modal = false;
+       }
        $array_fields = array();
        $array_fields[] = "codigo";
        $array_fields[] = "descripcion";
@@ -6762,42 +6838,31 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            foreach($array_fields as $str_field)
            {
                $method = "interativ_search_" . $str_field;
-               $str_out .= $this->$method();
+               $str_out .= $this->$method($bol_refin_use_modal);
            }
-           $this->Ini->Arr_result['setValue'][] = array('field' => 'id_div_interativ_search', 'value' => NM_charset_to_utf8($str_out));
+           $this->Ini->Arr_result['setValue'][] = array('field' => 'id_div_interativ_search_fields', 'value' => NM_charset_to_utf8($str_out));
        }
    }
-   function interativ_search_bar()
-   {
-       global $nm_saida;
-       $lin_obj = "<div class='scGridRefinedSearchToolbar' id='id_toolbar_refined' style='display:none'>";
-       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search_all();", "nm_proc_int_search_all();", "app_int_search_all", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-       $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "window.history.back();", "window.history.back();", "app_int_search_all_cancel", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-       $lin_obj .= "</div>";
-       return $lin_obj;
-   }
-   function interativ_search_codigo()
+   function interativ_search_codigo($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["codigo"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["codigo"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_codigo\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('codigo')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_codigo\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('codigo')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_codigo\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('codigo')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_codigo_ck\" name=\"int_search_codigo_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('codigo');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('codigo')\">";
+       $lin_obj .= "              <span id=\"id_expand_codigo\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_codigo\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_codigo\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','codigo', '', 'codigo', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_codigo\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','codigo', '', 'codigo', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -6837,17 +6902,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY codigo". $Cmps_where;
        $nm_comando .= " order by codigo ASC";
@@ -6895,14 +6960,27 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $lin_mult  = "";
        $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['codigo'])) ? "" : "none";
        $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_codigo_link\" style=\"display: " . $disp_link . ";\">";
+        $check_uncheck  = "
+            <span id='id_check_codigo' class='multiplecodigo' style='display:" . (($displ_open)?'':'none') . ";'>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('codigo', true); this.checked=true;\" \>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('codigo', false); this.checked=false;\" \>
+            </span>";
        $qtd_see_more  = 0;
        $qtd_result_see_more  = 0;
        $bol_open_see_more  = false;
+       if($bol_refin_use_modal)
+       {
+           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_dados']['codigo'])?false:true);
+       }
        foreach ($result as $dados => $qtd_result)
        {
            $formatado = $dados;
            $formatado_exib  = $formatado;
            $dados = (string)$dados;
+           if($bol_refin_use_modal && $bol_populate_modal_values)
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_dados']['codigo'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
+           }
            if($dados == '')
            {
                $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
@@ -6911,9 +6989,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
            if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
            {
-               $lin_obj  .= "   <div id='id_see_more_codigo' class='scGridRefinedSearchVejaMais'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('codigo');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-               $lin_obj  .= "   </div>";
                $lin_obj  .= "   <div id='id_see_more_list_codigo' style='display:none'>";
                $bol_open_see_more  = true;
            }
@@ -6927,62 +7002,79 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
            $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
            $lin_obj  .= "   <tr>";
+           $lin_obj  .= "   <td>";
+           $lin_obj  .= "   <span class='simplecodigo' style='display:" . (($displ_open)?'none':'') . ";'>";
            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['codigo']))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('uncheck', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','id_int_search_codigo','codigo', '" . NM_encode_input($dados . "##@@" . $formatado) . "');\"/>";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','id_int_search_codigo','codigo', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
            }
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'codigo', '');\" class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</a> ";
-           $lin_obj  .= "   </td>";
+           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'codigo', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
+           $lin_obj  .= $formatado_exib;
            if(!empty($veja_mais_link))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'codigo', '');\" class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</a> ";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
            }
+           $lin_obj  .= "        </a>";
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "    <span class='multiplecodigo' style='display:"  . (($displ_open)?'':'none') .  ";'>";
+           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['codigo']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['codigo']['val_sel'])) ? " checked" : "";
+           $checked = " checked";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_codigo_" . md5($dados) . "\" name=\"int_search_codigo[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_codigo_". md5($dados) ."\" for=\"id_int_search_codigo_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
+           }
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "   </td>";
            $lin_obj  .= "    </tr>";
            $lin_obj  .= "   </table>";
            $lin_obj  .= "   </div>";
-           $lin_mult .= "   <div><label class='scGridRefinedSearchCampo' style='display: block;'>";
-           $lin_mult .= "    <INPUT class='" . $this->css_scAppDivToolbarInput . "' type=\"checkbox\" id=\"id_int_search_codigo\" name=\"int_search_codigo[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" checked><span class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_mult .= "    <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_mult .= "   </label></div>";
            $qtd_result_see_more++;
        }
+           $displ_see_more = false;
            if($bol_open_see_more)
            {
                $lin_obj  .= "   </div>";
-               $lin_obj  .= "   <div id='id_see_less_codigo' class='scGridRefinedSearchVejaMais' style='display:none'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('codigo');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-               $lin_obj  .= "   </div>";
+               $displ_see_more = true;
            }
+           if($bol_refin_use_modal)
+           {
+               $displ_see_more = true;
+           }
+           $lin_obj  .= "   <div id='id_see_more_codigo' class='scGridRefinedSearchVejaMais'>";
+           $lin_obj  .= "       " . $check_uncheck;
+           if($bol_refin_use_modal)
+           {
+               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_semanas_venta_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=codigo&tp_obj=tx&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           else
+           {
+               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('codigo');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           $lin_obj  .= "   </div>";
+           $lin_obj  .= "   <div id='id_see_less_codigo' class='scGridRefinedSearchVejaMais' style='display:none;'>";
+           $lin_obj  .= "   " . $check_uncheck;
+           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('codigo');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
+           $lin_obj  .= "   </div>";
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
-       if (count($result) > 1)
        {
-           $disp_chk = "none";
-           $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_codigo_chk\" style=\"display: " . $disp_chk . ";\">";
-           $lin_obj  .= $lin_mult;
-           $lin_obj  .= "   </div></td></tr>";
-       }
-       if (count($result) > 1)
-       {
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_codigo\" style='display:none'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('codigo');", "nm_mult_int_search('codigo');", "mult_int_search_codigo", "", "", "display: $disp_link", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_show_multi_btn = '';
+           if (count($result) < 2)
+           {
+               $disp_show_multi_btn = 'none';
+           }
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('codigo', false);", "nm_mult_int_search('codigo', false);", "mult_int_search_codigo", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','id_int_search_codigo','codigo', '');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','id_int_search_codigo','codigo', '');", "app_int_search_codigo", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_multi_btn = 'none';
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','id_int_search_codigo','codigo', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['codigo']) . "','codigo','id_int_search_codigo','codigo', '', 'N');", "app_int_search_codigo", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('codigo');", "nm_single_int_search('codigo');", "single_int_search_codigo", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
@@ -6994,26 +7086,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $lin_obj .= "    </div>";
        return $lin_obj;
    }
-   function interativ_search_descripcion()
+   function interativ_search_descripcion($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["descripcion"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["descripcion"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_descripcion\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('descripcion')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_descripcion\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('descripcion')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_descripcion\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('descripcion')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_descripcion_ck\" name=\"int_search_descripcion_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('descripcion');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('descripcion')\">";
+       $lin_obj .= "              <span id=\"id_expand_descripcion\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_descripcion\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_descripcion\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','descripcion', '', 'descripcion', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_descripcion\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','descripcion', '', 'descripcion', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -7053,17 +7145,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY descripcion". $Cmps_where;
        $nm_comando .= " order by descripcion ASC";
@@ -7111,14 +7203,27 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $lin_mult  = "";
        $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['descripcion'])) ? "" : "none";
        $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_descripcion_link\" style=\"display: " . $disp_link . ";\">";
+        $check_uncheck  = "
+            <span id='id_check_descripcion' class='multipledescripcion' style='display:" . (($displ_open)?'':'none') . ";'>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('descripcion', true); this.checked=true;\" \>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('descripcion', false); this.checked=false;\" \>
+            </span>";
        $qtd_see_more  = 0;
        $qtd_result_see_more  = 0;
        $bol_open_see_more  = false;
+       if($bol_refin_use_modal)
+       {
+           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_dados']['descripcion'])?false:true);
+       }
        foreach ($result as $dados => $qtd_result)
        {
            $formatado = $dados;
            $formatado_exib  = $formatado;
            $dados = (string)$dados;
+           if($bol_refin_use_modal && $bol_populate_modal_values)
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_dados']['descripcion'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
+           }
            if($dados == '')
            {
                $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
@@ -7127,9 +7232,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
            if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
            {
-               $lin_obj  .= "   <div id='id_see_more_descripcion' class='scGridRefinedSearchVejaMais'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('descripcion');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-               $lin_obj  .= "   </div>";
                $lin_obj  .= "   <div id='id_see_more_list_descripcion' style='display:none'>";
                $bol_open_see_more  = true;
            }
@@ -7143,62 +7245,79 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
            $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
            $lin_obj  .= "   <tr>";
+           $lin_obj  .= "   <td>";
+           $lin_obj  .= "   <span class='simpledescripcion' style='display:" . (($displ_open)?'none':'') . ";'>";
            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['descripcion']))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('uncheck', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','id_int_search_descripcion','descripcion', '" . NM_encode_input($dados . "##@@" . $formatado) . "');\"/>";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','id_int_search_descripcion','descripcion', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
            }
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'descripcion', '');\" class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</a> ";
-           $lin_obj  .= "   </td>";
+           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'descripcion', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
+           $lin_obj  .= $formatado_exib;
            if(!empty($veja_mais_link))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'descripcion', '');\" class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</a> ";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
            }
+           $lin_obj  .= "        </a>";
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "    <span class='multipledescripcion' style='display:"  . (($displ_open)?'':'none') .  ";'>";
+           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['descripcion']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['descripcion']['val_sel'])) ? " checked" : "";
+           $checked = " checked";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_descripcion_" . md5($dados) . "\" name=\"int_search_descripcion[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_descripcion_". md5($dados) ."\" for=\"id_int_search_descripcion_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
+           }
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "   </td>";
            $lin_obj  .= "    </tr>";
            $lin_obj  .= "   </table>";
            $lin_obj  .= "   </div>";
-           $lin_mult .= "   <div><label class='scGridRefinedSearchCampo' style='display: block;'>";
-           $lin_mult .= "    <INPUT class='" . $this->css_scAppDivToolbarInput . "' type=\"checkbox\" id=\"id_int_search_descripcion\" name=\"int_search_descripcion[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" checked><span class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_mult .= "    <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_mult .= "   </label></div>";
            $qtd_result_see_more++;
        }
+           $displ_see_more = false;
            if($bol_open_see_more)
            {
                $lin_obj  .= "   </div>";
-               $lin_obj  .= "   <div id='id_see_less_descripcion' class='scGridRefinedSearchVejaMais' style='display:none'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('descripcion');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-               $lin_obj  .= "   </div>";
+               $displ_see_more = true;
            }
+           if($bol_refin_use_modal)
+           {
+               $displ_see_more = true;
+           }
+           $lin_obj  .= "   <div id='id_see_more_descripcion' class='scGridRefinedSearchVejaMais'>";
+           $lin_obj  .= "       " . $check_uncheck;
+           if($bol_refin_use_modal)
+           {
+               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_semanas_venta_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=descripcion&tp_obj=tx&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           else
+           {
+               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('descripcion');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           $lin_obj  .= "   </div>";
+           $lin_obj  .= "   <div id='id_see_less_descripcion' class='scGridRefinedSearchVejaMais' style='display:none;'>";
+           $lin_obj  .= "   " . $check_uncheck;
+           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('descripcion');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
+           $lin_obj  .= "   </div>";
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
-       if (count($result) > 1)
        {
-           $disp_chk = "none";
-           $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_descripcion_chk\" style=\"display: " . $disp_chk . ";\">";
-           $lin_obj  .= $lin_mult;
-           $lin_obj  .= "   </div></td></tr>";
-       }
-       if (count($result) > 1)
-       {
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_descripcion\" style='display:none'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('descripcion');", "nm_mult_int_search('descripcion');", "mult_int_search_descripcion", "", "", "display: $disp_link", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_show_multi_btn = '';
+           if (count($result) < 2)
+           {
+               $disp_show_multi_btn = 'none';
+           }
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('descripcion', false);", "nm_mult_int_search('descripcion', false);", "mult_int_search_descripcion", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','id_int_search_descripcion','descripcion', '');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','id_int_search_descripcion','descripcion', '');", "app_int_search_descripcion", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_multi_btn = 'none';
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','id_int_search_descripcion','descripcion', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['descripcion']) . "','descripcion','id_int_search_descripcion','descripcion', '', 'N');", "app_int_search_descripcion", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('descripcion');", "nm_single_int_search('descripcion');", "single_int_search_descripcion", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
@@ -7210,26 +7329,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $lin_obj .= "    </div>";
        return $lin_obj;
    }
-   function interativ_search_existencia()
+   function interativ_search_existencia($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["existencia"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["existencia"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_existencia\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('existencia')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_existencia\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('existencia')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_existencia\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('existencia')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_existencia_ck\" name=\"int_search_existencia_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('existencia');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('existencia')\">";
+       $lin_obj .= "              <span id=\"id_expand_existencia\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_existencia\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['existencia'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_existencia\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','existencia', '', 'existencia', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_existencia\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','existencia', '', 'existencia', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -7269,17 +7388,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY existencia". $Cmps_where;
        $nm_comando .= " order by existencia ASC";
@@ -7379,7 +7498,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       $lin_obj  .= "            $( '#id_slider_existencia_values_max' ).html(val_format2);";
       $lin_obj  .= "        },";
       $lin_obj  .= "    });";
-      $lin_obj  .= "        adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div>";
@@ -7390,12 +7508,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
          $disp_btn_range='none';
          if(count($result) == 1)
          {
-      $lin_obj  .= "<SCRIPT>
-";
-      $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
-      $lin_obj  .= "});";
-      $lin_obj  .= "</SCRIPT>";
                $range_min_formatado  = str_replace(",", ".", $range_min);
            nmgp_Form_Num_Val($range_min_formatado, ",", ".", "0", "S", "2", "", "N:3", "-") ; 
              $lin_obj  .= "    <div id='id_slider_existencia_values' style='text-align:center;'>";
@@ -7404,10 +7516,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
          }
      }
        $lin_obj  .= "   </div></td></tr>";
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "     <td>";
            $lin_obj .= "      <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_existencia\" style='display:" .  $cle_disp . "'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['existencia']) . "','existencia','id_int_search_existencia','existencia', '');", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['existencia']) . "','existencia','id_int_search_existencia','existencia', '');", "app_int_search_range_existencia", "", "", "display: $disp_btn_range", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['existencia']) . "','existencia','id_int_search_existencia','existencia', '', 'S');", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['existencia']) . "','existencia','id_int_search_existencia','existencia', '', 'S');", "app_int_search_range_existencia", "", "", "display: $disp_btn_range", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "      </div>";
            $lin_obj .= "     </td>";
@@ -7418,26 +7530,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $lin_obj .= "    </div>";
        return $lin_obj;
    }
-   function interativ_search_demanda_semanal()
+   function interativ_search_demanda_semanal($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["demanda_semanal"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["demanda_semanal"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_demanda_semanal\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('demanda_semanal')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_demanda_semanal\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('demanda_semanal')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_demanda_semanal\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('demanda_semanal')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_demanda_semanal_ck\" name=\"int_search_demanda_semanal_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('demanda_semanal');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('demanda_semanal')\">";
+       $lin_obj .= "              <span id=\"id_expand_demanda_semanal\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_demanda_semanal\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['demanda_semanal'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_demanda_semanal\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','demanda_semanal', '', 'demanda_semanal', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_demanda_semanal\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','demanda_semanal', '', 'demanda_semanal', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -7477,17 +7589,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY demanda_semanal". $Cmps_where;
        $nm_comando .= " order by demanda_semanal ASC";
@@ -7587,7 +7699,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       $lin_obj  .= "            $( '#id_slider_demanda_semanal_values_max' ).html(val_format2);";
       $lin_obj  .= "        },";
       $lin_obj  .= "    });";
-      $lin_obj  .= "        adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div>";
@@ -7598,12 +7709,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
          $disp_btn_range='none';
          if(count($result) == 1)
          {
-      $lin_obj  .= "<SCRIPT>
-";
-      $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
-      $lin_obj  .= "});";
-      $lin_obj  .= "</SCRIPT>";
                $range_min_formatado  = str_replace(",", ".", $range_min);
            nmgp_Form_Num_Val($range_min_formatado, ",", ".", "0", "S", "2", "", "N:2", "-") ; 
              $lin_obj  .= "    <div id='id_slider_demanda_semanal_values' style='text-align:center;'>";
@@ -7612,10 +7717,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
          }
      }
        $lin_obj  .= "   </div></td></tr>";
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "     <td>";
            $lin_obj .= "      <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_demanda_semanal\" style='display:" .  $cle_disp . "'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['demanda_semanal']) . "','demanda_semanal','id_int_search_demanda_semanal','demanda_semanal', '');", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['demanda_semanal']) . "','demanda_semanal','id_int_search_demanda_semanal','demanda_semanal', '');", "app_int_search_range_demanda_semanal", "", "", "display: $disp_btn_range", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['demanda_semanal']) . "','demanda_semanal','id_int_search_demanda_semanal','demanda_semanal', '', 'S');", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['demanda_semanal']) . "','demanda_semanal','id_int_search_demanda_semanal','demanda_semanal', '', 'S');", "app_int_search_range_demanda_semanal", "", "", "display: $disp_btn_range", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "      </div>";
            $lin_obj .= "     </td>";
@@ -7626,26 +7731,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $lin_obj .= "    </div>";
        return $lin_obj;
    }
-   function interativ_search_semanas_venta()
+   function interativ_search_semanas_venta($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["semanas_venta"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["semanas_venta"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_semanas_venta\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('semanas_venta')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_semanas_venta\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('semanas_venta')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_semanas_venta\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('semanas_venta')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_semanas_venta_ck\" name=\"int_search_semanas_venta_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('semanas_venta');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('semanas_venta')\">";
+       $lin_obj .= "              <span id=\"id_expand_semanas_venta\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_semanas_venta\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['semanas_venta'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_semanas_venta\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','semanas_venta', '', 'semanas_venta', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_semanas_venta\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','semanas_venta', '', 'semanas_venta', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -7685,17 +7790,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY semanas_venta". $Cmps_where;
        $nm_comando .= " order by semanas_venta ASC";
@@ -7795,7 +7900,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
       $lin_obj  .= "            $( '#id_slider_semanas_venta_values_max' ).html(val_format2);";
       $lin_obj  .= "        },";
       $lin_obj  .= "    });";
-      $lin_obj  .= "        adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div>";
@@ -7806,12 +7910,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
          $disp_btn_range='none';
          if(count($result) == 1)
          {
-      $lin_obj  .= "<SCRIPT>
-";
-      $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
-      $lin_obj  .= "});";
-      $lin_obj  .= "</SCRIPT>";
                $range_min_formatado  = str_replace(",", ".", $range_min);
            nmgp_Form_Num_Val($range_min_formatado, ",", ".", "0", "S", "2", "", "N:2", "-") ; 
              $lin_obj  .= "    <div id='id_slider_semanas_venta_values' style='text-align:center;'>";
@@ -7820,10 +7918,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
          }
      }
        $lin_obj  .= "   </div></td></tr>";
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "     <td>";
            $lin_obj .= "      <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_semanas_venta\" style='display:" .  $cle_disp . "'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['semanas_venta']) . "','semanas_venta','id_int_search_semanas_venta','semanas_venta', '');", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['semanas_venta']) . "','semanas_venta','id_int_search_semanas_venta','semanas_venta', '');", "app_int_search_range_semanas_venta", "", "", "display: $disp_btn_range", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['semanas_venta']) . "','semanas_venta','id_int_search_semanas_venta','semanas_venta', '', 'S');", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['semanas_venta']) . "','semanas_venta','id_int_search_semanas_venta','semanas_venta', '', 'S');", "app_int_search_range_semanas_venta", "", "", "display: $disp_btn_range", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "      </div>";
            $lin_obj .= "     </td>";
@@ -7834,26 +7932,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $lin_obj .= "    </div>";
        return $lin_obj;
    }
-   function interativ_search_unidad()
+   function interativ_search_unidad($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["unidad"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']["unidad"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_unidad\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('unidad')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_unidad\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('unidad')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_unidad\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('unidad')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_unidad_ck\" name=\"int_search_unidad_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('unidad');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('unidad')\">";
+       $lin_obj .= "              <span id=\"id_expand_unidad\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_unidad\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_unidad\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','unidad', '', 'unidad', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_unidad\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','unidad', '', 'unidad', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -7893,17 +7991,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY unidad". $Cmps_where;
        $nm_comando .= " order by unidad ASC";
@@ -7951,14 +8049,27 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $lin_mult  = "";
        $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['unidad'])) ? "" : "none";
        $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_unidad_link\" style=\"display: " . $disp_link . ";\">";
+        $check_uncheck  = "
+            <span id='id_check_unidad' class='multipleunidad' style='display:" . (($displ_open)?'':'none') . ";'>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('unidad', true); this.checked=true;\" \>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('unidad', false); this.checked=false;\" \>
+            </span>";
        $qtd_see_more  = 0;
        $qtd_result_see_more  = 0;
        $bol_open_see_more  = false;
+       if($bol_refin_use_modal)
+       {
+           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_dados']['unidad'])?false:true);
+       }
        foreach ($result as $dados => $qtd_result)
        {
            $formatado = $dados;
            $formatado_exib  = $formatado;
            $dados = (string)$dados;
+           if($bol_refin_use_modal && $bol_populate_modal_values)
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_dados']['unidad'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
+           }
            if($dados == '')
            {
                $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
@@ -7967,9 +8078,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
            if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
            {
-               $lin_obj  .= "   <div id='id_see_more_unidad' class='scGridRefinedSearchVejaMais'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('unidad');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-               $lin_obj  .= "   </div>";
                $lin_obj  .= "   <div id='id_see_more_list_unidad' style='display:none'>";
                $bol_open_see_more  = true;
            }
@@ -7983,62 +8091,79 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
            $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
            $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
            $lin_obj  .= "   <tr>";
+           $lin_obj  .= "   <td>";
+           $lin_obj  .= "   <span class='simpleunidad' style='display:" . (($displ_open)?'none':'') . ";'>";
            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['unidad']))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('uncheck', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','id_int_search_unidad','unidad', '" . NM_encode_input($dados . "##@@" . $formatado) . "');\"/>";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','id_int_search_unidad','unidad', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
            }
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'unidad', '');\" class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</a> ";
-           $lin_obj  .= "   </td>";
+           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'unidad', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
+           $lin_obj  .= $formatado_exib;
            if(!empty($veja_mais_link))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'unidad', '');\" class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</a> ";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
            }
+           $lin_obj  .= "        </a>";
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "    <span class='multipleunidad' style='display:"  . (($displ_open)?'':'none') .  ";'>";
+           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['unidad']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['interativ_search']['unidad']['val_sel'])) ? " checked" : "";
+           $checked = " checked";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_unidad_" . md5($dados) . "\" name=\"int_search_unidad[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_unidad_". md5($dados) ."\" for=\"id_int_search_unidad_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
+           }
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "   </td>";
            $lin_obj  .= "    </tr>";
            $lin_obj  .= "   </table>";
            $lin_obj  .= "   </div>";
-           $lin_mult .= "   <div><label class='scGridRefinedSearchCampo' style='display: block;'>";
-           $lin_mult .= "    <INPUT class='" . $this->css_scAppDivToolbarInput . "' type=\"checkbox\" id=\"id_int_search_unidad\" name=\"int_search_unidad[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" checked><span class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_mult .= "    <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_mult .= "   </label></div>";
            $qtd_result_see_more++;
        }
+           $displ_see_more = false;
            if($bol_open_see_more)
            {
                $lin_obj  .= "   </div>";
-               $lin_obj  .= "   <div id='id_see_less_unidad' class='scGridRefinedSearchVejaMais' style='display:none'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('unidad');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-               $lin_obj  .= "   </div>";
+               $displ_see_more = true;
            }
+           if($bol_refin_use_modal)
+           {
+               $displ_see_more = true;
+           }
+           $lin_obj  .= "   <div id='id_see_more_unidad' class='scGridRefinedSearchVejaMais'>";
+           $lin_obj  .= "       " . $check_uncheck;
+           if($bol_refin_use_modal)
+           {
+               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_semanas_venta_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=unidad&tp_obj=tx&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           else
+           {
+               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('unidad');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           $lin_obj  .= "   </div>";
+           $lin_obj  .= "   <div id='id_see_less_unidad' class='scGridRefinedSearchVejaMais' style='display:none;'>";
+           $lin_obj  .= "   " . $check_uncheck;
+           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('unidad');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
+           $lin_obj  .= "   </div>";
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
-       if (count($result) > 1)
        {
-           $disp_chk = "none";
-           $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_unidad_chk\" style=\"display: " . $disp_chk . ";\">";
-           $lin_obj  .= $lin_mult;
-           $lin_obj  .= "   </div></td></tr>";
-       }
-       if (count($result) > 1)
-       {
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_unidad\" style='display:none'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('unidad');", "nm_mult_int_search('unidad');", "mult_int_search_unidad", "", "", "display: $disp_link", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_show_multi_btn = '';
+           if (count($result) < 2)
+           {
+               $disp_show_multi_btn = 'none';
+           }
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('unidad', false);", "nm_mult_int_search('unidad', false);", "mult_int_search_unidad", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','id_int_search_unidad','unidad', '');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','id_int_search_unidad','unidad', '');", "app_int_search_unidad", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_multi_btn = 'none';
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','id_int_search_unidad','unidad', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['int_search_label']['unidad']) . "','unidad','id_int_search_unidad','unidad', '', 'N');", "app_int_search_unidad", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('unidad');", "nm_single_int_search('unidad');", "single_int_search_unidad", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
@@ -8054,7 +8179,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
    {
        global $nm_saida;
        $nm_saida->saida("   <script type=\"text/javascript\">\r\n");
-       $nm_saida->saida("     Tab_obj_int_mult = new Array();\r\n");
        $nm_saida->saida("     function toggleSeeMore(obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("         if($('#id_see_less_'+obj_id).css('display') == 'none')\r\n");
@@ -8072,15 +8196,85 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $nm_saida->saida("     function nm_proc_int_search_all()\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("         int_search_load_html = 'N';\r\n");
-       $nm_saida->saida("     $('#app_int_search_codigo').click();\r\n");
-       $nm_saida->saida("     $('#app_int_search_descripcion').click();\r\n");
-       $nm_saida->saida("     $('#app_int_search_existencia').click();\r\n");
-       $nm_saida->saida("     $('#app_int_search_demanda_semanal').click();\r\n");
-       $nm_saida->saida("     $('#app_int_search_semanas_venta').click();\r\n");
-       $nm_saida->saida("         int_search_load_html = 'S';\r\n");
-       $nm_saida->saida("     $('#app_int_search_unidad').click();\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_codigo\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_codigo').click();\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_proc_int_search(tp_link, tp_obj, label, nam_db, val_obj, obj_id, val_atual)\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_codigo[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_codigo').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','codigo', '', 'codigo', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_descripcion\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_descripcion').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_descripcion[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_descripcion').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','descripcion', '', 'descripcion', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_existencia\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_existencia').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_existencia[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_existencia').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','existencia', '', 'existencia', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_demanda_semanal\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_demanda_semanal').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_demanda_semanal[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_demanda_semanal').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','demanda_semanal', '', 'demanda_semanal', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_semanas_venta\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_semanas_venta').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_semanas_venta[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_semanas_venta').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','semanas_venta', '', 'semanas_venta', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("         int_search_load_html = 'S';\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_unidad\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_unidad').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_unidad[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_unidad').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','unidad', '', 'unidad', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_proc_int_clear_all()\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear_all','','','', '', '', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_proc_int_search(tp_link, tp_obj, label, nam_db, val_obj, obj_id, val_atual, refresh)\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("         while (label.lastIndexOf(\"__sasp__\") != -1)\r\n");
        $nm_saida->saida("         {\r\n");
@@ -8099,10 +8293,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $nm_saida->saida("           nam_db = nam_db.replace(\"__dasp__\" , '\"');\r\n");
        $nm_saida->saida("         }\r\n");
        $nm_saida->saida("         var out_int = nam_db + '__DL__' + label + '__DL__' + tp_obj + '__DL__';\r\n");
+       $nm_saida->saida("         if (tp_link == 'clear_all')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             out_int += 'clear_interativ_all';\r\n");
+       $nm_saida->saida("             Tab_obj_int_mult = {};\r\n");
+       $nm_saida->saida("         }\r\n");
        $nm_saida->saida("         if (tp_link == 'clear')\r\n");
        $nm_saida->saida("         {\r\n");
        $nm_saida->saida("             out_int += 'clear_interativ';\r\n");
-       $nm_saida->saida("             Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("             Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         if (tp_link == 'clear_opc')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             result = int_search_get_checkbox(obj_id, val_atual);\r\n");
+       $nm_saida->saida("             if (result != '') {\r\n");
+       $nm_saida->saida("                 out_int += result;\r\n");
+       $nm_saida->saida("             }\r\n");
+       $nm_saida->saida("             else {\r\n");
+       $nm_saida->saida("                 out_int += 'clear_interativ';\r\n");
+       $nm_saida->saida("                 Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("             }\r\n");
        $nm_saida->saida("         }\r\n");
        $nm_saida->saida("         if (tp_link == 'link')\r\n");
        $nm_saida->saida("         {\r\n");
@@ -8120,10 +8330,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $nm_saida->saida("             }\r\n");
        $nm_saida->saida("             else\r\n");
        $nm_saida->saida("             {\r\n");
-       $nm_saida->saida("                 Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("                 Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
        $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("             result  = int_search_get_checkbox(val_obj);\r\n");
-       $nm_saida->saida("             if (result == '') {\r\n");
+       $nm_saida->saida("             result  = int_search_get_checkbox(obj_id, '');\r\n");
+       $nm_saida->saida("             if(tp_link == 'chbx' && result == '')\r\n");
+       $nm_saida->saida("             {\r\n");
+       $nm_saida->saida("                 int_search_unset_checkbox(nam_db, val_atual, obj_id);\r\n");
        $nm_saida->saida("                 return;\r\n");
        $nm_saida->saida("             }\r\n");
        $nm_saida->saida("             out_int += result;\r\n");
@@ -8132,8 +8344,29 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $nm_saida->saida("         out_int  = out_int.replace(/[&]/g, \"__NM_AMP__\");\r\n");
        $nm_saida->saida("         out_int  = out_int.replace(/[%]/g, \"__NM_PRC__\");\r\n");
        $nm_saida->saida("         out_int  += '__DL__' + int_search_load_html;\r\n");
+       $nm_saida->saida("         out_int  += '__DL__' + refresh;\r\n");
        $nm_saida->saida("         ajax_navigate('interativ_search', out_int);\r\n");
        $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     var submit_checkbox = 'N';\r\n");
+       $nm_saida->saida("     function nm_proc_check_parent_value(bol_checked, str_cmp, value_md5)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("        $('#id_int_search_'+ str_cmp +'_' + value_md5).prop('checked', bol_checked);\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_proc_int_search_toggle()\r\n");
+       $nm_saida->saida("    {\r\n");
+       $nm_saida->saida("        if ($('#id_div_interativ_search').hasClass('is-closed')) {\r\n");
+       $nm_saida->saida("            $('#id_div_interativ_search_content').show();\r\n");
+       $nm_saida->saida("            $('#id_div_interativ_search').css('position', 'relative');\r\n");
+       $nm_saida->saida("            $('#app_int_search_open').hide();\r\n");
+       $nm_saida->saida("            $('#app_int_search_close').show();\r\n");
+       $nm_saida->saida("        } else {\r\n");
+       $nm_saida->saida("            $('#id_div_interativ_search_content').hide();\r\n");
+       $nm_saida->saida("            $('#id_div_interativ_search').css('position', 'absolute');\r\n");
+       $nm_saida->saida("            $('#app_int_search_open').show();\r\n");
+       $nm_saida->saida("            $('#app_int_search_close').hide();\r\n");
+       $nm_saida->saida("        }\r\n");
+       $nm_saida->saida("        $('#id_div_interativ_search').toggleClass('is-closed');\r\n");
+       $nm_saida->saida("    }\r\n");
        $nm_saida->saida("     function int_search_unset_checkbox(nam_db, val_atual, obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("         var obj_check = eval(\"document.getElementsByName('int_search_\" + obj_id + \"[]')\");\r\n");
@@ -8152,34 +8385,20 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $nm_saida->saida("         //if doesnt have checked anymore, clear\r\n");
        $nm_saida->saida("         if(!has_checked)\r\n");
        $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             nm_proc_int_search('clear','','', nam_db, '', obj_id, '')\r\n");
+       $nm_saida->saida("             nm_proc_int_search('clear','','', nam_db, '', obj_id, '', 'S')\r\n");
        $nm_saida->saida("             return;\r\n");
        $nm_saida->saida("         }\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function int_search_get_checkbox(obj_id)\r\n");
+       $nm_saida->saida("     function int_search_get_checkbox(obj_id, val_out)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("        var Nobj = document.getElementById(obj_id).name;\r\n");
-       $nm_saida->saida("        var obj  = document.getElementsByName(Nobj);\r\n");
        $nm_saida->saida("        var val  = \"\";\r\n");
-       $nm_saida->saida("        if (!obj.length)\r\n");
-       $nm_saida->saida("        {\r\n");
-       $nm_saida->saida("            if (obj.checked)\r\n");
+       $nm_saida->saida("        $( \"input[name='int_search_\"+ obj_id +\"[]']:checked\" ).each(function(){\r\n");
+       $nm_saida->saida("            if($(this).val() != val_out)\r\n");
        $nm_saida->saida("            {\r\n");
-       $nm_saida->saida("                val = obj.value;\r\n");
+       $nm_saida->saida("                val += (val != \"\") ? \"_VLS_\" : \"\";\r\n");
+       $nm_saida->saida("                val += $(this).val();\r\n");
        $nm_saida->saida("            }\r\n");
-       $nm_saida->saida("            return val;\r\n");
-       $nm_saida->saida("        }\r\n");
-       $nm_saida->saida("        else\r\n");
-       $nm_saida->saida("        {\r\n");
-       $nm_saida->saida("            for (iCheck = 0; iCheck < obj.length; iCheck++)\r\n");
-       $nm_saida->saida("            {\r\n");
-       $nm_saida->saida("                if (obj[iCheck].checked)\r\n");
-       $nm_saida->saida("                {\r\n");
-       $nm_saida->saida("                    val += (val != \"\") ? \"_VLS_\" : \"\";\r\n");
-       $nm_saida->saida("                    val += obj[iCheck].value;\r\n");
-       $nm_saida->saida("                }\r\n");
-       $nm_saida->saida("            }\r\n");
-       $nm_saida->saida("        }\r\n");
+       $nm_saida->saida("        });\r\n");
        $nm_saida->saida("        return val;\r\n");
        $nm_saida->saida("     }\r\n");
        $nm_saida->saida("     function nm_toggle_int_search(obj_id)\r\n");
@@ -8195,70 +8414,60 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
        $nm_saida->saida("     }\r\n");
        $nm_saida->saida("     function nm_expand_int_search(obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         if (Tab_obj_int_mult[\"'\" + obj_id + \"'\"] && Tab_obj_int_mult[\"'\" + obj_id + \"'\"] == 'S') {\r\n");
-       $nm_saida->saida("             $('#mult_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("             $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
-       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("             $('#id_tab_' + obj_id + '_chk').css('display','');\r\n");
-       $nm_saida->saida("             $('#id_int_search_' + obj_id + '_ck').css('display','');\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         else\r\n");
+       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
        $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             $('#mult_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("             $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
-       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("             $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
-       $nm_saida->saida("             $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
+       $nm_saida->saida("             if (Tab_obj_int_mult[ obj_id ] && Tab_obj_int_mult[ obj_id ] == 'S') {\r\n");
+       $nm_saida->saida("                 $('#app_int_search_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("             }\r\n");
+       $nm_saida->saida("             else\r\n");
+       $nm_saida->saida("             {\r\n");
+       $nm_saida->saida("                 $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("             }\r\n");
        $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
        $nm_saida->saida("         $('#id_toolbar_' + obj_id).show();\r\n");
        $nm_saida->saida("         $('#id_retract_' + obj_id).css('display','');\r\n");
        $nm_saida->saida("         $('#id_expand_' + obj_id).css('display','none');\r\n");
        $nm_saida->saida("     }\r\n");
        $nm_saida->saida("     function nm_retracts_int_search(obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         }\r\n");
        $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
        $nm_saida->saida("         $('#id_toolbar_' + obj_id).hide();\r\n");
        $nm_saida->saida("         $('#id_retract_' + obj_id).css('display','none');\r\n");
        $nm_saida->saida("         $('#id_expand_' + obj_id).css('display','');\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_mult_int_search(obj_id)\r\n");
+       $nm_saida->saida("     function nm_mult_int_search(obj_id, bol_first)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#single_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','');\r\n");
-       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','');\r\n");
-       $nm_saida->saida("         Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'S';\r\n");
+       $nm_saida->saida("         $('.simple' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('.multiple' + obj_id).show();\r\n");
+       $nm_saida->saida("         $('#mult_int_search_' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('#single_int_search_' + obj_id).show();\r\n");
+       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("            $('#app_int_search_' + obj_id).show();\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         Tab_obj_int_mult[ obj_id ] = 'S';\r\n");
        $nm_saida->saida("     }\r\n");
        $nm_saida->saida("     function nm_single_int_search(obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("         $('#single_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
-       $nm_saida->saida("         Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("         $('.simple' + obj_id).show();\r\n");
+       $nm_saida->saida("         $('.multiple' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('#mult_int_search_' + obj_id).show();\r\n");
+       $nm_saida->saida("         $('#single_int_search_' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('#app_int_search_' + obj_id).hide();\r\n");
+       $nm_saida->saida("         Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_change_mult_int_search(obj_id)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         if ($('#id_int_search_' + obj_id + '_ck').prop(\"checked\")) {\r\n");
-       $nm_saida->saida("             var ckeck = true;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         else {\r\n");
-       $nm_saida->saida("             var ckeck = false;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         var obj_check = eval(\"document.getElementsByName('int_search_\" + obj_id + \"[]')\");\r\n");
-       $nm_saida->saida("         for (i = 0; i < obj_check.length; i++)\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             obj_check[i].checked = ckeck;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("    function refinedSearchCheckUncheckAll(field_name, bol_value)\r\n");
+       $nm_saida->saida("    {\r\n");
+       $nm_saida->saida("        $(\"input[name='int_search_\"+ field_name +\"[]']\").prop('checked', bol_value);\r\n");
+       $nm_saida->saida("        if (submit_checkbox == \"S\") {\r\n");
+       $nm_saida->saida("            $('#app_int_search_' + field_name).click();\r\n");
+       $nm_saida->saida("        }\r\n");
+       $nm_saida->saida("    }\r\n");
        $nm_saida->saida("     $( document ).ready(function() {\r\n");
        $nm_saida->saida("        adjustMobile();\r\n");
        $nm_saida->saida("    });\r\n");
@@ -8622,6 +8831,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_semanas_venta']['proc_pdf
    $nm_saida->saida("      NM_obj_ant = obj;\r\n");
    $nm_saida->saida("      ind_time = setTimeout(\"obj.style.display='none'\", 300);\r\n");
    $nm_saida->saida("      return ind_time;\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+       $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+       $nm_saida->saida("     $('#div_" . $cada_id . "').addClass('disabled');\r\n");
+         }
+      }
+   }
    $nm_saida->saida("   }\r\n");
    $str_pbfile = $this->Ini->root . $this->Ini->path_imag_temp . '/sc_pb_' . session_id() . '.tmp';
    if (@is_file($str_pbfile) && $flag_apaga_pdf_log)

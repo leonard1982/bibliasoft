@@ -41,4 +41,6 @@ $refinedsearch_campo_close_icon = 'scriptcase__NM__ico__NM__refinedsearch_close.
 $str_resume_label_sort = 'scriptcase__NM__v5BlueSort.png';
 $str_resume_label_sort_asc = 'scriptcase__NM__v5BlueSortAsc.png';
 $str_resume_label_sort_desc = 'scriptcase__NM__v5BlueSortDesc.png';
+$scGridRefinedSearchExpandFAIcon = 'fas fa-chevron-right';
+$scGridRefinedSearchCollapseFAIcon = 'fas fa-chevron-left';
 ?>

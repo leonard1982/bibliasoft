@@ -1310,7 +1310,7 @@
   $this->arr_buttons['bsweetalert_ok']['value']            = $Nm_lang['lang_btns_cfrm'];
   $this->arr_buttons['bsweetalert_ok']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsweetalert_ok']['display_position'] = 'text_right';
-  $this->arr_buttons['bsweetalert_ok']['fontawesomeicon']  = 'fas fa-check';
+  $this->arr_buttons['bsweetalert_ok']['fontawesomeicon']  = '';
   $this->arr_buttons['bsweetalert_ok']['style'] = 'sweetalertok';
   $this->arr_buttons['bsweetalert_ok']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_bsweetalert_ok.gif';
 
@@ -1319,7 +1319,7 @@
   $this->arr_buttons['bsweetalert_cancel']['value']            = $Nm_lang['lang_btns_cncl'];
   $this->arr_buttons['bsweetalert_cancel']['display']          = 'text_fontawesomeicon';
   $this->arr_buttons['bsweetalert_cancel']['display_position'] = 'text_right';
-  $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']  = 'fas fa-ban';
+  $this->arr_buttons['bsweetalert_cancel']['fontawesomeicon']  = '';
   $this->arr_buttons['bsweetalert_cancel']['style'] = 'sweetalertcancel';
   $this->arr_buttons['bsweetalert_cancel']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_bsweetalert_cancel.gif';
 
@@ -1436,7 +1436,7 @@
   $this->arr_buttons['sys_format_reload']['value']            = $Nm_lang['lang_btns_reload'];
   $this->arr_buttons['sys_format_reload']['display']          = 'only_text';
   $this->arr_buttons['sys_format_reload']['display_position'] = 'img_right';
-  $this->arr_buttons['sys_format_reload']['fontawesomeicon']  = 'fas fa-sync-alt';
+  $this->arr_buttons['sys_format_reload']['fontawesomeicon']  = '';
   $this->arr_buttons['sys_format_reload']['style'] = 'default';
   $this->arr_buttons['sys_format_reload']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_refresh.png.png';
 
@@ -1445,7 +1445,7 @@
   $this->arr_buttons['breload']['value']            = $Nm_lang['lang_btns_reload'];
   $this->arr_buttons['breload']['display']          = 'only_text';
   $this->arr_buttons['breload']['display_position'] = 'img_right';
-  $this->arr_buttons['breload']['fontawesomeicon']  = 'fas fa-sync-alt';
+  $this->arr_buttons['breload']['fontawesomeicon']  = '';
   $this->arr_buttons['breload']['style'] = 'default';
   $this->arr_buttons['breload']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_refresh.png.png';
 
@@ -1454,7 +1454,7 @@
   $this->arr_buttons['bquick_clean']['value']            = $Nm_lang['lang_btns_quck_clean'];
   $this->arr_buttons['bquick_clean']['display']          = 'only_text';
   $this->arr_buttons['bquick_clean']['display_position'] = 'img_right';
-  $this->arr_buttons['bquick_clean']['fontawesomeicon']  = 'fas fa-broom';
+  $this->arr_buttons['bquick_clean']['fontawesomeicon']  = '';
   $this->arr_buttons['bquick_clean']['style'] = 'default';
   $this->arr_buttons['bquick_clean']['image'] = '';
 
@@ -1463,8 +1463,53 @@
   $this->arr_buttons['bgridsavesession']['value']            = $Nm_lang['lang_btns_gridsavesession'];
   $this->arr_buttons['bgridsavesession']['display']          = 'only_text';
   $this->arr_buttons['bgridsavesession']['display_position'] = 'text_right';
-  $this->arr_buttons['bgridsavesession']['fontawesomeicon']  = 'fas fa-thumbtack';
+  $this->arr_buttons['bgridsavesession']['fontawesomeicon']  = '';
   $this->arr_buttons['bgridsavesession']['style'] = 'default';
   $this->arr_buttons['bgridsavesession']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_bgridsave.gif';
+
+  $this->arr_buttons['bstepretorna']['hint']             = $Nm_lang['lang_btns_stepprev_hint'];
+  $this->arr_buttons['bstepretorna']['type']             = 'button';
+  $this->arr_buttons['bstepretorna']['value']            = $Nm_lang['lang_btns_stepprev'];
+  $this->arr_buttons['bstepretorna']['display']          = 'only_text';
+  $this->arr_buttons['bstepretorna']['display_position'] = 'text_right';
+  $this->arr_buttons['bstepretorna']['fontawesomeicon']  = 'fas fa-arrow-right';
+  $this->arr_buttons['bstepretorna']['style'] = 'default';
+  $this->arr_buttons['bstepretorna']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_bretorna.gif';
+
+  $this->arr_buttons['bstepavanca']['hint']             = $Nm_lang['lang_btns_stepnext_hint'];
+  $this->arr_buttons['bstepavanca']['type']             = 'button';
+  $this->arr_buttons['bstepavanca']['value']            = $Nm_lang['lang_btns_stepnext'];
+  $this->arr_buttons['bstepavanca']['display']          = 'only_text';
+  $this->arr_buttons['bstepavanca']['display_position'] = 'text_right';
+  $this->arr_buttons['bstepavanca']['fontawesomeicon']  = 'fas fa-arrow-left';
+  $this->arr_buttons['bstepavanca']['style'] = 'default';
+  $this->arr_buttons['bstepavanca']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_bavanca.gif';
+
+  $this->arr_buttons['bfilref_apply']['hint']             = $Nm_lang['lang_btns_bfilref_apply_hint'];
+  $this->arr_buttons['bfilref_apply']['type']             = 'button';
+  $this->arr_buttons['bfilref_apply']['value']            = $Nm_lang['lang_btns_bfilref_apply'];
+  $this->arr_buttons['bfilref_apply']['display']          = 'only_text';
+  $this->arr_buttons['bfilref_apply']['display_position'] = 'text_right';
+  $this->arr_buttons['bfilref_apply']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_apply']['style'] = 'default';
+  $this->arr_buttons['bfilref_apply']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_bpesquisa.gif';
+
+  $this->arr_buttons['bfilref_limpar']['hint']             = $Nm_lang['lang_btns_bfilref_limpar_hint'];
+  $this->arr_buttons['bfilref_limpar']['type']             = 'button';
+  $this->arr_buttons['bfilref_limpar']['value']            = $Nm_lang['lang_btns_bfilref_limpar'];
+  $this->arr_buttons['bfilref_limpar']['display']          = 'only_text';
+  $this->arr_buttons['bfilref_limpar']['display_position'] = 'text_right';
+  $this->arr_buttons['bfilref_limpar']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_limpar']['style'] = 'default';
+  $this->arr_buttons['bfilref_limpar']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_blimpar.gif';
+
+  $this->arr_buttons['bfilref_close']['hint']             = $Nm_lang['lang_btns_bfilref_close_hint'];
+  $this->arr_buttons['bfilref_close']['type']             = 'button';
+  $this->arr_buttons['bfilref_close']['value']            = $Nm_lang['lang_btns_bfilref_close'];
+  $this->arr_buttons['bfilref_close']['display']          = 'only_text';
+  $this->arr_buttons['bfilref_close']['display_position'] = 'text_right';
+  $this->arr_buttons['bfilref_close']['fontawesomeicon']  = '';
+  $this->arr_buttons['bfilref_close']['style'] = 'default';
+  $this->arr_buttons['bfilref_close']['image'] = 'scriptcase__NM__nm_ScriptCase6_RedWine_bajaxclose.gif';
 
 ?>

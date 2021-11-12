@@ -220,8 +220,8 @@ class impresion_pos_pdf_ini
       $this->nm_dt_criacao   = "20181005"; 
       $this->nm_hr_criacao   = "081610"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -780,6 +780,8 @@ class impresion_pos_pdf_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -904,7 +906,7 @@ class impresion_pos_pdf_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['impresion_pos_pdf']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['impresion_pos_pdf']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQBqD1BeVWBODMBYVcBODur/DorqD9XGZ1FGHAN7D5rqDEBeHArCHEFqHMJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIraDcBwZ9F7HIrKHuJwDMBYDkFCHEFYHMrqD9JmH9FaDSrYV5BOHgvsVkJ3V5XCHIJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5JeDEBOHEJGDWF/DoJeDcBwDQFGD1BeD5BqHuNODkBOV5F/VoJwD9XOZ1F7Z1BeD5JeDMNKZSJGDWF/VoFaDcBwZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiH5FYHMFaHQNwDQFaHIBeV5BqHuNODkBOH5XCHIJeHQJmH9BqHABYHQBqDMvCHENiDWX7HIFGHQNwDQJwHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNKHEXeHEXCVoJeHQFYDQBqHIrKD5JsHuNOVIB/H5XCHMFGHQBsZSBOHABYD5BODMzGZSJqDWXCZuXGHQXsH9BiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQBqHAN7HuJwDMzGDkBODWFaHIBiD9BiZ1FaDSrYZMXGDEBeHArsDWF/ZuB/HQFYZSBiHIvsVWXGDMNODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuvmVIBOHEF/HIJeDcBqH9FaHINKV5X7HgNKDkBsV5FqHIBiHQNwH9BiHIBeHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeHEFqVoFGD9NwDQJwHANOD5JwHuzGDkBOHEFYVoraD9BsZSBOZ1BeD5BqDEBOZSJGH5FYDoFUD9NwDQJsD1veD5JeDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHAN7HQB/HgrKVcFCDuFGVErqDcNmZkFGZ1rYV5JsDErKHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoJeHQBiZ1B/Z1BeHQBiHgBYHEJGDuFaZuFaHQXOZSFUZ1rwHuX7HuNOV9FeDWFaHIBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2012,10 +2014,15 @@ class impresion_pos_pdf_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_pesq_filtro'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['Grid_search']       = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf']['tot_geral']);
@@ -2453,22 +2460,23 @@ else
 <HEAD>
  <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_chart_titl'] ?> -  :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -3273,14 +3281,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['impresion_pos_pdf'][$path_doc_md5]
            $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['impresion_pos_pdf']['embutida_form'])
        {

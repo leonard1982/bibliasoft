@@ -110,10 +110,21 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
  <META http-equiv="Pragma" content="no-cache"/>
+<?php
+if ($_SESSION['scriptcase']['proc_mobile']) {
+?>
+ <META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+ <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
+<?php
+} else {
+?>
  <META name="viewport" content="width=device-width, initial-scale=1"/>
+<?php
+}
+?>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
-  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->str_schema_all ?>_export.css" /> 
-  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->str_schema_all ?>_export.css" /> 
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <link rel="stylesheet" href="<?php echo $this->path_prod ?>/third/font-awesome/css/all.min.css" type="text/css" media="screen" />
  <?php
  if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts))

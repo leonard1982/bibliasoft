@@ -315,6 +315,12 @@ class form_bancos_mob_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_bancos_mob']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_bancos_mob']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_bancos_mob']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_bancos_mob']['embutida_parms'];
@@ -1840,10 +1846,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1856,25 +1865,25 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_bancos_mob'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'codigo_banco' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codigo_banco' == $filtro)) || (is_array($filtro) && in_array('codigo_banco', $filtro)))
         $this->ValidateField_codigo_banco($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'descripcion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'descripcion' == $filtro)) || (is_array($filtro) && in_array('descripcion', $filtro)))
         $this->ValidateField_descripcion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'numero_cuenta' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'numero_cuenta' == $filtro)) || (is_array($filtro) && in_array('numero_cuenta', $filtro)))
         $this->ValidateField_numero_cuenta($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'comportamiento' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'comportamiento' == $filtro)) || (is_array($filtro) && in_array('comportamiento', $filtro)))
         $this->ValidateField_comportamiento($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cajero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cajero' == $filtro)) || (is_array($filtro) && in_array('cajero', $filtro)))
         $this->ValidateField_cajero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'entrada' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'entrada' == $filtro)) || (is_array($filtro) && in_array('entrada', $filtro)))
         $this->ValidateField_entrada($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'salida' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'salida' == $filtro)) || (is_array($filtro) && in_array('salida', $filtro)))
         $this->ValidateField_salida($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'saldo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'saldo' == $filtro)) || (is_array($filtro) && in_array('saldo', $filtro)))
         $this->ValidateField_saldo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'estado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'estado' == $filtro)) || (is_array($filtro) && in_array('estado', $filtro)))
         $this->ValidateField_estado($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'puc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'puc' == $filtro)) || (is_array($filtro) && in_array('puc', $filtro)))
         $this->ValidateField_puc($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (!isset($this->NM_ajax_flag) || 'validate_' != substr($this->NM_ajax_opcao, 0, 9))
@@ -1891,9 +1900,15 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "No se puede eliminar la caja general.";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_bancos_mob' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_bancos_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_bancos_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "No se puede eliminar la caja general.";
  }
 ;
@@ -4953,7 +4968,8 @@ $_SESSION['scriptcase']['form_bancos_mob']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -6023,5 +6039,48 @@ if (parent && parent.scAjaxDetailValue)
             $this->NM_non_ajax_info['ajaxJavascript'][] = array($sJsFunc, $aParam);
         }
     } // sc_ajax_javascript
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-8");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-9");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-3", "sc_b_upd_t.sc-unique-btn-10");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-4", "sc_b_del_t.sc-unique-btn-11");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-5", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-14", "sc_b_sai_t.sc-unique-btn-16", "sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-15");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-12");
+                break;
+            case "copy":
+                return array("sc_b_clone_t.sc-unique-btn-13");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-17");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-18");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-19");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-20");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

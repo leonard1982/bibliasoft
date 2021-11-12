@@ -2805,7 +2805,72 @@ sajax_show_javascript();
   }
 
   function scAjax_formReload() {
-    nm_move('igual');
+<?php
+    if ($this->nmgp_opcao == 'novo') {
+        echo "      nm_move('reload_novo');";
+    } else {
+        echo "      nm_move('igual');";
+    }
+?>
+  }
+  
+  function scBtnDisabled()
+  {
+    var btnNameNav, hasNavButton = false;
+
+    if (typeof oResp.btnDisabled != undefined) {
+      for (var btnName in oResp.btnDisabled) {
+        btnNameNav = btnName.substring(0, 9);
+
+        if ("on" == oResp.btnDisabled[btnName]) {
+          $("#" + btnName).addClass("disabled");
+
+          if ("sc_b_ini_" == btnNameNav) {
+            Nav_binicio_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_ret_" == btnNameNav) {
+            Nav_bretorna_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_avc_" == btnNameNav) {
+            Nav_bavanca_macro_disabled = "on";
+            hasNavButton = true;
+          } else if ("sc_b_fim_" == btnNameNav) {
+            Nav_bfinal_macro_disabled = "on";
+            hasNavButton = true;
+          }
+        } else {
+          $("#" + btnName).removeClass("disabled");
+
+          if ("sc_b_ini_" == btnNameNav) {
+            Nav_binicio_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_ret_" == btnNameNav) {
+            Nav_bretorna_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_avc_" == btnNameNav) {
+            Nav_bavanca_macro_disabled = "off";
+            hasNavButton = true;
+          } else if ("sc_b_fim_" == btnNameNav) {
+            Nav_bfinal_macro_disabled = "off";
+            hasNavButton = true;
+          }
+        }
+      }
+    }
+
+    if (hasNavButton) {
+      nav_atualiza(Nav_permite_ret, Nav_permite_ava, 't');
+      nav_atualiza(Nav_permite_ret, Nav_permite_ava, 'b');
+    }
+  }
+
+  function scBtnLabel()
+  {
+    if (typeof oResp.btnLabel != undefined) {
+      for (var btnName in oResp.btnLabel) {
+        $("#" + btnName).find(".btn-label").html(oResp.btnLabel[btnName]);
+      }
+    }
   }
 
   var scFormHasChanged = false;
@@ -3762,6 +3827,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -3819,6 +3886,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -3873,6 +3942,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -3939,6 +4010,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4000,6 +4073,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4061,6 +4136,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4120,6 +4197,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4180,6 +4259,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4247,6 +4328,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4309,6 +4392,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4370,6 +4455,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4427,6 +4514,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -4494,6 +4583,8 @@ sajax_show_javascript();
     }
     scAjaxShowDebug();
     scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel();
     scAjaxSetReadonly();
     scAjaxSetMaster();
@@ -5247,6 +5338,8 @@ if (isset($this->Embutida_form) && $this->Embutida_form) {
     scAjaxSetNavpage();
     scAjaxShowDebug();
     scAjaxSetDisplay(true);
+    scBtnDisabled();
+    scBtnLabel();
     scAjaxSetLabel(true);
     scAjaxSetMaster();
     scAjaxAlert(do_ajax_form_detallepedido_compra_submit_form_cb_after_alert);

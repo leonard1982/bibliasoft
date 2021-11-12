@@ -227,8 +227,8 @@ class grid_aplicaciones_menu_asignarpermisos_ini
       $this->nm_dt_criacao   = "20191220"; 
       $this->nm_hr_criacao   = "162811"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210714"; 
-      $this->nm_hr_ult_alt   = "100031"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -803,6 +803,8 @@ class grid_aplicaciones_menu_asignarpermisos_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -949,7 +951,7 @@ class grid_aplicaciones_menu_asignarpermisos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_aplicaciones_menu_asignarpermisos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_aplicaciones_menu_asignarpermisos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQB/HABYHuX7HuBYVcBUDWXCHIXGHQXOZkFGD1NaV5X7DEvsZSXeHEXCVoX7D9JKDQB/DSBYHQXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuJeDMBOV9BUDWJeVEF7HQBsZ1B/HIBeHQFGDEvsHErsH5F/VoBiHQJeDQJsHIBOV5BqDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBqD9NwH9X7DSBYD5JsHgrYDkBODWFaVorqD9BsZ1F7DSrYD5rqDMBYHEXeH5FYVoXGD9XsZSX7Z1N7D5JwHuzGDkB/V5X7DoXGDcJUZ1B/Z1NOZMFaDMNKZSXeDWX7DoXGD9JKDQX7HIrwD5NUHgvsVcFCDWJeVorqDcJUZ1FaHAN7V5X7DEBeHEJGH5FYDoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCH5F/HIraD9XsH9X7DSBYHuJeHuzGZSNiDWF/DoF7DcFYZ1X7HArKV5FUHgrKHErCV5XCZuJeD9XsDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBOHQJeDQBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuX7HgNOVkJ3DWFqZuB/D9FYDQX7HIBeHQFaDMrYDkBsDWFaDoXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwDQFaHArYVWXGHuvmVcFKH5XCVoJwDcNwH9BODSrYV5FGHgveHArsDWFqHIXGD9NmDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNwH9BiHABYD5NUDMBYVcFiV5FYHINUD9BiH9B/HIrwHQBODMNKZSJ3DuFYHMFGD9JKDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwV5FUHuzGVcFKDuFqDoFGDcBqH9B/HABYD5rqDEBeHEXeV5FaVoBiDcBwDQFGD1BeV5raHuNOVcBODWFYDoJsD9BiZ1BOZ1BeD5NUDErKZSXeHEFqVoBqD9XsH9X7HArYV5BOHuzGVcFKDWFYVoX7D9BsZ1B/DSrYD5JeDEBOZSJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMB/HgNKHErsH5FYHMXGD9FYDQFaHIrKHQBqHuBOVcrsDWFaVEF7DcFYVIJsD1vsZMFaDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoBiHQNwZkBiHABYZMJeDMBYZSJqDuFaDoXGHQXODuBqHArYV5BqHgvOVcXKDWXCDoXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2418,6 +2420,8 @@ class grid_aplicaciones_menu_asignarpermisos_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2792,11 +2796,16 @@ class grid_aplicaciones_menu_asignarpermisos_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos']['tot_geral']);
@@ -3238,7 +3247,7 @@ class grid_aplicaciones_menu_asignarpermisos_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -4156,22 +4165,23 @@ $_SESSION['scriptcase']['grid_aplicaciones_menu_asignarpermisos']['contr_erro'] 
 <HEAD>
  <TITLE>Permisos Menú/Usuario :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarpermisos'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -4953,14 +4963,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarperm
            $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['embutida_form'])
        {

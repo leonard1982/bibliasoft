@@ -315,6 +315,12 @@ class form_historiales_crm_apl
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_historiales_crm']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_historiales_crm']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_historiales_crm']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_historiales_crm']['embutida_parms'];
@@ -1952,10 +1958,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1968,25 +1977,25 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_historiales_crm'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'id_historial_crm' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_historial_crm' == $filtro)) || (is_array($filtro) && in_array('id_historial_crm', $filtro)))
         $this->ValidateField_id_historial_crm($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha' == $filtro)) || (is_array($filtro) && in_array('fecha', $filtro)))
         $this->ValidateField_fecha($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipo' == $filtro)) || (is_array($filtro) && in_array('tipo', $filtro)))
         $this->ValidateField_tipo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'notas' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'notas' == $filtro)) || (is_array($filtro) && in_array('notas', $filtro)))
         $this->ValidateField_notas($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'asesor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'asesor' == $filtro)) || (is_array($filtro) && in_array('asesor', $filtro)))
         $this->ValidateField_asesor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'motivo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'motivo' == $filtro)) || (is_array($filtro) && in_array('motivo', $filtro)))
         $this->ValidateField_motivo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'atendido' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'atendido' == $filtro)) || (is_array($filtro) && in_array('atendido', $filtro)))
         $this->ValidateField_atendido($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'id_contacto_tercero' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'id_contacto_tercero' == $filtro)) || (is_array($filtro) && in_array('id_contacto_tercero', $filtro)))
         $this->ValidateField_id_contacto_tercero($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'estado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'estado' == $filtro)) || (is_array($filtro) && in_array('estado', $filtro)))
         $this->ValidateField_estado($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'archivos' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'archivos' == $filtro)) || (is_array($filtro) && in_array('archivos', $filtro)))
         $this->ValidateField_archivos($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -3840,7 +3849,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_historiales_crm']['Lookup_est
           { 
               $rs1->Close(); 
               $this->editado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->editado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->editado_hora =  date('H') . ":" . date('i') . ":" . date('s');
               $NM_val_form['editado'] = $this->editado;
               $this->NM_ajax_changed['editado'] = true;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -4044,9 +4053,9 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_historiales_crm']['Lookup_est
               $NM_cmp_auto = "id_historial_crm, ";
           } 
               $this->creado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->creado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->creado_hora =  date('H') . ":" . date('i') . ":" . date('s');
               $this->editado =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
-              $this->editado_hora =  date('Y') . "-" . date('m')  . "-" . date('d') . " " . date('H') . ":" . date('i') . ":" . date('s');
+              $this->editado_hora =  date('H') . ":" . date('i') . ":" . date('s');
           $bInsertOk = true;
           $aInsertOk = array(); 
           $bInsertOk = $bInsertOk && empty($aInsertOk);
@@ -5425,7 +5434,8 @@ $(function() {
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -6725,5 +6735,54 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5");
+                break;
+            case "btn_crear_contacto":
+                return array("sc_btn_crear_contacto_top");
+                break;
+            case "btn_crear_tercero":
+                return array("sc_btn_crear_tercero_top");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-11");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-12");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-13");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-14");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

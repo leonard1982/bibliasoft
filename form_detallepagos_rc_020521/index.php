@@ -11,6 +11,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -284,8 +285,8 @@ class form_detallepagos_rc_020521_ini
       $this->nm_dt_criacao   = "20181019"; 
       $this->nm_hr_criacao   = "171903"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -942,7 +943,7 @@ class form_detallepagos_rc_020521_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZSFGHArYVWFaDMvODkBOV5FGVorqDcBqZSBOHANOD5rqDEBeVkXeDWFqVoFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoJsD9NmH9FGHABYHuraHgrKDkBODuFGVoX7D9XGZSB/DSBeHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWF/VoraD9XOZSB/Z1rYD5BiDMzGHEFiDWFqZuFaDcJeDQX7HIBeD5rqHgrKVcFCDWXCVoB/DcJUH9B/Z1BeD5JeDMNKZSJGDWr/DoF7DcXOZ9F7HANKV5BODMvOVcBUH5XKVoX7HQNmZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5FYHIX7HQXGVINUHAvmZMFaDMBYHArCDWX7DoJeD9NwZSBiDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMvCHEFiH5FYHMBOD9XsZ9XGHANOHuXGDMvOV9FeV5BmVENUD9BsH9BqDSBeHuJsHgBYHErCDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeH9FUD1BeHQrqDMvmDkBODWFaDoraDcFYH9FaHArYHQFUHgBYHArCHEFqHIXGDcJeZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQNUDMveHENiHEFqHIrqHQJeDQJwD1BeVWXGHuvmVcrsDWJeHMJeHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwH9X7Z1rwV5BOHuNOVcB/V5X7DoNUDcJUZ1FaD1rKD5NUDEBOHEFiDuFYVoB/D9NwDQJsHArYD5XGHuNODkFCH5FqVoJwD9XOZSB/D1rwD5BiHgveHErsDWrGDoBOHQXODuBqHAvmV5XGDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoF7D9XOZSB/D1rKHuFUHgBeHEXeDWr/HMXGD9FYH9BiHAvmV5JeHgrwVIBsV5F/HINUHQJmZSBqHIBeD5JwHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBODcFYZ1F7HIveHQFUHgNOHArCDWrGZuBqDcJeH9FGD1BeHQBqHuBOVcXKDuFGVEF7DcNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['form_detallepagos_rc_020521']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['form_detallepagos_rc_020521']['ordem_cmp'] = ""; 
@@ -2400,6 +2401,11 @@ ob_start();
     sajax_export("ajax_form_detallepagos_rc_020521_table_refresh");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->controle();
 //
     function nm_limpa_str_form_detallepagos_rc_020521(&$str)
@@ -2774,6 +2780,10 @@ ob_start();
       global $inicial_form_detallepagos_rc_020521;
       $aResp = array();
 
+      if (isset($inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['empty_filter'];
@@ -2870,6 +2880,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['btnDisabled']) && '' != $inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['btnDisabled'])
+         {
+            form_detallepagos_rc_020521_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['btnLabel']) && '' != $inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['btnLabel'])
+         {
+            form_detallepagos_rc_020521_pack_btn_label($aResp);
          }
          if (isset($inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['varList']) && !empty($inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['varList']))
          {
@@ -2974,8 +2992,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -3224,6 +3247,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_detallepagos_rc_020521_pack_master_value
+
+   function form_detallepagos_rc_020521_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_detallepagos_rc_020521;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_detallepagos_rc_020521_pack_ajax_alert
+
+   function form_detallepagos_rc_020521_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_detallepagos_rc_020521;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_detallepagos_rc_020521->contr_form_detallepagos_rc_020521->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_detallepagos_rc_020521_pack_ajax_alert
 
    function form_detallepagos_rc_020521_pack_ajax_alert(&$aResp)
    {

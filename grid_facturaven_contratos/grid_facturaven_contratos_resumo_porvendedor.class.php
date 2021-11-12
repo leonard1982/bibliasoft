@@ -24,6 +24,10 @@ class grid_facturaven_contratos_resumo
    var $NM_totaliz_hrz; 
    var $link_graph_tot; 
    var $Tot_ger; 
+   var $nmgp_botoes     = array();
+   var $nm_btn_exist    = array();
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array();
    var $array_total_vendedor;
    var $array_total_geral;
    var $array_tot_lin;
@@ -3823,6 +3827,7 @@ $_SESSION['scriptcase']['grid_facturaven_contratos']['contr_erro'] = 'off';
        { 
            $nm_saida->saida("        function sc_session_redir(url_redir)\r\n");
            $nm_saida->saida("        {\r\n");
+           $nm_saida->saida("            if (typeof(sc_session_redir_mobile) === typeof(function(){})) { sc_session_redir_mobile(url_redir); }\r\n");
            $nm_saida->saida("            if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')\r\n");
            $nm_saida->saida("            {\r\n");
            $nm_saida->saida("                window.parent.sc_session_redir(url_redir);\r\n");
@@ -5181,7 +5186,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['pdf'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rpdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['pdf'][] = "Rpdf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "Rpdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_pdf.php?nm_opc=pdf_res&nm_target=0&nm_cor=cor&papel=1&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=s&nm_res_cons=s&nm_ini_pdf_res=resume,chart&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=N&nm_label_group=S&nm_all_cab=N&nm_all_label=N&pdf_zip=N&nm_orient_grid=2&origem=res&language=es&conf_socor=S&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_facturaven_contratos&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5194,7 +5200,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['word'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rword_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['word'][] = "Rword_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "Rword_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=s&nm_ini_word_res=resume&nm_all_modules=grid,resume,chart&password=n&origem=res&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5202,7 +5209,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['xls'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rxls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['xls'][] = "Rxls_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_xls_conf('xlsx', 'resume', '','N');", "nm_gp_xls_conf('xlsx', 'resume', '','N');", "Rxls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5215,7 +5223,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['xml'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rxml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['xml'][] = "Rxml_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_xml_conf('tag', 'N', 'resume', '');", "nm_gp_xml_conf('tag', 'N', 'resume', '');", "Rxml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5223,7 +5232,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['csv'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rcsv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['csv'][] = "Rcsv_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_csv_conf('1','1','1','N','resume','');", "nm_gp_csv_conf('1','1','1','N','resume','');", "Rcsv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5231,7 +5241,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['rtf'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rrtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['rtf'][] = "Rrtf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "Rrtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5244,7 +5255,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['print'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rprinttop\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['print'][] = "Rprint_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "Rprint_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=resumo&nm_cor=PB&nm_res_cons=s&nm_ini_prt_res=resume&nm_all_modules=grid,resume,chart&password=n&origem=res&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5258,11 +5270,13 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       if ($this->nmgp_botoes['chart_conf'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_conf'][] = "Rgraf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bconf_graf", "", "", "Rgraf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_graf_flash.php?nome_apl=grid_facturaven_contratos&campo_apl=nm_resumo_graf&sc_page=" . NM_encode_input($this->Ini->sc_page) . "&language=es&tp_apl=cns_htm&KeepThis=true&TB_iframe=true&height=450&width=400&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
       if ($this->nmgp_botoes['chart_settings'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_settings'][] = "Rconfig_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "smry_conf", "summaryConfig();", "summaryConfig();", "Rconfig_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
@@ -5283,6 +5297,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           }
           if ($Q_count > 1 || $Q_free)
           {
+             $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_sel_groupby.php?opc_ret=resumo&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_sel_groupby.php?opc_ret=resumo&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           }
@@ -5290,6 +5305,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       if ($this->nmgp_botoes['chart_detail'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_detail'][] = "Rrotac_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "blink_resumogrid", "nm_gp_move('inicio', '0');", "nm_gp_move('inicio', '0');", "Rrotac_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
@@ -5311,8 +5327,9 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                 }
             }
          }
-      if ($this->nmgp_botoes['chart_exit'] == 'on' && !$this->grid_emb_form)
+      if ($this->nmgp_botoes['exit'] == 'on' && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['exit'][] = "Rsai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('igual', '0');", "nm_gp_move('igual', '0');", "Rsai_top", "", " Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
@@ -5348,16 +5365,19 @@ if ($_SESSION['scriptcase']['proc_mobile'])
          $NM_Gbtn = false;
       if ($this->nmgp_botoes['chart_conf'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_conf'][] = "Rgraf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bconf_graf", "", "", "Rgraf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_graf_flash.php?nome_apl=grid_facturaven_contratos&campo_apl=nm_resumo_graf&sc_page=" . NM_encode_input($this->Ini->sc_page) . "&language=es&tp_apl=cns_htm&KeepThis=true&TB_iframe=true&height=450&width=400&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
       if ($this->nmgp_botoes['chart_settings'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_settings'][] = "Rconfig_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "smry_conf", "summaryConfig();", "summaryConfig();", "Rconfig_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
       if ($this->nmgp_botoes['chart_detail'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_detail'][] = "Rrotac_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "blink_resumogrid", "nm_gp_move('inicio', '0');", "nm_gp_move('inicio', '0');", "Rrotac_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
@@ -5378,6 +5398,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           }
           if ($Q_count > 1 || $Q_free)
           {
+             $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_sel_groupby.php?opc_ret=resumo&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_sel_groupby.php?opc_ret=resumo&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           }
@@ -5395,7 +5416,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['pdf'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rpdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['pdf'][] = "Rpdf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "Rpdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_pdf.php?nm_opc=pdf_res&nm_target=0&nm_cor=cor&papel=1&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=s&nm_res_cons=s&nm_ini_pdf_res=resume,chart&nm_all_modules=grid,resume,chart&password=n&summary_export_columns=N&nm_label_group=S&nm_all_cab=N&nm_all_label=N&pdf_zip=N&nm_orient_grid=2&origem=res&language=es&conf_socor=S&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_facturaven_contratos&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5408,7 +5430,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['word'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rword_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['word'][] = "Rword_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "Rword_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=s&nm_ini_word_res=resume&nm_all_modules=grid,resume,chart&password=n&origem=res&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5416,7 +5439,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['xls'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rxls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['xls'][] = "Rxls_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_xls_conf('xlsx', 'resume', '','N');", "nm_gp_xls_conf('xlsx', 'resume', '','N');", "Rxls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5429,7 +5453,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['xml'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rxml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['xml'][] = "Rxml_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_xml_conf('tag', 'N', 'resume', '');", "nm_gp_xml_conf('tag', 'N', 'resume', '');", "Rxml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5437,7 +5462,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['csv'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rcsv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['csv'][] = "Rcsv_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_csv_conf('1','1','1','N','resume','');", "nm_gp_csv_conf('1','1','1','N','resume','');", "Rcsv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5445,7 +5471,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['rtf'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rrtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['rtf'][] = "Rrtf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "Rrtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5458,7 +5485,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['print'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rprinttop\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['print'][] = "Rprint_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "Rprint_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=resumo&nm_cor=PB&nm_res_cons=s&nm_ini_prt_res=resume&nm_all_modules=grid,resume,chart&password=n&origem=res&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -5488,6 +5516,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       if ($this->nmgp_botoes['filter'] == 'on' && !$this->Ini->SC_Link_View && !$this->grid_emb_form)
       {
+         $this->nm_btn_exist['filter'][] = "Rpesq_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpesquisa", "nm_gp_move('busca', '0', 'res');", "nm_gp_move('busca', '0', 'res');", "Rpesq_top", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
@@ -5508,6 +5537,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           }
           if ($Q_count > 1 || $Q_free)
           {
+             $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_sel_groupby.php?opc_ret=resumo&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_sel_groupby.php?opc_ret=resumo&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           }
@@ -5515,16 +5545,19 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       if ($this->nmgp_botoes['chart_conf'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_conf'][] = "Rgraf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bconf_graf", "", "", "Rgraf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_facturaven_contratos/grid_facturaven_contratos_config_graf_flash.php?nome_apl=grid_facturaven_contratos&campo_apl=nm_resumo_graf&sc_page=" . NM_encode_input($this->Ini->sc_page) . "&language=es&tp_apl=cns_htm&KeepThis=true&TB_iframe=true&height=450&width=400&modal=true", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
       if ($this->nmgp_botoes['chart_settings'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_settings'][] = "Rconfig_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "smry_conf", "summaryConfig();", "summaryConfig();", "Rconfig_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
       if ($this->nmgp_botoes['chart_detail'] == 'on' && !$this->grid_emb_form && !$this->NM_res_sem_reg)
       {
+         $this->nm_btn_exist['chart_detail'][] = "Rrotac_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "blink_resumogrid", "nm_gp_move('inicio', '0');", "nm_gp_move('inicio', '0');", "Rrotac_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
@@ -5546,8 +5579,9 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                 }
             }
          }
-      if ($this->nmgp_botoes['chart_exit'] == 'on' && !$this->grid_emb_form)
+      if ($this->nmgp_botoes['exit'] == 'on' && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['exit'][] = "Rsai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('igual', '0');", "nm_gp_move('igual', '0');", "Rsai_top", "", " Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
@@ -5886,6 +5920,20 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_contratos']['
       $nm_saida->saida("  <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
       $nm_saida->saida("</form> \r\n");
       $nm_saida->saida("<SCRIPT language=\"Javascript\">\r\n");
+   $nm_saida->saida("   $(function(){ \r\n");
+   $nm_saida->saida("       NM_btn_disable();\r\n");
+   $nm_saida->saida("   }); \r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+           $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+           $nm_saida->saida("     $('#div_" . $cada_id . "').addClass('disabled');\r\n");
+         }
+      }
+   }
+   $nm_saida->saida("   }\r\n");
       $nm_saida->saida("   function nm_gp_word_conf(cor, SC_module_export, password, ajax, str_type, bol_param)\r\n");
       $nm_saida->saida("   {\r\n");
       $nm_saida->saida("       if (\"R\" == ajax)\r\n");

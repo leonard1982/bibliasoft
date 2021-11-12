@@ -398,4 +398,19 @@ function nm_fix_permissions($path, $permission = 0644, $recursive = true)
     }
 }
 
+function sc_menu_force_orientation($str_option)
+{
+    if($str_option == 'vertical')
+    {
+        $_SESSION['scriptcase']['force_menu_orientacao'] = $str_option;
+    }
+    elseif($str_option == 'horizontal'){
+        $_SESSION['scriptcase']['force_menu_orientacao'] = $str_option;
+    }
+    else
+    {
+        unset($_SESSION['scriptcase']['force_menu_orientacao']);
+    }
+}
+
 ?>

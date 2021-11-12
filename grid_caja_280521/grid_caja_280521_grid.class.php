@@ -28,9 +28,12 @@ class grid_caja_280521_grid
    var $NM_opcao; 
    var $NM_flag_antigo; 
    var $nm_campos_cab = array();
-   var $NM_cmp_hidden = array();
-   var $nmgp_botoes = array();
-   var $Cmps_ord_def = array();
+   var $NM_cmp_hidden   = array();
+   var $nmgp_botoes     = array();
+   var $nm_btn_exist    = array();
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array();
+   var $Cmps_ord_def    = array();
    var $nmgp_label_quebras = array();
    var $nmgp_prim_pag_pdf;
    var $Campos_Mens_erro;
@@ -204,10 +207,18 @@ class grid_caja_280521_grid
        if (!$this->Proc_link_res && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opcao'] != 'pdf' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opcao_print'] != 'print')
        { 
        $nm_saida->saida("     <TR>\r\n");
-       $nm_saida->saida("      <TD class=\"scGridRefinedSearchPadding\" valign='top'>\r\n");
+       $nm_saida->saida("      <TD id=\"div_refin_search\" class=\"scGridRefinedSearchPadding\" valign='top'>\r\n");
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['ajax_nav'])
+           { 
+               $_SESSION['scriptcase']['saida_html'] = "";
+           } 
            $this->html_interativ_search();
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['ajax_nav'])
            { 
+               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['refresh_interativ']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['refresh_interativ'] == "S") {
+                   $this->Ini->Arr_result['setValue'][] = array('field' => 'div_refin_search', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+               }
+               unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['refresh_interativ']);
                $tb_disp = (!empty($this->nm_grid_sem_reg) && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_int_search']) ? 'none' : '';
                $this->Ini->Arr_result['setDisplay'][] = array('field' => 'TB_Interativ_Search', 'value' => $tb_disp);
            } 
@@ -457,7 +468,7 @@ class grid_caja_280521_grid
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['mostra_edit'] = "N";
        }
    }
-   if ($this->Ini->SC_Link_View || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_psq'])
+   if ($this->Ini->SC_Link_View || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_psq'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['psq_edit'] == 'N'))
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['mostra_edit'] = "N";
    }
@@ -1831,6 +1842,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            { 
                $nm_saida->saida("   function sc_session_redir(url_redir)\r\n");
                $nm_saida->saida("   {\r\n");
+           $nm_saida->saida("       if (typeof(sc_session_redir_mobile) === typeof(function(){})) { sc_session_redir_mobile(url_redir); }\r\n");
                $nm_saida->saida("       if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')\r\n");
                $nm_saida->saida("       {\r\n");
                $nm_saida->saida("           window.parent.sc_session_redir(url_redir);\r\n");
@@ -1965,6 +1977,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("  }\r\n");
            $nm_saida->saida("  function SC_init_jquery(isScrollNav){ \r\n");
            $nm_saida->saida("   \$(function(){ \r\n");
+           $nm_saida->saida("     NM_btn_disable();\r\n");
            if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['qsearch'] == "on")
            {
                $nm_saida->saida("     \$('#SC_fast_search_top').keyup(function(e) {\r\n");
@@ -2584,7 +2597,7 @@ $nm_saida->saida("}\r\n");
            {
                $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
            }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
            $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
            $nm_saida->saida("     <TR>\r\n");
            $nm_saida->saida("       <TD>\r\n");
@@ -2618,7 +2631,7 @@ $nm_saida->saida("}\r\n");
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['dashboard_info']['remove_margin'] ? 'margin: 0; ' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
           $vertical_center = '';
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
+           $nm_saida->saida("  <body id=\"grid_horizontal\" class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $remove_margin . $vertical_center . $css_body . "\">\r\n");
        }
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opcao'] == "pdf" && !$this->Print_All)
@@ -10477,6 +10490,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
       {
       $pos_path = strrpos($this->Ini->path_prod, "/");
       $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
+              $this->nm_btn_exist['sel_col'][] = "selcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -10495,6 +10509,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $UseAlias =  "S";
           }
+              $this->nm_btn_exist['sort_col'][] = "ordcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -10516,6 +10531,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           }
           if ($Q_count > 1 || $Q_free)
           {
+              $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -10547,7 +10563,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
       {
           $Tem_pdf_res = "n";
       }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['pdf'][] = "pdf_top";
+          $nm_saida->saida("            <div id=\"div_pdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=0&apapel=0&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=S&nm_all_cab=N&nm_all_label=N&nm_orient_grid=2&password=n&summary_export_columns=N&pdf_zip=N&origem=cons&language=es&conf_socor=N&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_280521&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -10570,7 +10587,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $Tem_word_res = "n";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_word_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['word'][] = "word_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -10593,7 +10611,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $Xls_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xls'][] = "xls_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_move('xls', '1', '$Xls_mod_export');", "nm_gp_move('xls', '1', '$Xls_mod_export');", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -10621,7 +10640,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $Xml_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xml'][] = "xml_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -10644,7 +10664,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $Csv_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_csv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['csv'][] = "csv_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -10653,7 +10674,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
       if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_rtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['rtf'][] = "rtf_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -10676,7 +10698,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
               $Tem_pdf_res = "n";
           }
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_print_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['print'][] = "print_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=PC&nm_cor=PB&password=n&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -10695,7 +10718,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $NM_btn = false;
               $NM_ult_sep = "NM_sep_1";
-              $nm_saida->saida("          <img id=\"NM_sep_1\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $nm_saida->saida("          <img id=\"NM_sep_1\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
           if ($this->nmgp_botoes['reload'] == "on")
@@ -10706,6 +10729,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['SC_btn_0'] == "on" && !$this->grid_emb_form) 
       { 
+          $this->nm_btn_exist['SC_btn_0'][] = "sc_SC_btn_0_top";
            if (isset($this->Ini->sc_lig_md5["grid_detalleRCyCE"]) && $this->Ini->sc_lig_md5["grid_detalleRCyCE"] == "S") {
                $Parms_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scoutNMSC_inicial*scininicio*scout";
                $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_caja_280521@SC_par@" . md5($Parms_Lig);
@@ -10713,7 +10737,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            } else {
                $Md5_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scoutNMSC_inicial*scininicio*scout";
            }
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "SC_btn_0", "nm_gp_submit5('" .  $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link  . "" .  SC_dir_app_name('grid_detalleRCyCE')  . "/index.php', '$this->nm_location', '" .  $Md5_Lig  . "', '_self', '', '', '', '', 'grid_detalleRCyCE');;", "nm_gp_submit5('" .  $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link  . "" .  SC_dir_app_name('grid_detalleRCyCE')  . "/index.php', '$this->nm_location', '" .  $Md5_Lig  . "', '_self', '', '', '', '', 'grid_detalleRCyCE');;", "sc_SC_btn_0_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "SC_btn_0", "nm_gp_submit5('" .  $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link  . "" .  SC_dir_app_name('grid_detalleRCyCE')  . "/index.php', '$this->nm_location', '" .  $Md5_Lig  . "', '_self', '', '', '', '', 'grid_detalleRCyCE');;", "nm_gp_submit5('" .  $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link  . "" .  SC_dir_app_name('grid_detalleRCyCE')  . "/index.php', '$this->nm_location', '" .  $Md5_Lig  . "', '_self', '', '', '', '', 'grid_detalleRCyCE');;", "sc_SC_btn_0_top", "", "Detalle Ingresos-Egresos", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $NM_btn = true;
       } 
@@ -10726,6 +10750,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_Gb_Free_cmp']))
             { }
             else {
+              $this->nm_btn_exist['summary'][] = "res_top";
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'])) {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
@@ -10748,6 +10773,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
           $nm_saida->saida("            <div id='id_save_grid_div_top' style='display:inline-block'>\r\n");
           }
+              $this->nm_btn_exist['gridsave'][] = "save_grid_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgridsave", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "save_grid_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
@@ -10831,6 +10857,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
           {
               $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['qt_lin_grid'];
+              $this->nm_btn_exist['goto'][] = "brec_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "birpara", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "brec_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $Page_Atu   = ceil($this->nmgp_reg_inicial / $Reg_Page);
@@ -10868,6 +10895,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['first'][] = "first_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -10882,6 +10910,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           }
           if ($this->nmgp_botoes['back'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['back'][] = "back_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -10940,12 +10969,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           }
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['forward'][] = "forward_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['last'][] = "last_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -10958,14 +10989,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_caja_280521_help.txt") && !$this->grid_emb_form)
@@ -11086,6 +11117,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
       {
       $pos_path = strrpos($this->Ini->path_prod, "/");
       $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
+              $this->nm_btn_exist['sel_col'][] = "selcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -11104,6 +11136,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $UseAlias =  "S";
           }
+              $this->nm_btn_exist['sort_col'][] = "ordcmp_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&use_alias=" . $UseAlias . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -11125,6 +11158,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           }
           if ($Q_count > 1 || $Q_free)
           {
+              $this->nm_btn_exist['groupby'][] = "sel_groupby_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgroupby", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnGroupByShow('" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_sel_groupby.php?opc_ret=igual&path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "sel_groupby_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -11156,7 +11190,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
       {
           $Tem_pdf_res = "n";
       }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['pdf'][] = "pdf_top";
+          $nm_saida->saida("            <div id=\"div_pdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=0&apapel=0&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=" . $Tem_gb_pdf . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_pdf_res=grid,resume&nm_all_modules=grid,resume,chart&nm_label_group=S&nm_all_cab=N&nm_all_label=N&nm_orient_grid=2&password=n&summary_export_columns=N&pdf_zip=N&origem=cons&language=es&conf_socor=N&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_caja_280521&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -11179,7 +11214,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $Tem_word_res = "n";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_word_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['word'][] = "word_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_config_word.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_cor=AM&nm_res_cons=" . $Tem_word_res . "&nm_ini_word_res=grid&nm_all_modules=grid,resume,chart&password=n&origem=cons&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -11202,7 +11238,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $Xls_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xls_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xls'][] = "xls_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_move('xls', '1', '$Xls_mod_export');", "nm_gp_move('xls', '1', '$Xls_mod_export');", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -11230,7 +11267,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $Xml_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_xml_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['xml'][] = "xml_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "nm_gp_xml_conf('tag','N','$Xml_mod_export','');", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -11253,7 +11291,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $Csv_mod_export = "grid";
           }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_csv_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['csv'][] = "csv_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "nm_gp_csv_conf('1','1','1','N','$Csv_mod_export','');", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -11262,7 +11301,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
       if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_rtf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['rtf'][] = "rtf_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_rtf_conf();", "nm_gp_rtf_conf();", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -11285,7 +11325,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
               $Tem_pdf_res = "n";
           }
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_print_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+              $this->nm_btn_exist['print'][] = "print_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_caja_280521/grid_caja_280521_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=PC&nm_cor=PB&password=n&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&nm_res_cons=" . $Tem_pdf_res . "&nm_ini_prt_res=grid&nm_all_modules=grid,resume,chart&origem=cons&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -11304,7 +11345,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
               $NM_btn = false;
               $NM_ult_sep = "NM_sep_2";
-              $nm_saida->saida("          <img id=\"NM_sep_2\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $nm_saida->saida("          <img id=\"NM_sep_2\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
           if ($this->nmgp_botoes['reload'] == "on")
@@ -11315,6 +11356,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['SC_btn_0'] == "on" && !$this->grid_emb_form) 
       { 
+          $this->nm_btn_exist['SC_btn_0'][] = "sc_SC_btn_0_top";
            if (isset($this->Ini->sc_lig_md5["grid_detalleRCyCE"]) && $this->Ini->sc_lig_md5["grid_detalleRCyCE"] == "S") {
                $Parms_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scoutNMSC_inicial*scininicio*scout";
                $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_caja_280521@SC_par@" . md5($Parms_Lig);
@@ -11322,7 +11364,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            } else {
                $Md5_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scoutNMSC_inicial*scininicio*scout";
            }
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "SC_btn_0", "nm_gp_submit5('" .  $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link  . "" .  SC_dir_app_name('grid_detalleRCyCE')  . "/index.php', '$this->nm_location', '" .  $Md5_Lig  . "', '_self', '', '', '', '', 'grid_detalleRCyCE');;", "nm_gp_submit5('" .  $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link  . "" .  SC_dir_app_name('grid_detalleRCyCE')  . "/index.php', '$this->nm_location', '" .  $Md5_Lig  . "', '_self', '', '', '', '', 'grid_detalleRCyCE');;", "sc_SC_btn_0_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "SC_btn_0", "nm_gp_submit5('" .  $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link  . "" .  SC_dir_app_name('grid_detalleRCyCE')  . "/index.php', '$this->nm_location', '" .  $Md5_Lig  . "', '_self', '', '', '', '', 'grid_detalleRCyCE');;", "nm_gp_submit5('" .  $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link  . "" .  SC_dir_app_name('grid_detalleRCyCE')  . "/index.php', '$this->nm_location', '" .  $Md5_Lig  . "', '_self', '', '', '', '', 'grid_detalleRCyCE');;", "sc_SC_btn_0_top", "", "Detalle Ingresos-Egresos", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $NM_btn = true;
       } 
@@ -11335,6 +11377,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_Ind_Groupby'] == "sc_free_group_by" && empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['SC_Gb_Free_cmp']))
             { }
             else {
+              $this->nm_btn_exist['summary'][] = "res_top";
               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'])) {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('resumo', '0');", "nm_gp_move('resumo', '0');", "res_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               } 
@@ -11357,6 +11400,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           {
           $nm_saida->saida("            <div id='id_save_grid_div_top' style='display:inline-block'>\r\n");
           }
+              $this->nm_btn_exist['gridsave'][] = "save_grid_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bgridsave", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "scBtnSaveGridShow('cons', 'Y', 'top', 'extended', '');", "save_grid_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
           if ($save_grid_format == 'simplified' && !$_SESSION['scriptcase']['proc_mobile'])
@@ -11392,6 +11436,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
       }
       if ($this->nmgp_botoes['exit'] == "on")
       {
+          $this->nm_btn_exist['exit'][] = "sai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('busca', '0', '');", "nm_gp_move('busca', '0', '');", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
@@ -11450,6 +11495,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
           {
               $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['qt_lin_grid'];
+              $this->nm_btn_exist['goto'][] = "brec_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "birpara", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "brec_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $Page_Atu   = ceil($this->nmgp_reg_inicial / $Reg_Page);
@@ -11487,6 +11533,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['first'][] = "first_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -11501,6 +11548,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           }
           if ($this->nmgp_botoes['back'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['back'][] = "back_bot";
               if ($this->Rec_ini == 0)
               {
                   $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -11559,12 +11607,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
           }
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['forward'][] = "forward_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['opc_liga']['nav']))
           {
+              $this->nm_btn_exist['last'][] = "last_bot";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -11577,14 +11627,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
               $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
               if ($this->Ini->Apl_paginacao == "FULL")
               {
-                  $nm_sumario = str_replace("?final?", $this->count_ger, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
               }
               else
               {
-                  $nm_sumario = str_replace("?final?", $this->nmgp_reg_final, $nm_sumario);
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
               }
-              $nm_sumario = str_replace("?total?", $this->count_ger, $nm_sumario);
-              $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
               $NM_btn = true;
           }
           if (is_file("grid_caja_280521_help.txt") && !$this->grid_emb_form)
@@ -11733,7 +11783,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['campos_busca'][ $field ] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['campos_busca'][ $field ], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['campos_busca'][ $field . "_cond"] == 'eq')
@@ -11783,7 +11834,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
                     }
                     else
                     {
-                        $str_value = preg_replace('/'. $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['fast_search'][2] .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
+                        $keywords = preg_quote($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['fast_search'][2], '/');
+                        $str_value = preg_replace('/'. $keywords .'/i', $str_html_ini . '$0' . $str_html_fim, $str_value);
                     }
                 }
                 elseif($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['fast_search'][1] == 'eq')
@@ -11804,7 +11856,16 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
    function html_interativ_search()
    {
        global $nm_saida;
+       $bol_refin_use_modal = false;
+       if($_SESSION['scriptcase']['proc_mobile'])
+       {
+           $bol_refin_use_modal = false;
+       }
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label'] = array();
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados'] = array();
+       }
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_sql']   = array();
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']))
        {
@@ -11817,6 +11878,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle'] = (isset($this->New_label['detalle'])) ? $this->New_label['detalle'] : 'Detalle';
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_sql']['detalle']   = "detalle";
        $tb_disp = (empty($this->nm_grid_sem_reg)) ? '' : 'none';
+       $nm_saida->saida("     <script>\r\n");
+       $nm_saida->saida("         var Tab_obj_int_mult = {};\r\n");
+       $nm_saida->saida("     </script>\r\n");
        $nm_saida->saida(" <table id=\"TB_Interativ_Search\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top; width: 100%; display:" . $tb_disp . ";\" valign=\"top\" cellspacing=0 cellpadding=0>\r\n");
        $nm_saida->saida("   <tr id=\"NM_Interativ_Search\">\r\n");
        $nm_saida->saida("   <td valign=\"top\"> \r\n");
@@ -11824,15 +11888,23 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $nm_saida->saida("     <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
        $nm_saida->saida("     <input type=\"hidden\" name=\"nmgp_opcao\" value=\"interativ_search\"/> \r\n");
        $nm_saida->saida("     <input type=\"hidden\" name=\"parm\" value=\"\"/> \r\n");
-       $nm_saida->saida("    <div id='id_div_interativ_search' class='scGridRefinedSearchMoldura' style='min-width:100px;max-width:120px;overflow-x:hidden;'>\r\n");
-       $lin_obj = $this->interativ_search_fecha();
+       $nm_saida->saida("    <div id='id_div_interativ_search' class=''>\r\n");
+           $disp_btn_collapse = 'none'; 
+           if('N' == 'S') 
+           { 
+               $disp_btn_collapse = ''; 
+           } 
+$nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSearchCollapse' style='display: " . $disp_btn_collapse . "' onclick='nm_proc_int_search_toggle(false);'><i class='icon_fa " . $this->Ini->scGridRefinedSearchCollapseFAIcon . "'></i></div> \r\n");
+       $nm_saida->saida("        <div id='id_div_interativ_search_content' class='scGridRefinedSearchMoldura' style='min-width:100px;max-width:120px;overflow-x:hidden;'>\r\n");
+       $nm_saida->saida("            <div id='id_div_interativ_search_fields'>\r\n");
+       $lin_obj = $this->interativ_search_fecha($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_jornada();
+       $lin_obj = $this->interativ_search_jornada($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_detalle();
+       $lin_obj = $this->interativ_search_detalle($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_bar();
-       $nm_saida->saida("" . $lin_obj . "\r\n");
+       $nm_saida->saida("            </div>\r\n");
+       $nm_saida->saida("        </div>\r\n");
        $nm_saida->saida("    </div>\r\n");
        $nm_saida->saida("    </form>\r\n");
        $nm_saida->saida("   </td>\r\n");
@@ -11843,61 +11915,56 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
    }
    function refresh_interativ_search()
    {
+       $bol_refin_use_modal = false;
+       if($_SESSION['scriptcase']['proc_mobile'])
+       {
+           $bol_refin_use_modal = false;
+       }
        $array_fields = array();
        $array_fields[] = "fecha";
        $array_fields[] = "jornada";
        $array_fields[] = "detalle";
        if(is_array($array_fields) && !empty($array_fields))
        {
-           //move itens that has been searched to the top
+           $arr_new = [];
            foreach($array_fields as $key => $str_field)
            {
                if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search'][$str_field]))
                {
                    unset($array_fields[ $key ]);
-                   array_unshift($array_fields, $str_field);
+                   $arr_new[] = $str_field;
                }
            }
+           $array_fields = array_merge($arr_new, $array_fields);
            $str_out = "";
            foreach($array_fields as $str_field)
            {
                $method = "interativ_search_" . $str_field;
-               $str_out .= $this->$method();
+               $str_out .= $this->$method($bol_refin_use_modal);
            }
-           $this->Ini->Arr_result['setValue'][] = array('field' => 'id_div_interativ_search', 'value' => NM_charset_to_utf8($str_out));
+           $this->Ini->Arr_result['setValue'][] = array('field' => 'id_div_interativ_search_fields', 'value' => NM_charset_to_utf8($str_out));
        }
    }
-   function interativ_search_bar()
-   {
-       global $nm_saida;
-       $lin_obj = "<div class='scGridRefinedSearchToolbar' id='id_toolbar_refined' style='display:none'>";
-       $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search_all();", "nm_proc_int_search_all();", "app_int_search_all", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-       $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "window.history.back();", "window.history.back();", "app_int_search_all_cancel", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-       $lin_obj .= "</div>";
-       return $lin_obj;
-   }
-   function interativ_search_fecha()
+   function interativ_search_fecha($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']["fecha"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']["fecha"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_fecha\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('fecha')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_fecha\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('fecha')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_fecha\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('fecha')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_fecha_ck\" name=\"int_search_fecha_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('fecha');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('fecha')\">";
+       $lin_obj .= "              <span id=\"id_expand_fecha\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_fecha\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_fecha\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','fecha', '', 'fecha', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_fecha\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','fecha', '', 'fecha', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -11937,17 +12004,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY fecha". $Cmps_where;
        $nm_comando .= " order by fecha ASC";
@@ -11995,9 +12062,18 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $lin_mult  = "";
        $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['fecha'])) ? "" : "none";
        $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_fecha_link\" style=\"display: " . $disp_link . ";\">";
+        $check_uncheck  = "
+            <span id='id_check_fecha' class='multiplefecha' style='display:" . (($displ_open)?'':'none') . ";'>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('fecha', true); this.checked=true;\" \>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('fecha', false); this.checked=false;\" \>
+            </span>";
        $qtd_see_more  = (int)3;
        $qtd_result_see_more  = 0;
        $bol_open_see_more  = false;
+       if($bol_refin_use_modal)
+       {
+           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados']['fecha'])?false:true);
+       }
        foreach ($result as $dados => $qtd_result)
        {
            $formatado = $dados;
@@ -12010,6 +12086,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            } 
            $formatado_exib  = $formatado;
            $dados = (string)$dados;
+           if($bol_refin_use_modal && $bol_populate_modal_values)
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados']['fecha'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
+           }
            if($dados == '')
            {
                $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
@@ -12018,9 +12098,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
            if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
            {
-               $lin_obj  .= "   <div id='id_see_more_fecha' class='scGridRefinedSearchVejaMais'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('fecha');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-               $lin_obj  .= "   </div>";
                $lin_obj  .= "   <div id='id_see_more_list_fecha' style='display:none'>";
                $bol_open_see_more  = true;
            }
@@ -12034,62 +12111,79 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
            $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
            $lin_obj  .= "   <tr>";
+           $lin_obj  .= "   <td>";
+           $lin_obj  .= "   <span class='simplefecha' style='display:" . (($displ_open)?'none':'') . ";'>";
            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['fecha']))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('uncheck', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','id_int_search_fecha','fecha', '" . NM_encode_input($dados . "##@@" . $formatado) . "');\"/>";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','id_int_search_fecha','fecha', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
            }
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'fecha', '');\" class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</a> ";
-           $lin_obj  .= "   </td>";
+           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'fecha', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
+           $lin_obj  .= $formatado_exib;
            if(!empty($veja_mais_link))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'fecha', '');\" class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</a> ";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
            }
+           $lin_obj  .= "        </a>";
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "    <span class='multiplefecha' style='display:"  . (($displ_open)?'':'none') .  ";'>";
+           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['fecha']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['fecha']['val_sel'])) ? " checked" : "";
+           $checked = " checked";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_fecha_" . md5($dados) . "\" name=\"int_search_fecha[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_fecha_". md5($dados) ."\" for=\"id_int_search_fecha_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
+           }
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "   </td>";
            $lin_obj  .= "    </tr>";
            $lin_obj  .= "   </table>";
            $lin_obj  .= "   </div>";
-           $lin_mult .= "   <div><label class='scGridRefinedSearchCampo' style='display: block;'>";
-           $lin_mult .= "    <INPUT class='" . $this->css_scAppDivToolbarInput . "' type=\"checkbox\" id=\"id_int_search_fecha\" name=\"int_search_fecha[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" checked><span class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_mult .= "    <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_mult .= "   </label></div>";
            $qtd_result_see_more++;
        }
+           $displ_see_more = false;
            if($bol_open_see_more)
            {
                $lin_obj  .= "   </div>";
-               $lin_obj  .= "   <div id='id_see_less_fecha' class='scGridRefinedSearchVejaMais' style='display:none'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('fecha');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-               $lin_obj  .= "   </div>";
+               $displ_see_more = true;
            }
+           if($bol_refin_use_modal)
+           {
+               $displ_see_more = true;
+           }
+           $lin_obj  .= "   <div id='id_see_more_fecha' class='scGridRefinedSearchVejaMais'>";
+           $lin_obj  .= "       " . $check_uncheck;
+           if($bol_refin_use_modal)
+           {
+               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_caja_280521_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=fecha&tp_obj=dt&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           else
+           {
+               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('fecha');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           $lin_obj  .= "   </div>";
+           $lin_obj  .= "   <div id='id_see_less_fecha' class='scGridRefinedSearchVejaMais' style='display:none;'>";
+           $lin_obj  .= "   " . $check_uncheck;
+           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('fecha');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
+           $lin_obj  .= "   </div>";
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
-       if (count($result) > 1)
        {
-           $disp_chk = "none";
-           $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_fecha_chk\" style=\"display: " . $disp_chk . ";\">";
-           $lin_obj  .= $lin_mult;
-           $lin_obj  .= "   </div></td></tr>";
-       }
-       if (count($result) > 1)
-       {
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_fecha\" style='display:none'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('fecha');", "nm_mult_int_search('fecha');", "mult_int_search_fecha", "", "", "display: $disp_link", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_show_multi_btn = '';
+           if (count($result) < 2)
+           {
+               $disp_show_multi_btn = 'none';
+           }
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('fecha', false);", "nm_mult_int_search('fecha', false);", "mult_int_search_fecha", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','id_int_search_fecha','fecha', '');", "nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','id_int_search_fecha','fecha', '');", "app_int_search_fecha", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_multi_btn = 'none';
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','id_int_search_fecha','fecha', '', 'N');", "nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['fecha']) . "','fecha','id_int_search_fecha','fecha', '', 'N');", "app_int_search_fecha", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('fecha');", "nm_single_int_search('fecha');", "single_int_search_fecha", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
@@ -12101,26 +12195,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $lin_obj .= "    </div>";
        return $lin_obj;
    }
-   function interativ_search_jornada()
+   function interativ_search_jornada($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']["jornada"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']["jornada"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_jornada\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('jornada')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_jornada\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('jornada')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_jornada\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('jornada')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_jornada_ck\" name=\"int_search_jornada_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('jornada');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('jornada')\">";
+       $lin_obj .= "              <span id=\"id_expand_jornada\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_jornada\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_jornada\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','jornada', '', 'jornada', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_jornada\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','jornada', '', 'jornada', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -12160,17 +12254,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY jornada". $Cmps_where;
        $nm_comando .= " order by jornada ASC";
@@ -12218,14 +12312,27 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $lin_mult  = "";
        $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['jornada'])) ? "" : "none";
        $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_jornada_link\" style=\"display: " . $disp_link . ";\">";
+        $check_uncheck  = "
+            <span id='id_check_jornada' class='multiplejornada' style='display:" . (($displ_open)?'':'none') . ";'>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('jornada', true); this.checked=true;\" \>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('jornada', false); this.checked=false;\" \>
+            </span>";
        $qtd_see_more  = (int)3;
        $qtd_result_see_more  = 0;
        $bol_open_see_more  = false;
+       if($bol_refin_use_modal)
+       {
+           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados']['jornada'])?false:true);
+       }
        foreach ($result as $dados => $qtd_result)
        {
            $formatado = $dados;
            $formatado_exib  = $formatado;
            $dados = (string)$dados;
+           if($bol_refin_use_modal && $bol_populate_modal_values)
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados']['jornada'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
+           }
            if($dados == '')
            {
                $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
@@ -12234,9 +12341,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
            if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
            {
-               $lin_obj  .= "   <div id='id_see_more_jornada' class='scGridRefinedSearchVejaMais'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('jornada');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-               $lin_obj  .= "   </div>";
                $lin_obj  .= "   <div id='id_see_more_list_jornada' style='display:none'>";
                $bol_open_see_more  = true;
            }
@@ -12250,62 +12354,79 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
            $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
            $lin_obj  .= "   <tr>";
+           $lin_obj  .= "   <td>";
+           $lin_obj  .= "   <span class='simplejornada' style='display:" . (($displ_open)?'none':'') . ";'>";
            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['jornada']))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('uncheck', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','id_int_search_jornada','jornada', '" . NM_encode_input($dados . "##@@" . $formatado) . "');\"/>";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','id_int_search_jornada','jornada', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
            }
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'jornada', '');\" class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</a> ";
-           $lin_obj  .= "   </td>";
+           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'jornada', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
+           $lin_obj  .= $formatado_exib;
            if(!empty($veja_mais_link))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'jornada', '');\" class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</a> ";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
            }
+           $lin_obj  .= "        </a>";
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "    <span class='multiplejornada' style='display:"  . (($displ_open)?'':'none') .  ";'>";
+           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['jornada']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['jornada']['val_sel'])) ? " checked" : "";
+           $checked = " checked";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_jornada_" . md5($dados) . "\" name=\"int_search_jornada[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_jornada_". md5($dados) ."\" for=\"id_int_search_jornada_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
+           }
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "   </td>";
            $lin_obj  .= "    </tr>";
            $lin_obj  .= "   </table>";
            $lin_obj  .= "   </div>";
-           $lin_mult .= "   <div><label class='scGridRefinedSearchCampo' style='display: block;'>";
-           $lin_mult .= "    <INPUT class='" . $this->css_scAppDivToolbarInput . "' type=\"checkbox\" id=\"id_int_search_jornada\" name=\"int_search_jornada[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" checked><span class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_mult .= "    <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_mult .= "   </label></div>";
            $qtd_result_see_more++;
        }
+           $displ_see_more = false;
            if($bol_open_see_more)
            {
                $lin_obj  .= "   </div>";
-               $lin_obj  .= "   <div id='id_see_less_jornada' class='scGridRefinedSearchVejaMais' style='display:none'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('jornada');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-               $lin_obj  .= "   </div>";
+               $displ_see_more = true;
            }
+           if($bol_refin_use_modal)
+           {
+               $displ_see_more = true;
+           }
+           $lin_obj  .= "   <div id='id_see_more_jornada' class='scGridRefinedSearchVejaMais'>";
+           $lin_obj  .= "       " . $check_uncheck;
+           if($bol_refin_use_modal)
+           {
+               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_caja_280521_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=jornada&tp_obj=tx&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           else
+           {
+               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('jornada');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           $lin_obj  .= "   </div>";
+           $lin_obj  .= "   <div id='id_see_less_jornada' class='scGridRefinedSearchVejaMais' style='display:none;'>";
+           $lin_obj  .= "   " . $check_uncheck;
+           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('jornada');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
+           $lin_obj  .= "   </div>";
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
-       if (count($result) > 1)
        {
-           $disp_chk = "none";
-           $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_jornada_chk\" style=\"display: " . $disp_chk . ";\">";
-           $lin_obj  .= $lin_mult;
-           $lin_obj  .= "   </div></td></tr>";
-       }
-       if (count($result) > 1)
-       {
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_jornada\" style='display:none'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('jornada');", "nm_mult_int_search('jornada');", "mult_int_search_jornada", "", "", "display: $disp_link", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_show_multi_btn = '';
+           if (count($result) < 2)
+           {
+               $disp_show_multi_btn = 'none';
+           }
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('jornada', false);", "nm_mult_int_search('jornada', false);", "mult_int_search_jornada", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','id_int_search_jornada','jornada', '');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','id_int_search_jornada','jornada', '');", "app_int_search_jornada", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_multi_btn = 'none';
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','id_int_search_jornada','jornada', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['jornada']) . "','jornada','id_int_search_jornada','jornada', '', 'N');", "app_int_search_jornada", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('jornada');", "nm_single_int_search('jornada');", "single_int_search_jornada", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
@@ -12317,26 +12438,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $lin_obj .= "    </div>";
        return $lin_obj;
    }
-   function interativ_search_detalle()
+   function interativ_search_detalle($bol_refin_use_modal)
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']["detalle"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']["detalle"])) ? "none" : "";
+       $displ_open= false;
        $lin_obj  = "    <div id=\"div_int_detalle\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('detalle')\">";
        $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "         <tr>";
        $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_detalle\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('detalle')\"/>   </span>";
-       $lin_obj .= "              <span id=\"id_retract_detalle\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('detalle')\"/>   </span>";
-       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_detalle_ck\" name=\"int_search_detalle_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('detalle');\">";
-       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('detalle')\">";
+       $lin_obj .= "              <span id=\"id_expand_detalle\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span id=\"id_retract_detalle\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
+       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
        $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle'];
        $lin_obj .= "              </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_detalle\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','detalle', '', 'detalle', '')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_clear_detalle\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','detalle', '', 'detalle', '', 'S')\"/>   </span>";
        $lin_obj .= "          </td>";
        $lin_obj .= "         </tr>";
        $lin_obj .= "        </table>";
@@ -12376,17 +12497,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            }
        }
        }
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'])) 
-   { 
-       if (empty($tmp_where)) 
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'])) 
        { 
-           $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']; 
+           if (empty($tmp_where)) 
+           { 
+               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo']; 
+           } 
+           else
+           { 
+               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'] . ")"; 
+           } 
        } 
-       else
-       { 
-           $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['where_resumo'] . ")"; 
-       } 
-   } 
        $nm_comando .= " " . $tmp_where;
        $nm_comando .= " GROUP BY detalle". $Cmps_where;
        $nm_comando .= " order by detalle ASC";
@@ -12434,14 +12555,27 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $lin_mult  = "";
        $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['detalle'])) ? "" : "none";
        $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_detalle_link\" style=\"display: " . $disp_link . ";\">";
+        $check_uncheck  = "
+            <span id='id_check_detalle' class='multipledetalle' style='display:" . (($displ_open)?'':'none') . ";'>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('detalle', true); this.checked=true;\" \>
+                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('detalle', false); this.checked=false;\" \>
+            </span>";
        $qtd_see_more  = (int)5;
        $qtd_result_see_more  = 0;
        $bol_open_see_more  = false;
+       if($bol_refin_use_modal)
+       {
+           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados']['detalle'])?false:true);
+       }
        foreach ($result as $dados => $qtd_result)
        {
            $formatado = $dados;
            $formatado_exib  = $formatado;
            $dados = (string)$dados;
+           if($bol_refin_use_modal && $bol_populate_modal_values)
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_dados']['detalle'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
+           }
            if($dados == '')
            {
                $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
@@ -12450,9 +12584,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
            if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
            {
-               $lin_obj  .= "   <div id='id_see_more_detalle' class='scGridRefinedSearchVejaMais'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('detalle');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-               $lin_obj  .= "   </div>";
                $lin_obj  .= "   <div id='id_see_more_list_detalle' style='display:none'>";
                $bol_open_see_more  = true;
            }
@@ -12466,62 +12597,79 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
            $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
            $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
            $lin_obj  .= "   <tr>";
+           $lin_obj  .= "   <td>";
+           $lin_obj  .= "   <span class='simpledetalle' style='display:" . (($displ_open)?'none':'') . ";'>";
            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['detalle']))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('uncheck', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','id_int_search_detalle','detalle', '" . NM_encode_input($dados . "##@@" . $formatado) . "');\"/>";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','id_int_search_detalle','detalle', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
            }
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'detalle', '');\" class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</a> ";
-           $lin_obj  .= "   </td>";
+           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'detalle', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
+           $lin_obj  .= $formatado_exib;
            if(!empty($veja_mais_link))
            {
-               $lin_obj  .= "   <td>";
-               $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'detalle', '');\" class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</a> ";
-               $lin_obj  .= "   </td>";
+               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
            }
+           $lin_obj  .= "        </a>";
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "    <span class='multipledetalle' style='display:"  . (($displ_open)?'':'none') .  ";'>";
+           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['detalle']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['interativ_search']['detalle']['val_sel'])) ? " checked" : "";
+           $checked = " checked";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_detalle_" . md5($dados) . "\" name=\"int_search_detalle[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_detalle_". md5($dados) ."\" for=\"id_int_search_detalle_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
+           }
+           $lin_obj  .= "    </span>";
+           $lin_obj  .= "   </td>";
            $lin_obj  .= "    </tr>";
            $lin_obj  .= "   </table>";
            $lin_obj  .= "   </div>";
-           $lin_mult .= "   <div><label class='scGridRefinedSearchCampo' style='display: block;'>";
-           $lin_mult .= "    <INPUT class='" . $this->css_scAppDivToolbarInput . "' type=\"checkbox\" id=\"id_int_search_detalle\" name=\"int_search_detalle[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" checked><span class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_mult .= "    <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_mult .= "   </label></div>";
            $qtd_result_see_more++;
        }
+           $displ_see_more = false;
            if($bol_open_see_more)
            {
                $lin_obj  .= "   </div>";
-               $lin_obj  .= "   <div id='id_see_less_detalle' class='scGridRefinedSearchVejaMais' style='display:none'>";
-               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('detalle');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-               $lin_obj  .= "   </div>";
+               $displ_see_more = true;
            }
+           if($bol_refin_use_modal)
+           {
+               $displ_see_more = true;
+           }
+           $lin_obj  .= "   <div id='id_see_more_detalle' class='scGridRefinedSearchVejaMais'>";
+           $lin_obj  .= "       " . $check_uncheck;
+           if($bol_refin_use_modal)
+           {
+               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_caja_280521_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=detalle&tp_obj=tx&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           else
+           {
+               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('detalle');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+           }
+           $lin_obj  .= "   </div>";
+           $lin_obj  .= "   <div id='id_see_less_detalle' class='scGridRefinedSearchVejaMais' style='display:none;'>";
+           $lin_obj  .= "   " . $check_uncheck;
+           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('detalle');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
+           $lin_obj  .= "   </div>";
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "    adjustMobile();";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
-       if (count($result) > 1)
        {
-           $disp_chk = "none";
-           $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_detalle_chk\" style=\"display: " . $disp_chk . ";\">";
-           $lin_obj  .= $lin_mult;
-           $lin_obj  .= "   </div></td></tr>";
-       }
-       if (count($result) > 1)
-       {
-           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_detalle\" style='display:none'>";
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('detalle');", "nm_mult_int_search('detalle');", "mult_int_search_detalle", "", "", "display: $disp_link", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_show_multi_btn = '';
+           if (count($result) < 2)
+           {
+               $disp_show_multi_btn = 'none';
+           }
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('detalle', false);", "nm_mult_int_search('detalle', false);", "mult_int_search_detalle", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','id_int_search_detalle','detalle', '');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','id_int_search_detalle','detalle', '');", "app_int_search_detalle", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $disp_multi_btn = 'none';
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','id_int_search_detalle','detalle', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['int_search_label']['detalle']) . "','detalle','id_int_search_detalle','detalle', '', 'N');", "app_int_search_detalle", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('detalle');", "nm_single_int_search('detalle');", "single_int_search_detalle", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
@@ -12537,7 +12685,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
    {
        global $nm_saida;
        $nm_saida->saida("   <script type=\"text/javascript\">\r\n");
-       $nm_saida->saida("     Tab_obj_int_mult = new Array();\r\n");
        $nm_saida->saida("     function toggleSeeMore(obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("         if($('#id_see_less_'+obj_id).css('display') == 'none')\r\n");
@@ -12555,12 +12702,49 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $nm_saida->saida("     function nm_proc_int_search_all()\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("         int_search_load_html = 'N';\r\n");
-       $nm_saida->saida("     $('#app_int_search_fecha').click();\r\n");
-       $nm_saida->saida("     $('#app_int_search_jornada').click();\r\n");
-       $nm_saida->saida("         int_search_load_html = 'S';\r\n");
-       $nm_saida->saida("     $('#app_int_search_detalle').click();\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_fecha\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_fecha').click();\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_proc_int_search(tp_link, tp_obj, label, nam_db, val_obj, obj_id, val_atual)\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_fecha[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_fecha').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','fecha', '', 'fecha', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_jornada\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_jornada').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_jornada[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_jornada').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','jornada', '', 'jornada', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("         int_search_load_html = 'S';\r\n");
+       $nm_saida->saida("     if($( \"#id_slider_detalle\").length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_range_detalle').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else if($( \"input[name='int_search_detalle[]']:checked\" ).length > 0)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#app_int_search_detalle').click();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     else\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear','','','detalle', '', 'detalle', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_proc_int_clear_all()\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         nm_proc_int_search('clear_all','','','', '', '', '', 'S');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_proc_int_search(tp_link, tp_obj, label, nam_db, val_obj, obj_id, val_atual, refresh)\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("         while (label.lastIndexOf(\"__sasp__\") != -1)\r\n");
        $nm_saida->saida("         {\r\n");
@@ -12579,10 +12763,26 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $nm_saida->saida("           nam_db = nam_db.replace(\"__dasp__\" , '\"');\r\n");
        $nm_saida->saida("         }\r\n");
        $nm_saida->saida("         var out_int = nam_db + '__DL__' + label + '__DL__' + tp_obj + '__DL__';\r\n");
+       $nm_saida->saida("         if (tp_link == 'clear_all')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             out_int += 'clear_interativ_all';\r\n");
+       $nm_saida->saida("             Tab_obj_int_mult = {};\r\n");
+       $nm_saida->saida("         }\r\n");
        $nm_saida->saida("         if (tp_link == 'clear')\r\n");
        $nm_saida->saida("         {\r\n");
        $nm_saida->saida("             out_int += 'clear_interativ';\r\n");
-       $nm_saida->saida("             Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("             Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         if (tp_link == 'clear_opc')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             result = int_search_get_checkbox(obj_id, val_atual);\r\n");
+       $nm_saida->saida("             if (result != '') {\r\n");
+       $nm_saida->saida("                 out_int += result;\r\n");
+       $nm_saida->saida("             }\r\n");
+       $nm_saida->saida("             else {\r\n");
+       $nm_saida->saida("                 out_int += 'clear_interativ';\r\n");
+       $nm_saida->saida("                 Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("             }\r\n");
        $nm_saida->saida("         }\r\n");
        $nm_saida->saida("         if (tp_link == 'link')\r\n");
        $nm_saida->saida("         {\r\n");
@@ -12600,10 +12800,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $nm_saida->saida("             }\r\n");
        $nm_saida->saida("             else\r\n");
        $nm_saida->saida("             {\r\n");
-       $nm_saida->saida("                 Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("                 Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
        $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("             result  = int_search_get_checkbox(val_obj);\r\n");
-       $nm_saida->saida("             if (result == '') {\r\n");
+       $nm_saida->saida("             result  = int_search_get_checkbox(obj_id, '');\r\n");
+       $nm_saida->saida("             if(tp_link == 'chbx' && result == '')\r\n");
+       $nm_saida->saida("             {\r\n");
+       $nm_saida->saida("                 int_search_unset_checkbox(nam_db, val_atual, obj_id);\r\n");
        $nm_saida->saida("                 return;\r\n");
        $nm_saida->saida("             }\r\n");
        $nm_saida->saida("             out_int += result;\r\n");
@@ -12612,8 +12814,29 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $nm_saida->saida("         out_int  = out_int.replace(/[&]/g, \"__NM_AMP__\");\r\n");
        $nm_saida->saida("         out_int  = out_int.replace(/[%]/g, \"__NM_PRC__\");\r\n");
        $nm_saida->saida("         out_int  += '__DL__' + int_search_load_html;\r\n");
+       $nm_saida->saida("         out_int  += '__DL__' + refresh;\r\n");
        $nm_saida->saida("         ajax_navigate('interativ_search', out_int);\r\n");
        $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     var submit_checkbox = 'N';\r\n");
+       $nm_saida->saida("     function nm_proc_check_parent_value(bol_checked, str_cmp, value_md5)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("        $('#id_int_search_'+ str_cmp +'_' + value_md5).prop('checked', bol_checked);\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_proc_int_search_toggle()\r\n");
+       $nm_saida->saida("    {\r\n");
+       $nm_saida->saida("        if ($('#id_div_interativ_search').hasClass('is-closed')) {\r\n");
+       $nm_saida->saida("            $('#id_div_interativ_search_content').show();\r\n");
+       $nm_saida->saida("            $('#id_div_interativ_search').css('position', 'relative');\r\n");
+       $nm_saida->saida("            $('#app_int_search_open').hide();\r\n");
+       $nm_saida->saida("            $('#app_int_search_close').show();\r\n");
+       $nm_saida->saida("        } else {\r\n");
+       $nm_saida->saida("            $('#id_div_interativ_search_content').hide();\r\n");
+       $nm_saida->saida("            $('#id_div_interativ_search').css('position', 'absolute');\r\n");
+       $nm_saida->saida("            $('#app_int_search_open').show();\r\n");
+       $nm_saida->saida("            $('#app_int_search_close').hide();\r\n");
+       $nm_saida->saida("        }\r\n");
+       $nm_saida->saida("        $('#id_div_interativ_search').toggleClass('is-closed');\r\n");
+       $nm_saida->saida("    }\r\n");
        $nm_saida->saida("     function int_search_unset_checkbox(nam_db, val_atual, obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("         var obj_check = eval(\"document.getElementsByName('int_search_\" + obj_id + \"[]')\");\r\n");
@@ -12632,34 +12855,20 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $nm_saida->saida("         //if doesnt have checked anymore, clear\r\n");
        $nm_saida->saida("         if(!has_checked)\r\n");
        $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             nm_proc_int_search('clear','','', nam_db, '', obj_id, '')\r\n");
+       $nm_saida->saida("             nm_proc_int_search('clear','','', nam_db, '', obj_id, '', 'S')\r\n");
        $nm_saida->saida("             return;\r\n");
        $nm_saida->saida("         }\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function int_search_get_checkbox(obj_id)\r\n");
+       $nm_saida->saida("     function int_search_get_checkbox(obj_id, val_out)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("        var Nobj = document.getElementById(obj_id).name;\r\n");
-       $nm_saida->saida("        var obj  = document.getElementsByName(Nobj);\r\n");
        $nm_saida->saida("        var val  = \"\";\r\n");
-       $nm_saida->saida("        if (!obj.length)\r\n");
-       $nm_saida->saida("        {\r\n");
-       $nm_saida->saida("            if (obj.checked)\r\n");
+       $nm_saida->saida("        $( \"input[name='int_search_\"+ obj_id +\"[]']:checked\" ).each(function(){\r\n");
+       $nm_saida->saida("            if($(this).val() != val_out)\r\n");
        $nm_saida->saida("            {\r\n");
-       $nm_saida->saida("                val = obj.value;\r\n");
+       $nm_saida->saida("                val += (val != \"\") ? \"_VLS_\" : \"\";\r\n");
+       $nm_saida->saida("                val += $(this).val();\r\n");
        $nm_saida->saida("            }\r\n");
-       $nm_saida->saida("            return val;\r\n");
-       $nm_saida->saida("        }\r\n");
-       $nm_saida->saida("        else\r\n");
-       $nm_saida->saida("        {\r\n");
-       $nm_saida->saida("            for (iCheck = 0; iCheck < obj.length; iCheck++)\r\n");
-       $nm_saida->saida("            {\r\n");
-       $nm_saida->saida("                if (obj[iCheck].checked)\r\n");
-       $nm_saida->saida("                {\r\n");
-       $nm_saida->saida("                    val += (val != \"\") ? \"_VLS_\" : \"\";\r\n");
-       $nm_saida->saida("                    val += obj[iCheck].value;\r\n");
-       $nm_saida->saida("                }\r\n");
-       $nm_saida->saida("            }\r\n");
-       $nm_saida->saida("        }\r\n");
+       $nm_saida->saida("        });\r\n");
        $nm_saida->saida("        return val;\r\n");
        $nm_saida->saida("     }\r\n");
        $nm_saida->saida("     function nm_toggle_int_search(obj_id)\r\n");
@@ -12675,70 +12884,60 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
        $nm_saida->saida("     }\r\n");
        $nm_saida->saida("     function nm_expand_int_search(obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         if (Tab_obj_int_mult[\"'\" + obj_id + \"'\"] && Tab_obj_int_mult[\"'\" + obj_id + \"'\"] == 'S') {\r\n");
-       $nm_saida->saida("             $('#mult_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("             $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
-       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("             $('#id_tab_' + obj_id + '_chk').css('display','');\r\n");
-       $nm_saida->saida("             $('#id_int_search_' + obj_id + '_ck').css('display','');\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         else\r\n");
+       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
        $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             $('#mult_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("             $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
-       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("             $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
-       $nm_saida->saida("             $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
+       $nm_saida->saida("             if (Tab_obj_int_mult[ obj_id ] && Tab_obj_int_mult[ obj_id ] == 'S') {\r\n");
+       $nm_saida->saida("                 $('#app_int_search_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("             }\r\n");
+       $nm_saida->saida("             else\r\n");
+       $nm_saida->saida("             {\r\n");
+       $nm_saida->saida("                 $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("             }\r\n");
        $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
        $nm_saida->saida("         $('#id_toolbar_' + obj_id).show();\r\n");
        $nm_saida->saida("         $('#id_retract_' + obj_id).css('display','');\r\n");
        $nm_saida->saida("         $('#id_expand_' + obj_id).css('display','none');\r\n");
        $nm_saida->saida("     }\r\n");
        $nm_saida->saida("     function nm_retracts_int_search(obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         }\r\n");
        $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
        $nm_saida->saida("         $('#id_toolbar_' + obj_id).hide();\r\n");
        $nm_saida->saida("         $('#id_retract_' + obj_id).css('display','none');\r\n");
        $nm_saida->saida("         $('#id_expand_' + obj_id).css('display','');\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_mult_int_search(obj_id)\r\n");
+       $nm_saida->saida("     function nm_mult_int_search(obj_id, bol_first)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#single_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','');\r\n");
-       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','');\r\n");
-       $nm_saida->saida("         Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'S';\r\n");
+       $nm_saida->saida("         $('.simple' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('.multiple' + obj_id).show();\r\n");
+       $nm_saida->saida("         $('#mult_int_search_' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('#single_int_search_' + obj_id).show();\r\n");
+       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("            $('#app_int_search_' + obj_id).show();\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         Tab_obj_int_mult[ obj_id ] = 'S';\r\n");
        $nm_saida->saida("     }\r\n");
        $nm_saida->saida("     function nm_single_int_search(obj_id)\r\n");
        $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("         $('#single_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
-       $nm_saida->saida("         Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("         $('.simple' + obj_id).show();\r\n");
+       $nm_saida->saida("         $('.multiple' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('#mult_int_search_' + obj_id).show();\r\n");
+       $nm_saida->saida("         $('#single_int_search_' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('#app_int_search_' + obj_id).hide();\r\n");
+       $nm_saida->saida("         Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_change_mult_int_search(obj_id)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         if ($('#id_int_search_' + obj_id + '_ck').prop(\"checked\")) {\r\n");
-       $nm_saida->saida("             var ckeck = true;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         else {\r\n");
-       $nm_saida->saida("             var ckeck = false;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         var obj_check = eval(\"document.getElementsByName('int_search_\" + obj_id + \"[]')\");\r\n");
-       $nm_saida->saida("         for (i = 0; i < obj_check.length; i++)\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             obj_check[i].checked = ckeck;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("    function refinedSearchCheckUncheckAll(field_name, bol_value)\r\n");
+       $nm_saida->saida("    {\r\n");
+       $nm_saida->saida("        $(\"input[name='int_search_\"+ field_name +\"[]']\").prop('checked', bol_value);\r\n");
+       $nm_saida->saida("        if (submit_checkbox == \"S\") {\r\n");
+       $nm_saida->saida("            $('#app_int_search_' + field_name).click();\r\n");
+       $nm_saida->saida("        }\r\n");
+       $nm_saida->saida("    }\r\n");
        $nm_saida->saida("     $( document ).ready(function() {\r\n");
        $nm_saida->saida("        adjustMobile();\r\n");
        $nm_saida->saida("    });\r\n");
@@ -13109,6 +13308,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_280521']['proc_pdf']
    $nm_saida->saida("      NM_obj_ant = obj;\r\n");
    $nm_saida->saida("      ind_time = setTimeout(\"obj.style.display='none'\", 300);\r\n");
    $nm_saida->saida("      return ind_time;\r\n");
+   $nm_saida->saida("   }\r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+       $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+       $nm_saida->saida("     $('#div_" . $cada_id . "').addClass('disabled');\r\n");
+         }
+      }
+   }
    $nm_saida->saida("   }\r\n");
    $str_pbfile = $this->Ini->root . $this->Ini->path_imag_temp . '/sc_pb_' . session_id() . '.tmp';
    if (@is_file($str_pbfile) && $flag_apaga_pdf_log)

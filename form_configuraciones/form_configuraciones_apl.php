@@ -642,6 +642,12 @@ class form_configuraciones_apl
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_configuraciones']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_configuraciones']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_configuraciones']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_configuraciones']['embutida_parms'];
@@ -3466,10 +3472,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -3482,103 +3491,103 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->NM_ajax_info['errList']['geral_form_configuraciones'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'lineasporfactura' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'lineasporfactura' == $filtro)) || (is_array($filtro) && in_array('lineasporfactura', $filtro)))
         $this->ValidateField_lineasporfactura($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'consolidararticulos' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'consolidararticulos' == $filtro)) || (is_array($filtro) && in_array('consolidararticulos', $filtro)))
         $this->ValidateField_consolidararticulos($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'serial' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'serial' == $filtro)) || (is_array($filtro) && in_array('serial', $filtro)))
         $this->ValidateField_serial($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'fecha' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha' == $filtro)) || (is_array($filtro) && in_array('fecha', $filtro)))
         $this->ValidateField_fecha($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'activo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'activo' == $filtro)) || (is_array($filtro) && in_array('activo', $filtro)))
         $this->ValidateField_activo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'espaciado' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'espaciado' == $filtro)) || (is_array($filtro) && in_array('espaciado', $filtro)))
         $this->ValidateField_espaciado($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'caja_movil' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'caja_movil' == $filtro)) || (is_array($filtro) && in_array('caja_movil', $filtro)))
         $this->ValidateField_caja_movil($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'pago_automatico' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'pago_automatico' == $filtro)) || (is_array($filtro) && in_array('pago_automatico', $filtro)))
         $this->ValidateField_pago_automatico($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'dia_limite_pago' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'dia_limite_pago' == $filtro)) || (is_array($filtro) && in_array('dia_limite_pago', $filtro)))
         $this->ValidateField_dia_limite_pago($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'refresh_grid_doc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'refresh_grid_doc' == $filtro)) || (is_array($filtro) && in_array('refresh_grid_doc', $filtro)))
         $this->ValidateField_refresh_grid_doc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'desactivar_control_sesion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'desactivar_control_sesion' == $filtro)) || (is_array($filtro) && in_array('desactivar_control_sesion', $filtro)))
         $this->ValidateField_desactivar_control_sesion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre_pc' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_pc' == $filtro)) || (is_array($filtro) && in_array('nombre_pc', $filtro)))
         $this->ValidateField_nombre_pc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'nombre_impre' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_impre' == $filtro)) || (is_array($filtro) && in_array('nombre_impre', $filtro)))
         $this->ValidateField_nombre_impre($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'essociedad' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'essociedad' == $filtro)) || (is_array($filtro) && in_array('essociedad', $filtro)))
         $this->ValidateField_essociedad($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'grancontr' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'grancontr' == $filtro)) || (is_array($filtro) && in_array('grancontr', $filtro)))
         $this->ValidateField_grancontr($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idconfiguraciones' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idconfiguraciones' == $filtro)) || (is_array($filtro) && in_array('idconfiguraciones', $filtro)))
         $this->ValidateField_idconfiguraciones($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'control_diasmora' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'control_diasmora' == $filtro)) || (is_array($filtro) && in_array('control_diasmora', $filtro)))
         $this->ValidateField_control_diasmora($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'control_costo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'control_costo' == $filtro)) || (is_array($filtro) && in_array('control_costo', $filtro)))
         $this->ValidateField_control_costo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'modificainvpedido' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'modificainvpedido' == $filtro)) || (is_array($filtro) && in_array('modificainvpedido', $filtro)))
         $this->ValidateField_modificainvpedido($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipodoc_pordefecto_pos' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'tipodoc_pordefecto_pos' == $filtro)) || (is_array($filtro) && in_array('tipodoc_pordefecto_pos', $filtro)))
         $this->ValidateField_tipodoc_pordefecto_pos($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_xml_fe' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_xml_fe' == $filtro)) || (is_array($filtro) && in_array('ver_xml_fe', $filtro)))
         $this->ValidateField_ver_xml_fe($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'noborrar_tmp_enpos' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'noborrar_tmp_enpos' == $filtro)) || (is_array($filtro) && in_array('noborrar_tmp_enpos', $filtro)))
         $this->ValidateField_noborrar_tmp_enpos($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'validar_correo_enlinea' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'validar_correo_enlinea' == $filtro)) || (is_array($filtro) && in_array('validar_correo_enlinea', $filtro)))
         $this->ValidateField_validar_correo_enlinea($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'apertura_caja' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'apertura_caja' == $filtro)) || (is_array($filtro) && in_array('apertura_caja', $filtro)))
         $this->ValidateField_apertura_caja($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'activar_console_log' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'activar_console_log' == $filtro)) || (is_array($filtro) && in_array('activar_console_log', $filtro)))
         $this->ValidateField_activar_console_log($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'codproducto_en_facventa' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'codproducto_en_facventa' == $filtro)) || (is_array($filtro) && in_array('codproducto_en_facventa', $filtro)))
         $this->ValidateField_codproducto_en_facventa($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'valor_propina_sugerida' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'valor_propina_sugerida' == $filtro)) || (is_array($filtro) && in_array('valor_propina_sugerida', $filtro)))
         $this->ValidateField_valor_propina_sugerida($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'columna_imprimir_ticket' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'columna_imprimir_ticket' == $filtro)) || (is_array($filtro) && in_array('columna_imprimir_ticket', $filtro)))
         $this->ValidateField_columna_imprimir_ticket($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'columna_imprimir_a4' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'columna_imprimir_a4' == $filtro)) || (is_array($filtro) && in_array('columna_imprimir_a4', $filtro)))
         $this->ValidateField_columna_imprimir_a4($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'columna_whatsapp' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'columna_whatsapp' == $filtro)) || (is_array($filtro) && in_array('columna_whatsapp', $filtro)))
         $this->ValidateField_columna_whatsapp($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'columna_npedido' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'columna_npedido' == $filtro)) || (is_array($filtro) && in_array('columna_npedido', $filtro)))
         $this->ValidateField_columna_npedido($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'columna_reg_pdf_propio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'columna_reg_pdf_propio' == $filtro)) || (is_array($filtro) && in_array('columna_reg_pdf_propio', $filtro)))
         $this->ValidateField_columna_reg_pdf_propio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_busqueda_refinada' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_busqueda_refinada' == $filtro)) || (is_array($filtro) && in_array('ver_busqueda_refinada', $filtro)))
         $this->ValidateField_ver_busqueda_refinada($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cal_valores_decimales' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cal_valores_decimales' == $filtro)) || (is_array($filtro) && in_array('cal_valores_decimales', $filtro)))
         $this->ValidateField_cal_valores_decimales($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cal_cantidades_decimales' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cal_cantidades_decimales' == $filtro)) || (is_array($filtro) && in_array('cal_cantidades_decimales', $filtro)))
         $this->ValidateField_cal_cantidades_decimales($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'validar_codbarras' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'validar_codbarras' == $filtro)) || (is_array($filtro) && in_array('validar_codbarras', $filtro)))
         $this->ValidateField_validar_codbarras($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_grupo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_grupo' == $filtro)) || (is_array($filtro) && in_array('ver_grupo', $filtro)))
         $this->ValidateField_ver_grupo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_codigo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_codigo' == $filtro)) || (is_array($filtro) && in_array('ver_codigo', $filtro)))
         $this->ValidateField_ver_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_imagen' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_imagen' == $filtro)) || (is_array($filtro) && in_array('ver_imagen', $filtro)))
         $this->ValidateField_ver_imagen($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_existencia' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_existencia' == $filtro)) || (is_array($filtro) && in_array('ver_existencia', $filtro)))
         $this->ValidateField_ver_existencia($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_unidad' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_unidad' == $filtro)) || (is_array($filtro) && in_array('ver_unidad', $filtro)))
         $this->ValidateField_ver_unidad($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_precio' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_precio' == $filtro)) || (is_array($filtro) && in_array('ver_precio', $filtro)))
         $this->ValidateField_ver_precio($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_impuesto' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_impuesto' == $filtro)) || (is_array($filtro) && in_array('ver_impuesto', $filtro)))
         $this->ValidateField_ver_impuesto($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_stock' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_stock' == $filtro)) || (is_array($filtro) && in_array('ver_stock', $filtro)))
         $this->ValidateField_ver_stock($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_ubicacion' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_ubicacion' == $filtro)) || (is_array($filtro) && in_array('ver_ubicacion', $filtro)))
         $this->ValidateField_ver_ubicacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_costo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_costo' == $filtro)) || (is_array($filtro) && in_array('ver_costo', $filtro)))
         $this->ValidateField_ver_costo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_proveedor' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_proveedor' == $filtro)) || (is_array($filtro) && in_array('ver_proveedor', $filtro)))
         $this->ValidateField_ver_proveedor($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_combo' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_combo' == $filtro)) || (is_array($filtro) && in_array('ver_combo', $filtro)))
         $this->ValidateField_ver_combo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'ver_agregar_nota' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'ver_agregar_nota' == $filtro)) || (is_array($filtro) && in_array('ver_agregar_nota', $filtro)))
         $this->ValidateField_ver_agregar_nota($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
@@ -12425,5 +12434,21 @@ if (parent && parent.scAjaxDetailValue)
             }
         }
     } // sc_ajax_message
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-1");
+                break;
+            case "activar":
+                return array("sc_activar_top");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-2");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

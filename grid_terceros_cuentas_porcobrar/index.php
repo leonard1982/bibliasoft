@@ -228,8 +228,8 @@ class grid_terceros_cuentas_porcobrar_ini
       $this->nm_dt_criacao   = "20190904"; 
       $this->nm_hr_criacao   = "131754"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -825,6 +825,8 @@ class grid_terceros_cuentas_porcobrar_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
@@ -950,7 +952,7 @@ class grid_terceros_cuentas_porcobrar_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_cuentas_porcobrar']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_cuentas_porcobrar']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQFaDSrwHuFUHuvmVcrsDuX7DoBiDcBqZSFaHANOV5X7HgBOZSJ3H5FYHIrqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGD1rwD5JeDENOHArCV5XCHMJwDcXGDQFGHABYV5FaDMvsV9BUDWFaHMXGHQXOZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwD9BiZ1F7HArYD5XGDMBYZSXeDWFqDoJeD9XsZSFGD1BeV5raHgvsDkFCDWFYDoraD9BsZSFaD1rKD5NUDErKZSJqV5FaDoBOD9XsZSFGHANOV5FGHuNODkBODWJeVoX7DcBqZ1FaHAvCV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiDWr/DoBqDcJeH9X7Z1BYHQJwDMvODkBsV5BmDoXGHQXGZ1BOD1rKHuJwHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BqHgBYHErsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVENUHQXOZkFGHIBeHuJsHgNOZSJqHEFqHMJeD9XsDQBqD1veVWJwDMrYVIBOH5XCDoFGHQNmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDQFaHIvsVWBOHuNOVcBOH5B3VoX7HQBsZSBqHAN7HuBqHgvCHEJGDWFqDoraDcXGDQBqHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJsHAvOVWXGDMzGVcrsDWJeDoJeD9BsZ1BOHAN7D5JeHgBOHEFiHEFaDoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSFGD1veD5JwHuzGVIBOH5FqDoraD9XOZSB/Z1BeD5JeDMNKZSXeH5FYZuB/DcBwDQX7Z1N7VWJsHgvsVcFCH5FqVoJwD9XOZ1F7Z1BeD5XGDMBYZSXeV5FaDorqD9NwH9X7HArYV5BODMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcJeDuBOZ1BYHuFGHgrKZSNiHEFYVENUHQNwZ1F7D1rwV5BODErKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIFUD9XGZ1FaHAN7HQBiHgNKHEBUDWFqHIFUD9FYDuFaD1BeHuNUDMBYVcXKDWXKVEFGHQBiZ1BOHIBeHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4595,7 +4597,7 @@ class grid_terceros_cuentas_porcobrar_apl
           }
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['cfg_graf']['graf_tipo']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['graf_disp']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['graf_disp']        = array('Bar', 'Pie', 'Line', 'Area');
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['cfg_graf']['graf_tipo']        = 'Bar';
@@ -4677,6 +4679,8 @@ class grid_terceros_cuentas_porcobrar_apl
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
       $this->Ini->Tree_img_col    = trim($str_tree_col);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
+      $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -5196,11 +5200,16 @@ class grid_terceros_cuentas_porcobrar_apl
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['prim_cons'] = true;  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['cond_pesq']         = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq_grid']   = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq_lookup'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['campos_busca']      = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['grid_pesq']         = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['Grid_search']       = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar']['tot_geral']);
@@ -5701,7 +5710,7 @@ class grid_terceros_cuentas_porcobrar_apl
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/stretch");
                     }
-                    elseif (FALSE !== strpos(php_uname(), '.el8.')) 
+                    elseif (FALSE !== strpos(strtolower(php_uname()), '.el8.')) 
                     {
                         chdir($this->Ini->path_third . "/wkhtmltopdf/centos8");
                     }
@@ -6779,22 +6788,23 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
 <HEAD>
  <TITLE>Documentos Cartera :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {
 ?>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+   <link rel="stylesheet" type="text/css" href="../_lib/lib/css/nm_export_mobile.css" /> 
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
- <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
- <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
- <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
- <META http-equiv="Pragma" content="no-cache"/>
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -7580,14 +7590,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_cuentas_porcobrar'][
            $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['dado_psq_ret']  = $todo[2];
            $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['js_apos_busca'] = $nm_evt_ret_busca;
            $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['opc_psq'] = true;   
-           if (isset($nmgp_iframe_ret)) 
-           {
+           if (isset($nmgp_iframe_ret)) {
                $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['iframe_ret_cap'] = $nmgp_iframe_ret;
+           }
+           $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['psq_edit'] = 'N';   
+           if (isset($nmgp_perm_edit)) {
+               $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['psq_edit'] = $nmgp_perm_edit;
            }
        } 
        elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['opc_psq']  = false;   
+           $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['psq_edit'] = 'N';   
        } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_terceros_cuentas_porcobrar']['embutida_form'])
        {

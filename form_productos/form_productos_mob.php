@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -303,8 +304,8 @@ class form_productos_mob_ini
       $this->nm_dt_criacao   = "20171209"; 
       $this->nm_hr_criacao   = "171014"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210913"; 
-      $this->nm_hr_ult_alt   = "091751"; 
+      $this->nm_dt_ult_alt   = "20211112"; 
+      $this->nm_hr_ult_alt   = "151925"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -1164,7 +1165,7 @@ class form_productos_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwDQJsD1vOV5JeDMvOVcBODWFaHIraD9BiZ1B/Z1vmD5BODMveHArCHEFaHMB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoX7D9JKDQB/HANOD5JsHgvsVIFCDWF/HIFUHQXGZ1B/D1NaD5JeHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DorqD9BsH9FaHAN7V5X7DMNKZSJGDWF/DoJeD9XsZSX7D1veVWJwHgvsDkFCH5XCVoraD9XOH9BOZ1BeV5X7DEBOZSXeDWrGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQBqHgvsVkJ3DuFaVoBiHQNwH9BiHIBeD5JsDMvOV9FeDWFYVErqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWB3VEFGHQNmZkBiD1rwHQJwDEBODkFeH5FYVoFGHQJKDQJsZ1N7V5BODMBYV9BUDuX7HMBqHQBsH9FaHAvsD5BODMBYVkJqDWXCHMBqHQBiDQX7HIrKHQF7HgrwVcFKV5F/HMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSX7HIrKHuB/HgrKVIFCDur/VEF7D9JmH9BODSNOV5JsHgvsZSXeHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1F7D1rKHuFGHgBeZSXeDWFGDoBqD9NmZSBiHABYVWXGHuvmVIFCHEFYVEF7HQBsZkBiHAvCD5BOHgrKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWF/VoraD9XOZSB/Z1rYD5BiDErKHEBUDWr/DoB/DcBwDQJwHABYV5FGHuBYVcFKV5X7VoFGDcNwH9B/Z1rYD5FaDMBYDkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9JKZSX7DSN7V5FGHgvsVcB/DWJeHMBOD9XOZ1X7HANOV5JwHgrKDkXKDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoBqHQBiDuBqHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1X7HArKV5XGHgNOHENiDWXCVoXGHQNmDQJsZ1NaVWXGDMBYV9FeV5F/DoNUD9BsZSBqD1rwD5NUHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['form_productos_mob']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['form_productos_mob']['initialize'])  
       { 
@@ -2221,6 +2222,11 @@ ob_start();
             $codigobar3 = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_productos_mob_validate_para_registro_fe' == $_POST['rs'])
+        {
+            $para_registro_fe = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_productos_mob_lkpedt_refresh_idgrup' == $_POST['rs'])
         {
             $idgrup = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -2464,18 +2470,19 @@ ob_start();
             $id_linea = NM_utf8_urldecode($_POST['rsargs'][51]);
             $codigobar2 = NM_utf8_urldecode($_POST['rsargs'][52]);
             $codigobar3 = NM_utf8_urldecode($_POST['rsargs'][53]);
-            $imagen_ul_name = NM_utf8_urldecode($_POST['rsargs'][54]);
-            $imagen_ul_type = NM_utf8_urldecode($_POST['rsargs'][55]);
-            $imagen_salva = NM_utf8_urldecode($_POST['rsargs'][56]);
-            $imagen_limpa = NM_utf8_urldecode($_POST['rsargs'][57]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][58]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][59]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][60]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][61]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][62]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][63]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][64]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][65]);
+            $para_registro_fe = NM_utf8_urldecode($_POST['rsargs'][54]);
+            $imagen_ul_name = NM_utf8_urldecode($_POST['rsargs'][55]);
+            $imagen_ul_type = NM_utf8_urldecode($_POST['rsargs'][56]);
+            $imagen_salva = NM_utf8_urldecode($_POST['rsargs'][57]);
+            $imagen_limpa = NM_utf8_urldecode($_POST['rsargs'][58]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][59]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][60]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][61]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][62]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][63]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][64]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][65]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][66]);
         }
         if ('ajax_form_productos_mob_navigate_form' == $_POST['rs'])
         {
@@ -3008,6 +3015,7 @@ ob_start();
     $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['select_html']['cod_cuenta'] = "class=\"sc-js-input scFormObjectOdd css_cod_cuenta_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_cod_cuenta\" name=\"cod_cuenta\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
     $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['select_html']['id_marca'] = "class=\"sc-js-input scFormObjectOdd css_id_marca_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_marca\" name=\"id_marca\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
     $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['select_html']['id_linea'] = "class=\"sc-js-input scFormObjectOdd css_id_linea_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_linea\" name=\"id_linea\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['select_html']['para_registro_fe'] = "class=\"sc-js-input scFormObjectOdd css_para_registro_fe_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_para_registro_fe\" name=\"para_registro_fe\" size=\"1\" alt=\"{type: \'select\', enterTab: true}\"";
 
     if (!defined('SC_SAJAX_LOADED'))
     {
@@ -3075,6 +3083,7 @@ ob_start();
     sajax_export("ajax_form_productos_mob_validate_id_linea");
     sajax_export("ajax_form_productos_mob_validate_codigobar2");
     sajax_export("ajax_form_productos_mob_validate_codigobar3");
+    sajax_export("ajax_form_productos_mob_validate_para_registro_fe");
     sajax_export("ajax_form_productos_mob_lkpedt_refresh_idgrup");
     sajax_export("ajax_form_productos_mob_lkpedt_refresh_idpro1");
     sajax_export("ajax_form_productos_mob_lkpedt_refresh_id_marca");
@@ -3104,6 +3113,11 @@ ob_start();
     sajax_export("ajax_form_productos_mob_submit_form");
     sajax_export("ajax_form_productos_mob_navigate_form");
     sajax_handle_client_request();
+
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
 
     $inicial_form_productos_mob->contr_form_productos_mob->controle();
 //
@@ -4153,6 +4167,25 @@ ob_start();
         exit;
     } // ajax_validate_codigobar3
 
+    function ajax_form_productos_mob_validate_para_registro_fe($para_registro_fe, $script_case_init)
+    {
+        global $inicial_form_productos_mob;
+        //register_shutdown_function("form_productos_mob_pack_ajax_response");
+        $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_flag          = true;
+        $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_opcao         = 'validate_para_registro_fe';
+        $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['param'] = array(
+                  'para_registro_fe' => NM_utf8_urldecode($para_registro_fe),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_productos_mob->contr_form_productos_mob->controle();
+        exit;
+    } // ajax_validate_para_registro_fe
+
     function ajax_form_productos_mob_lkpedt_refresh_idgrup($idgrup, $nmgp_refresh_fields, $script_case_init)
     {
         global $inicial_form_productos_mob;
@@ -4709,7 +4742,7 @@ ob_start();
         exit;
     } // ajax_autocomp_unidad_ma
 
-    function ajax_form_productos_mob_submit_form($codigoprod, $codigobar, $nompro, $idgrup, $idpro1, $tipo_producto, $idpro2, $otro, $otro2, $precio_editable, $maneja_tcs_lfs, $stockmen, $unidmaymen, $unimay, $unimen, $unidad_ma, $unidad_, $multiple_escala, $en_base_a, $costomen, $costo_prom, $recmayamen, $idiva, $existencia, $u_menor, $ubicacion, $activo, $colores, $confcolor, $tallas, $conftalla, $sabores, $sabor, $fecha_vencimiento, $lote, $serial_codbarras, $relleno, $control_costo, $por_preciominimo, $sugerido_mayor, $sugerido_menor, $preciofull, $precio2, $preciomay, $preciomen, $preciomen2, $preciomen3, $imagen, $cod_cuenta, $idprod, $id_marca, $id_linea, $codigobar2, $codigobar3, $imagen_ul_name, $imagen_ul_type, $imagen_salva, $imagen_limpa, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_productos_mob_submit_form($codigoprod, $codigobar, $nompro, $idgrup, $idpro1, $tipo_producto, $idpro2, $otro, $otro2, $precio_editable, $maneja_tcs_lfs, $stockmen, $unidmaymen, $unimay, $unimen, $unidad_ma, $unidad_, $multiple_escala, $en_base_a, $costomen, $costo_prom, $recmayamen, $idiva, $existencia, $u_menor, $ubicacion, $activo, $colores, $confcolor, $tallas, $conftalla, $sabores, $sabor, $fecha_vencimiento, $lote, $serial_codbarras, $relleno, $control_costo, $por_preciominimo, $sugerido_mayor, $sugerido_menor, $preciofull, $precio2, $preciomay, $preciomen, $preciomen2, $preciomen3, $imagen, $cod_cuenta, $idprod, $id_marca, $id_linea, $codigobar2, $codigobar3, $para_registro_fe, $imagen_ul_name, $imagen_ul_type, $imagen_salva, $imagen_limpa, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_productos_mob;
         //register_shutdown_function("form_productos_mob_pack_ajax_response");
@@ -4770,6 +4803,7 @@ ob_start();
                   'id_linea' => NM_utf8_urldecode($id_linea),
                   'codigobar2' => NM_utf8_urldecode($codigobar2),
                   'codigobar3' => NM_utf8_urldecode($codigobar3),
+                  'para_registro_fe' => NM_utf8_urldecode($para_registro_fe),
                   'imagen_ul_name' => NM_utf8_urldecode($imagen_ul_name),
                   'imagen_ul_type' => NM_utf8_urldecode($imagen_ul_type),
                   'imagen_salva' => NM_utf8_urldecode($imagen_salva),
@@ -4821,6 +4855,10 @@ ob_start();
       global $inicial_form_productos_mob;
       $aResp = array();
 
+      if (isset($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['empty_filter'];
@@ -4917,6 +4955,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['btnDisabled'])
+         {
+            form_productos_mob_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['btnLabel']) && '' != $inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['btnLabel'])
+         {
+            form_productos_mob_pack_btn_label($aResp);
          }
          if (isset($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['varList']) && !empty($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['varList']))
          {
@@ -5021,8 +5067,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -5271,6 +5322,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_productos_mob_pack_master_value
+
+   function form_productos_mob_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_productos_mob;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_productos_mob_pack_ajax_alert
+
+   function form_productos_mob_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_productos_mob;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_productos_mob->contr_form_productos_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_productos_mob_pack_ajax_alert
 
    function form_productos_mob_pack_ajax_alert(&$aResp)
    {

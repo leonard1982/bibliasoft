@@ -11,6 +11,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -284,8 +285,8 @@ class form_terceros_contratos_motivoscorte_ini
       $this->nm_dt_criacao   = "20200309"; 
       $this->nm_hr_criacao   = "182428"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -942,7 +943,7 @@ class form_terceros_contratos_motivoscorte_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKH9FGDSBYVWJwHgrKVIBODur/DoFGHQNmZSB/DSBeHuFUHgvsZSJGDWFqVoFGD9JKZSFGHIrwHQJwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCDuJeVoXGDcXGDuFaDSN7VWJeDMBYVIB/HEBmVErqHQXGH9B/HABYHuXGDEvsZSJ3HEFaHIX7HQXODuFaHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSFGD1veD5JwHuzGVIBOH5FqDoraD9XOZSB/Z1BeD5JeDMNKZSXeH5FYDoB/D9XsH9FGD1veV5BOHgvsVcFCH5XCVoraD9XOH9BOZ1BeV5X7DEBOZSJGH5F/VoXGD9NmH9X7Z1rwV5BqHgvsDkBOV5X7VoX7D9BiZ1F7D1zGV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCH5FGZuXGHQNmDuFaZ1BYHuBiHgrwVcrsHEF/VoBOHQXGZkBiDSrYV5XGDMBYVkJ3V5FaVoJeHQXsH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDQBqHIvsV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHErCDWr/ZuBOHQJKZSBiHIvsVWXGHuBOVIBsH5XCHMX7HQNwVINUHIBeV5FaHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDQX7HIrwD5FaHuzGVIFCDWFYHIF7D9XGZ1F7HAN7HuJwDMBYVkJGH5F/VoXGHQNmZ9XGHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQB/HArYD5B/HgrKV9FeDWBmVoFGDcJUZ1rqHAN7HuFUDMBYDkXKDWXCVoJeD9NwH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwVWJsHgrKVcFCDWJeVoBqDcJUZ1FaHAN7D5FaDErKZSJqV5FaDoF7D9XsZSX7Z1N7VWJsHuzGVIBODWFaVENUD9BsH9FaD1rwD5BiDEBOHEXeV5FaZuFaD9JKDQFGHAN7V5JwHuzGDkBOH5FqVoraD9XOZSFaD1rKV5FaHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUH9B/Z1BeV5FUHgNKHEXeH5BmZuXGDcBwZ9F7HANOHQrqHuvmDkBsDuFqDoJsHQXOH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmZ1BiHAvCZMXGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuJeHuBOV9FeDWFYVoBOHQNwH9BqHIveHQraHgBOZSJGDuFaHIBqHQNmH9FUHArYVWXGDMvOVIFCDur/HMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['form_terceros_contratos_motivoscorte']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['form_terceros_contratos_motivoscorte']['ordem_cmp'] = ""; 
@@ -2243,6 +2244,11 @@ ob_start();
     sajax_export("ajax_form_terceros_contratos_motivoscorte_table_refresh");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->controle();
 //
     function nm_limpa_str_form_terceros_contratos_motivoscorte(&$str)
@@ -2448,6 +2454,10 @@ ob_start();
       global $inicial_form_terceros_contratos_motivoscorte;
       $aResp = array();
 
+      if (isset($inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['empty_filter'];
@@ -2544,6 +2554,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['btnDisabled']) && '' != $inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['btnDisabled'])
+         {
+            form_terceros_contratos_motivoscorte_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['btnLabel']) && '' != $inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['btnLabel'])
+         {
+            form_terceros_contratos_motivoscorte_pack_btn_label($aResp);
          }
          if (isset($inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['varList']) && !empty($inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['varList']))
          {
@@ -2648,8 +2666,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2898,6 +2921,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_terceros_contratos_motivoscorte_pack_master_value
+
+   function form_terceros_contratos_motivoscorte_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_terceros_contratos_motivoscorte;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_terceros_contratos_motivoscorte_pack_ajax_alert
+
+   function form_terceros_contratos_motivoscorte_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_terceros_contratos_motivoscorte;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_terceros_contratos_motivoscorte->contr_form_terceros_contratos_motivoscorte->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_terceros_contratos_motivoscorte_pack_ajax_alert
 
    function form_terceros_contratos_motivoscorte_pack_ajax_alert(&$aResp)
    {

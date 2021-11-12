@@ -266,27 +266,27 @@ class grid_empresas_json
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT nombre_empresa, TO_DATE(TO_CHAR(creada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, TO_DATE(TO_CHAR(actualizada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, TO_DATE(TO_CHAR(creada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, TO_DATE(TO_CHAR(actualizada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq'];
@@ -326,11 +326,13 @@ class grid_empresas_json
          $this->sinmovimiento = $rs->fields[3] ;  
          $this->tipo_negocio = $rs->fields[4] ;  
          $this->predeterminada = $rs->fields[5] ;  
-         $this->idempresa = $rs->fields[6] ;  
+         $this->nomina = $rs->fields[6] ;  
+         $this->codempresa = $rs->fields[7] ;  
+         $this->idempresa = $rs->fields[8] ;  
          $this->idempresa = (string)$this->idempresa;
-         $this->nombre = $rs->fields[7] ;  
-         $this->observaciones = $rs->fields[8] ;  
-         $this->actualizada = $rs->fields[9] ;  
+         $this->nombre = $rs->fields[9] ;  
+         $this->observaciones = $rs->fields[10] ;  
+         $this->actualizada = $rs->fields[11] ;  
          //----- lookup - tipo_negocio
          $this->look_tipo_negocio = $this->tipo_negocio; 
          $this->Lookup->lookup_tipo_negocio($this->look_tipo_negocio); 
@@ -577,6 +579,36 @@ class grid_empresas_json
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->predeterminada;
+   }
+   //----- nomina
+   function NM_export_nomina()
+   {
+         $this->nomina = NM_charset_to_utf8($this->nomina);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['nomina'])) ? $this->New_label['nomina'] : "Nómina"; 
+         }
+         else
+         {
+             $SC_Label = "nomina"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->nomina;
+   }
+   //----- codempresa
+   function NM_export_codempresa()
+   {
+         $this->codempresa = NM_charset_to_utf8($this->codempresa);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['codempresa'])) ? $this->New_label['codempresa'] : "Cod Nómina"; 
+         }
+         else
+         {
+             $SC_Label = "codempresa"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->codempresa;
    }
    //----- idempresa
    function NM_export_idempresa()

@@ -324,27 +324,27 @@ class grid_empresas_xls
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT nombre_empresa, TO_DATE(TO_CHAR(creada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, TO_DATE(TO_CHAR(actualizada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, TO_DATE(TO_CHAR(creada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, TO_DATE(TO_CHAR(actualizada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT nombre_empresa, creada, copiada_como, sinmovimiento, tipo_negocio, predeterminada, nomina, codempresa, idempresa, nombre, observaciones, actualizada from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['where_pesq'];
@@ -379,11 +379,13 @@ class grid_empresas_xls
          $this->sinmovimiento = $rs->fields[3] ;  
          $this->tipo_negocio = $rs->fields[4] ;  
          $this->predeterminada = $rs->fields[5] ;  
-         $this->idempresa = $rs->fields[6] ;  
+         $this->nomina = $rs->fields[6] ;  
+         $this->codempresa = $rs->fields[7] ;  
+         $this->idempresa = $rs->fields[8] ;  
          $this->idempresa = (string)$this->idempresa;
-         $this->nombre = $rs->fields[7] ;  
-         $this->observaciones = $rs->fields[8] ;  
-         $this->actualizada = $rs->fields[9] ;  
+         $this->nombre = $rs->fields[9] ;  
+         $this->observaciones = $rs->fields[10] ;  
+         $this->actualizada = $rs->fields[11] ;  
      if ($this->groupby_show == "S") {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['embutida'])
          { 
@@ -755,6 +757,62 @@ class grid_empresas_xls
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['nomina'])) ? $this->New_label['nomina'] : "Nómina"; 
+          if ($Cada_col == "nomina" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['codempresa'])) ? $this->New_label['codempresa'] : "Cod Nómina"; 
+          if ($Cada_col == "codempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_empresas']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
           $SC_Label = (isset($this->New_label['idempresa'])) ? $this->New_label['idempresa'] : "Idempresa"; 
           if ($Cada_col == "idempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -1007,6 +1065,46 @@ class grid_empresas_xls
          }
          $this->Xls_col++;
    }
+   //----- nomina
+   function NM_export_nomina()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->nomina = html_entity_decode($this->nomina, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->nomina = strip_tags($this->nomina);
+         $this->nomina = NM_charset_to_utf8($this->nomina);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->nomina, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->nomina, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
+   //----- codempresa
+   function NM_export_codempresa()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->codempresa = html_entity_decode($this->codempresa, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->codempresa = strip_tags($this->codempresa);
+         $this->codempresa = NM_charset_to_utf8($this->codempresa);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->codempresa, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->codempresa, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- idempresa
    function NM_export_idempresa()
    {
@@ -1183,6 +1281,30 @@ class grid_empresas_xls
          $this->predeterminada = strip_tags($this->predeterminada);
          $this->predeterminada = NM_charset_to_utf8($this->predeterminada);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->predeterminada;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- nomina
+   function NM_sub_cons_nomina()
+   {
+         $this->nomina = html_entity_decode($this->nomina, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->nomina = strip_tags($this->nomina);
+         $this->nomina = NM_charset_to_utf8($this->nomina);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->nomina;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- codempresa
+   function NM_sub_cons_codempresa()
+   {
+         $this->codempresa = html_entity_decode($this->codempresa, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->codempresa = strip_tags($this->codempresa);
+         $this->codempresa = NM_charset_to_utf8($this->codempresa);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->codempresa;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";

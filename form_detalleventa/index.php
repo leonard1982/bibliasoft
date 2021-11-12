@@ -11,6 +11,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -170,7 +171,6 @@ class form_detalleventa_ini
    var $Gd_missing;
    var $sc_site_ssl;
    var $link_form_detalleventa_observ_edit;
-   var $link_grid_stock_cons;
    var $nm_cont_lin;
    var $nm_limite_lin;
    var $nm_limite_lin_prt;
@@ -285,9 +285,9 @@ class form_detalleventa_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20180801"; 
       $this->nm_hr_criacao   = "175942"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_autor_alt    = "edgar"; 
+      $this->nm_dt_ult_alt   = "20211111"; 
+      $this->nm_hr_ult_alt   = "171356"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -520,8 +520,7 @@ class form_detalleventa_ini
           }
       }
       if (isset($_SESSION['scriptcase']['form_detalleventa']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -914,9 +913,6 @@ class form_detalleventa_ini
       $this->link_form_detalleventa_observ_edit = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_detalleventa_observ') . "/";
       $this->sc_lig_target["C_@scinf_desc_"] = 'nmsc_iframe_liga_form_detalleventa_observ';
       $this->sc_lig_iframe["nmsc_iframe_liga_form_detalleventa_observ"] = 'nmsc_iframe_liga_form_detalleventa_observ';
-      $this->link_grid_stock_cons = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_stock') . "/";
-      $this->sc_lig_target["C_@scinf_existencia_"] = 'nmsc_iframe_liga_grid_stock';
-      $this->sc_lig_iframe["nmsc_iframe_liga_grid_stock"] = 'nmsc_iframe_liga_grid_stock';
       if ($_SESSION['sc_session'][$this->sc_page]['form_detalleventa']['dashboard_info']['under_dashboard'])
       {
           $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['form_detalleventa']['dashboard_info']['dashboard_app'];
@@ -984,7 +980,7 @@ class form_detalleventa_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQJsZ1rwHQBqDMvmVIBsH5XCVoX7D9BsVINUHArKD5rqDENOHEXeH5F/HMBODcJeDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcXGDQFGHABYHuJwHuvmZSNiDWFYDoNUD9XGZSBqHANOZMJeHgveHENiHEFqVoX7HQBiDQFUDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoB/D9NwH9X7Z1BYV5raHgrKVcFKDWFYVENUDcBqZ1B/HIrwV5FGDMzGHEJGDWXCVoB/D9XsH9FGD1veV5FUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NmZSX7Z1rwVWJwDMBOZSJqDuX7DoX7D9XGVINUDSrYHuJwHgNKHEXeDWX7ZuBOD9NwDQB/HAN7HurqDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHANKVWBODMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqHIB/HQJKZSFUHAveHuJeHgvOVcXKDWFaDoraHQNwZSB/HAvmD5BqHgvsVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9FGHANOHQJeDMvOVcB/DWXCHMJwHQBqZ1X7DSrYHQBqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcXKH5XKVENUDcJUH9B/DSrYZMB/DErKZSJGDWFqVoBqD9XsDuBqHAN7D5XGDMvsVcBUH5B3VEraD9BsZkBiHArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5JeHuNODkFCDWJeDoXGDcNwH9B/D1rKV5FaDEvsHEFiDWX7VoX7D9XsDQJsHABYVWJeHgrKVcBOV5F/VENUDcBqZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBOHEJGDWrGZuXGHQBiZ9F7HAvOV5XGHgvOVcFCH5XCDoFUHQNwZ1B/D1rKHQraDEBeZSJ3DuFaZuB/HQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWFGDoBqHQBiDuBqHAvOV5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQraDMveVkJGH5F/DoBOD9JKZSX7HIrKHQXGDMNODkBOV5X/VoFGD9XOH9BOD1rKHuBqDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['form_detalleventa']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['form_detalleventa']['ordem_cmp'] = ""; 
@@ -1814,12 +1810,6 @@ ob_start();
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
-        if ('ajax_form_detalleventa_validate_existencia_' == $_POST['rs'])
-        {
-            $existencia_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
         if ('ajax_form_detalleventa_validate_colores_' == $_POST['rs'])
         {
             $colores_ = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1941,6 +1931,19 @@ ob_start();
             $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][2]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
         }
+        if ('ajax_form_detalleventa_event_adicional__onchange' == $_POST['rs'])
+        {
+            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][9]);
+        }
         if ('ajax_form_detalleventa_event_cantidad__onblur' == $_POST['rs'])
         {
             $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -2028,11 +2031,11 @@ ob_start();
             $costop_ = NM_utf8_urldecode($_POST['rsargs'][4]);
             $factor_ = NM_utf8_urldecode($_POST['rsargs'][5]);
             $adicional_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $iva_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][11]);
             $colores_ = NM_utf8_urldecode($_POST['rsargs'][12]);
             $tallas_ = NM_utf8_urldecode($_POST['rsargs'][13]);
             $sabor_ = NM_utf8_urldecode($_POST['rsargs'][14]);
@@ -2110,7 +2113,7 @@ ob_start();
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][17]);
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][18]);
         }
-        for ($iSeq = 1; $iSeq <= 100; $iSeq++)
+        for ($iSeq = 1; $iSeq <= 20; $iSeq++)
         {
             if ('ajax_form_detalleventa_autocomp_idpro_' . $iSeq == $_POST['rs'])
             {
@@ -2124,35 +2127,34 @@ ob_start();
             $idpro_ = NM_utf8_urldecode($_POST['rsargs'][1]);
             $desc_ = NM_utf8_urldecode($_POST['rsargs'][2]);
             $obs_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $existencia_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $colores_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $elcolor_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $tallas_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $latalla_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $sabor_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $elsabor_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $iva_ = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $costop_ = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][25]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][26]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][27]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][28]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][29]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][30]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][31]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][32]);
+            $colores_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $elcolor_ = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $tallas_ = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $latalla_ = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $sabor_ = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $elsabor_ = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $factor_ = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $costop_ = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][26]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][27]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][29]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][30]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][31]);
         }
         if ('ajax_form_detalleventa_navigate_form' == $_POST['rs'])
         {
@@ -2783,7 +2785,6 @@ ob_start();
     sajax_export("ajax_form_detalleventa_validate_idpro_");
     sajax_export("ajax_form_detalleventa_validate_desc_");
     sajax_export("ajax_form_detalleventa_validate_obs_");
-    sajax_export("ajax_form_detalleventa_validate_existencia_");
     sajax_export("ajax_form_detalleventa_validate_colores_");
     sajax_export("ajax_form_detalleventa_validate_elcolor_");
     sajax_export("ajax_form_detalleventa_validate_tallas_");
@@ -2804,6 +2805,7 @@ ob_start();
     sajax_export("ajax_form_detalleventa_validate_iva_");
     sajax_export("ajax_form_detalleventa_validate_costop_");
     sajax_export("ajax_form_detalleventa_refresh_idpro_");
+    sajax_export("ajax_form_detalleventa_event_adicional__onchange");
     sajax_export("ajax_form_detalleventa_event_cantidad__onblur");
     sajax_export("ajax_form_detalleventa_event_cantidad__onfocus");
     sajax_export("ajax_form_detalleventa_event_colores__onchange");
@@ -2814,7 +2816,7 @@ ob_start();
     sajax_export("ajax_form_detalleventa_event_tallas__onchange");
     sajax_export("ajax_form_detalleventa_event_unidadmayor__onchange");
     sajax_export("ajax_form_detalleventa_event_valorunit__onblur");
-    for ($iSeq = 1; $iSeq <= 150; $iSeq++)
+    for ($iSeq = 1; $iSeq <= 70; $iSeq++)
     {
         sajax_export("ajax_form_detalleventa_autocomp_idpro_" . $iSeq);
     }
@@ -2824,6 +2826,11 @@ ob_start();
     sajax_export("ajax_form_detalleventa_backup_line");
     sajax_export("ajax_form_detalleventa_table_refresh");
     sajax_handle_client_request();
+
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
 
     $inicial_form_detalleventa->contr_form_detalleventa->controle();
 //
@@ -2926,26 +2933,6 @@ ob_start();
         $inicial_form_detalleventa->contr_form_detalleventa->controle();
         exit;
     } // ajax_validate_obs_
-
-    function ajax_form_detalleventa_validate_existencia_($existencia_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'validate_existencia_';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'existencia_' => NM_utf8_urldecode($existencia_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_validate_existencia_
 
     function ajax_form_detalleventa_validate_colores_($colores_, $nmgp_refresh_row, $script_case_init)
     {
@@ -3348,6 +3335,33 @@ ob_start();
         exit;
     } // ajax_refresh_idpro_
 
+    function ajax_form_detalleventa_event_adicional__onchange($idpro_, $adicional1_, $descuento_, $valorpar_, $adicional_, $iva_, $cantidad_, $valorunit_, $script_case_init, $nmgp_refresh_row)
+    {
+        global $inicial_form_detalleventa;
+        //register_shutdown_function("form_detalleventa_pack_ajax_response");
+        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
+        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'event_adicional__onchange';
+        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
+                  'idpro_' => NM_utf8_urldecode($idpro_),
+                  'adicional1_' => NM_utf8_urldecode($adicional1_),
+                  'descuento_' => NM_utf8_urldecode($descuento_),
+                  'valorpar_' => NM_utf8_urldecode($valorpar_),
+                  'adicional_' => NM_utf8_urldecode($adicional_),
+                  'iva_' => NM_utf8_urldecode($iva_),
+                  'cantidad_' => NM_utf8_urldecode($cantidad_),
+                  'valorunit_' => NM_utf8_urldecode($valorunit_),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_detalleventa->contr_form_detalleventa->controle();
+        exit;
+    } // ajax_event_adicional__onchange
+
     function ajax_form_detalleventa_event_cantidad__onblur($idpro_, $colores_, $tallas_, $sabor_, $valorunit_, $cantidad_, $stockubica_, $adicional1_, $descuento_, $valorpar_, $adicional_, $iva_, $idbod_, $unidadmayor_, $factor_, $unidad_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detalleventa;
@@ -3496,7 +3510,7 @@ ob_start();
         exit;
     } // ajax_event_idbod__onchange
 
-    function ajax_form_detalleventa_event_idpro__onchange($idpro_, $numfac_, $valorunit_, $unidadmayor_, $costop_, $factor_, $adicional_, $adicional1_, $descuento_, $valorpar_, $iva_, $cantidad_, $colores_, $tallas_, $sabor_, $script_case_init, $nmgp_refresh_row)
+    function ajax_form_detalleventa_event_idpro__onchange($idpro_, $numfac_, $valorunit_, $unidadmayor_, $costop_, $factor_, $adicional_, $cantidad_, $adicional1_, $descuento_, $valorpar_, $iva_, $colores_, $tallas_, $sabor_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detalleventa;
         //register_shutdown_function("form_detalleventa_pack_ajax_response");
@@ -3510,11 +3524,11 @@ ob_start();
                   'costop_' => NM_utf8_urldecode($costop_),
                   'factor_' => NM_utf8_urldecode($factor_),
                   'adicional_' => NM_utf8_urldecode($adicional_),
+                  'cantidad_' => NM_utf8_urldecode($cantidad_),
                   'adicional1_' => NM_utf8_urldecode($adicional1_),
                   'descuento_' => NM_utf8_urldecode($descuento_),
                   'valorpar_' => NM_utf8_urldecode($valorpar_),
                   'iva_' => NM_utf8_urldecode($iva_),
-                  'cantidad_' => NM_utf8_urldecode($cantidad_),
                   'colores_' => NM_utf8_urldecode($colores_),
                   'tallas_' => NM_utf8_urldecode($tallas_),
                   'sabor_' => NM_utf8_urldecode($sabor_),
@@ -4987,1528 +5001,8 @@ ob_start();
         $inicial_form_detalleventa->contr_form_detalleventa->controle();
         exit;
     } // ajax_autocomp_idpro_70
-    function ajax_form_detalleventa_autocomp_idpro_71($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_71';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_71
-    function ajax_form_detalleventa_autocomp_idpro_72($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_72';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_72
-    function ajax_form_detalleventa_autocomp_idpro_73($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_73';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_73
-    function ajax_form_detalleventa_autocomp_idpro_74($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_74';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_74
-    function ajax_form_detalleventa_autocomp_idpro_75($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_75';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_75
-    function ajax_form_detalleventa_autocomp_idpro_76($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_76';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_76
-    function ajax_form_detalleventa_autocomp_idpro_77($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_77';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_77
-    function ajax_form_detalleventa_autocomp_idpro_78($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_78';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_78
-    function ajax_form_detalleventa_autocomp_idpro_79($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_79';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_79
-    function ajax_form_detalleventa_autocomp_idpro_80($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_80';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_80
-    function ajax_form_detalleventa_autocomp_idpro_81($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_81';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_81
-    function ajax_form_detalleventa_autocomp_idpro_82($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_82';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_82
-    function ajax_form_detalleventa_autocomp_idpro_83($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_83';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_83
-    function ajax_form_detalleventa_autocomp_idpro_84($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_84';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_84
-    function ajax_form_detalleventa_autocomp_idpro_85($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_85';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_85
-    function ajax_form_detalleventa_autocomp_idpro_86($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_86';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_86
-    function ajax_form_detalleventa_autocomp_idpro_87($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_87';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_87
-    function ajax_form_detalleventa_autocomp_idpro_88($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_88';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_88
-    function ajax_form_detalleventa_autocomp_idpro_89($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_89';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_89
-    function ajax_form_detalleventa_autocomp_idpro_90($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_90';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_90
-    function ajax_form_detalleventa_autocomp_idpro_91($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_91';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_91
-    function ajax_form_detalleventa_autocomp_idpro_92($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_92';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_92
-    function ajax_form_detalleventa_autocomp_idpro_93($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_93';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_93
-    function ajax_form_detalleventa_autocomp_idpro_94($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_94';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_94
-    function ajax_form_detalleventa_autocomp_idpro_95($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_95';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_95
-    function ajax_form_detalleventa_autocomp_idpro_96($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_96';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_96
-    function ajax_form_detalleventa_autocomp_idpro_97($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_97';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_97
-    function ajax_form_detalleventa_autocomp_idpro_98($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_98';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_98
-    function ajax_form_detalleventa_autocomp_idpro_99($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_99';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_99
-    function ajax_form_detalleventa_autocomp_idpro_100($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_100';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_100
-    function ajax_form_detalleventa_autocomp_idpro_101($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_101';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_101
-    function ajax_form_detalleventa_autocomp_idpro_102($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_102';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_102
-    function ajax_form_detalleventa_autocomp_idpro_103($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_103';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_103
-    function ajax_form_detalleventa_autocomp_idpro_104($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_104';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_104
-    function ajax_form_detalleventa_autocomp_idpro_105($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_105';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_105
-    function ajax_form_detalleventa_autocomp_idpro_106($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_106';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_106
-    function ajax_form_detalleventa_autocomp_idpro_107($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_107';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_107
-    function ajax_form_detalleventa_autocomp_idpro_108($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_108';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_108
-    function ajax_form_detalleventa_autocomp_idpro_109($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_109';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_109
-    function ajax_form_detalleventa_autocomp_idpro_110($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_110';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_110
-    function ajax_form_detalleventa_autocomp_idpro_111($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_111';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_111
-    function ajax_form_detalleventa_autocomp_idpro_112($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_112';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_112
-    function ajax_form_detalleventa_autocomp_idpro_113($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_113';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_113
-    function ajax_form_detalleventa_autocomp_idpro_114($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_114';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_114
-    function ajax_form_detalleventa_autocomp_idpro_115($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_115';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_115
-    function ajax_form_detalleventa_autocomp_idpro_116($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_116';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_116
-    function ajax_form_detalleventa_autocomp_idpro_117($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_117';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_117
-    function ajax_form_detalleventa_autocomp_idpro_118($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_118';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_118
-    function ajax_form_detalleventa_autocomp_idpro_119($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_119';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_119
-    function ajax_form_detalleventa_autocomp_idpro_120($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_120';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_120
-    function ajax_form_detalleventa_autocomp_idpro_121($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_121';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_121
-    function ajax_form_detalleventa_autocomp_idpro_122($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_122';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_122
-    function ajax_form_detalleventa_autocomp_idpro_123($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_123';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_123
-    function ajax_form_detalleventa_autocomp_idpro_124($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_124';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_124
-    function ajax_form_detalleventa_autocomp_idpro_125($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_125';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_125
-    function ajax_form_detalleventa_autocomp_idpro_126($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_126';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_126
-    function ajax_form_detalleventa_autocomp_idpro_127($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_127';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_127
-    function ajax_form_detalleventa_autocomp_idpro_128($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_128';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_128
-    function ajax_form_detalleventa_autocomp_idpro_129($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_129';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_129
-    function ajax_form_detalleventa_autocomp_idpro_130($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_130';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_130
-    function ajax_form_detalleventa_autocomp_idpro_131($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_131';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_131
-    function ajax_form_detalleventa_autocomp_idpro_132($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_132';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_132
-    function ajax_form_detalleventa_autocomp_idpro_133($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_133';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_133
-    function ajax_form_detalleventa_autocomp_idpro_134($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_134';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_134
-    function ajax_form_detalleventa_autocomp_idpro_135($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_135';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_135
-    function ajax_form_detalleventa_autocomp_idpro_136($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_136';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_136
-    function ajax_form_detalleventa_autocomp_idpro_137($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_137';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_137
-    function ajax_form_detalleventa_autocomp_idpro_138($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_138';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_138
-    function ajax_form_detalleventa_autocomp_idpro_139($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_139';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_139
-    function ajax_form_detalleventa_autocomp_idpro_140($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_140';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_140
-    function ajax_form_detalleventa_autocomp_idpro_141($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_141';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_141
-    function ajax_form_detalleventa_autocomp_idpro_142($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_142';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_142
-    function ajax_form_detalleventa_autocomp_idpro_143($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_143';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_143
-    function ajax_form_detalleventa_autocomp_idpro_144($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_144';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_144
-    function ajax_form_detalleventa_autocomp_idpro_145($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_145';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_145
-    function ajax_form_detalleventa_autocomp_idpro_146($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_146';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_146
-    function ajax_form_detalleventa_autocomp_idpro_147($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_147';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_147
-    function ajax_form_detalleventa_autocomp_idpro_148($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_148';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_148
-    function ajax_form_detalleventa_autocomp_idpro_149($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_149';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_149
-    function ajax_form_detalleventa_autocomp_idpro_150($idpro_, $script_case_init)
-    {
-        global $inicial_form_detalleventa;
-        //register_shutdown_function("form_detalleventa_pack_ajax_response");
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_flag          = true;
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_opcao         = 'autocomp_idpro_150';
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detalleventa->contr_form_detalleventa->controle();
-        exit;
-    } // ajax_autocomp_idpro_150
 
-    function ajax_form_detalleventa_submit_form($numfac_, $idpro_, $desc_, $obs_, $existencia_, $colores_, $elcolor_, $tallas_, $latalla_, $sabor_, $elsabor_, $idbod_, $unidadmayor_, $stockubica_, $unidad_, $cantidad_, $valorunit_, $valorpar_, $descuento_, $adicional_, $adicional1_, $factor_, $iva_, $costop_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_detalleventa_submit_form($numfac_, $idpro_, $desc_, $obs_, $colores_, $elcolor_, $tallas_, $latalla_, $sabor_, $elsabor_, $idbod_, $unidadmayor_, $stockubica_, $unidad_, $cantidad_, $valorunit_, $valorpar_, $descuento_, $adicional_, $adicional1_, $factor_, $iva_, $costop_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_detalleventa;
         //register_shutdown_function("form_detalleventa_pack_ajax_response");
@@ -6519,7 +5013,6 @@ ob_start();
                   'idpro_' => NM_utf8_urldecode($idpro_),
                   'desc_' => NM_utf8_urldecode($desc_),
                   'obs_' => NM_utf8_urldecode($obs_),
-                  'existencia_' => NM_utf8_urldecode($existencia_),
                   'colores_' => NM_utf8_urldecode($colores_),
                   'elcolor_' => NM_utf8_urldecode($elcolor_),
                   'tallas_' => NM_utf8_urldecode($tallas_),
@@ -6652,6 +5145,10 @@ ob_start();
       global $inicial_form_detalleventa;
       $aResp = array();
 
+      if (isset($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['empty_filter'];
@@ -6748,6 +5245,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['btnDisabled']) && '' != $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['btnDisabled'])
+         {
+            form_detalleventa_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['btnLabel']) && '' != $inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['btnLabel'])
+         {
+            form_detalleventa_pack_btn_label($aResp);
          }
          if (isset($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['varList']) && !empty($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['varList']))
          {
@@ -6852,8 +5357,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -7102,6 +5612,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_detalleventa_pack_master_value
+
+   function form_detalleventa_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_detalleventa;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_detalleventa_pack_ajax_alert
+
+   function form_detalleventa_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_detalleventa;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_detalleventa->contr_form_detalleventa->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_detalleventa_pack_ajax_alert
 
    function form_detalleventa_pack_ajax_alert(&$aResp)
    {

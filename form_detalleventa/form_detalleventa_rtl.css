@@ -3,7 +3,7 @@
 .css_numfac__obj {text-align:left;}
 .css_idpro__label {text-align:center;vertical-align:middle;}
 .css_idpro__line {text-align:left;}
-.css_idpro__obj {text-align:left;}
+.css_idpro__obj {text-align:left;width:200px;}
 .css_unidadmayor__label { }
 .css_unidadmayor__line { }
 .css_unidadmayor__obj { }
@@ -33,7 +33,7 @@
 .css_descuento__obj {text-align:center;width:70px;}
 .css_adicional__label {text-align:right;}
 .css_adicional__line {text-align:left;}
-.css_adicional__obj {text-align:left;}
+.css_adicional__obj {text-align:center;width:70px;}
 .css_adicional1__label {text-align:right;}
 .css_adicional1__line {text-align:left;}
 .css_adicional1__obj {text-align:left;}
@@ -55,9 +55,6 @@
 .css_elsabor__label { }
 .css_elsabor__line { }
 .css_elsabor__obj { }
-.css_existencia__label {text-align:center;vertical-align:middle;}
-.css_existencia__line {text-align:center;vertical-align:middle;}
-.css_existencia__obj {text-align:center;}
 .css_latalla__label { }
 .css_latalla__line { }
 .css_latalla__obj { }

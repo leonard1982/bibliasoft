@@ -250,6 +250,12 @@ function scEventControl_onFocus(oField, iSeq) {
   if ("sabor_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
+  if ("adicional_" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
   if ("cantidad_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
@@ -609,6 +615,7 @@ function sc_form_detallepedido_adicional__onblur(oThis, iSeqRow) {
 
 function sc_form_detallepedido_adicional__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  do_ajax_form_detallepedido_event_adicional__onchange(iSeqRow);
   nm_check_insert(iSeqRow);
 }
 

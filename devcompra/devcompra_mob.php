@@ -13,6 +13,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -292,8 +293,8 @@ class devcompra_mob_ini
       $this->nm_dt_criacao   = "20180219"; 
       $this->nm_hr_criacao   = "142152"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -950,7 +951,7 @@ class devcompra_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDuFaD1BeV5X7DMBOVIBsV5FYDoFUDcNmZSBqHAN7V5JsDEBOVkJ3HEFaHIBiHQBiDQFaDSrwD5B/HgrKDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrYVcrsHEFYVoBODcBqH9FaHIveHuJeDEvsVkXeH5FYVoFaHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5B/DMzGHEJGDWXCDoF7D9XsZSX7Z1BYV5JeHuzGVIBODWFaVoJwD9BsZ1B/Z1BeD5F7HgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiD9BsZ1B/DSNOHuJsDEBeZSXeV5B7ZuJeDcBwDQX7D1BOVWJwHgvsDkBsH5XKVoF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWB3VEX7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHANKV5XGHgvsVIBsDWFYVoF7D9XGZSBqZ1NOV5JwHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwH9BiDSN7D5B/DMvmZSJqDWFYVoBiDcJUZ1B/Z1BOZMBqDEBeZSXeDuFYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9JmZSFaHANOHQJsDMveHArCV5B7DoJeD9XsZSBiDSBYHuXGHgvsVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeH5F/VoB/D9NmH9X7D1BeV5JwHuNOVcFCDWXCVoX7DcBqZ1BOZ1BeV5X7DEBOZSXeDWrGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaD1BeVWBOHgrKVIBsDWFaVEF7HQNmZkFGHIBeD5JeHgvsDkB/DuFaDoraHQBiDQFGD1BeHuX7HuzGVcFeH5XCHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHIveHQJwDEBODkFeH5FYVoFGHQJKDQJsZ1rwHuraDMzGVcFKDWFaVoFGDcFYZ1BODSrYHuJsHgBeHArsDWr/HIF7HQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['devcompra_mob']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['devcompra_mob']['initialize'])  
       { 
@@ -2261,6 +2262,11 @@ ob_start();
     sajax_export("ajax_devcompra_mob_navigate_form");
     sajax_handle_client_request();
 
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
+
     $inicial_devcompra_mob->contr_devcompra_mob->controle();
 //
     function nm_limpa_str_devcompra_mob(&$str)
@@ -2415,6 +2421,10 @@ ob_start();
       global $inicial_devcompra_mob;
       $aResp = array();
 
+      if (isset($inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['empty_filter'];
@@ -2511,6 +2521,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['btnDisabled']) && '' != $inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['btnDisabled'])
+         {
+            devcompra_mob_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['btnLabel']) && '' != $inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['btnLabel'])
+         {
+            devcompra_mob_pack_btn_label($aResp);
          }
          if (isset($inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['varList']) && !empty($inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['varList']))
          {
@@ -2615,8 +2633,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -2865,6 +2888,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // devcompra_mob_pack_master_value
+
+   function devcompra_mob_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_devcompra_mob;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // devcompra_mob_pack_ajax_alert
+
+   function devcompra_mob_pack_btn_label(&$aResp)
+   {
+      global $inicial_devcompra_mob;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_devcompra_mob->contr_devcompra_mob->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // devcompra_mob_pack_ajax_alert
 
    function devcompra_mob_pack_ajax_alert(&$aResp)
    {

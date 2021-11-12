@@ -309,6 +309,12 @@ class form_detallecombos_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_detallecombos']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_detallecombos']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['form_detallecombos']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_detallecombos']['embutida_parms'];
@@ -2128,10 +2134,13 @@ class form_detallecombos_apl
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade, $sc_seq_vert;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -2144,15 +2153,15 @@ class form_detallecombos_apl
               $this->NM_ajax_info['errList']['geral_form_detallecombos'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'idcombo_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idcombo_' == $filtro)) || (is_array($filtro) && in_array('idcombo_', $filtro)))
         $this->ValidateField_idcombo_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'idproducto_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'idproducto_' == $filtro)) || (is_array($filtro) && in_array('idproducto_', $filtro)))
         $this->ValidateField_idproducto_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'total_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'total_' == $filtro)) || (is_array($filtro) && in_array('total_', $filtro)))
         $this->ValidateField_total_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'cantidad_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'cantidad_' == $filtro)) || (is_array($filtro) && in_array('cantidad_', $filtro)))
         $this->ValidateField_cantidad_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'precio_' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'precio_' == $filtro)) || (is_array($filtro) && in_array('precio_', $filtro)))
         $this->ValidateField_precio_($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (!isset($this->NM_ajax_flag) || 'validate_' != substr($this->NM_ajax_opcao, 0, 9))
@@ -2202,9 +2211,15 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Ese producto ya está en el detalle del combo.";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
  {
-  $sErrorIndex = ('submit_form' == $this->NM_ajax_opcao) ? 'geral_form_detallecombos' : substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_detallecombos';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_detallecombos';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "Ese producto ya está en el detalle del combo.";
  }
 ;
@@ -5713,7 +5728,8 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -6750,5 +6766,27 @@ if (parent && parent.scAjaxDetailValue)
         $this->NM_ajax_info['masterValue'][$sIndex] = $sValue;
         $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['masterValue'] = $this->NM_ajax_info['masterValue'];
     } // sc_master_value
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-2");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-3");
+                break;
+            case "balterarsel":
+                return array("sc_b_upd_t.sc-unique-btn-4");
+                break;
+            case "bexcluirsel":
+                return array("sc_b_del_t.sc-unique-btn-5");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-6");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

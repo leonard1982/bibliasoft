@@ -24,6 +24,10 @@ class graf_ventas_productos_resumo
    var $NM_totaliz_hrz; 
    var $link_graph_tot; 
    var $Tot_ger; 
+   var $nmgp_botoes     = array();
+   var $nm_btn_exist    = array();
+   var $nm_btn_label    = array(); 
+   var $nm_btn_disabled = array();
    var $array_total_periodo;
    var $array_total_geral;
    var $array_tot_lin;
@@ -2908,6 +2912,7 @@ class graf_ventas_productos_resumo
        { 
            $nm_saida->saida("        function sc_session_redir(url_redir)\r\n");
            $nm_saida->saida("        {\r\n");
+           $nm_saida->saida("            if (typeof(sc_session_redir_mobile) === typeof(function(){})) { sc_session_redir_mobile(url_redir); }\r\n");
            $nm_saida->saida("            if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')\r\n");
            $nm_saida->saida("            {\r\n");
            $nm_saida->saida("                window.parent.sc_session_redir(url_redir);\r\n");
@@ -3836,7 +3841,7 @@ $nm_saida->saida("}\r\n");
                    {
                        $Lines = sc_convert_encoding($Lines, $_SESSION['scriptcase']['charset'], "UTF-8");
                    }
-                   $nm_saida->saida("   " . $Lines . ";\r\n");
+                   echo $Lines;
                }
            }
            $Msg_Inval = "Inv�lido";
@@ -3887,7 +3892,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       if (!$this->Ini->Export_html_zip && $this->Print_All && !$_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['doc_word']) 
       {
-          $nm_saida->saida(" <BODY class=\"" . $this->css_scGridPage . "\" style=\"-webkit-print-color-adjust: exact;\">\r\n");
+          $nm_saida->saida(" <BODY id=\"grid_chart\" class=\"" . $this->css_scGridPage . "\" style=\"-webkit-print-color-adjust: exact;\">\r\n");
           $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $summary_width . ">\r\n");
           $nm_saida->saida("     <TR>\r\n");
           $nm_saida->saida("       <TD align=\"center\">\r\n");
@@ -3913,7 +3918,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           $remove_margin = isset($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['dashboard_info']['remove_margin']) && $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['dashboard_info']['remove_margin'] ? 'margin: 0;' : '';
           $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['dashboard_info']['remove_border'] ? 'border-width: 0;' : '';
           $vertical_center = '';
-          $nm_saida->saida(" <BODY class=\"" . $this->css_scGridPage . "\" style=\"" . $remove_margin . $vertical_center . "\">\r\n");
+          $nm_saida->saida(" <BODY id=\"grid_chart\" class=\"" . $this->css_scGridPage . "\" style=\"" . $remove_margin . $vertical_center . "\">\r\n");
       }
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['opcao'] != "print" && !$_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['embutida'])
       {
@@ -4123,7 +4128,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
          }
          if ($NM_btn && is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid) && !$this->NM_res_sem_reg)
          {
-            $nm_saida->saida("          <img id=\"NM_sep_\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+            $nm_saida->saida("          <img id=\"NM_sep_\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
             $NM_btn = false;
          }
       if (!$this->grid_emb_form && $this->nmgp_botoes['group_3'] == "on")
@@ -4313,7 +4318,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['pdf'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rpdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['pdf'][] = "Rpdf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "Rpdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "graf_ventas_productos/graf_ventas_productos_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=8&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=s&nm_res_cons=s&nm_ini_pdf_res=chart&nm_all_modules=chart&password=n&summary_export_columns=N&pdf_zip=N&origem=chart&language=es&conf_socor=N&is_chart_app=Y&nm_label_group=N&nm_all_cab=S&nm_all_label=S&nm_orient_grid=2&script_case_init=" . $this->Ini->sc_page . "&app_name=graf_ventas_productos&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -4321,7 +4327,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['print'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rprinttop\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['print'][] = "Rprint_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "Rprint_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "graf_ventas_productos/graf_ventas_productos_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=resumo&nm_cor=CO&nm_res_cons=s&nm_ini_prt_res=chart&nm_all_modules=chart&password=n&origem=chart&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -4351,16 +4358,17 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                 }
             }
          }
-      if ($this->nmgp_botoes['chart_exit'] == 'on' && !$this->grid_emb_form)
+      if ($this->nmgp_botoes['exit'] == 'on' && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['exit'][] = "Rsai_top";
          if ($nm_apl_dependente == 1) 
          { 
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "Rsai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          } 
          elseif (!$this->Ini->SC_Link_View && !$this->aba_iframe) 
          { 
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "Rsai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          } 
       }
@@ -4398,7 +4406,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
          }
          if ($NM_btn && is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid) && !$this->NM_res_sem_reg)
          {
-            $nm_saida->saida("          <img id=\"NM_sep_\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+            $nm_saida->saida("          <img id=\"NM_sep_\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
             $NM_btn = false;
          }
       if (!$this->grid_emb_form && $this->nmgp_botoes['group_2'] == "on")
@@ -4588,7 +4596,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['pdf'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rpdf_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['pdf'][] = "Rpdf_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "Rpdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "graf_ventas_productos/graf_ventas_productos_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=8&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=S&sc_ver_93=" . s . "&nm_tem_gb=s&nm_res_cons=s&nm_ini_pdf_res=chart&nm_all_modules=chart&password=n&summary_export_columns=N&pdf_zip=N&origem=chart&language=es&conf_socor=N&is_chart_app=Y&nm_label_group=N&nm_all_cab=S&nm_all_label=S&nm_orient_grid=2&script_case_init=" . $this->Ini->sc_page . "&app_name=graf_ventas_productos&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -4596,7 +4605,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if (!$this->grid_emb_form && $this->nmgp_botoes['print'] == "on" && !$this->NM_res_sem_reg)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $nm_saida->saida("            <div id=\"div_Rprinttop\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+         $this->nm_btn_exist['print'][] = "Rprint_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "Rprint_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "graf_ventas_productos/graf_ventas_productos_config_print.php?script_case_init=" . $this->Ini->sc_page . "&summary_export_columns=N&nm_opc=resumo&nm_cor=CO&nm_res_cons=s&nm_ini_prt_res=chart&nm_all_modules=chart&password=n&origem=chart&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
@@ -4610,6 +4620,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       if ($this->nmgp_botoes['reload'] == 'on' && !$_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['opc_psq'] && !$this->grid_emb_form)
       {
+              $this->nm_btn_exist['reload'][] = "reload_top";
               $Cod_Btn = nmButtonOutput($this->arr_buttons, "breload", "window.location = '" . $this->Ini->path_link . "graf_ventas_productos/index.php';", "window.location = '" . $this->Ini->path_link . "graf_ventas_productos/index.php';", "reload_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
@@ -4632,16 +4643,17 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                 }
             }
          }
-      if ($this->nmgp_botoes['chart_exit'] == 'on' && !$this->grid_emb_form)
+      if ($this->nmgp_botoes['exit'] == 'on' && !$this->grid_emb_form)
       {
+          $this->nm_btn_exist['exit'][] = "Rsai_top";
          if ($nm_apl_dependente == 1) 
          { 
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "Rsai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          } 
          elseif (!$this->Ini->SC_Link_View && !$this->aba_iframe) 
          { 
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "Rsai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "document.FRES.action='$nm_url_saida'; document.FRES.submit();", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
          } 
       }
@@ -4975,6 +4987,20 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['graf_ventas_productos']['doc_
    $nm_saida->saida("    <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
    $nm_saida->saida("   </form> \r\n");
           $nm_saida->saida("<SCRIPT language=\"Javascript\">\r\n");
+   $nm_saida->saida("   $(function(){ \r\n");
+   $nm_saida->saida("       NM_btn_disable();\r\n");
+   $nm_saida->saida("   }); \r\n");
+   $nm_saida->saida("   function NM_btn_disable()\r\n");
+   $nm_saida->saida("   {\r\n");
+   foreach ($this->nm_btn_disabled as $cod_btn => $st_btn) {
+      if (isset($this->nm_btn_exist[$cod_btn]) && $st_btn == 'on') {
+         foreach ($this->nm_btn_exist[$cod_btn] as $cada_id) {
+           $nm_saida->saida("     $('#" . $cada_id . "').prop('onclick', null).off('click').addClass('disabled').removeAttr('href');\r\n");
+           $nm_saida->saida("     $('#div_" . $cada_id . "').addClass('disabled');\r\n");
+         }
+      }
+   }
+   $nm_saida->saida("   }\r\n");
           $nm_saida->saida(" function nm_link_cons(x) \r\n");
           $nm_saida->saida(" {\r\n");
           $nm_saida->saida("     document.FCONS.nmgp_parms_where.value = x;\r\n");

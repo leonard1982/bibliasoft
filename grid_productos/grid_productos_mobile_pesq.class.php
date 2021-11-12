@@ -5287,6 +5287,7 @@ $style_cond_in = ($stockmen_cond != "in") ? " style=\"display: none;\"" : "";
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['fast_search']);
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq_interativ'] = "";
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['interativ_search'] = array();
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['int_search_dados'] = array();
       if ("" == $this->comando_filtro)
       {
           $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_orig'];

@@ -1452,7 +1452,7 @@ class grid_lista_comandas_pesq
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
-<BODY class="scGridPage">
+<BODY id="grid_search" class="scGridPage">
 <SCRIPT type="text/javascript">
 if (parent.document.getElementById('nmsc_iframe_grid_lista_comandas').contentWindow.nm_gp_submit_ajax)
 {
@@ -1525,7 +1525,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 $vertical_center = 'display: flex; flex-direction: column; justify-content: flex-start; margin: 0px; min-height: 100vh;';
 ?>
-<BODY class="scFilterPage" style="<?php echo $vertical_center ?>">
+<BODY id="grid_search" class="scFilterPage" style="<?php echo $vertical_center ?>">
 <?php echo $this->Ini->Ajax_result_set ?>
 <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_js . "/browserSniffer.js" ?>"></SCRIPT>
    <script type="text/javascript">

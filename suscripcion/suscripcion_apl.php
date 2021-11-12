@@ -270,6 +270,12 @@ class suscripcion_apl
       {
           $_SESSION['nit'] = $this->nit;
       }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['suscripcion']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['suscripcion']['opc_ant'] = "inicio";
+      }
       if (isset($_SESSION['sc_session'][$script_case_init]['suscripcion']['embutida_parms']))
       { 
           $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['suscripcion']['embutida_parms'];
@@ -1910,10 +1916,13 @@ $_SESSION['scriptcase']['suscripcion']['contr_erro'] = 'off';
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
      global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
 //---------------------------------------------------------
      $this->sc_force_zero = array();
 
-     if ('' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
      {
           $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
           $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
@@ -1926,7 +1935,7 @@ $_SESSION['scriptcase']['suscripcion']['contr_erro'] = 'off';
               $this->NM_ajax_info['errList']['geral_suscripcion'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
           }
      }
-      if ('' == $filtro || 'mensaje' == $filtro)
+      if ((!is_array($filtro) && ('' == $filtro || 'mensaje' == $filtro)) || (is_array($filtro) && in_array('mensaje', $filtro)))
         $this->ValidateField_mensaje($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
@@ -2974,7 +2983,8 @@ $_SESSION['scriptcase']['suscripcion']['contr_erro'] = 'off';
         $htmlFim = '</div>';
 
         if ('qp' == $this->nmgp_cond_fast_search) {
-            $result = preg_replace('/'. $this->nmgp_arg_fast_search .'/i', $htmlIni . '$0' . $htmlFim, $result);
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
         } elseif ('eq' == $this->nmgp_cond_fast_search) {
             if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
                 $result = $htmlIni. $result .$htmlFim;
@@ -3660,5 +3670,30 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
        exit;
    }
 }
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "btn_registrar_pago_manual":
+                return array("sc_btn_registrar_pago_manual_top");
+                break;
+            case "0":
+                return array("sys_separator.sc-unique-btn-1", "sys_separator.sc-unique-btn-2", "sys_separator.sc-unique-btn-3");
+                break;
+            case "btn_validar_pago":
+                return array("sc_btn_validar_pago_top");
+                break;
+            case "btn_salir":
+                return array("sc_btn_salir_bot");
+                break;
+            case "btn_pagar":
+                return array("sc_btn_pagar_bot");
+                break;
+            case "btn_continuar":
+                return array("sc_btn_continuar_bot");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
 }
 ?>

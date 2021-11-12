@@ -11,6 +11,7 @@
            include_once("../_lib/lib/php/nm_check_mobile.php");
        }
        $_SESSION['scriptcase']['device_mobile'] = sc_check_mobile();
+       $_SESSION['scriptcase']['proc_mobile']   = $_SESSION['scriptcase']['device_mobile'];
        if (!isset($_SESSION['scriptcase']['display_mobile']))
        {
            $_SESSION['scriptcase']['display_mobile'] = true;
@@ -284,8 +285,8 @@ class form_detallepedido_compra_ini
       $this->nm_dt_criacao   = "20171228"; 
       $this->nm_hr_criacao   = "162318"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210523"; 
-      $this->nm_hr_ult_alt   = "211227"; 
+      $this->nm_dt_ult_alt   = "20210817"; 
+      $this->nm_hr_ult_alt   = "115231"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -942,7 +943,7 @@ class form_detallepedido_compra_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwDQX7D1BeHQJsHgrwDkBsV5F/HIrqDcFYZ1BOHArKD5XGHgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMvCHErsH5BmDoBqD9NmH9X7HIBeV5FGDMzGVcFeH5FqHMFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5JeHuNODkFCDWJeDoXGDcNwH9B/D1rKV5FaDEvsHEFiDWX7VoX7D9XsDQJsHABYV5JeHgrKVcBOH5XCDoFGDcJUZ1F7Z1BeD5BiDMBYZSXeV5FaVoFGD9NwDQJwHANOV5FUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NmZSBiHIBeD5B/DMrYVcFeDWJeHMBODcBqVINUDSrYHuBOHgNOHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BqHgBYHErsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIJeD9BsH9FaHIBeHQNUDEvsVkJ3H5X/ZuB/HQBiDQFaZ1N7D5BODMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeDQX7HABYHuBODMBYVcBUDWJeHMJsDcFYZSBqHAN7V5BODMveHArCDuJeVoJwD9XsZSBiHIBeHQFaDMvOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuBODcBwDuBqDSBYD5BqHgrwV9BUDur/HMJsHQBiVINUHANOZMBOHgvsZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWF/VoraD9XOZSB/Z1rYD5BiDMzGHEFiDWFqZuFaDcJeDQX7HIBeD5rqHgrKVcFCDWXCDoraDcJUZ1F7DSrYV5B/DEBOZSJqV5FaDoF7D9XsZSX7Z1BYV5JeHuzGVIBODWXKDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHAN7HuFGDEvsHErsDWF/HMJsD9NwZSBiDSNaV5JeHuvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoX7HQBqZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQFYDQFUD1BeHQXGDMNOV9BUDWF/HIXGD9BsZSFaHINKZMB/HgNOHArsH5FYVoJeDcBwH9X7HArYVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['form_detallepedido_compra']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['form_detallepedido_compra']['ordem_cmp'] = ""; 
@@ -2681,6 +2682,11 @@ ob_start();
     sajax_export("ajax_form_detallepedido_compra_backup_line");
     sajax_export("ajax_form_detallepedido_compra_table_refresh");
     sajax_handle_client_request();
+
+if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) {
+    $inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['param']['buffer_output'] = true;
+    ob_start();
+}
 
     $inicial_form_detallepedido_compra->contr_form_detallepedido_compra->controle();
 //
@@ -4708,6 +4714,10 @@ ob_start();
       global $inicial_form_detallepedido_compra;
       $aResp = array();
 
+      if (isset($inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['wizard']))
+      {
+          $aResp['wizard'] = $inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['wizard'];
+      }
       if (isset($inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['empty_filter']))
       {
           $aResp['empty_filter'] = $inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['empty_filter'];
@@ -4804,6 +4814,14 @@ ob_start();
          else
          {
             $aResp['clearUpload'] = 'N';
+         }
+         if (isset($inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['btnDisabled']) && '' != $inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['btnDisabled'])
+         {
+            form_detallepedido_compra_pack_btn_disabled($aResp);
+         }
+         if (isset($inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['btnLabel']) && '' != $inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['btnLabel'])
+         {
+            form_detallepedido_compra_pack_btn_label($aResp);
          }
          if (isset($inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['varList']) && !empty($inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['varList']))
          {
@@ -4908,8 +4926,13 @@ ob_start();
       }
       if (is_array($aResp))
       {
-          $oJson = new Services_JSON();
-          echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          if (isset($aResp['wizard'])) {
+              echo json_encode($aResp);
+          }
+          else {
+              $oJson = new Services_JSON();
+              echo "var res = " . trim(sajax_get_js_repr($oJson->encode($aResp))) . "; res;";
+          }
       }
       else
       {
@@ -5158,6 +5181,24 @@ ob_start();
                                          'value' => $sValue);
       }
    } // form_detallepedido_compra_pack_master_value
+
+   function form_detallepedido_compra_pack_btn_disabled(&$aResp)
+   {
+      global $inicial_form_detallepedido_compra;
+      $aResp['btnDisabled'] = array();
+      foreach ($inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['btnDisabled'] as $btnName => $btnStatus) {
+        $aResp['btnDisabled'][$btnName] = $btnStatus;
+      }
+   } // form_detallepedido_compra_pack_ajax_alert
+
+   function form_detallepedido_compra_pack_btn_label(&$aResp)
+   {
+      global $inicial_form_detallepedido_compra;
+      $aResp['btnLabel'] = array();
+      foreach ($inicial_form_detallepedido_compra->contr_form_detallepedido_compra->NM_ajax_info['btnLabel'] as $btnName => $btnLabel) {
+        $aResp['btnLabel'][$btnName] = $btnLabel;
+      }
+   } // form_detallepedido_compra_pack_ajax_alert
 
    function form_detallepedido_compra_pack_ajax_alert(&$aResp)
    {

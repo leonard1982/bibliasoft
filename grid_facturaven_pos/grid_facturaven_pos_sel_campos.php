@@ -184,7 +184,6 @@ function Sel_cmp_process()
       $tab_ger_campos['envio_dataico'] = "on";
       $tab_blk_campos[] = "envio_dataico";
       $tab_ger_campos['opciones'] = "on";
-      $tab_blk_campos[] = "opciones";
       $tab_ger_campos['idfacven'] = "on";
       $tab_ger_campos['numfacven'] = "on";
       $tab_ger_campos['fechavenc'] = "on";
@@ -214,6 +213,7 @@ function Sel_cmp_process()
       $tab_ger_campos['copiar'] = "on";
       $tab_ger_campos['existeentns'] = "on";
       $tab_ger_campos['imprimir'] = "on";
+      $tab_ger_campos['sc_clasificacion'] = "on";
 
 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['field_display']))
@@ -532,7 +532,7 @@ function proc_btn_sel(btn, proc) {
  .sc_ui_sortable {
   list-style-type: none;
   margin: 0;
-  min-width: 225px;
+  min-width: 120px;
  }
  .sc_ui_sortable li {
   margin: 0 3px 3px 3px;
@@ -849,6 +849,13 @@ if (!$this->embbed)
    {
 ?>
    <?php echo nmButtonOutput($this->arr_buttons, "bsair_appdiv", "self.parent.tb_remove(); buttonunselectedSF();", "self.parent.tb_remove(); buttonunselectedSF();", "Bsair", "", "", "", "absmiddle", "", "0px", $this->path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   elseif ($_SESSION['scriptcase']['proc_mobile'])
+   {
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "closeAllModalPanes();", "closeAllModalPanes();", "Bsair", "", "", "", "absmiddle", "", "0px", $this->path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }

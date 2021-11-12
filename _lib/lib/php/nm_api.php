@@ -133,6 +133,16 @@ function nm_get_api_gateways($api = '')
         "json_oauth" => ['placeholder' => 'Your Json Oauth', 'type' => 'textarea'],
         "auth_code" => ['placeholder' => 'Click in button and insert Auth Code generated', 'type' => 'gd_auth_code'],
     ];
+    /*
+    $arr_apis['storage']['onedrive'] = [
+        'api_key' => ['placeholder' => 'Your App Key'],
+        'api_secret' => ['placeholder' => 'Your App Secret'],
+        "auth_code" => ['placeholder' => 'Click in button and insert Auth Code generated', 'type' => 'od_auth_code'],
+    ];*/
+    $arr_apis['auth']['google_authenticator'] = [
+       // 'salt' => ['placeholder' => 'Salt'],
+        'domain' => ['placeholder' => 'Domain'],
+    ];
 
     if (!empty($api))
         return $arr_apis[$api];
@@ -180,6 +190,10 @@ use Kunnu\Dropbox\DropboxApp;
 use Omnipay\Omnipay;
 use Plivo\RestClient;
 use Twilio\Rest\Client;
+use Tsk\OneDrive\Services\OneDriveService;
+use Tsk\OneDrive\Client as OndriveClient;
+use Tsk\OneDrive\Http\MediaFileUpload;
+use Google\Authenticator\GoogleAuthenticator;
 
 function sc_call_api($profile, $arr_settings = [])
 {
@@ -383,12 +397,33 @@ function sc_call_api($profile, $arr_settings = [])
             return new Google_Service_Drive($client);
 
             break;
+        case 'onedrive':
+
+                $client = api_onedrive_get_client($profile, $arr_settings['settings']['api_key'], $arr_settings['settings']['api_secret'],
+                    isset($arr_settings['settings']['auth_code']) ? $arr_settings['settings']['auth_code'] : '',
+                    isset($arr_settings['settings']['token_code']) ? $arr_settings['settings']['token_code'] : '',
+                    isset($arr_settings['settings']['return_token']) ? $arr_settings['settings']['return_token'] : false);
+                return $client;
+
+            break;
+        case 'google_authenticator':
+                require_once $prod_path . '/vendor/autoload.php';
+                $client = new GoogleAuthenticator();
+
+                return [ $client, $arr_settings['settings'] ];
+
+            break;
 
 
     }
 
 }
 
+function sc_api_ondrive_get_url($profile, $api_key, $api_secret)
+{
+    $client = sc_call_api($profile, ['gateway'=> 'onedrive', 'settings' => ['api_secret' => $api_secret, 'api_key' => $api_key]]);
+    return $client->createAuthUrl();
+}
 function sc_api_gc_get_url($app_name, $json_oauth)
 {
     return api_google_get_client('', $app_name, $json_oauth);
@@ -449,6 +484,59 @@ function api_google_get_client($profile, $app_name, $json_oauth, $auth_code = ''
             return $client->createAuthUrl();
 
         }
+        // Save the token to a file.
+
+    }
+    return $client;
+}
+
+function api_onedrive_get_client($profile, $api_key, $api_secret, $auth_code = '', $token='', $return_token = false)
+{
+    $prod_path = nm_get_prod_path();
+
+    $json_file = __DIR__ . "/api_od_" . $profile . ".json";
+
+    require_once $prod_path . '/vendor/autoload.php';
+
+    $client = new OndriveClient();
+    $client->setClientId($api_key);
+    //$client->setTenantId('125b3545-7c05-4135-8caa-ec73a23aa2cd');
+    $client->setClientSecret($api_secret);
+    $client->setRedirectUri('http://localhost');
+    $client->setScopes([
+        OneDriveService::ONEDRIVE_OFFLINE_ACCESS,
+        OneDriveService::ONEDRIVE_FILE_READ,
+        OneDriveService::ONEDRIVE_FILE_READ_ALL,
+        OneDriveService::ONEDRIVE_FILE_READ_WRITE,
+        OneDriveService::ONEDRIVE_FILE_READ_WRITE_ALL
+    ]);
+
+    if (!empty($token)) {
+        $client->setAccessToken($token);
+    }
+    else if(!empty($auth_code)){
+        $token = json_encode($client->fetchAccessTokenWithAuthCode($auth_code));
+        file_put_contents($json_file, $token);
+        $client->setAccessToken($token);
+        if($return_token){
+            return $token;
+        }
+    } else{
+        try {
+            return ($client->createAuthUrl());
+        }catch(Exception $e){
+            dd($e);
+        }
+        return $client->createAuthUrl();
+    }
+
+    // If there is no previous token or it's expired.
+    if ($client->isAccessTokenExpired()) {
+        // Refresh the token if possible, else fetch a new one.
+        $client->refreshToken();
+
+        $token = $client->getAccessToken();
+        file_put_contents($json_file, $token);
         // Save the token to a file.
 
     }
@@ -844,6 +932,22 @@ function sc_api_upload($arr_settings)
                 ));
 
                 return true;
+                break;
+            case 'onedrive':
+                $handle   = fopen($arr_settings['file'], 'rb');
+                $fileSize = filesize($arr_settings['file']);
+                $chunkSize = 1024*1024;
+
+                $media = new MediaFileUpload($instance, basename($arr_settings['file']), $arr_settings['parents'], true, $chunkSize);
+                $media->setFileSize($fileSize);
+
+                $res = null;
+                while (!feof($handle)) {
+                    $bytes = fread($handle, $chunkSize);
+                    $res = $media->nextChunk($bytes);
+                }
+                return true;
+                break;
         }
     } catch (exception $e) {
         echo isset($nmgp_lang[$_SESSION['scriptcase']['str_lang']]['nmgp_lang_usr_lang_error_upload']) ? $nmgp_lang[$_SESSION['scriptcase']['str_lang']]['nmgp_lang_usr_lang_error_upload'] : '';
@@ -907,6 +1011,7 @@ function sc_api_download($arr_settings)
                 }
 
                 break;
+
             case 'google_drive':
                 if (isset($arr_settings['parents']) && !empty($arr_settings['parents'])) {
                     $id = '';
@@ -944,6 +1049,21 @@ function sc_api_download($arr_settings)
                 $content = $instance->files->get($id, array("alt" => "media"));
                 //$file_destination = utf8_encode($file_destination);
                 file_put_contents($file_destination, $content->getBody()->getContents());
+
+                break;
+            case 'onedrive':
+                $handle   = fopen($arr_settings['file'], 'rb');
+                $fileSize = filesize($arr_settings['file']);
+                $chunkSize = 1024*1024;
+
+                $media = new MediaFileUpload($instance, basename($arr_settings['file']), $arr_settings['parents'], true, $chunkSize);
+                $media->setFileSize($fileSize);
+
+                $res = null;
+                while (!feof($handle)) {
+                    $bytes = fread($handle, $chunkSize);
+                    $res = $media->nextChunk($bytes);
+                }
 
                 break;
         }

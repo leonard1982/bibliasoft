@@ -281,8 +281,13 @@ function Sel_processa_out()
 
       $this->Sel_css($bol_css_all);
 
+if(isset($bol_sel_campos_include) && $bol_sel_campos_include && $_SESSION['scriptcase']['proc_mobile'])
+{
 ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript" src="../_lib/lib/js/nm_touchfix.jquery.js"></script>
+<?php
+}
+?><script language="javascript" type="text/javascript">
 
 <?php
 if ($this->embbed)
@@ -483,7 +488,7 @@ function proc_btn_sel(btn, proc) {
  .sc_ui_sortable {
   list-style-type: none;
   margin: 0;
-  min-width: 225px;
+  min-width: 120px;
  }
  .sc_ui_sortable li {
   margin: 0 3px 3px 3px;
@@ -799,6 +804,13 @@ if (!$this->embbed)
    {
 ?>
    <?php echo nmButtonOutput($this->arr_buttons, "bsair_appdiv", "self.parent.tb_remove(); buttonunselectedSF();", "self.parent.tb_remove(); buttonunselectedSF();", "Bsair", "", "", "", "absmiddle", "", "0px", $this->path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+?>
+<?php
+   }
+   elseif ($_SESSION['scriptcase']['proc_mobile'])
+   {
+?>
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "closeAllModalPanes();", "closeAllModalPanes();", "Bsair", "", "", "", "absmiddle", "", "0px", $this->path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }

@@ -80,6 +80,7 @@ Table_sv_fil[3] = "asentada";
 Table_sv_fil[4] = "banco";
 Table_sv_fil[5] = "resolucion";
 Table_sv_fil[6] = "vendedor";
+Table_sv_fil[7] = "id_clasificacion";
 function ajax_select_filter(parm)
 {
     nmAjaxProcOn();

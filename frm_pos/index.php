@@ -217,8 +217,8 @@ class frm_pos_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "163114"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211008"; 
-      $this->nm_hr_ult_alt   = "180855"; 
+      $this->nm_dt_ult_alt   = "20211025"; 
+      $this->nm_hr_ult_alt   = "115408"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -784,6 +784,8 @@ class frm_pos_ini
       include("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Tree_img_col    = trim($str_tree_col);
       $this->Tree_img_exp    = trim($str_tree_exp);
+      $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
+      $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -908,7 +910,7 @@ class frm_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDQFUDSBYHQB/DMrYZSJqH5FqVErqHQXOH9BqHIBeHuXGHgBOZSJ3H5FGZuBOD9FYDQX7D1veHQNUDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWF/DoF7DcXGDQFUD1veD5JsHuBYV9FeV5FYHIF7HQNmZSBOHAvsZMBODErKVkXeHEFaZuXGHQBiDQFGD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDErKVkXeV5FqDoFUD9NwDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFGHQBiZ1X7DSNOHQFaHgNKVkJqDWrGZuFaHQXsDQFUDSBYVWJwHuvmVcFCDuX7VoBqHQXOZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5BqHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrwDkBOHEX7HIJeHQXGZ1FGHANOD5JeDEvsHEFiDuFaZuBqDcBiH9FUHIrKVWJeHgrwDkBODWF/DoXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQX7D1BeHuFGDMNODkB/H5XCDoFUHQXOZ1FaHAvCZMXGHgBeZSXeHEXCDoB/HQNwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQFUDMveVkJqHEXCHIraDcJeH9X7DSBYV5X7HgrwVcBUHEFYVoraHQBiZ1BODSNOHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5JeHuzGVIBOV5FYVoJwD9XOZ1F7Z1BeD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIFGD9NwH9FGHArYV5BOHuNOVcBODWF/VoB/DcNmZ1BiHIveV5JeHgvsHEJGH5BmZuB/D9NmDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHANKV5BODMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgNKDkBsV5FqHIraHQXOZSBiHABYVWXGDMzGDkB/DWXCDoFGHQNmZkBiHArYHuJsHgrKVkXeV5FaVoFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -3478,8 +3480,7 @@ function fAutorizar2()
 	console.log("autorizar codigo de barras");
 	
 	$("#validar_codbarras").val("SI");
-	$("#codbarra_cantidad").val("1");
-	$("#codbarra_precio").val("");
+	
 	$("#codbarras_tmp").val("");
 
 	$("#dialog2").show();
@@ -5285,12 +5286,6 @@ $(document).ready(function(){
 
 										var filas = $("#detallefactura tr").length;
 
-										$("#ventaitemcantidad").val("");
-										$("#ventaitemprecio").val("");
-										$("#ventaitemdescuento").val("");
-										$("#txt_articulo").val("");
-										$("#txt_articulo").focus();
-
 										console.log(filas);
 
 										var idfactura = $("#idfactura").val();
@@ -5344,19 +5339,54 @@ $(document).ready(function(){
 											);
 
 											fRecalcular();
+											
+											$("#ventaitemcantidad").val("");
+											$("#ventaitemprecio").val("");
+											$("#ventaitemdescuento").val("");
+											$("#txt_articulo").val("");
+											$("#txt_articulo").focus();
 										}
 										else
 										{
 											fAutorizar2();
 											
+											var cantidad = $("#ventaitemcantidad").val();
+											var precio   = $("#ventaitemprecio").val();
+											
 											$("#codbarra_nombrepro").text("");
 											$("#codbarras_tmp").val(codbarras);
 											$("#codbarra_nombrepro").text(o.nompro);
-											$("#sc_codbarra_precio").html(o.lista_precios);
-											$("#codbarra_precio").val($("#sc_codbarra_precio").val());
+											
+											if(!$.isEmptyObject(precio))
+											{
+												$("#sc_codbarra_precio").html("<option value='"+precio+"'>Manual</option>"+o.lista_precios);
+												$("#codbarra_precio").val(formatNumber(precio));
+											}
+											else
+											{
+												$("#sc_codbarra_precio").html(o.lista_precios);
+												$("#codbarra_precio").val($("#sc_codbarra_precio").val());
+											}
+											
+											if(!$.isEmptyObject(cantidad))
+											{
+												$("#codbarra_cantidad").val(cantidad);
+											}
+											else
+											{
+												$("#codbarra_cantidad").val("1");
+											}
+											
+											$("#ventaitemcantidad").val("");
+											$("#ventaitemprecio").val("");
+											$("#ventaitemdescuento").val("");
+											$("#txt_articulo").val("");
+											$("#sc_codbarra_precio").focus();
 										}
 
-									}else{ 
+									}
+									else
+									{ 
 
 										alertify.set('notifier','position', 'top-center');
 										alertify.error('Artículo inexistente.');
