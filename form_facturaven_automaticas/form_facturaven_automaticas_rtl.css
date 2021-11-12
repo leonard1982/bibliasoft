@@ -43,6 +43,9 @@
 .css_tipo_label { }
 .css_tipo_line { }
 .css_tipo_obj { }
+.css_id_clasificacion_label { }
+.css_id_clasificacion_line {text-align:left;}
+.css_id_clasificacion_obj {text-align:left;}
 .css_detalle_label { }
 .css_detalle_line { }
 .css_detalle_obj { }

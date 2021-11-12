@@ -2495,6 +2495,210 @@ else
 
 <?php } 
 ?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_clasificacion']))
+   {
+       $this->nm_new_label['id_clasificacion'] = "Clasificación";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_clasificacion = $this->id_clasificacion;
+   $sStyleHidden_id_clasificacion = '';
+   if (isset($this->nmgp_cmp_hidden['id_clasificacion']) && $this->nmgp_cmp_hidden['id_clasificacion'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_clasificacion']);
+       $sStyleHidden_id_clasificacion = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_clasificacion = 'display: none;';
+   $sStyleReadInp_id_clasificacion = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_clasificacion']) && $this->nmgp_cmp_readonly['id_clasificacion'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_clasificacion']);
+       $sStyleReadLab_id_clasificacion = '';
+       $sStyleReadInp_id_clasificacion = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_clasificacion']) && $this->nmgp_cmp_hidden['id_clasificacion'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_clasificacion" value="<?php echo $this->form_encode_input($this->id_clasificacion) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_id_clasificacion_line" id="hidden_field_data_id_clasificacion" style="<?php echo $sStyleHidden_id_clasificacion; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_clasificacion_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_id_clasificacion_label" style=""><span id="id_label_id_clasificacion"><?php echo $this->nm_new_label['id_clasificacion']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_clasificacion"]) &&  $this->nmgp_cmp_readonly["id_clasificacion"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array(); 
+    }
+
+   $old_value_fechaven = $this->fechaven;
+   $old_value_dias_decredito = $this->dias_decredito;
+   $old_value_subtotal = $this->subtotal;
+   $old_value_valoriva = $this->valoriva;
+   $old_value_total = $this->total;
+   $old_value_vendedor = $this->vendedor;
+   $old_value_numfacven = $this->numfacven;
+   $old_value_idfacven = $this->idfacven;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_fechaven = $this->fechaven;
+   $unformatted_value_dias_decredito = $this->dias_decredito;
+   $unformatted_value_subtotal = $this->subtotal;
+   $unformatted_value_valoriva = $this->valoriva;
+   $unformatted_value_total = $this->total;
+   $unformatted_value_vendedor = $this->vendedor;
+   $unformatted_value_numfacven = $this->numfacven;
+   $unformatted_value_idfacven = $this->idfacven;
+
+   $nm_comando = "SELECT id, descripcion  FROM facturaven_clasificacion  ORDER BY descripcion";
+
+   $this->fechaven = $old_value_fechaven;
+   $this->dias_decredito = $old_value_dias_decredito;
+   $this->subtotal = $old_value_subtotal;
+   $this->valoriva = $old_value_valoriva;
+   $this->total = $old_value_total;
+   $this->vendedor = $old_value_vendedor;
+   $this->numfacven = $old_value_numfacven;
+   $this->idfacven = $old_value_idfacven;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_clasificacion_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_clasificacion_1))
+          {
+              foreach ($this->id_clasificacion_1 as $tmp_id_clasificacion)
+              {
+                  if (trim($tmp_id_clasificacion) === trim($cadaselect[1])) { $id_clasificacion_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_clasificacion) === trim($cadaselect[1])) { $id_clasificacion_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_clasificacion" value="<?php echo $this->form_encode_input($id_clasificacion) . "\">" . $id_clasificacion_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_clasificacion();
+   $x = 0 ; 
+   $id_clasificacion_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_clasificacion_1))
+          {
+              foreach ($this->id_clasificacion_1 as $tmp_id_clasificacion)
+              {
+                  if (trim($tmp_id_clasificacion) === trim($cadaselect[1])) { $id_clasificacion_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_clasificacion) === trim($cadaselect[1])) { $id_clasificacion_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_clasificacion_look))
+          {
+              $id_clasificacion_look = $this->id_clasificacion;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_clasificacion\" class=\"css_id_clasificacion_line\" style=\"" .  $sStyleReadLab_id_clasificacion . "\">" . $this->form_format_readonly("id_clasificacion", $this->form_encode_input($id_clasificacion_look)) . "</span><span id=\"id_read_off_id_clasificacion\" class=\"css_read_off_id_clasificacion" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_clasificacion . "\">";
+   echo " <span id=\"idAjaxSelect_id_clasificacion\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_clasificacion_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_clasificacion\" name=\"id_clasificacion\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_clasificacion) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_clasificacion)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_clasificacion_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_clasificacion_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
 
 
 

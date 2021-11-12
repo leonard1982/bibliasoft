@@ -3501,6 +3501,43 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_facturaven_automaticas_mob_validate_detalle_cb
 
+  // ---------- Validate id_clasificacion
+  function do_ajax_form_facturaven_automaticas_mob_validate_id_clasificacion()
+  {
+    var nomeCampo_id_clasificacion = "id_clasificacion";
+    var var_id_clasificacion = scAjaxGetFieldSelect(nomeCampo_id_clasificacion);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_facturaven_automaticas_mob_validate_id_clasificacion(var_id_clasificacion, var_script_case_init, do_ajax_form_facturaven_automaticas_mob_validate_id_clasificacion_cb);
+  } // do_ajax_form_facturaven_automaticas_mob_validate_id_clasificacion
+
+  function do_ajax_form_facturaven_automaticas_mob_validate_id_clasificacion_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_clasificacion";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_facturaven_automaticas_mob_validate_id_clasificacion_cb
+
   // ---------- Refresh idcli
   function do_ajax_form_facturaven_automaticas_mob_refresh_idcli()
   {
@@ -3832,6 +3869,7 @@ function scJs_sweetalert_params(params) {
     var var_numfacven = scAjaxGetFieldText("numfacven");
     var var_idfacven = scAjaxGetFieldHidden("idfacven");
     var var_tipo = scAjaxGetFieldText("tipo");
+    var var_id_clasificacion = scAjaxGetFieldSelect("id_clasificacion");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -3841,7 +3879,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_facturaven_automaticas_mob_submit_form(var_resolucion, var_formapago, var_fechaven, var_credito, var_dias_decredito, var_idcli, var_dircliente, var_subtotal, var_valoriva, var_total, var_observaciones, var_vendedor, var_numfacven, var_idfacven, var_tipo, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_facturaven_automaticas_mob_submit_form_cb);
+    x_ajax_form_facturaven_automaticas_mob_submit_form(var_resolucion, var_formapago, var_fechaven, var_credito, var_dias_decredito, var_idcli, var_dircliente, var_subtotal, var_valoriva, var_total, var_observaciones, var_vendedor, var_numfacven, var_idfacven, var_tipo, var_id_clasificacion, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_facturaven_automaticas_mob_submit_form_cb);
   } // do_ajax_form_facturaven_automaticas_mob_submit_form
 
   function do_ajax_form_facturaven_automaticas_mob_submit_form_cb(sResp)
@@ -3882,6 +3920,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("idfacven");
       scAjaxHideErrorDisplay("tipo");
       scAjaxHideErrorDisplay("detalle");
+      scAjaxHideErrorDisplay("id_clasificacion");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['dashboard_info']['under_dashboard']) {
@@ -3957,6 +3996,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automati
     scAjaxHideErrorDisplay("idfacven");
     scAjaxHideErrorDisplay("tipo");
     scAjaxHideErrorDisplay("detalle");
+    scAjaxHideErrorDisplay("id_clasificacion");
     var var_idfacven = document.F2.idfacven.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -4111,6 +4151,7 @@ if ($this->Embutida_form)
   ajax_field_list[13] = "idfacven";
   ajax_field_list[14] = "tipo";
   ajax_field_list[15] = "detalle";
+  ajax_field_list[16] = "id_clasificacion";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -4135,7 +4176,8 @@ if ($this->Embutida_form)
     "numfacven": {"label": "Número", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "idfacven": {"label": "Idfacven", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "tipo": {"label": "Tipo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "detalle": {"label": "", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "detalle": {"label": "", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_clasificacion": {"label": "Clasificación", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -4171,7 +4213,8 @@ if ($this->Embutida_form)
     "numfacven": new Array(),
     "idfacven": new Array(),
     "tipo": new Array(),
-    "detalle": new Array()
+    "detalle": new Array(),
+    "id_clasificacion": new Array()
   };
   ajax_field_mult["resolucion"][1] = "resolucion";
   ajax_field_mult["formapago"][1] = "formapago";
@@ -4189,6 +4232,7 @@ if ($this->Embutida_form)
   ajax_field_mult["idfacven"][1] = "idfacven";
   ajax_field_mult["tipo"][1] = "tipo";
   ajax_field_mult["detalle"][1] = "detalle";
+  ajax_field_mult["id_clasificacion"][1] = "id_clasificacion";
 
   var ajax_field_id = {
     "resolucion": new Array("hidden_field_label_resolucion", "hidden_field_data_resolucion"),
@@ -4201,7 +4245,8 @@ if ($this->Embutida_form)
     "valoriva": new Array("hidden_field_label_valoriva", "hidden_field_data_valoriva"),
     "total": new Array("hidden_field_label_total", "hidden_field_data_total"),
     "observaciones": new Array("hidden_field_label_observaciones", "hidden_field_data_observaciones"),
-    "detalle": new Array("hidden_field_label_detalle", "hidden_field_data_detalle")
+    "detalle": new Array("hidden_field_label_detalle", "hidden_field_data_detalle"),
+    "id_clasificacion": new Array("hidden_field_label_id_clasificacion", "hidden_field_data_id_clasificacion")
   };
 
   var ajax_read_only = {
@@ -4220,7 +4265,8 @@ if ($this->Embutida_form)
     "numfacven": "off",
     "idfacven": "on",
     "tipo": "off",
-    "detalle": "off"
+    "detalle": "off",
+    "id_clasificacion": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -4490,6 +4536,23 @@ if ($this->Embutida_form)
     if ("detalle" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_clasificacion" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

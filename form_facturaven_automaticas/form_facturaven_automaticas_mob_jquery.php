@@ -67,6 +67,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["idfacven" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tipo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["detalle" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_clasificacion" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -166,6 +167,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["detalle" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["id_clasificacion" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_clasificacion" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -187,6 +194,9 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("dircliente" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_clasificacion" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   scEventControl_data[fieldName]["change"] = false;
@@ -250,6 +260,8 @@ function scJQEventsAdd(iSeqRow) {
                                             .bind('focus', function() { sc_form_facturaven_automaticas_dias_decredito_onfocus(this, iSeqRow) });
   $('#id_sc_field_tipo' + iSeqRow).bind('blur', function() { sc_form_facturaven_automaticas_tipo_onblur(this, iSeqRow) })
                                   .bind('focus', function() { sc_form_facturaven_automaticas_tipo_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_clasificacion' + iSeqRow).bind('blur', function() { sc_form_facturaven_automaticas_id_clasificacion_onblur(this, iSeqRow) })
+                                              .bind('focus', function() { sc_form_facturaven_automaticas_id_clasificacion_onfocus(this, iSeqRow) });
   $('#id_sc_field_detalle' + iSeqRow).bind('blur', function() { sc_form_facturaven_automaticas_detalle_onblur(this, iSeqRow) })
                                      .bind('focus', function() { sc_form_facturaven_automaticas_detalle_onfocus(this, iSeqRow) });
 } // scJQEventsAdd
@@ -408,6 +420,16 @@ function sc_form_facturaven_automaticas_tipo_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_facturaven_automaticas_id_clasificacion_onblur(oThis, iSeqRow) {
+  do_ajax_form_facturaven_automaticas_mob_validate_id_clasificacion();
+  scCssBlur(oThis);
+}
+
+function sc_form_facturaven_automaticas_id_clasificacion_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_facturaven_automaticas_detalle_onblur(oThis, iSeqRow) {
   do_ajax_form_facturaven_automaticas_mob_validate_detalle();
   scCssBlur(oThis);
@@ -465,6 +487,7 @@ function displayChange_block_3(status) {
 
 function displayChange_block_4(status) {
 	displayChange_field("detalle", "", status);
+	displayChange_field("id_clasificacion", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -484,6 +507,7 @@ function displayChange_row(row, status) {
 	displayChange_field_idfacven(row, status);
 	displayChange_field_tipo(row, status);
 	displayChange_field_detalle(row, status);
+	displayChange_field_id_clasificacion(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -534,6 +558,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("detalle" == field) {
 		displayChange_field_detalle(row, status);
+	}
+	if ("id_clasificacion" == field) {
+		displayChange_field_id_clasificacion(row, status);
 	}
 }
 
@@ -636,11 +663,27 @@ function displayChange_field_detalle(row, status) {
 	}
 }
 
+function displayChange_field_id_clasificacion(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_clasificacion__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_clasificacion" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_clasificacion");
+	}
+}
+
 function scRecreateSelect2() {
 	displayChange_field_resolucion("all", "on");
 	displayChange_field_credito("all", "on");
 	displayChange_field_idcli("all", "on");
 	displayChange_field_dircliente("all", "on");
+	displayChange_field_id_clasificacion("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -1302,6 +1345,9 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "dircliente" == specificField) {
     scJQSelect2Add_dircliente(seqRow);
   }
+  if (null == specificField || "id_clasificacion" == specificField) {
+    scJQSelect2Add_id_clasificacion(seqRow);
+  }
 } // scJQSelect2Add
 
 function scJQSelect2Add_resolucion(seqRow) {
@@ -1376,6 +1422,24 @@ function scJQSelect2Add_dircliente(seqRow) {
   );
 } // scJQSelect2Add
 
+function scJQSelect2Add_id_clasificacion(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_clasificacion_obj" : "#id_sc_field_id_clasificacion" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_clasificacion_obj',
+      dropdownCssClass: 'css_id_clasificacion_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -1389,6 +1453,7 @@ function scJQElementsAdd(iLine) {
   setTimeout(function () { if ('function' == typeof displayChange_field_credito) { displayChange_field_credito(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_idcli) { displayChange_field_idcli(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_dircliente) { displayChange_field_dircliente(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_clasificacion) { displayChange_field_id_clasificacion(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)
