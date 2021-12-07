@@ -1599,7 +1599,7 @@ if (!isset($this->sc_temp_regimen_emp)) {$this->sc_temp_regimen_emp = (isset($_S
 	$this->nmgp_cmp_hidden["sabor"] = "off"; $this->NM_ajax_info['fieldDisplay']['sabor'] = 'off';
 	}
 
-if($this->sc_temp_gnit!="88261176")
+if($this->sc_temp_gnit!="88261176-7")
 {
 	$this->nmgp_cmp_hidden["para_registro_fe"] = "off"; $this->NM_ajax_info['fieldDisplay']['para_registro_fe'] = 'off';
 }

@@ -5614,6 +5614,42 @@ ALTER TABLE `facturaven` ADD `id_clasificacion` INT NOT NULL DEFAULT '1' AFTER `
 
 ALTER TABLE `facturaven_automaticas` ADD `id_clasificacion` INT NOT NULL DEFAULT '1' AFTER `id_trans_fe`;
 
+
+ALTER TABLE `terceros` ADD `archivo_cedula` VARCHAR(300) NULL DEFAULT NULL AFTER `celular_notificafe`, ADD `archivo_rut` VARCHAR(300) NULL DEFAULT NULL AFTER `archivo_cedula`, ADD `archivo_nit` VARCHAR(300) NULL DEFAULT NULL AFTER `archivo_rut`, ADD `archivo_pago` VARCHAR(300) NULL DEFAULT NULL AFTER `archivo_nit`;
+
+ALTER TABLE `terceros` ADD `id_plan` INT NOT NULL DEFAULT '0' AFTER `archivo_pago`, ADD `valor_plan` DECIMAL(12.2) NOT NULL DEFAULT '0' AFTER `id_plan`, ADD `fecha_registro_fe` DATETIME NULL DEFAULT NULL AFTER `valor_plan`;
+
+ALTER TABLE `productos` ADD `para_registro_fe` SET('SI','NO') NOT NULL DEFAULT 'NO' COMMENT 'Para uso netamente de soluciones navarro' AFTER `ubicacion`;
+
+ALTER TABLE `terceros` ADD `nombre_contador` VARCHAR(120) NULL DEFAULT NULL AFTER `fecha_registro_fe`;
+
+
+
+CREATE TABLE `facturaven_soporte_pago` ( `id` INT NOT NULL AUTO_INCREMENT , `archivo` VARCHAR(300) NULL DEFAULT NULL , `fechayhora` DATETIME NULL DEFAULT NULL , `id_venta` INT NOT NULL DEFAULT '0' , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci COMMENT = 'Para subir archivos de pago de suscripciones';
+
+ALTER TABLE `facturaven` ADD `fecha_pago` DATETIME NULL DEFAULT NULL AFTER `id_clasificacion`;
+
+
+
+
+CREATE TABLE `token_sms` ( `id` INT NOT NULL , `codigo` INT NOT NULL DEFAULT '0' , `creado` DATETIME NOT NULL , `activo` SET('SI','NO') NOT NULL DEFAULT 'SI' , `id_tercero` INT NOT NULL DEFAULT '0' ) ENGINE = InnoDB;
+
+ALTER TABLE `token_sms` ADD `celular` INT NOT NULL DEFAULT '0' AFTER `id_tercero`;
+
+ALTER TABLE `token_sms` CHANGE `celular` `celular` VARCHAR(20) NOT NULL DEFAULT '0';
+
+ALTER TABLE `token_sms` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`);
+
+ALTER TABLE `terceros` ADD `estado` VARCHAR(30) NULL DEFAULT NULL AFTER `nombre_contador`;
+
+ALTER TABLE `terceros` CHANGE `estado` `estado` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'PENDIENTE, ASIGNADO, PRODUCCION, SUSPENDIDO, INACTIVO';
+
+
+ALTER TABLE `terceros` CHANGE `empleado` `empleado` SET('SI','NO') CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT 'NO', CHANGE `proveedor` `proveedor` SET('SI','NO') CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT 'NO', CHANGE `creditoprov` `creditoprov` SET('SI','NO') CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT 'NO', CHANGE `autoretenedor` `autoretenedor` SET('SI','NO') CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT 'NO';
+ALTER TABLE `terceros` ADD `si_nomina` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `estado`, ADD `si_factura_electronica` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTER `si_nomina`, ADD `nombre_empresa_bd` VARCHAR(200) NULL DEFAULT NULL AFTER `si_factura_electronica`;
+
+ALTER TABLE `terceros` ADD `n_trabajadores` INT NOT NULL DEFAULT '0' AFTER `nombre_empresa_bd`;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

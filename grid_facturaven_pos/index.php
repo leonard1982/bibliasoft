@@ -233,8 +233,8 @@ class grid_facturaven_pos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211028"; 
-      $this->nm_hr_ult_alt   = "145451"; 
+      $this->nm_dt_ult_alt   = "20211112"; 
+      $this->nm_hr_ult_alt   = "162731"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1288,7 +1288,7 @@ class grid_facturaven_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuBqHIrwVWJsHgrwVIB/DWF/HMB/HQBiZ1F7HArYV5JsDMzGVkJqDWXCVoBiHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuXGDcJeDuFaDSrwD5BOHuBYVcFKDWFaHMFGDcBqH9B/DSBeHQF7DMBYVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaVoBODcJeDQX7D1BeVWJsHuBYVcFCDWJeVoB/D9BiZSB/HArYV5FUDMNKZSJGDWF/DoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHENiDuXKVoFGDcBwDuFaHAN7HuXGDMrwVcBOV5F/DoF7HQBiH9FaHAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5XGHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvODkFCDWFaVErqDcJUH9BqZ1BeHuFGDEBOZSJqHEFqZuBOHQFYDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDuFaD1veHQJwHuBOV9BUDWXCDoJsD9JmZSBODSNOV5X7HgNKHAFKV5FqDoF7D9JKZ9F7DSBYV5BqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBiHuvmVcXKDuX7HIFUD9JmZSBOD1vsD5BqDMvCZSJqHEFqVoJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7HAN7V5FUHgvsDkFCH5XCVEraD9XOZSB/HABYZMBqDMzGHEXeV5XCDoFUD9NwDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmZSFUDSzGD5F7DMvOVIB/Dur/HMX7DcBqZkBiHABYV5JeDMzGZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHArsDWFGDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFGDcJUZkBiD1NaZMBODENOHEFKV5FqHMJeDcBwDQJwHAvCV5JeDMrYVcFCDWFYHMrqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'])  
       { 
@@ -7200,7 +7200,8 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->dircliente = (string)$this->dircliente;
        $this->id_clasificacion = $this->rs_grid->fields[43] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->fecha_pago = $this->rs_grid->fields[44] ;  
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -7817,7 +7818,8 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->dircliente = (string)$this->dircliente;
        $this->id_clasificacion = $this->rs_grid->fields[43] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->fecha_pago = $this->rs_grid->fields[44] ;  
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -8249,7 +8251,8 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->dircliente = (string)$this->dircliente;
        $this->id_clasificacion = $this->rs_grid->fields[43] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->fecha_pago = $this->rs_grid->fields[44] ;  
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -8607,7 +8610,8 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->dircliente = (string)$this->dircliente;
        $this->id_clasificacion = $this->rs_grid->fields[43] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->fecha_pago = $this->rs_grid->fields[44] ;  
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -10246,7 +10250,8 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->dircliente = (string)$this->dircliente;
        $this->id_clasificacion = $this->rs_grid->fields[43] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->fecha_pago = $this->rs_grid->fields[44] ;  
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -10626,7 +10631,8 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->dircliente = (string)$this->dircliente;
        $this->id_clasificacion = $this->rs_grid->fields[43] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->fecha_pago = $this->rs_grid->fields[44] ;  
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -12048,7 +12054,8 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->dircliente = (string)$this->dircliente;
        $this->id_clasificacion = $this->rs_grid->fields[43] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->fecha_pago = $this->rs_grid->fields[44] ;  
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -13363,7 +13370,8 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->dircliente = (string)$this->dircliente;
        $this->id_clasificacion = $this->rs_grid->fields[43] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->fecha_pago = $this->rs_grid->fields[44] ;  
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -17611,7 +17619,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           $nm_aspas  = "'";
           $nm_aspas1 = "'";
       }
-      $Nm_datas['fechaven'] = "date";$Nm_datas['fechavenc'] = "date";$Nm_datas['creado'] = "datetime";$Nm_datas['editado'] = "datetime";$Nm_datas['inicio'] = "datetime";$Nm_datas['fin'] = "datetime";$Nm_datas['fecha_validacion'] = "datetime";
+      $Nm_datas['fechaven'] = "date";$Nm_datas['fechavenc'] = "date";$Nm_datas['creado'] = "datetime";$Nm_datas['editado'] = "datetime";$Nm_datas['inicio'] = "datetime";$Nm_datas['fin'] = "datetime";$Nm_datas['fecha_validacion'] = "datetime";$Nm_datas['fecha_pago'] = "datetime";
       if (isset($Nm_datas[$nome]))
       {
           for ($x = 0; $x < strlen($campo); $x++)

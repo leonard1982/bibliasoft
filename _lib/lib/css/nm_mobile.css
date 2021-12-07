@@ -92,7 +92,7 @@ td.scGridBlockFont tr > td {
     font-family: Arial;
 }
 
-.modal-pane-container.scGridPage, .modal-pane-container.scFilterPage , .modal-pane-container.scFormPage {
+.modal-pane-container.scGridPage, .modal-pane-container.scFilterPage , .modal-pane-container.scFormPage, .modal-pane-container.scAppCalendarPage {
     display: flex;
     flex-direction: column;
     position: fixed;

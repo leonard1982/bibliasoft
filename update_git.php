@@ -33,8 +33,12 @@ if($vso=="escritorio")
 else
 {
 	$conexion = new dbMysql("127.0.0.1","root",",.Facilweb2020",'facilweb',3306);
-	$vsql = "select nombre from empresas";
+	$vsql = "select nombre from empresas where nombre like 'inventario_%'";
 	$consulta = $conexion->consulta($vsql);
+	
+	//primero actualizamos la de copia
+	Shell_exec("cd /var/www/html/facilweb | mysql -h localhost --port=3306 -u root -p,.Facilweb2020 -f -D inventario_copia < /var/www/html/facilweb/script_update.sql");
+	
 	while($r = mysqli_fetch_array($consulta))
 	{
 		//echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";

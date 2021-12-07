@@ -1,34 +1,34 @@
 
 
 
-        var _process = function _process(fnExec, timeOut) {
-            var timeOutResolve;
-            if (typeof timeOut === 'number') {
-                timeOutResolve = timeOut
-            } else if (typeof timeOut === 'boolean' && timeOut) {
-                timeOutResolve = 200;
-            } else {
-                timeOutResolve = 1000;
-            }
-            if (typeof timeOut === 'boolean' && timeOut) {
-                return new Promise(function (resolve, reject) {
-                    var intervalHolder = setInterval(function () {
-                        if (fnExec()) {
-                            clearInterval(intervalHolder);
-                            resolve();
-                        }
-                    }, timeOutResolve);
-                });
-            } else {
-                return new Promise(function (resolve, reject) {
-                    setTimeout(function () {
-                        fnExec();
-                        resolve();
-                    }, timeOutResolve);
-                });
+var _process = function _process(fnExec, timeOut) {
+    var timeOutResolve;
+    if (typeof timeOut === 'number') {
+        timeOutResolve = timeOut
+    } else if (typeof timeOut === 'boolean' && timeOut) {
+        timeOutResolve = 200;
+    } else {
+        timeOutResolve = 1000;
+    }
+    if (typeof timeOut === 'boolean' && timeOut) {
+        return new Promise(function (resolve, reject) {
+            var intervalHolder = setInterval(function () {
+                if (fnExec()) {
+                    clearInterval(intervalHolder);
+                    resolve();
+                }
+            }, timeOutResolve);
+        });
+    } else {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                fnExec();
+                resolve();
+            }, timeOutResolve);
+        });
 
-            }
-        };
+    }
+};
 
 
 /** Adição no jQuery para abrir painéis */
@@ -170,7 +170,7 @@ jQuery.fn.openInModalPane = function(params) {
 jQuery.fn.toggleModalPane = function(state, fromPop) {
     var _self = $(this[0]).closest('.modal-pane-container');
     var didPop = (typeof fromPop === 'undefined' || fromPop === false) ? false : fromPop;
-    scBtnGrpHideMobile();
+    if (typeof scBtnGrpHideMobile === 'function') scBtnGrpHideMobile();
     $('a.selected').removeClass('selected');
     if (_self[0]) {
         var baseID = _self[0].hasAttribute('id') ? _self.attr('id') : false;
@@ -185,12 +185,12 @@ jQuery.fn.toggleModalPane = function(state, fromPop) {
                         if (typeof _self.attr('nm-modalpane-holdajax') !== 'undefined') paneHoldAjax = true;
                         if (typeof _self.attr('nm-modalpane-isframe') !== 'undefined') isFrame = true;
                         $('body, html').addClass('locked');
-                        toggleScrollButton('hide');
+                        if (typeof toggleScrollButton === 'function') toggleScrollButton('hide');
                     } else {
                         if (typeof _self.attr('nm-modalpane-holdajax') !== 'undefined') paneHoldAjax = false;
                         if (typeof _self.attr('nm-modalpane-isframe') !== 'undefined') isFrame = false;
                         $('body, html').removeClass('locked');
-                        checkScroll();
+                        if (typeof checkScroll === 'function') checkScroll();
                     }
                 } else {
                     if (state) {
@@ -198,13 +198,13 @@ jQuery.fn.toggleModalPane = function(state, fromPop) {
                         if (typeof _self.attr('nm-modalpane-isframe') !== 'undefined') isFrame = true;
                         _self.addClass('active');
                         $('body, html').addClass('locked');
-                        toggleScrollButton('hide');
+                        if (typeof toggleScrollButton === 'function') toggleScrollButton('hide');
                     } else {
                         if (typeof _self.attr('nm-modalpane-holdajax') !== 'undefined') paneHoldAjax = false;
                         if (typeof _self.attr('nm-modalpane-isframe') !== 'undefined') isFrame = false;
                         _self.removeClass('active');
                         $('body, html').removeClass('locked');
-                        checkScroll();
+                        if (typeof checkScroll === 'function') checkScroll();
                     }
                 }
             }
