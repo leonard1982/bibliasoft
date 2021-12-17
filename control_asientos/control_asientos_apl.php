@@ -2685,6 +2685,7 @@ if($vtrue)
 
 					
 					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					echo "sql si ya asiento caja: ".$vsql."<br><br>";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2720,6 +2721,7 @@ if($vtrue)
 						if($this->regenerar =="RE")
 						{
 							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							echo "sql si delete caja: ".$vsql."<br><br>";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2846,6 +2848,7 @@ if($vtrue)
 
 					
 					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					echo "sql si ya asiento ingresos: ".$vsql."<br><br>";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2881,6 +2884,7 @@ if($vtrue)
 						if($this->regenerar =="RE")
 						{
 							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							echo "sql si ya delete ingresos: ".$vsql."<br><br>";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3005,6 +3009,7 @@ if($vtrue)
 					$vobs   = $this->vimpuestos[$a][8]; 
 
 					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					echo "sql si ya asiento impuestos: ".$vsql."<br><br>";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3040,6 +3045,7 @@ if($vtrue)
 						if($this->regenerar =="RE")
 						{
 							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							echo "sql si delete impuestos: ".$vsql."<br><br>";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
