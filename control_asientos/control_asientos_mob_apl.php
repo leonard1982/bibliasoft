@@ -2790,6 +2790,8 @@ if($vtrue)
          $rf->Close();
       ;
 					}
+					
+					echo "<b>sql asiento caja</b>: ".$vsql."<br><br>";
 				}
 			}
 
@@ -2949,6 +2951,8 @@ if($vtrue)
          $rf->Close();
       ;
 					}
+					
+					echo "<b>sql asiento ingresos</b>: ".$vsql."<br><br>";
 				}
 			}
 
@@ -3106,6 +3110,8 @@ if($vtrue)
          $rf->Close();
       ;
 					}
+					
+					echo "<b>sql asiento impuestos</b>: ".$vsql."<br><br>";
 				}
 			}
 		}
