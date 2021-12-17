@@ -16,6 +16,38 @@ class grid_asientos_xls
    var $NM_ctrl_style = array();
    var $Arquivo;
    var $Tit_doc;
+   var $count_ger;
+   var $sum_valor;
+   var $tipo_Old;
+   var $arg_sum_tipo;
+   var $Label_tipo;
+   var $sc_proc_quebra_tipo;
+   var $count_tipo;
+   var $sum_tipo_valor;
+   var $prefijo_Old;
+   var $arg_sum_prefijo;
+   var $Label_prefijo;
+   var $sc_proc_quebra_prefijo;
+   var $count_prefijo;
+   var $sum_prefijo_valor;
+   var $fecha_Old;
+   var $arg_sum_fecha;
+   var $Label_fecha;
+   var $sc_proc_quebra_fecha;
+   var $count_fecha;
+   var $sum_fecha_valor;
+   var $cuenta_Old;
+   var $arg_sum_cuenta;
+   var $Label_cuenta;
+   var $sc_proc_quebra_cuenta;
+   var $count_cuenta;
+   var $sum_cuenta_valor;
+   var $numero2_Old;
+   var $arg_sum_numero2;
+   var $Label_numero2;
+   var $sc_proc_quebra_numero2;
+   var $count_numero2;
+   var $sum_numero2_valor;
    //---- 
    function __construct()
    {
@@ -90,6 +122,13 @@ class grid_asientos_xls
           }
       }
       $this->Use_phpspreadsheet = (phpversion() >=  "7.3.9" && is_dir($this->Ini->path_third . '/phpspreadsheet')) ? true : false;
+      $this->SC_top = array();
+      $this->SC_bot = array();
+      $this->SC_top[] = "tipo";
+      $this->SC_top[] = "prefijo";
+      $this->SC_top[] = "fecha";
+      $this->SC_top[] = "cuenta";
+      $this->SC_top[] = "numero2";
       $this->Xls_tot_col = 0;
       $this->Xls_row     = 0;
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
@@ -168,6 +207,10 @@ class grid_asientos_xls
       $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'];
       $this->Tot->$Gb_geral();
       $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['tot_geral'][1];
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "_NM_SC_")
+      {
+          $this->sum_valor = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['tot_geral'][2];
+      }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && !$this->Ini->sc_export_ajax) {
           require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
           $this->pb = new scProgressBar();
@@ -307,30 +350,43 @@ class grid_asientos_xls
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT tipo, prefijo, numero, convert(char(23),fecha,121), nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, convert(char(23),fecha,121), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, EXTEND(fecha, YEAR TO DAY), nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, EXTEND(fecha, YEAR TO DAY), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq'];
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo'])) 
+      { 
+          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq'])) 
+          { 
+              $nmgp_select .= " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo']; 
+              $nmgp_select_count .= " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo']; 
+          } 
+          else
+          { 
+              $nmgp_select .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo'] . ")"; 
+              $nmgp_select_count .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo'] . ")"; 
+          } 
+      } 
       $nmgp_order_by = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['order_grid'];
       $nmgp_select .= $nmgp_order_by; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select;
@@ -357,18 +413,153 @@ class grid_asientos_xls
          $this->Xls_col = 0;
          $this->Xls_row++;
          $this->tipo = $rs->fields[0] ;  
-         $this->prefijo = $rs->fields[1] ;  
-         $this->numero = $rs->fields[2] ;  
-         $this->fecha = $rs->fields[3] ;  
-         $this->nit = $rs->fields[4] ;  
-         $this->cuenta = $rs->fields[5] ;  
-         $this->tipocd = $rs->fields[6] ;  
-         $this->valor = $rs->fields[7] ;  
+         $this->fecha = $rs->fields[1] ;  
+         $this->numero2 = $rs->fields[2] ;  
+         $this->nit = $rs->fields[3] ;  
+         $this->cuenta = $rs->fields[4] ;  
+         $this->tipocd = $rs->fields[5] ;  
+         $this->valor = $rs->fields[6] ;  
          $this->valor =  str_replace(",", ".", $this->valor);
          $this->valor = (string)$this->valor;
-         $this->observaciones = $rs->fields[8] ;  
-         $this->id_asiento = $rs->fields[9] ;  
+         $this->observaciones = $rs->fields[7] ;  
+         $this->id_asiento = $rs->fields[8] ;  
          $this->id_asiento = (string)$this->id_asiento;
+         $this->prefijo = $rs->fields[9] ;  
+         $this->numero = $rs->fields[10] ;  
+         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig']))
+         {
+             foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
+             {
+                 $this->$Cmp_clone = $this->$Cmp_orig;
+             }
+         }
+         $this->arg_sum_tipo = " = " . $this->Db->qstr($this->tipo);
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_group_by")
+         {
+             foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $cmp_gb => $resto)
+             {
+                 $Cmp_orig = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cmp_gb])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cmp_gb] : $cmp_gb;
+                 if ($Cmp_orig == "fecha")
+                 {
+                     $Str_arg_sum = "arg_sum_" . $cmp_gb;
+                     $Format_tst  = $this->Ini->Get_Gb_date_format('sc_free_group_by', $cmp_gb);
+                     $TP_Time     = (in_array($cmp_gb, $this->Ini->Cmp_Sql_Time)) ? "0000-00-00 " : "";
+                     $this->$Str_arg_sum = $this->Ini->Get_date_arg_sum($TP_Time . $this->fecha, $Format_tst, "fecha");
+                 }
+             }
+         }
+         if ($this->fecha == "")
+         {
+             $this->arg_sum_fecha = " is null";
+         }
+         elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "_NM_SC_")
+         {
+             $this->arg_sum_fecha = " = " . $this->Db->qstr($this->fecha);
+         }
+         $this->arg_sum_numero2 = " = " . $this->Db->qstr($this->numero2);
+         $this->arg_sum_cuenta = " = " . $this->Db->qstr($this->cuenta);
+         $this->arg_sum_prefijo = " = " . $this->Db->qstr($this->prefijo);
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_group_by") 
+          {  
+              $SC_arg_Gby = array();
+              $SC_arg_Sql = array();
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $cmp => $sql)
+              {
+                  $Cmp_orig   = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cmp])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cmp] : $cmp;
+                  $Format_tst = $this->Ini->Get_Gb_date_format('sc_free_group_by', $cmp);
+                  $TP_Time = (in_array($Cmp_orig, $this->Ini->Cmp_Sql_Time)) ? "0000-00-00 " : "";
+                  $SC_arg_Gby[$cmp] = $this->Ini->Get_arg_groupby($TP_Time . $this->$Cmp_orig, $Format_tst); 
+              }
+              $SC_lst_Gby = array();
+              $gb_ok      = false;
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $cmp => $sql)
+              {
+                  $Format_tst = $this->Ini->Get_Gb_date_format('sc_free_group_by', $cmp);
+                  $SC_arg_Sql[$cmp] = $sql;
+                  $Fun_GB  = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cmp])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cmp] : $cmp;
+                  if (!empty($Format_tst))
+                  {
+                      $temp = $this->$cmp;
+                      if (!empty($temp))
+                      {
+                          $SC_arg_Sql[$cmp] = $this->Ini->Get_sql_date_groupby($sql, $Format_tst);
+                      }
+                  }
+                  $temp = $cmp . "_Old";
+                  if ($SC_arg_Gby[$cmp] != $this->$temp || $gb_ok)
+                  {
+                      $SC_lst_Gby[] = $cmp;
+                      $gb_ok = true;
+                  }
+              }
+              $this->Nivel_gbBot = count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']);
+              krsort ($SC_lst_Gby);
+              $Qb_page = true;
+              foreach ($SC_lst_Gby as $Ind => $cmp)
+              {
+                  if (in_array($cmp, $this->SC_bot) && !$prim_gb)
+                  {
+                      $tmp = "quebra_" . $cmp . "_sc_free_group_by_bot";
+                      $this->$tmp($cmp);
+                      $this->Nivel_gbBot--;
+                      if ($this->groupby_show == "S") {
+                          $this->Xls_col = 0;
+                          $this->Xls_row++;
+                      }
+                  }
+                  $sql_where = "";
+                  $cmp_qb     = $this->$cmp;
+                  foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $Col_Gb => $Sql)
+                  {
+                      $tmp        = "arg_sum_" . $Col_Gb;
+                      $sql_where .= (!empty($sql_where)) ? " and " : "";
+                      $sql_where .= $SC_arg_Sql[$Col_Gb] . $this->$tmp;
+                      if ($Col_Gb == $cmp)
+                      {
+                          break;
+                      }
+                  }
+                  $tmp  = "quebra_" . $cmp . "_sc_free_group_by";
+                  $this->$tmp($cmp_qb, $sql_where, $cmp);
+              }
+              if (!empty($SC_lst_Gby) && !$prim_gb && $this->groupby_show == "S" && $this->groupby_show == "S")
+              {
+                  $this->Xls_col = 0;
+                  $this->Xls_row++;
+                  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                      $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                      $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                      $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                      $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                  }
+              }
+              $this->Nivel_gbBot = count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']);
+              ksort ($SC_lst_Gby);
+              foreach ($SC_lst_Gby as $Ind => $cmp)
+              {
+                  if (in_array($cmp, $this->SC_top))
+                  {
+                      $tmp = "quebra_" . $cmp . "_sc_free_group_by_top";
+                      $this->$tmp($cmp);
+                      if ($this->groupby_show == "S") {
+                          $this->Xls_col = 0;
+                          $this->Xls_row++;
+                      }
+                  }
+              }
+              if (!empty($SC_lst_Gby))
+              {
+                  $nm_houve_quebra = "S";
+                  foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $cmp => $sql)
+                  {
+                      $Cmp_orig   = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cmp])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cmp] : $cmp;
+                      $Format_tst = $this->Ini->Get_Gb_date_format('sc_free_group_by', $cmp);
+                      $Cmp_Old   = $cmp . '_Old';
+                      $TP_Time = (in_array($Cmp_orig, $this->Ini->Cmp_Sql_Time)) ? "0000-00-00 " : "";
+                      $this->$Cmp_Old = $this->Ini->Get_arg_groupby($TP_Time . $this->$Cmp_orig, $Format_tst); 
+                  }
+              }
+          }  
      if ($this->groupby_show == "S") {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'])
          { 
@@ -453,6 +644,35 @@ class grid_asientos_xls
           } 
       } 
       if ($this->groupby_show == "S") {
+          $this->Xls_col = 0;
+          $this->Xls_row++;
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_group_by")
+       {
+           $SC_lst_Gby = array();
+           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $cmp => $sql)
+           {
+               $SC_lst_Gby[] = $cmp;
+           }
+           $this->Nivel_gbBot = count($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']);
+           krsort ($SC_lst_Gby);
+           foreach ($SC_lst_Gby as $Ind => $cmp)
+           {
+               if (in_array($cmp, $this->SC_bot) && !$prim_gb)
+               {
+                   $tmp = "quebra_" . $cmp . "_sc_free_group_by_bot";
+                   $this->$tmp($cmp);
+                   $this->Nivel_gbBot--;
+                   if ($this->groupby_show == "S") {
+                       $this->Xls_col = 0;;
+                       $this->Xls_row++;;
+                   }
+               }
+           }
+       }
+          $this->Xls_col = 0;
+          $this->Xls_row++;
+          $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] . "_bot";
+          $this->$Gb_geral();
       }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'])
       { 
@@ -596,62 +816,6 @@ class grid_asientos_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
-          if ($Cada_col == "prefijo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
-          $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
-          if ($Cada_col == "numero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "right";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
           $SC_Label = (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "Fecha"; 
           if ($Cada_col == "fecha" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -673,6 +837,34 @@ class grid_asientos_xls
                   }
                   else {
                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Numero"; 
+          if ($Cada_col == "numero2" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
                   }
                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
@@ -848,6 +1040,62 @@ class grid_asientos_xls
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
+          if ($Cada_col == "prefijo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
+          if ($Cada_col == "numero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "right";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
       } 
       $this->Xls_col = 0;
       $this->Xls_row++;
@@ -869,46 +1117,6 @@ class grid_asientos_xls
          }
          else {
              $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->tipo, PHPExcel_Cell_DataType::TYPE_STRING);
-         }
-         $this->Xls_col++;
-   }
-   //----- prefijo
-   function NM_export_prefijo()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->prefijo = html_entity_decode($this->prefijo, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->prefijo = strip_tags($this->prefijo);
-         $this->prefijo = NM_charset_to_utf8($this->prefijo);
-         if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->prefijo, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-         }
-         else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->prefijo, PHPExcel_Cell_DataType::TYPE_STRING);
-         }
-         $this->Xls_col++;
-   }
-   //----- numero
-   function NM_export_numero()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->numero = html_entity_decode($this->numero, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->numero = strip_tags($this->numero);
-         $this->numero = NM_charset_to_utf8($this->numero);
-         if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->numero, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-         }
-         else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->numero, PHPExcel_Cell_DataType::TYPE_STRING);
          }
          $this->Xls_col++;
    }
@@ -935,6 +1143,26 @@ class grid_asientos_xls
          {
              $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->fecha);
              $this->NM_ctrl_style[$current_cell_ref]['format'] = $this->SC_date_conf_region;
+         }
+         $this->Xls_col++;
+   }
+   //----- numero2
+   function NM_export_numero2()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->numero2 = html_entity_decode($this->numero2, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->numero2 = strip_tags($this->numero2);
+         $this->numero2 = NM_charset_to_utf8($this->numero2);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->numero2, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->numero2, PHPExcel_Cell_DataType::TYPE_STRING);
          }
          $this->Xls_col++;
    }
@@ -1052,6 +1280,46 @@ class grid_asientos_xls
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->id_asiento);
          $this->Xls_col++;
    }
+   //----- prefijo
+   function NM_export_prefijo()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->prefijo = html_entity_decode($this->prefijo, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->prefijo = strip_tags($this->prefijo);
+         $this->prefijo = NM_charset_to_utf8($this->prefijo);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->prefijo, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->prefijo, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
+   //----- numero
+   function NM_export_numero()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->numero = html_entity_decode($this->numero, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->numero = strip_tags($this->numero);
+         $this->numero = NM_charset_to_utf8($this->numero);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->numero, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->numero, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- tipo
    function NM_sub_cons_tipo()
    {
@@ -1064,30 +1332,6 @@ class grid_asientos_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
-   //----- prefijo
-   function NM_sub_cons_prefijo()
-   {
-         $this->prefijo = html_entity_decode($this->prefijo, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->prefijo = strip_tags($this->prefijo);
-         $this->prefijo = NM_charset_to_utf8($this->prefijo);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->prefijo;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
-   //----- numero
-   function NM_sub_cons_numero()
-   {
-         $this->numero = html_entity_decode($this->numero, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->numero = strip_tags($this->numero);
-         $this->numero = NM_charset_to_utf8($this->numero);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->numero;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
    //----- fecha
    function NM_sub_cons_fecha()
    {
@@ -1096,6 +1340,18 @@ class grid_asientos_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "data";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $this->SC_date_conf_region;
+         $this->Xls_col++;
+   }
+   //----- numero2
+   function NM_sub_cons_numero2()
+   {
+         $this->numero2 = html_entity_decode($this->numero2, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->numero2 = strip_tags($this->numero2);
+         $this->numero2 = NM_charset_to_utf8($this->numero2);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->numero2;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
    //----- nit
@@ -1166,6 +1422,30 @@ class grid_asientos_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
          $this->Xls_col++;
    }
+   //----- prefijo
+   function NM_sub_cons_prefijo()
+   {
+         $this->prefijo = html_entity_decode($this->prefijo, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->prefijo = strip_tags($this->prefijo);
+         $this->prefijo = NM_charset_to_utf8($this->prefijo);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->prefijo;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- numero
+   function NM_sub_cons_numero()
+   {
+         $this->numero = html_entity_decode($this->numero, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->numero = strip_tags($this->numero);
+         $this->numero = NM_charset_to_utf8($this->numero);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->numero;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
    function xls_sub_cons_copy_label($row)
    {
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['nolabel']) || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['nolabel'])
@@ -1212,8 +1492,813 @@ class grid_asientos_xls
            $this->NM_ctrl_style = array();
        }
    }
-   function quebra_geral_sc_free_total_bot() 
+ function quebra_tipo_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name) 
+ {
+   $Var_name_gb  = "SC_tot_" . $Cmp_Name;
+   $Cmps_Gb_Free = "campos_quebra_" . $Cmp_Name;
+   $Desc_Gb_Ant  = $Cmp_Name . "_ant_desc";
+   global $$Var_name_gb, $Desc_Gb_Ant;
+   $this->sc_proc_quebra_prefijo = false;
+   $this->sc_proc_quebra_fecha = false;
+   $this->sc_proc_quebra_cuenta = false;
+   $this->sc_proc_quebra_numero2 = false;
+   $this->sc_proc_quebra_tipo = true; 
+   $this->Tot->quebra_tipo_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
+   $tot_tipo = $$Var_name_gb;
+   $conteudo = $tot_tipo[0] ;  
+   $this->count_tipo = $tot_tipo[1];
+   $Temp_cmp_quebra = array(); 
+   $conteudo = sc_strip_script($this->tipo); 
+   $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['tipo']))
    {
+       $Temp_cmp_quebra[0]['lab'] = $this->nmgp_label_quebras['tipo']; 
+   }
+   else
+   {
+       $Temp_cmp_quebra[0]['lab'] = "Tipo"; 
+   }
+   $this->$Cmps_Gb_Free = $Temp_cmp_quebra;
+   $this->sc_proc_quebra_tipo = false; 
+ } 
+ function quebra_prefijo_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name) 
+ {
+   $Var_name_gb  = "SC_tot_" . $Cmp_Name;
+   $Cmps_Gb_Free = "campos_quebra_" . $Cmp_Name;
+   $Desc_Gb_Ant  = $Cmp_Name . "_ant_desc";
+   global $$Var_name_gb, $Desc_Gb_Ant;
+   $this->sc_proc_quebra_tipo = false;
+   $this->sc_proc_quebra_fecha = false;
+   $this->sc_proc_quebra_cuenta = false;
+   $this->sc_proc_quebra_numero2 = false;
+   $this->sc_proc_quebra_prefijo = true; 
+   $this->Tot->quebra_prefijo_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
+   $tot_prefijo = $$Var_name_gb;
+   $conteudo = $tot_prefijo[0] ;  
+   $this->count_prefijo = $tot_prefijo[1];
+   $Temp_cmp_quebra = array(); 
+   $conteudo = sc_strip_script($this->prefijo); 
+   $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['prefijo']))
+   {
+       $Temp_cmp_quebra[0]['lab'] = $this->nmgp_label_quebras['prefijo']; 
+   }
+   else
+   {
+       $Temp_cmp_quebra[0]['lab'] = "Prefijo"; 
+   }
+   $this->$Cmps_Gb_Free = $Temp_cmp_quebra;
+   $this->sc_proc_quebra_prefijo = false; 
+ } 
+ function quebra_fecha_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name) 
+ {
+   $Var_name_gb  = "SC_tot_" . $Cmp_Name;
+   $Cmps_Gb_Free = "campos_quebra_" . $Cmp_Name;
+   $Desc_Gb_Ant  = $Cmp_Name . "_ant_desc";
+   global $$Var_name_gb, $Desc_Gb_Ant;
+   $this->sc_proc_quebra_tipo = false;
+   $this->sc_proc_quebra_prefijo = false;
+   $this->sc_proc_quebra_cuenta = false;
+   $this->sc_proc_quebra_numero2 = false;
+   $this->sc_proc_quebra_fecha = true; 
+   $this->Tot->quebra_fecha_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
+   $tot_fecha = $$Var_name_gb;
+   $conteudo = $tot_fecha[0] ;  
+   $this->count_fecha = $tot_fecha[1];
+   $Temp_cmp_quebra = array(); 
+   $conteudo = NM_encode_input(sc_strip_script($this->fecha)); 
+   $Format_tst = $this->Ini->Get_Gb_date_format('sc_free_group_by', $Cmp_Name);
+   $Prefix_dat = $this->Ini->Get_Gb_prefix_date_format('sc_free_group_by', $Cmp_Name);
+   $TP_Time    = (in_array($Cmp_Name, $this->Ini->Cmp_Sql_Time)) ? "0000-00-00 " : "";
+   $conteudo = $this->Ini->GB_date_format($TP_Time . $conteudo, $Format_tst, $Prefix_dat); 
+   $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['fecha']))
+   {
+       $Temp_cmp_quebra[0]['lab'] = $this->nmgp_label_quebras['fecha']; 
+   }
+   else
+   {
+       $Tmp_lab = "Fecha"; 
+       $Temp_cmp_quebra[0]['lab'] = sprintf("" . $this->Ini->Nm_lang['lang_othr_cons_title_YYYYMMDD2'] . "", $Tmp_lab); 
+   }
+   $this->$Cmps_Gb_Free = $Temp_cmp_quebra;
+   $this->sc_proc_quebra_fecha = false; 
+ } 
+ function quebra_cuenta_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name) 
+ {
+   $Var_name_gb  = "SC_tot_" . $Cmp_Name;
+   $Cmps_Gb_Free = "campos_quebra_" . $Cmp_Name;
+   $Desc_Gb_Ant  = $Cmp_Name . "_ant_desc";
+   global $$Var_name_gb, $Desc_Gb_Ant;
+   $this->sc_proc_quebra_tipo = false;
+   $this->sc_proc_quebra_prefijo = false;
+   $this->sc_proc_quebra_fecha = false;
+   $this->sc_proc_quebra_numero2 = false;
+   $this->sc_proc_quebra_cuenta = true; 
+   $this->Tot->quebra_cuenta_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
+   $tot_cuenta = $$Var_name_gb;
+   $conteudo = $tot_cuenta[0] ;  
+   $this->count_cuenta = $tot_cuenta[1];
+   $Temp_cmp_quebra = array(); 
+   $conteudo = sc_strip_script($this->cuenta); 
+   $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['cuenta']))
+   {
+       $Temp_cmp_quebra[0]['lab'] = $this->nmgp_label_quebras['cuenta']; 
+   }
+   else
+   {
+       $Temp_cmp_quebra[0]['lab'] = "Cuenta"; 
+   }
+   $this->$Cmps_Gb_Free = $Temp_cmp_quebra;
+   $this->sc_proc_quebra_cuenta = false; 
+ } 
+ function quebra_numero2_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name) 
+ {
+   $Var_name_gb  = "SC_tot_" . $Cmp_Name;
+   $Cmps_Gb_Free = "campos_quebra_" . $Cmp_Name;
+   $Desc_Gb_Ant  = $Cmp_Name . "_ant_desc";
+   global $$Var_name_gb, $Desc_Gb_Ant;
+   $this->sc_proc_quebra_tipo = false;
+   $this->sc_proc_quebra_prefijo = false;
+   $this->sc_proc_quebra_fecha = false;
+   $this->sc_proc_quebra_cuenta = false;
+   $this->sc_proc_quebra_numero2 = true; 
+   $this->Tot->quebra_numero2_sc_free_group_by($Cmp_qb, $Where_qb, $Cmp_Name);
+   $tot_numero2 = $$Var_name_gb;
+   $conteudo = $tot_numero2[0] ;  
+   $this->count_numero2 = $tot_numero2[1];
+   $Temp_cmp_quebra = array(); 
+   $conteudo = sc_strip_script($this->numero2); 
+   $Temp_cmp_quebra[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['numero2']))
+   {
+       $Temp_cmp_quebra[0]['lab'] = $this->nmgp_label_quebras['numero2']; 
+   }
+   else
+   {
+       $Temp_cmp_quebra[0]['lab'] = "Numero"; 
+   }
+   $this->$Cmps_Gb_Free = $Temp_cmp_quebra;
+   $this->sc_proc_quebra_numero2 = false; 
+ } 
+   function quebra_tipo_sc_free_group_by_top()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $lim_col  = 1;
+       $temp_cmp = "";
+       $cont_col = 0;
+       foreach ($this->campos_quebra_tipo as $cada_campo) {
+           if ($cont_col == $lim_col) {
+               $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+               $temp_cmp = strip_tags($temp_cmp);
+               $temp_cmp = NM_charset_to_utf8($temp_cmp);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $temp_cmp = "";
+               $cont_col = 0;
+               $this->Xls_row++;
+           }
+           $temp_cmp .= $cada_campo['lab'] . " => " . $cada_campo['cmp'] . "  ";
+           $cont_col++;
+       }
+       if (!empty($temp_cmp)) {
+           $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+           $temp_cmp = strip_tags($temp_cmp);
+           $temp_cmp = NM_charset_to_utf8($temp_cmp);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+           }
+           else {
+               $current_cell_ref = $this->calc_cell($this->Xls_col);
+               if ($this->Use_phpspreadsheet) {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+               }
+               else {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+               }
+               $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+               $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+           }
+       }
+   }
+   function quebra_tipo_sc_free_group_by_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $prim_cmp = true;
+       $mens_tot_base = "";
+       $mens_tot = "";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_cmp)
+       {
+           if (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+   }
+   function quebra_prefijo_sc_free_group_by_top()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $lim_col  = 1;
+       $temp_cmp = "";
+       $cont_col = 0;
+       foreach ($this->campos_quebra_prefijo as $cada_campo) {
+           if ($cont_col == $lim_col) {
+               $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+               $temp_cmp = strip_tags($temp_cmp);
+               $temp_cmp = NM_charset_to_utf8($temp_cmp);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $temp_cmp = "";
+               $cont_col = 0;
+               $this->Xls_row++;
+           }
+           $temp_cmp .= $cada_campo['lab'] . " => " . $cada_campo['cmp'] . "  ";
+           $cont_col++;
+       }
+       if (!empty($temp_cmp)) {
+           $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+           $temp_cmp = strip_tags($temp_cmp);
+           $temp_cmp = NM_charset_to_utf8($temp_cmp);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+           }
+           else {
+               $current_cell_ref = $this->calc_cell($this->Xls_col);
+               if ($this->Use_phpspreadsheet) {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+               }
+               else {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+               }
+               $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+               $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+           }
+       }
+   }
+   function quebra_prefijo_sc_free_group_by_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $prim_cmp = true;
+       $mens_tot_base = "";
+       $mens_tot = "";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_cmp)
+       {
+           if (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+   }
+   function quebra_fecha_sc_free_group_by_top()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $lim_col  = 1;
+       $temp_cmp = "";
+       $cont_col = 0;
+       foreach ($this->campos_quebra_fecha as $cada_campo) {
+           if ($cont_col == $lim_col) {
+               $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+               $temp_cmp = strip_tags($temp_cmp);
+               $temp_cmp = NM_charset_to_utf8($temp_cmp);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $temp_cmp = "";
+               $cont_col = 0;
+               $this->Xls_row++;
+           }
+           $temp_cmp .= $cada_campo['lab'] . " => " . $cada_campo['cmp'] . "  ";
+           $cont_col++;
+       }
+       if (!empty($temp_cmp)) {
+           $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+           $temp_cmp = strip_tags($temp_cmp);
+           $temp_cmp = NM_charset_to_utf8($temp_cmp);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+           }
+           else {
+               $current_cell_ref = $this->calc_cell($this->Xls_col);
+               if ($this->Use_phpspreadsheet) {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+               }
+               else {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+               }
+               $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+               $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+           }
+       }
+   }
+   function quebra_fecha_sc_free_group_by_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $prim_cmp = true;
+       $mens_tot_base = "";
+       $mens_tot = "";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_cmp)
+       {
+           if (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+   }
+   function quebra_cuenta_sc_free_group_by_top()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $lim_col  = 1;
+       $temp_cmp = "";
+       $cont_col = 0;
+       foreach ($this->campos_quebra_cuenta as $cada_campo) {
+           if ($cont_col == $lim_col) {
+               $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+               $temp_cmp = strip_tags($temp_cmp);
+               $temp_cmp = NM_charset_to_utf8($temp_cmp);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $temp_cmp = "";
+               $cont_col = 0;
+               $this->Xls_row++;
+           }
+           $temp_cmp .= $cada_campo['lab'] . " => " . $cada_campo['cmp'] . "  ";
+           $cont_col++;
+       }
+       if (!empty($temp_cmp)) {
+           $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+           $temp_cmp = strip_tags($temp_cmp);
+           $temp_cmp = NM_charset_to_utf8($temp_cmp);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+           }
+           else {
+               $current_cell_ref = $this->calc_cell($this->Xls_col);
+               if ($this->Use_phpspreadsheet) {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+               }
+               else {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+               }
+               $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+               $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+           }
+       }
+   }
+   function quebra_cuenta_sc_free_group_by_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $prim_cmp = true;
+       $mens_tot_base = "";
+       $mens_tot = "";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_cmp)
+       {
+           if (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+   }
+   function quebra_numero2_sc_free_group_by_top()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $lim_col  = 1;
+       $temp_cmp = "";
+       $cont_col = 0;
+       foreach ($this->campos_quebra_numero2 as $cada_campo) {
+           if ($cont_col == $lim_col) {
+               $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+               $temp_cmp = strip_tags($temp_cmp);
+               $temp_cmp = NM_charset_to_utf8($temp_cmp);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $temp_cmp = "";
+               $cont_col = 0;
+               $this->Xls_row++;
+           }
+           $temp_cmp .= $cada_campo['lab'] . " => " . $cada_campo['cmp'] . "  ";
+           $cont_col++;
+       }
+       if (!empty($temp_cmp)) {
+           $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+           $temp_cmp = strip_tags($temp_cmp);
+           $temp_cmp = NM_charset_to_utf8($temp_cmp);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+           }
+           else {
+               $current_cell_ref = $this->calc_cell($this->Xls_col);
+               if ($this->Use_phpspreadsheet) {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+               }
+               else {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+               }
+               $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+               $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+           }
+       }
+   }
+   function quebra_numero2_sc_free_group_by_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $prim_cmp = true;
+       $mens_tot_base = "";
+       $mens_tot = "";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_cmp)
+       {
+           if (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+   }
+   function quebra_geral_sc_free_group_by_bot() 
+   {
+   }
+   function quebra_geral__NM_SC__bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->Tot->quebra_geral__NM_SC_();
+       $prim_cmp = true;
+       $mens_tot = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['tot_geral'][1] . ")";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_cmp)
+       {
+           if ($Cada_cmp == "valor" && (!isset($this->NM_cmp_hidden['valor']) || $this->NM_cmp_hidden['valor'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['tot_geral'][2];
+               $prim_cmp = false;
+               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Vl_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Vl_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {
+           $this->Xls_row++;
+           $this->Xls_col = 1;
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+       }
    }
 
    function calc_cell($col)

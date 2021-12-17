@@ -227,13 +227,14 @@ class grid_asientos_ini
       $this->nm_dt_criacao   = "20201227"; 
       $this->nm_hr_criacao   = "174025"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210817"; 
-      $this->nm_hr_ult_alt   = "115231"; 
+      $this->nm_dt_ult_alt   = "20211217"; 
+      $this->nm_hr_ult_alt   = "144542"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0";
+      $this->nm_tp_variance  = "P";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -976,7 +977,7 @@ class grid_asientos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_asientos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_asientos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYZSX7D1BeV5BOHgvOVcFCDWFaHMJsDcNmZkBiD1rKD5BqHgNOHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBeDkXKDWr/DoFUHQNmDuBqD1veHuBiDMzGVcBOH5XCDoJsHQNmZ1F7D1rwHQFUHgveHEJGDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUDcJeDQFGD1BeD5BqHgrKVcBOV5F/VENUD9BsH9FaD1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFaHQJmZSBqHIrwZMB/DMNKZSXeDWX7VoJsHQNwDQFGHAN7HQJwDMrwV9FeDuX7HMrqDcBqH9FaHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvsD5XGHgBYHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuNOVIBOV5FGVorqDcBqH9BOHIBeD5FaDMvCHArsDWX7HIX7HQNwH9FUHIrKHuBODMzGDkFCDWF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwZ9F7HAveD5BqDMvODkFCDWF/VEFGHQXOZ1F7Z1NOHuFaHgNKHENiDWB3DoBOHQXsH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqDEBeHEJGDWF/ZuXGDcJeH9FGHAN7VWJwDMNODkFCDWF/VEF7HQBqZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwDcBqZ1FaD1rwV5JeDMzGHEXeV5XCZuFaD9XsZSFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWF/HIX7HQXOZSB/Z1BeHuFUDEBeHArCV5B7ZuJeDcJeH9BiHINaV5JeDMzGVIBsV5X7HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVoX7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQJwD1vOV5BqDMBYDkFCH5XCVErqHQNwZ1B/Z1BeV5JwDMzGHErsDuFaDoJeD9JKZSFGD1veHuraHgrKDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1686,11 +1687,1214 @@ class grid_asientos_ini
 
    function GB_date_format($val, $format, $prefix, $conf_region="S", $mask="")
    {
+       if (empty($val) || empty($format)) {
            return $val;
+       }
+       if ($format == 'HH') {
+           return $prefix . substr($val, 11, 2);
+       }
+       if ($format == 'DD') {
+           return $prefix . substr($val, 8, 2);
+       }
+       if ($format == 'MM' && $conf_region == "S") {
+           return $prefix . substr($val, 5, 2);
+       }
+       if ($format == 'WEEK' || $format == 'YYYYWEEK') {
+           $part = $this->Get_Sql_Week($val);
+           $part = (substr($part, 0, 1)== 0) ? substr($part, 1) : $part;
+       }
+       if ($format == 'DAYNAME' || $format == 'YYYYDAYNAME') {
+           $daynum = $this->nm_data->GetWeekDay($val);
+           if ($daynum == 0) {
+               $part = $this->Nm_lang['lang_days_sund'];
+           }
+           if ($daynum == 1) {
+               $part = $this->Nm_lang['lang_days_mond'];
+           }
+           if ($daynum == 2) {
+               $part = $this->Nm_lang['lang_days_tued'];
+           }
+           if ($daynum == 3) {
+               $part = $this->Nm_lang['lang_days_wend'];
+           }
+           if ($daynum == 4) {
+               $part = $this->Nm_lang['lang_days_thud'];
+           }
+           if ($daynum == 5) {
+               $part = $this->Nm_lang['lang_days_frid'];
+           }
+           if ($daynum == 6) {
+               $part = $this->Nm_lang['lang_days_satd'];
+           }
+       }
+       if ($format == 'YYYYSEMIANNUAL' || $format == 'SEMIANNUAL') {
+           $part = $this->nm_data->GetSem(substr($val, 5, 2));
+       }
+       if ($format == 'YYYYFOURMONTHS' || $format == 'FOURMONTHS') {
+           $part = $this->nm_data->GetQuadr(substr($val, 5, 2));
+       }
+       if ($format == 'YYYYQUARTER' || $format == 'QUARTER') {
+           $part = $this->nm_data->GetTrim(substr($val, 5, 2));
+       }
+       if ($format == 'YYYYBIMONTHLY' || $format == 'BIMONTHLY') {
+           $part = $this->nm_data->GetBim(substr($val, 5, 2));
+       }
+       if ($format == 'SEMIANNUAL' || $format == 'FOURMONTHS'  || $format == 'QUARTER' || $format == 'BIMONTHLY' || $format == 'WEEK' || $format == 'DAYNAME') {
+           return $prefix . $part;
+       }
+       if ($format == 'YYYYSEMIANNUAL' || $format == 'YYYYFOURMONTHS'  || $format == 'YYYYQUARTER' || $format == 'YYYYBIMONTHLY' || $format == 'YYYYWEEK' || $format == 'YYYYDAYNAME') {
+           return $prefix . $part . " " . substr($val, 0, 4);
+       }
+       if ($format == 'HHIISS') {
+           $tp     = 'HH';
+           $mk     = 'hhiiss';
+           $format = 'HH:II:SS';
+           $val    = substr($val, 11, 8);
+       }
+       if ($format == 'HHII') {
+           $tp     = 'HH';
+           $mk     = 'hhii';
+           $format = 'HH:II';
+           $val    = substr($val, 11, 5);
+       }
+       if ($format == 'YYYYMMDDHHIISS') {
+           $tp     = 'DH';
+           $mk     = 'ddmmaaaa;hhiiss';
+           $format = 'YYYY-MM-DD HH:II:SS';
+       }
+       if ($format == 'YYYYMMDDHHII') {
+           $tp     = 'DH';
+           $mk     = 'ddmmaaaa;hhii';
+           $format = 'YYYY-MM-DD HH:II';
+           $val    = substr($val, 0, 16);
+       }
+       if ($format == 'YYYYMMDDHH') {
+           $tp     = 'DH';
+           $mk     = 'ddmmaaaa;hh';
+           $format = 'YYYY-MM-DD HH';
+           $val    = substr($val, 0, 13);
+       }
+       if ($format == 'YYYYMMDD2') {
+           $tp     = 'DT';
+           $mk     = 'ddmmaaaa';
+           $format = 'YYYY-MM-DD';
+           $val    = substr($val, 0, 10);
+       }
+       if ($format == 'YYYYHH') {
+           return $prefix . substr($val, 0, 4) . $_SESSION['scriptcase']['reg_conf']['date_sep'] . substr($val, 11, 2);
+       }
+       if ($format == 'YYYYDD') {
+           return $prefix . substr($val, 0, 4) . $_SESSION['scriptcase']['reg_conf']['date_sep'] . substr($val, 8, 2);
+       }
+       if ($format == 'YYYYMM') {
+           $tp     = 'DT';
+           $mk     = 'mmaaaa';
+           $format = 'YYYY-MM';
+           $val = substr($val, 0, 7);
+       }
+       if ($format == 'MM') {
+           $tp     = 'DT';
+           $mk     = 'mm';
+           $format = 'MM';
+           $val = substr($val, 5, 2);
+       }
+       if ($format == 'YYYY') {
+           $tp     = 'DT';
+           $mk     = 'aaaa';
+           $format = 'YYYY';
+           $val = substr($val, 0, 4);
+       }
+       $conteudo_x = $val;
+       nm_conv_limpa_dado($conteudo_x, $format);
+       if (is_numeric($conteudo_x) && $conteudo_x > 0) 
+       { 
+           $this->nm_data->SetaData($val, $format);
+           if ($conf_region != "S")
+           { 
+               $val = $this->nm_data->FormataSaida($mask);
+           }
+           else
+           { 
+               $val = $this->nm_data->FormataSaida($this->nm_data->FormatRegion($tp, $mk));
+           }
+       }
+       return $prefix . $val;
+   }
+
+   function Get_date_arg_sum($val, $format, $cmp_sql, $arq_link_res=false, $res_metric=false)
+   {
+       $delimit  = $this->date_delim;
+       $delimit1 = $this->date_delim1;
+       if ($val == "")
+       {
+           return " is null";;
+       }
+       $arg_sum = "";
+       if ($format == 'YYYYMMDDHHIISS' && (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)))
+       {
+           $arg_sum = " like '" . substr($val, 0, 19) . "%'";
+           if ($res_metric)
+           {
+               return "";;
+           }
+       }
+       elseif ($format == 'YYYYMMDDHHIISS')
+       {
+           $arg_sum = " = " . $delimit . $val . $delimit1;
+           if ($res_metric)
+           {
+               return "";;
+           }
+       }
+       elseif ($format == 'YYYY' || $format == 'YYYYMMDDHHII' || $format == 'YYYYMMDDHH' || $format == 'YYYYMMDD2' || $format == 'YYYYMM')
+       {
+           $valx     = substr($val, 0, 4);
+           $arg_sum  = $this->Get_date_arg_sum_compl($valx, 'YYYY', $cmp_sql, $res_metric);
+          if ($format == 'YYYYMMDDHHII')
+           {
+               $valx     = substr($val, 5, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'MM', $cmp_sql, $res_metric);
+               $valx     = substr($val, 8, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DD', $cmp_sql, $res_metric);
+               $valx     = substr($val, 11, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+               $valx     = substr($val, 14, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'II', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYMMDDHH')
+           {
+               $valx     = substr($val, 5, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'MM', $cmp_sql, $res_metric);
+               $valx     = substr($val, 8, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DD', $cmp_sql, $res_metric);
+               $valx     = substr($val, 11, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYMMDD2')
+           {
+               $valx     = substr($val, 5, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'MM', $cmp_sql, $res_metric);
+               $valx     = substr($val, 8, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DD', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYMM')
+           {
+               $valx     = substr($val, 5, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'MM', $cmp_sql, $res_metric);
+           }
+       }
+       elseif ($format == 'MM')
+       {
+           $valx     = ($arq_link_res) ? $val : substr($val, 5, 2);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'DD')
+       {
+            $valx    = ($arq_link_res) ? $val : substr($val, 8, 2);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'HH')
+       {
+           $valx     = ($arq_link_res) ? substr($val, 0, 2) : substr($val, 11, 2);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'DAYNAME')
+       {
+            $valx    = ($arq_link_res || $res_metric) ? $val : $this->Compat_WeekDay($val);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'WEEK')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->Get_Sql_Week($val);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'BIMONTHLY')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->nm_data->GetBim(substr($val, 5, 2));
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'QUARTER')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->nm_data->GetTrim(substr($val, 5, 2));
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'FOURMONTHS')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->nm_data->GetQuadr(substr($val, 5, 2));
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'SEMIANNUAL')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->nm_data->GetSem(substr($val, 5, 2));
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'YYYYHH' || $format == 'YYYYDD' || $format == 'YYYYDAYNAME' || $format == 'YYYYWEEK' || $format == 'YYYYBIMONTHLY' || $format == 'YYYYQUARTER' || $format == 'YYYYFOURMONTHS' || $format == 'YYYYSEMIANNUAL')
+       {
+           $valx     = substr($val, 0, 4);
+           $arg_sum  = $this->Get_date_arg_sum_compl($valx, 'YYYY', $cmp_sql, $res_metric);
+           if ($format == 'YYYYHH')
+           {
+               $valx      = ($arq_link_res) ?  substr($val, 4, 2) : substr($val, 11, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYDD')
+           {
+                $valx     = ($arq_link_res) ?  substr($val, 4, 2) : substr($val, 8, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DD', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYDAYNAME')
+           {
+               $valx      = ($arq_link_res || $res_metric) ?  substr($val, 4, 1) : $this->Compat_WeekDay($val);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DAYNAME', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYWEEK')
+           {
+               $valx      = ($arq_link_res || $res_metric) ?  substr($val, 4, 2) : $this->Get_Sql_Week($val);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'WEEK', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYBIMONTHLY')
+           {
+               $valx      = ($arq_link_res || $res_metric) ? substr($val, 4, 1) : $this->nm_data->GetBim(substr($val, 5, 2));
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'BIMONTHLY', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYQUARTER')
+           {
+               $valx      = ($arq_link_res || $res_metric) ? substr($val, 4, 1) : $this->nm_data->GetTrim(substr($val, 5, 2));
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'QUARTER', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYFOURMONTHS')
+           {
+               $valx      = ($arq_link_res || $res_metric) ? substr($val, 4, 1) : $this->nm_data->GetQuadr(substr($val, 5, 2));
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'FOURMONTHS', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYSEMIANNUAL')
+           {
+               $valx      = ($arq_link_res || $res_metric) ? substr($val, 4, 1) : $this->nm_data->GetSem(substr($val, 5, 2));
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'SEMIANNUAL', $cmp_sql, $res_metric);
+           }
+       }
+       elseif ($format == 'HHIISS')
+       {
+           $valx     = ($arq_link_res) ? substr($val, 0, 2) : substr($val, 11, 2);
+           $arg_sum  = $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+           $valx     = ($arq_link_res) ? substr($val, 3, 2) : substr($val, 14, 2);
+           $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'II', $cmp_sql, $res_metric);
+           $valx     = ($arq_link_res) ? substr($val, 6, 2) : substr($val, 17, 2);
+           $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'SS', $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'HHII')
+       {
+           $valx     = ($arq_link_res) ? substr($val, 0, 2) : substr($val, 11, 2);
+           $arg_sum  = $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+           $valx     = ($arq_link_res) ? substr($val, 3, 2) : substr($val, 14, 2);
+           $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'II', $cmp_sql, $res_metric);
+       }
+       else
+       {
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+           {
+               $arg_sum = " = #" . $val . "#";
+           }
+           else
+           {
+               $arg_sum = " = " . $this->Db->qstr($val);
+           }
+       }
+       return $arg_sum;
+   }
+   function Get_date_arg_sum_compl($val, $format, $cmp_sql, $res_metric=false)
+   {
+       if ($res_metric) {
+           return $this->Get_date_arq_res_metric($format, $cmp_sql);
+       }
+       $delimit  = $this->date_delim;
+       $delimit1 = $this->date_delim1;
+       if ($format == 'HH') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%H'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "hour(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('hour' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(hour from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'HH24') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(hour, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "hour(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $cmp_sql . ", hour to second), '%H') = " . $val;
+           }
+           else {
+               return "hour(" . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'II') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%M'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "minute(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('minute' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(minute from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'MI') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(minute, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "minute(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $cmp_sql . ", hour to second), '%M') = " . $val;
+           }
+           else {
+               return "minute(" . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'SS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%S'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "second(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('second' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(second from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'SS') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(second, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "second(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $cmp_sql . ", hour to second), '%S') = " . $val;
+           }
+           else {
+               return "second(" . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'DD') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%d'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "day(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('day' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(day from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'DD') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(day, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(day, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "day(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFMONTH(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "day(" . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'MM') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%m'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "month(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('month' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(month from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'MM') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(month, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "month(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "month( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'YYYY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%Y'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "year(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('year' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(year from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'YYYY') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(year, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "year(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "year( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'WEEK') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "DatePart('ww'," . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%W'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "WEEK(" . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('week' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(week from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'WW') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(wk, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase)) {
+               return "CONVERT(VARCHAR(2), DATEPART(wk, " . $cmp_sql . ")) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(1 + (((CAST(" . $cmp_sql . " AS DATE) - MDY(1, 1, YEAR(" . $cmp_sql . "))) +  WEEKDAY(MDY(1, 1, YEAR(" . $cmp_sql . ")))) / 7) as INT) = '" . $val . "'";
+           }
+           else {
+               return "week( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'DAYNAME') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "Weekday(" . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%w'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "WEEKDAY(" . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('dow' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(weekday from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'D') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(dw, " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase)) {
+               return "CONVERT(CHAR(1), DATEPART(dw, " . $cmp_sql . ")) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2)) {
+               return "DAYOFWEEK(" . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFWEEK( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+           else {
+               return "WEEKDAY( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'SEMIANNUAL') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 6 + 1)) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 6 + 1) AS INTEGER) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 6 + 1) AS VARCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 6 + 1) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $cmp_sql . ", 'MM') - 1) / 6 + 1), 1, 1) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS float) as integer) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS INT (1)) = '" . $val . "'";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+       }
+       if ($format == 'FOURMONTHS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 4 + 1)) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 4 + 1) AS INTEGER) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 4 + 1) AS VARCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 4 + 1) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $cmp_sql . ", 'MM') - 1) / 4 + 1), 1, 1) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS float) as integer) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS INT (1)) = '" . $val . "'";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+       }
+       if ($format == 'QUARTER') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 3 + 1)) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 3 + 1) AS INTEGER) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "QUARTER(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "EXTRACT ('QUARTER' FROM " . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 3 + 1) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR (" . $cmp_sql . ", 'Q') = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DatePART (QUARTER, " . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2)) {
+               return "QUARTER(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "QUARTER(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "QUARTER(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 3 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+       }
+       if ($format == 'BIMONTHLY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 2 + 1)) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 2 + 1) AS INTEGER) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 2 + 1) AS VARCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 2 + 1) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $cmp_sql . ", 'MM') - 1) / 2 + 1), 1, 1) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS float) as integer) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS INT (1)) = '" . $val . "'";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+       }
+   }
+   function Get_date_arq_res_metric($format, $cmp_sql)
+   {
+       if ($format == 'HH') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%H'," . $cmp_sql . ") *sc# strftime('%H',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "hour(" . $cmp_sql . ") *sc# hour(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('hour' from " . $cmp_sql . ") *sc# extract('hour' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(hour from " . $cmp_sql . ") *sc# extract(hour from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'HH24') *sc# TO_CHAR(SC." . $cmp_sql . ",'HH24')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(hour, " . $cmp_sql . ") *sc# DATEPART(hour, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "hour(" . $cmp_sql . ") *sc# hour(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $cmp_sql . ", hour to second), '%H') *sc# to_char(extend(SC." . $cmp_sql . ", hour to second), '%H')";
+           }
+           else {
+               return "hour(" . $cmp_sql . ") *sc# hour(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'II') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%M'," . $cmp_sql . ") *sc# strftime('%M',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "minute(" . $cmp_sql . ") *sc# minute(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('minute' from " . $cmp_sql . ") *sc# extract('minute' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(minute from " . $cmp_sql . ") *sc# extract(minute from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'MI') *sc# TO_CHAR(SC." . $cmp_sql . ",'MI')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(minute, " . $cmp_sql . ") *sc# DATEPART(minute, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "minute(" . $cmp_sql . ") *sc# minute(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $cmp_sql . ", hour to second), '%M') *sc# to_char(extend(SC." . $cmp_sql . ", hour to second), '%M')";
+           }
+           else {
+               return "minute(" . $cmp_sql . ") *sc# minute(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'SS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%S'," . $cmp_sql . ") *sc# strftime('%S',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "second(" . $cmp_sql . ") *sc# second(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('second' from " . $cmp_sql . ") *sc# extract('second' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(second from " . $cmp_sql . ") *sc# extract(second from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'SS') *sc# TO_CHAR(SC." . $cmp_sql . ",'SS')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(second, " . $cmp_sql . ") *sc# DATEPART(second, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "second(" . $cmp_sql . ") *sc# second(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $cmp_sql . ", hour to second), '%S') *sc# to_char(extend(SC." . $cmp_sql . ", hour to second), '%S')";
+           }
+           else {
+               return "second(" . $cmp_sql . ") *sc# second(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'DD') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%d'," . $cmp_sql . ") *sc# strftime('%d',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "day(" . $cmp_sql . ") *sc# day(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('day' from " . $cmp_sql . ") *sc# extract('day' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(day from " . $cmp_sql . ") *sc# extract(day from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'DD') *sc# TO_CHAR(SC." . $cmp_sql . ",'DD')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(day, " . $cmp_sql . ") *sc# DATEPART(day, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "day(" . $cmp_sql . ") *sc# day(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFMONTH(" . $cmp_sql . ") *sc# DAYOFMONTH(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "day(" . $cmp_sql . ") *sc# day(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'MM') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%m'," . $cmp_sql . ") *sc# strftime('%m',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "month(" . $cmp_sql . ") *sc# month(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('month' from " . $cmp_sql . ") *sc# extract('month' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(month from " . $cmp_sql . ") *sc# extract(month from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'MM') *sc# TO_CHAR(SC." . $cmp_sql . ",'MM')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(month, " . $cmp_sql . ") *sc# DATEPART(month, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "month(" . $cmp_sql . ") *sc# month(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "month(" . $cmp_sql . ") *sc# month(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'YYYY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%Y'," . $cmp_sql . ") *sc# strftime('%Y',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "year( " . $cmp_sql . ") *sc# year(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('year' from " . $cmp_sql . ") *sc# extract('year' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(year from " . $cmp_sql . ") *sc# extract(year from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'YYYY') *sc# TO_CHAR(SC." . $cmp_sql . ",'YYYY')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(year, " . $cmp_sql . ") *sc# DATEPART(year, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "year(" . $cmp_sql . ") *sc# year(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "year( " . $cmp_sql . ") *sc# year(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'WEEK') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "DatePart('ww'," . $cmp_sql . ") *sc# DatePart('ww',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%W'," . $cmp_sql . ")  *sc# strftime('%W',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "WEEK(" . $cmp_sql . ") *sc# WEEK(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('week' from " . $cmp_sql . ") *sc# extract('week' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(week from " . $cmp_sql . ") *sc# extract(week from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'WW') *sc# TO_CHAR(SC." . $cmp_sql . ",'WW')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(wk, " . $cmp_sql . ") *sc# DATEPART(wk, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase)) {
+               return "CONVERT(VARCHAR(2), DATEPART(wk, " . $cmp_sql . ")) *sc# CONVERT(VARCHAR(2), DATEPART(wk, SC." . $cmp_sql . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(1 + (((CAST(" . $cmp_sql . " AS DATE) - MDY(1, 1, YEAR(" . $cmp_sql . "))) +  WEEKDAY(MDY(1, 1, YEAR(" . $cmp_sql . ")))) / 7) as INT) *sc# CAST(1 + (((CAST(" . $cmp_sql . " AS DATE) - MDY(1, 1, YEAR(" . $cmp_sql . "))) +  WEEKDAY(MDY(1, 1, YEAR(" . $cmp_sql . ")))) / 7) as INT)";
+           }
+           else {
+               return "week(" . $cmp_sql . ") *sc# week(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'DAYNAME') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "Weekday(" . $cmp_sql . ") *sc# Weekday(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%w'," . $cmp_sql . ") *sc# strftime('%w',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "WEEKDAY(" . $cmp_sql . ") *sc# WEEKDAY(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('dow' from " . $cmp_sql . ") *sc# extract('dow' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(weekday from " . $cmp_sql . ") *sc# extract(weekday from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR(" . $cmp_sql . ",'D') *sc# TO_CHAR(SC." . $cmp_sql . ",'D')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DATEPART(dw, " . $cmp_sql . ") *sc# DATEPART(dw, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase)) {
+               return "CONVERT(CHAR(1), DATEPART(dw, " . $cmp_sql . ")) *sc# CONVERT(CHAR(1), DATEPART(dw, SC." . $cmp_sql . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2)) {
+               return "DAYOFWEEK(" . $cmp_sql . ") *sc# DAYOFWEEK(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFWEEK(" . $cmp_sql . ") *sc# DAYOFWEEK(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "WEEKDAY(" . $cmp_sql . ") *sc# WEEKDAY(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'SEMIANNUAL') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 6 + 1)) *sc# CInt(Val((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1)))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 6 + 1) AS INTEGER) *sc# CAST(((strftime('%m', SC." . $cmp_sql . ") -1 ) / 6 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 6 + 1) AS VARCHAR (1)) *sc# CAST(((EXTRACT ('MONTH' FROM SC." . $cmp_sql . ") - 1) / 6 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 6 + 1) *sc# ((EXTRACT(MONTH FROM SC." . $cmp_sql . ") - 1) / 6 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $cmp_sql . ", 'MM') - 1) / 6 + 1), 1, 1) *sc# SUBSTR(((TO_CHAR (SC." . $cmp_sql . ", 'MM') - 1) / 6 + 1), 1, 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) *sc# CAST(((DatePART (MONTH, SC." . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS float) as integer) *sc# CAST(CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1) AS float) as integer)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS INT (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'FOURMONTHS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 4 + 1)) *sc# CInt(Val((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1)))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 4 + 1) AS INTEGER) *sc# CAST(((strftime('%m', SC." . $cmp_sql . ") -1 ) / 4 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 4 + 1) AS VARCHAR (1)) *sc# CAST(((EXTRACT ('MONTH' FROM SC." . $cmp_sql . ") - 1) / 4 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 4 + 1) *sc# ((EXTRACT(MONTH FROM SC." . $cmp_sql . ") - 1) / 4 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $cmp_sql . ", 'MM') - 1) / 4 + 1), 1, 1) *sc# SUBSTR(((TO_CHAR (SC." . $cmp_sql . ", 'MM') - 1) / 4 + 1), 1, 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) *sc# CAST(((DatePART (MONTH, SC." . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS float) as integer) *sc# CAST(CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1) AS float) as integer)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS INT (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'QUARTER') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 3 + 1)) *sc# CInt(Val((MONTH(SC." . $cmp_sql . ") - 1) / 3 + 1)))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 3 + 1) AS INTEGER) *sc# CAST(((strftime('%m', SC." . $cmp_sql . ") -1 ) / 3 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "QUARTER(" . $cmp_sql . ") *sc# QUARTER(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "EXTRACT ('QUARTER' FROM " . $cmp_sql . ") *sc# EXTRACT ('QUARTER' FROM SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 3 + 1) *sc# ((EXTRACT(MONTH FROM SC." . $cmp_sql . ") - 1) / 3 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR (" . $cmp_sql . ", 'Q') *sc# TO_CHAR (SC." . $cmp_sql . ", 'Q')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DatePART (QUARTER, " . $cmp_sql . ") *sc# DatePART (QUARTER, SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "QUARTER(" . $cmp_sql . ") *sc# QUARTER(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2)) {
+               return "QUARTER(" . $cmp_sql . ") *sc# QUARTER(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "QUARTER(" . $cmp_sql . ") *sc# QUARTER(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 3 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 3 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'BIMONTHLY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 2 + 1)) *sc# CInt(Val((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1)))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 2 + 1) AS INTEGER) *sc# CAST(((strftime('%m', SC." . $cmp_sql . ") -1 ) / 2 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 2 + 1) AS VARCHAR (1)) *sc# CAST(((EXTRACT ('MONTH' FROM SC." . $cmp_sql . ") - 1) / 2 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 2 + 1) *sc# ((EXTRACT(MONTH FROM SC." . $cmp_sql . ") - 1) / 2 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $cmp_sql . ", 'MM') - 1) / 2 + 1), 1, 1) *sc# SUBSTR(((TO_CHAR (SC." . $cmp_sql . ", 'MM') - 1) / 2 + 1), 1, 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) *sc# CAST(((DatePART (MONTH, SC." . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS float) as integer) *sc# CAST(CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1) AS float) as integer)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS INT (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+       }
+   }
+   function Get_sql_date_groupby($sql_def, $format)
+   {
+       if (empty($format))
+       {
+           return $sql_def;
+       }
+       if ($format != 'YYYYMMDDHHIISS')
+       {
+           return "";
+       }
+       $sql = $sql_def;
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+       {
+           $sql = "convert(char(23)," . $sql_def . ",121)";
+       }
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+       {
+           $sql = "TO_DATE(TO_CHAR(" . $sql_def . ", 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss')";
+       }
+       if ($format != 'YYYYMMDDHHIISS' && in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+       {
+           $sql = "to_char(" . $sql_def . ", 'YYYY-MM-DD HH24:MI:SS')";
+       }
+       if ($format != 'YYYYMMDDHHIISS' && in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix))
+       {
+           $sql = "EXTEND(" . $sql_def . ", YEAR TO SECOND)";
+       }
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+       {
+           $sql = $sql_def;
+       }
+       return $sql;
    }
    function Get_arg_groupby($val, $format)
    {
-       return $val; 
+       if ($format == 'YYYYMMDDHHIISS' && (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)))
+       {
+           return substr($val, 0, 19) ; 
+       }
+       elseif ($format == 'YYYYMMDDHHII')
+       {
+           return substr($val, 0, 16) ; 
+       }
+       elseif ($format == 'YYYYMMDDHH')
+       {
+           return substr($val, 0, 13) ; 
+       }
+       elseif ($format == 'YYYYMMDD2')
+       {
+           return substr($val, 0, 10) ; 
+       }
+       elseif ($format == 'YYYYMM')
+       {
+           return substr($val, 0, 7) ; 
+       }
+       elseif ($format == 'YYYYHH')
+       {
+           returnsubstr($val, 0, 4) . substr($val, 11, 2); 
+       }
+       elseif ($format == 'YYYYSEMIANNUAL')
+       {
+           return substr($val, 0, 4) . $this->nm_data->GetSem(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'YYYYFOURMONTHS')
+       {
+           return substr($val, 0, 4) . $this->nm_data->GetQuadr(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'YYYYQUARTER')
+       {
+           return substr($val, 0, 4) . $this->nm_data->GetTrim(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'YYYYBIMONTHLY')
+       {
+           return substr($val, 0, 4) . $this->nm_data->GetBim(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'YYYYWEEK')
+       {
+           return substr($val, 0, 4) . $this->Get_Sql_Week($val); 
+       }
+       elseif ($format == 'YYYYDAYNAME')
+       {
+           return substr($val, 0, 4) . $this->Compat_WeekDay($val); 
+       }
+       elseif ($format == 'YYYY')
+       {
+           return substr($val, 0, 4) ; 
+       }
+       elseif ($format == 'SEMIANNUAL')
+       {
+           return $this->nm_data->GetSem(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'FOURMONTHS')
+       {
+           return $this->nm_data->GetQuadr(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'QUARTER')
+       {
+           return $this->nm_data->GetTrim(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'BIMONTHLY')
+       {
+           return $this->nm_data->GetBim(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'WEEK')
+       {
+           return $this->Get_Sql_Week($val); 
+       }
+       elseif ($format == 'DAYNAME')
+       {
+           return $this->Compat_WeekDay($val); 
+       }
+       elseif ($format == 'MM')
+       {
+           return substr($val, 5, 2); 
+       }
+       elseif ($format == 'DD')
+       {
+           return substr($val, 8, 2); 
+       }
+       elseif ($format == 'HH')
+       {
+           return substr($val, 11, 2); 
+       }
+       elseif ($format == 'HHIISS')
+       {
+           return substr($val, 11, 8); 
+       }
+       elseif ($format == 'HHII')
+       {
+           return substr($val, 11, 5); 
+       }
+       else
+       {
+           return $val; 
+       }
    }
    function Get_format_dimension($ind_ini, $ind_qb, $campo, $rs, $conf_region="S", $mask="")
    {
@@ -1897,8 +3101,592 @@ class grid_asientos_ini
    function Get_date_order_groupby($sql_def, $order, $format="", $order_old="")
    {
        $order      = " " . trim($order);
-       $order_old .= (!empty($order_old)) ? ", " : "";
-       return $order_old . $sql_def . $order;
+       $orderby_ok = "";
+       if ($format == 'YYYYMMDDHHIISS' || $format == 'YYYYMMDDHHII' || $format == 'YYYYMMDDHH')
+       {
+           $orderby_ok .= $sql_def . $order;
+       }
+       elseif ($format == 'YYYYMMDD2')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby('YYYY', $sql_def) . $order. "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby('MM', $sql_def) . $order. "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby('DD', $sql_def) . $order;
+       }
+       elseif ($format == 'YYYY' || $format == 'MM' || $format == 'DD' || $format == 'HH')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby($format, $sql_def) . $order;
+       }
+       elseif (substr($format, 0, 4) == 'YYYY')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby('YYYY', $sql_def) . $order . "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby(substr($format, 4), $sql_def) . $order;
+       }
+       elseif ($format == 'SEMIANNUAL' || $format == 'FOURMONTHS' || $format == 'QUARTER' || $format == 'BIMONTHLY' || $format == 'WEEK' || $format == 'DAYNAME')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby($format, $sql_def) . $order;
+       }
+       elseif ($format == 'HHIISS')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby('HH', $sql_def) . $order. "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby('II', $sql_def) . $order. "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby('SS', $sql_def) . $order;
+       }
+       elseif ($format == 'HHII')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby('HH', $sql_def) . $order. "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby('II', $sql_def) . $order;
+       }
+       else
+       {
+           $orderby_ok .= $sql_def . $order;
+       }
+       $tst_order = explode("#@#", $orderby_ok);
+       foreach ($tst_order as $cada_tst)
+       {
+           $pos = strpos(" " . $order_old, $cada_tst);
+           if ($pos === false)
+           {
+               $order_old .= (!empty($order_old)) ? ", " : "";
+               $order_old .= $cada_tst;
+           }
+       }
+       return $order_old;
+   }
+   function Return_date_order_groupby($format, $sql_def)
+   {
+       if ($format == 'YYYY')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "YEAR(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "YEAR(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+           {
+               return "YEAR(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+           {
+               return "To_Char(" . $sql_def . ",'YYYY')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%Y'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(YEAR FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(year from " . $sql_def . "))";
+           }
+           else
+           {
+               return "YEAR(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'MM')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "MONTH(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "MONTH(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+           {
+               return "MONTH(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+           {
+               return "To_Char(" . $sql_def . ",'MM')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%m'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(MONTH FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(month from  " . $sql_def . "))";
+           }
+           else
+           {
+               return "MONTH(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'DD')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "DAY(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "DAY(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+           {
+               return "DAY(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+           {
+               return "To_Char(" . $sql_def . ",'DD')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%d'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(DAY FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(day from " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress))
+           {
+               return "DAYOFMONTH(" . $sql_def . ")";
+           }
+           else
+           {
+               return "DAY(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'HH')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "hour(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "hour(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+           {
+               return "DATEPART(hour, " . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+           {
+               return "To_Char(" . $sql_def . ",'HH24')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%H'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(hour FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(hour FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $sql_def . ", hour to second), '%H')";
+           }
+           else
+           {
+               return "hour(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'II')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "minute(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "minute(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+           {
+               return "DATEPART(minute, " . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+           {
+               return "To_Char(" . $sql_def . ",'MI')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%M'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(minute FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(minute FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $sql_def . ", hour to second), '%M')";
+           }
+           else
+           {
+               return "minute(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'SS')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "second(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "second(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+           {
+               return "DATEPART(second, " . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+           {
+               return "To_Char(" . $sql_def . ",'SS')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%S'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(second FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(second FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "to_char(extend(" . $sql_def . ", hour to second), '%S')";
+           }
+           else
+           {
+               return "second(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'WEEK')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "DatePart('ww'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "WEEK(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+           {
+               return "DATEPART(wk, " . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase))
+           {
+               return "CONVERT(VARCHAR(2), DATEPART(wk, " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+           {
+               return "To_Char(" . $sql_def . ",'WW')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%W'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(week FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(week FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix))
+           {
+               return "CAST(1 + (((CAST(" . $sql_def . " AS DATE) - MDY(1, 1, YEAR(" . $sql_def . "))) +  WEEKDAY(MDY(1, 1, YEAR(" . $sql_def . ")))) / 7) as INT)";
+           }
+           else
+           {
+               return "week(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'DAYNAME')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "Weekday(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "WEEKDAY(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+           {
+               return "DATEPART(dw, " . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase))
+           {
+               return "CONVERT(CHAR(1), DATEPART(dw, " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+           {
+               return "To_Char(" . $sql_def . ",'D')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%w'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(dow FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(weekday FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2)) {
+               return "DAYOFWEEK(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFWEEK(" . $sql_def . ")";
+           }
+           else
+           {
+               return "weekday(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'SEMIANNUAL') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $sql_def . ") - 1) / 6 + 1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $sql_def . ") -1 ) / 6 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $sql_def . ") - 1) / 6 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $sql_def . ") - 1) / 6 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $sql_def . ", 'MM') - 1) / 6 + 1), 1, 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $sql_def . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $sql_def . ") - 1) / 6 + 1) AS float) as integer)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 6 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'FOURMONTHS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $sql_def . ") - 1) / 4 + 1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $sql_def . ") -1 ) / 4 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $sql_def . ") - 1) / 4 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $sql_def . ") - 1) / 4 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $sql_def . ", 'MM') - 1) / 4 + 1), 1, 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $sql_def . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $sql_def . ") - 1) / 4 + 1) AS float) as integer)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 4 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'QUARTER') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $sql_def . ") - 1) / 3 + 1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $sql_def . ") -1 ) / 3 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "QUARTER(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "EXTRACT ('QUARTER' FROM " . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $sql_def . ") - 1) / 3 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "TO_CHAR (" . $sql_def . ", 'Q')";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "DatePART (QUARTER, " . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "QUARTER(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2)) {
+               return "QUARTER(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "QUARTER(" . $sql_def . ")";
+           }
+           else {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 3 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'BIMONTHLY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $sql_def . ") - 1) / 2 + 1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $sql_def . ") -1 ) / 2 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $sql_def . ") - 1) / 2 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $sql_def . ") - 1) / 2 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)) {
+               return "SUBSTR(((TO_CHAR (" . $sql_def . ", 'MM') - 1) / 2 + 1), 1, 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql)) {
+               return "CAST(((DatePART (MONTH, " . $sql_def . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix)) {
+               return "CAST(CAST(((MONTH(" . $sql_def . ") - 1) / 2 + 1) AS float) as integer)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 2 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+       }
+       return $order;
+   }
+   function Get_Sql_Week($val)
+   {
+       static $DT_in  = "";
+       static $DT_out = "";
+       if (empty($val))
+       {
+           return 0;
+       }
+       $sql_def = substr($val, 0, 10);
+       if ($sql_def == $DT_in)
+       {
+           return $DT_out;
+       }
+       $DT_in  = $sql_def;
+       $DT_out = 0;
+       $sql_def = "'" . $sql_def . "'";
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+       {
+           $cmd = "select DatePart('ww'," . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+       {
+           $cmd = "select WEEK(" . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql))
+       {
+           $cmd = "select DATEPART(wk, " . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase))
+       {
+           $cmd = "select CONVERT(VARCHAR(2), DATEPART(wk, " . $sql_def . "))";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle))
+       {
+           $cmd = "select To_Char(TO_DATE(" . $sql_def . ",'YYYY-MM-DD'),'WW') from dual";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+       {
+           $cmd = "select strftime('%W'," . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+       {
+           $cmd = "select EXTRACT(week FROM date " . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+       {
+           $cmd = "select extract(week FROM cast(" . $sql_def . " as date)) from RDB\$DATABASE";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2))
+       {
+           $cmd = "select week(" . $sql_def . ") FROM SYSIBM.SYSDUMMY1";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_informix))
+       {
+           $cmd = "select CAST(1 + (((CAST(to_date(" . $sql_def . ",'%Y-%m-%d') AS DATE) - MDY(1, 1, YEAR(to_date(" . $sql_def . ",'%Y-%m-%d')))) +  WEEKDAY(MDY(1, 1, YEAR(to_date(" . $sql_def . ",'%Y-%m-%d'))))) / 7) as INT) from SYSTABLES";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress))
+       {
+           $cmd = "select week(" . $sql_def . ") FROM SYSPROGRESS.SYSCALCTABLE";
+       }
+       else
+       {
+           $cmd = "select week(" . $sql_def . ")";
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $cmd;
+       $rweek = $this->Db->Execute($cmd);
+       if (isset($rweek->fields[0]))
+       { 
+           $DT_out = $rweek->fields[0];
+       } 
+       $rweek->Close(); 
+       return $DT_out;
+   }
+   function Compat_WeekDay($val)
+   {
+       $num = $this->nm_data->GetWeekDay($val);
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress))
+       {
+           $num++;
+       }
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+       {
+           $num = ($num == 0) ? 6 : $num - 1;
+       }
+       return $num;
    }
 }
 //===============================================================================
@@ -1950,7 +3738,7 @@ class grid_asientos_apl
    function controle($linhas = 0)
    {
       global $nm_saida, $nm_url_saida, $script_case_init, $nmgp_parms_pdf, $nmgp_graf_pdf, $nm_apl_dependente, $nmgp_navegator_print, $nmgp_tipo_print, $nmgp_cor_print, $nmgp_cor_word, $Det_use_pass_pdf, $Det_pdf_zip, $NMSC_conf_apl, $NM_contr_var_session, $NM_run_iframe, $SC_module_export, $nmgp_password,
-             $glo_senha_protect, $nmgp_opcao, $nm_call_php, $rec, $nmgp_quant_linhas, $nmgp_fast_search, $nmgp_cond_fast_search, $nmgp_arg_fast_search, $nmgp_ordem;
+             $glo_senha_protect, $nmgp_opcao, $nm_call_php, $rec, $nmgp_quant_linhas, $nmgp_fast_search, $nmgp_cond_fast_search, $nmgp_arg_fast_search, $nmgp_ordem, $nmgp_parms_where;
 
       $Parms_form_pdf = false;
       if (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_asientos']))
@@ -2020,6 +3808,64 @@ class grid_asientos_apl
       $this->Ini->Img_export_zip  = array();
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['emb_lig_aba'] = array();
       $this->Change_Menu = false;
+       if ($nmgp_opcao == "link_res")  
+       { 
+           $nmgp_opcao = "inicio";  
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] = "inicio";  
+           $Temp_parms = "";  
+           $todox = str_replace("?#?@?@?", "?#?@ ?@?", $nmgp_parms_where);
+           $todox = stripslashes($todox);
+           $todo  = explode("?@?", $todox);
+           foreach ($todo as $param)
+           {
+                $cadapar  = explode("?#?", $param);
+                if ($cadapar[0] == "numero2")  
+                { 
+                    $cadapar[0] = str_replace("numero2", "concat(prefijo,'/',numero)", $cadapar[0]);
+                } 
+                if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_group_by")
+                { 
+                    $Temp_parms .= (empty($Temp_parms)) ? "" : " and ";
+                    if ($cadapar[0] == "fecha")
+                    {
+                        $cadapar[1]  = str_replace("@aspass@", "", $cadapar[1]);
+                        $Format_tst  = $this->Ini->Get_Gb_date_format('sc_free_group_by', 'fecha');
+                        $Temp_arg    = $this->Ini->Get_date_arg_sum($cadapar[1], $Format_tst, $cadapar[0], true);
+                        $Temp_sql    = ($Temp_arg == " is null") ? $cadapar[0] : $this->Ini->Get_sql_date_groupby($cadapar[0], $Format_tst);
+                        $Temp_parms .= $Temp_sql;
+                        $Temp_parms .= $Temp_arg;
+                    }
+                    elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'][$cadapar[0]]))
+                    {
+                        list ($Sql_orig, $Sql_order) = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql'][$cadapar[0]];
+                        $cadapar[1]  = str_replace("@aspass@", "", $cadapar[1]);
+                        $Format_tst  = $this->Ini->Get_Gb_date_format('sc_free_group_by', $cadapar[0]);
+                        $Temp_arg    = $this->Ini->Get_date_arg_sum($cadapar[1], $Format_tst, $Sql_orig, true);
+                        $Temp_sql    = ($Temp_arg == " is null") ? $Sql_orig : $this->Ini->Get_sql_date_groupby($Sql_orig, $Format_tst);
+                        $Temp_parms .= $Temp_sql;
+                        $Temp_parms .= $Temp_arg;
+                    }
+                    else
+                    {
+                        $Tmp_pos = strpos($cadapar[1], "@aspass@");
+                        $cadapar[1] = str_replace("@aspass@", "", $cadapar[1]);
+                        if ($Tmp_pos !== false)
+                        {
+                            $cadapar[1] = $this->Ini->Db->qstr($cadapar[1]);
+                        }
+                        if ($cadapar[1] == "__SCNULL__" || $cadapar[1] == "'__SCNULL__'")
+                        {
+                            $Temp_parms .= $cadapar[0] . " is null" ;
+                        }
+                        else
+                        {
+                            $Temp_parms .= $cadapar[0] . " = " . $cadapar[1];
+                        }
+                    }
+                } 
+           }
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo'] = $Temp_parms;
+       } 
       if ($nmgp_opcao != "ajax_navigate" && $nmgp_opcao != "ajax_detalhe" && isset($_SESSION['scriptcase']['menu_atual']) && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['sc_outra_jan'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['sc_modal']))
       {
           $this->sc_init_menu = "x";
@@ -2185,7 +4031,12 @@ class grid_asientos_apl
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_date_format'] = array();
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_All_Groupby'] = array('sc_free_total' => 'grid');
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_prefix_date_format']['sc_free_group_by']['fecha'] = "" . $this->Ini->Nm_lang['lang_othr_valueYYYYMMDD2'] . "";
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_date_format']['sc_free_group_by']['fecha'])) 
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_date_format']['sc_free_group_by']['fecha'] = 'YYYYMMDD2';
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_All_Groupby'] = array('_NM_SC_' => 'grid', 'sc_free_group_by' => 'all');
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Groupby_hide'])) 
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Groupby_hide'] = array();
@@ -2201,8 +4052,37 @@ class grid_asientos_apl
           }
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] = $Ind;
       } 
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'])) 
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']  = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql']  = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'] = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']['tipo'] = "tipo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql']['tipo']["tipo"] = 'asc';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']['prefijo'] = "prefijo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql']['prefijo']["prefijo"] = 'asc';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']['fecha'] = "fecha";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql']['fecha']["fecha"] = 'asc';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']['cuenta'] = "cuenta";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql']['cuenta']["cuenta"] = 'asc';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp']['numero2'] = "concat(prefijo,'/',numero)";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql']['numero2']["concat(prefijo,'/',numero)"] = 'asc';
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['Labels_GB'] = array();
-      if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_total")
+      if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_group_by")
+      {
+          $Arr_free_labels = array();
+          $Arr_free_labels['tipo'] = "Tipo";
+          $Arr_free_labels['prefijo'] = "Prefijo";
+          $Arr_free_labels['fecha'] = "" . sprintf("" . $this->Ini->Nm_lang['lang_othr_cons_title_YYYYMMDD2'] . "", "Fecha") . "";
+          $Arr_free_labels['cuenta'] = "Cuenta";
+          $Arr_free_labels['numero2'] = "Numero";
+          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $Field => $Label)
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['Labels_GB'][] = $Arr_free_labels[$Field];
+          }
+      }
+      if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "_NM_SC_")
       {
       }
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['dados_orig_gb']))
@@ -2476,20 +4356,23 @@ class grid_asientos_apl
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order']))
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "tipo";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "prefijo";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "numero";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "fecha";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "numero2";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "nit";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "cuenta";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "tipocd";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "valor";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "observaciones";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "id_asiento";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "prefijo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "numero";
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel']))
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel'] = array();
           } 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel']['id_asiento'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel']['prefijo'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel']['numero'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel'];
       } 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['exit'] != '')
@@ -2709,7 +4592,39 @@ class grid_asientos_apl
           $this->Ini->Gd_missing = false;
       }
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_trata_img.php", "C", "nm_trata_img") ; 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_total") 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_group_by") 
+      {
+          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_select']))  
+          { 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_select'] = array(); 
+              $Free_sql_atual = array();
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql'] as $cmp => $resto)
+              {
+                  foreach ($resto as $cmp_sql => $ord)
+                  {
+                      $Free_sql_atual[$cmp_sql] = 0;
+                  } 
+              } 
+              if (!isset($Free_sql_atual['fecha']))
+              { 
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_select']['fecha'] = 'ASC'; 
+              } 
+              $Free_sql_atual = array();
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_sql'] as $cmp => $resto)
+              {
+                  foreach ($resto as $cmp_sql => $ord)
+                  {
+                      $Free_sql_atual[$cmp_sql] = 0;
+                  } 
+              } 
+              if (!isset($Free_sql_atual['id_asiento']))
+              { 
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_select']['id_asiento'] = 'ASC'; 
+              } 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_select_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_select']; 
+          } 
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "_NM_SC_") 
       {
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_select']))  
           { 
@@ -3589,6 +5504,10 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           if ($field == "SC_all_Cmp" || $field == "numero") 
           {
               $this->SC_monta_condicao($comando, "numero", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp" || $field == "numero2") 
+          {
+              $this->SC_monta_condicao($comando, "concat(prefijo,'/',numero)", $arg_search, $data_search);
           }
           if ($field == "SC_all_Cmp" || $field == "nit") 
           {

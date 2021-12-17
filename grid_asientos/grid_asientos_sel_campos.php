@@ -161,9 +161,9 @@ function Sel_cmp_process()
       $tab_blk_campos = array();
 
             $tab_ger_campos['tipo'] = "on";
-      $tab_ger_campos['prefijo'] = "on";
-      $tab_ger_campos['numero'] = "on";
       $tab_ger_campos['fecha'] = "on";
+      $tab_ger_campos['numero2'] = "on";
+      $tab_blk_campos[] = "numero2";
       $tab_ger_campos['nit'] = "on";
       $tab_ger_campos['cuenta'] = "on";
       $tab_blk_campos[] = "cuenta";
@@ -174,6 +174,8 @@ function Sel_cmp_process()
       $tab_ger_campos['observaciones'] = "on";
       $tab_blk_campos[] = "observaciones";
       $tab_ger_campos['id_asiento'] = "on";
+      $tab_ger_campos['prefijo'] = "on";
+      $tab_ger_campos['numero'] = "on";
 
 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['field_display']))

@@ -17,6 +17,7 @@ class grid_asientos_csv
    var $sc_proc_grid; 
    var $NM_cmp_hidden = array();
    var $count_ger;
+   var $sum_valor;
 
    //---- 
    function __construct()
@@ -98,6 +99,10 @@ class grid_asientos_csv
       {
           $this->Tot->$Gb_geral();
           $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['tot_geral'][1];
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "_NM_SC_")
+          {
+              $this->sum_valor = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['tot_geral'][2];
+          }
       }
       $this->Csv_password = "";
       $this->Arquivo   = "sc_csv";
@@ -133,7 +138,7 @@ class grid_asientos_csv
           { 
               $this->Tem_csv_res = (strpos(" " . $_REQUEST['SC_module_export'], "resume") !== false) ? true : false;
           } 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_total")
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "_NM_SC_")
           {
               $this->Tem_csv_res  = false;
           }
@@ -276,24 +281,16 @@ class grid_asientos_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
-              if ($Cada_col == "prefijo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
-              $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
-              if ($Cada_col == "numero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
               $SC_Label = (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "Fecha"; 
               if ($Cada_col == "fecha" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Numero"; 
+              if ($Cada_col == "numero2" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
                   $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
@@ -348,6 +345,22 @@ class grid_asientos_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
+              $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
+              if ($Cada_col == "prefijo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
+              if ($Cada_col == "numero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
           } 
           $this->csv_registro .= $this->Delim_line;
           fwrite($csv_f, $this->csv_registro);
@@ -357,30 +370,43 @@ class grid_asientos_csv
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT tipo, prefijo, numero, convert(char(23),fecha,121), nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, convert(char(23),fecha,121), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, EXTEND(fecha, YEAR TO DAY), nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, EXTEND(fecha, YEAR TO DAY), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, id_asiento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq'];
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo'])) 
+      { 
+          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq'])) 
+          { 
+              $nmgp_select .= " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo']; 
+              $nmgp_select_count .= " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo']; 
+          } 
+          else
+          { 
+              $nmgp_select .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo'] . ")"; 
+              $nmgp_select_count .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo'] . ")"; 
+          } 
+      } 
       $nmgp_order_by = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['order_grid'];
       $nmgp_select .= $nmgp_order_by; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select_count;
@@ -412,18 +438,19 @@ class grid_asientos_csv
          $this->csv_registro = "";
          $this->NM_prim_col  = 0;
          $this->tipo = $rs->fields[0] ;  
-         $this->prefijo = $rs->fields[1] ;  
-         $this->numero = $rs->fields[2] ;  
-         $this->fecha = $rs->fields[3] ;  
-         $this->nit = $rs->fields[4] ;  
-         $this->cuenta = $rs->fields[5] ;  
-         $this->tipocd = $rs->fields[6] ;  
-         $this->valor = $rs->fields[7] ;  
+         $this->fecha = $rs->fields[1] ;  
+         $this->numero2 = $rs->fields[2] ;  
+         $this->nit = $rs->fields[3] ;  
+         $this->cuenta = $rs->fields[4] ;  
+         $this->tipocd = $rs->fields[5] ;  
+         $this->valor = $rs->fields[6] ;  
          $this->valor =  str_replace(",", ".", $this->valor);
          $this->valor = (string)$this->valor;
-         $this->observaciones = $rs->fields[8] ;  
-         $this->id_asiento = $rs->fields[9] ;  
+         $this->observaciones = $rs->fields[7] ;  
+         $this->id_asiento = $rs->fields[8] ;  
          $this->id_asiento = (string)$this->id_asiento;
+         $this->prefijo = $rs->fields[9] ;  
+         $this->numero = $rs->fields[10] ;  
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_col)
          { 
@@ -554,22 +581,6 @@ class grid_asientos_csv
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
-   //----- prefijo
-   function NM_export_prefijo()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->prefijo);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
-   //----- numero
-   function NM_export_numero()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->numero);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
    //----- fecha
    function NM_export_fecha()
    {
@@ -582,6 +593,14 @@ class grid_asientos_csv
              } 
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->fecha);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- numero2
+   function NM_export_numero2()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->numero2);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
@@ -632,6 +651,22 @@ class grid_asientos_csv
              nmgp_Form_Num_Val($this->id_asiento, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->id_asiento);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- prefijo
+   function NM_export_prefijo()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->prefijo);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- numero
+   function NM_export_numero()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->numero);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }

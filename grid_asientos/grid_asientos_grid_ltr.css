@@ -1,11 +1,9 @@
 .css_tipo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_tipo_grid_line {vertical-align: top;text-align: left;}
-.css_prefijo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_prefijo_grid_line {vertical-align: top;text-align: left;}
-.css_numero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_numero_grid_line {vertical-align: top;text-align: right;}
 .css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_fecha_grid_line {vertical-align: top;text-align: center;}
+.css_numero2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_numero2_grid_line {vertical-align: top;text-align: left;}
 .css_nit_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_nit_grid_line {vertical-align: top;text-align: left;}
 .css_cuenta_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
@@ -14,7 +12,12 @@
 .css_tipocd_grid_line {vertical-align: top;text-align: left;}
 .css_valor_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_valor_grid_line {vertical-align: top;text-align: right;}
+.css_valor_tot_ger {text-align: right;}
 .css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_observaciones_grid_line {vertical-align: top;text-align: left;}
 .css_id_asiento_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_id_asiento_grid_line {vertical-align: top;text-align: right;}
+.css_prefijo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_prefijo_grid_line {vertical-align: top;text-align: left;}
+.css_numero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_numero_grid_line {vertical-align: top;text-align: right;}
