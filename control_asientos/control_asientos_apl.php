@@ -433,10 +433,6 @@ class control_asientos_apl
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->Db = $this->Ini->Db; 
-      if ($this->NM_ajax_flag && (!isset($this->NM_ajax_info['param']['buffer_output']) || !$this->NM_ajax_info['param']['buffer_output'] || 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9)))
-      {
-      $this->Db->debug = false;
-      }
       $this->Ini->str_google_fonts = isset($str_google_fonts)?$str_google_fonts:'';
       $this->Ini->Img_sep_form    = "/" . trim($str_toolbar_separator);
       $this->Ini->Color_bg_ajax   = "" == trim($str_ajax_bg)         ? "#000" : $str_ajax_bg;
@@ -1039,15 +1035,15 @@ class control_asientos_apl
       $this->field_config = array();
       //-- desde
       $this->field_config['desde']                 = array();
-      $this->field_config['desde']['date_format']  = $_SESSION['scriptcase']['reg_conf']['date_format'];
-      $this->field_config['desde']['date_sep']     = $_SESSION['scriptcase']['reg_conf']['date_sep'];
-      $this->field_config['desde']['date_display'] = "ddmmaaaa";
+      $this->field_config['desde']['date_format']  = "dd/mm/aaaa";
+      $this->field_config['desde']['date_sep']     = "/";
+      $this->field_config['desde']['date_display'] = "dd/mm/aaaa";
       $this->new_date_format('DT', 'desde');
       //-- hasta
       $this->field_config['hasta']                 = array();
-      $this->field_config['hasta']['date_format']  = $_SESSION['scriptcase']['reg_conf']['date_format'];
-      $this->field_config['hasta']['date_sep']     = $_SESSION['scriptcase']['reg_conf']['date_sep'];
-      $this->field_config['hasta']['date_display'] = "ddmmaaaa";
+      $this->field_config['hasta']['date_format']  = "dd/mm/aaaa";
+      $this->field_config['hasta']['date_sep']     = "/";
+      $this->field_config['hasta']['date_display'] = "dd/mm/aaaa";
       $this->new_date_format('DT', 'hasta');
    }
 
@@ -2089,12 +2085,9 @@ if($vtrue)
 {
 
 	$vfinifin = "";
-	if($this->desde !="null" and $this->hasta !="null")
-	{
-		$vfinifin = " and f.fechacom between '".$this->desde ."' and '".$this->hasta ."' ";
-	}
+	$vfinifin = " and f.fechacom between '".$this->desde ."' and '".$this->hasta ."' ";
 	
-	$vsql = "select f.idfaccom, concat('00/',f.numfacom) as num from facturacom f where f.asentada='1' $vfinifin order by f.idfaccom asc";
+	$vsql = "select f.idfaccom, concat('00/',f.numfacom) as num from facturacom f where $vfinifin order by f.idfaccom asc";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2595,11 +2588,7 @@ if($vtrue)
 		}
 	}
 	
-	$vfinifin = "";
-	if($this->desde !="null" and $this->hasta !="null")
-	{
-		$vfinifin = " and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' ";
-	}
+	$vfinifin = " and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' ";
 
 
 	$vsql = "select f.idfacven, concat(r.prefijo,'/',f.numfacven) as num from facturaven f left join resdian r on f.resolucion=r.Idres where f.asentada='1' and f.tipo='FV' $vfinifin order by f.idfacven asc";
@@ -3112,10 +3101,7 @@ if($vtrue)
 	}
 	
 	$vfinifin = "";
-	if($this->desde !="null" and $this->hasta !="null")
-	{
-		$vfinifin = " and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' ";
-	}
+	$vfinifin = " and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' ";
 
 	$vsql = "select f.idfacven, concat(r.prefijo,'/',f.numfacven) as num from facturaven_contratos f left join resdian r on f.resolucion=r.Idres where f.asentada='1'  and f.tipo='FV' $vfinifin order by f.idfacven asc";
 	 
@@ -4240,11 +4226,11 @@ $_SESSION['scriptcase']['control_asientos']['contr_erro'] = 'off';
    {
       if ($this->desde != "")  
       {
-     nm_conv_form_data($this->desde, $this->field_config['desde']['date_format'], "AAAAMMDD", array($this->field_config['desde']['date_sep'])) ;  
+     nm_conv_form_data($this->desde, $this->field_config['desde']['date_format'], "AAAA-MM-DD", array($this->field_config['desde']['date_sep'])) ;  
       }
       if ($this->hasta != "")  
       {
-     nm_conv_form_data($this->hasta, $this->field_config['hasta']['date_format'], "AAAAMMDD", array($this->field_config['hasta']['date_sep'])) ;  
+     nm_conv_form_data($this->hasta, $this->field_config['hasta']['date_format'], "AAAA-MM-DD", array($this->field_config['hasta']['date_sep'])) ;  
       }
    }
 //
