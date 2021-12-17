@@ -90,4 +90,4 @@ ALTER TABLE `terceros` ADD `si_nomina` SET('SI','NO') NOT NULL DEFAULT 'NO' AFTE
 
 ALTER TABLE `terceros` ADD `n_trabajadores` INT NOT NULL DEFAULT '0' AFTER `nombre_empresa_bd`;
 
-ALTER TABLE `asientos` CHANGE `valor` `valor` DECIMAL(15,2) NOT NULL DEFAULT '0.00';
+
