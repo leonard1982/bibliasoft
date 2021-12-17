@@ -2804,7 +2804,6 @@ if($vtrue)
 					where f.idfacven='".$vid."'
 					group by d.adicional";
 			
-			echo "sql ingresos: ".$vsql."<br><br>";
 			 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
