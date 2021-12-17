@@ -2180,7 +2180,7 @@ if($vtrue)
 					$vvalor = $this->vinventario[$a][7]; 
 					$vobs   = $this->vinventario[$a][8]; 
 					
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and cuenta='".$vcuenta."' and tipocd='".$vtipocd."'";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2215,7 +2215,7 @@ if($vtrue)
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where id_asiento='".$this->vsiya[0][0]."'";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2337,13 +2337,13 @@ if($vtrue)
 					$vobs   = $this->vimpuestos2[$a][8]; 
 
 					
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and cuenta='".$vcuenta."' and tipocd='".$vtipocd."'";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiYa = array();
-      $this->vsiya = array();
+      $this->vSiYa2 = array();
+      $this->vsiya2 = array();
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -2352,8 +2352,8 @@ if($vtrue)
           { 
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
-                      $this->vSiYa[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                      $this->vsiya[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vSiYa2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsiya2[$SCy] [$SCx] = $SCrx->fields[$SCx];
                  }
                  $SCy++; 
                  $SCrx->MoveNext();
@@ -2362,17 +2362,17 @@ if($vtrue)
       } 
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
-          $this->vSiYa = false;
-          $this->vSiYa_erro = $this->Db->ErrorMsg();
-          $this->vsiya = false;
-          $this->vsiya_erro = $this->Db->ErrorMsg();
+          $this->vSiYa2 = false;
+          $this->vSiYa2_erro = $this->Db->ErrorMsg();
+          $this->vsiya2 = false;
+          $this->vsiya2_erro = $this->Db->ErrorMsg();
       } 
 ;
-					if(isset($this->vsiya[0][0]))
+					if(isset($this->vsiya2[0][0]))
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where id_asiento='".$this->vsiya2[0][0]."'";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2485,13 +2485,13 @@ if($vtrue)
 					$vvalor = $this->vcaja2[$a][7]; 
 					$vobs   = $this->vcaja2[$a][8]; 
 				
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and cuenta='".$vcuenta."' and tipocd='".$vtipocd."'";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiYa = array();
-      $this->vsiya = array();
+      $this->vSiYa3 = array();
+      $this->vsiya3 = array();
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -2500,8 +2500,8 @@ if($vtrue)
           { 
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
-                      $this->vSiYa[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                      $this->vsiya[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vSiYa3[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsiya3[$SCy] [$SCx] = $SCrx->fields[$SCx];
                  }
                  $SCy++; 
                  $SCrx->MoveNext();
@@ -2510,17 +2510,17 @@ if($vtrue)
       } 
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
-          $this->vSiYa = false;
-          $this->vSiYa_erro = $this->Db->ErrorMsg();
-          $this->vsiya = false;
-          $this->vsiya_erro = $this->Db->ErrorMsg();
+          $this->vSiYa3 = false;
+          $this->vSiYa3_erro = $this->Db->ErrorMsg();
+          $this->vsiya3 = false;
+          $this->vsiya3_erro = $this->Db->ErrorMsg();
       } 
 ;
-					if(isset($this->vsiya[0][0]))
+					if(isset($this->vsiya3[0][0]))
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where id_asiento='".$this->vsiya3[0][0]."'";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2684,14 +2684,14 @@ if($vtrue)
 					$vobs   = $this->vcaja[$a][8]; 
 
 					
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and cuenta='".$vcuenta."' and tipocd='".$vtipocd."'";
 					echo "sql si ya asiento caja: ".$vsql."<br><br>";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiYa = array();
-      $this->vsiya = array();
+      $this->vSiYa4 = array();
+      $this->vsiya4 = array();
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -2700,8 +2700,8 @@ if($vtrue)
           { 
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
-                      $this->vSiYa[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                      $this->vsiya[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vSiYa4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsiya4[$SCy] [$SCx] = $SCrx->fields[$SCx];
                  }
                  $SCy++; 
                  $SCrx->MoveNext();
@@ -2710,17 +2710,17 @@ if($vtrue)
       } 
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
-          $this->vSiYa = false;
-          $this->vSiYa_erro = $this->Db->ErrorMsg();
-          $this->vsiya = false;
-          $this->vsiya_erro = $this->Db->ErrorMsg();
+          $this->vSiYa4 = false;
+          $this->vSiYa4_erro = $this->Db->ErrorMsg();
+          $this->vsiya4 = false;
+          $this->vsiya4_erro = $this->Db->ErrorMsg();
       } 
 ;
-					if(isset($this->vsiya[0][0]))
+					if(isset($this->vsiya4[0][0]))
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where id_asiento='".$this->vsiya4[0][0]."'";
 							echo "sql si delete caja: ".$vsql."<br><br>";
 							
      $nm_select = $vsql; 
@@ -2847,14 +2847,14 @@ if($vtrue)
 					$vobs   = $this->vingresos[$a][8]; 
 
 					
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and cuenta='".$vcuenta."' and tipocd='".$vtipocd."'";
 					echo "sql si ya asiento ingresos: ".$vsql."<br><br>";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiYa = array();
-      $this->vsiya = array();
+      $this->vSiYa5 = array();
+      $this->vsiya5 = array();
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -2863,8 +2863,8 @@ if($vtrue)
           { 
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
-                      $this->vSiYa[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                      $this->vsiya[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vSiYa5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsiya5[$SCy] [$SCx] = $SCrx->fields[$SCx];
                  }
                  $SCy++; 
                  $SCrx->MoveNext();
@@ -2873,17 +2873,17 @@ if($vtrue)
       } 
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
-          $this->vSiYa = false;
-          $this->vSiYa_erro = $this->Db->ErrorMsg();
-          $this->vsiya = false;
-          $this->vsiya_erro = $this->Db->ErrorMsg();
+          $this->vSiYa5 = false;
+          $this->vSiYa5_erro = $this->Db->ErrorMsg();
+          $this->vsiya5 = false;
+          $this->vsiya5_erro = $this->Db->ErrorMsg();
       } 
 ;
-					if(isset($this->vsiya[0][0]))
+					if(isset($this->vsiya5[0][0]))
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where id_asiento='".$this->vsiya5[0][0]."'";
 							echo "sql si ya delete ingresos: ".$vsql."<br><br>";
 							
      $nm_select = $vsql; 
@@ -3008,14 +3008,14 @@ if($vtrue)
 					$vvalor = $this->vimpuestos[$a][7]; 
 					$vobs   = $this->vimpuestos[$a][8]; 
 
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and cuenta='".$vcuenta."' and tipocd='".$vtipocd."'";
 					echo "sql si ya asiento impuestos: ".$vsql."<br><br>";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiYa = array();
-      $this->vsiya = array();
+      $this->vSiYa6 = array();
+      $this->vsiya6 = array();
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -3024,8 +3024,8 @@ if($vtrue)
           { 
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
-                      $this->vSiYa[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                      $this->vsiya[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vSiYa6[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsiya6[$SCy] [$SCx] = $SCrx->fields[$SCx];
                  }
                  $SCy++; 
                  $SCrx->MoveNext();
@@ -3034,17 +3034,17 @@ if($vtrue)
       } 
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
-          $this->vSiYa = false;
-          $this->vSiYa_erro = $this->Db->ErrorMsg();
-          $this->vsiya = false;
-          $this->vsiya_erro = $this->Db->ErrorMsg();
+          $this->vSiYa6 = false;
+          $this->vSiYa6_erro = $this->Db->ErrorMsg();
+          $this->vsiya6 = false;
+          $this->vsiya6_erro = $this->Db->ErrorMsg();
       } 
 ;
-					if(isset($this->vsiya[0][0]))
+					if(isset($this->vsiya6[0][0]))
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where id_asiento='".$this->vsiya6[0][0]."'";
 							echo "sql si delete impuestos: ".$vsql."<br><br>";
 							
      $nm_select = $vsql; 
