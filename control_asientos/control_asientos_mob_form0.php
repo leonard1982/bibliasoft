@@ -666,7 +666,7 @@ unset($NM_ult_sep);
 <input type="hidden" name="desde" value="<?php echo $this->form_encode_input($desde) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_desde_line" id="hidden_field_data_desde" style="<?php echo $sStyleHidden_desde; ?>"> <span class="scFormLabelOddFormat css_desde_label" style=""><span id="id_label_desde"><?php echo $this->nm_new_label['desde']; ?></span></span><br>
+    <TD class="scFormDataOdd css_desde_line" id="hidden_field_data_desde" style="<?php echo $sStyleHidden_desde; ?>"> <span class="scFormLabelOddFormat css_desde_label" style=""><span id="id_label_desde"><?php echo $this->nm_new_label['desde']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['php_cmp_required']['desde']) || $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['php_cmp_required']['desde'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br>
 <?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["desde"]) &&  $this->nmgp_cmp_readonly["desde"] == "on") { 
 
  ?>
@@ -746,7 +746,7 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
 <input type="hidden" name="hasta" value="<?php echo $this->form_encode_input($hasta) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_hasta_line" id="hidden_field_data_hasta" style="<?php echo $sStyleHidden_hasta; ?>"> <span class="scFormLabelOddFormat css_hasta_label" style=""><span id="id_label_hasta"><?php echo $this->nm_new_label['hasta']; ?></span></span><br>
+    <TD class="scFormDataOdd css_hasta_line" id="hidden_field_data_hasta" style="<?php echo $sStyleHidden_hasta; ?>"> <span class="scFormLabelOddFormat css_hasta_label" style=""><span id="id_label_hasta"><?php echo $this->nm_new_label['hasta']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['php_cmp_required']['hasta']) || $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos_mob']['php_cmp_required']['hasta'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br>
 <?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["hasta"]) &&  $this->nmgp_cmp_readonly["hasta"] == "on") { 
 
  ?>
@@ -870,6 +870,9 @@ $regenerar_look = "";
    </td></tr></table>
    </tr>
 </TABLE></div><!-- bloco_f -->
+</td></tr>
+<tr id="sc-id-required-row"><td class="scFormPageText">
+<span class="scFormRequiredOddColor">* <?php echo $this->Ini->Nm_lang['lang_othr_reqr']; ?></span>
 </td></tr> 
 <tr><td>
     <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar sc-toolbar-bottom" style="padding: 0px; spacing: 0px">

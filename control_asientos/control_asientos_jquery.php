@@ -230,7 +230,7 @@ function scJQCalendarAdd(iSeqRow) {
       sc_jq_calendar_value["#id_sc_field_desde" + iSeqRow] = $oField.val();
     },
     onClose: function(dateText, inst) {
-      do_ajax_control_asientos_validate_desde(iSeqRow);
+      setTimeout(function() { do_ajax_control_asientos_validate_desde(iSeqRow); }, 200);
     },
     showWeek: true,
     numberOfMonths: 1,
@@ -278,7 +278,7 @@ elseif ('' != $miniCalendarButton[0]) {
       sc_jq_calendar_value["#id_sc_field_hasta" + iSeqRow] = $oField.val();
     },
     onClose: function(dateText, inst) {
-      do_ajax_control_asientos_validate_hasta(iSeqRow);
+      setTimeout(function() { do_ajax_control_asientos_validate_hasta(iSeqRow); }, 200);
     },
     showWeek: true,
     numberOfMonths: 1,

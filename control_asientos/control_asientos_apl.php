@@ -1749,7 +1749,7 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
  $vmensaje = "";
 $vtrue    = true;
 
-$vsql = "select p.idprod from detalleventa dv left join productos p on dv.idpro=p.idprod where p.cod_cuenta is null or p.cod_cuenta = '' limit 1";
+$vsql = "select p.idprod from detalleventa dv left join productos p on dv.idpro=p.idprod inner join facturaven f on dv.numfac=f.idfacven where p.cod_cuenta is null or p.cod_cuenta = '' and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1786,7 +1786,7 @@ if(isset($this->vsigcp[0][0]))
 	$vtrue    = false;
 }
 
-$vsql = "select f.idfacven from facturaven f left join bancos b on f.banco=b.idcaja_vta where b.puc is null or b.puc='' limit 1";
+$vsql = "select f.idfacven from facturaven f left join bancos b on f.banco=b.idcaja_vta where b.puc is null or b.puc='' and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1860,7 +1860,7 @@ if(isset($this->vsigcp2[0][0]))
 	$vtrue    = false;
 }
 
-$vsql = "select i.idiva from detalleventa dv left join productos p on dv.idpro=p.idprod inner join iva i on p.idiva=i.idiva inner join facturaven_contratos f on dv.numfac=f.idfacven where i.puc is null or i.puc_dv_ventas or i.puc_compras or i.puc_dv_compras and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' limit 1";
+$vsql = "select i.trifa from detalleventa dv left join productos p on dv.idpro=p.idprod inner join iva i on p.idiva=i.idiva inner join facturaven f on dv.numfac=f.idfacven where i.puc is null and f.credito='1' and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1893,11 +1893,48 @@ $vsql = "select i.idiva from detalleventa dv left join productos p on dv.idpro=p
 ;
 if(isset($this->vsigcp3[0][0]))
 {
-	$vmensaje .= "Debe configurar el plan de cuentas de impuestos (IVA...).<br>";
+	$vmensaje .= "Debe configurar el plan de cuentas de impuestos IVA en ventas: ".$this->vsigcp3[0][0]."<br>";
 	$vtrue    = false;
 }
 
-$vsql = "select t.idtercero from facturaven f left join terceros t on f.idcli=t.idtercero where t.puc_auxiliar_proveedores is null  and f.fechaven between '".$this->desde ."' and '".$this->hasta ."'  limit 1";
+$vsql = "select i.trifa from detalleventa dv left join productos p on dv.idpro=p.idprod inner join iva i on p.idiva=i.idiva inner join facturacom f on dv.numfac=f.idfaccom where i.puc_compras is null and f.formapago='CREDITO' and f.fechacom between '".$this->desde ."' and '".$this->hasta ."' limit 1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiGCP7 = array();
+      $this->vsigcp7 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiGCP7[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsigcp7[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiGCP7 = false;
+          $this->vSiGCP7_erro = $this->Db->ErrorMsg();
+          $this->vsigcp7 = false;
+          $this->vsigcp7_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vsigcp7[0][0]))
+{
+	$vmensaje .= "Debe configurar el plan de cuentas de impuestos IVA en compras: ".$this->vsigcp7[0][0]."<br>";
+	$vtrue    = false;
+}
+
+$vsql = "select t.idtercero from facturaven f left join terceros t on f.idcli=t.idtercero where (t.puc_auxiliar_deudores is null or t.puc_auxiliar_deudores='') and f.credito='1' and f.fechaven between '".$this->desde ."' and '".$this->hasta ."'  limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1930,7 +1967,44 @@ $vsql = "select t.idtercero from facturaven f left join terceros t on f.idcli=t.
 ;
 if(isset($this->vsigcp4[0][0]))
 {
-	$vmensaje .= "Debe configurar el plan de cuentas de terceros.<br>";
+	$vmensaje .= "Debe configurar el plan de cuentas de clientes.<br>";
+	$vtrue    = false;
+}
+
+$vsql = "select t.idtercero from facturacom f left join terceros t on f.idprov=t.idtercero where (t.puc_auxiliar_proveedores is null or t.puc_auxiliar_proveedores='') and f.formapago='CREDITO' and f.fechacom between '".$this->desde ."' and '".$this->hasta ."'  limit 1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiGCP6 = array();
+      $this->vsigcp6 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiGCP6[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsigcp6[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiGCP6 = false;
+          $this->vSiGCP6_erro = $this->Db->ErrorMsg();
+          $this->vsigcp6 = false;
+          $this->vsigcp6_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vsigcp6[0][0]))
+{
+	$vmensaje .= "Debe configurar el plan de cuentas de proveedores.<br>";
 	$vtrue    = false;
 }
 
@@ -3611,6 +3685,21 @@ $_SESSION['scriptcase']['control_asientos']['contr_erro'] = 'off';
                   $this->NM_ajax_info['errList']['desde'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
               } 
           } 
+           elseif (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos']['php_cmp_required']['desde']) || $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos']['php_cmp_required']['desde'] == "on") 
+           { 
+              $hasError = true;
+              $Campos_Falta[] = "Desde" ; 
+              if (!isset($Campos_Erros['desde']))
+              {
+                  $Campos_Erros['desde'] = array();
+              }
+              $Campos_Erros['desde'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+                  if (!isset($this->NM_ajax_info['errList']['desde']) || !is_array($this->NM_ajax_info['errList']['desde']))
+                  {
+                      $this->NM_ajax_info['errList']['desde'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['desde'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+           } 
           $this->field_config['desde']['date_format'] = $guarda_datahora; 
        } 
         if ($hasError) {
@@ -3654,6 +3743,21 @@ $_SESSION['scriptcase']['control_asientos']['contr_erro'] = 'off';
                   $this->NM_ajax_info['errList']['hasta'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
               } 
           } 
+           elseif (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos']['php_cmp_required']['hasta']) || $_SESSION['sc_session'][$this->Ini->sc_page]['control_asientos']['php_cmp_required']['hasta'] == "on") 
+           { 
+              $hasError = true;
+              $Campos_Falta[] = "Hasta" ; 
+              if (!isset($Campos_Erros['hasta']))
+              {
+                  $Campos_Erros['hasta'] = array();
+              }
+              $Campos_Erros['hasta'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+                  if (!isset($this->NM_ajax_info['errList']['hasta']) || !is_array($this->NM_ajax_info['errList']['hasta']))
+                  {
+                      $this->NM_ajax_info['errList']['hasta'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['hasta'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+           } 
           $this->field_config['hasta']['date_format'] = $guarda_datahora; 
        } 
         if ($hasError) {

@@ -2936,7 +2936,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     var nomeCampo_desde = "desde";
     var var_desde = scAjaxGetFieldText(nomeCampo_desde);
     var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_control_asientos_validate_desde(var_desde, var_script_case_init, do_ajax_control_asientos_validate_desde_cb);
+    setTimeout(function() {
+      var var_desde = scAjaxGetFieldText(nomeCampo_desde);
+      x_ajax_control_asientos_validate_desde(var_desde, var_script_case_init, do_ajax_control_asientos_validate_desde_cb);
+    }, 200);
   } // do_ajax_control_asientos_validate_desde
 
   function do_ajax_control_asientos_validate_desde_cb(sResp)
@@ -2947,7 +2950,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scEventControl_onBlur(sFieldValid);
     scAjaxUpdateFieldErrors(sFieldValid, "valid");
     sAppErrors = scAjaxListErrors(true);
-    if ("" == sAppErrors)
+    if ("" == sAppErrors || ($("#ui-datepicker-div").length && $("#ui-datepicker-div").filter(":visible").length))
     {
       var sImgStatus = sc_img_status_ok;
       scAjaxHideErrorDisplay("table");
@@ -2973,7 +2976,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     var nomeCampo_hasta = "hasta";
     var var_hasta = scAjaxGetFieldText(nomeCampo_hasta);
     var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_control_asientos_validate_hasta(var_hasta, var_script_case_init, do_ajax_control_asientos_validate_hasta_cb);
+    setTimeout(function() {
+      var var_hasta = scAjaxGetFieldText(nomeCampo_hasta);
+      x_ajax_control_asientos_validate_hasta(var_hasta, var_script_case_init, do_ajax_control_asientos_validate_hasta_cb);
+    }, 200);
   } // do_ajax_control_asientos_validate_hasta
 
   function do_ajax_control_asientos_validate_hasta_cb(sResp)
@@ -2984,7 +2990,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scEventControl_onBlur(sFieldValid);
     scAjaxUpdateFieldErrors(sFieldValid, "valid");
     sAppErrors = scAjaxListErrors(true);
-    if ("" == sAppErrors)
+    if ("" == sAppErrors || ($("#ui-datepicker-div").length && $("#ui-datepicker-div").filter(":visible").length))
     {
       var sImgStatus = sc_img_status_ok;
       scAjaxHideErrorDisplay("table");
