@@ -1823,7 +1823,7 @@ if(isset($this->vsigcp2[0][0]))
 	$vtrue    = false;
 }
 
-$vsql = "select f.idfacven from facturaven_contratos f left join bancos b on f.banco=b.idcaja_vta where b.puc is null or b.puc='' limit 1";
+$vsql = "select f.idfacven from facturaven_contratos f left join bancos b on f.banco=b.idcaja_vta where b.puc is null or b.puc='' and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1860,7 +1860,7 @@ if(isset($this->vsigcp2[0][0]))
 	$vtrue    = false;
 }
 
-$vsql = "select i.idiva from detalleventa dv left join productos p on dv.idpro=p.idprod inner join iva i on p.idiva=i.idiva where i.puc is null or i.puc_dv_ventas or i.puc_compras or i.puc_dv_compras limit 1";
+$vsql = "select i.idiva from detalleventa dv left join productos p on dv.idpro=p.idprod inner join iva i on p.idiva=i.idiva inner join facturaven_contratos f on dv.numfac=f.idfacven where i.puc is null or i.puc_dv_ventas or i.puc_compras or i.puc_dv_compras and f.fechaven between '".$this->desde ."' and '".$this->hasta ."' limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1897,7 +1897,7 @@ if(isset($this->vsigcp3[0][0]))
 	$vtrue    = false;
 }
 
-$vsql = "select t.idtercero from facturaven f left join terceros t on f.idcli=t.idtercero where t.puc_auxiliar_proveedores is null limit 1";
+$vsql = "select t.idtercero from facturaven f left join terceros t on f.idcli=t.idtercero where t.puc_auxiliar_proveedores is null  and f.fechaven between '".$this->desde ."' and '".$this->hasta ."'  limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1934,7 +1934,7 @@ if(isset($this->vsigcp4[0][0]))
 	$vtrue    = false;
 }
 
-$vsql = "select t.idtercero from facturaven_contratos f left join terceros t on f.idcli=t.idtercero where t.puc_auxiliar_proveedores is null limit 1";
+$vsql = "select t.idtercero from facturaven_contratos f left join terceros t on f.idcli=t.idtercero where t.puc_auxiliar_proveedores is null and f.fechaven between '".$this->desde ."' and '".$this->hasta ."'  limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
