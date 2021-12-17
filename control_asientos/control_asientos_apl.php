@@ -2637,6 +2637,8 @@ if($vtrue)
 					left join terceros t on f.idcli=t.idtercero 
 					left join bancos b on f.banco=b.idcaja_vta
 					where f.idfacven='".$vid."'";
+			
+			echo "sql caja: ".$vsql."<br><br>";
 			 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2794,7 +2796,8 @@ if($vtrue)
 					left join grupos_contables gc on p.cod_cuenta=gc.codigo
 					where f.idfacven='".$vid."'
 					group by d.adicional";
-
+			
+			echo "sql ingresos: ".$vsql."<br><br>";
 			 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2952,6 +2955,7 @@ if($vtrue)
 					where f.idfacven='".$vid."' and d.adicional>0
 					group by d.adicional";
 
+			echo "sql impuestos: ".$vsql."<br><br>";
 			 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
