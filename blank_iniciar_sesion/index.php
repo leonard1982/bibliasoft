@@ -221,7 +221,7 @@ class blank_iniciar_sesion_ini
       $this->nm_hr_criacao   = "084030"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211218"; 
-      $this->nm_hr_ult_alt   = "183633"; 
+      $this->nm_hr_ult_alt   = "184034"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -913,7 +913,7 @@ class blank_iniciar_sesion_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_iniciar_sesion']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_iniciar_sesion']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDQFaZ1rwHuNUDMvsVcFeDuFqDoJeHQJmZSBqD1NaZMB/DEBeVkJ3DuXKVoFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7DSNOD5FaDEBOHEJqHEFqHIB/D9NmDQJsHANOVWJwHgrwVcXKH5XCDoFUD9XGZ1B/DSBeHQF7HgvsHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWJeDoJeDcBqZ1B/Z1NOV5JsDMNKZSXeHEFqVoBiD9JKDQX7D1BeD5BqHgvsVcFCDWJeVoJwD9XOH9B/HArYD5JeDEBeHEXeV5FaVoBiHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJsDMzGV9BUDWF/VorqD9XOZ1B/Z1BeD5BiHgBOHEFiDWFqHIraHQBiH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHAvmV5XGDMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgrKHErCH5F/ZuFaDcJeZSBiDSrwV5FGDMNOZSJ3V5FYHIraHQXGZSBqHIBeHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQFaZ1rwHuB/HgvOVcXKDWFYHIJsD9XGZ1B/HIBeHuJsDMveHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDEvsVkXeHEXCHMB/HQBiDQJsHArYD5BOHuvmZSJqDWFYHIJeDcNwH9BqZ1vOV5X7HgBYHEBUDuXKZuJeD9FYDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHuvmVcBOV5F/DoFGDcBqH9B/DSrYD5NUDErKVkJqV5FaDoXGDcBwDQFGD1BeD5BqHuNODkBOV5BmDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuJwHgvOV9FeHEF/HMFaD9XOH9B/DSNOD5rqDMzGVkJ3DuFYVoBiHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoJeHQBiDuBqHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1rqHAvmZMBOHgBOVkXeHEXCHIXGDcBwZSFUHIrwHuBOHgvOVIBOV5X7VoJwHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2550,9 +2550,14 @@ $(function() {
 	
 function fValidarSesion()
 {
-	var usuario  = $("#username").val();
-	var password = $("#password").val();
-	var bd       = $("#empresa").val();
+	var usuario    = $("#username").val();
+	var password   = $("#password").val();
+	var bd         = $("#empresa").val();
+	var recordarme = "NO";
+	if ($('#remember').prop('checked'))
+	{
+		recordarme = "SI";
+	}
 	
 	var codempresa = $("#empresa").val();
 		
@@ -2587,7 +2592,8 @@ function fValidarSesion()
 
 					usuario:usuario,
 					password:password,
-					bd:r2
+					bd:r2,
+					recordarme:recordarme
 
 				},function(r){
 
@@ -2918,11 +2924,11 @@ $(document).ready(function(){
 									</div>
 									<div class="form-group">
 										<label for="username" style="float:left;">Usuario/E-mail</label>
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="" required="required">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="<?php if(isset($_COOKIE["usuario"])){ echo $_COOKIE["usuario"];} ?>" required="required">
 									</div>
 									<div class="form-group">
 										<label for="password" style="float:left;">Contraseña</label>
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña" required="required">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña" value="<?php if(isset($_COOKIE["password"])){ echo $_COOKIE["password"];} ?>" required="required">
 									</div>
 									<div class="form-group">
 										<input style="float:left;" type="checkbox" tabindex="3" class="" name="remember" id="remember">

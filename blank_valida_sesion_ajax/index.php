@@ -1,7 +1,7 @@
 <?php
    include_once('blank_valida_sesion_ajax_session.php');
-   @ini_set('session.cookie_httponly', 1);
-   @ini_set('session.use_only_cookies', 1);
+   @ini_set('session.cookie_httponly', 0);
+   @ini_set('session.use_only_cookies', 0);
    @ini_set('session.cookie_secure', 0);
    @session_start() ;
    $_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_perfil']          = "conn_mysql";
@@ -220,8 +220,8 @@ class blank_valida_sesion_ajax_ini
       $this->nm_dt_criacao   = "20181008"; 
       $this->nm_hr_criacao   = "163540"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210817"; 
-      $this->nm_hr_ult_alt   = "115231"; 
+      $this->nm_dt_ult_alt   = "20211218"; 
+      $this->nm_hr_ult_alt   = "185107"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -913,7 +913,7 @@ class blank_valida_sesion_ajax_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_valida_sesion_ajax']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_valida_sesion_ajax']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZSFUHAveV5FUHuzGDkBOHEF/HMBqD9BiH9BqHANOZMBqHgveHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBOZSJGDWXCHMBiHQJKH9X7DSrwHuFUHgrKV9FiV5X/VErqHQBsZ1FaD1rKD5NUHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaZuBODcJeDQX7HIBeD5BqHgrKVcFKDWFaVoJwD9XOH9B/HArYD5JeDEBeHEXeV5FaVoBiDcXOZSX7HArYD5FaHgvsVcFCDurGDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQB/HgvOVcB/HEFYHIX7HQBsZ1X7HANOHuFUHgvsHErCH5X/ZuXGHQXsH9FGHAN7HuJwDMvsVcrsDWXCHIF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHIveHQJwDEBODkFeH5FYVoFGHQJKDQFaHIrKHuNUHgrKVcB/HEFYDoXGD9XOZSFaHIBeHuJwHgBeHArCDWXCDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDQFGHIrKD5rqDMvODkFCDWFYHMJsHQBqZkBiHANOHuX7DMvCDkB/DWX7VoFaD9FYDuFaHANOD5NUDMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMNOVcB/H5B3VoF7DcBqZSB/Z1BOD5BqDEBOVkJqDWX7VoJeD9FYDQJwHIrKV5FUHuvmVcFCH5XCHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9FaHANOD5NUDEBOHEFiHEFqVoFaDcJeDQFUZ1rwV5BqHgrKVcFCH5FqDoFGD9BsH9B/Z1NOD5BiDMBYHEXeHEXCDoraD9FYDQBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsDWF/ZuFaDcXOZ9F7HABYV5X7HgrKVIBsDuFGVErqD9BsZ1F7D1NaZMJeDMveHErCHEFaHIrqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoJeHQBiDuBqHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIBeHQBODMvCVkJ3DWB3ZuFaHQBiZSBiZ1BYHQB/DMrYVcrsH5XCHIraDcNwH9B/DSrYD5F7HgrKHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2073,8 +2073,7 @@ class blank_valida_sesion_ajax_apl
       $this->Erro      = new blank_valida_sesion_ajax_erro();
       $this->Erro->Ini = $this->Ini;
 //
-      header("X-XSS-Protection: 1; mode=block");
-      header("X-Frame-Options: SAMEORIGIN");
+      header("X-XSS-Protection: 0; mode=block");
       $_SESSION['scriptcase']['blank_valida_sesion_ajax']['contr_erro'] = 'on';
 if (!isset($_SESSION['gFactsinexist'])) {$_SESSION['gFactsinexist'] = "";}
 if (!isset($this->sc_temp_gFactsinexist)) {$this->sc_temp_gFactsinexist = (isset($_SESSION['gFactsinexist'])) ? $_SESSION['gFactsinexist'] : "";}
@@ -2268,6 +2267,24 @@ $vdia_aviso = "";
 $vdia_corte = ""; 
 $vwebservice = ""; 
 $vfecha_instalacion = "";
+$vrecordarme = "NO";
+$vusua = "";
+$vpass = "";
+
+if(isset($_POST["usuario"]))
+{
+	$vusua = $_POST["usuario"];
+}
+
+if(isset($_POST["password"]))
+{
+	$vpass = $_POST["password"];
+}
+
+if(isset($_POST["recordarme"]))
+{
+	$vrecordarme = $_POST["recordarme"];
+}
 
  
       $nm_select = $vsql; 
@@ -2389,6 +2406,14 @@ $vsql = "select
 
 if(isset($this->vvalidausuario[0][0]))
 {
+	
+	setcookie("recordarme", $vrecordarme);
+	
+	if($vrecordarme=="SI")
+	{
+		setcookie("usuario", $vusua);
+		setcookie("password", $vpass);
+	}
 	
 	 
       $nm_select = "select item_menu from aplicaciones_menu"; 
