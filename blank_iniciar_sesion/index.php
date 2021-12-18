@@ -220,8 +220,8 @@ class blank_iniciar_sesion_ini
       $this->nm_dt_criacao   = "20180904"; 
       $this->nm_hr_criacao   = "084030"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210913"; 
-      $this->nm_hr_ult_alt   = "200320"; 
+      $this->nm_dt_ult_alt   = "20211130"; 
+      $this->nm_hr_ult_alt   = "112822"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -913,7 +913,7 @@ class blank_iniciar_sesion_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_iniciar_sesion']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_iniciar_sesion']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDuFaHABYHQrqHgvOV9BUDuX7HIJeD9XOZ1BiHINKD5JeHgBOHArsDWX7DoraD9NmDQX7HIBeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNKHEJqH5FYVoFGD9JKDQJsDSN7VWBqHuNOZSNiH5FqDorqHQXOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9B/DSrYV5FUDEBeHEXeH5FYVoXGDcJeDQFGHANOV5raHuzGDkBODWFYVoFGD9JmZ1B/Z1BeV5FUHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMFaDcXGDQJwHIvsV5JeDMvOVIB/DWJeVoF7D9XGZkBiHANOD5BODMvCHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHArsDWBmDoJeHQJeDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBsVIJsDSvOD5BqDErKDkFeV5FqHIX7HQNwDQFaDSBYD5B/HuNOVIBsH5B3VEFGHQXOZ1FGD1rKHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwZSBiZ1N7V5XGHuBYVcBUDWF/DoX7HQXGH9B/HArYHuBODEBOHErsH5FGZuXGHQNmZSX7DSrwD5JeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JeHuNOV9BUDWXCDoJsHQBqZkFGHIveHQJsHgrKZSXeH5X/ZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwD5BqHuNOVIBOHEFYVoBqD9JmZ1B/HABYD5XGDMNKZSJGH5FYVoB/D9NwZSX7DSBYV5JwHuNOZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQJwHANOHQB/DMNODkBsV5FYHMJwHQXGZ1FaHArYD5rqDEvsHErsDWFqHIBiHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveHArsDWFGDoJeHQBiDuBqHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1X7DSrYHuFGHgBYHEBUDuJeHMJsD9NmDQB/HArYHuJeHuBOVcBUDWXKVoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2142,7 +2142,36 @@ if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
 if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
 if (!isset($_SESSION['gOS'])) {$_SESSION['gOS'] = "";}
 if (!isset($this->sc_temp_gOS)) {$this->sc_temp_gOS = (isset($_SESSION['gOS'])) ? $_SESSION['gOS'] : "";}
- $this->sc_temp_gOS = strtoupper(substr(PHP_OS, 0, 3));
+if (!isset($_SESSION['gurl_envionotadebito'])) {$_SESSION['gurl_envionotadebito'] = "";}
+if (!isset($this->sc_temp_gurl_envionotadebito)) {$this->sc_temp_gurl_envionotadebito = (isset($_SESSION['gurl_envionotadebito'])) ? $_SESSION['gurl_envionotadebito'] : "";}
+if (!isset($_SESSION['gurl_envionotacredito'])) {$_SESSION['gurl_envionotacredito'] = "";}
+if (!isset($this->sc_temp_gurl_envionotacredito)) {$this->sc_temp_gurl_envionotacredito = (isset($_SESSION['gurl_envionotacredito'])) ? $_SESSION['gurl_envionotacredito'] : "";}
+if (!isset($_SESSION['gurl_enviofacturas'])) {$_SESSION['gurl_enviofacturas'] = "";}
+if (!isset($this->sc_temp_gurl_enviofacturas)) {$this->sc_temp_gurl_enviofacturas = (isset($_SESSION['gurl_enviofacturas'])) ? $_SESSION['gurl_enviofacturas'] : "";}
+if (!isset($_SESSION['gurl_rangos'])) {$_SESSION['gurl_rangos'] = "";}
+if (!isset($this->sc_temp_gurl_rangos)) {$this->sc_temp_gurl_rangos = (isset($_SESSION['gurl_rangos'])) ? $_SESSION['gurl_rangos'] : "";}
+if (!isset($_SESSION['gurl_reg_resolucion'])) {$_SESSION['gurl_reg_resolucion'] = "";}
+if (!isset($this->sc_temp_gurl_reg_resolucion)) {$this->sc_temp_gurl_reg_resolucion = (isset($_SESSION['gurl_reg_resolucion'])) ? $_SESSION['gurl_reg_resolucion'] : "";}
+if (!isset($_SESSION['gurl_reg_subirlogo'])) {$_SESSION['gurl_reg_subirlogo'] = "";}
+if (!isset($this->sc_temp_gurl_reg_subirlogo)) {$this->sc_temp_gurl_reg_subirlogo = (isset($_SESSION['gurl_reg_subirlogo'])) ? $_SESSION['gurl_reg_subirlogo'] : "";}
+if (!isset($_SESSION['gurl_reg_certificado'])) {$_SESSION['gurl_reg_certificado'] = "";}
+if (!isset($this->sc_temp_gurl_reg_certificado)) {$this->sc_temp_gurl_reg_certificado = (isset($_SESSION['gurl_reg_certificado'])) ? $_SESSION['gurl_reg_certificado'] : "";}
+if (!isset($_SESSION['gurl_reg_software'])) {$_SESSION['gurl_reg_software'] = "";}
+if (!isset($this->sc_temp_gurl_reg_software)) {$this->sc_temp_gurl_reg_software = (isset($_SESSION['gurl_reg_software'])) ? $_SESSION['gurl_reg_software'] : "";}
+if (!isset($_SESSION['gurl_reg_empresa'])) {$_SESSION['gurl_reg_empresa'] = "";}
+if (!isset($this->sc_temp_gurl_reg_empresa)) {$this->sc_temp_gurl_reg_empresa = (isset($_SESSION['gurl_reg_empresa'])) ? $_SESSION['gurl_reg_empresa'] : "";}
+ 
+$this->sc_temp_gurl_reg_empresa     = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config';
+$this->sc_temp_gurl_reg_software    = 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/software';
+$this->sc_temp_gurl_reg_certificado = 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/certificate';
+$this->sc_temp_gurl_reg_subirlogo   = 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/logo';
+$this->sc_temp_gurl_reg_resolucion  = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/resolution';
+$this->sc_temp_gurl_rangos          = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/numbering-range';
+$this->sc_temp_gurl_enviofacturas   = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice';   
+$this->sc_temp_gurl_envionotacredito= 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note';
+$this->sc_temp_gurl_envionotadebito = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note';
+
+$this->sc_temp_gOS = strtoupper(substr(PHP_OS, 0, 3));
 
 $vimg  = "../_lib/img/fw_im_facilweb_eslogan.png";
 $vimg2 = "../_lib/img/logo_facilweb_blanco.png";
@@ -2255,7 +2284,16 @@ if(isset($_GET["username"]) and isset($_GET["password"]))
     $this->Ini->sc_tem_trans_banco = false;
 }
 
-	 if (isset($this->sc_temp_gOS)) {$_SESSION['gOS'] = $this->sc_temp_gOS;}
+	 if (isset($this->sc_temp_gurl_reg_empresa)) {$_SESSION['gurl_reg_empresa'] = $this->sc_temp_gurl_reg_empresa;}
+ if (isset($this->sc_temp_gurl_reg_software)) {$_SESSION['gurl_reg_software'] = $this->sc_temp_gurl_reg_software;}
+ if (isset($this->sc_temp_gurl_reg_certificado)) {$_SESSION['gurl_reg_certificado'] = $this->sc_temp_gurl_reg_certificado;}
+ if (isset($this->sc_temp_gurl_reg_subirlogo)) {$_SESSION['gurl_reg_subirlogo'] = $this->sc_temp_gurl_reg_subirlogo;}
+ if (isset($this->sc_temp_gurl_reg_resolucion)) {$_SESSION['gurl_reg_resolucion'] = $this->sc_temp_gurl_reg_resolucion;}
+ if (isset($this->sc_temp_gurl_rangos)) {$_SESSION['gurl_rangos'] = $this->sc_temp_gurl_rangos;}
+ if (isset($this->sc_temp_gurl_enviofacturas)) {$_SESSION['gurl_enviofacturas'] = $this->sc_temp_gurl_enviofacturas;}
+ if (isset($this->sc_temp_gurl_envionotacredito)) {$_SESSION['gurl_envionotacredito'] = $this->sc_temp_gurl_envionotacredito;}
+ if (isset($this->sc_temp_gurl_envionotadebito)) {$_SESSION['gurl_envionotadebito'] = $this->sc_temp_gurl_envionotadebito;}
+ if (isset($this->sc_temp_gOS)) {$_SESSION['gOS'] = $this->sc_temp_gOS;}
  if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
  if (isset($this->sc_temp_par_idajuste)) {$_SESSION['par_idajuste'] = $this->sc_temp_par_idajuste;}
  if (isset($this->sc_temp_par_fechainv)) {$_SESSION['par_fechainv'] = $this->sc_temp_par_fechainv;}
@@ -2515,37 +2553,78 @@ function fValidarSesion()
 	var usuario  = $("#username").val();
 	var password = $("#password").val();
 	var bd       = $("#empresa").val();
-
-	$.post("../blank_reset_bd/index.php",{bd:bd},function(r2){
+	
+	var codempresa = $("#empresa").val();
 		
-		console.log(r2);
+	$.post("../blank_si_empresa/index.php",{
+
+		codempresa:codempresa
+
+	},function(r){
+
+		console.log("Codempresa: "+codempresa);
+		console.log(r);
+		var obj = JSON.parse(r);
+
+		if(obj.ok=="NO")
+		{
+			if(confirm("Código de empresa no válido."))
+			{
+				 $("#empresa").select();
+			}
+			else
+			{
+				$("#empresa").select();
+			}
+		}
+		else
+		{
+			$.post("../blank_reset_bd/index.php",{bd:bd},function(r2){
 		
-		$.post("../blank_valida_sesion_ajax/index.php",{
+				console.log(r2);
 
-			usuario:usuario,
-			password:password,
-			bd:r2
+				$.post("../blank_valida_sesion_ajax/index.php",{
 
-		},function(r){
+					usuario:usuario,
+					password:password,
+					bd:r2
 
-			console.log(r);
+				},function(r){
 
-			var obj = JSON.parse(r);
+					console.log(r);
 
-			if(obj.suscripcion=="SI")
-			{
-				window.location = "../suscripcion";	
-			}
-			else if(!$.isEmptyObject(obj.pagina))
-			{
-			window.location = "../"+obj.pagina;
-			}
-			else if(!$.isEmptyObject(obj.mensaje))
-			{
-			alertify.alert('', obj.mensaje, function(){ });
-			}
-		});	
+					var obj = JSON.parse(r);
+
+					if(obj.suscripcion=="SI")
+					{
+						window.location = "../suscripcion";	
+					}
+					else if(!$.isEmptyObject(obj.pagina))
+					{
+					window.location = "../"+obj.pagina;
+					}
+					else if(!$.isEmptyObject(obj.mensaje))
+					{
+					alertify.alert('', obj.mensaje, function(){ });
+					}
+				});	
+
+			});
+		}
+	});
+}
+	
+function fActualizarSoftware()
+{
+	alertify.confirm('Advertencia', '¿Desea aplicar las actualizaciones del software? Mientras se lleva a cabo este proceso no debe cerrar la ventana del navegador, ya que podría ocasionar un daño en el sistema.', 
+	function(){ 
 		
+		location.href = "../update_git.php";
+	}
+    ,function(){ 
+		
+		alertify.error('Cancelado.');
+			   
 	});
 }
 	
@@ -2576,6 +2655,12 @@ $(document).ready(function(){
 			$("#username").focus();
 			return false;
 		}
+	});
+	
+	$("#empresa").change(function(){
+		
+		
+
 	});
 	
 	$("#username").keypress(function(e){
@@ -2845,7 +2930,7 @@ $(document).ready(function(){
 															<a  href="../blank_hacer_backup" tabindex="5" target="_blank"  style="margin-right:10px;"><img class="iconos_ampliar" alt="Saca copias de seguridad" src="../_lib/img/fw_ico_copias_seguridad.png" /></a>
 															<a  href="../blank_restaurar_backup" tabindex="5"  target="_blank"  style="margin-right:10px;"><img class="iconos_ampliar" alt="Restaura copias de seguridad" src="../_lib/img/fw_ico_restaurar_copias.png" /></a>
 													
-															<a  href="../update_git.php" tabindex="5"  target="_self"  style="margin-right:10px;"><img class="iconos_ampliar" alt="Actualizar" src="../_lib/img/grp__NM__img__NM__fw_ico_conexiones.png" /></a>
+															<a  onclick="fActualizarSoftware();" tabindex="5"  target="_self"  style="margin-right:10px;"><img class="iconos_ampliar" alt="Actualizar" src="../_lib/img/grp__NM__img__NM__fw_ico_conexiones.png" /></a>
 
 															<?php
 														}
@@ -2887,6 +2972,15 @@ $(document).ready(function(){
 		</div>
 	</div>
 <?php
+if (isset($this->sc_temp_gurl_reg_empresa)) {$_SESSION['gurl_reg_empresa'] = $this->sc_temp_gurl_reg_empresa;}
+if (isset($this->sc_temp_gurl_reg_software)) {$_SESSION['gurl_reg_software'] = $this->sc_temp_gurl_reg_software;}
+if (isset($this->sc_temp_gurl_reg_certificado)) {$_SESSION['gurl_reg_certificado'] = $this->sc_temp_gurl_reg_certificado;}
+if (isset($this->sc_temp_gurl_reg_subirlogo)) {$_SESSION['gurl_reg_subirlogo'] = $this->sc_temp_gurl_reg_subirlogo;}
+if (isset($this->sc_temp_gurl_reg_resolucion)) {$_SESSION['gurl_reg_resolucion'] = $this->sc_temp_gurl_reg_resolucion;}
+if (isset($this->sc_temp_gurl_rangos)) {$_SESSION['gurl_rangos'] = $this->sc_temp_gurl_rangos;}
+if (isset($this->sc_temp_gurl_enviofacturas)) {$_SESSION['gurl_enviofacturas'] = $this->sc_temp_gurl_enviofacturas;}
+if (isset($this->sc_temp_gurl_envionotacredito)) {$_SESSION['gurl_envionotacredito'] = $this->sc_temp_gurl_envionotacredito;}
+if (isset($this->sc_temp_gurl_envionotadebito)) {$_SESSION['gurl_envionotadebito'] = $this->sc_temp_gurl_envionotadebito;}
 if (isset($this->sc_temp_gOS)) {$_SESSION['gOS'] = $this->sc_temp_gOS;}
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 if (isset($this->sc_temp_par_idajuste)) {$_SESSION['par_idajuste'] = $this->sc_temp_par_idajuste;}
@@ -4177,6 +4271,132 @@ $_SESSION['scriptcase']['blank_iniciar_sesion']['contr_erro'] = 'off';
    {
        $_SESSION["gtipo_negocio"] = "";
    }
+   if (isset($_POST["gurl_reg_empresa"])) 
+   {
+       $_SESSION["gurl_reg_empresa"] = $_POST["gurl_reg_empresa"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_empresa"]);
+   }
+   if (isset($_GET["gurl_reg_empresa"])) 
+   {
+       $_SESSION["gurl_reg_empresa"] = $_GET["gurl_reg_empresa"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_empresa"]);
+   }
+   if (!isset($_SESSION["gurl_reg_empresa"])) 
+   {
+       $_SESSION["gurl_reg_empresa"] = "";
+   }
+   if (isset($_POST["gurl_reg_software"])) 
+   {
+       $_SESSION["gurl_reg_software"] = $_POST["gurl_reg_software"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_software"]);
+   }
+   if (isset($_GET["gurl_reg_software"])) 
+   {
+       $_SESSION["gurl_reg_software"] = $_GET["gurl_reg_software"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_software"]);
+   }
+   if (!isset($_SESSION["gurl_reg_software"])) 
+   {
+       $_SESSION["gurl_reg_software"] = "";
+   }
+   if (isset($_POST["gurl_reg_certificado"])) 
+   {
+       $_SESSION["gurl_reg_certificado"] = $_POST["gurl_reg_certificado"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_certificado"]);
+   }
+   if (isset($_GET["gurl_reg_certificado"])) 
+   {
+       $_SESSION["gurl_reg_certificado"] = $_GET["gurl_reg_certificado"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_certificado"]);
+   }
+   if (!isset($_SESSION["gurl_reg_certificado"])) 
+   {
+       $_SESSION["gurl_reg_certificado"] = "";
+   }
+   if (isset($_POST["gurl_reg_subirlogo"])) 
+   {
+       $_SESSION["gurl_reg_subirlogo"] = $_POST["gurl_reg_subirlogo"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_subirlogo"]);
+   }
+   if (isset($_GET["gurl_reg_subirlogo"])) 
+   {
+       $_SESSION["gurl_reg_subirlogo"] = $_GET["gurl_reg_subirlogo"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_subirlogo"]);
+   }
+   if (!isset($_SESSION["gurl_reg_subirlogo"])) 
+   {
+       $_SESSION["gurl_reg_subirlogo"] = "";
+   }
+   if (isset($_POST["gurl_reg_resolucion"])) 
+   {
+       $_SESSION["gurl_reg_resolucion"] = $_POST["gurl_reg_resolucion"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_resolucion"]);
+   }
+   if (isset($_GET["gurl_reg_resolucion"])) 
+   {
+       $_SESSION["gurl_reg_resolucion"] = $_GET["gurl_reg_resolucion"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_resolucion"]);
+   }
+   if (!isset($_SESSION["gurl_reg_resolucion"])) 
+   {
+       $_SESSION["gurl_reg_resolucion"] = "";
+   }
+   if (isset($_POST["gurl_rangos"])) 
+   {
+       $_SESSION["gurl_rangos"] = $_POST["gurl_rangos"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_rangos"]);
+   }
+   if (isset($_GET["gurl_rangos"])) 
+   {
+       $_SESSION["gurl_rangos"] = $_GET["gurl_rangos"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_rangos"]);
+   }
+   if (!isset($_SESSION["gurl_rangos"])) 
+   {
+       $_SESSION["gurl_rangos"] = "";
+   }
+   if (isset($_POST["gurl_enviofacturas"])) 
+   {
+       $_SESSION["gurl_enviofacturas"] = $_POST["gurl_enviofacturas"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_enviofacturas"]);
+   }
+   if (isset($_GET["gurl_enviofacturas"])) 
+   {
+       $_SESSION["gurl_enviofacturas"] = $_GET["gurl_enviofacturas"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_enviofacturas"]);
+   }
+   if (!isset($_SESSION["gurl_enviofacturas"])) 
+   {
+       $_SESSION["gurl_enviofacturas"] = "";
+   }
+   if (isset($_POST["gurl_envionotacredito"])) 
+   {
+       $_SESSION["gurl_envionotacredito"] = $_POST["gurl_envionotacredito"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_envionotacredito"]);
+   }
+   if (isset($_GET["gurl_envionotacredito"])) 
+   {
+       $_SESSION["gurl_envionotacredito"] = $_GET["gurl_envionotacredito"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_envionotacredito"]);
+   }
+   if (!isset($_SESSION["gurl_envionotacredito"])) 
+   {
+       $_SESSION["gurl_envionotacredito"] = "";
+   }
+   if (isset($_POST["gurl_envionotadebito"])) 
+   {
+       $_SESSION["gurl_envionotadebito"] = $_POST["gurl_envionotadebito"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_envionotadebito"]);
+   }
+   if (isset($_GET["gurl_envionotadebito"])) 
+   {
+       $_SESSION["gurl_envionotadebito"] = $_GET["gurl_envionotadebito"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_envionotadebito"]);
+   }
+   if (!isset($_SESSION["gurl_envionotadebito"])) 
+   {
+       $_SESSION["gurl_envionotadebito"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -4656,6 +4876,51 @@ $_SESSION['scriptcase']['blank_iniciar_sesion']['contr_erro'] = 'off';
        {
            $_SESSION['gtipo_negocio'] = $gtipo_negocio;
            nm_limpa_str_blank_iniciar_sesion($_SESSION["gtipo_negocio"]);
+       }
+       if (isset($gurl_reg_empresa)) 
+       {
+           $_SESSION['gurl_reg_empresa'] = $gurl_reg_empresa;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_empresa"]);
+       }
+       if (isset($gurl_reg_software)) 
+       {
+           $_SESSION['gurl_reg_software'] = $gurl_reg_software;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_software"]);
+       }
+       if (isset($gurl_reg_certificado)) 
+       {
+           $_SESSION['gurl_reg_certificado'] = $gurl_reg_certificado;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_certificado"]);
+       }
+       if (isset($gurl_reg_subirlogo)) 
+       {
+           $_SESSION['gurl_reg_subirlogo'] = $gurl_reg_subirlogo;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_subirlogo"]);
+       }
+       if (isset($gurl_reg_resolucion)) 
+       {
+           $_SESSION['gurl_reg_resolucion'] = $gurl_reg_resolucion;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_reg_resolucion"]);
+       }
+       if (isset($gurl_rangos)) 
+       {
+           $_SESSION['gurl_rangos'] = $gurl_rangos;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_rangos"]);
+       }
+       if (isset($gurl_enviofacturas)) 
+       {
+           $_SESSION['gurl_enviofacturas'] = $gurl_enviofacturas;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_enviofacturas"]);
+       }
+       if (isset($gurl_envionotacredito)) 
+       {
+           $_SESSION['gurl_envionotacredito'] = $gurl_envionotacredito;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_envionotacredito"]);
+       }
+       if (isset($gurl_envionotadebito)) 
+       {
+           $_SESSION['gurl_envionotadebito'] = $gurl_envionotadebito;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_envionotadebito"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  
