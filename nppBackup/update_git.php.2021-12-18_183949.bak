@@ -49,7 +49,7 @@ else
 	}
 }
 
-echo "<center><div style='padding:8px;color:white;background:#5868a6;border-radius:5px;width:600px;'>";
-echo "<h1>Actualizado con éxito!!!. </h1><br><br><a href='../' style='color:white;'>Aquí para volver<a/>";
-echo "</div></center>";
+echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
+echo "Actualizado con éxito!!!. <b>-> <a href='../' style='color:white;'>Aquí para volver<a/></b>";
+echo "</div>";
 ?>
