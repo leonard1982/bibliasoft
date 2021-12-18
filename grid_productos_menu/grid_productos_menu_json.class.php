@@ -324,7 +324,7 @@ if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit']
 }
 else
 {
-	$this->seleccionar  = "<div style='width:200px;height:150px;paddin:8px;white-space : normal;cursor:pointer;' doc='".$this->codigobar ."' onclick='window.opener.document.getElementById(\"txt_articulo\").value=\"".$this->codigobar ."\";window.opener.document.getElementById(\"div_ingresar_codigo\").click();'>".$this->nompro ." - PRECIO: ".number_format($this->preciomen )."</div>";
+	$this->seleccionar  = "<div style='width:200px;height:150px;paddin:8px;white-space : normal;cursor:pointer;' doc='".$this->codigobar ."' onclick='window.opener.document.getElementById(\"txt_articulo\").value=\"".$this->codigobar ."\";window.opener.document.getElementById(\"div_ingresar_codigo\").click();window.close();'>".$this->nompro ." - PRECIO: ".number_format($this->preciomen )."</div>";
 }
 if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['grid_productos_menu']['contr_erro'] = 'off'; 
