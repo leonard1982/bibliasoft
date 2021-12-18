@@ -54,6 +54,7 @@ $vfechalimite   = "";
 	
 $vfechavence    = "";
 $vurlmail       = ""; 
+$vbarrio        = "";
 
 //traemos las librerias
 include_once 'php/baseDeDatos.php';
@@ -198,6 +199,13 @@ if($r3 = mysqli_fetch_array($consulta3))
 		$vciudad_cliente = $r3[23];
 	}
 	$vurlmail            = $r3[24];
+	
+	$vsql = "select b.descripcion as barrio from terceros_contratos tc inner join terceros_contratos_factura tcf on tc.id_ter_cont=tcf.id_contrato inner join barrios b on tc.barrio=b.codigo where tcf.factura = '".$vid."' limit 1";
+	$c4   = $conexion->consulta($vsql);
+	if($re4 = mysqli_fetch_array($c4))
+	{
+		$vbarrio = $re4[0];
+	}
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -785,11 +793,11 @@ function Loading() {
 				<?php 
 					if(!empty($vdireccion2_cliente))
 					{
-						echo $vdireccion2_cliente;
+						echo $vdireccion2_cliente." ".$vbarrio;
 					}
 					else
 					{
-						echo $vdireccion_cliente; 
+						echo $vdireccion_cliente." ".$vbarrio; 
 					}
 				?>
 				</td>

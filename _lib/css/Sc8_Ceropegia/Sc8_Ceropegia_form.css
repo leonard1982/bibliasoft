@@ -82,6 +82,7 @@
 .sc-ui-pwd-eye { margin-left: 5px; margin-right: 5px }
 .scFormDataDragNDrop { background-color: #DCE5E2; background-image: none; opacity: 1; filter: alpha(opacity=100); border-color: #AEAEAE; border-style: dashed; border-width: 1px; color: #000000; font-family: Arial, sans-serif; font-size: 13px; padding: 25px; text-decoration: none; margin: 15px 4px; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0 }
 .scFormMessageTable { background-color: #EEEEEE; background-image: none; opacity: 1; filter: alpha(opacity=100); border-color: #D2D2D2; border-style: solid; border-width: 1px 1px 1px 1px; height: 40px;padding:px 5px;box-shadow:px 0 2px 10px -2px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px }
+.scDebugWindow { position: fixed !important; top: 50% !important; left: 50% !important; transform: translate(-50%,-50%) !important; z-index: 1 !important }
 .scFormMessageTitle { background-image: none; opacity: 1; filter: alpha(opacity=100); border-width: 0; color: #000000; font-family: Arial, sans-serif; font-size: 13px; padding: 3px; text-decoration: none }
 .scFormMessageTitleFont { color: #000000; font-family: Arial, sans-serif; font-size: 13px; text-decoration: none }
 .scFormMessageMessage { background-image: none; opacity: 1; filter: alpha(opacity=100); border-width: 0; color: #000000; font-family: Arial, sans-serif; font-size: 13px; padding: 3px; text-decoration: none }

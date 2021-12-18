@@ -1,6 +1,8 @@
 .scAppCalendarPage { font-family: Leelawadee, Ebrima, 'Bahnschrift Light', Gadugi, 'Nirmala UI', 'Segoe UI', Verdana; font-size: 13px; background-color: #fff; background-image: none; opacity: 1; filter: alpha(opacity=100); margin: 20px }
 .scAppCalendarPage .fc-unthemed .fc-content, .scAppCalendarPage .fc-unthemed .fc-divider, .scAppCalendarPage .fc-unthemed .fc-list-heading td, .scAppCalendarPage .fc-unthemed .fc-list-view, .scAppCalendarPage .fc-unthemed .fc-popover, .scAppCalendarPage .fc-unthemed .fc-row, .scAppCalendarPage .fc-unthemed tbody, .scAppCalendarPage .fc-unthemed td, .scAppCalendarPage .fc-unthemed th, .scAppCalendarPage .fc-unthemed thead { border-color: rgba(0,0,0,.05) }
 .scAppCalendarPage .fc-unthemed td.fc-today, .scAppCalendarPage #calendar_mini .fc-today { background-color: #FCFCEE; color: #6c757d }
+.scAppCalendarHeader { background-color: #ee5253; background-image: none; opacity: 1; filter: alpha(opacity=100); border-color: #ee5253; border-style: solid; border-width: 1px }
+.scAppCalendarHeaderFont { color: #FFFFFF; font-family: Leelawadee, Ebrima, 'Bahnschrift Light', Gadugi, 'Nirmala UI', 'Segoe UI', Verdana; font-size: 13px; text-decoration: none }
 .fc-header-title,.fc-day-number,.fc-center > h2 { color: #6c757d; font-family: Leelawadee, Ebrima, 'Bahnschrift Light', Gadugi, 'Nirmala UI', 'Segoe UI', Verdana }
 .fc-today { background-color: #FCFCEE }
 .fc-day { border-color: #E0E6ED }

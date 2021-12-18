@@ -1,6 +1,8 @@
 .scAppCalendarPage { font-family: Arial, sans-serif; font-size: 14px; background-color: #ECF6D2; background-image: none; opacity: 1; filter: alpha(opacity=100) }
 .scAppCalendarPage .fc-unthemed .fc-content, .scAppCalendarPage .fc-unthemed .fc-divider, .scAppCalendarPage .fc-unthemed .fc-list-heading td, .scAppCalendarPage .fc-unthemed .fc-list-view, .scAppCalendarPage .fc-unthemed .fc-popover, .scAppCalendarPage .fc-unthemed .fc-row, .scAppCalendarPage .fc-unthemed tbody, .scAppCalendarPage .fc-unthemed td, .scAppCalendarPage .fc-unthemed th, .scAppCalendarPage .fc-unthemed thead { border-color: #CCCCCC }
 .scAppCalendarPage .fc-unthemed td.fc-today, .scAppCalendarPage #calendar_mini .fc-today { background-color: #d6ec9e; color: #333 }
+.scAppCalendarHeader { background-color: #9FD41D; background-image: none; opacity: 1; filter: alpha(opacity=100) }
+.scAppCalendarHeaderFont { color: #648C03; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; text-decoration: none }
 .fc-header-title,.fc-day-number,.fc-center > h2 { color: #000000; font-family: Arial, sans-serif }
 .fc-today { background-color: #d6ec9e }
 .fc-day { border-color: #ddd #9dac79 #9dac79 #ddd }

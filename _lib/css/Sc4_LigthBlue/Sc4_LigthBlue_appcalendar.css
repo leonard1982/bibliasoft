@@ -1,6 +1,8 @@
 .scAppCalendarPage { font-family: Arial, sans-serif; font-size: 14px; background-color: #FFFFFF; background-image: url(../../img/scriptcase__NM__bgmiolo.gif); opacity: 1; filter: alpha(opacity=100) }
 .scAppCalendarPage .fc-unthemed .fc-content, .scAppCalendarPage .fc-unthemed .fc-divider, .scAppCalendarPage .fc-unthemed .fc-list-heading td, .scAppCalendarPage .fc-unthemed .fc-list-view, .scAppCalendarPage .fc-unthemed .fc-popover, .scAppCalendarPage .fc-unthemed .fc-row, .scAppCalendarPage .fc-unthemed tbody, .scAppCalendarPage .fc-unthemed td, .scAppCalendarPage .fc-unthemed th, .scAppCalendarPage .fc-unthemed thead { border-color: #8ba3b9 }
 .scAppCalendarPage .fc-unthemed td.fc-today, .scAppCalendarPage #calendar_mini .fc-today { background-color: #8ba3b9; color: #FFFFFF }
+.scAppCalendarHeader { background-color: #8ba3b9; background-image: none; opacity: 1; filter: alpha(opacity=100) }
+.scAppCalendarHeaderFont { color: #FFFFFF; font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; text-decoration: none }
 .fc-header-title,.fc-day-number,.fc-center > h2 { color: #000000; font-family: Arial, sans-serif }
 .fc-today { background-color: #8ba3b9 }
 .scAppCalendarPage .fc-day-header { background-color: #86a4c0; color: #FFFFFF; border-width: 0; border-style: solid; height: 40px; line-height: 40px }
