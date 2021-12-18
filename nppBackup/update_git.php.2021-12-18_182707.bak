@@ -12,32 +12,13 @@
     background-color: green;
 }
 </style>
-<script>
-function move() {
-  var elem = document.getElementById("myBar");   
-  var width = 1;
-  var id = setInterval(frame, 1000);
-  function frame() {
-    if (width >= 100) {
-      clearInterval(id);
-    } else {
-      width++; 
-      elem.style.width = width + '%'; 
-    }
-  }
-}
 
-window.onload = function(){
-	
-	move();
-}
-</script>
-
-<br>
 <div id="myProgress">
     <div id="myBar"></div>
 </div>
 
+<br>
+<button onclick="move()">Iniciar Actualización</button> 
 
 <?php
 //traemos las librerias
