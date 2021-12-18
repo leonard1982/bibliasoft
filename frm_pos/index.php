@@ -218,7 +218,7 @@ class frm_pos_ini
       $this->nm_hr_criacao   = "163114"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211218"; 
-      $this->nm_hr_ult_alt   = "172654"; 
+      $this->nm_hr_ult_alt   = "173509"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class frm_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDQFUDSzGVWBqHuvmV9FiV5X/VEraDcNmVINUD1rwHuFaHgBYHEXeH5FYDoJeDcXOZSX7HArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNOZSJ3DWr/HIB/HQNwZ9F7HAveHQF7DMzGDkBOV5FYDoFGD9BsVINUHAvmZMJeHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVIFCDWJeDoXGDcNwH9FaHArKD5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NmZ9F7HANKV5XGHgvOVcFKV5BmVEFGDcJUZSFaHANOHuJwHgveHEJGDuJeVoJeHQNmZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHAvmV5XGDMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgNKZSJqDWFqHINUD9JKDQFaZ1vCVWBODMzGDkB/DWrmVENUD9XOZSFaDSrYV5B/HgveHEJqDWX7ZuB/HQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeZSFUZ1rwHQrqDMvmVIBOHEX7DoBiD9XOZSB/Z1BeHQF7DEvsHArsDuFaHMBiHQXsZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgveHErCH5FYHIB/HQJeDQBOZ1zGV5BqHgvsVIBsDWFYHMraHQNmH9BqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5BOHuNOVcB/V5X7VorqD9BsH9FaD1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHENiDWXCHMB/D9NwDQB/D1BeD5NUDMvmV9BUH5FqHIF7DcJUZ1FaD1zGD5JeHgvCHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5BOHgveHArsDWrGDoBqHQJeDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBsZ1rqHAN7V5JwHgNKVkJ3DWXCVoFGD9XsDQFGHIrwHuX7HuNOV9FeV5F/HMJeHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2001,6 +2001,7 @@ if(isset($this->vconfiguraciones[0][0]))
 ;
 
 ;
+;
 
 ?>
 <head>
@@ -2151,12 +2152,13 @@ $this->JS();
 <table class="formatotabla" id="detallefactura">
 	<thead>
 		<tr>
-			<th width="40px">ITEM</th>
+			<th width="40px">#</th>
 			<th>PRODUCTO</th>
-			<th width="100px">CANTIDAD</th>
+			<th width="100px">CANT.</th>
 			<th width="150px" style="text-align:center;" >UNITARIO</th>
 			<th width="150px" style="text-align:center;" >DTO.</th>
 			<th width="100px" style="text-align:center;" >TOTAL</th>
+			<th width="40px"></th>
 			<th width="40px"></th>
 			<th width="40px"></th>
 		</tr>
@@ -3160,6 +3162,58 @@ function fEliminarItem(e,id,idradio){
 		}
 	}
 }
+	
+function fEliminarItem2(id)
+{
+	console.log("fEliminarItem2: ");
+	
+	alertify.confirm('Alerta', '¿Desea eliminar el item?', 
+	function(){ 
+		
+		var iddet = $("#itemsagregados"+id.substr(5,7)).val();
+		var sipropina   = "NO";
+
+		if($('#si_propina').prop('checked'))
+		{
+			sipropina = "SI";
+		}
+
+		console.log("iddet: "+iddet);
+
+		$.post("../frm_pos_gestionardetalle/index.php",{
+
+			iddet:iddet,
+			idfactura: $("#idfactura").val(),
+			sipropina: sipropina
+
+		},function(r){
+
+			console.log("Log data fEliminarItem: ");
+			console.log(r);
+
+			$("#"+id).remove();
+			$("#txt_articulo").focus();
+
+			$("#valor_propina").text(formatNumber(r));
+
+			SORTER.sort('#detallefactura tbody','desc');
+
+			fRecalcular();
+
+
+
+
+			console.log("Filas despues de eliminar item: "+$("#detallefactura tr").length);
+
+			
+		});
+	
+	}
+    , function(){ 
+		
+		alertify.error('Cancelado');		
+	});
+}
 					  
 function fRecalcular(){
 
@@ -3859,6 +3913,10 @@ function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,des
 	
 		datosnuevos += "<td>";
 		datosnuevos += "<img src='../_lib/img/scriptcase__NM__ico__NM__text_marked_32.png' onclick='fVerObservacionItem($(\"#itemsagregados"+fila+"\").val());' width='30px' />";
+		datosnuevos += "</td>";
+	
+		datosnuevos += "<td>";
+		datosnuevos += "<img src='../_lib/img/scriptcase__NM__ico__NM__garbage_delete_32.png' onclick='fEliminarItem2(\""+fila+"\");' width='30px' />";
 		datosnuevos += "</td>";
 											 
 		datosnuevos += "</tr>";
