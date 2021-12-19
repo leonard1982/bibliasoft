@@ -218,7 +218,7 @@ class blank_si_empresa_ini
       $this->nm_hr_criacao   = "154807"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211218"; 
-      $this->nm_hr_ult_alt   = "190017"; 
+      $this->nm_hr_ult_alt   = "190840"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_si_empresa_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_si_empresa']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_si_empresa']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDuFaHANOHuFGHuvmVIBsDuFqVEraD9JmZSB/HANOHQBiHgrKHArCDWXCVoJeHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcXGZSX7Z1N7D5JeHgrwVcB/DWF/HIX7HQNwH9BOHArKHuJeHgBeDkXKDWFGDoBOHQBiH9FGHAN7D5B/DMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDorqD9XsDQJsHArYD5NUHuvmDkB/V5X7VoFGD9JmZ1BOZ1BeV5FaDEBOHEJGDWF/DoJeDcBwDQFGD1BeV5FUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQFYH9BiHANOHuBOHuBOVcXKDWJeVoF7HQXGZSBqDSBeHQFUDMzGHENiDuJeDoJsHQBiDuBqHAN7VWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHAvOV5BODMvOV9BUDur/HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqVoJwHQNwH9X7HIvsVWJsHgvsDkFCHEFYHMX7HQJmZSB/D1vsZMFaHgBYHEXeDWXCVoBiHQBiDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDQFUD1veHQJeHuNOVcBODWFaVoraHQXGZSBqZ1BeD5JwDMvCZSXeHEXCVoX7DcBwDuFaZ1rwHuB/DMvOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIrqHQBiH9FGDSBYV5BqDMvOVcFKDWFaDoF7HQJmH9B/Z1vmZMB/HgBeVkJ3DWXCHIJwD9XsH9X7Z1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwV5BqHuvmVcB/V5X7DoraD9BsZ1FaHArKD5XGDMzGHEJGH5FYDoraHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHuJeDMvmVIFCDWF/DoFUD9XOH9BOHAvsZMBODEBOZSJGHEFqZuXGHQBiDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHAvmV5XGDMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDENOHEJqV5FaZuB/DcXGDQJsZ1N7V5FGHuzGZSJqH5XCHIF7HQNmH9BqDSrYV5B/HgveDkXKDuFaHMB/HQXODuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1961,35 +1961,59 @@ if(!empty($vcodempresa))
 	if($this->sc_temp_gtipo_empresa=="NUBE")
 	{
 		$vbd  = new dbMysql("127.0.0.1","root",",.Facilweb2020","facilweb");
+		
+		$vsql = "select nombre from empresas where nit ='".$vcodempresa."' and nombre like 'inventario_%'";
+		if($co= $vbd->consulta($vsql))
+		{
+			if($re = mysqli_fetch_row($co))
+			{
+				$vsi = "SI";
+
+				if (isset($_SESSION['scriptcase']['sc_connection']))
+{
+    unset($_SESSION['scriptcase']['sc_connection']);
+}
+
+				$arr_conn = array(); 
+
+				$arr_conn['user']     = "root";
+				$arr_conn['password'] = ",.Facilweb2020";
+				$arr_conn['database'] = $re[0];
+				$vnombre_bd           = $re[0];
+
+				sc_connection_edit("conn_mysql", $arr_conn); 
+			}
+		}
 	}
 	
 	if($this->sc_temp_gOS=="WIN")
 	{
 		$vbd  = new dbMysql("127.0.0.1","root",",.Facilweb2020","facilweb",3311);
-	}
-	
-	$vsql = "select nombre from empresas where nit ='".$vcodempresa."' and nombre like 'inventario_%'";
-	if($co= $vbd->consulta($vsql))
-	{
-		if($re = mysqli_fetch_row($co))
+		
+		$vsql = "select nombre from empresas where nombre ='".$vcodempresa."'";
+		if($co= $vbd->consulta($vsql))
 		{
-			$vsi = "SI";
-			
-			if (isset($_SESSION['scriptcase']['sc_connection']))
+			if($re = mysqli_fetch_row($co))
+			{
+				$vsi = "SI";
+
+				if (isset($_SESSION['scriptcase']['sc_connection']))
 {
     unset($_SESSION['scriptcase']['sc_connection']);
 }
 
-			$arr_conn = array(); 
+				$arr_conn = array(); 
 
-			$arr_conn['user']     = "root";
-			$arr_conn['password'] = ",.Facilweb2020";
-			$arr_conn['database'] = $re[0];
-			$vnombre_bd           = $re[0];
+				$arr_conn['user']     = "root";
+				$arr_conn['password'] = ",.Facilweb2020";
+				$arr_conn['database'] = $re[0];
+				$vnombre_bd           = $re[0];
 
-			sc_connection_edit("conn_mysql", $arr_conn); 
+				sc_connection_edit("conn_mysql", $arr_conn); 
+			}
 		}
 	}
+	
 }
 
 echo json_encode(array("ok"=>$vsi,"sql"=>$vsql,"nombre_bd"=>$vnombre_bd));
