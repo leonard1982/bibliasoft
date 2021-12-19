@@ -221,7 +221,7 @@ class blank_iniciar_sesion_ini
       $this->nm_hr_criacao   = "084030"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20211218"; 
-      $this->nm_hr_ult_alt   = "185612"; 
+      $this->nm_hr_ult_alt   = "191724"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -913,7 +913,7 @@ class blank_iniciar_sesion_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_iniciar_sesion']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_iniciar_sesion']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQFGHAN7VWXGDMvmZSJqDWBmVoF7D9BsH9BqZ1vOD5BqHgrKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVENUD9BsZSB/HIveZMFaHgrKVkJqDuJeHIBiHQXsDQFUHArYV5BODMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWr/VoX7DcJeDQX7Z1N7D5B/HgrYDkBOHEFYDoJsD9JmZ1B/D1rwV5JeDMBYHEJGDWr/DoFUD9NwZSX7HABYV5BqHuvmVcBOV5X7DoJsHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKZMFaHgBOHArsDWFqHIBiD9FYDQJsDSN7D5JsDMNOVcrsH5XCHMFaHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWXKVoF7HQNmVINUHAzGZMXGHgBeHEFiV5B3DoF7D9XsDuFaHAveV5JwHgvsVcFCDur/HIFUD9BsZ1F7HABYV5JwDMBYHEJqDWF/DorqHQXOZSBiD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwZSFGHAveV5BODMBYVIBsDWJeHIJeD9BiZ1BOHIBOZMXGDEvsVkJqDWB3DoJeD9NwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKD5F7DMzGHEXeDWFqHMFGDcBwDQFUZ1rwHQXGHgvsVIBsHEX7VoraHQNmVINUHABYHQXGDMBYZSXeDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaVoXGD9XsH9X7DSBYV5FGHuvmVcBODWFaVoX7DcNwH9FaD1rwV5FaDErKZSXeHEFqDoB/D9XsZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVcBOV5F/HIF7HQNmZ1rqHINKZMFaHgBeVkJ3HEFqHMFGD9XsDQX7HABYHuraDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvOV5XGDMvOZSNiDWXKVEX7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuFaHQXsDQJsHArYD5JsHuBYVcFKV5X7DoFUD9XOZ1BOHIBeD5BODEBeDkB/DWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2160,7 +2160,7 @@ if (!isset($_SESSION['gurl_reg_software'])) {$_SESSION['gurl_reg_software'] = ""
 if (!isset($this->sc_temp_gurl_reg_software)) {$this->sc_temp_gurl_reg_software = (isset($_SESSION['gurl_reg_software'])) ? $_SESSION['gurl_reg_software'] : "";}
 if (!isset($_SESSION['gurl_reg_empresa'])) {$_SESSION['gurl_reg_empresa'] = "";}
 if (!isset($this->sc_temp_gurl_reg_empresa)) {$this->sc_temp_gurl_reg_empresa = (isset($_SESSION['gurl_reg_empresa'])) ? $_SESSION['gurl_reg_empresa'] : "";}
- 
+ print_r($_COOKIE);
 $this->sc_temp_gurl_reg_empresa     = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config';
 $this->sc_temp_gurl_reg_software    = 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/software';
 $this->sc_temp_gurl_reg_certificado = 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/certificate';
@@ -2932,7 +2932,7 @@ $(document).ready(function(){
 										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña" value="<?php if(isset($_COOKIE["password"])){ echo $_COOKIE["password"];} ?>" required="required">
 									</div>
 									<div class="form-group">
-										<input style="float:left;" type="checkbox" tabindex="3" class="" name="remember" id="remember" value="SI">
+										<input style="float:left;" type="checkbox" tabindex="3" class="" name="remember" id="remember" <?php if(isset($_COOKIE["recordarme"])){ echo "checked='checked'";} ?>>
 										<label for="remember" style="float:left;margin-left:10px;"> Recordarme</label>
 									</div>
 									
