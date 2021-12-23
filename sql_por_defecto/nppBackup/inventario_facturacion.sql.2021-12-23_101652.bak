@@ -23611,10 +23611,6 @@ ALTER TABLE `terceros` ADD `n_trabajadores` INT NOT NULL DEFAULT '0' AFTER `nomb
 
 ALTER TABLE `asientos` CHANGE `valor` `valor` DECIMAL(15,2) NOT NULL DEFAULT '0.00';
 
-ALTER TABLE `facturaven` CHANGE `observaciones` `observaciones` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL;
-
-ALTER TABLE `detalleventa` CHANGE `obs` `obs` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'Campo para colocar la descripción ampliada del detalle del ítem de venta';
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
