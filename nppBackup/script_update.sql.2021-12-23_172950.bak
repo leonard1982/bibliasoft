@@ -95,11 +95,3 @@ ALTER TABLE `asientos` CHANGE `valor` `valor` DECIMAL(15,2) NOT NULL DEFAULT '0.
 ALTER TABLE `facturaven` CHANGE `observaciones` `observaciones` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL;
 
 ALTER TABLE `detalleventa` CHANGE `obs` `obs` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'Campo para colocar la descripción ampliada del detalle del ítem de venta';
-
-
-
-CREATE TABLE `mensajes_masivos` ( `id` INT NOT NULL AUTO_INCREMENT , `creado` DATETIME NULL DEFAULT NULL COMMENT 'fecha de creacion del registro' , `inicio` DATE NULL DEFAULT NULL COMMENT 'para un futuro donde se envían automaticamente desde un script' , `fin` DATE NULL DEFAULT NULL COMMENT 'para un futuro donde se envían automaticamente desde un script' , `mensaje` TEXT NULL DEFAULT NULL COMMENT 'El mensaje que se va ha enviar al correo' , `activo` SET('SI','NO') NULL DEFAULT 'SI' , `descripcion` VARCHAR(200) NULL DEFAULT NULL COMMENT 'Para clasificar el mensaje con un título en el software' , `asunto` VARCHAR(200) NULL DEFAULT NULL COMMENT 'El asunto que va a ir en el correo' , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
-
-ALTER TABLE `mensajes_masivos` ADD `imagen` VARCHAR(300) NULL DEFAULT NULL AFTER `asunto`;
-
-CREATE TABLE `mensajes_masivos_envios` ( `id` INT NOT NULL AUTO_INCREMENT , `creado` DATETIME NULL DEFAULT NULL , `actualizado` DATETIME NULL DEFAULT NULL , `u_envio` DATETIME NULL DEFAULT NULL , `n_envios` INT NOT NULL DEFAULT '0' , `id_mensaje` INT NOT NULL DEFAULT '0' , `clasificaciones_destino` VARCHAR(300) NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
