@@ -197,7 +197,7 @@ function scJQUploadAdd(iSeqRow) {
   $("#id_sc_field_archivo" + iSeqRow).fileupload({
     datatype: "json",
     url: "control_cargarproductos_excel_mob_ul_save.php",
-    dropZone: $("#hidden_field_data_archivo" + iSeqRow),
+    dropZone: "",
     formData: function() {
       return [
         {name: 'param_field', value: 'archivo'},

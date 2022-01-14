@@ -21,7 +21,6 @@ class form_pagar_pedido_270519_mob_apl
                                 'varList'           => array(),
                                 'focus'             => '',
                                 'navStatus'         => array(),
-                                'navSummary'        => array(),
                                 'redir'             => array(),
                                 'blockDisplay'      => array(),
                                 'fieldDisplay'      => array(),
@@ -86,7 +85,6 @@ class form_pagar_pedido_270519_mob_apl
    var $nmgp_opcao;
    var $nmgp_opc_ant;
    var $sc_evento;
-   var $sc_insert_on;
    var $nmgp_clone;
    var $nmgp_return_img = array();
    var $nmgp_dados_form = array();
@@ -174,18 +172,6 @@ class form_pagar_pedido_270519_mob_apl
           if (isset($this->NM_ajax_info['param']['nmgp_arg_dyn_search']))
           {
               $this->nmgp_arg_dyn_search = $this->NM_ajax_info['param']['nmgp_arg_dyn_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_arg_fast_search']))
-          {
-              $this->nmgp_arg_fast_search = $this->NM_ajax_info['param']['nmgp_arg_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_cond_fast_search']))
-          {
-              $this->nmgp_cond_fast_search = $this->NM_ajax_info['param']['nmgp_cond_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_fast_search']))
-          {
-              $this->nmgp_fast_search = $this->NM_ajax_info['param']['nmgp_fast_search'];
           }
           if (isset($this->NM_ajax_info['param']['nmgp_num_form']))
           {
@@ -689,19 +675,6 @@ class form_pagar_pedido_270519_mob_apl
       $this->arr_buttons['hacerpago']['style']            = "default";
       $this->arr_buttons['hacerpago']['image']            = "";
 
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
-          'has_fa'           => true,
-          'content_icons'    => false,
-          'style'            => "default",
-      );
-
 
       $_SESSION['scriptcase']['error_icon']['form_pagar_pedido_270519_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_pagar_pedido_270519_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
@@ -844,17 +817,16 @@ class form_pagar_pedido_270519_mob_apl
 
       $this->nmgp_botoes['cancel'] = "on";
       $this->nmgp_botoes['exit'] = "on";
-      $this->nmgp_botoes['qsearch'] = "on";
-      $this->nmgp_botoes['new'] = "on";
-      $this->nmgp_botoes['insert'] = "on";
-      $this->nmgp_botoes['copy'] = "on";
-      $this->nmgp_botoes['update'] = "on";
-      $this->nmgp_botoes['delete'] = "on";
-      $this->nmgp_botoes['first'] = "on";
-      $this->nmgp_botoes['back'] = "on";
-      $this->nmgp_botoes['forward'] = "on";
+      $this->nmgp_botoes['new']  = "off";
+      $this->nmgp_botoes['copy'] = "off";
+      $this->nmgp_botoes['insert'] = "off";
+      $this->nmgp_botoes['update'] = "off";
+      $this->nmgp_botoes['delete'] = "off";
+      $this->nmgp_botoes['first'] = "off";
+      $this->nmgp_botoes['back'] = "off";
+      $this->nmgp_botoes['forward'] = "off";
       $this->nmgp_botoes['last'] = "on";
-      $this->nmgp_botoes['summary'] = "on";
+      $this->nmgp_botoes['summary'] = "off";
       $this->nmgp_botoes['navpage'] = "off";
       $this->nmgp_botoes['goto'] = "off";
       $this->nmgp_botoes['qtline'] = "off";
@@ -893,7 +865,6 @@ class form_pagar_pedido_270519_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_pagar_pedido_270519_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_pagar_pedido_270519_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_pagar_pedido_270519_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_pagar_pedido_270519_mob']['new']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_pagar_pedido_270519_mob']['new'] != '')
       {
@@ -948,7 +919,6 @@ class form_pagar_pedido_270519_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['embutida_liga_form_insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['embutida_liga_form_insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['embutida_liga_form_insert'];
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['embutida_liga_form_update']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['embutida_liga_form_update'] != '')
       {
@@ -994,7 +964,6 @@ class form_pagar_pedido_270519_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_pagar_pedido_270519_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_pagar_pedido_270519_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf']['form_pagar_pedido_270519_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_pagar_pedido_270519_mob']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_pagar_pedido_270519_mob']['update'] != '')
       {
@@ -1167,13 +1136,6 @@ class form_pagar_pedido_270519_mob_apl
       $this->Erro      = new form_pagar_pedido_270519_mob_erro();
       $this->Erro->Ini = $this->Ini;
       $this->proc_fast_search = false;
-      if ($this->nmgp_opcao == "fast_search")  
-      {
-          $this->SC_fast_search($this->nmgp_fast_search, $this->nmgp_cond_fast_search, $this->nmgp_arg_fast_search);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['opcao'] = "inicio";
-          $this->nmgp_opcao = "inicio";
-          $this->proc_fast_search = true;
-      } 
       if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
       { 
          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['opcao']))
@@ -1242,7 +1204,6 @@ class form_pagar_pedido_270519_mob_apl
 //
       $this->NM_case_insensitive = false;
       $this->sc_evento = $this->nmgp_opcao;
-      $this->sc_insert_on = false;
             if ('ajax_check_file' == $this->nmgp_opcao ){
                  ob_start(); 
                  include_once("../_lib/lib/php/nm_api.php"); 
@@ -6515,7 +6476,6 @@ $_SESSION['scriptcase']['form_pagar_pedido_270519_mob']['contr_erro'] = 'off';
               $this->formapago = $this->formapago_before_qstr;
               $this->obspago = $this->obspago_before_qstr;
               $this->tipo_doc = $this->tipo_doc_before_qstr;
-              $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
               } 
@@ -6852,10 +6812,6 @@ $_SESSION['scriptcase']['form_pagar_pedido_270519_mob']['contr_erro'] = 'off';
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['reg_start'] = 0;
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['reg_start'] + 1;
-      $this->NM_ajax_info['navSummary']['reg_ini'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['reg_start'] + 1; 
-      $this->NM_ajax_info['navSummary']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['reg_qtd']; 
-      $this->NM_ajax_info['navSummary']['reg_tot'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['total'] + 1; 
       $GLOBALS["NM_ERRO_IBASE"] = 0;  
 //---------- 
       if ($this->nmgp_opcao != "novo" && $this->nmgp_opcao != "nada" && $this->nmgp_opcao != "refresh_insert") 
@@ -7001,21 +6957,15 @@ $_SESSION['scriptcase']['form_pagar_pedido_270519_mob']['contr_erro'] = 'off';
                   $this->NM_ajax_info['buttonDisplay']['forward'] = $this->nmgp_botoes['forward'] = "off";
                   $this->NM_ajax_info['buttonDisplay']['last']    = $this->nmgp_botoes['last']    = "off";
               }
-              $this->nmgp_opcao = "novo"; 
-              $this->nm_flag_saida_novo = "S"; 
-              $rs->Close(); 
-              $this->NM_ajax_info['buttonDisplay']['btnpagar'] = $this->nmgp_botoes['btnpagar'] = "off";
-              $this->NM_ajax_info['buttonDisplay']['hacerpago'] = $this->nmgp_botoes['hacerpago'] = "off";
-              if ($this->aba_iframe)
-              {
-                  $this->NM_ajax_info['buttonDisplay']['exit'] = $this->nmgp_botoes['exit'] = 'off';
-              }
+              $this->NM_ajax_info['buttonDisplay']['update'] = $this->nmgp_botoes['update'] = "off";
+              $this->NM_ajax_info['buttonDisplay']['delete'] = $this->nmgp_botoes['delete'] = "off";
+              return; 
           } 
           if ($rs === false && $GLOBALS["NM_ERRO_IBASE"] == 1) 
           { 
               $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $this->Erro->mensagem (__FILE__, __LINE__, "critica", $this->Ini->Nm_lang['lang_errm_nfnd_extr']); 
-              $this->nmgp_opcao = "novo"; 
+              $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_nfnd_extr'], $this->Db->ErrorMsg()); 
+              exit ; 
           }  
           if ($this->nmgp_opcao != "novo") 
           { 
@@ -7191,40 +7141,6 @@ $_SESSION['scriptcase']['form_pagar_pedido_270519_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["iddocumento"] = $this->iddocumento;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
-              if ($this->nmgp_clone != "S")
-              {
-              }
-              if ($this->nmgp_clone == "S" && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['dados_select']))
-              {
-                  $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['dados_select'];
-                  $this->numfacven = $this->nmgp_dados_select['numfacven'];  
-                  $this->nremision = $this->nmgp_dados_select['nremision'];  
-                  $this->credito = $this->nmgp_dados_select['credito'];  
-                  $this->fechaven = $this->nmgp_dados_select['fechaven'];  
-                  $this->fechavenc = $this->nmgp_dados_select['fechavenc'];  
-                  $this->idcli = $this->nmgp_dados_select['idcli'];  
-                  $this->subtotal = $this->nmgp_dados_select['subtotal'];  
-                  $this->valoriva = $this->nmgp_dados_select['valoriva'];  
-                  $this->total = $this->nmgp_dados_select['total'];  
-                  $this->facturado = $this->nmgp_dados_select['facturado'];  
-                  $this->asentada = $this->nmgp_dados_select['asentada'];  
-                  $this->observaciones = $this->nmgp_dados_select['observaciones'];  
-                  $this->saldo = $this->nmgp_dados_select['saldo'];  
-                  $this->adicional = $this->nmgp_dados_select['adicional'];  
-                  $this->formapago = $this->nmgp_dados_select['formapago'];  
-                  $this->adicional2 = $this->nmgp_dados_select['adicional2'];  
-                  $this->adicional3 = $this->nmgp_dados_select['adicional3'];  
-                  $this->obspago = $this->nmgp_dados_select['obspago'];  
-                  $this->vendedor = $this->nmgp_dados_select['vendedor'];  
-                  $this->dircliente = $this->nmgp_dados_select['dircliente'];  
-                  $this->numpedido = $this->nmgp_dados_select['numpedido'];  
-                  $this->prefijo_ped = $this->nmgp_dados_select['prefijo_ped'];  
-                  $this->tipo_doc = $this->nmgp_dados_select['tipo_doc'];  
-                  $this->usuario = $this->nmgp_dados_select['usuario'];  
-                  $this->fechadocu = $this->nmgp_dados_select['fechadocu'];  
-                  $this->origen = $this->nmgp_dados_select['origen'];  
-                  $this->iddocumento = $this->nmgp_dados_select['iddocumento'];  
-              }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_270519_mob']['foreign_key']))
           {
@@ -9246,43 +9162,13 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
                 return array("sc_b_hlp_t");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-1", "sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-14", "sc_b_sai_t.sc-unique-btn-16", "sc_b_sai_t.sc-unique-btn-2", "sc_b_sai_t.sc-unique-btn-12", "sc_b_sai_t.sc-unique-btn-13", "sc_b_sai_t.sc-unique-btn-15");
+                return array("sc_b_sai_t.sc-unique-btn-1", "sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-5", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-2", "sc_b_sai_t.sc-unique-btn-6");
                 break;
             case "last":
-                return array("sc_b_fim_b.sc-unique-btn-4", "sc_b_fim_b.sc-unique-btn-20");
+                return array("sc_b_fim_b.sc-unique-btn-4", "sc_b_fim_b.sc-unique-btn-8");
                 break;
             case "btnpagar":
                 return array("sc_btnpagar_bot");
-                break;
-            case "new":
-                return array("sc_b_new_t.sc-unique-btn-5");
-                break;
-            case "insert":
-                return array("sc_b_ins_t.sc-unique-btn-6");
-                break;
-            case "bcancelar":
-                return array("sc_b_sai_t.sc-unique-btn-7");
-                break;
-            case "update":
-                return array("sc_b_upd_t.sc-unique-btn-8");
-                break;
-            case "delete":
-                return array("sc_b_del_t.sc-unique-btn-9");
-                break;
-            case "0":
-                return array("sys_separator.sc-unique-btn-10");
-                break;
-            case "copy":
-                return array("sc_b_clone_t.sc-unique-btn-11");
-                break;
-            case "first":
-                return array("sc_b_ini_b.sc-unique-btn-17");
-                break;
-            case "back":
-                return array("sc_b_ret_b.sc-unique-btn-18");
-                break;
-            case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-19");
                 break;
         }
 

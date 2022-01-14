@@ -15,8 +15,6 @@ scriptcase__NM__ajax_load.gif
 scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png
 scriptcase__NM__qs_lupa.png
 scriptcase__NM__qs_close.png
-scriptcase__NM__gear.png
-scriptcase__NM__ico__NM__group_expand.png
 nm_busca.gif
 nm_te.gif
 nm_top.gif

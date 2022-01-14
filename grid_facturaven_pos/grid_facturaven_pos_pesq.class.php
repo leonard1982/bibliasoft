@@ -150,7 +150,8 @@ class grid_facturaven_pos_pesq
              $banco_cond, $banco,
              $resolucion_cond, $resolucion,
              $vendedor_cond, $vendedor,
-             $id_clasificacion_cond, $id_clasificacion;
+             $id_clasificacion_cond, $id_clasificacion,
+             $fecha_pago_cond, $fecha_pago, $fecha_pago_dia, $fecha_pago_mes, $fecha_pago_ano, $fecha_pago_hor, $fecha_pago_min, $fecha_pago_seg, $fecha_pago_input_2_dia, $fecha_pago_input_2_mes, $fecha_pago_input_2_ano, $fecha_pago_input_2_min, $fecha_pago_input_2_hor, $fecha_pago_input_2_seg;
       $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
   $fechaven  = date("Y-m-d");
 $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
@@ -212,6 +213,100 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if (isset($fechavenXX[0]))
           {
               $fechaven_input_2_ano = $fechavenXX[0]; 
+          }
+      }
+      if (isset($fecha_pago_day))
+      {
+          $fecha_pago_dia = $fecha_pago_day; 
+      }
+      if (isset($fecha_pago_month))
+      {
+          $fecha_pago_mes = $fecha_pago_month; 
+      }
+      if (isset($fecha_pago_year))
+      {
+          $fecha_pago_ano = $fecha_pago_year; 
+      }
+      if (isset($fecha_pago))
+      {
+          $fecha_pago = str_replace("0000", "", $fecha_pago);
+          $fecha_pago = str_replace("-00", "-", $fecha_pago);
+          $fecha_pagoTT = explode(" ", $fecha_pago);
+          $fecha_pagoXX = explode("-", $fecha_pagoTT[0]);
+          if (isset($fecha_pagoXX[2]))
+          {
+              $fecha_pago_dia = $fecha_pagoXX[2]; 
+          }
+          if (isset($fecha_pagoXX[1]))
+          {
+              $fecha_pago_mes = $fecha_pagoXX[1]; 
+          }
+          if (isset($fecha_pagoXX[0]))
+          {
+              $fecha_pago_ano = $fecha_pagoXX[0]; 
+          }
+          if (isset($fecha_pagoTT[1]))
+          {
+              $fecha_pagoXX = explode(":", $fecha_pagoTT[1]);
+              if (isset($fecha_pagoXX[2]))
+              {
+                  $fecha_pago_seg = $fecha_pagoXX[2]; 
+              }
+              if (isset($fecha_pagoXX[1]))
+              {
+                  $fecha_pago_min = $fecha_pagoXX[1]; 
+              }
+              if (isset($fecha_pagoXX[0]))
+              {
+                  $fecha_pago_hor = $fecha_pagoXX[0]; 
+              }
+          }
+      }
+      if (isset($fecha_pago_input_2_day))
+      {
+          $fecha_pago_input_2_dia = $fecha_pago_input_2_day; 
+      }
+      if (isset($fecha_pago_input_2_month))
+      {
+          $fecha_pago_input_2_mes = $fecha_pago_input_2_month; 
+      }
+      if (isset($fecha_pago_input_2_year))
+      {
+          $fecha_pago_input_2_ano = $fecha_pago_input_2_year; 
+      }
+      if (isset($fecha_pago_2))
+      {
+          $fecha_pago_2 = str_replace("0000", "", $fecha_pago_2);
+          $fecha_pago_2 = str_replace("-00", "-", $fecha_pago_2);
+          $fecha_pagoTT = explode(" ", $fecha_pago_2);
+          $fecha_pagoXX = explode("-", $fecha_pagoTT[0]);
+          if (isset($fecha_pagoXX[2]))
+          {
+              $fecha_pago_input_2_dia = $fecha_pagoXX[2]; 
+          }
+          if (isset($fecha_pagoXX[1]))
+          {
+              $fecha_pago_input_2_mes = $fecha_pagoXX[1]; 
+          }
+          if (isset($fecha_pagoXX[0]))
+          {
+              $fecha_pago_input_2_ano = $fecha_pagoXX[0]; 
+          }
+          if (isset($fecha_pagoTT[1]))
+          {
+              $fecha_pagoXX = explode(":", $fecha_pagoTT[1]);
+              if (isset($fecha_pagoXX[2]))
+              {
+                  $fecha_pago_input_2_seg = $fecha_pagoXX[2]; 
+              }
+              if (isset($fecha_pagoXX[1]))
+              {
+                  $fecha_pago_input_2_min = $fecha_pagoXX[1]; 
+              }
+              if (isset($fecha_pagoXX[0]))
+              {
+                  $fecha_pago_input_2_hor = $fecha_pagoXX[0]; 
+              }
           }
       }
     }
@@ -1885,6 +1980,66 @@ function scJQCalendarAdd() {
     buttonImageOnly: true
   });
 
+  $("#sc_fecha_pago_jq").datepicker({
+    beforeShow: function(input, inst) {
+          var_dt_ini  = document.getElementById('SC_fecha_pago_dia').value + '/';
+          var_dt_ini += document.getElementById('SC_fecha_pago_mes').value + '/';
+          var_dt_ini += document.getElementById('SC_fecha_pago_ano').value;
+          document.getElementById('sc_fecha_pago_jq').value = var_dt_ini;
+    },
+    onClose: function(dateText, inst) {
+          aParts  = dateText.split("/");
+          document.getElementById('SC_fecha_pago_dia').value = aParts[0];
+          document.getElementById('SC_fecha_pago_mes').value = aParts[1];
+          document.getElementById('SC_fecha_pago_ano').value = aParts[2];
+    },
+    showWeek: true,
+    numberOfMonths: 1,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: 'c-5:c+5',
+    dayNames: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    dayNamesMin: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sem"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>",
+    firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
+    dateFormat: "<?php echo $this->jqueryCalendarDtFormat("ddmmyyyy", "/"); ?>",
+    showOtherMonths: true,
+    showOn: "button",
+    buttonImage: "<?php echo $this->Ini->path_botoes . "/" . $this->arr_buttons['bcalendario']['image']; ?>",
+    buttonImageOnly: true
+  });
+
+  $("#sc_fecha_pago_jq2").datepicker({
+    beforeShow: function(input, inst) {
+          var_dt_ini  = document.getElementById('SC_fecha_pago_input_2_dia').value + '/';
+          var_dt_ini += document.getElementById('SC_fecha_pago_input_2_mes').value + '/';
+          var_dt_ini += document.getElementById('SC_fecha_pago_input_2_ano').value;
+          document.getElementById('sc_fecha_pago_jq2').value = var_dt_ini;
+    },
+    onClose: function(dateText, inst) {
+          aParts  = dateText.split("/");
+          document.getElementById('SC_fecha_pago_input_2_dia').value = aParts[0];
+          document.getElementById('SC_fecha_pago_input_2_mes').value = aParts[1];
+          document.getElementById('SC_fecha_pago_input_2_ano').value = aParts[2];
+    },
+    showWeek: true,
+    numberOfMonths: 1,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: 'c-5:c+5',
+    dayNames: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    dayNamesMin: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sem"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>",
+    firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
+    dateFormat: "<?php echo $this->jqueryCalendarDtFormat("ddmmyyyy", "/"); ?>",
+    showOtherMonths: true,
+    showOn: "button",
+    buttonImage: "<?php echo $this->Ini->path_botoes . "/" . $this->arr_buttons['bcalendario']['image']; ?>",
+    buttonImageOnly: true
+  });
+
 } // scJQCalendarAdd
 
 
@@ -1957,6 +2112,19 @@ function scJQCalendarAdd() {
   str_out += 'SC_vendedor#NMF#' + search_get_select('SC_vendedor') + '@NMF@';
   str_out += 'SC_id_clasificacion_cond#NMF#' + search_get_sel_txt('SC_id_clasificacion_cond') + '@NMF@';
   str_out += 'SC_id_clasificacion#NMF#' + search_get_select('SC_id_clasificacion') + '@NMF@';
+  str_out += 'SC_fecha_pago_cond#NMF#' + search_get_sel_txt('SC_fecha_pago_cond') + '@NMF@';
+  str_out += 'SC_fecha_pago_dia#NMF#' + search_get_sel_txt('SC_fecha_pago_dia') + '@NMF@';
+  str_out += 'SC_fecha_pago_mes#NMF#' + search_get_sel_txt('SC_fecha_pago_mes') + '@NMF@';
+  str_out += 'SC_fecha_pago_ano#NMF#' + search_get_sel_txt('SC_fecha_pago_ano') + '@NMF@';
+  str_out += 'SC_fecha_pago_input_2_dia#NMF#' + search_get_sel_txt('SC_fecha_pago_input_2_dia') + '@NMF@';
+  str_out += 'SC_fecha_pago_input_2_mes#NMF#' + search_get_sel_txt('SC_fecha_pago_input_2_mes') + '@NMF@';
+  str_out += 'SC_fecha_pago_input_2_ano#NMF#' + search_get_sel_txt('SC_fecha_pago_input_2_ano') + '@NMF@';
+  str_out += 'SC_fecha_pago_hor#NMF#' + search_get_sel_txt('SC_fecha_pago_hor') + '@NMF@';
+  str_out += 'SC_fecha_pago_min#NMF#' + search_get_sel_txt('SC_fecha_pago_min') + '@NMF@';
+  str_out += 'SC_fecha_pago_seg#NMF#' + search_get_sel_txt('SC_fecha_pago_seg') + '@NMF@';
+  str_out += 'SC_fecha_pago_input_2_hor#NMF#' + search_get_sel_txt('SC_fecha_pago_input_2_hor') + '@NMF@';
+  str_out += 'SC_fecha_pago_input_2_min#NMF#' + search_get_sel_txt('SC_fecha_pago_input_2_min') + '@NMF@';
+  str_out += 'SC_fecha_pago_input_2_seg#NMF#' + search_get_sel_txt('SC_fecha_pago_input_2_seg') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2226,6 +2394,7 @@ function nm_open_popup(parms)
              $resolucion_cond, $resolucion,
              $vendedor_cond, $vendedor,
              $id_clasificacion_cond, $id_clasificacion,
+             $fecha_pago_cond, $fecha_pago, $fecha_pago_dia, $fecha_pago_mes, $fecha_pago_ano, $fecha_pago_hor, $fecha_pago_min, $fecha_pago_seg, $fecha_pago_input_2_dia, $fecha_pago_input_2_mes, $fecha_pago_input_2_ano, $fecha_pago_input_2_min, $fecha_pago_input_2_hor, $fecha_pago_input_2_seg,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2285,6 +2454,19 @@ function nm_open_popup(parms)
           $vendedor_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['vendedor_cond']; 
           $id_clasificacion = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['id_clasificacion']; 
           $id_clasificacion_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['id_clasificacion_cond']; 
+          $fecha_pago_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_dia']; 
+          $fecha_pago_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_mes']; 
+          $fecha_pago_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_ano']; 
+          $fecha_pago_input_2_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_dia']; 
+          $fecha_pago_input_2_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_mes']; 
+          $fecha_pago_input_2_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_ano']; 
+          $fecha_pago_hor = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_hor']; 
+          $fecha_pago_min = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_min']; 
+          $fecha_pago_seg = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_seg']; 
+          $fecha_pago_input_2_hor = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_hor']; 
+          $fecha_pago_input_2_min = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_min']; 
+          $fecha_pago_input_2_seg = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_seg']; 
+          $fecha_pago_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['NM_operador']; 
       } 
       if (!isset($tipo_cond) || empty($tipo_cond))
@@ -2319,6 +2501,10 @@ function nm_open_popup(parms)
       {
          $id_clasificacion_cond = "eq";
       }
+      if (!isset($fecha_pago_cond) || empty($fecha_pago_cond))
+      {
+         $fecha_pago_cond = "bw";
+      }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
@@ -2330,6 +2516,7 @@ function nm_open_popup(parms)
       $str_hide_resolucion = (in_array($resolucion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_vendedor = (in_array($vendedor_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_id_clasificacion = (in_array($id_clasificacion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_fecha_pago = (in_array($fecha_pago_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
       $str_display_tipo = ('bw' == $tipo_cond) ? $display_aberto : $display_fechado;
       $str_display_fechaven = ('bw' == $fechaven_cond) ? $display_aberto : $display_fechado;
@@ -2339,6 +2526,7 @@ function nm_open_popup(parms)
       $str_display_resolucion = ('bw' == $resolucion_cond) ? $display_aberto : $display_fechado;
       $str_display_vendedor = ('bw' == $vendedor_cond) ? $display_aberto : $display_fechado;
       $str_display_id_clasificacion = ('bw' == $id_clasificacion_cond) ? $display_aberto : $display_fechado;
+      $str_display_fecha_pago = ('bw' == $fecha_pago_cond) ? $display_aberto : $display_fechado;
 
       if (!isset($tipo) || $tipo == "")
       {
@@ -2450,6 +2638,20 @@ function nm_open_popup(parms)
          else
          {
          $id_clasificacion = substr($id_clasificacion, 0, $tmp_pos);
+         }
+      }
+      if (!isset($fecha_pago) || $fecha_pago == "")
+      {
+          $fecha_pago = "";
+      }
+      if (isset($fecha_pago) && !empty($fecha_pago))
+      {
+         $tmp_pos = strpos($fecha_pago, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $fecha_pago = substr($fecha_pago, 0, $tmp_pos);
          }
       }
 ?>
@@ -2592,9 +2794,7 @@ foreach ($Arr_format as $Part_date)
 }
 
 ?>
-        <SPAN id="id_css_fechaven"  class="scFilterFieldFontOdd">
- <?php echo $date_format_show ?>         </SPAN>
-                  <br />
+         <br />
         <SPAN id="id_vis_fechaven"  <?php echo $str_display_fechaven; ?> class="scFilterFieldFontOdd">
          <?php echo $date_sep_bw ?> 
          <BR>
@@ -2900,7 +3100,7 @@ foreach ($Arr_format as $Part_date)
 <?php
       $resolucion_look = substr($this->Db->qstr($resolucion), 1, -1); 
       $nmgp_def_dados = "" ; 
-      $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE fecha>0 and activa='SI' ORDER BY prefijo"; 
+      $nm_comando = "SELECT Idres, concat(prefijo,' -- ',fec_vencimiento,' -- Activa: ',activa) as sc_alias_0 FROM resdian  WHERE fecha>0 ORDER BY prefijo"; 
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
@@ -3141,9 +3341,210 @@ foreach ($Arr_format as $Part_date)
        </TR>
       </TABLE>
      </TD>
+      <TD id='SC_fecha_pago_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['fecha_pago'])) ? $this->New_label['fecha_pago'] : "Fecha Pago"; ?></TD>
+     <TD class="scFilterFieldOdd"> 
+      <SELECT class="scFilterObjectOdd" id="SC_fecha_pago_cond" name="fecha_pago_cond" onChange="nm_campos_between(document.getElementById('id_vis_fecha_pago'), this, 'fecha_pago')">
+       <OPTION value="bw" <?php if ("bw" == $fecha_pago_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_betw'] ?></OPTION>
+       <OPTION value="nu" <?php if ("nu" == $fecha_pago_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_null'] ?></OPTION>
+       <OPTION value="nn" <?php if ("nn" == $fecha_pago_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_nnul'] ?></OPTION>
+       <OPTION value="ep" <?php if ("ep" == $fecha_pago_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_empty'] ?></OPTION>
+       <OPTION value="ne" <?php if ("ne" == $fecha_pago_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_nempty'] ?></OPTION>
+      </SELECT>
+       </TD>
+     <TD  class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_fecha_pago" <?php echo $str_hide_fecha_pago?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['fecha_pago'])) ? $this->New_label['fecha_pago'] : "Fecha Pago";
+ $nmgp_tab_label .= "fecha_pago?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
 
+<?php
+  $Form_base = "ddmmyyyy";
+  $date_format_show = "";
+  $Str_date = str_replace("a", "y", strtolower($_SESSION['scriptcase']['reg_conf']['date_format']));
+  $Lim   = strlen($Str_date);
+  $Str   = "";
+  $Ult   = "";
+  $Arr_D = array();
+  for ($I = 0; $I < $Lim; $I++)
+  {
+      $Char = substr($Str_date, $I, 1);
+      if ($Char != $Ult && "" != $Str)
+      {
+          $Arr_D[] = $Str;
+          $Str     = $Char;
+      }
+      else
+      {
+          $Str    .= $Char;
+      }
+      $Ult = $Char;
+  }
+  $Arr_D[] = $Str;
+  $Prim = true;
+  foreach ($Arr_D as $Cada_d)
+  {
+      if (strpos($Form_base, $Cada_d) !== false)
+      {
+          $date_format_show .= (!$Prim) ? $_SESSION['scriptcase']['reg_conf']['date_sep'] : "";
+          $date_format_show .= $Cada_d;
+          $Prim = false;
+      }
+  }
+  $date_format_show .= " ";
+  $Str_time = strtolower($_SESSION['scriptcase']['reg_conf']['time_format']);
+  $Lim   = strlen($Str_time);
+  $Str   = "";
+  $Ult   = "";
+  $Arr_T = array();
+  for ($I = 0; $I < $Lim; $I++)
+  {
+      $Char = substr($Str_time, $I, 1);
+      if ($Char != $Ult && "" != $Str)
+      {
+          $Arr_T[] = $Str;
+          $Str     = $Char;
+      }
+      else
+      {
+          $Str    .= $Char;
+      }
+      $Ult = $Char;
+  }
+  $Arr_T[] = $Str;
+  $Prim = true;
+  foreach ($Arr_T as $Cada_t)
+  {
+      if (strpos($Form_base, $Cada_t) !== false)
+      {
+          $date_format_show .= (!$Prim) ? $_SESSION['scriptcase']['reg_conf']['time_sep'] : "";
+          $date_format_show .= $Cada_t;
+          $Prim = false;
+      }
+  }
+  $Arr_format = array_merge($Arr_D, $Arr_T);
+  $date_format_show = str_replace("dd",   $this->Ini->Nm_lang['lang_othr_date_days'], $date_format_show);
+  $date_format_show = str_replace("mm",   $this->Ini->Nm_lang['lang_othr_date_mnth'], $date_format_show);
+  $date_format_show = str_replace("yyyy", $this->Ini->Nm_lang['lang_othr_date_year'], $date_format_show);
+  $date_format_show = str_replace("aaaa", $this->Ini->Nm_lang['lang_othr_date_year'], $date_format_show);
+  $date_format_show = str_replace("hh",   $this->Ini->Nm_lang['lang_othr_date_hour'], $date_format_show);
+  $date_format_show = str_replace("ii",   $this->Ini->Nm_lang['lang_othr_date_mint'], $date_format_show);
+  $date_format_show = str_replace("ss",   $this->Ini->Nm_lang['lang_othr_date_scnd'], $date_format_show);
+  $date_format_show = "" . $date_format_show .  "";
 
-    <TD class="scFilterLabelOdd" colspan="3" >&nbsp;</TD>   </tr>
+?>
+
+         <?php
+
+foreach ($Arr_format as $Part_date)
+{
+?>
+<?php
+  if (substr($Part_date, 0,1) == "d")
+  {
+?>
+<span id='id_date_part_fecha_pago_DD' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_pago_dia" name="fecha_pago_dia" value="<?php echo NM_encode_input($fecha_pago_dia); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "m")
+  {
+?>
+<span id='id_date_part_fecha_pago_MM' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_pago_mes" name="fecha_pago_mes" value="<?php echo NM_encode_input($fecha_pago_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "y")
+  {
+?>
+<span id='id_date_part_fecha_pago_AAAA' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_pago_ano" name="fecha_pago_ano" value="<?php echo NM_encode_input($fecha_pago_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
+ <INPUT type="hidden" id="sc_fecha_pago_jq">
+</span>
+
+<?php
+  }
+?>
+
+<?php
+
+}
+
+?>
+        </TD>
+       </TR>
+       <TR valign="top">
+        <TD id="id_vis_fecha_pago"  <?php echo $str_display_fecha_pago; ?> class="scFilterFieldFontOdd">
+         <?php echo $date_sep_bw ?>
+         <BR>
+         
+         <?php
+
+foreach ($Arr_format as $Part_date)
+{
+?>
+<?php
+  if (substr($Part_date, 0,1) == "d")
+  {
+?>
+<span id='id_date_part_fecha_pago_input_2_DD' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_pago_input_2_dia" name="fecha_pago_input_2_dia" value="<?php echo NM_encode_input($fecha_pago_input_2_dia); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "m")
+  {
+?>
+<span id='id_date_part_fecha_pago_input_2_MM' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_pago_input_2_mes" name="fecha_pago_input_2_mes" value="<?php echo NM_encode_input($fecha_pago_input_2_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "y")
+  {
+?>
+<span id='id_date_part_fecha_pago_input_2_AAAA' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_fecha_pago_input_2_ano" name="fecha_pago_input_2_ano" value="<?php echo NM_encode_input($fecha_pago_input_2_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
+ <INPUT type="hidden" id="sc_fecha_pago_jq2">
+</span>
+
+<?php
+  }
+?>
+
+<?php
+
+}
+
+?>
+
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr>
    </TABLE>
   </TD>
  </TR>
@@ -3157,214 +3558,7 @@ foreach ($Arr_format as $Part_date)
    <INPUT type="hidden" name="nmgp_tab_label" value="<?php echo NM_encode_input($nmgp_tab_label); ?>"> 
    <INPUT type="hidden" name="bprocessa" value="pesq"> 
  <?php
-     if ($_SESSION['scriptcase']['proc_mobile'])
-     {
-     ?>
- <TR align="center">
-  <TD class="scFilterTableTd">
-   <table width="100%" class="scFilterToolbar"><tr>
-    <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
-    </td>
-    <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
-   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   if ($this->nmgp_botoes['clear'] == "on")
-   {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-<?php
-   if (!isset($this->nmgp_botoes['save']) || $this->nmgp_botoes['save'] == "on")
-   {
-       $this->NM_fil_ant = $this->gera_array_filtros();
-?>
-     <span id="idAjaxSelect_NM_filters_bot">
-       <SELECT class="scFilterToolbar_obj" id="sel_recup_filters_bot" name="NM_filters_bot" onChange="nm_submit_filter(this, 'bot');" size="1">
-           <option value=""></option>
-<?php
-          $Nome_filter = "";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              $Select = "";
-              if ($Cada_filter == $this->NM_curr_fil)
-              {
-                  $Select = "selected";
-              }
-              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
-              }
-              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  echo "           <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
-              }
-?>
-           <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
-<?php
-          }
-?>
-       </SELECT>
-     </span>
-<?php
-   }
-?>
-<?php
-   if ($this->nmgp_botoes['save'] == "on")
-   {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bedit_filter", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "Ativa_save_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-<?php
-   if (is_file("grid_facturaven_pos_help.txt"))
-   {
-      $Arq_WebHelp = file("grid_facturaven_pos_help.txt"); 
-      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
-      {
-          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
-          $Tmp = explode(";", $Arq_WebHelp[0]); 
-          foreach ($Tmp as $Cada_help)
-          {
-              $Tmp1 = explode(":", $Cada_help); 
-              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
-              {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-              }
-          }
-      }
-   }
-?>
-<?php
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_pos']['start'] == 'filter' && $nm_apl_dependente != 1)
-   {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-   else
-   {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "Volver", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-    </td>
-    <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
-    </td>
-   </tr></table>
-<?php
-   if ($this->nmgp_botoes['save'] == "on")
-   {
-?>
-    </TD></TR><TR><TD>
-    <DIV id="Salvar_filters_bot" style="display:none;z-index:9999;">
-     <TABLE align="center" class="scFilterTable">
-      <TR>
-       <TD class="scFilterBlock">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top" class="scFilterBlockFont"><?php echo $this->Ini->Nm_lang['lang_othr_srch_head'] ?></td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "Cancel_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </TD>
-      </TR>
-      <TR>
-       <TD class="scFilterFieldOdd">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top">
-           <input class="scFilterObjectOdd" type="text" id="SC_nmgp_save_name_bot" name="nmgp_save_name_bot" value="">
-          </td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bsalvar_appdiv", "nm_save_form('bot');", "nm_save_form('bot');", "Save_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </TD>
-      </TR>
-      <TR>
-       <TD class="scFilterFieldEven">
-       <DIV id="Apaga_filters_bot" style="display:''">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top">
-          <div id="idAjaxSelect_NM_filters_del_bot">
-           <SELECT class="scFilterObjectOdd" id="sel_filters_del_bot" name="NM_filters_del_bot" size="1">
-            <option value=""></option>
-<?php
-          $Nome_filter = "";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              $Select = "";
-              if ($Cada_filter == $this->NM_curr_fil)
-              {
-                  $Select = "selected";
-              }
-              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
-              }
-              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  echo "            <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
-              }
-?>
-            <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
-<?php
-          }
-?>
-           </SELECT>
-          </div>
-          </td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bexcluir_appdiv", "nm_submit_filter_del('bot');", "nm_submit_filter_del('bot');", "Exc_filtro_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </DIV>
-       </TD>
-      </TR>
-     </TABLE>
-    </DIV> 
-<?php
-   }
-?>
-  </TD>
- </TR>
-     <?php
-     }
-     else
+     if (!$_SESSION['scriptcase']['proc_mobile'])
      {
      ?>
  <TR align="center">
@@ -3617,8 +3811,6 @@ foreach ($Arr_format as $Part_date)
        if ($_SESSION['scriptcase']['proc_mobile'])
        {
 ?>
-      document.getElementById('Apaga_filters_bot').style.display = 'none';
-      document.getElementById('sel_recup_filters_bot').style.display = 'none';
 <?php
        }
        else
@@ -3650,6 +3842,7 @@ foreach ($Arr_format as $Part_date)
    document.getElementById('Salvar_filters_bot').style.display = 'none';
    document.F1.tipo_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_tipo'), document.F1.tipo_cond, 'tipo');
+   document.F1.tipo.value = "";
    document.F1.fechaven_cond.value = 'bw';
    nm_campos_between(document.getElementById('id_vis_fechaven'), document.F1.fechaven_cond, 'fechaven');
    document.F1.fechaven_dia.value = "";
@@ -3664,6 +3857,7 @@ foreach ($Arr_format as $Part_date)
    document.F1.idcli_autocomp.value = "";
    document.F1.asentada_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_asentada'), document.F1.asentada_cond, 'asentada');
+   document.F1.asentada.value = "";
    document.F1.banco_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_banco'), document.F1.banco_cond, 'banco');
    document.F1.banco.value = "";
@@ -3676,6 +3870,14 @@ foreach ($Arr_format as $Part_date)
    document.F1.id_clasificacion_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_id_clasificacion'), document.F1.id_clasificacion_cond, 'id_clasificacion');
    document.F1.id_clasificacion.value = "";
+   document.F1.fecha_pago_cond.value = 'bw';
+   nm_campos_between(document.getElementById('id_vis_fecha_pago'), document.F1.fecha_pago_cond, 'fecha_pago');
+   document.F1.fecha_pago_dia.value = "";
+   document.F1.fecha_pago_mes.value = "";
+   document.F1.fecha_pago_ano.value = "";
+   document.F1.fecha_pago_input_2_dia.value = "";
+   document.F1.fecha_pago_input_2_mes.value = "";
+   document.F1.fecha_pago_input_2_ano.value = "";
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -3791,6 +3993,10 @@ foreach ($Arr_format as $Part_date)
  }
  function SC_carga_evt_jquery()
  {
+    $('#SC_fecha_pago_dia').bind('change', function() {sc_grid_facturaven_pos_valida_dia(this)});
+    $('#SC_fecha_pago_input_2_dia').bind('change', function() {sc_grid_facturaven_pos_valida_dia(this)});
+    $('#SC_fecha_pago_input_2_mes').bind('change', function() {sc_grid_facturaven_pos_valida_mes(this)});
+    $('#SC_fecha_pago_mes').bind('change', function() {sc_grid_facturaven_pos_valida_mes(this)});
     $('#SC_fechaven_dia').bind('change', function() {sc_grid_facturaven_pos_valida_dia(this)});
     $('#SC_fechaven_input_2_dia').bind('change', function() {sc_grid_facturaven_pos_valida_dia(this)});
     $('#SC_fechaven_input_2_mes').bind('change', function() {sc_grid_facturaven_pos_valida_mes(this)});
@@ -3974,6 +4180,19 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_vendedor'] = 'select';
       $tp_fields['SC_id_clasificacion_cond'] = 'cond';
       $tp_fields['SC_id_clasificacion'] = 'select';
+      $tp_fields['SC_fecha_pago_cond'] = 'cond';
+      $tp_fields['SC_fecha_pago_dia'] = 'text';
+      $tp_fields['SC_fecha_pago_mes'] = 'text';
+      $tp_fields['SC_fecha_pago_ano'] = 'text';
+      $tp_fields['SC_fecha_pago_input_2_dia'] = 'text';
+      $tp_fields['SC_fecha_pago_input_2_mes'] = 'text';
+      $tp_fields['SC_fecha_pago_input_2_ano'] = 'text';
+      $tp_fields['SC_fecha_pago_hor'] = 'text';
+      $tp_fields['SC_fecha_pago_min'] = 'text';
+      $tp_fields['SC_fecha_pago_seg'] = 'text';
+      $tp_fields['SC_fecha_pago_input_2_hor'] = 'text';
+      $tp_fields['SC_fecha_pago_input_2_min'] = 'text';
+      $tp_fields['SC_fecha_pago_input_2_seg'] = 'text';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -4124,7 +4343,8 @@ foreach ($Arr_format as $Part_date)
              $banco_cond, $banco,
              $resolucion_cond, $resolucion,
              $vendedor_cond, $vendedor,
-             $id_clasificacion_cond, $id_clasificacion, $nmgp_tab_label;
+             $id_clasificacion_cond, $id_clasificacion,
+             $fecha_pago_cond, $fecha_pago, $fecha_pago_dia, $fecha_pago_mes, $fecha_pago_ano, $fecha_pago_hor, $fecha_pago_min, $fecha_pago_seg, $fecha_pago_input_2_dia, $fecha_pago_input_2_mes, $fecha_pago_input_2_ano, $fecha_pago_input_2_min, $fecha_pago_input_2_hor, $fecha_pago_input_2_seg, $nmgp_tab_label;
 
       $C_formatado = true;
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
@@ -4181,6 +4401,31 @@ foreach ($Arr_format as $Part_date)
       if (!isset($id_clasificacion_input_2) || $id_clasificacion_input_2 == "")
       {
           $id_clasificacion_input_2 = $id_clasificacion;
+      }
+      $fecha_pago_cond_salva = $fecha_pago_cond; 
+      if (!isset($fecha_pago_input_2_dia) || $fecha_pago_input_2_dia == "")
+      {
+          $fecha_pago_input_2_dia = $fecha_pago_dia;
+      }
+      if (!isset($fecha_pago_input_2_mes) || $fecha_pago_input_2_mes == "")
+      {
+          $fecha_pago_input_2_mes = $fecha_pago_mes;
+      }
+      if (!isset($fecha_pago_input_2_ano) || $fecha_pago_input_2_ano == "")
+      {
+          $fecha_pago_input_2_ano = $fecha_pago_ano;
+      }
+      if (!isset($fecha_pago_input_2_hor) || $fecha_pago_input_2_hor == "")
+      {
+          $fecha_pago_input_2_hor = $fecha_pago_hor;
+      }
+      if (!isset($fecha_pago_input_2_min) || $fecha_pago_input_2_min == "")
+      {
+          $fecha_pago_input_2_min = $fecha_pago_min;
+      }
+      if (!isset($fecha_pago_input_2_seg) || $fecha_pago_input_2_seg == "")
+      {
+          $fecha_pago_input_2_seg = $fecha_pago_seg;
       }
       $tmp_pos = strpos($tipo, "##@@");
       if ($tmp_pos === false) {
@@ -4271,6 +4516,20 @@ foreach ($Arr_format as $Part_date)
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['id_clasificacion'] = $id_clasificacion; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['id_clasificacion_cond'] = $id_clasificacion_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_dia'] = $fecha_pago_dia; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_mes'] = $fecha_pago_mes; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_ano'] = $fecha_pago_ano; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_dia'] = $fecha_pago_input_2_dia; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_mes'] = $fecha_pago_input_2_mes; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_ano'] = $fecha_pago_input_2_ano; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_hor'] = $fecha_pago_hor; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_min'] = $fecha_pago_min; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_seg'] = $fecha_pago_seg; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_hor'] = $fecha_pago_input_2_hor; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_min'] = $fecha_pago_input_2_min; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2_seg'] = $fecha_pago_input_2_seg; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_cond'] = $fecha_pago_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
@@ -4491,6 +4750,62 @@ foreach ($Arr_format as $Part_date)
       if (isset($id_clasificacion))
       {
          $this->monta_condicao("id_clasificacion", $id_clasificacion_cond, $id_clasificacion, "", "id_clasificacion");
+      }
+
+      //----- $fecha_pago
+      $this->Date_part = false;
+      if ($fecha_pago_cond != "bi_TP")
+      {
+          $fecha_pago_cond = strtoupper($fecha_pago_cond);
+          $Dtxt = "";
+          $val  = array();
+          $Dtxt .= $fecha_pago_ano;
+          $Dtxt .= $fecha_pago_mes;
+          $Dtxt .= $fecha_pago_dia;
+          $Dtxt .= $fecha_pago_hor;
+          $Dtxt .= $fecha_pago_min;
+          $Dtxt .= $fecha_pago_seg;
+          $val[0]['ano'] = $fecha_pago_ano;
+          $val[0]['mes'] = $fecha_pago_mes;
+          $val[0]['dia'] = $fecha_pago_dia;
+          $val[0]['hor'] = $fecha_pago_hor;
+          $val[0]['min'] = $fecha_pago_min;
+          $val[0]['seg'] = $fecha_pago_seg;
+          if ($fecha_pago_cond == "BW")
+          {
+              $val[1]['ano'] = $fecha_pago_input_2_ano;
+              $val[1]['mes'] = $fecha_pago_input_2_mes;
+              $val[1]['dia'] = $fecha_pago_input_2_dia;
+              $val[1]['hor'] = $fecha_pago_input_2_hor;
+              $val[1]['min'] = $fecha_pago_input_2_min;
+              $val[1]['seg'] = $fecha_pago_input_2_seg;
+          }
+          $this->Operador_date_part = "";
+          $this->Lang_date_part     = "";
+          $this->nm_prep_date($val, "DH", "DATETIME", $fecha_pago_cond, "", "datahora");
+          if (!$this->Date_part) {
+              $val[0] = $this->Ini->sc_Date_Protect($val[0]);
+          }
+          $fecha_pago = $val[0];
+          $this->cmp_formatado['fecha_pago'] = $val[0];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago'] = $val[0];
+          $this->nm_data->SetaData($this->cmp_formatado['fecha_pago'], "YYYY-MM-DD HH:II:SS");
+          $this->cmp_formatado['fecha_pago'] = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DH", "dmY"));
+          if ($fecha_pago_cond == "BW")
+          {
+              if (!$this->Date_part) {
+                  $val[1] = $this->Ini->sc_Date_Protect($val[1]);
+              }
+              $fecha_pago_input_2     = $val[1];
+              $this->cmp_formatado['fecha_pago_input_2'] = $val[1];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['campos_busca']['fecha_pago_input_2'] = $val[1];
+              $this->nm_data->SetaData($this->cmp_formatado['fecha_pago_input_2'], "YYYY-MM-DD HH:II:SS");
+              $this->cmp_formatado['fecha_pago_input_2'] = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DH", "dmY"));
+          }
+          if (!empty($Dtxt) || $fecha_pago_cond == "NU" || $fecha_pago_cond == "NN"|| $fecha_pago_cond == "EP"|| $fecha_pago_cond == "NE")
+          {
+              $this->monta_condicao("fecha_pago", $fecha_pago_cond, $fecha_pago, $fecha_pago_input_2, 'fecha_pago', 'DATETIME');
+          }
       }
    }
 
@@ -5603,15 +5918,15 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 

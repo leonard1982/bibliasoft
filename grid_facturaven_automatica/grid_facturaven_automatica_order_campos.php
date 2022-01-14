@@ -112,6 +112,12 @@ function Ord_cmp_init()
    $tab_ger_campos['total'] = "on";
    $tab_def_campos['total'] = "total";
    $tab_labels["total"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["total"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["total"] : "Total";
+   $tab_ger_campos['clasificacion'] = "on";
+   $tab_def_campos['clasificacion'] = "clasificacion";
+   $tab_labels["clasificacion"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["clasificacion"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["clasificacion"] : "Clasificacion";
+   $tab_ger_campos['id_clasificacion'] = "on";
+   $tab_def_campos['id_clasificacion'] = "id_clasificacion";
+   $tab_labels["id_clasificacion"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["id_clasificacion"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["id_clasificacion"] : "Tipo";
    $tab_ger_campos['copiar'] = "on";
    if ($use_alias == "S")
    {
@@ -385,6 +391,7 @@ if (!$embbed)
 <table width='100%' cellspacing=0 cellpadding=0>
 <?php
 }
+$disp_rest = "none";
 ?>
  <tr>
   <td class="<?php echo ($embbed)? 'scAppDivHeader scAppDivHeaderText':'scGridLabelVert'; ?>">
@@ -536,7 +543,6 @@ if (!$embbed)
  </tr>
    <tr><td class="<?php echo ($embbed)? 'scAppDivToolbar':'scGridToolbar'; ?>">
 <?php
-  $disp_rest = "none";
   if (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['ordem_select']) && $_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['ordem_select'] != $_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['ordem_select_orig']) {
       $disp_rest = "";
   }
@@ -657,7 +663,11 @@ function display_btn_restore_ord() {
     buttonEnable_ord("f_sel_sub");
 }
 function proc_btn_ord(btn, proc) {
-    if ($("#" + btn).prop("disabled") == true) {
+    if (
+        (document.Fsel_ord.fsel_ok.value != 'regra' && $("#" + btn).prop("disabled") == true) || 
+        (document.Fsel_ord.fsel_ok.value == 'regra' && $("#id_sel_regra_sel_ord").val() == '')
+    )
+    {
         return;
     }
     eval (proc);

@@ -105,6 +105,95 @@ class grid_facturaven_automatica_lookup
       } 
    }  
 //  
+   function lookup_clasificacion(&$conteudo , $clasificacion) 
+   {   
+      static $save_conteudo = "" ; 
+      static $save_conteudo1 = "" ; 
+      $tst_cache = $clasificacion; 
+      if ($tst_cache === $save_conteudo && $conteudo != "&nbsp;") 
+      { 
+          $conteudo = $save_conteudo1 ; 
+          return ; 
+      } 
+      $save_conteudo = $tst_cache ; 
+      if (trim($clasificacion) === "" || trim($clasificacion) == "&nbsp;")
+      { 
+          $conteudo = "&nbsp;";
+          $save_conteudo  = ""; 
+          $save_conteudo1 = ""; 
+          return ; 
+      } 
+      $nm_comando = "SELECT (select cc.nombre from clasificacion_clientes cc where cc.idclasificacion_cliente=t.clasificacion_clientes limit 1) as clasifica
+FROM terceros t
+WHERE t.idtercero = $clasificacion 
+ORDER BY t.clasificacion_clientes" ; 
+      $conteudo = "" ; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rx = $this->Db->Execute($nm_comando)) 
+      { 
+          if (isset($rx->fields[0]))  
+          { 
+              $conteudo = trim($rx->fields[0]); 
+          } 
+          $save_conteudo1 = $conteudo ; 
+          $rx->Close(); 
+      } 
+      elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+          exit; 
+      } 
+      if ($conteudo === "") 
+      { 
+          $conteudo = "&nbsp;";
+          $save_conteudo1 = $conteudo ; 
+      } 
+   }  
+//  
+   function lookup_id_clasificacion(&$conteudo , $id_clasificacion) 
+   {   
+      static $save_conteudo = "" ; 
+      static $save_conteudo1 = "" ; 
+      $tst_cache = $id_clasificacion; 
+      if ($tst_cache === $save_conteudo && $conteudo != "&nbsp;") 
+      { 
+          $conteudo = $save_conteudo1 ; 
+          return ; 
+      } 
+      $save_conteudo = $tst_cache ; 
+      if (trim($id_clasificacion) === "" || trim($id_clasificacion) == "&nbsp;")
+      { 
+          $conteudo = "&nbsp;";
+          $save_conteudo  = ""; 
+          $save_conteudo1 = ""; 
+          return ; 
+      } 
+      $nm_comando = "select descripcion from facturaven_clasificacion where id = $id_clasificacion order by descripcion" ; 
+      $conteudo = "" ; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rx = $this->Db->Execute($nm_comando)) 
+      { 
+          if (isset($rx->fields[0]))  
+          { 
+              $conteudo = trim($rx->fields[0]); 
+          } 
+          $save_conteudo1 = $conteudo ; 
+          $rx->Close(); 
+      } 
+      elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+          exit; 
+      } 
+      if ($conteudo === "") 
+      { 
+          $conteudo = "&nbsp;";
+          $save_conteudo1 = $conteudo ; 
+      } 
+   }  
+//  
    function lookup_vendedor(&$conteudo , $vendedor) 
    {   
       static $save_conteudo = "" ; 

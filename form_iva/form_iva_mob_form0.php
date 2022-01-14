@@ -55,7 +55,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   var sc_css_status_pwd_text = '<?php echo $this->Ini->Css_status_pwd_text; ?>';
  </SCRIPT>
         <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
-<input type="hidden" id="sc-mobile-lock" value='true' />
  <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></SCRIPT>
  <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery/css/smoothness/jquery-ui.css" type="text/css" media="screen" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
@@ -664,7 +663,7 @@ else
     $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
     $vertical_center = '';
 ?>
-<body class="scFormPage" style="<?php echo $remove_margin . $str_iframe_body . $vertical_center; ?>">
+<body class="scFormPage sc-app-form" style="<?php echo $remove_margin . $str_iframe_body . $vertical_center; ?>">
 <?php
 
 if (isset($_SESSION['scriptcase']['form_iva']['error_buffer']) && '' != $_SESSION['scriptcase']['form_iva']['error_buffer'])
@@ -851,7 +850,7 @@ sc_userSweetAlertDisplayed = false;
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "R")
 {
 ?>
-    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar" style="padding: 0px; spacing: 0px">
+    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar sc-toolbar-top" style="padding: 0px; spacing: 0px">
     <table style="border-collapse: collapse; border-width: 0px; width: 100%">
     <tr> 
      <td nowrap align="left" valign="middle" width="33%" class="scFormToolbarPadding"> 
@@ -860,10 +859,6 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "R")
 {
     $NM_btn = false;
-?> 
-     </td> 
-     <td nowrap align="center" valign="middle" width="33%" class="scFormToolbarPadding"> 
-<?php 
     if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['new'] == "on") ? '' : 'display: none;';
 ?>
@@ -921,10 +916,6 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
 <?php
         $NM_btn = true;
     }
-?> 
-     </td> 
-     <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
-<?php 
     if ('' != $this->url_webhelp) {
         $sCondStyle = '';
 ?>
@@ -1001,6 +992,14 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
 <?php
         $NM_btn = true;
     }
+?> 
+     </td> 
+     <td nowrap align="center" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php 
+?> 
+     </td> 
+     <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php 
 }
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "R")
 {
@@ -1024,7 +1023,7 @@ unset($NM_ult_sep);
 </td></tr> 
 <tr><td>
 <?php
-       echo "<div id=\"sc-ui-empty-form\" class=\"scFormPageText\" style=\"padding: 10px; text-align: center; font-weight: bold" . ($this->nmgp_form_empty ? '' : '; display: none') . "\">";
+       echo "<div id=\"sc-ui-empty-form\" class=\"scFormPageText\" style=\"padding: 10px; font-weight: bold" . ($this->nmgp_form_empty ? '' : '; display: none') . "\">";
        echo $this->Ini->Nm_lang['lang_errm_empt'];
        echo "</div>";
   if ($this->nmgp_form_empty)
@@ -2118,13 +2117,56 @@ $puc_dv_compras_look = (isset($aLookup[0][$this->puc_dv_compras])) ? $aLookup[0]
    </tr>
 </TABLE></div><!-- bloco_f -->
 </td></tr> 
+<tr><td>
+<?php
+if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "R")
+{
+?>
+    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar sc-toolbar-bottom" style="padding: 0px; spacing: 0px">
+    <table style="border-collapse: collapse; border-width: 0px; width: 100%">
+    <tr> 
+     <td nowrap align="left" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php
+}
+if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "R")
+{
+    $NM_btn = false;
+?> 
+     </td> 
+     <td nowrap align="center" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php 
+?> 
+     </td> 
+     <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php 
+}
+if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['run_iframe'] != "R")
+{
+?>
+   </td></tr> 
+   </table> 
+   </td></tr></table> 
+<?php
+}
+?>
+<?php
+if (!$NM_btn && isset($NM_ult_sep))
+{
+    echo "    <script language=\"javascript\">";
+    echo "      document.getElementById('" .  $NM_ult_sep . "').style.display='none';";
+    echo "    </script>";
+}
+unset($NM_ult_sep);
+?>
+<?php if ('novo' != $this->nmgp_opcao || $this->Embutida_form) { ?><script>nav_atualiza(Nav_permite_ret, Nav_permite_ava, 'b');</script><?php } ?>
+</td></tr> 
 </table> 
 </div> 
 </td> 
 </tr> 
 </table> 
 
-<div id="id_debug_window" style="display: none; position: absolute; left: 50px; top: 50px"><table class="scFormMessageTable">
+<div id="id_debug_window" style="display: none;" class='scDebugWindow'><table class="scFormMessageTable">
 <tr><td class="scFormMessageTitle"><?php echo nmButtonOutput($this->arr_buttons, "berrm_clse", "scAjaxHideDebug()", "scAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
 &nbsp;&nbsp;Output</td></tr>
 <tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>

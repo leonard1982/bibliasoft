@@ -299,8 +299,8 @@ class form_reciboingreso_171019_mob_ini
       $this->nm_dt_criacao   = "20180402"; 
       $this->nm_hr_criacao   = "091457"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210817"; 
-      $this->nm_hr_ult_alt   = "115231"; 
+      $this->nm_dt_ult_alt   = "20211223"; 
+      $this->nm_hr_ult_alt   = "110934"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -1067,7 +1067,7 @@ class form_reciboingreso_171019_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQBqHIrwV5BOHuBYVcFKHEFYHMJwDcFYH9B/HANOHQJsHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeHEFYDoFGD9XGZkBiHAN7ZMB/HgBeVkXeHEFqHIraHQXODQJwHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSFGHANOD5JwHgvsDkBOHEFYVoBOD9BsH9B/DSrYV5FUDMzGZSJGDWr/VoB/D9NwZSX7Z1rwV5raDMvOV9BUDuFGVoF7HQNmZ1BiHAzGZMJeDMNKZSXeV5FqDoB/DcJeZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuvmZSJqDWFYHMXGHQXGZ1FaHIveV5FGHgNOVkXeHEB7ZuBqDcXGDQFGD1BeVWJsDMvmZSJqDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOV9BUDWXKVorqHQNmVINUHIveHQJwDEBODkFeH5FYVoFGHQJKDQJsDSrwHurqDMrYDkB/Dur/HMJeDcFYZ1rqD1rKHuJsDErKDkXKDuJeDoB/D9XsDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDuBqHANOD5rqHuBOVcBODurGVENUD9XOZ1BiHANOD5JwHgNOHEJqHEXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9XOZkBiHABYZMBODErKHErCH5FYHIFUDcXGH9FUHArYV5BOHgrKVcFCDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBOD9XsZSFGHANOD5F7HgrYDkFCDWJeDoraDcBqH9B/DSrYD5F7DEBOZSXeHEFqVoBiDcBwZSFGHANOD5JwHuzGDkBOV5X7VoJwHQNmZkBiHIBOD5BOHgveHErsDWFGZuXGDcXOZSX7Z1BYV5JwHgvsZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiD9JmZ1B/HIveHuBOHgvsVkJ3DurmZuB/D9NwH9BiZ1N7HuFGHgvsV9FeHEX7DoX7D9BiH9BqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiHAzGD5BOHgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgvOVIBOV5X/VorqDcFYH9BOD1rwZMJeHgNOHErsHEFqHIBqDcXGDQFUD1BeHQrqDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['form_reciboingreso_171019_mob']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['form_reciboingreso_171019_mob']['initialize'])  
       { 
@@ -2359,11 +2359,8 @@ ob_start();
             $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][1]);
             $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][2]);
             $nmgp_ordem = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $nmgp_fast_search = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $nmgp_cond_fast_search = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $nmgp_arg_fast_search = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $nmgp_arg_dyn_search = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $nmgp_arg_dyn_search = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][5]);
         }
     }
 
@@ -4499,7 +4496,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_submit_form
 
-    function ajax_form_reciboingreso_171019_mob_navigate_form($idrecibo, $nm_form_submit, $nmgp_opcao, $nmgp_ordem, $nmgp_fast_search, $nmgp_cond_fast_search, $nmgp_arg_fast_search, $nmgp_arg_dyn_search, $script_case_init)
+    function ajax_form_reciboingreso_171019_mob_navigate_form($idrecibo, $nm_form_submit, $nmgp_opcao, $nmgp_ordem, $nmgp_arg_dyn_search, $script_case_init)
     {
         global $inicial_form_reciboingreso_171019_mob;
         //register_shutdown_function("form_reciboingreso_171019_mob_pack_ajax_response");
@@ -4510,9 +4507,6 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),
                   'nmgp_ordem' => NM_utf8_urldecode($nmgp_ordem),
-                  'nmgp_fast_search' => NM_utf8_urldecode($nmgp_fast_search),
-                  'nmgp_cond_fast_search' => NM_utf8_urldecode($nmgp_cond_fast_search),
-                  'nmgp_arg_fast_search' => NM_utf8_urldecode($nmgp_arg_fast_search),
                   'nmgp_arg_dyn_search' => NM_utf8_urldecode($nmgp_arg_dyn_search),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,

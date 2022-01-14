@@ -2085,9 +2085,10 @@ if($vtrue)
 {
 
 	$vfinifin = "";
-	$vfinifin = " and f.fechacom between '".$this->desde ."' and '".$this->hasta ."' ";
+	$vfinifin = " f.fechacom between '".$this->desde ."' and '".$this->hasta ."' ";
 	
 	$vsql = "select f.idfaccom, concat('00/',f.numfacom) as num from facturacom f where $vfinifin order by f.idfaccom asc";
+
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 

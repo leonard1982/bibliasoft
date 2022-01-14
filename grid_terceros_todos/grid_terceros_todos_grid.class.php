@@ -69,6 +69,7 @@ class grid_terceros_todos_grid
    var $cliente;
    var $proveedor;
    var $empleado;
+   var $si_nomina;
    var $idtercero;
    var $nacimiento;
    var $sexo;
@@ -122,6 +123,7 @@ class grid_terceros_todos_grid
    var $puc_retefuente_servicios_prov;
    var $nube;
    var $tipo_documento;
+   var $estado;
 //--- 
  function monta_grid($linhas = 0)
  {
@@ -227,8 +229,51 @@ class grid_terceros_todos_grid
        if ($nmgrp_apl_opcao != "pdf")
        { 
            $this->nmgp_barra_top();
-           $this->nmgp_embbed_placeholder_top();
        } 
+       $display_tag_interativ = "none";
+       $descr_refin = "";
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']))
+       { 
+           $display_tag_interativ = "";
+           $descr_refin = "<div class='scGridFilterTagList'>";
+           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'] as $fil => $dados_fil) {
+               foreach ($dados_fil['lab'] as $lab_fil => $opcs_fil) {
+                   foreach ($opcs_fil as $iopc => $cada_opc) {
+                       $descr_refin .= "<div class='scGridFilterTagListItem'>";
+                       $descr_refin .= "<img align='absmiddle' style=\"cursor: pointer; float:right; padding-left: 5px;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" border=\"0\" onclick=\"nm_proc_int_search('clear_opc','" . $dados_fil['tp_obj'] . "','" . $lab_fil . "','" . $fil . "', 'id_int_search_" . $fil . "', '" . $fil . "', '" . $dados_fil['val_sel'][$iopc] . "##@@" . $cada_opc . "', 'S')\"/>";
+                       $descr_refin .= "<span class='scGridFilterTagListItemLabel'>";
+                       $descr_refin .= $lab_fil . "<br>";
+                       if ($dados_fil['tp_obj'] == 'bw') {
+                           $descr_refin .= $opcs_fil[0] . " <=> " . $opcs_fil[1];
+                       }
+                       else {
+                           $descr_refin .= $cada_opc;
+                       }
+                       $descr_refin .= "</span></div>&nbsp;&nbsp;";
+                       if ($dados_fil['tp_obj'] == 'bw') {
+                           break;
+                       }
+                   }
+               }
+           }
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bfilref_limpar", "nm_proc_int_clear_all();", "nm_proc_int_clear_all();", "app_int_search_all_cancel", "", "", "vertical-align: text-bottom;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $descr_refin .= $Cod_Btn; 
+           $descr_refin .= "</div>";
+       } 
+       $nm_saida->saida("       <tr id=\"tr_descr_refin_search\" style=\"display:" . $display_tag_interativ . ";padding: 0px;text-align: left;\"><td><div id=\"div_descr_refin_search\"  class=\"scGridFilterTag\" style=\"text-align: left;\">\r\n");
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav']) {
+           $_SESSION['scriptcase']['saida_html'] = "";
+       }
+       if ($_SESSION['scriptcase']['proc_mobile']) {
+           $nm_saida->saida("            <a onclick=\"refin_search_mobile();\" class='scGridFilterTagIconCol'><i class='icon_fa " . $this->Ini->scGridRefinedSearchCollapseFAIcon . "'></i></a>\r\n");
+       }
+       $nm_saida->saida("         " . $descr_refin . "\r\n");
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav']) {
+           $this->Ini->Arr_result['setValue'][] = array('field' => 'div_descr_refin_search', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+           $this->Ini->Arr_result['setDisplay'][] = array('field' => 'tr_descr_refin_search', 'value' => $display_tag_interativ);
+       }
+       $nm_saida->saida("       </div></td></tr> \r\n");
+
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['save_grid']))
        {
            $this->refresh_interativ_search();
@@ -240,7 +285,6 @@ class grid_terceros_todos_grid
        }
        if ($nmgrp_apl_opcao != "pdf")
        { 
-           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot();
        } 
        if (!$this->Proc_link_res && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != 'pdf' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != 'print')
@@ -570,6 +614,18 @@ class grid_terceros_todos_grid
        {
            $this->loatiende = substr($this->loatiende, 0, $tmp_pos);
        }
+       $this->estado = $Busca_temp['estado']; 
+       $tmp_pos = strpos($this->estado, "##@@");
+       if ($tmp_pos !== false && !is_array($this->estado))
+       {
+           $this->estado = substr($this->estado, 0, $tmp_pos);
+       }
+       $this->clasificacion_clientes = $Busca_temp['clasificacion_clientes']; 
+       $tmp_pos = strpos($this->clasificacion_clientes, "##@@");
+       if ($tmp_pos !== false && !is_array($this->clasificacion_clientes))
+       {
+           $this->clasificacion_clientes = substr($this->clasificacion_clientes, 0, $tmp_pos);
+       }
    } 
    $this->nm_field_dinamico = array();
    $this->nm_order_dinamico = array();
@@ -586,6 +642,8 @@ class grid_terceros_todos_grid
    } 
        ob_start(); 
    $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'on';
+if (!isset($_SESSION['gnit'])) {$_SESSION['gnit'] = "";}
+if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
 if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
  if($this->sc_temp_gnube_activa == "SI")
@@ -598,7 +656,28 @@ else
 	$this->nmgp_botoes["btn_subir_a_nube"] = "off";;
 	$this->nmgp_botoes["btn_actualizar_nube"] = "off";;
 }
+
+$vso   = "escritorio";
+
+if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+{  
+	$vso = "escritorio";
+}
+else
+{
+	$vso = "nube";
+}
+
+if($this->sc_temp_gnit=="88261176-7" and $vso=="nube")
+{
+	$this->NM_cmp_hidden["si_nomina"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['php_cmp_sel']["si_nomina"] = "on"; }
+}
+else
+{
+	$this->NM_cmp_hidden["si_nomina"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['php_cmp_sel']["si_nomina"] = "off"; }
+}
 if (isset($this->sc_temp_gnube_activa)) {$_SESSION['gnube_activa'] = $this->sc_temp_gnube_activa;}
+if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off'; 
        $this->SC_Buf_onInit = ob_get_clean();; 
 
@@ -1049,27 +1128,27 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
 //----- 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, str_replace (convert(char(10),nacimiento,102), '.', '-') + ' ' + convert(char(8),nacimiento,20), sexo, urlmail, str_replace (convert(char(10),fechault,102), '.', '-') + ' ' + convert(char(8),fechault,20), saldo, str_replace (convert(char(10),afiliacion,102), '.', '-') + ' ' + convert(char(8),afiliacion,20), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, str_replace (convert(char(10),nacimiento,102), '.', '-') + ' ' + convert(char(8),nacimiento,20), sexo, urlmail, str_replace (convert(char(10),fechault,102), '.', '-') + ' ' + convert(char(8),fechault,20), saldo, str_replace (convert(char(10),afiliacion,102), '.', '-') + ' ' + convert(char(8),afiliacion,20), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, convert(char(23),nacimiento,121), sexo, urlmail, convert(char(23),fechault,121), saldo, convert(char(23),afiliacion,121), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, convert(char(23),nacimiento,121), sexo, urlmail, convert(char(23),fechault,121), saldo, convert(char(23),afiliacion,121), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, TO_DATE(TO_CHAR(con_actual, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, TO_DATE(TO_CHAR(con_actual, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, EXTEND(nacimiento, YEAR TO DAY), sexo, urlmail, EXTEND(fechault, YEAR TO DAY), saldo, EXTEND(afiliacion, YEAR TO DAY), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, EXTEND(nacimiento, YEAR TO DAY), sexo, urlmail, EXTEND(fechault, YEAR TO DAY), saldo, EXTEND(afiliacion, YEAR TO DAY), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'])) 
@@ -1172,93 +1251,80 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
        $this->cliente = $this->rs_grid->fields[6] ;  
        $this->proveedor = $this->rs_grid->fields[7] ;  
        $this->empleado = $this->rs_grid->fields[8] ;  
-       $this->idtercero = $this->rs_grid->fields[9] ;  
+       $this->si_nomina = $this->rs_grid->fields[9] ;  
+       $this->idtercero = $this->rs_grid->fields[10] ;  
        $this->idtercero = (string)$this->idtercero;
-       $this->nacimiento = $this->rs_grid->fields[10] ;  
-       $this->sexo = $this->rs_grid->fields[11] ;  
-       $this->urlmail = $this->rs_grid->fields[12] ;  
-       $this->fechault = $this->rs_grid->fields[13] ;  
-       $this->saldo = $this->rs_grid->fields[14] ;  
+       $this->nacimiento = $this->rs_grid->fields[11] ;  
+       $this->sexo = $this->rs_grid->fields[12] ;  
+       $this->urlmail = $this->rs_grid->fields[13] ;  
+       $this->fechault = $this->rs_grid->fields[14] ;  
+       $this->saldo = $this->rs_grid->fields[15] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
-       $this->afiliacion = $this->rs_grid->fields[15] ;  
-       $this->regimen = $this->rs_grid->fields[16] ;  
-       $this->tipo = $this->rs_grid->fields[17] ;  
-       $this->observaciones = $this->rs_grid->fields[18] ;  
-       $this->loatiende = $this->rs_grid->fields[19] ;  
+       $this->afiliacion = $this->rs_grid->fields[16] ;  
+       $this->regimen = $this->rs_grid->fields[17] ;  
+       $this->tipo = $this->rs_grid->fields[18] ;  
+       $this->observaciones = $this->rs_grid->fields[19] ;  
+       $this->loatiende = $this->rs_grid->fields[20] ;  
        $this->loatiende = (string)$this->loatiende;
-       $this->contacto = $this->rs_grid->fields[20] ;  
-       $this->credito = $this->rs_grid->fields[21] ;  
-       $this->cupo = $this->rs_grid->fields[22] ;  
+       $this->contacto = $this->rs_grid->fields[21] ;  
+       $this->credito = $this->rs_grid->fields[22] ;  
+       $this->cupo = $this->rs_grid->fields[23] ;  
        $this->cupo = (string)$this->cupo;
-       $this->listaprecios = $this->rs_grid->fields[23] ;  
+       $this->listaprecios = $this->rs_grid->fields[24] ;  
        $this->listaprecios = (string)$this->listaprecios;
-       $this->con_actual = $this->rs_grid->fields[24] ;  
-       $this->efec_retencion = $this->rs_grid->fields[25] ;  
-       $this->urlmail_1 = $this->rs_grid->fields[26] ;  
-       $this->nombre1 = $this->rs_grid->fields[27] ;  
-       $this->nombre2 = $this->rs_grid->fields[28] ;  
-       $this->apellido1 = $this->rs_grid->fields[29] ;  
-       $this->apellido2 = $this->rs_grid->fields[30] ;  
-       $this->sucur_cliente = $this->rs_grid->fields[31] ;  
-       $this->representante = $this->rs_grid->fields[32] ;  
-       $this->es_restaurante = $this->rs_grid->fields[33] ;  
-       $this->dias_credito = $this->rs_grid->fields[34] ;  
+       $this->con_actual = $this->rs_grid->fields[25] ;  
+       $this->efec_retencion = $this->rs_grid->fields[26] ;  
+       $this->urlmail_1 = $this->rs_grid->fields[27] ;  
+       $this->nombre1 = $this->rs_grid->fields[28] ;  
+       $this->nombre2 = $this->rs_grid->fields[29] ;  
+       $this->apellido1 = $this->rs_grid->fields[30] ;  
+       $this->apellido2 = $this->rs_grid->fields[31] ;  
+       $this->sucur_cliente = $this->rs_grid->fields[32] ;  
+       $this->representante = $this->rs_grid->fields[33] ;  
+       $this->es_restaurante = $this->rs_grid->fields[34] ;  
+       $this->dias_credito = $this->rs_grid->fields[35] ;  
        $this->dias_credito = (string)$this->dias_credito;
-       $this->dias_mora = $this->rs_grid->fields[35] ;  
+       $this->dias_mora = $this->rs_grid->fields[36] ;  
        $this->dias_mora = (string)$this->dias_mora;
-       $this->cupo_vendedor = $this->rs_grid->fields[36] ;  
+       $this->cupo_vendedor = $this->rs_grid->fields[37] ;  
        $this->cupo_vendedor =  str_replace(",", ".", $this->cupo_vendedor);
-       $this->cupo_vendedor = (strpos(strtolower($this->cupo_vendedor), "e")) ? (float)$this->cupo_vendedor : $this->cupo_vendedor; 
        $this->cupo_vendedor = (string)$this->cupo_vendedor;
-       $this->codigo_ter = $this->rs_grid->fields[37] ;  
-       $this->es_cajero = $this->rs_grid->fields[38] ;  
-       $this->autorizado = $this->rs_grid->fields[39] ;  
-       $this->zona_clientes = $this->rs_grid->fields[40] ;  
+       $this->codigo_ter = $this->rs_grid->fields[38] ;  
+       $this->es_cajero = $this->rs_grid->fields[39] ;  
+       $this->autorizado = $this->rs_grid->fields[40] ;  
+       $this->zona_clientes = $this->rs_grid->fields[41] ;  
        $this->zona_clientes = (string)$this->zona_clientes;
-       $this->clasificacion_clientes = $this->rs_grid->fields[41] ;  
+       $this->clasificacion_clientes = $this->rs_grid->fields[42] ;  
        $this->clasificacion_clientes = (string)$this->clasificacion_clientes;
-       $this->creado = $this->rs_grid->fields[42] ;  
-       $this->disponible = $this->rs_grid->fields[43] ;  
-       $this->id_pedido_tmp = $this->rs_grid->fields[44] ;  
+       $this->creado = $this->rs_grid->fields[43] ;  
+       $this->disponible = $this->rs_grid->fields[44] ;  
+       $this->id_pedido_tmp = $this->rs_grid->fields[45] ;  
        $this->id_pedido_tmp = (string)$this->id_pedido_tmp;
-       $this->n_pedido_tmp = $this->rs_grid->fields[45] ;  
-       $this->total_pedido_tmp = $this->rs_grid->fields[46] ;  
+       $this->n_pedido_tmp = $this->rs_grid->fields[46] ;  
+       $this->total_pedido_tmp = $this->rs_grid->fields[47] ;  
        $this->total_pedido_tmp =  str_replace(",", ".", $this->total_pedido_tmp);
-       $this->total_pedido_tmp = (strpos(strtolower($this->total_pedido_tmp), "e")) ? (float)$this->total_pedido_tmp : $this->total_pedido_tmp; 
        $this->total_pedido_tmp = (string)$this->total_pedido_tmp;
-       $this->obs_pedido_tmp = $this->rs_grid->fields[47] ;  
-       $this->vend_pedido_tmp = $this->rs_grid->fields[48] ;  
-       $this->ciudad = $this->rs_grid->fields[49] ;  
-       $this->codigo_postal = $this->rs_grid->fields[50] ;  
-       $this->lenguaje = $this->rs_grid->fields[51] ;  
-       $this->nombre_comercil = $this->rs_grid->fields[52] ;  
-       $this->notificar = $this->rs_grid->fields[53] ;  
-       $this->puc_auxiliar_deudores = $this->rs_grid->fields[54] ;  
-       $this->puc_auxiliar_deudores = (string)$this->puc_auxiliar_deudores;
-       $this->puc_retefuente_ventas = $this->rs_grid->fields[55] ;  
-       $this->puc_retefuente_ventas = (string)$this->puc_retefuente_ventas;
-       $this->puc_retefuente_servicios_clie = $this->rs_grid->fields[56] ;  
-       $this->puc_retefuente_servicios_clie = (string)$this->puc_retefuente_servicios_clie;
-       $this->puc_auxiliar_proveedores = $this->rs_grid->fields[57] ;  
-       $this->puc_auxiliar_proveedores = (string)$this->puc_auxiliar_proveedores;
-       $this->puc_retefuente_compras = $this->rs_grid->fields[58] ;  
-       $this->puc_retefuente_compras = (string)$this->puc_retefuente_compras;
-       $this->puc_retefuente_servicios_prov = $this->rs_grid->fields[59] ;  
-       $this->puc_retefuente_servicios_prov = (string)$this->puc_retefuente_servicios_prov;
-       $this->nube = $this->rs_grid->fields[60] ;  
-       $this->tipo_documento = $this->rs_grid->fields[61] ;  
-       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-       { 
-           if (!empty($this->imagenter))
-           { 
-               $this->imagenter = $this->Db->BlobDecode($this->imagenter, false, true, "BLOB");
-           }
-       }
+       $this->obs_pedido_tmp = $this->rs_grid->fields[48] ;  
+       $this->vend_pedido_tmp = $this->rs_grid->fields[49] ;  
+       $this->ciudad = $this->rs_grid->fields[50] ;  
+       $this->codigo_postal = $this->rs_grid->fields[51] ;  
+       $this->lenguaje = $this->rs_grid->fields[52] ;  
+       $this->nombre_comercil = $this->rs_grid->fields[53] ;  
+       $this->notificar = $this->rs_grid->fields[54] ;  
+       $this->puc_auxiliar_deudores = $this->rs_grid->fields[55] ;  
+       $this->puc_retefuente_ventas = $this->rs_grid->fields[56] ;  
+       $this->puc_retefuente_servicios_clie = $this->rs_grid->fields[57] ;  
+       $this->puc_auxiliar_proveedores = $this->rs_grid->fields[58] ;  
+       $this->puc_retefuente_compras = $this->rs_grid->fields[59] ;  
+       $this->puc_retefuente_servicios_prov = $this->rs_grid->fields[60] ;  
+       $this->nube = $this->rs_grid->fields[61] ;  
+       $this->tipo_documento = $this->rs_grid->fields[62] ;  
+       $this->estado = $this->rs_grid->fields[63] ;  
        if (!isset($this->loatiende)) { $this->loatiende = ""; }
        $GLOBALS["idmuni"] = $this->rs_grid->fields[4] ;  
        $GLOBALS["idmuni"] = (string)$GLOBALS["idmuni"] ;
-       $GLOBALS["loatiende"] = $this->rs_grid->fields[19] ;  
+       $GLOBALS["loatiende"] = $this->rs_grid->fields[20] ;  
        $GLOBALS["loatiende"] = (string)$GLOBALS["loatiende"] ;
        $this->arg_sum_loatiende = ($this->loatiende == "") ? " is null " : " = " . $this->loatiende;
        $this->SC_seq_register = $this->nmgp_reg_start ; 
@@ -1314,59 +1380,61 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
            $this->cliente = $this->rs_grid->fields[6] ;  
            $this->proveedor = $this->rs_grid->fields[7] ;  
            $this->empleado = $this->rs_grid->fields[8] ;  
-           $this->idtercero = $this->rs_grid->fields[9] ;  
-           $this->nacimiento = $this->rs_grid->fields[10] ;  
-           $this->sexo = $this->rs_grid->fields[11] ;  
-           $this->urlmail = $this->rs_grid->fields[12] ;  
-           $this->fechault = $this->rs_grid->fields[13] ;  
-           $this->saldo = $this->rs_grid->fields[14] ;  
-           $this->afiliacion = $this->rs_grid->fields[15] ;  
-           $this->regimen = $this->rs_grid->fields[16] ;  
-           $this->tipo = $this->rs_grid->fields[17] ;  
-           $this->observaciones = $this->rs_grid->fields[18] ;  
-           $this->loatiende = $this->rs_grid->fields[19] ;  
-           $this->contacto = $this->rs_grid->fields[20] ;  
-           $this->credito = $this->rs_grid->fields[21] ;  
-           $this->cupo = $this->rs_grid->fields[22] ;  
-           $this->listaprecios = $this->rs_grid->fields[23] ;  
-           $this->con_actual = $this->rs_grid->fields[24] ;  
-           $this->efec_retencion = $this->rs_grid->fields[25] ;  
-           $this->urlmail_1 = $this->rs_grid->fields[26] ;  
-           $this->nombre1 = $this->rs_grid->fields[27] ;  
-           $this->nombre2 = $this->rs_grid->fields[28] ;  
-           $this->apellido1 = $this->rs_grid->fields[29] ;  
-           $this->apellido2 = $this->rs_grid->fields[30] ;  
-           $this->sucur_cliente = $this->rs_grid->fields[31] ;  
-           $this->representante = $this->rs_grid->fields[32] ;  
-           $this->es_restaurante = $this->rs_grid->fields[33] ;  
-           $this->dias_credito = $this->rs_grid->fields[34] ;  
-           $this->dias_mora = $this->rs_grid->fields[35] ;  
-           $this->cupo_vendedor = $this->rs_grid->fields[36] ;  
-           $this->codigo_ter = $this->rs_grid->fields[37] ;  
-           $this->es_cajero = $this->rs_grid->fields[38] ;  
-           $this->autorizado = $this->rs_grid->fields[39] ;  
-           $this->zona_clientes = $this->rs_grid->fields[40] ;  
-           $this->clasificacion_clientes = $this->rs_grid->fields[41] ;  
-           $this->creado = $this->rs_grid->fields[42] ;  
-           $this->disponible = $this->rs_grid->fields[43] ;  
-           $this->id_pedido_tmp = $this->rs_grid->fields[44] ;  
-           $this->n_pedido_tmp = $this->rs_grid->fields[45] ;  
-           $this->total_pedido_tmp = $this->rs_grid->fields[46] ;  
-           $this->obs_pedido_tmp = $this->rs_grid->fields[47] ;  
-           $this->vend_pedido_tmp = $this->rs_grid->fields[48] ;  
-           $this->ciudad = $this->rs_grid->fields[49] ;  
-           $this->codigo_postal = $this->rs_grid->fields[50] ;  
-           $this->lenguaje = $this->rs_grid->fields[51] ;  
-           $this->nombre_comercil = $this->rs_grid->fields[52] ;  
-           $this->notificar = $this->rs_grid->fields[53] ;  
-           $this->puc_auxiliar_deudores = $this->rs_grid->fields[54] ;  
-           $this->puc_retefuente_ventas = $this->rs_grid->fields[55] ;  
-           $this->puc_retefuente_servicios_clie = $this->rs_grid->fields[56] ;  
-           $this->puc_auxiliar_proveedores = $this->rs_grid->fields[57] ;  
-           $this->puc_retefuente_compras = $this->rs_grid->fields[58] ;  
-           $this->puc_retefuente_servicios_prov = $this->rs_grid->fields[59] ;  
-           $this->nube = $this->rs_grid->fields[60] ;  
-           $this->tipo_documento = $this->rs_grid->fields[61] ;  
+           $this->si_nomina = $this->rs_grid->fields[9] ;  
+           $this->idtercero = $this->rs_grid->fields[10] ;  
+           $this->nacimiento = $this->rs_grid->fields[11] ;  
+           $this->sexo = $this->rs_grid->fields[12] ;  
+           $this->urlmail = $this->rs_grid->fields[13] ;  
+           $this->fechault = $this->rs_grid->fields[14] ;  
+           $this->saldo = $this->rs_grid->fields[15] ;  
+           $this->afiliacion = $this->rs_grid->fields[16] ;  
+           $this->regimen = $this->rs_grid->fields[17] ;  
+           $this->tipo = $this->rs_grid->fields[18] ;  
+           $this->observaciones = $this->rs_grid->fields[19] ;  
+           $this->loatiende = $this->rs_grid->fields[20] ;  
+           $this->contacto = $this->rs_grid->fields[21] ;  
+           $this->credito = $this->rs_grid->fields[22] ;  
+           $this->cupo = $this->rs_grid->fields[23] ;  
+           $this->listaprecios = $this->rs_grid->fields[24] ;  
+           $this->con_actual = $this->rs_grid->fields[25] ;  
+           $this->efec_retencion = $this->rs_grid->fields[26] ;  
+           $this->urlmail_1 = $this->rs_grid->fields[27] ;  
+           $this->nombre1 = $this->rs_grid->fields[28] ;  
+           $this->nombre2 = $this->rs_grid->fields[29] ;  
+           $this->apellido1 = $this->rs_grid->fields[30] ;  
+           $this->apellido2 = $this->rs_grid->fields[31] ;  
+           $this->sucur_cliente = $this->rs_grid->fields[32] ;  
+           $this->representante = $this->rs_grid->fields[33] ;  
+           $this->es_restaurante = $this->rs_grid->fields[34] ;  
+           $this->dias_credito = $this->rs_grid->fields[35] ;  
+           $this->dias_mora = $this->rs_grid->fields[36] ;  
+           $this->cupo_vendedor = $this->rs_grid->fields[37] ;  
+           $this->codigo_ter = $this->rs_grid->fields[38] ;  
+           $this->es_cajero = $this->rs_grid->fields[39] ;  
+           $this->autorizado = $this->rs_grid->fields[40] ;  
+           $this->zona_clientes = $this->rs_grid->fields[41] ;  
+           $this->clasificacion_clientes = $this->rs_grid->fields[42] ;  
+           $this->creado = $this->rs_grid->fields[43] ;  
+           $this->disponible = $this->rs_grid->fields[44] ;  
+           $this->id_pedido_tmp = $this->rs_grid->fields[45] ;  
+           $this->n_pedido_tmp = $this->rs_grid->fields[46] ;  
+           $this->total_pedido_tmp = $this->rs_grid->fields[47] ;  
+           $this->obs_pedido_tmp = $this->rs_grid->fields[48] ;  
+           $this->vend_pedido_tmp = $this->rs_grid->fields[49] ;  
+           $this->ciudad = $this->rs_grid->fields[50] ;  
+           $this->codigo_postal = $this->rs_grid->fields[51] ;  
+           $this->lenguaje = $this->rs_grid->fields[52] ;  
+           $this->nombre_comercil = $this->rs_grid->fields[53] ;  
+           $this->notificar = $this->rs_grid->fields[54] ;  
+           $this->puc_auxiliar_deudores = $this->rs_grid->fields[55] ;  
+           $this->puc_retefuente_ventas = $this->rs_grid->fields[56] ;  
+           $this->puc_retefuente_servicios_clie = $this->rs_grid->fields[57] ;  
+           $this->puc_auxiliar_proveedores = $this->rs_grid->fields[58] ;  
+           $this->puc_retefuente_compras = $this->rs_grid->fields[59] ;  
+           $this->puc_retefuente_servicios_prov = $this->rs_grid->fields[60] ;  
+           $this->nube = $this->rs_grid->fields[61] ;  
+           $this->tipo_documento = $this->rs_grid->fields[62] ;  
+           $this->estado = $this->rs_grid->fields[63] ;  
            if (!isset($this->loatiende)) { $this->loatiende = ""; }
        } 
    } 
@@ -1431,10 +1499,10 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
+                    <meta name="msapplication-TileColor" content="#61678C">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
+                    <meta name="theme-color" content="#61678C">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#61678C">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1527,10 +1595,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#009061\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#61678C\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#009061\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#009061\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#61678C\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#61678C\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['doc_word'])
@@ -2302,7 +2370,7 @@ $nm_saida->saida("}\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf" && !$this->Print_All)
        { 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $nm_saida->saida("<div id=\"id_debug_window\" style=\"display: none; position: absolute; left: 50px; top: 50px\"><table class=\"scFormMessageTable\">\r\n");
+           $nm_saida->saida("<div id=\"id_debug_window\" style=\"display: none;\" class='scDebugWindow'><table class=\"scFormMessageTable\">\r\n");
            $nm_saida->saida("<tr><td class=\"scFormMessageTitle\">" . $Cod_Btn . "&nbsp;&nbsp;Output</td></tr>\r\n");
            $nm_saida->saida("<tr><td class=\"scFormMessageMessage\" style=\"padding: 0px; vertical-align: top\"><div style=\"padding: 2px; height: 200px; width: 350px; overflow: auto\" id=\"id_debug_text\"></div></td></tr>\r\n");
            $nm_saida->saida("</table></div>\r\n");
@@ -2484,6 +2552,8 @@ $nm_saida->saida("}\r\n");
    $this->css_proveedor_grid_line = $compl_css_emb . "css_proveedor_grid_line";
    $this->css_empleado_label = $compl_css_emb . "css_empleado_label";
    $this->css_empleado_grid_line = $compl_css_emb . "css_empleado_grid_line";
+   $this->css_si_nomina_label = $compl_css_emb . "css_si_nomina_label";
+   $this->css_si_nomina_grid_line = $compl_css_emb . "css_si_nomina_grid_line";
    $this->css_idtercero_label = $compl_css_emb . "css_idtercero_label";
    $this->css_idtercero_grid_line = $compl_css_emb . "css_idtercero_grid_line";
    $this->css_nacimiento_label = $compl_css_emb . "css_nacimiento_label";
@@ -2590,6 +2660,8 @@ $nm_saida->saida("}\r\n");
    $this->css_nube_grid_line = $compl_css_emb . "css_nube_grid_line";
    $this->css_tipo_documento_label = $compl_css_emb . "css_tipo_documento_label";
    $this->css_tipo_documento_grid_line = $compl_css_emb . "css_tipo_documento_grid_line";
+   $this->css_estado_label = $compl_css_emb . "css_estado_label";
+   $this->css_estado_grid_line = $compl_css_emb . "css_estado_grid_line";
    $this->css_facturas_label = $compl_css_emb . "css_facturas_label";
    $this->css_facturas_grid_line = $compl_css_emb . "css_facturas_grid_line";
    $this->css_sc_asigna_vendedor_label = $compl_css_emb . "css_sc_asigna_vendedor_label";
@@ -3003,7 +3075,7 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['direccion'])) ? $this->New_label['direccion'] : "Dirección"; 
    if (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_direccion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_direccion_label'] . "\" >\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_direccion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_direccion_label'] . "\" NOWRAP WIDTH=\"250px\">\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
    {
       $link_img = "";
@@ -3140,6 +3212,14 @@ $nm_saida->saida("}\r\n");
    $SC_Label = (isset($this->New_label['empleado'])) ? $this->New_label['empleado'] : "Empleado"; 
    if (!isset($this->NM_cmp_hidden['empleado']) || $this->NM_cmp_hidden['empleado'] != "off") { 
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_empleado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_empleado_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
+ function NM_label_si_nomina()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['si_nomina'])) ? $this->New_label['si_nomina'] : "Nómina"; 
+   if (!isset($this->NM_cmp_hidden['si_nomina']) || $this->NM_cmp_hidden['si_nomina'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_si_nomina_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_si_nomina_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_idtercero()
@@ -3614,6 +3694,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_documento_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_documento_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
+ function NM_label_estado()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Estado"; 
+   if (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_estado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_estado_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_facturas()
  {
    global $nm_saida;
@@ -3678,6 +3766,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['labels']['proveedor'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['empleado'])) ? $this->New_label['empleado'] : "Empleado"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['labels']['empleado'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['si_nomina'])) ? $this->New_label['si_nomina'] : "Nómina"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['labels']['si_nomina'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idtercero'])) ? $this->New_label['idtercero'] : "Idtercero"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['labels']['idtercero'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['nacimiento'])) ? $this->New_label['nacimiento'] : "Fec. Nacimiento"; 
@@ -3784,6 +3874,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['labels']['nube'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['tipo_documento'])) ? $this->New_label['tipo_documento'] : "Tipo Documento"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['labels']['tipo_documento'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Estado"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['labels']['estado'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['facturas'])) ? $this->New_label['facturas'] : "Listar Cartera"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['labels']['facturas'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['sc_asigna_vendedor'])) ? $this->New_label['sc_asigna_vendedor'] : "Lo Atiende"; 
@@ -4105,90 +4197,77 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pd
           $this->cliente = $this->rs_grid->fields[6] ;  
           $this->proveedor = $this->rs_grid->fields[7] ;  
           $this->empleado = $this->rs_grid->fields[8] ;  
-          $this->idtercero = $this->rs_grid->fields[9] ;  
+          $this->si_nomina = $this->rs_grid->fields[9] ;  
+          $this->idtercero = $this->rs_grid->fields[10] ;  
           $this->idtercero = (string)$this->idtercero;
-          $this->nacimiento = $this->rs_grid->fields[10] ;  
-          $this->sexo = $this->rs_grid->fields[11] ;  
-          $this->urlmail = $this->rs_grid->fields[12] ;  
-          $this->fechault = $this->rs_grid->fields[13] ;  
-          $this->saldo = $this->rs_grid->fields[14] ;  
+          $this->nacimiento = $this->rs_grid->fields[11] ;  
+          $this->sexo = $this->rs_grid->fields[12] ;  
+          $this->urlmail = $this->rs_grid->fields[13] ;  
+          $this->fechault = $this->rs_grid->fields[14] ;  
+          $this->saldo = $this->rs_grid->fields[15] ;  
           $this->saldo =  str_replace(",", ".", $this->saldo);
           $this->saldo = (string)$this->saldo;
-          $this->afiliacion = $this->rs_grid->fields[15] ;  
-          $this->regimen = $this->rs_grid->fields[16] ;  
-          $this->tipo = $this->rs_grid->fields[17] ;  
-          $this->observaciones = $this->rs_grid->fields[18] ;  
-          $this->loatiende = $this->rs_grid->fields[19] ;  
+          $this->afiliacion = $this->rs_grid->fields[16] ;  
+          $this->regimen = $this->rs_grid->fields[17] ;  
+          $this->tipo = $this->rs_grid->fields[18] ;  
+          $this->observaciones = $this->rs_grid->fields[19] ;  
+          $this->loatiende = $this->rs_grid->fields[20] ;  
           $this->loatiende = (string)$this->loatiende;
-          $this->contacto = $this->rs_grid->fields[20] ;  
-          $this->credito = $this->rs_grid->fields[21] ;  
-          $this->cupo = $this->rs_grid->fields[22] ;  
+          $this->contacto = $this->rs_grid->fields[21] ;  
+          $this->credito = $this->rs_grid->fields[22] ;  
+          $this->cupo = $this->rs_grid->fields[23] ;  
           $this->cupo = (string)$this->cupo;
-          $this->listaprecios = $this->rs_grid->fields[23] ;  
+          $this->listaprecios = $this->rs_grid->fields[24] ;  
           $this->listaprecios = (string)$this->listaprecios;
-          $this->con_actual = $this->rs_grid->fields[24] ;  
-          $this->efec_retencion = $this->rs_grid->fields[25] ;  
-          $this->urlmail_1 = $this->rs_grid->fields[26] ;  
-          $this->nombre1 = $this->rs_grid->fields[27] ;  
-          $this->nombre2 = $this->rs_grid->fields[28] ;  
-          $this->apellido1 = $this->rs_grid->fields[29] ;  
-          $this->apellido2 = $this->rs_grid->fields[30] ;  
-          $this->sucur_cliente = $this->rs_grid->fields[31] ;  
-          $this->representante = $this->rs_grid->fields[32] ;  
-          $this->es_restaurante = $this->rs_grid->fields[33] ;  
-          $this->dias_credito = $this->rs_grid->fields[34] ;  
+          $this->con_actual = $this->rs_grid->fields[25] ;  
+          $this->efec_retencion = $this->rs_grid->fields[26] ;  
+          $this->urlmail_1 = $this->rs_grid->fields[27] ;  
+          $this->nombre1 = $this->rs_grid->fields[28] ;  
+          $this->nombre2 = $this->rs_grid->fields[29] ;  
+          $this->apellido1 = $this->rs_grid->fields[30] ;  
+          $this->apellido2 = $this->rs_grid->fields[31] ;  
+          $this->sucur_cliente = $this->rs_grid->fields[32] ;  
+          $this->representante = $this->rs_grid->fields[33] ;  
+          $this->es_restaurante = $this->rs_grid->fields[34] ;  
+          $this->dias_credito = $this->rs_grid->fields[35] ;  
           $this->dias_credito = (string)$this->dias_credito;
-          $this->dias_mora = $this->rs_grid->fields[35] ;  
+          $this->dias_mora = $this->rs_grid->fields[36] ;  
           $this->dias_mora = (string)$this->dias_mora;
-          $this->cupo_vendedor = $this->rs_grid->fields[36] ;  
+          $this->cupo_vendedor = $this->rs_grid->fields[37] ;  
           $this->cupo_vendedor =  str_replace(",", ".", $this->cupo_vendedor);
-          $this->cupo_vendedor = (strpos(strtolower($this->cupo_vendedor), "e")) ? (float)$this->cupo_vendedor : $this->cupo_vendedor; 
           $this->cupo_vendedor = (string)$this->cupo_vendedor;
-          $this->codigo_ter = $this->rs_grid->fields[37] ;  
-          $this->es_cajero = $this->rs_grid->fields[38] ;  
-          $this->autorizado = $this->rs_grid->fields[39] ;  
-          $this->zona_clientes = $this->rs_grid->fields[40] ;  
+          $this->codigo_ter = $this->rs_grid->fields[38] ;  
+          $this->es_cajero = $this->rs_grid->fields[39] ;  
+          $this->autorizado = $this->rs_grid->fields[40] ;  
+          $this->zona_clientes = $this->rs_grid->fields[41] ;  
           $this->zona_clientes = (string)$this->zona_clientes;
-          $this->clasificacion_clientes = $this->rs_grid->fields[41] ;  
+          $this->clasificacion_clientes = $this->rs_grid->fields[42] ;  
           $this->clasificacion_clientes = (string)$this->clasificacion_clientes;
-          $this->creado = $this->rs_grid->fields[42] ;  
-          $this->disponible = $this->rs_grid->fields[43] ;  
-          $this->id_pedido_tmp = $this->rs_grid->fields[44] ;  
+          $this->creado = $this->rs_grid->fields[43] ;  
+          $this->disponible = $this->rs_grid->fields[44] ;  
+          $this->id_pedido_tmp = $this->rs_grid->fields[45] ;  
           $this->id_pedido_tmp = (string)$this->id_pedido_tmp;
-          $this->n_pedido_tmp = $this->rs_grid->fields[45] ;  
-          $this->total_pedido_tmp = $this->rs_grid->fields[46] ;  
+          $this->n_pedido_tmp = $this->rs_grid->fields[46] ;  
+          $this->total_pedido_tmp = $this->rs_grid->fields[47] ;  
           $this->total_pedido_tmp =  str_replace(",", ".", $this->total_pedido_tmp);
-          $this->total_pedido_tmp = (strpos(strtolower($this->total_pedido_tmp), "e")) ? (float)$this->total_pedido_tmp : $this->total_pedido_tmp; 
           $this->total_pedido_tmp = (string)$this->total_pedido_tmp;
-          $this->obs_pedido_tmp = $this->rs_grid->fields[47] ;  
-          $this->vend_pedido_tmp = $this->rs_grid->fields[48] ;  
-          $this->ciudad = $this->rs_grid->fields[49] ;  
-          $this->codigo_postal = $this->rs_grid->fields[50] ;  
-          $this->lenguaje = $this->rs_grid->fields[51] ;  
-          $this->nombre_comercil = $this->rs_grid->fields[52] ;  
-          $this->notificar = $this->rs_grid->fields[53] ;  
-          $this->puc_auxiliar_deudores = $this->rs_grid->fields[54] ;  
-          $this->puc_auxiliar_deudores = (string)$this->puc_auxiliar_deudores;
-          $this->puc_retefuente_ventas = $this->rs_grid->fields[55] ;  
-          $this->puc_retefuente_ventas = (string)$this->puc_retefuente_ventas;
-          $this->puc_retefuente_servicios_clie = $this->rs_grid->fields[56] ;  
-          $this->puc_retefuente_servicios_clie = (string)$this->puc_retefuente_servicios_clie;
-          $this->puc_auxiliar_proveedores = $this->rs_grid->fields[57] ;  
-          $this->puc_auxiliar_proveedores = (string)$this->puc_auxiliar_proveedores;
-          $this->puc_retefuente_compras = $this->rs_grid->fields[58] ;  
-          $this->puc_retefuente_compras = (string)$this->puc_retefuente_compras;
-          $this->puc_retefuente_servicios_prov = $this->rs_grid->fields[59] ;  
-          $this->puc_retefuente_servicios_prov = (string)$this->puc_retefuente_servicios_prov;
-          $this->nube = $this->rs_grid->fields[60] ;  
-          $this->tipo_documento = $this->rs_grid->fields[61] ;  
+          $this->obs_pedido_tmp = $this->rs_grid->fields[48] ;  
+          $this->vend_pedido_tmp = $this->rs_grid->fields[49] ;  
+          $this->ciudad = $this->rs_grid->fields[50] ;  
+          $this->codigo_postal = $this->rs_grid->fields[51] ;  
+          $this->lenguaje = $this->rs_grid->fields[52] ;  
+          $this->nombre_comercil = $this->rs_grid->fields[53] ;  
+          $this->notificar = $this->rs_grid->fields[54] ;  
+          $this->puc_auxiliar_deudores = $this->rs_grid->fields[55] ;  
+          $this->puc_retefuente_ventas = $this->rs_grid->fields[56] ;  
+          $this->puc_retefuente_servicios_clie = $this->rs_grid->fields[57] ;  
+          $this->puc_auxiliar_proveedores = $this->rs_grid->fields[58] ;  
+          $this->puc_retefuente_compras = $this->rs_grid->fields[59] ;  
+          $this->puc_retefuente_servicios_prov = $this->rs_grid->fields[60] ;  
+          $this->nube = $this->rs_grid->fields[61] ;  
+          $this->tipo_documento = $this->rs_grid->fields[62] ;  
+          $this->estado = $this->rs_grid->fields[63] ;  
           if (!isset($this->loatiende)) { $this->loatiende = ""; }
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-          { 
-              if (!empty($this->imagenter))
-              { 
-                  $this->imagenter = $this->Db->BlobDecode($this->imagenter, false, true, "BLOB");
-              }
-          }
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['SC_Ind_Groupby'] != "_NM_SC_")
          {
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] == "pdf")
@@ -4198,7 +4277,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pd
          }
           $GLOBALS["idmuni"] = $this->rs_grid->fields[4] ;  
           $GLOBALS["idmuni"] = (string)$GLOBALS["idmuni"];
-          $GLOBALS["loatiende"] = $this->rs_grid->fields[19] ;  
+          $GLOBALS["loatiende"] = $this->rs_grid->fields[20] ;  
           $GLOBALS["loatiende"] = (string)$GLOBALS["loatiende"];
           $this->arg_sum_loatiende = ($this->loatiende == "") ? " is null " : " = " . $this->loatiende;
           $this->SC_seq_page++; 
@@ -4330,7 +4409,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pd
           }  
           $this->sc_proc_grid = true;
           $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'on';
- $this->sc_asigna_vendedor   = "<select onchange='fAsignarVendedor(\"".$this->idtercero ."\",this.value);'>";
+ if($this->estado =="PENDIENTE")
+{
+	$this->NM_field_style["documento"] = "background-color:#33ff99;font-size:13px;color:#000000;font-family:arial;font-weight:sans-serif;";
+}
+$this->sc_asigna_vendedor   = "<select onchange='fAsignarVendedor(\"".$this->idtercero ."\",this.value);'>";
  
       $nm_select = "select idtercero,nombres from terceros where empleado='SI'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4660,6 +4743,11 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
               $str_tem_display = $this->getFieldHighlight('advanced_search', 'documento', $str_tem_display, $conteudo_original); 
           } 
               $conteudo = $str_tem_display; 
+              $Style_documento = "";
+          if (isset($this->NM_field_style["documento"]) && !empty($this->NM_field_style["documento"]))
+          {
+              $Style_documento .= $this->NM_field_style["documento"];
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -4668,7 +4756,7 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
           {
               $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_documento_grid_line . "\"  style=\"" . $this->Css_Cmp['css_documento_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_documento_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_documento_grid_line . "\"  style=\"" . $this->Css_Cmp['css_documento_grid_line'] . $Style_documento . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_documento_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_dv()
@@ -4922,6 +5010,35 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
               $this->SC_nowrap = "";
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_empleado_grid_line . "\"  style=\"" . $this->Css_Cmp['css_empleado_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_empleado_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_si_nomina()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['si_nomina']) || $this->NM_cmp_hidden['si_nomina'] != "off") { 
+          $conteudo = sc_strip_script($this->si_nomina); 
+          $conteudo_original = sc_strip_script($this->si_nomina); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'si_nomina', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'si_nomina', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_si_nomina_grid_line . "\"  style=\"" . $this->Css_Cmp['css_si_nomina_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_si_nomina_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_idtercero()
@@ -6621,6 +6738,35 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_tipo_documento_grid_line . "\"  style=\"" . $this->Css_Cmp['css_tipo_documento_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_tipo_documento_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_estado()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off") { 
+          $conteudo = sc_strip_script($this->estado); 
+          $conteudo_original = sc_strip_script($this->estado); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'estado', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'estado', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_estado_grid_line . "\"  style=\"" . $this->Css_Cmp['css_estado_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_estado_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_facturas()
  {
       global $nm_saida;
@@ -6721,7 +6867,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 66;
+   $this->NM_colspan  = 68;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -8414,23 +8560,27 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    }
    function nmgp_barra_top()
    {
-       if(isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
        {
            $this->nmgp_barra_top_mobile();
+           $this->nmgp_embbed_placeholder_top();
        }
-       else
+       if (!isset($_SESSION['scriptcase']['proc_mobile']) || !$_SESSION['scriptcase']['proc_mobile'])
        {
            $this->nmgp_barra_top_normal();
+           $this->nmgp_embbed_placeholder_top();
        }
    }
    function nmgp_barra_bot()
    {
-       if(isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot_mobile();
        }
-       else
+       if (!isset($_SESSION['scriptcase']['proc_mobile']) || !$_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot_normal();
        }
    }
@@ -8585,7 +8735,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
    function html_interativ_search()
    {
        global $nm_saida;
-       $bol_refin_use_modal = false;
+       $bol_refin_use_modal = true;
        if($_SESSION['scriptcase']['proc_mobile'])
        {
            $bol_refin_use_modal = false;
@@ -8617,9 +8767,9 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
        $nm_saida->saida("     <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
        $nm_saida->saida("     <input type=\"hidden\" name=\"nmgp_opcao\" value=\"interativ_search\"/> \r\n");
        $nm_saida->saida("     <input type=\"hidden\" name=\"parm\" value=\"\"/> \r\n");
-       $nm_saida->saida("    <div id='id_div_interativ_search' class=''>\r\n");
+       $nm_saida->saida("    <div id='id_div_interativ_search' class='is-closed'>\r\n");
            $disp_btn_collapse = 'none'; 
-           if('N' == 'S') 
+           if('S' == 'S') 
            { 
                $disp_btn_collapse = ''; 
            } 
@@ -8644,7 +8794,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    }
    function refresh_interativ_search()
    {
-       $bol_refin_use_modal = false;
+       $bol_refin_use_modal = true;
        if($_SESSION['scriptcase']['proc_mobile'])
        {
            $bol_refin_use_modal = false;
@@ -8655,6 +8805,16 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
        $array_fields[] = "cliente";
        if(is_array($array_fields) && !empty($array_fields))
        {
+           $arr_new = [];
+           foreach($array_fields as $key => $str_field)
+           {
+               if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$str_field]))
+               {
+                   unset($array_fields[ $key ]);
+                   $arr_new[] = $str_field;
+               }
+           }
+           $array_fields = array_merge($arr_new, $array_fields);
            $str_out = "";
            foreach($array_fields as $str_field)
            {

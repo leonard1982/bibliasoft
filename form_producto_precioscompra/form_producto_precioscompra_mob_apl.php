@@ -21,7 +21,6 @@ class form_producto_precioscompra_mob_apl
                                 'varList'           => array(),
                                 'focus'             => '',
                                 'navStatus'         => array(),
-                                'navSummary'        => array(),
                                 'redir'             => array(),
                                 'blockDisplay'      => array(),
                                 'fieldDisplay'      => array(),
@@ -101,7 +100,6 @@ class form_producto_precioscompra_mob_apl
    var $nmgp_opcao;
    var $nmgp_opc_ant;
    var $sc_evento;
-   var $sc_insert_on;
    var $nmgp_clone;
    var $nmgp_return_img = array();
    var $nmgp_dados_form = array();
@@ -177,18 +175,6 @@ class form_producto_precioscompra_mob_apl
           if (isset($this->NM_ajax_info['param']['nmgp_arg_dyn_search']))
           {
               $this->nmgp_arg_dyn_search = $this->NM_ajax_info['param']['nmgp_arg_dyn_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_arg_fast_search']))
-          {
-              $this->nmgp_arg_fast_search = $this->NM_ajax_info['param']['nmgp_arg_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_cond_fast_search']))
-          {
-              $this->nmgp_cond_fast_search = $this->NM_ajax_info['param']['nmgp_cond_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_fast_search']))
-          {
-              $this->nmgp_fast_search = $this->NM_ajax_info['param']['nmgp_fast_search'];
           }
           if (isset($this->NM_ajax_info['param']['nmgp_num_form']))
           {
@@ -625,19 +611,6 @@ class form_producto_precioscompra_mob_apl
       $this->arr_buttons['out']['style']            = "default";
       $this->arr_buttons['out']['image']            = "";
 
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
-          'has_fa'           => true,
-          'content_icons'    => false,
-          'style'            => "default",
-      );
-
 
       $_SESSION['scriptcase']['error_icon']['form_producto_precioscompra_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_producto_precioscompra_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
@@ -779,18 +752,17 @@ class form_producto_precioscompra_mob_apl
       }
 
       $this->nmgp_botoes['cancel'] = "on";
-      $this->nmgp_botoes['exit'] = "on";
-      $this->nmgp_botoes['qsearch'] = "on";
-      $this->nmgp_botoes['new'] = "on";
-      $this->nmgp_botoes['insert'] = "on";
+      $this->nmgp_botoes['exit'] = "off";
+      $this->nmgp_botoes['new']  = "off";
       $this->nmgp_botoes['copy'] = "off";
+      $this->nmgp_botoes['insert'] = "off";
       $this->nmgp_botoes['update'] = "on";
-      $this->nmgp_botoes['delete'] = "on";
-      $this->nmgp_botoes['first'] = "on";
-      $this->nmgp_botoes['back'] = "on";
-      $this->nmgp_botoes['forward'] = "on";
-      $this->nmgp_botoes['last'] = "on";
-      $this->nmgp_botoes['summary'] = "on";
+      $this->nmgp_botoes['delete'] = "off";
+      $this->nmgp_botoes['first'] = "off";
+      $this->nmgp_botoes['back'] = "off";
+      $this->nmgp_botoes['forward'] = "off";
+      $this->nmgp_botoes['last'] = "off";
+      $this->nmgp_botoes['summary'] = "off";
       $this->nmgp_botoes['navpage'] = "off";
       $this->nmgp_botoes['goto'] = "off";
       $this->nmgp_botoes['qtline'] = "off";
@@ -828,7 +800,6 @@ class form_producto_precioscompra_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_producto_precioscompra_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_producto_precioscompra_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_producto_precioscompra_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_producto_precioscompra_mob']['new']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_producto_precioscompra_mob']['new'] != '')
       {
@@ -883,7 +854,6 @@ class form_producto_precioscompra_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['embutida_liga_form_insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['embutida_liga_form_insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['embutida_liga_form_insert'];
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['embutida_liga_form_update']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['embutida_liga_form_update'] != '')
       {
@@ -929,7 +899,6 @@ class form_producto_precioscompra_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_producto_precioscompra_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_producto_precioscompra_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf']['form_producto_precioscompra_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_producto_precioscompra_mob']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_producto_precioscompra_mob']['update'] != '')
       {
@@ -1110,13 +1079,6 @@ class form_producto_precioscompra_mob_apl
       $this->Erro      = new form_producto_precioscompra_mob_erro();
       $this->Erro->Ini = $this->Ini;
       $this->proc_fast_search = false;
-      if ($this->nmgp_opcao == "fast_search")  
-      {
-          $this->SC_fast_search($this->nmgp_fast_search, $this->nmgp_cond_fast_search, $this->nmgp_arg_fast_search);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['opcao'] = "inicio";
-          $this->nmgp_opcao = "inicio";
-          $this->proc_fast_search = true;
-      } 
       if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
       { 
          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['opcao']))
@@ -1183,7 +1145,6 @@ class form_producto_precioscompra_mob_apl
 //
       $this->NM_case_insensitive = false;
       $this->sc_evento = $this->nmgp_opcao;
-      $this->sc_insert_on = false;
             if ('ajax_check_file' == $this->nmgp_opcao ){
                  ob_start(); 
                  include_once("../_lib/lib/php/nm_api.php"); 
@@ -5567,7 +5528,6 @@ $_SESSION['scriptcase']['form_producto_precioscompra_mob']['contr_erro'] = 'off'
               $this->fecha_fab = $this->fecha_fab_before_qstr;
               $this->lote = $this->lote_before_qstr;
               $this->serial_codbarras = $this->serial_codbarras_before_qstr;
-              $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
               } 
@@ -6009,20 +5969,15 @@ $_SESSION['scriptcase']['form_producto_precioscompra_mob']['contr_erro'] = 'off'
                   $this->NM_ajax_info['buttonDisplay']['forward'] = $this->nmgp_botoes['forward'] = "off";
                   $this->NM_ajax_info['buttonDisplay']['last']    = $this->nmgp_botoes['last']    = "off";
               }
-              $this->nmgp_opcao = "novo"; 
-              $this->nm_flag_saida_novo = "S"; 
-              $rs->Close(); 
-              $this->NM_ajax_info['buttonDisplay']['out'] = $this->nmgp_botoes['out'] = "off";
-              if ($this->aba_iframe)
-              {
-                  $this->NM_ajax_info['buttonDisplay']['exit'] = $this->nmgp_botoes['exit'] = 'off';
-              }
+              $this->NM_ajax_info['buttonDisplay']['update'] = $this->nmgp_botoes['update'] = "off";
+              $this->NM_ajax_info['buttonDisplay']['delete'] = $this->nmgp_botoes['delete'] = "off";
+              return; 
           } 
           if ($rs === false && $GLOBALS["NM_ERRO_IBASE"] == 1) 
           { 
               $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $this->Erro->mensagem (__FILE__, __LINE__, "critica", $this->Ini->Nm_lang['lang_errm_nfnd_extr']); 
-              $this->nmgp_opcao = "novo"; 
+              $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_nfnd_extr'], $this->Db->ErrorMsg()); 
+              exit ; 
           }  
           if ($this->nmgp_opcao != "novo") 
           { 
@@ -6252,51 +6207,6 @@ $_SESSION['scriptcase']['form_producto_precioscompra_mob']['contr_erro'] = 'off'
               $this->nmgp_dados_form["serial_codbarras"] = $this->serial_codbarras;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
-              if ($this->nmgp_clone != "S")
-              {
-                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['dados_clone']['imagenprod']);  
-              }
-              if ($this->nmgp_clone == "S" && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['dados_select']))
-              {
-                  $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['dados_select'];
-                  $this->codigobar = $this->nmgp_dados_select['codigobar'];  
-                  $this->codigoprod = $this->nmgp_dados_select['codigoprod'];  
-                  $this->nompro = $this->nmgp_dados_select['nompro'];  
-                  $this->unidmaymen = $this->nmgp_dados_select['unidmaymen'];  
-                  $this->unimay = $this->nmgp_dados_select['unimay'];  
-                  $this->unimen = $this->nmgp_dados_select['unimen'];  
-                  $this->costomay = $this->nmgp_dados_select['costomay'];  
-                  $this->costomen = $this->nmgp_dados_select['costomen'];  
-                  $this->recmayamen = $this->nmgp_dados_select['recmayamen'];  
-                  $this->preciomen = $this->nmgp_dados_select['preciomen'];  
-                  $this->preciomen2 = $this->nmgp_dados_select['preciomen2'];  
-                  $this->preciomen3 = $this->nmgp_dados_select['preciomen3'];  
-                  $this->precio2 = $this->nmgp_dados_select['precio2'];  
-                  $this->preciomay = $this->nmgp_dados_select['preciomay'];  
-                  $this->preciofull = $this->nmgp_dados_select['preciofull'];  
-                  $this->stockmay = $this->nmgp_dados_select['stockmay'];  
-                  $this->stockmen = $this->nmgp_dados_select['stockmen'];  
-                  $this->idgrup = $this->nmgp_dados_select['idgrup'];  
-                  $this->idpro1 = $this->nmgp_dados_select['idpro1'];  
-                  $this->idpro2 = $this->nmgp_dados_select['idpro2'];  
-                  $this->idiva = $this->nmgp_dados_select['idiva'];  
-                  $this->otro = $this->nmgp_dados_select['otro'];  
-                  $this->otro2 = $this->nmgp_dados_select['otro2'];  
-                  $this->colores = $this->nmgp_dados_select['colores'];  
-                  $this->tallas = $this->nmgp_dados_select['tallas'];  
-                  $this->sabores = $this->nmgp_dados_select['sabores'];  
-                  $this->imagenprod = $this->nmgp_dados_select['imagenprod'];  
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['dados_clone']['imagenprod'] = $this->nmgp_dados_select['imagenprod'];  
-                  $this->imconsumo = $this->nmgp_dados_select['imconsumo'];  
-                  $this->escombo = $this->nmgp_dados_select['escombo'];  
-                  $this->idcombo = $this->nmgp_dados_select['idcombo'];  
-                  $this->precio_editable = $this->nmgp_dados_select['precio_editable'];  
-                  $this->cod_cuenta = $this->nmgp_dados_select['cod_cuenta'];  
-                  $this->fecha_vencimiento = $this->nmgp_dados_select['fecha_vencimiento'];  
-                  $this->fecha_fab = $this->nmgp_dados_select['fecha_fab'];  
-                  $this->lote = $this->nmgp_dados_select['lote'];  
-                  $this->serial_codbarras = $this->nmgp_dados_select['serial_codbarras'];  
-              }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_producto_precioscompra_mob']['foreign_key']))
           {
@@ -7209,43 +7119,13 @@ if (parent && parent.scAjaxDetailValue)
     function getButtonIds($buttonName) {
         switch ($buttonName) {
             case "update":
-                return array("sc_b_upd_t.sc-unique-btn-1", "sc_b_upd_t.sc-unique-btn-5");
+                return array("sc_b_upd_t.sc-unique-btn-1", "sc_b_upd_t.sc-unique-btn-3");
                 break;
             case "out":
                 return array("sc_out_top");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-2", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11", "sc_b_sai_t.sc-unique-btn-10");
-                break;
-            case "new":
-                return array("sc_b_new_t.sc-unique-btn-3");
-                break;
-            case "insert":
-                return array("sc_b_ins_t.sc-unique-btn-4");
-                break;
-            case "delete":
-                return array("sc_b_del_t.sc-unique-btn-6");
-                break;
-            case "0":
-                return array("sys_separator.sc-unique-btn-7");
-                break;
-            case "copy":
-                return array("sc_b_clone_t.sc-unique-btn-8");
-                break;
-            case "help":
-                return array("sc_b_hlp_t");
-                break;
-            case "first":
-                return array("sc_b_ini_b.sc-unique-btn-12");
-                break;
-            case "back":
-                return array("sc_b_ret_b.sc-unique-btn-13");
-                break;
-            case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-14");
-                break;
-            case "last":
-                return array("sc_b_fim_b.sc-unique-btn-15");
+                return array("sc_b_sai_t.sc-unique-btn-2", "sc_b_sai_b.sc-unique-btn-4");
                 break;
         }
 

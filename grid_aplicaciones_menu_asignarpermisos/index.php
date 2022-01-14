@@ -227,8 +227,8 @@ class grid_aplicaciones_menu_asignarpermisos_ini
       $this->nm_dt_criacao   = "20191220"; 
       $this->nm_hr_criacao   = "162811"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210817"; 
-      $this->nm_hr_ult_alt   = "115231"; 
+      $this->nm_dt_ult_alt   = "20211223"; 
+      $this->nm_hr_ult_alt   = "110934"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -951,7 +951,7 @@ class grid_aplicaciones_menu_asignarpermisos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_aplicaciones_menu_asignarpermisos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_aplicaciones_menu_asignarpermisos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwDQFaHArYVWXGHuvmVcFKH5XCVoJwDcNwH9BODSrYV5FGHgveHArsDWFqHIXGD9NmDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNwH9BiHABYD5NUDMBYVcFiV5FYHINUD9BiH9B/HIrwHQBODMNKZSJ3DuFYHMFGD9JKDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwV5FUHuzGVcFKDuFqDoFGDcBqH9B/HABYD5rqDEBeHEXeV5FaVoBiDcBwDQFGD1BeV5raHuNOVcBODWFYDoJsD9BiZ1BOZ1BeD5NUDErKZSXeHEFqVoBqD9XsH9X7HArYV5BOHuzGVcFKDWFYVoX7D9BsZ1B/DSrYD5JeDEBOZSJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMB/HgNKHErsH5FYHMXGD9FYDQFaHIrKHQBqHuBOVcrsDWFaVEF7DcFYVIJsD1vsZMFaDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHErsDWrGZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoBiHQNwZkBiHABYZMJeDMBYZSJqDuFaDoXGHQXODuBqHArYV5BqHgvOVcXKDWXCDoXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQFGHIvsV5XGHuBYZSJqDuX7DoF7HQBsH9BOHAvsZMJeDErKZSJ3DWXCHIBqHQBiH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQrqDMveVkJ3DWFqVoFGDcBwDQFUHIrKD5XGHuNOVcFeDuX7HIJeDcJUH9BqDSNOHQFGDEBOZSXeV5FqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSXeDWX7DoBOD9XsDQJsDSBYV5FGHgvsVcBOH5FqDoFGD9BsH9B/Z1NOV5FaDErKZSJqV5FaVoFGDcBwDQX7Z1N7VWJwHgrYDkBODWFaVoFGD9JmZ1B/HIBeV5FUDMBYHEJGDWr/DoBODcBwDQFGHANOD5F7HuvmVcFCH5FqVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgrKVkJ3HEXCHMBiHQXODQB/Z1NaVWJeDMNOVIB/H5XCDoFGHQBqZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiHAzGD5BOHgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuzGVcXKDWBmVEF7HQBqZ1BODSNOZMBqHgveVkXeDuFYHIXGDcXGH9BiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4998,27 +4998,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_aplicaciones_menu_asignarperm
           $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['opcao'] = "busca";
           $contr_grid_aplicaciones_menu_asignarpermisos->NM_ajax_flag = true;
           $contr_grid_aplicaciones_menu_asignarpermisos->NM_ajax_opcao = $NM_ajax_opcao;
-      }
-      if ('ajax_filter_save' == $nmgp_opcao)
-      {
-          $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['opcao'] = "busca";
-          $contr_grid_aplicaciones_menu_asignarpermisos->NM_ajax_flag = true;
-          $contr_grid_aplicaciones_menu_asignarpermisos->NM_ajax_opcao = "ajax_filter_save";
-      }
-      if ('ajax_filter_delete' == $nmgp_opcao)
-      {
-          $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['opcao'] = "busca";
-          $contr_grid_aplicaciones_menu_asignarpermisos->NM_ajax_flag = true;
-          $contr_grid_aplicaciones_menu_asignarpermisos->NM_ajax_opcao = "ajax_filter_delete";
-      }
-      if ('ajax_filter_select' == $nmgp_opcao)
-      {
-          $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_aplicaciones_menu_asignarpermisos']['opcao'] = "busca";
-          $contr_grid_aplicaciones_menu_asignarpermisos->NM_ajax_flag = true;
-          $contr_grid_aplicaciones_menu_asignarpermisos->NM_ajax_opcao = "ajax_filter_select";
       }
        $contr_grid_aplicaciones_menu_asignarpermisos->controle();
    } 

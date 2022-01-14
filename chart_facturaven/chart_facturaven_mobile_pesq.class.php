@@ -1628,7 +1628,7 @@ $vertical_center = '';
 <?php
 $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
-<div id="id_debug_window" style="display: none; position: absolute; left: 50px; top: 50px"><table class="scFormMessageTable">
+<div id="id_debug_window" style="display: none;" class='scDebugWindow'><table class="scFormMessageTable">
 <tr><td class="scFormMessageTitle"><?php echo $Cod_Btn ?>&nbsp;&nbsp;Output</td></tr>
 <tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>
 </table></div>
@@ -2576,7 +2576,7 @@ foreach ($Arr_format as $Part_date)
  </TR>
      <?php
      }
-     else
+     if (!$_SESSION['scriptcase']['proc_mobile'])
      {
      ?>
  <TR align="center">

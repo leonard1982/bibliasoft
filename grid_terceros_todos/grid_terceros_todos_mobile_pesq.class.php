@@ -422,7 +422,7 @@ class grid_terceros_todos_pesq
       $nm_esp_postgres = array();
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $Nm_datas[] = "nacimiento";$Nm_datas[] = "nacimiento";$Nm_datas[] = "fechault";$Nm_datas[] = "fechault";$Nm_datas[] = "afiliacion";$Nm_datas[] = "afiliacion";$Nm_numeric[] = "idtercero";$Nm_numeric[] = "saldo";$Nm_numeric[] = "idmuni";$Nm_numeric[] = "loatiende";$Nm_numeric[] = "dv";$Nm_numeric[] = "cupo";$Nm_numeric[] = "listaprecios";$Nm_numeric[] = "dias_credito";$Nm_numeric[] = "dias_mora";$Nm_numeric[] = "cupo_vendedor";$Nm_numeric[] = "zona_clientes";$Nm_numeric[] = "clasificacion_clientes";$Nm_numeric[] = "id_pedido_tmp";$Nm_numeric[] = "total_pedido_tmp";$Nm_numeric[] = "puc_auxiliar_deudores";$Nm_numeric[] = "puc_retefuente_ventas";$Nm_numeric[] = "puc_retefuente_servicios_clie";$Nm_numeric[] = "puc_auxiliar_proveedores";$Nm_numeric[] = "puc_retefuente_compras";$Nm_numeric[] = "puc_retefuente_servicios_prov";
+      $Nm_datas[] = "nacimiento";$Nm_datas[] = "nacimiento";$Nm_datas[] = "fechault";$Nm_datas[] = "fechault";$Nm_datas[] = "afiliacion";$Nm_datas[] = "afiliacion";$Nm_numeric[] = "idtercero";$Nm_numeric[] = "saldo";$Nm_numeric[] = "idmuni";$Nm_numeric[] = "loatiende";$Nm_numeric[] = "dv";$Nm_numeric[] = "cupo";$Nm_numeric[] = "listaprecios";$Nm_numeric[] = "dias_credito";$Nm_numeric[] = "dias_mora";$Nm_numeric[] = "cupo_vendedor";$Nm_numeric[] = "zona_clientes";$Nm_numeric[] = "clasificacion_clientes";$Nm_numeric[] = "id_pedido_tmp";$Nm_numeric[] = "total_pedido_tmp";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       if (in_array($campo_join, $Nm_numeric))
       {
@@ -1648,7 +1648,7 @@ $vertical_center = '';
 <?php
 $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
-<div id="id_debug_window" style="display: none; position: absolute; left: 50px; top: 50px"><table class="scFormMessageTable">
+<div id="id_debug_window" style="display: none;" class='scDebugWindow'><table class="scFormMessageTable">
 <tr><td class="scFormMessageTitle"><?php echo $Cod_Btn ?>&nbsp;&nbsp;Output</td></tr>
 <tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>
 </table></div>
@@ -1869,6 +1869,10 @@ var nmdg_Form = "F1";
   str_out += 'SC_nombres_input_2#NMF#' + search_get_text('SC_nombres_input_2') + '@NMF@';
   str_out += 'SC_loatiende_cond#NMF#' + search_get_sel_txt('SC_loatiende_cond') + '@NMF@';
   str_out += 'SC_loatiende#NMF#' + search_get_select('SC_loatiende') + '@NMF@';
+  str_out += 'SC_estado_cond#NMF#' + search_get_sel_txt('SC_estado_cond') + '@NMF@';
+  str_out += 'SC_estado#NMF#' + search_get_select('SC_estado') + '@NMF@';
+  str_out += 'SC_clasificacion_clientes_cond#NMF#' + search_get_sel_txt('SC_clasificacion_clientes_cond') + '@NMF@';
+  str_out += 'SC_clasificacion_clientes#NMF#' + search_get_select('SC_clasificacion_clientes') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2188,6 +2192,8 @@ function nm_open_popup(parms)
              $documento_cond, $documento, $documento_input_2, $documento_autocomp,
              $nombres_cond, $nombres, $nombres_input_2, $nombres_autocomp,
              $loatiende_cond, $loatiende,
+             $estado_cond, $estado,
+             $clasificacion_clientes_cond, $clasificacion_clientes,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2234,6 +2240,10 @@ function nm_open_popup(parms)
           $nombres_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['nombres_cond']; 
           $loatiende = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['loatiende']; 
           $loatiende_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['loatiende_cond']; 
+          $estado = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['estado']; 
+          $estado_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['estado_cond']; 
+          $clasificacion_clientes = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['clasificacion_clientes']; 
+          $clasificacion_clientes_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['clasificacion_clientes_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['NM_operador']; 
       } 
       if (!isset($documento_cond) || empty($documento_cond))
@@ -2248,16 +2258,28 @@ function nm_open_popup(parms)
       {
          $loatiende_cond = "eq";
       }
+      if (!isset($estado_cond) || empty($estado_cond))
+      {
+         $estado_cond = "eq";
+      }
+      if (!isset($clasificacion_clientes_cond) || empty($clasificacion_clientes_cond))
+      {
+         $clasificacion_clientes_cond = "eq";
+      }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
       $str_hide_documento = (in_array($documento_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_nombres = (in_array($nombres_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_loatiende = (in_array($loatiende_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_estado = (in_array($estado_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_clasificacion_clientes = (in_array($clasificacion_clientes_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
       $str_display_documento = ('bw' == $documento_cond) ? $display_aberto : $display_fechado;
       $str_display_nombres = ('bw' == $nombres_cond) ? $display_aberto : $display_fechado;
       $str_display_loatiende = ('bw' == $loatiende_cond) ? $display_aberto : $display_fechado;
+      $str_display_estado = ('bw' == $estado_cond) ? $display_aberto : $display_fechado;
+      $str_display_clasificacion_clientes = ('bw' == $clasificacion_clientes_cond) ? $display_aberto : $display_fechado;
 
       if (!isset($documento) || $documento == "")
       {
@@ -2299,6 +2321,34 @@ function nm_open_popup(parms)
          else
          {
          $loatiende = substr($loatiende, 0, $tmp_pos);
+         }
+      }
+      if (!isset($estado) || $estado == "")
+      {
+          $estado = "";
+      }
+      if (isset($estado) && !empty($estado))
+      {
+         $tmp_pos = strpos($estado, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $estado = substr($estado, 0, $tmp_pos);
+         }
+      }
+      if (!isset($clasificacion_clientes) || $clasificacion_clientes == "")
+      {
+          $clasificacion_clientes = "";
+      }
+      if (isset($clasificacion_clientes) && !empty($clasificacion_clientes))
+      {
+         $tmp_pos = strpos($clasificacion_clientes, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $clasificacion_clientes = substr($clasificacion_clientes, 0, $tmp_pos);
          }
       }
 ?>
@@ -2556,6 +2606,174 @@ function nm_open_popup(parms)
 
 
 
+   </tr><tr>
+
+
+
+   
+      <INPUT type="hidden" id="SC_estado_cond" name="estado_cond" value="eq">
+
+    <TD nowrap class="scFilterLabelEven" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Estado";
+ $nmgp_tab_label .= "estado?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br><span id="id_hide_estado"  <?php echo $str_hide_estado?>>
+<?php
+      $estado_look = substr($this->Db->qstr($estado), 1, -1); 
+      $nmgp_def_dados = "" ; 
+      $nm_comando = "select distinct estado from " . $this->Ini->nm_tabela . " order by estado"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['psq_check_ret']['estado'] = array();
+         while (!$rs->EOF) 
+         { 
+            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['psq_check_ret']['estado'][] = trim($rs->fields[0]);
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?" ; 
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?N?@?" ; 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+?>
+   <span id="idAjaxSelect_estado">
+      <SELECT class="scFilterObjectEven" id="SC_estado" name="estado"  size="1">
+       <OPTION value="">Seleccione</OPTION>
+<?php
+      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
+      $nm_opcoes  = explode("?@?", $nm_opcoesx);
+      foreach ($nm_opcoes as $nm_opcao)
+      {
+         if (!empty($nm_opcao))
+         {
+            $temp_bug_list = explode("?#?", $nm_opcao);
+            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
+            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
+            if ("" != $estado)
+            {
+                    $estado_sel = ($nm_opc_cod === $estado) ? "selected" : "";
+            }
+            else
+            {
+               $estado_sel = ("S" == $nm_opc_sel) ? "selected" : "";
+            }
+            $nm_sc_valor = $nm_opc_val;
+            $nm_opc_val = $nm_sc_valor;
+?>
+       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $estado_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
+<?php
+         }
+      }
+?>
+      </SELECT>
+   </span>
+<?php
+?>
+         </TD>
+   
+
+
+
+   </tr><tr>
+
+
+
+   
+      <INPUT type="hidden" id="SC_clasificacion_clientes_cond" name="clasificacion_clientes_cond" value="eq">
+
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['clasificacion_clientes'])) ? $this->New_label['clasificacion_clientes'] : "Clasificación Clientes";
+ $nmgp_tab_label .= "clasificacion_clientes?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br><span id="id_hide_clasificacion_clientes"  <?php echo $str_hide_clasificacion_clientes?>>
+<?php
+      $clasificacion_clientes_look = substr($this->Db->qstr($clasificacion_clientes), 1, -1); 
+      $nmgp_def_dados = "" ; 
+      $nm_comando = "SELECT idclasificacion_cliente, nombre  FROM clasificacion_clientes  ORDER BY nombre"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->Execute($nm_comando)) 
+      { 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['psq_check_ret']['clasificacion_clientes'] = array();
+         while (!$rs->EOF) 
+         { 
+            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['psq_check_ret']['clasificacion_clientes'][] = trim($rs->fields[0]);
+            $nmgp_def_dados .= trim($rs->fields[1]) . "?#?" ; 
+            $nmgp_def_dados .= trim($rs->fields[0]) . "?#?N?@?" ; 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+?>
+   <span id="idAjaxSelect_clasificacion_clientes">
+      <SELECT class="scFilterObjectOdd" id="SC_clasificacion_clientes" name="clasificacion_clientes"  size="1">
+       <OPTION value="">Todas</OPTION>
+<?php
+      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
+      $nm_opcoes  = explode("?@?", $nm_opcoesx);
+      foreach ($nm_opcoes as $nm_opcao)
+      {
+         if (!empty($nm_opcao))
+         {
+            $temp_bug_list = explode("?#?", $nm_opcao);
+            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
+            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
+            if ("" != $clasificacion_clientes)
+            {
+                    $clasificacion_clientes_sel = ($nm_opc_cod === $clasificacion_clientes) ? "selected" : "";
+            }
+            else
+            {
+               $clasificacion_clientes_sel = ("S" == $nm_opc_sel) ? "selected" : "";
+            }
+            $nm_sc_valor = $nm_opc_val;
+            $nm_opc_val = $nm_sc_valor;
+?>
+       <OPTION value="<?php echo NM_encode_input($nm_opc_cod . $delimitador . $nm_opc_val); ?>" <?php echo $clasificacion_clientes_sel; ?>><?php echo $nm_opc_val; ?></OPTION>
+<?php
+         }
+      }
+?>
+      </SELECT>
+   </span>
+<?php
+?>
+         </TD>
+   
+
+
+
    </tr>
    </TABLE>
   </TD>
@@ -2570,214 +2788,7 @@ function nm_open_popup(parms)
    <INPUT type="hidden" name="nmgp_tab_label" value="<?php echo NM_encode_input($nmgp_tab_label); ?>"> 
    <INPUT type="hidden" name="bprocessa" value="pesq"> 
  <?php
-     if ($_SESSION['scriptcase']['proc_mobile'])
-     {
-     ?>
- <TR align="center">
-  <TD class="scFilterTableTd">
-   <table width="100%" class="scFilterToolbar"><tr>
-    <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
-    </td>
-    <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
-   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   if ($this->nmgp_botoes['clear'] == "on")
-   {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-<?php
-   if (!isset($this->nmgp_botoes['save']) || $this->nmgp_botoes['save'] == "on")
-   {
-       $this->NM_fil_ant = $this->gera_array_filtros();
-?>
-     <span id="idAjaxSelect_NM_filters_bot">
-       <SELECT class="scFilterToolbar_obj" id="sel_recup_filters_bot" name="NM_filters_bot" onChange="nm_submit_filter(this, 'bot');" size="1">
-           <option value=""></option>
-<?php
-          $Nome_filter = "";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              $Select = "";
-              if ($Cada_filter == $this->NM_curr_fil)
-              {
-                  $Select = "selected";
-              }
-              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
-              }
-              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  echo "           <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
-              }
-?>
-           <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
-<?php
-          }
-?>
-       </SELECT>
-     </span>
-<?php
-   }
-?>
-<?php
-   if ($this->nmgp_botoes['save'] == "on")
-   {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bedit_filter", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "Ativa_save_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-<?php
-   if (is_file("grid_terceros_todos_help.txt"))
-   {
-      $Arq_WebHelp = file("grid_terceros_todos_help.txt"); 
-      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
-      {
-          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
-          $Tmp = explode(";", $Arq_WebHelp[0]); 
-          foreach ($Tmp as $Cada_help)
-          {
-              $Tmp1 = explode(":", $Cada_help); 
-              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
-              {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-              }
-          }
-      }
-   }
-?>
-<?php
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['start'] == 'filter' && $nm_apl_dependente != 1)
-   {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-   else
-   {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-   }
-?>
-    </td>
-    <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
-    </td>
-   </tr></table>
-<?php
-   if ($this->nmgp_botoes['save'] == "on")
-   {
-?>
-    </TD></TR><TR><TD>
-    <DIV id="Salvar_filters_bot" style="display:none;z-index:9999;">
-     <TABLE align="center" class="scFilterTable">
-      <TR>
-       <TD class="scFilterBlock">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top" class="scFilterBlockFont"><?php echo $this->Ini->Nm_lang['lang_othr_srch_head'] ?></td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "document.getElementById('Salvar_filters_bot').style.display = 'none';", "Cancel_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </TD>
-      </TR>
-      <TR>
-       <TD class="scFilterFieldOdd">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top">
-           <input class="scFilterObjectOdd" type="text" id="SC_nmgp_save_name_bot" name="nmgp_save_name_bot" value="">
-          </td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bsalvar_appdiv", "nm_save_form('bot');", "nm_save_form('bot');", "Save_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </TD>
-      </TR>
-      <TR>
-       <TD class="scFilterFieldEven">
-       <DIV id="Apaga_filters_bot" style="display:''">
-        <table style="border-width: 0px; border-collapse: collapse" width="100%">
-         <tr>
-          <td style="padding: 0px" valign="top">
-          <div id="idAjaxSelect_NM_filters_del_bot">
-           <SELECT class="scFilterObjectOdd" id="sel_filters_del_bot" name="NM_filters_del_bot" size="1">
-            <option value=""></option>
-<?php
-          $Nome_filter = "";
-          foreach ($this->NM_fil_ant as $Cada_filter => $Tipo_filter)
-          {
-              $Select = "";
-              if ($Cada_filter == $this->NM_curr_fil)
-              {
-                  $Select = "selected";
-              }
-              if (NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] != "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, $_SESSION['scriptcase']['charset'], "UTF-8");
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], $_SESSION['scriptcase']['charset'], "UTF-8");
-              }
-              elseif (!NM_is_utf8($Cada_filter) && $_SESSION['scriptcase']['charset'] == "UTF-8")
-              {
-                  $Cada_filter    = sc_convert_encoding($Cada_filter, "UTF-8", $_SESSION['scriptcase']['charset']);
-                  $Tipo_filter[0] = sc_convert_encoding($Tipo_filter[0], "UTF-8", $_SESSION['scriptcase']['charset']);
-              }
-              if ($Tipo_filter[1] != $Nome_filter)
-              {
-                  $Nome_filter = $Tipo_filter[1];
-                  echo "            <option value=\"\">" . NM_encode_input($Nome_filter) . "</option>\r\n";
-              }
-?>
-            <option value="<?php echo NM_encode_input($Tipo_filter[0]) . "\" " . $Select . ">.." . $Cada_filter ?></option>
-<?php
-          }
-?>
-           </SELECT>
-          </div>
-          </td>
-          <td style="padding: 0px" align="right" valign="top">
-           <?php echo nmButtonOutput($this->arr_buttons, "bexcluir_appdiv", "nm_submit_filter_del('bot');", "nm_submit_filter_del('bot');", "Exc_filtro_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-          </td>
-         </tr>
-        </table>
-       </DIV>
-       </TD>
-      </TR>
-     </TABLE>
-    </DIV> 
-<?php
-   }
-?>
-  </TD>
- </TR>
-     <?php
-     }
-     else
+     if (!$_SESSION['scriptcase']['proc_mobile'])
      {
      ?>
  <TR align="center">
@@ -3030,8 +3041,6 @@ function nm_open_popup(parms)
        if ($_SESSION['scriptcase']['proc_mobile'])
        {
 ?>
-      document.getElementById('Apaga_filters_bot').style.display = 'none';
-      document.getElementById('sel_recup_filters_bot').style.display = 'none';
 <?php
        }
        else
@@ -3076,6 +3085,12 @@ function nm_open_popup(parms)
    document.F1.loatiende_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_loatiende'), document.F1.loatiende_cond, 'loatiende');
    document.F1.loatiende.value = "";
+   document.F1.estado_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_estado'), document.F1.estado_cond, 'estado');
+   document.F1.estado.value = "";
+   document.F1.clasificacion_clientes_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_clasificacion_clientes'), document.F1.clasificacion_clientes_cond, 'clasificacion_clientes');
+   document.F1.clasificacion_clientes.value = "";
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -3083,10 +3098,46 @@ function nm_open_popup(parms)
     if (Field == 'all' || Field == 'loatiende') {
        Sc_carga_select2_loatiende();
     }
+    if (Field == 'all' || Field == 'clasificacion_clientes') {
+       Sc_carga_select2_clasificacion_clientes();
+    }
+    if (Field == 'all' || Field == 'estado') {
+       Sc_carga_select2_estado();
+    }
  }
  function Sc_carga_select2_loatiende()
  {
   $("#SC_loatiende").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_clasificacion_clientes()
+ {
+  $("#SC_clasificacion_clientes").select2(
+    {
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+ }
+ function Sc_carga_select2_estado()
+ {
+  $("#SC_estado").select2(
     {
       language: {
         noResults: function() {
@@ -3242,6 +3293,10 @@ function nm_open_popup(parms)
       $tp_fields['SC_nombres_input_2'] = 'text';
       $tp_fields['SC_loatiende_cond'] = 'cond';
       $tp_fields['SC_loatiende'] = 'select';
+      $tp_fields['SC_estado_cond'] = 'cond';
+      $tp_fields['SC_estado'] = 'select';
+      $tp_fields['SC_clasificacion_clientes_cond'] = 'cond';
+      $tp_fields['SC_clasificacion_clientes'] = 'select';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -3387,7 +3442,9 @@ function nm_open_popup(parms)
    {
       global $documento_cond, $documento, $documento_input_2, $documento_autocomp,
              $nombres_cond, $nombres, $nombres_input_2, $nombres_autocomp,
-             $loatiende_cond, $loatiende, $nmgp_tab_label;
+             $loatiende_cond, $loatiende,
+             $estado_cond, $estado,
+             $clasificacion_clientes_cond, $clasificacion_clientes, $nmgp_tab_label;
 
       $C_formatado = true;
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
@@ -3416,6 +3473,16 @@ function nm_open_popup(parms)
       {
           $loatiende_input_2 = $loatiende;
       }
+      $estado_cond_salva = $estado_cond; 
+      if (!isset($estado_input_2) || $estado_input_2 == "")
+      {
+          $estado_input_2 = $estado;
+      }
+      $clasificacion_clientes_cond_salva = $clasificacion_clientes_cond; 
+      if (!isset($clasificacion_clientes_input_2) || $clasificacion_clientes_input_2 == "")
+      {
+          $clasificacion_clientes_input_2 = $clasificacion_clientes;
+      }
       $tmp_pos = strpos($loatiende, "##@@");
       if ($tmp_pos === false) {
           $L_lookup = $loatiende;
@@ -3425,6 +3492,26 @@ function nm_open_popup(parms)
       }
       if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['psq_check_ret']['loatiende'])) {
           if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Lo Atiende : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      $tmp_pos = strpos($estado, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $estado;
+      }
+      else {
+          $L_lookup = substr($estado, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['psq_check_ret']['estado'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Estado : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
+      $tmp_pos = strpos($clasificacion_clientes, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $clasificacion_clientes;
+      }
+      else {
+          $L_lookup = substr($clasificacion_clientes, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['psq_check_ret']['clasificacion_clientes'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Clasificación Clientes : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['documento'] = $documento; 
@@ -3437,6 +3524,12 @@ function nm_open_popup(parms)
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['loatiende'] = $loatiende; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['loatiende_cond'] = $loatiende_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['estado'] = $estado; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['estado_cond'] = $estado_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['clasificacion_clientes'] = $clasificacion_clientes; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['clasificacion_clientes_cond'] = $clasificacion_clientes_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
@@ -3555,6 +3648,18 @@ function nm_open_popup(parms)
           $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
       }
       $this->cmp_formatado['loatiende'] = $Conteudo;
+      $Conteudo = $estado;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['estado'] = $Conteudo;
+      $Conteudo = $clasificacion_clientes;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['clasificacion_clientes'] = $Conteudo;
 
       //----- $documento
       $this->Date_part = false;
@@ -3575,6 +3680,20 @@ function nm_open_popup(parms)
       if (isset($loatiende))
       {
          $this->monta_condicao("loatiende", $loatiende_cond, $loatiende, "", "loatiende");
+      }
+
+      //----- $estado
+      $this->Date_part = false;
+      if (isset($estado))
+      {
+         $this->monta_condicao("estado", $estado_cond, $estado, "", "estado");
+      }
+
+      //----- $clasificacion_clientes
+      $this->Date_part = false;
+      if (isset($clasificacion_clientes))
+      {
+         $this->monta_condicao("clasificacion_clientes", $clasificacion_clientes_cond, $clasificacion_clientes, "", "clasificacion_clientes");
       }
    }
 
@@ -3625,6 +3744,8 @@ function nm_open_popup(parms)
       switch ($Obj)
       {
          case "loatiende" : return ('class="scFilterObjectOdd"'); break;
+         case "estado" : return ('class="scFilterObjectEven"'); break;
+         case "clasificacion_clientes" : return ('class="scFilterObjectOdd"'); break;
          default       : return ("");
       }
    }

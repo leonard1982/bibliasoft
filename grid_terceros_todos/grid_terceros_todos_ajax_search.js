@@ -79,6 +79,8 @@ var Table_sv_fil = new Array();
 Table_sv_fil[0] = "documento";
 Table_sv_fil[1] = "nombres";
 Table_sv_fil[2] = "loatiende";
+Table_sv_fil[3] = "estado";
+Table_sv_fil[4] = "clasificacion_clientes";
 function ajax_select_filter(parm)
 {
     nmAjaxProcOn();

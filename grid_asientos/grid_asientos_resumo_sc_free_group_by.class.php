@@ -639,13 +639,17 @@ class grid_asientos_resumo
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['tipo'] = "Tipo"; 
        }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['prefijo']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['prefijo'] = "Prefijo"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero'] = "Numero"; 
+       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['fecha']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['fecha'] = "Fecha"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero2']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero2'] = "Numero"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['nit']))
        {
@@ -667,17 +671,13 @@ class grid_asientos_resumo
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['observaciones'] = "Observaciones"; 
        }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero2']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero2'] = "Numero"; 
+       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['id_asiento']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['id_asiento'] = "Id Asiento"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['prefijo']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['prefijo'] = "Prefijo"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero'] = "Numero"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['iddoc']))
        {
@@ -3107,31 +3107,6 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['doc_word'])
            $nm_saida->saida(" <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/malsup-blockui/jquery.blockUI.js\"></script>\r\n");
            $nm_saida->saida(" <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/jquery_plugin/select2/css/select2.min.css\" type=\"text/css\" />\r\n");
            $nm_saida->saida(" <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/select2/js/select2.full.min.js\"></script>\r\n");
-           if ($_SESSION['scriptcase']['proc_mobile'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav']) {  
-               $sc_app_data = json_encode([ 
-                   'appType' => 'summary', 
-                   'improvements' => true, 
-                   'displayOptionsButton' => false, 
-                   'displayScrollUp' => true, 
-                   'scrollUpPosition' => 'R', 
-                   'toolbarOrientation' => 'H', 
-                   'mobilePanes' => 'true', 
-                   'navigationBarButtons' => unserialize('N;'), 
-                   'langs' => [ 
-                       'lang_refined_search' => html_entity_decode($this->Ini->Nm_lang['lang_refined_search'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                       'lang_summary_search_button' => html_entity_decode($this->Ini->Nm_lang['lang_summary_search_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                       'lang_details_button' => html_entity_decode($this->Ini->Nm_lang['lang_details_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                   ], 
-               ]); ?> 
-        <input type="hidden" id="sc-mobile-app-data" value='<?php echo $sc_app_data; ?>' />
-        <script type="text/javascript" src="../_lib/lib/js/nm_modal_panes.jquery.js"></script>
-        <script type="text/javascript" src="../_lib/lib/js/nm_mobile.js"></script>
-        <link rel='stylesheet' href='../_lib/lib/css/nm_mobile.css' type='text/css'/>
-                    <script>
-                        $(document).ready(function(){
-                            bootstrapMobile();
-                        });
-                    </script>           <?php }
            $nm_saida->saida(" <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/jquery/css/smoothness/jquery-ui.css\" type=\"text/css\" media=\"screen\" />\r\n");
            $nm_saida->saida(" <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/font-awesome/css/all.min.css\" type=\"text/css\" media=\"screen\" />\r\n");
            $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->Ini->str_schema_filter . "_calendar.css\" />\r\n");
@@ -5075,19 +5050,19 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['doc_word'])
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
-         $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo, prefijo, numero, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
      { 
-         $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      { 
-         $nmgp_select = "SELECT tipo, convert(char(23),fecha,121), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo, prefijo, numero, convert(char(23),fecha,121), nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
      } 
      else 
      { 
-         $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
      } 
      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq']; 
      $campos_order = "";
@@ -5153,17 +5128,17 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['doc_word'])
                 }
             } 
             $this->tipo = $rs_res->fields[0] ;  
-            $this->fecha = $rs_res->fields[1] ;  
-            $this->numero2 = $rs_res->fields[2] ;  
-            $this->nit = $rs_res->fields[3] ;  
-            $this->cuenta = $rs_res->fields[4] ;  
-            $this->tipocd = $rs_res->fields[5] ;  
-            $this->valor = $rs_res->fields[6] ;  
+            $this->prefijo = $rs_res->fields[1] ;  
+            $this->numero = $rs_res->fields[2] ;  
+            $this->fecha = $rs_res->fields[3] ;  
+            $this->nit = $rs_res->fields[4] ;  
+            $this->cuenta = $rs_res->fields[5] ;  
+            $this->tipocd = $rs_res->fields[6] ;  
+            $this->valor = $rs_res->fields[7] ;  
             $this->valor =  str_replace(",", ".", $this->valor);
-            $this->observaciones = $rs_res->fields[7] ;  
-            $this->id_asiento = $rs_res->fields[8] ;  
-            $this->prefijo = $rs_res->fields[9] ;  
-            $this->numero = $rs_res->fields[10] ;  
+            $this->observaciones = $rs_res->fields[8] ;  
+            $this->numero2 = $rs_res->fields[9] ;  
+            $this->id_asiento = $rs_res->fields[10] ;  
             $this->tipo_orig = $this->tipo;
             $this->prefijo_orig = $this->prefijo;
             $this->fecha_orig = $this->fecha;

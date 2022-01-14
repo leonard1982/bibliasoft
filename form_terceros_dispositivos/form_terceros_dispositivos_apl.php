@@ -6328,6 +6328,7 @@ function sc_file_size($file, $format = false)
      var dynamicsearch_status = 'out';
      function nm_show_dynamicsearch_fields()
      {
+       if (typeof(nm_show_dynamicsearch_fields_mobile) === typeof(function(){})) { return nm_show_dynamicsearch_fields_mobile(); };
        var btn_id = 'id_dyn_search_fields';
        var obj_id = 'id_dynamic_search_fields';
        dynamicsearch_status = 'open';

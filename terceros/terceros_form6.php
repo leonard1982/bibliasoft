@@ -2,7 +2,7 @@
 <?php $sc_hidden_no = 1; $sc_hidden_yes = 0; ?>
    <a name="bloco_0"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_20"><!-- bloco_c -->
+<div id="div_hidden_bloco_21"><!-- bloco_c -->
 <?php
    if (!isset($this->nmgp_cmp_hidden['idtercero']))
    {
@@ -13,7 +13,7 @@
        $this->nmgp_cmp_hidden['relleno2'] = 'off';
    }
 ?>
-<TABLE align="center" id="hidden_bloco_20" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
+<TABLE align="center" id="hidden_bloco_21" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['idtercero']))
            {
                $this->nmgp_cmp_readonly['idtercero'] = 'on';
@@ -201,7 +201,7 @@ $es_restaurante_look = "";
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['run_iframe'] != "R")
 {
 ?>
-    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar" style="padding: 0px; spacing: 0px">
+    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar sc-toolbar-bottom" style="padding: 0px; spacing: 0px">
     <table style="border-collapse: collapse; border-width: 0px; width: 100%">
     <tr> 
      <td nowrap align="left" valign="middle" width="33%" class="scFormToolbarPadding"> 
@@ -358,7 +358,7 @@ unset($NM_ult_sep);
 </tr> 
 </table> 
 
-<div id="id_debug_window" style="display: none; position: absolute; left: 50px; top: 50px"><table class="scFormMessageTable">
+<div id="id_debug_window" style="display: none;" class='scDebugWindow'><table class="scFormMessageTable">
 <tr><td class="scFormMessageTitle"><?php echo nmButtonOutput($this->arr_buttons, "berrm_clse", "scAjaxHideDebug()", "scAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
 &nbsp;&nbsp;Output</td></tr>
 <tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>
@@ -403,7 +403,7 @@ else {
 ?>
 <script> 
 <?php
-  $nm_sc_blocos_da_pag = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+  $nm_sc_blocos_da_pag = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21);
 
   foreach ($this->Ini->nm_hidden_blocos as $bloco => $hidden)
   {
@@ -419,7 +419,7 @@ else {
 ?>
 $(window).bind("load", function() {
 <?php
-  $nm_sc_blocos_da_pag = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+  $nm_sc_blocos_da_pag = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21);
 
   foreach ($this->Ini->nm_hidden_blocos as $bloco => $hidden)
   {
@@ -652,6 +652,24 @@ scAjax_displayEmptyForm();
 			 return;
 		}
 	}
+	function scBtnFn_btn_generar_nomina() {
+		if ($("#sc_btn_generar_nomina_top").length && $("#sc_btn_generar_nomina_top").is(":visible")) {
+		    if ($("#sc_btn_generar_nomina_top").hasClass("disabled")) {
+		        return;
+		    }
+			sc_btn_btn_generar_nomina()
+			 return;
+		}
+	}
+	function scBtnFn_btn_reenviar_correo_nomina() {
+		if ($("#sc_btn_reenviar_correo_nomina_top").length && $("#sc_btn_reenviar_correo_nomina_top").is(":visible")) {
+		    if ($("#sc_btn_reenviar_correo_nomina_top").hasClass("disabled")) {
+		        return;
+		    }
+			sc_btn_btn_reenviar_correo_nomina()
+			 return;
+		}
+	}
 	function scBtnFn_sys_format_hlp() {
 		if ($("#sc_b_hlp_t").length && $("#sc_b_hlp_t").is(":visible")) {
 		    if ($("#sc_b_hlp_t").hasClass("disabled")) {
@@ -770,6 +788,7 @@ function scMobileDisplayControl(sOption) {
 <?php
        }
 ?>
+<iframe id="sc-id-download-iframe" name="sc_name_download_iframe" style="display: none"></iframe>
 <?php
 $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['buttonStatus'] = $this->nmgp_botoes;
 ?>

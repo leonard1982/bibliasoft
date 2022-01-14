@@ -5241,25 +5241,41 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/fullcalendar-3.4.0/fullcalendar.min.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/fullcalendar-3.4.0/gcal.min.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></SCRIPT>
-<script type="text/javascript">
-  function calendarGoBack() {
-    document.F6.action = "<?php echo $appReturn; ?>";
-    document.F6.submit();
-  }
-</script>
-<style type="text/css">
+<?php
+    $javascriptParams = array(
+        'app_return' => $appReturn,
+        'date_col' => $sCalDateCol,
+        'first_day' => $iFirstDay,
+        'url_google_import' => $url_importGoogle,
+        'url_google_export' => $url_exportGoogle,
+    );
+    $this->calendarOutput_css();
+    $this->calendarOutput_javascript($javascriptParams);
+?>
+</head>
+<body class="scAppCalendarPage" style="">
+<?php
+    $this->calendarOutput_calendar();
+    $this->calendarOutput_form();
+?>
+</body>
+</html>
+<?php
+   } // calendarOutputDisplay
 
+    function calendarOutput_css()
+    {
+?>
+<style type="text/css">
 @media (max-width: 1200px) {
     .fc-toolbar .fc-center{
         display:none;
     }
 }
-
 @media (max-width: 1150px) {
     .fc-toolbar .fc-center{
         display:inline-block !important;
     }
-
     button.fc-today-button,
     button.fc-print-button,
     button.fc-importGoogle-button,
@@ -5273,46 +5289,36 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         background-position: center;
         text-indent: -9999px;
     }
-
     button.fc-today-button {
         background-image: url(../_lib/img/scriptcase__NM__ico__NM__sc_cal_today.png)!important;
     }
-
     button.fc-print-button {
         background-image: url(../_lib/img/scriptcase__NM__ico__NM__sc_cal_print.png)!important;
     }
-
     button.fc-importGoogle-button {
         background-image: url(../_lib/img/scriptcase__NM__ico__NM__sc_cal_down.png)!important;
     }
-
     button.fc-exportGoogle-button {
         background-image: url(../_lib/img/scriptcase__NM__ico__NM__sc_cal_up.png)!important;
     }
-
     button.fc-month-button {
         background-image: url(../_lib/img/scriptcase__NM__ico__NM__sc_cal_month.png)!important;
     }
-
     button.fc-agendaWeek-button {
         background-image: url(../_lib/img/scriptcase__NM__ico__NM__sc_cal_week.png)!important;
     }
-
     button.fc-agendaDay-button {
         background-image: url(../_lib/img/scriptcase__NM__ico__NM__sc_cal_day.png)!important;
     }
-
     button.fc-listMonth-button {
         background-image: url(../_lib/img/scriptcase__NM__ico__NM__sc_cal_list.png)!important;
     }
 }
-
 @media (max-width: 670px) {
     button.fc-print-button{
         display:none !important;
     }
 }
-
 @media (max-width: 853px) {
     .fc-toolbar .fc-center{
         display:none !important;
@@ -5323,312 +5329,9 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     }
 }
 .fc-day-grid-event .fc-content {
-        white-space: normal;
-        word-break: break-all;
+    white-space: normal;
+    word-break: break-all;
 }
-</style>
- <script type="text/javascript">
-  function sc_session_redir(url_redir)
-  {
-      if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')
-      {
-          window.parent.sc_session_redir(url_redir);
-      }
-      else
-      {
-          if (window.opener && typeof window.opener.sc_session_redir === 'function')
-          {
-              window.close();
-              window.opener.sc_session_redir(url_redir);
-          }
-          else
-          {
-              window.location = url_redir;
-          }
-      }
-  }
-  function calendar_reload() {
-    $('#calendar').fullCalendar('refetchEvents');
-  }
-  function calendar_print() {
-      $.ajax({
-          url: 'calendar_calendar_mob.php',
-          type: 'GET',
-          dataType: 'json',
-          data: {
-              nmgp_opcao: 'calendar_print',
-              category: getCategory(true),
-              start: $('#calendar').fullCalendar('getView').start.format(),
-              end: $('#calendar').fullCalendar('getView').end.format()
-          }
-      }).done(function(data) {
-          if ('html' == data.outputFormat) {
-              var newWindow = window.open('');
-              newWindow.document.write(data.printHtml);
-              newWindow.document.close();
-              newWindow.focus();
-          }
-          else {
-              var newWindow = window.open(data.fileHtml);
-          }
-          //newWindow.print();
-      });
-  }
-  $(document).ready(function() {
-    $('#calendar_mini').fullCalendar({
-        monthNames: ["<?php      echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>"],
-        monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"],
-        dayNames: ["<?php        echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>"],
-        dayNamesShort: ["<?php   echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"],
-        buttonText: {
-          today: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_per_today"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);       ?>",
-        },
-    firstDay: <?php echo $iFirstDay; ?>,
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right:'',
-        },
-        dayClick: function(date, jsEvent, view) {
-          $('#calendar').fullCalendar( 'gotoDate', date );
-        },
-        defaultView: 'month',
-    });
-    $('#calendar').fullCalendar({
-      height: ($( document ).height()-10),
-      monthNames: ["<?php      echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>"],
-      monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"],
-      dayNames: ["<?php        echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>"],
-      dayNamesShort: ["<?php   echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"],
-      allDayText: "<?php       echo html_entity_decode($this->Ini->Nm_lang["lang_per_allday"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);     ?>",
-      allDayHtml: "<?php       echo html_entity_decode($this->Ini->Nm_lang["lang_per_allday"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);     ?>",
-      noEventsMessage: "<?php       echo html_entity_decode($this->Ini->Nm_lang["lang_per_nevent"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);     ?>",
-      buttonText: {
-        today: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_per_today"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);       ?>",
-        month: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_per_month"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);       ?>",
-        week: "<?php   echo html_entity_decode($this->Ini->Nm_lang["lang_per_week"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);        ?>",
-        day: "<?php    echo html_entity_decode($this->Ini->Nm_lang["lang_per_day"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);         ?>",
-        agenda: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_agenda"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
-        print: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_print"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);  ?>",
-        listMonth: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_agenda"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);  ?>",
-      },
-      views: {
-        month: {titleFormat: 'MMMM YYYY', columnFormat: 'ddd', timeFormat: 'h:mma',slotLabelFormat: ['ddd','h:mma'],},
-        week: {titleFormat: 'MMM D YYYY', columnFormat: 'ddd <?php echo $sCalDateCol; ?>', timeFormat: 'h:mma',slotLabelFormat: ['ddd <?php echo $sCalDateCol; ?>','h:mma'],},
-        day: {titleFormat: 'dddd[,] MMM D[,] YYYY', columnFormat: 'dddd <?php echo $sCalDateCol; ?>', timeFormat: 'h:mma',slotLabelFormat: ['dddd <?php echo $sCalDateCol; ?>','h:mma'],},
-      },
-      firstDay: <?php echo $iFirstDay; ?>,
-      header: {
-        left: 'prev,next today print',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay,listMonth<?php if ('' != $appReturn) { echo ' goBack'; } ?>'
-      },
-      customButtons: {
-        goBack: {
-          text: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_btns_back"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
-          click: function() {
-            calendarGoBack();
-          }
-        },
-        print: {
-          text: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_print"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);  ?>",
-          click: function() {
-            calendar_print();
-          }
-        }
-      },
-      editable: <?php echo ($this->calendarConfigValues['update'] ? 'true' : 'false'); ?>,
-      slotDuration: "00:30:00",
-      snapDuration: "00:05:00",
-      nextDayThreshold: "00:00:00",
-      eventStartEditable: true,
-      allDaySlot: true,
-<?php
-       if (isset($this->Ini->Nm_lang["lang_calendar_no_events"]) && '' != $this->Ini->Nm_lang["lang_calendar_no_events"]) {
-?>
-      noEventsMessage: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_no_events"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
-<?php
-       }
-?>
-      events: 'calendar_calendar_mob.php?script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_opcao=calendar_fetch' + getCategory(false),
-      eventRender: function (event, element, view) {
-        if(event.hasOwnProperty('description') && event.description != '')
-        {
-            element.find('.fc-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 80%;">'+event.description+'</span></div>');
-        }
-      },
-      dayClick: function(date, jsEvent, view) {
-<?php
-       if ($this->calendarConfigValues['insert'])
-       {
-?>
-        var sDate = date.format(), sTime = '00:00:00', allDay = false;
-        if (sDate.indexOf('T') > 0)
-        {
-            dateParts = date.format().split('T');
-            sDate = dateParts[0], sTime = dateParts[1];
-        }
-        else if ('month' == view.type)
-        {
-            sTime = '06:00:00';
-        }
-        else
-        {
-            allDay = true;
-        }
-<?php
-
-if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
-{
-?>
-        scAddNewEvent(sDate, sTime, allDay);
-<?php
-}
-else
-{
-?>
-        tb_show('', 'calendar_calendar_mob.php?nmgp_opcao=edit_novo&sc_cal_click_date=' + sDate + '&sc_cal_click_time=' + sTime + '&sc_cal_click_allday=' + allDay + '&script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_outra_jan=true&nmgp_url_saida=modal&TB_iframe=true&modal=true&height=500&width=700', '');
-<?php
-}
-
-?>
-<?php
-       }
-?>
-      },
-      eventClick: function(calEvent, jsEvent, view) {
-<?php
-
-if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
-{
-?>
-        scEditEvent(calEvent.id);
-<?php
-}
-else
-{
-?>
-        tb_show('', 'calendar_calendar_mob.php?nmgp_opcao=igual_calendar&id=' + calEvent.id + '&__orig_id=' + calEvent.id + '&script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_outra_jan=true&nmgp_url_saida=modal&TB_iframe=true&modal=true&height=500&width=700', '');
-<?php
-}
-
-?>
-      },
-      eventDrop: function(event, delta, revertFunc) {
-        $.ajax({
-          url: 'calendar_calendar_mob.php',
-          type: 'POST',
-          dataType: 'json',
-          data: { 'script_case_init': '<?php echo $this->Ini->sc_page ?>', 'nmgp_opcao': 'calendar_drop', 'sc_event_id': event.id, 'sc_day_delta': delta._data.days, 'sc_time_delta': (delta._data.hours * 60) + delta._data.minutes, 'sc_all_day': event.allDay, 'sc_fullcal_start': (event._start && event._start._d ? event._start._d.toISOString() : ''), 'sc_fullcal_end': (event._end && event._end._d ? event._end._d.toISOString() : '') },
-          originalEvent: event,
-          success: function(data) {
-            var bChanged = false;
-            if (typeof data['status'] !== "undefined" && false == data['status']) {
-              revertFunc();
-            }
-            else {
-              if (typeof data['backgroundColor'] !== "undefined" && '' != data['backgroundColor']) {
-                if (this.originalEvent.backgroundColor != data['backgroundColor']) {
-                  bChanged = true;
-                }
-                this.originalEvent.backgroundColor = data['backgroundColor'];
-              }
-              if (typeof data['borderColor'] !== "undefined" && '' != data['borderColor']) {
-                if (this.originalEvent.borderColor != data['borderColor']) {
-                  bChanged = true;
-                }
-                this.originalEvent.borderColor = data['borderColor'];
-              }
-              if (this.originalEvent.allDay || this.originalEvent.originalAllDay || bChanged) {
-                $('#calendar').fullCalendar('refetchEvents');
-              }
-              else {
-                $('#calendar').fullCalendar('updateEvent', this.originalEvent);
-              }
-            }
-            if (typeof data['message'] !== "undefined" && '' != data['message']) {
-              alert(data['message']);
-            }
-          }
-        });
-      },
-      eventResize: function(event, delta, revertFunc) {
-        $.post(
-          'calendar_calendar_mob.php',
-          { 'script_case_init': '<?php echo $this->Ini->sc_page ?>', 'nmgp_opcao': 'calendar_resize', 'sc_event_id': event.id, 'sc_day_delta': delta._data.days, 'sc_time_delta': (delta._data.hours * 60) + delta._data.minutes, 'sc_fullcal_start': (event._start && event._start._d ? event._start._d.toISOString() : ''), 'sc_fullcal_end': (event._end && event._end._d ? event._end._d.toISOString() : '') },
-          function(data) {
-            if (false == data['status']) {
-              revertFunc();
-            }
-            if (typeof data['message'] !== "undefined" && '' != data['message']) {
-              alert(data['message']);
-            }
-          },
-          'json'
-        );
-      },
-      defaultView: 'agendaWeek',
-    });
-  });
-  function scAddNewEvent(sDate, sTime, allDay) {
-    $("#sc-ui-nmgp_opcao").val("edit_novo");
-    $("#sc-ui-click-date").val(sDate);
-    $("#sc-ui-click-time").val(sTime);
-    $("#sc-ui-click-allday").val(allDay);
-    $("#sc-ui-form").submit();
-  }
-  function scEditEvent(sEventId) {
-    $("#sc-ui-nmgp_opcao").val("igual");
-    $("#sc-ui-event-id").val(sEventId);
-    $("#sc-ui-form").submit();
-  }
-
-        function filterCategory(category) {
-                if ($("#id_calendar_category_" + category).hasClass('scCalendarCategoryItemActive')) {
-                        $("#id_calendar_category_" + category).removeClass('scCalendarCategoryItemActive');
-                }
-                else {
-                        $("#id_calendar_category_" + category).addClass('scCalendarCategoryItemActive');
-                }
-
-                refreshFilterCategories();
-        }
-
-        function refreshFilterCategories() {
-                $('#calendar').fullCalendar('removeEventSource', 'calendar_calendar_mob.php?script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_opcao=calendar_fetch' + getCategory(false));
-
-                setCategory();
-
-                $('#calendar').fullCalendar('addEventSource', 'calendar_calendar_mob.php?script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_opcao=calendar_fetch' + getCategory(false));
-        }
-
-        function setCategory() {
-                var selectedCategories = $(".scCalendarCategoryItemActive"), categoryList = new Array(), i;
-
-                for (i = 0; i < selectedCategories.length; i++) {
-                        categoryList.push($(selectedCategories[i]).attr("id").substr(21));
-                }
-
-                $("#category_filter").val(categoryList.join(")SCCL)"))
-        }
-
-        function getCategory(isPrint) {
-                var categoryFilter = $("#category_filter");
-
-                if (!categoryFilter.length) {
-                        return "";
-                }
-                else if (isPrint) {
-                        return categoryFilter.val();
-                }
-                else {
-                        return "&category=" + categoryFilter.val();
-                }
-        }
- </script>
-</head>
-<body class="scAppCalendarPage" style="">
-<style type="text/css">
 .sc-cal-page-container {
     display: flex;
     flex-direction: row;
@@ -5657,84 +5360,701 @@ a#id_bcalendargoogleexport {
     white-space: nowrap;
 }
 </style>
-<div class='scCalendarBorder sc-cal-page-container'>
-    <?php
-if ($_SESSION['sc_session'][$this->Ini->sc_page]['calendar_calendar_mob']['dashboard_info']['under_dashboard']) {
+<?php
+    } // calendarOutput_css
+
+    function calendarOutput_javascript($javascriptParams)
+    {
+?>
+<script type="text/javascript">
+<?php
+        $this->calendarOutput_javascriptGeneral($javascriptParams);
+        $this->calendarOutput_javascriptDesktop();
+        $this->calendarOutput_javascriptMobile();
+?>
+$(function() {
+<?php
+        $this->calendarOutput_javascriptOnReady($javascriptParams);
+?>
+});
+</script>
+<?php
+    } // calendarOutput_javascript
+
+    function calendarOutput_javascriptGeneral($javascriptParams)
+    {
+?>
+function sc_session_redir(url_redir)
+{
+    if (window.parent && window.parent.document != window.document && typeof window.parent.sc_session_redir === 'function')
+    {
+        window.parent.sc_session_redir(url_redir);
+    }
+    else
+    {
+        if (window.opener && typeof window.opener.sc_session_redir === 'function')
+        {
+            window.close();
+            window.opener.sc_session_redir(url_redir);
+        }
+        else
+        {
+            window.location = url_redir;
+        }
+    }
+}
+
+function calendarGoBack()
+{
+    document.F6.action = "<?php echo $javascriptParams['app_return']; ?>";
+    document.F6.submit();
+}
+function calendar_reload()
+{
+    $("#calendar").fullCalendar("refetchEvents");
+}
+function calendar_print()
+{
+    $.ajax({
+        url: "calendar_calendar_mob.php",
+        type: "GET",
+        dataType: "json",
+        data: {
+            nmgp_opcao: "calendar_print",
+            category: getCategory(true),
+            start: $("#calendar").fullCalendar("getView").start.format(),
+            end: $("#calendar").fullCalendar("getView").end.format()
+        }
+    }).done(function(data) {
+        if ("html" == data.outputFormat) {
+            var newWindow = window.open("");
+            newWindow.document.write(data.printHtml);
+            newWindow.document.close();
+            newWindow.focus();
+        } else {
+            var newWindow = window.open(data.fileHtml);
+        }
+        //newWindow.print();
+    });
+}
+function filterCategory(category)
+{
+    if ($("#id_calendar_category_" + category).hasClass('scCalendarCategoryItemActive')) {
+        $("#id_calendar_category_" + category).removeClass('scCalendarCategoryItemActive');
+    } else {
+        $("#id_calendar_category_" + category).addClass('scCalendarCategoryItemActive');
+    }
+    refreshFilterCategories();
+}
+function refreshFilterCategories()
+{
+    $('#calendar').fullCalendar('removeEventSource', 'calendar_calendar_mob.php?script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_opcao=calendar_fetch' + getCategory(false));
+    setCategory();
+    $('#calendar').fullCalendar('addEventSource', 'calendar_calendar_mob.php?script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_opcao=calendar_fetch' + getCategory(false));
+}
+function setCategory()
+{
+    var selectedCategories = $(".scCalendarCategoryItemActive"), categoryList = new Array(), i;
+    for (i = 0; i < selectedCategories.length; i++) {
+        categoryList.push($(selectedCategories[i]).attr("id").substr(21));
+    }
+    $("#category_filter").val(categoryList.join(")SCCL)"))
+}
+function getCategory(isPrint)
+{
+    var categoryFilter = $("#category_filter");
+    if (!categoryFilter.length) {
+        return "";
+    } else if (isPrint) {
+        return categoryFilter.val();
+    } else {
+        return "&category=" + categoryFilter.val();
+    }
+}
+function addNewEvent(sDate, sTime, allDay)
+{
+<?php
+        if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile']) {
+?>
+    addNewEvent_mobile(sDate, sTime, allDay);
+<?php
+        } else {
+?>
+    addNewEvent_desktop(sDate, sTime, allDay);
+<?php
+        }
+?>
+}
+function editEvent(sEventId)
+{
+<?php
+        if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile']) {
+?>
+    editEvent_mobile(sEventId);
+<?php
+        } else {
+?>
+    editEvent_desktop(sEventId);
+<?php
+        }
+?>
+}
+<?php
+    } // calendarOutput_javascriptGeneral
+
+    function calendarOutput_javascriptDesktop()
+    {
+?>
+function addNewEvent_desktop(sDate, sTime, allDay)
+{
+    tb_show('', 'calendar_calendar_mob.php?nmgp_opcao=edit_novo&sc_cal_click_date=' + sDate + '&sc_cal_click_time=' + sTime + '&sc_cal_click_allday=' + allDay + '&script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_outra_jan=true&nmgp_url_saida=modal&TB_iframe=true&modal=true&height=500&width=700', '');
+}
+function editEvent_desktop(sEventId)
+{
+    tb_show('', 'calendar_calendar_mob.php?nmgp_opcao=igual_calendar&id=' + sEventId + '&__orig_id=' + sEventId + '&script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_outra_jan=true&nmgp_url_saida=modal&TB_iframe=true&modal=true&height=500&width=700', '');
+}
+<?php
+    } // calendarOutput_javascriptDesktop
+
+    function calendarOutput_javascriptMobile()
+    {
+?>
+function addNewEvent_mobile(sDate, sTime, allDay)
+{
+    $("#sc-ui-nmgp_opcao").val("edit_novo");
+    $("#sc-ui-click-date").val(sDate);
+    $("#sc-ui-click-time").val(sTime);
+    $("#sc-ui-click-allday").val(allDay);
+    $("#sc-ui-form").submit();
+}
+function editEvent_mobile(sEventId)
+{
+    $("#sc-ui-nmgp_opcao").val("igual");
+    $("#sc-ui-event-id").val(sEventId);
+    $("#sc-ui-form").submit();
+}
+<?php
+    } // calendarOutput_javascriptMobile
+
+    function calendarOutput_javascriptOnReady($javascriptParams)
+    {
+        $this->calendarOutput_javascriptOnReady_miniCalendar($javascriptParams);
+        $this->calendarOutput_javascriptOnReady_mainCalendar($javascriptParams);
+    } // calendarOutput_javascriptOnReady
+
+    function calendarOutput_javascriptOnReady_miniCalendar($javascriptParams)
+    {
+?>
+    $('#calendar_mini').fullCalendar({
+        monthNames: [
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"
+        ],
+        monthNamesShort: [
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"
+        ],
+        dayNames: [
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"
+        ],
+        dayNamesShort: [
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"
+        ],
+        buttonText: {
+            today: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_today"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+        },
+        firstDay: <?php echo $javascriptParams['first_day']; ?>,
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: '',
+        },
+        dayClick: function(date, jsEvent, view) {
+            $('#calendar').fullCalendar('gotoDate', date);
+        },
+        defaultView: 'month',
+    });
+<?php
+    } // calendarOutput_javascriptOnReady_miniCalendar
+
+    function calendarOutput_javascriptOnReady_mainCalendar($javascriptParams)
+    {
+?>
+    $('#calendar').fullCalendar({
+        height: ($( document ).height() - 10),
+        monthNames: [
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"
+        ],
+        monthNamesShort: [
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"
+        ],
+        dayNames: [
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"
+        ],
+        dayNamesShort: [
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>"
+        ],
+        allDayText: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_allday"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+        allDayHtml: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_allday"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+        buttonText: {
+            today: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_today"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            month: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_month"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            week: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_week"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            day: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_day"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            agenda: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_agenda"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            print: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_print"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+            listMonth: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_agenda"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+        },
+        views: {
+            month: {
+                titleFormat: 'MMMM YYYY',
+                columnFormat: 'ddd',
+                timeFormat: 'h:mma',
+                slotLabelFormat: [
+                    'ddd', 
+                    'h:mma'
+                ],
+            },
+            week: {
+                titleFormat: 'MMM D YYYY',
+                columnFormat: 'ddd <?php echo $javascriptParams['date_col']; ?>',
+                timeFormat: 'h:mma',
+                slotLabelFormat: [
+                    'ddd <?php echo $javascriptParams['date_col']; ?>',
+                    'h:mma'
+                ],
+            },
+            day: {
+                titleFormat: 'dddd[,] MMM D[,] YYYY',
+                columnFormat: 'dddd <?php echo $javascriptParams['date_col']; ?>',
+                timeFormat: 'h:mma',
+                slotLabelFormat: [
+                    'dddd <?php echo $javascriptParams['date_col']; ?>',
+                    'h:mma'
+                ],
+            },
+        },
+        firstDay: <?php echo $javascriptParams['first_day']; ?>,
+        header: {
+            left: 'prev,next today print',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listMonth<?php if ('' != $javascriptParams['app_return']) { echo ' goBack'; } ?>'
+        },
+        customButtons: {
+            print: {
+                text: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_print"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+                click: function() {
+                    calendar_print();
+                }
+            },
+            goBack: {
+                text: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_btns_back"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+                click: function() {
+                    calendarGoBack();
+                }
+            }
+        },
+        editable: <?php echo ($this->calendarConfigValues['update'] ? 'true' : 'false'); ?>,
+        slotDuration: "00:30:00",
+        snapDuration: "00:05:00",
+        nextDayThreshold: "00:00:00",
+        eventStartEditable: true,
+        allDaySlot: true,
+<?php
+        if (isset($this->Ini->Nm_lang["lang_calendar_no_events"]) && '' != $this->Ini->Nm_lang["lang_calendar_no_events"]) {
+?>
+        noEventsMessage: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_no_events"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+<?php
+        } else {
+?>
+        noEventsMessage: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_nevent"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>",
+<?php
+        }
+?>
+        events: 'calendar_calendar_mob.php?script_case_init=<?php echo $this->Ini->sc_page ?>&nmgp_opcao=calendar_fetch' + getCategory(false),
+        eventRender: function (event, element, view) {
+            if (event.hasOwnProperty('description') && event.description != '') {
+                element.find('.fc-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 80%;">' + event.description + '</span></div>');
+            }
+        },
+        dayClick: function(date, jsEvent, view) {
+<?php
+        if ($this->calendarConfigValues['insert']) {
+?>
+            var sDate = date.format(), sTime = '00:00:00', allDay = false;
+            if (sDate.indexOf('T') > 0) {
+                dateParts = date.format().split('T');
+                sDate = dateParts[0], sTime = dateParts[1];
+            } else if ('month' == view.type) {
+                sTime = '06:00:00';
+            } else {
+                allDay = true;
+            }
+            addNewEvent(sDate, sTime, allDay);
+<?php
+        }
+?>
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+            editEvent(calEvent.id);
+        },
+        eventDrop: function(event, delta, revertFunc) {
+            $.ajax({
+                url: 'calendar_calendar_mob.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    'script_case_init': '<?php echo $this->Ini->sc_page ?>',
+                    'nmgp_opcao': 'calendar_drop',
+                    'sc_event_id': event.id,
+                    'sc_day_delta': delta._data.days,
+                    'sc_time_delta': (delta._data.hours * 60) + delta._data.minutes,
+                    'sc_all_day': event.allDay,
+                    'sc_fullcal_start': (event._start && event._start._d ? event._start._d.toISOString() : ''),
+                    'sc_fullcal_end': (event._end && event._end._d ? event._end._d.toISOString() : '')
+                },
+                originalEvent: event,
+                success: function(data) {
+                    var bChanged = false;
+                    if (typeof data['status'] !== "undefined" && false == data['status']) {
+                        revertFunc();
+                    } else {
+                        if (typeof data['backgroundColor'] !== "undefined" && '' != data['backgroundColor']) {
+                            if (this.originalEvent.backgroundColor != data['backgroundColor']) {
+                                bChanged = true;
+                            }
+                            this.originalEvent.backgroundColor = data['backgroundColor'];
+                        }
+                        if (typeof data['borderColor'] !== "undefined" && '' != data['borderColor']) {
+                            if (this.originalEvent.borderColor != data['borderColor']) {
+                                bChanged = true;
+                            }
+                            this.originalEvent.borderColor = data['borderColor'];
+                        }
+                        if (this.originalEvent.allDay || this.originalEvent.originalAllDay || bChanged) {
+                            $('#calendar').fullCalendar('refetchEvents');
+                        } else {
+                            $('#calendar').fullCalendar('updateEvent', this.originalEvent);
+                        }
+                    }
+                    if (typeof data['message'] !== "undefined" && '' != data['message']) {
+                        alert(data['message']);
+                    }
+                }
+            });
+        },
+        eventResize: function(event, delta, revertFunc) {
+            $.post(
+                'calendar_calendar_mob.php',
+                {
+                    'script_case_init': '<?php echo $this->Ini->sc_page ?>',
+                    'nmgp_opcao': 'calendar_resize',
+                    'sc_event_id': event.id,
+                    'sc_day_delta': delta._data.days,
+                    'sc_time_delta': (delta._data.hours * 60) + delta._data.minutes,
+                    'sc_fullcal_start': (event._start && event._start._d ? event._start._d.toISOString() : ''),
+                    'sc_fullcal_end': (event._end && event._end._d ? event._end._d.toISOString() : '')
+                },
+                function(data) {
+                    if (false == data['status']) {
+                        revertFunc();
+                    }
+                    if (typeof data['message'] !== "undefined" && '' != data['message']) {
+                        alert(data['message']);
+                    }
+                },
+                'json'
+            );
+        },
+        defaultView: 'agendaWeek',
+    });
+<?php
+    } // calendarOutput_javascriptOnReady_mainCalendar
+
+    function calendarOutput_javascriptOnReady_mobile()
+    {
+?>
+    bootstrapMobile();
+    $("#sc-mobile-menu-month").on("click", function() {
+        mobileMenuMonthClick();
+    });
+    $("#sc-mobile-menu-week").on("click", function() {
+        mobileMenuWeekClick();
+    });
+    $("#sc-mobile-menu-day").on("click", function() {
+        mobileMenuDayClick();
+    });
+    $("#sc-mobile-menu-agenda").on("click", function() {
+        mobileMenuAgendaClick();
+    });
+    $("#sc-mobile-menu-categories").on("click", function() {
+        mobileMenuCategoriesClick();
+    });
+    $("#sc-mobile-menu-print").on("click", function() {
+        mobileMenuPrintClick();
+    });
+    $("#sc-mobile-menu-import").on("click", function() {
+        mobileMenuImportClick();
+    });
+    $("#sc-mobile-menu-export").on("click", function() {
+        mobileMenuExportClick();
+    });
+<?php
+    } // calendarOutput_javascriptOnReady_mobile
+
+    function calendarOutput_calendar()
+    {
+        if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile']) {
+            $this->calendarOutput_calendarMobile();
+        } else {
+            $this->calendarOutput_calendarDesktop();
+        }
+    } // calendarOutput_calendar
+
+    function calendarOutput_calendarDesktop()
+    {
+?>
+<div class="scCalendarBorder sc-cal-page-container">
+<?php
+        $this->calendarOutput_sideBar();
+        $this->calendarOutput_mainCalendar();
+?>
+</div>
+<?php
+    } // calendarOutput_calendarDesktop
+
+    function calendarOutput_calendarMobile()
+    {
+?>
+<div class="scCalendarBorder sc-cal-page-container">
+<?php
+        $this->calendarOutput_sideBar();
+        $this->calendarOutput_mainCalendar();
+?>
+</div>
+<?php
+    } // calendarOutput_calendarMobile
+
+    function calendarOutput_mainCalendar()
+    {
+?>
+<div class="sc-cal-calendar-container">
+    <div id="calendar" style="min-width: 260px; display:inline-block; margin-left:4px; vertical-align: top;"></div>
+</div>
+<?php
+    } // calendarOutput_mainCalendar
+
+    function calendarOutput_sideBar()
+    {
+        if ($_SESSION['sc_session'][$this->Ini->sc_page]['calendar_calendar_mob']['dashboard_info']['under_dashboard']) {
 ?>
 <style type="text/css">
 BODY { margin: 0 !important }
 </style>
 <?php
-}
+        }
 ?>
 <div class="sc-cal-side-container">
-<div id="calendar_mini"></div>
-     <script type="text/javascript">$(function() { refreshFilterCategories(); });</script>
-     <div class='scCalendarCategory'>
-      <div class='scCalendarCategoryTitle'><?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_categories"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?></div>
-       <input type='hidden' value='' id='category_filter' name='category_filter' />
-       <div class='scCalendarCategoryItemsMoldura sc-cal-categories-container'>
-        <div class='scCalendarCategoryItem scCalendarCategoryItemActive' onclick="filterCategory('A0')" id='id_calendar_category_A0'>
-         <div style='width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #a4bdfc; background-color: #a4bdfc;'></div>
-         <?php echo $this->Ini->Nm_lang['lang_category_personal']; ?>
-        </div>
-        <div class='scCalendarCategoryItem scCalendarCategoryItemActive' onclick="filterCategory('A1')" id='id_calendar_category_A1'>
-         <div style='width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #e1e1e1; background-color: #e1e1e1;'></div>
-         <?php echo $this->Ini->Nm_lang['lang_category_work']; ?>
-        </div>
-        <div class='scCalendarCategoryItem scCalendarCategoryItemActive' onclick="filterCategory('A2')" id='id_calendar_category_A2'>
-         <div style='width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #7ae7bf; background-color: #7ae7bf;'></div>
-         <?php echo $this->Ini->Nm_lang['lang_category_family']; ?>
-        </div>
-        <div class='scCalendarCategoryItem scCalendarCategoryItemActive' onclick="filterCategory('A3')" id='id_calendar_category_A3'>
-         <div style='width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #9a9cff; background-color: #9a9cff;'></div>
-         <?php echo $this->Ini->Nm_lang['lang_category_friends']; ?>
-        </div>
-        <div class='scCalendarCategoryItem scCalendarCategoryItemActive' onclick="filterCategory('A4')" id='id_calendar_category_A4'>
-         <div style='width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #FF887C; background-color: #FF887C;'></div>
-         <?php echo $this->Ini->Nm_lang['lang_category_others']; ?>
-        </div>
-        <div class='scCalendarCategoryItem scCalendarCategoryItemActive' onclick="filterCategory('SCNULLCAT')" id='id_calendar_category_SCNULLCAT'>
-         <div style='width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: dotted; border-width: 1px; border-color: #000; background-color: #fff;'></div>
-         <?php echo $this->Ini->Nm_lang['lang_calendar_no_category']; ?>
-        </div>
-       </div>
-      </div>
-     </div>
+<?php
+        $this->calendarOutput_googleCalendarButtons();
+        $this->calendarOutput_miniCalendar();
+        $this->calendarOutput_categoriesFilter();
+?>
+</div>
+<?php
+    } // calendarOutput_sideBar
 
-    <div class="sc-cal-calendar-container">
-    <div id="calendar" style="min-width: 260px; display:inline-block; margin-left:4px; vertical-align: top;"></div>
+    function calendarOutput_googleCalendarButtons()
+    {
+    } // calendarOutput_googleCalendarButtons
+
+    function calendarOutput_miniCalendar()
+    {
+?>
+    <div id="calendar_mini"></div>
+<?php
+    } // calendarOutput_miniCalendar
+
+    function calendarOutput_categoriesFilter()
+    {
+?>
+    <script type="text/javascript">$(function() { refreshFilterCategories(); });</script>
+    <div class="scCalendarCategory">
+        <div class="scCalendarCategoryTitle"><?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_categories"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?></div>
+        <input type="hidden" value="" id="category_filter" name="category_filter" />
+        <div class="scCalendarCategoryItemsMoldura sc-cal-categories-container">
+            <div class="scCalendarCategoryItem scCalendarCategoryItemActive" onclick="filterCategory('A0')" id="id_calendar_category_A0">
+                <div style="width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #a4bdfc; background-color: #a4bdfc;"></div>
+                <?php echo $this->Ini->Nm_lang['lang_category_personal']; ?>
+            </div>
+            <div class="scCalendarCategoryItem scCalendarCategoryItemActive" onclick="filterCategory('A1')" id="id_calendar_category_A1">
+                <div style="width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #e1e1e1; background-color: #e1e1e1;"></div>
+                <?php echo $this->Ini->Nm_lang['lang_category_work']; ?>
+            </div>
+            <div class="scCalendarCategoryItem scCalendarCategoryItemActive" onclick="filterCategory('A2')" id="id_calendar_category_A2">
+                <div style="width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #7ae7bf; background-color: #7ae7bf;"></div>
+                <?php echo $this->Ini->Nm_lang['lang_category_family']; ?>
+            </div>
+            <div class="scCalendarCategoryItem scCalendarCategoryItemActive" onclick="filterCategory('A3')" id="id_calendar_category_A3">
+                <div style="width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #9a9cff; background-color: #9a9cff;"></div>
+                <?php echo $this->Ini->Nm_lang['lang_category_friends']; ?>
+            </div>
+            <div class="scCalendarCategoryItem scCalendarCategoryItemActive" onclick="filterCategory('A4')" id="id_calendar_category_A4">
+                <div style="width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: solid; border-width: 1px; border-color: #FF887C; background-color: #FF887C;"></div>
+                <?php echo $this->Ini->Nm_lang['lang_category_others']; ?>
+            </div>
+            <div class="scCalendarCategoryItem scCalendarCategoryItemActive" onclick="filterCategory('SCNULLCAT')" id="id_calendar_category_SCNULLCAT">
+                <div style="width:16px; height:16px; display: inline-block; margin: 0px 2px; border-style: dotted; border-width: 1px; border-color: #000; background-color: #fff;"></div>
+                <?php echo $this->Ini->Nm_lang['lang_calendar_no_category']; ?>
+            </div>
+        </div>
+    </div>
+<?php
+    } // calendarOutput_categoriesFilter
+
+    function calendarOutput_mobileMenu()
+    {
+?>
+<div class="calendar-mobile-menu-overlay"></div>
+<div class="calendar-mobile-menu">
+    <div class="calendar-mobile-menu-toolbar"></div>
+    <div class="calendar-mobile-menu-items">
+        <div><span id="sc-mobile-menu-month" style="align-items: center">
+            <span class="far fa-calendar-alt"></span>
+            &nbsp;
+            <?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_month"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>
+        </span></div>
+        <div><span id="sc-mobile-menu-week" style="align-items: center">
+            <span class="fas fa-columns"></span>
+            &nbsp;
+            <?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_week"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>
+        </span></div>
+        <div><span id="sc-mobile-menu-day" style="align-items: center">
+            <span class="far fa-calendar-times""></span>
+            &nbsp;
+            <?php echo html_entity_decode($this->Ini->Nm_lang["lang_per_day"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>
+        </span></div>
+        <div><span id="sc-mobile-menu-agenda" style="align-items: center">
+            <span class="fas fa-list"></span>
+            &nbsp;
+            <?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_agenda"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>
+        </span></div>
+        <hr />
+        <div><span id="sc-mobile-menu-categories" style="align-items: center">
+            <span class="fas fa-filter"></span>
+            &nbsp;
+            <?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_categories"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>
+        </span></div>
+        <hr />
+        <div><span id="sc-mobile-menu-print" style="align-items: center">
+            <span class="fas fa-print"></span>
+            &nbsp;
+            <?php echo html_entity_decode($this->Ini->Nm_lang["lang_calendar_print"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]); ?>
+        </span></div>
     </div>
 </div>
 <?php
+    } // calendarOutput_mobileMenu
 
-if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
-{
-?>
-<form name="F1" id="sc-ui-form" method="post"
-      action="calendar_calendar.php"
-      target="_self">
- <input type="hidden" name="nm_form_submit" value="1" />
- <input type="hidden" name="nmgp_url_saida" value="" />
- <input type="hidden" name="nmgp_opcao" id="sc-ui-nmgp_opcao" value="" />
- <input type="hidden" name="nmgp_parms" value="" />
- <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>" />
- <input type="hidden" name="sc_cal_click_date" id="sc-ui-click-date" value="" />
- <input type="hidden" name="sc_cal_click_time" id="sc-ui-click-time" value="" />
- <input type="hidden" name="sc_cal_click_allday" id="sc-ui-click-allday" value="" />
- <input type="hidden" name="id" id="sc-ui-event-id" value="" />
-</form>
-<?php
-}
+    function calendarOutput_form()
+    {
+        $this->calendarOutput_formGeneral();
+        $this->calendarOutput_formMobile();
+    } // calendarOutput_form
 
+    function calendarOutput_formGeneral()
+    {
 ?>
 <form name="F6" method="post" action="./" target="_self">
-  <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>" />
+    <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>" />
 </form>
-</body>
-</html>
 <?php
-   } // calendarOutputDisplay
+    } // calendarOutput_formGeneral
+
+    function calendarOutput_formMobile()
+    {
+        if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile']) {
+?>
+<form name="F1" id="sc-ui-form" method="post" action="calendar_calendar.php" target="_self">
+    <input type="hidden" name="nm_form_submit" value="1" />
+    <input type="hidden" name="nmgp_url_saida" value="" />
+    <input type="hidden" name="nmgp_opcao" id="sc-ui-nmgp_opcao" value="" />
+    <input type="hidden" name="nmgp_parms" value="" />
+    <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>" />
+    <input type="hidden" name="sc_cal_click_date" id="sc-ui-click-date" value="" />
+    <input type="hidden" name="sc_cal_click_time" id="sc-ui-click-time" value="" />
+    <input type="hidden" name="sc_cal_click_allday" id="sc-ui-click-allday" value="" />
+    <input type="hidden" name="id" id="sc-ui-event-id" value="" />
+</form>
+<?php
+        }
+    } // calendarOutput_formMobile
 
    function calendarOutputJson($returnArray, $integerIndexes = false)
    {
@@ -8141,25 +8461,25 @@ if (parent && parent.scAjaxDetailValue)
     function getButtonIds($buttonName) {
         switch ($buttonName) {
             case "new":
-                return array("sc_b_new_b.sc-unique-btn-1", "sc_b_new_b.sc-unique-btn-9");
+                return array("sc_b_new_b.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-9");
                 break;
             case "insert":
-                return array("sc_b_ins_b.sc-unique-btn-2", "sc_b_ins_b.sc-unique-btn-10");
+                return array("sc_b_ins_b.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-10");
                 break;
             case "update":
-                return array("sc_b_upd_b.sc-unique-btn-3", "sc_b_upd_b.sc-unique-btn-11");
+                return array("sc_b_upd_b.sc-unique-btn-3", "sc_b_upd_t.sc-unique-btn-11");
                 break;
             case "delete":
-                return array("sc_b_del_b.sc-unique-btn-4", "sc_b_del_b.sc-unique-btn-12");
+                return array("sc_b_del_b.sc-unique-btn-4", "sc_b_del_t.sc-unique-btn-12");
                 break;
             case "0":
                 return array("sys_separator.sc-unique-btn-5", "sys_separator.sc-unique-btn-13");
                 break;
             case "help":
-                return array("sc_b_hlp_b");
+                return array("sc_b_hlp_t");
                 break;
             case "exit":
-                return array("sc_b_sai_b.sc-unique-btn-6", "sc_b_sai_b.sc-unique-btn-8", "sc_b_sai_b.sc-unique-btn-14", "sc_b_sai_b.sc-unique-btn-16", "sc_b_sai_b.sc-unique-btn-7", "sc_b_sai_b.sc-unique-btn-15");
+                return array("sc_b_sai_b.sc-unique-btn-6", "sc_b_sai_b.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-14", "sc_b_sai_t.sc-unique-btn-16", "sc_b_sai_b.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-15");
                 break;
         }
 

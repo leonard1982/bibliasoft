@@ -227,8 +227,8 @@ class grid_asientos_ini
       $this->nm_dt_criacao   = "20201227"; 
       $this->nm_hr_criacao   = "174025"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211217"; 
-      $this->nm_hr_ult_alt   = "144702"; 
+      $this->nm_dt_ult_alt   = "20220112"; 
+      $this->nm_hr_ult_alt   = "105951"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -977,7 +977,7 @@ class grid_asientos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_asientos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_asientos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuFaDSBYV5FGDMBYVcrsDWJeHIBiD9XGZ1rqHArKZMXGHgNKHEJqH5F/DoJeDcJeH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FUDMvCVkJqDuFaHIBqHQXsDQFaZ1BYVWXGHuNOZSrCV5FYHIFGD9XGZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwDcBqZ1FaD1rwV5JeDMzGHEXeV5XCZuFaD9XsZSFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWXCVoFGDcBqVIJsHIBeV5FUDEBeHEJGDWX7DoFUDcBwZSFGHIvsVWBOHuNOVcFeV5F/VENUD9JmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoF7HQNmZkBiHAvCD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuvmDkB/DWFaVEFGD9XGZkFGDSBOZMB/HgBOVkJGDWFqHIrqD9FYDQFUD1BeHuBqHgrKDkBsDur/HMFaD9JmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQFGHAN7HuBqDMNOV9FeH5B7VEFGHQNwZ1X7HArYHQF7HgNOZSXeH5FYHINUHQNmH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5B/HgBeHArsH5F/HIB/HQBiZSX7HINaVWJsHgrKVcBUH5XCVoraD9BiZ1F7D1zGD5BqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeD5NUDErKZSXeHEFqVoB/D9XsH9FGD1veV5JwHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiDcNmZ1FGDSBeV5B/HgvCHEJqHEFqHIBiDcBiDuBqHIrKHuF7DMvmVcB/H5FqHMJwHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNmZkBiHAzGZMB/HgBeHEFiV5B3DoF7D9XsDuFaHAveD5BODMvsVcBUDuX7HMBOD9XOZSBqHIveHQBODMvCHEBUDuFaVoJeHQBiZ9F7HIrKHurqDMBOVcFKDuFqHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4382,24 +4382,22 @@ class grid_asientos_apl
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order']))
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "tipo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "prefijo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "numero";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "fecha";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "numero2";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "nit";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "cuenta";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "tipocd";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "valor";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "observaciones";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "numero2";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "id_asiento";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "prefijo";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'][] = "numero";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'];
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel']))
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel'] = array();
           } 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel']['id_asiento'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel']['prefijo'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel']['numero'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['usr_cmp_sel'];
       } 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['exit'] != '')

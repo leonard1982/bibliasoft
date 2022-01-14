@@ -195,7 +195,6 @@ class grid_caja_flujos_grid
        if ($nmgrp_apl_opcao != "pdf")
        { 
            $this->nmgp_barra_top();
-           $this->nmgp_embbed_placeholder_top();
        } 
        unset ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['save_grid']);
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['pdf_res'] && (!isset($_GET['flash_graf']) || 'chart' != $_GET['flash_graf']))
@@ -204,7 +203,6 @@ class grid_caja_flujos_grid
        }
        if ($nmgrp_apl_opcao != "pdf")
        { 
-           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot();
        } 
        $nm_saida->saida("   </table>\r\n");
@@ -1437,10 +1435,10 @@ class grid_caja_flujos_grid
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
+                    <meta name="msapplication-TileColor" content="#61678C">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
+                    <meta name="theme-color" content="#61678C">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#61678C">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1533,10 +1531,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#009061\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#61678C\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#009061\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#009061\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#61678C\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#61678C\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['doc_word'])
@@ -2453,7 +2451,7 @@ $nm_saida->saida("}\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->Print_All)
        { 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $nm_saida->saida("<div id=\"id_debug_window\" style=\"display: none; position: absolute; left: 50px; top: 50px\"><table class=\"scFormMessageTable\">\r\n");
+           $nm_saida->saida("<div id=\"id_debug_window\" style=\"display: none;\" class='scDebugWindow'><table class=\"scFormMessageTable\">\r\n");
            $nm_saida->saida("<tr><td class=\"scFormMessageTitle\">" . $Cod_Btn . "&nbsp;&nbsp;Output</td></tr>\r\n");
            $nm_saida->saida("<tr><td class=\"scFormMessageMessage\" style=\"padding: 0px; vertical-align: top\"><div style=\"padding: 2px; height: 200px; width: 350px; overflow: auto\" id=\"id_debug_text\"></div></td></tr>\r\n");
            $nm_saida->saida("</table></div>\r\n");
@@ -5020,7 +5018,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['ind_tree']++;
@@ -5186,7 +5184,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['ind_tree']++;
@@ -5352,7 +5350,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['ind_tree']++;
@@ -5518,7 +5516,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['ind_tree']++;
@@ -5684,7 +5682,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['ind_tree']++;
@@ -5850,7 +5848,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['ind_tree']++;
@@ -6022,7 +6020,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        if ($this->Ult_qb_free == $this->Tab_Nv_tree['fecha'])
@@ -6210,7 +6208,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        if ($this->Ult_qb_free == $this->Tab_Nv_tree['tipo'])
@@ -6398,7 +6396,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        if ($this->Ult_qb_free == $this->Tab_Nv_tree['documento'])
@@ -6586,7 +6584,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        if ($this->Ult_qb_free == $this->Tab_Nv_tree['valor'])
@@ -6774,7 +6772,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        if ($this->Ult_qb_free == $this->Tab_Nv_tree['banco'])
@@ -6960,7 +6958,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        if ($this->Ult_qb_free == $this->Tab_Nv_tree['tercero'])
@@ -7146,7 +7144,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        if ($this->Ult_qb_free == $this->Tab_Nv_tree['usuario'])
@@ -7332,7 +7330,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    $nm_saida->saida("       " . $link_div_2 . "\r\n");
    $nm_saida->saida("     </TD>\r\n");
    $nm_saida->saida("    </TR>\r\n");
-   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
+   if ('' != $this->Ini->Tree_img_col && '' != $this->Ini->Tree_img_exp && !$this->Ini->Proc_print && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['opcao'] != "pdf" && !$this->NM_emb_tree_no)
    {
        $nm_saida->saida("    </TBODY>");
        if ($this->Ult_qb_free == $this->Tab_Nv_tree['ie'])
@@ -9370,23 +9368,27 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_caja_flujos']['proc_pdf']
    }
    function nmgp_barra_top()
    {
-       if(isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
        {
            $this->nmgp_barra_top_mobile();
+           $this->nmgp_embbed_placeholder_top();
        }
-       else
+       if (!isset($_SESSION['scriptcase']['proc_mobile']) || !$_SESSION['scriptcase']['proc_mobile'])
        {
            $this->nmgp_barra_top_normal();
+           $this->nmgp_embbed_placeholder_top();
        }
    }
    function nmgp_barra_bot()
    {
-       if(isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot_mobile();
        }
-       else
+       if (!isset($_SESSION['scriptcase']['proc_mobile']) || !$_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot_normal();
        }
    }

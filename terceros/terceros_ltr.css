@@ -199,6 +199,45 @@
 .css_celular_notificafe_label { }
 .css_celular_notificafe_line { }
 .css_celular_notificafe_obj { }
+.css_archivo_cedula_label { }
+.css_archivo_cedula_line { }
+.css_archivo_cedula_obj { }
+.css_archivo_rut_label { }
+.css_archivo_rut_line { }
+.css_archivo_rut_obj { }
+.css_archivo_nit_label { }
+.css_archivo_nit_line { }
+.css_archivo_nit_obj { }
+.css_archivo_pago_label { }
+.css_archivo_pago_line { }
+.css_archivo_pago_obj { }
+.css_id_plan_label { }
+.css_id_plan_line {text-align:left;}
+.css_id_plan_obj {text-align:left;}
+.css_valor_plan_label { }
+.css_valor_plan_line {text-align:left;}
+.css_valor_plan_obj {text-align:left;}
+.css_fecha_registro_fe_label { }
+.css_fecha_registro_fe_line { }
+.css_fecha_registro_fe_obj { }
+.css_nombre_contador_label { }
+.css_nombre_contador_line { }
+.css_nombre_contador_obj { }
+.css_estado_label { }
+.css_estado_line { }
+.css_estado_obj { }
+.css_si_nomina_label { }
+.css_si_nomina_line { }
+.css_si_nomina_obj { }
+.css_si_factura_electronica_label { }
+.css_si_factura_electronica_line { }
+.css_si_factura_electronica_obj { }
+.css_nombre_empresa_bd_label { }
+.css_nombre_empresa_bd_line { }
+.css_nombre_empresa_bd_obj { }
+.css_n_trabajadores_label { }
+.css_n_trabajadores_line {text-align:left;}
+.css_n_trabajadores_obj {text-align:left;}
 .css_archivos_label { }
 .css_archivos_line { }
 .css_archivos_obj { }

@@ -9154,7 +9154,7 @@ if (parent && parent.scAjaxDetailValue)
                 return array("sc_sc_btn_0_top");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-2", "sc_b_sai_t.sc-unique-btn-4");
+                return array("sc_b_sai_t.sc-unique-btn-2", "sc_b_sai_b.sc-unique-btn-4");
                 break;
         }
 

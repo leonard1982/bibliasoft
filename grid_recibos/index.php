@@ -228,8 +228,8 @@ class grid_recibos_ini
       $this->nm_dt_criacao   = "20210315"; 
       $this->nm_hr_criacao   = "175202"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210817"; 
-      $this->nm_hr_ult_alt   = "115231"; 
+      $this->nm_dt_ult_alt   = "20211223"; 
+      $this->nm_hr_ult_alt   = "110934"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -962,7 +962,7 @@ class grid_recibos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_recibos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_recibos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDuFaHAN7HuBqDMNOZSJqDWJeHIBiHQNwZkFGDSBeZMJeHgBOHEXeH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErsDWF/DoJsHQFYDQFaZ1BYHQXGDMrYVIFCH5XKVoF7HQNwH9B/HIBeHQNUHgvsZSJ3DWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUD9NwH9X7HABYV5FGHuvmVcBODWJeVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcXKHEF/VoFGHQXGZ1rqHArYHuJwHgBYHEXeDuFaZuJeD9NmZSX7Z1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHANKV5BODMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErsDWX7DoFUHQXODQFUHIrKD5FaDMvsVcB/DWXCDoFUHQJmZ1B/DSBeV5JeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeH9FGD1vOVWJsDMBYVIFCDWFaHMXGHQNwVINUHIBeHQF7DMBYHEJqDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9JmZ1BODSNOZMXGDENOHEJqHEXCHMJwD9JKDQFGD1BeVWBqDMvmVIBOV5F/VorqHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwD9XOZSB/HArYD5rqDEBeHEXeDWr/DoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgvsVcFCDWF/HINUHQJmZSFaD1rwV5BOHgNOHErCDuJeHIraDcXGH9FUHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKV5XGDMvOV9BUH5XCHMBiD9BsVIraD1rwV5X7HgBeHErsDWX7HMBiHQJKZ9F7HIrKHQrqDMrYVIBOH5XCHMBqHQNwVINUHArKD5BiHgrKHArCV5FaVoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -3777,7 +3777,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           {
               $this->SC_monta_condicao($comando, "fecha", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "num") 
+          if ($field == "num") 
           {
               $this->SC_monta_condicao($comando, "concat(prefijo,'/',numero)", $arg_search, $data_search);
           }
@@ -3817,27 +3817,27 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
                   $this->SC_monta_condicao($comando, "concepto", $arg_search, $data_lookup);
               }
           }
-          if ($field == "SC_all_Cmp" || $field == "id_recibo") 
+          if ($field == "SC_all_Cmp") 
           {
               $this->SC_monta_condicao($comando, "id_recibo", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "base") 
+          if ($field == "SC_all_Cmp") 
           {
               $this->SC_monta_condicao($comando, "base", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "iva") 
+          if ($field == "SC_all_Cmp") 
           {
               $this->SC_monta_condicao($comando, "iva", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "id_usuario") 
+          if ($field == "SC_all_Cmp") 
           {
               $this->SC_monta_condicao($comando, "id_usuario", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "creado") 
+          if ($field == "SC_all_Cmp") 
           {
               $this->SC_monta_condicao($comando, "creado", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "actualizado") 
+          if ($field == "SC_all_Cmp") 
           {
               $this->SC_monta_condicao($comando, "actualizado", $arg_search, $data_search);
           }

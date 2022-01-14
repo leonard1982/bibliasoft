@@ -165,6 +165,44 @@ class terceros_mob_apl
    var $porcentaje_propina_sugerida;
    var $correo_notificafe;
    var $celular_notificafe;
+   var $archivo_cedula;
+   var $archivo_cedula_scfile_name;
+   var $archivo_cedula_ul_name;
+   var $archivo_cedula_ul_type;
+   var $archivo_cedula_limpa;
+   var $archivo_cedula_salva;
+   var $archivo_rut;
+   var $archivo_rut_scfile_name;
+   var $archivo_rut_ul_name;
+   var $archivo_rut_ul_type;
+   var $archivo_rut_limpa;
+   var $archivo_rut_salva;
+   var $archivo_nit;
+   var $archivo_nit_scfile_name;
+   var $archivo_nit_ul_name;
+   var $archivo_nit_ul_type;
+   var $archivo_nit_limpa;
+   var $archivo_nit_salva;
+   var $archivo_pago;
+   var $archivo_pago_scfile_name;
+   var $archivo_pago_ul_name;
+   var $archivo_pago_ul_type;
+   var $archivo_pago_limpa;
+   var $archivo_pago_salva;
+   var $id_plan;
+   var $id_plan_1;
+   var $valor_plan;
+   var $fecha_registro_fe;
+   var $fecha_registro_fe_hora;
+   var $nombre_contador;
+   var $estado;
+   var $estado_1;
+   var $si_nomina;
+   var $si_nomina_1;
+   var $si_factura_electronica;
+   var $si_factura_electronica_1;
+   var $nombre_empresa_bd;
+   var $n_trabajadores;
    var $archivos;
    var $c_postal;
    var $ciiu;
@@ -236,6 +274,86 @@ class terceros_mob_apl
           if (isset($this->NM_ajax_info['param']['apellido2']))
           {
               $this->apellido2 = $this->NM_ajax_info['param']['apellido2'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_cedula']))
+          {
+              $this->archivo_cedula = $this->NM_ajax_info['param']['archivo_cedula'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_cedula_limpa']))
+          {
+              $this->archivo_cedula_limpa = $this->NM_ajax_info['param']['archivo_cedula_limpa'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_cedula_salva']))
+          {
+              $this->archivo_cedula_salva = $this->NM_ajax_info['param']['archivo_cedula_salva'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_cedula_ul_name']))
+          {
+              $this->archivo_cedula_ul_name = $this->NM_ajax_info['param']['archivo_cedula_ul_name'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_cedula_ul_type']))
+          {
+              $this->archivo_cedula_ul_type = $this->NM_ajax_info['param']['archivo_cedula_ul_type'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_nit']))
+          {
+              $this->archivo_nit = $this->NM_ajax_info['param']['archivo_nit'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_nit_limpa']))
+          {
+              $this->archivo_nit_limpa = $this->NM_ajax_info['param']['archivo_nit_limpa'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_nit_salva']))
+          {
+              $this->archivo_nit_salva = $this->NM_ajax_info['param']['archivo_nit_salva'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_nit_ul_name']))
+          {
+              $this->archivo_nit_ul_name = $this->NM_ajax_info['param']['archivo_nit_ul_name'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_nit_ul_type']))
+          {
+              $this->archivo_nit_ul_type = $this->NM_ajax_info['param']['archivo_nit_ul_type'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_pago']))
+          {
+              $this->archivo_pago = $this->NM_ajax_info['param']['archivo_pago'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_pago_limpa']))
+          {
+              $this->archivo_pago_limpa = $this->NM_ajax_info['param']['archivo_pago_limpa'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_pago_salva']))
+          {
+              $this->archivo_pago_salva = $this->NM_ajax_info['param']['archivo_pago_salva'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_pago_ul_name']))
+          {
+              $this->archivo_pago_ul_name = $this->NM_ajax_info['param']['archivo_pago_ul_name'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_pago_ul_type']))
+          {
+              $this->archivo_pago_ul_type = $this->NM_ajax_info['param']['archivo_pago_ul_type'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_rut']))
+          {
+              $this->archivo_rut = $this->NM_ajax_info['param']['archivo_rut'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_rut_limpa']))
+          {
+              $this->archivo_rut_limpa = $this->NM_ajax_info['param']['archivo_rut_limpa'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_rut_salva']))
+          {
+              $this->archivo_rut_salva = $this->NM_ajax_info['param']['archivo_rut_salva'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_rut_ul_name']))
+          {
+              $this->archivo_rut_ul_name = $this->NM_ajax_info['param']['archivo_rut_ul_name'];
+          }
+          if (isset($this->NM_ajax_info['param']['archivo_rut_ul_type']))
+          {
+              $this->archivo_rut_ul_type = $this->NM_ajax_info['param']['archivo_rut_ul_type'];
           }
           if (isset($this->NM_ajax_info['param']['archivos']))
           {
@@ -373,6 +491,14 @@ class terceros_mob_apl
           {
               $this->es_tecnico = $this->NM_ajax_info['param']['es_tecnico'];
           }
+          if (isset($this->NM_ajax_info['param']['estado']))
+          {
+              $this->estado = $this->NM_ajax_info['param']['estado'];
+          }
+          if (isset($this->NM_ajax_info['param']['fecha_registro_fe']))
+          {
+              $this->fecha_registro_fe = $this->NM_ajax_info['param']['fecha_registro_fe'];
+          }
           if (isset($this->NM_ajax_info['param']['fechault']))
           {
               $this->fechault = $this->NM_ajax_info['param']['fechault'];
@@ -380,6 +506,10 @@ class terceros_mob_apl
           if (isset($this->NM_ajax_info['param']['fechultcomp']))
           {
               $this->fechultcomp = $this->NM_ajax_info['param']['fechultcomp'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_plan']))
+          {
+              $this->id_plan = $this->NM_ajax_info['param']['id_plan'];
           }
           if (isset($this->NM_ajax_info['param']['idmuni']))
           {
@@ -416,6 +546,10 @@ class terceros_mob_apl
           if (isset($this->NM_ajax_info['param']['loatiende']))
           {
               $this->loatiende = $this->NM_ajax_info['param']['loatiende'];
+          }
+          if (isset($this->NM_ajax_info['param']['n_trabajadores']))
+          {
+              $this->n_trabajadores = $this->NM_ajax_info['param']['n_trabajadores'];
           }
           if (isset($this->NM_ajax_info['param']['nacimiento']))
           {
@@ -480,6 +614,14 @@ class terceros_mob_apl
           if (isset($this->NM_ajax_info['param']['nombre_comercil']))
           {
               $this->nombre_comercil = $this->NM_ajax_info['param']['nombre_comercil'];
+          }
+          if (isset($this->NM_ajax_info['param']['nombre_contador']))
+          {
+              $this->nombre_contador = $this->NM_ajax_info['param']['nombre_contador'];
+          }
+          if (isset($this->NM_ajax_info['param']['nombre_empresa_bd']))
+          {
+              $this->nombre_empresa_bd = $this->NM_ajax_info['param']['nombre_empresa_bd'];
           }
           if (isset($this->NM_ajax_info['param']['nombres']))
           {
@@ -561,6 +703,14 @@ class terceros_mob_apl
           {
               $this->sexo = $this->NM_ajax_info['param']['sexo'];
           }
+          if (isset($this->NM_ajax_info['param']['si_factura_electronica']))
+          {
+              $this->si_factura_electronica = $this->NM_ajax_info['param']['si_factura_electronica'];
+          }
+          if (isset($this->NM_ajax_info['param']['si_nomina']))
+          {
+              $this->si_nomina = $this->NM_ajax_info['param']['si_nomina'];
+          }
           if (isset($this->NM_ajax_info['param']['sucur_cliente']))
           {
               $this->sucur_cliente = $this->NM_ajax_info['param']['sucur_cliente'];
@@ -592,6 +742,10 @@ class terceros_mob_apl
           if (isset($this->NM_ajax_info['param']['urlmail']))
           {
               $this->urlmail = $this->NM_ajax_info['param']['urlmail'];
+          }
+          if (isset($this->NM_ajax_info['param']['valor_plan']))
+          {
+              $this->valor_plan = $this->NM_ajax_info['param']['valor_plan'];
           }
           if (isset($this->NM_ajax_info['param']['zona_clientes']))
           {
@@ -729,9 +883,17 @@ class terceros_mob_apl
       {
           $_SESSION['sn'] = $this->sn;
       }
+      if (isset($this->gnit) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gnit'] = $this->gnit;
+      }
       if (isset($this->gidtercero) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
+      }
+      if (isset($this->gurl_reg_empresa) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gurl_reg_empresa'] = $this->gurl_reg_empresa;
       }
       if (isset($_POST["pa"]) && isset($this->pa)) 
       {
@@ -757,9 +919,17 @@ class terceros_mob_apl
       {
           $_SESSION['sn'] = $this->sn;
       }
+      if (isset($_POST["gnit"]) && isset($this->gnit)) 
+      {
+          $_SESSION['gnit'] = $this->gnit;
+      }
       if (isset($_POST["gidtercero"]) && isset($this->gidtercero)) 
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
+      }
+      if (isset($_POST["gurl_reg_empresa"]) && isset($this->gurl_reg_empresa)) 
+      {
+          $_SESSION['gurl_reg_empresa'] = $this->gurl_reg_empresa;
       }
       if (isset($_GET["pa"]) && isset($this->pa)) 
       {
@@ -785,9 +955,17 @@ class terceros_mob_apl
       {
           $_SESSION['sn'] = $this->sn;
       }
+      if (isset($_GET["gnit"]) && isset($this->gnit)) 
+      {
+          $_SESSION['gnit'] = $this->gnit;
+      }
       if (isset($_GET["gidtercero"]) && isset($this->gidtercero)) 
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
+      }
+      if (isset($_GET["gurl_reg_empresa"]) && isset($this->gurl_reg_empresa)) 
+      {
+          $_SESSION['gurl_reg_empresa'] = $this->gurl_reg_empresa;
       }
       if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
           $_POST['nmgp_opcao'] = "novo";
@@ -862,9 +1040,17 @@ class terceros_mob_apl
           {
               $_SESSION['sn'] = $this->sn;
           }
+          if (isset($this->gnit)) 
+          {
+              $_SESSION['gnit'] = $this->gnit;
+          }
           if (isset($this->gidtercero)) 
           {
               $_SESSION['gidtercero'] = $this->gidtercero;
+          }
+          if (isset($this->gurl_reg_empresa)) 
+          {
+              $_SESSION['gurl_reg_empresa'] = $this->gurl_reg_empresa;
           }
           if (isset($this->NM_where_filter_form))
           {
@@ -903,9 +1089,17 @@ class terceros_mob_apl
           {
               $_SESSION['sn'] = $this->sn;
           }
+          if (isset($this->gnit)) 
+          {
+              $_SESSION['gnit'] = $this->gnit;
+          }
           if (isset($this->gidtercero)) 
           {
               $_SESSION['gidtercero'] = $this->gidtercero;
+          }
+          if (isset($this->gurl_reg_empresa)) 
+          {
+              $_SESSION['gurl_reg_empresa'] = $this->gurl_reg_empresa;
           }
       } 
       elseif (isset($script_case_init) && !empty($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['terceros_mob']['parms']))
@@ -935,6 +1129,14 @@ class terceros_mob_apl
       { 
           $_SESSION['sc_session'][$script_case_init]['terceros_mob']['nm_run_menu'] = 1;
       } 
+      if (($this->NM_ajax_flag && 'navigate_form' == $this->NM_ajax_opcao) || (isset($this->nmgp_opcao) && $this->nmgp_opcao == "igual"))
+      { }
+      else
+      {
+          $aDtParts = explode(' ', $this->fecha_registro_fe);
+          $this->fecha_registro_fe      = $aDtParts[0];
+          $this->fecha_registro_fe_hora = $aDtParts[1];
+      }
       if (!$this->NM_ajax_flag && 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9))
       {
           $this->NM_ajax_flag = true;
@@ -1030,6 +1232,62 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           'upload_file_width'  => '80',
           'upload_file_aspect' => 'S',
           'upload_file_type'   => 'I',
+      );
+
+      $_SESSION['sc_session'][$script_case_init]['terceros_mob']['upload_field_info']['archivo_cedula'] = array(
+          'app_dir'            => $this->Ini->path_aplicacao,
+          'app_name'           => 'terceros_mob',
+          'upload_dir'         => $this->Ini->root . $this->Ini->path_imag_temp . '/',
+          'upload_url'         => $this->Ini->path_imag_temp . '/',
+          'upload_type'        => 'single',
+          'upload_allowed_type'  => '/\.(.pdf)$/i',
+          'upload_max_size'  => null,
+          'upload_file_height' => '',
+          'upload_file_width'  => '',
+          'upload_file_aspect' => '',
+          'upload_file_type'   => 'N1',
+      );
+
+      $_SESSION['sc_session'][$script_case_init]['terceros_mob']['upload_field_info']['archivo_rut'] = array(
+          'app_dir'            => $this->Ini->path_aplicacao,
+          'app_name'           => 'terceros_mob',
+          'upload_dir'         => $this->Ini->root . $this->Ini->path_imag_temp . '/',
+          'upload_url'         => $this->Ini->path_imag_temp . '/',
+          'upload_type'        => 'single',
+          'upload_allowed_type'  => '/\.(.pdf)$/i',
+          'upload_max_size'  => null,
+          'upload_file_height' => '',
+          'upload_file_width'  => '',
+          'upload_file_aspect' => '',
+          'upload_file_type'   => 'N2',
+      );
+
+      $_SESSION['sc_session'][$script_case_init]['terceros_mob']['upload_field_info']['archivo_nit'] = array(
+          'app_dir'            => $this->Ini->path_aplicacao,
+          'app_name'           => 'terceros_mob',
+          'upload_dir'         => $this->Ini->root . $this->Ini->path_imag_temp . '/',
+          'upload_url'         => $this->Ini->path_imag_temp . '/',
+          'upload_type'        => 'single',
+          'upload_allowed_type'  => '/\.(.pdf)$/i',
+          'upload_max_size'  => null,
+          'upload_file_height' => '',
+          'upload_file_width'  => '',
+          'upload_file_aspect' => '',
+          'upload_file_type'   => 'N3',
+      );
+
+      $_SESSION['sc_session'][$script_case_init]['terceros_mob']['upload_field_info']['archivo_pago'] = array(
+          'app_dir'            => $this->Ini->path_aplicacao,
+          'app_name'           => 'terceros_mob',
+          'upload_dir'         => $this->Ini->root . $this->Ini->path_imag_temp . '/',
+          'upload_url'         => $this->Ini->path_imag_temp . '/',
+          'upload_type'        => 'single',
+          'upload_allowed_type'  => '/\.(.pdf|.jpg|.jpeg|.png|.bmp|.gif)$/i',
+          'upload_max_size'  => null,
+          'upload_file_height' => '',
+          'upload_file_width'  => '',
+          'upload_file_aspect' => '',
+          'upload_file_type'   => 'N4',
       );
 
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['masterValue']);
@@ -1128,6 +1386,39 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         $this->classes_100perc_fields['keep_field_size'] = true;
 
 
+      $this->arr_buttons['btn_generar_nomina']['hint']             = "¿Desea crear una cuenta de nómina para el tercero?";
+      $this->arr_buttons['btn_generar_nomina']['type']             = "button";
+      $this->arr_buttons['btn_generar_nomina']['value']            = "Generar Cuenta Nómina";
+      $this->arr_buttons['btn_generar_nomina']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons['btn_generar_nomina']['display_position'] = "text_right";
+      $this->arr_buttons['btn_generar_nomina']['style']            = "danger";
+      $this->arr_buttons['btn_generar_nomina']['image']            = "";
+      $this->arr_buttons['btn_generar_nomina']['has_fa']            = "true";
+      $this->arr_buttons['btn_generar_nomina']['fontawesomeicon']            = "fas fa-donate";
+
+      $this->arr_buttons['btn_reenviar_correo_nomina']['hint']             = "Reenvía un correo con las credenciales de nómina";
+      $this->arr_buttons['btn_reenviar_correo_nomina']['type']             = "button";
+      $this->arr_buttons['btn_reenviar_correo_nomina']['value']            = "Reenviar Correo Cuenta Nómina";
+      $this->arr_buttons['btn_reenviar_correo_nomina']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons['btn_reenviar_correo_nomina']['display_position'] = "text_right";
+      $this->arr_buttons['btn_reenviar_correo_nomina']['style']            = "facebook";
+      $this->arr_buttons['btn_reenviar_correo_nomina']['image']            = "";
+      $this->arr_buttons['btn_reenviar_correo_nomina']['has_fa']            = "true";
+      $this->arr_buttons['btn_reenviar_correo_nomina']['fontawesomeicon']            = "far fa-envelope";
+
+      $this->arr_buttons['group_group_1']= array(
+          'value'            => "Especiales",
+          'hint'             => "",
+          'type'             => "button",
+          'display'          => "only_text",
+          'display_position' => "text_right",
+          'image'            => "",
+          'fontawesomeicon'  => "fas fa-cog",
+          'has_fa'           => true,
+          'content_icons'    => false,
+          'style'            => "default",
+      );
+
 
       $_SESSION['scriptcase']['error_icon']['terceros_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['terceros_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
@@ -1202,6 +1493,94 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $this->imagenter = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->imagenter_ul_name;
           $this->imagenter_scfile_name = substr($this->imagenter_ul_name, 12);
           $this->imagenter_scfile_type = $this->imagenter_ul_type;
+      }
+      if (isset($this->NM_ajax_info['param']['archivo_cedula_ul_name']) && '' != $this->NM_ajax_info['param']['archivo_cedula_ul_name'])
+      {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_cedula_ul_name]))
+          {
+              $this->NM_ajax_info['param']['archivo_cedula_ul_name'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_cedula_ul_name];
+          }
+          $this->archivo_cedula = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->NM_ajax_info['param']['archivo_cedula_ul_name'];
+          $this->archivo_cedula_scfile_name = substr($this->NM_ajax_info['param']['archivo_cedula_ul_name'], 12);
+          $this->archivo_cedula_scfile_type = $this->NM_ajax_info['param']['archivo_cedula_ul_type'];
+          $this->archivo_cedula_ul_name = $this->NM_ajax_info['param']['archivo_cedula_ul_name'];
+          $this->archivo_cedula_ul_type = $this->NM_ajax_info['param']['archivo_cedula_ul_type'];
+      }
+      elseif (isset($this->archivo_cedula_ul_name) && '' != $this->archivo_cedula_ul_name)
+      {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_cedula_ul_name]))
+          {
+              $this->archivo_cedula_ul_name = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_cedula_ul_name];
+          }
+          $this->archivo_cedula = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->archivo_cedula_ul_name;
+          $this->archivo_cedula_scfile_name = substr($this->archivo_cedula_ul_name, 12);
+          $this->archivo_cedula_scfile_type = $this->archivo_cedula_ul_type;
+      }
+      if (isset($this->NM_ajax_info['param']['archivo_rut_ul_name']) && '' != $this->NM_ajax_info['param']['archivo_rut_ul_name'])
+      {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_rut_ul_name]))
+          {
+              $this->NM_ajax_info['param']['archivo_rut_ul_name'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_rut_ul_name];
+          }
+          $this->archivo_rut = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->NM_ajax_info['param']['archivo_rut_ul_name'];
+          $this->archivo_rut_scfile_name = substr($this->NM_ajax_info['param']['archivo_rut_ul_name'], 12);
+          $this->archivo_rut_scfile_type = $this->NM_ajax_info['param']['archivo_rut_ul_type'];
+          $this->archivo_rut_ul_name = $this->NM_ajax_info['param']['archivo_rut_ul_name'];
+          $this->archivo_rut_ul_type = $this->NM_ajax_info['param']['archivo_rut_ul_type'];
+      }
+      elseif (isset($this->archivo_rut_ul_name) && '' != $this->archivo_rut_ul_name)
+      {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_rut_ul_name]))
+          {
+              $this->archivo_rut_ul_name = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_rut_ul_name];
+          }
+          $this->archivo_rut = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->archivo_rut_ul_name;
+          $this->archivo_rut_scfile_name = substr($this->archivo_rut_ul_name, 12);
+          $this->archivo_rut_scfile_type = $this->archivo_rut_ul_type;
+      }
+      if (isset($this->NM_ajax_info['param']['archivo_nit_ul_name']) && '' != $this->NM_ajax_info['param']['archivo_nit_ul_name'])
+      {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_nit_ul_name]))
+          {
+              $this->NM_ajax_info['param']['archivo_nit_ul_name'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_nit_ul_name];
+          }
+          $this->archivo_nit = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->NM_ajax_info['param']['archivo_nit_ul_name'];
+          $this->archivo_nit_scfile_name = substr($this->NM_ajax_info['param']['archivo_nit_ul_name'], 12);
+          $this->archivo_nit_scfile_type = $this->NM_ajax_info['param']['archivo_nit_ul_type'];
+          $this->archivo_nit_ul_name = $this->NM_ajax_info['param']['archivo_nit_ul_name'];
+          $this->archivo_nit_ul_type = $this->NM_ajax_info['param']['archivo_nit_ul_type'];
+      }
+      elseif (isset($this->archivo_nit_ul_name) && '' != $this->archivo_nit_ul_name)
+      {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_nit_ul_name]))
+          {
+              $this->archivo_nit_ul_name = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_nit_ul_name];
+          }
+          $this->archivo_nit = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->archivo_nit_ul_name;
+          $this->archivo_nit_scfile_name = substr($this->archivo_nit_ul_name, 12);
+          $this->archivo_nit_scfile_type = $this->archivo_nit_ul_type;
+      }
+      if (isset($this->NM_ajax_info['param']['archivo_pago_ul_name']) && '' != $this->NM_ajax_info['param']['archivo_pago_ul_name'])
+      {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_pago_ul_name]))
+          {
+              $this->NM_ajax_info['param']['archivo_pago_ul_name'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_pago_ul_name];
+          }
+          $this->archivo_pago = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->NM_ajax_info['param']['archivo_pago_ul_name'];
+          $this->archivo_pago_scfile_name = substr($this->NM_ajax_info['param']['archivo_pago_ul_name'], 12);
+          $this->archivo_pago_scfile_type = $this->NM_ajax_info['param']['archivo_pago_ul_type'];
+          $this->archivo_pago_ul_name = $this->NM_ajax_info['param']['archivo_pago_ul_name'];
+          $this->archivo_pago_ul_type = $this->NM_ajax_info['param']['archivo_pago_ul_type'];
+      }
+      elseif (isset($this->archivo_pago_ul_name) && '' != $this->archivo_pago_ul_name)
+      {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_pago_ul_name]))
+          {
+              $this->archivo_pago_ul_name = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_pago_ul_name];
+          }
+          $this->archivo_pago = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->archivo_pago_ul_name;
+          $this->archivo_pago_scfile_name = substr($this->archivo_pago_ul_name, 12);
+          $this->archivo_pago_scfile_type = $this->archivo_pago_ul_type;
       }
 
       $this->loadFieldConfig();
@@ -1308,6 +1687,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $this->nmgp_botoes['goto'] = "on";
       $this->nmgp_botoes['qtline'] = "off";
       $this->nmgp_botoes['reload'] = "off";
+      $this->nmgp_botoes['btn_generar_nomina'] = "on";
+      $this->nmgp_botoes['btn_reenviar_correo_nomina'] = "on";
       if (isset($this->NM_btn_cancel) && 'N' == $this->NM_btn_cancel)
       {
           $this->nmgp_botoes['cancel'] = "off";
@@ -1665,6 +2046,16 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       {
           $this->nmgp_opc_ant = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['opc_ant'];
       } 
+      if ($this->nmgp_opcao == "novo")  
+      {
+          $this->nmgp_botoes['btn_generar_nomina'] = "off";
+          $this->nmgp_botoes['btn_reenviar_correo_nomina'] = "off";
+      }
+      elseif ($this->nmgp_opcao == "incluir")  
+      {
+          $this->nmgp_botoes['btn_generar_nomina'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['botoes']['btn_generar_nomina'];
+          $this->nmgp_botoes['btn_reenviar_correo_nomina'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['botoes']['btn_reenviar_correo_nomina'];
+      }
       if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "muda_form")  
       {
           $this->nmgp_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['botoes'];
@@ -1700,7 +2091,32 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     $original_idtercero = $this->idtercero;
 }
 if (!isset($this->sc_temp_id_tercero)) {$this->sc_temp_id_tercero = (isset($_SESSION['id_tercero'])) ? $_SESSION['id_tercero'] : "";}
-  $this->sc_temp_id_tercero=0;
+if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
+  $vso   = "escritorio";
+
+if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+{  
+	$vso = "escritorio";
+}
+else
+{
+	$vso = "nube";
+}
+
+if($this->sc_temp_gnit=="88261176-7" and $vso=="nube")
+{
+	$this->Ini->nm_hidden_blocos[19] = "on"; $this->NM_ajax_info['blockDisplay']['19'] = 'on';
+	$this->NM_ajax_info['buttonDisplay']['btn_generar_nomina'] = $this->nmgp_botoes["btn_generar_nomina"] = "on";;
+	$this->NM_ajax_info['buttonDisplay']['btn_reenviar_correo_nomina'] = $this->nmgp_botoes["btn_reenviar_correo_nomina"] = "on";;
+}
+else
+{
+	$this->Ini->nm_hidden_blocos[19] = "off"; $this->NM_ajax_info['blockDisplay']['19'] = 'off';
+	$this->NM_ajax_info['buttonDisplay']['btn_generar_nomina'] = $this->nmgp_botoes["btn_generar_nomina"] = "off";;
+	$this->NM_ajax_info['buttonDisplay']['btn_reenviar_correo_nomina'] = $this->nmgp_botoes["btn_reenviar_correo_nomina"] = "off";;
+}
+
+$this->sc_temp_id_tercero=0;
 if($this->idtercero >0)
 	{
 	$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
@@ -1719,6 +2135,7 @@ else
 	$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
 	;
 	}
+if (isset($this->sc_temp_gnit)) { $_SESSION['gnit'] = $this->sc_temp_gnit;}
 if (isset($this->sc_temp_id_tercero)) { $_SESSION['id_tercero'] = $this->sc_temp_id_tercero;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -1804,7 +2221,26 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       if (isset($this->porcentaje_propina_sugerida)) { $this->nm_limpa_alfa($this->porcentaje_propina_sugerida); }
       if (isset($this->correo_notificafe)) { $this->nm_limpa_alfa($this->correo_notificafe); }
       if (isset($this->celular_notificafe)) { $this->nm_limpa_alfa($this->celular_notificafe); }
+      if (isset($this->id_plan)) { $this->nm_limpa_alfa($this->id_plan); }
+      if (isset($this->valor_plan)) { $this->nm_limpa_alfa($this->valor_plan); }
+      if (isset($this->nombre_contador)) { $this->nm_limpa_alfa($this->nombre_contador); }
+      if (isset($this->estado)) { $this->nm_limpa_alfa($this->estado); }
+      if (isset($this->nombre_empresa_bd)) { $this->nm_limpa_alfa($this->nombre_empresa_bd); }
+      if (isset($this->n_trabajadores)) { $this->nm_limpa_alfa($this->n_trabajadores); }
       if (isset($this->archivos)) { $this->nm_limpa_alfa($this->archivos); }
+      if ($nm_opc_form_php == "formphp")
+      { 
+          if ($nm_call_php == "btn_generar_nomina")
+          { 
+              $this->sc_btn_btn_generar_nomina();
+          } 
+          if ($nm_call_php == "btn_reenviar_correo_nomina")
+          { 
+              $this->sc_btn_btn_reenviar_correo_nomina();
+          } 
+          $this->NM_close_db(); 
+          exit;
+      } 
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1921,6 +2357,28 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $this->field_config['saldoapagar']['symbol_mon'] = $_SESSION['scriptcase']['reg_conf']['monet_simb'];
       $this->field_config['saldoapagar']['format_pos'] = $_SESSION['scriptcase']['reg_conf']['monet_f_pos'];
       $this->field_config['saldoapagar']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['monet_f_neg'];
+      //-- valor_plan
+      $this->field_config['valor_plan']               = array();
+      $this->field_config['valor_plan']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_val'];
+      $this->field_config['valor_plan']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit'];
+      $this->field_config['valor_plan']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_val'];
+      $this->field_config['valor_plan']['symbol_mon'] = '';
+      $this->field_config['valor_plan']['format_pos'] = $_SESSION['scriptcase']['reg_conf']['monet_f_pos'];
+      $this->field_config['valor_plan']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['monet_f_neg'];
+      //-- fecha_registro_fe
+      $this->field_config['fecha_registro_fe']                 = array();
+      $this->field_config['fecha_registro_fe']['date_format']  = $_SESSION['scriptcase']['reg_conf']['date_format'] . ';' . $_SESSION['scriptcase']['reg_conf']['time_format'];
+      $this->field_config['fecha_registro_fe']['date_sep']     = $_SESSION['scriptcase']['reg_conf']['date_sep'];
+      $this->field_config['fecha_registro_fe']['time_sep']     = $_SESSION['scriptcase']['reg_conf']['time_sep'];
+      $this->field_config['fecha_registro_fe']['date_display'] = "ddmmaaaa;hhiiss";
+      $this->new_date_format('DH', 'fecha_registro_fe');
+      //-- n_trabajadores
+      $this->field_config['n_trabajadores']               = array();
+      $this->field_config['n_trabajadores']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['n_trabajadores']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['n_trabajadores']['symbol_dec'] = '';
+      $this->field_config['n_trabajadores']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['n_trabajadores']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- porcentaje_propina_sugerida
       $this->field_config['porcentaje_propina_sugerida']               = array();
       $this->field_config['porcentaje_propina_sugerida']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -2293,6 +2751,58 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_retefuente_servicios_prov');
           }
+          if ('validate_archivo_cedula' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'archivo_cedula');
+          }
+          if ('validate_archivo_rut' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'archivo_rut');
+          }
+          if ('validate_archivo_nit' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'archivo_nit');
+          }
+          if ('validate_archivo_pago' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'archivo_pago');
+          }
+          if ('validate_id_plan' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_plan');
+          }
+          if ('validate_valor_plan' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'valor_plan');
+          }
+          if ('validate_fecha_registro_fe' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'fecha_registro_fe');
+          }
+          if ('validate_nombre_contador' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nombre_contador');
+          }
+          if ('validate_estado' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'estado');
+          }
+          if ('validate_si_nomina' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'si_nomina');
+          }
+          if ('validate_n_trabajadores' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'n_trabajadores');
+          }
+          if ('validate_si_factura_electronica' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'si_factura_electronica');
+          }
+          if ('validate_nombre_empresa_bd' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nombre_empresa_bd');
+          }
           if ('validate_archivos' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'archivos');
@@ -2426,6 +2936,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -2446,6 +2960,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -2658,6 +3176,48 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "%' ORDER BY codigo, nombre";
@@ -2702,6 +3262,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -2781,6 +3345,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -2801,6 +3369,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -3013,6 +3585,48 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
@@ -3057,6 +3671,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -3136,6 +3754,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -3156,6 +3778,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -3368,6 +3994,48 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "%' ORDER BY codigo, nombre";
@@ -3412,6 +4080,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -3491,6 +4163,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -3511,6 +4187,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -3723,6 +4403,48 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "%' ORDER BY codigo, nombre";
@@ -3767,6 +4489,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -3846,6 +4572,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -3866,6 +4596,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -4078,6 +4812,48 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "%' ORDER BY codigo, nombre";
@@ -4122,6 +4898,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -4201,6 +4981,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -4221,6 +5005,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -4433,6 +5221,48 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "%' ORDER BY codigo, nombre";
@@ -4477,6 +5307,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -4706,6 +5540,42 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                           $this->es_tecnico .= ";";
                       } 
                       $this->es_tecnico .= $dados_es_tecnico_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->si_nomina))
+          {
+              $x = 0; 
+              $this->si_nomina_1 = $this->si_nomina;
+              $this->si_nomina = ""; 
+              if ($this->si_nomina_1 != "") 
+              { 
+                  foreach ($this->si_nomina_1 as $dados_si_nomina_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->si_nomina .= ";";
+                      } 
+                      $this->si_nomina .= $dados_si_nomina_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->si_factura_electronica))
+          {
+              $x = 0; 
+              $this->si_factura_electronica_1 = $this->si_factura_electronica;
+              $this->si_factura_electronica = ""; 
+              if ($this->si_factura_electronica_1 != "") 
+              { 
+                  foreach ($this->si_factura_electronica_1 as $dados_si_factura_electronica_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->si_factura_electronica .= ";";
+                      } 
+                      $this->si_factura_electronica .= $dados_si_factura_electronica_1;
                       $x++ ; 
                   } 
               } 
@@ -5249,7 +6119,1538 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        if ($this->Db && !$this->Embutida_proc)
        { 
            $this->Db->Close(); 
+           $this->Ini->nm_db_conn_facilweb->Close(); 
        } 
+   }
+   function sc_btn_btn_generar_nomina() 
+   {
+        global $nm_url_saida, $teste_validade, 
+               $glo_senha_protect, $nm_apl_dependente, $nm_form_submit, $sc_check_excl, $nm_opc_form_php, $nm_call_php, $nm_opc_lookup;
+ 
+     ob_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+ <head>
+    <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+      if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+      {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+      }
+
+?>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <SCRIPT type="text/javascript">
+      var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+      var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_esc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_userSweetAlertDisplayed = false;
+    </SCRIPT>
+    <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></SCRIPT>
+<?php
+include_once("terceros_mob_sajax_js.php");
+?>
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/sweetalert2.all.min.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/polyfill.min.js"></SCRIPT>
+ <script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
+    <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form.css" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+  <?php 
+  if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts)) 
+  { 
+  ?> 
+  <link href="<?php echo $this->Ini->str_google_fonts ?>" rel="stylesheet" /> 
+  <?php 
+  } 
+  ?> 
+ </head>
+  <body class="scFormPage">
+      <table class="scFormTabela" align="center"><tr><td>
+<?php
+      $varloc_btn_php = array();
+      $nmgp_opcao_saida_php = "igual";
+      $nmgp_opc_ant_saida_php = "";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['opc_ant'] == "novo" || $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['opc_ant'] == "incluir")
+      {
+          $nmgp_opc_ant_saida_php = "novo";
+          $nmgp_opcao_saida_php   = "recarga";
+      }
+      else
+      {
+          if (!isset($this->correo_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe']))
+          {
+              $varloc_btn_php['correo_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe'];
+          }
+          if (!isset($this->celular_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['celular_notificafe']))
+          {
+              $varloc_btn_php['celular_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['celular_notificafe'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->nombre_empresa_bd) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombre_empresa_bd']))
+          {
+              $varloc_btn_php['nombre_empresa_bd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombre_empresa_bd'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->regimen) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['regimen']))
+          {
+              $varloc_btn_php['regimen'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['regimen'];
+          }
+          if (!isset($this->dv) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv']))
+          {
+              $varloc_btn_php['dv'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->dv) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv']))
+          {
+              $varloc_btn_php['dv'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv'];
+          }
+          if (!isset($this->direccion) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['direccion']))
+          {
+              $varloc_btn_php['direccion'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['direccion'];
+          }
+          if (!isset($this->tel_cel) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tel_cel']))
+          {
+              $varloc_btn_php['tel_cel'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tel_cel'];
+          }
+          if (!isset($this->urlmail) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['urlmail']))
+          {
+              $varloc_btn_php['urlmail'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['urlmail'];
+          }
+          if (!isset($this->tipo_documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo_documento']))
+          {
+              $varloc_btn_php['tipo_documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo_documento'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->idmuni) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni']))
+          {
+              $varloc_btn_php['idmuni'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni'];
+          }
+          if (!isset($this->idmuni) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni']))
+          {
+              $varloc_btn_php['idmuni'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni'];
+          }
+          if (!isset($this->idmuni) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni']))
+          {
+              $varloc_btn_php['idmuni'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni'];
+          }
+          if (!isset($this->codigo_postal) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['codigo_postal']))
+          {
+              $varloc_btn_php['codigo_postal'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['codigo_postal'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->tipo_documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo_documento']))
+          {
+              $varloc_btn_php['tipo_documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo_documento'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->idmuni) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni']))
+          {
+              $varloc_btn_php['idmuni'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->dv) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv']))
+          {
+              $varloc_btn_php['dv'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->direccion) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['direccion']))
+          {
+              $varloc_btn_php['direccion'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['direccion'];
+          }
+          if (!isset($this->tel_cel) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tel_cel']))
+          {
+              $varloc_btn_php['tel_cel'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tel_cel'];
+          }
+          if (!isset($this->urlmail) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['urlmail']))
+          {
+              $varloc_btn_php['urlmail'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['urlmail'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->correo_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe']))
+          {
+              $varloc_btn_php['correo_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->sc_mail_ok) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_ok']))
+          {
+              $varloc_btn_php['sc_mail_ok'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_ok'];
+          }
+          if (!isset($this->sc_mail_erro) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_erro']))
+          {
+              $varloc_btn_php['sc_mail_erro'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_erro'];
+          }
+          if (!isset($this->nombre_empresa_bd) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombre_empresa_bd']))
+          {
+              $varloc_btn_php['nombre_empresa_bd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombre_empresa_bd'];
+          }
+          if (!isset($this->nombre_empresa_bd) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombre_empresa_bd']))
+          {
+              $varloc_btn_php['nombre_empresa_bd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombre_empresa_bd'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->correo_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe']))
+          {
+              $varloc_btn_php['correo_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe'];
+          }
+          if (!isset($this->celular_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['celular_notificafe']))
+          {
+              $varloc_btn_php['celular_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['celular_notificafe'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->regimen) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['regimen']))
+          {
+              $varloc_btn_php['regimen'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['regimen'];
+          }
+          if (!isset($this->dv) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv']))
+          {
+              $varloc_btn_php['dv'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->dv) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv']))
+          {
+              $varloc_btn_php['dv'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv'];
+          }
+          if (!isset($this->direccion) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['direccion']))
+          {
+              $varloc_btn_php['direccion'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['direccion'];
+          }
+          if (!isset($this->tel_cel) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tel_cel']))
+          {
+              $varloc_btn_php['tel_cel'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tel_cel'];
+          }
+          if (!isset($this->urlmail) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['urlmail']))
+          {
+              $varloc_btn_php['urlmail'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['urlmail'];
+          }
+          if (!isset($this->tipo_documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo_documento']))
+          {
+              $varloc_btn_php['tipo_documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo_documento'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->idmuni) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni']))
+          {
+              $varloc_btn_php['idmuni'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni'];
+          }
+          if (!isset($this->idmuni) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni']))
+          {
+              $varloc_btn_php['idmuni'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni'];
+          }
+          if (!isset($this->idmuni) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni']))
+          {
+              $varloc_btn_php['idmuni'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni'];
+          }
+          if (!isset($this->codigo_postal) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['codigo_postal']))
+          {
+              $varloc_btn_php['codigo_postal'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['codigo_postal'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->tipo_documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo_documento']))
+          {
+              $varloc_btn_php['tipo_documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo_documento'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->idmuni) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni']))
+          {
+              $varloc_btn_php['idmuni'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['idmuni'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->dv) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv']))
+          {
+              $varloc_btn_php['dv'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['dv'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->direccion) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['direccion']))
+          {
+              $varloc_btn_php['direccion'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['direccion'];
+          }
+          if (!isset($this->tel_cel) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tel_cel']))
+          {
+              $varloc_btn_php['tel_cel'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['tel_cel'];
+          }
+          if (!isset($this->urlmail) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['urlmail']))
+          {
+              $varloc_btn_php['urlmail'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['urlmail'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->correo_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe']))
+          {
+              $varloc_btn_php['correo_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->sc_mail_ok) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_ok']))
+          {
+              $varloc_btn_php['sc_mail_ok'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_ok'];
+          }
+          if (!isset($this->sc_mail_erro) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_erro']))
+          {
+              $varloc_btn_php['sc_mail_erro'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_erro'];
+          }
+      }
+      $nm_f_saida = "terceros_mob.php";
+      nm_limpa_numero($this->dv, $this->field_config['dv']['symbol_grp']) ; 
+      nm_limpa_numero($this->idtercero, $this->field_config['idtercero']['symbol_grp']) ; 
+      $this->nm_tira_mask($this->celular_notificafe, "999-9999999", "(){}[].,;:-+/ "); 
+      if (!empty($this->field_config['cupo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupo, $this->field_config['cupo']['symbol_dec'], $this->field_config['cupo']['symbol_grp'], $this->field_config['cupo']['symbol_mon']); 
+          nm_limpa_valor($this->cupo, $this->field_config['cupo']['symbol_dec'], $this->field_config['cupo']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['cupodis']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupodis, $this->field_config['cupodis']['symbol_dec'], $this->field_config['cupodis']['symbol_grp'], $this->field_config['cupodis']['symbol_mon']); 
+          nm_limpa_valor($this->cupodis, $this->field_config['cupodis']['symbol_dec'], $this->field_config['cupodis']['symbol_grp']) ; 
+      }
+      nm_limpa_numero($this->dias_credito, $this->field_config['dias_credito']['symbol_grp']) ; 
+      nm_limpa_numero($this->dias_mora, $this->field_config['dias_mora']['symbol_grp']) ; 
+      nm_limpa_data($this->nacimiento, $this->field_config['nacimiento']['date_sep']) ; 
+      nm_limpa_data($this->fechault, $this->field_config['fechault']['date_sep']) ; 
+      if (!empty($this->field_config['saldo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->saldo, $this->field_config['saldo']['symbol_dec'], $this->field_config['saldo']['symbol_grp'], $this->field_config['saldo']['symbol_mon']); 
+          nm_limpa_valor($this->saldo, $this->field_config['saldo']['symbol_dec'], $this->field_config['saldo']['symbol_grp']) ; 
+      }
+      nm_limpa_data($this->afiliacion, $this->field_config['afiliacion']['date_sep']) ; 
+      if (!empty($this->field_config['cupo_vendedor']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupo_vendedor, $this->field_config['cupo_vendedor']['symbol_dec'], $this->field_config['cupo_vendedor']['symbol_grp'], $this->field_config['cupo_vendedor']['symbol_mon']); 
+          nm_limpa_valor($this->cupo_vendedor, $this->field_config['cupo_vendedor']['symbol_dec'], $this->field_config['cupo_vendedor']['symbol_grp']) ; 
+      }
+      nm_limpa_numero($this->dias, $this->field_config['dias']['symbol_grp']) ; 
+      nm_limpa_data($this->fechultcomp, $this->field_config['fechultcomp']['date_sep']) ; 
+      if (!empty($this->field_config['saldoapagar']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->saldoapagar, $this->field_config['saldoapagar']['symbol_dec'], $this->field_config['saldoapagar']['symbol_grp'], $this->field_config['saldoapagar']['symbol_mon']); 
+          nm_limpa_valor($this->saldoapagar, $this->field_config['saldoapagar']['symbol_dec'], $this->field_config['saldoapagar']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['valor_plan']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp'], $this->field_config['valor_plan']['symbol_mon']); 
+          nm_limpa_valor($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp']) ; 
+      }
+      nm_limpa_data($this->fecha_registro_fe, $this->field_config['fecha_registro_fe']['date_sep']) ; 
+      nm_limpa_hora($this->fecha_registro_fe_hora, $this->field_config['fecha_registro_fe']['time_sep']) ; 
+      nm_limpa_numero($this->n_trabajadores, $this->field_config['n_trabajadores']['symbol_grp']) ; 
+      nm_limpa_numero($this->porcentaje_propina_sugerida, $this->field_config['porcentaje_propina_sugerida']['symbol_grp']) ; 
+      $this->nm_converte_datas();
+      foreach ($varloc_btn_php as $cmp => $val_cmp)
+      {
+          $this->$cmp = $val_cmp;
+      }
+      $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gurl_reg_empresa)) {$this->sc_temp_gurl_reg_empresa = (isset($_SESSION['gurl_reg_empresa'])) ? $_SESSION['gurl_reg_empresa'] : "";}
+  
+
+
+$vso   = "escritorio";
+
+if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+{  
+	$vso = "escritorio";
+}
+else
+{
+	$vso = "nube";
+}
+
+$vvalida   = true;
+$vmensaje  = "";
+$vmensaje2 = "";
+
+if(empty(trim($this->correo_notificafe )))
+{
+	$vvalida   = false;
+	$vmensaje2 .= "Debe asignar un correo notificación al tercero.<br>";
+}
+
+if(empty(trim($this->celular_notificafe )))
+{
+	$vvalida = false;
+	$vmensaje2 .= "Debe asignar un número de celular de notificación al tercero.<br>";
+}
+
+if($vvalida)
+{
+	if($vso=="nube")
+	{
+		sc_include_library ("prj", "conexion_externa", "baseDeDatos.php", true, true);
+		$vbd  = new dbMysql("127.0.0.1","root",",.Facilweb2020","facilweb");
+		$vsql = "select nomina, idempresa from empresas where nit ='".$this->documento ."'";
+		if($co= $vbd->consulta($vsql))
+		{
+			if($re = mysqli_fetch_row($co))
+			{
+				if($re[0]=="SI")
+				{
+					$vmensaje2 .= "Ya tiene nómina activa en la tabla empresas de la base de datos facilweb.";
+				}
+				else
+				{
+					$vnombre_nomina = $this->nombre_empresa_bd ;
+					$vnombre_nomina = str_replace(" ","_",$vnombre_nomina);
+					$vnombre_nomina = "nomina_".$vnombre_nomina;
+
+					if(!empty($vnombre_nomina))
+					{
+						$vsql = "update empresas set nomina='SI' where idempresa='".$re[1]."'";
+						$vbd->consulta($vsql);
+
+						$vsql = "SHOW DATABASES like '".$vnombre_nomina."'";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiNomina = array();
+      $this->vsinomina = array();
+      if ($SCrx = $this->Ini->nm_db_conn_facilweb->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiNomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsinomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiNomina = false;
+          $this->vSiNomina_erro = $this->Ini->nm_db_conn_facilweb->ErrorMsg();
+          $this->vsinomina = false;
+          $this->vsinomina_erro = $this->Ini->nm_db_conn_facilweb->ErrorMsg();
+      } 
+;
+						if(!isset($this->vsinomina[0][0]))
+						{
+							$vconsulta = "mysqldbcopy --source=root:,.Facilweb2020@localhost:3306 --destination=root:,.Facilweb2020@localhost:3306 nomina_copia:".$vnombre_nomina;
+							shell_exec($vconsulta);
+						}
+						
+						$vnatur = 1;
+						$vregim = 0;
+						if($this->tipo =="JUR")
+						{
+							$vnatur = 2;
+						}
+						
+						if($this->regimen =="COMUN")
+						{
+							$vregim = 1;
+						}
+						
+						if($vnatur==2)
+						{
+							$vregim = 1;
+						}
+						
+						$this->dv  = $this->fDigito($this->documento );
+
+						$vsql = "UPDATE datosemp SET razonsoc='".$this->nombres ."',nit='".$this->documento ."',dv='".$this->dv ."',direccion='".$this->direccion ."',naturaleza='".$vnatur."',regimen='".$vregim."',telefono='".$this->tel_cel ."',correo='".$this->urlmail ."',tipo_documento='".$this->tipo_documento ."',nombre_comercial='".$this->nombres ."',nompais='COLOMBIA',nom_depto=(select (select d.departamento from departamento d where d.iddep=m.iddepar limit 1) from municipio m where m.idmun='".$this->idmuni ."' limit 1),municipio='".$this->idmuni ."',ciudad=(select m.municipio from municipio m where m.idmun='".$this->idmuni ."' limit 1),codigo_postal='".$this->codigo_postal ."',sucursal='001',codigo_te='E-16' WHERE iddatos='1'";
+						
+						$vbd2 = new dbMysql("127.0.0.1","root",",.Facilweb2020",$vnombre_nomina);
+						$vbd2->consulta($vsql);
+						
+						
+						$vbd3 = new dbMysql("127.0.0.1","root",",.Facilweb2020","apidian2020");
+						$vsql = "select user_id from companies where identification_number ='".$this->documento ."'";
+						if($co3= $vbd3->consulta($vsql))
+						{
+							if(!$re3 = mysqli_fetch_row($co3))
+							{
+								
+								$vtipo_doc = 3;
+								if($this->tipo_documento ==31)
+								{
+									$vtipo_doc = 6;
+								}
+								
+								if($this->tipo =="JUR")
+								{
+									$vnatur = 1;
+								}
+								else
+								{
+									$vnatur = 2;
+								}
+								
+								if($vregim==0)
+								{
+									$vregim = 2;
+								}
+								else
+								{
+									$vregim = 1;
+								}
+								
+								$id_municipio = 780;
+								$vsql = "select mc.id from municipalities mc where mc.code=(select concat(m.codigo_dep,m.codigo_mu) from municipio m  where m.idmuni='".$this->idmuni ."' limit 1) limit 1";
+								 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vidmu = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vidmu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vidmu = false;
+          $this->vidmu_erro = $this->Db->ErrorMsg();
+      } 
+;
+								if(isset($this->vidmu[0][0]))
+								{
+									$id_municipio = $this->vidmu[0][0];
+								}
+								
+								$curl = curl_init();
+								
+								curl_setopt_array($curl, array(
+								  CURLOPT_URL => $this->sc_temp_gurl_reg_empresa.'/'.$this->documento .'/'.$this->dv ,
+								  CURLOPT_RETURNTRANSFER => true,
+								  CURLOPT_ENCODING => '',
+								  CURLOPT_MAXREDIRS => 10,
+								  CURLOPT_TIMEOUT => 0,
+								  CURLOPT_FOLLOWLOCATION => true,
+								  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+								  CURLOPT_CUSTOMREQUEST => 'POST',
+								  CURLOPT_POSTFIELDS =>'{
+									"type_document_identification_id": '.$vtipo_doc.',
+									"type_organization_id": '.$vnatur.',
+									"type_regime_id": '.$vregim.',
+									"type_liability_id": 117,
+									"business_name": "'.$this->nombres .'",
+									"merchant_registration": "0000000-00",
+									"municipality_id": '.$id_municipio.',
+									"address": "'.$this->direccion .'",
+									"phone": '.$this->tel_cel .',
+									"email": "'.$this->urlmail .'"
+								}',
+								  CURLOPT_HTTPHEADER => array(
+									'Content-Type: application/json',
+									'Accept: application/json'
+								  ),
+								));
+
+								$response = curl_exec($curl);
+
+								curl_close($curl);
+								$vr = json_decode($response);
+								
+								
+								$vsql = "select u.api_token from companies c inner join users u on c.user_id=u.id where c.identification_number ='".$this->documento ."'";
+								if($co4= $vbd3->consulta($vsql))
+								{
+									if($re4 = mysqli_fetch_row($co4))
+									{
+										$vsql = "select id_ws from webservice where id_ws='1'";
+										if($co5= $vbd2->consulta($vsql))
+										{
+											if($re5 = mysqli_fetch_row($co5))
+											{
+												$vsql = "UPDATE webservice SET proveedor='PROPIO',agno_ws='2021',token='".$re4[0]."',password='123',servidor1='https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/payroll', servidor2='https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/payroll-adjust-note', servidor3='', servidor4='https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/status/zip/', estado='https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/status/document/', pdf='https://www.facilwebnube.com/apidian2021/public/index.php/api/download/', activo='SI',tipo='PRODUCCION', testid='' where id_ws='1'";
+											}
+											else
+											{
+										
+												$vsql = "INSERT IGNORE webservice (id_ws, proveedor, agno_ws, token, password, servidor1, servidor2, servidor3, servidor4, estado, pdf, activo, tipo,testid) VALUES(1,'PROPIO','2021', '".$re4[0]."', '123', 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/payroll', 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/payroll-adjust-note', '', 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/status/zip/', 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/status/document/', 'https://www.facilwebnube.com/apidian2021/public/index.php/api/download/', 'SI', 'PRODUCCION', '')";
+											}
+										
+											$vbd2->consulta($vsql);
+										}
+									}
+								}
+							}
+						
+							$vpuerto      = 587;
+							$vserver      = "smtp.gmail.com";
+							$vusuario     = "info@facilweb.com.co";
+							$vpassword    = "hydeqdnvafmwjwza";
+							$vemailemisor = "info@facilweb.com.co";
+							$vreceptor    = trim($this->correo_notificafe );
+
+							$vfecha      = date("d-m-Y H:i:s");
+							$vasunto     = "Bienvenido(a) al portal de Facilweb Nómina";
+							$vmensaje   .= "<h2>".$this->nombres ."</h2>";
+							$vmensaje   .= "<h4>Consultarlo desde un computador.</h4><br><br>";
+							$vmensaje   .= "<b>Estos son sus datos de acceso:</b> <br><br>";
+							$vmensaje   .= "<b>Enlace de ingreso:</b> https://www.facilwebnube.com/nomina <br><br>";
+							$vmensaje   .= "<b>Código de Empresa:</b> ".$this->documento .".<br>";https://youtube.com/playlist?list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p
+							$vmensaje   .= "<b>Usuario:</b> Nomina.<br>";
+							$vmensaje   .= "<b>Contraseña:</b> 123.<br><br>";
+							$vmensaje   .= "<b>Ver aquí la visión general:</b> https://www.youtube.com/watch?v=XBgI_E2aIdM&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p<br><br>";
+							$vmensaje   .= "<b>Configurando la nómina:</b> https://www.youtube.com/watch?v=NKXuNgx_3d8&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=2<br><br>";
+							$vmensaje   .= "<b>Creación de empleados:</b> https://www.youtube.com/watch?v=0mBmEOrI06Q&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=3<br><br>";
+							$vmensaje   .= "<b>Creando la nómina:</b> https://www.youtube.com/watch?v=Z3FZpb_DF9o&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=4<br><br>";
+							$vmensaje   .= "<b>Descuentos de Préstamos:</b> https://www.youtube.com/watch?v=b3x6y67eUKY&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=9<br><br>";
+							$vmensaje   .= "<b>Relación de Horas Extras:</b> https://www.youtube.com/watch?v=e1iGKoUFVFY&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=10<br><br>";
+							$vmensaje   .= "<b>Incapacidades de Origen Común:</b> https://www.youtube.com/watch?v=jbTytE7rjL0&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=11<br><br>";
+							$vmensaje   .= "<b>Soportes de Pago de Nómina:</b> https://www.youtube.com/watch?v=2IRLMlqd-zw&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=12<br><br>";
+							$vmensaje   .= "<b>Generar el folio de manera manual:</b> https://www.youtube.com/watch?v=zX1TVHragBQ&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=13<br><br>";
+							$vmensaje   .= "<b>Prima y cesantías:</b> https://www.youtube.com/watch?v=dQsazb1kOko&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=14<br><br>";
+							$vmensaje   .= "<b>Generar folios por nómina:</b> https://www.youtube.com/watch?v=6BqUx9E2Ywc&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=15<br><br>";
+							$vmensaje   .= "<b>PARA VER TODA LA LISTA DE REPRODUCCIÓN EN YOUTUBE:</b> https://youtube.com/playlist?list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p<br><br>";
+
+							    include_once($this->Ini->path_third . "/swift/swift_required.php");
+    $sc_mail_port     = "$vpuerto";
+    $sc_mail_tp_port  = "T";
+    $sc_mail_tp_mens  = "H";
+    $sc_mail_tp_copy  = "";
+    $this->sc_mail_count = 0;
+    $this->sc_mail_erro  = "";
+    $this->sc_mail_ok    = true;
+    if ($sc_mail_tp_port == "S" || $sc_mail_tp_port == "Y")
+    {
+        $sc_mail_port = (!empty($sc_mail_port)) ? $sc_mail_port : 465;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'ssl');
+    }
+    elseif ($sc_mail_tp_port == "T")
+    {
+        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 587;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'tls');
+    }
+    else
+    {
+        $sc_mail_port = (!empty($sc_mail_port)) ? $sc_mail_port : 25;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port);
+    }
+    $Con_Mail->setUsername($vusuario);
+    $Con_Mail->setpassword($vpassword);
+    $Send_Mail = Swift_Mailer::newInstance($Con_Mail);
+    if ($sc_mail_tp_mens == "H")
+    {
+        $Mens_Mail = Swift_Message::newInstance($vasunto);
+        $Mens_Mail->setBody(SC_Mail_Image($vmensaje, $Mens_Mail))->setContentType("text/html");
+    }
+    else
+    {
+        $Mens_Mail = Swift_Message::newInstance($vasunto)->setBody($vmensaje);
+    }
+    if (!empty($_SESSION['scriptcase']['charset']))
+    {
+        $Mens_Mail->setCharset($_SESSION['scriptcase']['charset']);
+    }
+    $Temp_mail = $vreceptor;
+    if (!is_array($Temp_mail))
+    {
+        $Temp_mail = explode(";", $vreceptor);
+    }
+    foreach ($Temp_mail as $NM_dest)
+    {
+        if (!empty($NM_dest))
+        {
+            $Arr_addr = SC_Mail_Address($NM_dest);
+            $Mens_Mail->addTo($Arr_addr[0], $Arr_addr[1]);
+        }
+    }
+    $Temp_mail = explode(";", "facilweb@solucionesnavarro.com");
+    foreach ($Temp_mail as $NM_dest)
+    {
+        if (!empty($NM_dest))
+        {
+            $Arr_addr = SC_Mail_Address($NM_dest);
+            if (strtoupper(substr($sc_mail_tp_copy, 0, 2)) == "CC")
+            {
+                $Mens_Mail->addCc($Arr_addr[0], $Arr_addr[1]);
+            }
+            else
+            {
+                $Mens_Mail->addBcc($Arr_addr[0], $Arr_addr[1]);
+            }
+        }
+    }
+    $Arr_addr = SC_Mail_Address($vemailemisor);
+    $Err_mail = array();
+    $this->sc_mail_count = $Send_Mail->send($Mens_Mail->setFrom($Arr_addr[0], $Arr_addr[1]), $Err_mail);
+    if (!empty($Err_mail))
+    {
+        $this->sc_mail_erro = $Err_mail;
+        $this->sc_mail_ok   = false;
+    }
+;
+
+							if ($this->sc_mail_ok )
+							{
+								$vmensaje2 .= "Gracias por registrarse con nosotros. En breve recibirá un correo electrónico confirmando el registro.";
+							}
+							else
+							{
+								$vmensaje2 .= "Hubo un error al enviar el correo, por favor comuníquese con soporte. ".$this->sc_mail_erro ;
+							}
+						}
+					}
+					else
+					{
+						$vmensaje2 .= "Debe digitar un Nombre Empresa BD en la pestaña 'Otros'.";
+					}
+				}
+			}
+			else
+			{
+				$vnombre_nomina = $this->nombre_empresa_bd ;
+
+				if(!empty($vnombre_nomina))
+				{
+					$vnombre_nomina = $this->nombre_empresa_bd ;
+					$vnombre_nomina = str_replace(" ","_",$vnombre_nomina);
+					$vnombre_nomina = "nomina_".$vnombre_nomina;
+					
+					$vsql = "insert into empresas SET nombre='".$vnombre_nomina."',nombre_empresa='".$this->nombres ."',creada=NOW(),actualizada=NOW(),sinmovimiento='NO',tipo_negocio='GENERAL',predeterminada='NO',password='123',nit='".$this->documento ."',correo='".$this->correo_notificafe ."',celular='".$this->celular_notificafe ."',codempresa='".$this->documento ."',nomina='SI',nombre_empresa_nomina='".$vnombre_nomina."', observaciones=''";
+					
+					
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Ini->nm_db_conn_facilweb->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Ini->nm_db_conn_facilweb->ErrorMsg());
+             if ($this->NM_ajax_flag)
+             {
+                terceros_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					
+					$vsql = "select nomina, idempresa from empresas where nit ='".$this->documento ."'";
+					if($co= $vbd->consulta($vsql))
+					{
+						if($re = mysqli_fetch_row($co))
+						{
+								
+							if(!empty($vnombre_nomina))
+							{
+								$vsql = "update empresas set nomina='SI' where idempresa='".$re[1]."'";
+								$vbd->consulta($vsql);
+
+								$vsql = "SHOW DATABASES like '".$vnombre_nomina."'";
+								 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiNomina = array();
+      $this->vsinomina = array();
+      if ($SCrx = $this->Ini->nm_db_conn_facilweb->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiNomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsinomina[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiNomina = false;
+          $this->vSiNomina_erro = $this->Ini->nm_db_conn_facilweb->ErrorMsg();
+          $this->vsinomina = false;
+          $this->vsinomina_erro = $this->Ini->nm_db_conn_facilweb->ErrorMsg();
+      } 
+;
+								if(!isset($this->vsinomina[0][0]))
+								{
+									$vconsulta = "mysqldbcopy --source=root:,.Facilweb2020@localhost:3306 --destination=root:,.Facilweb2020@localhost:3306 nomina_copia:".$vnombre_nomina;
+									shell_exec($vconsulta);
+								}
+								
+								
+								$vnatur = 1;
+								$vregim = 0;
+								if($this->tipo =="JUR")
+								{
+									$vnatur = 2;
+								}
+
+								if($this->regimen =="COMUN")
+								{
+									$vregim = 1;
+								}
+								
+								if($vnatur==2)
+								{
+									$vregim = 1;
+								}
+
+								$this->dv  = $this->fDigito($this->documento );
+
+								$vsql = "UPDATE datosemp SET razonsoc='".$this->nombres ."',nit='".$this->documento ."',dv='".$this->dv ."',direccion='".$this->direccion ."',naturaleza='".$vnatur."',regimen='".$vregim."',telefono='".$this->tel_cel ."',correo='".$this->urlmail ."',tipo_documento='".$this->tipo_documento ."',nombre_comercial='".$this->nombres ."',nompais='COLOMBIA',nom_depto=(select (select d.departamento from departamento d where d.iddep=m.iddepar limit 1) from municipio m where m.idmun='".$this->idmuni ."' limit 1),municipio='".$this->idmuni ."',ciudad=(select m.municipio from municipio m where m.idmun='".$this->idmuni ."' limit 1),codigo_postal='".$this->codigo_postal ."',sucursal='001',codigo_te='E-16' WHERE iddatos='1'";
+
+								$vbd2 = new dbMysql("127.0.0.1","root",",.Facilweb2020",$vnombre_nomina);
+								$vbd2->consulta($vsql);
+
+
+								$vbd3 = new dbMysql("127.0.0.1","root",",.Facilweb2020","apidian2020");
+								$vsql = "select user_id from companies where identification_number ='".$this->documento ."'";
+								if($co3= $vbd3->consulta($vsql))
+								{
+									if(!$re3 = mysqli_fetch_row($co3))
+									{
+
+										$vtipo_doc = 3;
+										if($this->tipo_documento ==31)
+										{
+											$vtipo_doc = 6;
+										}
+
+										if($this->tipo =="JUR")
+										{
+											$vnatur = 1;
+										}
+										else
+										{
+											$vnatur = 2;
+										}
+
+										if($vregim==0)
+										{
+											$vregim = 2;
+										}
+										else
+										{
+											$vregim = 1;
+										}
+
+										$id_municipio = 780;
+										$vsql = "select mc.id from municipalities mc where mc.code=(select concat(m.codigo_dep,m.codigo_mu) from municipio m  where m.idmuni='".$this->idmuni ."' limit 1) limit 1";
+										 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vidmu = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vidmu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vidmu = false;
+          $this->vidmu_erro = $this->Db->ErrorMsg();
+      } 
+;
+										if(isset($this->vidmu[0][0]))
+										{
+											$id_municipio = $this->vidmu[0][0];
+										}
+										
+										$curl = curl_init();
+
+										curl_setopt_array($curl, array(
+										  CURLOPT_URL => $this->sc_temp_gurl_reg_empresa.'/'.$this->documento .'/'.$this->dv ,
+										  CURLOPT_RETURNTRANSFER => true,
+										  CURLOPT_ENCODING => '',
+										  CURLOPT_MAXREDIRS => 10,
+										  CURLOPT_TIMEOUT => 0,
+										  CURLOPT_FOLLOWLOCATION => true,
+										  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+										  CURLOPT_CUSTOMREQUEST => 'POST',
+										  CURLOPT_POSTFIELDS =>'{
+											"type_document_identification_id": '.$vtipo_doc.',
+											"type_organization_id": '.$vnatur.',
+											"type_regime_id": '.$vregim.',
+											"type_liability_id": 117,
+											"business_name": "'.$this->nombres .'",
+											"merchant_registration": "0000000-00",
+											"municipality_id": '.$id_municipio.',
+											"address": "'.$this->direccion .'",
+											"phone": '.$this->tel_cel .',
+											"email": "'.$this->urlmail .'"
+										}',
+										  CURLOPT_HTTPHEADER => array(
+											'Content-Type: application/json',
+											'Accept: application/json'
+										  ),
+										));
+
+										$response = curl_exec($curl);
+
+										curl_close($curl);
+										$vr = json_decode($response);
+
+										$vsql = "select u.api_token from companies c inner join users u on c.user_id=u.id where c.identification_number ='".$this->documento ."'";
+										if($co4= $vbd3->consulta($vsql))
+										{
+											if($re4 = mysqli_fetch_row($co4))
+											{
+												$vsql = "select id_ws from webservice where id_ws='1'";
+												if($co5= $vbd2->consulta($vsql))
+												{
+													if($re5 = mysqli_fetch_row($co5))
+													{
+														$vsql = "UPDATE webservice SET proveedor='PROPIO',agno_ws='2021',token='".$re4[0]."',password='123',servidor1='https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/payroll', servidor2='https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/payroll-adjust-note', servidor3='', servidor4='https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/status/zip/', estado='https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/status/document/', pdf='https://www.facilwebnube.com/apidian2021/public/index.php/api/download/', activo='SI',tipo='PRODUCCION', testid='' where id_ws='1'";
+													}
+													else
+													{
+
+														$vsql = "INSERT IGNORE webservice (id_ws, proveedor, agno_ws, token, password, servidor1, servidor2, servidor3, servidor4, estado, pdf, activo, tipo,testid) VALUES(1,'PROPIO','2021', '".$re4[0]."', '123', 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/payroll', 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/payroll-adjust-note', '', 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/status/zip/', 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/status/document/', 'https://www.facilwebnube.com/apidian2021/public/index.php/api/download/', 'SI', 'PRODUCCION', '')";
+													}
+
+													$vbd2->consulta($vsql);
+												}
+											}
+										}
+									}
+								}
+								
+
+								$vpuerto      = 587;
+								$vserver      = "smtp.gmail.com";
+								$vusuario     = "info@facilweb.com.co";
+								$vpassword    = "hydeqdnvafmwjwza";
+								$vemailemisor = "info@facilweb.com.co";
+								$vreceptor    = trim($this->correo_notificafe );
+
+								$vfecha      = date("d-m-Y H:i:s");
+								$vasunto     = "Bienvenido(a) al portal de Facilweb Nómina";
+								$vmensaje   .= "<h2>".$this->nombres ."</h2>";
+								$vmensaje   .= "<h4>Consultarlo desde un computador.</h4><br><br>";
+								$vmensaje   .= "<b>Estos son sus datos de acceso:</b> <br><br>";
+								$vmensaje   .= "<b>Enlace de ingreso:</b> https://www.facilwebnube.com/nomina <br><br>";
+								$vmensaje   .= "<b>Código de Empresa:</b> ".$this->documento .".<br>";
+								$vmensaje   .= "<b>Usuario:</b> Nomina.<br>";
+								$vmensaje   .= "<b>Contraseña:</b> 123.<br><br>";
+								$vmensaje   .= "<b>Ver aquí la visión general:</b> https://www.youtube.com/watch?v=XBgI_E2aIdM&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p<br><br>";
+								$vmensaje   .= "<b>Configurando la nómina:</b> https://www.youtube.com/watch?v=NKXuNgx_3d8&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=2<br><br>";
+								$vmensaje   .= "<b>Creación de empleados:</b> https://www.youtube.com/watch?v=0mBmEOrI06Q&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=3<br><br>";
+								$vmensaje   .= "<b>Creando la nómina:</b> https://www.youtube.com/watch?v=Z3FZpb_DF9o&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=4<br><br>";
+								$vmensaje   .= "<b>Descuentos de Préstamos:</b> https://www.youtube.com/watch?v=b3x6y67eUKY&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=9<br><br>";
+								$vmensaje   .= "<b>Relación de Horas Extras:</b> https://www.youtube.com/watch?v=e1iGKoUFVFY&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=10<br><br>";
+								$vmensaje   .= "<b>Incapacidades de Origen Común:</b> https://www.youtube.com/watch?v=jbTytE7rjL0&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=11<br><br>";
+								$vmensaje   .= "<b>Soportes de Pago de Nómina:</b> https://www.youtube.com/watch?v=2IRLMlqd-zw&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=12<br><br>";
+								$vmensaje   .= "<b>Generar el folio de manera manual:</b> https://www.youtube.com/watch?v=zX1TVHragBQ&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=13<br><br>";
+								$vmensaje   .= "<b>Prima y cesantías:</b> https://www.youtube.com/watch?v=dQsazb1kOko&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=14<br><br>";
+								$vmensaje   .= "<b>Generar folios por nómina:</b> https://www.youtube.com/watch?v=6BqUx9E2Ywc&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=15<br><br>";
+								$vmensaje   .= "<b>PARA VER TODA LA LISTA DE REPRODUCCIÓN EN YOUTUBE:</b> https://youtube.com/playlist?list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p<br><br>";
+
+								    include_once($this->Ini->path_third . "/swift/swift_required.php");
+    $sc_mail_port     = "$vpuerto";
+    $sc_mail_tp_port  = "T";
+    $sc_mail_tp_mens  = "H";
+    $sc_mail_tp_copy  = "";
+    $this->sc_mail_count = 0;
+    $this->sc_mail_erro  = "";
+    $this->sc_mail_ok    = true;
+    if ($sc_mail_tp_port == "S" || $sc_mail_tp_port == "Y")
+    {
+        $sc_mail_port = (!empty($sc_mail_port)) ? $sc_mail_port : 465;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'ssl');
+    }
+    elseif ($sc_mail_tp_port == "T")
+    {
+        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 587;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'tls');
+    }
+    else
+    {
+        $sc_mail_port = (!empty($sc_mail_port)) ? $sc_mail_port : 25;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port);
+    }
+    $Con_Mail->setUsername($vusuario);
+    $Con_Mail->setpassword($vpassword);
+    $Send_Mail = Swift_Mailer::newInstance($Con_Mail);
+    if ($sc_mail_tp_mens == "H")
+    {
+        $Mens_Mail = Swift_Message::newInstance($vasunto);
+        $Mens_Mail->setBody(SC_Mail_Image($vmensaje, $Mens_Mail))->setContentType("text/html");
+    }
+    else
+    {
+        $Mens_Mail = Swift_Message::newInstance($vasunto)->setBody($vmensaje);
+    }
+    if (!empty($_SESSION['scriptcase']['charset']))
+    {
+        $Mens_Mail->setCharset($_SESSION['scriptcase']['charset']);
+    }
+    $Temp_mail = $vreceptor;
+    if (!is_array($Temp_mail))
+    {
+        $Temp_mail = explode(";", $vreceptor);
+    }
+    foreach ($Temp_mail as $NM_dest)
+    {
+        if (!empty($NM_dest))
+        {
+            $Arr_addr = SC_Mail_Address($NM_dest);
+            $Mens_Mail->addTo($Arr_addr[0], $Arr_addr[1]);
+        }
+    }
+    $Temp_mail = explode(";", "facilweb@solucionesnavarro.com");
+    foreach ($Temp_mail as $NM_dest)
+    {
+        if (!empty($NM_dest))
+        {
+            $Arr_addr = SC_Mail_Address($NM_dest);
+            if (strtoupper(substr($sc_mail_tp_copy, 0, 2)) == "CC")
+            {
+                $Mens_Mail->addCc($Arr_addr[0], $Arr_addr[1]);
+            }
+            else
+            {
+                $Mens_Mail->addBcc($Arr_addr[0], $Arr_addr[1]);
+            }
+        }
+    }
+    $Arr_addr = SC_Mail_Address($vemailemisor);
+    $Err_mail = array();
+    $this->sc_mail_count = $Send_Mail->send($Mens_Mail->setFrom($Arr_addr[0], $Arr_addr[1]), $Err_mail);
+    if (!empty($Err_mail))
+    {
+        $this->sc_mail_erro = $Err_mail;
+        $this->sc_mail_ok   = false;
+    }
+;
+
+								if ($this->sc_mail_ok )
+								{
+									$vmensaje2 .= "Gracias por registrarse con nosotros. En breve recibirá un correo electrónico confirmando el registro.";
+								}
+								else
+								{
+									$vmensaje2 .= "Hubo un error al enviar el correo, por favor comuníquese con soporte. ".$this->sc_mail_erro ;
+								}
+							}
+							else
+							{
+								$vmensaje2 .= "Debe digitar un Nombre Empresa BD en la pestaña 'Otros'.";
+							}
+						}
+					}
+				}
+				else
+				{
+					$vmensaje2 .= "Debe digitar un Nombre Empresa BD en la pestaña 'Otros'...";
+				}
+			}
+		}
+	}
+}
+
+if(!empty($vmensaje2))
+{
+	echo "<div style='border-radius:8px;padding:10px;color:white;background:#5877b9;'>".$vmensaje2."</div>";
+}
+if (isset($this->sc_temp_gurl_reg_empresa)) { $_SESSION['gurl_reg_empresa'] = $this->sc_temp_gurl_reg_empresa;}
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off'; 
+    echo ob_get_clean();
+?>
+      </td></tr><tr><td align="center">
+      <form name="FPHP" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value=""/>
+      <input type=hidden name="script_case_init" value="<?php  echo $this->form_encode_input($this->Ini->sc_page); ?>"/>
+      <input type=hidden name="idtercero" value="<?php echo $this->form_encode_input($this->idtercero) ?>"/>
+      <input type=hidden name="nmgp_opcao" value="<?php echo $this->form_encode_input($nmgp_opcao_saida_php); ?>"/>
+      <input type=hidden name="nmgp_opc_ant" value="<?php echo $this->form_encode_input($nmgp_opc_ant_saida_php); ?>"/>
+      <input type=submit name="nmgp_bok" value="<?php echo $this->Ini->Nm_lang['lang_btns_cfrm'] ?>"/>
+      </form>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
+   }
+   function sc_btn_btn_reenviar_correo_nomina() 
+   {
+        global $nm_url_saida, $teste_validade, 
+               $glo_senha_protect, $nm_apl_dependente, $nm_form_submit, $sc_check_excl, $nm_opc_form_php, $nm_call_php, $nm_opc_lookup;
+ 
+     ob_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+ <head>
+    <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+      if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+      {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+      }
+
+?>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <SCRIPT type="text/javascript">
+      var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+      var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_esc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_userSweetAlertDisplayed = false;
+    </SCRIPT>
+    <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></SCRIPT>
+<?php
+include_once("terceros_mob_sajax_js.php");
+?>
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/sweetalert2.all.min.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/polyfill.min.js"></SCRIPT>
+ <script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
+    <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form.css" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+  <?php 
+  if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts)) 
+  { 
+  ?> 
+  <link href="<?php echo $this->Ini->str_google_fonts ?>" rel="stylesheet" /> 
+  <?php 
+  } 
+  ?> 
+ </head>
+  <body class="scFormPage">
+      <table class="scFormTabela" align="center"><tr><td>
+<?php
+      $varloc_btn_php = array();
+      $nmgp_opcao_saida_php = "igual";
+      $nmgp_opc_ant_saida_php = "";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['opc_ant'] == "novo" || $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['opc_ant'] == "incluir")
+      {
+          $nmgp_opc_ant_saida_php = "novo";
+          $nmgp_opcao_saida_php   = "recarga";
+      }
+      else
+      {
+          if (!isset($this->correo_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe']))
+          {
+              $varloc_btn_php['correo_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe'];
+          }
+          if (!isset($this->celular_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['celular_notificafe']))
+          {
+              $varloc_btn_php['celular_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['celular_notificafe'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->nombre_empresa_bd) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombre_empresa_bd']))
+          {
+              $varloc_btn_php['nombre_empresa_bd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombre_empresa_bd'];
+          }
+          if (!isset($this->correo_notificafe) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe']))
+          {
+              $varloc_btn_php['correo_notificafe'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['correo_notificafe'];
+          }
+          if (!isset($this->nombres) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres']))
+          {
+              $varloc_btn_php['nombres'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['nombres'];
+          }
+          if (!isset($this->documento) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento']))
+          {
+              $varloc_btn_php['documento'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['documento'];
+          }
+          if (!isset($this->sc_mail_ok) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_ok']))
+          {
+              $varloc_btn_php['sc_mail_ok'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_ok'];
+          }
+          if (!isset($this->sc_mail_erro) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_erro']))
+          {
+              $varloc_btn_php['sc_mail_erro'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['sc_mail_erro'];
+          }
+      }
+      $nm_f_saida = "terceros_mob.php";
+      nm_limpa_numero($this->dv, $this->field_config['dv']['symbol_grp']) ; 
+      nm_limpa_numero($this->idtercero, $this->field_config['idtercero']['symbol_grp']) ; 
+      $this->nm_tira_mask($this->celular_notificafe, "999-9999999", "(){}[].,;:-+/ "); 
+      if (!empty($this->field_config['cupo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupo, $this->field_config['cupo']['symbol_dec'], $this->field_config['cupo']['symbol_grp'], $this->field_config['cupo']['symbol_mon']); 
+          nm_limpa_valor($this->cupo, $this->field_config['cupo']['symbol_dec'], $this->field_config['cupo']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['cupodis']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupodis, $this->field_config['cupodis']['symbol_dec'], $this->field_config['cupodis']['symbol_grp'], $this->field_config['cupodis']['symbol_mon']); 
+          nm_limpa_valor($this->cupodis, $this->field_config['cupodis']['symbol_dec'], $this->field_config['cupodis']['symbol_grp']) ; 
+      }
+      nm_limpa_numero($this->dias_credito, $this->field_config['dias_credito']['symbol_grp']) ; 
+      nm_limpa_numero($this->dias_mora, $this->field_config['dias_mora']['symbol_grp']) ; 
+      nm_limpa_data($this->nacimiento, $this->field_config['nacimiento']['date_sep']) ; 
+      nm_limpa_data($this->fechault, $this->field_config['fechault']['date_sep']) ; 
+      if (!empty($this->field_config['saldo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->saldo, $this->field_config['saldo']['symbol_dec'], $this->field_config['saldo']['symbol_grp'], $this->field_config['saldo']['symbol_mon']); 
+          nm_limpa_valor($this->saldo, $this->field_config['saldo']['symbol_dec'], $this->field_config['saldo']['symbol_grp']) ; 
+      }
+      nm_limpa_data($this->afiliacion, $this->field_config['afiliacion']['date_sep']) ; 
+      if (!empty($this->field_config['cupo_vendedor']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupo_vendedor, $this->field_config['cupo_vendedor']['symbol_dec'], $this->field_config['cupo_vendedor']['symbol_grp'], $this->field_config['cupo_vendedor']['symbol_mon']); 
+          nm_limpa_valor($this->cupo_vendedor, $this->field_config['cupo_vendedor']['symbol_dec'], $this->field_config['cupo_vendedor']['symbol_grp']) ; 
+      }
+      nm_limpa_numero($this->dias, $this->field_config['dias']['symbol_grp']) ; 
+      nm_limpa_data($this->fechultcomp, $this->field_config['fechultcomp']['date_sep']) ; 
+      if (!empty($this->field_config['saldoapagar']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->saldoapagar, $this->field_config['saldoapagar']['symbol_dec'], $this->field_config['saldoapagar']['symbol_grp'], $this->field_config['saldoapagar']['symbol_mon']); 
+          nm_limpa_valor($this->saldoapagar, $this->field_config['saldoapagar']['symbol_dec'], $this->field_config['saldoapagar']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['valor_plan']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp'], $this->field_config['valor_plan']['symbol_mon']); 
+          nm_limpa_valor($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp']) ; 
+      }
+      nm_limpa_data($this->fecha_registro_fe, $this->field_config['fecha_registro_fe']['date_sep']) ; 
+      nm_limpa_hora($this->fecha_registro_fe_hora, $this->field_config['fecha_registro_fe']['time_sep']) ; 
+      nm_limpa_numero($this->n_trabajadores, $this->field_config['n_trabajadores']['symbol_grp']) ; 
+      nm_limpa_numero($this->porcentaje_propina_sugerida, $this->field_config['porcentaje_propina_sugerida']['symbol_grp']) ; 
+      $this->nm_converte_datas();
+      foreach ($varloc_btn_php as $cmp => $val_cmp)
+      {
+          $this->$cmp = $val_cmp;
+      }
+      $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+  $vso   = "escritorio";
+
+if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+{  
+	$vso = "escritorio";
+}
+else
+{
+	$vso = "nube";
+}
+
+$vvalida   = true;
+$vmensaje  = "";
+$vmensaje2 = "";
+
+if(empty(trim($this->correo_notificafe )))
+{
+	$vvalida   = false;
+	$vmensaje2 .= "Debe asignar un correo notificación al tercero.<br>";
+}
+
+if(empty(trim($this->celular_notificafe )))
+{
+	$vvalida = false;
+	$vmensaje2 .= "Debe asignar un número de celular de notificación al tercero.<br>";
+}
+
+if($vvalida)
+{
+
+	sc_include_library ("prj", "conexion_externa", "baseDeDatos.php", true, true);
+	$vbd  = new dbMysql("127.0.0.1","root",",.Facilweb2020","facilweb");
+	$vsql = "select nomina, idempresa from empresas where nit ='".$this->documento ."'";
+	if($co= $vbd->consulta($vsql))
+	{
+		if($re = mysqli_fetch_row($co))
+		{
+			if($re[0]=="SI")
+			{
+
+				$vnombre_nomina = $this->nombre_empresa_bd ;
+				$vnombre_nomina = str_replace(" ","_",$vnombre_nomina);
+				$vnombre_nomina = "nomina_".$vnombre_nomina;
+
+				if(!empty($vnombre_nomina))
+				{						
+					$vpuerto      = 587;
+					$vserver      = "smtp.gmail.com";
+					$vusuario     = "info@facilweb.com.co";
+					$vpassword    = "hydeqdnvafmwjwza";
+					$vemailemisor = "info@facilweb.com.co";
+					$vreceptor    = trim($this->correo_notificafe );
+
+					$vfecha      = date("d-m-Y H:i:s");
+					$vasunto     = "Bienvenido(a) al portal de Facilweb Nómina";
+					$vmensaje   .= "<h2>".$this->nombres ."</h2>";
+					$vmensaje   .= "<h4>Consultarlo desde un computador.</h4><br><br>";
+					$vmensaje   .= "<b>Estos son sus datos de acceso:</b> <br><br>";
+					$vmensaje   .= "<b>Enlace de ingreso:</b> https://www.facilwebnube.com/nomina <br><br>";
+					$vmensaje   .= "<b>Código de Empresa:</b> ".$this->documento .".<br>";
+					$vmensaje   .= "<b>Usuario:</b> Nomina.<br>";
+					$vmensaje   .= "<b>Contraseña:</b> 123.<br><br>";
+					$vmensaje   .= "<b>Ver aquí la visión general:</b> https://www.youtube.com/watch?v=XBgI_E2aIdM&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p<br><br>";
+					$vmensaje   .= "<b>Configurando la nómina:</b> https://www.youtube.com/watch?v=NKXuNgx_3d8&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=2<br><br>";
+					$vmensaje   .= "<b>Creación de empleados:</b> https://www.youtube.com/watch?v=0mBmEOrI06Q&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=3<br><br>";
+					$vmensaje   .= "<b>Creando la nómina:</b> https://www.youtube.com/watch?v=Z3FZpb_DF9o&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=4<br><br>";
+					$vmensaje   .= "<b>Descuentos de Préstamos:</b> https://www.youtube.com/watch?v=b3x6y67eUKY&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=9<br><br>";
+					$vmensaje   .= "<b>Relación de Horas Extras:</b> https://www.youtube.com/watch?v=e1iGKoUFVFY&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=10<br><br>";
+					$vmensaje   .= "<b>Incapacidades de Origen Común:</b> https://www.youtube.com/watch?v=jbTytE7rjL0&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=11<br><br>";
+					$vmensaje   .= "<b>Soportes de Pago de Nómina:</b> https://www.youtube.com/watch?v=2IRLMlqd-zw&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=12<br><br>";
+					$vmensaje   .= "<b>Generar el folio de manera manual:</b> https://www.youtube.com/watch?v=zX1TVHragBQ&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=13<br><br>";
+					$vmensaje   .= "<b>Prima y cesantías:</b> https://www.youtube.com/watch?v=dQsazb1kOko&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=14<br><br>";
+					$vmensaje   .= "<b>Generar folios por nómina:</b> https://www.youtube.com/watch?v=6BqUx9E2Ywc&list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p&index=15<br><br>";
+					$vmensaje   .= "<b>PARA VER TODA LA LISTA DE REPRODUCCIÓN EN YOUTUBE:</b> https://youtube.com/playlist?list=PLiKta3ijgKmKUNw9D085co1uwjWvLjO3p<br><br>";
+					
+					    include_once($this->Ini->path_third . "/swift/swift_required.php");
+    $sc_mail_port     = "$vpuerto";
+    $sc_mail_tp_port  = "T";
+    $sc_mail_tp_mens  = "H";
+    $sc_mail_tp_copy  = "";
+    $this->sc_mail_count = 0;
+    $this->sc_mail_erro  = "";
+    $this->sc_mail_ok    = true;
+    if ($sc_mail_tp_port == "S" || $sc_mail_tp_port == "Y")
+    {
+        $sc_mail_port = (!empty($sc_mail_port)) ? $sc_mail_port : 465;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'ssl');
+    }
+    elseif ($sc_mail_tp_port == "T")
+    {
+        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 587;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'tls');
+    }
+    else
+    {
+        $sc_mail_port = (!empty($sc_mail_port)) ? $sc_mail_port : 25;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port);
+    }
+    $Con_Mail->setUsername($vusuario);
+    $Con_Mail->setpassword($vpassword);
+    $Send_Mail = Swift_Mailer::newInstance($Con_Mail);
+    if ($sc_mail_tp_mens == "H")
+    {
+        $Mens_Mail = Swift_Message::newInstance($vasunto);
+        $Mens_Mail->setBody(SC_Mail_Image($vmensaje, $Mens_Mail))->setContentType("text/html");
+    }
+    else
+    {
+        $Mens_Mail = Swift_Message::newInstance($vasunto)->setBody($vmensaje);
+    }
+    if (!empty($_SESSION['scriptcase']['charset']))
+    {
+        $Mens_Mail->setCharset($_SESSION['scriptcase']['charset']);
+    }
+    $Temp_mail = $vreceptor;
+    if (!is_array($Temp_mail))
+    {
+        $Temp_mail = explode(";", $vreceptor);
+    }
+    foreach ($Temp_mail as $NM_dest)
+    {
+        if (!empty($NM_dest))
+        {
+            $Arr_addr = SC_Mail_Address($NM_dest);
+            $Mens_Mail->addTo($Arr_addr[0], $Arr_addr[1]);
+        }
+    }
+    $Temp_mail = explode(";", "facilweb@solucionesnavarro.com");
+    foreach ($Temp_mail as $NM_dest)
+    {
+        if (!empty($NM_dest))
+        {
+            $Arr_addr = SC_Mail_Address($NM_dest);
+            if (strtoupper(substr($sc_mail_tp_copy, 0, 2)) == "CC")
+            {
+                $Mens_Mail->addCc($Arr_addr[0], $Arr_addr[1]);
+            }
+            else
+            {
+                $Mens_Mail->addBcc($Arr_addr[0], $Arr_addr[1]);
+            }
+        }
+    }
+    $Arr_addr = SC_Mail_Address($vemailemisor);
+    $Err_mail = array();
+    $this->sc_mail_count = $Send_Mail->send($Mens_Mail->setFrom($Arr_addr[0], $Arr_addr[1]), $Err_mail);
+    if (!empty($Err_mail))
+    {
+        $this->sc_mail_erro = $Err_mail;
+        $this->sc_mail_ok   = false;
+    }
+;
+
+					if ($this->sc_mail_ok )
+					{
+						$vmensaje2 .= "Gracias por registrarse con nosotros. En breve recibirá un correo electrónico confirmando el registro.";
+					}
+					else
+					{
+						$vmensaje2 .= "Hubo un error al enviar el correo, por favor comuníquese con soporte. ".$this->sc_mail_erro ;
+					}
+				}
+				else
+				{
+					$vmensaje2 .= "Debe digitar un Nombre Empresa BD en la pestaña 'Otros'.";
+				}
+			}
+		}
+		else
+		{
+			$vmensaje2 .= "NO se puede enviar las credenciales de conexión a la nómina porque la base de datos no ha sido creada y configurada.";
+		}
+	}
+}
+
+if(!empty($vmensaje2))
+{
+	echo "<div style='border-radius:8px;padding:10px;color:white;background:#5877b9;'>".$vmensaje2."</div>";
+}
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off'; 
+    echo ob_get_clean();
+?>
+      </td></tr><tr><td align="center">
+      <form name="FPHP" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value=""/>
+      <input type=hidden name="script_case_init" value="<?php  echo $this->form_encode_input($this->Ini->sc_page); ?>"/>
+      <input type=hidden name="idtercero" value="<?php echo $this->form_encode_input($this->idtercero) ?>"/>
+      <input type=hidden name="nmgp_opcao" value="<?php echo $this->form_encode_input($nmgp_opcao_saida_php); ?>"/>
+      <input type=hidden name="nmgp_opc_ant" value="<?php echo $this->form_encode_input($nmgp_opc_ant_saida_php); ?>"/>
+      <input type=submit name="nmgp_bok" value="<?php echo $this->Ini->Nm_lang['lang_btns_cfrm'] ?>"/>
+      </form>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
    }
 //
 //--------------------------------------------------------------------------------------
@@ -5668,6 +8069,45 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'puc_retefuente_servicios_prov':
                return "PUC Retefuente Servicios Prov";
                break;
+           case 'archivo_cedula':
+               return "Cédula";
+               break;
+           case 'archivo_rut':
+               return "RUT";
+               break;
+           case 'archivo_nit':
+               return "Cámara de Comercio";
+               break;
+           case 'archivo_pago':
+               return "Archivos de Pago";
+               break;
+           case 'id_plan':
+               return "Plan";
+               break;
+           case 'valor_plan':
+               return "Valor Plan";
+               break;
+           case 'fecha_registro_fe':
+               return "Fecha Registro Fe";
+               break;
+           case 'nombre_contador':
+               return "Nombre Contador";
+               break;
+           case 'estado':
+               return "Estado";
+               break;
+           case 'si_nomina':
+               return "Nómina";
+               break;
+           case 'n_trabajadores':
+               return "Número de Empleados";
+               break;
+           case 'si_factura_electronica':
+               return "Factura Electrónica";
+               break;
+           case 'nombre_empresa_bd':
+               return "Nombre Empresa BD";
+               break;
            case 'archivos':
                return "";
                break;
@@ -5906,6 +8346,32 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_puc_retefuente_compras($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_servicios_prov' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_servicios_prov', $filtro)))
         $this->ValidateField_puc_retefuente_servicios_prov($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'archivo_cedula' == $filtro)) || (is_array($filtro) && in_array('archivo_cedula', $filtro)))
+        $this->ValidateField_archivo_cedula($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'archivo_rut' == $filtro)) || (is_array($filtro) && in_array('archivo_rut', $filtro)))
+        $this->ValidateField_archivo_rut($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'archivo_nit' == $filtro)) || (is_array($filtro) && in_array('archivo_nit', $filtro)))
+        $this->ValidateField_archivo_nit($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'archivo_pago' == $filtro)) || (is_array($filtro) && in_array('archivo_pago', $filtro)))
+        $this->ValidateField_archivo_pago($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_plan' == $filtro)) || (is_array($filtro) && in_array('id_plan', $filtro)))
+        $this->ValidateField_id_plan($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'valor_plan' == $filtro)) || (is_array($filtro) && in_array('valor_plan', $filtro)))
+        $this->ValidateField_valor_plan($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'fecha_registro_fe' == $filtro)) || (is_array($filtro) && in_array('fecha_registro_fe', $filtro)))
+        $this->ValidateField_fecha_registro_fe($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_contador' == $filtro)) || (is_array($filtro) && in_array('nombre_contador', $filtro)))
+        $this->ValidateField_nombre_contador($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'estado' == $filtro)) || (is_array($filtro) && in_array('estado', $filtro)))
+        $this->ValidateField_estado($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'si_nomina' == $filtro)) || (is_array($filtro) && in_array('si_nomina', $filtro)))
+        $this->ValidateField_si_nomina($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'n_trabajadores' == $filtro)) || (is_array($filtro) && in_array('n_trabajadores', $filtro)))
+        $this->ValidateField_n_trabajadores($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'si_factura_electronica' == $filtro)) || (is_array($filtro) && in_array('si_factura_electronica', $filtro)))
+        $this->ValidateField_si_factura_electronica($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'nombre_empresa_bd' == $filtro)) || (is_array($filtro) && in_array('nombre_empresa_bd', $filtro)))
+        $this->ValidateField_nombre_empresa_bd($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'archivos' == $filtro)) || (is_array($filtro) && in_array('archivos', $filtro)))
         $this->ValidateField_archivos($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'es_restaurante' == $filtro)) || (is_array($filtro) && in_array('es_restaurante', $filtro)))
@@ -9179,6 +11645,701 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_puc_retefuente_servicios_prov
 
+    function ValidateField_archivo_cedula(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+        if ($this->nmgp_opcao != "excluir")
+        {
+            $sTestFile = $this->archivo_cedula;
+            if (!function_exists('sc_upload_unprotect_chars'))
+            {
+                include_once 'terceros_mob_doc_name.php';
+            }
+            $this->archivo_cedula = sc_upload_unprotect_chars($this->archivo_cedula);
+            $this->archivo_cedula_scfile_name = sc_upload_unprotect_chars($this->archivo_cedula_scfile_name);
+            if ("" != $this->archivo_cedula && "S" != $this->archivo_cedula_limpa && !$teste_validade->ArqExtensao($this->archivo_cedula, array('.pdf')))
+            {
+                $hasError = true;
+                $Campos_Crit .= "Cédula: " . $this->Ini->Nm_lang['lang_errm_file_invl']; 
+                if (!isset($Campos_Erros['archivo_cedula']))
+                {
+                    $Campos_Erros['archivo_cedula'] = array();
+                }
+                $Campos_Erros['archivo_cedula'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
+                if (!isset($this->NM_ajax_info['errList']['archivo_cedula']) || !is_array($this->NM_ajax_info['errList']['archivo_cedula']))
+                {
+                    $this->NM_ajax_info['errList']['archivo_cedula'] = array();
+                }
+                $this->NM_ajax_info['errList']['archivo_cedula'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
+            }
+            if (!$hasError && "" != $this->archivo_cedula && "S" != $this->archivo_cedula_limpa) {
+                if (!function_exists('sc_upload_unprotect_chars')) {
+                    include_once 'terceros_mob_doc_name.php';
+                }
+                $pathParts = pathinfo(sc_upload_unprotect_chars($sTestFile));
+                $fileSize = filesize(sc_upload_unprotect_chars($sTestFile));
+                $sizeErrorSuffix = '';
+                if ($hasError) {
+                    $Campos_Crit .= "Cédula: " . $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                    if (!isset($Campos_Erros['archivo_cedula']))
+                    {
+                        $Campos_Erros['archivo_cedula'] = array();
+                    }
+                    $Campos_Erros['archivo_cedula'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                    if (!isset($this->NM_ajax_info['errList']['archivo_cedula']) || !is_array($this->NM_ajax_info['errList']['archivo_cedula']))
+                    {
+                        $this->NM_ajax_info['errList']['archivo_cedula'] = array();
+                    }
+                    $this->NM_ajax_info['errList']['archivo_cedula'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                }
+            }
+        }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'archivo_cedula';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_archivo_cedula
+
+    function ValidateField_archivo_rut(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+        if ($this->nmgp_opcao != "excluir")
+        {
+            $sTestFile = $this->archivo_rut;
+            if (!function_exists('sc_upload_unprotect_chars'))
+            {
+                include_once 'terceros_mob_doc_name.php';
+            }
+            $this->archivo_rut = sc_upload_unprotect_chars($this->archivo_rut);
+            $this->archivo_rut_scfile_name = sc_upload_unprotect_chars($this->archivo_rut_scfile_name);
+            if ("" != $this->archivo_rut && "S" != $this->archivo_rut_limpa && !$teste_validade->ArqExtensao($this->archivo_rut, array('.pdf')))
+            {
+                $hasError = true;
+                $Campos_Crit .= "RUT: " . $this->Ini->Nm_lang['lang_errm_file_invl']; 
+                if (!isset($Campos_Erros['archivo_rut']))
+                {
+                    $Campos_Erros['archivo_rut'] = array();
+                }
+                $Campos_Erros['archivo_rut'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
+                if (!isset($this->NM_ajax_info['errList']['archivo_rut']) || !is_array($this->NM_ajax_info['errList']['archivo_rut']))
+                {
+                    $this->NM_ajax_info['errList']['archivo_rut'] = array();
+                }
+                $this->NM_ajax_info['errList']['archivo_rut'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
+            }
+            if (!$hasError && "" != $this->archivo_rut && "S" != $this->archivo_rut_limpa) {
+                if (!function_exists('sc_upload_unprotect_chars')) {
+                    include_once 'terceros_mob_doc_name.php';
+                }
+                $pathParts = pathinfo(sc_upload_unprotect_chars($sTestFile));
+                $fileSize = filesize(sc_upload_unprotect_chars($sTestFile));
+                $sizeErrorSuffix = '';
+                if ($hasError) {
+                    $Campos_Crit .= "RUT: " . $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                    if (!isset($Campos_Erros['archivo_rut']))
+                    {
+                        $Campos_Erros['archivo_rut'] = array();
+                    }
+                    $Campos_Erros['archivo_rut'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                    if (!isset($this->NM_ajax_info['errList']['archivo_rut']) || !is_array($this->NM_ajax_info['errList']['archivo_rut']))
+                    {
+                        $this->NM_ajax_info['errList']['archivo_rut'] = array();
+                    }
+                    $this->NM_ajax_info['errList']['archivo_rut'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                }
+            }
+        }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'archivo_rut';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_archivo_rut
+
+    function ValidateField_archivo_nit(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+        if ($this->nmgp_opcao != "excluir")
+        {
+            $sTestFile = $this->archivo_nit;
+            if (!function_exists('sc_upload_unprotect_chars'))
+            {
+                include_once 'terceros_mob_doc_name.php';
+            }
+            $this->archivo_nit = sc_upload_unprotect_chars($this->archivo_nit);
+            $this->archivo_nit_scfile_name = sc_upload_unprotect_chars($this->archivo_nit_scfile_name);
+            if ("" != $this->archivo_nit && "S" != $this->archivo_nit_limpa && !$teste_validade->ArqExtensao($this->archivo_nit, array('.pdf')))
+            {
+                $hasError = true;
+                $Campos_Crit .= "Cámara de Comercio: " . $this->Ini->Nm_lang['lang_errm_file_invl']; 
+                if (!isset($Campos_Erros['archivo_nit']))
+                {
+                    $Campos_Erros['archivo_nit'] = array();
+                }
+                $Campos_Erros['archivo_nit'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
+                if (!isset($this->NM_ajax_info['errList']['archivo_nit']) || !is_array($this->NM_ajax_info['errList']['archivo_nit']))
+                {
+                    $this->NM_ajax_info['errList']['archivo_nit'] = array();
+                }
+                $this->NM_ajax_info['errList']['archivo_nit'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
+            }
+            if (!$hasError && "" != $this->archivo_nit && "S" != $this->archivo_nit_limpa) {
+                if (!function_exists('sc_upload_unprotect_chars')) {
+                    include_once 'terceros_mob_doc_name.php';
+                }
+                $pathParts = pathinfo(sc_upload_unprotect_chars($sTestFile));
+                $fileSize = filesize(sc_upload_unprotect_chars($sTestFile));
+                $sizeErrorSuffix = '';
+                if ($hasError) {
+                    $Campos_Crit .= "Cámara de Comercio: " . $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                    if (!isset($Campos_Erros['archivo_nit']))
+                    {
+                        $Campos_Erros['archivo_nit'] = array();
+                    }
+                    $Campos_Erros['archivo_nit'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                    if (!isset($this->NM_ajax_info['errList']['archivo_nit']) || !is_array($this->NM_ajax_info['errList']['archivo_nit']))
+                    {
+                        $this->NM_ajax_info['errList']['archivo_nit'] = array();
+                    }
+                    $this->NM_ajax_info['errList']['archivo_nit'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                }
+            }
+        }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'archivo_nit';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_archivo_nit
+
+    function ValidateField_archivo_pago(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+        if ($this->nmgp_opcao != "excluir")
+        {
+            $sTestFile = $this->archivo_pago;
+            if (!function_exists('sc_upload_unprotect_chars'))
+            {
+                include_once 'terceros_mob_doc_name.php';
+            }
+            $this->archivo_pago = sc_upload_unprotect_chars($this->archivo_pago);
+            $this->archivo_pago_scfile_name = sc_upload_unprotect_chars($this->archivo_pago_scfile_name);
+            if ("" != $this->archivo_pago && "S" != $this->archivo_pago_limpa && !$teste_validade->ArqExtensao($this->archivo_pago, array('.pdf', '.jpg', '.jpeg', '.png', '.bmp', '.gif')))
+            {
+                $hasError = true;
+                $Campos_Crit .= "Archivos de Pago: " . $this->Ini->Nm_lang['lang_errm_file_invl']; 
+                if (!isset($Campos_Erros['archivo_pago']))
+                {
+                    $Campos_Erros['archivo_pago'] = array();
+                }
+                $Campos_Erros['archivo_pago'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
+                if (!isset($this->NM_ajax_info['errList']['archivo_pago']) || !is_array($this->NM_ajax_info['errList']['archivo_pago']))
+                {
+                    $this->NM_ajax_info['errList']['archivo_pago'] = array();
+                }
+                $this->NM_ajax_info['errList']['archivo_pago'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
+            }
+            if (!$hasError && "" != $this->archivo_pago && "S" != $this->archivo_pago_limpa) {
+                if (!function_exists('sc_upload_unprotect_chars')) {
+                    include_once 'terceros_mob_doc_name.php';
+                }
+                $pathParts = pathinfo(sc_upload_unprotect_chars($sTestFile));
+                $fileSize = filesize(sc_upload_unprotect_chars($sTestFile));
+                $sizeErrorSuffix = '';
+                if ($hasError) {
+                    $Campos_Crit .= "Archivos de Pago: " . $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                    if (!isset($Campos_Erros['archivo_pago']))
+                    {
+                        $Campos_Erros['archivo_pago'] = array();
+                    }
+                    $Campos_Erros['archivo_pago'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                    if (!isset($this->NM_ajax_info['errList']['archivo_pago']) || !is_array($this->NM_ajax_info['errList']['archivo_pago']))
+                    {
+                        $this->NM_ajax_info['errList']['archivo_pago'] = array();
+                    }
+                    $this->NM_ajax_info['errList']['archivo_pago'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
+                }
+            }
+        }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'archivo_pago';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_archivo_pago
+
+    function ValidateField_id_plan(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_plan) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan']) && !in_array($this->id_plan, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_plan']))
+                   {
+                       $Campos_Erros['id_plan'] = array();
+                   }
+                   $Campos_Erros['id_plan'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_plan']) || !is_array($this->NM_ajax_info['errList']['id_plan']))
+                   {
+                       $this->NM_ajax_info['errList']['id_plan'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_plan'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_plan';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_plan
+
+    function ValidateField_valor_plan(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->valor_plan === "" || is_null($this->valor_plan))  
+      { 
+          $this->valor_plan = 0;
+          $this->sc_force_zero[] = 'valor_plan';
+      } 
+      if (!empty($this->field_config['valor_plan']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp'], $this->field_config['valor_plan']['symbol_mon']); 
+          nm_limpa_valor($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp']) ; 
+          if ('.' == substr($this->valor_plan, 0, 1))
+          {
+              if ('' == str_replace('0', '', substr($this->valor_plan, 1)))
+              {
+                  $this->valor_plan = '';
+              }
+              else
+              {
+                  $this->valor_plan = '0' . $this->valor_plan;
+              }
+          }
+      }
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if ($this->valor_plan != '')  
+          { 
+              $iTestSize = 13;
+              if (strlen($this->valor_plan) > $iTestSize)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Valor Plan: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['valor_plan']))
+                  {
+                      $Campos_Erros['valor_plan'] = array();
+                  }
+                  $Campos_Erros['valor_plan'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['valor_plan']) || !is_array($this->NM_ajax_info['errList']['valor_plan']))
+                  {
+                      $this->NM_ajax_info['errList']['valor_plan'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['valor_plan'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->valor_plan, 12, 0, -0, 999999999999, "N") == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Valor Plan; " ; 
+                  if (!isset($Campos_Erros['valor_plan']))
+                  {
+                      $Campos_Erros['valor_plan'] = array();
+                  }
+                  $Campos_Erros['valor_plan'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['valor_plan']) || !is_array($this->NM_ajax_info['errList']['valor_plan']))
+                  {
+                      $this->NM_ajax_info['errList']['valor_plan'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['valor_plan'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'valor_plan';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_valor_plan
+
+    function ValidateField_fecha_registro_fe(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      nm_limpa_data($this->fecha_registro_fe, $this->field_config['fecha_registro_fe']['date_sep']) ; 
+      $trab_dt_min = ""; 
+      $trab_dt_max = ""; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $guarda_datahora = $this->field_config['fecha_registro_fe']['date_format']; 
+          if (false !== strpos($guarda_datahora, ';')) $this->field_config['fecha_registro_fe']['date_format'] = substr($guarda_datahora, 0, strpos($guarda_datahora, ';'));
+          $Format_Data = $this->field_config['fecha_registro_fe']['date_format']; 
+          nm_limpa_data($Format_Data, $this->field_config['fecha_registro_fe']['date_sep']) ; 
+          if (trim($this->fecha_registro_fe) != "")  
+          { 
+              if ($teste_validade->Data($this->fecha_registro_fe, $Format_Data, $trab_dt_min, $trab_dt_max) == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Fecha Registro Fe; " ; 
+                  if (!isset($Campos_Erros['fecha_registro_fe']))
+                  {
+                      $Campos_Erros['fecha_registro_fe'] = array();
+                  }
+                  $Campos_Erros['fecha_registro_fe'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['fecha_registro_fe']) || !is_array($this->NM_ajax_info['errList']['fecha_registro_fe']))
+                  {
+                      $this->NM_ajax_info['errList']['fecha_registro_fe'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['fecha_registro_fe'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+          $this->field_config['fecha_registro_fe']['date_format'] = $guarda_datahora; 
+       } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'fecha_registro_fe';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+      nm_limpa_hora($this->fecha_registro_fe_hora, $this->field_config['fecha_registro_fe_hora']['time_sep']) ; 
+      if ($this->nmgp_opcao != "excluir") 
+      {
+          $Format_Hora = $this->field_config['fecha_registro_fe_hora']['date_format']; 
+          nm_limpa_hora($Format_Hora, $this->field_config['fecha_registro_fe_hora']['time_sep']) ; 
+          if (trim($this->fecha_registro_fe_hora) != "")  
+          { 
+              if ($teste_validade->Hora($this->fecha_registro_fe_hora, $Format_Hora) == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Fecha Registro Fe; " ; 
+                  if (!isset($Campos_Erros['fecha_registro_fe_hora']))
+                  {
+                      $Campos_Erros['fecha_registro_fe_hora'] = array();
+                  }
+                  $Campos_Erros['fecha_registro_fe_hora'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['fecha_registro_fe']) || !is_array($this->NM_ajax_info['errList']['fecha_registro_fe']))
+                  {
+                      $this->NM_ajax_info['errList']['fecha_registro_fe'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['fecha_registro_fe'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+      } 
+      if (isset($Campos_Erros['fecha_registro_fe']) && isset($Campos_Erros['fecha_registro_fe_hora']))
+      {
+          $this->removeDuplicateDttmError($Campos_Erros['fecha_registro_fe'], $Campos_Erros['fecha_registro_fe_hora']);
+          if (empty($Campos_Erros['fecha_registro_fe_hora']))
+          {
+              unset($Campos_Erros['fecha_registro_fe_hora']);
+          }
+          if (isset($this->NM_ajax_info['errList']['fecha_registro_fe']))
+          {
+              $this->NM_ajax_info['errList']['fecha_registro_fe'] = array_unique($this->NM_ajax_info['errList']['fecha_registro_fe']);
+          }
+      }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'fecha_registro_fe_hora';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_fecha_registro_fe_hora
+
+    function ValidateField_nombre_contador(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      $this->nombre_contador = sc_strtoupper($this->nombre_contador); 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->nombre_contador) > 120) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Nombre Contador " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 120 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['nombre_contador']))
+              {
+                  $Campos_Erros['nombre_contador'] = array();
+              }
+              $Campos_Erros['nombre_contador'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 120 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['nombre_contador']) || !is_array($this->NM_ajax_info['errList']['nombre_contador']))
+              {
+                  $this->NM_ajax_info['errList']['nombre_contador'] = array();
+              }
+              $this->NM_ajax_info['errList']['nombre_contador'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 120 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'nombre_contador';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_nombre_contador
+
+    function ValidateField_estado(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->estado == "" && $this->nmgp_opcao != "excluir")
+      { 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'estado';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_estado
+
+    function ValidateField_si_nomina(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->si_nomina == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->si_nomina = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->si_nomina))
+          {
+              $x = 0; 
+              $this->si_nomina_1 = array(); 
+              foreach ($this->si_nomina as $ind => $dados_si_nomina_1 ) 
+              {
+                  if ($dados_si_nomina_1 != "") 
+                  {
+                      $this->si_nomina_1[] = $dados_si_nomina_1;
+                  } 
+              } 
+              $this->si_nomina = ""; 
+              foreach ($this->si_nomina_1 as $dados_si_nomina_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->si_nomina .= ";";
+                   } 
+                   $this->si_nomina .= $dados_si_nomina_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'si_nomina';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_si_nomina
+
+    function ValidateField_n_trabajadores(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->n_trabajadores === "" || is_null($this->n_trabajadores))  
+      { 
+          $this->n_trabajadores = 0;
+          $this->sc_force_zero[] = 'n_trabajadores';
+      } 
+      nm_limpa_numero($this->n_trabajadores, $this->field_config['n_trabajadores']['symbol_grp']) ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if ($this->n_trabajadores != '')  
+          { 
+              $iTestSize = 11;
+              if (strlen($this->n_trabajadores) > $iTestSize)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Número de Empleados: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['n_trabajadores']))
+                  {
+                      $Campos_Erros['n_trabajadores'] = array();
+                  }
+                  $Campos_Erros['n_trabajadores'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['n_trabajadores']) || !is_array($this->NM_ajax_info['errList']['n_trabajadores']))
+                  {
+                      $this->NM_ajax_info['errList']['n_trabajadores'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['n_trabajadores'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->n_trabajadores, 11, 0, -0, 99999999999, "N") == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Número de Empleados; " ; 
+                  if (!isset($Campos_Erros['n_trabajadores']))
+                  {
+                      $Campos_Erros['n_trabajadores'] = array();
+                  }
+                  $Campos_Erros['n_trabajadores'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['n_trabajadores']) || !is_array($this->NM_ajax_info['errList']['n_trabajadores']))
+                  {
+                      $this->NM_ajax_info['errList']['n_trabajadores'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['n_trabajadores'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'n_trabajadores';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_n_trabajadores
+
+    function ValidateField_si_factura_electronica(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->si_factura_electronica == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->si_factura_electronica = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->si_factura_electronica))
+          {
+              $x = 0; 
+              $this->si_factura_electronica_1 = array(); 
+              foreach ($this->si_factura_electronica as $ind => $dados_si_factura_electronica_1 ) 
+              {
+                  if ($dados_si_factura_electronica_1 != "") 
+                  {
+                      $this->si_factura_electronica_1[] = $dados_si_factura_electronica_1;
+                  } 
+              } 
+              $this->si_factura_electronica = ""; 
+              foreach ($this->si_factura_electronica_1 as $dados_si_factura_electronica_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->si_factura_electronica .= ";";
+                   } 
+                   $this->si_factura_electronica .= $dados_si_factura_electronica_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'si_factura_electronica';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_si_factura_electronica
+
+    function ValidateField_nombre_empresa_bd(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      $this->nombre_empresa_bd = sc_strtolower($this->nombre_empresa_bd); 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->nombre_empresa_bd) > 200) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Nombre Empresa BD " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 200 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['nombre_empresa_bd']))
+              {
+                  $Campos_Erros['nombre_empresa_bd'] = array();
+              }
+              $Campos_Erros['nombre_empresa_bd'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 200 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['nombre_empresa_bd']) || !is_array($this->NM_ajax_info['errList']['nombre_empresa_bd']))
+              {
+                  $this->NM_ajax_info['errList']['nombre_empresa_bd'] = array();
+              }
+              $this->NM_ajax_info['errList']['nombre_empresa_bd'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 200 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "abcdefghijklmnopqrstuvwxyz ";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->nombre_empresa_bd ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->nombre_empresa_bd, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Nombre Empresa BD " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['nombre_empresa_bd']))
+              {
+                  $Campos_Erros['nombre_empresa_bd'] = array();
+              }
+              $Campos_Erros['nombre_empresa_bd'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['nombre_empresa_bd']) || !is_array($this->NM_ajax_info['errList']['nombre_empresa_bd']))
+              {
+                  $this->NM_ajax_info['errList']['nombre_empresa_bd'] = array();
+              }
+              $this->NM_ajax_info['errList']['nombre_empresa_bd'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'nombre_empresa_bd';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_nombre_empresa_bd
+
     function ValidateField_archivos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -9381,6 +12542,318 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->imagenter = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['imagenter'];
           }
       } 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if ($this->archivo_cedula == "none") 
+          { 
+              $this->archivo_cedula = ""; 
+          } 
+          if ($this->archivo_cedula != "") 
+          { 
+              if (is_file($this->archivo_cedula))  
+              { 
+                  if ($this->nmgp_opcao == "incluir")
+                  { 
+                      $this->SC_DOC_archivo_cedula = $this->archivo_cedula;
+                  } 
+                  else 
+                  { 
+                      $arq_archivo_cedula = fopen($this->archivo_cedula, "r") ; 
+                      $reg_archivo_cedula = fread($arq_archivo_cedula, filesize($this->archivo_cedula)) ; 
+                      fclose($arq_archivo_cedula) ;  
+                  } 
+                  $this->NM_size_docs[$this->archivo_cedula_scfile_name] = $this->sc_file_size($this->archivo_cedula);
+                  $this->archivo_cedula =  trim($this->archivo_cedula_scfile_name) ;  
+                  $dir_doc = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+                 if ($this->nmgp_opcao != "incluir")
+                 { 
+                  if (nm_mkdir($dir_doc))  
+                  { 
+                      $_test_file = $this->fetchUniqueUploadName($this->archivo_cedula_scfile_name, $dir_doc, "archivo_cedula");
+                      if (trim($this->archivo_cedula_scfile_name) != $_test_file)
+                      {
+                          $this->archivo_cedula_scfile_name = $_test_file;
+                          $this->archivo_cedula = $_test_file;
+                      }
+                      $arq_archivo_cedula = fopen($dir_doc . trim($this->archivo_cedula_scfile_name), "w") ; 
+                      fwrite($arq_archivo_cedula, $reg_archivo_cedula) ;  
+                      fclose($arq_archivo_cedula) ;  
+                  } 
+                  else 
+                  { 
+                      $Campos_Crit .= "Cédula: " . $this->Ini->Nm_lang['lang_errm_ivdr']; 
+                      if (!isset($Campos_Erros['archivo_cedula']))
+                      {
+                          $Campos_Erros['archivo_cedula'] = array();
+                      }
+                      $Campos_Erros['archivo_cedula'][] = $this->Ini->Nm_lang['lang_errm_ivdr'];
+                      if (!isset($this->NM_ajax_info['errList']['archivo_cedula']) || !is_array($this->NM_ajax_info['errList']['archivo_cedula']))
+                      {
+                          $this->NM_ajax_info['errList']['archivo_cedula'] = array();
+                      }
+                      $this->NM_ajax_info['errList']['archivo_cedula'][] = $this->Ini->Nm_lang['lang_errm_ivdr'];
+                  } 
+                 } 
+              } 
+              else 
+              { 
+                  $Campos_Crit .= "Cédula " . $this->Ini->Nm_lang['lang_errm_upld']; 
+                  $this->archivo_cedula = "";
+                  if (!isset($Campos_Erros['archivo_cedula']))
+                  {
+                      $Campos_Erros['archivo_cedula'] = array();
+                  }
+                  $Campos_Erros['archivo_cedula'][] = $this->Ini->Nm_lang['lang_errm_upld'];
+                  if (!isset($this->NM_ajax_info['errList']['archivo_cedula']) || !is_array($this->NM_ajax_info['errList']['archivo_cedula']))
+                  {
+                      $this->NM_ajax_info['errList']['archivo_cedula'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['archivo_cedula'][] = $this->Ini->Nm_lang['lang_errm_upld'];
+              } 
+          } 
+          elseif (!empty($this->archivo_cedula_salva) && $this->archivo_cedula_limpa != "S")
+          {
+              $this->archivo_cedula = $this->archivo_cedula_salva;
+          }
+      } 
+      elseif (!empty($this->archivo_cedula_salva) && $this->archivo_cedula_limpa != "S")
+      {
+          $this->archivo_cedula = $this->archivo_cedula_salva;
+      }
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if ($this->archivo_rut == "none") 
+          { 
+              $this->archivo_rut = ""; 
+          } 
+          if ($this->archivo_rut != "") 
+          { 
+              if (is_file($this->archivo_rut))  
+              { 
+                  if ($this->nmgp_opcao == "incluir")
+                  { 
+                      $this->SC_DOC_archivo_rut = $this->archivo_rut;
+                  } 
+                  else 
+                  { 
+                      $arq_archivo_rut = fopen($this->archivo_rut, "r") ; 
+                      $reg_archivo_rut = fread($arq_archivo_rut, filesize($this->archivo_rut)) ; 
+                      fclose($arq_archivo_rut) ;  
+                  } 
+                  $this->NM_size_docs[$this->archivo_rut_scfile_name] = $this->sc_file_size($this->archivo_rut);
+                  $this->archivo_rut =  trim($this->archivo_rut_scfile_name) ;  
+                  $dir_doc = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+                 if ($this->nmgp_opcao != "incluir")
+                 { 
+                  if (nm_mkdir($dir_doc))  
+                  { 
+                      $_test_file = $this->fetchUniqueUploadName($this->archivo_rut_scfile_name, $dir_doc, "archivo_rut");
+                      if (trim($this->archivo_rut_scfile_name) != $_test_file)
+                      {
+                          $this->archivo_rut_scfile_name = $_test_file;
+                          $this->archivo_rut = $_test_file;
+                      }
+                      $arq_archivo_rut = fopen($dir_doc . trim($this->archivo_rut_scfile_name), "w") ; 
+                      fwrite($arq_archivo_rut, $reg_archivo_rut) ;  
+                      fclose($arq_archivo_rut) ;  
+                  } 
+                  else 
+                  { 
+                      $Campos_Crit .= "RUT: " . $this->Ini->Nm_lang['lang_errm_ivdr']; 
+                      if (!isset($Campos_Erros['archivo_rut']))
+                      {
+                          $Campos_Erros['archivo_rut'] = array();
+                      }
+                      $Campos_Erros['archivo_rut'][] = $this->Ini->Nm_lang['lang_errm_ivdr'];
+                      if (!isset($this->NM_ajax_info['errList']['archivo_rut']) || !is_array($this->NM_ajax_info['errList']['archivo_rut']))
+                      {
+                          $this->NM_ajax_info['errList']['archivo_rut'] = array();
+                      }
+                      $this->NM_ajax_info['errList']['archivo_rut'][] = $this->Ini->Nm_lang['lang_errm_ivdr'];
+                  } 
+                 } 
+              } 
+              else 
+              { 
+                  $Campos_Crit .= "RUT " . $this->Ini->Nm_lang['lang_errm_upld']; 
+                  $this->archivo_rut = "";
+                  if (!isset($Campos_Erros['archivo_rut']))
+                  {
+                      $Campos_Erros['archivo_rut'] = array();
+                  }
+                  $Campos_Erros['archivo_rut'][] = $this->Ini->Nm_lang['lang_errm_upld'];
+                  if (!isset($this->NM_ajax_info['errList']['archivo_rut']) || !is_array($this->NM_ajax_info['errList']['archivo_rut']))
+                  {
+                      $this->NM_ajax_info['errList']['archivo_rut'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['archivo_rut'][] = $this->Ini->Nm_lang['lang_errm_upld'];
+              } 
+          } 
+          elseif (!empty($this->archivo_rut_salva) && $this->archivo_rut_limpa != "S")
+          {
+              $this->archivo_rut = $this->archivo_rut_salva;
+          }
+      } 
+      elseif (!empty($this->archivo_rut_salva) && $this->archivo_rut_limpa != "S")
+      {
+          $this->archivo_rut = $this->archivo_rut_salva;
+      }
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if ($this->archivo_nit == "none") 
+          { 
+              $this->archivo_nit = ""; 
+          } 
+          if ($this->archivo_nit != "") 
+          { 
+              if (is_file($this->archivo_nit))  
+              { 
+                  if ($this->nmgp_opcao == "incluir")
+                  { 
+                      $this->SC_DOC_archivo_nit = $this->archivo_nit;
+                  } 
+                  else 
+                  { 
+                      $arq_archivo_nit = fopen($this->archivo_nit, "r") ; 
+                      $reg_archivo_nit = fread($arq_archivo_nit, filesize($this->archivo_nit)) ; 
+                      fclose($arq_archivo_nit) ;  
+                  } 
+                  $this->NM_size_docs[$this->archivo_nit_scfile_name] = $this->sc_file_size($this->archivo_nit);
+                  $this->archivo_nit =  trim($this->archivo_nit_scfile_name) ;  
+                  $dir_doc = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+                 if ($this->nmgp_opcao != "incluir")
+                 { 
+                  if (nm_mkdir($dir_doc))  
+                  { 
+                      $_test_file = $this->fetchUniqueUploadName($this->archivo_nit_scfile_name, $dir_doc, "archivo_nit");
+                      if (trim($this->archivo_nit_scfile_name) != $_test_file)
+                      {
+                          $this->archivo_nit_scfile_name = $_test_file;
+                          $this->archivo_nit = $_test_file;
+                      }
+                      $arq_archivo_nit = fopen($dir_doc . trim($this->archivo_nit_scfile_name), "w") ; 
+                      fwrite($arq_archivo_nit, $reg_archivo_nit) ;  
+                      fclose($arq_archivo_nit) ;  
+                  } 
+                  else 
+                  { 
+                      $Campos_Crit .= "Cámara de Comercio: " . $this->Ini->Nm_lang['lang_errm_ivdr']; 
+                      if (!isset($Campos_Erros['archivo_nit']))
+                      {
+                          $Campos_Erros['archivo_nit'] = array();
+                      }
+                      $Campos_Erros['archivo_nit'][] = $this->Ini->Nm_lang['lang_errm_ivdr'];
+                      if (!isset($this->NM_ajax_info['errList']['archivo_nit']) || !is_array($this->NM_ajax_info['errList']['archivo_nit']))
+                      {
+                          $this->NM_ajax_info['errList']['archivo_nit'] = array();
+                      }
+                      $this->NM_ajax_info['errList']['archivo_nit'][] = $this->Ini->Nm_lang['lang_errm_ivdr'];
+                  } 
+                 } 
+              } 
+              else 
+              { 
+                  $Campos_Crit .= "Cámara de Comercio " . $this->Ini->Nm_lang['lang_errm_upld']; 
+                  $this->archivo_nit = "";
+                  if (!isset($Campos_Erros['archivo_nit']))
+                  {
+                      $Campos_Erros['archivo_nit'] = array();
+                  }
+                  $Campos_Erros['archivo_nit'][] = $this->Ini->Nm_lang['lang_errm_upld'];
+                  if (!isset($this->NM_ajax_info['errList']['archivo_nit']) || !is_array($this->NM_ajax_info['errList']['archivo_nit']))
+                  {
+                      $this->NM_ajax_info['errList']['archivo_nit'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['archivo_nit'][] = $this->Ini->Nm_lang['lang_errm_upld'];
+              } 
+          } 
+          elseif (!empty($this->archivo_nit_salva) && $this->archivo_nit_limpa != "S")
+          {
+              $this->archivo_nit = $this->archivo_nit_salva;
+          }
+      } 
+      elseif (!empty($this->archivo_nit_salva) && $this->archivo_nit_limpa != "S")
+      {
+          $this->archivo_nit = $this->archivo_nit_salva;
+      }
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if ($this->archivo_pago == "none") 
+          { 
+              $this->archivo_pago = ""; 
+          } 
+          if ($this->archivo_pago != "") 
+          { 
+              if (is_file($this->archivo_pago))  
+              { 
+                  if ($this->nmgp_opcao == "incluir")
+                  { 
+                      $this->SC_DOC_archivo_pago = $this->archivo_pago;
+                  } 
+                  else 
+                  { 
+                      $arq_archivo_pago = fopen($this->archivo_pago, "r") ; 
+                      $reg_archivo_pago = fread($arq_archivo_pago, filesize($this->archivo_pago)) ; 
+                      fclose($arq_archivo_pago) ;  
+                  } 
+                  $this->NM_size_docs[$this->archivo_pago_scfile_name] = $this->sc_file_size($this->archivo_pago);
+                  $this->archivo_pago =  trim($this->archivo_pago_scfile_name) ;  
+                  $dir_doc = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+                 if ($this->nmgp_opcao != "incluir")
+                 { 
+                  if (nm_mkdir($dir_doc))  
+                  { 
+                      $_test_file = $this->fetchUniqueUploadName($this->archivo_pago_scfile_name, $dir_doc, "archivo_pago");
+                      if (trim($this->archivo_pago_scfile_name) != $_test_file)
+                      {
+                          $this->archivo_pago_scfile_name = $_test_file;
+                          $this->archivo_pago = $_test_file;
+                      }
+                      $arq_archivo_pago = fopen($dir_doc . trim($this->archivo_pago_scfile_name), "w") ; 
+                      fwrite($arq_archivo_pago, $reg_archivo_pago) ;  
+                      fclose($arq_archivo_pago) ;  
+                  } 
+                  else 
+                  { 
+                      $Campos_Crit .= "Archivos de Pago: " . $this->Ini->Nm_lang['lang_errm_ivdr']; 
+                      if (!isset($Campos_Erros['archivo_pago']))
+                      {
+                          $Campos_Erros['archivo_pago'] = array();
+                      }
+                      $Campos_Erros['archivo_pago'][] = $this->Ini->Nm_lang['lang_errm_ivdr'];
+                      if (!isset($this->NM_ajax_info['errList']['archivo_pago']) || !is_array($this->NM_ajax_info['errList']['archivo_pago']))
+                      {
+                          $this->NM_ajax_info['errList']['archivo_pago'] = array();
+                      }
+                      $this->NM_ajax_info['errList']['archivo_pago'][] = $this->Ini->Nm_lang['lang_errm_ivdr'];
+                  } 
+                 } 
+              } 
+              else 
+              { 
+                  $Campos_Crit .= "Archivos de Pago " . $this->Ini->Nm_lang['lang_errm_upld']; 
+                  $this->archivo_pago = "";
+                  if (!isset($Campos_Erros['archivo_pago']))
+                  {
+                      $Campos_Erros['archivo_pago'] = array();
+                  }
+                  $Campos_Erros['archivo_pago'][] = $this->Ini->Nm_lang['lang_errm_upld'];
+                  if (!isset($this->NM_ajax_info['errList']['archivo_pago']) || !is_array($this->NM_ajax_info['errList']['archivo_pago']))
+                  {
+                      $this->NM_ajax_info['errList']['archivo_pago'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['archivo_pago'][] = $this->Ini->Nm_lang['lang_errm_upld'];
+              } 
+          } 
+          elseif (!empty($this->archivo_pago_salva) && $this->archivo_pago_limpa != "S")
+          {
+              $this->archivo_pago = $this->archivo_pago_salva;
+          }
+      } 
+      elseif (!empty($this->archivo_pago_salva) && $this->archivo_pago_limpa != "S")
+      {
+          $this->archivo_pago = $this->archivo_pago_salva;
+      }
    }
 
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
@@ -9485,6 +12958,39 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['puc_auxiliar_proveedores'] = $this->puc_auxiliar_proveedores;
     $this->nmgp_dados_form['puc_retefuente_compras'] = $this->puc_retefuente_compras;
     $this->nmgp_dados_form['puc_retefuente_servicios_prov'] = $this->puc_retefuente_servicios_prov;
+    if (empty($this->archivo_cedula))
+    {
+        $this->archivo_cedula = $this->nmgp_dados_form['archivo_cedula'];
+    }
+    $this->nmgp_dados_form['archivo_cedula'] = $this->archivo_cedula;
+    $this->nmgp_dados_form['archivo_cedula_limpa'] = $this->archivo_cedula_limpa;
+    if (empty($this->archivo_rut))
+    {
+        $this->archivo_rut = $this->nmgp_dados_form['archivo_rut'];
+    }
+    $this->nmgp_dados_form['archivo_rut'] = $this->archivo_rut;
+    $this->nmgp_dados_form['archivo_rut_limpa'] = $this->archivo_rut_limpa;
+    if (empty($this->archivo_nit))
+    {
+        $this->archivo_nit = $this->nmgp_dados_form['archivo_nit'];
+    }
+    $this->nmgp_dados_form['archivo_nit'] = $this->archivo_nit;
+    $this->nmgp_dados_form['archivo_nit_limpa'] = $this->archivo_nit_limpa;
+    if (empty($this->archivo_pago))
+    {
+        $this->archivo_pago = $this->nmgp_dados_form['archivo_pago'];
+    }
+    $this->nmgp_dados_form['archivo_pago'] = $this->archivo_pago;
+    $this->nmgp_dados_form['archivo_pago_limpa'] = $this->archivo_pago_limpa;
+    $this->nmgp_dados_form['id_plan'] = $this->id_plan;
+    $this->nmgp_dados_form['valor_plan'] = $this->valor_plan;
+    $this->nmgp_dados_form['fecha_registro_fe'] = (strlen(trim($this->fecha_registro_fe)) > 19) ? str_replace(".", ":", $this->fecha_registro_fe) : trim($this->fecha_registro_fe);
+    $this->nmgp_dados_form['nombre_contador'] = $this->nombre_contador;
+    $this->nmgp_dados_form['estado'] = $this->estado;
+    $this->nmgp_dados_form['si_nomina'] = $this->si_nomina;
+    $this->nmgp_dados_form['n_trabajadores'] = $this->n_trabajadores;
+    $this->nmgp_dados_form['si_factura_electronica'] = $this->si_factura_electronica;
+    $this->nmgp_dados_form['nombre_empresa_bd'] = $this->nombre_empresa_bd;
     $this->nmgp_dados_form['archivos'] = $this->archivos;
     $this->nmgp_dados_form['es_restaurante'] = $this->es_restaurante;
     $this->nmgp_dados_form['porcentaje_propina_sugerida'] = $this->porcentaje_propina_sugerida;
@@ -9556,6 +13062,18 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
          $this->sc_remove_currency($this->saldoapagar, $this->field_config['saldoapagar']['symbol_dec'], $this->field_config['saldoapagar']['symbol_grp'], $this->field_config['saldoapagar']['symbol_mon']);
          nm_limpa_valor($this->saldoapagar, $this->field_config['saldoapagar']['symbol_dec'], $this->field_config['saldoapagar']['symbol_grp']);
       }
+      $this->Before_unformat['valor_plan'] = $this->valor_plan;
+      if (!empty($this->field_config['valor_plan']['symbol_dec']))
+      {
+         $this->sc_remove_currency($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp'], $this->field_config['valor_plan']['symbol_mon']);
+         nm_limpa_valor($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp']);
+      }
+      $this->Before_unformat['fecha_registro_fe'] = $this->fecha_registro_fe;
+      $this->Before_unformat['fecha_registro_fe_hora'] = $this->fecha_registro_fe_hora;
+      nm_limpa_data($this->fecha_registro_fe, $this->field_config['fecha_registro_fe']['date_sep']) ; 
+      nm_limpa_hora($this->fecha_registro_fe_hora, $this->field_config['fecha_registro_fe']['time_sep']) ; 
+      $this->Before_unformat['n_trabajadores'] = $this->n_trabajadores;
+      nm_limpa_numero($this->n_trabajadores, $this->field_config['n_trabajadores']['symbol_grp']) ; 
       $this->Before_unformat['porcentaje_propina_sugerida'] = $this->porcentaje_propina_sugerida;
       nm_limpa_numero($this->porcentaje_propina_sugerida, $this->field_config['porcentaje_propina_sugerida']['symbol_grp']) ; 
       $this->Before_unformat['con_actual'] = $this->con_actual;
@@ -9574,6 +13092,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
          $this->sc_remove_currency($this->total_pedido_tmp, $this->field_config['total_pedido_tmp']['symbol_dec'], $this->field_config['total_pedido_tmp']['symbol_grp'], $this->field_config['total_pedido_tmp']['symbol_mon']);
          nm_limpa_valor($this->total_pedido_tmp, $this->field_config['total_pedido_tmp']['symbol_dec'], $this->field_config['total_pedido_tmp']['symbol_grp']);
       }
+   }
+   function nm_tira_formatacao_documento($Val_in)
+   {
+      return $Val_in;
    }
    function sc_add_currency(&$value, $symbol, $pos)
    {
@@ -9680,6 +13202,18 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
              $this->sc_remove_currency($this->saldoapagar, $this->field_config['saldoapagar']['symbol_dec'], $this->field_config['saldoapagar']['symbol_grp'], $this->field_config['saldoapagar']['symbol_mon']);
              nm_limpa_valor($this->saldoapagar, $this->field_config['saldoapagar']['symbol_dec'], $this->field_config['saldoapagar']['symbol_grp']);
           }
+      }
+      if ($Nome_Campo == "valor_plan")
+      {
+          if (!empty($this->field_config['valor_plan']['symbol_dec']))
+          {
+             $this->sc_remove_currency($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp'], $this->field_config['valor_plan']['symbol_mon']);
+             nm_limpa_valor($this->valor_plan, $this->field_config['valor_plan']['symbol_dec'], $this->field_config['valor_plan']['symbol_grp']);
+          }
+      }
+      if ($Nome_Campo == "n_trabajadores")
+      {
+          nm_limpa_numero($this->n_trabajadores, $this->field_config['n_trabajadores']['symbol_grp']) ; 
       }
       if ($Nome_Campo == "porcentaje_propina_sugerida")
       {
@@ -9795,6 +13329,34 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           nmgp_Form_Num_Val($this->saldoapagar, $this->field_config['saldoapagar']['symbol_grp'], $this->field_config['saldoapagar']['symbol_dec'], "0", "S", $this->field_config['saldoapagar']['format_neg'], "", "", "-", $this->field_config['saldoapagar']['symbol_fmt']) ; 
           $sMonSymb = $this->field_config['saldoapagar']['symbol_mon'];
           $this->sc_add_currency($this->saldoapagar, $sMonSymb, $this->field_config['saldoapagar']['format_pos']); 
+      }
+      if ('' !== $this->valor_plan || (!empty($format_fields) && isset($format_fields['valor_plan'])))
+      {
+          nmgp_Form_Num_Val($this->valor_plan, $this->field_config['valor_plan']['symbol_grp'], $this->field_config['valor_plan']['symbol_dec'], "0", "S", $this->field_config['valor_plan']['format_neg'], "", "", "-", $this->field_config['valor_plan']['symbol_fmt']) ; 
+      }
+      if ((!empty($this->fecha_registro_fe) && 'null' != $this->fecha_registro_fe) || (!empty($format_fields) && isset($format_fields['fecha_registro_fe'])))
+      {
+          $nm_separa_data = strpos($this->field_config['fecha_registro_fe']['date_format'], ";") ;
+          $guarda_format_hora = $this->field_config['fecha_registro_fe']['date_format'];
+          $this->field_config['fecha_registro_fe']['date_format'] = substr($this->field_config['fecha_registro_fe']['date_format'], 0, $nm_separa_data) ;
+          $separador = strpos($this->fecha_registro_fe, " ") ; 
+          $this->fecha_registro_fe_hora = substr($this->fecha_registro_fe, $separador + 1) ; 
+          $this->fecha_registro_fe = substr($this->fecha_registro_fe, 0, $separador) ; 
+          nm_volta_data($this->fecha_registro_fe, $this->field_config['fecha_registro_fe']['date_format']) ; 
+          nmgp_Form_Datas($this->fecha_registro_fe, $this->field_config['fecha_registro_fe']['date_format'], $this->field_config['fecha_registro_fe']['date_sep']) ;  
+          $this->field_config['fecha_registro_fe']['date_format'] = substr($guarda_format_hora, $nm_separa_data + 1) ;
+          nm_volta_hora($this->fecha_registro_fe_hora, $this->field_config['fecha_registro_fe']['date_format']) ; 
+          nmgp_Form_Hora($this->fecha_registro_fe_hora, $this->field_config['fecha_registro_fe']['date_format'], $this->field_config['fecha_registro_fe']['time_sep']) ;  
+          $this->field_config['fecha_registro_fe']['date_format'] = $guarda_format_hora ;
+      }
+      elseif ('null' == $this->fecha_registro_fe || '' == $this->fecha_registro_fe)
+      {
+          $this->fecha_registro_fe_hora = '';
+          $this->fecha_registro_fe = '';
+      }
+      if ('' !== $this->n_trabajadores || (!empty($format_fields) && isset($format_fields['n_trabajadores'])))
+      {
+          nmgp_Form_Num_Val($this->n_trabajadores, $this->field_config['n_trabajadores']['symbol_grp'], $this->field_config['n_trabajadores']['symbol_dec'], "0", "S", $this->field_config['n_trabajadores']['format_neg'], "", "", "-", $this->field_config['n_trabajadores']['symbol_fmt']) ; 
       }
       if ('' !== $this->porcentaje_propina_sugerida || (!empty($format_fields) && isset($format_fields['porcentaje_propina_sugerida'])))
       {
@@ -10248,6 +13810,60 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           }
       } 
       $this->field_config['fechultcomp']['date_format'] = $guarda_format_hora;
+      $guarda_format_hora = $this->field_config['fecha_registro_fe']['date_format'];
+      if ($this->fecha_registro_fe != "")  
+      { 
+          $nm_separa_data = strpos($this->field_config['fecha_registro_fe']['date_format'], ";") ;
+          $this->field_config['fecha_registro_fe']['date_format'] = substr($this->field_config['fecha_registro_fe']['date_format'], 0, $nm_separa_data) ;
+          nm_conv_data($this->fecha_registro_fe, $this->field_config['fecha_registro_fe']['date_format']) ; 
+          if ('pdo_sqlsrv' == strtolower($this->Ini->nm_tpbanco) || 'pdo_dblib' == strtolower($this->Ini->nm_tpbanco))
+          {
+              $this->fecha_registro_fe = str_replace('-', '', $this->fecha_registro_fe);
+          }
+          $this->field_config['fecha_registro_fe']['date_format'] = substr($guarda_format_hora, $nm_separa_data + 1) ;
+          nm_conv_hora($this->fecha_registro_fe_hora, $this->field_config['fecha_registro_fe']['date_format']) ; 
+          if ($this->fecha_registro_fe_hora == "" )  
+          { 
+              $this->fecha_registro_fe_hora = "00:00:00:000" ; 
+          }
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+          {
+              $this->fecha_registro_fe_hora = substr($this->fecha_registro_fe_hora, 0, -4) . "." . substr($this->fecha_registro_fe_hora, -3);
+          }
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+          {
+              $this->fecha_registro_fe_hora = substr($this->fecha_registro_fe_hora, 0, -4);
+          }
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+          {
+              $this->fecha_registro_fe_hora = substr($this->fecha_registro_fe_hora, 0, -4);
+          }
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+          {
+              $this->fecha_registro_fe_hora = substr($this->fecha_registro_fe_hora, 0, -4);
+          }
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+          {
+              $this->fecha_registro_fe_hora = substr($this->fecha_registro_fe_hora, 0, -4);
+          }
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+          {
+              $this->fecha_registro_fe_hora = substr($this->fecha_registro_fe_hora, 0, -4);
+          }
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+          {
+              $this->fecha_registro_fe_hora = substr($this->fecha_registro_fe_hora, 0, -4);
+          }
+          if ($this->fecha_registro_fe != "")  
+          { 
+              $this->fecha_registro_fe .= " " . $this->fecha_registro_fe_hora ; 
+          }
+      } 
+      if ($this->fecha_registro_fe == "" && $use_null)  
+      { 
+          $this->fecha_registro_fe = "null" ; 
+      } 
+      $this->field_config['fecha_registro_fe']['date_format'] = $guarda_format_hora;
    }
 //
    function nm_prep_date_change($cmp_date, $format_dt)
@@ -10402,6 +14018,19 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $this->ajax_return_values_puc_auxiliar_proveedores();
           $this->ajax_return_values_puc_retefuente_compras();
           $this->ajax_return_values_puc_retefuente_servicios_prov();
+          $this->ajax_return_values_archivo_cedula();
+          $this->ajax_return_values_archivo_rut();
+          $this->ajax_return_values_archivo_nit();
+          $this->ajax_return_values_archivo_pago();
+          $this->ajax_return_values_id_plan();
+          $this->ajax_return_values_valor_plan();
+          $this->ajax_return_values_fecha_registro_fe();
+          $this->ajax_return_values_nombre_contador();
+          $this->ajax_return_values_estado();
+          $this->ajax_return_values_si_nomina();
+          $this->ajax_return_values_n_trabajadores();
+          $this->ajax_return_values_si_factura_electronica();
+          $this->ajax_return_values_nombre_empresa_bd();
           $this->ajax_return_values_archivos();
           $this->ajax_return_values_es_restaurante();
           $this->ajax_return_values_porcentaje_propina_sugerida();
@@ -11103,6 +14732,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -11123,6 +14756,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -11335,6 +14972,48 @@ else
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT iddep, departamento  FROM departamento  ORDER BY departamento";
 
    $this->dv = $old_value_dv;
@@ -11352,6 +15031,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -11471,6 +15154,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -11491,6 +15178,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT idmun, municipio  FROM municipio  WHERE iddepar=$this->departamento ORDER BY municipio";
@@ -11510,6 +15201,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -11632,6 +15327,10 @@ if ($this->idmuni != "")
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -11652,6 +15351,10 @@ if ($this->idmuni != "")
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT municipio FROM municipio  WHERE idmun=$this->idmuni ORDER BY municipio";
@@ -11671,6 +15374,10 @@ if ($this->idmuni != "")
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -11791,6 +15498,10 @@ if ($this->idmuni != "")
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -11811,6 +15522,10 @@ if ($this->idmuni != "")
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT codigo_postal  FROM codigo_postal  WHERE idmuni=$this->idmuni ORDER BY codigo_postal";
@@ -11830,6 +15545,10 @@ if ($this->idmuni != "")
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -11965,6 +15684,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_lenguaje'][
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -11985,6 +15708,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_lenguaje'][
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -12197,6 +15924,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_lenguaje'][
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT lenguaje, lenguaje  FROM lenguas  ORDER BY lenguaje";
 
    $this->dv = $old_value_dv;
@@ -12214,6 +15983,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_lenguaje'][
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -12886,6 +16659,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_loatiende']
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -12906,6 +16683,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_loatiende']
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
@@ -12952,6 +16733,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_loatiende']
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -13674,6 +17459,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_zona_client
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -13694,6 +17483,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_zona_client
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -13906,6 +17699,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_zona_client
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT idzona_cliente, codigo + ' - ' + nombre  FROM zona_clientes  ORDER BY codigo, nombre";
@@ -13950,6 +17785,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_zona_client
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -14071,6 +17910,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -14091,6 +17934,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -14303,6 +18150,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT idclasificacion_cliente, codigo + ' - ' + nombre  FROM clasificacion_clientes  ORDER BY codigo, nombre";
@@ -14347,6 +18236,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -14464,6 +18357,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -14484,6 +18381,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -14696,6 +18597,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "' ORDER BY codigo, nombre";
@@ -14740,6 +18683,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -14829,6 +18776,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -14849,6 +18800,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -15061,6 +19016,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "' ORDER BY codigo, nombre";
@@ -15105,6 +19102,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -15194,6 +19195,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -15214,6 +19219,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -15426,6 +19435,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "' ORDER BY codigo, nombre";
@@ -15470,6 +19521,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -15559,6 +19614,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -15579,6 +19638,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -15791,6 +19854,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "' ORDER BY codigo, nombre";
@@ -15835,6 +19940,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -15924,6 +20033,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -15944,6 +20057,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -16156,6 +20273,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "' ORDER BY codigo, nombre";
@@ -16200,6 +20359,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -16289,6 +20452,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -16309,6 +20476,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -16521,6 +20692,48 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "' ORDER BY codigo, nombre";
@@ -16565,6 +20778,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -16611,6 +20828,866 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
           $this->NM_ajax_info['fldList']['puc_retefuente_servicios_prov_autocomp'] = array(
                'type'    => 'text',
                'valList' => array($val_output),
+              );
+          }
+   }
+
+          //----- archivo_cedula
+   function ajax_return_values_archivo_cedula($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("archivo_cedula", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->archivo_cedula);
+              $aLookup = array();
+              $sTmpExtension = pathinfo($this->archivo_cedula, PATHINFO_EXTENSION);
+              $sTmpExtension = null == $sTmpExtension ? '' : '.' . $sTmpExtension;
+              $sTmpFile      = 'sc_archivo_cedula_' . md5(mt_rand(1, 1000) . microtime() . session_id()) . $sTmpExtension;
+              if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames']))
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'] = array();
+              }
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'][$sTmpFile] = $this->archivo_cedula;
+              $tmp_file_archivo_cedula = trim(NM_charset_to_utf8($this->archivo_cedula));
+              $tmp_icon_archivo_cedula = '';
+              if ('' != $tmp_file_archivo_cedula)
+              {
+                  $tmp_icon_archivo_cedula = $this->gera_icone($tmp_file_archivo_cedula);
+              }
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['archivo_cedula'] = array(
+                       'row'    => '',
+               'type'    => 'documento',
+               'valList' => array($sTmpValue),
+               'docLink' => "<a href=\"javascript:nm_mostra_doc('1', '" . $sTmpFile . "', 'terceros')\">" . $tmp_file_archivo_cedula . "</a>",
+               'docIcon' => $tmp_icon_archivo_cedula,
+               'docReadonly' => "N",
+              );
+              if ('navigate_form' == $this->NM_ajax_opcao)
+              {
+                  $this->NM_ajax_info['fldList']['archivo_cedula_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+              }
+          }
+   }
+
+          //----- archivo_rut
+   function ajax_return_values_archivo_rut($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("archivo_rut", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->archivo_rut);
+              $aLookup = array();
+              $sTmpExtension = pathinfo($this->archivo_rut, PATHINFO_EXTENSION);
+              $sTmpExtension = null == $sTmpExtension ? '' : '.' . $sTmpExtension;
+              $sTmpFile      = 'sc_archivo_rut_' . md5(mt_rand(1, 1000) . microtime() . session_id()) . $sTmpExtension;
+              if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames']))
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'] = array();
+              }
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'][$sTmpFile] = $this->archivo_rut;
+              $tmp_file_archivo_rut = trim(NM_charset_to_utf8($this->archivo_rut));
+              $tmp_icon_archivo_rut = '';
+              if ('' != $tmp_file_archivo_rut)
+              {
+                  $tmp_icon_archivo_rut = $this->gera_icone($tmp_file_archivo_rut);
+              }
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['archivo_rut'] = array(
+                       'row'    => '',
+               'type'    => 'documento',
+               'valList' => array($sTmpValue),
+               'docLink' => "<a href=\"javascript:nm_mostra_doc('2', '" . $sTmpFile . "', 'terceros')\">" . $tmp_file_archivo_rut . "</a>",
+               'docIcon' => $tmp_icon_archivo_rut,
+               'docReadonly' => "N",
+              );
+              if ('navigate_form' == $this->NM_ajax_opcao)
+              {
+                  $this->NM_ajax_info['fldList']['archivo_rut_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+              }
+          }
+   }
+
+          //----- archivo_nit
+   function ajax_return_values_archivo_nit($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("archivo_nit", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->archivo_nit);
+              $aLookup = array();
+              $sTmpExtension = pathinfo($this->archivo_nit, PATHINFO_EXTENSION);
+              $sTmpExtension = null == $sTmpExtension ? '' : '.' . $sTmpExtension;
+              $sTmpFile      = 'sc_archivo_nit_' . md5(mt_rand(1, 1000) . microtime() . session_id()) . $sTmpExtension;
+              if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames']))
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'] = array();
+              }
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'][$sTmpFile] = $this->archivo_nit;
+              $tmp_file_archivo_nit = trim(NM_charset_to_utf8($this->archivo_nit));
+              $tmp_icon_archivo_nit = '';
+              if ('' != $tmp_file_archivo_nit)
+              {
+                  $tmp_icon_archivo_nit = $this->gera_icone($tmp_file_archivo_nit);
+              }
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['archivo_nit'] = array(
+                       'row'    => '',
+               'type'    => 'documento',
+               'valList' => array($sTmpValue),
+               'docLink' => "<a href=\"javascript:nm_mostra_doc('3', '" . $sTmpFile . "', 'terceros')\">" . $tmp_file_archivo_nit . "</a>",
+               'docIcon' => $tmp_icon_archivo_nit,
+               'docReadonly' => "N",
+              );
+              if ('navigate_form' == $this->NM_ajax_opcao)
+              {
+                  $this->NM_ajax_info['fldList']['archivo_nit_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+              }
+          }
+   }
+
+          //----- archivo_pago
+   function ajax_return_values_archivo_pago($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("archivo_pago", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->archivo_pago);
+              $aLookup = array();
+              $sTmpExtension = pathinfo($this->archivo_pago, PATHINFO_EXTENSION);
+              $sTmpExtension = null == $sTmpExtension ? '' : '.' . $sTmpExtension;
+              $sTmpFile      = 'sc_archivo_pago_' . md5(mt_rand(1, 1000) . microtime() . session_id()) . $sTmpExtension;
+              if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames']))
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'] = array();
+              }
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'][$sTmpFile] = $this->archivo_pago;
+              $tmp_file_archivo_pago = trim(NM_charset_to_utf8($this->archivo_pago));
+              $tmp_icon_archivo_pago = '';
+              if ('' != $tmp_file_archivo_pago)
+              {
+                  $tmp_icon_archivo_pago = $this->gera_icone($tmp_file_archivo_pago);
+              }
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['archivo_pago'] = array(
+                       'row'    => '',
+               'type'    => 'documento',
+               'valList' => array($sTmpValue),
+               'docLink' => "<a href=\"javascript:nm_mostra_doc('4', '" . $sTmpFile . "', 'terceros')\">" . $tmp_file_archivo_pago . "</a>",
+               'docIcon' => $tmp_icon_archivo_pago,
+               'docReadonly' => "N",
+              );
+              if ('navigate_form' == $this->NM_ajax_opcao)
+              {
+                  $this->NM_ajax_info['fldList']['archivo_pago_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+              }
+          }
+   }
+
+          //----- id_plan
+   function ajax_return_values_id_plan($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_plan", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_plan);
+              $aLookup = array();
+              $this->_tmp_lookup_id_plan = $this->id_plan;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string('Seleccione')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $cliente_val_str = "''";
+   if (!empty($this->cliente))
+   {
+       if (is_array($this->cliente))
+       {
+           $Tmp_array = $this->cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->cliente);
+       }
+       $cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $cliente_val_str)
+          {
+             $cliente_val_str .= ", ";
+          }
+          $cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $empleado_val_str = "''";
+   if (!empty($this->empleado))
+   {
+       if (is_array($this->empleado))
+       {
+           $Tmp_array = $this->empleado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->empleado);
+       }
+       $empleado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $empleado_val_str)
+          {
+             $empleado_val_str .= ", ";
+          }
+          $empleado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $proveedor_val_str = "''";
+   if (!empty($this->proveedor))
+   {
+       if (is_array($this->proveedor))
+       {
+           $Tmp_array = $this->proveedor;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->proveedor);
+       }
+       $proveedor_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $proveedor_val_str)
+          {
+             $proveedor_val_str .= ", ";
+          }
+          $proveedor_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $sucur_cliente_val_str = "''";
+   if (!empty($this->sucur_cliente))
+   {
+       if (is_array($this->sucur_cliente))
+       {
+           $Tmp_array = $this->sucur_cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->sucur_cliente);
+       }
+       $sucur_cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $sucur_cliente_val_str)
+          {
+             $sucur_cliente_val_str .= ", ";
+          }
+          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_restaurante_val_str = "''";
+   if (!empty($this->es_restaurante))
+   {
+       if (is_array($this->es_restaurante))
+       {
+           $Tmp_array = $this->es_restaurante;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_restaurante);
+       }
+       $es_restaurante_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_restaurante_val_str)
+          {
+             $es_restaurante_val_str .= ", ";
+          }
+          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_cajero_val_str = "''";
+   if (!empty($this->es_cajero))
+   {
+       if (is_array($this->es_cajero))
+       {
+           $Tmp_array = $this->es_cajero;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_cajero);
+       }
+       $es_cajero_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_cajero_val_str)
+          {
+             $es_cajero_val_str .= ", ";
+          }
+          $es_cajero_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $autorizado_val_str = "''";
+   if (!empty($this->autorizado))
+   {
+       if (is_array($this->autorizado))
+       {
+           $Tmp_array = $this->autorizado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->autorizado);
+       }
+       $autorizado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $autorizado_val_str)
+          {
+             $autorizado_val_str .= ", ";
+          }
+          $autorizado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $notificar_val_str = "''";
+   if (!empty($this->notificar))
+   {
+       if (is_array($this->notificar))
+       {
+           $Tmp_array = $this->notificar;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->notificar);
+       }
+       $notificar_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $notificar_val_str)
+          {
+             $notificar_val_str .= ", ";
+          }
+          $notificar_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_tecnico_val_str = "''";
+   if (!empty($this->es_tecnico))
+   {
+       if (is_array($this->es_tecnico))
+       {
+           $Tmp_array = $this->es_tecnico;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_tecnico);
+       }
+       $es_tecnico_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_tecnico_val_str)
+          {
+             $es_tecnico_val_str .= ", ";
+          }
+          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro)  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT idprod, codigobar&' - '&nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   else
+   {
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_plan\"";
+          if (isset($this->NM_ajax_info['select_html']['id_plan']) && !empty($this->NM_ajax_info['select_html']['id_plan']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_plan']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_plan == $sValue)
+                  {
+                      $this->_tmp_lookup_id_plan = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_plan'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_plan']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_plan']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_plan']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_plan']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_plan']['labList'] = $aLabel;
+          }
+   }
+
+          //----- valor_plan
+   function ajax_return_values_valor_plan($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("valor_plan", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->valor_plan);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['valor_plan'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($sTmpValue),
+              );
+          }
+   }
+
+          //----- fecha_registro_fe
+   function ajax_return_values_fecha_registro_fe($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("fecha_registro_fe", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->fecha_registro_fe);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['fecha_registro_fe'] = array(
+                       'row'    => '',
+               'type'    => 'label',
+               'valList' => array($this->fecha_registro_fe . ' ' . $this->fecha_registro_fe_hora),
+              );
+          }
+   }
+
+          //----- nombre_contador
+   function ajax_return_values_nombre_contador($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("nombre_contador", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->nombre_contador);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['nombre_contador'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- estado
+   function ajax_return_values_estado($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("estado", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->estado);
+              $aLookup = array();
+              $this->_tmp_lookup_estado = $this->estado;
+
+$aLookup[] = array(terceros_mob_pack_protect_string('PENDIENTE') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("PENDIENTE")));
+$aLookup[] = array(terceros_mob_pack_protect_string('ASIGNADO') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("ASIGNADO")));
+$aLookup[] = array(terceros_mob_pack_protect_string('PRODUCCION') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("PRODUCCION")));
+$aLookup[] = array(terceros_mob_pack_protect_string('SUSPENDIDO') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("SUSPENDIDO")));
+$aLookup[] = array(terceros_mob_pack_protect_string('INACTIVO') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("INACTIVO")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_estado'][] = 'PENDIENTE';
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_estado'][] = 'ASIGNADO';
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_estado'][] = 'PRODUCCION';
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_estado'][] = 'SUSPENDIDO';
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_estado'][] = 'INACTIVO';
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"estado\"";
+          if (isset($this->NM_ajax_info['select_html']['estado']) && !empty($this->NM_ajax_info['select_html']['estado']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['estado']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->estado == $sValue)
+                  {
+                      $this->_tmp_lookup_estado = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['estado'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['estado']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['estado']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['estado']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['estado']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['estado']['labList'] = $aLabel;
+          }
+   }
+
+          //----- si_nomina
+   function ajax_return_values_si_nomina($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("si_nomina", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->si_nomina);
+              $aLookup = array();
+              $this->_tmp_lookup_si_nomina = $this->si_nomina;
+
+$aLookup[] = array(terceros_mob_pack_protect_string('SI') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_si_nomina'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['si_nomina']) && !empty($this->NM_ajax_info['select_html']['si_nomina']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['si_nomina']);
+          }
+          $this->NM_ajax_info['fldList']['si_nomina'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-si_nomina',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['si_nomina']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['si_nomina']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['si_nomina']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['si_nomina']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['si_nomina']['labList'] = $aLabel;
+          }
+   }
+
+          //----- n_trabajadores
+   function ajax_return_values_n_trabajadores($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("n_trabajadores", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->n_trabajadores);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['n_trabajadores'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($sTmpValue),
+              );
+          }
+   }
+
+          //----- si_factura_electronica
+   function ajax_return_values_si_factura_electronica($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("si_factura_electronica", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->si_factura_electronica);
+              $aLookup = array();
+              $this->_tmp_lookup_si_factura_electronica = $this->si_factura_electronica;
+
+$aLookup[] = array(terceros_mob_pack_protect_string('SI') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_si_factura_electronica'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['si_factura_electronica']) && !empty($this->NM_ajax_info['select_html']['si_factura_electronica']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['si_factura_electronica']);
+          }
+          $this->NM_ajax_info['fldList']['si_factura_electronica'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-si_factura_electronica',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['si_factura_electronica']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['si_factura_electronica']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['si_factura_electronica']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['si_factura_electronica']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['si_factura_electronica']['labList'] = $aLabel;
+          }
+   }
+
+          //----- nombre_empresa_bd
+   function ajax_return_values_nombre_empresa_bd($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("nombre_empresa_bd", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->nombre_empresa_bd);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['nombre_empresa_bd'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
               );
           }
    }
@@ -17133,6 +22210,10 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 }
 $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off'; 
       }
+      if (empty($this->fecha_registro_fe))
+      {
+          $this->fecha_registro_fe_hora = $this->fecha_registro_fe;
+      }
       if (empty($this->con_actual))
       {
           $this->con_actual_hora = $this->con_actual;
@@ -17156,6 +22237,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $this->saldo = str_replace($sc_parm1, $sc_parm2, $this->saldo); 
       $this->cupo_vendedor = str_replace($sc_parm1, $sc_parm2, $this->cupo_vendedor); 
       $this->saldoapagar = str_replace($sc_parm1, $sc_parm2, $this->saldoapagar); 
+      $this->valor_plan = str_replace($sc_parm1, $sc_parm2, $this->valor_plan); 
       $this->total_pedido_tmp = str_replace($sc_parm1, $sc_parm2, $this->total_pedido_tmp); 
    } 
    function nm_poe_aspas_decimal() 
@@ -17165,6 +22247,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $this->saldo = "'" . $this->saldo . "'";
       $this->cupo_vendedor = "'" . $this->cupo_vendedor . "'";
       $this->saldoapagar = "'" . $this->saldoapagar . "'";
+      $this->valor_plan = "'" . $this->valor_plan . "'";
       $this->total_pedido_tmp = "'" . $this->total_pedido_tmp . "'";
    } 
    function nm_tira_aspas_decimal() 
@@ -17174,6 +22257,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $this->saldo = str_replace("'", "", $this->saldo); 
       $this->cupo_vendedor = str_replace("'", "", $this->cupo_vendedor); 
       $this->saldoapagar = str_replace("'", "", $this->saldoapagar); 
+      $this->valor_plan = str_replace("'", "", $this->valor_plan); 
       $this->total_pedido_tmp = str_replace("'", "", $this->total_pedido_tmp); 
    } 
 //----------- 
@@ -17653,6 +22737,19 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $NM_val_form['puc_auxiliar_proveedores'] = $this->puc_auxiliar_proveedores;
       $NM_val_form['puc_retefuente_compras'] = $this->puc_retefuente_compras;
       $NM_val_form['puc_retefuente_servicios_prov'] = $this->puc_retefuente_servicios_prov;
+      $NM_val_form['archivo_cedula'] = $this->archivo_cedula;
+      $NM_val_form['archivo_rut'] = $this->archivo_rut;
+      $NM_val_form['archivo_nit'] = $this->archivo_nit;
+      $NM_val_form['archivo_pago'] = $this->archivo_pago;
+      $NM_val_form['id_plan'] = $this->id_plan;
+      $NM_val_form['valor_plan'] = $this->valor_plan;
+      $NM_val_form['fecha_registro_fe'] = $this->fecha_registro_fe;
+      $NM_val_form['nombre_contador'] = $this->nombre_contador;
+      $NM_val_form['estado'] = $this->estado;
+      $NM_val_form['si_nomina'] = $this->si_nomina;
+      $NM_val_form['n_trabajadores'] = $this->n_trabajadores;
+      $NM_val_form['si_factura_electronica'] = $this->si_factura_electronica;
+      $NM_val_form['nombre_empresa_bd'] = $this->nombre_empresa_bd;
       $NM_val_form['archivos'] = $this->archivos;
       $NM_val_form['es_restaurante'] = $this->es_restaurante;
       $NM_val_form['porcentaje_propina_sugerida'] = $this->porcentaje_propina_sugerida;
@@ -17921,6 +23018,21 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       { 
           $this->porcentaje_propina_sugerida = 0;
           $this->sc_force_zero[] = 'porcentaje_propina_sugerida';
+      } 
+      if ($this->id_plan === "" || is_null($this->id_plan))  
+      { 
+          $this->id_plan = 0;
+          $this->sc_force_zero[] = 'id_plan';
+      } 
+      if ($this->valor_plan === "" || is_null($this->valor_plan))  
+      { 
+          $this->valor_plan = 0;
+          $this->sc_force_zero[] = 'valor_plan';
+      } 
+      if ($this->n_trabajadores === "" || is_null($this->n_trabajadores))  
+      { 
+          $this->n_trabajadores = 0;
+          $this->sc_force_zero[] = 'n_trabajadores';
       } 
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['decimal_db'] == ",") 
@@ -18538,6 +23650,74 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->celular_notificafe = "null"; 
               $NM_val_null[] = "celular_notificafe";
           } 
+          $this->archivo_cedula_original_filename = $this->archivo_cedula; 
+          $this->archivo_cedula_before_qstr = $this->archivo_cedula;
+          $this->archivo_cedula = substr($this->Db->qstr($this->archivo_cedula), 1, -1); 
+          if ($this->archivo_cedula == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->archivo_cedula = "null"; 
+              $NM_val_null[] = "archivo_cedula";
+          } 
+          $this->archivo_rut_original_filename = $this->archivo_rut; 
+          $this->archivo_rut_before_qstr = $this->archivo_rut;
+          $this->archivo_rut = substr($this->Db->qstr($this->archivo_rut), 1, -1); 
+          if ($this->archivo_rut == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->archivo_rut = "null"; 
+              $NM_val_null[] = "archivo_rut";
+          } 
+          $this->archivo_nit_original_filename = $this->archivo_nit; 
+          $this->archivo_nit_before_qstr = $this->archivo_nit;
+          $this->archivo_nit = substr($this->Db->qstr($this->archivo_nit), 1, -1); 
+          if ($this->archivo_nit == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->archivo_nit = "null"; 
+              $NM_val_null[] = "archivo_nit";
+          } 
+          $this->archivo_pago_original_filename = $this->archivo_pago; 
+          $this->archivo_pago_before_qstr = $this->archivo_pago;
+          $this->archivo_pago = substr($this->Db->qstr($this->archivo_pago), 1, -1); 
+          if ($this->archivo_pago == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->archivo_pago = "null"; 
+              $NM_val_null[] = "archivo_pago";
+          } 
+          if ($this->fecha_registro_fe == "")  
+          { 
+              $this->fecha_registro_fe = "null"; 
+              $NM_val_null[] = "fecha_registro_fe";
+          } 
+          $this->nombre_contador_before_qstr = $this->nombre_contador;
+          $this->nombre_contador = substr($this->Db->qstr($this->nombre_contador), 1, -1); 
+          if ($this->nombre_contador == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->nombre_contador = "null"; 
+              $NM_val_null[] = "nombre_contador";
+          } 
+          $this->estado_before_qstr = $this->estado;
+          $this->estado = substr($this->Db->qstr($this->estado), 1, -1); 
+          if ($this->estado == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->estado = "null"; 
+              $NM_val_null[] = "estado";
+          } 
+          if ($this->si_nomina == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->si_nomina = "null"; 
+              $NM_val_null[] = "si_nomina";
+          } 
+          if ($this->si_factura_electronica == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->si_factura_electronica = "null"; 
+              $NM_val_null[] = "si_factura_electronica";
+          } 
+          $this->nombre_empresa_bd_before_qstr = $this->nombre_empresa_bd;
+          $this->nombre_empresa_bd = substr($this->Db->qstr($this->nombre_empresa_bd), 1, -1); 
+          if ($this->nombre_empresa_bd == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->nombre_empresa_bd = "null"; 
+              $NM_val_null[] = "nombre_empresa_bd";
+          } 
           $this->archivos_before_qstr = $this->archivos;
           $this->archivos = substr($this->Db->qstr($this->archivos), 1, -1); 
           if ($this->archivos == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
@@ -18647,37 +23827,37 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = #$this->nacimiento#, sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = #$this->afiliacion#, idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = #$this->fechultcomp#, saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe'"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = #$this->nacimiento#, sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = #$this->afiliacion#, idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = #$this->fechultcomp#, saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = #$this->fecha_registro_fe#, nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe'"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe'"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = EXTEND('$this->nacimiento', YEAR TO DAY), sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = EXTEND('$this->afiliacion', YEAR TO DAY), idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = EXTEND('$this->fechultcomp', YEAR TO DAY), saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe'"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = EXTEND('$this->nacimiento', YEAR TO DAY), sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = EXTEND('$this->afiliacion', YEAR TO DAY), idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = EXTEND('$this->fechultcomp', YEAR TO DAY), saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = EXTEND('$this->fecha_registro_fe', YEAR TO FRACTION), nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe'"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe'"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe'"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
               } 
               if (isset($NM_val_form['fechault']) && $NM_val_form['fechault'] != $this->nmgp_dados_select['fechault']) 
               { 
@@ -18707,6 +23887,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                   $SC_fields_update[] = "longitude = '$this->longitude'"; 
               } 
               $aDoNotUpdate = array();
+              $aEraseFiles  = array();
               $temp_cmd_sql = "";
               if ($this->imagenter_limpa == "S")
               {
@@ -18739,6 +23920,174 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                   else
                   {
                       $aDoNotUpdate[] = "imagenter";
+                  }
+              }
+              if (!empty($temp_cmd_sql))
+              {
+                  $SC_fields_update[] = $temp_cmd_sql;
+              }
+              $temp_cmd_sql = "";
+              if ($this->archivo_cedula_limpa == "S")
+              {
+                  $sDirErase     = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/";
+                  $aEraseFiles[] = array('dir' => $sDirErase, 'file' => $this->nmgp_dados_form['archivo_cedula']);
+                  if ($this->archivo_cedula != "null")
+                  {
+                      $this->archivo_cedula = '';
+                  }
+                  if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+                  {
+                      $temp_cmd_sql = "archivo_cedula = '" . $this->archivo_cedula . "'";
+                  }
+                  else
+                  {
+                      $temp_cmd_sql = "archivo_cedula = '" . $this->archivo_cedula . "'";
+                  }
+                  $this->archivo_cedula = "";
+              }
+              else
+              {
+                  if ($this->archivo_cedula != "none" && $this->archivo_cedula != "")
+                  {
+                      $NM_conteudo =  $this->archivo_cedula;
+                      if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+                      {
+                      $temp_cmd_sql .= " archivo_cedula = '$NM_conteudo'";
+                      }
+                      else
+                      {
+                          $temp_cmd_sql .= " archivo_cedula = '$NM_conteudo'";
+                      }
+                  }
+                  else
+                  {
+                      $aDoNotUpdate[] = "archivo_cedula";
+                  }
+              }
+              if (!empty($temp_cmd_sql))
+              {
+                  $SC_fields_update[] = $temp_cmd_sql;
+              }
+              $temp_cmd_sql = "";
+              if ($this->archivo_rut_limpa == "S")
+              {
+                  $sDirErase     = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/";
+                  $aEraseFiles[] = array('dir' => $sDirErase, 'file' => $this->nmgp_dados_form['archivo_rut']);
+                  if ($this->archivo_rut != "null")
+                  {
+                      $this->archivo_rut = '';
+                  }
+                  if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+                  {
+                      $temp_cmd_sql = "archivo_rut = '" . $this->archivo_rut . "'";
+                  }
+                  else
+                  {
+                      $temp_cmd_sql = "archivo_rut = '" . $this->archivo_rut . "'";
+                  }
+                  $this->archivo_rut = "";
+              }
+              else
+              {
+                  if ($this->archivo_rut != "none" && $this->archivo_rut != "")
+                  {
+                      $NM_conteudo =  $this->archivo_rut;
+                      if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+                      {
+                      $temp_cmd_sql .= " archivo_rut = '$NM_conteudo'";
+                      }
+                      else
+                      {
+                          $temp_cmd_sql .= " archivo_rut = '$NM_conteudo'";
+                      }
+                  }
+                  else
+                  {
+                      $aDoNotUpdate[] = "archivo_rut";
+                  }
+              }
+              if (!empty($temp_cmd_sql))
+              {
+                  $SC_fields_update[] = $temp_cmd_sql;
+              }
+              $temp_cmd_sql = "";
+              if ($this->archivo_nit_limpa == "S")
+              {
+                  $sDirErase     = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/";
+                  $aEraseFiles[] = array('dir' => $sDirErase, 'file' => $this->nmgp_dados_form['archivo_nit']);
+                  if ($this->archivo_nit != "null")
+                  {
+                      $this->archivo_nit = '';
+                  }
+                  if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+                  {
+                      $temp_cmd_sql = "archivo_nit = '" . $this->archivo_nit . "'";
+                  }
+                  else
+                  {
+                      $temp_cmd_sql = "archivo_nit = '" . $this->archivo_nit . "'";
+                  }
+                  $this->archivo_nit = "";
+              }
+              else
+              {
+                  if ($this->archivo_nit != "none" && $this->archivo_nit != "")
+                  {
+                      $NM_conteudo =  $this->archivo_nit;
+                      if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+                      {
+                      $temp_cmd_sql .= " archivo_nit = '$NM_conteudo'";
+                      }
+                      else
+                      {
+                          $temp_cmd_sql .= " archivo_nit = '$NM_conteudo'";
+                      }
+                  }
+                  else
+                  {
+                      $aDoNotUpdate[] = "archivo_nit";
+                  }
+              }
+              if (!empty($temp_cmd_sql))
+              {
+                  $SC_fields_update[] = $temp_cmd_sql;
+              }
+              $temp_cmd_sql = "";
+              if ($this->archivo_pago_limpa == "S")
+              {
+                  $sDirErase     = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/";
+                  $aEraseFiles[] = array('dir' => $sDirErase, 'file' => $this->nmgp_dados_form['archivo_pago']);
+                  if ($this->archivo_pago != "null")
+                  {
+                      $this->archivo_pago = '';
+                  }
+                  if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+                  {
+                      $temp_cmd_sql = "archivo_pago = '" . $this->archivo_pago . "'";
+                  }
+                  else
+                  {
+                      $temp_cmd_sql = "archivo_pago = '" . $this->archivo_pago . "'";
+                  }
+                  $this->archivo_pago = "";
+              }
+              else
+              {
+                  if ($this->archivo_pago != "none" && $this->archivo_pago != "")
+                  {
+                      $NM_conteudo =  $this->archivo_pago;
+                      if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+                      {
+                      $temp_cmd_sql .= " archivo_pago = '$NM_conteudo'";
+                      }
+                      else
+                      {
+                          $temp_cmd_sql .= " archivo_pago = '$NM_conteudo'";
+                      }
+                  }
+                  else
+                  {
+                      $aDoNotUpdate[] = "archivo_pago";
                   }
               }
               if (!empty($temp_cmd_sql))
@@ -18868,6 +24217,13 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->codigo_tercero = $this->codigo_tercero_before_qstr;
               $this->correo_notificafe = $this->correo_notificafe_before_qstr;
               $this->celular_notificafe = $this->celular_notificafe_before_qstr;
+              $this->archivo_cedula = $this->archivo_cedula_before_qstr;
+              $this->archivo_rut = $this->archivo_rut_before_qstr;
+              $this->archivo_nit = $this->archivo_nit_before_qstr;
+              $this->archivo_pago = $this->archivo_pago_before_qstr;
+              $this->nombre_contador = $this->nombre_contador_before_qstr;
+              $this->estado = $this->estado_before_qstr;
+              $this->nombre_empresa_bd = $this->nombre_empresa_bd_before_qstr;
               $this->archivos = $this->archivos_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
@@ -18903,6 +24259,49 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                       'valList' => array(''),
                   );
               }
+              if ($this->archivo_cedula_limpa == "S")
+              {
+                  $this->NM_ajax_info['fldList']['archivo_cedula_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+              }
+              if ($this->archivo_rut_limpa == "S")
+              {
+                  $this->NM_ajax_info['fldList']['archivo_rut_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+              }
+              if ($this->archivo_nit_limpa == "S")
+              {
+                  $this->NM_ajax_info['fldList']['archivo_nit_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+              }
+              if ($this->archivo_pago_limpa == "S")
+              {
+                  $this->NM_ajax_info['fldList']['archivo_pago_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+              }
+              if (!empty($aEraseFiles))
+              {
+                  foreach ($aEraseFiles as $aEraseData)
+                  {
+                      $sEraseFile = $aEraseData['dir'] . $aEraseData['file'];
+                      if (@is_file($sEraseFile))
+                      {
+                          @unlink($sEraseFile);
+                      }
+                  }
+              }
               $this->sc_evento = "update"; 
               $this->nmgp_opcao = "igual"; 
               $this->nm_flag_iframe = true;
@@ -18915,6 +24314,26 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               if ($this->NM_ajax_flag) {
                   $this->NM_ajax_info['clearUpload'] = 'S';
                   $this->NM_ajax_info['fldList']['imagenter_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+                  $this->NM_ajax_info['fldList']['archivo_cedula_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+                  $this->NM_ajax_info['fldList']['archivo_rut_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+                  $this->NM_ajax_info['fldList']['archivo_nit_salva'] = array(
+                      'row'     => '',
+                      'type'    => 'text',
+                      'valList' => array(''),
+                  );
+                  $this->NM_ajax_info['fldList']['archivo_pago_salva'] = array(
                       'row'     => '',
                       'type'    => 'text',
                       'valList' => array(''),
@@ -19012,6 +24431,18 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               elseif (isset($this->correo_notificafe)) { $this->nm_limpa_alfa($this->correo_notificafe); }
               if     (isset($NM_val_form) && isset($NM_val_form['celular_notificafe'])) { $this->celular_notificafe = $NM_val_form['celular_notificafe']; }
               elseif (isset($this->celular_notificafe)) { $this->nm_limpa_alfa($this->celular_notificafe); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_plan'])) { $this->id_plan = $NM_val_form['id_plan']; }
+              elseif (isset($this->id_plan)) { $this->nm_limpa_alfa($this->id_plan); }
+              if     (isset($NM_val_form) && isset($NM_val_form['valor_plan'])) { $this->valor_plan = $NM_val_form['valor_plan']; }
+              elseif (isset($this->valor_plan)) { $this->nm_limpa_alfa($this->valor_plan); }
+              if     (isset($NM_val_form) && isset($NM_val_form['nombre_contador'])) { $this->nombre_contador = $NM_val_form['nombre_contador']; }
+              elseif (isset($this->nombre_contador)) { $this->nm_limpa_alfa($this->nombre_contador); }
+              if     (isset($NM_val_form) && isset($NM_val_form['estado'])) { $this->estado = $NM_val_form['estado']; }
+              elseif (isset($this->estado)) { $this->nm_limpa_alfa($this->estado); }
+              if     (isset($NM_val_form) && isset($NM_val_form['nombre_empresa_bd'])) { $this->nombre_empresa_bd = $NM_val_form['nombre_empresa_bd']; }
+              elseif (isset($this->nombre_empresa_bd)) { $this->nm_limpa_alfa($this->nombre_empresa_bd); }
+              if     (isset($NM_val_form) && isset($NM_val_form['n_trabajadores'])) { $this->n_trabajadores = $NM_val_form['n_trabajadores']; }
+              elseif (isset($this->n_trabajadores)) { $this->nm_limpa_alfa($this->n_trabajadores); }
               if     (isset($NM_val_form) && isset($NM_val_form['archivos'])) { $this->archivos = $NM_val_form['archivos']; }
               elseif (isset($this->archivos)) { $this->nm_limpa_alfa($this->archivos); }
 
@@ -19020,10 +24451,66 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               {
               }
 
+              $bChange_archivo_cedula = false;
+              if (isset($this->archivo_cedula_original_filename) && '' != $this->archivo_cedula_original_filename && $this->archivo_cedula_original_filename != $this->archivo_cedula)
+              {
+                  $sTmpOrig_archivo_cedula = $this->archivo_cedula;
+                  $this->archivo_cedula    = $this->archivo_cedula_original_filename;
+                  $bChange_archivo_cedula  = true;
+              }
+
+              $bChange_archivo_rut = false;
+              if (isset($this->archivo_rut_original_filename) && '' != $this->archivo_rut_original_filename && $this->archivo_rut_original_filename != $this->archivo_rut)
+              {
+                  $sTmpOrig_archivo_rut = $this->archivo_rut;
+                  $this->archivo_rut    = $this->archivo_rut_original_filename;
+                  $bChange_archivo_rut  = true;
+              }
+
+              $bChange_archivo_nit = false;
+              if (isset($this->archivo_nit_original_filename) && '' != $this->archivo_nit_original_filename && $this->archivo_nit_original_filename != $this->archivo_nit)
+              {
+                  $sTmpOrig_archivo_nit = $this->archivo_nit;
+                  $this->archivo_nit    = $this->archivo_nit_original_filename;
+                  $bChange_archivo_nit  = true;
+              }
+
+              $bChange_archivo_pago = false;
+              if (isset($this->archivo_pago_original_filename) && '' != $this->archivo_pago_original_filename && $this->archivo_pago_original_filename != $this->archivo_pago)
+              {
+                  $sTmpOrig_archivo_pago = $this->archivo_pago;
+                  $this->archivo_pago    = $this->archivo_pago_original_filename;
+                  $bChange_archivo_pago  = true;
+              }
+
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('tipo', 'regimen', 'tipo_documento', 'documento', 'dv', 'imagenter', 'codigo_tercero', 'sexo', 'notificar', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'tel_cel', 'urlmail', 'idtercero', 'r_social', 'nombres', 'nombre_comercil', 'representante', 'direccion', 'departamento', 'idmuni', 'ciudad', 'codigo_postal', 'observaciones', 'lenguaje', 'c_postal', 'correo_notificafe', 'celular_notificafe', 'cliente', 'proveedor', 'empleado', 'es_tecnico', 'activo', 'credito', 'cupo', 'cupodis', 'dias_credito', 'dias_mora', 'efec_retencion', 'listaprecios', 'loatiende', 'autorizado', 'relleno2', 'nacimiento', 'detalle_tributario', 'responsabilidad_fiscal', 'ciiu', 'sucur_cliente', 'sucursales', 'fechault', 'saldo', 'afiliacion', 'es_cajero', 'cupo_vendedor', 'autoretenedor', 'creditoprov', 'dias', 'url', 'contacto', 'telefonos_prov', 'email', 'fechultcomp', 'saldoapagar', 'codigo_ter', 'zona_clientes', 'clasificacion_clientes', 'puc_auxiliar_deudores', 'puc_retefuente_ventas', 'puc_retefuente_servicios_clie', 'puc_auxiliar_proveedores', 'puc_retefuente_compras', 'puc_retefuente_servicios_prov', 'archivos', 'es_restaurante', 'porcentaje_propina_sugerida'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('tipo', 'regimen', 'tipo_documento', 'documento', 'dv', 'imagenter', 'codigo_tercero', 'sexo', 'notificar', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'tel_cel', 'urlmail', 'idtercero', 'r_social', 'nombres', 'nombre_comercil', 'representante', 'direccion', 'departamento', 'idmuni', 'ciudad', 'codigo_postal', 'observaciones', 'lenguaje', 'c_postal', 'correo_notificafe', 'celular_notificafe', 'cliente', 'proveedor', 'empleado', 'es_tecnico', 'activo', 'credito', 'cupo', 'cupodis', 'dias_credito', 'dias_mora', 'efec_retencion', 'listaprecios', 'loatiende', 'autorizado', 'relleno2', 'nacimiento', 'detalle_tributario', 'responsabilidad_fiscal', 'ciiu', 'sucur_cliente', 'sucursales', 'fechault', 'saldo', 'afiliacion', 'es_cajero', 'cupo_vendedor', 'autoretenedor', 'creditoprov', 'dias', 'url', 'contacto', 'telefonos_prov', 'email', 'fechultcomp', 'saldoapagar', 'codigo_ter', 'zona_clientes', 'clasificacion_clientes', 'puc_auxiliar_deudores', 'puc_retefuente_ventas', 'puc_retefuente_servicios_clie', 'puc_auxiliar_proveedores', 'puc_retefuente_compras', 'puc_retefuente_servicios_prov', 'archivo_cedula', 'archivo_rut', 'archivo_nit', 'archivo_pago', 'id_plan', 'valor_plan', 'fecha_registro_fe', 'nombre_contador', 'estado', 'si_nomina', 'n_trabajadores', 'si_factura_electronica', 'nombre_empresa_bd', 'archivos', 'es_restaurante', 'porcentaje_propina_sugerida'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
+
+              if ($bChange_archivo_cedula)
+              {
+                  $this->archivo_cedula                   = $sTmpOrig_archivo_cedula;
+                  $this->archivo_cedula_original_filename = '';
+              }
+
+              if ($bChange_archivo_rut)
+              {
+                  $this->archivo_rut                   = $sTmpOrig_archivo_rut;
+                  $this->archivo_rut_original_filename = '';
+              }
+
+              if ($bChange_archivo_nit)
+              {
+                  $this->archivo_nit                   = $sTmpOrig_archivo_nit;
+                  $this->archivo_nit_original_filename = '';
+              }
+
+              if ($bChange_archivo_pago)
+              {
+                  $this->archivo_pago                   = $sTmpOrig_archivo_pago;
+                  $this->archivo_pago_original_filename = '';
+              }
 
               $this->nm_tira_formatacao();
               $this->nm_converte_datas();
@@ -19163,6 +24650,34 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               {
                   $this->imagenter_scfile_name = $_test_file;
                   $this->imagenter = $_test_file;
+              }
+              $dir_file = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+              $_test_file = $this->fetchUniqueUploadName($this->archivo_cedula_scfile_name, $dir_file, "archivo_cedula");
+              if (trim($this->archivo_cedula_scfile_name) != $_test_file)
+              {
+                  $this->archivo_cedula_scfile_name = $_test_file;
+                  $this->archivo_cedula = $_test_file;
+              }
+              $dir_file = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+              $_test_file = $this->fetchUniqueUploadName($this->archivo_rut_scfile_name, $dir_file, "archivo_rut");
+              if (trim($this->archivo_rut_scfile_name) != $_test_file)
+              {
+                  $this->archivo_rut_scfile_name = $_test_file;
+                  $this->archivo_rut = $_test_file;
+              }
+              $dir_file = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+              $_test_file = $this->fetchUniqueUploadName($this->archivo_nit_scfile_name, $dir_file, "archivo_nit");
+              if (trim($this->archivo_nit_scfile_name) != $_test_file)
+              {
+                  $this->archivo_nit_scfile_name = $_test_file;
+                  $this->archivo_nit = $_test_file;
+              }
+              $dir_file = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+              $_test_file = $this->fetchUniqueUploadName($this->archivo_pago_scfile_name, $dir_file, "archivo_pago");
+              if (trim($this->archivo_pago_scfile_name) != $_test_file)
+              {
+                  $this->archivo_pago_scfile_name = $_test_file;
+                  $this->archivo_pago = $_test_file;
               }
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
@@ -19453,7 +24968,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, #$this->fecha_registro_fe#, '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco == "pdo_sqlsrv")
               { 
@@ -19744,7 +25259,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
@@ -20035,7 +25550,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
@@ -20326,7 +25841,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
@@ -20617,7 +26132,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
@@ -20908,7 +26423,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, EXTEND('$this->fecha_registro_fe', YEAR TO FRACTION), '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               {
@@ -21199,7 +26714,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
@@ -21490,7 +27005,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
@@ -21781,7 +27296,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco =='pdo_ibm')
               {
@@ -22072,7 +27587,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               else
               {
@@ -22363,7 +27878,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -22436,6 +27951,13 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->codigo_tercero = $this->codigo_tercero_before_qstr;
               $this->correo_notificafe = $this->correo_notificafe_before_qstr;
               $this->celular_notificafe = $this->celular_notificafe_before_qstr;
+              $this->archivo_cedula = $this->archivo_cedula_before_qstr;
+              $this->archivo_rut = $this->archivo_rut_before_qstr;
+              $this->archivo_nit = $this->archivo_nit_before_qstr;
+              $this->archivo_pago = $this->archivo_pago_before_qstr;
+              $this->nombre_contador = $this->nombre_contador_before_qstr;
+              $this->estado = $this->estado_before_qstr;
+              $this->nombre_empresa_bd = $this->nombre_empresa_bd_before_qstr;
               $this->archivos = $this->archivos_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql)) 
               { 
@@ -22467,6 +27989,46 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                   unset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['total']);
               }
 
+              $dir_doc = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+              if (nm_mkdir($dir_doc))  
+              { 
+                  $arq_archivo_cedula = fopen($this->SC_DOC_archivo_cedula, "r") ; 
+                  $reg_archivo_cedula = fread($arq_archivo_cedula, filesize($this->SC_DOC_archivo_cedula)) ; 
+                  fclose($arq_archivo_cedula) ;  
+                  $arq_archivo_cedula = fopen($dir_doc . trim($this->archivo_cedula_scfile_name), "w") ; 
+                  fwrite($arq_archivo_cedula, $reg_archivo_cedula) ;  
+                  fclose($arq_archivo_cedula) ;  
+              } 
+              $dir_doc = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+              if (nm_mkdir($dir_doc))  
+              { 
+                  $arq_archivo_rut = fopen($this->SC_DOC_archivo_rut, "r") ; 
+                  $reg_archivo_rut = fread($arq_archivo_rut, filesize($this->SC_DOC_archivo_rut)) ; 
+                  fclose($arq_archivo_rut) ;  
+                  $arq_archivo_rut = fopen($dir_doc . trim($this->archivo_rut_scfile_name), "w") ; 
+                  fwrite($arq_archivo_rut, $reg_archivo_rut) ;  
+                  fclose($arq_archivo_rut) ;  
+              } 
+              $dir_doc = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+              if (nm_mkdir($dir_doc))  
+              { 
+                  $arq_archivo_nit = fopen($this->SC_DOC_archivo_nit, "r") ; 
+                  $reg_archivo_nit = fread($arq_archivo_nit, filesize($this->SC_DOC_archivo_nit)) ; 
+                  fclose($arq_archivo_nit) ;  
+                  $arq_archivo_nit = fopen($dir_doc . trim($this->archivo_nit_scfile_name), "w") ; 
+                  fwrite($arq_archivo_nit, $reg_archivo_nit) ;  
+                  fclose($arq_archivo_nit) ;  
+              } 
+              $dir_doc = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+              if (nm_mkdir($dir_doc))  
+              { 
+                  $arq_archivo_pago = fopen($this->SC_DOC_archivo_pago, "r") ; 
+                  $reg_archivo_pago = fread($arq_archivo_pago, filesize($this->SC_DOC_archivo_pago)) ; 
+                  fclose($arq_archivo_pago) ;  
+                  $arq_archivo_pago = fopen($dir_doc . trim($this->archivo_pago_scfile_name), "w") ; 
+                  fwrite($arq_archivo_pago, $reg_archivo_pago) ;  
+                  fclose($arq_archivo_pago) ;  
+              } 
               $this->sc_evento = "insert"; 
               $this->documento = $this->documento_before_qstr;
               $this->nombres = $this->nombres_before_qstr;
@@ -22503,6 +28065,13 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->codigo_tercero = $this->codigo_tercero_before_qstr;
               $this->correo_notificafe = $this->correo_notificafe_before_qstr;
               $this->celular_notificafe = $this->celular_notificafe_before_qstr;
+              $this->archivo_cedula = $this->archivo_cedula_before_qstr;
+              $this->archivo_rut = $this->archivo_rut_before_qstr;
+              $this->archivo_nit = $this->archivo_nit_before_qstr;
+              $this->archivo_pago = $this->archivo_pago_before_qstr;
+              $this->nombre_contador = $this->nombre_contador_before_qstr;
+              $this->estado = $this->estado_before_qstr;
+              $this->nombre_empresa_bd = $this->nombre_empresa_bd_before_qstr;
               $this->archivos = $this->archivos_before_qstr;
               $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
@@ -22512,6 +28081,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               {
               $this->nmgp_opcao   = "igual"; 
               $this->nmgp_opc_ant = "igual"; 
+              $this->nmgp_botoes['btn_generar_nomina'] = "on";
+              $this->nmgp_botoes['btn_reenviar_correo_nomina'] = "on";
               }
               $this->nm_flag_iframe = true;
           } 
@@ -22569,6 +28140,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
               exit; 
           }  
+          $aEraseFiles = array();
           $tmp_result = (int) $rs1->fields[0]; 
           if ($tmp_result != 1) 
           { 
@@ -22618,6 +28190,25 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                       }
                   } 
               } 
+                  $sDirErase     = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+                  $aEraseFiles[] = array('dir' => $sDirErase, 'file' => $this->nmgp_dados_form['archivo_cedula']);
+                  $sDirErase     = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+                  $aEraseFiles[] = array('dir' => $sDirErase, 'file' => $this->nmgp_dados_form['archivo_rut']);
+                  $sDirErase     = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+                  $aEraseFiles[] = array('dir' => $sDirErase, 'file' => $this->nmgp_dados_form['archivo_nit']);
+                  $sDirErase     = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
+                  $aEraseFiles[] = array('dir' => $sDirErase, 'file' => $this->nmgp_dados_form['archivo_pago']);
+              if (!empty($aEraseFiles))
+              {
+                  foreach ($aEraseFiles as $aEraseData)
+                  {
+                      $sEraseFile = $aEraseData['dir'] . $aEraseData['file'];
+                      if (@is_file($sEraseFile))
+                      {
+                          @unlink($sEraseFile);
+                      }
+                  }
+              }
               $this->sc_evento = "delete"; 
               if (empty($this->sc_erro_delete)) {
                   $this->record_delete_ok = true;
@@ -23243,6 +28834,18 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $this->nmgp_dados_form['imagenter'] = ""; 
       $this->imagenter_limpa = ""; 
       $this->imagenter_salva = ""; 
+      $this->nmgp_dados_form['archivo_cedula'] = ""; 
+      $this->archivo_cedula_limpa = ""; 
+      $this->archivo_cedula_salva = ""; 
+      $this->nmgp_dados_form['archivo_rut'] = ""; 
+      $this->archivo_rut_limpa = ""; 
+      $this->archivo_rut_salva = ""; 
+      $this->nmgp_dados_form['archivo_nit'] = ""; 
+      $this->archivo_nit_limpa = ""; 
+      $this->archivo_nit_salva = ""; 
+      $this->nmgp_dados_form['archivo_pago'] = ""; 
+      $this->archivo_pago_limpa = ""; 
+      $this->archivo_pago_salva = ""; 
       $this->NM_commit_db(); 
       if ($this->sc_evento != "insert" && $this->sc_evento != "update" && $this->sc_evento != "delete")
       { 
@@ -23445,23 +29048,23 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, str_replace (convert(char(10),nacimiento,102), '.', '-') + ' ' + convert(char(8),nacimiento,20), sexo, urlmail, str_replace (convert(char(10),fechault,102), '.', '-') + ' ' + convert(char(8),fechault,20), saldo, str_replace (convert(char(10),afiliacion,102), '.', '-') + ' ' + convert(char(8),afiliacion,20), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, str_replace (convert(char(10),fechultcomp,102), '.', '-') + ' ' + convert(char(8),fechultcomp,20), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, str_replace (convert(char(10),nacimiento,102), '.', '-') + ' ' + convert(char(8),nacimiento,20), sexo, urlmail, str_replace (convert(char(10),fechault,102), '.', '-') + ' ' + convert(char(8),fechault,20), saldo, str_replace (convert(char(10),afiliacion,102), '.', '-') + ' ' + convert(char(8),afiliacion,20), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, str_replace (convert(char(10),fechultcomp,102), '.', '-') + ' ' + convert(char(8),fechultcomp,20), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, str_replace (convert(char(10),fecha_registro_fe,102), '.', '-') + ' ' + convert(char(8),fecha_registro_fe,20), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, convert(char(23),nacimiento,121), sexo, urlmail, convert(char(23),fechault,121), saldo, convert(char(23),afiliacion,121), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, convert(char(23),fechultcomp,121), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, convert(char(23),nacimiento,121), sexo, urlmail, convert(char(23),fechault,121), saldo, convert(char(23),afiliacion,121), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, convert(char(23),fechultcomp,121), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, convert(char(23),fecha_registro_fe,121), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, idmuni, observaciones, credito, cupo, listaprecios, loatiende, TO_DATE(TO_CHAR(con_actual, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, fechultcomp, saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, idmuni, observaciones, credito, cupo, listaprecios, loatiende, TO_DATE(TO_CHAR(con_actual, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, fechultcomp, saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, EXTEND(nacimiento, YEAR TO DAY), sexo, urlmail, EXTEND(fechault, YEAR TO DAY), saldo, EXTEND(afiliacion, YEAR TO DAY), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, EXTEND(fechultcomp, YEAR TO DAY), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, LOTOFILE(imagenter, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_imagenter', 'client'), es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, EXTEND(nacimiento, YEAR TO DAY), sexo, urlmail, EXTEND(fechault, YEAR TO DAY), saldo, EXTEND(afiliacion, YEAR TO DAY), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, EXTEND(fechultcomp, YEAR TO DAY), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, LOTOFILE(imagenter, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_imagenter', 'client'), es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, EXTEND(fecha_registro_fe, YEAR TO FRACTION), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, fechultcomp, saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, fechultcomp, saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -23573,6 +29176,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                   $this->NM_ajax_info['buttonDisplay']['update']  = $this->nmgp_botoes['update']  = "off";
                   $this->NM_ajax_info['buttonDisplay']['delete']  = $this->nmgp_botoes['delete']  = "off";
                   $this->NM_ajax_info['buttonDisplay']['first']   = $this->nmgp_botoes['insert']  = "off";
+                  $this->NM_ajax_info['buttonDisplay']['btn_generar_nomina'] = $this->nmgp_botoes['btn_generar_nomina'] = "off";
+                  $this->NM_ajax_info['buttonDisplay']['btn_reenviar_correo_nomina'] = $this->nmgp_botoes['btn_reenviar_correo_nomina'] = "off";
                   $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['empty_filter'] = true;
                   return; 
               }
@@ -23587,6 +29192,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->nmgp_opcao = "novo"; 
               $this->nm_flag_saida_novo = "S"; 
               $rs->Close(); 
+              $this->NM_ajax_info['buttonDisplay']['btn_generar_nomina'] = $this->nmgp_botoes['btn_generar_nomina'] = "off";
+              $this->NM_ajax_info['buttonDisplay']['btn_reenviar_correo_nomina'] = $this->nmgp_botoes['btn_reenviar_correo_nomina'] = "off";
               if ($this->aba_iframe)
               {
                   $this->NM_ajax_info['buttonDisplay']['exit'] = $this->nmgp_botoes['exit'] = 'off';
@@ -23793,6 +29400,40 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_select['correo_notificafe'] = $this->correo_notificafe;
               $this->celular_notificafe = $rs->fields[77] ; 
               $this->nmgp_dados_select['celular_notificafe'] = $this->celular_notificafe;
+              $this->archivo_cedula = $rs->fields[78] ; 
+              $this->nmgp_dados_select['archivo_cedula'] = $this->archivo_cedula;
+              $this->archivo_rut = $rs->fields[79] ; 
+              $this->nmgp_dados_select['archivo_rut'] = $this->archivo_rut;
+              $this->archivo_nit = $rs->fields[80] ; 
+              $this->nmgp_dados_select['archivo_nit'] = $this->archivo_nit;
+              $this->archivo_pago = $rs->fields[81] ; 
+              $this->nmgp_dados_select['archivo_pago'] = $this->archivo_pago;
+              $this->id_plan = $rs->fields[82] ; 
+              $this->nmgp_dados_select['id_plan'] = $this->id_plan;
+              $this->valor_plan = $rs->fields[83] ; 
+              $this->nmgp_dados_select['valor_plan'] = $this->valor_plan;
+              $this->fecha_registro_fe = $rs->fields[84] ; 
+              if (substr($this->fecha_registro_fe, 10, 1) == "-") 
+              { 
+                 $this->fecha_registro_fe = substr($this->fecha_registro_fe, 0, 10) . " " . substr($this->fecha_registro_fe, 11);
+              } 
+              if (substr($this->fecha_registro_fe, 13, 1) == ".") 
+              { 
+                 $this->fecha_registro_fe = substr($this->fecha_registro_fe, 0, 13) . ":" . substr($this->fecha_registro_fe, 14, 2) . ":" . substr($this->fecha_registro_fe, 17);
+              } 
+              $this->nmgp_dados_select['fecha_registro_fe'] = $this->fecha_registro_fe;
+              $this->nombre_contador = $rs->fields[85] ; 
+              $this->nmgp_dados_select['nombre_contador'] = $this->nombre_contador;
+              $this->estado = $rs->fields[86] ; 
+              $this->nmgp_dados_select['estado'] = $this->estado;
+              $this->si_nomina = $rs->fields[87] ; 
+              $this->nmgp_dados_select['si_nomina'] = $this->si_nomina;
+              $this->si_factura_electronica = $rs->fields[88] ; 
+              $this->nmgp_dados_select['si_factura_electronica'] = $this->si_factura_electronica;
+              $this->nombre_empresa_bd = $rs->fields[89] ; 
+              $this->nmgp_dados_select['nombre_empresa_bd'] = $this->nombre_empresa_bd;
+              $this->n_trabajadores = $rs->fields[90] ; 
+              $this->nmgp_dados_select['n_trabajadores'] = $this->n_trabajadores;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->nm_troca_decimal(",", ".");
               $this->idtercero = (string)$this->idtercero; 
@@ -23812,8 +29453,15 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->id_pedido_tmp = (string)$this->id_pedido_tmp; 
               $this->total_pedido_tmp = (string)$this->total_pedido_tmp; 
               $this->porcentaje_propina_sugerida = (string)$this->porcentaje_propina_sugerida; 
+              $this->id_plan = (string)$this->id_plan; 
+              $this->valor_plan = (string)$this->valor_plan; 
+              $this->n_trabajadores = (string)$this->n_trabajadores; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['parms'] = "idtercero?#?$this->idtercero?@?";
               $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['sub_dir'][0]  = "";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['sub_dir'][1]  = "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['sub_dir'][2]  = "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['sub_dir'][3]  = "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['sub_dir'][4]  = "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/";
           } 
           $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_select'] = $this->nmgp_dados_select;
           if (!$this->NM_ajax_flag || 'backup_line' != $this->NM_ajax_opcao)
@@ -23997,6 +29645,41 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["correo_notificafe"] = $this->correo_notificafe;
               $this->celular_notificafe = "";  
               $this->nmgp_dados_form["celular_notificafe"] = $this->celular_notificafe;
+              $this->archivo_cedula = "";  
+              $this->archivo_cedula_ul_name = "" ;  
+              $this->archivo_cedula_ul_type = "" ;  
+              $this->nmgp_dados_form["archivo_cedula"] = $this->archivo_cedula;
+              $this->archivo_rut = "";  
+              $this->archivo_rut_ul_name = "" ;  
+              $this->archivo_rut_ul_type = "" ;  
+              $this->nmgp_dados_form["archivo_rut"] = $this->archivo_rut;
+              $this->archivo_nit = "";  
+              $this->archivo_nit_ul_name = "" ;  
+              $this->archivo_nit_ul_type = "" ;  
+              $this->nmgp_dados_form["archivo_nit"] = $this->archivo_nit;
+              $this->archivo_pago = "";  
+              $this->archivo_pago_ul_name = "" ;  
+              $this->archivo_pago_ul_type = "" ;  
+              $this->nmgp_dados_form["archivo_pago"] = $this->archivo_pago;
+              $this->id_plan = "";  
+              $this->nmgp_dados_form["id_plan"] = $this->id_plan;
+              $this->valor_plan = "";  
+              $this->nmgp_dados_form["valor_plan"] = $this->valor_plan;
+              $this->fecha_registro_fe = "";  
+              $this->fecha_registro_fe_hora = "" ;  
+              $this->nmgp_dados_form["fecha_registro_fe"] = $this->fecha_registro_fe;
+              $this->nombre_contador = "";  
+              $this->nmgp_dados_form["nombre_contador"] = $this->nombre_contador;
+              $this->estado = "";  
+              $this->nmgp_dados_form["estado"] = $this->estado;
+              $this->si_nomina = "NO";  
+              $this->nmgp_dados_form["si_nomina"] = $this->si_nomina;
+              $this->si_factura_electronica = "NO";  
+              $this->nmgp_dados_form["si_factura_electronica"] = $this->si_factura_electronica;
+              $this->nombre_empresa_bd = "";  
+              $this->nmgp_dados_form["nombre_empresa_bd"] = $this->nombre_empresa_bd;
+              $this->n_trabajadores = "";  
+              $this->nmgp_dados_form["n_trabajadores"] = $this->n_trabajadores;
               $this->archivos = "";  
               $this->nmgp_dados_form["archivos"] = $this->archivos;
               $this->c_postal = "";  
@@ -24104,6 +29787,19 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                   $this->porcentaje_propina_sugerida = $this->nmgp_dados_select['porcentaje_propina_sugerida'];  
                   $this->correo_notificafe = $this->nmgp_dados_select['correo_notificafe'];  
                   $this->celular_notificafe = $this->nmgp_dados_select['celular_notificafe'];  
+                  $this->archivo_cedula = $this->nmgp_dados_select['archivo_cedula'];  
+                  $this->archivo_rut = $this->nmgp_dados_select['archivo_rut'];  
+                  $this->archivo_nit = $this->nmgp_dados_select['archivo_nit'];  
+                  $this->archivo_pago = $this->nmgp_dados_select['archivo_pago'];  
+                  $this->id_plan = $this->nmgp_dados_select['id_plan'];  
+                  $this->valor_plan = $this->nmgp_dados_select['valor_plan'];  
+                  $this->fecha_registro_fe = $this->nmgp_dados_select['fecha_registro_fe'];  
+                  $this->nombre_contador = $this->nmgp_dados_select['nombre_contador'];  
+                  $this->estado = $this->nmgp_dados_select['estado'];  
+                  $this->si_nomina = $this->nmgp_dados_select['si_nomina'];  
+                  $this->si_factura_electronica = $this->nmgp_dados_select['si_factura_electronica'];  
+                  $this->nombre_empresa_bd = $this->nmgp_dados_select['nombre_empresa_bd'];  
+                  $this->n_trabajadores = $this->nmgp_dados_select['n_trabajadores'];  
                   $this->archivos = $this->nmgp_dados_select['archivos'];  
               }
           }
@@ -24452,6 +30148,27 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                 }
         }
 
+// 
+ function gera_icone($doc) 
+ {
+    $cam_icone = "";
+    $path =  $this->Ini->root . $this->Ini->path_icones . "/";
+    if (is_dir($path))
+    {
+        $nm_icones = nm_list_icon($path); 
+        $nm_tipo = strtolower(substr($doc, strrpos($doc, ".") + 1));
+        $nm_tipo = str_replace(array('docx', 'xlsx'), array('doc', 'xls'), $nm_tipo);
+        if (isset($nm_icones[$nm_tipo]) && !empty($nm_icones[$nm_tipo]))
+        {
+            $cam_icone = $this->Ini->path_icones . "/" . $nm_icones[$nm_tipo];
+        }
+        else
+        {
+            $cam_icone = $this->Ini->path_icones . "/" . $nm_icones["default"];
+        }
+    }
+    return $cam_icone;
+ } 
 //
 function apellido1_onChange()
 {
@@ -25647,6 +31364,109 @@ terceros_mob_pack_ajax_response();
 exit;
 $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
 }
+function fDigito($vdoc)
+{
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+  
+	$long=strlen($vdoc);
+	$str=$vdoc;
+	$arr = str_split($str);
+	switch ($long)
+	{
+	case 4:
+	$valor=$arr[3]*3+$arr[2]*7+$arr[1]*13+$arr[0]*17;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 5:
+	$valor=$arr[0]*19+$arr[1]*17+$arr[2]*13+$arr[3]*7+$arr[4]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 6:
+	$valor=$arr[0]*23+$arr[1]*19+$arr[2]*17+$arr[3]*13+$arr[4]*7+$arr[5]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 7:
+	$valor=$arr[0]*29+$arr[1]*23+$arr[2]*19+$arr[3]*17+$arr[4]*13+$arr[5]*7+$arr[6]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 8:
+	$valor=$arr[0]*37+$arr[1]*29+$arr[2]*23+$arr[3]*19+$arr[4]*17+$arr[5]*13+$arr[6]*7+$arr[7]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 9:
+	$valor=$arr[0]*41+$arr[1]*37+$arr[2]*29+$arr[3]*23+$arr[4]*19+$arr[5]*17+$arr[6]*13+$arr[7]*7+$arr[8]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+
+	case 10:
+	$valor=$arr[0]*43+$arr[1]*41+$arr[2]*37+$arr[3]*29+$arr[4]*23+$arr[5]*19+$arr[6]*17+$arr[7]*13+$arr[8]*7+$arr[9]*3;
+	$dig=$valor%11;
+	if($dig==1 or $dig==0)
+		{
+		return $dig;
+		}
+	else
+		{
+		return 11-$dig;
+		}
+	break;
+	}
+
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
+}
 //
  function nm_gera_html()
  {
@@ -25813,6 +31633,50 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
            $out1_imagenter = $temp_out1_imagenter;
        }
    }
+   if ($this->archivo_cedula != "" && $this->archivo_cedula != "none")   
+   { 
+       $sTmpExtension = pathinfo($this->archivo_cedula, PATHINFO_EXTENSION);
+       $sTmpExtension = null == $sTmpExtension ? '' : '.' . $sTmpExtension;
+       $sTmpFile_archivo_cedula = 'sc_archivo_cedula_' . md5(mt_rand(1, 1000) . microtime() . session_id()) . $sTmpExtension;
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'] = array();
+       }
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'][$sTmpFile_archivo_cedula] = $this->archivo_cedula;
+   } 
+   if ($this->archivo_rut != "" && $this->archivo_rut != "none")   
+   { 
+       $sTmpExtension = pathinfo($this->archivo_rut, PATHINFO_EXTENSION);
+       $sTmpExtension = null == $sTmpExtension ? '' : '.' . $sTmpExtension;
+       $sTmpFile_archivo_rut = 'sc_archivo_rut_' . md5(mt_rand(1, 1000) . microtime() . session_id()) . $sTmpExtension;
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'] = array();
+       }
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'][$sTmpFile_archivo_rut] = $this->archivo_rut;
+   } 
+   if ($this->archivo_nit != "" && $this->archivo_nit != "none")   
+   { 
+       $sTmpExtension = pathinfo($this->archivo_nit, PATHINFO_EXTENSION);
+       $sTmpExtension = null == $sTmpExtension ? '' : '.' . $sTmpExtension;
+       $sTmpFile_archivo_nit = 'sc_archivo_nit_' . md5(mt_rand(1, 1000) . microtime() . session_id()) . $sTmpExtension;
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'] = array();
+       }
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'][$sTmpFile_archivo_nit] = $this->archivo_nit;
+   } 
+   if ($this->archivo_pago != "" && $this->archivo_pago != "none")   
+   { 
+       $sTmpExtension = pathinfo($this->archivo_pago, PATHINFO_EXTENSION);
+       $sTmpExtension = null == $sTmpExtension ? '' : '.' . $sTmpExtension;
+       $sTmpFile_archivo_pago = 'sc_archivo_pago_' . md5(mt_rand(1, 1000) . microtime() . session_id()) . $sTmpExtension;
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'] = array();
+       }
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['download_filenames'][$sTmpFile_archivo_pago] = $this->archivo_pago;
+   } 
     $this->nacimiento_Dt_max = date('Ymd'); 
         $this->initFormPages();
         include_once("terceros_mob_form0.php");
@@ -25865,12 +31729,13 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                         'otros' => array(
                                 17 => 'on',
                                 18 => 'on',
-                        ),
-                        'archivos' => array(
                                 19 => 'on',
                         ),
-                        'restaurante' => array(
+                        'archivos' => array(
                                 20 => 'on',
+                        ),
+                        'restaurante' => array(
+                                21 => 'on',
                         ),
                 );
 
@@ -25894,8 +31759,9 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                         16 => 'proveedor',
                         17 => 'otros',
                         18 => 'otros',
-                        19 => 'archivos',
-                        20 => 'restaurante',
+                        19 => 'otros',
+                        20 => 'archivos',
+                        21 => 'restaurante',
                 );
 
                 if (!empty($this->Ini->nm_hidden_blocos)) {
@@ -26528,6 +32394,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -26548,6 +32418,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -26760,6 +32634,48 @@ else
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT iddep, departamento  FROM departamento  ORDER BY departamento";
 
    $this->dv = $old_value_dv;
@@ -26777,6 +32693,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -26847,6 +32767,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -26867,6 +32791,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT idmun, municipio  FROM municipio  WHERE iddepar=$this->departamento ORDER BY municipio";
@@ -26886,6 +32814,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -26959,6 +32891,10 @@ if ($this->idmuni != "")
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -26979,6 +32915,10 @@ if ($this->idmuni != "")
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT municipio FROM municipio  WHERE idmun=$this->idmuni ORDER BY municipio";
@@ -26998,6 +32938,10 @@ if ($this->idmuni != "")
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -27069,6 +33013,10 @@ if ($this->idmuni != "")
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -27089,6 +33037,10 @@ if ($this->idmuni != "")
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT codigo_postal  FROM codigo_postal  WHERE idmuni=$this->idmuni ORDER BY codigo_postal";
@@ -27108,6 +33060,10 @@ if ($this->idmuni != "")
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -27176,6 +33132,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -27196,6 +33156,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -27408,6 +33372,48 @@ else
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT lenguaje, lenguaje  FROM lenguas  ORDER BY lenguaje";
 
    $this->dv = $old_value_dv;
@@ -27425,6 +33431,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -27560,6 +33570,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -27580,6 +33594,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
@@ -27626,6 +33644,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -27738,6 +33760,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -27758,6 +33784,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -27970,6 +34000,48 @@ else
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT idzona_cliente, codigo + ' - ' + nombre  FROM zona_clientes  ORDER BY codigo, nombre";
@@ -28014,6 +34086,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -28084,6 +34160,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -28104,6 +34184,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -28316,6 +34400,48 @@ else
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
        $nm_comando = "SELECT idclasificacion_cliente, codigo + ' - ' + nombre  FROM clasificacion_clientes  ORDER BY codigo, nombre";
@@ -28360,6 +34486,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -28387,6 +34517,434 @@ else
    $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
    $todo  = explode("?@?", $todox) ; 
    return $todo;
+
+   }
+   function Form_lookup_id_plan()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $cliente_val_str = "''";
+   if (!empty($this->cliente))
+   {
+       if (is_array($this->cliente))
+       {
+           $Tmp_array = $this->cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->cliente);
+       }
+       $cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $cliente_val_str)
+          {
+             $cliente_val_str .= ", ";
+          }
+          $cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $empleado_val_str = "''";
+   if (!empty($this->empleado))
+   {
+       if (is_array($this->empleado))
+       {
+           $Tmp_array = $this->empleado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->empleado);
+       }
+       $empleado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $empleado_val_str)
+          {
+             $empleado_val_str .= ", ";
+          }
+          $empleado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $proveedor_val_str = "''";
+   if (!empty($this->proveedor))
+   {
+       if (is_array($this->proveedor))
+       {
+           $Tmp_array = $this->proveedor;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->proveedor);
+       }
+       $proveedor_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $proveedor_val_str)
+          {
+             $proveedor_val_str .= ", ";
+          }
+          $proveedor_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $sucur_cliente_val_str = "''";
+   if (!empty($this->sucur_cliente))
+   {
+       if (is_array($this->sucur_cliente))
+       {
+           $Tmp_array = $this->sucur_cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->sucur_cliente);
+       }
+       $sucur_cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $sucur_cliente_val_str)
+          {
+             $sucur_cliente_val_str .= ", ";
+          }
+          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_restaurante_val_str = "''";
+   if (!empty($this->es_restaurante))
+   {
+       if (is_array($this->es_restaurante))
+       {
+           $Tmp_array = $this->es_restaurante;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_restaurante);
+       }
+       $es_restaurante_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_restaurante_val_str)
+          {
+             $es_restaurante_val_str .= ", ";
+          }
+          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_cajero_val_str = "''";
+   if (!empty($this->es_cajero))
+   {
+       if (is_array($this->es_cajero))
+       {
+           $Tmp_array = $this->es_cajero;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_cajero);
+       }
+       $es_cajero_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_cajero_val_str)
+          {
+             $es_cajero_val_str .= ", ";
+          }
+          $es_cajero_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $autorizado_val_str = "''";
+   if (!empty($this->autorizado))
+   {
+       if (is_array($this->autorizado))
+       {
+           $Tmp_array = $this->autorizado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->autorizado);
+       }
+       $autorizado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $autorizado_val_str)
+          {
+             $autorizado_val_str .= ", ";
+          }
+          $autorizado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $notificar_val_str = "''";
+   if (!empty($this->notificar))
+   {
+       if (is_array($this->notificar))
+       {
+           $Tmp_array = $this->notificar;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->notificar);
+       }
+       $notificar_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $notificar_val_str)
+          {
+             $notificar_val_str .= ", ";
+          }
+          $notificar_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_tecnico_val_str = "''";
+   if (!empty($this->es_tecnico))
+   {
+       if (is_array($this->es_tecnico))
+       {
+           $Tmp_array = $this->es_tecnico;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_tecnico);
+       }
+       $es_tecnico_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_tecnico_val_str)
+          {
+             $es_tecnico_val_str .= ", ";
+          }
+          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro)  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT idprod, codigobar&' - '&nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+   else
+   {
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro  FROM productos  ORDER BY codigobar, nompro";
+   }
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_plan'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_estado()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "PENDIENTE?#?PENDIENTE?#?N?@?";
+       $nmgp_def_dados .= "ASIGNADO?#?ASIGNADO?#?N?@?";
+       $nmgp_def_dados .= "PRODUCCION?#?PRODUCCION?#?N?@?";
+       $nmgp_def_dados .= "SUSPENDIDO?#?SUSPENDIDO?#?N?@?";
+       $nmgp_def_dados .= "INACTIVO?#?INACTIVO?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_si_nomina()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_si_factura_electronica()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "SI?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
 
    }
    function Form_lookup_es_restaurante()
@@ -28507,7 +35065,7 @@ else
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idtercero";$nm_numeric[] = "saldo";$nm_numeric[] = "idmuni";$nm_numeric[] = "cupo";$nm_numeric[] = "listaprecios";$nm_numeric[] = "loatiende";$nm_numeric[] = "dias";$nm_numeric[] = "saldoapagar";$nm_numeric[] = "dv";$nm_numeric[] = "dias_credito";$nm_numeric[] = "dias_mora";$nm_numeric[] = "cupo_vendedor";$nm_numeric[] = "zona_clientes";$nm_numeric[] = "clasificacion_clientes";$nm_numeric[] = "id_pedido_tmp";$nm_numeric[] = "total_pedido_tmp";$nm_numeric[] = "porcentaje_propina_sugerida";$nm_numeric[] = "";
+      $nm_numeric[] = "idtercero";$nm_numeric[] = "saldo";$nm_numeric[] = "idmuni";$nm_numeric[] = "cupo";$nm_numeric[] = "listaprecios";$nm_numeric[] = "loatiende";$nm_numeric[] = "dias";$nm_numeric[] = "saldoapagar";$nm_numeric[] = "dv";$nm_numeric[] = "dias_credito";$nm_numeric[] = "dias_mora";$nm_numeric[] = "cupo_vendedor";$nm_numeric[] = "zona_clientes";$nm_numeric[] = "clasificacion_clientes";$nm_numeric[] = "id_pedido_tmp";$nm_numeric[] = "total_pedido_tmp";$nm_numeric[] = "porcentaje_propina_sugerida";$nm_numeric[] = "id_plan";$nm_numeric[] = "valor_plan";$nm_numeric[] = "n_trabajadores";$nm_numeric[] = "";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['decimal_db'] == ".")
@@ -28559,7 +35117,7 @@ else
              $nm_aspas  = "'";
              $nm_aspas1 = "'";
          }
-      $Nm_datas['nacimiento'] = "date";$Nm_datas['fechault'] = "date";$Nm_datas['afiliacion'] = "date";$Nm_datas['con_actual'] = "timestamp";$Nm_datas['fechultcomp'] = "date";$Nm_datas['creado'] = "timestamp";
+      $Nm_datas['nacimiento'] = "date";$Nm_datas['fechault'] = "date";$Nm_datas['afiliacion'] = "date";$Nm_datas['con_actual'] = "timestamp";$Nm_datas['fechultcomp'] = "date";$Nm_datas['creado'] = "timestamp";$Nm_datas['fecha_registro_fe'] = "datetime";
          if (isset($Nm_datas[$campo_join]))
          {
              for ($x = 0; $x < strlen($campo); $x++)
@@ -28917,6 +35475,19 @@ if (parent && parent.scAjaxDetailValue)
                         'puc_auxiliar_proveedores' => 'puc_auxiliar_proveedores',
                         'puc_retefuente_compras' => 'puc_retefuente_compras',
                         'puc_retefuente_servicios_prov' => 'puc_retefuente_servicios_prov',
+                        'archivo_cedula' => 'archivo_cedula',
+                        'archivo_rut' => 'archivo_rut',
+                        'archivo_nit' => 'archivo_nit',
+                        'archivo_pago' => 'archivo_pago',
+                        'id_plan' => 'id_plan',
+                        'valor_plan' => 'valor_plan',
+                        'fecha_registro_fe' => 'fecha_registro_fe',
+                        'nombre_contador' => 'nombre_contador',
+                        'estado' => 'estado',
+                        'si_nomina' => 'si_nomina',
+                        'n_trabajadores' => 'n_trabajadores',
+                        'si_factura_electronica' => 'si_factura_electronica',
+                        'nombre_empresa_bd' => 'nombre_empresa_bd',
                         'archivos' => 'archivos',
                         'es_restaurante' => 'es_restaurante',
                         'porcentaje_propina_sugerida' => 'porcentaje_propina_sugerida',
@@ -28953,6 +35524,10 @@ if (parent && parent.scAjaxDetailValue)
         }
 
         $sFieldDateTime = '';
+        if ('fecha_registro_fe' == $sField)
+        {
+            $sFieldDateTime = $sField . '_hora';
+        }
         if ('con_actual' == $sField)
         {
             $sFieldDateTime = $sField . '_hora';
@@ -28994,6 +35569,12 @@ if (parent && parent.scAjaxDetailValue)
                 break;
             case "copy":
                 return array("sc_b_clone_t.sc-unique-btn-7", "sc_b_clone_t.sc-unique-btn-23");
+                break;
+            case "btn_generar_nomina":
+                return array("sc_btn_generar_nomina_top");
+                break;
+            case "btn_reenviar_correo_nomina":
+                return array("sc_btn_reenviar_correo_nomina_top");
                 break;
             case "help":
                 return array("sc_b_hlp_t");

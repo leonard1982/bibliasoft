@@ -498,6 +498,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -518,6 +522,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
@@ -564,6 +572,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;

@@ -146,7 +146,7 @@ else
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "R")
 {
 ?>
-    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar" style="padding: 0px; spacing: 0px">
+    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar sc-toolbar-bottom" style="padding: 0px; spacing: 0px">
     <table style="border-collapse: collapse; border-width: 0px; width: 100%">
     <tr> 
      <td nowrap align="left" valign="middle" width="33%" class="scFormToolbarPadding"> 
@@ -155,11 +155,33 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "R")
 {
     $NM_btn = false;
+      if ($opcao_botoes != "novo" && $this->nmgp_botoes['goto'] == "on")
+      {
+        $sCondStyle = '';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['birpara']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['birpara']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_label']['birpara']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_label']['birpara']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_label']['birpara'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "birpara", "scBtnFn_sys_GridPermiteSeq()", "scBtnFn_sys_GridPermiteSeq()", "brec_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+?> 
+   <input type="text" class="scFormToolbarInput" name="nmgp_rec_b" value="" style="width:25px;vertical-align: middle;"/> 
+<?php 
+      }
     if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['first'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-27';
+        $buttonMacroDisabled = 'sc-unique-btn-25';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['first']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['first']) {
@@ -178,7 +200,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['back'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-28';
+        $buttonMacroDisabled = 'sc-unique-btn-26';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['back']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['back']) {
@@ -193,17 +215,17 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
 <?php
         $NM_btn = true;
     }
-if ($opcao_botoes != "novo" && $this->nmgp_botoes['summary'] == "on")
+if ($opcao_botoes != "novo" && $this->nmgp_botoes['navpage'] == "on")
 {
 ?> 
-     <span nowrap id="sc_b_summary_b" class="scFormToolbarPadding"></span> 
+     <span nowrap id="sc_b_navpage_b" class="scFormToolbarPadding"></span> 
 <?php 
 }
     if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['forward'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-29';
+        $buttonMacroDisabled = 'sc-unique-btn-27';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['forward']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['forward']) {
@@ -222,7 +244,7 @@ if ($opcao_botoes != "novo" && $this->nmgp_botoes['summary'] == "on")
         $sCondStyle = ($this->nmgp_botoes['last'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-30';
+        $buttonMacroDisabled = 'sc-unique-btn-28';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['last']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['btn_disabled']['last']) {
@@ -237,6 +259,12 @@ if ($opcao_botoes != "novo" && $this->nmgp_botoes['summary'] == "on")
 <?php
         $NM_btn = true;
     }
+if ($opcao_botoes != "novo" && $this->nmgp_botoes['summary'] == "on")
+{
+?> 
+     <span nowrap id="sc_b_summary_b" class="scFormToolbarPadding"></span> 
+<?php 
+}
 ?> 
      </td> 
      <td nowrap align="center" valign="middle" width="33%" class="scFormToolbarPadding"> 
@@ -267,6 +295,7 @@ unset($NM_ult_sep);
 <?php if ('novo' != $this->nmgp_opcao || $this->Embutida_form) { ?><script>nav_atualiza(Nav_permite_ret, Nav_permite_ava, 'b');</script><?php } ?>
 <?php if (('novo' != $this->nmgp_opcao || $this->Embutida_form) && !$this->nmgp_form_empty && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "F") { if ('parcial' == $this->form_paginacao) {?><script>summary_atualiza(<?php echo ($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['reg_start'] + 1). ", " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['reg_qtd'] . ", " . ($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['total'] + 1)?>);</script><?php }} ?>
 <?php if (('novo' != $this->nmgp_opcao || $this->Embutida_form) && !$this->nmgp_form_empty && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "F") { if ('total' == $this->form_paginacao) {?><script>summary_atualiza(1, <?php echo $this->sc_max_reg . ", " . $this->sc_max_reg?>);</script><?php }} ?>
+<?php if (('novo' != $this->nmgp_opcao || $this->Embutida_form) && !$this->nmgp_form_empty && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagos_master_mob']['run_iframe'] != "F") { ?><script>navpage_atualiza('<?php echo $this->SC_nav_page ?>');</script><?php } ?>
 </td></tr> 
 </table> 
 </div> 
@@ -274,7 +303,7 @@ unset($NM_ult_sep);
 </tr> 
 </table> 
 
-<div id="id_debug_window" style="display: none; position: absolute; left: 50px; top: 50px"><table class="scFormMessageTable">
+<div id="id_debug_window" style="display: none;" class='scDebugWindow'><table class="scFormMessageTable">
 <tr><td class="scFormMessageTitle"><?php echo nmButtonOutput($this->arr_buttons, "berrm_clse", "scAjaxHideDebug()", "scAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
 &nbsp;&nbsp;Output</td></tr>
 <tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>
@@ -611,36 +640,36 @@ scAjax_displayEmptyForm();
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
+		if ($("#sc_b_sai_t.sc-unique-btn-20").length && $("#sc_b_sai_t.sc-unique-btn-20").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-20").hasClass("disabled")) {
+		        return;
+		    }
+			scFormClose_F5('<?php echo $nm_url_saida; ?>');
+			 return;
+		}
+		if ($("#sc_b_sai_t.sc-unique-btn-21").length && $("#sc_b_sai_t.sc-unique-btn-21").is(":visible")) {
+		    if ($("#sc_b_sai_t.sc-unique-btn-21").hasClass("disabled")) {
+		        return;
+		    }
+			scFormClose_F5('<?php echo $nm_url_saida; ?>');
+			 return;
+		}
 		if ($("#sc_b_sai_t.sc-unique-btn-22").length && $("#sc_b_sai_t.sc-unique-btn-22").is(":visible")) {
 		    if ($("#sc_b_sai_t.sc-unique-btn-22").hasClass("disabled")) {
 		        return;
 		    }
-			scFormClose_F5('<?php echo $nm_url_saida; ?>');
+			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
 		if ($("#sc_b_sai_t.sc-unique-btn-23").length && $("#sc_b_sai_t.sc-unique-btn-23").is(":visible")) {
 		    if ($("#sc_b_sai_t.sc-unique-btn-23").hasClass("disabled")) {
 		        return;
 		    }
-			scFormClose_F5('<?php echo $nm_url_saida; ?>');
+			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
 		if ($("#sc_b_sai_t.sc-unique-btn-24").length && $("#sc_b_sai_t.sc-unique-btn-24").is(":visible")) {
 		    if ($("#sc_b_sai_t.sc-unique-btn-24").hasClass("disabled")) {
-		        return;
-		    }
-			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
-			 return;
-		}
-		if ($("#sc_b_sai_t.sc-unique-btn-25").length && $("#sc_b_sai_t.sc-unique-btn-25").is(":visible")) {
-		    if ($("#sc_b_sai_t.sc-unique-btn-25").hasClass("disabled")) {
-		        return;
-		    }
-			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
-			 return;
-		}
-		if ($("#sc_b_sai_t.sc-unique-btn-26").length && $("#sc_b_sai_t.sc-unique-btn-26").is(":visible")) {
-		    if ($("#sc_b_sai_t.sc-unique-btn-26").hasClass("disabled")) {
 		        return;
 		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
@@ -664,8 +693,8 @@ scAjax_displayEmptyForm();
 			nm_move ('inicio');
 			 return;
 		}
-		if ($("#sc_b_ini_b.sc-unique-btn-27").length && $("#sc_b_ini_b.sc-unique-btn-27").is(":visible")) {
-		    if ($("#sc_b_ini_b.sc-unique-btn-27").hasClass("disabled")) {
+		if ($("#sc_b_ini_b.sc-unique-btn-25").length && $("#sc_b_ini_b.sc-unique-btn-25").is(":visible")) {
+		    if ($("#sc_b_ini_b.sc-unique-btn-25").hasClass("disabled")) {
 		        return;
 		    }
 			nm_move ('inicio');
@@ -680,8 +709,8 @@ scAjax_displayEmptyForm();
 			nm_move ('retorna');
 			 return;
 		}
-		if ($("#sc_b_ret_b.sc-unique-btn-28").length && $("#sc_b_ret_b.sc-unique-btn-28").is(":visible")) {
-		    if ($("#sc_b_ret_b.sc-unique-btn-28").hasClass("disabled")) {
+		if ($("#sc_b_ret_b.sc-unique-btn-26").length && $("#sc_b_ret_b.sc-unique-btn-26").is(":visible")) {
+		    if ($("#sc_b_ret_b.sc-unique-btn-26").hasClass("disabled")) {
 		        return;
 		    }
 			nm_move ('retorna');
@@ -696,8 +725,8 @@ scAjax_displayEmptyForm();
 			nm_move ('avanca');
 			 return;
 		}
-		if ($("#sc_b_avc_b.sc-unique-btn-29").length && $("#sc_b_avc_b.sc-unique-btn-29").is(":visible")) {
-		    if ($("#sc_b_avc_b.sc-unique-btn-29").hasClass("disabled")) {
+		if ($("#sc_b_avc_b.sc-unique-btn-27").length && $("#sc_b_avc_b.sc-unique-btn-27").is(":visible")) {
+		    if ($("#sc_b_avc_b.sc-unique-btn-27").hasClass("disabled")) {
 		        return;
 		    }
 			nm_move ('avanca');
@@ -712,29 +741,11 @@ scAjax_displayEmptyForm();
 			nm_move ('final');
 			 return;
 		}
-		if ($("#sc_b_fim_b.sc-unique-btn-30").length && $("#sc_b_fim_b.sc-unique-btn-30").is(":visible")) {
-		    if ($("#sc_b_fim_b.sc-unique-btn-30").hasClass("disabled")) {
+		if ($("#sc_b_fim_b.sc-unique-btn-28").length && $("#sc_b_fim_b.sc-unique-btn-28").is(":visible")) {
+		    if ($("#sc_b_fim_b.sc-unique-btn-28").hasClass("disabled")) {
 		        return;
 		    }
 			nm_move ('final');
-			 return;
-		}
-	}
-	function scBtnFn_sys_separator() {
-		if ($("#sys_separator.sc-unique-btn-20").length && $("#sys_separator.sc-unique-btn-20").is(":visible")) {
-		    if ($("#sys_separator.sc-unique-btn-20").hasClass("disabled")) {
-		        return;
-		    }
-			return false;
-			 return;
-		}
-	}
-	function scBtnFn_sys_format_copy() {
-		if ($("#sc_b_clone_t.sc-unique-btn-21").length && $("#sc_b_clone_t.sc-unique-btn-21").is(":visible")) {
-		    if ($("#sc_b_clone_t.sc-unique-btn-21").hasClass("disabled")) {
-		        return;
-		    }
-			nm_move ('clone');
 			 return;
 		}
 	}

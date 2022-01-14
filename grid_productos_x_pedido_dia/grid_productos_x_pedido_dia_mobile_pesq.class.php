@@ -1629,7 +1629,7 @@ $vertical_center = '';
 <?php
 $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
-<div id="id_debug_window" style="display: none; position: absolute; left: 50px; top: 50px"><table class="scFormMessageTable">
+<div id="id_debug_window" style="display: none;" class='scDebugWindow'><table class="scFormMessageTable">
 <tr><td class="scFormMessageTitle"><?php echo $Cod_Btn ?>&nbsp;&nbsp;Output</td></tr>
 <tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>
 </table></div>
@@ -2160,86 +2160,7 @@ foreach ($Arr_format as $Part_date)
     $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_x_pedido_dia']['pesq_tab_label'] = $nmgp_tab_label;
 ?>
  <?php
-     if ($_SESSION['scriptcase']['proc_mobile'])
-     {
-     ?>
- <TR align="center">
-  <TD class="scFilterTableTd">
-   <table width="100%" class="scFilterToolbar"><tr>
-    <td class="scFilterToolbarPadding" align="left" width="33%" nowrap>
-    </td>
-    <td class="scFilterToolbarPadding" align="center" width="33%" nowrap>
-<?php
-   if (is_file("grid_productos_x_pedido_dia_help.txt"))
-   {
-      $Arq_WebHelp = file("grid_productos_x_pedido_dia_help.txt"); 
-      if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
-      {
-          $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
-          $Tmp = explode(";", $Arq_WebHelp[0]); 
-          foreach ($Tmp as $Cada_help)
-          {
-              $Tmp1 = explode(":", $Cada_help); 
-              if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
-              {
-?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-              }
-          }
-      }
-   }
-?>
-<?php
-   if ($nm_apl_dependente == 1 || (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_x_pedido_dia']['opc_psq'] && !$this->aba_iframe))
-   {
-       if ($nm_apl_dependente == 1) 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-       elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_x_pedido_dia']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_x_pedido_dia']['dashboard_info']['under_dashboard'])
-       { }
-       else 
-       { 
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       } 
-   }
-   elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_x_pedido_dia']['opc_psq'])
-   {
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_x_pedido_dia']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_x_pedido_dia']['sc_modal'])
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove();", "self.parent.tb_remove();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-       else
-       {
-?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-<?php
-       }
-   }
-?>
-   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Generar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "Generar", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-?>
-    </td>
-    <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
-    </td>
-   </tr></table>
-  </TD>
- </TR>
-     <?php
-     }
-     else
+     if (!$_SESSION['scriptcase']['proc_mobile'])
      {
      ?>
  <TR align="center">

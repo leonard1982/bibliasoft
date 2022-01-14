@@ -1485,6 +1485,10 @@ class form_facturaven_automaticas_mob_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'dias_decredito');
           }
+          if ('validate_id_clasificacion' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_clasificacion');
+          }
           if ('validate_idcli' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'idcli');
@@ -1528,10 +1532,6 @@ class form_facturaven_automaticas_mob_apl
           if ('validate_detalle' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'detalle');
-          }
-          if ('validate_id_clasificacion' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_clasificacion');
           }
           form_facturaven_automaticas_mob_pack_ajax_response();
           exit;
@@ -2054,6 +2054,9 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'dias_decredito':
                return "Días crédito";
                break;
+           case 'id_clasificacion':
+               return "Clasificación";
+               break;
            case 'idcli':
                return "Cliente";
                break;
@@ -2086,9 +2089,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                break;
            case 'detalle':
                return "";
-               break;
-           case 'id_clasificacion':
-               return "Clasificación";
                break;
            case 'nremision':
                return "Nremision";
@@ -2256,6 +2256,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_credito($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'dias_decredito' == $filtro)) || (is_array($filtro) && in_array('dias_decredito', $filtro)))
         $this->ValidateField_dias_decredito($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_clasificacion' == $filtro)) || (is_array($filtro) && in_array('id_clasificacion', $filtro)))
+        $this->ValidateField_id_clasificacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'idcli' == $filtro)) || (is_array($filtro) && in_array('idcli', $filtro)))
         $this->ValidateField_idcli($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'dircliente' == $filtro)) || (is_array($filtro) && in_array('dircliente', $filtro)))
@@ -2278,8 +2280,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_tipo($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'detalle' == $filtro)) || (is_array($filtro) && in_array('detalle', $filtro)))
         $this->ValidateField_detalle($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'id_clasificacion' == $filtro)) || (is_array($filtro) && in_array('id_clasificacion', $filtro)))
-        $this->ValidateField_id_clasificacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
 //---
@@ -2498,6 +2498,35 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
     } // ValidateField_dias_decredito
+
+    function ValidateField_id_clasificacion(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_clasificacion) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']) && !in_array($this->id_clasificacion, $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_clasificacion']))
+                   {
+                       $Campos_Erros['id_clasificacion'] = array();
+                   }
+                   $Campos_Erros['id_clasificacion'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_clasificacion']) || !is_array($this->NM_ajax_info['errList']['id_clasificacion']))
+                   {
+                       $this->NM_ajax_info['errList']['id_clasificacion'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_clasificacion'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_clasificacion';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_clasificacion
 
     function ValidateField_idcli(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
@@ -3060,35 +3089,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_detalle
 
-    function ValidateField_id_clasificacion(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->id_clasificacion) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']) && !in_array($this->id_clasificacion, $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['id_clasificacion']))
-                   {
-                       $Campos_Erros['id_clasificacion'] = array();
-                   }
-                   $Campos_Erros['id_clasificacion'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['id_clasificacion']) || !is_array($this->NM_ajax_info['errList']['id_clasificacion']))
-                   {
-                       $this->NM_ajax_info['errList']['id_clasificacion'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['id_clasificacion'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'id_clasificacion';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_id_clasificacion
-
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -3117,6 +3117,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     $this->nmgp_dados_form['fechaven'] = (strlen(trim($this->fechaven)) > 19) ? str_replace(".", ":", $this->fechaven) : trim($this->fechaven);
     $this->nmgp_dados_form['credito'] = $this->credito;
     $this->nmgp_dados_form['dias_decredito'] = $this->dias_decredito;
+    $this->nmgp_dados_form['id_clasificacion'] = $this->id_clasificacion;
     $this->nmgp_dados_form['idcli'] = $this->idcli;
     $this->nmgp_dados_form['dircliente'] = $this->dircliente;
     $this->nmgp_dados_form['subtotal'] = $this->subtotal;
@@ -3128,7 +3129,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     $this->nmgp_dados_form['idfacven'] = $this->idfacven;
     $this->nmgp_dados_form['tipo'] = $this->tipo;
     $this->nmgp_dados_form['detalle'] = $this->detalle;
-    $this->nmgp_dados_form['id_clasificacion'] = $this->id_clasificacion;
     $this->nmgp_dados_form['nremision'] = $this->nremision;
     $this->nmgp_dados_form['fechavenc'] = $this->fechavenc;
     $this->nmgp_dados_form['pagada'] = $this->pagada;
@@ -3937,6 +3937,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->ajax_return_values_fechaven();
           $this->ajax_return_values_credito();
           $this->ajax_return_values_dias_decredito();
+          $this->ajax_return_values_id_clasificacion();
           $this->ajax_return_values_idcli();
           $this->ajax_return_values_dircliente();
           $this->ajax_return_values_subtotal();
@@ -3948,7 +3949,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->ajax_return_values_idfacven();
           $this->ajax_return_values_tipo();
           $this->ajax_return_values_detalle();
-          $this->ajax_return_values_id_clasificacion();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
@@ -4219,6 +4219,140 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob'][
                'type'    => 'text',
                'valList' => array($sTmpValue),
               );
+          }
+   }
+
+          //----- id_clasificacion
+   function ajax_return_values_id_clasificacion($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_clasificacion", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_clasificacion);
+              $aLookup = array();
+              $this->_tmp_lookup_id_clasificacion = $this->id_clasificacion;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_fechaven = $this->fechaven;
+   $old_value_dias_decredito = $this->dias_decredito;
+   $old_value_subtotal = $this->subtotal;
+   $old_value_valoriva = $this->valoriva;
+   $old_value_total = $this->total;
+   $old_value_vendedor = $this->vendedor;
+   $old_value_numfacven = $this->numfacven;
+   $old_value_idfacven = $this->idfacven;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_fechaven = $this->fechaven;
+   $unformatted_value_dias_decredito = $this->dias_decredito;
+   $unformatted_value_subtotal = $this->subtotal;
+   $unformatted_value_valoriva = $this->valoriva;
+   $unformatted_value_total = $this->total;
+   $unformatted_value_vendedor = $this->vendedor;
+   $unformatted_value_numfacven = $this->numfacven;
+   $unformatted_value_idfacven = $this->idfacven;
+
+   $nm_comando = "SELECT id, descripcion  FROM facturaven_clasificacion  ORDER BY descripcion";
+
+   $this->fechaven = $old_value_fechaven;
+   $this->dias_decredito = $old_value_dias_decredito;
+   $this->subtotal = $old_value_subtotal;
+   $this->valoriva = $old_value_valoriva;
+   $this->total = $old_value_total;
+   $this->vendedor = $old_value_vendedor;
+   $this->numfacven = $old_value_numfacven;
+   $this->idfacven = $old_value_idfacven;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $aLookup[] = array(form_facturaven_automaticas_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_facturaven_automaticas_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_clasificacion\"";
+          if (isset($this->NM_ajax_info['select_html']['id_clasificacion']) && !empty($this->NM_ajax_info['select_html']['id_clasificacion']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_clasificacion']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_clasificacion == $sValue)
+                  {
+                      $this->_tmp_lookup_id_clasificacion = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_clasificacion'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_clasificacion']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_clasificacion']['valList'][$i] = form_facturaven_automaticas_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_clasificacion']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_clasificacion']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_clasificacion']['labList'] = $aLabel;
           }
    }
 
@@ -4636,140 +4770,6 @@ if ($this->idcli != "")
                'type'    => 'text',
                'valList' => array($sTmpValue),
               );
-          }
-   }
-
-          //----- id_clasificacion
-   function ajax_return_values_id_clasificacion($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_clasificacion", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->id_clasificacion);
-              $aLookup = array();
-              $this->_tmp_lookup_id_clasificacion = $this->id_clasificacion;
-
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array(); 
-}
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_fechaven = $this->fechaven;
-   $old_value_dias_decredito = $this->dias_decredito;
-   $old_value_subtotal = $this->subtotal;
-   $old_value_valoriva = $this->valoriva;
-   $old_value_total = $this->total;
-   $old_value_vendedor = $this->vendedor;
-   $old_value_numfacven = $this->numfacven;
-   $old_value_idfacven = $this->idfacven;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_fechaven = $this->fechaven;
-   $unformatted_value_dias_decredito = $this->dias_decredito;
-   $unformatted_value_subtotal = $this->subtotal;
-   $unformatted_value_valoriva = $this->valoriva;
-   $unformatted_value_total = $this->total;
-   $unformatted_value_vendedor = $this->vendedor;
-   $unformatted_value_numfacven = $this->numfacven;
-   $unformatted_value_idfacven = $this->idfacven;
-
-   $nm_comando = "SELECT id, descripcion  FROM facturaven_clasificacion  ORDER BY descripcion";
-
-   $this->fechaven = $old_value_fechaven;
-   $this->dias_decredito = $old_value_dias_decredito;
-   $this->subtotal = $old_value_subtotal;
-   $this->valoriva = $old_value_valoriva;
-   $this->total = $old_value_total;
-   $this->vendedor = $old_value_vendedor;
-   $this->numfacven = $old_value_numfacven;
-   $this->idfacven = $old_value_idfacven;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_facturaven_automaticas_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_facturaven_automaticas_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"id_clasificacion\"";
-          if (isset($this->NM_ajax_info['select_html']['id_clasificacion']) && !empty($this->NM_ajax_info['select_html']['id_clasificacion']))
-          {
-              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_clasificacion']);
-          }
-          $sLookup = '';
-          if (empty($aLookup))
-          {
-              $aLookup[] = array('' => '');
-          }
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-
-                  if ($this->id_clasificacion == $sValue)
-                  {
-                      $this->_tmp_lookup_id_clasificacion = $sLabel;
-                  }
-
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-          $this->NM_ajax_info['fldList']['id_clasificacion'] = array(
-                       'row'    => '',
-               'type'    => 'select',
-               'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['id_clasificacion']['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['id_clasificacion']['valList'][$i] = form_facturaven_automaticas_mob_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_clasificacion']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['id_clasificacion']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['id_clasificacion']['labList'] = $aLabel;
           }
    }
 
@@ -5206,6 +5206,7 @@ $_SESSION['scriptcase']['form_facturaven_automaticas_mob']['contr_erro'] = 'off'
       $NM_val_form['fechaven'] = $this->fechaven;
       $NM_val_form['credito'] = $this->credito;
       $NM_val_form['dias_decredito'] = $this->dias_decredito;
+      $NM_val_form['id_clasificacion'] = $this->id_clasificacion;
       $NM_val_form['idcli'] = $this->idcli;
       $NM_val_form['dircliente'] = $this->dircliente;
       $NM_val_form['subtotal'] = $this->subtotal;
@@ -5217,7 +5218,6 @@ $_SESSION['scriptcase']['form_facturaven_automaticas_mob']['contr_erro'] = 'off'
       $NM_val_form['idfacven'] = $this->idfacven;
       $NM_val_form['tipo'] = $this->tipo;
       $NM_val_form['detalle'] = $this->detalle;
-      $NM_val_form['id_clasificacion'] = $this->id_clasificacion;
       $NM_val_form['nremision'] = $this->nremision;
       $NM_val_form['fechavenc'] = $this->fechavenc;
       $NM_val_form['pagada'] = $this->pagada;
@@ -6056,7 +6056,7 @@ $_SESSION['scriptcase']['form_facturaven_automaticas_mob']['contr_erro'] = 'off'
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('resolucion', 'formapago', 'fechaven', 'credito', 'dias_decredito', 'idcli', 'dircliente', 'subtotal', 'valoriva', 'total', 'observaciones', 'vendedor', 'numfacven', 'idfacven', 'tipo', 'detalle', 'id_clasificacion'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('resolucion', 'formapago', 'fechaven', 'credito', 'dias_decredito', 'id_clasificacion', 'idcli', 'dircliente', 'subtotal', 'valoriva', 'total', 'observaciones', 'vendedor', 'numfacven', 'idfacven', 'tipo', 'detalle'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -8368,6 +8368,91 @@ else
        return $todo;
 
    }
+   function Form_lookup_id_clasificacion()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array(); 
+    }
+
+   $old_value_fechaven = $this->fechaven;
+   $old_value_dias_decredito = $this->dias_decredito;
+   $old_value_subtotal = $this->subtotal;
+   $old_value_valoriva = $this->valoriva;
+   $old_value_total = $this->total;
+   $old_value_vendedor = $this->vendedor;
+   $old_value_numfacven = $this->numfacven;
+   $old_value_idfacven = $this->idfacven;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_fechaven = $this->fechaven;
+   $unformatted_value_dias_decredito = $this->dias_decredito;
+   $unformatted_value_subtotal = $this->subtotal;
+   $unformatted_value_valoriva = $this->valoriva;
+   $unformatted_value_total = $this->total;
+   $unformatted_value_vendedor = $this->vendedor;
+   $unformatted_value_numfacven = $this->numfacven;
+   $unformatted_value_idfacven = $this->idfacven;
+
+   $nm_comando = "SELECT id, descripcion  FROM facturaven_clasificacion  ORDER BY descripcion";
+
+   $this->fechaven = $old_value_fechaven;
+   $this->dias_decredito = $old_value_dias_decredito;
+   $this->subtotal = $old_value_subtotal;
+   $this->valoriva = $old_value_valoriva;
+   $this->total = $old_value_total;
+   $this->vendedor = $old_value_vendedor;
+   $this->numfacven = $old_value_numfacven;
+   $this->idfacven = $old_value_idfacven;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
    function Form_lookup_idcli()
    {
 $nmgp_def_dados = "" ; 
@@ -8537,91 +8622,6 @@ if ($this->idcli != "")
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
 } 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   return $todo;
-
-   }
-   function Form_lookup_id_clasificacion()
-   {
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array(); 
-}
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'] = array(); 
-    }
-
-   $old_value_fechaven = $this->fechaven;
-   $old_value_dias_decredito = $this->dias_decredito;
-   $old_value_subtotal = $this->subtotal;
-   $old_value_valoriva = $this->valoriva;
-   $old_value_total = $this->total;
-   $old_value_vendedor = $this->vendedor;
-   $old_value_numfacven = $this->numfacven;
-   $old_value_idfacven = $this->idfacven;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_fechaven = $this->fechaven;
-   $unformatted_value_dias_decredito = $this->dias_decredito;
-   $unformatted_value_subtotal = $this->subtotal;
-   $unformatted_value_valoriva = $this->valoriva;
-   $unformatted_value_total = $this->total;
-   $unformatted_value_vendedor = $this->vendedor;
-   $unformatted_value_numfacven = $this->numfacven;
-   $unformatted_value_idfacven = $this->idfacven;
-
-   $nm_comando = "SELECT id, descripcion  FROM facturaven_clasificacion  ORDER BY descripcion";
-
-   $this->fechaven = $old_value_fechaven;
-   $this->dias_decredito = $old_value_dias_decredito;
-   $this->subtotal = $old_value_subtotal;
-   $this->valoriva = $old_value_valoriva;
-   $this->total = $old_value_total;
-   $this->vendedor = $old_value_vendedor;
-   $this->numfacven = $old_value_numfacven;
-   $this->idfacven = $old_value_idfacven;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas_mob']['Lookup_id_clasificacion'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
    $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
    $todo  = explode("?@?", $todox) ; 
    return $todo;

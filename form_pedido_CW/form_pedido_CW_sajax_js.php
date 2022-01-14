@@ -66,7 +66,7 @@ sajax_show_javascript();
     {
       document.getElementById("id_debug_window").style.display = "";
       document.getElementById("id_debug_text").innerHTML = scAjaxFormatDebug(oResp["htmOutput"]) + document.getElementById("id_debug_text").innerHTML;
-      scCenterElement(document.getElementById("id_debug_window"));
+      //scCenterElement(document.getElementById("id_debug_window"));
     }
   } // scAjaxShowDebug
 
@@ -339,11 +339,24 @@ sajax_show_javascript();
 
   function scAjaxCalendarReload()
   {
-    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"])
+    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"] && typeof self.parent.calendar_reload == "function")
     {
+<?php
+if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && isset($_SESSION['scriptcase']['display_mobile']) && $_SESSION['scriptcase']['display_mobile']) {
+?>
       self.parent.calendar_reload();
       self.parent.tb_remove();
+<?php
+} else {
+?>
+      self.parent.calendar_reload();
+      self.parent.tb_remove();
+<?php
+}
+?>
+      return true;
     }
+    return false;
   } // scCalendarReload
 
   function scAjaxUpdateErrors(sType)
@@ -3705,14 +3718,10 @@ sajax_show_javascript();
   {
     var var_total = scAjaxGetFieldHidden("total");
     var var_asentada = scAjaxGetFieldSelect("asentada");
-    var var_idcli = scAjaxGetFieldText("id_ac_idcli");
-    var var_credito = scAjaxGetFieldSelect("credito");
-    var var_cupodis = scAjaxGetFieldHidden("cupodis");
     var var_idpedido = scAjaxGetFieldHidden("idpedido");
-    var var_facturado = scAjaxGetFieldSelect("facturado");
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn(true);
-    x_ajax_form_pedido_CW_event_asentada_onchange(var_total, var_asentada, var_idcli, var_credito, var_cupodis, var_idpedido, var_facturado, var_script_case_init, do_ajax_form_pedido_CW_event_asentada_onchange_cb);
+    x_ajax_form_pedido_CW_event_asentada_onchange(var_total, var_asentada, var_idpedido, var_script_case_init, do_ajax_form_pedido_CW_event_asentada_onchange_cb);
   } // do_ajax_form_pedido_CW_event_asentada_onchange
 
   function do_ajax_form_pedido_CW_event_asentada_onchange_cb(sResp)
@@ -4330,7 +4339,6 @@ function scJs_sweetalert_params(params) {
   {
     scAjaxProcOff();
     oResp = scAjaxResponse(sResp);
-    scAjaxCalendarReload();
     scAjaxUpdateErrors("valid");
     sAppErrors = scAjaxListErrors(true);
     if ("" == sAppErrors || "menu_link" == document.F1.nmgp_opcao.value)

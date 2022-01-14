@@ -66,7 +66,7 @@ sajax_show_javascript();
     {
       document.getElementById("id_debug_window").style.display = "";
       document.getElementById("id_debug_text").innerHTML = scAjaxFormatDebug(oResp["htmOutput"]) + document.getElementById("id_debug_text").innerHTML;
-      scCenterElement(document.getElementById("id_debug_window"));
+      //scCenterElement(document.getElementById("id_debug_window"));
     }
   } // scAjaxShowDebug
 
@@ -339,11 +339,24 @@ sajax_show_javascript();
 
   function scAjaxCalendarReload()
   {
-    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"])
+    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"] && typeof self.parent.calendar_reload == "function")
     {
+<?php
+if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && isset($_SESSION['scriptcase']['display_mobile']) && $_SESSION['scriptcase']['display_mobile']) {
+?>
       self.parent.calendar_reload();
       self.parent.tb_remove();
+<?php
+} else {
+?>
+      self.parent.calendar_reload();
+      self.parent.tb_remove();
+<?php
+}
+?>
+      return true;
     }
+    return false;
   } // scCalendarReload
 
   function scAjaxUpdateErrors(sType)
@@ -3725,6 +3738,9 @@ function scJs_sweetalert_params(params) {
   {
     scAjaxProcOff();
     oResp = scAjaxResponse(sResp);
+    if (scAjaxCalendarReload()) {
+      return;
+    }
     scAjaxUpdateErrors("valid");
     sAppErrors = scAjaxListErrors(true);
     if ("" == sAppErrors || "menu_link" == document.F1.nmgp_opcao.value)
@@ -3770,8 +3786,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['calendar_calendar_mob'][
     Nm_Proc_Atualiz = false;
     if (!scAjaxHasError())
     {
-      document.F6.action = "calendar_calendar_mob_fim.php";
-      document.F6.submit();
+      history.go(-1);
       return;
       scAjaxSetFields(false);
       scAjaxSetVariables();
@@ -3874,6 +3889,7 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
     scAjaxSetLabel(true);
     scAjaxSetReadonly(true);
     scAjaxSetMaster();
+    scAjaxSetNavStatus("t");
     scAjaxSetNavStatus("b");
     scAjaxSetDisplay(true);
     scAjaxSetBtnVars();

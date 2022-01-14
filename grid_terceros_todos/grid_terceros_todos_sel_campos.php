@@ -169,6 +169,8 @@ function Sel_cmp_process()
       $tab_ger_campos['cliente'] = "on";
       $tab_ger_campos['proveedor'] = "on";
       $tab_ger_campos['empleado'] = "on";
+      $tab_ger_campos['si_nomina'] = "on";
+      $tab_blk_campos[] = "si_nomina";
       $tab_ger_campos['idtercero'] = "on";
       $tab_ger_campos['nacimiento'] = "on";
       $tab_ger_campos['sexo'] = "on";
@@ -222,6 +224,7 @@ function Sel_cmp_process()
       $tab_ger_campos['puc_retefuente_servicios_prov'] = "on";
       $tab_ger_campos['nube'] = "on";
       $tab_ger_campos['tipo_documento'] = "on";
+      $tab_ger_campos['estado'] = "on";
       $tab_ger_campos['facturas'] = "on";
       $tab_ger_campos['sc_asigna_vendedor'] = "on";
 

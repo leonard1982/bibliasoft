@@ -229,8 +229,8 @@ class grid_terceros_contratos_generar_fv_ini
       $this->nm_dt_criacao   = "20200311"; 
       $this->nm_hr_criacao   = "151455"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211014"; 
-      $this->nm_hr_ult_alt   = "194640"; 
+      $this->nm_dt_ult_alt   = "20220114"; 
+      $this->nm_hr_ult_alt   = "171012"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1007,7 +1007,7 @@ class grid_terceros_contratos_generar_fv_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_contratos_generar_fv']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_contratos_generar_fv']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKH9FUHABYHurqDMrwV9FeDWJeHIX7D9BsH9B/Z1NOHuFUDMzGVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCV5FaVoBqDcXGZSFUHIrKVWBODMBYVIBsDuX7HMrqD9JmZ1BiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODuX7VoX7D9JmZ1B/D1rKD5BiDEvsHEFiDWFqDoJeDcJeZSX7HABYV5BOHuNODkFCH5FqVoJwDcBqH9B/Z1BeV5FUDEvsHEBUDWr/DoraD9NmDQJsZ1rwV5BqHgrYDkBODuX7DoraD9BsZSB/HArYD5XGDMBYHEJGDWr/DoFUDcBwH9FGHAvCD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuBODcBwDQJwHAN7D5FaDMBYDkB/H5XCHMrqHQBsVIJsHArYV5JeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmZkBiHAzGD5BqHgveDkXKDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDur/HIX7D9BsH9BqDSBeV5JsDEvsHErsDWXCHIraD9JKH9X7HABYD5rqDMvOVIBsH5FqHIBiHQNwZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQJwD1BeHuX7HuBYVcFeDuFqHMJwDcBqH9FaHIBOD5BqHgvsHArCV5FaVoBqHQXGDQX7Z1vCD5F7DMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHENiDuJeDoBOHQBiZ9F7HAvOVWBOHuvmDkBODur/HMFaDcFYZSBOHArKHQF7DMzGVkXeV5FqHMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaZuFaDcBwDQFGHANOV5FGHgrKVcFCDWJeVoraD9XOH9BOZ1BeD5rqDEBOZSXeV5XCZuFaD9NwH9X7HArYVWJsHuNODkFCH5FqVoJwDcJUH9B/HArYV5FUDMzGHEJGDWr/DoraD9NwH9FUZ1rwD5JeHuBYZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiD9BiZSB/HIBOD5XGHgvsVkJqDWFqHMJeHQNwDQB/HAvmV5XGHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDWXKVoF7HQNwZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNwZSFUHAveHQJeDMrYV9BUH5FqHMraDcNwH9BqZ1BOD5BODMBYHEJqDWFGDoBOHQJeDuBqD1BeHuBODMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1034,7 +1034,7 @@ class grid_terceros_contratos_generar_fv_ini
       } 
       if (empty($this->nm_tabela))
       {
-          $this->nm_tabela = "terceros_contratos"; 
+          $this->nm_tabela = ""; 
       }
    }
 
@@ -3782,6 +3782,11 @@ class grid_terceros_contratos_generar_fv_apl
                    }
               }
           } 
+          if (isset($gmensaje)) 
+          {
+              $_SESSION['gmensaje'] = $gmensaje;
+              nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gmensaje"]);
+          }
           if (isset($ganio)) 
           {
               $_SESSION['ganio'] = $ganio;
@@ -3802,16 +3807,6 @@ class grid_terceros_contratos_generar_fv_apl
               $_SESSION['gcodzona'] = $gcodzona;
               nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gcodzona"]);
           }
-          if (isset($gresolucion)) 
-          {
-              $_SESSION['gresolucion'] = $gresolucion;
-              nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gresolucion"]);
-          }
-          if (isset($gmensaje)) 
-          {
-              $_SESSION['gmensaje'] = $gmensaje;
-              nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gmensaje"]);
-          }
           if (isset($gfecha_documento)) 
           {
               $_SESSION['gfecha_documento'] = $gfecha_documento;
@@ -3821,6 +3816,11 @@ class grid_terceros_contratos_generar_fv_apl
           {
               $_SESSION['gdia'] = $gdia;
               nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gdia"]);
+          }
+          if (isset($gresolucion)) 
+          {
+              $_SESSION['gresolucion'] = $gresolucion;
+              nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gresolucion"]);
           }
       } 
       if ($Parms_form_pdf)
@@ -3860,14 +3860,6 @@ class grid_terceros_contratos_generar_fv_apl
            foreach ($todo as $param)
            {
                 $cadapar  = explode("?#?", $param);
-                if ($cadapar[0] == "anio")  
-                { 
-                    $cadapar[0] = str_replace("anio", "YEAR(fecha_contrato)", $cadapar[0]);
-                } 
-                if ($cadapar[0] == "periodo")  
-                { 
-                    $cadapar[0] = str_replace("periodo", "month(fecha_contrato)", $cadapar[0]);
-                } 
                 if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['SC_Ind_Groupby'] == "sc_free_group_by")
                 { 
                     $Temp_parms .= (empty($Temp_parms)) ? "" : " and ";
@@ -4759,18 +4751,6 @@ class grid_terceros_contratos_generar_fv_apl
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['ordem_select']))  
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['ordem_select'] = array(); 
-              $Free_sql_atual = array();
-              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['SC_Gb_Free_sql'] as $cmp => $resto)
-              {
-                  foreach ($resto as $cmp_sql => $ord)
-                  {
-                      $Free_sql_atual[$cmp_sql] = 0;
-                  } 
-              } 
-              if (!isset($Free_sql_atual['numero_contrato']))
-              { 
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['ordem_select']['numero_contrato'] = 'DESC'; 
-              } 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['ordem_select_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['ordem_select']; 
           } 
       }
@@ -4869,7 +4849,7 @@ class grid_terceros_contratos_generar_fv_apl
       { 
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['prim_cons'] = true;  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['where_orig'] = " where activo='SI'";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['where_orig'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['where_orig'];  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['where_orig'];  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['cond_pesq']         = ""; 
@@ -5591,7 +5571,6 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos
        $this->estado = $this->rs_grid->fields[4] ;  
        $this->mensualidad = $this->rs_grid->fields[5] ;  
        $this->mensualidad =  str_replace(",", ".", $this->mensualidad);
-       $this->mensualidad = (strpos(strtolower($this->mensualidad), "e")) ? (float)$this->mensualidad : $this->mensualidad; 
        $this->mensualidad = (string)$this->mensualidad;
        $this->fecha_factura = $this->rs_grid->fields[6] ;  
        $this->id_ter_cont = $this->rs_grid->fields[7] ;  
@@ -5607,21 +5586,17 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos
        $this->fecha_ultimopago = $this->rs_grid->fields[16] ;  
        $this->valorpagado = $this->rs_grid->fields[17] ;  
        $this->valorpagado =  str_replace(",", ".", $this->valorpagado);
-       $this->valorpagado = (strpos(strtolower($this->valorpagado), "e")) ? (float)$this->valorpagado : $this->valorpagado; 
        $this->valorpagado = (string)$this->valorpagado;
        $this->saldoanterior = $this->rs_grid->fields[18] ;  
        $this->saldoanterior =  str_replace(",", ".", $this->saldoanterior);
-       $this->saldoanterior = (strpos(strtolower($this->saldoanterior), "e")) ? (float)$this->saldoanterior : $this->saldoanterior; 
        $this->saldoanterior = (string)$this->saldoanterior;
        $this->saldoactual = $this->rs_grid->fields[19] ;  
        $this->saldoactual =  str_replace(",", ".", $this->saldoactual);
-       $this->saldoactual = (strpos(strtolower($this->saldoactual), "e")) ? (float)$this->saldoactual : $this->saldoactual; 
        $this->saldoactual = (string)$this->saldoactual;
        $this->mesultimafactura = $this->rs_grid->fields[20] ;  
        $this->observaciones = $this->rs_grid->fields[21] ;  
        $this->valor_ultimafactura = $this->rs_grid->fields[22] ;  
        $this->valor_ultimafactura =  str_replace(",", ".", $this->valor_ultimafactura);
-       $this->valor_ultimafactura = (strpos(strtolower($this->valor_ultimafactura), "e")) ? (float)$this->valor_ultimafactura : $this->valor_ultimafactura; 
        $this->valor_ultimafactura = (string)$this->valor_ultimafactura;
        $this->precinto = $this->rs_grid->fields[23] ;  
        $this->correo = $this->rs_grid->fields[24] ;  
@@ -6637,7 +6612,7 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "id_ter_cont";$nm_numeric[] = "numero_contrato";$nm_numeric[] = "usuario_crea";$nm_numeric[] = "usuario_edita";$nm_numeric[] = "valorpagado";$nm_numeric[] = "saldoanterior";$nm_numeric[] = "saldoactual";$nm_numeric[] = "valor_ultimafactura";$nm_numeric[] = "mensualidad";$nm_numeric[] = "year(fecha_contrato)";$nm_numeric[] = "month(fecha_contrato)";
+      $nm_numeric[] = "id_ter_cont";$nm_numeric[] = "numero_contrato";$nm_numeric[] = "usuario_crea";$nm_numeric[] = "usuario_edita";$nm_numeric[] = "valorpagado";$nm_numeric[] = "saldoanterior";$nm_numeric[] = "saldoactual";$nm_numeric[] = "valor_ultimafactura";$nm_numeric[] = "mensualidad";$nm_numeric[] = "anio";$nm_numeric[] = "periodo";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['decimal_db'] == ".")
@@ -7409,6 +7384,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
    {
        $nmgp_parms = "";
    }
+   if (isset($gmensaje)) 
+   {
+       $_SESSION['gmensaje'] = $gmensaje;
+   }
    if (isset($ganio)) 
    {
        $_SESSION['ganio'] = $ganio;
@@ -7425,14 +7404,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
    {
        $_SESSION['gcodzona'] = $gcodzona;
    }
-   if (isset($gresolucion)) 
-   {
-       $_SESSION['gresolucion'] = $gresolucion;
-   }
-   if (isset($gmensaje)) 
-   {
-       $_SESSION['gmensaje'] = $gmensaje;
-   }
    if (isset($gfecha_documento)) 
    {
        $_SESSION['gfecha_documento'] = $gfecha_documento;
@@ -7440,6 +7411,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
    if (isset($gdia)) 
    {
        $_SESSION['gdia'] = $gdia;
+   }
+   if (isset($gresolucion)) 
+   {
+       $_SESSION['gresolucion'] = $gresolucion;
    }
    if (!empty($glo_perfil))  
    { 
@@ -7558,6 +7533,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
                     $$Tmp_par = $cadapar[1];
                 }
            }
+           if (isset($gmensaje)) 
+           {
+               $_SESSION['gmensaje'] = $gmensaje;
+               nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gmensaje"]);
+           }
            if (isset($ganio)) 
            {
                $_SESSION['ganio'] = $ganio;
@@ -7578,16 +7558,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
                $_SESSION['gcodzona'] = $gcodzona;
                nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gcodzona"]);
            }
-           if (isset($gresolucion)) 
-           {
-               $_SESSION['gresolucion'] = $gresolucion;
-               nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gresolucion"]);
-           }
-           if (isset($gmensaje)) 
-           {
-               $_SESSION['gmensaje'] = $gmensaje;
-               nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gmensaje"]);
-           }
            if (isset($gfecha_documento)) 
            {
                $_SESSION['gfecha_documento'] = $gfecha_documento;
@@ -7597,6 +7567,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
            {
                $_SESSION['gdia'] = $gdia;
                nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gdia"]);
+           }
+           if (isset($gresolucion)) 
+           {
+               $_SESSION['gresolucion'] = $gresolucion;
+               nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gresolucion"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -7831,6 +7806,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
        { 
            $_SESSION['sc_session'][$script_case_init]['grid_terceros_contratos_generar_fv']['opcao'] = $nmgp_opcao ;  
        }   
+       if (isset($_POST["gmensaje"])) 
+       {
+           $_SESSION["gmensaje"] = $_POST["gmensaje"];
+           nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gmensaje"]);
+       }
+       if (isset($_GET["gmensaje"])) 
+       {
+           $_SESSION["gmensaje"] = $_GET["gmensaje"];
+           nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gmensaje"]);
+       }
+       if (!isset($_SESSION["gmensaje"])) 
+       {
+           $_SESSION["gmensaje"] = "";
+       }
        if (isset($_POST["ganio"])) 
        {
            $_SESSION["ganio"] = $_POST["ganio"];
@@ -7887,34 +7876,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
        {
            $_SESSION["gcodzona"] = "";
        }
-       if (isset($_POST["gresolucion"])) 
-       {
-           $_SESSION["gresolucion"] = $_POST["gresolucion"];
-           nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gresolucion"]);
-       }
-       if (isset($_GET["gresolucion"])) 
-       {
-           $_SESSION["gresolucion"] = $_GET["gresolucion"];
-           nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gresolucion"]);
-       }
-       if (!isset($_SESSION["gresolucion"])) 
-       {
-           $_SESSION["gresolucion"] = "";
-       }
-       if (isset($_POST["gmensaje"])) 
-       {
-           $_SESSION["gmensaje"] = $_POST["gmensaje"];
-           nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gmensaje"]);
-       }
-       if (isset($_GET["gmensaje"])) 
-       {
-           $_SESSION["gmensaje"] = $_GET["gmensaje"];
-           nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gmensaje"]);
-       }
-       if (!isset($_SESSION["gmensaje"])) 
-       {
-           $_SESSION["gmensaje"] = "";
-       }
        if (isset($_POST["gfecha_documento"])) 
        {
            $_SESSION["gfecha_documento"] = $_POST["gfecha_documento"];
@@ -7942,6 +7903,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
        if (!isset($_SESSION["gdia"])) 
        {
            $_SESSION["gdia"] = "";
+       }
+       if (isset($_POST["gresolucion"])) 
+       {
+           $_SESSION["gresolucion"] = $_POST["gresolucion"];
+           nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gresolucion"]);
+       }
+       if (isset($_GET["gresolucion"])) 
+       {
+           $_SESSION["gresolucion"] = $_GET["gresolucion"];
+           nm_limpa_str_grid_terceros_contratos_generar_fv($_SESSION["gresolucion"]);
+       }
+       if (!isset($_SESSION["gresolucion"])) 
+       {
+           $_SESSION["gresolucion"] = "";
        }
        if (isset($nmgp_lig_edit_lapis)) 
        {
@@ -8125,8 +8100,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv
        $Nm_numeric[] = "saldoactual";
        $Nm_numeric[] = "valor_ultimafactura";
        $Nm_numeric[] = "mensualidad";
-       $Nm_numeric[] = "year(fecha_contrato)";
-       $Nm_numeric[] = "month(fecha_contrato)";
+       $Nm_numeric[] = "anio";
+       $Nm_numeric[] = "periodo";
        if (in_array($name, $Nm_numeric))
        {
            if (is_array($val))

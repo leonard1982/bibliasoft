@@ -277,16 +277,16 @@ class form_detallepedido_CW_ini
       $this->nm_seguranca    = ""; 
       $this->nm_grupo        = "FACILWEBv2"; 
       $this->nm_grupo_versao = "1"; 
-      $this->nm_autor        = "admin"; 
+      $this->nm_autor        = "edgar"; 
       $this->nm_script_by    = "netmake"; 
       $this->nm_script_type  = "PHP"; 
       $this->nm_versao_sc    = "v9"; 
       $this->nm_tp_lic_sc    = "ep_bronze"; 
-      $this->nm_dt_criacao   = "20171228"; 
-      $this->nm_hr_criacao   = "162318"; 
+      $this->nm_dt_criacao   = "20211125"; 
+      $this->nm_hr_criacao   = "170133"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210817"; 
-      $this->nm_hr_ult_alt   = "115231"; 
+      $this->nm_dt_ult_alt   = "20211223"; 
+      $this->nm_hr_ult_alt   = "110934"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -943,7 +943,7 @@ class form_detallepedido_CW_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9X7HIvsVWJsHuNOZSJqDWrmVEFGHQNmZSFaD1NaZMFaHgNOZSJ3DuFYHMJwHQBiZSX7HAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJwHANOHQJsDMvsVcXKDuX7HIJeDcBqH9BqHIveD5JwDErKHENiDWB3ZuJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSX7D1veD5JwHuBYVcFKDWFaDoJeD9BsZ1F7HArYD5BqDMzGHEXeH5F/VoXGDcBwDQJsZ1rwV5raDMvmDkB/DuFGDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQBOHuvmDkB/DWFYHMF7HQNmH9B/HINaZMBODEBOHArCH5F/HIraD9NmH9X7Z1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHANKV5BODMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBeHErsDWBmZuFaHQNmDQBqHAvCV5XGHgrKVIB/H5XCDoFUHQBqZkFGHArYHQF7DErKHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKH9BiZ1N7HuJeDMrYVcrsDur/HIXGD9BiZ1BiD1zGZMBqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvmVcFKV5BmVoBqD9BsZkFGHAvsZMBqDMveHEXeHEFqVoFGHQFYDQJsD1BeHurqDMBOVIFCDWFYVoB/HQBsZ1B/HAN7HQNUHgBeHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSB/Z1BeD5XGDEBOHEJqV5FaVoFaDcBwDQFGD1veV5FUHuNOVcFKDuFqDoraD9XOZ1F7HArYV5B/DEBeHEXeH5F/DoB/DcXOZSBiD1BeHuXGDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQBiH9FGDSzGV5BqDMvsVcFeDWJeHIFGHQNmZ1FGZ1vmD5BqHgNKHEJGDWFqDoBqDcXGH9FGHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqHAvOV5XGDMrYVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMveHEJGH5F/HIF7HQJKZSBiHIrwD5B/HgvOVcFeDWFYDoFUHQNwZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['form_detallepedido_CW']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['form_detallepedido_CW']['ordem_cmp'] = ""; 
@@ -1597,10 +1597,9 @@ ob_start();
     $sc_conv_var['hora_final'] = "hora_final_";
     $sc_conv_var['observ'] = "observ_";
     $sc_conv_var['cerrado'] = "cerrado_";
+    $sc_conv_var['obs'] = "obs_";
+    $sc_conv_var['descr'] = "descr_";
     $sc_conv_var['codbarra'] = "codbarra_";
-    $sc_conv_var['stockubica'] = "stockubica_";
-    $sc_conv_var['unidad'] = "unidad_";
-    $sc_conv_var['cod_barras'] = "cod_barras_";
     if (!empty($_FILES))
     {
         foreach ($_FILES as $nmgp_campo => $nmgp_valores)
@@ -1757,33 +1756,21 @@ ob_start();
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
-        if ('ajax_form_detallepedido_CW_validate_cod_barras_' == $_POST['rs'])
+        if ('ajax_form_detallepedido_CW_validate_idpedid_' == $_POST['rs'])
         {
-            $cod_barras_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $idpedid_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_form_detallepedido_CW_validate_codbarra_' == $_POST['rs'])
+        {
+            $codbarra_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
         if ('ajax_form_detallepedido_CW_validate_idpro_' == $_POST['rs'])
         {
             $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_colores_' == $_POST['rs'])
-        {
-            $colores_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_tallas_' == $_POST['rs'])
-        {
-            $tallas_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_sabor_' == $_POST['rs'])
-        {
-            $sabor_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
@@ -1796,24 +1783,6 @@ ob_start();
         if ('ajax_form_detallepedido_CW_validate_observ_' == $_POST['rs'])
         {
             $observ_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_unidadmayor_' == $_POST['rs'])
-        {
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_stockubica_' == $_POST['rs'])
-        {
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_unidad_' == $_POST['rs'])
-        {
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
@@ -1835,9 +1804,9 @@ ob_start();
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
-        if ('ajax_form_detallepedido_CW_validate_descuento_' == $_POST['rs'])
+        if ('ajax_form_detallepedido_CW_validate_iva_' == $_POST['rs'])
         {
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
@@ -1847,264 +1816,85 @@ ob_start();
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
-        if ('ajax_form_detallepedido_CW_validate_adicional1_' == $_POST['rs'])
+        if ('ajax_form_detallepedido_CW_event_adicional__onchange' == $_POST['rs'])
         {
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_factor_' == $_POST['rs'])
-        {
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_iva_' == $_POST['rs'])
-        {
-            $iva_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_validate_costop_' == $_POST['rs'])
-        {
-            $costop_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_refresh_idpro_' == $_POST['rs'])
-        {
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
-        }
-        if ('ajax_form_detallepedido_CW_event_cantidad__onblur' == $_POST['rs'])
-        {
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $iva_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][6]);
         }
         if ('ajax_form_detallepedido_CW_event_cantidad__onchange' == $_POST['rs'])
         {
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][6]);
         }
-        if ('ajax_form_detallepedido_CW_event_cantidad__onfocus' == $_POST['rs'])
+        if ('ajax_form_detallepedido_CW_event_codbarra__onchange' == $_POST['rs'])
         {
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_event_cod_barras__onchange' == $_POST['rs'])
-        {
-            $cod_barras_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $codbarra_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $idpro_ = NM_utf8_urldecode($_POST['rsargs'][1]);
             $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][2]);
             $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $costop_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $observ_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $iva_ = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $colores_ = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $tallas_ = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $sabor_ = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][18]);
-        }
-        if ('ajax_form_detallepedido_CW_event_colores__onchange' == $_POST['rs'])
-        {
-            $colores_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][8]);
-        }
-        if ('ajax_form_detallepedido_CW_event_idbod__onblur' == $_POST['rs'])
-        {
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][7]);
-        }
-        if ('ajax_form_detallepedido_CW_event_idbod__onchange' == $_POST['rs'])
-        {
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $observ_ = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][10]);
         }
         if ('ajax_form_detallepedido_CW_event_idpro__onchange' == $_POST['rs'])
         {
             $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $idpro_ = NM_utf8_urldecode($_POST['rsargs'][1]);
             $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $costop_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $observ_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $iva_ = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $colores_ = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $tallas_ = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $sabor_ = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][17]);
-        }
-        if ('ajax_form_detallepedido_CW_event_observ__onblur' == $_POST['rs'])
-        {
-            $observ_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_event_observ__onchange' == $_POST['rs'])
-        {
-            $observ_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
-        if ('ajax_form_detallepedido_CW_event_sabor__onchange' == $_POST['rs'])
-        {
-            $sabor_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][8]);
-        }
-        if ('ajax_form_detallepedido_CW_event_tallas__onchange' == $_POST['rs'])
-        {
-            $tallas_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][8]);
-        }
-        if ('ajax_form_detallepedido_CW_event_unidadmayor__onchange' == $_POST['rs'])
-        {
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $observ_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][6]);
             $iva_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][14]);
-        }
-        if ('ajax_form_detallepedido_CW_event_valorunit__onblur' == $_POST['rs'])
-        {
-            $observ_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][9]);
         }
         if ('ajax_form_detallepedido_CW_event_valorunit__onchange' == $_POST['rs'])
         {
-            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $costop_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $iva_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][15]);
-        }
-        for ($iSeq = 1; $iSeq <= 10; $iSeq++)
-        {
-            if ('ajax_form_detallepedido_CW_autocomp_idpro_' . $iSeq == $_POST['rs'])
-            {
-                $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-                $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-            }
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][6]);
         }
         if ('ajax_form_detallepedido_CW_submit_form' == $_POST['rs'])
         {
             $iddet_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $cod_barras_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $colores_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $tallas_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $sabor_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $observ_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $unidadmayor_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $stockubica_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $unidad_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $adicional1_ = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $factor_ = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $iva_ = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $costop_ = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][25]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][26]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][27]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $idpedid_ = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $codbarra_ = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $idpro_ = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $idbod_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $observ_ = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $adicional_ = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][19]);
         }
         if ('ajax_form_detallepedido_CW_navigate_form' == $_POST['rs'])
         {
@@ -2274,30 +2064,6 @@ ob_start();
         {
             $_SESSION['par_numero'] = $par_numero;
         }
-        if (isset($numventa)) 
-        {
-            $_SESSION['numventa'] = $numventa;
-        }
-        if (isset($edit_cantidad)) 
-        {
-            $_SESSION['edit_cantidad'] = $edit_cantidad;
-        }
-        if (isset($sw)) 
-        {
-            $_SESSION['sw'] = $sw;
-        }
-        if (isset($color_pedido)) 
-        {
-            $_SESSION['color_pedido'] = $color_pedido;
-        }
-        if (isset($talla_pedido)) 
-        {
-            $_SESSION['talla_pedido'] = $talla_pedido;
-        }
-        if (isset($sabor_pedido)) 
-        {
-            $_SESSION['sabor_pedido'] = $sabor_pedido;
-        }
         if (!isset($gModificarInventario) && isset($gmodificarinventario)) 
         {
             $gModificarInventario = $gmodificarinventario;
@@ -2305,6 +2071,14 @@ ob_start();
         if (isset($gModificarInventario)) 
         {
             $_SESSION['gModificarInventario'] = $gModificarInventario;
+        }
+        if (isset($sw)) 
+        {
+            $_SESSION['sw'] = $sw;
+        }
+        if (isset($edit_cantidad)) 
+        {
+            $_SESSION['edit_cantidad'] = $edit_cantidad;
         }
     } 
     elseif (isset($script_case_init) && !empty($script_case_init) && !is_array($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_detallepedido_CW']['parms']))
@@ -2534,66 +2308,6 @@ ob_start();
             $_SESSION['par_numero'] = $_GET["par_numero"];
             nm_limpa_str_form_detallepedido_CW($_SESSION['par_numero']);
         }
-        if (isset($_POST["numventa"])) 
-        {
-            $_SESSION['numventa'] = $_POST["numventa"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['numventa']);
-        }
-        if (isset($_GET["numventa"])) 
-        {
-            $_SESSION['numventa'] = $_GET["numventa"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['numventa']);
-        }
-        if (isset($_POST["edit_cantidad"])) 
-        {
-            $_SESSION['edit_cantidad'] = $_POST["edit_cantidad"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['edit_cantidad']);
-        }
-        if (isset($_GET["edit_cantidad"])) 
-        {
-            $_SESSION['edit_cantidad'] = $_GET["edit_cantidad"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['edit_cantidad']);
-        }
-        if (isset($_POST["sw"])) 
-        {
-            $_SESSION['sw'] = $_POST["sw"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['sw']);
-        }
-        if (isset($_GET["sw"])) 
-        {
-            $_SESSION['sw'] = $_GET["sw"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['sw']);
-        }
-        if (isset($_POST["color_pedido"])) 
-        {
-            $_SESSION['color_pedido'] = $_POST["color_pedido"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['color_pedido']);
-        }
-        if (isset($_GET["color_pedido"])) 
-        {
-            $_SESSION['color_pedido'] = $_GET["color_pedido"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['color_pedido']);
-        }
-        if (isset($_POST["talla_pedido"])) 
-        {
-            $_SESSION['talla_pedido'] = $_POST["talla_pedido"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['talla_pedido']);
-        }
-        if (isset($_GET["talla_pedido"])) 
-        {
-            $_SESSION['talla_pedido'] = $_GET["talla_pedido"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['talla_pedido']);
-        }
-        if (isset($_POST["sabor_pedido"])) 
-        {
-            $_SESSION['sabor_pedido'] = $_POST["sabor_pedido"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['sabor_pedido']);
-        }
-        if (isset($_GET["sabor_pedido"])) 
-        {
-            $_SESSION['sabor_pedido'] = $_GET["sabor_pedido"];
-            nm_limpa_str_form_detallepedido_CW($_SESSION['sabor_pedido']);
-        }
         if (isset($_POST["gModificarInventario"])) 
         {
             $_SESSION['gModificarInventario'] = $_POST["gModificarInventario"];
@@ -2613,6 +2327,26 @@ ob_start();
         {
             $_SESSION['gModificarInventario'] = $_GET["gmodificarinventario"];
             nm_limpa_str_form_detallepedido_CW($_SESSION['gModificarInventario']);
+        }
+        if (isset($_POST["sw"])) 
+        {
+            $_SESSION['sw'] = $_POST["sw"];
+            nm_limpa_str_form_detallepedido_CW($_SESSION['sw']);
+        }
+        if (isset($_GET["sw"])) 
+        {
+            $_SESSION['sw'] = $_GET["sw"];
+            nm_limpa_str_form_detallepedido_CW($_SESSION['sw']);
+        }
+        if (isset($_POST["edit_cantidad"])) 
+        {
+            $_SESSION['edit_cantidad'] = $_POST["edit_cantidad"];
+            nm_limpa_str_form_detallepedido_CW($_SESSION['edit_cantidad']);
+        }
+        if (isset($_GET["edit_cantidad"])) 
+        {
+            $_SESSION['edit_cantidad'] = $_GET["edit_cantidad"];
+            nm_limpa_str_form_detallepedido_CW($_SESSION['edit_cantidad']);
         }
         if (!empty($_SESSION['sc_session'][$script_case_init]['form_detallepedido_CW']['volta_redirect_apl']))
         {
@@ -2710,11 +2444,8 @@ ob_start();
     $inicial_form_detallepedido_CW->inicializa();
 
     $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['select_html'] = array();
-    $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['select_html']['colores_'] = "class=\\\"sc-js-input scFormObjectOddMult css_colores__obj{SC_100PERC_CLASS_INPUT}\\\" style=\\\"\\\" id=\\\"id_sc_field_colores_\" . \$sc_seq_vert . \"\\\" name=\\\"colores_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: 'select', enterTab: true}\\\"";
-    $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['select_html']['tallas_'] = "class=\\\"sc-js-input scFormObjectOddMult css_tallas__obj{SC_100PERC_CLASS_INPUT}\\\" style=\\\"\\\" id=\\\"id_sc_field_tallas_\" . \$sc_seq_vert . \"\\\" name=\\\"tallas_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: 'select', enterTab: true}\\\"";
-    $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['select_html']['sabor_'] = "class=\\\"sc-js-input scFormObjectOddMult css_sabor__obj{SC_100PERC_CLASS_INPUT}\\\" style=\\\"\\\" id=\\\"id_sc_field_sabor_\" . \$sc_seq_vert . \"\\\" name=\\\"sabor_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: 'select', enterTab: true}\\\"";
+    $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['select_html']['idpro_'] = "class=\\\"sc-js-input scFormObjectOddMult css_idpro__obj{SC_100PERC_CLASS_INPUT}\\\" style=\\\"\\\" id=\\\"id_sc_field_idpro_\" . \$sc_seq_vert . \"\\\" name=\\\"idpro_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: 'select', enterTab: true}\\\"";
     $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['select_html']['idbod_'] = "class=\\\"sc-js-input scFormObjectOddMult css_idbod__obj{SC_100PERC_CLASS_INPUT}\\\" style=\\\"\\\" id=\\\"id_sc_field_idbod_\" . \$sc_seq_vert . \"\\\" name=\\\"idbod_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: 'select', enterTab: true}\\\"";
-    $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['select_html']['unidadmayor_'] = "class=\\\"sc-js-input scFormObjectOddMult css_unidadmayor__obj{SC_100PERC_CLASS_INPUT}\\\" style=\\\"\\\" id=\\\"id_sc_field_unidadmayor_\" . \$sc_seq_vert . \"\\\" name=\\\"unidadmayor_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: \\'select\\', enterTab: true}\\\"";
 
     if (!defined('SC_SAJAX_LOADED'))
     {
@@ -2729,45 +2460,21 @@ ob_start();
     sajax_init();
     //$sajax_debug_mode = 1;
     sajax_export("ajax_form_detallepedido_CW_validate_iddet_");
-    sajax_export("ajax_form_detallepedido_CW_validate_cod_barras_");
+    sajax_export("ajax_form_detallepedido_CW_validate_idpedid_");
+    sajax_export("ajax_form_detallepedido_CW_validate_codbarra_");
     sajax_export("ajax_form_detallepedido_CW_validate_idpro_");
-    sajax_export("ajax_form_detallepedido_CW_validate_colores_");
-    sajax_export("ajax_form_detallepedido_CW_validate_tallas_");
-    sajax_export("ajax_form_detallepedido_CW_validate_sabor_");
     sajax_export("ajax_form_detallepedido_CW_validate_idbod_");
     sajax_export("ajax_form_detallepedido_CW_validate_observ_");
-    sajax_export("ajax_form_detallepedido_CW_validate_unidadmayor_");
-    sajax_export("ajax_form_detallepedido_CW_validate_stockubica_");
-    sajax_export("ajax_form_detallepedido_CW_validate_unidad_");
     sajax_export("ajax_form_detallepedido_CW_validate_cantidad_");
     sajax_export("ajax_form_detallepedido_CW_validate_valorunit_");
     sajax_export("ajax_form_detallepedido_CW_validate_valorpar_");
-    sajax_export("ajax_form_detallepedido_CW_validate_descuento_");
-    sajax_export("ajax_form_detallepedido_CW_validate_adicional_");
-    sajax_export("ajax_form_detallepedido_CW_validate_adicional1_");
-    sajax_export("ajax_form_detallepedido_CW_validate_factor_");
     sajax_export("ajax_form_detallepedido_CW_validate_iva_");
-    sajax_export("ajax_form_detallepedido_CW_validate_costop_");
-    sajax_export("ajax_form_detallepedido_CW_refresh_idpro_");
-    sajax_export("ajax_form_detallepedido_CW_event_cantidad__onblur");
+    sajax_export("ajax_form_detallepedido_CW_validate_adicional_");
+    sajax_export("ajax_form_detallepedido_CW_event_adicional__onchange");
     sajax_export("ajax_form_detallepedido_CW_event_cantidad__onchange");
-    sajax_export("ajax_form_detallepedido_CW_event_cantidad__onfocus");
-    sajax_export("ajax_form_detallepedido_CW_event_cod_barras__onchange");
-    sajax_export("ajax_form_detallepedido_CW_event_colores__onchange");
-    sajax_export("ajax_form_detallepedido_CW_event_idbod__onblur");
-    sajax_export("ajax_form_detallepedido_CW_event_idbod__onchange");
+    sajax_export("ajax_form_detallepedido_CW_event_codbarra__onchange");
     sajax_export("ajax_form_detallepedido_CW_event_idpro__onchange");
-    sajax_export("ajax_form_detallepedido_CW_event_observ__onblur");
-    sajax_export("ajax_form_detallepedido_CW_event_observ__onchange");
-    sajax_export("ajax_form_detallepedido_CW_event_sabor__onchange");
-    sajax_export("ajax_form_detallepedido_CW_event_tallas__onchange");
-    sajax_export("ajax_form_detallepedido_CW_event_unidadmayor__onchange");
-    sajax_export("ajax_form_detallepedido_CW_event_valorunit__onblur");
     sajax_export("ajax_form_detallepedido_CW_event_valorunit__onchange");
-    for ($iSeq = 1; $iSeq <= 60; $iSeq++)
-    {
-        sajax_export("ajax_form_detallepedido_CW_autocomp_idpro_" . $iSeq);
-    }
     sajax_export("ajax_form_detallepedido_CW_submit_form");
     sajax_export("ajax_form_detallepedido_CW_navigate_form");
     sajax_export("ajax_form_detallepedido_CW_add_new_line");
@@ -2822,14 +2529,14 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_iddet_
 
-    function ajax_form_detallepedido_CW_validate_cod_barras_($cod_barras_, $nmgp_refresh_row, $script_case_init)
+    function ajax_form_detallepedido_CW_validate_idpedid_($idpedid_, $nmgp_refresh_row, $script_case_init)
     {
         global $inicial_form_detallepedido_CW;
         //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_cod_barras_';
+        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_idpedid_';
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'cod_barras_' => NM_utf8_urldecode($cod_barras_),
+                  'idpedid_' => NM_utf8_urldecode($idpedid_),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
@@ -2840,7 +2547,27 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         }
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
         exit;
-    } // ajax_validate_cod_barras_
+    } // ajax_validate_idpedid_
+
+    function ajax_form_detallepedido_CW_validate_codbarra_($codbarra_, $nmgp_refresh_row, $script_case_init)
+    {
+        global $inicial_form_detallepedido_CW;
+        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
+        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
+        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_codbarra_';
+        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
+                  'codbarra_' => NM_utf8_urldecode($codbarra_),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
+        exit;
+    } // ajax_validate_codbarra_
 
     function ajax_form_detallepedido_CW_validate_idpro_($idpro_, $nmgp_refresh_row, $script_case_init)
     {
@@ -2861,66 +2588,6 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
         exit;
     } // ajax_validate_idpro_
-
-    function ajax_form_detallepedido_CW_validate_colores_($colores_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_colores_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'colores_' => NM_utf8_urldecode($colores_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_colores_
-
-    function ajax_form_detallepedido_CW_validate_tallas_($tallas_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_tallas_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'tallas_' => NM_utf8_urldecode($tallas_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_tallas_
-
-    function ajax_form_detallepedido_CW_validate_sabor_($sabor_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_sabor_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'sabor_' => NM_utf8_urldecode($sabor_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_sabor_
 
     function ajax_form_detallepedido_CW_validate_idbod_($idbod_, $nmgp_refresh_row, $script_case_init)
     {
@@ -2961,66 +2628,6 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
         exit;
     } // ajax_validate_observ_
-
-    function ajax_form_detallepedido_CW_validate_unidadmayor_($unidadmayor_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_unidadmayor_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_unidadmayor_
-
-    function ajax_form_detallepedido_CW_validate_stockubica_($stockubica_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_stockubica_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_stockubica_
-
-    function ajax_form_detallepedido_CW_validate_unidad_($unidad_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_unidad_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'unidad_' => NM_utf8_urldecode($unidad_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_unidad_
 
     function ajax_form_detallepedido_CW_validate_cantidad_($cantidad_, $nmgp_refresh_row, $script_case_init)
     {
@@ -3082,14 +2689,14 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_valorpar_
 
-    function ajax_form_detallepedido_CW_validate_descuento_($descuento_, $nmgp_refresh_row, $script_case_init)
+    function ajax_form_detallepedido_CW_validate_iva_($iva_, $nmgp_refresh_row, $script_case_init)
     {
         global $inicial_form_detallepedido_CW;
         //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_descuento_';
+        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_iva_';
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'descuento_' => NM_utf8_urldecode($descuento_),
+                  'iva_' => NM_utf8_urldecode($iva_),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,
@@ -3100,7 +2707,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         }
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
         exit;
-    } // ajax_validate_descuento_
+    } // ajax_validate_iva_
 
     function ajax_form_detallepedido_CW_validate_adicional_($adicional_, $nmgp_refresh_row, $script_case_init)
     {
@@ -3122,127 +2729,18 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_adicional_
 
-    function ajax_form_detallepedido_CW_validate_adicional1_($adicional1_, $nmgp_refresh_row, $script_case_init)
+    function ajax_form_detallepedido_CW_event_adicional__onchange($valorpar_, $cantidad_, $valorunit_, $adicional_, $iva_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detallepedido_CW;
         //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_adicional1_';
+        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_adicional__onchange';
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'adicional1_' => NM_utf8_urldecode($adicional1_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_adicional1_
-
-    function ajax_form_detallepedido_CW_validate_factor_($factor_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_factor_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_factor_
-
-    function ajax_form_detallepedido_CW_validate_iva_($iva_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_iva_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'iva_' => NM_utf8_urldecode($iva_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_iva_
-
-    function ajax_form_detallepedido_CW_validate_costop_($costop_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'validate_costop_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'costop_' => NM_utf8_urldecode($costop_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_validate_costop_
-
-    function ajax_form_detallepedido_CW_refresh_idpro_($idpro_, $nmgp_refresh_row, $nmgp_refresh_fields, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'refresh_idpro_';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_refresh_idpro_
-
-    function ajax_form_detallepedido_CW_event_cantidad__onblur($idpro_, $valorunit_, $cantidad_, $stockubica_, $adicional1_, $descuento_, $valorpar_, $adicional_, $iva_, $idbod_, $unidadmayor_, $factor_, $unidad_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_cantidad__onblur';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'valorunit_' => NM_utf8_urldecode($valorunit_),
-                  'cantidad_' => NM_utf8_urldecode($cantidad_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'adicional1_' => NM_utf8_urldecode($adicional1_),
-                  'descuento_' => NM_utf8_urldecode($descuento_),
                   'valorpar_' => NM_utf8_urldecode($valorpar_),
+                  'cantidad_' => NM_utf8_urldecode($cantidad_),
+                  'valorunit_' => NM_utf8_urldecode($valorunit_),
                   'adicional_' => NM_utf8_urldecode($adicional_),
                   'iva_' => NM_utf8_urldecode($iva_),
-                  'idbod_' => NM_utf8_urldecode($idbod_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'buffer_output' => true,
@@ -3253,17 +2751,20 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         }
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
         exit;
-    } // ajax_event_cantidad__onblur
+    } // ajax_event_adicional__onchange
 
-    function ajax_form_detallepedido_CW_event_cantidad__onchange($cantidad_, $stockubica_, $script_case_init, $nmgp_refresh_row)
+    function ajax_form_detallepedido_CW_event_cantidad__onchange($valorpar_, $cantidad_, $valorunit_, $adicional_, $iva_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detallepedido_CW;
         //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_cantidad__onchange';
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
+                  'valorpar_' => NM_utf8_urldecode($valorpar_),
                   'cantidad_' => NM_utf8_urldecode($cantidad_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
+                  'valorunit_' => NM_utf8_urldecode($valorunit_),
+                  'adicional_' => NM_utf8_urldecode($adicional_),
+                  'iva_' => NM_utf8_urldecode($iva_),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'buffer_output' => true,
@@ -3276,50 +2777,22 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_cantidad__onchange
 
-    function ajax_form_detallepedido_CW_event_cantidad__onfocus($cantidad_, $script_case_init, $nmgp_refresh_row)
+    function ajax_form_detallepedido_CW_event_codbarra__onchange($codbarra_, $idpro_, $cantidad_, $valorunit_, $idbod_, $observ_, $adicional_, $valorpar_, $iva_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detallepedido_CW;
         //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_cantidad__onfocus';
+        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_codbarra__onchange';
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'cantidad_' => NM_utf8_urldecode($cantidad_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_cantidad__onfocus
-
-    function ajax_form_detallepedido_CW_event_cod_barras__onchange($cod_barras_, $idpro_, $cantidad_, $valorunit_, $unidadmayor_, $costop_, $factor_, $idbod_, $observ_, $adicional1_, $descuento_, $valorpar_, $adicional_, $iva_, $colores_, $tallas_, $sabor_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_cod_barras__onchange';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'cod_barras_' => NM_utf8_urldecode($cod_barras_),
+                  'codbarra_' => NM_utf8_urldecode($codbarra_),
                   'idpro_' => NM_utf8_urldecode($idpro_),
                   'cantidad_' => NM_utf8_urldecode($cantidad_),
                   'valorunit_' => NM_utf8_urldecode($valorunit_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'costop_' => NM_utf8_urldecode($costop_),
-                  'factor_' => NM_utf8_urldecode($factor_),
                   'idbod_' => NM_utf8_urldecode($idbod_),
                   'observ_' => NM_utf8_urldecode($observ_),
-                  'adicional1_' => NM_utf8_urldecode($adicional1_),
-                  'descuento_' => NM_utf8_urldecode($descuento_),
-                  'valorpar_' => NM_utf8_urldecode($valorpar_),
                   'adicional_' => NM_utf8_urldecode($adicional_),
+                  'valorpar_' => NM_utf8_urldecode($valorpar_),
                   'iva_' => NM_utf8_urldecode($iva_),
-                  'colores_' => NM_utf8_urldecode($colores_),
-                  'tallas_' => NM_utf8_urldecode($tallas_),
-                  'sabor_' => NM_utf8_urldecode($sabor_),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'buffer_output' => true,
@@ -3330,85 +2803,9 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         }
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
         exit;
-    } // ajax_event_cod_barras__onchange
+    } // ajax_event_codbarra__onchange
 
-    function ajax_form_detallepedido_CW_event_colores__onchange($colores_, $idpro_, $idbod_, $unidadmayor_, $factor_, $stockubica_, $unidad_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_colores__onchange';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'colores_' => NM_utf8_urldecode($colores_),
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'idbod_' => NM_utf8_urldecode($idbod_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_colores__onchange
-
-    function ajax_form_detallepedido_CW_event_idbod__onblur($idpro_, $idbod_, $unidadmayor_, $factor_, $stockubica_, $unidad_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_idbod__onblur';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'idbod_' => NM_utf8_urldecode($idbod_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_idbod__onblur
-
-    function ajax_form_detallepedido_CW_event_idbod__onchange($idpro_, $idbod_, $unidadmayor_, $factor_, $stockubica_, $unidad_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_idbod__onchange';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'idbod_' => NM_utf8_urldecode($idbod_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_idbod__onchange
-
-    function ajax_form_detallepedido_CW_event_idpro__onchange($cantidad_, $idpro_, $valorunit_, $unidadmayor_, $costop_, $factor_, $idbod_, $observ_, $adicional1_, $descuento_, $valorpar_, $adicional_, $iva_, $colores_, $tallas_, $sabor_, $script_case_init, $nmgp_refresh_row)
+    function ajax_form_detallepedido_CW_event_idpro__onchange($cantidad_, $idpro_, $valorunit_, $idbod_, $observ_, $adicional_, $valorpar_, $iva_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detallepedido_CW;
         //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
@@ -3418,19 +2815,11 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'cantidad_' => NM_utf8_urldecode($cantidad_),
                   'idpro_' => NM_utf8_urldecode($idpro_),
                   'valorunit_' => NM_utf8_urldecode($valorunit_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'costop_' => NM_utf8_urldecode($costop_),
-                  'factor_' => NM_utf8_urldecode($factor_),
                   'idbod_' => NM_utf8_urldecode($idbod_),
                   'observ_' => NM_utf8_urldecode($observ_),
-                  'adicional1_' => NM_utf8_urldecode($adicional1_),
-                  'descuento_' => NM_utf8_urldecode($descuento_),
-                  'valorpar_' => NM_utf8_urldecode($valorpar_),
                   'adicional_' => NM_utf8_urldecode($adicional_),
+                  'valorpar_' => NM_utf8_urldecode($valorpar_),
                   'iva_' => NM_utf8_urldecode($iva_),
-                  'colores_' => NM_utf8_urldecode($colores_),
-                  'tallas_' => NM_utf8_urldecode($tallas_),
-                  'sabor_' => NM_utf8_urldecode($sabor_),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'buffer_output' => true,
@@ -3443,172 +2832,18 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_idpro__onchange
 
-    function ajax_form_detallepedido_CW_event_observ__onblur($observ_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_observ__onblur';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'observ_' => NM_utf8_urldecode($observ_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_observ__onblur
-
-    function ajax_form_detallepedido_CW_event_observ__onchange($observ_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_observ__onchange';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'observ_' => NM_utf8_urldecode($observ_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_observ__onchange
-
-    function ajax_form_detallepedido_CW_event_sabor__onchange($sabor_, $idpro_, $idbod_, $unidadmayor_, $factor_, $stockubica_, $unidad_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_sabor__onchange';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'sabor_' => NM_utf8_urldecode($sabor_),
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'idbod_' => NM_utf8_urldecode($idbod_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_sabor__onchange
-
-    function ajax_form_detallepedido_CW_event_tallas__onchange($tallas_, $idpro_, $idbod_, $unidadmayor_, $factor_, $stockubica_, $unidad_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_tallas__onchange';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'tallas_' => NM_utf8_urldecode($tallas_),
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'idbod_' => NM_utf8_urldecode($idbod_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_tallas__onchange
-
-    function ajax_form_detallepedido_CW_event_unidadmayor__onchange($unidadmayor_, $idpro_, $valorunit_, $adicional1_, $descuento_, $valorpar_, $adicional_, $iva_, $cantidad_, $idbod_, $factor_, $stockubica_, $unidad_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_unidadmayor__onchange';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'valorunit_' => NM_utf8_urldecode($valorunit_),
-                  'adicional1_' => NM_utf8_urldecode($adicional1_),
-                  'descuento_' => NM_utf8_urldecode($descuento_),
-                  'valorpar_' => NM_utf8_urldecode($valorpar_),
-                  'adicional_' => NM_utf8_urldecode($adicional_),
-                  'iva_' => NM_utf8_urldecode($iva_),
-                  'cantidad_' => NM_utf8_urldecode($cantidad_),
-                  'idbod_' => NM_utf8_urldecode($idbod_),
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_unidadmayor__onchange
-
-    function ajax_form_detallepedido_CW_event_valorunit__onblur($observ_, $valorunit_, $script_case_init, $nmgp_refresh_row)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_valorunit__onblur';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'observ_' => NM_utf8_urldecode($observ_),
-                  'valorunit_' => NM_utf8_urldecode($valorunit_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_event_valorunit__onblur
-
-    function ajax_form_detallepedido_CW_event_valorunit__onchange($valorunit_, $costop_, $idpro_, $adicional1_, $descuento_, $valorpar_, $adicional_, $iva_, $cantidad_, $idbod_, $unidadmayor_, $factor_, $stockubica_, $unidad_, $script_case_init, $nmgp_refresh_row)
+    function ajax_form_detallepedido_CW_event_valorunit__onchange($valorpar_, $cantidad_, $valorunit_, $adicional_, $iva_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detallepedido_CW;
         //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'event_valorunit__onchange';
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'valorunit_' => NM_utf8_urldecode($valorunit_),
-                  'costop_' => NM_utf8_urldecode($costop_),
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'adicional1_' => NM_utf8_urldecode($adicional1_),
-                  'descuento_' => NM_utf8_urldecode($descuento_),
                   'valorpar_' => NM_utf8_urldecode($valorpar_),
+                  'cantidad_' => NM_utf8_urldecode($cantidad_),
+                  'valorunit_' => NM_utf8_urldecode($valorunit_),
                   'adicional_' => NM_utf8_urldecode($adicional_),
                   'iva_' => NM_utf8_urldecode($iva_),
-                  'cantidad_' => NM_utf8_urldecode($cantidad_),
-                  'idbod_' => NM_utf8_urldecode($idbod_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'factor_' => NM_utf8_urldecode($factor_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'buffer_output' => true,
@@ -3621,1148 +2856,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_valorunit__onchange
 
-    function ajax_form_detallepedido_CW_autocomp_idpro_1($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_1';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_1
-    function ajax_form_detallepedido_CW_autocomp_idpro_2($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_2';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_2
-    function ajax_form_detallepedido_CW_autocomp_idpro_3($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_3';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_3
-    function ajax_form_detallepedido_CW_autocomp_idpro_4($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_4';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_4
-    function ajax_form_detallepedido_CW_autocomp_idpro_5($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_5';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_5
-    function ajax_form_detallepedido_CW_autocomp_idpro_6($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_6';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_6
-    function ajax_form_detallepedido_CW_autocomp_idpro_7($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_7';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_7
-    function ajax_form_detallepedido_CW_autocomp_idpro_8($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_8';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_8
-    function ajax_form_detallepedido_CW_autocomp_idpro_9($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_9';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_9
-    function ajax_form_detallepedido_CW_autocomp_idpro_10($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_10';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_10
-    function ajax_form_detallepedido_CW_autocomp_idpro_11($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_11';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_11
-    function ajax_form_detallepedido_CW_autocomp_idpro_12($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_12';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_12
-    function ajax_form_detallepedido_CW_autocomp_idpro_13($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_13';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_13
-    function ajax_form_detallepedido_CW_autocomp_idpro_14($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_14';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_14
-    function ajax_form_detallepedido_CW_autocomp_idpro_15($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_15';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_15
-    function ajax_form_detallepedido_CW_autocomp_idpro_16($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_16';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_16
-    function ajax_form_detallepedido_CW_autocomp_idpro_17($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_17';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_17
-    function ajax_form_detallepedido_CW_autocomp_idpro_18($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_18';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_18
-    function ajax_form_detallepedido_CW_autocomp_idpro_19($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_19';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_19
-    function ajax_form_detallepedido_CW_autocomp_idpro_20($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_20';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_20
-    function ajax_form_detallepedido_CW_autocomp_idpro_21($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_21';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_21
-    function ajax_form_detallepedido_CW_autocomp_idpro_22($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_22';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_22
-    function ajax_form_detallepedido_CW_autocomp_idpro_23($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_23';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_23
-    function ajax_form_detallepedido_CW_autocomp_idpro_24($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_24';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_24
-    function ajax_form_detallepedido_CW_autocomp_idpro_25($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_25';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_25
-    function ajax_form_detallepedido_CW_autocomp_idpro_26($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_26';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_26
-    function ajax_form_detallepedido_CW_autocomp_idpro_27($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_27';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_27
-    function ajax_form_detallepedido_CW_autocomp_idpro_28($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_28';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_28
-    function ajax_form_detallepedido_CW_autocomp_idpro_29($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_29';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_29
-    function ajax_form_detallepedido_CW_autocomp_idpro_30($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_30';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_30
-    function ajax_form_detallepedido_CW_autocomp_idpro_31($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_31';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_31
-    function ajax_form_detallepedido_CW_autocomp_idpro_32($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_32';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_32
-    function ajax_form_detallepedido_CW_autocomp_idpro_33($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_33';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_33
-    function ajax_form_detallepedido_CW_autocomp_idpro_34($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_34';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_34
-    function ajax_form_detallepedido_CW_autocomp_idpro_35($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_35';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_35
-    function ajax_form_detallepedido_CW_autocomp_idpro_36($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_36';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_36
-    function ajax_form_detallepedido_CW_autocomp_idpro_37($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_37';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_37
-    function ajax_form_detallepedido_CW_autocomp_idpro_38($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_38';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_38
-    function ajax_form_detallepedido_CW_autocomp_idpro_39($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_39';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_39
-    function ajax_form_detallepedido_CW_autocomp_idpro_40($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_40';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_40
-    function ajax_form_detallepedido_CW_autocomp_idpro_41($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_41';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_41
-    function ajax_form_detallepedido_CW_autocomp_idpro_42($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_42';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_42
-    function ajax_form_detallepedido_CW_autocomp_idpro_43($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_43';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_43
-    function ajax_form_detallepedido_CW_autocomp_idpro_44($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_44';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_44
-    function ajax_form_detallepedido_CW_autocomp_idpro_45($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_45';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_45
-    function ajax_form_detallepedido_CW_autocomp_idpro_46($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_46';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_46
-    function ajax_form_detallepedido_CW_autocomp_idpro_47($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_47';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_47
-    function ajax_form_detallepedido_CW_autocomp_idpro_48($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_48';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_48
-    function ajax_form_detallepedido_CW_autocomp_idpro_49($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_49';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_49
-    function ajax_form_detallepedido_CW_autocomp_idpro_50($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_50';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_50
-    function ajax_form_detallepedido_CW_autocomp_idpro_51($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_51';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_51
-    function ajax_form_detallepedido_CW_autocomp_idpro_52($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_52';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_52
-    function ajax_form_detallepedido_CW_autocomp_idpro_53($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_53';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_53
-    function ajax_form_detallepedido_CW_autocomp_idpro_54($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_54';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_54
-    function ajax_form_detallepedido_CW_autocomp_idpro_55($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_55';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_55
-    function ajax_form_detallepedido_CW_autocomp_idpro_56($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_56';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_56
-    function ajax_form_detallepedido_CW_autocomp_idpro_57($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_57';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_57
-    function ajax_form_detallepedido_CW_autocomp_idpro_58($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_58';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_58
-    function ajax_form_detallepedido_CW_autocomp_idpro_59($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_59';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_59
-    function ajax_form_detallepedido_CW_autocomp_idpro_60($idpro_, $script_case_init)
-    {
-        global $inicial_form_detallepedido_CW;
-        //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_flag          = true;
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'autocomp_idpro_60';
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
-                  'idpro_' => NM_utf8_urldecode($idpro_),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_'] = utf8_decode(urldecode($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['idpro_']));
-        if ($inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->controle();
-        exit;
-    } // ajax_autocomp_idpro_60
-
-    function ajax_form_detallepedido_CW_submit_form($iddet_, $cod_barras_, $idpro_, $colores_, $tallas_, $sabor_, $idbod_, $observ_, $unidadmayor_, $stockubica_, $unidad_, $cantidad_, $valorunit_, $valorpar_, $descuento_, $adicional_, $adicional1_, $factor_, $iva_, $costop_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_detallepedido_CW_submit_form($iddet_, $idpedid_, $codbarra_, $idpro_, $idbod_, $observ_, $cantidad_, $valorunit_, $valorpar_, $iva_, $adicional_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_detallepedido_CW;
         //register_shutdown_function("form_detallepedido_CW_pack_ajax_response");
@@ -4770,25 +2864,16 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_opcao         = 'submit_form';
         $inicial_form_detallepedido_CW->contr_form_detallepedido_CW->NM_ajax_info['param'] = array(
                   'iddet_' => NM_utf8_urldecode($iddet_),
-                  'cod_barras_' => NM_utf8_urldecode($cod_barras_),
+                  'idpedid_' => NM_utf8_urldecode($idpedid_),
+                  'codbarra_' => NM_utf8_urldecode($codbarra_),
                   'idpro_' => NM_utf8_urldecode($idpro_),
-                  'colores_' => NM_utf8_urldecode($colores_),
-                  'tallas_' => NM_utf8_urldecode($tallas_),
-                  'sabor_' => NM_utf8_urldecode($sabor_),
                   'idbod_' => NM_utf8_urldecode($idbod_),
                   'observ_' => NM_utf8_urldecode($observ_),
-                  'unidadmayor_' => NM_utf8_urldecode($unidadmayor_),
-                  'stockubica_' => NM_utf8_urldecode($stockubica_),
-                  'unidad_' => NM_utf8_urldecode($unidad_),
                   'cantidad_' => NM_utf8_urldecode($cantidad_),
                   'valorunit_' => NM_utf8_urldecode($valorunit_),
                   'valorpar_' => NM_utf8_urldecode($valorpar_),
-                  'descuento_' => NM_utf8_urldecode($descuento_),
-                  'adicional_' => NM_utf8_urldecode($adicional_),
-                  'adicional1_' => NM_utf8_urldecode($adicional1_),
-                  'factor_' => NM_utf8_urldecode($factor_),
                   'iva_' => NM_utf8_urldecode($iva_),
-                  'costop_' => NM_utf8_urldecode($costop_),
+                  'adicional_' => NM_utf8_urldecode($adicional_),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),

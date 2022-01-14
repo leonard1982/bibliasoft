@@ -55,7 +55,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   var sc_css_status_pwd_text = '<?php echo $this->Ini->Css_status_pwd_text; ?>';
  </SCRIPT>
         <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
-<input type="hidden" id="sc-mobile-lock" value='true' />
  <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></SCRIPT>
  <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery/css/smoothness/jquery-ui.css" type="text/css" media="screen" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
@@ -116,6 +115,11 @@ if ('' != $miniCalendarFA) {
 	padding: 0
 }
 .css_read_off_afiliacion button {
+	background-color: transparent;
+	border: 0;
+	padding: 0
+}
+.css_read_off_fecha_registro_fe button {
 	background-color: transparent;
 	border: 0;
 	padding: 0
@@ -304,6 +308,8 @@ if ('' != $miniCalendarFA) {
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_prod; ?>/third/font-awesome/css/all.min.css" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_calendar.css" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_calendar<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_btngrp.css" />
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_btngrp<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" media="screen" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_progressbar.css" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_progressbar<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
 <?php
@@ -606,6 +612,19 @@ include_once('terceros_mob_jquery.php');
  var Dyn_Ini  = true;
  $(function() {
 
+  $(".scBtnGrpText").mouseover(function() { $(this).addClass("scBtnGrpTextOver"); }).mouseout(function() { $(this).removeClass("scBtnGrpTextOver"); });
+     $(".scBtnGrpClick").mouseup(function(){
+          event.preventDefault();
+          if(event.target !== event.currentTarget) return;
+          if($(this).find("a").prop('href') != '')
+          {
+              $(this).find("a").click();
+          }
+          else
+          {
+              eval($(this).find("a").prop('onclick'));
+          }
+  });
   scJQElementsAdd('');
 
   scJQGeneralAdd();
@@ -671,6 +690,9 @@ if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && 
          scQuickSearchKeyUp('t', null);
      }
    });
+   function SC_btn_grp_text() {
+      $(".scBtnGrpText").mouseover(function() { $(this).addClass("scBtnGrpTextOver"); }).mouseout(function() { $(this).removeClass("scBtnGrpTextOver"); });
+   };
    function scQuickSearchSubmit_t() {
      nm_move('fast_search', 't');
    }
@@ -789,7 +811,7 @@ if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && 
   }
 
   if (show_block[block_id]) {
-    if ("hidden_bloco_19" == block_id) {
+    if ("hidden_bloco_20" == block_id) {
       scAjaxDetailHeight("grid_gestor_archivos_tercero", "500");
     }
   }
@@ -1210,7 +1232,7 @@ else
     $remove_border = isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboard_info']['remove_border']) && $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboard_info']['remove_border'] ? 'border-width: 0; ' : '';
     $vertical_center = '';
 ?>
-<body class="scFormPage" style="<?php echo $remove_margin . $str_iframe_body . $vertical_center; ?>">
+<body class="scFormPage sc-app-form" style="<?php echo $remove_margin . $str_iframe_body . $vertical_center; ?>">
 <?php
 
 if (isset($_SESSION['scriptcase']['terceros']['error_buffer']) && '' != $_SESSION['scriptcase']['terceros']['error_buffer'])
@@ -1301,6 +1323,10 @@ if ('novo' == $this->nmgp_opcao || 'incluir' == $this->nmgp_opcao)
 <input type="hidden" name="upload_file_width" value="">
 <input type="hidden" name="upload_file_aspect" value="">
 <input type="hidden" name="upload_file_type" value="">
+<input type="hidden" name="archivo_cedula_salva" value="<?php  echo $this->form_encode_input($this->archivo_cedula) ?>">
+<input type="hidden" name="archivo_rut_salva" value="<?php  echo $this->form_encode_input($this->archivo_rut) ?>">
+<input type="hidden" name="archivo_nit_salva" value="<?php  echo $this->form_encode_input($this->archivo_nit) ?>">
+<input type="hidden" name="archivo_pago_salva" value="<?php  echo $this->form_encode_input($this->archivo_pago) ?>">
 <input type="hidden" name="_sc_force_mobile" id="sc-id-mobile-control" value="" />
 <?php
 $_SESSION['scriptcase']['error_span_title']['terceros_mob'] = $this->Ini->Error_icon_span;
@@ -1405,7 +1431,7 @@ sc_userSweetAlertDisplayed = false;
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['run_iframe'] != "R")
 {
 ?>
-    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar" style="padding: 0px; spacing: 0px">
+    <table style="border-collapse: collapse; border-width: 0px; width: 100%"><tr><td class="scFormToolbar sc-toolbar-top" style="padding: 0px; spacing: 0px">
     <table style="border-collapse: collapse; border-width: 0px; width: 100%">
     <tr> 
      <td nowrap align="left" valign="middle" width="33%" class="scFormToolbarPadding"> 
@@ -1444,10 +1470,6 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
           </span>  </div>
   <?php
       }
-?> 
-     </td> 
-     <td nowrap align="center" valign="middle" width="33%" class="scFormToolbarPadding"> 
-<?php 
     if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['new'] == "on") ? '' : 'display: none;';
 ?>
@@ -1588,10 +1610,108 @@ if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep
 <?php
         $NM_btn = true;
     }
-?> 
-     </td> 
-     <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
-<?php 
+        $sCondStyle = '';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "Especiales";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['group_group_1']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['group_group_1']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['group_group_1']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['group_group_1']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['group_group_1'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "group_group_1", "scBtnGrpShow('group_1_t')", "scBtnGrpShow('group_1_t')", "sc_btgp_btn_group_1_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "__sc_grp__");?>
+ 
+<?php
+echo nmButtonGroupTableOutput($this->arr_buttons, "group_group_1", 'group_1', 't', 'app', 'ini');
+    if (($opcao_botoes != "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['btn_generar_nomina'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['btn_generar_nomina']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['btn_generar_nomina']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_generar_nomina']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_generar_nomina']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_generar_nomina'];
+        }
+?>
+  <div class="scBtnGrpText scBtnGrpClick"  style="<?php echo $sCondStyle; ?>" id="gbl_sc_btn_generar_nomina_top">
+<?php echo nmButtonOutput($this->arr_buttons, "btn_generar_nomina", "scBtnFn_btn_generar_nomina()", "scBtnFn_btn_generar_nomina()", "sc_btn_generar_nomina_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "group_1");?>
+  </div>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes == "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['btn_generar_nomina'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['btn_generar_nomina']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['btn_generar_nomina']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_generar_nomina']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_generar_nomina']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_generar_nomina'];
+        }
+?>
+  <div class="scBtnGrpText scBtnGrpClick"  style="<?php echo $sCondStyle; ?>" id="gbl_sc_btn_generar_nomina_top">
+<?php echo nmButtonOutput($this->arr_buttons, "btn_generar_nomina", "scBtnFn_btn_generar_nomina()", "scBtnFn_btn_generar_nomina()", "sc_btn_generar_nomina_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "group_1");?>
+  </div>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes != "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['btn_reenviar_correo_nomina'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['btn_reenviar_correo_nomina']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['btn_reenviar_correo_nomina']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_reenviar_correo_nomina']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_reenviar_correo_nomina']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_reenviar_correo_nomina'];
+        }
+?>
+  <div class="scBtnGrpText scBtnGrpClick"  style="<?php echo $sCondStyle; ?>" id="gbl_sc_btn_reenviar_correo_nomina_top">
+<?php echo nmButtonOutput($this->arr_buttons, "btn_reenviar_correo_nomina", "scBtnFn_btn_reenviar_correo_nomina()", "scBtnFn_btn_reenviar_correo_nomina()", "sc_btn_reenviar_correo_nomina_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "group_1");?>
+  </div>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes == "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['btn_reenviar_correo_nomina'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['btn_reenviar_correo_nomina']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_disabled']['btn_reenviar_correo_nomina']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_reenviar_correo_nomina']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_reenviar_correo_nomina']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['btn_label']['btn_reenviar_correo_nomina'];
+        }
+?>
+  <div class="scBtnGrpText scBtnGrpClick"  style="<?php echo $sCondStyle; ?>" id="gbl_sc_btn_reenviar_correo_nomina_top">
+<?php echo nmButtonOutput($this->arr_buttons, "btn_reenviar_correo_nomina", "scBtnFn_btn_reenviar_correo_nomina()", "scBtnFn_btn_reenviar_correo_nomina()", "sc_btn_reenviar_correo_nomina_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "group_1");?>
+  </div>
+ 
+<?php
+        $NM_btn = true;
+    }
+echo nmButtonGroupTableOutput($this->arr_buttons, "", '', '', '', 'fim');
     if ('' != $this->url_webhelp) {
         $sCondStyle = '';
 ?>
@@ -1706,6 +1826,14 @@ if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep
 <?php
         $NM_btn = true;
     }
+?> 
+     </td> 
+     <td nowrap align="center" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php 
+?> 
+     </td> 
+     <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
+<?php 
 }
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['run_iframe'] != "R")
 {
@@ -1729,7 +1857,7 @@ unset($NM_ult_sep);
 </td></tr> 
 <tr><td>
 <?php
-       echo "<div id=\"sc-ui-empty-form\" class=\"scFormPageText\" style=\"padding: 10px; text-align: center; font-weight: bold" . ($this->nmgp_form_empty ? '' : '; display: none') . "\">";
+       echo "<div id=\"sc-ui-empty-form\" class=\"scFormPageText\" style=\"padding: 10px; font-weight: bold" . ($this->nmgp_form_empty ? '' : '; display: none') . "\">";
        echo $this->Ini->Nm_lang['lang_errm_empt'];
        echo "</div>";
   if ($this->nmgp_form_empty)
@@ -1900,6 +2028,14 @@ var pag_ativa = "terceros_mob_form0";
 ?>
 <TABLE align="center" id="hidden_bloco_0" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><input type="hidden" name="imagenter_ul_name" id="id_sc_field_imagenter_ul_name" value="<?php echo $this->form_encode_input($this->imagenter_ul_name);?>">
 <input type="hidden" name="imagenter_ul_type" id="id_sc_field_imagenter_ul_type" value="<?php echo $this->form_encode_input($this->imagenter_ul_type);?>">
+<input type="hidden" name="archivo_cedula_ul_name" id="id_sc_field_archivo_cedula_ul_name" value="<?php echo $this->form_encode_input($this->archivo_cedula_ul_name);?>">
+<input type="hidden" name="archivo_cedula_ul_type" id="id_sc_field_archivo_cedula_ul_type" value="<?php echo $this->form_encode_input($this->archivo_cedula_ul_type);?>">
+<input type="hidden" name="archivo_rut_ul_name" id="id_sc_field_archivo_rut_ul_name" value="<?php echo $this->form_encode_input($this->archivo_rut_ul_name);?>">
+<input type="hidden" name="archivo_rut_ul_type" id="id_sc_field_archivo_rut_ul_type" value="<?php echo $this->form_encode_input($this->archivo_rut_ul_type);?>">
+<input type="hidden" name="archivo_nit_ul_name" id="id_sc_field_archivo_nit_ul_name" value="<?php echo $this->form_encode_input($this->archivo_nit_ul_name);?>">
+<input type="hidden" name="archivo_nit_ul_type" id="id_sc_field_archivo_nit_ul_type" value="<?php echo $this->form_encode_input($this->archivo_nit_ul_type);?>">
+<input type="hidden" name="archivo_pago_ul_name" id="id_sc_field_archivo_pago_ul_name" value="<?php echo $this->form_encode_input($this->archivo_pago_ul_name);?>">
+<input type="hidden" name="archivo_pago_ul_type" id="id_sc_field_archivo_pago_ul_type" value="<?php echo $this->form_encode_input($this->archivo_pago_ul_type);?>">
    <tr>
 
 
@@ -3518,6 +3654,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -3538,6 +3678,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -3750,6 +3894,48 @@ else
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT iddep, departamento  FROM departamento  ORDER BY departamento";
 
    $this->dv = $old_value_dv;
@@ -3767,6 +3953,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -3956,6 +4146,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -3976,6 +4170,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT idmun, municipio  FROM municipio  WHERE iddepar=$this->departamento ORDER BY municipio";
@@ -3995,6 +4193,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -4187,6 +4389,10 @@ if ($this->idmuni != "")
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -4207,6 +4413,10 @@ if ($this->idmuni != "")
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT municipio FROM municipio  WHERE idmun=$this->idmuni ORDER BY municipio";
@@ -4226,6 +4436,10 @@ if ($this->idmuni != "")
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -4416,6 +4630,10 @@ if ($this->idmuni != "")
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -4436,6 +4654,10 @@ if ($this->idmuni != "")
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $nm_comando = "SELECT codigo_postal  FROM codigo_postal  WHERE idmuni=$this->idmuni ORDER BY codigo_postal";
@@ -4455,6 +4677,10 @@ if ($this->idmuni != "")
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
@@ -4711,6 +4937,10 @@ else
    $old_value_dias = $this->dias;
    $old_value_fechultcomp = $this->fechultcomp;
    $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
    $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
@@ -4731,6 +4961,10 @@ else
    $unformatted_value_dias = $this->dias;
    $unformatted_value_fechultcomp = $this->fechultcomp;
    $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
    $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
 
    $cliente_val_str = "''";
@@ -4943,6 +5177,48 @@ else
           $es_tecnico_val_str .= "'$Tmp_val_cmp'";
        }
    }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT lenguaje, lenguaje  FROM lenguas  ORDER BY lenguaje";
 
    $this->dv = $old_value_dv;
@@ -4960,6 +5236,10 @@ else
    $this->dias = $old_value_dias;
    $this->fechultcomp = $old_value_fechultcomp;
    $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
    $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;

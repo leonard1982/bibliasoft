@@ -299,27 +299,27 @@ class grid_asientos_xml
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, prefijo, numero, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT tipo, convert(char(23),fecha,121), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, prefijo, numero, convert(char(23),fecha,121), nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipo, EXTEND(fecha, YEAR TO DAY), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, prefijo, numero, EXTEND(fecha, YEAR TO DAY), nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq'];
@@ -378,19 +378,19 @@ class grid_asientos_xml
              $this->xml_registro = "<grid_asientos";
          }
          $this->tipo = $rs->fields[0] ;  
-         $this->fecha = $rs->fields[1] ;  
-         $this->numero2 = $rs->fields[2] ;  
-         $this->nit = $rs->fields[3] ;  
-         $this->cuenta = $rs->fields[4] ;  
-         $this->tipocd = $rs->fields[5] ;  
-         $this->valor = $rs->fields[6] ;  
+         $this->prefijo = $rs->fields[1] ;  
+         $this->numero = $rs->fields[2] ;  
+         $this->fecha = $rs->fields[3] ;  
+         $this->nit = $rs->fields[4] ;  
+         $this->cuenta = $rs->fields[5] ;  
+         $this->tipocd = $rs->fields[6] ;  
+         $this->valor = $rs->fields[7] ;  
          $this->valor =  str_replace(",", ".", $this->valor);
          $this->valor = (string)$this->valor;
-         $this->observaciones = $rs->fields[7] ;  
-         $this->id_asiento = $rs->fields[8] ;  
+         $this->observaciones = $rs->fields[8] ;  
+         $this->numero2 = $rs->fields[9] ;  
+         $this->id_asiento = $rs->fields[10] ;  
          $this->id_asiento = (string)$this->id_asiento;
-         $this->prefijo = $rs->fields[9] ;  
-         $this->numero = $rs->fields[10] ;  
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_col)
          { 
@@ -652,6 +652,56 @@ class grid_asientos_xml
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->tipo) . "\"";
          }
    }
+   //----- prefijo
+   function NM_export_prefijo()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->prefijo))
+         {
+             $this->prefijo = sc_convert_encoding($this->prefijo, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
+         }
+         else
+         {
+             $SC_Label = "prefijo"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->prefijo) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->prefijo) . "\"";
+         }
+   }
+   //----- numero
+   function NM_export_numero()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->numero))
+         {
+             $this->numero = sc_convert_encoding($this->numero, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
+         }
+         else
+         {
+             $SC_Label = "numero"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->numero) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->numero) . "\"";
+         }
+   }
    //----- fecha
    function NM_export_fecha()
    {
@@ -678,31 +728,6 @@ class grid_asientos_xml
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->fecha) . "\"";
-         }
-   }
-   //----- numero2
-   function NM_export_numero2()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->numero2))
-         {
-             $this->numero2 = sc_convert_encoding($this->numero2, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Numero"; 
-         }
-         else
-         {
-             $SC_Label = "numero2"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->numero2) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->numero2) . "\"";
          }
    }
    //----- nit
@@ -827,6 +852,31 @@ class grid_asientos_xml
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->observaciones) . "\"";
          }
    }
+   //----- numero2
+   function NM_export_numero2()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->numero2))
+         {
+             $this->numero2 = sc_convert_encoding($this->numero2, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Numero"; 
+         }
+         else
+         {
+             $SC_Label = "numero2"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->numero2) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->numero2) . "\"";
+         }
+   }
    //----- id_asiento
    function NM_export_id_asiento()
    {
@@ -847,56 +897,6 @@ class grid_asientos_xml
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->id_asiento) . "\"";
-         }
-   }
-   //----- prefijo
-   function NM_export_prefijo()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->prefijo))
-         {
-             $this->prefijo = sc_convert_encoding($this->prefijo, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
-         }
-         else
-         {
-             $SC_Label = "prefijo"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->prefijo) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->prefijo) . "\"";
-         }
-   }
-   //----- numero
-   function NM_export_numero()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->numero))
-         {
-             $this->numero = sc_convert_encoding($this->numero, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
-         }
-         else
-         {
-             $SC_Label = "numero"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->numero) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->numero) . "\"";
          }
    }
 

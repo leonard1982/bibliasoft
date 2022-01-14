@@ -81,6 +81,7 @@ Table_sv_fil[4] = "banco";
 Table_sv_fil[5] = "resolucion";
 Table_sv_fil[6] = "vendedor";
 Table_sv_fil[7] = "id_clasificacion";
+Table_sv_fil[8] = "fecha_pago";
 function ajax_select_filter(parm)
 {
     nmAjaxProcOn();

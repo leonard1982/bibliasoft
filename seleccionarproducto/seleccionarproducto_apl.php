@@ -1475,7 +1475,8 @@ $_SESSION['scriptcase']['seleccionarproducto']['contr_erro'] = 'off';
           }
           else
           {
-              $this->nmgp_redireciona_form($this->Ini->link_grid_facturaven_pos_detalle, $this->nm_location, "par_numfacventa*scin" . $this->producto . "*scout", "_self", '', '430', '630'); 
+              $SC_parm_lig = "par_numfacventa*scin" . $this->producto . "*scout";
+              $this->nmgp_redireciona_form($this->Ini->link_grid_facturaven_pos_detalle, $this->nm_location, $SC_parm_lig, "_self", '', '430', '630'); 
           }
           $this->NM_close_db(); 
           if ($this->NM_ajax_flag)

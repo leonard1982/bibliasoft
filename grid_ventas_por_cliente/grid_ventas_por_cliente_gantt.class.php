@@ -58,9 +58,9 @@ class grid_ventas_por_cliente_gantt
     {
         $this->chart_data = array();
 
-        $sSelect  = "SELECT t.nombres, f.fechaven,  FROM " . $this->Ini->nm_tabela;
+        $sSelect  = "SELECT t.nombres, f.fechaven, f.fechaven FROM " . $this->Ini->nm_tabela;
         $sSelect .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq'];
-        $sSelect .= " ORDER BY f.fechaven, ";
+        $sSelect .= " ORDER BY f.fechaven, f.fechaven";
 
         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $sSelect;
 
@@ -76,14 +76,14 @@ class grid_ventas_por_cliente_gantt
         {
             $cliente = $rs_gantt->fields[0];
             $fecha = $rs_gantt->fields[1];
-            $ = $rs_gantt->fields[2];
+            $fecha = $rs_gantt->fields[2];
             $_sc_gantt_data_complete = 100;
             $_sc_gantt_data_resource = '';
 
             $this->chart_data[] = array(
                 'label'    => $cliente,
                 'start'    => $fecha,
-                'end'      => $,
+                'end'      => $fecha,
                 'complete' => $_sc_gantt_data_complete,
                 'resource' => $_sc_gantt_data_resource,
             );
@@ -237,11 +237,28 @@ class grid_ventas_por_cliente_gantt
 
     function formatEndInputDate($sDate)
     {
+        $sTempDate = $sDate;
+        nm_conv_limpa_dado($sTempDate, "YYYY-MM-DD");
+        if (is_numeric($sTempDate) && $sTempDate > 0)
+        {
+            $this->nm_data->SetaData($sDate, "YYYY-MM-DD");
+            $sOutput = 'html' == $this->output ? $this->nm_data->FormatRegion("DT", "aaaammdd") : $this->formatOutputDate($this->output_unformatted);
+            $sDate   = $this->nm_data->FormataSaida($sOutput);
+            $this->storeDateInfo($this->nm_data->mAno, $this->nm_data->mMes);
+        }
         return $sDate;
     }
 
     function formatIntervalDate($sDate)
     {
+        $sTempDate = $sDate;
+        nm_conv_limpa_dado($sTempDate, "YYYY/MM/DD");
+        if (is_numeric($sTempDate) && $sTempDate > 0)
+        {
+            $this->nm_data->SetaData($sDate, "YYYY/MM/DD");
+            $sOutput = $this->formatOutputDate($this->output_unformatted);
+            $sDate   = $this->nm_data->FormataSaida($sOutput);
+        }
         return $sDate;
     }
 

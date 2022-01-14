@@ -1658,32 +1658,6 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Pragma" content="no-cache" />
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
  <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
-          <?php 
-           if ($_SESSION['scriptcase']['proc_mobile']) {  
-               $sc_app_data = json_encode([ 
-                   'appType' => 'search', 
-                   'improvements' => true, 
-                   'displayOptionsButton' => false, 
-                   'displayScrollUp' => true, 
-                   'scrollUpPosition' => 'R', 
-                   'toolbarOrientation' => 'H', 
-                   'mobilePanes' => 'true', 
-                   'navigationBarButtons' => unserialize('a:0:{}'), 
-                   'langs' => [ 
-                       'lang_refined_search' => html_entity_decode($this->Ini->Nm_lang['lang_refined_search'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                       'lang_summary_search_button' => html_entity_decode($this->Ini->Nm_lang['lang_summary_search_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                       'lang_details_button' => html_entity_decode($this->Ini->Nm_lang['lang_details_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                   ], 
-               ]); ?> 
-        <input type="hidden" id="sc-mobile-app-data" value='<?php echo $sc_app_data; ?>' />
-        <script type="text/javascript" src="../_lib/lib/js/nm_modal_panes.jquery.js"></script>
-        <script type="text/javascript" src="../_lib/lib/js/nm_mobile.js"></script>
-        <link rel='stylesheet' href='../_lib/lib/css/nm_mobile.css' type='text/css'/>
-    <script>
-        $(document).ready(function(){
-            bootstrapMobile();
-        });
-    </script>          <?php } ?>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
  <script type="text/javascript" src="../_lib/lib/js/scInput.js"></script>

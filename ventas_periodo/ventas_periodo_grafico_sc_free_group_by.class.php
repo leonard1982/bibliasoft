@@ -1303,6 +1303,7 @@ class ventas_periodo_grafico
        $chart_attr_j['xAxisName'] = $this->formatFusionLabel($tit_label);
        $chart_attr_j['yAxisName'] = $this->formatFusionLabel($tit_datay);
        $chart_attr_j['exportEnabled'] = 1;
+       $chart_attr_j['exportMode'] = 'client';
        $chart_attr_j['exportFileName'] = "ventas_periodo";
 
        $_SESSION['sc_session'][$this->Ini->sc_page]['ventas_periodo']['this_chart_label'] = $chart_attr_j['caption'];

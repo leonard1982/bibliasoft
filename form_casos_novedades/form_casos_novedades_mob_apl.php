@@ -21,7 +21,6 @@ class form_casos_novedades_mob_apl
                                 'varList'           => array(),
                                 'focus'             => '',
                                 'navStatus'         => array(),
-                                'navSummary'        => array(),
                                 'redir'             => array(),
                                 'blockDisplay'      => array(),
                                 'fieldDisplay'      => array(),
@@ -69,7 +68,6 @@ class form_casos_novedades_mob_apl
    var $nmgp_opcao;
    var $nmgp_opc_ant;
    var $sc_evento;
-   var $sc_insert_on;
    var $nmgp_clone;
    var $nmgp_return_img = array();
    var $nmgp_dados_form = array();
@@ -165,18 +163,6 @@ class form_casos_novedades_mob_apl
           if (isset($this->NM_ajax_info['param']['nmgp_arg_dyn_search']))
           {
               $this->nmgp_arg_dyn_search = $this->NM_ajax_info['param']['nmgp_arg_dyn_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_arg_fast_search']))
-          {
-              $this->nmgp_arg_fast_search = $this->NM_ajax_info['param']['nmgp_arg_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_cond_fast_search']))
-          {
-              $this->nmgp_cond_fast_search = $this->NM_ajax_info['param']['nmgp_cond_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_fast_search']))
-          {
-              $this->nmgp_fast_search = $this->NM_ajax_info['param']['nmgp_fast_search'];
           }
           if (isset($this->NM_ajax_info['param']['nmgp_num_form']))
           {
@@ -572,19 +558,6 @@ class form_casos_novedades_mob_apl
         $this->classes_100perc_fields['keep_field_size'] = true;
 
 
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
-          'has_fa'           => true,
-          'content_icons'    => false,
-          'style'            => "default",
-      );
-
 
       $_SESSION['scriptcase']['error_icon']['form_casos_novedades_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_casos_novedades_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
@@ -727,17 +700,16 @@ class form_casos_novedades_mob_apl
 
       $this->nmgp_botoes['cancel'] = "on";
       $this->nmgp_botoes['exit'] = "on";
-      $this->nmgp_botoes['qsearch'] = "on";
       $this->nmgp_botoes['new'] = "on";
       $this->nmgp_botoes['insert'] = "on";
-      $this->nmgp_botoes['copy'] = "on";
+      $this->nmgp_botoes['copy'] = "off";
       $this->nmgp_botoes['update'] = "on";
       $this->nmgp_botoes['delete'] = "on";
-      $this->nmgp_botoes['first'] = "on";
-      $this->nmgp_botoes['back'] = "on";
-      $this->nmgp_botoes['forward'] = "on";
-      $this->nmgp_botoes['last'] = "on";
-      $this->nmgp_botoes['summary'] = "on";
+      $this->nmgp_botoes['first'] = "off";
+      $this->nmgp_botoes['back'] = "off";
+      $this->nmgp_botoes['forward'] = "off";
+      $this->nmgp_botoes['last'] = "off";
+      $this->nmgp_botoes['summary'] = "off";
       $this->nmgp_botoes['navpage'] = "off";
       $this->nmgp_botoes['goto'] = "off";
       $this->nmgp_botoes['qtline'] = "off";
@@ -774,7 +746,6 @@ class form_casos_novedades_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_casos_novedades_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_casos_novedades_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_casos_novedades_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_casos_novedades_mob']['new']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_casos_novedades_mob']['new'] != '')
       {
@@ -829,7 +800,6 @@ class form_casos_novedades_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['embutida_liga_form_insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['embutida_liga_form_insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['embutida_liga_form_insert'];
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['embutida_liga_form_update']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['embutida_liga_form_update'] != '')
       {
@@ -875,7 +845,6 @@ class form_casos_novedades_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_casos_novedades_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_casos_novedades_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf']['form_casos_novedades_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_casos_novedades_mob']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_casos_novedades_mob']['update'] != '')
       {
@@ -1045,13 +1014,6 @@ class form_casos_novedades_mob_apl
       $this->Erro      = new form_casos_novedades_mob_erro();
       $this->Erro->Ini = $this->Ini;
       $this->proc_fast_search = false;
-      if ($this->nmgp_opcao == "fast_search")  
-      {
-          $this->SC_fast_search($this->nmgp_fast_search, $this->nmgp_cond_fast_search, $this->nmgp_arg_fast_search);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'] = "inicio";
-          $this->nmgp_opcao = "inicio";
-          $this->proc_fast_search = true;
-      } 
       if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
       { 
          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao']))
@@ -1110,7 +1072,6 @@ class form_casos_novedades_mob_apl
 //
       $this->NM_case_insensitive = false;
       $this->sc_evento = $this->nmgp_opcao;
-      $this->sc_insert_on = false;
             if ('ajax_check_file' == $this->nmgp_opcao ){
                  ob_start(); 
                  include_once("../_lib/lib/php/nm_api.php"); 
@@ -3902,6 +3863,99 @@ $_SESSION['scriptcase']['form_casos_novedades_mob']['contr_erro'] = 'off';
    } 
 //----------- 
 
+   function controle_navegacao()
+   {
+      global $sc_where;
+
+          if (false && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['total']))
+          {
+               $sc_where_pos = " WHERE ((id_novedades < $this->id_novedades))";
+               if ('' != $sc_where)
+               {
+                   if ('where ' == strtolower(substr(trim($sc_where), 0, 6)))
+                   {
+                       $sc_where = substr(trim($sc_where), 6);
+                   }
+                   if ('and ' == strtolower(substr(trim($sc_where), 0, 4)))
+                   {
+                       $sc_where = substr(trim($sc_where), 4);
+                   }
+                   $sc_where_pos .= ' AND (' . $sc_where . ')';
+                   $sc_where = ' WHERE ' . $sc_where;
+               }
+               $nmgp_sel_count = 'SELECT COUNT(*) AS countTest FROM ' . $this->Ini->nm_tabela . $sc_where;
+               $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_sel_count; 
+               $rsc = $this->Db->Execute($nmgp_sel_count); 
+               if ($rsc === false && !$rsc->EOF)  
+               { 
+                   $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                   exit; 
+               }  
+               $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['total'] = $rsc->fields[0];
+               $rsc->Close(); 
+               if ('' != $this->id_novedades)
+               {
+               $nmgp_sel_count = 'SELECT COUNT(*) AS countTest FROM ' . $this->Ini->nm_tabela . $sc_where_pos;
+               $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_sel_count; 
+               $rsc = $this->Db->Execute($nmgp_sel_count); 
+               if ($rsc === false && !$rsc->EOF)  
+               { 
+                   $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                   exit; 
+               }  
+               $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = $rsc->fields[0];
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] < 0)
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = 0;
+               }
+               $rsc->Close(); 
+               }
+               else
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = 0;
+               }
+          }
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['qt_reg_grid'] = 1;
+          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio']))
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = 0;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['final']  = 0;
+          }
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'] = $this->NM_ajax_info['param']['nmgp_opcao'];
+          if (in_array($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'], array('incluir', 'alterar', 'excluir')))
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'] = '';
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'] == 'inicio')
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = 0;
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'] == 'retorna')
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] - $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['qt_reg_grid'];
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] < 0)
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = 0 ;
+              }
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'] == 'avanca' && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['total']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['total'] > $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['final']))
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['final'];
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'] == 'final')
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['total'] - $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['qt_reg_grid'];
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] < 0)
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] = 0;
+              }
+          }
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['final'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'] + $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['qt_reg_grid'];
+          $this->Nav_permite_ret = 0 != $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['inicio'];
+          $this->Nav_permite_ava = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['total'] != $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['final'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao'] = '';
+
+   }
 
    function temRegistros($sWhere)
    {
@@ -4598,7 +4652,6 @@ $_SESSION['scriptcase']['form_casos_novedades_mob']['contr_erro'] = 'off';
               $this->desc_imp = $this->desc_imp_before_qstr;
               $this->descr = $this->descr_before_qstr;
               $this->cod_producto = $this->cod_producto_before_qstr;
-              $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
               } 
@@ -4721,11 +4774,6 @@ $_SESSION['scriptcase']['form_casos_novedades_mob']['contr_erro'] = 'off';
               }
               $this->nmgp_opcao = "avanca"; 
               $this->nm_flag_iframe = true;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start']--; 
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start'] < 0)
-              {
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start'] = 0; 
-              }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['db_changed'] = true;
 
@@ -4962,35 +5010,8 @@ $_SESSION['scriptcase']['form_casos_novedades_mob']['contr_erro'] = 'off';
                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['select'] = ""; 
               } 
           } 
-          if ($this->nmgp_opcao == "igual") 
-          { 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
-              $rs = $this->Db->Execute($nmgp_select) ; 
-          } 
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-          { 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start'] . ")" ; 
-              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start']) ; 
-          } 
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-          { 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start'] . ")" ; 
-              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start']) ; 
-          } 
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
-          { 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start'] . ")" ; 
-              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start']) ; 
-          } 
-          else  
-          { 
-              $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
-              $rs = $this->Db->Execute($nmgp_select) ; 
-              if (!$rs === false && !$rs->EOF) 
-              { 
-                  $rs->Move($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start']) ;  
-              } 
-          } 
+          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
+          $rs = $this->Db->Execute($nmgp_select) ; 
           if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
           { 
               $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
@@ -5092,9 +5113,7 @@ $_SESSION['scriptcase']['form_casos_novedades_mob']['contr_erro'] = 'off';
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['dados_select'] = $this->nmgp_dados_select;
           if (!$this->NM_ajax_flag || 'backup_line' != $this->NM_ajax_opcao)
           {
-              $this->Nav_permite_ret = 0 != $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start'];
-              $this->Nav_permite_ava = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['reg_start'] < $qt_geral_reg_form_casos_novedades_mob;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['opcao']   = '';
+              $this->controle_navegacao();
           }
       } 
       if ($this->nmgp_opcao == "novo" || $this->nmgp_opcao == "refresh_insert") 
@@ -5138,25 +5157,6 @@ $_SESSION['scriptcase']['form_casos_novedades_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["tipo"] = $this->tipo;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
-              if ($this->nmgp_clone != "S")
-              {
-              }
-              if ($this->nmgp_clone == "S" && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['dados_select']))
-              {
-                  $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['dados_select'];
-                  $this->id_caso = $this->nmgp_dados_select['id_caso'];  
-                  $this->id_producto = $this->nmgp_dados_select['id_producto'];  
-                  $this->fecha = $this->nmgp_dados_select['fecha'];  
-                  $this->descripcion = $this->nmgp_dados_select['descripcion'];  
-                  $this->cantidad = $this->nmgp_dados_select['cantidad'];  
-                  $this->valor = $this->nmgp_dados_select['valor'];  
-                  $this->valor_imp = $this->nmgp_dados_select['valor_imp'];  
-                  $this->tarifa_imp = $this->nmgp_dados_select['tarifa_imp'];  
-                  $this->codigo_imp = $this->nmgp_dados_select['codigo_imp'];  
-                  $this->desc_imp = $this->nmgp_dados_select['desc_imp'];  
-                  $this->descr = $this->nmgp_dados_select['descr'];  
-                  $this->cod_producto = $this->nmgp_dados_select['cod_producto'];  
-              }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_casos_novedades_mob']['foreign_key']))
           {
@@ -6695,25 +6695,7 @@ if (parent && parent.scAjaxDetailValue)
                 return array("sc_b_hlp_t");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-5", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-14", "sc_b_sai_t.sc-unique-btn-16", "sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-15");
-                break;
-            case "0":
-                return array("sys_separator.sc-unique-btn-12");
-                break;
-            case "copy":
-                return array("sc_b_clone_t.sc-unique-btn-13");
-                break;
-            case "first":
-                return array("sc_b_ini_b.sc-unique-btn-17");
-                break;
-            case "back":
-                return array("sc_b_ret_b.sc-unique-btn-18");
-                break;
-            case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-19");
-                break;
-            case "last":
-                return array("sc_b_fim_b.sc-unique-btn-20");
+                return array("sc_b_sai_t.sc-unique-btn-5", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-12", "sc_b_sai_t.sc-unique-btn-14", "sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-13");
                 break;
         }
 

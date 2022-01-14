@@ -233,8 +233,8 @@ class grid_facturaven_pos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211112"; 
-      $this->nm_hr_ult_alt   = "162731"; 
+      $this->nm_dt_ult_alt   = "20220111"; 
+      $this->nm_hr_ult_alt   = "214126"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1176,6 +1176,16 @@ class grid_facturaven_pos_ini
       $this->arr_buttons_usr['btn_vigencia_certificado']['image']            = "";
       $this->arr_buttons_usr['btn_vigencia_certificado']['has_fa']            = "true";
       $this->arr_buttons_usr['btn_vigencia_certificado']['fontawesomeicon']            = "fas fa-certificate";
+
+      $this->arr_buttons_usr['btn_notifica_sms']['hint']             = "¿Desea enviar el recordatorio de cobro de los registros seleccionados?";
+      $this->arr_buttons_usr['btn_notifica_sms']['type']             = "button";
+      $this->arr_buttons_usr['btn_notifica_sms']['value']            = "Recordatorio Cobro Pendientes";
+      $this->arr_buttons_usr['btn_notifica_sms']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons_usr['btn_notifica_sms']['display_position'] = "text_right";
+      $this->arr_buttons_usr['btn_notifica_sms']['style']            = "cancel";
+      $this->arr_buttons_usr['btn_notifica_sms']['image']            = "";
+      $this->arr_buttons_usr['btn_notifica_sms']['has_fa']            = "true";
+      $this->arr_buttons_usr['btn_notifica_sms']['fontawesomeicon']            = "fas fa-hand-holding-usd";
       $this->str_google_fonts= isset($str_google_fonts)?$str_google_fonts:'';
       $this->regionalDefault();
       $this->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
@@ -1288,7 +1298,7 @@ class grid_facturaven_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDuFaD1veHQJwHuBOV9BUDWXCDoJsD9JmZSBODSNOV5X7HgNKHAFKV5FqDoF7D9JKZ9F7DSBYV5BqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBiHuvmVcXKDuX7HIFUD9JmZSBOD1vsD5BqDMvCZSJqHEFqVoJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7HAN7V5FUHgvsDkFCH5XCVEraD9XOZSB/HABYZMBqDMzGHEXeV5XCDoFUD9NwDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmZSFUDSzGD5F7DMvOVIB/Dur/HMX7DcBqZkBiHABYV5JeDMzGZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHArsDWFGDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFGDcJUZkBiD1NaZMBODENOHEFKV5FqHMJeDcBwDQJwHAvCV5JeDMrYVcFCDWFYHMrqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcJeDQFUZ1rwVWBqHuNOVcBOH5XCHIFUHQBiZ1BiDSrYHuB/DMveVkJqDWFGZuJeDcBiH9X7Z1NaVWBODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFGDMzGVcFCDWJeDoFUHQBsZSFaD1vsZMBqHgBYHEFiDWr/DoBODcBwZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwD5JeHgvsVcBOH5FqVENUD9BiZ1FaHAN7D5NUDEvsVkXeDWFqVoBiDcXOZSFGHAveV5JwHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsDSrwHuNUDMrwVcBODuX7HMFGHQXGZSFaHABYHuB/HgrKZSJ3DuFYHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDWFGDoBqHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQXGZ1B/HArYHQFaDEvsZSJGH5FGZuBqD9JKZ9F7HANOD5JwDMNOVcFCH5XCHINUHQNwZ1BiHABYHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'])  
       { 
@@ -1598,6 +1608,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if (!isset($_SESSION['gIdfac'])) 
           {
               $this->nm_falta_var .= "gIdfac; ";
+          }
+          if (!isset($_SESSION['gnit'])) 
+          {
+              $this->nm_falta_var .= "gnit; ";
           }
       }
 // 
@@ -4295,6 +4309,11 @@ class grid_facturaven_pos_apl
               $_SESSION['gIdfac'] = $gIdfac;
               nm_limpa_str_grid_facturaven_pos($_SESSION["gIdfac"]);
           }
+          if (isset($gnit)) 
+          {
+              $_SESSION['gnit'] = $gnit;
+              nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
+          }
       } 
       if ($Parms_form_pdf)
       { 
@@ -6227,9 +6246,6 @@ class grid_facturaven_pos_apl
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] = 'pesq';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['orig_pesq'] = 'grid';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_refresh'] = true;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq_interativ'] = "";
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['interativ_search'] = array();
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['int_search_dados'] = array();
           } 
       } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] == "interativ_search")
@@ -6315,6 +6331,10 @@ class grid_facturaven_pos_apl
           if ($nm_call_php == "btn_vigencia_certificado")
           { 
               $this->btn_vigencia_certificado();
+          } 
+          if ($nm_call_php == "btn_notifica_sms")
+          { 
+              $this->btn_notifica_sms();
           } 
           $this->Db->Close(); 
           exit;
@@ -7169,39 +7189,38 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->fecha_validacion = $this->rs_grid->fields[31] ;  
        $this->cufe = $this->rs_grid->fields[32] ;  
        $this->estado = $this->rs_grid->fields[33] ;  
-       $this->enviada_a_tns = $this->rs_grid->fields[34] ;  
-       $this->factura_tns = $this->rs_grid->fields[35] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
            $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[36])) 
+           if (is_file($this->rs_grid->fields[34])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[36]);  
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[36] ;  
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
        } 
-       $this->id_trans_fe = $this->rs_grid->fields[37] ;  
-       $this->nomcli = $this->rs_grid->fields[38] ;  
-       $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
-       $this->celular_ws = $this->rs_grid->fields[41] ;  
-       $this->dircliente = $this->rs_grid->fields[42] ;  
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[43] ;  
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[44] ;  
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -7787,39 +7806,38 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->fecha_validacion = $this->rs_grid->fields[31] ;  
        $this->cufe = $this->rs_grid->fields[32] ;  
        $this->estado = $this->rs_grid->fields[33] ;  
-       $this->enviada_a_tns = $this->rs_grid->fields[34] ;  
-       $this->factura_tns = $this->rs_grid->fields[35] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
            $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[36])) 
+           if (is_file($this->rs_grid->fields[34])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[36]);  
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[36] ;  
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
        } 
-       $this->id_trans_fe = $this->rs_grid->fields[37] ;  
-       $this->nomcli = $this->rs_grid->fields[38] ;  
-       $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
-       $this->celular_ws = $this->rs_grid->fields[41] ;  
-       $this->dircliente = $this->rs_grid->fields[42] ;  
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[43] ;  
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[44] ;  
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -7834,21 +7852,62 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
       $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
-  if(!empty($this->cufe ))
+  $vidfacven = $this->idfacven ;
+$vcufe  = "";
+$vidcli = "";
+$vtipo  = "";
+$vcod_cuenta = "";
+$vsql = "select f.resolucion, f.asentada, f.total, f.credito, f.numfacven,f.cufe,f.idcli,f.tipo,concat(r.prefijo,'/',f.numfacven) as cod_cuenta from facturaven f inner join resdian r on f.resolucion=r.Idres where f.idfacven='".$vidfacven."'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDatos = array();
+      $this->vdatos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDatos = false;
+          $this->vDatos_erro = $this->Db->ErrorMsg();
+          $this->vdatos = false;
+          $this->vdatos_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vdatos[0][0]))
 {
-	echo "NO SE PUEDE REVERSAR UN DOCUMENTO ELECTRÓNICO ENVIADO.";
+	$vresolucion = $this->vdatos[0][0];
+	$vasentada   = $this->vdatos[0][1];
+	$vtotal      = $this->vdatos[0][2];
+	$vcredito    = $this->vdatos[0][3];
+	$vnumfacven  = $this->vdatos[0][4];
+	$vcufe       = $this->vdatos[0][5];
+	$vidcli      = $this->vdatos[0][6];
+	$vtipo       = $this->vdatos[0][7];
+	$vcod_cuenta = $this->vdatos[0][8];
 }
-else
-{
+
 $vpj = "";
  
-      $nm_select = "select prefijo from resdian where Idres='".$this->resolucion  ."'"; 
+      $nm_select = "select prefijo from resdian where Idres='".$vresolucion."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vPrefijo = array();
       $this->vprefijo = array();
-     if ($this->resolucion !== "")
-     { 
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -7872,32 +7931,36 @@ $vpj = "";
           $this->vprefijo = false;
           $this->vprefijo_erro = $this->Db->ErrorMsg();
       } 
-     } 
 ;
 if(isset($this->vprefijo[0][0]))
 {
-$vpj = $this->vprefijo[0][0];
+	$vpj = $this->vprefijo[0][0];
 }
 
- 
+if(!empty($vcufe))
+{
+	echo "NO SE PUEDE REVERSAR UN DOCUMENTO ELECTRÓNICO ENVIADO.";
+}
+else
+{
+
+	 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select monto,saldofac,nurecibo,str_replace (convert(char(10),fecharecibo,102), '.', '-') + ' ' + convert(char(8),fecharecibo,20) from recibocaja where resolucion='".$this->resolucion  ."' and nufac='".$this->numfacven  ."' and cliente='".$this->idcli  ."'"; 
+          $nm_select = "select monto,saldofac,nurecibo,str_replace (convert(char(10),fecharecibo,102), '.', '-') + ' ' + convert(char(8),fecharecibo,20) from recibocaja where resolucion='".$vresolucion."' and nufac='".$vnumfacven."' and cliente='".$vidcli."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select monto,saldofac,nurecibo,convert(char(23),fecharecibo,121) from recibocaja where resolucion='".$this->resolucion  ."' and nufac='".$this->numfacven  ."' and cliente='".$this->idcli  ."'"; 
+          $nm_select = "select monto,saldofac,nurecibo,convert(char(23),fecharecibo,121) from recibocaja where resolucion='".$vresolucion."' and nufac='".$vnumfacven."' and cliente='".$vidcli."'"; 
       }
       else
       { 
-          $nm_select = "select monto,saldofac,nurecibo,fecharecibo from recibocaja where resolucion='".$this->resolucion  ."' and nufac='".$this->numfacven  ."' and cliente='".$this->idcli  ."'"; 
+          $nm_select = "select monto,saldofac,nurecibo,fecharecibo from recibocaja where resolucion='".$vresolucion."' and nufac='".$vnumfacven."' and cliente='".$vidcli."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vSiRC = array();
       $this->vsirc = array();
-     if ($this->resolucion !== "" && $this->numfacven !== "" && $this->idcli !== "")
-     { 
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -7930,33 +7993,32 @@ $vpj = $this->vprefijo[0][0];
           $this->vsirc = false;
           $this->vsirc_erro = $this->Db->ErrorMsg();
       } 
-     } 
 ;
 
-if(isset($this->vsirc[0][0]))
-{
-	$nrc = $this->vsirc[0][2];
-	$nfc = $this->vsirc[0][3];
-	$nfc = date_create($nfc);
-	$nfc = date_format($nfc,"d/m/Y");
-	
-	echo "No se puede reversar el documento: ".$this->tipo ."/".$vpj."/".$this->numfacven ." porque tiene recibo de caja No: ".$nrc.", con fecha: ".$nfc.".<br>";
-}
-else
-{
-	
-	 
+	if(isset($this->vsirc[0][0]))
+	{
+		$nrc = $this->vsirc[0][2];
+		$nfc = $this->vsirc[0][3];
+		$nfc = date_create($nfc);
+		$nfc = date_format($nfc,"d/m/Y");
+
+		echo "No se puede reversar el documento: ".$vtipo."/".$vpj."/".$vnumfacven." porque tiene recibo de caja No: ".$nrc.", con fecha: ".$nfc.".<br>";
+	}
+	else
+	{
+
+		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select concat(prefijo,'/',numero) as sc_alias_0, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20) from terceros_cuentas where cod_cuenta='".$this->cod_cuenta  ."' and tipo='RC'"; 
+          $nm_select = "select concat(prefijo,'/',numero) as sc_alias_0, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20) from terceros_cuentas where cod_cuenta='".$vcod_cuenta."' and tipo='RC'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select concat(prefijo,'/',numero) as sc_alias_0, convert(char(23),fecha,121) from terceros_cuentas where cod_cuenta='".$this->cod_cuenta  ."' and tipo='RC'"; 
+          $nm_select = "select concat(prefijo,'/',numero) as sc_alias_0, convert(char(23),fecha,121) from terceros_cuentas where cod_cuenta='".$vcod_cuenta."' and tipo='RC'"; 
       }
       else
       { 
-          $nm_select = "select concat(prefijo,'/',numero),fecha from terceros_cuentas where cod_cuenta='".$this->cod_cuenta  ."' and tipo='RC'"; 
+          $nm_select = "select concat(prefijo,'/',numero),fecha from terceros_cuentas where cod_cuenta='".$vcod_cuenta."' and tipo='RC'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -7986,31 +8048,31 @@ else
           $this->vsidoc_erro = $this->Db->ErrorMsg();
       } 
 ;
-	
-	if(isset($this->vsidoc[0][0]))
-	{
-		$nrc = $this->vsidoc[0][0];
-		$nfc = $this->vsidoc[0][1];
-		$nfc = date_create($nfc);
-		$nfc = date_format($nfc,"d/m/Y");
 
-		echo "No se puede reversar el documento: ".$this->tipo ."/".$vpj."/".$this->numfacven ." porque tiene documento en cartera No: ".$nrc.", con fecha: ".$nfc.".<br>";
-	}
-	else
-	{
-		$idfac = $this->idfacven ;
-		$vsqltotal = "update 
-		  facturaven 
-		  set 
-		  total=(select coalesce(sum(d.tneto),0) from detalleventa d where d.numfac='".$idfac."'),
-		  saldo=(select coalesce(sum(d.tneto),0) from detalleventa d where d.numfac='".$idfac."'),
-		  valoriva=round((select coalesce(sum(d.iva),0) from detalleventa d where d.numfac='".$idfac."')), 
-		  subtotal=round((select coalesce(sum(d.tbase),0) from detalleventa d where d.numfac='".$idfac."')) 
-		  where 
-		  idfacven='".$idfac."'
-		  ";
+		if(isset($this->vsidoc[0][0]))
+		{
+			$nrc = $this->vsidoc[0][0];
+			$nfc = $this->vsidoc[0][1];
+			$nfc = date_create($nfc);
+			$nfc = date_format($nfc,"d/m/Y");
 
-		
+			echo "No se puede reversar el documento: ".$vtipo."/".$vpj."/".$vnumfacven." porque tiene documento en cartera No: ".$nrc.", con fecha: ".$nfc."...<br>";
+		}
+		else
+		{
+			$idfac = $vidfacven;
+			$vsqltotal = "update 
+			  facturaven 
+			  set 
+			  total=(select coalesce(sum(d.tneto),0) from detalleventa d where d.numfac='".$idfac."'),
+			  saldo=(select coalesce(sum(d.tneto),0) from detalleventa d where d.numfac='".$idfac."'),
+			  valoriva=round((select coalesce(sum(d.iva),0) from detalleventa d where d.numfac='".$idfac."')), 
+			  subtotal=round((select coalesce(sum(d.tbase),0) from detalleventa d where d.numfac='".$idfac."')) 
+			  where 
+			  idfacven='".$idfac."'
+			  ";
+
+			
      $nm_select = $vsqltotal; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -8028,11 +8090,9 @@ else
          $rf->Close();
       ;
 
-		if($this->enviada_a_tns =="NO")
-		{
-			$this->fAsentar($this->idfacven ,"NO",0,0,false);	
+			$this->fAsentar($vidfacven,"NO",0,0,false);	
 			
-     $nm_select = "insert into log set usuario='".$this->sc_temp_gidtercero."',accion='OTRO',observaciones='Se reversó la factura: ".$vpj."/".$this->numfacven  ."'"; 
+     $nm_select = "insert into log set usuario='".$this->sc_temp_gidtercero."',accion='OTRO',observaciones='Se reversó la factura: ".$vpj."/".$vnumfacven."'"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -8049,13 +8109,7 @@ else
          $rf->Close();
       ;
 		}
-		else
-		{
-
-			echo "No se puede reversar el documento: ".$this->factura_tns ." porque ya fue enviado a TNS.<br>";
-		}
 	}
-}
 }
 if (isset($this->sc_temp_gidtercero)) {$_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
@@ -8220,39 +8274,38 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->fecha_validacion = $this->rs_grid->fields[31] ;  
        $this->cufe = $this->rs_grid->fields[32] ;  
        $this->estado = $this->rs_grid->fields[33] ;  
-       $this->enviada_a_tns = $this->rs_grid->fields[34] ;  
-       $this->factura_tns = $this->rs_grid->fields[35] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
            $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[36])) 
+           if (is_file($this->rs_grid->fields[34])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[36]);  
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[36] ;  
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
        } 
-       $this->id_trans_fe = $this->rs_grid->fields[37] ;  
-       $this->nomcli = $this->rs_grid->fields[38] ;  
-       $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
-       $this->celular_ws = $this->rs_grid->fields[41] ;  
-       $this->dircliente = $this->rs_grid->fields[42] ;  
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[43] ;  
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[44] ;  
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -8267,15 +8320,54 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
       $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
-  $vpj = "";
+  $vidfacven = $this->idfacven ;
+$vsql = "select resolucion, asentada, total, credito, numfacven from facturaven where idfacven='".$vidfacven."'";
  
-      $nm_select = "select prefijo from resdian where Idres='".$this->resolucion  ."'"; 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDatos = array();
+      $this->vdatos = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDatos = false;
+          $this->vDatos_erro = $this->Db->ErrorMsg();
+          $this->vdatos = false;
+          $this->vdatos_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vdatos[0][0]))
+{
+	$vresolucion = $this->vdatos[0][0];
+	$vasentada   = $this->vdatos[0][1];
+	$vtotal      = $this->vdatos[0][2];
+	$vcredito    = $this->vdatos[0][3];
+	$vnumfacven  = $this->vdatos[0][4];
+}
+
+$vpj = "";
+ 
+      $nm_select = "select prefijo from resdian where Idres='".$vresolucion."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vPrefijo = array();
       $this->vprefijo = array();
-     if ($this->resolucion !== "")
-     { 
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -8299,18 +8391,17 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
           $this->vprefijo = false;
           $this->vprefijo_erro = $this->Db->ErrorMsg();
       } 
-     } 
 ;
 if(isset($this->vprefijo[0][0]))
 {
-$vpj = $this->vprefijo[0][0];
+	$vpj = $this->vprefijo[0][0];
 }
 
-if($this->asentada ==0)
+if($vasentada==0)
 {
-	if($this->total >0)
+	if($vtotal>0)
 	{
-		$idfac = $this->idfacven ;
+		$idfac = $vidfacven;
 		$vsqltotal = "update 
 		  facturaven 
 		  set 
@@ -8339,15 +8430,13 @@ if($this->asentada ==0)
          }
          $rf->Close();
       ;
-		
+
 		 
-      $nm_select = "select iddet from detalleventa where numfac='".$this->idfacven  ."' limit 1"; 
+      $nm_select = "select iddet from detalleventa where numfac='".$vidfacven."' limit 1"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vSiDetalle = array();
       $this->vsidetalle = array();
-     if ($this->idfacven !== "")
-     { 
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
@@ -8371,21 +8460,20 @@ if($this->asentada ==0)
           $this->vsidetalle = false;
           $this->vsidetalle_erro = $this->Db->ErrorMsg();
       } 
-     } 
 ;
 
 		if(isset($this->vsidetalle[0][0]))
 		{
-			$this->fAsentar($this->idfacven ,"SI",$this->total ,0,false,true);
-			
+			$this->fAsentar($vidfacven,"SI",$vtotal,0,false,true);
 
-			if($this->credito ==2)
+
+			if($vcredito==2)
 			{
-				$this->fPagarFacVen($this->idfacven ,2,false);
+				$this->fPagarFacVen($vidfacven,2,false);
 			}
+
 			
-			
-     $nm_select = "insert into log set usuario='".$this->sc_temp_gidtercero."',accion='OTRO',observaciones='Se asentó la factura: ".$vpj."/".$this->numfacven  ."'"; 
+     $nm_select = "insert into log set usuario='".$this->sc_temp_gidtercero."',accion='OTRO',observaciones='Se asentó la factura: ".$vpj."/".$vnumfacven."'"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -8401,20 +8489,22 @@ if($this->asentada ==0)
          }
          $rf->Close();
       ;
+
+			echo "Documento ".$vpj."/".$vnumfacven." asentado.";
 		}
 		else
 		{
-			echo "No se puede asentar el documento: ".$vpj."/".$this->numfacven ." porque no tiene detalle.<br>";
+			echo "No se puede asentar el documento: ".$vpj."/".$vnumfacven." porque no tiene detalle.<br>";
 		}
 	}
 	else
 	{
-		echo "No se puede asentar el documento: ".$vpj."/".$this->numfacven ." porque el total esta en cero.<br>";
+		echo "No se puede asentar el documento: ".$vpj."/".$vnumfacven." porque el total esta en cero.<br>";
 	}
 }
 else
 {
-	echo "No se puede asentar el documento: ".$vpj."/".$this->numfacven ." porque ya está asentada.<br>";
+	echo "No se puede asentar el documento: ".$vpj."/".$vnumfacven." porque ya está asentada.<br>";
 }
 if (isset($this->sc_temp_gidtercero)) {$_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
@@ -8579,39 +8669,38 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->fecha_validacion = $this->rs_grid->fields[31] ;  
        $this->cufe = $this->rs_grid->fields[32] ;  
        $this->estado = $this->rs_grid->fields[33] ;  
-       $this->enviada_a_tns = $this->rs_grid->fields[34] ;  
-       $this->factura_tns = $this->rs_grid->fields[35] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
            $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[36])) 
+           if (is_file($this->rs_grid->fields[34])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[36]);  
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[36] ;  
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
        } 
-       $this->id_trans_fe = $this->rs_grid->fields[37] ;  
-       $this->nomcli = $this->rs_grid->fields[38] ;  
-       $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
-       $this->celular_ws = $this->rs_grid->fields[41] ;  
-       $this->dircliente = $this->rs_grid->fields[42] ;  
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[43] ;  
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[44] ;  
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -10219,39 +10308,38 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->fecha_validacion = $this->rs_grid->fields[31] ;  
        $this->cufe = $this->rs_grid->fields[32] ;  
        $this->estado = $this->rs_grid->fields[33] ;  
-       $this->enviada_a_tns = $this->rs_grid->fields[34] ;  
-       $this->factura_tns = $this->rs_grid->fields[35] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
            $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[36])) 
+           if (is_file($this->rs_grid->fields[34])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[36]);  
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[36] ;  
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
        } 
-       $this->id_trans_fe = $this->rs_grid->fields[37] ;  
-       $this->nomcli = $this->rs_grid->fields[38] ;  
-       $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
-       $this->celular_ws = $this->rs_grid->fields[41] ;  
-       $this->dircliente = $this->rs_grid->fields[42] ;  
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[43] ;  
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[44] ;  
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -10600,39 +10688,38 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->fecha_validacion = $this->rs_grid->fields[31] ;  
        $this->cufe = $this->rs_grid->fields[32] ;  
        $this->estado = $this->rs_grid->fields[33] ;  
-       $this->enviada_a_tns = $this->rs_grid->fields[34] ;  
-       $this->factura_tns = $this->rs_grid->fields[35] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
            $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[36])) 
+           if (is_file($this->rs_grid->fields[34])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[36]);  
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[36] ;  
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
        } 
-       $this->id_trans_fe = $this->rs_grid->fields[37] ;  
-       $this->nomcli = $this->rs_grid->fields[38] ;  
-       $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
-       $this->celular_ws = $this->rs_grid->fields[41] ;  
-       $this->dircliente = $this->rs_grid->fields[42] ;  
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[43] ;  
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[44] ;  
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -12023,39 +12110,38 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->fecha_validacion = $this->rs_grid->fields[31] ;  
        $this->cufe = $this->rs_grid->fields[32] ;  
        $this->estado = $this->rs_grid->fields[33] ;  
-       $this->enviada_a_tns = $this->rs_grid->fields[34] ;  
-       $this->factura_tns = $this->rs_grid->fields[35] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
            $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[36])) 
+           if (is_file($this->rs_grid->fields[34])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[36]);  
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[36] ;  
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
        } 
-       $this->id_trans_fe = $this->rs_grid->fields[37] ;  
-       $this->nomcli = $this->rs_grid->fields[38] ;  
-       $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
-       $this->celular_ws = $this->rs_grid->fields[41] ;  
-       $this->dircliente = $this->rs_grid->fields[42] ;  
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[43] ;  
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[44] ;  
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -13339,39 +13425,38 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->fecha_validacion = $this->rs_grid->fields[31] ;  
        $this->cufe = $this->rs_grid->fields[32] ;  
        $this->estado = $this->rs_grid->fields[33] ;  
-       $this->enviada_a_tns = $this->rs_grid->fields[34] ;  
-       $this->factura_tns = $this->rs_grid->fields[35] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
            $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[36])) 
+           if (is_file($this->rs_grid->fields[34])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[36]);  
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[36]) ;  
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[36] ;  
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
        } 
-       $this->id_trans_fe = $this->rs_grid->fields[37] ;  
-       $this->nomcli = $this->rs_grid->fields[38] ;  
-       $this->si_electronica = $this->rs_grid->fields[39] ;  
-       $this->nombre_cliente = $this->rs_grid->fields[40] ;  
-       $this->celular_ws = $this->rs_grid->fields[41] ;  
-       $this->dircliente = $this->rs_grid->fields[42] ;  
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[43] ;  
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[44] ;  
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -13760,6 +13845,323 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       <input type=hidden name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page);?>"/>
       <input type=submit name="nmgp_bok" value="<?php echo $this->Ini->Nm_lang['lang_btns_cfrm'] ?>"/>
       </form>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
+      $this->SC_redir_btn = false;
+   }
+   function btn_notifica_sms() 
+   {
+      global 
+      $nm_apl_dependente;
+      $this->SC_redir_btn = true;
+      $nm_f_saida = "./";
+?>
+     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+      <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+      <head>
+       <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
+?>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+}
+?>
+        <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
+        <script type="text/javascript">
+          var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+          var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+          var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
+        </script>
+        <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
+        <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+      </head>
+      <body class="scGridPage">
+      <table class="scGridTabela" align="center"><tr><td>
+<?php
+ob_start();
+$NM_cont_reg  = 0;
+$NM_index_reg = (isset($_POST['nm_run_opt_sel'])) ? explode(";", $_POST['nm_run_opt_sel']) : array();
+if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sc_sql_btn_run']))
+{
+    foreach ($NM_index_reg as $Run_register)
+    {
+       if (!is_numeric($Run_register)) { continue; }
+       $this->rs_grid->fields = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sc_sql_btn_run'][$Run_register];
+       $this->fechaven = $this->rs_grid->fields[0] ;  
+       $this->tipo = $this->rs_grid->fields[1] ;  
+       $this->credito = $this->rs_grid->fields[2] ;  
+       $this->credito = (string)$this->credito;
+       $this->numero2 = $this->rs_grid->fields[3] ;  
+       $this->idcli = $this->rs_grid->fields[4] ;  
+       $this->idcli = (string)$this->idcli;
+       $this->direccion2 = $this->rs_grid->fields[5] ;  
+       $this->total = $this->rs_grid->fields[6] ;  
+       $this->total =  str_replace(",", ".", $this->total);
+       $this->total = (string)$this->total;
+       $this->pedido = $this->rs_grid->fields[7] ;  
+       $this->pedido = (string)$this->pedido;
+       $this->idfacven = $this->rs_grid->fields[8] ;  
+       $this->idfacven = (string)$this->idfacven;
+       $this->numfacven = $this->rs_grid->fields[9] ;  
+       $this->numfacven = (string)$this->numfacven;
+       $this->fechavenc = $this->rs_grid->fields[10] ;  
+       $this->subtotal = $this->rs_grid->fields[11] ;  
+       $this->subtotal =  str_replace(",", ".", $this->subtotal);
+       $this->subtotal = (string)$this->subtotal;
+       $this->valoriva = $this->rs_grid->fields[12] ;  
+       $this->valoriva =  str_replace(",", ".", $this->valoriva);
+       $this->valoriva = (string)$this->valoriva;
+       $this->pagada = $this->rs_grid->fields[13] ;  
+       $this->asentada = $this->rs_grid->fields[14] ;  
+       $this->asentada = (string)$this->asentada;
+       $this->observaciones = $this->rs_grid->fields[15] ;  
+       $this->saldo = $this->rs_grid->fields[16] ;  
+       $this->saldo =  str_replace(",", ".", $this->saldo);
+       $this->saldo = (string)$this->saldo;
+       $this->adicional = $this->rs_grid->fields[17] ;  
+       $this->adicional =  str_replace(",", ".", $this->adicional);
+       $this->adicional = (string)$this->adicional;
+       $this->adicional2 = $this->rs_grid->fields[18] ;  
+       $this->adicional2 = (string)$this->adicional2;
+       $this->adicional3 = $this->rs_grid->fields[19] ;  
+       $this->adicional3 = (string)$this->adicional3;
+       $this->resolucion = $this->rs_grid->fields[20] ;  
+       $this->resolucion = (string)$this->resolucion;
+       $this->vendedor = $this->rs_grid->fields[21] ;  
+       $this->vendedor = (string)$this->vendedor;
+       $this->creado = $this->rs_grid->fields[22] ;  
+       $this->editado = $this->rs_grid->fields[23] ;  
+       $this->usuario_crea = $this->rs_grid->fields[24] ;  
+       $this->usuario_crea = (string)$this->usuario_crea;
+       $this->inicio = $this->rs_grid->fields[25] ;  
+       $this->fin = $this->rs_grid->fields[26] ;  
+       $this->banco = $this->rs_grid->fields[27] ;  
+       $this->banco = (string)$this->banco;
+       $this->dias_decredito = $this->rs_grid->fields[28] ;  
+       $this->dias_decredito = (string)$this->dias_decredito;
+       $this->cod_cuenta = $this->rs_grid->fields[29] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->qr_base64 = "";  
+           if (is_file($this->rs_grid->fields[30])) 
+           { 
+               $this->qr_base64 = file_get_contents($this->rs_grid->fields[30]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->qr_base64 = $this->Db->BlobDecode($this->rs_grid->fields[30]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->qr_base64 = $this->Db->BlobDecode($this->rs_grid->fields[30]) ;  
+       } 
+       else 
+       { 
+           $this->qr_base64 = $this->rs_grid->fields[30] ;  
+       } 
+       $this->fecha_validacion = $this->rs_grid->fields[31] ;  
+       $this->cufe = $this->rs_grid->fields[32] ;  
+       $this->estado = $this->rs_grid->fields[33] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->enlacepdf = "";  
+           if (is_file($this->rs_grid->fields[34])) 
+           { 
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[34]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[34]) ;  
+       } 
+       else 
+       { 
+           $this->enlacepdf = $this->rs_grid->fields[34] ;  
+       } 
+       $this->id_trans_fe = $this->rs_grid->fields[35] ;  
+       $this->nomcli = $this->rs_grid->fields[36] ;  
+       $this->si_electronica = $this->rs_grid->fields[37] ;  
+       $this->nombre_cliente = $this->rs_grid->fields[38] ;  
+       $this->celular_ws = $this->rs_grid->fields[39] ;  
+       $this->dircliente = $this->rs_grid->fields[40] ;  
+       $this->dircliente = (string)$this->dircliente;
+       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
+       $this->id_clasificacion = (string)$this->id_clasificacion;
+       $this->fecha_pago = $this->rs_grid->fields[42] ;  
+       $this->fec_pago = $this->rs_grid->fields[43] ;  
+       $this->numfe = $this->rs_grid->fields[44] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+       { 
+           if (!empty($this->qr_base64))
+           { 
+               $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
+           }
+           if (!empty($this->enlacepdf))
+           { 
+               $this->enlacepdf = $this->Db->BlobDecode($this->enlacepdf, false, true, "BLOB");
+           }
+       }
+      $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  if(empty($this->fec_pago ))
+{
+	$vmensaje = date("d-m-Y H:i:s")." Tiene una factura pendiente por pagar de FACILWEB, si ya pagó por favor ignore el mensaje y/o haga llegar el soporte de pago al correo info@facilweb.com.co o al WhatsApp 3114485310 - 320 9481569. Para ver la factura abra el siguiente enlace: https://www.facilwebnube.com/facilweb/facturafe/?id=".$this->idfacven ;
+	
+	$vsql ="select t.celular_notificafe,t.nombres from terceros t inner join facturaven f on f.idcli=t.idtercero where f.idfacven='".$this->idfacven ."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vCN = array();
+      $this->vcn = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vCN[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vcn[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vCN = false;
+          $this->vCN_erro = $this->Db->ErrorMsg();
+          $this->vcn = false;
+          $this->vcn_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vcn[0][0]))
+	{
+
+		if(!empty($this->vcn[0][0]))
+		{
+			$vcel = trim($this->vcn[0][0]);
+			
+			if(strlen($vcel)==10)
+			{
+				$curl = curl_init();
+
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => 'https://api103.hablame.co/api/sms/v3/send/priority',
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => '',
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 0,
+				  CURLOPT_FOLLOWLOCATION => true,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => 'POST',
+				  CURLOPT_POSTFIELDS =>'{
+					"toNumber":"57'.$vcel.'",
+					"sms": "'.$vmensaje.'",
+					"flash":"",
+					"sc":"",
+					"request_dlvr_rcpt":""
+				}',
+				  CURLOPT_HTTPHEADER => array(
+					'account: 10014120',
+					'apiKey: qBCuHvMtf8L7vGSRCgJ3t32ECXr1dk',
+					'token: a9b759ec32a0b10156b97f824a1fc7c9',
+					'Content-Type: application/json'
+				  ),
+				));
+
+				$response = curl_exec($curl);
+				$response = json_decode($response);
+
+
+				curl_close($curl);
+
+				if(isset($response->status))
+				{
+					if($response->status=="1x000")
+					{
+						echo "<div style='padding:10px;border-radius:5px;color:white;background:#61678c;'>Mensaje enviado con éxito del cliente ".$this->vcn[0][1]." y la factura: ".$this->numero2 .", celular: ".$vcel."</div><br>";
+					}
+					else
+					{
+						echo "<div style='padding:10px;border-radius:5px;color:white;background:#d50011;'>No se pudo enviar el mensaje del cliente ".$this->vcn[0][1]." y la factura: ".$this->numero2 .", celular: ".$vcel."</div><br>";
+						echo $response."<br><br>";
+					}
+				}
+				else
+				{
+					echo "<div style='padding:10px;border-radius:5px;color:white;background:#d50011;'>Hubo un error al enviar el mensaje del cliente ".$this->vcn[0][1]." y la factura: ".$this->numero2 ."</div><br>";
+					echo $response."<br><br>";
+				}
+			}
+			else
+			{
+				echo "<div style='padding:10px;border-radius:5px;color:white;background:#d50011;'>El número de notificación del cliente ".$this->vcn[0][1]." y la factura: ".$this->numero2 ." debe ser un número celular: ".$vcel."</div><br>";
+			}
+		}
+		else
+		{
+			echo "<div style='padding:10px;border-radius:5px;color:white;background:#d50011;'>El número de notificación del cliente ".$this->vcn[0][1]." y la factura: ".$this->numero2 ." está vacio.</div><br>";
+		}
+	}
+	else
+	{
+		echo "<div style='padding:10px;border-radius:5px;color:white;background:#d50011;'>No se encontró número de notificacion para la factura: ".$this->numero2 .".</div><br>";
+	}
+}
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
+    }  
+    $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
+  
+$_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off'; 
+}  
+    $this->NM_buffer = ob_get_contents();
+    if (!empty($this->NM_buffer))
+    {
+        ob_end_flush();
+    }
+?>
+      </td></tr><tr><td align="center">
+      <form name="F4" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value="volta_grid"/>
+      <input type=hidden name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page);?>"/>
+<?php
+    if (!empty($this->NM_buffer))
+    {
+        echo "<input type=submit name=\"nmgp_bok\" value=\"" . $this->Ini->Nm_lang['lang_btns_cfrm'] . "\"/>";
+        echo "</form>";
+    }
+    else
+    {
+        echo "</form>";
+        echo "<script type=\"text/javascript\">";
+        echo "document.F4.submit();";
+        echo "</script>";
+    }
+?>
       </td></tr></table>
       </body>
       </html>
@@ -14510,15 +14912,15 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -18559,6 +18961,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
    {
        $_SESSION['gIdfac'] = $gIdfac;
    }
+   if (isset($gnit)) 
+   {
+       $_SESSION['gnit'] = $gnit;
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -18709,6 +19115,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
            {
                $_SESSION['gIdfac'] = $gIdfac;
                nm_limpa_str_grid_facturaven_pos($_SESSION["gIdfac"]);
+           }
+           if (isset($gnit)) 
+           {
+               $_SESSION['gnit'] = $gnit;
+               nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -19036,6 +19447,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
        if (!isset($_SESSION["gIdfac"])) 
        {
            $_SESSION["gIdfac"] = "";
+       }
+       if (isset($_POST["gnit"])) 
+       {
+           $_SESSION["gnit"] = $_POST["gnit"];
+           nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
+       }
+       if (isset($_GET["gnit"])) 
+       {
+           $_SESSION["gnit"] = $_GET["gnit"];
+           nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
+       }
+       if (!isset($_SESSION["gnit"])) 
+       {
+           $_SESSION["gnit"] = "";
        }
        if (isset($nmgp_lig_edit_lapis)) 
        {

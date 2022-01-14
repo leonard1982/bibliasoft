@@ -66,7 +66,7 @@ sajax_show_javascript();
     {
       document.getElementById("id_debug_window").style.display = "";
       document.getElementById("id_debug_text").innerHTML = scAjaxFormatDebug(oResp["htmOutput"]) + document.getElementById("id_debug_text").innerHTML;
-      scCenterElement(document.getElementById("id_debug_window"));
+      //scCenterElement(document.getElementById("id_debug_window"));
     }
   } // scAjaxShowDebug
 
@@ -339,11 +339,24 @@ sajax_show_javascript();
 
   function scAjaxCalendarReload()
   {
-    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"])
+    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"] && typeof self.parent.calendar_reload == "function")
     {
+<?php
+if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && isset($_SESSION['scriptcase']['display_mobile']) && $_SESSION['scriptcase']['display_mobile']) {
+?>
       self.parent.calendar_reload();
       self.parent.tb_remove();
+<?php
+} else {
+?>
+      self.parent.calendar_reload();
+      self.parent.tb_remove();
+<?php
+}
+?>
+      return true;
     }
+    return false;
   } // scCalendarReload
 
   function scAjaxUpdateErrors(sType)
@@ -5623,6 +5636,487 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_terceros_mob_validate_puc_retefuente_servicios_prov_cb
 
+  // ---------- Validate archivo_cedula
+  function do_ajax_terceros_mob_validate_archivo_cedula()
+  {
+    var nomeCampo_archivo_cedula = "archivo_cedula";
+    var var_archivo_cedula = scAjaxGetFieldText(nomeCampo_archivo_cedula);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_archivo_cedula(var_archivo_cedula, var_script_case_init, do_ajax_terceros_mob_validate_archivo_cedula_cb);
+  } // do_ajax_terceros_mob_validate_archivo_cedula
+
+  function do_ajax_terceros_mob_validate_archivo_cedula_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "archivo_cedula";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_archivo_cedula_cb
+
+  // ---------- Validate archivo_rut
+  function do_ajax_terceros_mob_validate_archivo_rut()
+  {
+    var nomeCampo_archivo_rut = "archivo_rut";
+    var var_archivo_rut = scAjaxGetFieldText(nomeCampo_archivo_rut);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_archivo_rut(var_archivo_rut, var_script_case_init, do_ajax_terceros_mob_validate_archivo_rut_cb);
+  } // do_ajax_terceros_mob_validate_archivo_rut
+
+  function do_ajax_terceros_mob_validate_archivo_rut_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "archivo_rut";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_archivo_rut_cb
+
+  // ---------- Validate archivo_nit
+  function do_ajax_terceros_mob_validate_archivo_nit()
+  {
+    var nomeCampo_archivo_nit = "archivo_nit";
+    var var_archivo_nit = scAjaxGetFieldText(nomeCampo_archivo_nit);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_archivo_nit(var_archivo_nit, var_script_case_init, do_ajax_terceros_mob_validate_archivo_nit_cb);
+  } // do_ajax_terceros_mob_validate_archivo_nit
+
+  function do_ajax_terceros_mob_validate_archivo_nit_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "archivo_nit";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_archivo_nit_cb
+
+  // ---------- Validate archivo_pago
+  function do_ajax_terceros_mob_validate_archivo_pago()
+  {
+    var nomeCampo_archivo_pago = "archivo_pago";
+    var var_archivo_pago = scAjaxGetFieldText(nomeCampo_archivo_pago);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_archivo_pago(var_archivo_pago, var_script_case_init, do_ajax_terceros_mob_validate_archivo_pago_cb);
+  } // do_ajax_terceros_mob_validate_archivo_pago
+
+  function do_ajax_terceros_mob_validate_archivo_pago_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "archivo_pago";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_archivo_pago_cb
+
+  // ---------- Validate id_plan
+  function do_ajax_terceros_mob_validate_id_plan()
+  {
+    var nomeCampo_id_plan = "id_plan";
+    var var_id_plan = scAjaxGetFieldSelect(nomeCampo_id_plan);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_id_plan(var_id_plan, var_script_case_init, do_ajax_terceros_mob_validate_id_plan_cb);
+  } // do_ajax_terceros_mob_validate_id_plan
+
+  function do_ajax_terceros_mob_validate_id_plan_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_plan";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_id_plan_cb
+
+  // ---------- Validate valor_plan
+  function do_ajax_terceros_mob_validate_valor_plan()
+  {
+    var nomeCampo_valor_plan = "valor_plan";
+    var var_valor_plan = scAjaxGetFieldText(nomeCampo_valor_plan);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_valor_plan(var_valor_plan, var_script_case_init, do_ajax_terceros_mob_validate_valor_plan_cb);
+  } // do_ajax_terceros_mob_validate_valor_plan
+
+  function do_ajax_terceros_mob_validate_valor_plan_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "valor_plan";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_valor_plan_cb
+
+  // ---------- Validate fecha_registro_fe
+  function do_ajax_terceros_mob_validate_fecha_registro_fe()
+  {
+    var nomeCampo_fecha_registro_fe = "fecha_registro_fe";
+    var var_fecha_registro_fe = scAjaxGetFieldHidden(nomeCampo_fecha_registro_fe);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_fecha_registro_fe(var_fecha_registro_fe, var_script_case_init, do_ajax_terceros_mob_validate_fecha_registro_fe_cb);
+  } // do_ajax_terceros_mob_validate_fecha_registro_fe
+
+  function do_ajax_terceros_mob_validate_fecha_registro_fe_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "fecha_registro_fe";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_fecha_registro_fe_cb
+
+  // ---------- Validate nombre_contador
+  function do_ajax_terceros_mob_validate_nombre_contador()
+  {
+    var nomeCampo_nombre_contador = "nombre_contador";
+    var var_nombre_contador = scAjaxGetFieldText(nomeCampo_nombre_contador);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_nombre_contador(var_nombre_contador, var_script_case_init, do_ajax_terceros_mob_validate_nombre_contador_cb);
+  } // do_ajax_terceros_mob_validate_nombre_contador
+
+  function do_ajax_terceros_mob_validate_nombre_contador_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "nombre_contador";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_nombre_contador_cb
+
+  // ---------- Validate estado
+  function do_ajax_terceros_mob_validate_estado()
+  {
+    var nomeCampo_estado = "estado";
+    var var_estado = scAjaxGetFieldSelect(nomeCampo_estado);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_estado(var_estado, var_script_case_init, do_ajax_terceros_mob_validate_estado_cb);
+  } // do_ajax_terceros_mob_validate_estado
+
+  function do_ajax_terceros_mob_validate_estado_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "estado";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_estado_cb
+
+  // ---------- Validate si_nomina
+  function do_ajax_terceros_mob_validate_si_nomina()
+  {
+    var nomeCampo_si_nomina = "si_nomina";
+    var var_si_nomina = scAjaxGetFieldCheckbox(nomeCampo_si_nomina, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_si_nomina(var_si_nomina, var_script_case_init, do_ajax_terceros_mob_validate_si_nomina_cb);
+  } // do_ajax_terceros_mob_validate_si_nomina
+
+  function do_ajax_terceros_mob_validate_si_nomina_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "si_nomina";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_si_nomina_cb
+
+  // ---------- Validate n_trabajadores
+  function do_ajax_terceros_mob_validate_n_trabajadores()
+  {
+    var nomeCampo_n_trabajadores = "n_trabajadores";
+    var var_n_trabajadores = scAjaxGetFieldText(nomeCampo_n_trabajadores);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_n_trabajadores(var_n_trabajadores, var_script_case_init, do_ajax_terceros_mob_validate_n_trabajadores_cb);
+  } // do_ajax_terceros_mob_validate_n_trabajadores
+
+  function do_ajax_terceros_mob_validate_n_trabajadores_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "n_trabajadores";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_n_trabajadores_cb
+
+  // ---------- Validate si_factura_electronica
+  function do_ajax_terceros_mob_validate_si_factura_electronica()
+  {
+    var nomeCampo_si_factura_electronica = "si_factura_electronica";
+    var var_si_factura_electronica = scAjaxGetFieldCheckbox(nomeCampo_si_factura_electronica, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_si_factura_electronica(var_si_factura_electronica, var_script_case_init, do_ajax_terceros_mob_validate_si_factura_electronica_cb);
+  } // do_ajax_terceros_mob_validate_si_factura_electronica
+
+  function do_ajax_terceros_mob_validate_si_factura_electronica_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "si_factura_electronica";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_si_factura_electronica_cb
+
+  // ---------- Validate nombre_empresa_bd
+  function do_ajax_terceros_mob_validate_nombre_empresa_bd()
+  {
+    var nomeCampo_nombre_empresa_bd = "nombre_empresa_bd";
+    var var_nombre_empresa_bd = scAjaxGetFieldText(nomeCampo_nombre_empresa_bd);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_mob_validate_nombre_empresa_bd(var_nombre_empresa_bd, var_script_case_init, do_ajax_terceros_mob_validate_nombre_empresa_bd_cb);
+  } // do_ajax_terceros_mob_validate_nombre_empresa_bd
+
+  function do_ajax_terceros_mob_validate_nombre_empresa_bd_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "nombre_empresa_bd";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_mob_validate_nombre_empresa_bd_cb
+
   // ---------- Validate archivos
   function do_ajax_terceros_mob_validate_archivos()
   {
@@ -7029,11 +7523,40 @@ function scJs_sweetalert_params(params) {
     var var_puc_auxiliar_proveedores = scAjaxGetFieldText("puc_auxiliar_proveedores");
     var var_puc_retefuente_compras = scAjaxGetFieldText("puc_retefuente_compras");
     var var_puc_retefuente_servicios_prov = scAjaxGetFieldText("puc_retefuente_servicios_prov");
+    var var_archivo_cedula = scAjaxGetFieldText("archivo_cedula");
+    var var_archivo_rut = scAjaxGetFieldText("archivo_rut");
+    var var_archivo_nit = scAjaxGetFieldText("archivo_nit");
+    var var_archivo_pago = scAjaxGetFieldText("archivo_pago");
+    var var_id_plan = scAjaxGetFieldSelect("id_plan");
+    var var_valor_plan = scAjaxGetFieldText("valor_plan");
+    var var_fecha_registro_fe = scAjaxGetFieldHidden("fecha_registro_fe");
+    var var_nombre_contador = scAjaxGetFieldText("nombre_contador");
+    var var_estado = scAjaxGetFieldSelect("estado");
+    var var_si_nomina = scAjaxGetFieldCheckbox("si_nomina", ";");
+    var var_n_trabajadores = scAjaxGetFieldText("n_trabajadores");
+    var var_si_factura_electronica = scAjaxGetFieldCheckbox("si_factura_electronica", ";");
+    var var_nombre_empresa_bd = scAjaxGetFieldText("nombre_empresa_bd");
     var var_es_restaurante = scAjaxGetFieldCheckbox("es_restaurante", ";");
     var var_porcentaje_propina_sugerida = scAjaxGetFieldText("porcentaje_propina_sugerida");
     var var_imagenter_ul_name = scAjaxSpecCharProtect(document.F1.imagenter_ul_name.value);//.replace(/[+]/g, "__NM_PLUS__");
     var var_imagenter_ul_type = document.F1.imagenter_ul_type.value;
+    var var_archivo_cedula_ul_name = scAjaxSpecCharProtect(document.F1.archivo_cedula_ul_name.value);//.replace(/[+]/g, "__NM_PLUS__");
+    var var_archivo_cedula_ul_type = document.F1.archivo_cedula_ul_type.value;
+    var var_archivo_rut_ul_name = scAjaxSpecCharProtect(document.F1.archivo_rut_ul_name.value);//.replace(/[+]/g, "__NM_PLUS__");
+    var var_archivo_rut_ul_type = document.F1.archivo_rut_ul_type.value;
+    var var_archivo_nit_ul_name = scAjaxSpecCharProtect(document.F1.archivo_nit_ul_name.value);//.replace(/[+]/g, "__NM_PLUS__");
+    var var_archivo_nit_ul_type = document.F1.archivo_nit_ul_type.value;
+    var var_archivo_pago_ul_name = scAjaxSpecCharProtect(document.F1.archivo_pago_ul_name.value);//.replace(/[+]/g, "__NM_PLUS__");
+    var var_archivo_pago_ul_type = document.F1.archivo_pago_ul_type.value;
     var var_imagenter_limpa = document.F1.imagenter_limpa.checked ? "S" : "N";
+    var var_archivo_cedula_salva = scAjaxSpecCharProtect(document.F1.archivo_cedula_salva.value);//.replace(/[+]/g, "__NM_PLUS__");
+    var var_archivo_cedula_limpa = document.F1.archivo_cedula_limpa.checked ? "S" : "N";
+    var var_archivo_rut_salva = scAjaxSpecCharProtect(document.F1.archivo_rut_salva.value);//.replace(/[+]/g, "__NM_PLUS__");
+    var var_archivo_rut_limpa = document.F1.archivo_rut_limpa.checked ? "S" : "N";
+    var var_archivo_nit_salva = scAjaxSpecCharProtect(document.F1.archivo_nit_salva.value);//.replace(/[+]/g, "__NM_PLUS__");
+    var var_archivo_nit_limpa = document.F1.archivo_nit_limpa.checked ? "S" : "N";
+    var var_archivo_pago_salva = scAjaxSpecCharProtect(document.F1.archivo_pago_salva.value);//.replace(/[+]/g, "__NM_PLUS__");
+    var var_archivo_pago_limpa = document.F1.archivo_pago_limpa.checked ? "S" : "N";
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -7043,14 +7566,13 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_terceros_mob_submit_form(var_tipo, var_regimen, var_tipo_documento, var_documento, var_dv, var_imagenter, var_codigo_tercero, var_sexo, var_notificar, var_nombre1, var_nombre2, var_apellido1, var_apellido2, var_tel_cel, var_urlmail, var_idtercero, var_r_social, var_nombres, var_nombre_comercil, var_representante, var_direccion, var_departamento, var_idmuni, var_ciudad, var_codigo_postal, var_observaciones, var_lenguaje, var_c_postal, var_correo_notificafe, var_celular_notificafe, var_cliente, var_proveedor, var_empleado, var_es_tecnico, var_activo, var_credito, var_cupo, var_cupodis, var_dias_credito, var_dias_mora, var_efec_retencion, var_listaprecios, var_loatiende, var_autorizado, var_relleno2, var_nacimiento, var_detalle_tributario, var_responsabilidad_fiscal, var_ciiu, var_sucur_cliente, var_sucursales, var_fechault, var_saldo, var_afiliacion, var_es_cajero, var_cupo_vendedor, var_autoretenedor, var_creditoprov, var_dias, var_url, var_contacto, var_telefonos_prov, var_email, var_fechultcomp, var_saldoapagar, var_codigo_ter, var_zona_clientes, var_clasificacion_clientes, var_puc_auxiliar_deudores, var_puc_retefuente_ventas, var_puc_retefuente_servicios_clie, var_puc_auxiliar_proveedores, var_puc_retefuente_compras, var_puc_retefuente_servicios_prov, var_es_restaurante, var_porcentaje_propina_sugerida, var_imagenter_ul_name, var_imagenter_ul_type, var_imagenter_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_terceros_mob_submit_form_cb);
+    x_ajax_terceros_mob_submit_form(var_tipo, var_regimen, var_tipo_documento, var_documento, var_dv, var_imagenter, var_codigo_tercero, var_sexo, var_notificar, var_nombre1, var_nombre2, var_apellido1, var_apellido2, var_tel_cel, var_urlmail, var_idtercero, var_r_social, var_nombres, var_nombre_comercil, var_representante, var_direccion, var_departamento, var_idmuni, var_ciudad, var_codigo_postal, var_observaciones, var_lenguaje, var_c_postal, var_correo_notificafe, var_celular_notificafe, var_cliente, var_proveedor, var_empleado, var_es_tecnico, var_activo, var_credito, var_cupo, var_cupodis, var_dias_credito, var_dias_mora, var_efec_retencion, var_listaprecios, var_loatiende, var_autorizado, var_relleno2, var_nacimiento, var_detalle_tributario, var_responsabilidad_fiscal, var_ciiu, var_sucur_cliente, var_sucursales, var_fechault, var_saldo, var_afiliacion, var_es_cajero, var_cupo_vendedor, var_autoretenedor, var_creditoprov, var_dias, var_url, var_contacto, var_telefonos_prov, var_email, var_fechultcomp, var_saldoapagar, var_codigo_ter, var_zona_clientes, var_clasificacion_clientes, var_puc_auxiliar_deudores, var_puc_retefuente_ventas, var_puc_retefuente_servicios_clie, var_puc_auxiliar_proveedores, var_puc_retefuente_compras, var_puc_retefuente_servicios_prov, var_archivo_cedula, var_archivo_rut, var_archivo_nit, var_archivo_pago, var_id_plan, var_valor_plan, var_fecha_registro_fe, var_nombre_contador, var_estado, var_si_nomina, var_n_trabajadores, var_si_factura_electronica, var_nombre_empresa_bd, var_es_restaurante, var_porcentaje_propina_sugerida, var_imagenter_ul_name, var_imagenter_ul_type, var_archivo_cedula_ul_name, var_archivo_cedula_ul_type, var_archivo_rut_ul_name, var_archivo_rut_ul_type, var_archivo_nit_ul_name, var_archivo_nit_ul_type, var_archivo_pago_ul_name, var_archivo_pago_ul_type, var_imagenter_limpa, var_archivo_cedula_salva, var_archivo_cedula_limpa, var_archivo_rut_salva, var_archivo_rut_limpa, var_archivo_nit_salva, var_archivo_nit_limpa, var_archivo_pago_salva, var_archivo_pago_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_terceros_mob_submit_form_cb);
   } // do_ajax_terceros_mob_submit_form
 
   function do_ajax_terceros_mob_submit_form_cb(sResp)
   {
     scAjaxProcOff();
     oResp = scAjaxResponse(sResp);
-    scAjaxCalendarReload();
     scAjaxUpdateErrors("valid");
     sAppErrors = scAjaxListErrors(true);
     if ("" == sAppErrors || "menu_link" == document.F1.nmgp_opcao.value)
@@ -7142,6 +7664,19 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("puc_auxiliar_proveedores");
       scAjaxHideErrorDisplay("puc_retefuente_compras");
       scAjaxHideErrorDisplay("puc_retefuente_servicios_prov");
+      scAjaxHideErrorDisplay("archivo_cedula");
+      scAjaxHideErrorDisplay("archivo_rut");
+      scAjaxHideErrorDisplay("archivo_nit");
+      scAjaxHideErrorDisplay("archivo_pago");
+      scAjaxHideErrorDisplay("id_plan");
+      scAjaxHideErrorDisplay("valor_plan");
+      scAjaxHideErrorDisplay("fecha_registro_fe");
+      scAjaxHideErrorDisplay("nombre_contador");
+      scAjaxHideErrorDisplay("estado");
+      scAjaxHideErrorDisplay("si_nomina");
+      scAjaxHideErrorDisplay("n_trabajadores");
+      scAjaxHideErrorDisplay("si_factura_electronica");
+      scAjaxHideErrorDisplay("nombre_empresa_bd");
       scAjaxHideErrorDisplay("archivos");
       scAjaxHideErrorDisplay("es_restaurante");
       scAjaxHideErrorDisplay("porcentaje_propina_sugerida");
@@ -7172,6 +7707,42 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboar
       {
         var oImgTemp = {0: {"value" : ""}};
         scAjaxSetFieldImage("imagenter", oImgTemp, "", "", "", "N");
+      }
+      if (document.F1.archivo_cedula_limpa && document.F1.archivo_cedula_limpa.checked)
+      {
+        var oImgTemp = {0: {"value" : ""}};
+        scAjaxSetFieldDocument("archivo_cedula", oImgTemp, "", "");
+      }
+      else if (document.getElementById("id_ajax_doc_archivo_cedula") && "" != document.getElementById("id_ajax_doc_archivo_cedula").innerHTML)
+      {
+        document.getElementById("id_ajax_doc_archivo_cedula").style.display = "";
+      }
+      if (document.F1.archivo_rut_limpa && document.F1.archivo_rut_limpa.checked)
+      {
+        var oImgTemp = {0: {"value" : ""}};
+        scAjaxSetFieldDocument("archivo_rut", oImgTemp, "", "");
+      }
+      else if (document.getElementById("id_ajax_doc_archivo_rut") && "" != document.getElementById("id_ajax_doc_archivo_rut").innerHTML)
+      {
+        document.getElementById("id_ajax_doc_archivo_rut").style.display = "";
+      }
+      if (document.F1.archivo_nit_limpa && document.F1.archivo_nit_limpa.checked)
+      {
+        var oImgTemp = {0: {"value" : ""}};
+        scAjaxSetFieldDocument("archivo_nit", oImgTemp, "", "");
+      }
+      else if (document.getElementById("id_ajax_doc_archivo_nit") && "" != document.getElementById("id_ajax_doc_archivo_nit").innerHTML)
+      {
+        document.getElementById("id_ajax_doc_archivo_nit").style.display = "";
+      }
+      if (document.F1.archivo_pago_limpa && document.F1.archivo_pago_limpa.checked)
+      {
+        var oImgTemp = {0: {"value" : ""}};
+        scAjaxSetFieldDocument("archivo_pago", oImgTemp, "", "");
+      }
+      else if (document.getElementById("id_ajax_doc_archivo_pago") && "" != document.getElementById("id_ajax_doc_archivo_pago").innerHTML)
+      {
+        document.getElementById("id_ajax_doc_archivo_pago").style.display = "";
       }
     document.F1.imagenter_ul_name.value = '';
     document.F1.imagenter_ul_type.value = '';
@@ -7285,6 +7856,19 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboar
     scAjaxHideErrorDisplay("puc_auxiliar_proveedores");
     scAjaxHideErrorDisplay("puc_retefuente_compras");
     scAjaxHideErrorDisplay("puc_retefuente_servicios_prov");
+    scAjaxHideErrorDisplay("archivo_cedula");
+    scAjaxHideErrorDisplay("archivo_rut");
+    scAjaxHideErrorDisplay("archivo_nit");
+    scAjaxHideErrorDisplay("archivo_pago");
+    scAjaxHideErrorDisplay("id_plan");
+    scAjaxHideErrorDisplay("valor_plan");
+    scAjaxHideErrorDisplay("fecha_registro_fe");
+    scAjaxHideErrorDisplay("nombre_contador");
+    scAjaxHideErrorDisplay("estado");
+    scAjaxHideErrorDisplay("si_nomina");
+    scAjaxHideErrorDisplay("n_trabajadores");
+    scAjaxHideErrorDisplay("si_factura_electronica");
+    scAjaxHideErrorDisplay("nombre_empresa_bd");
     scAjaxHideErrorDisplay("archivos");
     scAjaxHideErrorDisplay("es_restaurante");
     scAjaxHideErrorDisplay("porcentaje_propina_sugerida");
@@ -7381,6 +7965,7 @@ if ($this->Embutida_form)
     {
       sc_form_onload();
     }
+    SC_btn_grp_text();
     scAjaxProcOff();
   } // do_ajax_terceros_mob_navigate_form_cb_after_alert
   function sc_hide_terceros_mob_form()
@@ -7545,9 +8130,22 @@ if ($this->Embutida_form)
   ajax_field_list[71] = "puc_auxiliar_proveedores";
   ajax_field_list[72] = "puc_retefuente_compras";
   ajax_field_list[73] = "puc_retefuente_servicios_prov";
-  ajax_field_list[74] = "archivos";
-  ajax_field_list[75] = "es_restaurante";
-  ajax_field_list[76] = "porcentaje_propina_sugerida";
+  ajax_field_list[74] = "archivo_cedula";
+  ajax_field_list[75] = "archivo_rut";
+  ajax_field_list[76] = "archivo_nit";
+  ajax_field_list[77] = "archivo_pago";
+  ajax_field_list[78] = "id_plan";
+  ajax_field_list[79] = "valor_plan";
+  ajax_field_list[80] = "fecha_registro_fe";
+  ajax_field_list[81] = "nombre_contador";
+  ajax_field_list[82] = "estado";
+  ajax_field_list[83] = "si_nomina";
+  ajax_field_list[84] = "n_trabajadores";
+  ajax_field_list[85] = "si_factura_electronica";
+  ajax_field_list[86] = "nombre_empresa_bd";
+  ajax_field_list[87] = "archivos";
+  ajax_field_list[88] = "es_restaurante";
+  ajax_field_list[89] = "porcentaje_propina_sugerida";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -7571,6 +8169,7 @@ if ($this->Embutida_form)
   ajax_block_list[18] = "18";
   ajax_block_list[19] = "19";
   ajax_block_list[20] = "20";
+  ajax_block_list[21] = "21";
 
   var ajax_error_list = {
     "tipo": {"label": "Tipo persona", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -7647,6 +8246,19 @@ if ($this->Embutida_form)
     "puc_auxiliar_proveedores": {"label": "PUC Auxiliar Proveedores", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "puc_retefuente_compras": {"label": "PUC Retefuente Compras", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "puc_retefuente_servicios_prov": {"label": "PUC Retefuente Servicios Prov", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "archivo_cedula": {"label": "Cédula", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "archivo_rut": {"label": "RUT", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "archivo_nit": {"label": "Cámara de Comercio", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "archivo_pago": {"label": "Archivos de Pago", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_plan": {"label": "Plan", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "valor_plan": {"label": "Valor Plan", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "fecha_registro_fe": {"label": "Fecha Registro Fe", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "nombre_contador": {"label": "Nombre Contador", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "estado": {"label": "Estado", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "si_nomina": {"label": "Nómina", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "n_trabajadores": {"label": "Número de Empleados", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "si_factura_electronica": {"label": "Factura Electrónica", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "nombre_empresa_bd": {"label": "Nombre Empresa BD", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "archivos": {"label": "", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "es_restaurante": {"label": "Utilizar en Restaurante", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "porcentaje_propina_sugerida": {"label": "% Propina Sugerida", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
@@ -7674,7 +8286,8 @@ if ($this->Embutida_form)
     "17": "hidden_bloco_17",
     "18": "hidden_bloco_18",
     "19": "hidden_bloco_19",
-    "20": "hidden_bloco_20"
+    "20": "hidden_bloco_20",
+    "21": "hidden_bloco_21"
   };
 
   var ajax_block_tab = {
@@ -7698,7 +8311,8 @@ if ($this->Embutida_form)
     "hidden_bloco_17": "",
     "hidden_bloco_18": "",
     "hidden_bloco_19": "",
-    "hidden_bloco_20": ""
+    "hidden_bloco_20": "",
+    "hidden_bloco_21": ""
   };
 
   var ajax_field_mult = {
@@ -7776,6 +8390,19 @@ if ($this->Embutida_form)
     "puc_auxiliar_proveedores": new Array(),
     "puc_retefuente_compras": new Array(),
     "puc_retefuente_servicios_prov": new Array(),
+    "archivo_cedula": new Array(),
+    "archivo_rut": new Array(),
+    "archivo_nit": new Array(),
+    "archivo_pago": new Array(),
+    "id_plan": new Array(),
+    "valor_plan": new Array(),
+    "fecha_registro_fe": new Array(),
+    "nombre_contador": new Array(),
+    "estado": new Array(),
+    "si_nomina": new Array(),
+    "n_trabajadores": new Array(),
+    "si_factura_electronica": new Array(),
+    "nombre_empresa_bd": new Array(),
     "archivos": new Array(),
     "es_restaurante": new Array(),
     "porcentaje_propina_sugerida": new Array()
@@ -7854,6 +8481,19 @@ if ($this->Embutida_form)
   ajax_field_mult["puc_auxiliar_proveedores"][1] = "puc_auxiliar_proveedores";
   ajax_field_mult["puc_retefuente_compras"][1] = "puc_retefuente_compras";
   ajax_field_mult["puc_retefuente_servicios_prov"][1] = "puc_retefuente_servicios_prov";
+  ajax_field_mult["archivo_cedula"][1] = "archivo_cedula";
+  ajax_field_mult["archivo_rut"][1] = "archivo_rut";
+  ajax_field_mult["archivo_nit"][1] = "archivo_nit";
+  ajax_field_mult["archivo_pago"][1] = "archivo_pago";
+  ajax_field_mult["id_plan"][1] = "id_plan";
+  ajax_field_mult["valor_plan"][1] = "valor_plan";
+  ajax_field_mult["fecha_registro_fe"][1] = "fecha_registro_fe";
+  ajax_field_mult["nombre_contador"][1] = "nombre_contador";
+  ajax_field_mult["estado"][1] = "estado";
+  ajax_field_mult["si_nomina"][1] = "si_nomina";
+  ajax_field_mult["n_trabajadores"][1] = "n_trabajadores";
+  ajax_field_mult["si_factura_electronica"][1] = "si_factura_electronica";
+  ajax_field_mult["nombre_empresa_bd"][1] = "nombre_empresa_bd";
   ajax_field_mult["archivos"][1] = "archivos";
   ajax_field_mult["es_restaurante"][1] = "es_restaurante";
   ajax_field_mult["porcentaje_propina_sugerida"][1] = "porcentaje_propina_sugerida";
@@ -7931,6 +8571,19 @@ if ($this->Embutida_form)
     "puc_auxiliar_proveedores": new Array("hidden_field_label_puc_auxiliar_proveedores", "hidden_field_data_puc_auxiliar_proveedores"),
     "puc_retefuente_compras": new Array("hidden_field_label_puc_retefuente_compras", "hidden_field_data_puc_retefuente_compras"),
     "puc_retefuente_servicios_prov": new Array("hidden_field_label_puc_retefuente_servicios_prov", "hidden_field_data_puc_retefuente_servicios_prov"),
+    "archivo_cedula": new Array("hidden_field_label_archivo_cedula", "hidden_field_data_archivo_cedula"),
+    "archivo_rut": new Array("hidden_field_label_archivo_rut", "hidden_field_data_archivo_rut"),
+    "archivo_nit": new Array("hidden_field_label_archivo_nit", "hidden_field_data_archivo_nit"),
+    "archivo_pago": new Array("hidden_field_label_archivo_pago", "hidden_field_data_archivo_pago"),
+    "id_plan": new Array("hidden_field_label_id_plan", "hidden_field_data_id_plan"),
+    "valor_plan": new Array("hidden_field_label_valor_plan", "hidden_field_data_valor_plan"),
+    "fecha_registro_fe": new Array("hidden_field_label_fecha_registro_fe", "hidden_field_data_fecha_registro_fe"),
+    "nombre_contador": new Array("hidden_field_label_nombre_contador", "hidden_field_data_nombre_contador"),
+    "estado": new Array("hidden_field_label_estado", "hidden_field_data_estado"),
+    "si_nomina": new Array("hidden_field_label_si_nomina", "hidden_field_data_si_nomina"),
+    "n_trabajadores": new Array("hidden_field_label_n_trabajadores", "hidden_field_data_n_trabajadores"),
+    "si_factura_electronica": new Array("hidden_field_label_si_factura_electronica", "hidden_field_data_si_factura_electronica"),
+    "nombre_empresa_bd": new Array("hidden_field_label_nombre_empresa_bd", "hidden_field_data_nombre_empresa_bd"),
     "archivos": new Array("hidden_field_label_archivos", "hidden_field_data_archivos"),
     "es_restaurante": new Array("hidden_field_label_es_restaurante", "hidden_field_data_es_restaurante"),
     "porcentaje_propina_sugerida": new Array("hidden_field_label_porcentaje_propina_sugerida", "hidden_field_data_porcentaje_propina_sugerida")
@@ -8011,6 +8664,19 @@ if ($this->Embutida_form)
     "puc_auxiliar_proveedores": "off",
     "puc_retefuente_compras": "off",
     "puc_retefuente_servicios_prov": "off",
+    "archivo_cedula": "off",
+    "archivo_rut": "off",
+    "archivo_nit": "off",
+    "archivo_pago": "off",
+    "id_plan": "off",
+    "valor_plan": "off",
+    "fecha_registro_fe": "off",
+    "nombre_contador": "off",
+    "estado": "off",
+    "si_nomina": "off",
+    "n_trabajadores": "off",
+    "si_factura_electronica": "off",
+    "nombre_empresa_bd": "off",
     "archivos": "off",
     "es_restaurante": "off",
     "porcentaje_propina_sugerida": "off"
@@ -9261,6 +9927,223 @@ if ($this->Embutida_form)
       return;
     }
     if ("puc_retefuente_servicios_prov" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("archivo_cedula" == sIndex)
+    {
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("archivo_rut" == sIndex)
+    {
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("archivo_nit" == sIndex)
+    {
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("archivo_pago" == sIndex)
+    {
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_plan" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("valor_plan" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("fecha_registro_fe" == sIndex)
+    {
+      scAjaxSetFieldLabel(sIndex, aValue);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("nombre_contador" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("estado" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("si_nomina" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("n_trabajadores" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("si_factura_electronica" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("nombre_empresa_bd" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);

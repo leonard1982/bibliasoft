@@ -1,0 +1,20 @@
+.css_servidor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_servidor_grid_line {vertical-align: top;text-align: left;}
+.css_puerto_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_puerto_grid_line {vertical-align: top;text-align: right;}
+.css_usuario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_usuario_grid_line {vertical-align: top;text-align: left;}
+.css_tls_ssl_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_tls_ssl_grid_line {vertical-align: top;text-align: left;}
+.css_activo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_activo_grid_line {vertical-align: top;text-align: left;}
+.css_id_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_id_grid_line {vertical-align: top;text-align: right;}
+.css_password_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_password_grid_line {vertical-align: top;text-align: left;}
+.css_correo_remitente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_correo_remitente_grid_line {vertical-align: top;text-align: left;}
+.css_creado_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_creado_grid_line {vertical-align: top;text-align: center;}
+.css_actualizado_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_actualizado_grid_line {vertical-align: top;text-align: center;}

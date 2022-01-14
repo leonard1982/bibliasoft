@@ -56,6 +56,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["fechaven" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["credito" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["dias_decredito" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_clasificacion" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idcli" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["dircliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["subtotal" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -67,7 +68,6 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["idfacven" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tipo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["detalle" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["id_clasificacion" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -99,6 +99,12 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["dias_decredito" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_clasificacion" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_clasificacion" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["idcli" + iSeqRow]["blur"]) {
@@ -167,12 +173,6 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["detalle" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["id_clasificacion" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["id_clasificacion" + iSeqRow]["change"]) {
-    return true;
-  }
   return false;
 } // scEventControl_active
 
@@ -190,13 +190,13 @@ function scEventControl_onFocus(oField, iSeq) {
   if ("credito" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
+  if ("id_clasificacion" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
   if ("idcli" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("dircliente" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["blur"] = false;
-  }
-  if ("id_clasificacion" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   scEventControl_data[fieldName]["change"] = false;
@@ -464,6 +464,7 @@ function displayChange_block_0(status) {
 	displayChange_field("fechaven", "", status);
 	displayChange_field("credito", "", status);
 	displayChange_field("dias_decredito", "", status);
+	displayChange_field("id_clasificacion", "", status);
 }
 
 function displayChange_block_1(status) {
@@ -487,7 +488,6 @@ function displayChange_block_3(status) {
 
 function displayChange_block_4(status) {
 	displayChange_field("detalle", "", status);
-	displayChange_field("id_clasificacion", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -496,6 +496,7 @@ function displayChange_row(row, status) {
 	displayChange_field_fechaven(row, status);
 	displayChange_field_credito(row, status);
 	displayChange_field_dias_decredito(row, status);
+	displayChange_field_id_clasificacion(row, status);
 	displayChange_field_idcli(row, status);
 	displayChange_field_dircliente(row, status);
 	displayChange_field_subtotal(row, status);
@@ -507,7 +508,6 @@ function displayChange_row(row, status) {
 	displayChange_field_idfacven(row, status);
 	displayChange_field_tipo(row, status);
 	displayChange_field_detalle(row, status);
-	displayChange_field_id_clasificacion(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -525,6 +525,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("dias_decredito" == field) {
 		displayChange_field_dias_decredito(row, status);
+	}
+	if ("id_clasificacion" == field) {
+		displayChange_field_id_clasificacion(row, status);
 	}
 	if ("idcli" == field) {
 		displayChange_field_idcli(row, status);
@@ -558,9 +561,6 @@ function displayChange_field(field, row, status) {
 	}
 	if ("detalle" == field) {
 		displayChange_field_detalle(row, status);
-	}
-	if ("id_clasificacion" == field) {
-		displayChange_field_id_clasificacion(row, status);
 	}
 }
 
@@ -601,6 +601,21 @@ function displayChange_field_credito(row, status) {
 }
 
 function displayChange_field_dias_decredito(row, status) {
+}
+
+function displayChange_field_id_clasificacion(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_clasificacion__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_clasificacion" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_clasificacion");
+	}
 }
 
 function displayChange_field_idcli(row, status) {
@@ -663,27 +678,12 @@ function displayChange_field_detalle(row, status) {
 	}
 }
 
-function displayChange_field_id_clasificacion(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_id_clasificacion__obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_id_clasificacion" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "id_clasificacion");
-	}
-}
-
 function scRecreateSelect2() {
 	displayChange_field_resolucion("all", "on");
 	displayChange_field_credito("all", "on");
+	displayChange_field_id_clasificacion("all", "on");
 	displayChange_field_idcli("all", "on");
 	displayChange_field_dircliente("all", "on");
-	displayChange_field_id_clasificacion("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -1339,14 +1339,14 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "credito" == specificField) {
     scJQSelect2Add_credito(seqRow);
   }
+  if (null == specificField || "id_clasificacion" == specificField) {
+    scJQSelect2Add_id_clasificacion(seqRow);
+  }
   if (null == specificField || "idcli" == specificField) {
     scJQSelect2Add_idcli(seqRow);
   }
   if (null == specificField || "dircliente" == specificField) {
     scJQSelect2Add_dircliente(seqRow);
-  }
-  if (null == specificField || "id_clasificacion" == specificField) {
-    scJQSelect2Add_id_clasificacion(seqRow);
   }
 } // scJQSelect2Add
 
@@ -1374,6 +1374,24 @@ function scJQSelect2Add_credito(seqRow) {
     {
       containerCssClass: 'css_credito_obj',
       dropdownCssClass: 'css_credito_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_clasificacion(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_clasificacion_obj" : "#id_sc_field_id_clasificacion" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_clasificacion_obj',
+      dropdownCssClass: 'css_id_clasificacion_obj',
       language: {
         noResults: function() {
           return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
@@ -1422,24 +1440,6 @@ function scJQSelect2Add_dircliente(seqRow) {
   );
 } // scJQSelect2Add
 
-function scJQSelect2Add_id_clasificacion(seqRow) {
-  var elemSelector = "all" == seqRow ? ".css_id_clasificacion_obj" : "#id_sc_field_id_clasificacion" + seqRow;
-  $(elemSelector).select2(
-    {
-      containerCssClass: 'css_id_clasificacion_obj',
-      dropdownCssClass: 'css_id_clasificacion_obj',
-      language: {
-        noResults: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
-        },
-        searching: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
-        }
-      }
-    }
-  );
-} // scJQSelect2Add
-
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -1451,9 +1451,9 @@ function scJQElementsAdd(iLine) {
   scJQSelect2Add(iLine);
   setTimeout(function () { if ('function' == typeof displayChange_field_resolucion) { displayChange_field_resolucion(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_credito) { displayChange_field_credito(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_clasificacion) { displayChange_field_id_clasificacion(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_idcli) { displayChange_field_idcli(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_dircliente) { displayChange_field_dircliente(iLine, "on"); } }, 150);
-  setTimeout(function () { if ('function' == typeof displayChange_field_id_clasificacion) { displayChange_field_id_clasificacion(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)

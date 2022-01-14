@@ -85,16 +85,16 @@ class grid_asientos_grid
    var $count_numero2;
    var $sum_numero2_valor;
    var $tipo;
+   var $prefijo;
+   var $numero;
    var $fecha;
-   var $numero2;
    var $nit;
    var $cuenta;
    var $tipocd;
    var $valor;
    var $observaciones;
+   var $numero2;
    var $id_asiento;
-   var $prefijo;
-   var $numero;
 //--- 
  function monta_grid($linhas = 0)
  {
@@ -474,17 +474,17 @@ class grid_asientos_grid
    $this->nmgp_botoes['reload'] = "on";
    $this->nmgp_botoes['btn_generar'] = "on";
    $this->Cmps_ord_def['tipo'] = " asc";
+   $this->Cmps_ord_def['prefijo'] = " asc";
+   $this->Cmps_ord_def['numero'] = " desc";
    $this->Cmps_ord_def['fecha'] = " desc";
-   $this->Cmps_ord_def['numero2'] = " asc";
-   $this->Cmps_ord_def["concat(prefijo,'/',numero)"] = "";
    $this->Cmps_ord_def['nit'] = " asc";
    $this->Cmps_ord_def['cuenta'] = " asc";
    $this->Cmps_ord_def['tipocd'] = " asc";
    $this->Cmps_ord_def['valor'] = " desc";
    $this->Cmps_ord_def['observaciones'] = " asc";
+   $this->Cmps_ord_def['numero2'] = " asc";
+   $this->Cmps_ord_def["concat(prefijo,'/',numero)"] = "";
    $this->Cmps_ord_def['id_asiento'] = " desc";
-   $this->Cmps_ord_def['prefijo'] = " asc";
-   $this->Cmps_ord_def['numero'] = " desc";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['btn_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
@@ -985,27 +985,27 @@ class grid_asientos_grid
 //----- 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT tipo, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, prefijo, numero, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT tipo, convert(char(23),fecha,121), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, prefijo, numero, convert(char(23),fecha,121), nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT tipo, EXTEND(fecha, YEAR TO DAY), concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, prefijo, numero, EXTEND(fecha, YEAR TO DAY), nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT tipo, fecha, concat(prefijo,'/',numero) as numero2, nit, cuenta, tipocd, valor, observaciones, id_asiento, prefijo, numero from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipo, prefijo, numero, fecha, nit, cuenta, tipocd, valor, observaciones, concat(prefijo,'/',numero) as numero2, id_asiento from " . $this->Ini->nm_tabela; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['where_resumo'])) 
@@ -1094,19 +1094,19 @@ class grid_asientos_grid
    else 
    { 
        $this->tipo = $this->rs_grid->fields[0] ;  
-       $this->fecha = $this->rs_grid->fields[1] ;  
-       $this->numero2 = $this->rs_grid->fields[2] ;  
-       $this->nit = $this->rs_grid->fields[3] ;  
-       $this->cuenta = $this->rs_grid->fields[4] ;  
-       $this->tipocd = $this->rs_grid->fields[5] ;  
-       $this->valor = $this->rs_grid->fields[6] ;  
+       $this->prefijo = $this->rs_grid->fields[1] ;  
+       $this->numero = $this->rs_grid->fields[2] ;  
+       $this->fecha = $this->rs_grid->fields[3] ;  
+       $this->nit = $this->rs_grid->fields[4] ;  
+       $this->cuenta = $this->rs_grid->fields[5] ;  
+       $this->tipocd = $this->rs_grid->fields[6] ;  
+       $this->valor = $this->rs_grid->fields[7] ;  
        $this->valor =  str_replace(",", ".", $this->valor);
        $this->valor = (string)$this->valor;
-       $this->observaciones = $this->rs_grid->fields[7] ;  
-       $this->id_asiento = $this->rs_grid->fields[8] ;  
+       $this->observaciones = $this->rs_grid->fields[8] ;  
+       $this->numero2 = $this->rs_grid->fields[9] ;  
+       $this->id_asiento = $this->rs_grid->fields[10] ;  
        $this->id_asiento = (string)$this->id_asiento;
-       $this->prefijo = $this->rs_grid->fields[9] ;  
-       $this->numero = $this->rs_grid->fields[10] ;  
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig']))
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1120,6 +1120,7 @@ class grid_asientos_grid
        if (!isset($this->cuenta)) { $this->cuenta = ""; }
        if (!isset($this->numero2)) { $this->numero2 = ""; }
        $this->arg_sum_tipo = " = " . $this->Db->qstr($this->tipo);
+       $this->arg_sum_prefijo = " = " . $this->Db->qstr($this->prefijo);
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_group_by")
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $cmp_gb => $resto)
@@ -1142,9 +1143,8 @@ class grid_asientos_grid
        {
            $this->arg_sum_fecha = " = " . $this->Db->qstr($this->fecha);
        }
-       $this->arg_sum_numero2 = " = " . $this->Db->qstr($this->numero2);
        $this->arg_sum_cuenta = " = " . $this->Db->qstr($this->cuenta);
-       $this->arg_sum_prefijo = " = " . $this->Db->qstr($this->prefijo);
+       $this->arg_sum_numero2 = " = " . $this->Db->qstr($this->numero2);
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
        $this->SC_sep_quebra = false;
@@ -1185,16 +1185,16 @@ class grid_asientos_grid
            $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['final']; 
            $this->rs_grid->MoveNext(); 
            $this->tipo = $this->rs_grid->fields[0] ;  
-           $this->fecha = $this->rs_grid->fields[1] ;  
-           $this->numero2 = $this->rs_grid->fields[2] ;  
-           $this->nit = $this->rs_grid->fields[3] ;  
-           $this->cuenta = $this->rs_grid->fields[4] ;  
-           $this->tipocd = $this->rs_grid->fields[5] ;  
-           $this->valor = $this->rs_grid->fields[6] ;  
-           $this->observaciones = $this->rs_grid->fields[7] ;  
-           $this->id_asiento = $this->rs_grid->fields[8] ;  
-           $this->prefijo = $this->rs_grid->fields[9] ;  
-           $this->numero = $this->rs_grid->fields[10] ;  
+           $this->prefijo = $this->rs_grid->fields[1] ;  
+           $this->numero = $this->rs_grid->fields[2] ;  
+           $this->fecha = $this->rs_grid->fields[3] ;  
+           $this->nit = $this->rs_grid->fields[4] ;  
+           $this->cuenta = $this->rs_grid->fields[5] ;  
+           $this->tipocd = $this->rs_grid->fields[6] ;  
+           $this->valor = $this->rs_grid->fields[7] ;  
+           $this->observaciones = $this->rs_grid->fields[8] ;  
+           $this->numero2 = $this->rs_grid->fields[9] ;  
+           $this->id_asiento = $this->rs_grid->fields[10] ;  
            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig']))
            {
                foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1452,27 +1452,6 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("     var sc_ajaxBordW = '" . $this->Ini->Border_w_ajax . "';\r\n");
            $nm_saida->saida("   </script>\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"../_lib/lib/js/jquery-3.6.0.min.js\"></script>\r\n");
-           if ($_SESSION['scriptcase']['proc_mobile'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) {  
-               $sc_app_data = json_encode([ 
-                   'appType' => 'grid', 
-                   'improvements' => true, 
-                   'displayOptionsButton' => false, 
-                   'displayScrollUp' => true, 
-                   'scrollUpPosition' => 'R', 
-                   'toolbarOrientation' => 'H', 
-                   'mobilePanes' => 'true', 
-                   'navigationBarButtons' => unserialize('a:0:{}'), 
-                   'langs' => [ 
-                       'lang_refined_search' => html_entity_decode($this->Ini->Nm_lang['lang_refined_search'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                       'lang_summary_search_button' => html_entity_decode($this->Ini->Nm_lang['lang_summary_search_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                       'lang_details_button' => html_entity_decode($this->Ini->Nm_lang['lang_details_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                   ], 
-               ]); ?> 
-        <input type="hidden" id="sc-mobile-app-data" value='<?php echo $sc_app_data; ?>' />
-        <script type="text/javascript" src="../_lib/lib/js/nm_modal_panes.jquery.js"></script>
-        <script type="text/javascript" src="../_lib/lib/js/nm_mobile.js"></script>
-        <link rel='stylesheet' href='../_lib/lib/css/nm_mobile.css' type='text/css'/>
-          <?php }
            $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_sweetalert.css\" />\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/sweetalert/sweetalert2.all.min.js\"></script>\r\n");
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/sweetalert/polyfill.min.js\"></script>\r\n");
@@ -1542,13 +1521,6 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_filter" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\" /> \r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_appdiv.css\" /> \r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_appdiv" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\" /> \r\n");
-           if ($_SESSION['scriptcase']['proc_mobile'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida']) { 
-           $nm_saida->saida("            <script>\r\n");
-           $nm_saida->saida("                $(document).ready(function(){\r\n");
-           $nm_saida->saida("                    bootstrapMobile();\r\n");
-           $nm_saida->saida("                });\r\n");
-           $nm_saida->saida("            </script>\r\n");
-           }
            $nm_saida->saida("   <style type=\"text/css\"> \r\n");
            $nm_saida->saida("     .scGridLabelFont a img[src\$='" . $this->Ini->Label_sort_desc . "'], \r\n");
            $nm_saida->saida("     .scGridLabelFont a img[src\$='" . $this->Ini->Label_sort_asc . "'], \r\n");
@@ -2411,10 +2383,12 @@ $nm_saida->saida("}\r\n");
    $this->css_sep = " ";
    $this->css_tipo_label = $compl_css_emb . "css_tipo_label";
    $this->css_tipo_grid_line = $compl_css_emb . "css_tipo_grid_line";
+   $this->css_prefijo_label = $compl_css_emb . "css_prefijo_label";
+   $this->css_prefijo_grid_line = $compl_css_emb . "css_prefijo_grid_line";
+   $this->css_numero_label = $compl_css_emb . "css_numero_label";
+   $this->css_numero_grid_line = $compl_css_emb . "css_numero_grid_line";
    $this->css_fecha_label = $compl_css_emb . "css_fecha_label";
    $this->css_fecha_grid_line = $compl_css_emb . "css_fecha_grid_line";
-   $this->css_numero2_label = $compl_css_emb . "css_numero2_label";
-   $this->css_numero2_grid_line = $compl_css_emb . "css_numero2_grid_line";
    $this->css_nit_label = $compl_css_emb . "css_nit_label";
    $this->css_nit_grid_line = $compl_css_emb . "css_nit_grid_line";
    $this->css_cuenta_label = $compl_css_emb . "css_cuenta_label";
@@ -2425,12 +2399,10 @@ $nm_saida->saida("}\r\n");
    $this->css_valor_grid_line = $compl_css_emb . "css_valor_grid_line";
    $this->css_observaciones_label = $compl_css_emb . "css_observaciones_label";
    $this->css_observaciones_grid_line = $compl_css_emb . "css_observaciones_grid_line";
+   $this->css_numero2_label = $compl_css_emb . "css_numero2_label";
+   $this->css_numero2_grid_line = $compl_css_emb . "css_numero2_grid_line";
    $this->css_id_asiento_label = $compl_css_emb . "css_id_asiento_label";
    $this->css_id_asiento_grid_line = $compl_css_emb . "css_id_asiento_grid_line";
-   $this->css_prefijo_label = $compl_css_emb . "css_prefijo_label";
-   $this->css_prefijo_grid_line = $compl_css_emb . "css_prefijo_grid_line";
-   $this->css_numero_label = $compl_css_emb . "css_numero_label";
-   $this->css_numero_grid_line = $compl_css_emb . "css_numero_grid_line";
  }  
  function cabecalho()
  {
@@ -2617,10 +2589,10 @@ $nm_saida->saida("}\r\n");
       } 
    $nm_saida->saida("    <TR id=\"tit_grid_asientos__SCCS__" . $nm_seq_titulos . "\" align=\"center\" class=\"" . $this->css_scGridLabel . " sc-ui-grid-header-row sc-ui-grid-header-row-grid_asientos-" . $tmp_header_row . "\">\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida_label']) { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero_label'] . "\" >&nbsp;</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_id_asiento_label'] . "\" >&nbsp;</TD>\r\n");
    } 
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opc_psq']) { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero_label'] . "\" >&nbsp;</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_id_asiento_label'] . "\" >&nbsp;</TD>\r\n");
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['field_order'] as $Cada_label)
    { 
@@ -2741,6 +2713,118 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_prefijo()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
+   if (!isset($this->NM_cmp_hidden['prefijo']) || $this->NM_cmp_hidden['prefijo'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_prefijo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_prefijo_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_cmp'] == 'prefijo')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('prefijo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
+ function NM_label_numero()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
+   if (!isset($this->NM_cmp_hidden['numero']) || $this->NM_cmp_hidden['numero'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numero_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_cmp'] == 'numero')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('numero')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
  function NM_label_fecha()
  {
    global $nm_saida;
@@ -2789,74 +2873,6 @@ $nm_saida->saida("}\r\n");
           $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
       }
    $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('fecha')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
-   }
-   else
-   {
-   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
-   }
-   $nm_saida->saida("</TD>\r\n");
-   } 
- }
- function NM_label_numero2()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Numero"; 
-   if (!isset($this->NM_cmp_hidden['numero2']) || $this->NM_cmp_hidden['numero2'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numero2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero2_label'] . "\" >\r\n");
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] != "pdf")
-   {
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-      {
-          $NM_cmp_class =  "concat(prefijo,'/',numero)";
-      }
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-      {
-          $NM_cmp_class =  "concat(prefijo,'/',numero)";
-      }
-      else
-      {
-          $NM_cmp_class =  "numero2";
-      }
-      $link_img = "";
-      $nome_img = $this->Ini->Label_sort;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_cmp'] == $NM_cmp_class)
-      {
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_label'] == "desc")
-          {
-              $nome_img = $this->Ini->Label_sort_desc;
-          }
-          else
-          {
-              $nome_img = $this->Ini->Label_sort_asc;
-          }
-      }
-      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
-      {
-          $this->Ini->Label_sort_pos = "right_field";
-      }
-      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
-      if (empty($nome_img))
-      {
-          $link_img = nl2br($SC_Label);
-          $Css_compl_sort = "";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_field")
-      {
-          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_field")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_cell")
-      {
-          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_cell")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('" . $NM_cmp_class . "')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
    }
    else
    {
@@ -3145,6 +3161,74 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_numero2()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Numero"; 
+   if (!isset($this->NM_cmp_hidden['numero2']) || $this->NM_cmp_hidden['numero2'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numero2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero2_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] != "pdf")
+   {
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+      {
+          $NM_cmp_class =  "concat(prefijo,'/',numero)";
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+      {
+          $NM_cmp_class =  "concat(prefijo,'/',numero)";
+      }
+      else
+      {
+          $NM_cmp_class =  "numero2";
+      }
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_cmp'] == $NM_cmp_class)
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('" . $NM_cmp_class . "')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
  function NM_label_id_asiento()
  {
    global $nm_saida;
@@ -3201,118 +3285,6 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
- function NM_label_prefijo()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
-   if (!isset($this->NM_cmp_hidden['prefijo']) || $this->NM_cmp_hidden['prefijo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_prefijo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_prefijo_label'] . "\" >\r\n");
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] != "pdf")
-   {
-      $link_img = "";
-      $nome_img = $this->Ini->Label_sort;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_cmp'] == 'prefijo')
-      {
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_label'] == "desc")
-          {
-              $nome_img = $this->Ini->Label_sort_desc;
-          }
-          else
-          {
-              $nome_img = $this->Ini->Label_sort_asc;
-          }
-      }
-      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
-      {
-          $this->Ini->Label_sort_pos = "right_field";
-      }
-      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
-      if (empty($nome_img))
-      {
-          $link_img = nl2br($SC_Label);
-          $Css_compl_sort = "";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_field")
-      {
-          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_field")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_cell")
-      {
-          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_cell")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('prefijo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
-   }
-   else
-   {
-   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
-   }
-   $nm_saida->saida("</TD>\r\n");
-   } 
- }
- function NM_label_numero()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
-   if (!isset($this->NM_cmp_hidden['numero']) || $this->NM_cmp_hidden['numero'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numero_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero_label'] . "\" >\r\n");
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] != "pdf")
-   {
-      $link_img = "";
-      $nome_img = $this->Ini->Label_sort;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_cmp'] == 'numero')
-      {
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ordem_label'] == "desc")
-          {
-              $nome_img = $this->Ini->Label_sort_desc;
-          }
-          else
-          {
-              $nome_img = $this->Ini->Label_sort_asc;
-          }
-      }
-      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
-      {
-          $this->Ini->Label_sort_pos = "right_field";
-      }
-      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
-      if (empty($nome_img))
-      {
-          $link_img = nl2br($SC_Label);
-          $Css_compl_sort = "";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_field")
-      {
-          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_field")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_cell")
-      {
-          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_cell")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('numero')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
-   }
-   else
-   {
-   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
-   }
-   $nm_saida->saida("</TD>\r\n");
-   } 
- }
 // 
 //----- 
  function grid($linhas = 0)
@@ -3345,10 +3317,12 @@ $nm_saida->saida("}\r\n");
 // 
    $SC_Label = (isset($this->New_label['tipo'])) ? $this->New_label['tipo'] : "Tipo"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['tipo'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['prefijo'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "Fecha"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['fecha'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Numero"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero2'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['nit'])) ? $this->New_label['nit'] : "Nit"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['nit'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['cuenta'])) ? $this->New_label['cuenta'] : "Cuenta"; 
@@ -3359,12 +3333,10 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['valor'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Observaciones"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['observaciones'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Numero"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero2'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['id_asiento'])) ? $this->New_label['id_asiento'] : "Id Asiento"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['id_asiento'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['prefijo'])) ? $this->New_label['prefijo'] : "Prefijo"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['prefijo'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['numero'])) ? $this->New_label['numero'] : "Numero"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['labels']['numero'] = $SC_Label; 
    if (!$this->grid_emb_form && isset($_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['lig_edit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['lig_edit'] != '')
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['mostra_edit'] = $_SESSION['scriptcase']['sc_apl_conf']['grid_asientos']['lig_edit'];
@@ -3627,19 +3599,19 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
           }
           $this->Lin_impressas++;
           $this->tipo = $this->rs_grid->fields[0] ;  
-          $this->fecha = $this->rs_grid->fields[1] ;  
-          $this->numero2 = $this->rs_grid->fields[2] ;  
-          $this->nit = $this->rs_grid->fields[3] ;  
-          $this->cuenta = $this->rs_grid->fields[4] ;  
-          $this->tipocd = $this->rs_grid->fields[5] ;  
-          $this->valor = $this->rs_grid->fields[6] ;  
+          $this->prefijo = $this->rs_grid->fields[1] ;  
+          $this->numero = $this->rs_grid->fields[2] ;  
+          $this->fecha = $this->rs_grid->fields[3] ;  
+          $this->nit = $this->rs_grid->fields[4] ;  
+          $this->cuenta = $this->rs_grid->fields[5] ;  
+          $this->tipocd = $this->rs_grid->fields[6] ;  
+          $this->valor = $this->rs_grid->fields[7] ;  
           $this->valor =  str_replace(",", ".", $this->valor);
           $this->valor = (string)$this->valor;
-          $this->observaciones = $this->rs_grid->fields[7] ;  
-          $this->id_asiento = $this->rs_grid->fields[8] ;  
+          $this->observaciones = $this->rs_grid->fields[8] ;  
+          $this->numero2 = $this->rs_grid->fields[9] ;  
+          $this->id_asiento = $this->rs_grid->fields[10] ;  
           $this->id_asiento = (string)$this->id_asiento;
-          $this->prefijo = $this->rs_grid->fields[9] ;  
-          $this->numero = $this->rs_grid->fields[10] ;  
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig']))
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -3653,6 +3625,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
           if (!isset($this->cuenta)) { $this->cuenta = ""; }
           if (!isset($this->numero2)) { $this->numero2 = ""; }
           $this->arg_sum_tipo = " = " . $this->Db->qstr($this->tipo);
+          $this->arg_sum_prefijo = " = " . $this->Db->qstr($this->prefijo);
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Ind_Groupby'] == "sc_free_group_by")
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['SC_Gb_Free_cmp'] as $cmp_gb => $resto)
@@ -3675,9 +3648,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
           {
               $this->arg_sum_fecha = " = " . $this->Db->qstr($this->fecha);
           }
-          $this->arg_sum_numero2 = " = " . $this->Db->qstr($this->numero2);
           $this->arg_sum_cuenta = " = " . $this->Db->qstr($this->cuenta);
-          $this->arg_sum_prefijo = " = " . $this->Db->qstr($this->prefijo);
+          $this->arg_sum_numero2 = " = " . $this->Db->qstr($this->numero2);
           $this->SC_seq_page++; 
           $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['final'] + 1; 
           $this->SC_sep_quebra = true;
@@ -3851,10 +3823,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
           $this->SC_ancora = $this->SC_seq_page;
           $nm_saida->saida("    <TR  class=\"" . $this->css_line_back . "\"  style=\"page-break-inside: avoid;\"" . $NM_destaque . " id=\"SC_ancor" . $this->SC_ancora . "\">\r\n");
  if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida_grid']){ 
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->Css_Cmp['css_numero_grid_line'] . "\" NOWRAP align=\"\" valign=\"\"   HEIGHT=\"0px\">&nbsp;</TD>\r\n");
+          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->Css_Cmp['css_id_asiento_grid_line'] . "\" NOWRAP align=\"\" valign=\"\"   HEIGHT=\"0px\">&nbsp;</TD>\r\n");
  }
  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opc_psq']){ 
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  style=\"" . $this->Css_Cmp['css_numero_grid_line'] . "\" NOWRAP align=\"left\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\">\r\n");
+          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  style=\"" . $this->Css_Cmp['css_id_asiento_grid_line'] . "\" NOWRAP align=\"left\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\">\r\n");
  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcapture", "document.Fpesq.nm_ret_psq.value='" . $teste . "'; nm_escreve_window();", "document.Fpesq.nm_ret_psq.value='" . $teste . "'; nm_escreve_window();", "", "Rad_psq", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida(" $Cod_Btn</TD>\r\n");
  } 
@@ -3989,6 +3961,64 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_tipo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_tipo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_tipo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_prefijo()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['prefijo']) || $this->NM_cmp_hidden['prefijo'] != "off") { 
+          $conteudo = sc_strip_script($this->prefijo); 
+          $conteudo_original = sc_strip_script($this->prefijo); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'prefijo', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'prefijo', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_prefijo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_prefijo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_prefijo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_numero()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['numero']) || $this->NM_cmp_hidden['numero'] != "off") { 
+          $conteudo = sc_strip_script($this->numero); 
+          $conteudo_original = sc_strip_script($this->numero); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'numero', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'numero', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_numero_grid_line . "\"  style=\"" . $this->Css_Cmp['css_numero_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_numero_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_fecha()
  {
       global $nm_saida;
@@ -4026,35 +4056,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
               $this->SC_nowrap = "NOWRAP";
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_fecha_grid_line . "\"  style=\"" . $this->Css_Cmp['css_fecha_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_fecha_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
- function NM_grid_numero2()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['numero2']) || $this->NM_cmp_hidden['numero2'] != "off") { 
-          $conteudo = sc_strip_script($this->numero2); 
-          $conteudo_original = sc_strip_script($this->numero2); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'numero2', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'numero2', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "";
-          }
-          else
-          {
-              $this->SC_nowrap = "";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_numero2_grid_line . "\"  style=\"" . $this->Css_Cmp['css_numero2_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_numero2_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_nit()
@@ -4206,6 +4207,35 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_observaciones_grid_line . "\"  style=\"" . $this->Css_Cmp['css_observaciones_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_observaciones_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_numero2()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['numero2']) || $this->NM_cmp_hidden['numero2'] != "off") { 
+          $conteudo = sc_strip_script($this->numero2); 
+          $conteudo_original = sc_strip_script($this->numero2); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'numero2', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'numero2', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_numero2_grid_line . "\"  style=\"" . $this->Css_Cmp['css_numero2_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_numero2_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_id_asiento()
  {
       global $nm_saida;
@@ -4237,64 +4267,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
               $this->SC_nowrap = "NOWRAP";
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_id_asiento_grid_line . "\"  style=\"" . $this->Css_Cmp['css_id_asiento_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_id_asiento_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
- function NM_grid_prefijo()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['prefijo']) || $this->NM_cmp_hidden['prefijo'] != "off") { 
-          $conteudo = sc_strip_script($this->prefijo); 
-          $conteudo_original = sc_strip_script($this->prefijo); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'prefijo', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'prefijo', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "";
-          }
-          else
-          {
-              $this->SC_nowrap = "";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_prefijo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_prefijo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_prefijo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
- function NM_grid_numero()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['numero']) || $this->NM_cmp_hidden['numero'] != "off") { 
-          $conteudo = sc_strip_script($this->numero); 
-          $conteudo_original = sc_strip_script($this->numero); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'numero', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'numero', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_numero_grid_line . "\"  style=\"" . $this->Css_Cmp['css_numero_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_numero_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_calc_span()
@@ -5070,11 +5042,15 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
     {
        $colspan++;
     }
-    if ($Cada_cmp == "fecha" && (!isset($this->NM_cmp_hidden['fecha']) || $this->NM_cmp_hidden['fecha'] != "off"))
+    if ($Cada_cmp == "prefijo" && (!isset($this->NM_cmp_hidden['prefijo']) || $this->NM_cmp_hidden['prefijo'] != "off"))
     {
        $colspan++;
     }
-    if ($Cada_cmp == "numero2" && (!isset($this->NM_cmp_hidden['numero2']) || $this->NM_cmp_hidden['numero2'] != "off"))
+    if ($Cada_cmp == "numero" && (!isset($this->NM_cmp_hidden['numero']) || $this->NM_cmp_hidden['numero'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "fecha" && (!isset($this->NM_cmp_hidden['fecha']) || $this->NM_cmp_hidden['fecha'] != "off"))
     {
        $colspan++;
     }
@@ -5106,15 +5082,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "numero2" && (!isset($this->NM_cmp_hidden['numero2']) || $this->NM_cmp_hidden['numero2'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "id_asiento" && (!isset($this->NM_cmp_hidden['id_asiento']) || $this->NM_cmp_hidden['id_asiento'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "prefijo" && (!isset($this->NM_cmp_hidden['prefijo']) || $this->NM_cmp_hidden['prefijo'] != "off"))
-    {
-       $colspan++;
-    }
-    if ($Cada_cmp == "numero" && (!isset($this->NM_cmp_hidden['numero']) || $this->NM_cmp_hidden['numero'] != "off"))
     {
        $colspan++;
     }
@@ -5728,6 +5700,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
           $nm_saida->saida("          </span>");
           $NM_btn = true;
       }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
       if ($this->nmgp_botoes['group_1'] == "on" && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_1_top = false;</script>\r\n");
@@ -5849,6 +5823,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if (is_file("grid_asientos_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_asientos_help.txt"); 
@@ -5879,16 +5855,210 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
       }
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
       $nm_saida->saida("       </table> \r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
       { 
           $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_toobar_top', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+          $_SESSION['scriptcase']['saida_html'] = "";
+      } 
+      $nm_saida->saida("      </td> \r\n");
+      $nm_saida->saida("     </tr> \r\n");
+      $nm_saida->saida("      <tr style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td> \r\n");
+      $nm_saida->saida("     </form> \r\n");
+      $nm_saida->saida("      </td> \r\n");
+      $nm_saida->saida("     </tr> \r\n");
+      if (!$NM_btn && isset($NM_ult_sep))
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+          { 
+              $this->Ini->Arr_result['setDisplay'][] = array('field' => $NM_ult_sep, 'value' => 'none');
+          } 
+          $nm_saida->saida("     <script language=\"javascript\">\r\n");
+          $nm_saida->saida("        document.getElementById('" . $NM_ult_sep . "').style.display='none';\r\n");
+          $nm_saida->saida("     </script>\r\n");
+      }
+   }
+   function nmgp_barra_bot_mobile()
+   {
+      global 
+             $nm_saida, $nm_url_saida, $nm_apl_dependente;
+      $NM_btn  = false;
+      $NM_Gbtn = false;
+      $this->NM_calc_span();
+      $nm_saida->saida("      <tr style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td>\r\n");
+      $nm_saida->saida("      <form id=\"id_F0_bot\" name=\"F0_bot\" method=\"post\" action=\"./\" target=\"_self\"> \r\n");
+      $nm_saida->saida("      <input type=\"text\" id=\"id_sc_truta_f0_bot\" name=\"sc_truta_f0_bot\" value=\"\"/> \r\n");
+      $nm_saida->saida("      <input type=\"hidden\" id=\"script_init_f0_bot\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
+      $nm_saida->saida("      <input type=\"hidden\" id=\"opcao_f0_bot\" name=\"nmgp_opcao\" value=\"muda_qt_linhas\"/> \r\n");
+      $nm_saida->saida("      </td></tr><tr>\r\n");
+      $nm_saida->saida("       <td id=\"sc_grid_toobar_bot\"  class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+      { 
+          $_SESSION['scriptcase']['saida_html'] = "";
+      } 
+      $nm_saida->saida("        <table class=\"" . $this->css_scGridToolbar . "\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top;\" width=\"100%\" valign=\"top\">\r\n");
+      $nm_saida->saida("         <tr> \r\n");
+      $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"left\" width=\"33%\"> \r\n");
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
+          {
+              $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['qt_lin_grid'];
+              $this->nm_btn_exist['goto'][] = "brec_bot";
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "birpara", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "brec_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $Page_Atu   = ceil($this->nmgp_reg_inicial / $Reg_Page);
+              $nm_saida->saida("          <input id=\"rec_f0_bot\" type=\"text\" class=\"" . $this->css_css_toolbar_obj . "\" name=\"rec\" value=\"" . NM_encode_input($Page_Atu) . "\" style=\"width:25px;vertical-align: middle;\"/> \r\n");
+              $NM_btn = true;
+          }
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['qtline'] == "on" && $this->Ini->Apl_paginacao != "FULL")
+          {
+              $nm_saida->saida("          <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border: 0px;vertical-align: middle;\">" . $this->Ini->Nm_lang['lang_btns_rows'] . "</span>\r\n");
+              $nm_saida->saida("          <select class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;\" id=\"quant_linhas_f0_bot\" name=\"nmgp_quant_linhas\" onchange=\"sc_ind = document.getElementById('quant_linhas_f0_bot').selectedIndex; nm_gp_submit_ajax('muda_qt_linhas', document.getElementById('quant_linhas_f0_bot').options[sc_ind].value);\"> \r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['qt_lin_grid'] == 10) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"10\" " . $obj_sel . ">10</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['qt_lin_grid'] == 20) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"20\" " . $obj_sel . ">20</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['qt_lin_grid'] == 50) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"50\" " . $obj_sel . ">50</option>\r\n");
+              $nm_saida->saida("          </select>\r\n");
+              $NM_btn = true;
+          }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
+          if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opc_liga']['nav']))
+          {
+              $this->nm_btn_exist['first'][] = "first_bot";
+              if ($this->Rec_ini == 0)
+              {
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $nm_saida->saida("           $Cod_Btn \r\n");
+              }
+              else
+              {
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $nm_saida->saida("           $Cod_Btn \r\n");
+              }
+                  $NM_btn = true;
+          }
+          if ($this->nmgp_botoes['back'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opc_liga']['nav']))
+          {
+              $this->nm_btn_exist['back'][] = "back_bot";
+              if ($this->Rec_ini == 0)
+              {
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "disabled", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $nm_saida->saida("           $Cod_Btn \r\n");
+              }
+              else
+              {
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                  $nm_saida->saida("           $Cod_Btn \r\n");
+              }
+                  $NM_btn = true;
+          }
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['navpage'] == "on" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opc_liga']['nav']) && $this->Ini->Apl_paginacao != "FULL" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['qt_lin_grid'] != "all")
+          {
+              $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['qt_lin_grid'];
+              $Max_link   = 5;
+              $Mid_link   = ceil($Max_link / 2);
+              $Corr_link  = (($Max_link % 2) == 0) ? 0 : 1;
+              $Qtd_Pages  = ceil($this->count_ger / $Reg_Page);
+              $Page_Atu   = ceil($this->nmgp_reg_final / $Reg_Page);
+              $Link_ini   = 1;
+              if ($Page_Atu > $Max_link)
+              {
+                  $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+              }
+              elseif ($Page_Atu > $Mid_link)
+              {
+                  $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+              }
+              if (($Qtd_Pages - $Link_ini) < $Max_link)
+              {
+                  $Link_ini = ($Qtd_Pages - $Max_link) + 1;
+              }
+              if ($Link_ini < 1)
+              {
+                  $Link_ini = 1;
+              }
+              for ($x = 0; $x < $Max_link && $Link_ini <= $Qtd_Pages; $x++)
+              {
+                  $rec = (($Link_ini - 1) * $Reg_Page) + 1;
+                  if ($Link_ini == $Page_Atu)
+                  {
+                      $nm_saida->saida("            <span class=\"scGridToolbarNavOpen\" style=\"vertical-align: middle;\">" . $Link_ini . "</span>\r\n");
+                  }
+                  else
+                  {
+                      $nm_saida->saida("            <a class=\"scGridToolbarNav\" style=\"vertical-align: middle;\" href=\"javascript: nm_gp_submit_rec(" . $rec . ");\">" . $Link_ini . "</a>\r\n");
+                  }
+                  $Link_ini++;
+                  if (($x + 1) < $Max_link && $Link_ini <= $Qtd_Pages && '' != $this->Ini->Str_toolbarnav_separator && @is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator))
+                  {
+                      $nm_saida->saida("            <img src=\"" . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+                  }
+              }
+              $NM_btn = true;
+          }
+          if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opc_liga']['nav']))
+          {
+              $this->nm_btn_exist['forward'][] = "forward_bot";
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+          if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opc_liga']['nav']))
+          {
+              $this->nm_btn_exist['last'][] = "last_bot";
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
+          if ($this->nmgp_botoes['rows'] == "on" && empty($this->nm_grid_sem_reg))
+          {
+              $nm_sumario = "[" . $this->Ini->Nm_lang['lang_othr_smry_info'] . "]";
+              $nm_sumario = str_replace("?start?", $this->nmgp_reg_inicial, $nm_sumario);
+              if ($this->Ini->Apl_paginacao == "FULL")
+              {
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->count_ger."</span>", $nm_sumario);
+              }
+              else
+              {
+                  $nm_sumario = str_replace("?final?", "<span class='sm_counter_final'>".$this->nmgp_reg_final."</span>", $nm_sumario);
+              }
+              $nm_sumario = str_replace("?total?", "<span class='sm_counter_total'>".$this->count_ger."</span>", $nm_sumario);
+              $nm_saida->saida("           <span class=\"summary_indicator " . $this->css_css_toolbar_obj . "\" style=\"border:0px;\"><span class='sm_counter'>" . $nm_sumario . "</span></span>\r\n");
+              $NM_btn = true;
+          }
+          if (is_file("grid_asientos_help.txt") && !$this->grid_emb_form)
+          {
+             $Arq_WebHelp = file("grid_asientos_help.txt"); 
+             if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
+             {
+                 $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
+                 $Tmp = explode(";", $Arq_WebHelp[0]); 
+                 foreach ($Tmp as $Cada_help)
+                 {
+                     $Tmp1 = explode(":", $Cada_help); 
+                     if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
+                     {
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                        $nm_saida->saida("           $Cod_Btn \r\n");
+                        $NM_btn = true;
+                     }
+                 }
+             }
+          }
+      $nm_saida->saida("         </td> \r\n");
+      $nm_saida->saida("        </tr> \r\n");
+      $nm_saida->saida("       </table> \r\n");
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+      { 
+          $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_toobar_bot', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
           $_SESSION['scriptcase']['saida_html'] = "";
       } 
       $nm_saida->saida("      </td> \r\n");
@@ -5924,6 +6094,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
    }
    function nmgp_barra_bot()
    {
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       {
+           $this->nmgp_embbed_placeholder_bot();
+           $this->nmgp_barra_bot_mobile();
+       }
        if (!isset($_SESSION['scriptcase']['proc_mobile']) || !$_SESSION['scriptcase']['proc_mobile'])
        {
            $this->nmgp_embbed_placeholder_bot();
@@ -7875,6 +8050,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
    } 
    elseif ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] != "pdf" && $_SESSION['scriptcase']['proc_mobile'])
    { 
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+       {
+           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
+       }
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+       {
+           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
+       }
    } 
    $nm_saida->saida("  $(window).scroll(function() {\r\n");
    $nm_saida->saida("   if (typeof(scSetFixedHeaders) === typeof(function(){})) scSetFixedHeaders();\r\n");
@@ -7916,6 +8099,34 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['proc_pdf']) {
        } 
        elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opcao'] != "pdf" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['opc_liga']['nav']) && $_SESSION['scriptcase']['proc_mobile'])
        { 
+           { 
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+               {
+                   $this->Ini->Arr_result['setDisabled'][] = array('field' => 'forward_bot', 'value' => "true");
+                   $this->Ini->Arr_result['setClass'][] = array('field' => 'forward_bot', 'value' => "scButton_" . $this->arr_buttons['bcons_avanca']['style'] . ' disabled');
+               }
+               if ($this->arr_buttons['bcons_avanca']['display'] == 'only_img' || $this->arr_buttons['bcons_avanca']['display'] == 'text_img')
+               { 
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+                   {
+                       $this->Ini->Arr_result['setSrc'][] = array('field' => 'id_img_forward_bot', 'value' => $this->Ini->path_botoes . "/" . $this->arr_buttons['bcons_avanca']['image']);
+                   }
+               } 
+           } 
+           { 
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+               {
+                  $this->Ini->Arr_result['setDisabled'][] = array('field' => 'last_bot', 'value' => "true");
+                  $this->Ini->Arr_result['setClass'][] = array('field' => 'last_bot', 'value' => "scButton_" . $this->arr_buttons['bcons_final']['style'] . ' disabled');
+               }
+               if ($this->arr_buttons['bcons_final']['display'] == 'only_img' || $this->arr_buttons['bcons_final']['display'] == 'text_img')
+               { 
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])
+                   {
+                       $this->Ini->Arr_result['setSrc'][] = array('field' => 'id_img_last_bot', 'value' => $this->Ini->path_botoes . "/" . $this->arr_buttons['bcons_final']['image']);
+                   }
+               } 
+           } 
        } 
        $nm_saida->saida("   nm_gp_fim = \"fim\";\r\n");
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_asientos']['ajax_nav'])

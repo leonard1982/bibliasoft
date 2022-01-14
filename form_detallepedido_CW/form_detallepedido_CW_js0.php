@@ -42,29 +42,6 @@
 <div id="id_fatal_error" class="" style="display: none; position: absolute"></div>
 <script type="text/javascript"> 
 <?php
-  if (isset($this->NM_ajax_info['masterValue']) && !empty($this->NM_ajax_info['masterValue']))
-  {
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dashboard_info']['under_dashboard']) {
-          echo "  var dbParentFrame = $(parent.document).find(\"[name='" . $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dashboard_info']['parent_widget'] . "']\")";
-          echo "  if (dbParentFrame && dbParentFrame[0] && dbParentFrame[0].contentWindow.scAjaxDetailValue)";
-          echo "  {"; 
-          foreach ($this->NM_ajax_info['masterValue'] as $cmp => $val)
-          {
-              echo " dbParentFrame[0].contentWindow.scAjaxDetailValue('" . $cmp . "', '" . $val . "');";
-          }
-      }
-      else {
-          echo "  if (parent.scAjaxDetailValue)";
-          echo "  {"; 
-          foreach ($this->NM_ajax_info['masterValue'] as $cmp => $val)
-          {
-              echo " parent.scAjaxDetailValue('" . $cmp . "', '" . $val . "');";
-          }
-          echo "  }"; 
-      }
-  }
-?> 
-<?php
   if (isset($this->nm_mens_alert) && !empty($this->nm_mens_alert))
   {
       foreach ($this->nm_mens_alert as $i_alert => $mensagem)
@@ -131,7 +108,11 @@ function nm_move(x, y, z)
        $NM_parm_ifr = (isset($NM_run_iframe) && $NM_run_iframe == 1) ? "NM_run_iframe?#?1?@?" : "";
 ?>
         document.F2.nmgp_parms.value = "<?php echo $NM_parm_ifr ?>";
-        document.F2.submit();
+        if (scFormHasChanged) {
+          scJs_confirm('<?php echo html_entity_decode($this->Ini->Nm_lang['lang_reload_confirm']) ?>', function() { document.F2.submit(); }, function() {});
+        } else {
+          document.F2.submit();
+        }
     }
     else
     {
@@ -174,10 +155,6 @@ function nm_atualiza(x, y)
 <?php 
     }
 ?>
-    if (scEventControl_active_all()) {
-      setTimeout(function() { nm_atualiza(x, y); }, 500);
-      return;
-    }
     if (!sc_mupload_ok)
     {
         if (!confirm("<?php echo $this->Ini->Nm_lang['lang_errm_muok'] ?>"))
@@ -204,13 +181,12 @@ function nm_atualiza(x, y)
     { 
        document.F1.nmgp_num_form.value = y; 
     } 
-    if (x == "excluir" && sc_quant_excl > 0) 
+    if (x == "alterar" && sc_quant_excl > 0) 
     { 
        if (confirm ("<?php echo html_entity_decode($this->Ini->Nm_lang['lang_errm_cfrm_remv'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>"))  
        { 
            scAjaxProcOn();
            document.F1.nmgp_opcao.value = x; 
-           nm_field_disabled_reset();
            document.F1.submit(); 
        } 
        else 
@@ -222,7 +198,6 @@ function nm_atualiza(x, y)
     { 
        scAjaxProcOn();
        document.F1.nmgp_opcao.value = x; 
-       nm_field_disabled_reset();
        document.F1.submit(); 
     } 
     if (Nm_submit_ok)
@@ -296,7 +271,7 @@ function scForm_confirmUpdate_multi(callbackOk, callbackCancel) {
 } // scForm_confirmUpdate_multi
 
 function scForm_submit_multi(x) {
-	if (x == "excluir" && sc_quant_excl > 0) {
+	if (x == "alterar" && sc_quant_excl > 0) {
 		scJs_confirm("<?php echo html_entity_decode($this->Ini->Nm_lang['lang_errm_cfrm_remv'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>", function() { scForm_submit_multi_after(x); }, scForm_cancel);
 	}
 	else {
@@ -307,7 +282,6 @@ function scForm_submit_multi(x) {
 function scForm_submit_multi_after(x) {
     scAjaxProcOn();
 	document.F1.nmgp_opcao.value = x;
-	nm_field_disabled_reset();
 	document.F1.submit();
 	if (Nm_submit_ok) {
 		Nm_Proc_Atualiz = true;
@@ -322,10 +296,6 @@ if (isset($this->Refresh_aba_menu)) {
 <?php
 }
 ?>
-	if (scEventControl_active_all()) {
-		setTimeout(function() { nm_atualiza(x, y); }, 500);
-		return false;
-	}
 
 	Nm_submit_ok = true;
 	if (Nm_Proc_Atualiz) {
@@ -501,27 +471,17 @@ function sc_rtrim(str, chars) {
         chars = chars || "\\s";
         return str.replace(new RegExp("[" + chars + "]+$", "g"), "");
 }
-var nm_num_campo = 1;
-function lookup_cod_barras_(campo)
-{
-   campo = (campo != null) ? campo : nm_num_campo;
-   nm_num_campo = campo;
-   dados  = eval('document.F1.cod_barras_' + campo + '.value');
-   jsrsExecute("<?php  echo $this->Ini->path_link . SC_dir_app_name('form_detallepedido_CW')?>/form_detallepedido_CW.php?script_case_init=<?php echo $this->form_encode_input($this->Ini->sc_page); ?>&nmgp_opcao=lookup", recebe_cod_barras_, "cod_barras_", dados, false);
-}
-function recebe_cod_barras_(string)
-{
-   document.getElementById('id_lookup_cod_barras_' + nm_num_campo).innerHTML = string;
-}
-<?php 
-   if ($this->nmgp_opcao == "novo")
-   {
-   }
-?>
 function nm_check_insert(iLine)
 {
+<?php
+if ('novo' == $this->nmgp_opcao)
+{
+?>
    if (document.F1.elements['sc_check_vert[' + iLine + ']'])
       document.F1.elements['sc_check_vert[' + iLine + ']'].checked = true;
+<?php
+}
+?>
 }
 function nm_uncheck_delete()
 {
@@ -531,12 +491,7 @@ function nm_uncheck_delete()
       if (document.F1.elements['sc_check_vert[' + iLine + ']'])
          document.F1.elements['sc_check_vert[' + iLine + ']'].checked = false;
 }
-var hasJsFormOnload = true;
-function sc_form_onload()
-{
-   nm_field_disabled("idpro_=disabled", "U");
-   
-}
+var hasJsFormOnload = false;
 
 function scCssFocus(oHtmlObj, iSeqVert)
 {

@@ -1594,7 +1594,7 @@ $vertical_center = 'display: flex; flex-direction: column; justify-content: flex
 <?php
 $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
-<div id="id_debug_window" style="display: none; position: absolute; left: 50px; top: 50px"><table class="scFormMessageTable">
+<div id="id_debug_window" style="display: none;" class='scDebugWindow'><table class="scFormMessageTable">
 <tr><td class="scFormMessageTitle"><?php echo $Cod_Btn ?>&nbsp;&nbsp;Output</td></tr>
 <tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>
 </table></div>
@@ -2334,7 +2334,7 @@ function nm_open_popup(parms)
 ?>
      <?php
      }
-     else
+     if (!$_SESSION['scriptcase']['proc_mobile'])
      {
      ?>
 <?php
@@ -2423,6 +2423,9 @@ function nm_open_popup(parms)
  {
     document.F1.submit();
  }
+ Arr_def_estado = new Array();
+ Arr_def_estado[0] = '1';
+ Arr_def_estado[1] = '2';
  function limpa_form()
  {
    document.F1.reset();
@@ -2439,6 +2442,28 @@ function nm_open_popup(parms)
    document.F1.producto_autocomp.value = "";
    document.F1.estado_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_estado'), document.F1.estado_cond, 'estado');
+   for (i = 0; i < document.F1.elements.length; i++)
+   {
+      if (document.F1.elements[i].name == 'estado[]' && document.F1.elements[i].checked)
+      {
+          document.F1.elements[i].checked = false;
+      }
+   }
+   if (Arr_def_estado[0]) {
+       for (i = 0; i < document.F1.elements.length; i++) {
+           if (document.F1.elements[i].name == 'estado[]') {
+               for (iz = 0; iz < Arr_def_estado.length; iz++) {
+                    Arr_def_test = Arr_def_estado[iz] + "##@@"
+                    Arr_def_len  = Arr_def_test.length;
+                    Obj_val      = document.F1.elements[i].value;
+                    if (Arr_def_test == Obj_val.substring(0,Arr_def_len)) {
+                        document.F1.elements[i].checked = true;
+                        break;
+                    }
+               }
+           }
+       }
+   }
  }
  function SC_carga_evt_jquery()
  {

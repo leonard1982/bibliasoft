@@ -229,8 +229,8 @@ class grid_facturaven_automatica_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211028"; 
-      $this->nm_hr_ult_alt   = "143741"; 
+      $this->nm_dt_ult_alt   = "20220104"; 
+      $this->nm_hr_ult_alt   = "103634"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -998,7 +998,7 @@ class grid_facturaven_automatica_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_automatica']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_automatica']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQJsHAvmV5JeDMrYV9FeHEFYVoB/HQFYZ1BOHArKD5BOHgvsHArCDuJeZuFaD9XsDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsD9NmDQFUD1BeV5BOHuzGV9FeHEX7HMFUHQJmZSBqZ1BeD5BiHgBOHArsHEFqDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7HAN7V5FUHgvsDkFCH5XCVEraD9XOZSB/HABYZMBqDMzGHEXeV5XCDoFUDcJeDQFGHABYVWJsHuNODkBOV5FYVoB/D9BiZ1F7DSrYD5rqDMBYHAFKV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGD1rKZMFaHgveHEBUH5F/DoJsHQXsDuFaDSBYVWBOHuvmDkFCDWXCHIBiHQBiZSBOD1vsZMBODMveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAzGD5BOHgveHArsDWFGDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVENUDcNmZ1F7Z1BeZMJeHgvsZSXeDWXCVoJsHQNmDQFUHArYD5B/DMBYVcBUH5XCHIFGHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwDuFaHIrKV5raDMNOVcXKH5FqHMraHQBqZ1FGD1zGD5XGHgBOHEFiDuFaHMFGD9FYDQJwHAN7D5JsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKVWXGHgrKZSNiHEFYDoX7D9XOZ1FGHIveHQNUDMzGHEXeDuFYVoBqHQFYDuFaHArYVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBqD9NwH9X7DSBYD5JsHgrYDkBODWF/VoB/DcBqH9FaD1rKZMFaDErKVkXeDWX7ZuBODcBwDQX7Z1N7V5raHgvsVcFCDWFYVENUD9BsH9B/Z1rYD5NUDEvsHEFiHEFqDoF7DcJeDuBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiHEFaHMX7D9XsZSBiHArYVWXGDMrYVcFeDuX7DoNUDcBqZSB/D1rwHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiHAzGD5BOHgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVIB/DWFaVoBqDcFYZ1FaD1vsD5JeDMvCZSJGDWFqHINUD9NmDuFaHAvmD5F7DMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -3733,7 +3733,7 @@ class grid_facturaven_automatica_apl
    function controle($linhas = 0)
    {
       global $nm_saida, $nm_url_saida, $script_case_init, $nmgp_parms_pdf, $nmgp_graf_pdf, $nm_apl_dependente, $nmgp_navegator_print, $nmgp_tipo_print, $nmgp_cor_print, $nmgp_cor_word, $Det_use_pass_pdf, $Det_pdf_zip, $NMSC_conf_apl, $NM_contr_var_session, $NM_run_iframe, $SC_module_export, $nmgp_password,
-             $glo_senha_protect, $nmgp_opcao, $nm_call_php, $rec, $nmgp_quant_linhas, $nmgp_fast_search, $nmgp_cond_fast_search, $nmgp_arg_fast_search, $nmgp_parms_where;
+             $glo_senha_protect, $nmgp_opcao, $nm_call_php, $rec, $nmgp_quant_linhas, $nmgp_fast_search, $nmgp_cond_fast_search, $nmgp_arg_fast_search, $nmgp_ordem, $nmgp_parms_where;
 
       $Parms_form_pdf = false;
       if (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_facturaven_automatica']))
@@ -4200,6 +4200,10 @@ class grid_facturaven_automatica_apl
                   $nmgp_fast_search      = (isset($temp[0])) ? $temp[0] : "";
                   $nmgp_cond_fast_search = (isset($temp[1])) ? $temp[1] : "";
                   $nmgp_arg_fast_search  = (isset($temp[2])) ? $temp[2] : "";
+              }
+              if ($nmgp_opcao == "ordem")
+              {
+                  $nmgp_ordem = $_POST['parm'];
               }
           }
       }
@@ -5259,6 +5263,8 @@ class grid_facturaven_automatica_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "idcli";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "direccion2";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "total";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "clasificacion";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "id_clasificacion";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "copiar";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "fechaven";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "fechavenc";
@@ -6287,31 +6293,35 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automat
        $this->total = $this->rs_grid->fields[5] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
-       $this->fechaven = $this->rs_grid->fields[6] ;  
-       $this->fechavenc = $this->rs_grid->fields[7] ;  
-       $this->subtotal = $this->rs_grid->fields[8] ;  
+       $this->clasificacion = $this->rs_grid->fields[6] ;  
+       $this->clasificacion = (string)$this->clasificacion;
+       $this->id_clasificacion = $this->rs_grid->fields[7] ;  
+       $this->id_clasificacion = (string)$this->id_clasificacion;
+       $this->fechaven = $this->rs_grid->fields[8] ;  
+       $this->fechavenc = $this->rs_grid->fields[9] ;  
+       $this->subtotal = $this->rs_grid->fields[10] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[9] ;  
+       $this->valoriva = $this->rs_grid->fields[11] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->observaciones = $this->rs_grid->fields[10] ;  
-       $this->vendedor = $this->rs_grid->fields[11] ;  
+       $this->observaciones = $this->rs_grid->fields[12] ;  
+       $this->vendedor = $this->rs_grid->fields[13] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->banco = $this->rs_grid->fields[12] ;  
+       $this->banco = $this->rs_grid->fields[14] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[13] ;  
+       $this->dias_decredito = $this->rs_grid->fields[15] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->idfacven = $this->rs_grid->fields[14] ;  
+       $this->idfacven = $this->rs_grid->fields[16] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->pagada = $this->rs_grid->fields[15] ;  
-       $this->asentada = $this->rs_grid->fields[16] ;  
+       $this->pagada = $this->rs_grid->fields[17] ;  
+       $this->asentada = $this->rs_grid->fields[18] ;  
        $this->asentada = (string)$this->asentada;
-       $this->adicional = $this->rs_grid->fields[17] ;  
+       $this->adicional = $this->rs_grid->fields[19] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->tipo = $this->rs_grid->fields[18] ;  
-       $this->nomcliente = $this->rs_grid->fields[19] ;  
+       $this->tipo = $this->rs_grid->fields[20] ;  
+       $this->nomcliente = $this->rs_grid->fields[21] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -6460,31 +6470,35 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automat
        $this->total = $this->rs_grid->fields[5] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
-       $this->fechaven = $this->rs_grid->fields[6] ;  
-       $this->fechavenc = $this->rs_grid->fields[7] ;  
-       $this->subtotal = $this->rs_grid->fields[8] ;  
+       $this->clasificacion = $this->rs_grid->fields[6] ;  
+       $this->clasificacion = (string)$this->clasificacion;
+       $this->id_clasificacion = $this->rs_grid->fields[7] ;  
+       $this->id_clasificacion = (string)$this->id_clasificacion;
+       $this->fechaven = $this->rs_grid->fields[8] ;  
+       $this->fechavenc = $this->rs_grid->fields[9] ;  
+       $this->subtotal = $this->rs_grid->fields[10] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[9] ;  
+       $this->valoriva = $this->rs_grid->fields[11] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->observaciones = $this->rs_grid->fields[10] ;  
-       $this->vendedor = $this->rs_grid->fields[11] ;  
+       $this->observaciones = $this->rs_grid->fields[12] ;  
+       $this->vendedor = $this->rs_grid->fields[13] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->banco = $this->rs_grid->fields[12] ;  
+       $this->banco = $this->rs_grid->fields[14] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[13] ;  
+       $this->dias_decredito = $this->rs_grid->fields[15] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->idfacven = $this->rs_grid->fields[14] ;  
+       $this->idfacven = $this->rs_grid->fields[16] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->pagada = $this->rs_grid->fields[15] ;  
-       $this->asentada = $this->rs_grid->fields[16] ;  
+       $this->pagada = $this->rs_grid->fields[17] ;  
+       $this->asentada = $this->rs_grid->fields[18] ;  
        $this->asentada = (string)$this->asentada;
-       $this->adicional = $this->rs_grid->fields[17] ;  
+       $this->adicional = $this->rs_grid->fields[19] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->tipo = $this->rs_grid->fields[18] ;  
-       $this->nomcliente = $this->rs_grid->fields[19] ;  
+       $this->tipo = $this->rs_grid->fields[20] ;  
+       $this->nomcliente = $this->rs_grid->fields[21] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -6683,31 +6697,35 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automat
        $this->total = $this->rs_grid->fields[5] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
-       $this->fechaven = $this->rs_grid->fields[6] ;  
-       $this->fechavenc = $this->rs_grid->fields[7] ;  
-       $this->subtotal = $this->rs_grid->fields[8] ;  
+       $this->clasificacion = $this->rs_grid->fields[6] ;  
+       $this->clasificacion = (string)$this->clasificacion;
+       $this->id_clasificacion = $this->rs_grid->fields[7] ;  
+       $this->id_clasificacion = (string)$this->id_clasificacion;
+       $this->fechaven = $this->rs_grid->fields[8] ;  
+       $this->fechavenc = $this->rs_grid->fields[9] ;  
+       $this->subtotal = $this->rs_grid->fields[10] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[9] ;  
+       $this->valoriva = $this->rs_grid->fields[11] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->observaciones = $this->rs_grid->fields[10] ;  
-       $this->vendedor = $this->rs_grid->fields[11] ;  
+       $this->observaciones = $this->rs_grid->fields[12] ;  
+       $this->vendedor = $this->rs_grid->fields[13] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->banco = $this->rs_grid->fields[12] ;  
+       $this->banco = $this->rs_grid->fields[14] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[13] ;  
+       $this->dias_decredito = $this->rs_grid->fields[15] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->idfacven = $this->rs_grid->fields[14] ;  
+       $this->idfacven = $this->rs_grid->fields[16] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->pagada = $this->rs_grid->fields[15] ;  
-       $this->asentada = $this->rs_grid->fields[16] ;  
+       $this->pagada = $this->rs_grid->fields[17] ;  
+       $this->asentada = $this->rs_grid->fields[18] ;  
        $this->asentada = (string)$this->asentada;
-       $this->adicional = $this->rs_grid->fields[17] ;  
+       $this->adicional = $this->rs_grid->fields[19] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->tipo = $this->rs_grid->fields[18] ;  
-       $this->nomcliente = $this->rs_grid->fields[19] ;  
+       $this->tipo = $this->rs_grid->fields[20] ;  
+       $this->nomcliente = $this->rs_grid->fields[21] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -6973,7 +6991,7 @@ if(isset($this->vid[0][0]))
 		
 			$this->fActualizarTotalFactura($vidfacven_nuevo);
 			
-			echo "<div class='padding: 8px;border-radius:3px;color:white;background:blue;'>La factura de $this->nomcliente  del mes de $vmes de $vanio fue generada por un valor de ".number_format($this->total )."</div><br>";
+			echo "<div style='padding: 8px;border-radius:3px;color:white;background:blue;'>La factura de $this->nomcliente  del mes de $vmes de $vanio fue generada por un valor de ".number_format($this->total )."</div><br>";
 		}
 	}
 }
@@ -7596,15 +7614,15 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'on';
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -10182,7 +10200,7 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idfacven";$nm_numeric[] = "numfacven";$nm_numeric[] = "credito";$nm_numeric[] = "idcli";$nm_numeric[] = "subtotal";$nm_numeric[] = "valoriva";$nm_numeric[] = "total";$nm_numeric[] = "asentada";$nm_numeric[] = "saldo";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional2";$nm_numeric[] = "adicional3";$nm_numeric[] = "resolucion";$nm_numeric[] = "vendedor";$nm_numeric[] = "usuario_crea";$nm_numeric[] = "banco";$nm_numeric[] = "dias_decredito";
+      $nm_numeric[] = "idfacven";$nm_numeric[] = "numfacven";$nm_numeric[] = "credito";$nm_numeric[] = "idcli";$nm_numeric[] = "subtotal";$nm_numeric[] = "valoriva";$nm_numeric[] = "total";$nm_numeric[] = "asentada";$nm_numeric[] = "saldo";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional2";$nm_numeric[] = "adicional3";$nm_numeric[] = "resolucion";$nm_numeric[] = "vendedor";$nm_numeric[] = "usuario_crea";$nm_numeric[] = "banco";$nm_numeric[] = "dias_decredito";$nm_numeric[] = "clasificacion";$nm_numeric[] = "id_clasificacion";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['decimal_db'] == ".")
@@ -11517,6 +11535,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica'][$path
        $Nm_numeric[] = "usuario_crea";
        $Nm_numeric[] = "banco";
        $Nm_numeric[] = "dias_decredito";
+       $Nm_numeric[] = "clasificacion";
+       $Nm_numeric[] = "id_clasificacion";
        if (in_array($name, $Nm_numeric))
        {
            if (is_array($val))

@@ -66,7 +66,7 @@ sajax_show_javascript();
     {
       document.getElementById("id_debug_window").style.display = "";
       document.getElementById("id_debug_text").innerHTML = scAjaxFormatDebug(oResp["htmOutput"]) + document.getElementById("id_debug_text").innerHTML;
-      scCenterElement(document.getElementById("id_debug_window"));
+      //scCenterElement(document.getElementById("id_debug_window"));
     }
   } // scAjaxShowDebug
 
@@ -339,11 +339,24 @@ sajax_show_javascript();
 
   function scAjaxCalendarReload()
   {
-    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"])
+    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"] && typeof self.parent.calendar_reload == "function")
     {
+<?php
+if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && isset($_SESSION['scriptcase']['display_mobile']) && $_SESSION['scriptcase']['display_mobile']) {
+?>
       self.parent.calendar_reload();
       self.parent.tb_remove();
+<?php
+} else {
+?>
+      self.parent.calendar_reload();
+      self.parent.tb_remove();
+<?php
+}
+?>
+      return true;
     }
+    return false;
   } // scCalendarReload
 
   function scAjaxUpdateErrors(sType)
@@ -3572,7 +3585,6 @@ function scJs_sweetalert_params(params) {
   {
     scAjaxProcOff();
     oResp = scAjaxResponse(sResp);
-    scAjaxCalendarReload();
     scAjaxUpdateErrors("valid");
     sAppErrors = scAjaxListErrors(true);
     if ("" == sAppErrors || "menu_link" == document.F1.nmgp_opcao.value)
@@ -3715,6 +3727,7 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
     scAjaxSetVariables();
     document.F2.iddet.value = scAjaxGetKeyValue("iddet");
     scAjaxSetSummary();
+    scAjaxSetNavpage();
     scAjaxShowDebug();
     scAjaxSetLabel(true);
     scAjaxSetReadonly(true);
@@ -3744,7 +3757,6 @@ if ($this->Embutida_form)
     {
       sc_form_onload();
     }
-    SC_btn_grp_text();
   } // do_ajax_detalleventa_pos_mob_navigate_form_cb_after_alert
   function sc_hide_detalleventa_pos_mob_form()
   {

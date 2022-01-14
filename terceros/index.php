@@ -44,6 +44,7 @@
    $_SESSION['scriptcase']['terceros']['glo_nm_path_imag_temp']  = "";
    $_SESSION['scriptcase']['terceros']['glo_nm_path_cache']  = "";
    $_SESSION['scriptcase']['terceros']['glo_nm_path_doc']        = "";
+   $_SESSION['scriptcase']['terceros']['glo_con_conn_facilweb']         = "conn_facilweb";
    $NM_dir_atual = getcwd();
    if (empty($NM_dir_atual))
    {
@@ -224,6 +225,8 @@ class terceros_ini
    var $nm_bases_vfp;
    var $nm_bases_odbc;
    var $nm_bases_progress;
+   var $nm_db_conn_facilweb;
+   var $nm_con_conn_facilweb = array();
    var $sc_page;
    var $sc_lig_md5 = array();
    var $sc_lig_target = array();
@@ -302,8 +305,8 @@ class terceros_ini
       $this->nm_dt_criacao   = "20171205"; 
       $this->nm_hr_criacao   = "171843"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211028"; 
-      $this->nm_hr_ult_alt   = "143741"; 
+      $this->nm_dt_ult_alt   = "20211223"; 
+      $this->nm_hr_ult_alt   = "110934"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -536,7 +539,8 @@ class terceros_ini
           }
       }
       if (isset($_SESSION['scriptcase']['terceros']['session_timeout']['redir'])) {
-          $SS_cod_html  = '';
+          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -1094,6 +1098,10 @@ class terceros_ini
           $_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil'] = true;
       }
       if (function_exists("nm_check_pdf_server")) $this->server_pdf = nm_check_pdf_server($this->path_libs, $this->server_pdf);
+      if (!function_exists("SC_Mail_Image"))
+      {
+          include_once("terceros_sc_mail_image.php");
+      }
       if (!isset($_SESSION['scriptcase']['sc_num_img']) || empty($_SESSION['scriptcase']['sc_num_img']))
       { 
           $_SESSION['scriptcase']['sc_num_img'] = 1; 
@@ -1116,7 +1124,7 @@ class terceros_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZ9F7D1BOVWBqDMBOVcFeDuX7DorqDcJUVINUDSrYHQJwDEBODkFeH5FYVoFGHQJKDQBqHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1FGDSNOHuX7HgrKDkXKDuFaVoX7D9XsZSBiD1BOV5JeDMvOVIBsV5F/DoXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwVWJsHgrKVcFCDWJeVoBqDcJUZ1FaHAN7D5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1F7D1rKV5BqHgrKHErCV5FaDoXGD9NmH9BiDSrwHurqDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiDuBqHAvOV5XGDMvOVcBUH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFiHEFqVoBqHQXOH9X7DSN7D5JwHuBYVcFeV5X7HMB/DcNmZSFaHArYHuJwHgvsZSXeDuJeDoBqDcJeZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9FGHABYD5B/DMvOV9FeV5F/VoB/D9XGZ1BOHArYV5X7HgBODkB/DWFqHIFUDcJeDQFUHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCHEXCHIBiHQXOH9BiHIBeVWBOHgvOVcBUDur/HIrqD9XOZSB/HIrwV5JeHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHuBYVcFKDWFYVoX7DcBqH9B/HArYD5XGDEBOZSJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsHArYV5BqHgvOVcFeDWFaHIJeDcJUZ1rqD1rwD5FaDErKZSJGDWX7HMJeDcBwH9BiDSrwD5FaHgrKVcXKH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VoF7HQNmZkBiD1rKHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvOVWBODMBODkFCDWXCHIFUD9XOZ1X7HAvCZMB/DEBeHENiDWF/HIBiHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['terceros']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['terceros']['initialize'])  
       { 
@@ -1130,6 +1138,7 @@ class terceros_ini
           $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['initialize'] = false;
       } 
       $this->conectDB();
+      $this->conectExtra();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
       {
           echo "<tr>";
@@ -1180,6 +1189,16 @@ class terceros_ini
       }
       if (isset($_SESSION['scriptcase']['terceros']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['terceros']['glo_nm_conexao']))
       {
+          db_conect_devel('conn_facilweb', $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          $this->nm_con_conn_facilweb['servidor'] = $_SESSION['scriptcase']['glo_servidor'];
+          $this->nm_con_conn_facilweb['usuario']  = $_SESSION['scriptcase']['glo_usuario'];
+          $this->nm_con_conn_facilweb['banco']    = $_SESSION['scriptcase']['glo_banco'];
+          $this->nm_con_conn_facilweb['senha']    = $_SESSION['scriptcase']['glo_senha'];
+          $this->nm_con_conn_facilweb['tpbanco']  = $_SESSION['scriptcase']['glo_tpbanco'];
+          $this->nm_con_conn_facilweb['decimal']  = $_SESSION['scriptcase']['glo_decimal_db'];
+          $this->nm_con_conn_facilweb['SC_sep_date'] = $_SESSION['scriptcase']['glo_date_separator'];
+          $this->nm_con_conn_facilweb['protect']  = "S";
+          $this->nm_con_conn_facilweb['database_encoding']  = isset($_SESSION['scriptcase']['glo_database_encoding'])?$_SESSION['scriptcase']['glo_database_encoding']:'';
           db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
           {
@@ -1197,6 +1216,17 @@ class terceros_ini
       if (!empty($perfil_trab))
       {
           $_SESSION['scriptcase']['glo_senha_protect'] = "";
+          carrega_perfil($_SESSION['scriptcase']['terceros']['glo_con_conn_facilweb'], $this->path_libs, "S");
+          $this->nm_con_conn_facilweb['servidor'] = $_SESSION['scriptcase']['glo_servidor'];
+          $this->nm_con_conn_facilweb['usuario']  = $_SESSION['scriptcase']['glo_usuario'];
+          $this->nm_con_conn_facilweb['banco']    = $_SESSION['scriptcase']['glo_banco'];
+          $this->nm_con_conn_facilweb['senha']    = $_SESSION['scriptcase']['glo_senha'];
+          $this->nm_con_conn_facilweb['tpbanco']  = $_SESSION['scriptcase']['glo_tpbanco'];
+          $this->nm_con_conn_facilweb['decimal']  = $_SESSION['scriptcase']['glo_decimal_db'];
+          $this->nm_con_conn_facilweb['SC_sep_date'] = $_SESSION['scriptcase']['glo_date_separator'];
+          $this->nm_con_conn_facilweb['protect']  = $_SESSION['scriptcase']['glo_senha_protect'];
+          $this->nm_con_conn_facilweb['database_encoding']  = isset($_SESSION['scriptcase']['glo_database_encoding'])?$_SESSION['scriptcase']['glo_database_encoding']:'';
+          $_SESSION['scriptcase']['glo_senha_protect'] = "";
           carrega_perfil($perfil_trab, $this->path_libs, "S");
           if (empty($_SESSION['scriptcase']['glo_senha_protect']))
           {
@@ -1209,9 +1239,17 @@ class terceros_ini
       }
       if (!$_SESSION['sc_session'][$this->sc_page]['terceros']['embutida_form'] || !$_SESSION['sc_session'][$this->sc_page]['terceros']['embutida_proc']) 
       {
+          if (!isset($_SESSION['gnit'])) 
+          {
+              $this->nm_falta_var .= "gnit; ";
+          }
           if (!isset($_SESSION['gidtercero'])) 
           {
               $this->nm_falta_var .= "gidtercero; ";
+          }
+          if (!isset($_SESSION['gurl_reg_empresa'])) 
+          {
+              $this->nm_falta_var .= "gurl_reg_empresa; ";
           }
       }
 // 
@@ -1622,6 +1660,40 @@ class terceros_ini
           $_SESSION['sc_session'][$this->sc_page]['terceros']['decimal_db'] = "."; 
       } 
   }
+// 
+   function conectExtra()
+   {
+      $database_encodding = $this->force_db_utf8 ? 'utf8' : $this->nm_con_conn_facilweb['database_encoding'];
+      $this->nm_db_conn_facilweb = db_conect($this->nm_con_conn_facilweb['tpbanco'], $this->nm_con_conn_facilweb['servidor'], $this->nm_con_conn_facilweb['usuario'], $this->nm_con_conn_facilweb['senha'], $this->nm_con_conn_facilweb['banco'], $this->nm_con_conn_facilweb['protect'], 'S', 'N', '', $database_encodding);
+      if (in_array(strtolower($this->nm_con_conn_facilweb['tpbanco']), $this->nm_bases_ibase))
+      {
+          if (function_exists('ibase_timefmt'))
+          {
+              ibase_timefmt('%Y-%m-%d %H:%M:%S');
+          } 
+          $GLOBALS["NM_ERRO_IBASE"] = 1;  
+      } 
+      if (in_array(strtolower($this->nm_con_conn_facilweb['tpbanco']), $this->nm_bases_sybase))
+      {
+          $this->nm_db_conn_facilweb->fetchMode = ADODB_FETCH_BOTH;
+          $this->nm_db_conn_facilweb->Execute("set dateformat ymd");
+          $this->nm_db_conn_facilweb->Execute("set quoted_identifier ON");
+      } 
+      if (in_array(strtolower($this->nm_con_conn_facilweb['tpbanco']), $this->nm_bases_db2))
+      {
+          $this->nm_db_conn_facilweb->fetchMode = ADODB_FETCH_NUM;
+      } 
+      if (in_array(strtolower($this->nm_con_conn_facilweb['tpbanco']), $this->nm_bases_mssql))
+      {
+          $this->nm_db_conn_facilweb->Execute("set dateformat ymd");
+      } 
+      if (in_array(strtolower($this->nm_con_conn_facilweb['tpbanco']), $this->nm_bases_oracle))
+      {
+          $this->nm_db_conn_facilweb->Execute("alter session set nls_date_format = 'yyyy-mm-dd hh24:mi:ss'");
+          $this->nm_db_conn_facilweb->Execute("alter session set nls_numeric_characters = '.,'");
+          $this->nm_con_conn_facilweb['decimal'] = "."; 
+      } 
+   }
 
   function setConnectionHash() {
     if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['terceros']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['terceros']['glo_nm_conexao'])) {
@@ -2265,6 +2337,71 @@ ob_start();
             $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_terceros_validate_archivo_cedula' == $_POST['rs'])
+        {
+            $archivo_cedula = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_archivo_rut' == $_POST['rs'])
+        {
+            $archivo_rut = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_archivo_nit' == $_POST['rs'])
+        {
+            $archivo_nit = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_archivo_pago' == $_POST['rs'])
+        {
+            $archivo_pago = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_id_plan' == $_POST['rs'])
+        {
+            $id_plan = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_valor_plan' == $_POST['rs'])
+        {
+            $valor_plan = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_fecha_registro_fe' == $_POST['rs'])
+        {
+            $fecha_registro_fe = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_nombre_contador' == $_POST['rs'])
+        {
+            $nombre_contador = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_estado' == $_POST['rs'])
+        {
+            $estado = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_si_nomina' == $_POST['rs'])
+        {
+            $si_nomina = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_n_trabajadores' == $_POST['rs'])
+        {
+            $n_trabajadores = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_si_factura_electronica' == $_POST['rs'])
+        {
+            $si_factura_electronica = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_validate_nombre_empresa_bd' == $_POST['rs'])
+        {
+            $nombre_empresa_bd = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_terceros_validate_archivos' == $_POST['rs'])
         {
             $archivos = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -2556,19 +2693,48 @@ ob_start();
             $puc_auxiliar_proveedores = NM_utf8_urldecode($_POST['rsargs'][71]);
             $puc_retefuente_compras = NM_utf8_urldecode($_POST['rsargs'][72]);
             $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][73]);
-            $es_restaurante = NM_utf8_urldecode($_POST['rsargs'][74]);
-            $porcentaje_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][75]);
-            $imagenter_ul_name = NM_utf8_urldecode($_POST['rsargs'][76]);
-            $imagenter_ul_type = NM_utf8_urldecode($_POST['rsargs'][77]);
-            $imagenter_limpa = NM_utf8_urldecode($_POST['rsargs'][78]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][79]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][80]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][81]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][82]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][83]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][84]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][85]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][86]);
+            $archivo_cedula = NM_utf8_urldecode($_POST['rsargs'][74]);
+            $archivo_rut = NM_utf8_urldecode($_POST['rsargs'][75]);
+            $archivo_nit = NM_utf8_urldecode($_POST['rsargs'][76]);
+            $archivo_pago = NM_utf8_urldecode($_POST['rsargs'][77]);
+            $id_plan = NM_utf8_urldecode($_POST['rsargs'][78]);
+            $valor_plan = NM_utf8_urldecode($_POST['rsargs'][79]);
+            $fecha_registro_fe = NM_utf8_urldecode($_POST['rsargs'][80]);
+            $nombre_contador = NM_utf8_urldecode($_POST['rsargs'][81]);
+            $estado = NM_utf8_urldecode($_POST['rsargs'][82]);
+            $si_nomina = NM_utf8_urldecode($_POST['rsargs'][83]);
+            $n_trabajadores = NM_utf8_urldecode($_POST['rsargs'][84]);
+            $si_factura_electronica = NM_utf8_urldecode($_POST['rsargs'][85]);
+            $nombre_empresa_bd = NM_utf8_urldecode($_POST['rsargs'][86]);
+            $es_restaurante = NM_utf8_urldecode($_POST['rsargs'][87]);
+            $porcentaje_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][88]);
+            $imagenter_ul_name = NM_utf8_urldecode($_POST['rsargs'][89]);
+            $imagenter_ul_type = NM_utf8_urldecode($_POST['rsargs'][90]);
+            $archivo_cedula_ul_name = NM_utf8_urldecode($_POST['rsargs'][91]);
+            $archivo_cedula_ul_type = NM_utf8_urldecode($_POST['rsargs'][92]);
+            $archivo_rut_ul_name = NM_utf8_urldecode($_POST['rsargs'][93]);
+            $archivo_rut_ul_type = NM_utf8_urldecode($_POST['rsargs'][94]);
+            $archivo_nit_ul_name = NM_utf8_urldecode($_POST['rsargs'][95]);
+            $archivo_nit_ul_type = NM_utf8_urldecode($_POST['rsargs'][96]);
+            $archivo_pago_ul_name = NM_utf8_urldecode($_POST['rsargs'][97]);
+            $archivo_pago_ul_type = NM_utf8_urldecode($_POST['rsargs'][98]);
+            $imagenter_limpa = NM_utf8_urldecode($_POST['rsargs'][99]);
+            $archivo_cedula_salva = NM_utf8_urldecode($_POST['rsargs'][100]);
+            $archivo_cedula_limpa = NM_utf8_urldecode($_POST['rsargs'][101]);
+            $archivo_rut_salva = NM_utf8_urldecode($_POST['rsargs'][102]);
+            $archivo_rut_limpa = NM_utf8_urldecode($_POST['rsargs'][103]);
+            $archivo_nit_salva = NM_utf8_urldecode($_POST['rsargs'][104]);
+            $archivo_nit_limpa = NM_utf8_urldecode($_POST['rsargs'][105]);
+            $archivo_pago_salva = NM_utf8_urldecode($_POST['rsargs'][106]);
+            $archivo_pago_limpa = NM_utf8_urldecode($_POST['rsargs'][107]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][108]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][109]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][110]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][111]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][112]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][113]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][114]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][115]);
         }
         if ('ajax_terceros_navigate_form' == $_POST['rs'])
         {
@@ -2738,9 +2904,17 @@ ob_start();
         {
             $_SESSION['sn'] = $sn;
         }
+        if (isset($gnit)) 
+        {
+            $_SESSION['gnit'] = $gnit;
+        }
         if (isset($gidtercero)) 
         {
             $_SESSION['gidtercero'] = $gidtercero;
+        }
+        if (isset($gurl_reg_empresa)) 
+        {
+            $_SESSION['gurl_reg_empresa'] = $gurl_reg_empresa;
         }
     } 
     elseif (isset($script_case_init) && !empty($script_case_init) && !is_array($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['terceros']['parms']))
@@ -3020,6 +3194,16 @@ ob_start();
             $_SESSION['sn'] = $_GET["sn"];
             nm_limpa_str_terceros($_SESSION['sn']);
         }
+        if (isset($_POST["gnit"])) 
+        {
+            $_SESSION['gnit'] = $_POST["gnit"];
+            nm_limpa_str_terceros($_SESSION['gnit']);
+        }
+        if (isset($_GET["gnit"])) 
+        {
+            $_SESSION['gnit'] = $_GET["gnit"];
+            nm_limpa_str_terceros($_SESSION['gnit']);
+        }
         if (isset($_POST["gidtercero"])) 
         {
             $_SESSION['gidtercero'] = $_POST["gidtercero"];
@@ -3029,6 +3213,16 @@ ob_start();
         {
             $_SESSION['gidtercero'] = $_GET["gidtercero"];
             nm_limpa_str_terceros($_SESSION['gidtercero']);
+        }
+        if (isset($_POST["gurl_reg_empresa"])) 
+        {
+            $_SESSION['gurl_reg_empresa'] = $_POST["gurl_reg_empresa"];
+            nm_limpa_str_terceros($_SESSION['gurl_reg_empresa']);
+        }
+        if (isset($_GET["gurl_reg_empresa"])) 
+        {
+            $_SESSION['gurl_reg_empresa'] = $_GET["gurl_reg_empresa"];
+            nm_limpa_str_terceros($_SESSION['gurl_reg_empresa']);
         }
         if (!empty($_SESSION['sc_session'][$script_case_init]['terceros']['volta_redirect_apl']))
         {
@@ -3152,6 +3346,10 @@ ob_start();
     $inicial_terceros->contr_terceros->NM_ajax_info['select_html']['creditoprov'] = "class=\"sc-js-input scFormObjectOdd css_creditoprov_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_creditoprov\" name=\"creditoprov\" size=\"1\" alt=\"{type: \'select\', enterTab: true}\"";
     $inicial_terceros->contr_terceros->NM_ajax_info['select_html']['zona_clientes'] = "class=\"sc-js-input scFormObjectOdd css_zona_clientes_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_zona_clientes\" name=\"zona_clientes\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
     $inicial_terceros->contr_terceros->NM_ajax_info['select_html']['clasificacion_clientes'] = "class=\"sc-js-input scFormObjectOdd css_clasificacion_clientes_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_clasificacion_clientes\" name=\"clasificacion_clientes\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros->contr_terceros->NM_ajax_info['select_html']['id_plan'] = "class=\"sc-js-input scFormObjectOdd css_id_plan_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_plan\" name=\"id_plan\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros->contr_terceros->NM_ajax_info['select_html']['estado'] = "class=\"sc-js-input scFormObjectOdd css_estado_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_estado\" name=\"estado\" size=\"1\" alt=\"{type: \'select\', enterTab: true}\"";
+    $inicial_terceros->contr_terceros->NM_ajax_info['select_html']['si_nomina'] = " onClick=\"\" ";
+    $inicial_terceros->contr_terceros->NM_ajax_info['select_html']['si_factura_electronica'] = " onClick=\"\" ";
     $inicial_terceros->contr_terceros->NM_ajax_info['select_html']['es_restaurante'] = " onClick=\"\" ";
 
     if (!defined('SC_SAJAX_LOADED'))
@@ -3240,6 +3438,19 @@ ob_start();
     sajax_export("ajax_terceros_validate_puc_auxiliar_proveedores");
     sajax_export("ajax_terceros_validate_puc_retefuente_compras");
     sajax_export("ajax_terceros_validate_puc_retefuente_servicios_prov");
+    sajax_export("ajax_terceros_validate_archivo_cedula");
+    sajax_export("ajax_terceros_validate_archivo_rut");
+    sajax_export("ajax_terceros_validate_archivo_nit");
+    sajax_export("ajax_terceros_validate_archivo_pago");
+    sajax_export("ajax_terceros_validate_id_plan");
+    sajax_export("ajax_terceros_validate_valor_plan");
+    sajax_export("ajax_terceros_validate_fecha_registro_fe");
+    sajax_export("ajax_terceros_validate_nombre_contador");
+    sajax_export("ajax_terceros_validate_estado");
+    sajax_export("ajax_terceros_validate_si_nomina");
+    sajax_export("ajax_terceros_validate_n_trabajadores");
+    sajax_export("ajax_terceros_validate_si_factura_electronica");
+    sajax_export("ajax_terceros_validate_nombre_empresa_bd");
     sajax_export("ajax_terceros_validate_archivos");
     sajax_export("ajax_terceros_validate_es_restaurante");
     sajax_export("ajax_terceros_validate_porcentaje_propina_sugerida");
@@ -4708,6 +4919,253 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_puc_retefuente_servicios_prov
 
+    function ajax_terceros_validate_archivo_cedula($archivo_cedula, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_archivo_cedula';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'archivo_cedula' => NM_utf8_urldecode($archivo_cedula),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_archivo_cedula
+
+    function ajax_terceros_validate_archivo_rut($archivo_rut, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_archivo_rut';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'archivo_rut' => NM_utf8_urldecode($archivo_rut),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_archivo_rut
+
+    function ajax_terceros_validate_archivo_nit($archivo_nit, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_archivo_nit';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'archivo_nit' => NM_utf8_urldecode($archivo_nit),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_archivo_nit
+
+    function ajax_terceros_validate_archivo_pago($archivo_pago, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_archivo_pago';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'archivo_pago' => NM_utf8_urldecode($archivo_pago),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_archivo_pago
+
+    function ajax_terceros_validate_id_plan($id_plan, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_id_plan';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'id_plan' => NM_utf8_urldecode($id_plan),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_id_plan
+
+    function ajax_terceros_validate_valor_plan($valor_plan, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_valor_plan';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'valor_plan' => NM_utf8_urldecode($valor_plan),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_valor_plan
+
+    function ajax_terceros_validate_fecha_registro_fe($fecha_registro_fe, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_fecha_registro_fe';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'fecha_registro_fe' => NM_utf8_urldecode($fecha_registro_fe),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_fecha_registro_fe
+
+    function ajax_terceros_validate_nombre_contador($nombre_contador, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_nombre_contador';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'nombre_contador' => NM_utf8_urldecode($nombre_contador),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_nombre_contador
+
+    function ajax_terceros_validate_estado($estado, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_estado';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'estado' => NM_utf8_urldecode($estado),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_estado
+
+    function ajax_terceros_validate_si_nomina($si_nomina, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_si_nomina';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'si_nomina' => NM_utf8_urldecode($si_nomina),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_si_nomina
+
+    function ajax_terceros_validate_n_trabajadores($n_trabajadores, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_n_trabajadores';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'n_trabajadores' => NM_utf8_urldecode($n_trabajadores),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_n_trabajadores
+
+    function ajax_terceros_validate_si_factura_electronica($si_factura_electronica, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_si_factura_electronica';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'si_factura_electronica' => NM_utf8_urldecode($si_factura_electronica),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_si_factura_electronica
+
+    function ajax_terceros_validate_nombre_empresa_bd($nombre_empresa_bd, $script_case_init)
+    {
+        global $inicial_terceros;
+        //register_shutdown_function("terceros_pack_ajax_response");
+        $inicial_terceros->contr_terceros->NM_ajax_flag          = true;
+        $inicial_terceros->contr_terceros->NM_ajax_opcao         = 'validate_nombre_empresa_bd';
+        $inicial_terceros->contr_terceros->NM_ajax_info['param'] = array(
+                  'nombre_empresa_bd' => NM_utf8_urldecode($nombre_empresa_bd),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros->contr_terceros->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros->contr_terceros->controle();
+        exit;
+    } // ajax_validate_nombre_empresa_bd
+
     function ajax_terceros_validate_archivos($archivos, $script_case_init)
     {
         global $inicial_terceros;
@@ -5363,7 +5821,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_autocomp_puc_retefuente_servicios_prov
 
-    function ajax_terceros_submit_form($tipo, $regimen, $tipo_documento, $documento, $dv, $imagenter, $codigo_tercero, $sexo, $notificar, $nombre1, $nombre2, $apellido1, $apellido2, $tel_cel, $urlmail, $idtercero, $r_social, $nombres, $nombre_comercil, $representante, $direccion, $departamento, $idmuni, $ciudad, $codigo_postal, $observaciones, $lenguaje, $c_postal, $correo_notificafe, $celular_notificafe, $cliente, $proveedor, $empleado, $es_tecnico, $activo, $credito, $cupo, $cupodis, $dias_credito, $dias_mora, $efec_retencion, $listaprecios, $loatiende, $autorizado, $relleno2, $nacimiento, $detalle_tributario, $responsabilidad_fiscal, $ciiu, $sucur_cliente, $sucursales, $fechault, $saldo, $afiliacion, $es_cajero, $cupo_vendedor, $autoretenedor, $creditoprov, $dias, $url, $contacto, $telefonos_prov, $email, $fechultcomp, $saldoapagar, $codigo_ter, $zona_clientes, $clasificacion_clientes, $puc_auxiliar_deudores, $puc_retefuente_ventas, $puc_retefuente_servicios_clie, $puc_auxiliar_proveedores, $puc_retefuente_compras, $puc_retefuente_servicios_prov, $es_restaurante, $porcentaje_propina_sugerida, $imagenter_ul_name, $imagenter_ul_type, $imagenter_limpa, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_terceros_submit_form($tipo, $regimen, $tipo_documento, $documento, $dv, $imagenter, $codigo_tercero, $sexo, $notificar, $nombre1, $nombre2, $apellido1, $apellido2, $tel_cel, $urlmail, $idtercero, $r_social, $nombres, $nombre_comercil, $representante, $direccion, $departamento, $idmuni, $ciudad, $codigo_postal, $observaciones, $lenguaje, $c_postal, $correo_notificafe, $celular_notificafe, $cliente, $proveedor, $empleado, $es_tecnico, $activo, $credito, $cupo, $cupodis, $dias_credito, $dias_mora, $efec_retencion, $listaprecios, $loatiende, $autorizado, $relleno2, $nacimiento, $detalle_tributario, $responsabilidad_fiscal, $ciiu, $sucur_cliente, $sucursales, $fechault, $saldo, $afiliacion, $es_cajero, $cupo_vendedor, $autoretenedor, $creditoprov, $dias, $url, $contacto, $telefonos_prov, $email, $fechultcomp, $saldoapagar, $codigo_ter, $zona_clientes, $clasificacion_clientes, $puc_auxiliar_deudores, $puc_retefuente_ventas, $puc_retefuente_servicios_clie, $puc_auxiliar_proveedores, $puc_retefuente_compras, $puc_retefuente_servicios_prov, $archivo_cedula, $archivo_rut, $archivo_nit, $archivo_pago, $id_plan, $valor_plan, $fecha_registro_fe, $nombre_contador, $estado, $si_nomina, $n_trabajadores, $si_factura_electronica, $nombre_empresa_bd, $es_restaurante, $porcentaje_propina_sugerida, $imagenter_ul_name, $imagenter_ul_type, $archivo_cedula_ul_name, $archivo_cedula_ul_type, $archivo_rut_ul_name, $archivo_rut_ul_type, $archivo_nit_ul_name, $archivo_nit_ul_type, $archivo_pago_ul_name, $archivo_pago_ul_type, $imagenter_limpa, $archivo_cedula_salva, $archivo_cedula_limpa, $archivo_rut_salva, $archivo_rut_limpa, $archivo_nit_salva, $archivo_nit_limpa, $archivo_pago_salva, $archivo_pago_limpa, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_terceros;
         //register_shutdown_function("terceros_pack_ajax_response");
@@ -5444,11 +5902,40 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'puc_auxiliar_proveedores' => NM_utf8_urldecode($puc_auxiliar_proveedores),
                   'puc_retefuente_compras' => NM_utf8_urldecode($puc_retefuente_compras),
                   'puc_retefuente_servicios_prov' => NM_utf8_urldecode($puc_retefuente_servicios_prov),
+                  'archivo_cedula' => NM_utf8_urldecode($archivo_cedula),
+                  'archivo_rut' => NM_utf8_urldecode($archivo_rut),
+                  'archivo_nit' => NM_utf8_urldecode($archivo_nit),
+                  'archivo_pago' => NM_utf8_urldecode($archivo_pago),
+                  'id_plan' => NM_utf8_urldecode($id_plan),
+                  'valor_plan' => NM_utf8_urldecode($valor_plan),
+                  'fecha_registro_fe' => NM_utf8_urldecode($fecha_registro_fe),
+                  'nombre_contador' => NM_utf8_urldecode($nombre_contador),
+                  'estado' => NM_utf8_urldecode($estado),
+                  'si_nomina' => NM_utf8_urldecode($si_nomina),
+                  'n_trabajadores' => NM_utf8_urldecode($n_trabajadores),
+                  'si_factura_electronica' => NM_utf8_urldecode($si_factura_electronica),
+                  'nombre_empresa_bd' => NM_utf8_urldecode($nombre_empresa_bd),
                   'es_restaurante' => NM_utf8_urldecode($es_restaurante),
                   'porcentaje_propina_sugerida' => NM_utf8_urldecode($porcentaje_propina_sugerida),
                   'imagenter_ul_name' => NM_utf8_urldecode($imagenter_ul_name),
                   'imagenter_ul_type' => NM_utf8_urldecode($imagenter_ul_type),
+                  'archivo_cedula_ul_name' => NM_utf8_urldecode($archivo_cedula_ul_name),
+                  'archivo_cedula_ul_type' => NM_utf8_urldecode($archivo_cedula_ul_type),
+                  'archivo_rut_ul_name' => NM_utf8_urldecode($archivo_rut_ul_name),
+                  'archivo_rut_ul_type' => NM_utf8_urldecode($archivo_rut_ul_type),
+                  'archivo_nit_ul_name' => NM_utf8_urldecode($archivo_nit_ul_name),
+                  'archivo_nit_ul_type' => NM_utf8_urldecode($archivo_nit_ul_type),
+                  'archivo_pago_ul_name' => NM_utf8_urldecode($archivo_pago_ul_name),
+                  'archivo_pago_ul_type' => NM_utf8_urldecode($archivo_pago_ul_type),
                   'imagenter_limpa' => NM_utf8_urldecode($imagenter_limpa),
+                  'archivo_cedula_salva' => NM_utf8_urldecode($archivo_cedula_salva),
+                  'archivo_cedula_limpa' => NM_utf8_urldecode($archivo_cedula_limpa),
+                  'archivo_rut_salva' => NM_utf8_urldecode($archivo_rut_salva),
+                  'archivo_rut_limpa' => NM_utf8_urldecode($archivo_rut_limpa),
+                  'archivo_nit_salva' => NM_utf8_urldecode($archivo_nit_salva),
+                  'archivo_nit_limpa' => NM_utf8_urldecode($archivo_nit_limpa),
+                  'archivo_pago_salva' => NM_utf8_urldecode($archivo_pago_salva),
+                  'archivo_pago_limpa' => NM_utf8_urldecode($archivo_pago_limpa),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),

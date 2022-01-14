@@ -365,6 +365,7 @@ if (!$embbed)
 <table width='100%' cellspacing=0 cellpadding=0>
 <?php
 }
+$disp_rest = "none";
 ?>
  <tr>
   <td class="<?php echo ($embbed)? 'scAppDivHeader scAppDivHeaderText':'scGridLabelVert'; ?>">
@@ -403,7 +404,7 @@ if (!$embbed)
    if (!$embbed)
    {
 ?>
-   <?php echo nmButtonOutput($this->arr_buttons, "bapply_appdiv", "scSubmitOrderCampos('" . NM_encode_input($tbar_pos) . "', 'regra')", "scSubmitOrderCampos('" . NM_encode_input($tbar_pos) . "', 'regra')", "f_sub_regr", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+   <?php echo nmButtonOutput($this->arr_buttons, "bcancelar_appdiv", "self.parent.tb_remove(); buttonunselectedOF();", "self.parent.tb_remove(); buttonunselectedOF();", "f_sub_regr", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }
@@ -481,7 +482,11 @@ function display_btn_restore_ord() {
     buttonEnable_ord("f_sel_sub");
 }
 function proc_btn_ord(btn, proc) {
-    if ($("#" + btn).prop("disabled") == true) {
+    if (
+        (document.Fsel_ord.fsel_ok.value != 'regra' && $("#" + btn).prop("disabled") == true) || 
+        (document.Fsel_ord.fsel_ok.value == 'regra' && $("#id_sel_regra_sel_ord").val() == '')
+    )
+    {
         return;
     }
     eval (proc);

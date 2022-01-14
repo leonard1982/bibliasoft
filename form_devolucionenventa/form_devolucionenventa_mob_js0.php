@@ -116,6 +116,10 @@ function scInlineFormSend()
   return false;
 }
 
+function nm_navpage(x, op) 
+{ 
+    nm_move('navpage', x);
+} 
 function nm_move(x, y, z) 
 { 
     if (Nm_Proc_Atualiz)

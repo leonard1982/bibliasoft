@@ -9,16 +9,13 @@
 <input type="hidden" name="nmgp_parms" value=""/>
 <input type="hidden" name="nmgp_ordem" value=""/>
 <input type="hidden" name="nmgp_clone" value=""/>
-<input type="hidden" name="nmgp_fast_search" value=""/>
-<input type="hidden" name="nmgp_cond_fast_search" value=""/>
-<input type="hidden" name="nmgp_arg_fast_search" value=""/>
 <input type="hidden" name="nmgp_arg_dyn_search" value=""/>
 <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"> 
 </form> 
 <form name="F5" method="post" 
                   action="form_configuraciones_mob.php" 
                   target="_self"> 
-  <input type="hidden" name="nmgp_opcao" value="<?php if ($this->nm_Start_new) {echo "ini";} elseif ($this->sc_insert_on) {echo "final";} else {echo "igual";}?>"/>
+  <input type="hidden" name="nmgp_opcao" value="<?php if ($this->nm_Start_new) {echo "ini";} else {echo "igual";}?>"/>
   <input type="hidden" name="nmgp_parms" value="<?php echo $this->form_encode_input($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob']['parms']); ?>"/>
   <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"/> 
 </form> 
@@ -98,35 +95,6 @@ function nm_move(x, y, z)
         x = "novo";
         document.F2.nmgp_clone.value = "S";
         document.F2.nmgp_opcao.value = x; 
-    }
-    if ("fast_search" == x)
-    {
-        document.F2.nmgp_ordem.value = ''; 
-        document.F2.nmgp_fast_search.value = scAjaxGetFieldSelectMult("nmgp_fast_search_" + y, ";"); 
-        document.F2.nmgp_arg_fast_search.value = scAjaxGetFieldText("nmgp_arg_fast_search_" + y); 
-        var ver_ch = eval('change_fast_' + y);
-        if (document.F2.nmgp_arg_fast_search.value == '' && ver_ch == '')
-        { 
-            scJs_alert("<?php echo $this->Ini->Nm_lang['lang_srch_req_field'] ?>");
-            document.F1.elements["nmgp_arg_fast_search_" + y].focus();
-            return false;
-        } 
-        if (document.F2.nmgp_arg_fast_search.value == '__Clear_Fast__')
-        { 
-            document.F2.nmgp_arg_fast_search.value = '';
-            document.F1.elements["nmgp_arg_fast_search_" + y].value = '';
-        } 
-        if(document.F2.nmgp_arg_fast_search.value == '') 
-        { 
-            $('#SC_fast_search_close_' + y).hide();
-            $('#SC_fast_search_submit_' + y).show();
-        } 
-        else 
-        { 
-            $('#SC_fast_search_close_' + y).show();
-            $('#SC_fast_search_submit_' + y).hide();
-        } 
-        document.F2.nmgp_cond_fast_search.value = scAjaxGetFieldText("nmgp_cond_fast_search_" + y); 
     }
     if ("novo" == x || "edit_novo" == x || "reload_novo" == x)
     {

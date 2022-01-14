@@ -550,7 +550,7 @@ function scJQUploadAdd(iSeqRow) {
   $("#id_sc_field_imagen" + iSeqRow).fileupload({
     datatype: "json",
     url: "form_grupo_mob_ul_save.php",
-    dropZone: $("#hidden_field_data_imagen" + iSeqRow),
+    dropZone: "",
     formData: function() {
       return [
         {name: 'param_field', value: 'imagen'},
@@ -872,41 +872,3 @@ function scCheckUploadExtensionSize_imagen(thisField)
     return 'ok';
 }
 
-var scBtnGrpStatus = {};
-function scBtnGrpShow(sGroup) {
-  if (typeof(scBtnGrpShowMobile) === typeof(function(){})) { return scBtnGrpShowMobile(sGroup); };
-  $('#sc_btgp_btn_' + sGroup).addClass('selected');
-  var btnPos = $('#sc_btgp_btn_' + sGroup).offset();
-  scBtnGrpStatus[sGroup] = 'open';
-  $('#sc_btgp_btn_' + sGroup).mouseout(function() {
-    scBtnGrpStatus[sGroup] = '';
-    setTimeout(function() {
-      scBtnGrpHide(sGroup, false);
-    }, 1000);
-  }).mouseover(function() {
-    scBtnGrpStatus[sGroup] = 'over';
-  });
-  $('#sc_btgp_div_' + sGroup + ' span a').click(function() {
-    scBtnGrpStatus[sGroup] = 'out';
-    scBtnGrpHide(sGroup, false);
-  });
-  $('#sc_btgp_div_' + sGroup).css({
-    'left': btnPos.left
-  })
-  .mouseover(function() {
-    scBtnGrpStatus[sGroup] = 'over';
-  })
-  .mouseleave(function() {
-    scBtnGrpStatus[sGroup] = 'out';
-    setTimeout(function() {
-      scBtnGrpHide(sGroup, false);
-    }, 1000);
-  })
-  .show('fast');
-}
-function scBtnGrpHide(sGroup, bForce) {
-  if (bForce || 'over' != scBtnGrpStatus[sGroup]) {
-    $('#sc_btgp_div_' + sGroup).hide('fast');
-    $('#sc_btgp_btn_' + sGroup).addClass('selected');
-  }
-}

@@ -229,8 +229,8 @@ class grid_reporte_impuestos_ing_terceros_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210817"; 
-      $this->nm_hr_ult_alt   = "115231"; 
+      $this->nm_dt_ult_alt   = "20211223"; 
+      $this->nm_hr_ult_alt   = "110934"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1270,7 +1270,7 @@ class grid_reporte_impuestos_ing_terceros_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_reporte_impuestos_ing_terceros']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_reporte_impuestos_ing_terceros']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXOZ9F7HArYD5BOHgvOVcBOV5F/DoJeD9BiZSFaHIveD5XGDENOHArCDuJeVoJsHQNmH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKD5NUHgNOVkJqDWXCVoFaDcJeDQX7DSBYHQF7DMrYVIBsDWFYVorqHQNwZ1BiHAzGZMBqHgveHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODuX7VoX7D9JmZ1B/D1rKD5BiDErKVkXeDWFqDoBOD9XsZSFGHANOVWJsHgrKVcB/V5X7DoFGD9BsZ1FaHArKZMFaDMzGHEJGH5FYZuFaD9XsZSFGD1BeV5raHuvmVcBOV5F/DoF7DcNwH9FaD1rKV5FaDErKVkXeH5FYVoB/D9NwH9X7Z1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFUD9XOZ1FGHIrwV5JeDMvCHEJGHEFqDoB/DcBiDQJsD1BeHQBqDMvmV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5XGDMvOV9BUDWB3VoX7HQBqZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmZSFGHIrwD5JsHgvsVIBsDurGDoXGD9XOH9B/HAN7HQFGDErKVkJ3HEXCZuBqD9NmDQX7DSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYH9FUHArYHuBODMzGDkBODWFaDoXGD9BsZ1F7Z1rYV5FUHgvsHErCH5F/HMB/HQXOZSFGD1veHuFGHgrKVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuFaHQJeDQFaZ1N7HQNUHuvmVcBODWF/VoJwHQNmZSB/D1rwHQBiHgNKVkXeHEXCHIBiDcJeH9BiDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSFGHANOD5JwHuzGVcFKV5X7VoX7D9BiZ1F7HArYD5BiDEBeHEXeV5FqDoBOD9NmDQX7HABYV5BqHuBYVcFKV5X7VoFGDcNwH9B/DSrYV5FUDMzGZSJqV5FaZuFaDcBwDQFGHANOV5FGHgrKVcFCDWJeVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBeHEXeDWXCHIB/HQNwDQB/HAveHQNUDMNODkB/HEF/HIFUDcNmZkBiHANOHQXGDEvsDkXKHEFqDoJeD9NmDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqHAvOV5XGDMrYVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMvCHEJGDWXCHIFUHQBiDuBqHAveD5JwHgrYDkBODuX7DorqHQBsZ1BiD1rwHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -10057,15 +10057,15 @@ $_SESSION['scriptcase']['grid_reporte_impuestos_ing_terceros']['contr_erro'] = '
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -13989,27 +13989,27 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       }
       $sv_data = $data_search;
       foreach ($fields as $field) {
-          if ($field == "SC_all_Cmp" || $field == "anio") 
+          if ($field == "anio") 
           {
               $this->SC_monta_condicao($comando, "anio", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "periodo") 
+          if ($field == "periodo") 
           {
               $this->SC_monta_condicao($comando, "periodo", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "zona") 
+          if ($field == "zona") 
           {
               $this->SC_monta_condicao($comando, "zona", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "fechaven") 
+          if ($field == "fechaven") 
           {
               $this->SC_monta_condicao($comando, "fechaven", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "numero2") 
+          if ($field == "numero2") 
           {
               $this->SC_monta_condicao($comando, "numero2", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "ccnit") 
+          if ($field == "ccnit") 
           {
               $this->SC_monta_condicao($comando, "ccnit", $arg_search, $data_search);
           }
@@ -14021,43 +14021,43 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                   $this->SC_monta_condicao($comando, "idcli", $arg_search, $data_lookup);
               }
           }
-          if ($field == "SC_all_Cmp" || $field == "numcontrato") 
+          if ($field == "numcontrato") 
           {
               $this->SC_monta_condicao($comando, "numcontrato", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "subtotal") 
+          if ($field == "subtotal") 
           {
               $this->SC_monta_condicao($comando, "subtotal", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "base_iva_19") 
+          if ($field == "base_iva_19") 
           {
               $this->SC_monta_condicao($comando, "base_iva_19", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "valor_iva_19") 
+          if ($field == "valor_iva_19") 
           {
               $this->SC_monta_condicao($comando, "valor_iva_19", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "base_iva_5") 
+          if ($field == "base_iva_5") 
           {
               $this->SC_monta_condicao($comando, "base_iva_5", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "valor_iva_5") 
+          if ($field == "valor_iva_5") 
           {
               $this->SC_monta_condicao($comando, "valor_iva_5", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "excento") 
+          if ($field == "excento") 
           {
               $this->SC_monta_condicao($comando, "excento", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "ing_terceros") 
+          if ($field == "ing_terceros") 
           {
               $this->SC_monta_condicao($comando, "ing_terceros", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "total") 
+          if ($field == "total") 
           {
               $this->SC_monta_condicao($comando, "total", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "idfacven") 
+          if ($field == "idfacven") 
           {
               $this->SC_monta_condicao($comando, "idfacven", $arg_search, str_replace(",", ".", $data_search));
           }
@@ -14065,7 +14065,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           {
               $this->SC_monta_condicao($comando, "numfacven", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "credito") 
+          if ($field == "credito") 
           {
               $data_lookup = $this->SC_lookup_credito($arg_search, $data_search);
               if (is_array($data_lookup) && !empty($data_lookup)) 
@@ -14073,19 +14073,19 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                   $this->SC_monta_condicao($comando, "credito", $arg_search, $data_lookup);
               }
           }
-          if ($field == "SC_all_Cmp" || $field == "fechavenc") 
+          if ($field == "fechavenc") 
           {
               $this->SC_monta_condicao($comando, "fechavenc", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "valoriva") 
+          if ($field == "valoriva") 
           {
               $this->SC_monta_condicao($comando, "valoriva", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "pagada") 
+          if ($field == "pagada") 
           {
               $this->SC_monta_condicao($comando, "pagada", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "asentada") 
+          if ($field == "asentada") 
           {
               $data_lookup = $this->SC_lookup_asentada($arg_search, $data_search);
               if (is_array($data_lookup) && !empty($data_lookup)) 
@@ -14097,23 +14097,23 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           {
               $this->SC_monta_condicao($comando, "observaciones", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "saldo") 
+          if ($field == "saldo") 
           {
               $this->SC_monta_condicao($comando, "saldo", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "adicional") 
+          if ($field == "adicional") 
           {
               $this->SC_monta_condicao($comando, "adicional", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "adicional2") 
+          if ($field == "adicional2") 
           {
               $this->SC_monta_condicao($comando, "adicional2", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "adicional3") 
+          if ($field == "adicional3") 
           {
               $this->SC_monta_condicao($comando, "adicional3", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "resolucion") 
+          if ($field == "resolucion") 
           {
               $data_lookup = $this->SC_lookup_resolucion($arg_search, $data_search);
               if (is_array($data_lookup) && !empty($data_lookup)) 
@@ -14121,7 +14121,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                   $this->SC_monta_condicao($comando, "resolucion", $arg_search, $data_lookup);
               }
           }
-          if ($field == "SC_all_Cmp" || $field == "vendedor") 
+          if ($field == "vendedor") 
           {
               $data_lookup = $this->SC_lookup_vendedor($arg_search, $data_search);
               if (is_array($data_lookup) && !empty($data_lookup)) 
@@ -14129,27 +14129,27 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                   $this->SC_monta_condicao($comando, "vendedor", $arg_search, $data_lookup);
               }
           }
-          if ($field == "SC_all_Cmp" || $field == "creado") 
+          if ($field == "creado") 
           {
               $this->SC_monta_condicao($comando, "creado", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "editado") 
+          if ($field == "editado") 
           {
               $this->SC_monta_condicao($comando, "editado", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "usuario_crea") 
+          if ($field == "usuario_crea") 
           {
               $this->SC_monta_condicao($comando, "usuario_crea", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "inicio") 
+          if ($field == "inicio") 
           {
               $this->SC_monta_condicao($comando, "inicio", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "fin") 
+          if ($field == "fin") 
           {
               $this->SC_monta_condicao($comando, "fin", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "banco") 
+          if ($field == "banco") 
           {
               $data_lookup = $this->SC_lookup_banco($arg_search, $data_search);
               if (is_array($data_lookup) && !empty($data_lookup)) 
@@ -14157,15 +14157,15 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                   $this->SC_monta_condicao($comando, "banco", $arg_search, $data_lookup);
               }
           }
-          if ($field == "SC_all_Cmp" || $field == "dias_decredito") 
+          if ($field == "dias_decredito") 
           {
               $this->SC_monta_condicao($comando, "dias_decredito", $arg_search, str_replace(",", ".", $data_search));
           }
-          if ($field == "SC_all_Cmp" || $field == "tipo") 
+          if ($field == "tipo") 
           {
               $this->SC_monta_condicao($comando, "tipo", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "cod_cuenta") 
+          if ($field == "cod_cuenta") 
           {
               $this->SC_monta_condicao($comando, "cod_cuenta", $arg_search, $data_search);
           }

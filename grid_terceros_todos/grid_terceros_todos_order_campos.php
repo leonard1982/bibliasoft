@@ -121,6 +121,9 @@ function Ord_cmp_init()
    $tab_ger_campos['empleado'] = "on";
    $tab_def_campos['empleado'] = "empleado";
    $tab_labels["empleado"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["empleado"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["empleado"] : "Empleado";
+   $tab_ger_campos['si_nomina'] = "on";
+   $tab_def_campos['si_nomina'] = "si_nomina";
+   $tab_labels["si_nomina"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["si_nomina"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["si_nomina"] : "Nómina";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['field_display'] as $NM_cada_field => $NM_cada_opc)
@@ -383,6 +386,7 @@ if (!$embbed)
 <table width='100%' cellspacing=0 cellpadding=0>
 <?php
 }
+$disp_rest = "none";
 ?>
  <tr>
   <td class="<?php echo ($embbed)? 'scAppDivHeader scAppDivHeaderText':'scGridLabelVert'; ?>">
@@ -534,7 +538,6 @@ if (!$embbed)
  </tr>
    <tr><td class="<?php echo ($embbed)? 'scAppDivToolbar':'scGridToolbar'; ?>">
 <?php
-  $disp_rest = "none";
   if (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['ordem_select']) && $_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['ordem_select'] != $_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['ordem_select_orig']) {
       $disp_rest = "";
   }
@@ -655,7 +658,11 @@ function display_btn_restore_ord() {
     buttonEnable_ord("f_sel_sub");
 }
 function proc_btn_ord(btn, proc) {
-    if ($("#" + btn).prop("disabled") == true) {
+    if (
+        (document.Fsel_ord.fsel_ok.value != 'regra' && $("#" + btn).prop("disabled") == true) || 
+        (document.Fsel_ord.fsel_ok.value == 'regra' && $("#id_sel_regra_sel_ord").val() == '')
+    )
+    {
         return;
     }
     eval (proc);

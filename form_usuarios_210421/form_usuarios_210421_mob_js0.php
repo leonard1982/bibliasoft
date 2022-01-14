@@ -39,6 +39,13 @@
                   target="_self"> 
   <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"/> 
 </form> 
+<form name="F7" method="post" 
+                  action="form_usuarios_210421_mob.php" 
+                  target="_self"> 
+  <input type="hidden" name="nmgp_opcao" value="change_qtd_line"/>
+  <input type="hidden" name="nmgp_max_line" value=""/>
+  <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"/> 
+</form> 
 <form name="FCAP" action="" method="post" target="_blank"> 
   <input type="hidden" name="SC_lig_apl_orig" value="form_usuarios_210421_mob"/>
   <input type="hidden" name="nmgp_parms" value=""> 
@@ -134,6 +141,10 @@ function scInlineFormSend()
   return false;
 }
 
+function nm_navpage(x, op) 
+{ 
+    nm_move('navpage', x);
+} 
 function nm_move(x, y, z) 
 { 
     if (Nm_Proc_Atualiz)

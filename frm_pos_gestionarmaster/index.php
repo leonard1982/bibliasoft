@@ -217,8 +217,8 @@ class frm_pos_gestionarmaster_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "174314"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20210922"; 
-      $this->nm_hr_ult_alt   = "172058"; 
+      $this->nm_dt_ult_alt   = "20220111"; 
+      $this->nm_hr_ult_alt   = "214126"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class frm_pos_gestionarmaster_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_gestionarmaster']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_gestionarmaster']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQX7DSBYD5FaDMrYVcFKV5FYHMFaHQNmVINUHIveV5BOHgNOVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoFGDcBqZ1B/HIrwV5BOHgvsHEJGDWXCHIF7HQJeDQFUDSvCV5BqDMBOV9BUH5FqVorqD9XOZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5BOHuNOVcB/V5X7VorqD9BsH9FaD1rwD5BiDMzGZSXeDWFqDoXGD9NmDQJsDSBYV5JwHuNOVIBODWFaVoX7D9BsZ1B/HABYD5JeDEvsHEFiDWFqDoJeHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJsDMzGV9BUHEX/VorqHQBsZ1X7D1rwHuBqDEBeZSXeH5F/VoB/D9JKZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoBqHQBiDuBqHANKV5BODMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBOVkJqH5X/ZuFaDcBwZSFUHIrwHQXGHuzGVcBOV5X7HIF7DcNwH9BqZ1NOZMBqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZSFUDSN7HuBOHuBYVcFKDurGVoX7D9XOZ1BiDSrYV5JsDMBYZSXeDWFGDoBOD9FYDQFaHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaDSBYHQJsDMrYVcBOHEF/HIFUHQNwZkBiD1rKD5BqHgrKHArCV5FqZuBqHQBiDQJsHIBeVWBqDMvODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwH9FGHANOD5F7HgrYDkFCDWXCVoraD9XOH9BOZ1BeV5BODMzGHEJGH5FYZuFaD9JKDQX7Z1rwD5NUHgvsVcFCDWJeDoXGDcBqZ1FaD1rwZMB/DMzGHEJGDWrGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQraHgNKHArCH5F/HMXGD9NmZ9XGHArYD5JeDMBYDkB/V5X7HIFUHQXOZSBqZ1rYV5BOHgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgveHArsDWFGZuFaHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBOD9BiZ1rqHIBeV5FaDEBeVkJ3HEFaHIFUDcXGZSX7HABYD5JsHuBYV9FeDWJeHMF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -3166,7 +3166,7 @@ if(isset($_POST["prefijo"]))
 	}
 	
 	 
-      $nm_select = "select Idres,prefijo from resdian where prefijo <> 'INVENT FI' and prefijo <> 'NOTA' and prefijo <> 'PEDIDO'  and prefijo <> 'COTI' and prefijo <> 'PROFORMA' and prefijo <> 'REMIS' and prefijo <> 'PED COMP' and activa='SI' order by Idres desc"; 
+      $nm_select = "select Idres,prefijo from resdian where prefijo <> 'INVENT FI' and prefijo <> 'NOTA' and prefijo <> 'PEDIDO'  and prefijo <> 'COTI' and prefijo <> 'PROFORMA' and prefijo <> 'REMIS' and prefijo <> 'PED COMP' and activa='SI' and pref_ncr='NO' order by Idres desc"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vPrefijos = array();
@@ -4039,15 +4039,17 @@ if(isset($_POST["insertardetallerecibo"]))
 
 if(isset($_POST["cambiarnumero"]))
 {
-	$idfactura = $_POST["idfactura"];
-	$vprefijo  = $_POST["pj"];
-	$vnumero   = $_POST["numero"];
-	$vtipodoc  = $_POST["tipodoc"];
-	$vmensaje = "";
+	$idfactura    = $_POST["idfactura"];
+	$vprefijo     = $_POST["pj"];
+	$vnumero      = $_POST["numero"];
+	$vtipodoc     = $_POST["tipodoc"];
+	$vmensaje     = "";
 	$vconsecutivo = "";
+	$vsql         = "";
 	
+	$vsql = "select r.prefijo from facturaven f inner join resdian r on f.resolucion=r.Idres where f.tipo='".$vtipodoc."' and f.numfacven='".$vnumero."' and f.resolucion='".$vprefijo."' and idfacven <>'".$idfactura."'";
 	 
-      $nm_select = "select r.prefijo from facturaven f inner join resdian r on f.resolucion=r.Idres where f.tipo='".$vtipodoc."' and f.numfacven='".$vnumero."' and f.resolucion='".$vprefijo."' and idfacven <>'".$idfactura."'"; 
+      $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vSiExiste = array();
@@ -4117,16 +4119,7 @@ if(isset($_POST["cambiarnumero"]))
 		{
 			$vconsecutivo = $this->vultimonumero[0][0];
 
-			$sql = "update 
-					facturaven 
-					set 
-					resolucion='".$vprefijo."', 
-					numfacven='".$vconsecutivo."',
-					tipo='".$vtipodoc."'
-					where 
-					idfacven='".$idfactura."'
-					";
-
+			$sql = "update facturaven set resolucion='".$vprefijo."',numfacven='".$vconsecutivo."',tipo='".$vtipodoc."'	where idfacven='".$idfactura."'";
 			
      $nm_select = $sql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4148,26 +4141,23 @@ if(isset($_POST["cambiarnumero"]))
 	}
 	else
 	{
-		$vnum = $vnumero-1;
+		$vsql = "select fechaven from facturaven where idfacven='".$idfactura."'";
 		 
-      $nm_select = "select numfacven from facturaven where tipo='".$vtipodoc."' and resolucion='".$vprefijo."' and numfacven='".$vnum."'"; 
+      $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiMayor = array();
-      $this->vsimayor = array();
+      $this->vFec = array();
+      $this->vfec = array();
       if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
           $nm_count = $SCrx->FieldCount();
           while (!$SCrx->EOF)
           { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
-                        $this->vSiMayor[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $this->vsimayor[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vFec[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vfec[$SCy] [$SCx] = $SCrx->fields[$SCx];
                  }
                  $SCy++; 
                  $SCrx->MoveNext();
@@ -4176,17 +4166,55 @@ if(isset($_POST["cambiarnumero"]))
       } 
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
-          $this->vSiMayor = false;
-          $this->vSiMayor_erro = $this->Db->ErrorMsg();
-          $this->vsimayor = false;
-          $this->vsimayor_erro = $this->Db->ErrorMsg();
+          $this->vFec = false;
+          $this->vFec_erro = $this->Db->ErrorMsg();
+          $this->vfec = false;
+          $this->vfec_erro = $this->Db->ErrorMsg();
       } 
 ;
-		
-		if(!isset($this->vsimayor[0][0]))
+		$vfechaventa = "";
+		if(isset($this->vfec[0][0]))
 		{
-			$vsql = "select f.numfacven,r.prefijo from facturaven f inner join resdian r on f.resolucion=r.Idres where f.idfacven='".$idfactura."'";
+			$vfechaventa = $this->vfec[0][0];
+			
+			$vsql = "select concat(r.prefijo,'/',f.numfacven) as num from facturaven f inner join resdian r on f.resolucion=r.Idres where f.numfacven>'".$vnumero."' and f.tipo='".$vtipodoc."' and f.resolucion='".$vprefijo."' and f.fechaven<'".$vfechaventa."' limit 1";
+			
 			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiExis = array();
+      $this->vsiexis = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiExis[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsiexis[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiExis = false;
+          $this->vSiExis_erro = $this->Db->ErrorMsg();
+          $this->vsiexis = false;
+          $this->vsiexis_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(isset($this->vsiexis[0][0]))
+			{
+				$vmensaje = "Hay un documento posterior con una fecha menor a : ".$vfechaventa;
+				
+				$vsql = "select f.numfacven,r.prefijo from facturaven f inner join resdian r on f.resolucion=r.Idres where f.idfacven='".$idfactura."'";
+				 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -4217,21 +4245,34 @@ if(isset($_POST["cambiarnumero"]))
       } 
 ;
 
-			if(isset($this->vultimonumero[0][0]))
-			{
-				$vconsecutivo = $this->vultimonumero[0][0];
-				$vconsec = $vconsecutivo-1;
-				
-				$sql = "update 
-							facturaven 
-							set 
-							resolucion='".$vprefijo."', 
-							numfacven='".$vconsecutivo."',
-							tipo='".$vtipodoc."'
-							where 
-							idfacven='".$idfactura."'
-							";
+				if(isset($this->vultimonumero[0][0]))
+				{
+					$vconsecutivo = $this->vultimonumero[0][0];
+					$vconsec = $vconsecutivo-1;
 
+					$sql = "update facturaven set resolucion='".$vprefijo."',numfacven='".$vconsecutivo."',tipo='".$vtipodoc."'	where idfacven='".$idfactura."'";
+					
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				}
+			}
+			else
+			{
+				$sql = "update facturaven set resolucion='".$vprefijo."',numfacven='".$vnumero."',tipo='".$vtipodoc."'	where idfacven='".$idfactura."'";
 				
      $nm_select = $sql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -4249,16 +4290,17 @@ if(isset($_POST["cambiarnumero"]))
          }
          $rf->Close();
       ;
-				
-				$vmensaje = "El numero del documento no es consecutivo al ultimo numero: ".$vtipodoc."/".$this->vultimonumero[0][1]."/".$vconsec;
 			}
 		}
+		
+		
 	}
 	
 	echo json_encode(array(
 		
-		"mensaje"=>$vmensaje,
-		"numero"=>$vconsecutivo
+		"mensaje" =>$vmensaje,
+		"numero"  =>$vconsecutivo,
+		"sql"     =>$vsql
 	));
 }
 
@@ -4511,15 +4553,15 @@ $_SESSION['scriptcase']['frm_pos_gestionarmaster']['contr_erro'] = 'on';
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 

@@ -163,18 +163,6 @@ class form_recibos_ing_caja_mob_apl
           {
               $this->nmgp_arg_dyn_search = $this->NM_ajax_info['param']['nmgp_arg_dyn_search'];
           }
-          if (isset($this->NM_ajax_info['param']['nmgp_arg_fast_search']))
-          {
-              $this->nmgp_arg_fast_search = $this->NM_ajax_info['param']['nmgp_arg_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_cond_fast_search']))
-          {
-              $this->nmgp_cond_fast_search = $this->NM_ajax_info['param']['nmgp_cond_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_fast_search']))
-          {
-              $this->nmgp_fast_search = $this->NM_ajax_info['param']['nmgp_fast_search'];
-          }
           if (isset($this->NM_ajax_info['param']['nmgp_num_form']))
           {
               $this->nmgp_num_form = $this->NM_ajax_info['param']['nmgp_num_form'];
@@ -601,19 +589,6 @@ class form_recibos_ing_caja_mob_apl
         $this->classes_100perc_fields['keep_field_size'] = true;
 
 
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
-          'has_fa'           => true,
-          'content_icons'    => false,
-          'style'            => "default",
-      );
-
 
       $_SESSION['scriptcase']['error_icon']['form_recibos_ing_caja_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_recibos_ing_caja_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
@@ -756,15 +731,14 @@ class form_recibos_ing_caja_mob_apl
 
       $this->nmgp_botoes['cancel'] = "on";
       $this->nmgp_botoes['exit'] = "on";
-      $this->nmgp_botoes['qsearch'] = "on";
       $this->nmgp_botoes['new'] = "on";
       $this->nmgp_botoes['insert'] = "on";
-      $this->nmgp_botoes['copy'] = "on";
+      $this->nmgp_botoes['copy'] = "off";
       $this->nmgp_botoes['update'] = "on";
       $this->nmgp_botoes['delete'] = "on";
-      $this->nmgp_botoes['first'] = "on";
-      $this->nmgp_botoes['back'] = "on";
-      $this->nmgp_botoes['forward'] = "on";
+      $this->nmgp_botoes['first'] = "off";
+      $this->nmgp_botoes['back'] = "off";
+      $this->nmgp_botoes['forward'] = "off";
       $this->nmgp_botoes['last'] = "on";
       $this->nmgp_botoes['summary'] = "on";
       $this->nmgp_botoes['navpage'] = "off";
@@ -803,7 +777,6 @@ class form_recibos_ing_caja_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_recibos_ing_caja_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_recibos_ing_caja_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_recibos_ing_caja_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_recibos_ing_caja_mob']['new']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_recibos_ing_caja_mob']['new'] != '')
       {
@@ -858,7 +831,6 @@ class form_recibos_ing_caja_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['embutida_liga_form_insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['embutida_liga_form_insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['embutida_liga_form_insert'];
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['embutida_liga_form_update']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['embutida_liga_form_update'] != '')
       {
@@ -904,7 +876,6 @@ class form_recibos_ing_caja_mob_apl
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_recibos_ing_caja_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_recibos_ing_caja_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf']['form_recibos_ing_caja_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_recibos_ing_caja_mob']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_recibos_ing_caja_mob']['update'] != '')
       {
@@ -1073,13 +1044,6 @@ class form_recibos_ing_caja_mob_apl
       $this->Erro      = new form_recibos_ing_caja_mob_erro();
       $this->Erro->Ini = $this->Ini;
       $this->proc_fast_search = false;
-      if ($this->nmgp_opcao == "fast_search")  
-      {
-          $this->SC_fast_search($this->nmgp_fast_search, $this->nmgp_cond_fast_search, $this->nmgp_arg_fast_search);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['opcao'] = "inicio";
-          $this->nmgp_opcao = "inicio";
-          $this->proc_fast_search = true;
-      } 
       if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
       { 
          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['opcao']))
@@ -5839,24 +5803,6 @@ $_SESSION['scriptcase']['form_recibos_ing_caja_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["detalle1"] = $this->detalle1;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
-              if ($this->nmgp_clone != "S")
-              {
-              }
-              if ($this->nmgp_clone == "S" && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['dados_select']))
-              {
-                  $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['dados_select'];
-                  $this->numero_rc = $this->nmgp_dados_select['numero_rc'];  
-                  $this->fecha_rc = $this->nmgp_dados_select['fecha_rc'];  
-                  $this->contrato = $this->nmgp_dados_select['contrato'];  
-                  $this->tercero = $this->nmgp_dados_select['tercero'];  
-                  $this->monto_rc = $this->nmgp_dados_select['monto_rc'];  
-                  $this->observacion = $this->nmgp_dados_select['observacion'];  
-                  $this->creado = $this->nmgp_dados_select['creado'];  
-                  $this->editado = $this->nmgp_dados_select['editado'];  
-                  $this->id_banco = $this->nmgp_dados_select['id_banco'];  
-                  $this->asentado = $this->nmgp_dados_select['asentado'];  
-                  $this->detalle1 = $this->nmgp_dados_select['detalle1'];  
-              }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_recibos_ing_caja_mob']['foreign_key']))
           {
@@ -8048,25 +7994,10 @@ if (parent && parent.scAjaxDetailValue)
                 return array("sc_b_hlp_t");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-19", "sc_b_sai_t.sc-unique-btn-20", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-21", "sc_b_sai_t.sc-unique-btn-23");
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-17", "sc_b_sai_t.sc-unique-btn-18", "sc_b_sai_t.sc-unique-btn-20", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-19", "sc_b_sai_t.sc-unique-btn-21");
                 break;
             case "last":
-                return array("sc_b_fim_b.sc-unique-btn-11", "sc_b_fim_b.sc-unique-btn-27");
-                break;
-            case "0":
-                return array("sys_separator.sc-unique-btn-17");
-                break;
-            case "copy":
-                return array("sc_b_clone_t.sc-unique-btn-18");
-                break;
-            case "first":
-                return array("sc_b_ini_b.sc-unique-btn-24");
-                break;
-            case "back":
-                return array("sc_b_ret_b.sc-unique-btn-25");
-                break;
-            case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-26");
+                return array("sc_b_fim_b.sc-unique-btn-11", "sc_b_fim_b.sc-unique-btn-22");
                 break;
         }
 

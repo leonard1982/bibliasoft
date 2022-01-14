@@ -22,6 +22,7 @@ class form_reciboingreso_remis_mob_apl
                                 'focus'             => '',
                                 'navStatus'         => array(),
                                 'navSummary'        => array(),
+                                'navPage'           => array(),
                                 'redir'             => array(),
                                 'blockDisplay'      => array(),
                                 'fieldDisplay'      => array(),
@@ -157,18 +158,6 @@ class form_reciboingreso_remis_mob_apl
           if (isset($this->NM_ajax_info['param']['nmgp_arg_dyn_search']))
           {
               $this->nmgp_arg_dyn_search = $this->NM_ajax_info['param']['nmgp_arg_dyn_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_arg_fast_search']))
-          {
-              $this->nmgp_arg_fast_search = $this->NM_ajax_info['param']['nmgp_arg_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_cond_fast_search']))
-          {
-              $this->nmgp_cond_fast_search = $this->NM_ajax_info['param']['nmgp_cond_fast_search'];
-          }
-          if (isset($this->NM_ajax_info['param']['nmgp_fast_search']))
-          {
-              $this->nmgp_fast_search = $this->NM_ajax_info['param']['nmgp_fast_search'];
           }
           if (isset($this->NM_ajax_info['param']['nmgp_num_form']))
           {
@@ -671,19 +660,6 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
       $this->arr_buttons['imprimir']['style']            = "";
       $this->arr_buttons['imprimir']['image']            = "usr__NM__bg__NM__apps_printer_15747.png";
 
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_options'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
-          'has_fa'           => true,
-          'content_icons'    => false,
-          'style'            => "default",
-      );
-
 
       $_SESSION['scriptcase']['error_icon']['form_reciboingreso_remis_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_reciboingreso_remis_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
@@ -826,10 +802,9 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
 
       $this->nmgp_botoes['cancel'] = "on";
       $this->nmgp_botoes['exit'] = "on";
-      $this->nmgp_botoes['qsearch'] = "on";
       $this->nmgp_botoes['new'] = "on";
       $this->nmgp_botoes['insert'] = "on";
-      $this->nmgp_botoes['copy'] = "on";
+      $this->nmgp_botoes['copy'] = "off";
       $this->nmgp_botoes['update'] = "on";
       $this->nmgp_botoes['delete'] = "on";
       $this->nmgp_botoes['first'] = "on";
@@ -837,8 +812,8 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
       $this->nmgp_botoes['forward'] = "on";
       $this->nmgp_botoes['last'] = "on";
       $this->nmgp_botoes['summary'] = "on";
-      $this->nmgp_botoes['navpage'] = "off";
-      $this->nmgp_botoes['goto'] = "off";
+      $this->nmgp_botoes['navpage'] = "on";
+      $this->nmgp_botoes['goto'] = "on";
       $this->nmgp_botoes['qtline'] = "off";
       $this->nmgp_botoes['reload'] = "off";
       $this->nmgp_botoes['imprimir'] = "on";
@@ -874,7 +849,6 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_reciboingreso_remis_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_reciboingreso_remis_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_reciboingreso_remis_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_reciboingreso_remis_mob']['new']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_reciboingreso_remis_mob']['new'] != '')
       {
@@ -929,7 +903,6 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
       {
           $this->nmgp_botoes['new']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['embutida_liga_form_insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['embutida_liga_form_insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['embutida_liga_form_insert'];
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['embutida_liga_form_update']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['embutida_liga_form_update'] != '')
       {
@@ -975,7 +948,6 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
       {
           $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_reciboingreso_remis_mob']['insert'];
           $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_reciboingreso_remis_mob']['insert'];
-          $this->nmgp_botoes['copy']   = $_SESSION['scriptcase']['sc_apl_conf']['form_reciboingreso_remis_mob']['insert'];
       }
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_reciboingreso_remis_mob']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_reciboingreso_remis_mob']['update'] != '')
       {
@@ -1133,13 +1105,6 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
       $this->Erro      = new form_reciboingreso_remis_mob_erro();
       $this->Erro->Ini = $this->Ini;
       $this->proc_fast_search = false;
-      if ($this->nmgp_opcao == "fast_search")  
-      {
-          $this->SC_fast_search($this->nmgp_fast_search, $this->nmgp_cond_fast_search, $this->nmgp_arg_fast_search);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['opcao'] = "inicio";
-          $this->nmgp_opcao = "inicio";
-          $this->proc_fast_search = true;
-      } 
       if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
       { 
          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['opcao']))
@@ -5789,6 +5754,10 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['reg_start'] = $qt_geral_reg_form_reciboingreso_remis_mob; 
       } 
+      if ($this->nmgp_opcao == "navpage" && ($this->nmgp_ordem - 1) <= $qt_geral_reg_form_reciboingreso_remis_mob) 
+      { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['reg_start'] = $this->nmgp_ordem - 1; 
+      } 
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['reg_start']) || empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['reg_start']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['reg_start'] = 0;
@@ -5797,6 +5766,8 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
       $this->NM_ajax_info['navSummary']['reg_ini'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['reg_start'] + 1; 
       $this->NM_ajax_info['navSummary']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['reg_qtd']; 
       $this->NM_ajax_info['navSummary']['reg_tot'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['total'] + 1; 
+      $this->NM_gera_nav_page(); 
+      $this->NM_ajax_info['navPage'] = $this->SC_nav_page; 
       $GLOBALS["NM_ERRO_IBASE"] = 0;  
 //---------- 
       if ($this->nmgp_opcao != "novo" && $this->nmgp_opcao != "nada" && $this->nmgp_opcao != "refresh_insert") 
@@ -6063,28 +6034,6 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["resolucion"] = $this->resolucion;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
-              if ($this->nmgp_clone != "S")
-              {
-              }
-              if ($this->nmgp_clone == "S" && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['dados_select']))
-              {
-                  $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['dados_select'];
-                  $this->nurecibo = $this->nmgp_dados_select['nurecibo'];  
-                  $this->nufac = $this->nmgp_dados_select['nufac'];  
-                  $this->cliente = $this->nmgp_dados_select['cliente'];  
-                  $this->fecharecibo = $this->nmgp_dados_select['fecharecibo'];  
-                  $this->monto = $this->nmgp_dados_select['monto'];  
-                  $this->son = $this->nmgp_dados_select['son'];  
-                  $this->saldofac = $this->nmgp_dados_select['saldofac'];  
-                  $this->formapago = $this->nmgp_dados_select['formapago'];  
-                  $this->numcheque = $this->nmgp_dados_select['numcheque'];  
-                  $this->banco = $this->nmgp_dados_select['banco'];  
-                  $this->numtarjeta = $this->nmgp_dados_select['numtarjeta'];  
-                  $this->nombreobanco = $this->nmgp_dados_select['nombreobanco'];  
-                  $this->obser = $this->nmgp_dados_select['obser'];  
-                  $this->concepto = $this->nmgp_dados_select['concepto'];  
-                  $this->resolucion = $this->nmgp_dados_select['resolucion'];  
-              }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['foreign_key']))
           {
@@ -6336,6 +6285,69 @@ $_SESSION['scriptcase']['form_reciboingreso_remis_mob']['contr_erro'] = 'off';
      $this->nmgp_opcao = "igual";  
      return ;  
    } 
+   function NM_gera_nav_page() 
+   {
+       $this->SC_nav_page = "";
+       $Arr_result        = array();
+       $Ind_result        = 0;
+       $Reg_Page   = 1;
+       $Max_link   = 5;
+       $Mid_link   = ceil($Max_link / 2);
+       $Corr_link  = (($Max_link % 2) == 0) ? 0 : 1;
+       $rec_tot    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['total'] + 1;
+       $rec_fim    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis_mob']['reg_start'] + 1;
+       $rec_fim    = ($rec_fim > $rec_tot) ? $rec_tot : $rec_fim;
+       if ($rec_tot == 0)
+       {
+           return;
+       }
+       $Qtd_Pages  = ceil($rec_tot / $Reg_Page);
+       $Page_Atu   = ceil($rec_fim / $Reg_Page);
+       $Link_ini   = 1;
+       if ($Page_Atu > $Max_link)
+       {
+           $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+       }
+       elseif ($Page_Atu > $Mid_link)
+       {
+           $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+       }
+       if (($Qtd_Pages - $Link_ini) < $Max_link)
+       {
+           $Link_ini = ($Qtd_Pages - $Max_link) + 1;
+       }
+       if ($Link_ini < 1)
+       {
+           $Link_ini = 1;
+       }
+       for ($x = 0; $x < $Max_link && $Link_ini <= $Qtd_Pages; $x++)
+       {
+           $rec = (($Link_ini - 1) * $Reg_Page) + 1;
+           if ($Link_ini == $Page_Atu)
+           {
+               $Arr_result[$Ind_result] = '<span class="scFormToolbarNavOpen" style="vertical-align: middle;">' . $Link_ini . '</span>';
+           }
+           else
+           {
+               $Arr_result[$Ind_result] = '<a class="scFormToolbarNav" style="vertical-align: middle;" href="javascript: nm_navpage(' . $rec . ')">' . $Link_ini . '</a>';
+           }
+           $Link_ini++;
+           $Ind_result++;
+           if (($x + 1) < $Max_link && $Link_ini <= $Qtd_Pages && '' != $this->Ini->Str_toolbarnav_separator && @is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator))
+           {
+               $Arr_result[$Ind_result] = '<img src="' . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator . '" align="absmiddle" style="vertical-align: middle;">';
+               $Ind_result++;
+           }
+       }
+       if ($_SESSION['scriptcase']['reg_conf']['css_dir'] == "RTL")
+       {
+           krsort($Arr_result);
+       }
+       foreach ($Arr_result as $Ind_result => $Lin_result)
+       {
+           $this->SC_nav_page .= $Lin_result;
+       }
+   }
         function initializeRecordState() {
                 $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_remis']['record_state'] = array();
         }
@@ -8166,28 +8178,22 @@ if (parent && parent.scAjaxDetailValue)
                 return array("sc_b_hlp_t");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-23", "sc_b_sai_t.sc-unique-btn-25", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-24", "sc_b_sai_t.sc-unique-btn-26");
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-20", "sc_b_sai_t.sc-unique-btn-21", "sc_b_sai_t.sc-unique-btn-23", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-24");
                 break;
             case "birpara":
                 return array("brec_b");
                 break;
             case "first":
-                return array("sc_b_ini_b.sc-unique-btn-11", "sc_b_ini_b.sc-unique-btn-27");
+                return array("sc_b_ini_b.sc-unique-btn-11", "sc_b_ini_b.sc-unique-btn-25");
                 break;
             case "back":
-                return array("sc_b_ret_b.sc-unique-btn-12", "sc_b_ret_b.sc-unique-btn-28");
+                return array("sc_b_ret_b.sc-unique-btn-12", "sc_b_ret_b.sc-unique-btn-26");
                 break;
             case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-13", "sc_b_avc_b.sc-unique-btn-29");
+                return array("sc_b_avc_b.sc-unique-btn-13", "sc_b_avc_b.sc-unique-btn-27");
                 break;
             case "last":
-                return array("sc_b_fim_b.sc-unique-btn-14", "sc_b_fim_b.sc-unique-btn-30");
-                break;
-            case "0":
-                return array("sys_separator.sc-unique-btn-20");
-                break;
-            case "copy":
-                return array("sc_b_clone_t.sc-unique-btn-21");
+                return array("sc_b_fim_b.sc-unique-btn-14", "sc_b_fim_b.sc-unique-btn-28");
                 break;
         }
 

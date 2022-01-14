@@ -379,6 +379,7 @@ if (!$embbed)
 <table width='100%' cellspacing=0 cellpadding=0>
 <?php
 }
+$disp_rest = "none";
 ?>
  <tr>
   <td class="<?php echo ($embbed)? 'scAppDivHeader scAppDivHeaderText':'scGridLabelVert'; ?>">
@@ -530,7 +531,6 @@ if (!$embbed)
  </tr>
    <tr><td class="<?php echo ($embbed)? 'scAppDivToolbar':'scGridToolbar'; ?>">
 <?php
-  $disp_rest = "none";
   if (isset($_SESSION['sc_session'][$sc_init]['grid_tesoreria_proveedor']['ordem_select']) && $_SESSION['sc_session'][$sc_init]['grid_tesoreria_proveedor']['ordem_select'] != $_SESSION['sc_session'][$sc_init]['grid_tesoreria_proveedor']['ordem_select_orig']) {
       $disp_rest = "";
   }
@@ -651,7 +651,11 @@ function display_btn_restore_ord() {
     buttonEnable_ord("f_sel_sub");
 }
 function proc_btn_ord(btn, proc) {
-    if ($("#" + btn).prop("disabled") == true) {
+    if (
+        (document.Fsel_ord.fsel_ok.value != 'regra' && $("#" + btn).prop("disabled") == true) || 
+        (document.Fsel_ord.fsel_ok.value == 'regra' && $("#id_sel_regra_sel_ord").val() == '')
+    )
+    {
         return;
     }
     eval (proc);

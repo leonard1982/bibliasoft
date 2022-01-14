@@ -12,6 +12,10 @@
 .css_total_grid_line {vertical-align: middle;text-align: right;}
 .css_total_sub_tot {text-align: right;}
 .css_total_tot_ger {text-align: right;}
+.css_clasificacion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_clasificacion_grid_line {vertical-align: top;text-align: right;}
+.css_id_clasificacion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_clasificacion_grid_line {vertical-align: top;text-align: right;}
 .css_copiar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_copiar_grid_line {text-align: center;}
 .css_fechaven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}

@@ -1025,7 +1025,7 @@ function scJQUploadAdd(iSeqRow) {
   $("#id_sc_field_logo" + iSeqRow).fileupload({
     datatype: "json",
     url: "form_datosemp_mob_ul_save.php",
-    dropZone: $("#hidden_field_data_logo" + iSeqRow),
+    dropZone: "",
     formData: function() {
       return [
         {name: 'param_field', value: 'logo'},

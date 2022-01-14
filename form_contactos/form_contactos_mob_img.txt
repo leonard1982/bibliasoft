@@ -22,8 +22,6 @@ scriptcase__NM__ico__NM__users2_24.png
 scriptcase__NM__ico__NM__airmail_24.png
 scriptcase__NM__ico__NM__telephone2_24.png
 scriptcase__NM__ico__NM__document_pinned_24.png
-scriptcase__NM__gear.png
-scriptcase__NM__ico__NM__group_expand.png
 scriptcase__NM__ico__NM__contacts.png
 nm_edite.gif
 nm_te.gif

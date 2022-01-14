@@ -7700,8 +7700,11 @@ $_SESSION['scriptcase']['form_pedido_CW']['contr_erro'] = 'off';
               $this->form_detallepedido_CW->ini_controle();
               if ($this->form_detallepedido_CW->temRegistros($sDetailWhere))
               {
-                  $bDelecaoOk = false;
-                  $sMsgErro   = $this->Ini->Nm_lang['lang_errm_fkvi'];
+                  if (!$this->form_detallepedido_CW->deletaRegistros($sDetailWhere))
+                  {
+                      $bDelecaoOk = false;
+                      $sMsgErro   = $this->Ini->Nm_lang['lang_errm_fkvi'];
+                  }
               }
           }
 
@@ -8777,46 +8780,16 @@ $_SESSION['scriptcase']['form_pedido_CW']['contr_erro'] = 'on';
   
 $original_total = $this->total;
 $original_asentada = $this->asentada;
-$original_idcli = $this->idcli;
-$original_credito = $this->credito;
-$original_cupodis = $this->cupodis;
 $original_idpedido = $this->idpedido;
-$original_facturado = $this->facturado;
 
 if($this->total >0)
 	{
-	
 	if ($this->asentada ==1)
 		{
 		$this->sc_ajax_javascript('nm_field_disabled', array("idcli=disabled;observaciones=disabled;numfacven=disabled;fechaven=disabled;fechavenc=disabled;credito=disabled;prefijo_ped=disabled", ""));
 ;
 		$this->Ini->nm_hidden_blocos[3] = "off"; $this->NM_ajax_info['blockDisplay']['3'] = 'off';
 		
-		
-		$idt=$this->idcli ; 
-		 
-      $nm_select = "select saldo from terceros where idtercero=$idt"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-		$sal=substr($this->ds , 5); 
-		
-		if($this->credito ==1)
-			{
-			$this->cupodis =$this->cupodis -$this->total ;
-			if($this->cupodis <0)
-				{
-				$this->asentada =0;
-				$this->nm_mens_alert[] = '¡NO Tiene saldo suficiente para realizar Pedido!'; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert('¡NO Tiene saldo suficiente para realizar Pedido!'); }goto error;
-				}
-			
 			
      $nm_select ="UPDATE pedidos set asentada=1 where idpedido=$this->idpedido "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -8846,147 +8819,19 @@ if($this->total >0)
 			$vIdPedido=$this->idpedido ;
 			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
  {
-$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('form_pagar_pedido') . "/", $this->nm_location, "par_idpedido?#?" . NM_encode_input($vIdPedido) . "?@?", "_self", "ret_self", 440, 630);
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('form_pagar_pedido_CW') . "/", $this->nm_location, "par_idpedido?#?" . NM_encode_input($vIdPedido) . "?@?", "_self", "ret_self", 440, 630);
  };
-			
-			}
-		
-		if($this->facturado =='NO' and $this->credito ==2)
-			{
-				
-     $nm_select ="UPDATE pedidos set asentada=1 where idpedido=$this->idpedido "; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_pedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-			}
-		
-			 
-      $nm_select = "select modificainvpedido from configuraciones where idconfiguraciones='1'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiModificaInv = array();
-      $this->vsimodificainv = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->vSiModificaInv[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                      $this->vsimodificainv[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vSiModificaInv = false;
-          $this->vSiModificaInv_erro = $this->Db->ErrorMsg();
-          $this->vsimodificainv = false;
-          $this->vsimodificainv_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-			if(isset($this->vsimodificainv[0][0]))
-			{
-
-				$idfactura  = $this->idpedido ;
-
-				if($this->vsimodificainv[0][0]=="SI")
-				{
-					 
-      $nm_select = "select total,prefijo_ped,numpedido from pedidos where idpedido='".$idfactura."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vDatosPedido = array();
-      $this->vdatospedido = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
-                 $SCrx->fields[2] = str_replace(',', '.', $SCrx->fields[2]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
-                 $SCrx->fields[1] = (string)$SCrx->fields[1];
-                 $SCrx->fields[2] = (strpos(strtolower($SCrx->fields[2]), "e")) ? (float)$SCrx->fields[2] : $SCrx->fields[2];
-                 $SCrx->fields[2] = (string)$SCrx->fields[2];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->vDatosPedido[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                      $this->vdatospedido[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vDatosPedido = false;
-          $this->vDatosPedido_erro = $this->Db->ErrorMsg();
-          $this->vdatospedido = false;
-          $this->vdatospedido_erro = $this->Db->ErrorMsg();
-      } 
-;
-}
-			}
-			
-			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
- {
-$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('form_pagar_pedido') . "/", $this->nm_location, "par_idpedido?#?" . NM_encode_input($idfactura) . "?@?", "_self", "ret_self", 440, 630);
- };
-		
 		}
 	else
 		{
 			$this->sc_ajax_javascript('nm_field_disabled', array("observaciones=;numfacven=;facturado=;fechaven=;fechavenc=;prefijo_ped=", ""));
 ;
 			$this->Ini->nm_hidden_blocos[3] = "on"; $this->NM_ajax_info['blockDisplay']['3'] = 'on';
-
-			$idt=$this->idcli ;
-			 
-      $nm_select = "select saldo from terceros where idtercero=$idt"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-			$sal=substr($this->ds , 5);
-
-			if($this->credito ==1)
-				{
-				$this->cupodis =$this->cupodis +$this->total ;
-				}
 			$this->NM_ajax_info['buttonDisplay']['imprimir'] = $this->nmgp_botoes["imprimir"] = "off";;
 			$this->NM_ajax_info['buttonDisplay']['new'] = $this->nmgp_botoes["new"] = "on";;
+			$sql1 = "UPDATE pedidos set asentada=0 where idpedido='".$this->idpedido ."'";
 			
-     $nm_select ="UPDATE pedidos set asentada=0 where idpedido=$this->idpedido "; 
+     $nm_select = $sql1; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -9002,44 +8847,9 @@ $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('form_
          }
          $rf->Close();
       ;
-
-			 
-      $nm_select = "select modificainvpedido from configuraciones where idconfiguraciones='1'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiModificaInv = array();
-      $this->vsimodificainv = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->vSiModificaInv[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                      $this->vsimodificainv[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vSiModificaInv = false;
-          $this->vSiModificaInv_erro = $this->Db->ErrorMsg();
-          $this->vsimodificainv = false;
-          $this->vsimodificainv_erro = $this->Db->ErrorMsg();
-      } 
-;
-		
-			if(isset($this->vsimodificainv[0][0]))
-			{
-				if($this->vsimodificainv[0][0]=="SI")
-				{
-					
-     $nm_select ="delete from caja where idpedido='".$this->idpedido ."'"; 
+			$sql2 = "delete from caja where idpedido = '".$this->idpedido ."'";
+			
+     $nm_select = $sql2; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -9055,8 +8865,9 @@ $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('form_
          }
          $rf->Close();
       ;
-					
-     $nm_select ="update pedidos set saldo=total, adicional2=0, adicional3=0 where idpedido='".$this->idpedido ."'"; 
+			$sql3 = "update pedidos set saldo='".$this->total ."', adicional2=0, adicional3=0 where idpedido='".$this->idpedido ."'";
+			
+     $nm_select = $sql3; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -9072,8 +8883,6 @@ $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('form_
          }
          $rf->Close();
       ;
-				}
-			}
 		}
 	
 	}
@@ -9089,12 +8898,8 @@ error:
 
 $modificado_total = $this->total;
 $modificado_asentada = $this->asentada;
-$modificado_idcli = $this->idcli;
-$modificado_credito = $this->credito;
-$modificado_cupodis = $this->cupodis;
 $modificado_idpedido = $this->idpedido;
-$modificado_facturado = $this->facturado;
-$this->nm_formatar_campos('total', 'asentada', 'idcli', 'credito', 'cupodis', 'idpedido', 'facturado');
+$this->nm_formatar_campos('total', 'asentada', 'idpedido');
 if ($original_total !== $modificado_total || isset($this->nmgp_cmp_readonly['total']) || (isset($bFlagRead_total) && $bFlagRead_total))
 {
     $this->ajax_return_values_total(true);
@@ -9103,25 +8908,9 @@ if ($original_asentada !== $modificado_asentada || isset($this->nmgp_cmp_readonl
 {
     $this->ajax_return_values_asentada(true);
 }
-if ($original_idcli !== $modificado_idcli || isset($this->nmgp_cmp_readonly['idcli']) || (isset($bFlagRead_idcli) && $bFlagRead_idcli))
-{
-    $this->ajax_return_values_idcli(true);
-}
-if ($original_credito !== $modificado_credito || isset($this->nmgp_cmp_readonly['credito']) || (isset($bFlagRead_credito) && $bFlagRead_credito))
-{
-    $this->ajax_return_values_credito(true);
-}
-if ($original_cupodis !== $modificado_cupodis || isset($this->nmgp_cmp_readonly['cupodis']) || (isset($bFlagRead_cupodis) && $bFlagRead_cupodis))
-{
-    $this->ajax_return_values_cupodis(true);
-}
 if ($original_idpedido !== $modificado_idpedido || isset($this->nmgp_cmp_readonly['idpedido']) || (isset($bFlagRead_idpedido) && $bFlagRead_idpedido))
 {
     $this->ajax_return_values_idpedido(true);
-}
-if ($original_facturado !== $modificado_facturado || isset($this->nmgp_cmp_readonly['facturado']) || (isset($bFlagRead_facturado) && $bFlagRead_facturado))
-{
-    $this->ajax_return_values_facturado(true);
 }
 $this->NM_ajax_info['event_field'] = 'asentada';
 form_pedido_CW_pack_ajax_response();
@@ -9622,15 +9411,15 @@ $_SESSION['scriptcase']['form_pedido_CW']['contr_erro'] = 'on';
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as 0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(19),f.fechaven,121),convert(char(19),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(19),f.fechaven,121), convert(char(19),coalesce(f.creado,NOW()),121) as 0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 

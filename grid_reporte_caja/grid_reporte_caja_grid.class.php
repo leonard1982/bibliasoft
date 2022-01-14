@@ -171,11 +171,14 @@ class grid_reporte_caja_grid
             } 
        $nm_saida->saida("    <table width='100%' cellspacing=0 cellpadding=0>\r\n");
        $nmgrp_apl_opcao= (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_reporte_caja'])) ? "pdf" : $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opcao'];
+       if ($nmgrp_apl_opcao != "pdf")
+       { 
+           $this->nmgp_barra_top();
+       } 
        unset ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['save_grid']);
        $this->grid();
        if ($nmgrp_apl_opcao != "pdf")
        { 
-           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot();
        } 
        $nm_saida->saida("   </table>\r\n");
@@ -957,10 +960,10 @@ class grid_reporte_caja_grid
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
+                    <meta name="msapplication-TileColor" content="">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
+                    <meta name="theme-color" content="">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1053,10 +1056,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#009061\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#009061\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#009061\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['doc_word'])
@@ -1866,7 +1869,7 @@ $nm_saida->saida("}\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opcao'] != "pdf" && !$this->Print_All)
        { 
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $nm_saida->saida("<div id=\"id_debug_window\" style=\"display: none; position: absolute; left: 50px; top: 50px\"><table class=\"scFormMessageTable\">\r\n");
+           $nm_saida->saida("<div id=\"id_debug_window\" style=\"display: none;\" class='scDebugWindow'><table class=\"scFormMessageTable\">\r\n");
            $nm_saida->saida("<tr><td class=\"scFormMessageTitle\">" . $Cod_Btn . "&nbsp;&nbsp;Output</td></tr>\r\n");
            $nm_saida->saida("<tr><td class=\"scFormMessageMessage\" style=\"padding: 0px; vertical-align: top\"><div style=\"padding: 2px; height: 200px; width: 350px; overflow: auto\" id=\"id_debug_text\"></div></td></tr>\r\n");
            $nm_saida->saida("</table></div>\r\n");
@@ -6702,6 +6705,90 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
           $nm_saida->saida("     </script>\r\n");
       }
    }
+   function nmgp_barra_top_mobile()
+   {
+      global 
+             $nm_saida, $nm_url_saida, $nm_apl_dependente;
+      $NM_btn  = false;
+      $NM_Gbtn = false;
+      $nm_saida->saida("      <tr style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td>\r\n");
+      $nm_saida->saida("      <form id=\"id_F0_top\" name=\"F0_top\" method=\"post\" action=\"./\" target=\"_self\"> \r\n");
+      $nm_saida->saida("      <input type=\"text\" id=\"id_sc_truta_f0_top\" name=\"sc_truta_f0_top\" value=\"\"/> \r\n");
+      $nm_saida->saida("      <input type=\"hidden\" id=\"script_init_f0_top\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
+      $nm_saida->saida("      <input type=\"hidden\" id=\"opcao_f0_top\" name=\"nmgp_opcao\" value=\"muda_qt_linhas\"/> \r\n");
+      $nm_saida->saida("      </td></tr><tr>\r\n");
+      $nm_saida->saida("       <td id=\"sc_grid_toobar_top\"  class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['ajax_nav'])
+      { 
+          $_SESSION['scriptcase']['saida_html'] = "";
+      } 
+      $nm_saida->saida("        <table class=\"" . $this->css_scGridToolbar . "\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top;\" width=\"100%\" valign=\"top\">\r\n");
+      $nm_saida->saida("         <tr> \r\n");
+      $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"left\" width=\"33%\"> \r\n");
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['opcao_print'] != "print") 
+      {
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
+          if (is_file("grid_reporte_caja_help.txt") && !$this->grid_emb_form)
+          {
+             $Arq_WebHelp = file("grid_reporte_caja_help.txt"); 
+             if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
+             {
+                 $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
+                 $Tmp = explode(";", $Arq_WebHelp[0]); 
+                 foreach ($Tmp as $Cada_help)
+                 {
+                     $Tmp1 = explode(":", $Cada_help); 
+                     if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
+                     {
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+                        $nm_saida->saida("           $Cod_Btn \r\n");
+                        $NM_btn = true;
+                     }
+                 }
+             }
+          }
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['b_sair'] || $this->grid_emb_form || $this->grid_emb_form_full)
+      {
+         $this->nmgp_botoes['exit'] = "off"; 
+      }
+      if ($this->nmgp_botoes['exit'] == "on")
+      {
+          $this->nm_btn_exist['exit'][] = "sai_top";
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('busca', '0', '');", "nm_gp_move('busca', '0', '');", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+         $nm_saida->saida("           $Cod_Btn \r\n");
+         $NM_btn = true;
+      }
+      }
+      $nm_saida->saida("         </td> \r\n");
+      $nm_saida->saida("        </tr> \r\n");
+      $nm_saida->saida("       </table> \r\n");
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['ajax_nav'] && $this->force_toolbar)
+      { 
+          $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_toobar_top', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+          $_SESSION['scriptcase']['saida_html'] = "";
+      } 
+      $nm_saida->saida("      </td> \r\n");
+      $nm_saida->saida("     </tr> \r\n");
+      $nm_saida->saida("      <tr style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td> \r\n");
+      $nm_saida->saida("     </form> \r\n");
+      $nm_saida->saida("      </td> \r\n");
+      $nm_saida->saida("     </tr> \r\n");
+      if (!$NM_btn && isset($NM_ult_sep))
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['ajax_nav'] && $this->force_toolbar)
+          { 
+              $this->Ini->Arr_result['setDisplay'][] = array('field' => $NM_ult_sep, 'value' => 'none');
+          } 
+          $nm_saida->saida("     <script language=\"javascript\">\r\n");
+          $nm_saida->saida("        document.getElementById('" . $NM_ult_sep . "').style.display='none';\r\n");
+          $nm_saida->saida("     </script>\r\n");
+      }
+   }
    function nmgp_barra_bot_mobile()
    {
       global 
@@ -6902,20 +6989,48 @@ $nm_saida->saida("    </td></tr></table></td>\r\n");
    }
    function nmgp_barra_top()
    {
-       if(isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_barra_top_mobile();
+           $this->nmgp_embbed_placeholder_top();
        }
    }
    function nmgp_barra_bot()
    {
-       if(isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot_mobile();
        }
-       else
+       if (!isset($_SESSION['scriptcase']['proc_mobile']) || !$_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot_normal();
        }
+   }
+   function nmgp_embbed_placeholder_top()
+   {
+      global $nm_saida;
+      $nm_saida->saida("     <tr id=\"sc_id_save_grid_placeholder_top\" style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td>\r\n");
+      $nm_saida->saida("      </td>\r\n");
+      $nm_saida->saida("     </tr>\r\n");
+      $nm_saida->saida("     <tr id=\"sc_id_groupby_placeholder_top\" style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td>\r\n");
+      $nm_saida->saida("      </td>\r\n");
+      $nm_saida->saida("     </tr>\r\n");
+      $nm_saida->saida("     <tr id=\"sc_id_sel_campos_placeholder_top\" style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td>\r\n");
+      $nm_saida->saida("      </td>\r\n");
+      $nm_saida->saida("     </tr>\r\n");
+      $nm_saida->saida("     <tr id=\"sc_id_export_email_placeholder_top\" style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td>\r\n");
+      $nm_saida->saida("      </td>\r\n");
+      $nm_saida->saida("     </tr>\r\n");
+      $nm_saida->saida("     <tr id=\"sc_id_order_campos_placeholder_top\" style=\"display: none\">\r\n");
+      $nm_saida->saida("      <td>\r\n");
+      $nm_saida->saida("      </td>\r\n");
+      $nm_saida->saida("     </tr>\r\n");
    }
    function nmgp_embbed_placeholder_bot()
    {

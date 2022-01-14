@@ -43,6 +43,18 @@ class grid_terceros_todos_total
           {
               $this->loatiende = substr($this->loatiende, 0, $tmp_pos);
           }
+          $this->estado = $Busca_temp['estado']; 
+          $tmp_pos = strpos($this->estado, "##@@");
+          if ($tmp_pos !== false && !is_array($this->estado))
+          {
+              $this->estado = substr($this->estado, 0, $tmp_pos);
+          }
+          $this->clasificacion_clientes = $Busca_temp['clasificacion_clientes']; 
+          $tmp_pos = strpos($this->clasificacion_clientes, "##@@");
+          if ($tmp_pos !== false && !is_array($this->clasificacion_clientes))
+          {
+              $this->clasificacion_clientes = substr($this->clasificacion_clientes, 0, $tmp_pos);
+          }
       } 
    }
 
@@ -197,6 +209,18 @@ class grid_terceros_todos_total
           {
               $this->loatiende = substr($this->loatiende, 0, $tmp_pos);
           }
+          $this->estado = $Busca_temp['estado']; 
+          $tmp_pos = strpos($this->estado, "##@@");
+          if ($tmp_pos !== false && !is_array($this->estado))
+          {
+              $this->estado = substr($this->estado, 0, $tmp_pos);
+          }
+          $this->clasificacion_clientes = $Busca_temp['clasificacion_clientes']; 
+          $tmp_pos = strpos($this->clasificacion_clientes, "##@@");
+          if ($tmp_pos !== false && !is_array($this->clasificacion_clientes))
+          {
+              $this->clasificacion_clientes = substr($this->clasificacion_clientes, 0, $tmp_pos);
+          }
       } 
       $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'];
       $ind_qb                = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['SC_Ind_Groupby'];
@@ -295,7 +319,7 @@ class grid_terceros_todos_total
       $sc_having = ((isset($parms_sub_sel['having']))) ? "  having " . $parms_sub_sel['having'] : "";
       $Tem_estat_manual = false;
       $where_ok = $this->sc_where_atual;
-      $cmp_sql_tp_num = array('idtercero' => 'N','saldo' => 'N','idmuni' => 'N','loatiende' => 'N','dv' => 'N','cupo' => 'N','listaprecios' => 'N','dias_credito' => 'N','dias_mora' => 'N','cupo_vendedor' => 'N','zona_clientes' => 'N','clasificacion_clientes' => 'N','id_pedido_tmp' => 'N','total_pedido_tmp' => 'N','puc_auxiliar_deudores' => 'N','puc_retefuente_ventas' => 'N','puc_retefuente_servicios_clie' => 'N','puc_auxiliar_proveedores' => 'N','puc_retefuente_compras' => 'N','puc_retefuente_servicios_prov' => 'N');
+      $cmp_sql_tp_num = array('idtercero' => 'N','saldo' => 'N','idmuni' => 'N','loatiende' => 'N','dv' => 'N','cupo' => 'N','listaprecios' => 'N','dias_credito' => 'N','dias_mora' => 'N','cupo_vendedor' => 'N','zona_clientes' => 'N','clasificacion_clientes' => 'N','id_pedido_tmp' => 'N','total_pedido_tmp' => 'N');
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
       { 
          $cmd_simp = "select count(*)#@#cmps_quebras#@# from " . $this->Ini->nm_tabela . " " . $where_ok;
@@ -520,6 +544,18 @@ class grid_terceros_todos_total
           {
               $this->loatiende = substr($this->loatiende, 0, $tmp_pos);
           }
+          $this->estado = $Busca_temp['estado']; 
+          $tmp_pos = strpos($this->estado, "##@@");
+          if ($tmp_pos !== false && !is_array($this->estado))
+          {
+              $this->estado = substr($this->estado, 0, $tmp_pos);
+          }
+          $this->clasificacion_clientes = $Busca_temp['clasificacion_clientes']; 
+          $tmp_pos = strpos($this->clasificacion_clientes, "##@@");
+          if ($tmp_pos !== false && !is_array($this->clasificacion_clientes))
+          {
+              $this->clasificacion_clientes = substr($this->clasificacion_clientes, 0, $tmp_pos);
+          }
       } 
       $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'];
       $ind_qb                = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['SC_Ind_Groupby'];
@@ -622,7 +658,7 @@ class grid_terceros_todos_total
       $sc_having = ((isset($parms_sub_sel['having']))) ? "  having " . $parms_sub_sel['having'] : "";
       $Tem_estat_manual = false;
       $where_ok = $this->sc_where_atual;
-      $cmp_sql_tp_num = array('idtercero' => 'N','saldo' => 'N','idmuni' => 'N','loatiende' => 'N','dv' => 'N','cupo' => 'N','listaprecios' => 'N','dias_credito' => 'N','dias_mora' => 'N','cupo_vendedor' => 'N','zona_clientes' => 'N','clasificacion_clientes' => 'N','id_pedido_tmp' => 'N','total_pedido_tmp' => 'N','puc_auxiliar_deudores' => 'N','puc_retefuente_ventas' => 'N','puc_retefuente_servicios_clie' => 'N','puc_auxiliar_proveedores' => 'N','puc_retefuente_compras' => 'N','puc_retefuente_servicios_prov' => 'N');
+      $cmp_sql_tp_num = array('idtercero' => 'N','saldo' => 'N','idmuni' => 'N','loatiende' => 'N','dv' => 'N','cupo' => 'N','listaprecios' => 'N','dias_credito' => 'N','dias_mora' => 'N','cupo_vendedor' => 'N','zona_clientes' => 'N','clasificacion_clientes' => 'N','id_pedido_tmp' => 'N','total_pedido_tmp' => 'N');
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
       { 
          $cmd_simp = "select count(*)#@#cmps_quebras#@# from " . $this->Ini->nm_tabela . " " . $where_ok;

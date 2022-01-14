@@ -99,6 +99,11 @@ class grid_terceros_todos_xls
           $_SESSION['gnube_activa'] = $gnube_activa;
           nm_limpa_str_grid_terceros_todos($_SESSION["gnube_activa"]);
       }
+      if (isset($gnit)) 
+      {
+          $_SESSION['gnit'] = $gnit;
+          nm_limpa_str_grid_terceros_todos($_SESSION["gnit"]);
+      }
       $this->Use_phpspreadsheet = (phpversion() >=  "7.3.9" && is_dir($this->Ini->path_third . '/phpspreadsheet')) ? true : false;
       $this->SC_top = array();
       $this->SC_bot = array();
@@ -296,9 +301,23 @@ class grid_terceros_todos_xls
           {
               $this->loatiende = substr($this->loatiende, 0, $tmp_pos);
           }
+          $this->estado = $Busca_temp['estado']; 
+          $tmp_pos = strpos($this->estado, "##@@");
+          if ($tmp_pos !== false && !is_array($this->estado))
+          {
+              $this->estado = substr($this->estado, 0, $tmp_pos);
+          }
+          $this->clasificacion_clientes = $Busca_temp['clasificacion_clientes']; 
+          $tmp_pos = strpos($this->clasificacion_clientes, "##@@");
+          if ($tmp_pos !== false && !is_array($this->clasificacion_clientes))
+          {
+              $this->clasificacion_clientes = substr($this->clasificacion_clientes, 0, $tmp_pos);
+          }
       } 
       $this->nm_where_dinamico = "";
       $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'on';
+if (!isset($_SESSION['gnit'])) {$_SESSION['gnit'] = "";}
+if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
 if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
  if($this->sc_temp_gnube_activa == "SI")
@@ -311,7 +330,28 @@ else
 	$this->nmgp_botoes["btn_subir_a_nube"] = "off";;
 	$this->nmgp_botoes["btn_actualizar_nube"] = "off";;
 }
+
+$vso   = "escritorio";
+
+if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+{  
+	$vso = "escritorio";
+}
+else
+{
+	$vso = "nube";
+}
+
+if($this->sc_temp_gnit=="88261176-7" and $vso=="nube")
+{
+	$this->NM_cmp_hidden["si_nomina"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['php_cmp_sel']["si_nomina"] = "on"; }
+}
+else
+{
+	$this->NM_cmp_hidden["si_nomina"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['php_cmp_sel']["si_nomina"] = "off"; }
+}
 if (isset($this->sc_temp_gnube_activa)) {$_SESSION['gnube_activa'] = $this->sc_temp_gnube_activa;}
+if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off'; 
       if  (!empty($this->nm_where_dinamico)) 
       {   
@@ -352,27 +392,27 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, str_replace (convert(char(10),nacimiento,102), '.', '-') + ' ' + convert(char(8),nacimiento,20), sexo, urlmail, str_replace (convert(char(10),fechault,102), '.', '-') + ' ' + convert(char(8),fechault,20), saldo, str_replace (convert(char(10),afiliacion,102), '.', '-') + ' ' + convert(char(8),afiliacion,20), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, str_replace (convert(char(10),nacimiento,102), '.', '-') + ' ' + convert(char(8),nacimiento,20), sexo, urlmail, str_replace (convert(char(10),fechault,102), '.', '-') + ' ' + convert(char(8),fechault,20), saldo, str_replace (convert(char(10),afiliacion,102), '.', '-') + ' ' + convert(char(8),afiliacion,20), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, convert(char(23),nacimiento,121), sexo, urlmail, convert(char(23),fechault,121), saldo, convert(char(23),afiliacion,121), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, convert(char(23),nacimiento,121), sexo, urlmail, convert(char(23),fechault,121), saldo, convert(char(23),afiliacion,121), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, TO_DATE(TO_CHAR(con_actual, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, TO_DATE(TO_CHAR(con_actual, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, EXTEND(nacimiento, YEAR TO DAY), sexo, urlmail, EXTEND(fechault, YEAR TO DAY), saldo, EXTEND(afiliacion, YEAR TO DAY), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, EXTEND(nacimiento, YEAR TO DAY), sexo, urlmail, EXTEND(fechault, YEAR TO DAY), saldo, EXTEND(afiliacion, YEAR TO DAY), regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT documento, dv, nombres, direccion, idmuni, tel_cel, cliente, proveedor, empleado, si_nomina, idtercero, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, regimen, tipo, observaciones, loatiende, contacto, credito, cupo, listaprecios, con_actual, efec_retencion, urlmail as urlmail_1, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, tipo_documento, estado from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'];
@@ -432,82 +472,76 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
          $this->cliente = $rs->fields[6] ;  
          $this->proveedor = $rs->fields[7] ;  
          $this->empleado = $rs->fields[8] ;  
-         $this->idtercero = $rs->fields[9] ;  
+         $this->si_nomina = $rs->fields[9] ;  
+         $this->idtercero = $rs->fields[10] ;  
          $this->idtercero = (string)$this->idtercero;
-         $this->nacimiento = $rs->fields[10] ;  
-         $this->sexo = $rs->fields[11] ;  
-         $this->urlmail = $rs->fields[12] ;  
-         $this->fechault = $rs->fields[13] ;  
-         $this->saldo = $rs->fields[14] ;  
+         $this->nacimiento = $rs->fields[11] ;  
+         $this->sexo = $rs->fields[12] ;  
+         $this->urlmail = $rs->fields[13] ;  
+         $this->fechault = $rs->fields[14] ;  
+         $this->saldo = $rs->fields[15] ;  
          $this->saldo =  str_replace(",", ".", $this->saldo);
          $this->saldo = (string)$this->saldo;
-         $this->afiliacion = $rs->fields[15] ;  
-         $this->regimen = $rs->fields[16] ;  
-         $this->tipo = $rs->fields[17] ;  
-         $this->observaciones = $rs->fields[18] ;  
-         $this->loatiende = $rs->fields[19] ;  
+         $this->afiliacion = $rs->fields[16] ;  
+         $this->regimen = $rs->fields[17] ;  
+         $this->tipo = $rs->fields[18] ;  
+         $this->observaciones = $rs->fields[19] ;  
+         $this->loatiende = $rs->fields[20] ;  
          $this->loatiende = (string)$this->loatiende;
-         $this->contacto = $rs->fields[20] ;  
-         $this->credito = $rs->fields[21] ;  
-         $this->cupo = $rs->fields[22] ;  
+         $this->contacto = $rs->fields[21] ;  
+         $this->credito = $rs->fields[22] ;  
+         $this->cupo = $rs->fields[23] ;  
          $this->cupo = (string)$this->cupo;
-         $this->listaprecios = $rs->fields[23] ;  
+         $this->listaprecios = $rs->fields[24] ;  
          $this->listaprecios = (string)$this->listaprecios;
-         $this->con_actual = $rs->fields[24] ;  
-         $this->efec_retencion = $rs->fields[25] ;  
-         $this->urlmail_1 = $rs->fields[26] ;  
-         $this->nombre1 = $rs->fields[27] ;  
-         $this->nombre2 = $rs->fields[28] ;  
-         $this->apellido1 = $rs->fields[29] ;  
-         $this->apellido2 = $rs->fields[30] ;  
-         $this->sucur_cliente = $rs->fields[31] ;  
-         $this->representante = $rs->fields[32] ;  
-         $this->es_restaurante = $rs->fields[33] ;  
-         $this->dias_credito = $rs->fields[34] ;  
+         $this->con_actual = $rs->fields[25] ;  
+         $this->efec_retencion = $rs->fields[26] ;  
+         $this->urlmail_1 = $rs->fields[27] ;  
+         $this->nombre1 = $rs->fields[28] ;  
+         $this->nombre2 = $rs->fields[29] ;  
+         $this->apellido1 = $rs->fields[30] ;  
+         $this->apellido2 = $rs->fields[31] ;  
+         $this->sucur_cliente = $rs->fields[32] ;  
+         $this->representante = $rs->fields[33] ;  
+         $this->es_restaurante = $rs->fields[34] ;  
+         $this->dias_credito = $rs->fields[35] ;  
          $this->dias_credito = (string)$this->dias_credito;
-         $this->dias_mora = $rs->fields[35] ;  
+         $this->dias_mora = $rs->fields[36] ;  
          $this->dias_mora = (string)$this->dias_mora;
-         $this->cupo_vendedor = $rs->fields[36] ;  
+         $this->cupo_vendedor = $rs->fields[37] ;  
          $this->cupo_vendedor =  str_replace(",", ".", $this->cupo_vendedor);
-         $this->cupo_vendedor = (strpos(strtolower($this->cupo_vendedor), "e")) ? (float)$this->cupo_vendedor : $this->cupo_vendedor; 
          $this->cupo_vendedor = (string)$this->cupo_vendedor;
-         $this->codigo_ter = $rs->fields[37] ;  
-         $this->es_cajero = $rs->fields[38] ;  
-         $this->autorizado = $rs->fields[39] ;  
-         $this->zona_clientes = $rs->fields[40] ;  
+         $this->codigo_ter = $rs->fields[38] ;  
+         $this->es_cajero = $rs->fields[39] ;  
+         $this->autorizado = $rs->fields[40] ;  
+         $this->zona_clientes = $rs->fields[41] ;  
          $this->zona_clientes = (string)$this->zona_clientes;
-         $this->clasificacion_clientes = $rs->fields[41] ;  
+         $this->clasificacion_clientes = $rs->fields[42] ;  
          $this->clasificacion_clientes = (string)$this->clasificacion_clientes;
-         $this->creado = $rs->fields[42] ;  
-         $this->disponible = $rs->fields[43] ;  
-         $this->id_pedido_tmp = $rs->fields[44] ;  
+         $this->creado = $rs->fields[43] ;  
+         $this->disponible = $rs->fields[44] ;  
+         $this->id_pedido_tmp = $rs->fields[45] ;  
          $this->id_pedido_tmp = (string)$this->id_pedido_tmp;
-         $this->n_pedido_tmp = $rs->fields[45] ;  
-         $this->total_pedido_tmp = $rs->fields[46] ;  
+         $this->n_pedido_tmp = $rs->fields[46] ;  
+         $this->total_pedido_tmp = $rs->fields[47] ;  
          $this->total_pedido_tmp =  str_replace(",", ".", $this->total_pedido_tmp);
-         $this->total_pedido_tmp = (strpos(strtolower($this->total_pedido_tmp), "e")) ? (float)$this->total_pedido_tmp : $this->total_pedido_tmp; 
          $this->total_pedido_tmp = (string)$this->total_pedido_tmp;
-         $this->obs_pedido_tmp = $rs->fields[47] ;  
-         $this->vend_pedido_tmp = $rs->fields[48] ;  
-         $this->ciudad = $rs->fields[49] ;  
-         $this->codigo_postal = $rs->fields[50] ;  
-         $this->lenguaje = $rs->fields[51] ;  
-         $this->nombre_comercil = $rs->fields[52] ;  
-         $this->notificar = $rs->fields[53] ;  
-         $this->puc_auxiliar_deudores = $rs->fields[54] ;  
-         $this->puc_auxiliar_deudores = (string)$this->puc_auxiliar_deudores;
-         $this->puc_retefuente_ventas = $rs->fields[55] ;  
-         $this->puc_retefuente_ventas = (string)$this->puc_retefuente_ventas;
-         $this->puc_retefuente_servicios_clie = $rs->fields[56] ;  
-         $this->puc_retefuente_servicios_clie = (string)$this->puc_retefuente_servicios_clie;
-         $this->puc_auxiliar_proveedores = $rs->fields[57] ;  
-         $this->puc_auxiliar_proveedores = (string)$this->puc_auxiliar_proveedores;
-         $this->puc_retefuente_compras = $rs->fields[58] ;  
-         $this->puc_retefuente_compras = (string)$this->puc_retefuente_compras;
-         $this->puc_retefuente_servicios_prov = $rs->fields[59] ;  
-         $this->puc_retefuente_servicios_prov = (string)$this->puc_retefuente_servicios_prov;
-         $this->nube = $rs->fields[60] ;  
-         $this->tipo_documento = $rs->fields[61] ;  
+         $this->obs_pedido_tmp = $rs->fields[48] ;  
+         $this->vend_pedido_tmp = $rs->fields[49] ;  
+         $this->ciudad = $rs->fields[50] ;  
+         $this->codigo_postal = $rs->fields[51] ;  
+         $this->lenguaje = $rs->fields[52] ;  
+         $this->nombre_comercil = $rs->fields[53] ;  
+         $this->notificar = $rs->fields[54] ;  
+         $this->puc_auxiliar_deudores = $rs->fields[55] ;  
+         $this->puc_retefuente_ventas = $rs->fields[56] ;  
+         $this->puc_retefuente_servicios_clie = $rs->fields[57] ;  
+         $this->puc_auxiliar_proveedores = $rs->fields[58] ;  
+         $this->puc_retefuente_compras = $rs->fields[59] ;  
+         $this->puc_retefuente_servicios_prov = $rs->fields[60] ;  
+         $this->nube = $rs->fields[61] ;  
+         $this->tipo_documento = $rs->fields[62] ;  
+         $this->estado = $rs->fields[63] ;  
          $this->arg_sum_loatiende = ($this->loatiende == "") ? " is null " : " = " . $this->loatiende;
           if ($this->loatiende !== $this->loatiende_Old && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['SC_Ind_Groupby'] == "vendedor") 
           {  
@@ -681,7 +715,12 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
          $this->look_loatiende = ($this->look_loatiende == "&nbsp;") ? "" : $this->look_loatiende; 
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'on';
- $this->sc_asigna_vendedor   = "<select onchange='fAsignarVendedor(\"".$this->idtercero ."\",this.value);'>";
+ if($this->estado =="PENDIENTE")
+{
+	$this->NM_field_style["documento"] = "background-color:#33ff99;font-size:13px;color:#000000;font-family:arial;font-weight:sans-serif;";
+}
+
+$this->sc_asigna_vendedor   = "<select onchange='fAsignarVendedor(\"".$this->idtercero ."\",this.value);'>";
  
       $nm_select = "select idtercero,nombres from terceros where empleado='SI'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1162,6 +1201,34 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
                   }
                   else {
                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['si_nomina'])) ? $this->New_label['si_nomina'] : "Nómina"; 
+          if ($Cada_col == "si_nomina" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
                   }
                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
@@ -2653,6 +2720,34 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Estado"; 
+          if ($Cada_col == "estado" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
           $SC_Label = (isset($this->New_label['facturas'])) ? $this->New_label['facturas'] : "Listar Cartera"; 
           if ($Cada_col == "facturas" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -2899,6 +2994,26 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
          }
          else {
              $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->empleado, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
+   //----- si_nomina
+   function NM_export_si_nomina()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->si_nomina = html_entity_decode($this->si_nomina, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->si_nomina = strip_tags($this->si_nomina);
+         $this->si_nomina = NM_charset_to_utf8($this->si_nomina);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->si_nomina, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->si_nomina, PHPExcel_Cell_DataType::TYPE_STRING);
          }
          $this->Xls_col++;
    }
@@ -3966,6 +4081,26 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
          }
          $this->Xls_col++;
    }
+   //----- estado
+   function NM_export_estado()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->estado = html_entity_decode($this->estado, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->estado = strip_tags($this->estado);
+         $this->estado = NM_charset_to_utf8($this->estado);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->estado, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->estado, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- facturas
    function NM_export_facturas()
    {
@@ -4119,6 +4254,18 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
          $this->empleado = NM_charset_to_utf8($this->empleado);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->empleado;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- si_nomina
+   function NM_sub_cons_si_nomina()
+   {
+         $this->si_nomina = html_entity_decode($this->si_nomina, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->si_nomina = strip_tags($this->si_nomina);
+         $this->si_nomina = NM_charset_to_utf8($this->si_nomina);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->si_nomina;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -4751,6 +4898,18 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
          $this->tipo_documento = strip_tags($this->tipo_documento);
          $this->tipo_documento = NM_charset_to_utf8($this->tipo_documento);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->tipo_documento;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- estado
+   function NM_sub_cons_estado()
+   {
+         $this->estado = html_entity_decode($this->estado, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->estado = strip_tags($this->estado);
+         $this->estado = NM_charset_to_utf8($this->estado);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->estado;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";

@@ -49,6 +49,48 @@
 <div id="id_div_process_block" style="display: none; margin: 10px; whitespace: nowrap"><span class="scFormProcess"><img border="0" src="<?php echo $this->Ini->path_icones; ?>/scriptcase__NM__ajax_load.gif" align="absmiddle" />&nbsp;<?php echo $this->Ini->Nm_lang['lang_othr_prcs']; ?>...</span></div>
 <div id="id_fatal_error" class="scFormLabelOdd" style="display: none; position: absolute"></div>
 <script type="text/javascript"> 
+var Crtl_btn_btn_generar_nomina = false;
+function sc_btn_btn_generar_nomina()
+{
+    if (scEventControl_active("")) {
+      setTimeout(function() { sc_btn_btn_generar_nomina(); }, 500);
+      return;
+    }
+    if (Crtl_btn_btn_generar_nomina) {return;}
+    scJs_confirm("<?php echo html_entity_decode('¿Desea crear una cuenta de nómina para el tercero?', ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>", sc_btn_btn_generar_nomina_ok, sc_btn_btn_generar_nomina_cancel)
+}
+function sc_btn_btn_generar_nomina_cancel()
+{
+}
+function sc_btn_btn_generar_nomina_ok()
+{
+    Crtl_btn_btn_generar_nomina = true;
+    document.F1.nmgp_parms.value = "nmgp_opcao?#?formphp?@?nm_call_php?#?btn_generar_nomina?@?";
+    document.F1.action = "./";
+    document.F1.target = "_self";
+    document.F1.submit();
+}
+var Crtl_btn_btn_reenviar_correo_nomina = false;
+function sc_btn_btn_reenviar_correo_nomina()
+{
+    if (scEventControl_active("")) {
+      setTimeout(function() { sc_btn_btn_reenviar_correo_nomina(); }, 500);
+      return;
+    }
+    if (Crtl_btn_btn_reenviar_correo_nomina) {return;}
+    scJs_confirm("<?php echo html_entity_decode('¿Desea reenviar las credenciales de la cuenta de nómina al correo de notificación del cliente?', ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>", sc_btn_btn_reenviar_correo_nomina_ok, sc_btn_btn_reenviar_correo_nomina_cancel)
+}
+function sc_btn_btn_reenviar_correo_nomina_cancel()
+{
+}
+function sc_btn_btn_reenviar_correo_nomina_ok()
+{
+    Crtl_btn_btn_reenviar_correo_nomina = true;
+    document.F1.nmgp_parms.value = "nmgp_opcao?#?formphp?@?nm_call_php?#?btn_reenviar_correo_nomina?@?";
+    document.F1.action = "./";
+    document.F1.target = "_self";
+    document.F1.submit();
+}
  NM_tp_critica(1);
 function nm_gp_submit(apl_lig, apl_saida, parms, opc, target, modal_h, modal_w, apl_name) 
 { 
@@ -522,6 +564,44 @@ function sc_ltrim(str, chars) {
 function sc_rtrim(str, chars) {
         chars = chars || "\\s";
         return str.replace(new RegExp("[" + chars + "]+$", "g"), "");
+}
+var scDlChk;
+var scDlTOut;
+function nm_mostra_doc(campo1, campo2, campo3)
+{
+    while (campo2.lastIndexOf("&") != -1)
+    {
+       campo2 = campo2.replace("&" , "**Ecom**");
+    }
+    while (campo2.lastIndexOf("#") != -1)
+    {
+       campo2 = campo2.replace("#" , "**Jvel**");
+    }
+    while (campo2.lastIndexOf("+") != -1)
+    {
+       campo2 = campo2.replace("+" , "**Plus**");
+    }
+    while (campo2.lastIndexOf("+") != -1)
+    {
+       campo2 = campo2.replace("%" , "**Perc**");
+    }
+    scDlChk = setTimeout(function() { sc_check_for_download(); }, 1000);
+    scDlTOut = setTimeout(function() { clearTimeout(scDlChk); }, 10000);
+    NovaJanela = window.open ("terceros_doc.php?script_case_init=<?php echo $this->form_encode_input($this->Ini->sc_page); ?>&nm_cod_doc=" + campo1 + "&nm_nome_doc=" + encodeURIComponent(campo2) + "&nm_cod_apl=" + campo3, "sc_name_download_iframe", "resizable, scrollbars");
+}
+function sc_check_for_download()
+{
+    if (scDlChk) {
+        clearTimeout(scDlChk);
+    }
+    var ifrContent = $("#sc-id-download-iframe").contents().find("body").html();
+    if ("" == ifrContent) {
+        scDlChk = setTimeout(function() { sc_check_for_download() }, 1000);
+    }
+    else {
+        _scAjaxShowMessage({title: "", message: ifrContent, isModal: false, timeout: null, showButton: true, buttonLabel: "Ok", topPos: 0, leftPos: 0, width: 0, height: 0, redirUrl: "", redirTarget: "", redirParam: "", showClose: false, showBodyIcon: true, isToast: false, toastPos: ""});
+        clearTimeout(scDlTOut);
+    }
 }
 var hasJsFormOnload = true;
 function sc_form_onload()

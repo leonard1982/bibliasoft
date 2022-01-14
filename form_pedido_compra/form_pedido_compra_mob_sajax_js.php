@@ -66,7 +66,7 @@ sajax_show_javascript();
     {
       document.getElementById("id_debug_window").style.display = "";
       document.getElementById("id_debug_text").innerHTML = scAjaxFormatDebug(oResp["htmOutput"]) + document.getElementById("id_debug_text").innerHTML;
-      scCenterElement(document.getElementById("id_debug_window"));
+      //scCenterElement(document.getElementById("id_debug_window"));
     }
   } // scAjaxShowDebug
 
@@ -339,11 +339,24 @@ sajax_show_javascript();
 
   function scAjaxCalendarReload()
   {
-    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"])
+    if (oResp["calendarReload"] && "OK" == oResp["calendarReload"] && typeof self.parent.calendar_reload == "function")
     {
+<?php
+if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && isset($_SESSION['scriptcase']['display_mobile']) && $_SESSION['scriptcase']['display_mobile']) {
+?>
       self.parent.calendar_reload();
       self.parent.tb_remove();
+<?php
+} else {
+?>
+      self.parent.calendar_reload();
+      self.parent.tb_remove();
+<?php
+}
+?>
+      return true;
     }
+    return false;
   } // scCalendarReload
 
   function scAjaxUpdateErrors(sType)
@@ -4135,7 +4148,6 @@ function scJs_sweetalert_params(params) {
   {
     scAjaxProcOff();
     oResp = scAjaxResponse(sResp);
-    scAjaxCalendarReload();
     scAjaxUpdateErrors("valid");
     sAppErrors = scAjaxListErrors(true);
     if ("" == sAppErrors || "menu_link" == document.F1.nmgp_opcao.value)
@@ -4248,14 +4260,11 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pedido_compra_mob']
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
     var var_nmgp_ordem = document.F2.nmgp_ordem.value;
-    var var_nmgp_fast_search = document.F2.nmgp_fast_search.value;
-    var var_nmgp_cond_fast_search = document.F2.nmgp_cond_fast_search.value;
-    var var_nmgp_arg_fast_search = document.F2.nmgp_arg_fast_search.value;
     var var_nmgp_arg_dyn_search = document.F2.nmgp_arg_dyn_search.value;
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn();
     scStatusDetail["form_detallepedido_compra_mob"] = "on";
-    x_ajax_form_pedido_compra_mob_navigate_form(var_idpedido, var_nm_form_submit, var_nmgp_opcao, var_nmgp_ordem, var_nmgp_fast_search,  var_nmgp_cond_fast_search,  var_nmgp_arg_fast_search, var_nmgp_arg_dyn_search, var_script_case_init, do_ajax_form_pedido_compra_mob_navigate_form_cb);
+    x_ajax_form_pedido_compra_mob_navigate_form(var_idpedido, var_nm_form_submit, var_nmgp_opcao, var_nmgp_ordem, var_nmgp_arg_dyn_search, var_script_case_init, do_ajax_form_pedido_compra_mob_navigate_form_cb);
   } // do_ajax_form_pedido_compra_mob_navigate_form
 
   var scMasterDetailParentIframe = "<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['form_pedido_compra_mob']['dashboard_info']['parent_widget'] ?>";
@@ -4295,6 +4304,7 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
     scAjaxSetVariables();
     document.F2.idpedido.value = scAjaxGetKeyValue("idpedido");
     scAjaxSetSummary();
+    scAjaxSetNavpage();
     scAjaxShowDebug();
     scAjaxSetLabel(true);
     scAjaxSetReadonly(true);
@@ -4332,7 +4342,6 @@ if ($this->Embutida_form)
     {
       sc_form_onload();
     }
-    SC_btn_grp_text();
   } // do_ajax_form_pedido_compra_mob_navigate_form_cb_after_alert
   function sc_hide_form_pedido_compra_mob_form()
   {

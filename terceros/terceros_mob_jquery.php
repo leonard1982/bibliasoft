@@ -104,6 +104,19 @@ function scFocusField(sField) {
       case 'puc_auxiliar_proveedores':
       case 'puc_retefuente_compras':
       case 'puc_retefuente_servicios_prov':
+      case 'archivo_cedula':
+      case 'archivo_rut':
+      case 'archivo_nit':
+      case 'archivo_pago':
+      case 'id_plan':
+      case 'valor_plan':
+      case 'fecha_registro_fe':
+      case 'nombre_contador':
+      case 'estado':
+      case 'si_nomina':
+      case 'n_trabajadores':
+      case 'si_factura_electronica':
+      case 'nombre_empresa_bd':
         sc_exib_ocult_pag('terceros_mob_form4');
         break;
       case 'archivos':
@@ -221,6 +234,19 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["puc_auxiliar_proveedores" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_retefuente_compras" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_retefuente_servicios_prov" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["archivo_cedula" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["archivo_rut" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["archivo_nit" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["archivo_pago" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_plan" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["valor_plan" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["fecha_registro_fe" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["nombre_contador" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["estado" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["si_nomina" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["n_trabajadores" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["si_factura_electronica" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["nombre_empresa_bd" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["archivos" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["es_restaurante" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["porcentaje_propina_sugerida" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -665,6 +691,60 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["puc_retefuente_servicios_prov" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["id_plan" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_plan" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["valor_plan" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["valor_plan" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["fecha_registro_fe" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["fecha_registro_fe" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["nombre_contador" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["nombre_contador" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["estado" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["estado" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["si_nomina" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["si_nomina" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["n_trabajadores" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["n_trabajadores" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["si_factura_electronica" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["si_factura_electronica" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["nombre_empresa_bd" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["nombre_empresa_bd" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["archivos" + iSeqRow]["blur"]) {
     return true;
   }
@@ -758,6 +838,12 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("clasificacion_clientes" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_plan" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("estado" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("apellido1" + iSeq == fieldName) {
@@ -1029,6 +1115,34 @@ function scJQEventsAdd(iSeqRow) {
                                                .bind('focus', function() { sc_terceros_correo_notificafe_onfocus(this, iSeqRow) });
   $('#id_sc_field_celular_notificafe' + iSeqRow).bind('blur', function() { sc_terceros_celular_notificafe_onblur(this, iSeqRow) })
                                                 .bind('focus', function() { sc_terceros_celular_notificafe_onfocus(this, iSeqRow) });
+  $('#id_sc_field_archivo_cedula' + iSeqRow).bind('blur', function() { sc_terceros_archivo_cedula_onblur(this, iSeqRow) })
+                                            .bind('focus', function() { sc_terceros_archivo_cedula_onfocus(this, iSeqRow) });
+  $('#id_sc_field_archivo_rut' + iSeqRow).bind('blur', function() { sc_terceros_archivo_rut_onblur(this, iSeqRow) })
+                                         .bind('focus', function() { sc_terceros_archivo_rut_onfocus(this, iSeqRow) });
+  $('#id_sc_field_archivo_nit' + iSeqRow).bind('blur', function() { sc_terceros_archivo_nit_onblur(this, iSeqRow) })
+                                         .bind('focus', function() { sc_terceros_archivo_nit_onfocus(this, iSeqRow) });
+  $('#id_sc_field_archivo_pago' + iSeqRow).bind('blur', function() { sc_terceros_archivo_pago_onblur(this, iSeqRow) })
+                                          .bind('focus', function() { sc_terceros_archivo_pago_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_plan' + iSeqRow).bind('blur', function() { sc_terceros_id_plan_onblur(this, iSeqRow) })
+                                     .bind('focus', function() { sc_terceros_id_plan_onfocus(this, iSeqRow) });
+  $('#id_sc_field_valor_plan' + iSeqRow).bind('blur', function() { sc_terceros_valor_plan_onblur(this, iSeqRow) })
+                                        .bind('focus', function() { sc_terceros_valor_plan_onfocus(this, iSeqRow) });
+  $('#id_sc_field_fecha_registro_fe' + iSeqRow).bind('blur', function() { sc_terceros_fecha_registro_fe_onblur(this, iSeqRow) })
+                                               .bind('focus', function() { sc_terceros_fecha_registro_fe_onfocus(this, iSeqRow) });
+  $('#id_sc_field_fecha_registro_fe_hora' + iSeqRow).bind('blur', function() { sc_terceros_fecha_registro_fe_onblur(this, iSeqRow) })
+                                                    .bind('focus', function() { sc_terceros_fecha_registro_fe_onfocus(this, iSeqRow) });
+  $('#id_sc_field_nombre_contador' + iSeqRow).bind('blur', function() { sc_terceros_nombre_contador_onblur(this, iSeqRow) })
+                                             .bind('focus', function() { sc_terceros_nombre_contador_onfocus(this, iSeqRow) });
+  $('#id_sc_field_estado' + iSeqRow).bind('blur', function() { sc_terceros_estado_onblur(this, iSeqRow) })
+                                    .bind('focus', function() { sc_terceros_estado_onfocus(this, iSeqRow) });
+  $('#id_sc_field_si_nomina' + iSeqRow).bind('blur', function() { sc_terceros_si_nomina_onblur(this, iSeqRow) })
+                                       .bind('focus', function() { sc_terceros_si_nomina_onfocus(this, iSeqRow) });
+  $('#id_sc_field_si_factura_electronica' + iSeqRow).bind('blur', function() { sc_terceros_si_factura_electronica_onblur(this, iSeqRow) })
+                                                    .bind('focus', function() { sc_terceros_si_factura_electronica_onfocus(this, iSeqRow) });
+  $('#id_sc_field_nombre_empresa_bd' + iSeqRow).bind('blur', function() { sc_terceros_nombre_empresa_bd_onblur(this, iSeqRow) })
+                                               .bind('focus', function() { sc_terceros_nombre_empresa_bd_onfocus(this, iSeqRow) });
+  $('#id_sc_field_n_trabajadores' + iSeqRow).bind('blur', function() { sc_terceros_n_trabajadores_onblur(this, iSeqRow) })
+                                            .bind('focus', function() { sc_terceros_n_trabajadores_onfocus(this, iSeqRow) });
   $('#id_sc_field_archivos' + iSeqRow).bind('blur', function() { sc_terceros_archivos_onblur(this, iSeqRow) })
                                       .bind('focus', function() { sc_terceros_archivos_onfocus(this, iSeqRow) });
   $('#id_sc_field_c_postal' + iSeqRow).bind('blur', function() { sc_terceros_c_postal_onblur(this, iSeqRow) })
@@ -1060,6 +1174,8 @@ function scJQEventsAdd(iSeqRow) {
   $('.sc-ui-checkbox-autorizado' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-sucur_cliente' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-es_cajero' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-si_nomina' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-si_factura_electronica' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-es_restaurante' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
 } // scJQEventsAdd
 
@@ -1791,6 +1907,138 @@ function sc_terceros_celular_notificafe_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_terceros_archivo_cedula_onblur(oThis, iSeqRow) {
+  scCssBlur(oThis);
+}
+
+function sc_terceros_archivo_cedula_onfocus(oThis, iSeqRow) {
+  scCssFocus(oThis);
+}
+
+function sc_terceros_archivo_rut_onblur(oThis, iSeqRow) {
+  scCssBlur(oThis);
+}
+
+function sc_terceros_archivo_rut_onfocus(oThis, iSeqRow) {
+  scCssFocus(oThis);
+}
+
+function sc_terceros_archivo_nit_onblur(oThis, iSeqRow) {
+  scCssBlur(oThis);
+}
+
+function sc_terceros_archivo_nit_onfocus(oThis, iSeqRow) {
+  scCssFocus(oThis);
+}
+
+function sc_terceros_archivo_pago_onblur(oThis, iSeqRow) {
+  scCssBlur(oThis);
+}
+
+function sc_terceros_archivo_pago_onfocus(oThis, iSeqRow) {
+  scCssFocus(oThis);
+}
+
+function sc_terceros_id_plan_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_id_plan();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_id_plan_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_valor_plan_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_valor_plan();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_valor_plan_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_fecha_registro_fe_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_fecha_registro_fe();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_fecha_registro_fe_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_fecha_registro_fe();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_fecha_registro_fe_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_fecha_registro_fe_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_nombre_contador_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_nombre_contador();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_nombre_contador_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_estado_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_estado();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_estado_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_si_nomina_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_si_nomina();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_si_nomina_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_si_factura_electronica_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_si_factura_electronica();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_si_factura_electronica_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_nombre_empresa_bd_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_nombre_empresa_bd();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_nombre_empresa_bd_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_n_trabajadores_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_n_trabajadores();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_n_trabajadores_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_terceros_archivos_onblur(oThis, iSeqRow) {
   do_ajax_terceros_mob_validate_archivos();
   scCssBlur(oThis);
@@ -1955,14 +2203,15 @@ function displayChange_page_3(status) {
 function displayChange_page_4(status) {
 	displayChange_block("17", status);
 	displayChange_block("18", status);
-}
-
-function displayChange_page_5(status) {
 	displayChange_block("19", status);
 }
 
-function displayChange_page_6(status) {
+function displayChange_page_5(status) {
 	displayChange_block("20", status);
+}
+
+function displayChange_page_6(status) {
+	displayChange_block("21", status);
 }
 
 function displayChange_block(block, status) {
@@ -2028,6 +2277,9 @@ function displayChange_block(block, status) {
 	}
 	if ("20" == block) {
 		displayChange_block_20(status);
+	}
+	if ("21" == block) {
+		displayChange_block_21(status);
 	}
 }
 
@@ -2163,10 +2415,26 @@ function displayChange_block_18(status) {
 }
 
 function displayChange_block_19(status) {
-	displayChange_field("archivos", "", status);
+	displayChange_field("archivo_cedula", "", status);
+	displayChange_field("archivo_rut", "", status);
+	displayChange_field("archivo_nit", "", status);
+	displayChange_field("archivo_pago", "", status);
+	displayChange_field("id_plan", "", status);
+	displayChange_field("valor_plan", "", status);
+	displayChange_field("fecha_registro_fe", "", status);
+	displayChange_field("nombre_contador", "", status);
+	displayChange_field("estado", "", status);
+	displayChange_field("si_nomina", "", status);
+	displayChange_field("n_trabajadores", "", status);
+	displayChange_field("si_factura_electronica", "", status);
+	displayChange_field("nombre_empresa_bd", "", status);
 }
 
 function displayChange_block_20(status) {
+	displayChange_field("archivos", "", status);
+}
+
+function displayChange_block_21(status) {
 	displayChange_field("es_restaurante", "", status);
 	displayChange_field("porcentaje_propina_sugerida", "", status);
 }
@@ -2246,6 +2514,19 @@ function displayChange_row(row, status) {
 	displayChange_field_puc_auxiliar_proveedores(row, status);
 	displayChange_field_puc_retefuente_compras(row, status);
 	displayChange_field_puc_retefuente_servicios_prov(row, status);
+	displayChange_field_archivo_cedula(row, status);
+	displayChange_field_archivo_rut(row, status);
+	displayChange_field_archivo_nit(row, status);
+	displayChange_field_archivo_pago(row, status);
+	displayChange_field_id_plan(row, status);
+	displayChange_field_valor_plan(row, status);
+	displayChange_field_fecha_registro_fe(row, status);
+	displayChange_field_nombre_contador(row, status);
+	displayChange_field_estado(row, status);
+	displayChange_field_si_nomina(row, status);
+	displayChange_field_n_trabajadores(row, status);
+	displayChange_field_si_factura_electronica(row, status);
+	displayChange_field_nombre_empresa_bd(row, status);
 	displayChange_field_archivos(row, status);
 	displayChange_field_es_restaurante(row, status);
 	displayChange_field_porcentaje_propina_sugerida(row, status);
@@ -2473,6 +2754,45 @@ function displayChange_field(field, row, status) {
 	}
 	if ("puc_retefuente_servicios_prov" == field) {
 		displayChange_field_puc_retefuente_servicios_prov(row, status);
+	}
+	if ("archivo_cedula" == field) {
+		displayChange_field_archivo_cedula(row, status);
+	}
+	if ("archivo_rut" == field) {
+		displayChange_field_archivo_rut(row, status);
+	}
+	if ("archivo_nit" == field) {
+		displayChange_field_archivo_nit(row, status);
+	}
+	if ("archivo_pago" == field) {
+		displayChange_field_archivo_pago(row, status);
+	}
+	if ("id_plan" == field) {
+		displayChange_field_id_plan(row, status);
+	}
+	if ("valor_plan" == field) {
+		displayChange_field_valor_plan(row, status);
+	}
+	if ("fecha_registro_fe" == field) {
+		displayChange_field_fecha_registro_fe(row, status);
+	}
+	if ("nombre_contador" == field) {
+		displayChange_field_nombre_contador(row, status);
+	}
+	if ("estado" == field) {
+		displayChange_field_estado(row, status);
+	}
+	if ("si_nomina" == field) {
+		displayChange_field_si_nomina(row, status);
+	}
+	if ("n_trabajadores" == field) {
+		displayChange_field_n_trabajadores(row, status);
+	}
+	if ("si_factura_electronica" == field) {
+		displayChange_field_si_factura_electronica(row, status);
+	}
+	if ("nombre_empresa_bd" == field) {
+		displayChange_field_nombre_empresa_bd(row, status);
 	}
 	if ("archivos" == field) {
 		displayChange_field_archivos(row, status);
@@ -2911,6 +3231,69 @@ function displayChange_field_puc_retefuente_compras(row, status) {
 function displayChange_field_puc_retefuente_servicios_prov(row, status) {
 }
 
+function displayChange_field_archivo_cedula(row, status) {
+}
+
+function displayChange_field_archivo_rut(row, status) {
+}
+
+function displayChange_field_archivo_nit(row, status) {
+}
+
+function displayChange_field_archivo_pago(row, status) {
+}
+
+function displayChange_field_id_plan(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_plan__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_plan" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_plan");
+	}
+}
+
+function displayChange_field_valor_plan(row, status) {
+}
+
+function displayChange_field_fecha_registro_fe(row, status) {
+}
+
+function displayChange_field_nombre_contador(row, status) {
+}
+
+function displayChange_field_estado(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_estado__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_estado" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "estado");
+	}
+}
+
+function displayChange_field_si_nomina(row, status) {
+}
+
+function displayChange_field_n_trabajadores(row, status) {
+}
+
+function displayChange_field_si_factura_electronica(row, status) {
+}
+
+function displayChange_field_nombre_empresa_bd(row, status) {
+}
+
 function displayChange_field_archivos(row, status) {
 	if ("on" == status && typeof $("#nmsc_iframe_liga_grid_gestor_archivos_tercero")[0].contentWindow.scRecreateSelect2 === "function") {
 		$("#nmsc_iframe_liga_grid_gestor_archivos_tercero")[0].contentWindow.scRecreateSelect2();
@@ -2941,6 +3324,8 @@ function scRecreateSelect2() {
 	displayChange_field_creditoprov("all", "on");
 	displayChange_field_zona_clientes("all", "on");
 	displayChange_field_clasificacion_clientes("all", "on");
+	displayChange_field_id_plan("all", "on");
+	displayChange_field_estado("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -3097,6 +3482,61 @@ elseif ('' != $miniCalendarButton[0]) {
     weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_days_sem'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>",
     firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
     dateFormat: "<?php echo $this->jqueryCalendarDtFormat("" . str_replace(array('/', 'aaaa', $_SESSION['scriptcase']['reg_conf']['date_sep']), array('', 'yyyy', ''), $this->field_config['afiliacion']['date_format']) . "", "" . $_SESSION['scriptcase']['reg_conf']['date_sep'] . ""); ?>",
+    showOtherMonths: true,
+    showOn: "button",
+<?php
+$miniCalendarIcon   = $this->jqueryIconFile('calendar');
+$miniCalendarFA     = $this->jqueryFAFile('calendar');
+$miniCalendarButton = $this->jqueryButtonText('calendar');
+if ('' != $miniCalendarIcon) {
+?>
+    buttonImage: "<?php echo $miniCalendarIcon; ?>",
+    buttonImageOnly: true,
+<?php
+}
+elseif ('' != $miniCalendarFA) {
+?>
+    buttonText: "<?php echo $miniCalendarFA; ?>",
+<?php
+}
+elseif ('' != $miniCalendarButton[0]) {
+?>
+    buttonText: "<?php echo $miniCalendarButton[0]; ?>",
+<?php
+}
+?>
+    currentText: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_per_today"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);       ?>",
+    closeText: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_btns_mess_clse"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);       ?>",
+  });
+  $("#id_sc_field_fecha_registro_fe" + iSeqRow).datepicker({
+    beforeShow: function(input, inst) {
+      var $oField = $(this),
+          aParts  = $oField.val().split(" "),
+          sTime   = "";
+      sc_jq_calendar_value["#id_sc_field_fecha_registro_fe" + iSeqRow] = $oField.val();
+      if (2 == aParts.length) {
+        sTime = " " + aParts[1];
+      }
+      if ('' == sTime || ' ' == sTime) {
+        sTime = ' <?php echo $this->jqueryCalendarTimeStart($this->field_config['fecha_registro_fe']['date_format']); ?>';
+      }
+      $oField.datepicker("option", "dateFormat", "<?php echo $this->jqueryCalendarDtFormat("" . str_replace(array('/', 'aaaa', 'hh', 'ii', 'ss', ':', ';', $_SESSION['scriptcase']['reg_conf']['date_sep'], $_SESSION['scriptcase']['reg_conf']['time_sep']), array('', 'yyyy', '','','', '', '', '', ''), $this->field_config['fecha_registro_fe']['date_format']) . "", "" . $_SESSION['scriptcase']['reg_conf']['date_sep'] . ""); ?>" + sTime);
+    },
+    onClose: function(dateText, inst) {
+      do_ajax_terceros_mob_validate_fecha_registro_fe(iSeqRow);
+    },
+    showWeek: true,
+    numberOfMonths: 1,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: 'c-5:c+5',
+    dayNames: ["<?php        echo html_entity_decode($this->Ini->Nm_lang['lang_days_sund'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_mond'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_tued'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_wend'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_thud'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_frid'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_satd'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>"],
+    dayNamesMin: ["<?php     echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_sund'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_mond'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_tued'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_wend'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_thud'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_frid'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_satd'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>"],
+    monthNames: ["<?php      echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>"],
+    monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_janu'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_febr'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_marc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_apri'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_mayy'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_june'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_july'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_augu'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_sept'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_octo'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_nove'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_dece'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>"],
+    weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_days_sem'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>",
+    firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
+    dateFormat: "<?php echo $this->jqueryCalendarDtFormat("" . str_replace(array('/', 'aaaa', 'hh', 'ii', 'ss', ':', ';', $_SESSION['scriptcase']['reg_conf']['date_sep'], $_SESSION['scriptcase']['reg_conf']['time_sep']), array('', 'yyyy', '','','', '', '', '', ''), $this->field_config['fecha_registro_fe']['date_format']) . "", "" . $_SESSION['scriptcase']['reg_conf']['date_sep'] . ""); ?>",
     showOtherMonths: true,
     showOn: "button",
 <?php
@@ -3366,6 +3806,446 @@ function scJQUploadAdd(iSeqRow) {
     }
   });
 
+  $("#id_sc_field_archivo_cedula" + iSeqRow).fileupload({
+    datatype: "json",
+    url: "terceros_mob_ul_save.php",
+    dropZone: "",
+    formData: function() {
+      return [
+        {name: 'param_field', value: 'archivo_cedula'},
+        {name: 'param_seq', value: '<?php echo $this->Ini->sc_page; ?>'},
+        {name: 'upload_file_row', value: iSeqRow}
+      ];
+    },
+    progress: function(e, data) {
+      var loader, progress;
+      if (data.lengthComputable && window.FormData !== undefined) {
+        loader = $("#id_img_loader_archivo_cedula" + iSeqRow);
+        loaderContent = $("#id_img_loader_archivo_cedula" + iSeqRow + " .scProgressBarLoading");
+        loaderContent.html("&nbsp;");
+        progress = parseInt(data.loaded / data.total * 100, 10);
+        loader.show().find("div").css("width", progress + "%");
+      }
+      else {
+        loader = $("#id_ajax_loader_archivo_cedula" + iSeqRow);
+        loader.show();
+      }
+    },
+    change: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_archivo_cedula(data);
+      if ('ok' != checkUploadSize) {
+        e.preventDefault();
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    drop: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_archivo_cedula(data);
+      if ('ok' != checkUploadSize) {
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    done: function(e, data) {
+      var fileData, respData, respPos, respMsg, thumbDisplay, checkDisplay, var_ajax_img_thumb, oTemp;
+      fileData = null;
+      respMsg = "";
+      if (data && data.result && data.result[0] && data.result[0].body) {
+        respData = data.result[0].body.innerText;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = $.parseJSON(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      else {
+        respData = data.result;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = eval(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      if (window.FormData !== undefined)
+      {
+        $("#id_img_loader_archivo_cedula" + iSeqRow).hide();
+      }
+      else
+      {
+        $("#id_ajax_loader_archivo_cedula" + iSeqRow).hide();
+      }
+      if (null == fileData) {
+        if ("" != respMsg) {
+          oTemp = {"htmOutput" : "<?php echo $this->Ini->Nm_lang['lang_errm_upld_admn']; ?>"};
+          scAjaxShowDebug(oTemp);
+        }
+        return;
+      }
+      if (fileData[0].error && "" != fileData[0].error) {
+        var uploadErrorMessage = "";
+        oResp = {};
+        if ("acceptFileTypes" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_invl']) ?>";
+        }
+        else if ("maxFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("minFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("emptyFile" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_empty']) ?>";
+        }
+        scAjaxShowErrorDisplay("table", uploadErrorMessage);
+        return;
+      }
+      $("#id_sc_field_archivo_cedula" + iSeqRow).val("");
+      $("#id_sc_field_archivo_cedula_ul_name" + iSeqRow).val(fileData[0].sc_ul_name);
+      $("#id_sc_field_archivo_cedula_ul_type" + iSeqRow).val(fileData[0].type);
+      $("#id_ajax_doc_archivo_cedula" + iSeqRow).html(fileData[0].name);
+      $("#id_ajax_doc_archivo_cedula" + iSeqRow).css("display", "");
+      checkDisplay = ("" == fileData[0].sc_random_prot.substr(12)) ? "none" : "";
+      $("#chk_ajax_img_archivo_cedula" + iSeqRow).css("display", checkDisplay);
+      $("#id_ajax_link_archivo_cedula" + iSeqRow).html(fileData[0].sc_random_prot.substr(12));
+    }
+  });
+
+  $("#id_sc_field_archivo_rut" + iSeqRow).fileupload({
+    datatype: "json",
+    url: "terceros_mob_ul_save.php",
+    dropZone: "",
+    formData: function() {
+      return [
+        {name: 'param_field', value: 'archivo_rut'},
+        {name: 'param_seq', value: '<?php echo $this->Ini->sc_page; ?>'},
+        {name: 'upload_file_row', value: iSeqRow}
+      ];
+    },
+    progress: function(e, data) {
+      var loader, progress;
+      if (data.lengthComputable && window.FormData !== undefined) {
+        loader = $("#id_img_loader_archivo_rut" + iSeqRow);
+        loaderContent = $("#id_img_loader_archivo_rut" + iSeqRow + " .scProgressBarLoading");
+        loaderContent.html("&nbsp;");
+        progress = parseInt(data.loaded / data.total * 100, 10);
+        loader.show().find("div").css("width", progress + "%");
+      }
+      else {
+        loader = $("#id_ajax_loader_archivo_rut" + iSeqRow);
+        loader.show();
+      }
+    },
+    change: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_archivo_rut(data);
+      if ('ok' != checkUploadSize) {
+        e.preventDefault();
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    drop: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_archivo_rut(data);
+      if ('ok' != checkUploadSize) {
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    done: function(e, data) {
+      var fileData, respData, respPos, respMsg, thumbDisplay, checkDisplay, var_ajax_img_thumb, oTemp;
+      fileData = null;
+      respMsg = "";
+      if (data && data.result && data.result[0] && data.result[0].body) {
+        respData = data.result[0].body.innerText;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = $.parseJSON(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      else {
+        respData = data.result;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = eval(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      if (window.FormData !== undefined)
+      {
+        $("#id_img_loader_archivo_rut" + iSeqRow).hide();
+      }
+      else
+      {
+        $("#id_ajax_loader_archivo_rut" + iSeqRow).hide();
+      }
+      if (null == fileData) {
+        if ("" != respMsg) {
+          oTemp = {"htmOutput" : "<?php echo $this->Ini->Nm_lang['lang_errm_upld_admn']; ?>"};
+          scAjaxShowDebug(oTemp);
+        }
+        return;
+      }
+      if (fileData[0].error && "" != fileData[0].error) {
+        var uploadErrorMessage = "";
+        oResp = {};
+        if ("acceptFileTypes" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_invl']) ?>";
+        }
+        else if ("maxFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("minFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("emptyFile" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_empty']) ?>";
+        }
+        scAjaxShowErrorDisplay("table", uploadErrorMessage);
+        return;
+      }
+      $("#id_sc_field_archivo_rut" + iSeqRow).val("");
+      $("#id_sc_field_archivo_rut_ul_name" + iSeqRow).val(fileData[0].sc_ul_name);
+      $("#id_sc_field_archivo_rut_ul_type" + iSeqRow).val(fileData[0].type);
+      $("#id_ajax_doc_archivo_rut" + iSeqRow).html(fileData[0].name);
+      $("#id_ajax_doc_archivo_rut" + iSeqRow).css("display", "");
+      checkDisplay = ("" == fileData[0].sc_random_prot.substr(12)) ? "none" : "";
+      $("#chk_ajax_img_archivo_rut" + iSeqRow).css("display", checkDisplay);
+      $("#id_ajax_link_archivo_rut" + iSeqRow).html(fileData[0].sc_random_prot.substr(12));
+    }
+  });
+
+  $("#id_sc_field_archivo_nit" + iSeqRow).fileupload({
+    datatype: "json",
+    url: "terceros_mob_ul_save.php",
+    dropZone: "",
+    formData: function() {
+      return [
+        {name: 'param_field', value: 'archivo_nit'},
+        {name: 'param_seq', value: '<?php echo $this->Ini->sc_page; ?>'},
+        {name: 'upload_file_row', value: iSeqRow}
+      ];
+    },
+    progress: function(e, data) {
+      var loader, progress;
+      if (data.lengthComputable && window.FormData !== undefined) {
+        loader = $("#id_img_loader_archivo_nit" + iSeqRow);
+        loaderContent = $("#id_img_loader_archivo_nit" + iSeqRow + " .scProgressBarLoading");
+        loaderContent.html("&nbsp;");
+        progress = parseInt(data.loaded / data.total * 100, 10);
+        loader.show().find("div").css("width", progress + "%");
+      }
+      else {
+        loader = $("#id_ajax_loader_archivo_nit" + iSeqRow);
+        loader.show();
+      }
+    },
+    change: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_archivo_nit(data);
+      if ('ok' != checkUploadSize) {
+        e.preventDefault();
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    drop: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_archivo_nit(data);
+      if ('ok' != checkUploadSize) {
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    done: function(e, data) {
+      var fileData, respData, respPos, respMsg, thumbDisplay, checkDisplay, var_ajax_img_thumb, oTemp;
+      fileData = null;
+      respMsg = "";
+      if (data && data.result && data.result[0] && data.result[0].body) {
+        respData = data.result[0].body.innerText;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = $.parseJSON(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      else {
+        respData = data.result;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = eval(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      if (window.FormData !== undefined)
+      {
+        $("#id_img_loader_archivo_nit" + iSeqRow).hide();
+      }
+      else
+      {
+        $("#id_ajax_loader_archivo_nit" + iSeqRow).hide();
+      }
+      if (null == fileData) {
+        if ("" != respMsg) {
+          oTemp = {"htmOutput" : "<?php echo $this->Ini->Nm_lang['lang_errm_upld_admn']; ?>"};
+          scAjaxShowDebug(oTemp);
+        }
+        return;
+      }
+      if (fileData[0].error && "" != fileData[0].error) {
+        var uploadErrorMessage = "";
+        oResp = {};
+        if ("acceptFileTypes" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_invl']) ?>";
+        }
+        else if ("maxFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("minFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("emptyFile" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_empty']) ?>";
+        }
+        scAjaxShowErrorDisplay("table", uploadErrorMessage);
+        return;
+      }
+      $("#id_sc_field_archivo_nit" + iSeqRow).val("");
+      $("#id_sc_field_archivo_nit_ul_name" + iSeqRow).val(fileData[0].sc_ul_name);
+      $("#id_sc_field_archivo_nit_ul_type" + iSeqRow).val(fileData[0].type);
+      $("#id_ajax_doc_archivo_nit" + iSeqRow).html(fileData[0].name);
+      $("#id_ajax_doc_archivo_nit" + iSeqRow).css("display", "");
+      checkDisplay = ("" == fileData[0].sc_random_prot.substr(12)) ? "none" : "";
+      $("#chk_ajax_img_archivo_nit" + iSeqRow).css("display", checkDisplay);
+      $("#id_ajax_link_archivo_nit" + iSeqRow).html(fileData[0].sc_random_prot.substr(12));
+    }
+  });
+
+  $("#id_sc_field_archivo_pago" + iSeqRow).fileupload({
+    datatype: "json",
+    url: "terceros_mob_ul_save.php",
+    dropZone: "",
+    formData: function() {
+      return [
+        {name: 'param_field', value: 'archivo_pago'},
+        {name: 'param_seq', value: '<?php echo $this->Ini->sc_page; ?>'},
+        {name: 'upload_file_row', value: iSeqRow}
+      ];
+    },
+    progress: function(e, data) {
+      var loader, progress;
+      if (data.lengthComputable && window.FormData !== undefined) {
+        loader = $("#id_img_loader_archivo_pago" + iSeqRow);
+        loaderContent = $("#id_img_loader_archivo_pago" + iSeqRow + " .scProgressBarLoading");
+        loaderContent.html("&nbsp;");
+        progress = parseInt(data.loaded / data.total * 100, 10);
+        loader.show().find("div").css("width", progress + "%");
+      }
+      else {
+        loader = $("#id_ajax_loader_archivo_pago" + iSeqRow);
+        loader.show();
+      }
+    },
+    change: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_archivo_pago(data);
+      if ('ok' != checkUploadSize) {
+        e.preventDefault();
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    drop: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_archivo_pago(data);
+      if ('ok' != checkUploadSize) {
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    done: function(e, data) {
+      var fileData, respData, respPos, respMsg, thumbDisplay, checkDisplay, var_ajax_img_thumb, oTemp;
+      fileData = null;
+      respMsg = "";
+      if (data && data.result && data.result[0] && data.result[0].body) {
+        respData = data.result[0].body.innerText;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = $.parseJSON(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      else {
+        respData = data.result;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = eval(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      if (window.FormData !== undefined)
+      {
+        $("#id_img_loader_archivo_pago" + iSeqRow).hide();
+      }
+      else
+      {
+        $("#id_ajax_loader_archivo_pago" + iSeqRow).hide();
+      }
+      if (null == fileData) {
+        if ("" != respMsg) {
+          oTemp = {"htmOutput" : "<?php echo $this->Ini->Nm_lang['lang_errm_upld_admn']; ?>"};
+          scAjaxShowDebug(oTemp);
+        }
+        return;
+      }
+      if (fileData[0].error && "" != fileData[0].error) {
+        var uploadErrorMessage = "";
+        oResp = {};
+        if ("acceptFileTypes" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_invl']) ?>";
+        }
+        else if ("maxFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("minFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("emptyFile" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_empty']) ?>";
+        }
+        scAjaxShowErrorDisplay("table", uploadErrorMessage);
+        return;
+      }
+      $("#id_sc_field_archivo_pago" + iSeqRow).val("");
+      $("#id_sc_field_archivo_pago_ul_name" + iSeqRow).val(fileData[0].sc_ul_name);
+      $("#id_sc_field_archivo_pago_ul_type" + iSeqRow).val(fileData[0].type);
+      $("#id_ajax_doc_archivo_pago" + iSeqRow).html(fileData[0].name);
+      $("#id_ajax_doc_archivo_pago" + iSeqRow).css("display", "");
+      checkDisplay = ("" == fileData[0].sc_random_prot.substr(12)) ? "none" : "";
+      $("#chk_ajax_img_archivo_pago" + iSeqRow).css("display", checkDisplay);
+      $("#id_ajax_link_archivo_pago" + iSeqRow).html(fileData[0].sc_random_prot.substr(12));
+    }
+  });
+
 } // scJQUploadAdd
 
 var api_cache_requests = [];
@@ -3568,6 +4448,12 @@ function scJQSelect2Add(seqRow, specificField) {
   }
   if (null == specificField || "clasificacion_clientes" == specificField) {
     scJQSelect2Add_clasificacion_clientes(seqRow);
+  }
+  if (null == specificField || "id_plan" == specificField) {
+    scJQSelect2Add_id_plan(seqRow);
+  }
+  if (null == specificField || "estado" == specificField) {
+    scJQSelect2Add_estado(seqRow);
   }
 } // scJQSelect2Add
 
@@ -3877,6 +4763,43 @@ function scJQSelect2Add_clasificacion_clientes(seqRow) {
   );
 } // scJQSelect2Add
 
+function scJQSelect2Add_id_plan(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_plan_obj" : "#id_sc_field_id_plan" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_plan_obj',
+      dropdownCssClass: 'css_id_plan_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_estado(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_estado_obj" : "#id_sc_field_estado" + seqRow;
+  $(elemSelector).select2(
+    {
+      minimumResultsForSearch: Infinity,
+      containerCssClass: 'css_estado_obj',
+      dropdownCssClass: 'css_estado_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -3903,6 +4826,8 @@ function scJQElementsAdd(iLine) {
   setTimeout(function () { if ('function' == typeof displayChange_field_creditoprov) { displayChange_field_creditoprov(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_zona_clientes) { displayChange_field_zona_clientes(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_clasificacion_clientes) { displayChange_field_clasificacion_clientes(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_plan) { displayChange_field_id_plan(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_estado) { displayChange_field_estado(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)
@@ -3943,3 +4868,97 @@ function scCheckUploadExtensionSize_imagenter(thisField)
     return 'ok';
 }
 
+function scCheckUploadExtensionSize_archivo_cedula(thisField)
+{
+    if ("files" in thisField && thisField.files.length > 0) {
+        thisFileExtension = scGetFileExtension(thisField.files[0].name);
+
+
+        if (![".pdf"].includes(thisFileExtension)) {
+            return 'err_extension||' + thisFileExtension.toUpperCase();
+        }
+    }
+
+    return 'ok';
+}
+
+function scCheckUploadExtensionSize_archivo_rut(thisField)
+{
+    if ("files" in thisField && thisField.files.length > 0) {
+        thisFileExtension = scGetFileExtension(thisField.files[0].name);
+
+
+        if (![".pdf"].includes(thisFileExtension)) {
+            return 'err_extension||' + thisFileExtension.toUpperCase();
+        }
+    }
+
+    return 'ok';
+}
+
+function scCheckUploadExtensionSize_archivo_nit(thisField)
+{
+    if ("files" in thisField && thisField.files.length > 0) {
+        thisFileExtension = scGetFileExtension(thisField.files[0].name);
+
+
+        if (![".pdf"].includes(thisFileExtension)) {
+            return 'err_extension||' + thisFileExtension.toUpperCase();
+        }
+    }
+
+    return 'ok';
+}
+
+function scCheckUploadExtensionSize_archivo_pago(thisField)
+{
+    if ("files" in thisField && thisField.files.length > 0) {
+        thisFileExtension = scGetFileExtension(thisField.files[0].name);
+
+
+        if (![".pdf", ".jpg", ".jpeg", ".png", ".bmp", ".gif"].includes(thisFileExtension)) {
+            return 'err_extension||' + thisFileExtension.toUpperCase();
+        }
+    }
+
+    return 'ok';
+}
+
+var scBtnGrpStatus = {};
+function scBtnGrpShow(sGroup) {
+  if (typeof(scBtnGrpShowMobile) === typeof(function(){})) { return scBtnGrpShowMobile(sGroup); };
+  $('#sc_btgp_btn_' + sGroup).addClass('selected');
+  var btnPos = $('#sc_btgp_btn_' + sGroup).offset();
+  scBtnGrpStatus[sGroup] = 'open';
+  $('#sc_btgp_btn_' + sGroup).mouseout(function() {
+    scBtnGrpStatus[sGroup] = '';
+    setTimeout(function() {
+      scBtnGrpHide(sGroup, false);
+    }, 1000);
+  }).mouseover(function() {
+    scBtnGrpStatus[sGroup] = 'over';
+  });
+  $('#sc_btgp_div_' + sGroup + ' span a').click(function() {
+    scBtnGrpStatus[sGroup] = 'out';
+    scBtnGrpHide(sGroup, false);
+  });
+  $('#sc_btgp_div_' + sGroup).css({
+    'left': btnPos.left
+  })
+  .mouseover(function() {
+    scBtnGrpStatus[sGroup] = 'over';
+  })
+  .mouseleave(function() {
+    scBtnGrpStatus[sGroup] = 'out';
+    setTimeout(function() {
+      scBtnGrpHide(sGroup, false);
+    }, 1000);
+  })
+  .show('fast');
+}
+function scBtnGrpHide(sGroup, bForce) {
+  if (bForce || 'over' != scBtnGrpStatus[sGroup]) {
+    $('#sc_btgp_div_' + sGroup).hide('fast');
+    $('#sc_btgp_btn_' + sGroup).addClass('selected');
+  }
+}

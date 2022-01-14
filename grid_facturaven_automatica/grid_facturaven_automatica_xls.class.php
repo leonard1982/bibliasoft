@@ -583,30 +583,30 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
       } 
       $this->nm_field_dinamico = array();
       $this->nm_order_dinamico = array();
-      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, convert(char(23),fechaven,121), convert(char(23),fechavenc,121), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, convert(char(23),fechaven,121), convert(char(23),fechavenc,121), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, EXTEND(fechaven, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, EXTEND(fechaven, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+          $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_pesq'];
@@ -667,31 +667,35 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
          $this->total = $rs->fields[5] ;  
          $this->total =  str_replace(",", ".", $this->total);
          $this->total = (string)$this->total;
-         $this->fechaven = $rs->fields[6] ;  
-         $this->fechavenc = $rs->fields[7] ;  
-         $this->subtotal = $rs->fields[8] ;  
+         $this->clasificacion = $rs->fields[6] ;  
+         $this->clasificacion = (string)$this->clasificacion;
+         $this->id_clasificacion = $rs->fields[7] ;  
+         $this->id_clasificacion = (string)$this->id_clasificacion;
+         $this->fechaven = $rs->fields[8] ;  
+         $this->fechavenc = $rs->fields[9] ;  
+         $this->subtotal = $rs->fields[10] ;  
          $this->subtotal =  str_replace(",", ".", $this->subtotal);
          $this->subtotal = (string)$this->subtotal;
-         $this->valoriva = $rs->fields[9] ;  
+         $this->valoriva = $rs->fields[11] ;  
          $this->valoriva =  str_replace(",", ".", $this->valoriva);
          $this->valoriva = (string)$this->valoriva;
-         $this->observaciones = $rs->fields[10] ;  
-         $this->vendedor = $rs->fields[11] ;  
+         $this->observaciones = $rs->fields[12] ;  
+         $this->vendedor = $rs->fields[13] ;  
          $this->vendedor = (string)$this->vendedor;
-         $this->banco = $rs->fields[12] ;  
+         $this->banco = $rs->fields[14] ;  
          $this->banco = (string)$this->banco;
-         $this->dias_decredito = $rs->fields[13] ;  
+         $this->dias_decredito = $rs->fields[15] ;  
          $this->dias_decredito = (string)$this->dias_decredito;
-         $this->idfacven = $rs->fields[14] ;  
+         $this->idfacven = $rs->fields[16] ;  
          $this->idfacven = (string)$this->idfacven;
-         $this->pagada = $rs->fields[15] ;  
-         $this->asentada = $rs->fields[16] ;  
+         $this->pagada = $rs->fields[17] ;  
+         $this->asentada = $rs->fields[18] ;  
          $this->asentada = (string)$this->asentada;
-         $this->adicional = $rs->fields[17] ;  
+         $this->adicional = $rs->fields[19] ;  
          $this->adicional =  str_replace(",", ".", $this->adicional);
          $this->adicional = (string)$this->adicional;
-         $this->tipo = $rs->fields[18] ;  
-         $this->nomcliente = $rs->fields[19] ;  
+         $this->tipo = $rs->fields[20] ;  
+         $this->nomcliente = $rs->fields[21] ;  
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig']))
          {
              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1207,6 +1211,14 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
          $this->look_idcli = $this->idcli; 
          $this->Lookup->lookup_idcli($this->look_idcli, $this->idcli) ; 
          $this->look_idcli = ($this->look_idcli == "&nbsp;") ? "" : $this->look_idcli; 
+         //----- lookup - clasificacion
+         $this->look_clasificacion = $this->clasificacion; 
+         $this->Lookup->lookup_clasificacion($this->look_clasificacion, $this->clasificacion) ; 
+         $this->look_clasificacion = ($this->look_clasificacion == "&nbsp;") ? "" : $this->look_clasificacion; 
+         //----- lookup - id_clasificacion
+         $this->look_id_clasificacion = $this->id_clasificacion; 
+         $this->Lookup->lookup_id_clasificacion($this->look_id_clasificacion, $this->id_clasificacion) ; 
+         $this->look_id_clasificacion = ($this->look_id_clasificacion == "&nbsp;") ? "" : $this->look_id_clasificacion; 
          //----- lookup - vendedor
          $this->look_vendedor = $this->vendedor; 
          $this->Lookup->lookup_vendedor($this->look_vendedor, $this->vendedor) ; 
@@ -1700,6 +1712,62 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['clasificacion'])) ? $this->New_label['clasificacion'] : "Clasificacion"; 
+          if ($Cada_col == "clasificacion" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['id_clasificacion'])) ? $this->New_label['id_clasificacion'] : "Tipo"; 
+          if ($Cada_col == "id_clasificacion" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
           $SC_Label = (isset($this->New_label['copiar'])) ? $this->New_label['copiar'] : "Duplicar"; 
           if ($Cada_col == "copiar" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -2065,6 +2133,46 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->total);
          $this->Xls_col++;
    }
+   //----- clasificacion
+   function NM_export_clasificacion()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->look_clasificacion = html_entity_decode($this->look_clasificacion, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_clasificacion = strip_tags($this->look_clasificacion);
+         $this->look_clasificacion = NM_charset_to_utf8($this->look_clasificacion);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_clasificacion, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_clasificacion, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
+   //----- id_clasificacion
+   function NM_export_id_clasificacion()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->look_id_clasificacion = html_entity_decode($this->look_id_clasificacion, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_id_clasificacion = strip_tags($this->look_id_clasificacion);
+         $this->look_id_clasificacion = NM_charset_to_utf8($this->look_id_clasificacion);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_id_clasificacion, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_id_clasificacion, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- copiar
    function NM_export_copiar()
    {
@@ -2302,6 +2410,30 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0.00";
+         $this->Xls_col++;
+   }
+   //----- clasificacion
+   function NM_sub_cons_clasificacion()
+   {
+         $this->look_clasificacion = html_entity_decode($this->look_clasificacion, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_clasificacion = strip_tags($this->look_clasificacion);
+         $this->look_clasificacion = NM_charset_to_utf8($this->look_clasificacion);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_clasificacion;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- id_clasificacion
+   function NM_sub_cons_id_clasificacion()
+   {
+         $this->look_id_clasificacion = html_entity_decode($this->look_id_clasificacion, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_id_clasificacion = strip_tags($this->look_id_clasificacion);
+         $this->look_id_clasificacion = NM_charset_to_utf8($this->look_id_clasificacion);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_id_clasificacion;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
    //----- copiar
@@ -9545,15 +9677,15 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'on';
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 

@@ -3388,31 +3388,6 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_111121']['doc_wo
            $nm_saida->saida(" <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/font-awesome/css/all.min.css\" type=\"text/css\" media=\"screen\" />\r\n");
            $nm_saida->saida(" <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/touch_punch/jquery.ui.touch-punch.min.js\"></script>\r\n");
            $nm_saida->saida(" <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/malsup-blockui/jquery.blockUI.js\"></script>\r\n");
-           if ($_SESSION['scriptcase']['proc_mobile'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_111121']['ajax_nav']) {  
-               $sc_app_data = json_encode([ 
-                   'appType' => 'summary', 
-                   'improvements' => true, 
-                   'displayOptionsButton' => false, 
-                   'displayScrollUp' => true, 
-                   'scrollUpPosition' => 'R', 
-                   'toolbarOrientation' => 'H', 
-                   'mobilePanes' => 'true', 
-                   'navigationBarButtons' => unserialize('N;'), 
-                   'langs' => [ 
-                       'lang_refined_search' => html_entity_decode($this->Ini->Nm_lang['lang_refined_search'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                       'lang_summary_search_button' => html_entity_decode($this->Ini->Nm_lang['lang_summary_search_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                       'lang_details_button' => html_entity_decode($this->Ini->Nm_lang['lang_details_button'], ENT_COMPAT, $_SESSION['scriptcase']['charset']), 
-                   ], 
-               ]); ?> 
-        <input type="hidden" id="sc-mobile-app-data" value='<?php echo $sc_app_data; ?>' />
-        <script type="text/javascript" src="../_lib/lib/js/nm_modal_panes.jquery.js"></script>
-        <script type="text/javascript" src="../_lib/lib/js/nm_mobile.js"></script>
-        <link rel='stylesheet' href='../_lib/lib/css/nm_mobile.css' type='text/css'/>
-                    <script>
-                        $(document).ready(function(){
-                            bootstrapMobile();
-                        });
-                    </script>           <?php }
            $nm_saida->saida(" <script type=\"text/javascript\" src=\"grid_pedidos_111121_ajax.js\"></script>\r\n");
            $nm_saida->saida(" <script type=\"text/javascript\">\r\n");
            $nm_saida->saida("   var sc_ajaxBg = '" . $this->Ini->Color_bg_ajax . "';\r\n");
@@ -3796,7 +3771,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_111121']['opcao'] != "print" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_111121']['embutida'])
       {
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $nm_saida->saida("<div id=\"id_debug_window\" style=\"display: none; position: absolute; left: 50px; top: 50px\"><table class=\"scFormMessageTable\">\r\n");
+           $nm_saida->saida("<div id=\"id_debug_window\" style=\"display: none;\" class='scDebugWindow'><table class=\"scFormMessageTable\">\r\n");
            $nm_saida->saida("<tr><td class=\"scFormMessageTitle\">" . $Cod_Btn . "&nbsp;&nbsp;Output</td></tr>\r\n");
            $nm_saida->saida("<tr><td class=\"scFormMessageMessage\" style=\"padding: 0px; vertical-align: top\"><div style=\"padding: 2px; height: 200px; width: 350px; overflow: auto\" id=\"id_debug_text\"></div></td></tr>\r\n");
            $nm_saida->saida("</table></div>\r\n");
@@ -3999,7 +3974,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                 }
             }
          }
-      if ($this->nmgp_botoes['exit'] == 'on' && !$this->grid_emb_form)
+      if ($this->nmgp_botoes['chart_exit'] == 'on' && !$this->grid_emb_form)
       {
           $this->nm_btn_exist['exit'][] = "Rsai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('igual', '0');", "nm_gp_move('igual', '0');", "Rsai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -4188,7 +4163,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
                 }
             }
          }
-      if ($this->nmgp_botoes['exit'] == 'on' && !$this->grid_emb_form)
+      if ($this->nmgp_botoes['chart_exit'] == 'on' && !$this->grid_emb_form)
       {
           $this->nm_btn_exist['exit'][] = "Rsai_top";
          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('igual', '0');", "nm_gp_move('igual', '0');", "Rsai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");

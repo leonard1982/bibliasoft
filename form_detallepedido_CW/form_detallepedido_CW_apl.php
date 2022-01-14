@@ -56,8 +56,8 @@ class form_detallepedido_CW_apl
    var $numfac_;
    var $remision_;
    var $idpro_;
+   var $idpro__1;
    var $unidadmayor_;
-   var $unidadmayor__1;
    var $factor_;
    var $idbod_;
    var $idbod__1;
@@ -71,11 +71,8 @@ class form_detallepedido_CW_apl
    var $adicional1_;
    var $devuelto_;
    var $colores_;
-   var $colores__1;
    var $tallas_;
-   var $tallas__1;
    var $sabor_;
-   var $sabor__1;
    var $estado_comanda_;
    var $usuario_comanda_;
    var $tercero_comanda_;
@@ -85,10 +82,9 @@ class form_detallepedido_CW_apl
    var $hora_final__hora;
    var $observ_;
    var $cerrado_;
+   var $obs_;
+   var $descr_;
    var $codbarra_;
-   var $stockubica_;
-   var $unidad_;
-   var $cod_barras_;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -115,7 +111,7 @@ class form_detallepedido_CW_apl
    var $sc_max_reg = 10; 
    var $sc_max_reg_incl = 10; 
    var $form_vert_form_detallepedido_CW = array();
-   var $form_paginacao = 'total';
+   var $form_paginacao = 'parcial';
    var $lig_edit_lookup      = false;
    var $lig_edit_lookup_call = false;
    var $lig_edit_lookup_cb   = '';
@@ -124,7 +120,7 @@ class form_detallepedido_CW_apl
    var $Embutida_call  = false;
    var $Embutida_ronly = false;
    var $Embutida_proc  = false;
-   var $Embutida_form  = false;
+   var $Embutida_form  = true;
    var $Grid_editavel  = false;
    var $url_webhelp = '';
    var $nm_todas_criticas;
@@ -143,10 +139,6 @@ class form_detallepedido_CW_apl
 
       if ($this->NM_ajax_flag)
       {
-          if (isset($this->NM_ajax_info['param']['adicional1_']))
-          {
-              $this->adicional1_ = $this->NM_ajax_info['param']['adicional1_'];
-          }
           if (isset($this->NM_ajax_info['param']['adicional_']))
           {
               $this->adicional_ = $this->NM_ajax_info['param']['adicional_'];
@@ -155,29 +147,13 @@ class form_detallepedido_CW_apl
           {
               $this->cantidad_ = $this->NM_ajax_info['param']['cantidad_'];
           }
-          if (isset($this->NM_ajax_info['param']['cod_barras_']))
+          if (isset($this->NM_ajax_info['param']['codbarra_']))
           {
-              $this->cod_barras_ = $this->NM_ajax_info['param']['cod_barras_'];
-          }
-          if (isset($this->NM_ajax_info['param']['colores_']))
-          {
-              $this->colores_ = $this->NM_ajax_info['param']['colores_'];
-          }
-          if (isset($this->NM_ajax_info['param']['costop_']))
-          {
-              $this->costop_ = $this->NM_ajax_info['param']['costop_'];
+              $this->codbarra_ = $this->NM_ajax_info['param']['codbarra_'];
           }
           if (isset($this->NM_ajax_info['param']['csrf_token']))
           {
               $this->csrf_token = $this->NM_ajax_info['param']['csrf_token'];
-          }
-          if (isset($this->NM_ajax_info['param']['descuento_']))
-          {
-              $this->descuento_ = $this->NM_ajax_info['param']['descuento_'];
-          }
-          if (isset($this->NM_ajax_info['param']['factor_']))
-          {
-              $this->factor_ = $this->NM_ajax_info['param']['factor_'];
           }
           if (isset($this->NM_ajax_info['param']['idbod_']))
           {
@@ -186,6 +162,10 @@ class form_detallepedido_CW_apl
           if (isset($this->NM_ajax_info['param']['iddet_']))
           {
               $this->iddet_ = $this->NM_ajax_info['param']['iddet_'];
+          }
+          if (isset($this->NM_ajax_info['param']['idpedid_']))
+          {
+              $this->idpedid_ = $this->NM_ajax_info['param']['idpedid_'];
           }
           if (isset($this->NM_ajax_info['param']['idpro_']))
           {
@@ -223,10 +203,6 @@ class form_detallepedido_CW_apl
           {
               $this->nmgp_parms = $this->NM_ajax_info['param']['nmgp_parms'];
           }
-          if (isset($this->NM_ajax_info['param']['nmgp_refresh_fields']))
-          {
-              $this->nmgp_refresh_fields = $this->NM_ajax_info['param']['nmgp_refresh_fields'];
-          }
           if (isset($this->NM_ajax_info['param']['nmgp_refresh_row']))
           {
               $this->nmgp_refresh_row = $this->NM_ajax_info['param']['nmgp_refresh_row'];
@@ -238,10 +214,6 @@ class form_detallepedido_CW_apl
           if (isset($this->NM_ajax_info['param']['observ_']))
           {
               $this->observ_ = $this->NM_ajax_info['param']['observ_'];
-          }
-          if (isset($this->NM_ajax_info['param']['sabor_']))
-          {
-              $this->sabor_ = $this->NM_ajax_info['param']['sabor_'];
           }
           if (isset($this->NM_ajax_info['param']['sc_clone']))
           {
@@ -258,22 +230,6 @@ class form_detallepedido_CW_apl
           if (isset($this->NM_ajax_info['param']['script_case_init']))
           {
               $this->script_case_init = $this->NM_ajax_info['param']['script_case_init'];
-          }
-          if (isset($this->NM_ajax_info['param']['stockubica_']))
-          {
-              $this->stockubica_ = $this->NM_ajax_info['param']['stockubica_'];
-          }
-          if (isset($this->NM_ajax_info['param']['tallas_']))
-          {
-              $this->tallas_ = $this->NM_ajax_info['param']['tallas_'];
-          }
-          if (isset($this->NM_ajax_info['param']['unidad_']))
-          {
-              $this->unidad_ = $this->NM_ajax_info['param']['unidad_'];
-          }
-          if (isset($this->NM_ajax_info['param']['unidadmayor_']))
-          {
-              $this->unidadmayor_ = $this->NM_ajax_info['param']['unidadmayor_'];
           }
           if (isset($this->NM_ajax_info['param']['valorpar_']))
           {
@@ -322,10 +278,9 @@ class form_detallepedido_CW_apl
       $this->sc_conv_var['hora_final'] = "hora_final_";
       $this->sc_conv_var['observ'] = "observ_";
       $this->sc_conv_var['cerrado'] = "cerrado_";
+      $this->sc_conv_var['obs'] = "obs_";
+      $this->sc_conv_var['descr'] = "descr_";
       $this->sc_conv_var['codbarra'] = "codbarra_";
-      $this->sc_conv_var['stockubica'] = "stockubica_";
-      $this->sc_conv_var['unidad'] = "unidad_";
-      $this->sc_conv_var['cod_barras'] = "cod_barras_";
       if (!empty($_FILES))
       {
           foreach ($_FILES as $nmgp_campo => $nmgp_valores)
@@ -426,61 +381,21 @@ class form_detallepedido_CW_apl
       {
           $_SESSION['par_numero'] = $this->par_numero;
       }
-      if (isset($this->numventa) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      if (isset($this->gModificarInventario) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
       {
-          $_SESSION['numventa'] = $this->numventa;
-      }
-      if (isset($this->edit_cantidad) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
-      {
-          $_SESSION['edit_cantidad'] = $this->edit_cantidad;
+          $_SESSION['gModificarInventario'] = $this->gModificarInventario;
       }
       if (isset($this->sw) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
       {
           $_SESSION['sw'] = $this->sw;
       }
-      if (isset($this->color_pedido) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      if (isset($this->edit_cantidad) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
       {
-          $_SESSION['color_pedido'] = $this->color_pedido;
-      }
-      if (isset($this->talla_pedido) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
-      {
-          $_SESSION['talla_pedido'] = $this->talla_pedido;
-      }
-      if (isset($this->sabor_pedido) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
-      {
-          $_SESSION['sabor_pedido'] = $this->sabor_pedido;
-      }
-      if (isset($this->gModificarInventario) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
-      {
-          $_SESSION['gModificarInventario'] = $this->gModificarInventario;
+          $_SESSION['edit_cantidad'] = $this->edit_cantidad;
       }
       if (isset($_POST["par_numero"]) && isset($this->par_numero)) 
       {
           $_SESSION['par_numero'] = $this->par_numero;
-      }
-      if (isset($_POST["numventa"]) && isset($this->numventa)) 
-      {
-          $_SESSION['numventa'] = $this->numventa;
-      }
-      if (isset($_POST["edit_cantidad"]) && isset($this->edit_cantidad)) 
-      {
-          $_SESSION['edit_cantidad'] = $this->edit_cantidad;
-      }
-      if (isset($_POST["sw"]) && isset($this->sw)) 
-      {
-          $_SESSION['sw'] = $this->sw;
-      }
-      if (isset($_POST["color_pedido"]) && isset($this->color_pedido)) 
-      {
-          $_SESSION['color_pedido'] = $this->color_pedido;
-      }
-      if (isset($_POST["talla_pedido"]) && isset($this->talla_pedido)) 
-      {
-          $_SESSION['talla_pedido'] = $this->talla_pedido;
-      }
-      if (isset($_POST["sabor_pedido"]) && isset($this->sabor_pedido)) 
-      {
-          $_SESSION['sabor_pedido'] = $this->sabor_pedido;
       }
       if (isset($_POST["gModificarInventario"]) && isset($this->gModificarInventario)) 
       {
@@ -490,33 +405,17 @@ class form_detallepedido_CW_apl
       {
           $_SESSION['gModificarInventario'] = $_POST["gmodificarinventario"];
       }
-      if (isset($_GET["par_numero"]) && isset($this->par_numero)) 
-      {
-          $_SESSION['par_numero'] = $this->par_numero;
-      }
-      if (isset($_GET["numventa"]) && isset($this->numventa)) 
-      {
-          $_SESSION['numventa'] = $this->numventa;
-      }
-      if (isset($_GET["edit_cantidad"]) && isset($this->edit_cantidad)) 
-      {
-          $_SESSION['edit_cantidad'] = $this->edit_cantidad;
-      }
-      if (isset($_GET["sw"]) && isset($this->sw)) 
+      if (isset($_POST["sw"]) && isset($this->sw)) 
       {
           $_SESSION['sw'] = $this->sw;
       }
-      if (isset($_GET["color_pedido"]) && isset($this->color_pedido)) 
+      if (isset($_POST["edit_cantidad"]) && isset($this->edit_cantidad)) 
       {
-          $_SESSION['color_pedido'] = $this->color_pedido;
+          $_SESSION['edit_cantidad'] = $this->edit_cantidad;
       }
-      if (isset($_GET["talla_pedido"]) && isset($this->talla_pedido)) 
+      if (isset($_GET["par_numero"]) && isset($this->par_numero)) 
       {
-          $_SESSION['talla_pedido'] = $this->talla_pedido;
-      }
-      if (isset($_GET["sabor_pedido"]) && isset($this->sabor_pedido)) 
-      {
-          $_SESSION['sabor_pedido'] = $this->sabor_pedido;
+          $_SESSION['par_numero'] = $this->par_numero;
       }
       if (isset($_GET["gModificarInventario"]) && isset($this->gModificarInventario)) 
       {
@@ -525,6 +424,14 @@ class form_detallepedido_CW_apl
       if (!isset($_GET["gModificarInventario"]) && isset($_GET["gmodificarinventario"])) 
       {
           $_SESSION['gModificarInventario'] = $_GET["gmodificarinventario"];
+      }
+      if (isset($_GET["sw"]) && isset($this->sw)) 
+      {
+          $_SESSION['sw'] = $this->sw;
+      }
+      if (isset($_GET["edit_cantidad"]) && isset($this->edit_cantidad)) 
+      {
+          $_SESSION['edit_cantidad'] = $this->edit_cantidad;
       }
       if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
           $_POST['nmgp_opcao'] = "novo";
@@ -593,30 +500,6 @@ class form_detallepedido_CW_apl
           {
               $_SESSION['par_numero'] = $this->par_numero;
           }
-          if (isset($this->numventa)) 
-          {
-              $_SESSION['numventa'] = $this->numventa;
-          }
-          if (isset($this->edit_cantidad)) 
-          {
-              $_SESSION['edit_cantidad'] = $this->edit_cantidad;
-          }
-          if (isset($this->sw)) 
-          {
-              $_SESSION['sw'] = $this->sw;
-          }
-          if (isset($this->color_pedido)) 
-          {
-              $_SESSION['color_pedido'] = $this->color_pedido;
-          }
-          if (isset($this->talla_pedido)) 
-          {
-              $_SESSION['talla_pedido'] = $this->talla_pedido;
-          }
-          if (isset($this->sabor_pedido)) 
-          {
-              $_SESSION['sabor_pedido'] = $this->sabor_pedido;
-          }
           if (!isset($this->gModificarInventario) && isset($this->gmodificarinventario)) 
           {
               $this->gModificarInventario = $this->gmodificarinventario;
@@ -624,6 +507,14 @@ class form_detallepedido_CW_apl
           if (isset($this->gModificarInventario)) 
           {
               $_SESSION['gModificarInventario'] = $this->gModificarInventario;
+          }
+          if (isset($this->sw)) 
+          {
+              $_SESSION['sw'] = $this->sw;
+          }
+          if (isset($this->edit_cantidad)) 
+          {
+              $_SESSION['edit_cantidad'] = $this->edit_cantidad;
           }
           if ($tem_where_parms)
           {
@@ -650,30 +541,6 @@ class form_detallepedido_CW_apl
           {
               $_SESSION['par_numero'] = $this->par_numero;
           }
-          if (isset($this->numventa)) 
-          {
-              $_SESSION['numventa'] = $this->numventa;
-          }
-          if (isset($this->edit_cantidad)) 
-          {
-              $_SESSION['edit_cantidad'] = $this->edit_cantidad;
-          }
-          if (isset($this->sw)) 
-          {
-              $_SESSION['sw'] = $this->sw;
-          }
-          if (isset($this->color_pedido)) 
-          {
-              $_SESSION['color_pedido'] = $this->color_pedido;
-          }
-          if (isset($this->talla_pedido)) 
-          {
-              $_SESSION['talla_pedido'] = $this->talla_pedido;
-          }
-          if (isset($this->sabor_pedido)) 
-          {
-              $_SESSION['sabor_pedido'] = $this->sabor_pedido;
-          }
           if (!isset($this->gModificarInventario) && isset($this->gmodificarinventario)) 
           {
               $this->gModificarInventario = $this->gmodificarinventario;
@@ -681,6 +548,14 @@ class form_detallepedido_CW_apl
           if (isset($this->gModificarInventario)) 
           {
               $_SESSION['gModificarInventario'] = $this->gModificarInventario;
+          }
+          if (isset($this->sw)) 
+          {
+              $_SESSION['sw'] = $this->sw;
+          }
+          if (isset($this->edit_cantidad)) 
+          {
+              $_SESSION['edit_cantidad'] = $this->edit_cantidad;
           }
       } 
       elseif (isset($script_case_init) && !empty($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_detallepedido_CW']['parms']))
@@ -766,7 +641,7 @@ class form_detallepedido_CW_apl
           if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_detallepedido_CW']))
           {
                $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_detallepedido_CW']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('form_detallepedido_CW') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_detallepedido_CW']['label'] = "Detalle venta";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_detallepedido_CW']['label'] = "" . $this->Ini->Nm_lang['lang_othr_frmu_title'] . " detallepedido";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -1372,33 +1247,12 @@ class form_detallepedido_CW_apl
             if(!empty($img_width) && !empty($img_height)){
                 $sc_obj_img->setWidth($img_width);
                 $sc_obj_img->setHeight($img_height);
-            }            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            }
+                $sc_obj_img->setManterAspecto(true);
+            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
             echo $out1_img_cache;
                exit;
             }
-      if ($nm_opc_lookup == "lookup")
-      { 
-          if ($GLOBALS['F'] == "cod_barras_")
-          { 
-              $nm_parms   = substr($GLOBALS['P0'], 1, strlen($GLOBALS['P0']) - 2);
-              $array_vars = explode(",", $nm_parms);
-              $this->cod_barras_ = $array_vars[0];
-              $cod_barras_       = $this->cod_barras_;
-              $this->cod_barras_       = $cod_barras_;
-              $this->lookup_cod_barras_($conteudo);
-              $conteudo = str_replace("&", "&amp;", $conteudo); 
-              $conteudo = str_replace("\/" , "\/", $conteudo); 
-              echo "<html><head></head>";
-              echo " <body onload=\"p=document.layers?parentLayer:window.parent;p.jsrsLoaded('" . $GLOBALS['C'] . "');\">";
-              echo "  jsrsPayload:";
-              echo "  <br>";
-              echo "  <form name=\"jsrs_Form\"><textarea name=\"jsrs_Payload\">";
-              echo "$conteudo";
-              echo " </textarea></form></body></html>";
-          } 
-          $this->NM_close_db(); 
-          exit;
-      } 
    }
 
    function loadFieldConfig()
@@ -1411,13 +1265,13 @@ class form_detallepedido_CW_apl
       $this->field_config['iddet_']['symbol_dec'] = '';
       $this->field_config['iddet_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['iddet_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- stockubica_
-      $this->field_config['stockubica_']               = array();
-      $this->field_config['stockubica_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['stockubica_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['stockubica_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_num'];
-      $this->field_config['stockubica_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['stockubica_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- idpedid_
+      $this->field_config['idpedid_']               = array();
+      $this->field_config['idpedid_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['idpedid_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['idpedid_']['symbol_dec'] = '';
+      $this->field_config['idpedid_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['idpedid_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- cantidad_
       $this->field_config['cantidad_']               = array();
       $this->field_config['cantidad_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -1441,35 +1295,6 @@ class form_detallepedido_CW_apl
       $this->field_config['valorpar_']['symbol_mon'] = $_SESSION['scriptcase']['reg_conf']['monet_simb'];
       $this->field_config['valorpar_']['format_pos'] = $_SESSION['scriptcase']['reg_conf']['monet_f_pos'];
       $this->field_config['valorpar_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['monet_f_neg'];
-      //-- descuento_
-      $this->field_config['descuento_']               = array();
-      $this->field_config['descuento_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['descuento_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['descuento_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_num'];
-      $this->field_config['descuento_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['descuento_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- adicional_
-      $this->field_config['adicional_']               = array();
-      $this->field_config['adicional_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['adicional_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['adicional_']['symbol_dec'] = '';
-      $this->field_config['adicional_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['adicional_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- adicional1_
-      $this->field_config['adicional1_']               = array();
-      $this->field_config['adicional1_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['adicional1_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['adicional1_']['symbol_dec'] = '';
-      $this->field_config['adicional1_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['adicional1_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- factor_
-      $this->field_config['factor_']               = array();
-      $this->field_config['factor_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_val'];
-      $this->field_config['factor_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit'];
-      $this->field_config['factor_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_val'];
-      $this->field_config['factor_']['symbol_mon'] = '';
-      $this->field_config['factor_']['format_pos'] = $_SESSION['scriptcase']['reg_conf']['monet_f_pos'];
-      $this->field_config['factor_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['monet_f_neg'];
       //-- iva_
       $this->field_config['iva_']               = array();
       $this->field_config['iva_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_val'];
@@ -1478,20 +1303,13 @@ class form_detallepedido_CW_apl
       $this->field_config['iva_']['symbol_mon'] = $_SESSION['scriptcase']['reg_conf']['monet_simb'];
       $this->field_config['iva_']['format_pos'] = $_SESSION['scriptcase']['reg_conf']['monet_f_pos'];
       $this->field_config['iva_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['monet_f_neg'];
-      //-- costop_
-      $this->field_config['costop_']               = array();
-      $this->field_config['costop_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['costop_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['costop_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_num'];
-      $this->field_config['costop_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['costop_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- idpedid_
-      $this->field_config['idpedid_']               = array();
-      $this->field_config['idpedid_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['idpedid_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['idpedid_']['symbol_dec'] = '';
-      $this->field_config['idpedid_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['idpedid_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- adicional_
+      $this->field_config['adicional_']               = array();
+      $this->field_config['adicional_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['adicional_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['adicional_']['symbol_dec'] = '';
+      $this->field_config['adicional_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['adicional_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- numfac_
       $this->field_config['numfac_']               = array();
       $this->field_config['numfac_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -1506,6 +1324,37 @@ class form_detallepedido_CW_apl
       $this->field_config['remision_']['symbol_dec'] = '';
       $this->field_config['remision_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['remision_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- factor_
+      $this->field_config['factor_']               = array();
+      $this->field_config['factor_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_val'];
+      $this->field_config['factor_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit'];
+      $this->field_config['factor_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_val'];
+      $this->field_config['factor_']['symbol_mon'] = '';
+      $this->field_config['factor_']['format_pos'] = $_SESSION['scriptcase']['reg_conf']['monet_f_pos'];
+      $this->field_config['factor_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['monet_f_neg'];
+      //-- costop_
+      $this->field_config['costop_']               = array();
+      $this->field_config['costop_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_val'];
+      $this->field_config['costop_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit'];
+      $this->field_config['costop_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_val'];
+      $this->field_config['costop_']['symbol_mon'] = '';
+      $this->field_config['costop_']['format_pos'] = $_SESSION['scriptcase']['reg_conf']['monet_f_pos'];
+      $this->field_config['costop_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['monet_f_neg'];
+      //-- descuento_
+      $this->field_config['descuento_']               = array();
+      $this->field_config['descuento_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_val'];
+      $this->field_config['descuento_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit'];
+      $this->field_config['descuento_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_val'];
+      $this->field_config['descuento_']['symbol_mon'] = '';
+      $this->field_config['descuento_']['format_pos'] = $_SESSION['scriptcase']['reg_conf']['monet_f_pos'];
+      $this->field_config['descuento_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['monet_f_neg'];
+      //-- adicional1_
+      $this->field_config['adicional1_']               = array();
+      $this->field_config['adicional1_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['adicional1_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['adicional1_']['symbol_dec'] = '';
+      $this->field_config['adicional1_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['adicional1_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- devuelto_
       $this->field_config['devuelto_']               = array();
       $this->field_config['devuelto_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -1513,6 +1362,27 @@ class form_detallepedido_CW_apl
       $this->field_config['devuelto_']['symbol_dec'] = '';
       $this->field_config['devuelto_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['devuelto_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- colores_
+      $this->field_config['colores_']               = array();
+      $this->field_config['colores_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['colores_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['colores_']['symbol_dec'] = '';
+      $this->field_config['colores_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['colores_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- tallas_
+      $this->field_config['tallas_']               = array();
+      $this->field_config['tallas_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['tallas_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['tallas_']['symbol_dec'] = '';
+      $this->field_config['tallas_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['tallas_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- sabor_
+      $this->field_config['sabor_']               = array();
+      $this->field_config['sabor_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['sabor_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['sabor_']['symbol_dec'] = '';
+      $this->field_config['sabor_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['sabor_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- tercero_comanda_
       $this->field_config['tercero_comanda_']               = array();
       $this->field_config['tercero_comanda_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -1534,13 +1404,6 @@ class form_detallepedido_CW_apl
       $this->field_config['hora_final_']['time_sep']     = $_SESSION['scriptcase']['reg_conf']['time_sep'];
       $this->field_config['hora_final_']['date_display'] = "ddmmaaaa;hhiiss";
       $this->new_date_format('DH', 'hora_final_');
-      //-- codbarra_
-      $this->field_config['codbarra_']               = array();
-      $this->field_config['codbarra_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['codbarra_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['codbarra_']['symbol_dec'] = '';
-      $this->field_config['codbarra_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['codbarra_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
    }
 
    function controle()
@@ -1640,21 +1503,14 @@ class form_detallepedido_CW_apl
       if ($this->NM_ajax_flag && 'submit_form' == $this->NM_ajax_opcao)
       {
          if (isset($this->iddet_)) { $this->nm_limpa_alfa($this->iddet_); }
+         if (isset($this->idpedid_)) { $this->nm_limpa_alfa($this->idpedid_); }
          if (isset($this->idpro_)) { $this->nm_limpa_alfa($this->idpro_); }
-         if (isset($this->unidadmayor_)) { $this->nm_limpa_alfa($this->unidadmayor_); }
-         if (isset($this->factor_)) { $this->nm_limpa_alfa($this->factor_); }
          if (isset($this->idbod_)) { $this->nm_limpa_alfa($this->idbod_); }
-         if (isset($this->costop_)) { $this->nm_limpa_alfa($this->costop_); }
          if (isset($this->cantidad_)) { $this->nm_limpa_alfa($this->cantidad_); }
          if (isset($this->valorunit_)) { $this->nm_limpa_alfa($this->valorunit_); }
          if (isset($this->valorpar_)) { $this->nm_limpa_alfa($this->valorpar_); }
          if (isset($this->iva_)) { $this->nm_limpa_alfa($this->iva_); }
-         if (isset($this->descuento_)) { $this->nm_limpa_alfa($this->descuento_); }
          if (isset($this->adicional_)) { $this->nm_limpa_alfa($this->adicional_); }
-         if (isset($this->adicional1_)) { $this->nm_limpa_alfa($this->adicional1_); }
-         if (isset($this->colores_)) { $this->nm_limpa_alfa($this->colores_); }
-         if (isset($this->tallas_)) { $this->nm_limpa_alfa($this->tallas_); }
-         if (isset($this->sabor_)) { $this->nm_limpa_alfa($this->sabor_); }
          if (isset($this->observ_)) { $this->nm_limpa_alfa($this->observ_); }
          if (isset($this->Sc_num_lin_alt) && $this->Sc_num_lin_alt > 0) 
          {
@@ -1663,17 +1519,25 @@ class form_detallepedido_CW_apl
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_form'][$sc_seq_vert]))
          {
              $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_form'][$sc_seq_vert];
-             $this->idpedid_ = $this->nmgp_dados_form['idpedid_']; 
              $this->numfac_ = $this->nmgp_dados_form['numfac_']; 
              $this->remision_ = $this->nmgp_dados_form['remision_']; 
+             $this->unidadmayor_ = $this->nmgp_dados_form['unidadmayor_']; 
+             $this->factor_ = $this->nmgp_dados_form['factor_']; 
+             $this->costop_ = $this->nmgp_dados_form['costop_']; 
+             $this->descuento_ = $this->nmgp_dados_form['descuento_']; 
+             $this->adicional1_ = $this->nmgp_dados_form['adicional1_']; 
              $this->devuelto_ = $this->nmgp_dados_form['devuelto_']; 
+             $this->colores_ = $this->nmgp_dados_form['colores_']; 
+             $this->tallas_ = $this->nmgp_dados_form['tallas_']; 
+             $this->sabor_ = $this->nmgp_dados_form['sabor_']; 
              $this->estado_comanda_ = $this->nmgp_dados_form['estado_comanda_']; 
              $this->usuario_comanda_ = $this->nmgp_dados_form['usuario_comanda_']; 
              $this->tercero_comanda_ = $this->nmgp_dados_form['tercero_comanda_']; 
              $this->hora_inicio_ = $this->nmgp_dados_form['hora_inicio_']; 
              $this->hora_final_ = $this->nmgp_dados_form['hora_final_']; 
              $this->cerrado_ = $this->nmgp_dados_form['cerrado_']; 
-             $this->codbarra_ = $this->nmgp_dados_form['codbarra_']; 
+             $this->obs_ = $this->nmgp_dados_form['obs_']; 
+             $this->descr_ = $this->nmgp_dados_form['descr_']; 
          }
          $this->controle_form_vert();
          if ($Campos_Crit != "" || !empty($Campos_Falta) || $this->Campos_Mens_erro != "")
@@ -1697,6 +1561,8 @@ class form_detallepedido_CW_apl
                   {
                       $this->NM_ajax_info['errList']['geral_form_detallepedido_CW'][] = $this->Campos_Mens_erro;
                   }
+                  $this->NM_gera_nav_page(); 
+                  $this->NM_ajax_info['navPage'] = $this->SC_nav_page; 
               }
          }
          else
@@ -1750,25 +1616,17 @@ class form_detallepedido_CW_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'iddet_');
           }
-          if ('validate_cod_barras_' == $this->NM_ajax_opcao)
+          if ('validate_idpedid_' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'cod_barras_');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'idpedid_');
+          }
+          if ('validate_codbarra_' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'codbarra_');
           }
           if ('validate_idpro_' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'idpro_');
-          }
-          if ('validate_colores_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'colores_');
-          }
-          if ('validate_tallas_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'tallas_');
-          }
-          if ('validate_sabor_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'sabor_');
           }
           if ('validate_idbod_' == $this->NM_ajax_opcao)
           {
@@ -1777,18 +1635,6 @@ class form_detallepedido_CW_apl
           if ('validate_observ_' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'observ_');
-          }
-          if ('validate_unidadmayor_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'unidadmayor_');
-          }
-          if ('validate_stockubica_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'stockubica_');
-          }
-          if ('validate_unidad_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'unidad_');
           }
           if ('validate_cantidad_' == $this->NM_ajax_opcao)
           {
@@ -1802,166 +1648,13 @@ class form_detallepedido_CW_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'valorpar_');
           }
-          if ('validate_descuento_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'descuento_');
-          }
-          if ('validate_adicional_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'adicional_');
-          }
-          if ('validate_adicional1_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'adicional1_');
-          }
-          if ('validate_factor_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'factor_');
-          }
           if ('validate_iva_' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'iva_');
           }
-          if ('validate_costop_' == $this->NM_ajax_opcao)
+          if ('validate_adicional_' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'costop_');
-          }
-          form_detallepedido_CW_pack_ajax_response();
-          exit;
-      }
-      if ($this->NM_ajax_flag && 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9))
-      {
-          if ('autocomp_idpro_' == substr($this->NM_ajax_opcao, 0, strlen('autocomp_idpro_')))
-          {
-              if (isset($_GET['term'])) {
-                  $this->idpro_ = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->idpro_ = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array(); 
-    }
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT idprod, codigobar + \" - \" + nompro FROM productos WHERE (activo like 'SI') AND codigobar + \" - \" + nompro LIKE '%" . substr($this->Db->qstr($this->idpro_), 1, -1) . "%' ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT idprod, concat(codigobar, \" - \",nompro) FROM productos WHERE (activo like 'SI') AND concat(codigobar, \" - \",nompro) LIKE '%" . substr($this->Db->qstr($this->idpro_), 1, -1) . "%' ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT idprod, codigobar&\" - \"&nompro FROM productos WHERE (activo like 'SI') AND codigobar&\" - \"&nompro LIKE '%" . substr($this->Db->qstr($this->idpro_), 1, -1) . "%' ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND codigobar||\" - \"||nompro LIKE '%" . substr($this->Db->qstr($this->idpro_), 1, -1) . "%' ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT idprod, codigobar + \" - \" + nompro FROM productos WHERE (activo like 'SI') AND codigobar + \" - \" + nompro LIKE '%" . substr($this->Db->qstr($this->idpro_), 1, -1) . "%' ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND codigobar||\" - \"||nompro LIKE '%" . substr($this->Db->qstr($this->idpro_), 1, -1) . "%' ORDER BY codigobar, nompro";
-   }
-   else
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND codigobar||\" - \"||nompro LIKE '%" . substr($this->Db->qstr($this->idpro_), 1, -1) . "%' ORDER BY codigobar, nompro";
-   }
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'adicional_');
           }
           form_detallepedido_CW_pack_ajax_response();
           exit;
@@ -1971,61 +1664,49 @@ class form_detallepedido_CW_apl
          $Campos_Crit  = "";
          $Campos_Falta = array();
          $Campos_Erros = array();
-         if ($this->nmgp_opcao == "recarga" && !isset($GLOBALS["idpro_" . $sc_seq_vert]))
-         { 
-             $GLOBALS["idpro_" . $sc_seq_vert] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idpro_'];
-         } 
          $this->iddet_ = $GLOBALS["iddet_" . $sc_seq_vert]; 
-         $this->cod_barras_ = $GLOBALS["cod_barras_" . $sc_seq_vert]; 
+         $this->idpedid_ = $GLOBALS["idpedid_" . $sc_seq_vert]; 
+         $this->codbarra_ = $GLOBALS["codbarra_" . $sc_seq_vert]; 
          $this->idpro_ = $GLOBALS["idpro_" . $sc_seq_vert]; 
-         $this->colores_ = $GLOBALS["colores_" . $sc_seq_vert]; 
-         $this->tallas_ = $GLOBALS["tallas_" . $sc_seq_vert]; 
-         $this->sabor_ = $GLOBALS["sabor_" . $sc_seq_vert]; 
          $this->idbod_ = $GLOBALS["idbod_" . $sc_seq_vert]; 
          $this->observ_ = $GLOBALS["observ_" . $sc_seq_vert]; 
-         $this->unidadmayor_ = $GLOBALS["unidadmayor_" . $sc_seq_vert]; 
-         $this->stockubica_ = $GLOBALS["stockubica_" . $sc_seq_vert]; 
-         $this->unidad_ = $GLOBALS["unidad_" . $sc_seq_vert]; 
          $this->cantidad_ = $GLOBALS["cantidad_" . $sc_seq_vert]; 
          $this->valorunit_ = $GLOBALS["valorunit_" . $sc_seq_vert]; 
          $this->valorpar_ = $GLOBALS["valorpar_" . $sc_seq_vert]; 
-         $this->descuento_ = $GLOBALS["descuento_" . $sc_seq_vert]; 
-         $this->adicional_ = $GLOBALS["adicional_" . $sc_seq_vert]; 
-         $this->adicional1_ = $GLOBALS["adicional1_" . $sc_seq_vert]; 
-         $this->factor_ = $GLOBALS["factor_" . $sc_seq_vert]; 
          $this->iva_ = $GLOBALS["iva_" . $sc_seq_vert]; 
-         $this->costop_ = $GLOBALS["costop_" . $sc_seq_vert]; 
+         $this->adicional_ = $GLOBALS["adicional_" . $sc_seq_vert]; 
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_form'][$sc_seq_vert]))
          {
              $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_form'][$sc_seq_vert];
-             $this->idpedid_ = $this->nmgp_dados_form['idpedid_']; 
              $this->numfac_ = $this->nmgp_dados_form['numfac_']; 
              $this->remision_ = $this->nmgp_dados_form['remision_']; 
+             $this->unidadmayor_ = $this->nmgp_dados_form['unidadmayor_']; 
+             $this->factor_ = $this->nmgp_dados_form['factor_']; 
+             $this->costop_ = $this->nmgp_dados_form['costop_']; 
+             $this->descuento_ = $this->nmgp_dados_form['descuento_']; 
+             $this->adicional1_ = $this->nmgp_dados_form['adicional1_']; 
              $this->devuelto_ = $this->nmgp_dados_form['devuelto_']; 
+             $this->colores_ = $this->nmgp_dados_form['colores_']; 
+             $this->tallas_ = $this->nmgp_dados_form['tallas_']; 
+             $this->sabor_ = $this->nmgp_dados_form['sabor_']; 
              $this->estado_comanda_ = $this->nmgp_dados_form['estado_comanda_']; 
              $this->usuario_comanda_ = $this->nmgp_dados_form['usuario_comanda_']; 
              $this->tercero_comanda_ = $this->nmgp_dados_form['tercero_comanda_']; 
              $this->hora_inicio_ = $this->nmgp_dados_form['hora_inicio_']; 
              $this->hora_final_ = $this->nmgp_dados_form['hora_final_']; 
              $this->cerrado_ = $this->nmgp_dados_form['cerrado_']; 
-             $this->codbarra_ = $this->nmgp_dados_form['codbarra_']; 
+             $this->obs_ = $this->nmgp_dados_form['obs_']; 
+             $this->descr_ = $this->nmgp_dados_form['descr_']; 
          }
          if (isset($this->iddet_)) { $this->nm_limpa_alfa($this->iddet_); }
+         if (isset($this->idpedid_)) { $this->nm_limpa_alfa($this->idpedid_); }
          if (isset($this->idpro_)) { $this->nm_limpa_alfa($this->idpro_); }
-         if (isset($this->unidadmayor_)) { $this->nm_limpa_alfa($this->unidadmayor_); }
-         if (isset($this->factor_)) { $this->nm_limpa_alfa($this->factor_); }
          if (isset($this->idbod_)) { $this->nm_limpa_alfa($this->idbod_); }
-         if (isset($this->costop_)) { $this->nm_limpa_alfa($this->costop_); }
          if (isset($this->cantidad_)) { $this->nm_limpa_alfa($this->cantidad_); }
          if (isset($this->valorunit_)) { $this->nm_limpa_alfa($this->valorunit_); }
          if (isset($this->valorpar_)) { $this->nm_limpa_alfa($this->valorpar_); }
          if (isset($this->iva_)) { $this->nm_limpa_alfa($this->iva_); }
-         if (isset($this->descuento_)) { $this->nm_limpa_alfa($this->descuento_); }
          if (isset($this->adicional_)) { $this->nm_limpa_alfa($this->adicional_); }
-         if (isset($this->adicional1_)) { $this->nm_limpa_alfa($this->adicional1_); }
-         if (isset($this->colores_)) { $this->nm_limpa_alfa($this->colores_); }
-         if (isset($this->tallas_)) { $this->nm_limpa_alfa($this->tallas_); }
-         if (isset($this->sabor_)) { $this->nm_limpa_alfa($this->sabor_); }
          if (isset($this->observ_)) { $this->nm_limpa_alfa($this->observ_); }
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_form'])) 
          {
@@ -2035,14 +1716,14 @@ class form_detallepedido_CW_apl
          {
             $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert];
          }
-         if ($this->nmgp_opcao != "recarga" && (!in_array($sc_seq_vert, $sc_check_excl) && !in_array($sc_seq_vert, $sc_check_incl) ))
+         if ($this->nmgp_opcao != "recarga" && in_array($sc_seq_vert, $sc_check_excl))
+         {
+             $this->nmgp_opcao = "excluir";
+         }
+         if ($this->nmgp_opcao == "incluir" && !in_array($sc_seq_vert, $sc_check_incl))
          { }
          else
          {
-             if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idpro_']) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['sc_disabled'][$sc_seq_vert]['idpro_']))
-             { 
-                 $this->idpro_ = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idpro_'];
-             } 
              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['sc_disabled'] = array();
              $this->controle_form_vert(); 
              $this->nmgp_opcao = $sc_opc_salva; 
@@ -2059,29 +1740,27 @@ class form_detallepedido_CW_apl
                 $this->nm_formatar_campos();
              }
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['iddet_'] =  $this->iddet_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cod_barras_'] =  $this->cod_barras_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpedid_'] =  $this->idpedid_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['codbarra_'] =  $this->codbarra_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpro_'] =  $this->idpro_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['colores_'] =  $this->colores_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tallas_'] =  $this->tallas_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['sabor_'] =  $this->sabor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idbod_'] =  $this->idbod_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['observ_'] =  $this->observ_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidadmayor_'] =  $this->unidadmayor_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['stockubica_'] =  $this->stockubica_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidad_'] =  $this->unidad_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cantidad_'] =  $this->cantidad_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['valorunit_'] =  $this->valorunit_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['valorpar_'] =  $this->valorpar_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descuento_'] =  $this->descuento_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional_'] =  $this->adicional_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional1_'] =  $this->adicional1_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['factor_'] =  $this->factor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['iva_'] =  $this->iva_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['costop_'] =  $this->costop_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpedid_'] =  $this->idpedid_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional_'] =  $this->adicional_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['numfac_'] =  $this->numfac_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['remision_'] =  $this->remision_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidadmayor_'] =  $this->unidadmayor_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['factor_'] =  $this->factor_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['costop_'] =  $this->costop_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descuento_'] =  $this->descuento_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional1_'] =  $this->adicional1_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['devuelto_'] =  $this->devuelto_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['colores_'] =  $this->colores_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tallas_'] =  $this->tallas_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['sabor_'] =  $this->sabor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['estado_comanda_'] =  $this->estado_comanda_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['usuario_comanda_'] =  $this->usuario_comanda_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tercero_comanda_'] =  $this->tercero_comanda_; 
@@ -2090,7 +1769,8 @@ class form_detallepedido_CW_apl
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['hora_final_'] =  $this->hora_final_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['hora_final__hora'] =  $this->hora_final__hora; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cerrado_'] =  $this->cerrado_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['codbarra_'] =  $this->codbarra_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['obs_'] =  $this->obs_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descr_'] =  $this->descr_; 
          }
          $sc_seq_vert++; 
       } 
@@ -2162,61 +1842,21 @@ class form_detallepedido_CW_apl
       if ($this->NM_ajax_flag && 'event_' == substr($this->NM_ajax_opcao, 0, 6))
       {
           $this->nm_tira_formatacao();
-          if ('event_cantidad__onblur' == $this->NM_ajax_opcao)
+          if ('event_adicional__onchange' == $this->NM_ajax_opcao)
           {
-              $this->cantidad__onBlur();
+              $this->adicional__onChange();
           }
           if ('event_cantidad__onchange' == $this->NM_ajax_opcao)
           {
               $this->cantidad__onChange();
           }
-          if ('event_cantidad__onfocus' == $this->NM_ajax_opcao)
+          if ('event_codbarra__onchange' == $this->NM_ajax_opcao)
           {
-              $this->cantidad__onFocus();
-          }
-          if ('event_cod_barras__onchange' == $this->NM_ajax_opcao)
-          {
-              $this->cod_barras__onChange();
-          }
-          if ('event_colores__onchange' == $this->NM_ajax_opcao)
-          {
-              $this->colores__onChange();
-          }
-          if ('event_idbod__onblur' == $this->NM_ajax_opcao)
-          {
-              $this->idbod__onBlur();
-          }
-          if ('event_idbod__onchange' == $this->NM_ajax_opcao)
-          {
-              $this->idbod__onChange();
+              $this->codbarra__onChange();
           }
           if ('event_idpro__onchange' == $this->NM_ajax_opcao)
           {
               $this->idpro__onChange();
-          }
-          if ('event_observ__onblur' == $this->NM_ajax_opcao)
-          {
-              $this->observ__onBlur();
-          }
-          if ('event_observ__onchange' == $this->NM_ajax_opcao)
-          {
-              $this->observ__onChange();
-          }
-          if ('event_sabor__onchange' == $this->NM_ajax_opcao)
-          {
-              $this->sabor__onChange();
-          }
-          if ('event_tallas__onchange' == $this->NM_ajax_opcao)
-          {
-              $this->tallas__onChange();
-          }
-          if ('event_unidadmayor__onchange' == $this->NM_ajax_opcao)
-          {
-              $this->unidadmayor__onChange();
-          }
-          if ('event_valorunit__onblur' == $this->NM_ajax_opcao)
-          {
-              $this->valorunit__onBlur();
           }
           if ('event_valorunit__onchange' == $this->NM_ajax_opcao)
           {
@@ -2299,15 +1939,7 @@ class form_detallepedido_CW_apl
       }
       if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "recarga_mobile" || $this->nmgp_opcao == "muda_form") 
       {
-          if (isset($this->idpro_))
-          { 
-              $SV_idpro_ = $this->idpro_;
-          } 
           $this->nm_tira_formatacao();
-          if (isset($SV_idpro_) && $this->nmgp_opcao != "recarga")
-          { 
-              $this->idpro_ = $SV_idpro_;
-          } 
           $nm_sc_sv_opcao = $this->nmgp_opcao; 
           $this->nmgp_opcao = "nada"; 
           $this->nm_acessa_banco();
@@ -2445,7 +2077,7 @@ class form_detallepedido_CW_apl
 ?>
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo strip_tags("Detalle venta") ?></TITLE>
+ <TITLE><?php echo strip_tags("" . $this->Ini->Nm_lang['lang_othr_frmu_title'] . " detallepedido") ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
  <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
@@ -2530,46 +2162,6 @@ class form_detallepedido_CW_apl
        { 
            $this->Db->Close(); 
        } 
-   }
-//
-//--------------------------------------------------------------------------------------
-   function lookup_cod_barras_(&$conteudo)
-   {
-      global  $cod_barras_;
-      $guarda_formatado = $this->formatado;
-      $this->nm_tira_formatacao();
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-      { 
-          $GLOBALS["NM_ERRO_IBASE"] = 1;  
-      } 
-      $nm_comando = "SELECT codigobar 
-FROM productos 
-WHERE idprod = $this->cod_barras_ 
-ORDER BY codigobar"; 
-      if ($this->cod_barras_ == "")
-      { 
-          $conteudo = ""; 
-          $this->nm_formatar_campos();
-          return; 
-      } 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Db->Execute($nm_comando)) 
-      {
-          $conteudo = (isset($rs->fields[0])) ? $rs->fields[0] : ""; 
-          $rs->Close() ; 
-      } 
-      elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
-      {  
-          $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-          exit; 
-      } 
-      $GLOBALS["NM_ERRO_IBASE"] = 0; 
-      foreach ($this->Before_unformat as $Cmp => $Val)
-      {
-          $this->$Cmp = $Val;
-          $this->formatado = $guarda_formatado;
-      }
    }
 //
 //--------------------------------------------------------------------------------------
@@ -2769,65 +2361,35 @@ ORDER BY codigobar";
            case 'iddet_':
                return "Iddet";
                break;
-           case 'cod_barras_':
-               return "Código de barras";
-               break;
-           case 'idpro_':
-               return "Artículo";
-               break;
-           case 'colores_':
-               return "Color";
-               break;
-           case 'tallas_':
-               return "Talla";
-               break;
-           case 'sabor_':
-               return "Sabor";
-               break;
-           case 'idbod_':
-               return "Pista";
-               break;
-           case 'observ_':
-               return "N° Recibo";
-               break;
-           case 'unidadmayor_':
-               return "Unidad Mayor";
-               break;
-           case 'stockubica_':
-               return "Stock Ubicación";
-               break;
-           case 'unidad_':
-               return "Unidad";
-               break;
-           case 'cantidad_':
-               return "Cantidad";
-               break;
-           case 'valorunit_':
-               return "Valor unit.";
-               break;
-           case 'valorpar_':
-               return "Valor parcial";
-               break;
-           case 'descuento_':
-               return "Descuento";
-               break;
-           case 'adicional_':
-               return "Tasa de IVA";
-               break;
-           case 'adicional1_':
-               return "Tasa de descuento";
-               break;
-           case 'factor_':
-               return "Factor";
-               break;
-           case 'iva_':
-               return "Iva";
-               break;
-           case 'costop_':
-               return "Costop";
-               break;
            case 'idpedid_':
                return "Idpedid";
+               break;
+           case 'codbarra_':
+               return "CÓDIGO";
+               break;
+           case 'idpro_':
+               return "PRODUCTO";
+               break;
+           case 'idbod_':
+               return "UBICACION";
+               break;
+           case 'observ_':
+               return "N° recibo";
+               break;
+           case 'cantidad_':
+               return "CANTIDAD";
+               break;
+           case 'valorunit_':
+               return "VAL. UNIT.";
+               break;
+           case 'valorpar_':
+               return "VR. PARC.";
+               break;
+           case 'iva_':
+               return "IMPUESTO";
+               break;
+           case 'adicional_':
+               return "% IMP.";
                break;
            case 'numfac_':
                return "Numfac";
@@ -2835,8 +2397,32 @@ ORDER BY codigobar";
            case 'remision_':
                return "Remision";
                break;
+           case 'unidadmayor_':
+               return "Unidadmayor";
+               break;
+           case 'factor_':
+               return "Factor";
+               break;
+           case 'costop_':
+               return "Costop";
+               break;
+           case 'descuento_':
+               return "Descuento";
+               break;
+           case 'adicional1_':
+               return "Adicional 1";
+               break;
            case 'devuelto_':
                return "Devuelto";
+               break;
+           case 'colores_':
+               return "Colores";
+               break;
+           case 'tallas_':
+               return "Tallas";
+               break;
+           case 'sabor_':
+               return "Sabor";
                break;
            case 'estado_comanda_':
                return "Estado Comanda";
@@ -2856,8 +2442,11 @@ ORDER BY codigobar";
            case 'cerrado_':
                return "Cerrado";
                break;
-           case 'codbarra_':
-               return "Código";
+           case 'obs_':
+               return "Obs";
+               break;
+           case 'descr_':
+               return "Descr";
                break;
        }
 
@@ -2887,7 +2476,7 @@ ORDER BY codigobar";
 //--------------------------------------------------------------------------------------
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
-     global $nm_browser, $teste_validade, $sc_seq_vert;
+     global $nm_browser, $teste_validade;
      if (is_array($filtro) && empty($filtro)) {
          $filtro = '';
      }
@@ -2909,44 +2498,26 @@ ORDER BY codigobar";
      }
       if ((!is_array($filtro) && ('' == $filtro || 'iddet_' == $filtro)) || (is_array($filtro) && in_array('iddet_', $filtro)))
         $this->ValidateField_iddet_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'cod_barras_' == $filtro)) || (is_array($filtro) && in_array('cod_barras_', $filtro)))
-        $this->ValidateField_cod_barras_($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'idpedid_' == $filtro)) || (is_array($filtro) && in_array('idpedid_', $filtro)))
+        $this->ValidateField_idpedid_($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'codbarra_' == $filtro)) || (is_array($filtro) && in_array('codbarra_', $filtro)))
+        $this->ValidateField_codbarra_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'idpro_' == $filtro)) || (is_array($filtro) && in_array('idpro_', $filtro)))
         $this->ValidateField_idpro_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'colores_' == $filtro)) || (is_array($filtro) && in_array('colores_', $filtro)))
-        $this->ValidateField_colores_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'tallas_' == $filtro)) || (is_array($filtro) && in_array('tallas_', $filtro)))
-        $this->ValidateField_tallas_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'sabor_' == $filtro)) || (is_array($filtro) && in_array('sabor_', $filtro)))
-        $this->ValidateField_sabor_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'idbod_' == $filtro)) || (is_array($filtro) && in_array('idbod_', $filtro)))
         $this->ValidateField_idbod_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'observ_' == $filtro)) || (is_array($filtro) && in_array('observ_', $filtro)))
         $this->ValidateField_observ_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'unidadmayor_' == $filtro)) || (is_array($filtro) && in_array('unidadmayor_', $filtro)))
-        $this->ValidateField_unidadmayor_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'stockubica_' == $filtro)) || (is_array($filtro) && in_array('stockubica_', $filtro)))
-        $this->ValidateField_stockubica_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'unidad_' == $filtro)) || (is_array($filtro) && in_array('unidad_', $filtro)))
-        $this->ValidateField_unidad_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'cantidad_' == $filtro)) || (is_array($filtro) && in_array('cantidad_', $filtro)))
         $this->ValidateField_cantidad_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'valorunit_' == $filtro)) || (is_array($filtro) && in_array('valorunit_', $filtro)))
         $this->ValidateField_valorunit_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'valorpar_' == $filtro)) || (is_array($filtro) && in_array('valorpar_', $filtro)))
         $this->ValidateField_valorpar_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'descuento_' == $filtro)) || (is_array($filtro) && in_array('descuento_', $filtro)))
-        $this->ValidateField_descuento_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'adicional_' == $filtro)) || (is_array($filtro) && in_array('adicional_', $filtro)))
-        $this->ValidateField_adicional_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'adicional1_' == $filtro)) || (is_array($filtro) && in_array('adicional1_', $filtro)))
-        $this->ValidateField_adicional1_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'factor_' == $filtro)) || (is_array($filtro) && in_array('factor_', $filtro)))
-        $this->ValidateField_factor_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'iva_' == $filtro)) || (is_array($filtro) && in_array('iva_', $filtro)))
         $this->ValidateField_iva_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'costop_' == $filtro)) || (is_array($filtro) && in_array('costop_', $filtro)))
-        $this->ValidateField_costop_($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'adicional_' == $filtro)) || (is_array($filtro) && in_array('adicional_', $filtro)))
+        $this->ValidateField_adicional_($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (!isset($this->NM_ajax_flag) || 'validate_' != substr($this->NM_ajax_opcao, 0, 9))
       {
@@ -2954,6 +2525,7 @@ ORDER BY codigobar";
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_cantidad_ = $this->cantidad_;
+    $original_idbod_ = $this->idbod_;
     $original_valorpar_ = $this->valorpar_;
 }
   if ($this->sc_evento == "excluir" || $this->sc_evento == "delete")
@@ -2976,10 +2548,9 @@ if($this->cantidad_ ==0.00 or (empty($this->cantidad_ )))
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Ingrese una cantidad Válida!";
  }
 ;
-	$this->sc_set_focus('colores');
 	if($this->valorpar_ <1)
-			{
-			
+		{
+		
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡No ingresó precio válido!";
  if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
@@ -2994,7 +2565,25 @@ if($this->cantidad_ ==0.00 or (empty($this->cantidad_ )))
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡No ingresó precio válido!";
  }
 ;
-			}
+		}
+	}
+if(empty($this->idbod_ ))
+	{
+	
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Ingrese una ubicación válida!";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_detallepedido_CW';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_detallepedido_CW';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Ingrese una ubicación válida!";
+ }
+;
 	}
 a:;
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
@@ -3004,6 +2593,12 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
+    }
+    if (($original_idbod_ != $this->idbod_ || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['type']    = 'select';
+        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['valList'] = array($this->idbod_);
+        $this->NM_ajax_changed['idbod_'] = true;
     }
     if (($original_valorpar_ != $this->valorpar_ || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))&& isset($this->nmgp_refresh_row))
     {
@@ -3040,7 +2635,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       { 
           if ($this->iddet_ != '')  
           { 
-              $iTestSize = 20;
+              $iTestSize = 19;
               if (strlen($this->iddet_) > $iTestSize)  
               { 
                   $hasError = true;
@@ -3056,7 +2651,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                   }
                   $this->NM_ajax_info['errList']['iddet_'][] = $this->Ini->Nm_lang['lang_errm_size'];
               } 
-              if ($teste_validade->Valor($this->iddet_, 20, 0, 0, 0, "N") == false)  
+              if ($teste_validade->Valor($this->iddet_, 19, 0, 0, 0, "N") == false)  
               { 
                   $hasError = true;
                   $Campos_Crit .= "Iddet; " ; 
@@ -3083,101 +2678,129 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
         }
     } // ValidateField_iddet_
 
-    function ValidateField_cod_barras_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_idpedid_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
+      if ($this->idpedid_ === "" || is_null($this->idpedid_))  
       { 
-          if (NM_utf8_strlen($this->cod_barras_) > 20) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "Código de barras " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['cod_barras_']))
-              {
-                  $Campos_Erros['cod_barras_'] = array();
-              }
-              $Campos_Erros['cod_barras_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['cod_barras_']) || !is_array($this->NM_ajax_info['errList']['cod_barras_']))
-              {
-                  $this->NM_ajax_info['errList']['cod_barras_'] = array();
-              }
-              $this->NM_ajax_info['errList']['cod_barras_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
+          $this->idpedid_ = 0;
+          $this->sc_force_zero[] = 'idpedid_';
       } 
-      $Teste_trab = "01234567890123456789";
-      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
-      {
-          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
-      }
-;
-      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
-      $Teste_compara = $this->cod_barras_ ; 
+      nm_limpa_numero($this->idpedid_, $this->field_config['idpedid_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          $Teste_critica = 0 ; 
-          for ($x = 0; $x < mb_strlen($this->cod_barras_, $_SESSION['scriptcase']['charset']); $x++) 
+          if ($this->idpedid_ != '')  
           { 
-               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
-               { 
-                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
-                    { 
-                        break ; 
-                    } 
-               } 
-               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
-               { 
-                  $Teste_critica = 1 ; 
-               } 
-          } 
-          if ($Teste_critica == 1) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "Código de barras " . $this->Ini->Nm_lang['lang_errm_ivch']; 
-              if (!isset($Campos_Erros['cod_barras_']))
-              {
-                  $Campos_Erros['cod_barras_'] = array();
-              }
-              $Campos_Erros['cod_barras_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
-              if (!isset($this->NM_ajax_info['errList']['cod_barras_']) || !is_array($this->NM_ajax_info['errList']['cod_barras_']))
-              {
-                  $this->NM_ajax_info['errList']['cod_barras_'] = array();
-              }
-              $this->NM_ajax_info['errList']['cod_barras_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              $iTestSize = 19;
+              if (strlen($this->idpedid_) > $iTestSize)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Idpedid: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['idpedid_']))
+                  {
+                      $Campos_Erros['idpedid_'] = array();
+                  }
+                  $Campos_Erros['idpedid_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['idpedid_']) || !is_array($this->NM_ajax_info['errList']['idpedid_']))
+                  {
+                      $this->NM_ajax_info['errList']['idpedid_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['idpedid_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->idpedid_, 19, 0, 0, 0, "N") == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Idpedid; " ; 
+                  if (!isset($Campos_Erros['idpedid_']))
+                  {
+                      $Campos_Erros['idpedid_'] = array();
+                  }
+                  $Campos_Erros['idpedid_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['idpedid_']) || !is_array($this->NM_ajax_info['errList']['idpedid_']))
+                  {
+                      $this->NM_ajax_info['errList']['idpedid_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['idpedid_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
           } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'cod_barras_';
+            $fieldName = 'idpedid_';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_cod_barras_
+    } // ValidateField_idpedid_
 
-    function ValidateField_idpro_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_codbarra_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if (NM_utf8_strlen($this->idpro_) > 10) 
+          if (NM_utf8_strlen($this->codbarra_) > 24) 
           { 
               $hasError = true;
-              $Campos_Crit .= "Artículo " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= "CÓDIGO " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 24 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['codbarra_']))
+              {
+                  $Campos_Erros['codbarra_'] = array();
+              }
+              $Campos_Erros['codbarra_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 24 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['codbarra_']) || !is_array($this->NM_ajax_info['errList']['codbarra_']))
+              {
+                  $this->NM_ajax_info['errList']['codbarra_'] = array();
+              }
+              $this->NM_ajax_info['errList']['codbarra_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 24 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'codbarra_';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_codbarra_
+
+    function ValidateField_idpro_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->idpro_ == "" && $this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['php_cmp_required']['idpro_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['php_cmp_required']['idpro_'] == "on"))
+      {
+          $hasError = true;
+          $Campos_Falta[] = "PRODUCTO" ; 
+          if (!isset($Campos_Erros['idpro_']))
+          {
+              $Campos_Erros['idpro_'] = array();
+          }
+          $Campos_Erros['idpro_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+          if (!isset($this->NM_ajax_info['errList']['idpro_']) || !is_array($this->NM_ajax_info['errList']['idpro_']))
+          {
+              $this->NM_ajax_info['errList']['idpro_'] = array();
+          }
+          $this->NM_ajax_info['errList']['idpro_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+      }
+          if (!empty($this->idpro_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']) && !in_array($this->idpro_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']))
+          {
+              $hasError = true;
+              $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
               if (!isset($Campos_Erros['idpro_']))
               {
                   $Campos_Erros['idpro_'] = array();
               }
-              $Campos_Erros['idpro_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              $Campos_Erros['idpro_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
               if (!isset($this->NM_ajax_info['errList']['idpro_']) || !is_array($this->NM_ajax_info['errList']['idpro_']))
               {
                   $this->NM_ajax_info['errList']['idpro_'] = array();
               }
-              $this->NM_ajax_info['errList']['idpro_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+              $this->NM_ajax_info['errList']['idpro_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+          }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'idpro_';
@@ -3188,127 +2811,25 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
         }
     } // ValidateField_idpro_
 
-    function ValidateField_colores_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->colores_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']) && !in_array($this->colores_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['colores_']))
-                   {
-                       $Campos_Erros['colores_'] = array();
-                   }
-                   $Campos_Erros['colores_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['colores_']) || !is_array($this->NM_ajax_info['errList']['colores_']))
-                   {
-                       $this->NM_ajax_info['errList']['colores_'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['colores_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'colores_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_colores_
-
-    function ValidateField_tallas_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->tallas_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']) && !in_array($this->tallas_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['tallas_']))
-                   {
-                       $Campos_Erros['tallas_'] = array();
-                   }
-                   $Campos_Erros['tallas_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['tallas_']) || !is_array($this->NM_ajax_info['errList']['tallas_']))
-                   {
-                       $this->NM_ajax_info['errList']['tallas_'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['tallas_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'tallas_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_tallas_
-
-    function ValidateField_sabor_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->sabor_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']) && !in_array($this->sabor_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['sabor_']))
-                   {
-                       $Campos_Erros['sabor_'] = array();
-                   }
-                   $Campos_Erros['sabor_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['sabor_']) || !is_array($this->NM_ajax_info['errList']['sabor_']))
-                   {
-                       $this->NM_ajax_info['errList']['sabor_'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['sabor_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'sabor_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_sabor_
-
     function ValidateField_idbod_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->idbod_ == "" && $this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['php_cmp_required']['idbod_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['php_cmp_required']['idbod_'] == "on"))
-      {
-          $hasError = true;
-          $Campos_Falta[] = "Pista" ; 
-          if (!isset($Campos_Erros['idbod_']))
-          {
-              $Campos_Erros['idbod_'] = array();
-          }
-          $Campos_Erros['idbod_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-          if (!isset($this->NM_ajax_info['errList']['idbod_']) || !is_array($this->NM_ajax_info['errList']['idbod_']))
-          {
-              $this->NM_ajax_info['errList']['idbod_'] = array();
-          }
-          $this->NM_ajax_info['errList']['idbod_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-      }
-          if (!empty($this->idbod_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idbod_']) && !in_array($this->idbod_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idbod_']))
-          {
-              $hasError = true;
-              $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-              if (!isset($Campos_Erros['idbod_']))
-              {
-                  $Campos_Erros['idbod_'] = array();
-              }
-              $Campos_Erros['idbod_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-              if (!isset($this->NM_ajax_info['errList']['idbod_']) || !is_array($this->NM_ajax_info['errList']['idbod_']))
-              {
-                  $this->NM_ajax_info['errList']['idbod_'] = array();
-              }
-              $this->NM_ajax_info['errList']['idbod_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-          }
+               if (!empty($this->idbod_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idbod_']) && !in_array($this->idbod_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idbod_']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['idbod_']))
+                   {
+                       $Campos_Erros['idbod_'] = array();
+                   }
+                   $Campos_Erros['idbod_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['idbod_']) || !is_array($this->NM_ajax_info['errList']['idbod_']))
+                   {
+                       $this->NM_ajax_info['errList']['idbod_'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['idbod_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'idbod_';
@@ -3323,31 +2844,12 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
     {
         global $teste_validade;
         $hasError = false;
-      $this->observ_ = sc_strtoupper($this->observ_); 
-      if ($this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['php_cmp_required']['observ_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['php_cmp_required']['observ_'] == "on")) 
-      { 
-          if ($this->observ_ == "")  
-          { 
-              $hasError = true;
-              $Campos_Falta[] =  "N° Recibo" ; 
-              if (!isset($Campos_Erros['observ_']))
-              {
-                  $Campos_Erros['observ_'] = array();
-              }
-              $Campos_Erros['observ_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-                  if (!isset($this->NM_ajax_info['errList']['observ_']) || !is_array($this->NM_ajax_info['errList']['observ_']))
-                  {
-                      $this->NM_ajax_info['errList']['observ_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['observ_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-          } 
-      } 
       if ($this->nmgp_opcao != "excluir") 
       { 
           if (NM_utf8_strlen($this->observ_) > 120) 
           { 
               $hasError = true;
-              $Campos_Crit .= "N° Recibo " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 120 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= "N° recibo " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 120 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['observ_']))
               {
                   $Campos_Erros['observ_'] = array();
@@ -3360,47 +2862,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $this->NM_ajax_info['errList']['observ_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 120 " . $this->Ini->Nm_lang['lang_errm_nchr'];
           } 
       } 
-      $Teste_trab = "0123456789";
-      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
-      {
-          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
-      }
-;
-      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
-      $Teste_compara = $this->observ_ ; 
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          $Teste_critica = 0 ; 
-          for ($x = 0; $x < mb_strlen($this->observ_, $_SESSION['scriptcase']['charset']); $x++) 
-          { 
-               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
-               { 
-                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
-                    { 
-                        break ; 
-                    } 
-               } 
-               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
-               { 
-                  $Teste_critica = 1 ; 
-               } 
-          } 
-          if ($Teste_critica == 1) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "N° Recibo " . $this->Ini->Nm_lang['lang_errm_ivch']; 
-              if (!isset($Campos_Erros['observ_']))
-              {
-                  $Campos_Erros['observ_'] = array();
-              }
-              $Campos_Erros['observ_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
-              if (!isset($this->NM_ajax_info['errList']['observ_']) || !is_array($this->NM_ajax_info['errList']['observ_']))
-              {
-                  $this->NM_ajax_info['errList']['observ_'] = array();
-              }
-              $this->NM_ajax_info['errList']['observ_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
-          } 
-      } 
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'observ_';
@@ -3410,123 +2871,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
     } // ValidateField_observ_
-
-    function ValidateField_unidadmayor_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->unidadmayor_ == "" && $this->nmgp_opcao != "excluir")
-      { 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'unidadmayor_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_unidadmayor_
-
-    function ValidateField_stockubica_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->stockubica_ === "" || is_null($this->stockubica_))  
-      { 
-          $this->stockubica_ = 0;
-          $this->sc_force_zero[] = 'stockubica_';
-      } 
-      if (!empty($this->field_config['stockubica_']['symbol_dec']))
-      {
-          nm_limpa_valor($this->stockubica_, $this->field_config['stockubica_']['symbol_dec'], $this->field_config['stockubica_']['symbol_grp']) ; 
-          if ('.' == substr($this->stockubica_, 0, 1))
-          {
-              if ('' == str_replace('0', '', substr($this->stockubica_, 1)))
-              {
-                  $this->stockubica_ = '';
-              }
-              else
-              {
-                  $this->stockubica_ = '0' . $this->stockubica_;
-              }
-          }
-      }
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->stockubica_ != '')  
-          { 
-              $iTestSize = 21;
-              if ('-' == substr($this->stockubica_, 0, 1))
-              {
-                  $iTestSize++;
-              }
-              elseif ('-' == substr($this->stockubica_, -1))
-              {
-                  $iTestSize++;
-                  $this->stockubica_ = '-' . substr($this->stockubica_, 0, -1);
-              }
-              if (strlen($this->stockubica_) > $iTestSize)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Stock Ubicación: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['stockubica_']))
-                  {
-                      $Campos_Erros['stockubica_'] = array();
-                  }
-                  $Campos_Erros['stockubica_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['stockubica_']) || !is_array($this->NM_ajax_info['errList']['stockubica_']))
-                  {
-                      $this->NM_ajax_info['errList']['stockubica_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['stockubica_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->stockubica_, 18, 2, 0, 0, "S") == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Stock Ubicación; " ; 
-                  if (!isset($Campos_Erros['stockubica_']))
-                  {
-                      $Campos_Erros['stockubica_'] = array();
-                  }
-                  $Campos_Erros['stockubica_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['stockubica_']) || !is_array($this->NM_ajax_info['errList']['stockubica_']))
-                  {
-                      $this->NM_ajax_info['errList']['stockubica_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['stockubica_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'stockubica_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_stockubica_
-
-    function ValidateField_unidad_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (trim($this->unidad_) != "")  
-          { 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'unidad_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_unidad_
 
     function ValidateField_cantidad_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
@@ -3560,7 +2904,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if (strlen($this->cantidad_) > $iTestSize)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Cantidad: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  $Campos_Crit .= "CANTIDAD: " . $this->Ini->Nm_lang['lang_errm_size']; 
                   if (!isset($Campos_Erros['cantidad_']))
                   {
                       $Campos_Erros['cantidad_'] = array();
@@ -3575,7 +2919,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if ($teste_validade->Valor($this->cantidad_, 10, 2, 0, 0, "N") == false)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Cantidad; " ; 
+                  $Campos_Crit .= "CANTIDAD; " ; 
                   if (!isset($Campos_Erros['cantidad_']))
                   {
                       $Campos_Erros['cantidad_'] = array();
@@ -3632,7 +2976,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if (strlen($this->valorunit_) > $iTestSize)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Valor unit.: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  $Campos_Crit .= "VAL. UNIT.: " . $this->Ini->Nm_lang['lang_errm_size']; 
                   if (!isset($Campos_Erros['valorunit_']))
                   {
                       $Campos_Erros['valorunit_'] = array();
@@ -3647,7 +2991,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if ($teste_validade->Valor($this->valorunit_, 12, 0, 0, 0, "N") == false)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Valor unit.; " ; 
+                  $Campos_Crit .= "VAL. UNIT.; " ; 
                   if (!isset($Campos_Erros['valorunit_']))
                   {
                       $Campos_Erros['valorunit_'] = array();
@@ -3704,7 +3048,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if (strlen($this->valorpar_) > $iTestSize)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Valor parcial: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  $Campos_Crit .= "VR. PARC.: " . $this->Ini->Nm_lang['lang_errm_size']; 
                   if (!isset($Campos_Erros['valorpar_']))
                   {
                       $Campos_Erros['valorpar_'] = array();
@@ -3719,7 +3063,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if ($teste_validade->Valor($this->valorpar_, 12, 0, 0, 0, "N") == false)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Valor parcial; " ; 
+                  $Campos_Crit .= "VR. PARC.; " ; 
                   if (!isset($Campos_Erros['valorpar_']))
                   {
                       $Campos_Erros['valorpar_'] = array();
@@ -3742,263 +3086,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
     } // ValidateField_valorpar_
-
-    function ValidateField_descuento_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->descuento_ === "" || is_null($this->descuento_))  
-      { 
-          $this->descuento_ = 0;
-          $this->sc_force_zero[] = 'descuento_';
-      } 
-      if (!empty($this->field_config['descuento_']['symbol_dec']))
-      {
-          nm_limpa_valor($this->descuento_, $this->field_config['descuento_']['symbol_dec'], $this->field_config['descuento_']['symbol_grp']) ; 
-          if ('.' == substr($this->descuento_, 0, 1))
-          {
-              if ('' == str_replace('0', '', substr($this->descuento_, 1)))
-              {
-                  $this->descuento_ = '';
-              }
-              else
-              {
-                  $this->descuento_ = '0' . $this->descuento_;
-              }
-          }
-      }
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->descuento_ != '')  
-          { 
-              $iTestSize = 7;
-              if (strlen($this->descuento_) > $iTestSize)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Descuento: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['descuento_']))
-                  {
-                      $Campos_Erros['descuento_'] = array();
-                  }
-                  $Campos_Erros['descuento_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['descuento_']) || !is_array($this->NM_ajax_info['errList']['descuento_']))
-                  {
-                      $this->NM_ajax_info['errList']['descuento_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['descuento_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->descuento_, 6, 0, 0, 0, "N") == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Descuento; " ; 
-                  if (!isset($Campos_Erros['descuento_']))
-                  {
-                      $Campos_Erros['descuento_'] = array();
-                  }
-                  $Campos_Erros['descuento_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['descuento_']) || !is_array($this->NM_ajax_info['errList']['descuento_']))
-                  {
-                      $this->NM_ajax_info['errList']['descuento_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['descuento_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'descuento_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_descuento_
-
-    function ValidateField_adicional_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->adicional_ === "" || is_null($this->adicional_))  
-      { 
-          $this->adicional_ = 0;
-          $this->sc_force_zero[] = 'adicional_';
-      } 
-      nm_limpa_numero($this->adicional_, $this->field_config['adicional_']['symbol_grp']) ; 
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->adicional_ != '')  
-          { 
-              $iTestSize = 11;
-              if (strlen($this->adicional_) > $iTestSize)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Tasa de IVA: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['adicional_']))
-                  {
-                      $Campos_Erros['adicional_'] = array();
-                  }
-                  $Campos_Erros['adicional_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['adicional_']) || !is_array($this->NM_ajax_info['errList']['adicional_']))
-                  {
-                      $this->NM_ajax_info['errList']['adicional_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['adicional_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->adicional_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Tasa de IVA; " ; 
-                  if (!isset($Campos_Erros['adicional_']))
-                  {
-                      $Campos_Erros['adicional_'] = array();
-                  }
-                  $Campos_Erros['adicional_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['adicional_']) || !is_array($this->NM_ajax_info['errList']['adicional_']))
-                  {
-                      $this->NM_ajax_info['errList']['adicional_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['adicional_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'adicional_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_adicional_
-
-    function ValidateField_adicional1_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->adicional1_ === "" || is_null($this->adicional1_))  
-      { 
-          $this->adicional1_ = 0;
-          $this->sc_force_zero[] = 'adicional1_';
-      } 
-      nm_limpa_numero($this->adicional1_, $this->field_config['adicional1_']['symbol_grp']) ; 
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->adicional1_ != '')  
-          { 
-              $iTestSize = 11;
-              if (strlen($this->adicional1_) > $iTestSize)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Tasa de descuento: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['adicional1_']))
-                  {
-                      $Campos_Erros['adicional1_'] = array();
-                  }
-                  $Campos_Erros['adicional1_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['adicional1_']) || !is_array($this->NM_ajax_info['errList']['adicional1_']))
-                  {
-                      $this->NM_ajax_info['errList']['adicional1_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['adicional1_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->adicional1_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Tasa de descuento; " ; 
-                  if (!isset($Campos_Erros['adicional1_']))
-                  {
-                      $Campos_Erros['adicional1_'] = array();
-                  }
-                  $Campos_Erros['adicional1_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['adicional1_']) || !is_array($this->NM_ajax_info['errList']['adicional1_']))
-                  {
-                      $this->NM_ajax_info['errList']['adicional1_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['adicional1_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'adicional1_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_adicional1_
-
-    function ValidateField_factor_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->factor_ === "" || is_null($this->factor_))  
-      { 
-          $this->factor_ = 0;
-          $this->sc_force_zero[] = 'factor_';
-      } 
-      if (!empty($this->field_config['factor_']['symbol_dec']))
-      {
-          $this->sc_remove_currency($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp'], $this->field_config['factor_']['symbol_mon']); 
-          nm_limpa_valor($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp']) ; 
-          if ('.' == substr($this->factor_, 0, 1))
-          {
-              if ('' == str_replace('0', '', substr($this->factor_, 1)))
-              {
-                  $this->factor_ = '';
-              }
-              else
-              {
-                  $this->factor_ = '0' . $this->factor_;
-              }
-          }
-      }
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->factor_ != '')  
-          { 
-              $iTestSize = 11;
-              if (strlen($this->factor_) > $iTestSize)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Factor: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['factor_']))
-                  {
-                      $Campos_Erros['factor_'] = array();
-                  }
-                  $Campos_Erros['factor_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['factor_']) || !is_array($this->NM_ajax_info['errList']['factor_']))
-                  {
-                      $this->NM_ajax_info['errList']['factor_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['factor_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->factor_, 8, 2, 0, 0, "N") == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Factor; " ; 
-                  if (!isset($Campos_Erros['factor_']))
-                  {
-                      $Campos_Erros['factor_'] = array();
-                  }
-                  $Campos_Erros['factor_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['factor_']) || !is_array($this->NM_ajax_info['errList']['factor_']))
-                  {
-                      $this->NM_ajax_info['errList']['factor_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['factor_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'factor_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_factor_
 
     function ValidateField_iva_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
@@ -4033,7 +3120,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if (strlen($this->iva_) > $iTestSize)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Iva: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  $Campos_Crit .= "IMPUESTO: " . $this->Ini->Nm_lang['lang_errm_size']; 
                   if (!isset($Campos_Erros['iva_']))
                   {
                       $Campos_Erros['iva_'] = array();
@@ -4048,7 +3135,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if ($teste_validade->Valor($this->iva_, 8, 2, 0, 0, "N") == false)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Iva; " ; 
+                  $Campos_Crit .= "IMPUESTO; " ; 
                   if (!isset($Campos_Erros['iva_']))
                   {
                       $Campos_Erros['iva_'] = array();
@@ -4072,76 +3159,62 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
         }
     } // ValidateField_iva_
 
-    function ValidateField_costop_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_adicional_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->costop_ === "" || is_null($this->costop_))  
+      if ($this->adicional_ === "" || is_null($this->adicional_))  
       { 
-          $this->costop_ = 0;
-          $this->sc_force_zero[] = 'costop_';
+          $this->adicional_ = 0;
+          $this->sc_force_zero[] = 'adicional_';
       } 
-      if (!empty($this->field_config['costop_']['symbol_dec']))
-      {
-          nm_limpa_valor($this->costop_, $this->field_config['costop_']['symbol_dec'], $this->field_config['costop_']['symbol_grp']) ; 
-          if ('.' == substr($this->costop_, 0, 1))
-          {
-              if ('' == str_replace('0', '', substr($this->costop_, 1)))
-              {
-                  $this->costop_ = '';
-              }
-              else
-              {
-                  $this->costop_ = '0' . $this->costop_;
-              }
-          }
-      }
+      nm_limpa_numero($this->adicional_, $this->field_config['adicional_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->costop_ != '')  
+          if ($this->adicional_ != '')  
           { 
-              $iTestSize = 13;
-              if (strlen($this->costop_) > $iTestSize)  
+              $iTestSize = 11;
+              if (strlen($this->adicional_) > $iTestSize)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Costop: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['costop_']))
+                  $Campos_Crit .= "% IMP.: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['adicional_']))
                   {
-                      $Campos_Erros['costop_'] = array();
+                      $Campos_Erros['adicional_'] = array();
                   }
-                  $Campos_Erros['costop_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['costop_']) || !is_array($this->NM_ajax_info['errList']['costop_']))
+                  $Campos_Erros['adicional_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['adicional_']) || !is_array($this->NM_ajax_info['errList']['adicional_']))
                   {
-                      $this->NM_ajax_info['errList']['costop_'] = array();
+                      $this->NM_ajax_info['errList']['adicional_'] = array();
                   }
-                  $this->NM_ajax_info['errList']['costop_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  $this->NM_ajax_info['errList']['adicional_'][] = $this->Ini->Nm_lang['lang_errm_size'];
               } 
-              if ($teste_validade->Valor($this->costop_, 12, 0, 0, 0, "N") == false)  
+              if ($teste_validade->Valor($this->adicional_, 11, 0, 0, 0, "N") == false)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Costop; " ; 
-                  if (!isset($Campos_Erros['costop_']))
+                  $Campos_Crit .= "% IMP.; " ; 
+                  if (!isset($Campos_Erros['adicional_']))
                   {
-                      $Campos_Erros['costop_'] = array();
+                      $Campos_Erros['adicional_'] = array();
                   }
-                  $Campos_Erros['costop_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['costop_']) || !is_array($this->NM_ajax_info['errList']['costop_']))
+                  $Campos_Erros['adicional_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['adicional_']) || !is_array($this->NM_ajax_info['errList']['adicional_']))
                   {
-                      $this->NM_ajax_info['errList']['costop_'] = array();
+                      $this->NM_ajax_info['errList']['adicional_'] = array();
                   }
-                  $this->NM_ajax_info['errList']['costop_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  $this->NM_ajax_info['errList']['adicional_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
               } 
           } 
       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'costop_';
+            $fieldName = 'adicional_';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_costop_
+    } // ValidateField_adicional_
 
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
@@ -4167,36 +3240,35 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
     global
            $sc_seq_vert;
     $this->nmgp_dados_form['iddet_'] = $this->iddet_;
-    $this->nmgp_dados_form['cod_barras_'] = $this->cod_barras_;
+    $this->nmgp_dados_form['idpedid_'] = $this->idpedid_;
+    $this->nmgp_dados_form['codbarra_'] = $this->codbarra_;
     $this->nmgp_dados_form['idpro_'] = $this->idpro_;
-    $this->nmgp_dados_form['colores_'] = $this->colores_;
-    $this->nmgp_dados_form['tallas_'] = $this->tallas_;
-    $this->nmgp_dados_form['sabor_'] = $this->sabor_;
     $this->nmgp_dados_form['idbod_'] = $this->idbod_;
     $this->nmgp_dados_form['observ_'] = $this->observ_;
-    $this->nmgp_dados_form['unidadmayor_'] = $this->unidadmayor_;
-    $this->nmgp_dados_form['stockubica_'] = $this->stockubica_;
-    $this->nmgp_dados_form['unidad_'] = $this->unidad_;
     $this->nmgp_dados_form['cantidad_'] = $this->cantidad_;
     $this->nmgp_dados_form['valorunit_'] = $this->valorunit_;
     $this->nmgp_dados_form['valorpar_'] = $this->valorpar_;
-    $this->nmgp_dados_form['descuento_'] = $this->descuento_;
-    $this->nmgp_dados_form['adicional_'] = $this->adicional_;
-    $this->nmgp_dados_form['adicional1_'] = $this->adicional1_;
-    $this->nmgp_dados_form['factor_'] = $this->factor_;
     $this->nmgp_dados_form['iva_'] = $this->iva_;
-    $this->nmgp_dados_form['costop_'] = $this->costop_;
-    $this->nmgp_dados_form['idpedid_'] = $this->idpedid_;
+    $this->nmgp_dados_form['adicional_'] = $this->adicional_;
     $this->nmgp_dados_form['numfac_'] = $this->numfac_;
     $this->nmgp_dados_form['remision_'] = $this->remision_;
+    $this->nmgp_dados_form['unidadmayor_'] = $this->unidadmayor_;
+    $this->nmgp_dados_form['factor_'] = $this->factor_;
+    $this->nmgp_dados_form['costop_'] = $this->costop_;
+    $this->nmgp_dados_form['descuento_'] = $this->descuento_;
+    $this->nmgp_dados_form['adicional1_'] = $this->adicional1_;
     $this->nmgp_dados_form['devuelto_'] = $this->devuelto_;
+    $this->nmgp_dados_form['colores_'] = $this->colores_;
+    $this->nmgp_dados_form['tallas_'] = $this->tallas_;
+    $this->nmgp_dados_form['sabor_'] = $this->sabor_;
     $this->nmgp_dados_form['estado_comanda_'] = $this->estado_comanda_;
     $this->nmgp_dados_form['usuario_comanda_'] = $this->usuario_comanda_;
     $this->nmgp_dados_form['tercero_comanda_'] = $this->tercero_comanda_;
     $this->nmgp_dados_form['hora_inicio_'] = $this->hora_inicio_;
     $this->nmgp_dados_form['hora_final_'] = $this->hora_final_;
     $this->nmgp_dados_form['cerrado_'] = $this->cerrado_;
-    $this->nmgp_dados_form['codbarra_'] = $this->codbarra_;
+    $this->nmgp_dados_form['obs_'] = $this->obs_;
+    $this->nmgp_dados_form['descr_'] = $this->descr_;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_form'][$sc_seq_vert] = $this->nmgp_dados_form;
    }
    function nm_tira_formatacao()
@@ -4206,11 +3278,8 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
          $this->formatado = false;
       $this->Before_unformat['iddet_'] = $this->iddet_;
       nm_limpa_numero($this->iddet_, $this->field_config['iddet_']['symbol_grp']) ; 
-      $this->Before_unformat['stockubica_'] = $this->stockubica_;
-      if (!empty($this->field_config['stockubica_']['symbol_dec']))
-      {
-         nm_limpa_valor($this->stockubica_, $this->field_config['stockubica_']['symbol_dec'], $this->field_config['stockubica_']['symbol_grp']);
-      }
+      $this->Before_unformat['idpedid_'] = $this->idpedid_;
+      nm_limpa_numero($this->idpedid_, $this->field_config['idpedid_']['symbol_grp']) ; 
       $this->Before_unformat['cantidad_'] = $this->cantidad_;
       if (!empty($this->field_config['cantidad_']['symbol_dec']))
       {
@@ -4228,40 +3297,46 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
          $this->sc_remove_currency($this->valorpar_, $this->field_config['valorpar_']['symbol_dec'], $this->field_config['valorpar_']['symbol_grp'], $this->field_config['valorpar_']['symbol_mon']);
          nm_limpa_valor($this->valorpar_, $this->field_config['valorpar_']['symbol_dec'], $this->field_config['valorpar_']['symbol_grp']);
       }
-      $this->Before_unformat['descuento_'] = $this->descuento_;
-      if (!empty($this->field_config['descuento_']['symbol_dec']))
-      {
-         nm_limpa_valor($this->descuento_, $this->field_config['descuento_']['symbol_dec'], $this->field_config['descuento_']['symbol_grp']);
-      }
-      $this->Before_unformat['adicional_'] = $this->adicional_;
-      nm_limpa_numero($this->adicional_, $this->field_config['adicional_']['symbol_grp']) ; 
-      $this->Before_unformat['adicional1_'] = $this->adicional1_;
-      nm_limpa_numero($this->adicional1_, $this->field_config['adicional1_']['symbol_grp']) ; 
-      $this->Before_unformat['factor_'] = $this->factor_;
-      if (!empty($this->field_config['factor_']['symbol_dec']))
-      {
-         $this->sc_remove_currency($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp'], $this->field_config['factor_']['symbol_mon']);
-         nm_limpa_valor($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp']);
-      }
       $this->Before_unformat['iva_'] = $this->iva_;
       if (!empty($this->field_config['iva_']['symbol_dec']))
       {
          $this->sc_remove_currency($this->iva_, $this->field_config['iva_']['symbol_dec'], $this->field_config['iva_']['symbol_grp'], $this->field_config['iva_']['symbol_mon']);
          nm_limpa_valor($this->iva_, $this->field_config['iva_']['symbol_dec'], $this->field_config['iva_']['symbol_grp']);
       }
-      $this->Before_unformat['costop_'] = $this->costop_;
-      if (!empty($this->field_config['costop_']['symbol_dec']))
-      {
-         nm_limpa_valor($this->costop_, $this->field_config['costop_']['symbol_dec'], $this->field_config['costop_']['symbol_grp']);
-      }
-      $this->Before_unformat['idpedid_'] = $this->idpedid_;
-      nm_limpa_numero($this->idpedid_, $this->field_config['idpedid_']['symbol_grp']) ; 
+      $this->Before_unformat['adicional_'] = $this->adicional_;
+      nm_limpa_numero($this->adicional_, $this->field_config['adicional_']['symbol_grp']) ; 
       $this->Before_unformat['numfac_'] = $this->numfac_;
       nm_limpa_numero($this->numfac_, $this->field_config['numfac_']['symbol_grp']) ; 
       $this->Before_unformat['remision_'] = $this->remision_;
       nm_limpa_numero($this->remision_, $this->field_config['remision_']['symbol_grp']) ; 
+      $this->Before_unformat['factor_'] = $this->factor_;
+      if (!empty($this->field_config['factor_']['symbol_dec']))
+      {
+         $this->sc_remove_currency($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp'], $this->field_config['factor_']['symbol_mon']);
+         nm_limpa_valor($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp']);
+      }
+      $this->Before_unformat['costop_'] = $this->costop_;
+      if (!empty($this->field_config['costop_']['symbol_dec']))
+      {
+         $this->sc_remove_currency($this->costop_, $this->field_config['costop_']['symbol_dec'], $this->field_config['costop_']['symbol_grp'], $this->field_config['costop_']['symbol_mon']);
+         nm_limpa_valor($this->costop_, $this->field_config['costop_']['symbol_dec'], $this->field_config['costop_']['symbol_grp']);
+      }
+      $this->Before_unformat['descuento_'] = $this->descuento_;
+      if (!empty($this->field_config['descuento_']['symbol_dec']))
+      {
+         $this->sc_remove_currency($this->descuento_, $this->field_config['descuento_']['symbol_dec'], $this->field_config['descuento_']['symbol_grp'], $this->field_config['descuento_']['symbol_mon']);
+         nm_limpa_valor($this->descuento_, $this->field_config['descuento_']['symbol_dec'], $this->field_config['descuento_']['symbol_grp']);
+      }
+      $this->Before_unformat['adicional1_'] = $this->adicional1_;
+      nm_limpa_numero($this->adicional1_, $this->field_config['adicional1_']['symbol_grp']) ; 
       $this->Before_unformat['devuelto_'] = $this->devuelto_;
       nm_limpa_numero($this->devuelto_, $this->field_config['devuelto_']['symbol_grp']) ; 
+      $this->Before_unformat['colores_'] = $this->colores_;
+      nm_limpa_numero($this->colores_, $this->field_config['colores_']['symbol_grp']) ; 
+      $this->Before_unformat['tallas_'] = $this->tallas_;
+      nm_limpa_numero($this->tallas_, $this->field_config['tallas_']['symbol_grp']) ; 
+      $this->Before_unformat['sabor_'] = $this->sabor_;
+      nm_limpa_numero($this->sabor_, $this->field_config['sabor_']['symbol_grp']) ; 
       $this->Before_unformat['tercero_comanda_'] = $this->tercero_comanda_;
       nm_limpa_numero($this->tercero_comanda_, $this->field_config['tercero_comanda_']['symbol_grp']) ; 
       $this->Before_unformat['hora_inicio_'] = $this->hora_inicio_;
@@ -4272,8 +3347,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       $this->Before_unformat['hora_final__hora'] = $this->hora_final__hora;
       nm_limpa_data($this->hora_final_, $this->field_config['hora_final_']['date_sep']) ; 
       nm_limpa_hora($this->hora_final__hora, $this->field_config['hora_final_']['time_sep']) ; 
-      $this->Before_unformat['codbarra_'] = $this->codbarra_;
-      nm_limpa_numero($this->codbarra_, $this->field_config['codbarra_']['symbol_grp']) ; 
    }
    function sc_add_currency(&$value, $symbol, $pos)
    {
@@ -4321,12 +3394,9 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       {
           nm_limpa_numero($this->iddet_, $this->field_config['iddet_']['symbol_grp']) ; 
       }
-      if ($Nome_Campo == "stockubica_")
+      if ($Nome_Campo == "idpedid_")
       {
-          if (!empty($this->field_config['stockubica_']['symbol_dec']))
-          {
-             nm_limpa_valor($this->stockubica_, $this->field_config['stockubica_']['symbol_dec'], $this->field_config['stockubica_']['symbol_grp']);
-          }
+          nm_limpa_numero($this->idpedid_, $this->field_config['idpedid_']['symbol_grp']) ; 
       }
       if ($Nome_Campo == "cantidad_")
       {
@@ -4351,29 +3421,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
              nm_limpa_valor($this->valorpar_, $this->field_config['valorpar_']['symbol_dec'], $this->field_config['valorpar_']['symbol_grp']);
           }
       }
-      if ($Nome_Campo == "descuento_")
-      {
-          if (!empty($this->field_config['descuento_']['symbol_dec']))
-          {
-             nm_limpa_valor($this->descuento_, $this->field_config['descuento_']['symbol_dec'], $this->field_config['descuento_']['symbol_grp']);
-          }
-      }
-      if ($Nome_Campo == "adicional_")
-      {
-          nm_limpa_numero($this->adicional_, $this->field_config['adicional_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "adicional1_")
-      {
-          nm_limpa_numero($this->adicional1_, $this->field_config['adicional1_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "factor_")
-      {
-          if (!empty($this->field_config['factor_']['symbol_dec']))
-          {
-             $this->sc_remove_currency($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp'], $this->field_config['factor_']['symbol_mon']);
-             nm_limpa_valor($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp']);
-          }
-      }
       if ($Nome_Campo == "iva_")
       {
           if (!empty($this->field_config['iva_']['symbol_dec']))
@@ -4382,16 +3429,9 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
              nm_limpa_valor($this->iva_, $this->field_config['iva_']['symbol_dec'], $this->field_config['iva_']['symbol_grp']);
           }
       }
-      if ($Nome_Campo == "costop_")
+      if ($Nome_Campo == "adicional_")
       {
-          if (!empty($this->field_config['costop_']['symbol_dec']))
-          {
-             nm_limpa_valor($this->costop_, $this->field_config['costop_']['symbol_dec'], $this->field_config['costop_']['symbol_grp']);
-          }
-      }
-      if ($Nome_Campo == "idpedid_")
-      {
-          nm_limpa_numero($this->idpedid_, $this->field_config['idpedid_']['symbol_grp']) ; 
+          nm_limpa_numero($this->adicional_, $this->field_config['adicional_']['symbol_grp']) ; 
       }
       if ($Nome_Campo == "numfac_")
       {
@@ -4401,17 +3441,53 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       {
           nm_limpa_numero($this->remision_, $this->field_config['remision_']['symbol_grp']) ; 
       }
+      if ($Nome_Campo == "factor_")
+      {
+          if (!empty($this->field_config['factor_']['symbol_dec']))
+          {
+             $this->sc_remove_currency($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp'], $this->field_config['factor_']['symbol_mon']);
+             nm_limpa_valor($this->factor_, $this->field_config['factor_']['symbol_dec'], $this->field_config['factor_']['symbol_grp']);
+          }
+      }
+      if ($Nome_Campo == "costop_")
+      {
+          if (!empty($this->field_config['costop_']['symbol_dec']))
+          {
+             $this->sc_remove_currency($this->costop_, $this->field_config['costop_']['symbol_dec'], $this->field_config['costop_']['symbol_grp'], $this->field_config['costop_']['symbol_mon']);
+             nm_limpa_valor($this->costop_, $this->field_config['costop_']['symbol_dec'], $this->field_config['costop_']['symbol_grp']);
+          }
+      }
+      if ($Nome_Campo == "descuento_")
+      {
+          if (!empty($this->field_config['descuento_']['symbol_dec']))
+          {
+             $this->sc_remove_currency($this->descuento_, $this->field_config['descuento_']['symbol_dec'], $this->field_config['descuento_']['symbol_grp'], $this->field_config['descuento_']['symbol_mon']);
+             nm_limpa_valor($this->descuento_, $this->field_config['descuento_']['symbol_dec'], $this->field_config['descuento_']['symbol_grp']);
+          }
+      }
+      if ($Nome_Campo == "adicional1_")
+      {
+          nm_limpa_numero($this->adicional1_, $this->field_config['adicional1_']['symbol_grp']) ; 
+      }
       if ($Nome_Campo == "devuelto_")
       {
           nm_limpa_numero($this->devuelto_, $this->field_config['devuelto_']['symbol_grp']) ; 
       }
+      if ($Nome_Campo == "colores_")
+      {
+          nm_limpa_numero($this->colores_, $this->field_config['colores_']['symbol_grp']) ; 
+      }
+      if ($Nome_Campo == "tallas_")
+      {
+          nm_limpa_numero($this->tallas_, $this->field_config['tallas_']['symbol_grp']) ; 
+      }
+      if ($Nome_Campo == "sabor_")
+      {
+          nm_limpa_numero($this->sabor_, $this->field_config['sabor_']['symbol_grp']) ; 
+      }
       if ($Nome_Campo == "tercero_comanda_")
       {
           nm_limpa_numero($this->tercero_comanda_, $this->field_config['tercero_comanda_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "codbarra_")
-      {
-          nm_limpa_numero($this->codbarra_, $this->field_config['codbarra_']['symbol_grp']) ; 
       }
    }
    function nm_formatar_campos($format_fields = array())
@@ -4421,9 +3497,9 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       {
           nmgp_Form_Num_Val($this->iddet_, $this->field_config['iddet_']['symbol_grp'], $this->field_config['iddet_']['symbol_dec'], "0", "S", $this->field_config['iddet_']['format_neg'], "", "", "-", $this->field_config['iddet_']['symbol_fmt']) ; 
       }
-      if ('' !== $this->stockubica_ || (!empty($format_fields) && isset($format_fields['stockubica_'])))
+      if ('' !== $this->idpedid_ || (!empty($format_fields) && isset($format_fields['idpedid_'])))
       {
-          nmgp_Form_Num_Val($this->stockubica_, $this->field_config['stockubica_']['symbol_grp'], $this->field_config['stockubica_']['symbol_dec'], "2", "S", $this->field_config['stockubica_']['format_neg'], "", "", "-", $this->field_config['stockubica_']['symbol_fmt']) ; 
+          nmgp_Form_Num_Val($this->idpedid_, $this->field_config['idpedid_']['symbol_grp'], $this->field_config['idpedid_']['symbol_dec'], "0", "S", $this->field_config['idpedid_']['format_neg'], "", "", "-", $this->field_config['idpedid_']['symbol_fmt']) ; 
       }
       if ('' !== $this->cantidad_ || (!empty($format_fields) && isset($format_fields['cantidad_'])))
       {
@@ -4441,31 +3517,15 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
           $sMonSymb = $this->field_config['valorpar_']['symbol_mon'];
           $this->sc_add_currency($this->valorpar_, $sMonSymb, $this->field_config['valorpar_']['format_pos']); 
       }
-      if ('' !== $this->descuento_ || (!empty($format_fields) && isset($format_fields['descuento_'])))
-      {
-          nmgp_Form_Num_Val($this->descuento_, $this->field_config['descuento_']['symbol_grp'], $this->field_config['descuento_']['symbol_dec'], "0", "S", $this->field_config['descuento_']['format_neg'], "", "", "-", $this->field_config['descuento_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->adicional_ || (!empty($format_fields) && isset($format_fields['adicional_'])))
-      {
-          nmgp_Form_Num_Val($this->adicional_, $this->field_config['adicional_']['symbol_grp'], $this->field_config['adicional_']['symbol_dec'], "0", "S", $this->field_config['adicional_']['format_neg'], "", "", "-", $this->field_config['adicional_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->adicional1_ || (!empty($format_fields) && isset($format_fields['adicional1_'])))
-      {
-          nmgp_Form_Num_Val($this->adicional1_, $this->field_config['adicional1_']['symbol_grp'], $this->field_config['adicional1_']['symbol_dec'], "0", "S", $this->field_config['adicional1_']['format_neg'], "", "", "-", $this->field_config['adicional1_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->factor_ || (!empty($format_fields) && isset($format_fields['factor_'])))
-      {
-          nmgp_Form_Num_Val($this->factor_, $this->field_config['factor_']['symbol_grp'], $this->field_config['factor_']['symbol_dec'], "2", "S", $this->field_config['factor_']['format_neg'], "", "", "-", $this->field_config['factor_']['symbol_fmt']) ; 
-      }
       if ('' !== $this->iva_ || (!empty($format_fields) && isset($format_fields['iva_'])))
       {
           nmgp_Form_Num_Val($this->iva_, $this->field_config['iva_']['symbol_grp'], $this->field_config['iva_']['symbol_dec'], "2", "S", $this->field_config['iva_']['format_neg'], "", "", "-", $this->field_config['iva_']['symbol_fmt']) ; 
           $sMonSymb = $this->field_config['iva_']['symbol_mon'];
           $this->sc_add_currency($this->iva_, $sMonSymb, $this->field_config['iva_']['format_pos']); 
       }
-      if ('' !== $this->costop_ || (!empty($format_fields) && isset($format_fields['costop_'])))
+      if ('' !== $this->adicional_ || (!empty($format_fields) && isset($format_fields['adicional_'])))
       {
-          nmgp_Form_Num_Val($this->costop_, $this->field_config['costop_']['symbol_grp'], $this->field_config['costop_']['symbol_dec'], "0", "S", $this->field_config['costop_']['format_neg'], "", "", "-", $this->field_config['costop_']['symbol_fmt']) ; 
+          nmgp_Form_Num_Val($this->adicional_, $this->field_config['adicional_']['symbol_grp'], $this->field_config['adicional_']['symbol_dec'], "0", "S", $this->field_config['adicional_']['format_neg'], "", "", "-", $this->field_config['adicional_']['symbol_fmt']) ; 
       }
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
@@ -4888,25 +3948,17 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                   {
                       $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['iddet_'] = $this->iddet_;
                   }
-                  if (isset($this->NM_ajax_changed['cod_barras_']) && $this->NM_ajax_changed['cod_barras_'])
+                  if (isset($this->NM_ajax_changed['idpedid_']) && $this->NM_ajax_changed['idpedid_'])
                   {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['cod_barras_'] = $this->cod_barras_;
+                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['idpedid_'] = $this->idpedid_;
+                  }
+                  if (isset($this->NM_ajax_changed['codbarra_']) && $this->NM_ajax_changed['codbarra_'])
+                  {
+                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['codbarra_'] = $this->codbarra_;
                   }
                   if (isset($this->NM_ajax_changed['idpro_']) && $this->NM_ajax_changed['idpro_'])
                   {
                       $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['idpro_'] = $this->idpro_;
-                  }
-                  if (isset($this->NM_ajax_changed['colores_']) && $this->NM_ajax_changed['colores_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['colores_'] = $this->colores_;
-                  }
-                  if (isset($this->NM_ajax_changed['tallas_']) && $this->NM_ajax_changed['tallas_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['tallas_'] = $this->tallas_;
-                  }
-                  if (isset($this->NM_ajax_changed['sabor_']) && $this->NM_ajax_changed['sabor_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['sabor_'] = $this->sabor_;
                   }
                   if (isset($this->NM_ajax_changed['idbod_']) && $this->NM_ajax_changed['idbod_'])
                   {
@@ -4915,18 +3967,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                   if (isset($this->NM_ajax_changed['observ_']) && $this->NM_ajax_changed['observ_'])
                   {
                       $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['observ_'] = $this->observ_;
-                  }
-                  if (isset($this->NM_ajax_changed['unidadmayor_']) && $this->NM_ajax_changed['unidadmayor_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['unidadmayor_'] = $this->unidadmayor_;
-                  }
-                  if (isset($this->NM_ajax_changed['stockubica_']) && $this->NM_ajax_changed['stockubica_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['stockubica_'] = $this->stockubica_;
-                  }
-                  if (isset($this->NM_ajax_changed['unidad_']) && $this->NM_ajax_changed['unidad_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['unidad_'] = $this->unidad_;
                   }
                   if (isset($this->NM_ajax_changed['cantidad_']) && $this->NM_ajax_changed['cantidad_'])
                   {
@@ -4940,37 +3980,20 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                   {
                       $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['valorpar_'] = $this->valorpar_;
                   }
-                  if (isset($this->NM_ajax_changed['descuento_']) && $this->NM_ajax_changed['descuento_'])
+                  if (isset($this->NM_ajax_changed['iva_']) && $this->NM_ajax_changed['iva_'])
                   {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['descuento_'] = $this->descuento_;
+                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['iva_'] = $this->iva_;
                   }
                   if (isset($this->NM_ajax_changed['adicional_']) && $this->NM_ajax_changed['adicional_'])
                   {
                       $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['adicional_'] = $this->adicional_;
                   }
-                  if (isset($this->NM_ajax_changed['adicional1_']) && $this->NM_ajax_changed['adicional1_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['adicional1_'] = $this->adicional1_;
-                  }
-                  if (isset($this->NM_ajax_changed['factor_']) && $this->NM_ajax_changed['factor_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['factor_'] = $this->factor_;
-                  }
-                  if (isset($this->NM_ajax_changed['iva_']) && $this->NM_ajax_changed['iva_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['iva_'] = $this->iva_;
-                  }
-                  if (isset($this->NM_ajax_changed['costop_']) && $this->NM_ajax_changed['costop_'])
-                  {
-                      $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['costop_'] = $this->costop_;
-                  }
               }
           }
           if (isset($this->nmgp_refresh_row) && '' != $this->nmgp_refresh_row)
           {
+              $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['codbarra_'] = $this->codbarra_;
               $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['observ_'] = $this->observ_;
-              $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['unidadmayor_'] = $this->unidadmayor_;
-              $this->form_vert_form_detallepedido_CW[$this->nmgp_refresh_row]['unidad_'] = $this->unidad_;
           }
           $this->NM_ajax_info['rsSize']            = sizeof($this->form_vert_form_detallepedido_CW);
           $this->NM_ajax_info['buttonDisplayVert'] = array();
@@ -4996,118 +4019,82 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                        'valList' => array($sTmpValue),
                        );
               }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("cod_barras_", $this->nmgp_refresh_fields)))
+              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("idpedid_", $this->nmgp_refresh_fields)))
               {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['cod_barras_']);
+                  $sTmpValue = NM_charset_to_utf8($aRecData['idpedid_']);
                   $aLookup = array();
           $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['cod_barras_' . $sc_seq_vert] = array(
+                  $this->NM_ajax_info['fldList']['idpedid_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'valList' => array($sTmpValue),
                        );
-              $this->cod_barras_ = $aRecData['cod_barras_'];
-              $orig_cod_barras_ = $this->cod_barras_;
-              $cod_barras_      = $this->cod_barras_;
-              $this->cod_barras_ = $cod_barras_;
-              $this->lookup_cod_barras_($conteudo);
-              $this->cod_barras_ = $orig_cod_barras_;
-              $this->NM_ajax_info['fldList']['cod_barras_' . $sc_seq_vert]['lookupCons'] = form_detallepedido_CW_pack_protect_string($conteudo);
+              }
+              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("codbarra_", $this->nmgp_refresh_fields)))
+              {
+                  $sTmpValue = NM_charset_to_utf8($aRecData['codbarra_']);
+                  $aLookup = array();
+          $aLookupOrig = $aLookup;
+                  $this->NM_ajax_info['fldList']['codbarra_' . $sc_seq_vert] = array(
+                       'row'    => $sc_seq_vert,
+                       'type'    => 'text',
+                       'valList' => array($sTmpValue),
+                       );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("idpro_", $this->nmgp_refresh_fields)))
               {
                   $sTmpValue = NM_charset_to_utf8($aRecData['idpro_']);
-                  $this->idpro_ = $sTmpValue;
-                  $this->nm_clear_val('idpro_');
-                  $sTmpValue = $this->idpro_;
                   $aLookup = array();
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array(); 
+}
+$aLookup[] = array(form_detallepedido_CW_pack_protect_string('') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array(); 
-    }
 
    $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
+   $old_value_idpedid_ = $this->idpedid_;
    $old_value_cantidad_ = $this->cantidad_;
    $old_value_valorunit_ = $this->valorunit_;
    $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
    $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
+   $old_value_adicional_ = $this->adicional_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
+   $unformatted_value_idpedid_ = $this->idpedid_;
    $unformatted_value_cantidad_ = $this->cantidad_;
    $unformatted_value_valorunit_ = $this->valorunit_;
    $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
    $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
+   $unformatted_value_adicional_ = $this->adicional_;
 
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT idprod, codigobar + \" - \" + nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT idprod, concat(codigobar, \" - \",nompro) FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT idprod, codigobar&\" - \"&nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT idprod, codigobar + \" - \" + nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   else
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
+   $nm_comando = "SELECT idprod, concat(codigobar, ' - ',nompro)  FROM productos  ORDER BY codigobar, nompro";
 
    $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
+   $this->idpedid_ = $old_value_idpedid_;
    $this->cantidad_ = $old_value_cantidad_;
    $this->valorunit_ = $old_value_valorunit_;
    $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
    $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
+   $this->adicional_ = $old_value_adicional_;
 
-   if ('' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'])
-   {
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -5127,16 +4114,35 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
        $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
        exit; 
    } 
-   }
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"idpro_\"";
+          if (isset($this->NM_ajax_info['select_html']['idpro_']) && !empty($this->NM_ajax_info['select_html']['idpro_']))
+          {
+              eval("\$sSelComp = \"" . str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['idpro_']) . "\";");
+          }
+          $sLookup = '';
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
                   $this->NM_ajax_info['fldList']['idpro_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'select2_ac',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'select',
+                       'valList' => array($sTmpValue),
+               'optList' => $aLookup,
                        );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['idpro_' . $sc_seq_vert]['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['idpro_' . $sc_seq_vert]['valList'][$i] = form_detallepedido_CW_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
               if (in_array(key($aValData), $this->NM_ajax_info['fldList']['idpro_' . $sc_seq_vert]['valList']))
@@ -5149,415 +4155,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['idpro_' . $sc_seq_vert]['labList'] = $aLabel;
-          $this->NM_ajax_info['fldList']['idpro_' . $sc_seq_vert . '_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($aLookup[0][form_detallepedido_CW_pack_protect_string($aRecData['idpro_'])]),
-              );
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("colores_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['colores_']);
-                  $aLookup = array();
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'] = array(); 
-}
-if ('autocomp_' != substr($this->NM_ajax_opcao, 0, 9))
-{
-   $this->idpro_ = $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpro_'];
-}
-$aLookup[] = array(form_detallepedido_CW_pack_protect_string('0') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string(' ')));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'][] = '0';
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   $nm_comando = "SELECT f.idcol, c.color  FROM colorxproducto f left join colores c on f.idcol=c.idcolores where idpr=$this->idpro_ ORDER BY f.idcol";
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"colores_\"";
-          if (isset($this->NM_ajax_info['select_html']['colores_']) && !empty($this->NM_ajax_info['select_html']['colores_']))
-          {
-              eval("\$sSelComp = \"" . str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['colores_']) . "\";");
-          }
-          $sLookup = '';
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-                  $this->NM_ajax_info['fldList']['colores_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'select',
-                       'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-                       );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['colores_' . $sc_seq_vert]['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['colores_' . $sc_seq_vert]['valList'][$i] = form_detallepedido_CW_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['colores_' . $sc_seq_vert]['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['colores_' . $sc_seq_vert]['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['colores_' . $sc_seq_vert]['labList'] = $aLabel;
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("tallas_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['tallas_']);
-                  $aLookup = array();
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'] = array(); 
-}
-if ('autocomp_' != substr($this->NM_ajax_opcao, 0, 9))
-{
-   $this->idpro_ = $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpro_'];
-}
-$aLookup[] = array(form_detallepedido_CW_pack_protect_string('0') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string(' ')));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'][] = '0';
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   $nm_comando = "SELECT f.idta, t.tamaño FROM tallaxproducto f left join tallas t on f.idta=t.idtallas where idpr=$this->idpro_ ORDER BY f.idta";
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"tallas_\"";
-          if (isset($this->NM_ajax_info['select_html']['tallas_']) && !empty($this->NM_ajax_info['select_html']['tallas_']))
-          {
-              eval("\$sSelComp = \"" . str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['tallas_']) . "\";");
-          }
-          $sLookup = '';
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-                  $this->NM_ajax_info['fldList']['tallas_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'select',
-                       'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-                       );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['tallas_' . $sc_seq_vert]['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['tallas_' . $sc_seq_vert]['valList'][$i] = form_detallepedido_CW_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['tallas_' . $sc_seq_vert]['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['tallas_' . $sc_seq_vert]['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['tallas_' . $sc_seq_vert]['labList'] = $aLabel;
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("sabor_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['sabor_']);
-                  $aLookup = array();
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'] = array(); 
-}
-if ('autocomp_' != substr($this->NM_ajax_opcao, 0, 9))
-{
-   $this->idpro_ = $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpro_'];
-}
-$aLookup[] = array(form_detallepedido_CW_pack_protect_string('0') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string(' ')));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'][] = '0';
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   $nm_comando = "SELECT f.idsa, t.tamaño FROM saborxproducto f left join tallas t on f.idsa=t.idtallas where idpr=$this->idpro_ and tallasabor='S' ORDER BY f.idsa";
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"sabor_\"";
-          if (isset($this->NM_ajax_info['select_html']['sabor_']) && !empty($this->NM_ajax_info['select_html']['sabor_']))
-          {
-              eval("\$sSelComp = \"" . str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['sabor_']) . "\";");
-          }
-          $sLookup = '';
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-                  $this->NM_ajax_info['fldList']['sabor_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'select',
-                       'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-                       );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['sabor_' . $sc_seq_vert]['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['sabor_' . $sc_seq_vert]['valList'][$i] = form_detallepedido_CW_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['sabor_' . $sc_seq_vert]['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['sabor_' . $sc_seq_vert]['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['sabor_' . $sc_seq_vert]['labList'] = $aLabel;
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("idbod_", $this->nmgp_refresh_fields)))
               {
@@ -5573,7 +4170,7 @@ else
 {
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idbod_'] = array(); 
 }
-$aLookup[] = array(form_detallepedido_CW_pack_protect_string('') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string('SELECCIONE')));
+$aLookup[] = array(form_detallepedido_CW_pack_protect_string('') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string(' ')));
 $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idbod_'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
@@ -5583,44 +4180,32 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_id
    $nmgp_def_dados = "" ; 
 
    $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
+   $old_value_idpedid_ = $this->idpedid_;
    $old_value_cantidad_ = $this->cantidad_;
    $old_value_valorunit_ = $this->valorunit_;
    $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
    $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
+   $old_value_adicional_ = $this->adicional_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
+   $unformatted_value_idpedid_ = $this->idpedid_;
    $unformatted_value_cantidad_ = $this->cantidad_;
    $unformatted_value_valorunit_ = $this->valorunit_;
    $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
    $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
+   $unformatted_value_adicional_ = $this->adicional_;
 
-   $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY bodega";
+   $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY idbodega DESC";
 
    $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
+   $this->idpedid_ = $old_value_idpedid_;
    $this->cantidad_ = $old_value_cantidad_;
    $this->valorunit_ = $old_value_valorunit_;
    $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
    $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
+   $this->adicional_ = $old_value_adicional_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -5694,76 +4279,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_id
                   $this->NM_ajax_info['fldList']['observ_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
-                       );
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("unidadmayor_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['unidadmayor_']);
-                  $aLookup = array();
-$aLookup[] = array(form_detallepedido_CW_pack_protect_string('NO') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string("NO")));
-$aLookup[] = array(form_detallepedido_CW_pack_protect_string('SI') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string("SI")));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_unidadmayor_'][] = 'NO';
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_unidadmayor_'][] = 'SI';
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"unidadmayor_\"";
-          if (isset($this->NM_ajax_info['select_html']['unidadmayor_']) && !empty($this->NM_ajax_info['select_html']['unidadmayor_']))
-          {
-              eval("\$sSelComp = \"" . str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['unidadmayor_']) . "\";");
-          }
-          $sLookup = '';
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-                  $this->NM_ajax_info['fldList']['unidadmayor_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'select',
-                       'valList' => array($sTmpValue),
-                       );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['unidadmayor_' . $sc_seq_vert]['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['unidadmayor_' . $sc_seq_vert]['valList'][$i] = form_detallepedido_CW_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['unidadmayor_' . $sc_seq_vert]['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['unidadmayor_' . $sc_seq_vert]['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['unidadmayor_' . $sc_seq_vert]['labList'] = $aLabel;
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("stockubica_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['stockubica_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['stockubica_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'label',
-                       'valList' => array($sTmpValue),
-                       );
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("unidad_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['unidad_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['unidad_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'label',
                        'valList' => array($sTmpValue),
                        );
               }
@@ -5800,50 +4315,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_un
                        'valList' => array($sTmpValue),
                        );
               }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("descuento_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['descuento_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['descuento_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'label',
-                       'valList' => array($sTmpValue),
-                       );
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("adicional_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['adicional_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['adicional_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($sTmpValue),
-                       );
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("adicional1_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['adicional1_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['adicional1_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($sTmpValue),
-                       );
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("factor_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['factor_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['factor_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($sTmpValue),
-                       );
-              }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("iva_", $this->nmgp_refresh_fields)))
               {
                   $sTmpValue = NM_charset_to_utf8($aRecData['iva_']);
@@ -5855,12 +4326,12 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_un
                        'valList' => array($sTmpValue),
                        );
               }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("costop_", $this->nmgp_refresh_fields)))
+              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("adicional_", $this->nmgp_refresh_fields)))
               {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['costop_']);
+                  $sTmpValue = NM_charset_to_utf8($aRecData['adicional_']);
                   $aLookup = array();
           $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['costop_' . $sc_seq_vert] = array(
+                  $this->NM_ajax_info['fldList']['adicional_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
                        'valList' => array($sTmpValue),
@@ -5945,107 +4416,24 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_un
           $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
-    $original_colores_ = $this->colores_;
-    $original_factor_ = $this->factor_;
-    $original_idbod_ = $this->idbod_;
-    $original_idpro_ = $this->idpro_;
-    $original_sabor_ = $this->sabor_;
-    $original_stockubica_ = $this->stockubica_;
-    $original_tallas_ = $this->tallas_;
-    $original_unidad_ = $this->unidad_;
-    $original_unidadmayor_ = $this->unidadmayor_;
+    $original_idpedid_ = $this->idpedid_;
 }
 if (!isset($this->sc_temp_edit_cantidad)) {$this->sc_temp_edit_cantidad = (isset($_SESSION['edit_cantidad'])) ? $_SESSION['edit_cantidad'] : "";}
 if (!isset($this->sc_temp_sw)) {$this->sc_temp_sw = (isset($_SESSION['sw'])) ? $_SESSION['sw'] : "";}
 if (!isset($this->sc_temp_par_numero)) {$this->sc_temp_par_numero = (isset($_SESSION['par_numero'])) ? $_SESSION['par_numero'] : "";}
-  $this->sc_field_readonly("valorunit_", 'on', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
-
-$this->idpedid_ =$this->sc_temp_par_numero;
+  $this->idpedid_ =$this->sc_temp_par_numero;
 $this->sc_temp_sw=0;
 $this->sc_temp_edit_cantidad=0;
-$this->ver_stock();
-if($this->colores_ ==0 or $this->colores_ =="")
-	{
-	$this->nmgp_cmp_hidden["colores_"] = "off"; $this->NM_ajax_info['fieldDisplay']['colores_'] = 'off';
-	}
-else
-	{
-	$this->nmgp_cmp_hidden["colores_"] = "on"; $this->NM_ajax_info['fieldDisplay']['colores_'] = 'on';
-	}
-if($this->tallas_ ==0 or $this->tallas_ =="")
-	{
-	$this->nmgp_cmp_hidden["tallas_"] = "off"; $this->NM_ajax_info['fieldDisplay']['tallas_'] = 'off';
-	}
-else
-	{
-	$this->nmgp_cmp_hidden["tallas_"] = "on"; $this->NM_ajax_info['fieldDisplay']['tallas_'] = 'on';
-	}
-if($this->sabor_ ==0 or $this->sabor_ =="")
-	{
-	$this->nmgp_cmp_hidden["sabor_"] = "off"; $this->NM_ajax_info['fieldDisplay']['sabor_'] = 'off';
-	}
-else
-	{
-	$this->nmgp_cmp_hidden["sabor_"] = "on"; $this->NM_ajax_info['fieldDisplay']['sabor_'] = 'on';
-	}
 if (isset($this->sc_temp_par_numero)) { $_SESSION['par_numero'] = $this->sc_temp_par_numero;}
 if (isset($this->sc_temp_sw)) { $_SESSION['sw'] = $this->sc_temp_sw;}
 if (isset($this->sc_temp_edit_cantidad)) { $_SESSION['edit_cantidad'] = $this->sc_temp_edit_cantidad;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
-    if (($original_colores_ != $this->colores_ || (isset($bFlagRead_colores_) && $bFlagRead_colores_))&& isset($this->nmgp_refresh_row))
+    if (($original_idpedid_ != $this->idpedid_ || (isset($bFlagRead_idpedid_) && $bFlagRead_idpedid_))&& isset($this->nmgp_refresh_row))
     {
-        $this->NM_ajax_info['fldList']['colores_' . $this->nmgp_refresh_row]['type']    = 'select';
-        $this->NM_ajax_info['fldList']['colores_' . $this->nmgp_refresh_row]['valList'] = array($this->colores_);
-        $this->NM_ajax_changed['colores_'] = true;
-    }
-    if (($original_factor_ != $this->factor_ || (isset($bFlagRead_factor_) && $bFlagRead_factor_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['factor_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['factor_' . $this->nmgp_refresh_row]['valList'] = array($this->factor_);
-        $this->NM_ajax_changed['factor_'] = true;
-    }
-    if (($original_idbod_ != $this->idbod_ || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['type']    = 'select';
-        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['valList'] = array($this->idbod_);
-        $this->NM_ajax_changed['idbod_'] = true;
-    }
-    if (($original_idpro_ != $this->idpro_ || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['valList'] = array($this->idpro_);
-        $this->NM_ajax_changed['idpro_'] = true;
-    }
-    if (($original_sabor_ != $this->sabor_ || (isset($bFlagRead_sabor_) && $bFlagRead_sabor_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['sabor_' . $this->nmgp_refresh_row]['type']    = 'select';
-        $this->NM_ajax_info['fldList']['sabor_' . $this->nmgp_refresh_row]['valList'] = array($this->sabor_);
-        $this->NM_ajax_changed['sabor_'] = true;
-    }
-    if (($original_stockubica_ != $this->stockubica_ || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['stockubica_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['stockubica_' . $this->nmgp_refresh_row]['valList'] = array($this->stockubica_);
-        $this->NM_ajax_changed['stockubica_'] = true;
-    }
-    if (($original_tallas_ != $this->tallas_ || (isset($bFlagRead_tallas_) && $bFlagRead_tallas_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['tallas_' . $this->nmgp_refresh_row]['type']    = 'select';
-        $this->NM_ajax_info['fldList']['tallas_' . $this->nmgp_refresh_row]['valList'] = array($this->tallas_);
-        $this->NM_ajax_changed['tallas_'] = true;
-    }
-    if (($original_unidad_ != $this->unidad_ || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['unidad_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['unidad_' . $this->nmgp_refresh_row]['valList'] = array($this->unidad_);
-        $this->NM_ajax_changed['unidad_'] = true;
-    }
-    if (($original_unidadmayor_ != $this->unidadmayor_ || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['unidadmayor_' . $this->nmgp_refresh_row]['type']    = 'select';
-        $this->NM_ajax_info['fldList']['unidadmayor_' . $this->nmgp_refresh_row]['valList'] = array($this->unidadmayor_);
-        $this->NM_ajax_changed['unidadmayor_'] = true;
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['valList'] = array($this->idpedid_);
+        $this->NM_ajax_changed['idpedid_'] = true;
     }
 }
 $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off'; 
@@ -6053,67 +4441,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
   }
   function nm_proc_onload($bFormat = true)
   {
-      if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
-      $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    $original_factor_ = $this->factor_;
-    $original_idbod_ = $this->idbod_;
-    $original_idpro_ = $this->idpro_;
-    $original_stockubica_ = $this->stockubica_;
-    $original_unidad_ = $this->unidad_;
-    $original_unidadmayor_ = $this->unidadmayor_;
-}
-  $this->ver_stock();
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    if (($original_factor_ != $this->factor_ || (isset($bFlagRead_factor_) && $bFlagRead_factor_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['factor_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['factor_' . $this->nmgp_refresh_row]['valList'] = array($this->factor_);
-        $this->NM_ajax_changed['factor_'] = true;
-    }
-    if (($original_idbod_ != $this->idbod_ || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['type']    = 'select';
-        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['valList'] = array($this->idbod_);
-        $this->NM_ajax_changed['idbod_'] = true;
-    }
-    if (($original_idpro_ != $this->idpro_ || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['valList'] = array($this->idpro_);
-        $this->NM_ajax_changed['idpro_'] = true;
-    }
-    if (($original_stockubica_ != $this->stockubica_ || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['stockubica_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['stockubica_' . $this->nmgp_refresh_row]['valList'] = array($this->stockubica_);
-        $this->NM_ajax_changed['stockubica_'] = true;
-    }
-    if (($original_unidad_ != $this->unidad_ || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['unidad_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['unidad_' . $this->nmgp_refresh_row]['valList'] = array($this->unidad_);
-        $this->NM_ajax_changed['unidad_'] = true;
-    }
-    if (($original_unidadmayor_ != $this->unidadmayor_ || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['unidadmayor_' . $this->nmgp_refresh_row]['type']    = 'select';
-        $this->NM_ajax_info['fldList']['unidadmayor_' . $this->nmgp_refresh_row]['valList'] = array($this->unidadmayor_);
-        $this->NM_ajax_changed['unidadmayor_'] = true;
-    }
-}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off'; 
-      }
-      if (empty($this->hora_inicio_))
-      {
-          $this->hora_inicio__hora = $this->hora_inicio_;
-      }
-      if (empty($this->hora_final_))
-      {
-          $this->hora_final__hora = $this->hora_final_;
-      }
       $this->nm_guardar_campos();
       if ($bFormat) $this->nm_formatar_campos();
   }
@@ -6124,36 +4451,33 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
 //
    function nm_troca_decimal($sc_parm1, $sc_parm2) 
    { 
-      $this->stockubica_ = str_replace($sc_parm1, $sc_parm2, $this->stockubica_); 
       $this->cantidad_ = str_replace($sc_parm1, $sc_parm2, $this->cantidad_); 
       $this->valorunit_ = str_replace($sc_parm1, $sc_parm2, $this->valorunit_); 
       $this->valorpar_ = str_replace($sc_parm1, $sc_parm2, $this->valorpar_); 
-      $this->descuento_ = str_replace($sc_parm1, $sc_parm2, $this->descuento_); 
-      $this->factor_ = str_replace($sc_parm1, $sc_parm2, $this->factor_); 
       $this->iva_ = str_replace($sc_parm1, $sc_parm2, $this->iva_); 
+      $this->factor_ = str_replace($sc_parm1, $sc_parm2, $this->factor_); 
       $this->costop_ = str_replace($sc_parm1, $sc_parm2, $this->costop_); 
+      $this->descuento_ = str_replace($sc_parm1, $sc_parm2, $this->descuento_); 
    } 
    function nm_poe_aspas_decimal() 
    { 
-      $this->stockubica_ = "'" . $this->stockubica_ . "'";
       $this->cantidad_ = "'" . $this->cantidad_ . "'";
       $this->valorunit_ = "'" . $this->valorunit_ . "'";
       $this->valorpar_ = "'" . $this->valorpar_ . "'";
-      $this->descuento_ = "'" . $this->descuento_ . "'";
-      $this->factor_ = "'" . $this->factor_ . "'";
       $this->iva_ = "'" . $this->iva_ . "'";
+      $this->factor_ = "'" . $this->factor_ . "'";
       $this->costop_ = "'" . $this->costop_ . "'";
+      $this->descuento_ = "'" . $this->descuento_ . "'";
    } 
    function nm_tira_aspas_decimal() 
    { 
-      $this->stockubica_ = str_replace("'", "", $this->stockubica_); 
       $this->cantidad_ = str_replace("'", "", $this->cantidad_); 
       $this->valorunit_ = str_replace("'", "", $this->valorunit_); 
       $this->valorpar_ = str_replace("'", "", $this->valorpar_); 
-      $this->descuento_ = str_replace("'", "", $this->descuento_); 
-      $this->factor_ = str_replace("'", "", $this->factor_); 
       $this->iva_ = str_replace("'", "", $this->iva_); 
+      $this->factor_ = str_replace("'", "", $this->factor_); 
       $this->costop_ = str_replace("'", "", $this->costop_); 
+      $this->descuento_ = str_replace("'", "", $this->descuento_); 
    } 
 //----------- 
 
@@ -6251,30 +4575,21 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
-    $original_adicional1_ = $this->adicional1_;
     $original_adicional_ = $this->adicional_;
     $original_cantidad_ = $this->cantidad_;
-    $original_descuento_ = $this->descuento_;
-    $original_idpro_ = $this->idpro_;
+    $original_idpedid_ = $this->idpedid_;
     $original_iva_ = $this->iva_;
     $original_valorpar_ = $this->valorpar_;
     $original_valorunit_ = $this->valorunit_;
 }
 if (!isset($this->sc_temp_par_numero)) {$this->sc_temp_par_numero = (isset($_SESSION['par_numero'])) ? $_SESSION['par_numero'] : "";}
-  $this->calcula_parcial();
-$this->calcula_descuento();
-$this->calcula_iva();
-$this->idpedid_ =$this->sc_temp_par_numero;
-				
+  $this->idpedid_  = $this->sc_temp_par_numero;
+$this->calcula_parcial();
+$this->calculaimp();
+
 if (isset($this->sc_temp_par_numero)) { $_SESSION['par_numero'] = $this->sc_temp_par_numero;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
-    if (($original_adicional1_ != $this->adicional1_ || (isset($bFlagRead_adicional1_) && $bFlagRead_adicional1_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['adicional1_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['adicional1_' . $this->nmgp_refresh_row]['valList'] = array($this->adicional1_);
-        $this->NM_ajax_changed['adicional1_'] = true;
-    }
     if (($original_adicional_ != $this->adicional_ || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))&& isset($this->nmgp_refresh_row))
     {
         $this->NM_ajax_info['fldList']['adicional_' . $this->nmgp_refresh_row]['type']    = 'text';
@@ -6287,17 +4602,11 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
     }
-    if (($original_descuento_ != $this->descuento_ || (isset($bFlagRead_descuento_) && $bFlagRead_descuento_))&& isset($this->nmgp_refresh_row))
+    if (($original_idpedid_ != $this->idpedid_ || (isset($bFlagRead_idpedid_) && $bFlagRead_idpedid_))&& isset($this->nmgp_refresh_row))
     {
-        $this->NM_ajax_info['fldList']['descuento_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['descuento_' . $this->nmgp_refresh_row]['valList'] = array($this->descuento_);
-        $this->NM_ajax_changed['descuento_'] = true;
-    }
-    if (($original_idpro_ != $this->idpro_ || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['valList'] = array($this->idpro_);
-        $this->NM_ajax_changed['idpro_'] = true;
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['valList'] = array($this->idpedid_);
+        $this->NM_ajax_changed['idpedid_'] = true;
     }
     if (($original_iva_ != $this->iva_ || (isset($bFlagRead_iva_) && $bFlagRead_iva_))&& isset($this->nmgp_refresh_row))
     {
@@ -6325,26 +4634,16 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
-    $original_adicional1_ = $this->adicional1_;
     $original_adicional_ = $this->adicional_;
     $original_cantidad_ = $this->cantidad_;
-    $original_descuento_ = $this->descuento_;
-    $original_idpro_ = $this->idpro_;
     $original_iva_ = $this->iva_;
     $original_valorpar_ = $this->valorpar_;
     $original_valorunit_ = $this->valorunit_;
 }
   $this->calcula_parcial();
-$this->calcula_descuento();
-$this->calcula_iva();
+$this->calculaimp();
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
-    if (($original_adicional1_ != $this->adicional1_ || (isset($bFlagRead_adicional1_) && $bFlagRead_adicional1_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['adicional1_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['adicional1_' . $this->nmgp_refresh_row]['valList'] = array($this->adicional1_);
-        $this->NM_ajax_changed['adicional1_'] = true;
-    }
     if (($original_adicional_ != $this->adicional_ || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))&& isset($this->nmgp_refresh_row))
     {
         $this->NM_ajax_info['fldList']['adicional_' . $this->nmgp_refresh_row]['type']    = 'text';
@@ -6356,18 +4655,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
-    }
-    if (($original_descuento_ != $this->descuento_ || (isset($bFlagRead_descuento_) && $bFlagRead_descuento_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['descuento_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['descuento_' . $this->nmgp_refresh_row]['valList'] = array($this->descuento_);
-        $this->NM_ajax_changed['descuento_'] = true;
-    }
-    if (($original_idpro_ != $this->idpro_ || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['valList'] = array($this->idpro_);
-        $this->NM_ajax_changed['idpro_'] = true;
     }
     if (($original_iva_ != $this->iva_ || (isset($bFlagRead_iva_) && $bFlagRead_iva_))&& isset($this->nmgp_refresh_row))
     {
@@ -6403,8 +4690,6 @@ if (!isset($this->sc_temp_gModificarInventario)) {$this->sc_temp_gModificarInven
 	$this->fGestionaStock($this->iddet_ ,1,"pedido");
 }
 
-
-
 if (isset($this->sc_temp_gModificarInventario)) { $_SESSION['gModificarInventario'] = $this->sc_temp_gModificarInventario;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -6425,42 +4710,28 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       {
           $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert];
           if ($this->nmgp_dados_select['iddet_'] == $this->iddet_ &&
+              $this->nmgp_dados_select['idpedid_'] == $this->idpedid_ &&
               $this->nmgp_dados_select['idpro_'] == $this->idpro_ &&
-              $this->nmgp_dados_select['colores_'] == $this->colores_ &&
-              $this->nmgp_dados_select['tallas_'] == $this->tallas_ &&
-              $this->nmgp_dados_select['sabor_'] == $this->sabor_ &&
               $this->nmgp_dados_select['idbod_'] == $this->idbod_ &&
               $this->nmgp_dados_select['observ_'] == $this->observ_ &&
-              $this->nmgp_dados_select['unidadmayor_'] == $this->unidadmayor_ &&
               $this->nmgp_dados_select['cantidad_'] == $this->cantidad_ &&
               $this->nmgp_dados_select['valorunit_'] == $this->valorunit_ &&
               $this->nmgp_dados_select['valorpar_'] == $this->valorpar_ &&
-              $this->nmgp_dados_select['descuento_'] == $this->descuento_ &&
-              $this->nmgp_dados_select['adicional_'] == $this->adicional_ &&
-              $this->nmgp_dados_select['adicional1_'] == $this->adicional1_ &&
-              $this->nmgp_dados_select['factor_'] == $this->factor_ &&
               $this->nmgp_dados_select['iva_'] == $this->iva_ &&
-              $this->nmgp_dados_select['costop_'] == $this->costop_)
+              $this->nmgp_dados_select['adicional_'] == $this->adicional_)
           { }
           else
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['iddet_'] = $this->iddet_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idpedid_'] = $this->idpedid_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idpro_'] = $this->idpro_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['colores_'] = $this->colores_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['tallas_'] = $this->tallas_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['sabor_'] = $this->sabor_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idbod_'] = $this->idbod_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['observ_'] = $this->observ_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['unidadmayor_'] = $this->unidadmayor_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['cantidad_'] = $this->cantidad_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['valorunit_'] = $this->valorunit_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['valorpar_'] = $this->valorpar_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['descuento_'] = $this->descuento_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['adicional_'] = $this->adicional_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['adicional1_'] = $this->adicional1_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['factor_'] = $this->factor_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['iva_'] = $this->iva_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['costop_'] = $this->costop_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['adicional_'] = $this->adicional_;
           }
       }
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -6473,39 +4744,36 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       { 
           $this->Ini->sc_tem_trans_banco = $this->Db->BeginTrans(); 
       } 
-      if ('incluir' == $this->nmgp_opcao && $this->idpedid_ == ""){$this->idpedid_ = "null"; $NM_val_null[] = "idpedid_";}  
-      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->idpedid_ == ""){$this->idpedid_ = "null"; $NM_val_null[] = "idpedid_";}  
       $NM_val_form['iddet_'] = $this->iddet_;
-      $NM_val_form['cod_barras_'] = $this->cod_barras_;
+      $NM_val_form['idpedid_'] = $this->idpedid_;
+      $NM_val_form['codbarra_'] = $this->codbarra_;
       $NM_val_form['idpro_'] = $this->idpro_;
-      $NM_val_form['colores_'] = $this->colores_;
-      $NM_val_form['tallas_'] = $this->tallas_;
-      $NM_val_form['sabor_'] = $this->sabor_;
       $NM_val_form['idbod_'] = $this->idbod_;
       $NM_val_form['observ_'] = $this->observ_;
-      $NM_val_form['unidadmayor_'] = $this->unidadmayor_;
-      $NM_val_form['stockubica_'] = $this->stockubica_;
-      $NM_val_form['unidad_'] = $this->unidad_;
       $NM_val_form['cantidad_'] = $this->cantidad_;
       $NM_val_form['valorunit_'] = $this->valorunit_;
       $NM_val_form['valorpar_'] = $this->valorpar_;
-      $NM_val_form['descuento_'] = $this->descuento_;
-      $NM_val_form['adicional_'] = $this->adicional_;
-      $NM_val_form['adicional1_'] = $this->adicional1_;
-      $NM_val_form['factor_'] = $this->factor_;
       $NM_val_form['iva_'] = $this->iva_;
-      $NM_val_form['costop_'] = $this->costop_;
-      $NM_val_form['idpedid_'] = $this->idpedid_;
+      $NM_val_form['adicional_'] = $this->adicional_;
       $NM_val_form['numfac_'] = $this->numfac_;
       $NM_val_form['remision_'] = $this->remision_;
+      $NM_val_form['unidadmayor_'] = $this->unidadmayor_;
+      $NM_val_form['factor_'] = $this->factor_;
+      $NM_val_form['costop_'] = $this->costop_;
+      $NM_val_form['descuento_'] = $this->descuento_;
+      $NM_val_form['adicional1_'] = $this->adicional1_;
       $NM_val_form['devuelto_'] = $this->devuelto_;
+      $NM_val_form['colores_'] = $this->colores_;
+      $NM_val_form['tallas_'] = $this->tallas_;
+      $NM_val_form['sabor_'] = $this->sabor_;
       $NM_val_form['estado_comanda_'] = $this->estado_comanda_;
       $NM_val_form['usuario_comanda_'] = $this->usuario_comanda_;
       $NM_val_form['tercero_comanda_'] = $this->tercero_comanda_;
       $NM_val_form['hora_inicio_'] = $this->hora_inicio_;
       $NM_val_form['hora_final_'] = $this->hora_final_;
       $NM_val_form['cerrado_'] = $this->cerrado_;
-      $NM_val_form['codbarra_'] = $this->codbarra_;
+      $NM_val_form['obs_'] = $this->obs_;
+      $NM_val_form['descr_'] = $this->descr_;
       if ($this->iddet_ === "" || is_null($this->iddet_))  
       { 
           $this->iddet_ = 0;
@@ -6530,11 +4798,17 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
           $this->idpro_ = 0;
           $this->sc_force_zero[] = 'idpro_';
       } 
+      if ($this->nmgp_opcao == "alterar")
+      {
+      }
+      if ($this->nmgp_opcao == "alterar")
+      {
       if ($this->factor_ === "" || is_null($this->factor_))  
       { 
           $this->factor_ = 0;
           $this->sc_force_zero[] = 'factor_';
       } 
+      }
       if ($this->idbod_ === "" || is_null($this->idbod_))  
       { 
           $this->idbod_ = 0;
@@ -6600,11 +4874,17 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
           $this->sabor_ = 0;
           $this->sc_force_zero[] = 'sabor_';
       } 
+      if ($this->nmgp_opcao == "alterar")
+      {
+      }
       if ($this->tercero_comanda_ === "" || is_null($this->tercero_comanda_))  
       { 
           $this->tercero_comanda_ = 0;
           $this->sc_force_zero[] = 'tercero_comanda_';
       } 
+      if ($this->nmgp_opcao == "alterar")
+      {
+      }
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['decimal_db'] == ",") 
       {
@@ -6612,20 +4892,25 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       }
       if ($this->nmgp_opcao == "alterar" || $this->nmgp_opcao == "incluir") 
       {
-          $this->unidadmayor__before_qstr = $this->unidadmayor_;
-          $this->unidadmayor_ = substr($this->Db->qstr($this->unidadmayor_), 1, -1); 
-          if ($this->unidadmayor_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
-          { 
-              $this->unidadmayor_ = "null"; 
-              $NM_val_null[] = "unidadmayor_";
-          } 
-          $this->estado_comanda__before_qstr = $this->estado_comanda_;
-          $this->estado_comanda_ = substr($this->Db->qstr($this->estado_comanda_), 1, -1); 
-          if ($this->estado_comanda_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
-          { 
-              $this->estado_comanda_ = "null"; 
-              $NM_val_null[] = "estado_comanda_";
-          } 
+          if ($this->nmgp_opcao == "alterar") 
+          {
+              if ($this->unidadmayor_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+              { 
+                  $this->unidadmayor_ = "null"; 
+                  $NM_val_null[] = "unidadmayor_";
+              } 
+          }
+          if ($this->nmgp_opcao == "alterar") 
+          {
+          }
+          if ($this->nmgp_opcao == "alterar") 
+          {
+              if ($this->estado_comanda_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+              { 
+                  $this->estado_comanda_ = "null"; 
+                  $NM_val_null[] = "estado_comanda_";
+              } 
+          }
           $this->usuario_comanda__before_qstr = $this->usuario_comanda_;
           $this->usuario_comanda_ = substr($this->Db->qstr($this->usuario_comanda_), 1, -1); 
           if ($this->usuario_comanda_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
@@ -6650,12 +4935,27 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $this->observ_ = "null"; 
               $NM_val_null[] = "observ_";
           } 
-          $this->cerrado__before_qstr = $this->cerrado_;
-          $this->cerrado_ = substr($this->Db->qstr($this->cerrado_), 1, -1); 
-          if ($this->cerrado_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          if ($this->nmgp_opcao == "alterar") 
+          {
+              if ($this->cerrado_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+              { 
+                  $this->cerrado_ = "null"; 
+                  $NM_val_null[] = "cerrado_";
+              } 
+          }
+          $this->obs__before_qstr = $this->obs_;
+          $this->obs_ = substr($this->Db->qstr($this->obs_), 1, -1); 
+          if ($this->obs_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
           { 
-              $this->cerrado_ = "null"; 
-              $NM_val_null[] = "cerrado_";
+              $this->obs_ = "null"; 
+              $NM_val_null[] = "obs_";
+          } 
+          $this->descr__before_qstr = $this->descr_;
+          $this->descr_ = substr($this->Db->qstr($this->descr_), 1, -1); 
+          if ($this->descr_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->descr_ = "null"; 
+              $NM_val_null[] = "descr_";
           } 
       }
       if ($this->nmgp_opcao == "alterar") 
@@ -6727,41 +5027,37 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idpro = $this->idpro_, unidadmayor = '$this->unidadmayor_', factor = $this->factor_, idbod = $this->idbod_, costop = $this->costop_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, descuento = $this->descuento_, adicional = $this->adicional_, adicional1 = $this->adicional1_, colores = $this->colores_, tallas = $this->tallas_, sabor = $this->sabor_, observ = '$this->observ_'"; 
+                  $SC_fields_update[] = "idpedid = $this->idpedid_, idpro = $this->idpro_, idbod = $this->idbod_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, adicional = $this->adicional_, observ = '$this->observ_'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idpro = $this->idpro_, unidadmayor = '$this->unidadmayor_', factor = $this->factor_, idbod = $this->idbod_, costop = $this->costop_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, descuento = $this->descuento_, adicional = $this->adicional_, adicional1 = $this->adicional1_, colores = $this->colores_, tallas = $this->tallas_, sabor = $this->sabor_, observ = '$this->observ_'"; 
+                  $SC_fields_update[] = "idpedid = $this->idpedid_, idpro = $this->idpro_, idbod = $this->idbod_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, adicional = $this->adicional_, observ = '$this->observ_'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idpro = $this->idpro_, unidadmayor = '$this->unidadmayor_', factor = $this->factor_, idbod = $this->idbod_, costop = $this->costop_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, descuento = $this->descuento_, adicional = $this->adicional_, adicional1 = $this->adicional1_, colores = $this->colores_, tallas = $this->tallas_, sabor = $this->sabor_, observ = '$this->observ_'"; 
+                  $SC_fields_update[] = "idpedid = $this->idpedid_, idpro = $this->idpro_, idbod = $this->idbod_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, adicional = $this->adicional_, observ = '$this->observ_'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idpro = $this->idpro_, unidadmayor = '$this->unidadmayor_', factor = $this->factor_, idbod = $this->idbod_, costop = $this->costop_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, descuento = $this->descuento_, adicional = $this->adicional_, adicional1 = $this->adicional1_, colores = $this->colores_, tallas = $this->tallas_, sabor = $this->sabor_, observ = '$this->observ_'"; 
+                  $SC_fields_update[] = "idpedid = $this->idpedid_, idpro = $this->idpro_, idbod = $this->idbod_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, adicional = $this->adicional_, observ = '$this->observ_'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idpro = $this->idpro_, unidadmayor = '$this->unidadmayor_', factor = $this->factor_, idbod = $this->idbod_, costop = $this->costop_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, descuento = $this->descuento_, adicional = $this->adicional_, adicional1 = $this->adicional1_, colores = $this->colores_, tallas = $this->tallas_, sabor = $this->sabor_, observ = '$this->observ_'"; 
+                  $SC_fields_update[] = "idpedid = $this->idpedid_, idpro = $this->idpro_, idbod = $this->idbod_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, adicional = $this->adicional_, observ = '$this->observ_'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idpro = $this->idpro_, unidadmayor = '$this->unidadmayor_', factor = $this->factor_, idbod = $this->idbod_, costop = $this->costop_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, descuento = $this->descuento_, adicional = $this->adicional_, adicional1 = $this->adicional1_, colores = $this->colores_, tallas = $this->tallas_, sabor = $this->sabor_, observ = '$this->observ_'"; 
+                  $SC_fields_update[] = "idpedid = $this->idpedid_, idpro = $this->idpro_, idbod = $this->idbod_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, adicional = $this->adicional_, observ = '$this->observ_'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idpro = $this->idpro_, unidadmayor = '$this->unidadmayor_', factor = $this->factor_, idbod = $this->idbod_, costop = $this->costop_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, descuento = $this->descuento_, adicional = $this->adicional_, adicional1 = $this->adicional1_, colores = $this->colores_, tallas = $this->tallas_, sabor = $this->sabor_, observ = '$this->observ_'"; 
-              } 
-              if (isset($NM_val_form['idpedid_']) && $NM_val_form['idpedid_'] != $this->nmgp_dados_select['idpedid_']) 
-              { 
-                  $SC_fields_update[] = "idpedid = $this->idpedid_"; 
+                  $SC_fields_update[] = "idpedid = $this->idpedid_, idpro = $this->idpro_, idbod = $this->idbod_, cantidad = $this->cantidad_, valorunit = $this->valorunit_, valorpar = $this->valorpar_, iva = $this->iva_, adicional = $this->adicional_, observ = '$this->observ_'"; 
               } 
               if (isset($NM_val_form['numfac_']) && $NM_val_form['numfac_'] != $this->nmgp_dados_select['numfac_']) 
               { 
@@ -6771,9 +5067,41 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               { 
                   $SC_fields_update[] = "remision = $this->remision_"; 
               } 
+              if (isset($NM_val_form['unidadmayor_']) && $NM_val_form['unidadmayor_'] != $this->nmgp_dados_select['unidadmayor_']) 
+              { 
+                  $SC_fields_update[] = "unidadmayor = '$this->unidadmayor_'"; 
+              } 
+              if (isset($NM_val_form['factor_']) && $NM_val_form['factor_'] != $this->nmgp_dados_select['factor_']) 
+              { 
+                  $SC_fields_update[] = "factor = $this->factor_"; 
+              } 
+              if (isset($NM_val_form['costop_']) && $NM_val_form['costop_'] != $this->nmgp_dados_select['costop_']) 
+              { 
+                  $SC_fields_update[] = "costop = $this->costop_"; 
+              } 
+              if (isset($NM_val_form['descuento_']) && $NM_val_form['descuento_'] != $this->nmgp_dados_select['descuento_']) 
+              { 
+                  $SC_fields_update[] = "descuento = $this->descuento_"; 
+              } 
+              if (isset($NM_val_form['adicional1_']) && $NM_val_form['adicional1_'] != $this->nmgp_dados_select['adicional1_']) 
+              { 
+                  $SC_fields_update[] = "adicional1 = $this->adicional1_"; 
+              } 
               if (isset($NM_val_form['devuelto_']) && $NM_val_form['devuelto_'] != $this->nmgp_dados_select['devuelto_']) 
               { 
                   $SC_fields_update[] = "devuelto = $this->devuelto_"; 
+              } 
+              if (isset($NM_val_form['colores_']) && $NM_val_form['colores_'] != $this->nmgp_dados_select['colores_']) 
+              { 
+                  $SC_fields_update[] = "colores = $this->colores_"; 
+              } 
+              if (isset($NM_val_form['tallas_']) && $NM_val_form['tallas_'] != $this->nmgp_dados_select['tallas_']) 
+              { 
+                  $SC_fields_update[] = "tallas = $this->tallas_"; 
+              } 
+              if (isset($NM_val_form['sabor_']) && $NM_val_form['sabor_'] != $this->nmgp_dados_select['sabor_']) 
+              { 
+                  $SC_fields_update[] = "sabor = $this->sabor_"; 
               } 
               if (isset($NM_val_form['estado_comanda_']) && $NM_val_form['estado_comanda_'] != $this->nmgp_dados_select['estado_comanda_']) 
               { 
@@ -6812,6 +5140,14 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               if (isset($NM_val_form['cerrado_']) && $NM_val_form['cerrado_'] != $this->nmgp_dados_select['cerrado_']) 
               { 
                   $SC_fields_update[] = "cerrado = '$this->cerrado_'"; 
+              } 
+              if (isset($NM_val_form['obs_']) && $NM_val_form['obs_'] != $this->nmgp_dados_select['obs_']) 
+              { 
+                  $SC_fields_update[] = "obs = '$this->obs_'"; 
+              } 
+              if (isset($NM_val_form['descr_']) && $NM_val_form['descr_'] != $this->nmgp_dados_select['descr_']) 
+              { 
+                  $SC_fields_update[] = "descr = '$this->descr_'"; 
               } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
@@ -6872,11 +5208,10 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                       }   
                   }   
               }   
-              $this->unidadmayor_ = $this->unidadmayor__before_qstr;
-              $this->estado_comanda_ = $this->estado_comanda__before_qstr;
               $this->usuario_comanda_ = $this->usuario_comanda__before_qstr;
               $this->observ_ = $this->observ__before_qstr;
-              $this->cerrado_ = $this->cerrado__before_qstr;
+              $this->obs_ = $this->obs__before_qstr;
+              $this->descr_ = $this->descr__before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
               }   
@@ -6887,6 +5222,8 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               {
                   $this->lig_edit_lookup_call = true;
               }
+              $this->NM_gera_nav_page(); 
+              $this->NM_ajax_info['navPage'] = $this->SC_nav_page; 
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['db_changed'] = true;
               if ($this->NM_ajax_flag) {
@@ -6896,16 +5233,12 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $this->sc_teve_alt = true; 
               if     (isset($NM_val_form) && isset($NM_val_form['iddet_'])) { $this->iddet_ = $NM_val_form['iddet_']; }
               elseif (isset($this->iddet_)) { $this->nm_limpa_alfa($this->iddet_); }
+              if     (isset($NM_val_form) && isset($NM_val_form['idpedid_'])) { $this->idpedid_ = $NM_val_form['idpedid_']; }
+              elseif (isset($this->idpedid_)) { $this->nm_limpa_alfa($this->idpedid_); }
               if     (isset($NM_val_form) && isset($NM_val_form['idpro_'])) { $this->idpro_ = $NM_val_form['idpro_']; }
               elseif (isset($this->idpro_)) { $this->nm_limpa_alfa($this->idpro_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['unidadmayor_'])) { $this->unidadmayor_ = $NM_val_form['unidadmayor_']; }
-              elseif (isset($this->unidadmayor_)) { $this->nm_limpa_alfa($this->unidadmayor_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['factor_'])) { $this->factor_ = $NM_val_form['factor_']; }
-              elseif (isset($this->factor_)) { $this->nm_limpa_alfa($this->factor_); }
               if     (isset($NM_val_form) && isset($NM_val_form['idbod_'])) { $this->idbod_ = $NM_val_form['idbod_']; }
               elseif (isset($this->idbod_)) { $this->nm_limpa_alfa($this->idbod_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['costop_'])) { $this->costop_ = $NM_val_form['costop_']; }
-              elseif (isset($this->costop_)) { $this->nm_limpa_alfa($this->costop_); }
               if     (isset($NM_val_form) && isset($NM_val_form['cantidad_'])) { $this->cantidad_ = $NM_val_form['cantidad_']; }
               elseif (isset($this->cantidad_)) { $this->nm_limpa_alfa($this->cantidad_); }
               if     (isset($NM_val_form) && isset($NM_val_form['valorunit_'])) { $this->valorunit_ = $NM_val_form['valorunit_']; }
@@ -6914,20 +5247,11 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               elseif (isset($this->valorpar_)) { $this->nm_limpa_alfa($this->valorpar_); }
               if     (isset($NM_val_form) && isset($NM_val_form['iva_'])) { $this->iva_ = $NM_val_form['iva_']; }
               elseif (isset($this->iva_)) { $this->nm_limpa_alfa($this->iva_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['descuento_'])) { $this->descuento_ = $NM_val_form['descuento_']; }
-              elseif (isset($this->descuento_)) { $this->nm_limpa_alfa($this->descuento_); }
               if     (isset($NM_val_form) && isset($NM_val_form['adicional_'])) { $this->adicional_ = $NM_val_form['adicional_']; }
               elseif (isset($this->adicional_)) { $this->nm_limpa_alfa($this->adicional_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['adicional1_'])) { $this->adicional1_ = $NM_val_form['adicional1_']; }
-              elseif (isset($this->adicional1_)) { $this->nm_limpa_alfa($this->adicional1_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['colores_'])) { $this->colores_ = $NM_val_form['colores_']; }
-              elseif (isset($this->colores_)) { $this->nm_limpa_alfa($this->colores_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['tallas_'])) { $this->tallas_ = $NM_val_form['tallas_']; }
-              elseif (isset($this->tallas_)) { $this->nm_limpa_alfa($this->tallas_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['sabor_'])) { $this->sabor_ = $NM_val_form['sabor_']; }
-              elseif (isset($this->sabor_)) { $this->nm_limpa_alfa($this->sabor_); }
               if     (isset($NM_val_form) && isset($NM_val_form['observ_'])) { $this->observ_ = $NM_val_form['observ_']; }
               elseif (isset($this->observ_)) { $this->nm_limpa_alfa($this->observ_); }
+              $this->nm_proc_onload_record($this->nmgp_refresh_row);
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -6935,7 +5259,8 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('iddet_', 'cod_barras_', 'idpro_', 'colores_', 'tallas_', 'sabor_', 'idbod_', 'observ_', 'unidadmayor_', 'stockubica_', 'unidad_', 'cantidad_', 'valorunit_', 'valorpar_', 'descuento_', 'adicional_', 'adicional1_', 'factor_', 'iva_', 'costop_'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('iddet_', 'idpedid_', 'codbarra_', 'idpro_', 'idbod_', 'observ_', 'cantidad_', 'valorunit_', 'valorpar_', 'iva_', 'adicional_'), $aDoNotUpdate);
+              $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
               if (isset($this->Embutida_ronly) && $this->Embutida_ronly)
@@ -6943,25 +5268,15 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
 
                   $this->NM_ajax_info['readOnly']['iddet_' . $this->nmgp_refresh_row] = 'on';
 
-                  $this->NM_ajax_info['readOnly']['cod_barras_' . $this->nmgp_refresh_row] = 'on';
+                  $this->NM_ajax_info['readOnly']['idpedid_' . $this->nmgp_refresh_row] = 'on';
+
+                  $this->NM_ajax_info['readOnly']['codbarra_' . $this->nmgp_refresh_row] = 'on';
 
                   $this->NM_ajax_info['readOnly']['idpro_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['colores_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['tallas_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['sabor_' . $this->nmgp_refresh_row] = 'on';
 
                   $this->NM_ajax_info['readOnly']['idbod_' . $this->nmgp_refresh_row] = 'on';
 
                   $this->NM_ajax_info['readOnly']['observ_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['unidadmayor_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['stockubica_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['unidad_' . $this->nmgp_refresh_row] = 'on';
 
                   $this->NM_ajax_info['readOnly']['cantidad_' . $this->nmgp_refresh_row] = 'on';
 
@@ -6969,17 +5284,9 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
 
                   $this->NM_ajax_info['readOnly']['valorpar_' . $this->nmgp_refresh_row] = 'on';
 
-                  $this->NM_ajax_info['readOnly']['descuento_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['adicional1_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['factor_' . $this->nmgp_refresh_row] = 'on';
-
                   $this->NM_ajax_info['readOnly']['iva_' . $this->nmgp_refresh_row] = 'on';
 
-                  $this->NM_ajax_info['readOnly']['costop_' . $this->nmgp_refresh_row] = 'on';
+                  $this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row] = 'on';
 
 
                   $this->NM_ajax_info['closeLine'] = $this->nmgp_refresh_row;
@@ -7019,39 +5326,237 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES ($this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES ($this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, TO_DATE('$this->hora_inicio_', 'yyyy-mm-dd hh24:mi:ss'), TO_DATE('$this->hora_final_', 'yyyy-mm-dd hh24:mi:ss'), '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, TO_DATE('$this->hora_inicio_', 'yyyy-mm-dd hh24:mi:ss'), TO_DATE('$this->hora_final_', 'yyyy-mm-dd hh24:mi:ss'), '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, TO_DATE('$this->hora_inicio_', 'yyyy-mm-dd hh24:mi:ss'), TO_DATE('$this->hora_final_', 'yyyy-mm-dd hh24:mi:ss'), '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, TO_DATE('$this->hora_inicio_', 'yyyy-mm-dd hh24:mi:ss'), TO_DATE('$this->hora_final_', 'yyyy-mm-dd hh24:mi:ss'), '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, '$this->unidadmayor_', $this->factor_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->estado_comanda_', '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->cerrado_')"; 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->unidadmayor_ != "")
+                  { 
+                       $compl_insert     .= ", unidadmayor";
+                       $compl_insert_val .= ", '$this->unidadmayor_'";
+                  } 
+                  if ($this->factor_ != "")
+                  { 
+                       $compl_insert     .= ", factor";
+                       $compl_insert_val .= ", $this->factor_";
+                  } 
+                  if ($this->estado_comanda_ != "")
+                  { 
+                       $compl_insert     .= ", estado_comanda";
+                       $compl_insert_val .= ", '$this->estado_comanda_'";
+                  } 
+                  if ($this->cerrado_ != "")
+                  { 
+                       $compl_insert     .= ", cerrado";
+                       $compl_insert_val .= ", '$this->cerrado_'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idpedid, numfac, remision, idpro, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, obs, descr $compl_insert) VALUES (" . $NM_seq_auto . "$this->idpedid_, $this->numfac_, $this->remision_, $this->idpro_, $this->idbod_, $this->costop_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->adicional_, $this->adicional1_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, '$this->usuario_comanda_', $this->tercero_comanda_, '$this->hora_inicio_', '$this->hora_final_', '$this->observ_', '$this->obs_', '$this->descr_' $compl_insert_val)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -7195,39 +5700,38 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                   $this->iddet_ = $rsy->fields[0];
                   $rsy->Close(); 
               } 
-              $this->unidadmayor_ = $this->unidadmayor__before_qstr;
-              $this->estado_comanda_ = $this->estado_comanda__before_qstr;
               $this->usuario_comanda_ = $this->usuario_comanda__before_qstr;
               $this->observ_ = $this->observ__before_qstr;
-              $this->cerrado_ = $this->cerrado__before_qstr;
+              $this->obs_ = $this->obs__before_qstr;
+              $this->descr_ = $this->descr__before_qstr;
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['db_changed'] = true;
 
               $this->sc_evento = "insert"; 
-              $this->unidadmayor_ = $this->unidadmayor__before_qstr;
-              $this->estado_comanda_ = $this->estado_comanda__before_qstr;
               $this->usuario_comanda_ = $this->usuario_comanda__before_qstr;
               $this->observ_ = $this->observ__before_qstr;
-              $this->cerrado_ = $this->cerrado__before_qstr;
+              $this->obs_ = $this->obs__before_qstr;
+              $this->descr_ = $this->descr__before_qstr;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['total']++; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_qtd']++; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_I_E']++; 
+              $this->NM_ajax_info['navSummary']['reg_ini'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start'] + 1; 
+              $this->NM_ajax_info['navSummary']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_qtd']; 
+              $this->NM_ajax_info['navSummary']['reg_tot'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['total'] + 1; 
+              $this->NM_gera_nav_page(); 
+              $this->NM_ajax_info['navPage'] = $this->SC_nav_page; 
               $this->sc_teve_incl = true; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['iddet_'] = $this->iddet_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idpedid_'] = $this->idpedid_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idpro_'] = $this->idpro_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['colores_'] = $this->colores_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['tallas_'] = $this->tallas_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['sabor_'] = $this->sabor_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['idbod_'] = $this->idbod_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['observ_'] = $this->observ_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['unidadmayor_'] = $this->unidadmayor_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['cantidad_'] = $this->cantidad_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['valorunit_'] = $this->valorunit_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['valorpar_'] = $this->valorpar_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['descuento_'] = $this->descuento_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['adicional_'] = $this->adicional_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['adicional1_'] = $this->adicional1_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['factor_'] = $this->factor_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['iva_'] = $this->iva_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['costop_'] = $this->costop_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['dados_select'][$sc_seq_vert]['adicional_'] = $this->adicional_;
               if (!empty($this->sc_force_zero))
               {
                   foreach ($this->sc_force_zero as $i_force_zero => $sc_force_zero_field)
@@ -7244,25 +5748,19 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                   }
               }
               if (isset($this->iddet_)) { $this->nm_limpa_alfa($this->iddet_); }
+              if (isset($this->idpedid_)) { $this->nm_limpa_alfa($this->idpedid_); }
               if (isset($this->idpro_)) { $this->nm_limpa_alfa($this->idpro_); }
-              if (isset($this->unidadmayor_)) { $this->nm_limpa_alfa($this->unidadmayor_); }
-              if (isset($this->factor_)) { $this->nm_limpa_alfa($this->factor_); }
               if (isset($this->idbod_)) { $this->nm_limpa_alfa($this->idbod_); }
-              if (isset($this->costop_)) { $this->nm_limpa_alfa($this->costop_); }
               if (isset($this->cantidad_)) { $this->nm_limpa_alfa($this->cantidad_); }
               if (isset($this->valorunit_)) { $this->nm_limpa_alfa($this->valorunit_); }
               if (isset($this->valorpar_)) { $this->nm_limpa_alfa($this->valorpar_); }
               if (isset($this->iva_)) { $this->nm_limpa_alfa($this->iva_); }
-              if (isset($this->descuento_)) { $this->nm_limpa_alfa($this->descuento_); }
               if (isset($this->adicional_)) { $this->nm_limpa_alfa($this->adicional_); }
-              if (isset($this->adicional1_)) { $this->nm_limpa_alfa($this->adicional1_); }
-              if (isset($this->colores_)) { $this->nm_limpa_alfa($this->colores_); }
-              if (isset($this->tallas_)) { $this->nm_limpa_alfa($this->tallas_); }
-              if (isset($this->sabor_)) { $this->nm_limpa_alfa($this->sabor_); }
               if (isset($this->observ_)) { $this->nm_limpa_alfa($this->observ_); }
               if (isset($this->Embutida_form) && $this->Embutida_form)
               {
                   $this->nm_guardar_campos();
+                  $this->nm_proc_onload_record($this->nmgp_refresh_row);
                   $this->nm_formatar_campos();
 
                   $tmpLabel_iddet_ = $this->iddet_;
@@ -7285,33 +5783,45 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
                       }
                   }
 
-                  $orig_cod_barras_ = $this->cod_barras_;
-                  $cod_barras_      = $this->cod_barras_;
-                  $this->cod_barras_ = $cod_barras_;
-                  $this->lookup_cod_barras_($conteudo);
-                  $this->cod_barras_ = $orig_cod_barras_;
-                  $this->NM_ajax_info['fldList']['cod_barras_' . $this->nmgp_refresh_row]['lookupCons'] = form_detallepedido_CW_pack_protect_string($conteudo);
-                  $this->NM_ajax_info['fldList']['cod_barras_' . $this->nmgp_refresh_row]['type']    = 'text';
-                  $this->NM_ajax_info['fldList']['cod_barras_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->cod_barras_)));
-                  $this->NM_ajax_info['fldList']['cod_barras_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_cod_barras_)));
+                  $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->idpedid_)));
+                  $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_idpedid_)));
 
                   if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
                   {
-                      if (!isset($this->NM_ajax_info['readOnly']['cod_barras_' . $this->nmgp_refresh_row]))
+                      if (!isset($this->NM_ajax_info['readOnly']['idpedid_' . $this->nmgp_refresh_row]))
                       {
-                          $this->NM_ajax_info['readOnly']['cod_barras_' . $this->nmgp_refresh_row] = "off";
+                          $this->NM_ajax_info['readOnly']['idpedid_' . $this->nmgp_refresh_row] = "off";
                       }
                   }
                   elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
                   {
-                      if (!isset($this->NM_ajax_info['readOnly']['cod_barras_' . $this->nmgp_refresh_row]))
+                      if (!isset($this->NM_ajax_info['readOnly']['idpedid_' . $this->nmgp_refresh_row]))
                       {
-                          $this->NM_ajax_info['readOnly']['cod_barras_' . $this->nmgp_refresh_row] = "on";
+                          $this->NM_ajax_info['readOnly']['idpedid_' . $this->nmgp_refresh_row] = "on";
                       }
                   }
 
-              $aLookup = array();
-              $aRecData['idpro_'] = $this->idpro_;
+                  $this->NM_ajax_info['fldList']['codbarra_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['codbarra_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->codbarra_)));
+                  $this->NM_ajax_info['fldList']['codbarra_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_codbarra_)));
+
+                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
+                  {
+                      if (!isset($this->NM_ajax_info['readOnly']['codbarra_' . $this->nmgp_refresh_row]))
+                      {
+                          $this->NM_ajax_info['readOnly']['codbarra_' . $this->nmgp_refresh_row] = "off";
+                      }
+                  }
+                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
+                  {
+                      if (!isset($this->NM_ajax_info['readOnly']['codbarra_' . $this->nmgp_refresh_row]))
+                      {
+                          $this->NM_ajax_info['readOnly']['codbarra_' . $this->nmgp_refresh_row] = "on";
+                      }
+                  }
+
+                  $aLookup = array();
  
 $nmgp_def_dados = "" ; 
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']))
@@ -7328,87 +5838,38 @@ else
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array(); 
-    }
 
    $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
+   $old_value_idpedid_ = $this->idpedid_;
    $old_value_cantidad_ = $this->cantidad_;
    $old_value_valorunit_ = $this->valorunit_;
    $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
    $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
+   $old_value_adicional_ = $this->adicional_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
+   $unformatted_value_idpedid_ = $this->idpedid_;
    $unformatted_value_cantidad_ = $this->cantidad_;
    $unformatted_value_valorunit_ = $this->valorunit_;
    $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
    $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
+   $unformatted_value_adicional_ = $this->adicional_;
 
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT idprod, codigobar + \" - \" + nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT idprod, concat(codigobar, \" - \",nompro) FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT idprod, codigobar&\" - \"&nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT idprod, codigobar + \" - \" + nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
-   else
-   {
-       $nm_comando = "SELECT idprod, codigobar||\" - \"||nompro FROM productos WHERE (activo like 'SI') AND idprod = " . $aRecData['idpro_'] . " ORDER BY codigobar, nompro";
-   }
+   $nm_comando = "SELECT idprod, concat(codigobar, ' - ',nompro)  FROM productos  ORDER BY codigobar, nompro";
 
    $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
+   $this->idpedid_ = $old_value_idpedid_;
    $this->cantidad_ = $old_value_cantidad_;
    $this->valorunit_ = $old_value_valorunit_;
    $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
    $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
+   $this->adicional_ = $old_value_adicional_;
 
-   if ('' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'])
-   {
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -7428,28 +5889,19 @@ else
        $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
        exit; 
    } 
-   }
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
-          $val_output = "";
-          foreach ($aLookup as $iLookup => $aLookupDados)
+          $sLabelTemp = '';
+          foreach ($aLookup as $aValData)
           {
-              $SV_cmp = $this->idpro_;
-              $this->nm_clear_val("idpro_");
-              if (isset($aLookupDados[$this->idpro_]))
+              if (key($aValData) == form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($this->idpro_)))
               {
-                  $val_output = $aLookupDados[$this->idpro_];
+                  $sLabelTemp = current($aValData);
               }
-              $this->idpro_ = $SV_cmp;
           }
-          $this->NM_ajax_info['fldList']['idpro__autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
-              );
-          $tmpLabel_idpro_ = $val_output;
-
-                  $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'text';
+          $tmpLabel_idpro_ = $sLabelTemp;
+                  $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'select';
                   $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->idpro_)));
-                  $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_idpro_)));
+                  $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['labList'] = array($tmpLabel_idpro_);
 
                   if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
                   {
@@ -7463,345 +5915,6 @@ else
                       if (!isset($this->NM_ajax_info['readOnly']['idpro_' . $this->nmgp_refresh_row]))
                       {
                           $this->NM_ajax_info['readOnly']['idpro_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $aLookup = array();
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'] = array(); 
-}
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   $nm_comando = "SELECT f.idcol, c.color  FROM colorxproducto f left join colores c on f.idcol=c.idcolores where idpr=$this->idpro_ ORDER BY f.idcol";
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $sLabelTemp = '';
-          foreach ($aLookup as $aValData)
-          {
-              if (key($aValData) == form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($this->colores_)))
-              {
-                  $sLabelTemp = current($aValData);
-              }
-          }
-          $tmpLabel_colores_ = $sLabelTemp;
-                  $this->NM_ajax_info['fldList']['colores_' . $this->nmgp_refresh_row]['type']    = 'select';
-                  $this->NM_ajax_info['fldList']['colores_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->colores_)));
-                  $this->NM_ajax_info['fldList']['colores_' . $this->nmgp_refresh_row]['labList'] = array($tmpLabel_colores_);
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['colores_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['colores_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['colores_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['colores_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $aLookup = array();
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'] = array(); 
-}
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   $nm_comando = "SELECT f.idta, t.tamaño FROM tallaxproducto f left join tallas t on f.idta=t.idtallas where idpr=$this->idpro_ ORDER BY f.idta";
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $sLabelTemp = '';
-          foreach ($aLookup as $aValData)
-          {
-              if (key($aValData) == form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($this->tallas_)))
-              {
-                  $sLabelTemp = current($aValData);
-              }
-          }
-          $tmpLabel_tallas_ = $sLabelTemp;
-                  $this->NM_ajax_info['fldList']['tallas_' . $this->nmgp_refresh_row]['type']    = 'select';
-                  $this->NM_ajax_info['fldList']['tallas_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->tallas_)));
-                  $this->NM_ajax_info['fldList']['tallas_' . $this->nmgp_refresh_row]['labList'] = array($tmpLabel_tallas_);
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['tallas_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['tallas_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['tallas_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['tallas_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $aLookup = array();
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'] = array(); 
-}
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   $nm_comando = "SELECT f.idsa, t.tamaño FROM saborxproducto f left join tallas t on f.idsa=t.idtallas where idpr=$this->idpro_ and tallasabor='S' ORDER BY f.idsa";
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $sLabelTemp = '';
-          foreach ($aLookup as $aValData)
-          {
-              if (key($aValData) == form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($this->sabor_)))
-              {
-                  $sLabelTemp = current($aValData);
-              }
-          }
-          $tmpLabel_sabor_ = $sLabelTemp;
-                  $this->NM_ajax_info['fldList']['sabor_' . $this->nmgp_refresh_row]['type']    = 'select';
-                  $this->NM_ajax_info['fldList']['sabor_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->sabor_)));
-                  $this->NM_ajax_info['fldList']['sabor_' . $this->nmgp_refresh_row]['labList'] = array($tmpLabel_sabor_);
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['sabor_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['sabor_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['sabor_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['sabor_' . $this->nmgp_refresh_row] = "on";
                       }
                   }
 
@@ -7824,44 +5937,32 @@ else
    $nmgp_def_dados = "" ; 
 
    $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
+   $old_value_idpedid_ = $this->idpedid_;
    $old_value_cantidad_ = $this->cantidad_;
    $old_value_valorunit_ = $this->valorunit_;
    $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
    $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
+   $old_value_adicional_ = $this->adicional_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
+   $unformatted_value_idpedid_ = $this->idpedid_;
    $unformatted_value_cantidad_ = $this->cantidad_;
    $unformatted_value_valorunit_ = $this->valorunit_;
    $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
    $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
+   $unformatted_value_adicional_ = $this->adicional_;
 
-   $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY bodega";
+   $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY idbodega DESC";
 
    $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
+   $this->idpedid_ = $old_value_idpedid_;
    $this->cantidad_ = $old_value_cantidad_;
    $this->valorunit_ = $old_value_valorunit_;
    $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
    $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
+   $this->adicional_ = $old_value_adicional_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -7933,79 +6034,6 @@ else
                       }
                   }
 
-                  $aLookup = array();
-$aLookup[] = array(form_detallepedido_CW_pack_protect_string('NO') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string("NO")));
-$aLookup[] = array(form_detallepedido_CW_pack_protect_string('SI') => str_replace('<', '&lt;',form_detallepedido_CW_pack_protect_string("SI")));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_unidadmayor_'][] = 'NO';
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_unidadmayor_'][] = 'SI';
-          $sLabelTemp = '';
-          foreach ($aLookup as $aValData)
-          {
-              if (key($aValData) == form_detallepedido_CW_pack_protect_string(NM_charset_to_utf8($this->unidadmayor_)))
-              {
-                  $sLabelTemp = current($aValData);
-              }
-          }
-          $tmpLabel_unidadmayor_ = $sLabelTemp;
-                  $this->NM_ajax_info['fldList']['unidadmayor_' . $this->nmgp_refresh_row]['type']    = 'select';
-                  $this->NM_ajax_info['fldList']['unidadmayor_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->unidadmayor_)));
-                  $this->NM_ajax_info['fldList']['unidadmayor_' . $this->nmgp_refresh_row]['labList'] = array($tmpLabel_unidadmayor_);
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['unidadmayor_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['unidadmayor_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['unidadmayor_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['unidadmayor_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $tmpLabel_stockubica_ = $this->stockubica_;
-                  $this->NM_ajax_info['fldList']['stockubica_' . $this->nmgp_refresh_row]['type']    = 'label';
-                  $this->NM_ajax_info['fldList']['stockubica_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->stockubica_)));
-                  $this->NM_ajax_info['fldList']['stockubica_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_stockubica_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['stockubica_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['stockubica_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['stockubica_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['stockubica_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $tmpLabel_unidad_ = $this->unidad_;
-                  $this->NM_ajax_info['fldList']['unidad_' . $this->nmgp_refresh_row]['type']    = 'label';
-                  $this->NM_ajax_info['fldList']['unidad_' . $this->nmgp_refresh_row]['valList'] = array($this->unidad_);
-                  $this->NM_ajax_info['fldList']['unidad_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_unidad_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['unidad_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['unidad_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['unidad_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['unidad_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
                   $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
                   $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->cantidad_)));
                   $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_cantidad_)));
@@ -8064,83 +6092,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_un
                       }
                   }
 
-                  $tmpLabel_descuento_ = $this->descuento_;
-                  $this->NM_ajax_info['fldList']['descuento_' . $this->nmgp_refresh_row]['type']    = 'label';
-                  $this->NM_ajax_info['fldList']['descuento_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->descuento_)));
-                  $this->NM_ajax_info['fldList']['descuento_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_descuento_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['descuento_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['descuento_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['descuento_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['descuento_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $this->NM_ajax_info['fldList']['adicional_' . $this->nmgp_refresh_row]['type']    = 'text';
-                  $this->NM_ajax_info['fldList']['adicional_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->adicional_)));
-                  $this->NM_ajax_info['fldList']['adicional_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_adicional_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $this->NM_ajax_info['fldList']['adicional1_' . $this->nmgp_refresh_row]['type']    = 'text';
-                  $this->NM_ajax_info['fldList']['adicional1_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->adicional1_)));
-                  $this->NM_ajax_info['fldList']['adicional1_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_adicional1_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['adicional1_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['adicional1_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['adicional1_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['adicional1_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $this->NM_ajax_info['fldList']['factor_' . $this->nmgp_refresh_row]['type']    = 'text';
-                  $this->NM_ajax_info['fldList']['factor_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->factor_)));
-                  $this->NM_ajax_info['fldList']['factor_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_factor_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['factor_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['factor_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['factor_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['factor_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
                   $tmpLabel_iva_ = $this->iva_;
                   $this->NM_ajax_info['fldList']['iva_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['iva_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->iva_)));
@@ -8161,22 +6112,22 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_un
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['costop_' . $this->nmgp_refresh_row]['type']    = 'text';
-                  $this->NM_ajax_info['fldList']['costop_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->costop_)));
-                  $this->NM_ajax_info['fldList']['costop_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_costop_)));
+                  $this->NM_ajax_info['fldList']['adicional_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['adicional_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->adicional_)));
+                  $this->NM_ajax_info['fldList']['adicional_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_adicional_)));
 
                   if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
                   {
-                      if (!isset($this->NM_ajax_info['readOnly']['costop_' . $this->nmgp_refresh_row]))
+                      if (!isset($this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row]))
                       {
-                          $this->NM_ajax_info['readOnly']['costop_' . $this->nmgp_refresh_row] = "off";
+                          $this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row] = "off";
                       }
                   }
                   elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
                   {
-                      if (!isset($this->NM_ajax_info['readOnly']['costop_' . $this->nmgp_refresh_row]))
+                      if (!isset($this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row]))
                       {
-                          $this->NM_ajax_info['readOnly']['costop_' . $this->nmgp_refresh_row] = "on";
+                          $this->NM_ajax_info['readOnly']['adicional_' . $this->nmgp_refresh_row] = "on";
                       }
                   }
 
@@ -8297,6 +6248,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_un
                   } 
               } 
               $this->sc_evento = "delete"; 
+              $this->nm_proc_onload_record($sc_seq_vert);
               $this->nmgp_opcao = "avanca"; 
               $this->nm_flag_iframe = true;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start']--; 
@@ -8307,6 +6259,14 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_un
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['db_changed'] = true;
 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_qtd']--; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['total']--; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_I_E']--; 
+              $this->NM_ajax_info['navSummary']['reg_ini'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start'] + 1; 
+              $this->NM_ajax_info['navSummary']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_qtd']; 
+              $this->NM_ajax_info['navSummary']['reg_tot'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['total'] + 1; 
+              $this->NM_gera_nav_page(); 
+              $this->NM_ajax_info['navPage'] = $this->SC_nav_page; 
               $this->sc_teve_excl = true; 
               if ($this->lig_edit_lookup)
               {
@@ -8346,8 +6306,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_un
         $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
+    $original_idbod_ = $this->idbod_;
     $original_iddet_ = $this->iddet_;
+    $original_idpedid_ = $this->idpedid_;
     $original_idpro_ = $this->idpro_;
+    $original_observ_ = $this->observ_;
 }
 if (!isset($this->sc_temp_gModificarInventario)) {$this->sc_temp_gModificarInventario = (isset($_SESSION['gModificarInventario'])) ? $_SESSION['gModificarInventario'] : "";}
    
@@ -8394,20 +6357,58 @@ if(isset($this->ds_p[0][0]))
 	}
 
 $this->update_master();
+if($this->observ_ !='00' and $this->idbod_ >4)
+	{
+	
+     $nm_select ="UPDATE pedidos SET observaciones = '".$this->observ_ ."' WHERE idpedido='".$this->idpedid_ ."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_detallepedido_CW_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}
 if (isset($this->sc_temp_gModificarInventario)) { $_SESSION['gModificarInventario'] = $this->sc_temp_gModificarInventario;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
+    if (($original_idbod_ != $this->idbod_ || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['type']    = 'select';
+        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['valList'] = array($this->idbod_);
+        $this->NM_ajax_changed['idbod_'] = true;
+    }
     if (($original_iddet_ != $this->iddet_ || (isset($bFlagRead_iddet_) && $bFlagRead_iddet_))&& isset($this->nmgp_refresh_row))
     {
         $this->NM_ajax_info['fldList']['iddet_' . $this->nmgp_refresh_row]['type']    = 'label';
         $this->NM_ajax_info['fldList']['iddet_' . $this->nmgp_refresh_row]['valList'] = array($this->iddet_);
         $this->NM_ajax_changed['iddet_'] = true;
     }
+    if (($original_idpedid_ != $this->idpedid_ || (isset($bFlagRead_idpedid_) && $bFlagRead_idpedid_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['valList'] = array($this->idpedid_);
+        $this->NM_ajax_changed['idpedid_'] = true;
+    }
     if (($original_idpro_ != $this->idpro_ || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))&& isset($this->nmgp_refresh_row))
     {
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'select';
         $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['valList'] = array($this->idpro_);
         $this->NM_ajax_changed['idpro_'] = true;
+    }
+    if (($original_observ_ != $this->observ_ || (isset($bFlagRead_observ_) && $bFlagRead_observ_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['observ_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['observ_' . $this->nmgp_refresh_row]['valList'] = array($this->observ_);
+        $this->NM_ajax_changed['observ_'] = true;
     }
 }
 $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off'; 
@@ -8416,7 +6417,10 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
         $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
+    $original_idbod_ = $this->idbod_;
     $original_iddet_ = $this->iddet_;
+    $original_idpedid_ = $this->idpedid_;
+    $original_observ_ = $this->observ_;
 }
 if (!isset($this->sc_temp_sw)) {$this->sc_temp_sw = (isset($_SESSION['sw'])) ? $_SESSION['sw'] : "";}
 if (!isset($this->sc_temp_gModificarInventario)) {$this->sc_temp_gModificarInventario = (isset($_SESSION['gModificarInventario'])) ? $_SESSION['gModificarInventario'] : "";}
@@ -8427,23 +6431,73 @@ if (!isset($this->sc_temp_gModificarInventario)) {$this->sc_temp_gModificarInven
 
 $this->update_master();
 $this->sc_temp_sw=0;
-
+if($this->observ_ !='00' and $this->idbod_ >4)
+	{
+	
+     $nm_select ="UPDATE pedidos SET observaciones = '".$this->observ_ ."' WHERE idpedido='".$this->idpedid_ ."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_detallepedido_CW_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}
 if (isset($this->sc_temp_gModificarInventario)) { $_SESSION['gModificarInventario'] = $this->sc_temp_gModificarInventario;}
 if (isset($this->sc_temp_sw)) { $_SESSION['sw'] = $this->sc_temp_sw;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
+    if (($original_idbod_ != $this->idbod_ || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['type']    = 'select';
+        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['valList'] = array($this->idbod_);
+        $this->NM_ajax_changed['idbod_'] = true;
+    }
     if (($original_iddet_ != $this->iddet_ || (isset($bFlagRead_iddet_) && $bFlagRead_iddet_))&& isset($this->nmgp_refresh_row))
     {
         $this->NM_ajax_info['fldList']['iddet_' . $this->nmgp_refresh_row]['type']    = 'label';
         $this->NM_ajax_info['fldList']['iddet_' . $this->nmgp_refresh_row]['valList'] = array($this->iddet_);
         $this->NM_ajax_changed['iddet_'] = true;
     }
+    if (($original_idpedid_ != $this->idpedid_ || (isset($bFlagRead_idpedid_) && $bFlagRead_idpedid_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['valList'] = array($this->idpedid_);
+        $this->NM_ajax_changed['idpedid_'] = true;
+    }
+    if (($original_observ_ != $this->observ_ || (isset($bFlagRead_observ_) && $bFlagRead_observ_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['observ_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['observ_' . $this->nmgp_refresh_row]['valList'] = array($this->observ_);
+        $this->NM_ajax_changed['observ_'] = true;
+    }
 }
 $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off'; 
     }
     if ("delete" == $this->sc_evento && $this->nmgp_opcao != "nada") {
       $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_idpedid_ = $this->idpedid_;
+}
   $this->update_master();
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_idpedid_ != $this->idpedid_ || (isset($bFlagRead_idpedid_) && $bFlagRead_idpedid_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['idpedid_' . $this->nmgp_refresh_row]['valList'] = array($this->idpedid_);
+        $this->NM_ajax_changed['idpedid_'] = true;
+    }
+}
 $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off'; 
     }
       if (!empty($this->Campos_Mens_erro)) 
@@ -8582,8 +6636,9 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['total'] = $qt_geral_reg_form_detallepedido_CW;
               $rt->Close();
           }
-      if ((isset($_POST['master_nav']) && 'on' == $_POST['master_nav']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['total']) || $this->sc_teve_excl || $this->sc_teve_incl)
+      if ((isset($_POST['master_nav']) && 'on' == $_POST['master_nav']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['total']))
       { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_I_E'] = 0; 
           if (!$this->sc_teve_excl && !$this->sc_teve_incl) 
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start'] = 0; 
@@ -8637,7 +6692,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       } 
       if ($this->nmgp_opcao == "avanca")  
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start'] += $this->sc_max_reg; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start'] += ($this->sc_max_reg + $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_I_E']); 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start'] > $qt_geral_reg_form_detallepedido_CW)
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start'] = $qt_geral_reg_form_detallepedido_CW - $this->sc_max_reg; 
@@ -8663,6 +6718,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_start'] = 0; 
           }
       } 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['reg_I_E'] = 0; 
       }
       $Cmps_ord_def = array();
       $sc_order_by  = "";
@@ -8695,23 +6751,23 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
       } 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado, obs, descr from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado, obs, descr from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, TO_DATE(TO_CHAR(hora_inicio, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(hora_final, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), observ, cerrado from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, TO_DATE(TO_CHAR(hora_inicio, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(hora_final, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), observ, cerrado, obs, descr from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado, obs, descr from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idpedid, numfac, remision, idpro, unidadmayor, factor, idbod, costop, cantidad, valorunit, valorpar, iva, descuento, adicional, adicional1, devuelto, colores, tallas, sabor, estado_comanda, usuario_comanda, tercero_comanda, hora_inicio, hora_final, observ, cerrado, obs, descr from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       if ($this->nmgp_opcao != "novo") 
       { 
@@ -8806,9 +6862,6 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
           {
               $bPagTest = $sc_seq_vert <= $this->sc_max_reg;
           }
-          if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
-              $this->nm_proc_onload(false);
-          }
           while (!$rs->EOF && $bPagTest)
           { 
               if ('total' == $this->form_paginacao)
@@ -8839,21 +6892,21 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $this->nmgp_dados_select['idpro_'] = $this->idpro_;
               $this->unidadmayor_ = $rs->fields[5] ; 
               $this->nmgp_dados_select['unidadmayor_'] = $this->unidadmayor_;
-              $this->factor_ = trim($rs->fields[6]) ; 
+              $this->factor_ = $rs->fields[6] ; 
               $this->nmgp_dados_select['factor_'] = $this->factor_;
               $this->idbod_ = $rs->fields[7] ; 
               $this->nmgp_dados_select['idbod_'] = $this->idbod_;
-              $this->costop_ = trim($rs->fields[8]) ; 
+              $this->costop_ = $rs->fields[8] ; 
               $this->nmgp_dados_select['costop_'] = $this->costop_;
-              $this->cantidad_ = trim($rs->fields[9]) ; 
+              $this->cantidad_ = $rs->fields[9] ; 
               $this->nmgp_dados_select['cantidad_'] = $this->cantidad_;
-              $this->valorunit_ = trim($rs->fields[10]) ; 
+              $this->valorunit_ = $rs->fields[10] ; 
               $this->nmgp_dados_select['valorunit_'] = $this->valorunit_;
-              $this->valorpar_ = trim($rs->fields[11]) ; 
+              $this->valorpar_ = $rs->fields[11] ; 
               $this->nmgp_dados_select['valorpar_'] = $this->valorpar_;
-              $this->iva_ = trim($rs->fields[12]) ; 
+              $this->iva_ = $rs->fields[12] ; 
               $this->nmgp_dados_select['iva_'] = $this->iva_;
-              $this->descuento_ = trim($rs->fields[13]) ; 
+              $this->descuento_ = $rs->fields[13] ; 
               $this->nmgp_dados_select['descuento_'] = $this->descuento_;
               $this->adicional_ = $rs->fields[14] ; 
               $this->nmgp_dados_select['adicional_'] = $this->adicional_;
@@ -8897,10 +6950,11 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $this->nmgp_dados_select['observ_'] = $this->observ_;
               $this->cerrado_ = $rs->fields[26] ; 
               $this->nmgp_dados_select['cerrado_'] = $this->cerrado_;
+              $this->obs_ = $rs->fields[27] ; 
+              $this->nmgp_dados_select['obs_'] = $this->obs_;
+              $this->descr_ = $rs->fields[28] ; 
+              $this->nmgp_dados_select['descr_'] = $this->descr_;
               $this->codbarra_ = isset($GLOBALS['codbarra_' . $sc_seq_vert]) ? $GLOBALS['codbarra_' . $sc_seq_vert] : '';
-              $this->stockubica_ = isset($GLOBALS['stockubica_' . $sc_seq_vert]) ? $GLOBALS['stockubica_' . $sc_seq_vert] : '';
-              $this->unidad_ = isset($GLOBALS['unidad_' . $sc_seq_vert]) ? $GLOBALS['unidad_' . $sc_seq_vert] : '';
-              $this->cod_barras_ = isset($GLOBALS['cod_barras_' . $sc_seq_vert]) ? $GLOBALS['cod_barras_' . $sc_seq_vert] : '';
               $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->nm_troca_decimal(",", ".");
               $this->iddet_ = (string)$this->iddet_; 
@@ -8908,20 +6962,13 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $this->numfac_ = (string)$this->numfac_; 
               $this->remision_ = (string)$this->remision_; 
               $this->idpro_ = (string)$this->idpro_; 
-              $this->factor_ = (strpos(strtolower($this->factor_), "e")) ? (float)$this->factor_ : $this->factor_; 
               $this->factor_ = (string)$this->factor_; 
               $this->idbod_ = (string)$this->idbod_; 
-              $this->costop_ = (strpos(strtolower($this->costop_), "e")) ? (float)$this->costop_ : $this->costop_; 
               $this->costop_ = (string)$this->costop_; 
-              $this->cantidad_ = (strpos(strtolower($this->cantidad_), "e")) ? (float)$this->cantidad_ : $this->cantidad_; 
               $this->cantidad_ = (string)$this->cantidad_; 
-              $this->valorunit_ = (strpos(strtolower($this->valorunit_), "e")) ? (float)$this->valorunit_ : $this->valorunit_; 
               $this->valorunit_ = (string)$this->valorunit_; 
-              $this->valorpar_ = (strpos(strtolower($this->valorpar_), "e")) ? (float)$this->valorpar_ : $this->valorpar_; 
               $this->valorpar_ = (string)$this->valorpar_; 
-              $this->iva_ = (strpos(strtolower($this->iva_), "e")) ? (float)$this->iva_ : $this->iva_; 
               $this->iva_ = (string)$this->iva_; 
-              $this->descuento_ = (strpos(strtolower($this->descuento_), "e")) ? (float)$this->descuento_ : $this->descuento_; 
               $this->descuento_ = (string)$this->descuento_; 
               $this->adicional_ = (string)$this->adicional_; 
               $this->adicional1_ = (string)$this->adicional1_; 
@@ -8942,29 +6989,27 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $this->nm_guardar_campos();
               $this->nm_formatar_campos();
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['iddet_'] =  $this->iddet_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cod_barras_'] =  $this->cod_barras_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpedid_'] =  $this->idpedid_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['codbarra_'] =  $this->codbarra_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpro_'] =  $this->idpro_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['colores_'] =  $this->colores_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tallas_'] =  $this->tallas_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['sabor_'] =  $this->sabor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idbod_'] =  $this->idbod_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['observ_'] =  $this->observ_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidadmayor_'] =  $this->unidadmayor_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['stockubica_'] =  $this->stockubica_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidad_'] =  $this->unidad_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cantidad_'] =  $this->cantidad_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['valorunit_'] =  $this->valorunit_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['valorpar_'] =  $this->valorpar_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descuento_'] =  $this->descuento_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional_'] =  $this->adicional_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional1_'] =  $this->adicional1_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['factor_'] =  $this->factor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['iva_'] =  $this->iva_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['costop_'] =  $this->costop_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpedid_'] =  $this->idpedid_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional_'] =  $this->adicional_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['numfac_'] =  $this->numfac_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['remision_'] =  $this->remision_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidadmayor_'] =  $this->unidadmayor_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['factor_'] =  $this->factor_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['costop_'] =  $this->costop_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descuento_'] =  $this->descuento_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional1_'] =  $this->adicional1_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['devuelto_'] =  $this->devuelto_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['colores_'] =  $this->colores_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tallas_'] =  $this->tallas_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['sabor_'] =  $this->sabor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['estado_comanda_'] =  $this->estado_comanda_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['usuario_comanda_'] =  $this->usuario_comanda_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tercero_comanda_'] =  $this->tercero_comanda_; 
@@ -8973,7 +7018,8 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['hora_final_'] =  $this->hora_final_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['hora_final__hora'] =  $this->hora_final__hora; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cerrado_'] =  $this->cerrado_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['codbarra_'] =  $this->codbarra_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['obs_'] =  $this->obs_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descr_'] =  $this->descr_; 
               $sc_seq_vert++; 
               $rs->MoveNext() ; 
               if (isset($this->NM_ajax_opcao) && 'backup_line' == $this->NM_ajax_opcao)
@@ -9029,32 +7075,23 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
           elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['embutida_multi']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['embutida_multi']) 
           { 
           } 
-          elseif ($this->Embutida_form) 
+          else 
           { 
               $this->sc_max_reg_incl = 0; 
           } 
           while ($sc_seq_vert <= $this->sc_max_reg_incl) 
           { 
               $this->iddet_ = "";  
+              $this->idpedid_ = "";  
               $this->idpro_ = "";  
-              $this->unidadmayor_ = "";  
-              $this->factor_ = "";  
               $this->idbod_ = "";  
-              $this->costop_ = "";  
-              $this->cantidad_ = "0,00";  
-              $this->valorunit_ = "0";  
+              $this->cantidad_ = "";  
+              $this->valorunit_ = "";  
               $this->valorpar_ = "";  
               $this->iva_ = "";  
-              $this->descuento_ = "";  
-              $this->adicional_ = "0";  
-              $this->adicional1_ = "0";  
-              $this->colores_ = "";  
-              $this->tallas_ = "";  
-              $this->sabor_ = "";  
+              $this->adicional_ = "";  
               $this->observ_ = "";  
-              $this->stockubica_ = "0";  
-              $this->unidad_ = "";  
-              $this->cod_barras_ = "";  
+              $this->codbarra_ = "";  
               $this->nm_proc_onload_record($sc_seq_vert);
               if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['foreign_key']))
               {
@@ -9070,29 +7107,27 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
               $this->nm_guardar_campos();
               $this->nm_formatar_campos();
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['iddet_'] =  $this->iddet_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cod_barras_'] =  $this->cod_barras_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpedid_'] =  $this->idpedid_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['codbarra_'] =  $this->codbarra_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpro_'] =  $this->idpro_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['colores_'] =  $this->colores_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tallas_'] =  $this->tallas_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['sabor_'] =  $this->sabor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idbod_'] =  $this->idbod_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['observ_'] =  $this->observ_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidadmayor_'] =  $this->unidadmayor_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['stockubica_'] =  $this->stockubica_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidad_'] =  $this->unidad_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cantidad_'] =  $this->cantidad_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['valorunit_'] =  $this->valorunit_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['valorpar_'] =  $this->valorpar_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descuento_'] =  $this->descuento_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional_'] =  $this->adicional_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional1_'] =  $this->adicional1_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['factor_'] =  $this->factor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['iva_'] =  $this->iva_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['costop_'] =  $this->costop_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['idpedid_'] =  $this->idpedid_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional_'] =  $this->adicional_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['numfac_'] =  $this->numfac_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['remision_'] =  $this->remision_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['unidadmayor_'] =  $this->unidadmayor_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['factor_'] =  $this->factor_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['costop_'] =  $this->costop_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descuento_'] =  $this->descuento_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['adicional1_'] =  $this->adicional1_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['devuelto_'] =  $this->devuelto_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['colores_'] =  $this->colores_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tallas_'] =  $this->tallas_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['sabor_'] =  $this->sabor_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['estado_comanda_'] =  $this->estado_comanda_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['usuario_comanda_'] =  $this->usuario_comanda_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['tercero_comanda_'] =  $this->tercero_comanda_; 
@@ -9101,12 +7136,10 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['hora_final_'] =  $this->hora_final_; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['hora_final__hora'] =  $this->hora_final__hora; 
              $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['cerrado_'] =  $this->cerrado_; 
-             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['codbarra_'] =  $this->codbarra_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['obs_'] =  $this->obs_; 
+             $this->form_vert_form_detallepedido_CW[$sc_seq_vert]['descr_'] =  $this->descr_; 
               $sc_seq_vert++; 
           } 
-          if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
-              $this->nm_proc_onload(false);
-          }
       }  
   }
    function NM_gera_nav_page() 
@@ -9204,2678 +7237,74 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
         }
 
 //
-function actualiza_stock()
+function adicional__onChange()
 {
 $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
   
-$proid=$this->idpro_ ;
-$cant=$this->cantidad_ ;
+$original_valorpar_ = $this->valorpar_;
+$original_cantidad_ = $this->cantidad_;
+$original_valorunit_ = $this->valorunit_;
+$original_adicional_ = $this->adicional_;
+$original_iva_ = $this->iva_;
 
-		$sql="select stockmen from productos where idprod=$proid";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-		$this->ds =substr($this->ds , 8);$existencia=$this->ds ;
-		if($this->unidadmayor_ =='NO' and $this->factor_ >0)
-			{
-			$aux=$cant/$this->factor_ ;
-			$cant=round($aux, 2);
-			$sql="UPDATE productos SET stockmen = ($existencia-$cant) WHERE idprod=$proid";
-			
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-			}
-		else
-			{
-			$sql="UPDATE productos SET stockmen = ($existencia-$cant) WHERE idprod=$proid";
-			
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-			}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function actualiza_stock_edita()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_sw)) {$this->sc_temp_sw = (isset($_SESSION['sw'])) ? $_SESSION['sw'] : "";}
-if (!isset($this->sc_temp_edit_cantidad)) {$this->sc_temp_edit_cantidad = (isset($_SESSION['edit_cantidad'])) ? $_SESSION['edit_cantidad'] : "";}
-  
-$proid=$this->idpro_ ;
-$cant=$this->cantidad_ ;
+$this->calcula_parcial();
+$this->sc_ajax_message ("Está cambiando el % del Impuesto de manera manual!!!", "Precaución");
+$this->calculaimp();
 
-if($this->sc_temp_edit_cantidad<$cant and $cant>0)
-	{
-		$cant=$cant-$this->sc_temp_edit_cantidad;
-		$sql="select stockmen from productos where idprod=$proid";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-		$this->ds =substr($this->ds , 8);$existencia=$this->ds ;
-		
-		if($this->unidadmayor_ =='NO' and $this->factor_ >0)
-			{
-			$aux=$cant/$this->factor_ ;
-			$cant=round($aux, 2);
-			$sql="UPDATE productos SET stockmen = ($existencia-$cant) WHERE idprod=$proid";
-			
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-			}
-		else
-			{
-			$sql="UPDATE productos SET stockmen = ($existencia-$cant) WHERE idprod=$proid";
-			
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-			}
-	}
-else if($this->sc_temp_edit_cantidad>$cant and $cant>0)
-	{
-		$cant=$this->sc_temp_edit_cantidad-$cant;
-		$sql="select stockmen from productos where idprod=$proid";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-		$this->ds =substr($this->ds , 8);$existencia=$this->ds ;
-		
-		if($this->unidadmayor_ =='NO' and $this->factor_ >0)
-			{
-			$aux=$cant/$this->factor_ ;
-			$cant=round($aux, 2);
-			$sql="UPDATE productos SET stockmen = ($existencia+$cant) WHERE idprod=$proid";
-			
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-			}
-		else
-			{
-			$sql="UPDATE productos SET stockmen = ($existencia+$cant) WHERE idprod=$proid";
-			
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-			}
-	}
-$this->sc_temp_sw=0;
-if (isset($this->sc_temp_edit_cantidad)) { $_SESSION['edit_cantidad'] = $this->sc_temp_edit_cantidad;}
-if (isset($this->sc_temp_sw)) { $_SESSION['sw'] = $this->sc_temp_sw;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function actualiza_stock_elimina()
+
+$modificado_valorpar_ = $this->valorpar_;
+$modificado_cantidad_ = $this->cantidad_;
+$modificado_valorunit_ = $this->valorunit_;
+$modificado_adicional_ = $this->adicional_;
+$modificado_iva_ = $this->iva_;
+$this->nm_formatar_campos('valorpar_', 'cantidad_', 'valorunit_', 'adicional_', 'iva_');
+$this->nmgp_refresh_fields = array();
+if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
 {
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$proid=$this->idpro_ ;
-$cant=$this->cantidad_ ;
- 
-      $nm_select = "SELECT stockmen FROM productos WHERE idprod=$proid"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->ds = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-if(!empty($this->ds[0][0]))
-	{
-		if($this->unidadmayor_ =='NO' and $this->factor_ >0)
-			{
-			$aux=$cant/$this->factor_ ;
-			$cant=round($aux, 2);
-			}
-			
-			$stoc=$this->ds[0][0]+$cant;
-			$sql="UPDATE productos SET stockmen = $stoc WHERE idprod=$proid";
-			
-     $nm_select = $sql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-	}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
+    $this->nmgp_refresh_fields[] = 'valorpar_';
+    $this->NM_ajax_changed['valorpar_'] = true;
+    $this->NM_ajax_force_values = true;
 }
-function calcula_descuento()
+if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
 {
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$sql="select otro from productos where idprod=$this->idpro_ ";
- 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-$desc=substr($this->ds , 4);settype ($desc,"integer");
-if($desc==1)
-	{
-	$sql="select otro2 from productos where idprod=$this->idpro_ ";
-	 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-	$tasades=substr($this->ds , 5);
-	$this->adicional1_ =$tasades;
-	$tasades=$tasades/100;$tasades=round($tasades, 2);
-	$this->descuento_ =$this->valorpar_ *$tasades;
-	
-	}
-else{$this->descuento_ =0;$this->adicional1_ =0;}
+    $this->nmgp_refresh_fields[] = 'cantidad_';
+    $this->NM_ajax_changed['cantidad_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
+{
+    $this->nmgp_refresh_fields[] = 'valorunit_';
+    $this->NM_ajax_changed['valorunit_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
+{
+    $this->nmgp_refresh_fields[] = 'adicional_';
+    $this->NM_ajax_changed['adicional_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
+{
+    $this->nmgp_refresh_fields[] = 'iva_';
+    $this->NM_ajax_changed['iva_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($this->NM_ajax_force_values)
+{
+    $this->ajax_return_values();
+}
+$this->NM_ajax_info['event_field'] = 'adicional';
+form_detallepedido_CW_pack_ajax_response();
+exit;
+
+
 $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
 }
 function calcula_iva()
 {
 $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
   
-$sql="select idiva from productos where idprod=$this->idpro_ ";
- 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-$idiva=substr($this->ds , 5);
-$sql="select trifa from iva where idiva=$idiva";
- 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-$iva=substr($this->ds , 5);
-$this->adicional_ =$iva;
-$iva=$iva/100;
-$iva=$iva+1;
-$parc_desc=$this->valorpar_ -$this->descuento_ ;
-$b=$parc_desc/$iva; $b=round($b, 0);
-$this->iva_ =$parc_desc-$b;
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function calcula_parcial()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$ca=$this->cantidad_ ;
-$vu=$this->valorunit_ ;
-$this->valorpar_ =$ca*$vu;
-
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function cantidad__onBlur()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_sabor_pedido)) {$this->sc_temp_sabor_pedido = (isset($_SESSION['sabor_pedido'])) ? $_SESSION['sabor_pedido'] : "";}
-if (!isset($this->sc_temp_talla_pedido)) {$this->sc_temp_talla_pedido = (isset($_SESSION['talla_pedido'])) ? $_SESSION['talla_pedido'] : "";}
-if (!isset($this->sc_temp_color_pedido)) {$this->sc_temp_color_pedido = (isset($_SESSION['color_pedido'])) ? $_SESSION['color_pedido'] : "";}
-  
-$original_idpro_ = $this->idpro_;
-$original_valorunit_ = $this->valorunit_;
-$original_cantidad_ = $this->cantidad_;
-$original_stockubica_ = $this->stockubica_;
-$original_adicional1_ = $this->adicional1_;
-$original_descuento_ = $this->descuento_;
-$original_valorpar_ = $this->valorpar_;
-$original_adicional_ = $this->adicional_;
-$original_iva_ = $this->iva_;
-$original_idbod_ = $this->idbod_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_factor_ = $this->factor_;
-$original_unidad_ = $this->unidad_;
-
-$idp=$this->idpro_ ;
-$col=$this->sc_temp_color_pedido;
-$tal=$this->sc_temp_talla_pedido;
-$sa=$this->sc_temp_sabor_pedido;
- 
-      $nm_select = "select colores, tallas, sabores from productos where idprod=$idp"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->dat = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->dat[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dat = false;
-          $this->dat_erro = $this->Db->ErrorMsg();
-      } 
-;	
-if($this->dat[0][0]=='SI')
-	{
-	if($col>0)
-		{
-		if($this->dat[0][1]=='SI')
-			{
-			if($tal>0)
-				{
-				if($this->dat[0][2]=='SI')
-					{
-					if($sa>0)
-						{
-						goto et;
-						}
-					else
-						{
-						$this->sc_set_focus('sabor');
-						$this->nm_mens_alert[] = "Por favor seleccione el SABOR!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Por favor seleccione el SABOR!"); }goto et2;
-						}
-					}
-				else
-					{
-					goto et;
-					}
-				}
-			else
-				{
-				$this->sc_set_focus('tallas');
-				$this->nm_mens_alert[] = "Por favor seleccione la TALLA!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Por favor seleccione la TALLA!"); }goto et2;
-				}
-			}
-		else
-			{
-			if($this->dat[0][2]=='SI')
-					{
-					if($sa>0)
-						{
-						goto et;
-						}
-					else
-						{
-						$this->sc_set_focus('sabor');
-						$this->nm_mens_alert[] = "Por favor seleccione el SABOR!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Por favor seleccione el SABOR!"); }goto et2;
-						}
-					}
-				else
-					{
-					goto et;
-					}
-			}
-		}
-	else
-			{
-			$this->sc_set_focus('colores');
-			$this->nm_mens_alert[] = "Por favor seleccione el COLOR!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Por favor seleccione el COLOR!"); }goto et2;
-			}
-	}
-else
-	{
-	if($this->dat[0][1]=='SI')
-			{
-			if($tal>0)
-				{
-				if($this->dat[0][2]=='SI')
-					{
-					if($sa>0)
-						{
-						goto et;
-						}
-					else
-						{
-						$this->sc_set_focus('sabor');
-						$this->nm_mens_alert[] = "Por favor seleccione el SABOR!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Por favor seleccione el SABOR!"); }goto et2;
-						}
-					}
-				else
-					{
-					goto et;
-					}
-				}
-			else
-				{
-				$this->sc_set_focus('tallas');
-				$this->nm_mens_alert[] = "Por favor seleccione la TALLA!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Por favor seleccione la TALLA!"); }goto et2;
-				}
-			}
-		else
-			{
-			if($this->dat[0][2]=='SI')
-					{
-					if($sa>0)
-						{
-						goto et;
-						}
-					else
-						{
-						$this->sc_set_focus('sabor');
-						$this->nm_mens_alert[] = "Por favor seleccione el SABOR!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Por favor seleccione el SABOR!"); }goto et2;
-						}
-					}
-				else
-					{
-					goto et;
-					}
-			}
-	}
-
-et:;
-	if($this->valorunit_ =="")
-		{
-		$this->sc_set_focus('valorunit');
-		}
-	else
-		{
-		$gru=$this->consulta_grupo();
-		if($gru==0)
-		{
-		if(!empty($this->idpro_ ))
-			{
-			if($this->cantidad_ ==0.00 or (empty($this->cantidad_ )))
-				{
-				
- if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
- if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Ingrese una cantidad Válida!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
- {
-  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
-   $sErrorIndex = 'geral_form_detallepedido_CW';
-  } elseif ('submit_form' == $this->NM_ajax_opcao) {
-   $sErrorIndex = 'geral_form_detallepedido_CW';
-  } else {
-   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
-  }
-  $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Ingrese una cantidad Válida!";
- }
-;
-				$this->sc_set_focus('colores');
-				}
-			else
-				{
-				$this->sc_set_focus('valorunit');
-				$this->calcula_parcial();
-				$this->calcula_descuento();
-				$this->calcula_iva();
-				$this->ver_stock();
-				}
-			}
-		}
-else
-	{
-	$this->sc_set_focus('valorunit');
-	$this->calcula_parcial();
-	$this->calcula_descuento();
-	$this->calcula_iva();
-	$this->ver_stock();
-	}
-		}
-goto et3;
-et2:;
-$this->cantidad_ =0;
-
-et3:;
-
-
-
-
-if (isset($this->sc_temp_color_pedido)) { $_SESSION['color_pedido'] = $this->sc_temp_color_pedido;}
-if (isset($this->sc_temp_talla_pedido)) { $_SESSION['talla_pedido'] = $this->sc_temp_talla_pedido;}
-if (isset($this->sc_temp_sabor_pedido)) { $_SESSION['sabor_pedido'] = $this->sc_temp_sabor_pedido;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_idpro_ = $this->idpro_;
-$modificado_valorunit_ = $this->valorunit_;
-$modificado_cantidad_ = $this->cantidad_;
-$modificado_stockubica_ = $this->stockubica_;
-$modificado_adicional1_ = $this->adicional1_;
-$modificado_descuento_ = $this->descuento_;
-$modificado_valorpar_ = $this->valorpar_;
-$modificado_adicional_ = $this->adicional_;
-$modificado_iva_ = $this->iva_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_factor_ = $this->factor_;
-$modificado_unidad_ = $this->unidad_;
-$this->nm_formatar_campos('idpro_', 'valorunit_', 'cantidad_', 'stockubica_', 'adicional1_', 'descuento_', 'valorpar_', 'adicional_', 'iva_', 'idbod_', 'unidadmayor_', 'factor_', 'unidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
-{
-    $this->nmgp_refresh_fields[] = 'valorunit_';
-    $this->NM_ajax_changed['valorunit_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
-{
-    $this->nmgp_refresh_fields[] = 'cantidad_';
-    $this->NM_ajax_changed['cantidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional1_ !== $modificado_adicional1_ || isset($this->nmgp_cmp_readonly['adicional1_']) || (isset($bFlagRead_adicional1_) && $bFlagRead_adicional1_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional1_';
-    $this->NM_ajax_changed['adicional1_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_descuento_ !== $modificado_descuento_ || isset($this->nmgp_cmp_readonly['descuento_']) || (isset($bFlagRead_descuento_) && $bFlagRead_descuento_))
-{
-    $this->nmgp_refresh_fields[] = 'descuento_';
-    $this->NM_ajax_changed['descuento_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
-{
-    $this->nmgp_refresh_fields[] = 'valorpar_';
-    $this->NM_ajax_changed['valorpar_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional_';
-    $this->NM_ajax_changed['adicional_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
-{
-    $this->nmgp_refresh_fields[] = 'iva_';
-    $this->NM_ajax_changed['iva_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidad_ !== $modificado_unidad_ || isset($this->nmgp_cmp_readonly['unidad_']) || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))
-{
-    $this->nmgp_refresh_fields[] = 'unidad_';
-    $this->NM_ajax_changed['unidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'cantidad';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function cantidad__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$original_cantidad_ = $this->cantidad_;
-$original_stockubica_ = $this->stockubica_;
-
-
-
-
-$modificado_cantidad_ = $this->cantidad_;
-$modificado_stockubica_ = $this->stockubica_;
-$this->nm_formatar_campos('cantidad_', 'stockubica_');
-$this->nmgp_refresh_fields = array();
-if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
-{
-    $this->nmgp_refresh_fields[] = 'cantidad_';
-    $this->NM_ajax_changed['cantidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'cantidad';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-
-
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function cantidad__onFocus()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_edit_cantidad)) {$this->sc_temp_edit_cantidad = (isset($_SESSION['edit_cantidad'])) ? $_SESSION['edit_cantidad'] : "";}
-if (!isset($this->sc_temp_sw)) {$this->sc_temp_sw = (isset($_SESSION['sw'])) ? $_SESSION['sw'] : "";}
-  
-$original_cantidad_ = $this->cantidad_;
-
-if($this->sc_temp_sw==0){
-if($this->cantidad_ !=0){$this->sc_temp_edit_cantidad=$this->cantidad_ ;}
-	$this->sc_temp_sw=1;
-	}
-
-
-if (isset($this->sc_temp_sw)) { $_SESSION['sw'] = $this->sc_temp_sw;}
-if (isset($this->sc_temp_edit_cantidad)) { $_SESSION['edit_cantidad'] = $this->sc_temp_edit_cantidad;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_cantidad_ = $this->cantidad_;
-$this->nm_formatar_campos('cantidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
-{
-    $this->nmgp_refresh_fields[] = 'cantidad_';
-    $this->NM_ajax_changed['cantidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'cantidad';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function cod_barras__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_par_numero)) {$this->sc_temp_par_numero = (isset($_SESSION['par_numero'])) ? $_SESSION['par_numero'] : "";}
-  
-$original_cod_barras_ = $this->cod_barras_;
-$original_idpro_ = $this->idpro_;
-$original_cantidad_ = $this->cantidad_;
-$original_valorunit_ = $this->valorunit_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_costop_ = $this->costop_;
-$original_factor_ = $this->factor_;
-$original_idbod_ = $this->idbod_;
-$original_observ_ = $this->observ_;
-$original_adicional1_ = $this->adicional1_;
-$original_descuento_ = $this->descuento_;
-$original_valorpar_ = $this->valorpar_;
-$original_adicional_ = $this->adicional_;
-$original_iva_ = $this->iva_;
-$original_colores_ = $this->colores_;
-$original_tallas_ = $this->tallas_;
-$original_sabor_ = $this->sabor_;
-
-$vCod=$this->cod_barras_ ;
- 
-      $nm_select = "select idprod FROM productos where codigobar =$vCod"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->dse = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->dse[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dse = false;
-          $this->dse_erro = $this->Db->ErrorMsg();
-      } 
-;
-if(isset($this->dse[0][0]))
-	{
-	$this->idpro_ =$this->dse[0][0];
-	}
-else
-	{
-	echo "PRODUCTO NO REGISTRADO";
-	}
-
-
-$this->maneja_cts();
-$fac=$this->sc_temp_par_numero;
-$sql1="select idcli from pedidos where idpedido=$fac";
- 
-      $nm_select = $sql1; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->des = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->des = false;
-          $this->des_erro = $this->Db->ErrorMsg();
-      } 
-;
-$ter=substr($this->des , 5);
-
-$sql2="select listaprecios from terceros where idtercero=$ter";
- 
-      $nm_select = $sql2; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->dec = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dec = false;
-          $this->dec_erro = $this->Db->ErrorMsg();
-      } 
-;
-$lis=substr($this->dec , 12); 
-$this->cantidad_ =1;
-$vprecioeditable = "NO";
-$vidgrup = 1;
-
-$sql="select unidmaymen, costomen, recmayamen, preciomen, preciofull,precio_editable,idgrup from productos where idprod=$this->idpro_ ";
-	 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->data = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->data = false;
-          $this->data_erro = $this->Db->ErrorMsg();
-      } 
-;
-	if($this->data[0][0]=='SI')
-		{
-		$this->valorunit_ =$this->data[0][4];
-		$this->unidadmayor_ ="SI";
-		
-		}
-	else
-		{
-		$this->valorunit_ =$this->data[0][3];
-		$this->unidadmayor_ ="NO";
-		}
-		
-		$this->costop_ =$this->data[0][1];
-		$this->factor_ =$this->data[0][2];
-	
-		$vprecioeditable = $this->data[0][5];
-		$vidgrup = $this->data[0][6];
-
-if($vprecioeditable=="SI")
-{
-	$this->sc_field_readonly("valorunit_", 'off', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
-}
-else
-{
-	$this->sc_field_readonly("valorunit_", 'on', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
-}
-
-if($vidgrup==1)
-{
-	$this->idbod_  = "";
-	$this->sc_set_focus('idbod');
-}
-else
-{
-	$this->idbod_  = 1;
-	$this->observ_ ='00';
-	$this->sc_set_focus('cantidad');
-}
-
-
-$this->calcula_parcial();
-$this->calcula_descuento();
-$this->calcula_iva();
-
-
-
-if (isset($this->sc_temp_par_numero)) { $_SESSION['par_numero'] = $this->sc_temp_par_numero;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_cod_barras_ = $this->cod_barras_;
-$modificado_idpro_ = $this->idpro_;
-$modificado_cantidad_ = $this->cantidad_;
-$modificado_valorunit_ = $this->valorunit_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_costop_ = $this->costop_;
-$modificado_factor_ = $this->factor_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_observ_ = $this->observ_;
-$modificado_adicional1_ = $this->adicional1_;
-$modificado_descuento_ = $this->descuento_;
-$modificado_valorpar_ = $this->valorpar_;
-$modificado_adicional_ = $this->adicional_;
-$modificado_iva_ = $this->iva_;
-$modificado_colores_ = $this->colores_;
-$modificado_tallas_ = $this->tallas_;
-$modificado_sabor_ = $this->sabor_;
-$this->nm_formatar_campos('cod_barras_', 'idpro_', 'cantidad_', 'valorunit_', 'unidadmayor_', 'costop_', 'factor_', 'idbod_', 'observ_', 'adicional1_', 'descuento_', 'valorpar_', 'adicional_', 'iva_', 'colores_', 'tallas_', 'sabor_');
-$this->nmgp_refresh_fields = array();
-if ($original_cod_barras_ !== $modificado_cod_barras_ || isset($this->nmgp_cmp_readonly['cod_barras_']) || (isset($bFlagRead_cod_barras_) && $bFlagRead_cod_barras_))
-{
-    $this->nmgp_refresh_fields[] = 'cod_barras_';
-    $this->NM_ajax_changed['cod_barras_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
-{
-    $this->nmgp_refresh_fields[] = 'cantidad_';
-    $this->NM_ajax_changed['cantidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
-{
-    $this->nmgp_refresh_fields[] = 'valorunit_';
-    $this->NM_ajax_changed['valorunit_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_costop_ !== $modificado_costop_ || isset($this->nmgp_cmp_readonly['costop_']) || (isset($bFlagRead_costop_) && $bFlagRead_costop_))
-{
-    $this->nmgp_refresh_fields[] = 'costop_';
-    $this->NM_ajax_changed['costop_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_observ_ !== $modificado_observ_ || isset($this->nmgp_cmp_readonly['observ_']) || (isset($bFlagRead_observ_) && $bFlagRead_observ_))
-{
-    $this->nmgp_refresh_fields[] = 'observ_';
-    $this->NM_ajax_changed['observ_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional1_ !== $modificado_adicional1_ || isset($this->nmgp_cmp_readonly['adicional1_']) || (isset($bFlagRead_adicional1_) && $bFlagRead_adicional1_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional1_';
-    $this->NM_ajax_changed['adicional1_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_descuento_ !== $modificado_descuento_ || isset($this->nmgp_cmp_readonly['descuento_']) || (isset($bFlagRead_descuento_) && $bFlagRead_descuento_))
-{
-    $this->nmgp_refresh_fields[] = 'descuento_';
-    $this->NM_ajax_changed['descuento_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
-{
-    $this->nmgp_refresh_fields[] = 'valorpar_';
-    $this->NM_ajax_changed['valorpar_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional_';
-    $this->NM_ajax_changed['adicional_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
-{
-    $this->nmgp_refresh_fields[] = 'iva_';
-    $this->NM_ajax_changed['iva_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_colores_ !== $modificado_colores_ || isset($this->nmgp_cmp_readonly['colores_']) || (isset($bFlagRead_colores_) && $bFlagRead_colores_))
-{
-    $this->nmgp_refresh_fields[] = 'colores_';
-    $this->NM_ajax_changed['colores_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_tallas_ !== $modificado_tallas_ || isset($this->nmgp_cmp_readonly['tallas_']) || (isset($bFlagRead_tallas_) && $bFlagRead_tallas_))
-{
-    $this->nmgp_refresh_fields[] = 'tallas_';
-    $this->NM_ajax_changed['tallas_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_sabor_ !== $modificado_sabor_ || isset($this->nmgp_cmp_readonly['sabor_']) || (isset($bFlagRead_sabor_) && $bFlagRead_sabor_))
-{
-    $this->nmgp_refresh_fields[] = 'sabor_';
-    $this->NM_ajax_changed['sabor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'cod';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function colores__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_color_pedido)) {$this->sc_temp_color_pedido = (isset($_SESSION['color_pedido'])) ? $_SESSION['color_pedido'] : "";}
-  
-$original_colores_ = $this->colores_;
-$original_idpro_ = $this->idpro_;
-$original_idbod_ = $this->idbod_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_factor_ = $this->factor_;
-$original_stockubica_ = $this->stockubica_;
-$original_unidad_ = $this->unidad_;
-
-$this->ver_stock();
-$this->sc_set_focus('tallas');
-if($this->colores_ >0)
-	{
-	$this->sc_temp_color_pedido=$this->colores_ ;
-	}
-
-
-if (isset($this->sc_temp_color_pedido)) { $_SESSION['color_pedido'] = $this->sc_temp_color_pedido;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_colores_ = $this->colores_;
-$modificado_idpro_ = $this->idpro_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_factor_ = $this->factor_;
-$modificado_stockubica_ = $this->stockubica_;
-$modificado_unidad_ = $this->unidad_;
-$this->nm_formatar_campos('colores_', 'idpro_', 'idbod_', 'unidadmayor_', 'factor_', 'stockubica_', 'unidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_colores_ !== $modificado_colores_ || isset($this->nmgp_cmp_readonly['colores_']) || (isset($bFlagRead_colores_) && $bFlagRead_colores_))
-{
-    $this->nmgp_refresh_fields[] = 'colores_';
-    $this->NM_ajax_changed['colores_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidad_ !== $modificado_unidad_ || isset($this->nmgp_cmp_readonly['unidad_']) || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))
-{
-    $this->nmgp_refresh_fields[] = 'unidad_';
-    $this->NM_ajax_changed['unidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'colores';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function consulta_grupo()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$idpr=$this->idpro_ ;
- 
-      $nm_select = "select idgrup from productos where idprod=$idpr"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->dat = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->dat[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dat = false;
-          $this->dat_erro = $this->Db->ErrorMsg();
-      } 
-;
-if (isset($this->dat[0][0]))
-	{
-	if ($this->dat[0][0]==1)
-		{
-		$se=1;
-		goto eti2;		
-		}
-	else
-		{
-		goto eti1;
-		}
-	}
-else
-	{
-	goto eti1;
-	}
-eti1:;
-$se=0;
-eti2:;
-return $se;
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function idbod__onBlur()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$original_idpro_ = $this->idpro_;
-$original_idbod_ = $this->idbod_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_factor_ = $this->factor_;
-$original_stockubica_ = $this->stockubica_;
-$original_unidad_ = $this->unidad_;
-
-$this->ver_stock();
-
-$modificado_idpro_ = $this->idpro_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_factor_ = $this->factor_;
-$modificado_stockubica_ = $this->stockubica_;
-$modificado_unidad_ = $this->unidad_;
-$this->nm_formatar_campos('idpro_', 'idbod_', 'unidadmayor_', 'factor_', 'stockubica_', 'unidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidad_ !== $modificado_unidad_ || isset($this->nmgp_cmp_readonly['unidad_']) || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))
-{
-    $this->nmgp_refresh_fields[] = 'unidad_';
-    $this->NM_ajax_changed['unidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'idbod';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-
-
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function idbod__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$original_idpro_ = $this->idpro_;
-$original_idbod_ = $this->idbod_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_factor_ = $this->factor_;
-$original_stockubica_ = $this->stockubica_;
-$original_unidad_ = $this->unidad_;
-
-$this->ver_stock();
-$this->sc_set_focus('observ');
-
-$modificado_idpro_ = $this->idpro_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_factor_ = $this->factor_;
-$modificado_stockubica_ = $this->stockubica_;
-$modificado_unidad_ = $this->unidad_;
-$this->nm_formatar_campos('idpro_', 'idbod_', 'unidadmayor_', 'factor_', 'stockubica_', 'unidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidad_ !== $modificado_unidad_ || isset($this->nmgp_cmp_readonly['unidad_']) || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))
-{
-    $this->nmgp_refresh_fields[] = 'unidad_';
-    $this->NM_ajax_changed['unidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'idbod';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-
-
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function idpro__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_par_numero)) {$this->sc_temp_par_numero = (isset($_SESSION['par_numero'])) ? $_SESSION['par_numero'] : "";}
-  
-$original_cantidad_ = $this->cantidad_;
-$original_idpro_ = $this->idpro_;
-$original_valorunit_ = $this->valorunit_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_costop_ = $this->costop_;
-$original_factor_ = $this->factor_;
-$original_idbod_ = $this->idbod_;
-$original_observ_ = $this->observ_;
-$original_adicional1_ = $this->adicional1_;
-$original_descuento_ = $this->descuento_;
-$original_valorpar_ = $this->valorpar_;
-$original_adicional_ = $this->adicional_;
-$original_iva_ = $this->iva_;
-$original_colores_ = $this->colores_;
-$original_tallas_ = $this->tallas_;
-$original_sabor_ = $this->sabor_;
-
-$this->maneja_cts();
-$fac=$this->sc_temp_par_numero;
-$sql1="select idcli from pedidos where idpedido=$fac";
- 
-      $nm_select = $sql1; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->des = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->des = false;
-          $this->des_erro = $this->Db->ErrorMsg();
-      } 
-;
-$ter=substr($this->des , 5);
-
-$sql2="select listaprecios from terceros where idtercero=$ter";
- 
-      $nm_select = $sql2; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->dec = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dec = false;
-          $this->dec_erro = $this->Db->ErrorMsg();
-      } 
-;
-$lis=substr($this->dec , 12); 
-$this->cantidad_ =1;
-$vprecioeditable = "NO";
-$vidgrup = 1;
-
- 
-      $nm_select = "select activo from productos where idprod='".$this->idpro_ ."'"; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->dsp = array();
-     if ($this->idpro_ != "")
-     { 
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->dsp[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dsp = false;
-          $this->dsp_erro = $this->Db->ErrorMsg();
-      } 
-     } 
-;
-if(isset($this->dsp[0][0]) and $this->dsp[0][0]=='SI')
-	{
-	$sql="select unidmaymen, costomen, recmayamen, preciomen, preciofull,precio_editable,idgrup from productos where idprod=$this->idpro_ ";
-	 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->data = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->data = false;
-          $this->data_erro = $this->Db->ErrorMsg();
-      } 
-;
-	if($this->data[0][0]=='SI')
-		{
-		$this->valorunit_ =$this->data[0][4];
-		$this->unidadmayor_ ="SI";
-		
-		}
-	else
-		{
-		$this->valorunit_ =$this->data[0][3];
-		$this->unidadmayor_ ="NO";
-		}
-		
-		$this->costop_ =$this->data[0][1];
-		$this->factor_ =$this->data[0][2];
-	
-		$vprecioeditable = $this->data[0][5];
-		$vidgrup = $this->data[0][6];
-
-	if($vprecioeditable=="SI")
-	{
-		$this->sc_field_readonly("valorunit_", 'off', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
-	}
-	else
-	{
-		$this->sc_field_readonly("valorunit_", 'on', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
-	}
-
-	if($vidgrup==1)
-	{
-		$this->idbod_  = "";
-		$this->sc_set_focus('idbod');
-	}
-	else
-	{
-		$this->idbod_  = 1;
-		$this->observ_ ='00';
-		$this->sc_set_focus('cantidad');
-	}
-
-
-	$this->calcula_parcial();
-	$this->calcula_descuento();
-	$this->calcula_iva();
-	}
-else
-	{
-	echo "PRODUCTO ESTÁ INACTIVO!!";
-	}
-
-
-
-
-
-
-if (isset($this->sc_temp_par_numero)) { $_SESSION['par_numero'] = $this->sc_temp_par_numero;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_cantidad_ = $this->cantidad_;
-$modificado_idpro_ = $this->idpro_;
-$modificado_valorunit_ = $this->valorunit_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_costop_ = $this->costop_;
-$modificado_factor_ = $this->factor_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_observ_ = $this->observ_;
-$modificado_adicional1_ = $this->adicional1_;
-$modificado_descuento_ = $this->descuento_;
-$modificado_valorpar_ = $this->valorpar_;
-$modificado_adicional_ = $this->adicional_;
-$modificado_iva_ = $this->iva_;
-$modificado_colores_ = $this->colores_;
-$modificado_tallas_ = $this->tallas_;
-$modificado_sabor_ = $this->sabor_;
-$this->nm_formatar_campos('cantidad_', 'idpro_', 'valorunit_', 'unidadmayor_', 'costop_', 'factor_', 'idbod_', 'observ_', 'adicional1_', 'descuento_', 'valorpar_', 'adicional_', 'iva_', 'colores_', 'tallas_', 'sabor_');
-$this->nmgp_refresh_fields = array();
-if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
-{
-    $this->nmgp_refresh_fields[] = 'cantidad_';
-    $this->NM_ajax_changed['cantidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
-{
-    $this->nmgp_refresh_fields[] = 'valorunit_';
-    $this->NM_ajax_changed['valorunit_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_costop_ !== $modificado_costop_ || isset($this->nmgp_cmp_readonly['costop_']) || (isset($bFlagRead_costop_) && $bFlagRead_costop_))
-{
-    $this->nmgp_refresh_fields[] = 'costop_';
-    $this->NM_ajax_changed['costop_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_observ_ !== $modificado_observ_ || isset($this->nmgp_cmp_readonly['observ_']) || (isset($bFlagRead_observ_) && $bFlagRead_observ_))
-{
-    $this->nmgp_refresh_fields[] = 'observ_';
-    $this->NM_ajax_changed['observ_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional1_ !== $modificado_adicional1_ || isset($this->nmgp_cmp_readonly['adicional1_']) || (isset($bFlagRead_adicional1_) && $bFlagRead_adicional1_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional1_';
-    $this->NM_ajax_changed['adicional1_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_descuento_ !== $modificado_descuento_ || isset($this->nmgp_cmp_readonly['descuento_']) || (isset($bFlagRead_descuento_) && $bFlagRead_descuento_))
-{
-    $this->nmgp_refresh_fields[] = 'descuento_';
-    $this->NM_ajax_changed['descuento_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
-{
-    $this->nmgp_refresh_fields[] = 'valorpar_';
-    $this->NM_ajax_changed['valorpar_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional_';
-    $this->NM_ajax_changed['adicional_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
-{
-    $this->nmgp_refresh_fields[] = 'iva_';
-    $this->NM_ajax_changed['iva_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_colores_ !== $modificado_colores_ || isset($this->nmgp_cmp_readonly['colores_']) || (isset($bFlagRead_colores_) && $bFlagRead_colores_))
-{
-    $this->nmgp_refresh_fields[] = 'colores_';
-    $this->NM_ajax_changed['colores_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_tallas_ !== $modificado_tallas_ || isset($this->nmgp_cmp_readonly['tallas_']) || (isset($bFlagRead_tallas_) && $bFlagRead_tallas_))
-{
-    $this->nmgp_refresh_fields[] = 'tallas_';
-    $this->NM_ajax_changed['tallas_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_sabor_ !== $modificado_sabor_ || isset($this->nmgp_cmp_readonly['sabor_']) || (isset($bFlagRead_sabor_) && $bFlagRead_sabor_))
-{
-    $this->nmgp_refresh_fields[] = 'sabor_';
-    $this->NM_ajax_changed['sabor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'idpro';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function maneja_cts()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_sabor_pedido)) {$this->sc_temp_sabor_pedido = (isset($_SESSION['sabor_pedido'])) ? $_SESSION['sabor_pedido'] : "";}
-if (!isset($this->sc_temp_talla_pedido)) {$this->sc_temp_talla_pedido = (isset($_SESSION['talla_pedido'])) ? $_SESSION['talla_pedido'] : "";}
-if (!isset($this->sc_temp_color_pedido)) {$this->sc_temp_color_pedido = (isset($_SESSION['color_pedido'])) ? $_SESSION['color_pedido'] : "";}
-  
-$sql2="select colores, tallas, sabores from productos where idprod=$this->idpro_ ";
- 
-      $nm_select = $sql2; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->dt = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->dt[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dt = false;
-          $this->dt_erro = $this->Db->ErrorMsg();
-      } 
-;
-if(isset($this->dt[0][0]))
-	{
-	if ($this->dt[0][0]=='NO')
-		{
-		$this->colores_ =0;
-		$this->nmgp_cmp_hidden["colores_"] = "off"; $this->NM_ajax_info['fieldDisplay']['colores_'] = 'off';
-		}
-	else
-		{
-		$this->nmgp_cmp_hidden["colores_"] = "on"; $this->NM_ajax_info['fieldDisplay']['colores_'] = 'on';
-		}
-	if ($this->dt[0][1]=='NO')
-		{
-		$this->tallas_ =0;
-		$this->nmgp_cmp_hidden["tallas_"] = "off"; $this->NM_ajax_info['fieldDisplay']['tallas_'] = 'off';
-		}
-	else
-		{
-		$this->nmgp_cmp_hidden["tallas_"] = "on"; $this->NM_ajax_info['fieldDisplay']['tallas_'] = 'on';
-		}
-	if ($this->dt[0][2]=='NO')
-		{
-		$this->sabor_ =0;
-		$this->nmgp_cmp_hidden["sabor_"] = "off"; $this->NM_ajax_info['fieldDisplay']['sabor_'] = 'off';
-		}
-	else
-		{
-		$this->nmgp_cmp_hidden["sabor_"] = "on"; $this->NM_ajax_info['fieldDisplay']['sabor_'] = 'on';
-		}
-	$this->sc_temp_color_pedido=$this->colores_ ;
-	$this->sc_temp_talla_pedido=$this->tallas_ ;
-	$this->sc_temp_sabor_pedido=$this->sabor_ ;
-	$this->ver_stock();
-	}
-if (isset($this->sc_temp_color_pedido)) { $_SESSION['color_pedido'] = $this->sc_temp_color_pedido;}
-if (isset($this->sc_temp_talla_pedido)) { $_SESSION['talla_pedido'] = $this->sc_temp_talla_pedido;}
-if (isset($this->sc_temp_sabor_pedido)) { $_SESSION['sabor_pedido'] = $this->sc_temp_sabor_pedido;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function observ__onBlur()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$original_observ_ = $this->observ_;
-
-if($this->observ_ =='')
-	{
-	
- if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
- if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡No ingresó número de ticket válido!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
- {
-  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
-   $sErrorIndex = 'geral_form_detallepedido_CW';
-  } elseif ('submit_form' == $this->NM_ajax_opcao) {
-   $sErrorIndex = 'geral_form_detallepedido_CW';
-  } else {
-   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
-  }
-  $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡No ingresó número de ticket válido!";
- }
-;
-	$this->sc_set_focus('observ');
-	}
-
-$modificado_observ_ = $this->observ_;
-$this->nm_formatar_campos('observ_');
-$this->nmgp_refresh_fields = array();
-if ($original_observ_ !== $modificado_observ_ || isset($this->nmgp_cmp_readonly['observ_']) || (isset($bFlagRead_observ_) && $bFlagRead_observ_))
-{
-    $this->nmgp_refresh_fields[] = 'observ_';
-    $this->NM_ajax_changed['observ_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'observ';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function observ__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_par_numero)) {$this->sc_temp_par_numero = (isset($_SESSION['par_numero'])) ? $_SESSION['par_numero'] : "";}
-  
-$original_observ_ = $this->observ_;
-
-$this->sc_set_focus('valorunit');
-
-     $nm_select ="update pedidos set observaciones='$this->observ_' where idpedido=$this->sc_temp_par_numero"; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-
-
-if (isset($this->sc_temp_par_numero)) { $_SESSION['par_numero'] = $this->sc_temp_par_numero;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_observ_ = $this->observ_;
-$this->nm_formatar_campos('observ_');
-$this->nmgp_refresh_fields = array();
-if ($original_observ_ !== $modificado_observ_ || isset($this->nmgp_cmp_readonly['observ_']) || (isset($bFlagRead_observ_) && $bFlagRead_observ_))
-{
-    $this->nmgp_refresh_fields[] = 'observ_';
-    $this->NM_ajax_changed['observ_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'observ';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function sabor__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_sabor_pedido)) {$this->sc_temp_sabor_pedido = (isset($_SESSION['sabor_pedido'])) ? $_SESSION['sabor_pedido'] : "";}
-  
-$original_sabor_ = $this->sabor_;
-$original_idpro_ = $this->idpro_;
-$original_idbod_ = $this->idbod_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_factor_ = $this->factor_;
-$original_stockubica_ = $this->stockubica_;
-$original_unidad_ = $this->unidad_;
-
-$this->ver_stock();
-$this->sc_set_focus('idbod');
-if($this->sabor_ >0)
-	{
-	$this->sc_temp_sabor_pedido=$this->sabor_ ;
-	}
-
-
-if (isset($this->sc_temp_sabor_pedido)) { $_SESSION['sabor_pedido'] = $this->sc_temp_sabor_pedido;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_sabor_ = $this->sabor_;
-$modificado_idpro_ = $this->idpro_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_factor_ = $this->factor_;
-$modificado_stockubica_ = $this->stockubica_;
-$modificado_unidad_ = $this->unidad_;
-$this->nm_formatar_campos('sabor_', 'idpro_', 'idbod_', 'unidadmayor_', 'factor_', 'stockubica_', 'unidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_sabor_ !== $modificado_sabor_ || isset($this->nmgp_cmp_readonly['sabor_']) || (isset($bFlagRead_sabor_) && $bFlagRead_sabor_))
-{
-    $this->nmgp_refresh_fields[] = 'sabor_';
-    $this->NM_ajax_changed['sabor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidad_ !== $modificado_unidad_ || isset($this->nmgp_cmp_readonly['unidad_']) || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))
-{
-    $this->nmgp_refresh_fields[] = 'unidad_';
-    $this->NM_ajax_changed['unidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'sabor';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function tallas__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_talla_pedido)) {$this->sc_temp_talla_pedido = (isset($_SESSION['talla_pedido'])) ? $_SESSION['talla_pedido'] : "";}
-  
-$original_tallas_ = $this->tallas_;
-$original_idpro_ = $this->idpro_;
-$original_idbod_ = $this->idbod_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_factor_ = $this->factor_;
-$original_stockubica_ = $this->stockubica_;
-$original_unidad_ = $this->unidad_;
-
-$this->ver_stock();
-$this->sc_set_focus('sabor');
-if($this->tallas_ >0)
-	{
-	$this->sc_temp_talla_pedido=$this->tallas_ ;
-	}
-
-
-if (isset($this->sc_temp_talla_pedido)) { $_SESSION['talla_pedido'] = $this->sc_temp_talla_pedido;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_tallas_ = $this->tallas_;
-$modificado_idpro_ = $this->idpro_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_factor_ = $this->factor_;
-$modificado_stockubica_ = $this->stockubica_;
-$modificado_unidad_ = $this->unidad_;
-$this->nm_formatar_campos('tallas_', 'idpro_', 'idbod_', 'unidadmayor_', 'factor_', 'stockubica_', 'unidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_tallas_ !== $modificado_tallas_ || isset($this->nmgp_cmp_readonly['tallas_']) || (isset($bFlagRead_tallas_) && $bFlagRead_tallas_))
-{
-    $this->nmgp_refresh_fields[] = 'tallas_';
-    $this->NM_ajax_changed['tallas_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidad_ !== $modificado_unidad_ || isset($this->nmgp_cmp_readonly['unidad_']) || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))
-{
-    $this->nmgp_refresh_fields[] = 'unidad_';
-    $this->NM_ajax_changed['unidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'tallas';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function unidadmayor__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_par_numero)) {$this->sc_temp_par_numero = (isset($_SESSION['par_numero'])) ? $_SESSION['par_numero'] : "";}
-  
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_idpro_ = $this->idpro_;
-$original_valorunit_ = $this->valorunit_;
-$original_adicional1_ = $this->adicional1_;
-$original_descuento_ = $this->descuento_;
-$original_valorpar_ = $this->valorpar_;
-$original_adicional_ = $this->adicional_;
-$original_iva_ = $this->iva_;
-$original_cantidad_ = $this->cantidad_;
-$original_idbod_ = $this->idbod_;
-$original_factor_ = $this->factor_;
-$original_stockubica_ = $this->stockubica_;
-$original_unidad_ = $this->unidad_;
-
-$fac=$this->sc_temp_par_numero;
-$sql1="select idcli from pedidos where idpedido=$fac";
- 
-      $nm_select = $sql1; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->des = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->des = false;
-          $this->des_erro = $this->Db->ErrorMsg();
-      } 
-;
-$ter=substr($this->des , 5);
-$sql2="select listaprecios from terceros where idtercero=$ter";
- 
-      $nm_select = $sql2; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->dec = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dec = false;
-          $this->dec_erro = $this->Db->ErrorMsg();
-      } 
-;
-$lis=substr($this->dec , 12); 
-
-if($this->unidadmayor_ =='NO')
-{
-	switch ($lis)
-		{
-		case 1:
-		$sql="select preciomen from productos where idprod=$this->idpro_ ";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->data = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->data = false;
-          $this->data_erro = $this->Db->ErrorMsg();
-      } 
-;
-		if(!empty($this->data[0][0]))
-			{
-			$this->valorunit_ =$this->data[0][0];
-			$this->sc_set_focus('cantidad');
-			}
-		
-		break;
-
-		case 2:
-		$sql="select preciomen2 from productos where idprod=$this->idpro_ ";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->data = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->data = false;
-          $this->data_erro = $this->Db->ErrorMsg();
-      } 
-;
-		if(!empty($this->data[0][0]))
-			{
-			$this->valorunit_ =$this->data[0][0];
-			$this->sc_set_focus('cantidad');
-			}
-		
-		break;
-
-		case 3:
-		$sql="select preciomen3 from productos where idprod=$this->idpro_ ";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->data = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->data = false;
-          $this->data_erro = $this->Db->ErrorMsg();
-      } 
-;
-		if(!empty($this->data[0][0]))
-			{
-			$this->valorunit_ =$this->data[0][0];
-			$this->sc_set_focus('cantidad');
-			}
-		break;
-
-		}
-}
-else
-	{
-	switch ($lis)
-		{
-		case 1:
-		$sql="select unidmaymen, preciomen, preciofull from productos where idprod=$this->idpro_ ";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->data = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->data = false;
-          $this->data_erro = $this->Db->ErrorMsg();
-      } 
-;
-		if($this->data[0][0]=='SI')
-			{
-			$this->valorunit_ =$this->data[0][2];
-			$this->sc_set_focus('cantidad');
-			}
-		else
-			{
-			$this->unidadmayor_ ="NO";
-			$this->nm_mens_alert[] = 'PRODUCTO NO MANEJA UNIDAD MAYOR/MENOR'; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert('PRODUCTO NO MANEJA UNIDAD MAYOR/MENOR'); }$this->valorunit_ =$this->data[0][1];
-			$this->sc_set_focus('cantidad');
-			}
-		
-		break;
-
-		case 2:
-		$sql="select unidmaymen, preciomen2, precio2  from productos where idprod=$this->idpro_ ";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->data = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->data = false;
-          $this->data_erro = $this->Db->ErrorMsg();
-      } 
-;
-		if($this->data[0][0]=='SI')
-			{
-			$this->valorunit_ =$this->data[0][2];
-			$this->sc_set_focus('cantidad');
-			}
-		else
-			{
-			$this->unidadmayor_ ="NO";
-			$this->nm_mens_alert[] = 'PRODUCTO NO MANEJA UNIDAD MAYOR/MENOR'; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert('PRODUCTO NO MANEJA UNIDAD MAYOR/MENOR'); }$this->valorunit_ =$this->data[0][1];
-			$this->sc_set_focus('cantidad');
-			}
-		break;
-
-		case 3:
-		$sql="select unidmaymen, preciomen3, preciomay from productos where idprod=$this->idpro_ ";
-		 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->data = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->data = false;
-          $this->data_erro = $this->Db->ErrorMsg();
-      } 
-;
-		if($this->data[0][0]=='SI')
-			{
-			$this->valorunit_ =$this->data[0][2];
-			$this->sc_set_focus('cantidad');
-			}
-		else
-			{
-			$this->unidadmayor_ ="NO";
-			$this->nm_mens_alert[] = 'PRODUCTO NO MANEJA UNIDAD MAYOR/MENOR'; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert('PRODUCTO NO MANEJA UNIDAD MAYOR/MENOR'); }$this->valorunit_ =$this->data[0][1];
-			$this->sc_set_focus('cantidad');
-			}
-		break;
-
-		}
-	}
-$this->calcula_parcial();
-$this->calcula_descuento();
-$this->calcula_iva();
-$this->ver_stock();
-
-
-
-if (isset($this->sc_temp_par_numero)) { $_SESSION['par_numero'] = $this->sc_temp_par_numero;}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_idpro_ = $this->idpro_;
-$modificado_valorunit_ = $this->valorunit_;
-$modificado_adicional1_ = $this->adicional1_;
-$modificado_descuento_ = $this->descuento_;
-$modificado_valorpar_ = $this->valorpar_;
-$modificado_adicional_ = $this->adicional_;
-$modificado_iva_ = $this->iva_;
-$modificado_cantidad_ = $this->cantidad_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_factor_ = $this->factor_;
-$modificado_stockubica_ = $this->stockubica_;
-$modificado_unidad_ = $this->unidad_;
-$this->nm_formatar_campos('unidadmayor_', 'idpro_', 'valorunit_', 'adicional1_', 'descuento_', 'valorpar_', 'adicional_', 'iva_', 'cantidad_', 'idbod_', 'factor_', 'stockubica_', 'unidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
-{
-    $this->nmgp_refresh_fields[] = 'valorunit_';
-    $this->NM_ajax_changed['valorunit_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional1_ !== $modificado_adicional1_ || isset($this->nmgp_cmp_readonly['adicional1_']) || (isset($bFlagRead_adicional1_) && $bFlagRead_adicional1_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional1_';
-    $this->NM_ajax_changed['adicional1_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_descuento_ !== $modificado_descuento_ || isset($this->nmgp_cmp_readonly['descuento_']) || (isset($bFlagRead_descuento_) && $bFlagRead_descuento_))
-{
-    $this->nmgp_refresh_fields[] = 'descuento_';
-    $this->NM_ajax_changed['descuento_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
-{
-    $this->nmgp_refresh_fields[] = 'valorpar_';
-    $this->NM_ajax_changed['valorpar_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional_';
-    $this->NM_ajax_changed['adicional_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
-{
-    $this->nmgp_refresh_fields[] = 'iva_';
-    $this->NM_ajax_changed['iva_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
-{
-    $this->nmgp_refresh_fields[] = 'cantidad_';
-    $this->NM_ajax_changed['cantidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidad_ !== $modificado_unidad_ || isset($this->nmgp_cmp_readonly['unidad_']) || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))
-{
-    $this->nmgp_refresh_fields[] = 'unidad_';
-    $this->NM_ajax_changed['unidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'unidadmayor';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-}
-function update_master()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$sql="SELECT sum(valorpar), sum(iva), sum(descuento) FROM detallepedido WHERE idpedid=$this->idpedid_ ";
- 
-      $nm_select = $sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->ds = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-$total=$this->ds[0][0]-$this->ds[0][2];
-$iva=$this->ds[0][1];
-$sub=$total-$iva;
-$desc=$this->ds[0][2];
-
-if(!empty($this->ds[0][0]))
-{
-	
-     $nm_select ="UPDATE pedidos SET total=$total, saldo=$total, subtotal=$sub, valoriva=$iva, adicional=$desc WHERE idpedido=$this->idpedid_ "; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-	$total= number_format($total,0);
-	$iva= number_format($iva,0);
-	$sub= number_format($sub,0);
-	$desc= number_format($desc,0);
-
-	$this->sc_master_value('total', $total);
-	$this->sc_master_value('saldo', $total);
-	$this->sc_master_value('subtotal', $sub);
-	$this->sc_master_value('valoriva', $iva);
-	$this->sc_master_value('adicional', $desc);
-}
-
-else
-	{
-	
-     $nm_select ="UPDATE pedidos SET total=0, saldo=0, subtotal=0, valoriva=0, adicional=0 WHERE idpedido=$this->idpedid_ "; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                form_detallepedido_CW_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-	
-	$this->sc_master_value('total', 0);
-	$this->sc_master_value('saldo', 0);
-	$this->sc_master_value('subtotal', 0);
-	$this->sc_master_value('valoriva', 0);
-	$this->sc_master_value('adicional', 0);
-	}
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function valorunit__onBlur()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$original_observ_ = $this->observ_;
-$original_valorunit_ = $this->valorunit_;
-
-if($this->observ_ !='')
-	{
-	if($this->valorunit_ <1)
-		{
-		
- if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
- if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡No ingresó precio válido!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
- {
-  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
-   $sErrorIndex = 'geral_form_detallepedido_CW';
-  } elseif ('submit_form' == $this->NM_ajax_opcao) {
-   $sErrorIndex = 'geral_form_detallepedido_CW';
-  } else {
-   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
-  }
-  $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡No ingresó precio válido!";
- }
-;
-		$this->sc_set_focus('valorunit');
-		}
-	}
-
-$modificado_observ_ = $this->observ_;
-$modificado_valorunit_ = $this->valorunit_;
-$this->nm_formatar_campos('observ_', 'valorunit_');
-$this->nmgp_refresh_fields = array();
-if ($original_observ_ !== $modificado_observ_ || isset($this->nmgp_cmp_readonly['observ_']) || (isset($bFlagRead_observ_) && $bFlagRead_observ_))
-{
-    $this->nmgp_refresh_fields[] = 'observ_';
-    $this->NM_ajax_changed['observ_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
-{
-    $this->nmgp_refresh_fields[] = 'valorunit_';
-    $this->NM_ajax_changed['valorunit_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'valorunit';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function valorunit__onChange()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-  
-$original_valorunit_ = $this->valorunit_;
-$original_costop_ = $this->costop_;
-$original_idpro_ = $this->idpro_;
-$original_adicional1_ = $this->adicional1_;
-$original_descuento_ = $this->descuento_;
-$original_valorpar_ = $this->valorpar_;
-$original_adicional_ = $this->adicional_;
-$original_iva_ = $this->iva_;
-$original_cantidad_ = $this->cantidad_;
-$original_idbod_ = $this->idbod_;
-$original_unidadmayor_ = $this->unidadmayor_;
-$original_factor_ = $this->factor_;
-$original_stockubica_ = $this->stockubica_;
-$original_unidad_ = $this->unidad_;
-
-if($this->valorunit_ <$this->costop_ )
-	{
-	
- if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
- if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "¡Valor unitario inferior al costo!";
- if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
- {
-  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
-   $sErrorIndex = 'geral_form_detallepedido_CW';
-  } elseif ('submit_form' == $this->NM_ajax_opcao) {
-   $sErrorIndex = 'geral_form_detallepedido_CW';
-  } else {
-   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
-  }
-  $this->NM_ajax_info['errList'][$sErrorIndex][] = "¡Valor unitario inferior al costo!";
- }
-;
-	$this->sc_set_focus('valorunit');
-	}
-$this->calcula_parcial();
-$this->calcula_descuento();
-$this->calcula_iva();
-$this->ver_stock();
-
-$modificado_valorunit_ = $this->valorunit_;
-$modificado_costop_ = $this->costop_;
-$modificado_idpro_ = $this->idpro_;
-$modificado_adicional1_ = $this->adicional1_;
-$modificado_descuento_ = $this->descuento_;
-$modificado_valorpar_ = $this->valorpar_;
-$modificado_adicional_ = $this->adicional_;
-$modificado_iva_ = $this->iva_;
-$modificado_cantidad_ = $this->cantidad_;
-$modificado_idbod_ = $this->idbod_;
-$modificado_unidadmayor_ = $this->unidadmayor_;
-$modificado_factor_ = $this->factor_;
-$modificado_stockubica_ = $this->stockubica_;
-$modificado_unidad_ = $this->unidad_;
-$this->nm_formatar_campos('valorunit_', 'costop_', 'idpro_', 'adicional1_', 'descuento_', 'valorpar_', 'adicional_', 'iva_', 'cantidad_', 'idbod_', 'unidadmayor_', 'factor_', 'stockubica_', 'unidad_');
-$this->nmgp_refresh_fields = array();
-if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
-{
-    $this->nmgp_refresh_fields[] = 'valorunit_';
-    $this->NM_ajax_changed['valorunit_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_costop_ !== $modificado_costop_ || isset($this->nmgp_cmp_readonly['costop_']) || (isset($bFlagRead_costop_) && $bFlagRead_costop_))
-{
-    $this->nmgp_refresh_fields[] = 'costop_';
-    $this->NM_ajax_changed['costop_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
-{
-    $this->nmgp_refresh_fields[] = 'idpro_';
-    $this->NM_ajax_changed['idpro_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional1_ !== $modificado_adicional1_ || isset($this->nmgp_cmp_readonly['adicional1_']) || (isset($bFlagRead_adicional1_) && $bFlagRead_adicional1_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional1_';
-    $this->NM_ajax_changed['adicional1_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_descuento_ !== $modificado_descuento_ || isset($this->nmgp_cmp_readonly['descuento_']) || (isset($bFlagRead_descuento_) && $bFlagRead_descuento_))
-{
-    $this->nmgp_refresh_fields[] = 'descuento_';
-    $this->NM_ajax_changed['descuento_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
-{
-    $this->nmgp_refresh_fields[] = 'valorpar_';
-    $this->NM_ajax_changed['valorpar_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
-{
-    $this->nmgp_refresh_fields[] = 'adicional_';
-    $this->NM_ajax_changed['adicional_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
-{
-    $this->nmgp_refresh_fields[] = 'iva_';
-    $this->NM_ajax_changed['iva_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
-{
-    $this->nmgp_refresh_fields[] = 'cantidad_';
-    $this->NM_ajax_changed['cantidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
-{
-    $this->nmgp_refresh_fields[] = 'idbod_';
-    $this->NM_ajax_changed['idbod_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidadmayor_ !== $modificado_unidadmayor_ || isset($this->nmgp_cmp_readonly['unidadmayor_']) || (isset($bFlagRead_unidadmayor_) && $bFlagRead_unidadmayor_))
-{
-    $this->nmgp_refresh_fields[] = 'unidadmayor_';
-    $this->NM_ajax_changed['unidadmayor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_factor_ !== $modificado_factor_ || isset($this->nmgp_cmp_readonly['factor_']) || (isset($bFlagRead_factor_) && $bFlagRead_factor_))
-{
-    $this->nmgp_refresh_fields[] = 'factor_';
-    $this->NM_ajax_changed['factor_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_stockubica_ !== $modificado_stockubica_ || isset($this->nmgp_cmp_readonly['stockubica_']) || (isset($bFlagRead_stockubica_) && $bFlagRead_stockubica_))
-{
-    $this->nmgp_refresh_fields[] = 'stockubica_';
-    $this->NM_ajax_changed['stockubica_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_unidad_ !== $modificado_unidad_ || isset($this->nmgp_cmp_readonly['unidad_']) || (isset($bFlagRead_unidad_) && $bFlagRead_unidad_))
-{
-    $this->nmgp_refresh_fields[] = 'unidad_';
-    $this->NM_ajax_changed['unidad_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($this->NM_ajax_force_values)
-{
-    $this->ajax_return_values();
-}
-$this->NM_ajax_info['event_field'] = 'valorunit';
-form_detallepedido_CW_pack_ajax_response();
-exit;
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
-}
-function ver_stock()
-{
-$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
-if (!isset($this->sc_temp_sabor_pedido)) {$this->sc_temp_sabor_pedido = (isset($_SESSION['sabor_pedido'])) ? $_SESSION['sabor_pedido'] : "";}
-if (!isset($this->sc_temp_talla_pedido)) {$this->sc_temp_talla_pedido = (isset($_SESSION['talla_pedido'])) ? $_SESSION['talla_pedido'] : "";}
-if (!isset($this->sc_temp_color_pedido)) {$this->sc_temp_color_pedido = (isset($_SESSION['color_pedido'])) ? $_SESSION['color_pedido'] : "";}
-  
-$gru=$this->consulta_grupo();
-if($gru==0)
-	{
-if(!empty($this->idpro_ ))
-	{
-$sql="SELECT SUM(cantidad) AS cantidad FROM inventario
-WHERE idpro = $this->idpro_  AND idbod=$this->idbod_  and colores=$this->sc_temp_color_pedido and tallas=$this->sc_temp_talla_pedido and sabor=$this->sc_temp_sabor_pedido";
+$sql="select trifa from iva where idiva = (select idiva from productos where idprod='".$this->idpro_ ."')";
  
       $nm_select = $sql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -11904,70 +7333,577 @@ WHERE idpro = $this->idpro_  AND idbod=$this->idbod_  and colores=$this->sc_temp
 ;
 if(isset($this->ds[0][0]))
 	{
+	$this->adicional_ =$this->ds[0][0];
+	$iva=$this->adicional_ /100;
+	$iva=$iva+1;
+	$parc_desc=$this->valorpar_ ;
+	$b=$parc_desc/$iva; 
+	$b=round($b, 2);
+	$this->iva_ =$parc_desc-$b;
+	}
+else
+	{
+	$this->iva_  = 0;
+	}
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
+}
+function calcula_parcial()
+{
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
+  
+$this->valorpar_  = $this->cantidad_  * $this->valorunit_ ;
+
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
+}
+function calculaimp()
+{
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
+  
+$iva=$this->adicional_ /100;
+$iva=$iva+1;
+$parc_desc=$this->valorpar_ ;
+$b=$parc_desc/$iva; 
+$b=round($b, 2);
+$this->iva_ =$parc_desc-$b;
+
+
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
+}
+function cantidad__onChange()
+{
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
+  
+$original_valorpar_ = $this->valorpar_;
+$original_cantidad_ = $this->cantidad_;
+$original_valorunit_ = $this->valorunit_;
+$original_adicional_ = $this->adicional_;
+$original_iva_ = $this->iva_;
+
+$this->calcula_parcial();
+$this->calculaimp();
+
+$modificado_valorpar_ = $this->valorpar_;
+$modificado_cantidad_ = $this->cantidad_;
+$modificado_valorunit_ = $this->valorunit_;
+$modificado_adicional_ = $this->adicional_;
+$modificado_iva_ = $this->iva_;
+$this->nm_formatar_campos('valorpar_', 'cantidad_', 'valorunit_', 'adicional_', 'iva_');
+$this->nmgp_refresh_fields = array();
+if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
+{
+    $this->nmgp_refresh_fields[] = 'valorpar_';
+    $this->NM_ajax_changed['valorpar_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
+{
+    $this->nmgp_refresh_fields[] = 'cantidad_';
+    $this->NM_ajax_changed['cantidad_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
+{
+    $this->nmgp_refresh_fields[] = 'valorunit_';
+    $this->NM_ajax_changed['valorunit_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
+{
+    $this->nmgp_refresh_fields[] = 'adicional_';
+    $this->NM_ajax_changed['adicional_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
+{
+    $this->nmgp_refresh_fields[] = 'iva_';
+    $this->NM_ajax_changed['iva_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($this->NM_ajax_force_values)
+{
+    $this->ajax_return_values();
+}
+$this->NM_ajax_info['event_field'] = 'cantidad';
+form_detallepedido_CW_pack_ajax_response();
+exit;
+
+
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
+}
+function codbarra__onChange()
+{
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
+  
+$original_codbarra_ = $this->codbarra_;
+$original_idpro_ = $this->idpro_;
+$original_cantidad_ = $this->cantidad_;
+$original_valorunit_ = $this->valorunit_;
+$original_idbod_ = $this->idbod_;
+$original_observ_ = $this->observ_;
+$original_adicional_ = $this->adicional_;
+$original_valorpar_ = $this->valorpar_;
+$original_iva_ = $this->iva_;
+
+$sql_pr = "select idprod FROM productos where codigobar ='".$this->codbarra_ ."'";
+ 
+      $nm_select = $sql_pr; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dse = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dse[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dse = false;
+          $this->dse_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->dse[0][0]))
+	{
+	$this->idpro_ 		=$this->dse[0][0];
+	$this->cantidad_ 	=1;
+	$sql1="select preciomen, precio_editable,idgrup from productos where idprod='".$this->idpro_ ."'";
+	 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->data = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->data = false;
+          $this->data_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->data[0][0]))
+		{
+		$this->valorunit_ 		 =$this->data[0][0];
+		$this->unidadmayor_ 	 ="NO";
+		$vprecioeditable = $this->data[0][1];
+		$vidgrup 		 = $this->data[0][2];
+		if($vprecioeditable=="SI")
+			{
+			$this->sc_field_readonly("valorunit_", 'off', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
+			}
+		else
+			{
+			$this->sc_field_readonly("valorunit_", 'on', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
+			}
+		if($vidgrup==1)
+			{
+			$this->idbod_  = "";
+			$this->observ_  = "";
+			}
+		else
+			{
+			$this->idbod_  = 1;
+			$this->observ_ ='00';
+			}
+
+		}
+	$this->calcula_parcial();
+	$this->calcula_iva();
+	}
+else
+	{
+	$this->nm_mens_alert[] = "No se encuentra coincidencia!!!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("No se encuentra coincidencia!!!"); }$this->codbarra_  = '';
+	}
+
+
+
+
+$modificado_codbarra_ = $this->codbarra_;
+$modificado_idpro_ = $this->idpro_;
+$modificado_cantidad_ = $this->cantidad_;
+$modificado_valorunit_ = $this->valorunit_;
+$modificado_idbod_ = $this->idbod_;
+$modificado_observ_ = $this->observ_;
+$modificado_adicional_ = $this->adicional_;
+$modificado_valorpar_ = $this->valorpar_;
+$modificado_iva_ = $this->iva_;
+$this->nm_formatar_campos('codbarra_', 'idpro_', 'cantidad_', 'valorunit_', 'idbod_', 'observ_', 'adicional_', 'valorpar_', 'iva_');
+$this->nmgp_refresh_fields = array();
+if ($original_codbarra_ !== $modificado_codbarra_ || isset($this->nmgp_cmp_readonly['codbarra_']) || (isset($bFlagRead_codbarra_) && $bFlagRead_codbarra_))
+{
+    $this->nmgp_refresh_fields[] = 'codbarra_';
+    $this->NM_ajax_changed['codbarra_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
+{
+    $this->nmgp_refresh_fields[] = 'idpro_';
+    $this->NM_ajax_changed['idpro_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
+{
+    $this->nmgp_refresh_fields[] = 'cantidad_';
+    $this->NM_ajax_changed['cantidad_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
+{
+    $this->nmgp_refresh_fields[] = 'valorunit_';
+    $this->NM_ajax_changed['valorunit_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
+{
+    $this->nmgp_refresh_fields[] = 'idbod_';
+    $this->NM_ajax_changed['idbod_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_observ_ !== $modificado_observ_ || isset($this->nmgp_cmp_readonly['observ_']) || (isset($bFlagRead_observ_) && $bFlagRead_observ_))
+{
+    $this->nmgp_refresh_fields[] = 'observ_';
+    $this->NM_ajax_changed['observ_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
+{
+    $this->nmgp_refresh_fields[] = 'adicional_';
+    $this->NM_ajax_changed['adicional_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
+{
+    $this->nmgp_refresh_fields[] = 'valorpar_';
+    $this->NM_ajax_changed['valorpar_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
+{
+    $this->nmgp_refresh_fields[] = 'iva_';
+    $this->NM_ajax_changed['iva_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($this->NM_ajax_force_values)
+{
+    $this->ajax_return_values();
+}
+$this->NM_ajax_info['event_field'] = 'codbarra';
+form_detallepedido_CW_pack_ajax_response();
+exit;
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
+}
+function idpro__onChange()
+{
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
+  
+$original_cantidad_ = $this->cantidad_;
+$original_idpro_ = $this->idpro_;
+$original_valorunit_ = $this->valorunit_;
+$original_idbod_ = $this->idbod_;
+$original_observ_ = $this->observ_;
+$original_adicional_ = $this->adicional_;
+$original_valorpar_ = $this->valorpar_;
+$original_iva_ = $this->iva_;
+
+	$this->cantidad_ 	=1;
+	$sql1="select preciomen, precio_editable,idgrup from productos where idprod='".$this->idpro_ ."'";
+	 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->data = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->data[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->data = false;
+          $this->data_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->data[0][0]))
+		{
+		$this->valorunit_ 		 =$this->data[0][0];
+		$this->unidadmayor_ 	 ="NO";
+		$vprecioeditable = $this->data[0][1];
+		$vidgrup 		 = $this->data[0][2];
+		if($vprecioeditable=="SI")
+			{
+			$this->sc_field_readonly("valorunit_", 'off', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
+			}
+		else
+			{
+			$this->sc_field_readonly("valorunit_", 'on', (isset($sc_seq_vert) ? $sc_seq_vert : ''));
+			}
+		if($vidgrup==1)
+			{
+			$this->idbod_  = "";
+			$this->observ_  = "";
+			}
+		else
+			{
+			$this->idbod_  = 1;
+			$this->observ_ ='00';
+			}
+		$this->calcula_parcial();
+		$this->calcula_iva();
+		}
+
+
+$modificado_cantidad_ = $this->cantidad_;
+$modificado_idpro_ = $this->idpro_;
+$modificado_valorunit_ = $this->valorunit_;
+$modificado_idbod_ = $this->idbod_;
+$modificado_observ_ = $this->observ_;
+$modificado_adicional_ = $this->adicional_;
+$modificado_valorpar_ = $this->valorpar_;
+$modificado_iva_ = $this->iva_;
+$this->nm_formatar_campos('cantidad_', 'idpro_', 'valorunit_', 'idbod_', 'observ_', 'adicional_', 'valorpar_', 'iva_');
+$this->nmgp_refresh_fields = array();
+if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
+{
+    $this->nmgp_refresh_fields[] = 'cantidad_';
+    $this->NM_ajax_changed['cantidad_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_idpro_ !== $modificado_idpro_ || isset($this->nmgp_cmp_readonly['idpro_']) || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))
+{
+    $this->nmgp_refresh_fields[] = 'idpro_';
+    $this->NM_ajax_changed['idpro_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
+{
+    $this->nmgp_refresh_fields[] = 'valorunit_';
+    $this->NM_ajax_changed['valorunit_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_idbod_ !== $modificado_idbod_ || isset($this->nmgp_cmp_readonly['idbod_']) || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))
+{
+    $this->nmgp_refresh_fields[] = 'idbod_';
+    $this->NM_ajax_changed['idbod_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_observ_ !== $modificado_observ_ || isset($this->nmgp_cmp_readonly['observ_']) || (isset($bFlagRead_observ_) && $bFlagRead_observ_))
+{
+    $this->nmgp_refresh_fields[] = 'observ_';
+    $this->NM_ajax_changed['observ_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
+{
+    $this->nmgp_refresh_fields[] = 'adicional_';
+    $this->NM_ajax_changed['adicional_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
+{
+    $this->nmgp_refresh_fields[] = 'valorpar_';
+    $this->NM_ajax_changed['valorpar_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
+{
+    $this->nmgp_refresh_fields[] = 'iva_';
+    $this->NM_ajax_changed['iva_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($this->NM_ajax_force_values)
+{
+    $this->ajax_return_values();
+}
+$this->NM_ajax_info['event_field'] = 'idpro';
+form_detallepedido_CW_pack_ajax_response();
+exit;
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
+}
+function update_master()
+{
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
+  
+$sql="SELECT sum(valorpar), sum(iva) FROM detallepedido WHERE idpedid='".$this->idpedid_ ."'";
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds = false;
+          $this->ds_erro = $this->Db->ErrorMsg();
+      } 
+;
+$total=$this->ds[0][0];
+$iva=$this->ds[0][1];
+$sub=$total-$iva;
+$desc=0;
+
 if(!empty($this->ds[0][0]))
 	{
-	if($this->unidadmayor_ =='NO' and $this->factor_ >0)
-		{
-		$this->stockubica_ =$this->ds[0][0]*$this->factor_ ;
-		 
-      $nm_select = "select unimen from productos where idprod=$this->idpro_ "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+	
+     $nm_select ="UPDATE pedidos SET total='".$total."', saldo='".$total."', subtotal='".$sub."', valoriva='".$iva."', adicional='".$desc."' WHERE idpedido='".$this->idpedid_ ."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->dt = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dt = false;
-          $this->dt_erro = $this->Db->ErrorMsg();
-      } 
-;
-		$this->unidad_ =substr($this->dt , 6);
-		}
-	else if($this->unidadmayor_ =='SI')
-		{
-		$this->stockubica_ =$this->ds[0][0];
-		 
-      $nm_select = "select unimay from productos where idprod=$this->idpro_ "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->dt = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dt = false;
-          $this->dt_erro = $this->Db->ErrorMsg();
-      } 
-;
-		$this->unidad_ =substr($this->dt , 6);
-		}
-	if($this->unidadmayor_ =='NO' and $this->factor_ ==0)
-		{
-		$this->stockubica_ =$this->ds[0][0];
-		 
-      $nm_select = "select unimen from productos where idprod=$this->idpro_ "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->dt = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dt = false;
-          $this->dt_erro = $this->Db->ErrorMsg();
-      } 
-;
-		$this->unidad_ =substr($this->dt , 6);
-		}
-	}else
-		{
-		$this->stockubica_ =0;
-		$this->unidad_ ='';
-		}
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_detallepedido_CW_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	$total= number_format($total,0);
+	$iva= number_format($iva,0);
+	$sub= number_format($sub,0);
+	$desc= number_format($desc,0);
+
+	$this->sc_master_value('total', $total);
+	$this->sc_master_value('saldo', $total);
+	$this->sc_master_value('subtotal', $sub);
+	$this->sc_master_value('valoriva', $iva);
+	$this->sc_master_value('adicional', $desc);
 	}
+
+else
+	{
+	
+     $nm_select ="UPDATE pedidos SET total=0, saldo=0, subtotal=0, valoriva=0, adicional=0 WHERE idpedido='".$this->idpedid_ ."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_detallepedido_CW_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	
+	$this->sc_master_value('total', 0);
+	$this->sc_master_value('saldo', 0);
+	$this->sc_master_value('subtotal', 0);
+	$this->sc_master_value('valoriva', 0);
+	$this->sc_master_value('adicional', 0);
 	}
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
 }
-if (isset($this->sc_temp_color_pedido)) { $_SESSION['color_pedido'] = $this->sc_temp_color_pedido;}
-if (isset($this->sc_temp_talla_pedido)) { $_SESSION['talla_pedido'] = $this->sc_temp_talla_pedido;}
-if (isset($this->sc_temp_sabor_pedido)) { $_SESSION['sabor_pedido'] = $this->sc_temp_sabor_pedido;}
+function valorunit__onChange()
+{
+$_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'on';
+  
+$original_valorpar_ = $this->valorpar_;
+$original_cantidad_ = $this->cantidad_;
+$original_valorunit_ = $this->valorunit_;
+$original_adicional_ = $this->adicional_;
+$original_iva_ = $this->iva_;
+
+$this->calcula_parcial();
+$this->calculaimp();
+
+$modificado_valorpar_ = $this->valorpar_;
+$modificado_cantidad_ = $this->cantidad_;
+$modificado_valorunit_ = $this->valorunit_;
+$modificado_adicional_ = $this->adicional_;
+$modificado_iva_ = $this->iva_;
+$this->nm_formatar_campos('valorpar_', 'cantidad_', 'valorunit_', 'adicional_', 'iva_');
+$this->nmgp_refresh_fields = array();
+if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
+{
+    $this->nmgp_refresh_fields[] = 'valorpar_';
+    $this->NM_ajax_changed['valorpar_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
+{
+    $this->nmgp_refresh_fields[] = 'cantidad_';
+    $this->NM_ajax_changed['cantidad_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
+{
+    $this->nmgp_refresh_fields[] = 'valorunit_';
+    $this->NM_ajax_changed['valorunit_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_adicional_ !== $modificado_adicional_ || isset($this->nmgp_cmp_readonly['adicional_']) || (isset($bFlagRead_adicional_) && $bFlagRead_adicional_))
+{
+    $this->nmgp_refresh_fields[] = 'adicional_';
+    $this->NM_ajax_changed['adicional_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
+{
+    $this->nmgp_refresh_fields[] = 'iva_';
+    $this->NM_ajax_changed['iva_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($this->NM_ajax_force_values)
+{
+    $this->ajax_return_values();
+}
+$this->NM_ajax_info['event_field'] = 'valorunit';
+form_detallepedido_CW_pack_ajax_response();
+exit;
+
+
 $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
 }
 function fGestionaStock($iddet,$tipo,$tipodoc)
@@ -13021,7 +8957,7 @@ $_SESSION['scriptcase']['form_detallepedido_CW']['contr_erro'] = 'off';
     function form_highlight_search_quicksearch(&$result, $field, $value)
     {
         $searchOk = false;
-        if ('SC_all_Cmp' == $this->nmgp_fast_search && in_array($field, array("iddet_", "numfac_", "idpro_", "idbod_", "cantidad_", "valorunit_", "valorpar_", "iva_", "descuento_", "adicional_", "adicional1_", "adicional2"))) {
+        if ('SC_all_Cmp' == $this->nmgp_fast_search && in_array($field, array("iddet_", "idpedid_", "numfac_", "remision_", "idpro_", "unidadmayor_", "factor_", "idbod_", "costop_", "cantidad_", "valorunit_", "valorpar_", "iva_", "descuento_", "adicional_", "adicional1_", "devuelto_", "colores_", "tallas_", "sabor_", "estado_comanda_", "usuario_comanda_", "tercero_comanda_", "hora_inicio_", "hora_final_", "observ_", "cerrado_", "obs_", "descr_"))) {
             $searchOk = true;
         }
         elseif ($field == $this->nmgp_fast_search && in_array($field, array(""))) {
@@ -13494,74 +9430,59 @@ function sc_file_size($file, $format = false)
      }
  } // new_date_format
 
-   function Form_lookup_colores_()
+   function Form_lookup_idpro_()
    {
 $nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']))
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']))
 {
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']); 
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']); 
 }
 else
 {
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'] = array(); 
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array(); 
 }
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']))
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']))
    {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_']); 
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_']); 
    }
    else
    {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'] = array(); 
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'] = array(); 
     }
 
    $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
+   $old_value_idpedid_ = $this->idpedid_;
    $old_value_cantidad_ = $this->cantidad_;
    $old_value_valorunit_ = $this->valorunit_;
    $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
    $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
+   $old_value_adicional_ = $this->adicional_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
+   $unformatted_value_idpedid_ = $this->idpedid_;
    $unformatted_value_cantidad_ = $this->cantidad_;
    $unformatted_value_valorunit_ = $this->valorunit_;
    $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
    $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
+   $unformatted_value_adicional_ = $this->adicional_;
 
-   $nm_comando = "SELECT f.idcol, c.color  FROM colorxproducto f left join colores c on f.idcol=c.idcolores where idpr=$this->idpro_ ORDER BY f.idcol";
+   $nm_comando = "SELECT idprod, concat(codigobar, ' - ',nompro)  FROM productos  ORDER BY codigobar, nompro";
 
    $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
+   $this->idpedid_ = $old_value_idpedid_;
    $this->cantidad_ = $old_value_cantidad_;
    $this->valorunit_ = $old_value_valorunit_;
    $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
    $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
+   $this->adicional_ = $old_value_adicional_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -13574,7 +9495,7 @@ if ($this->idpro_ != "")
               $rs->fields[0] = (string)$rs->fields[0];
               $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
               $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_colores_'][] = $rs->fields[0];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_idpro_'][] = $rs->fields[0];
               $rs->MoveNext() ; 
        } 
        $rs->Close() ; 
@@ -13585,201 +9506,6 @@ if ($this->idpro_ != "")
        exit; 
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   return $todo;
-
-   }
-   function Form_lookup_tallas_()
-   {
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'] = array(); 
-}
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'] = array(); 
-    }
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   $nm_comando = "SELECT f.idta, t.tamaño FROM tallaxproducto f left join tallas t on f.idta=t.idtallas where idpr=$this->idpro_ ORDER BY f.idta";
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_tallas_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   return $todo;
-
-   }
-   function Form_lookup_sabor_()
-   {
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'] = array(); 
-}
-if ($this->idpro_ != "")
-{ 
-   $this->nm_clear_val("idpro_");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'] = array(); 
-    }
-
-   $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
-   $old_value_cantidad_ = $this->cantidad_;
-   $old_value_valorunit_ = $this->valorunit_;
-   $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
-   $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
-   $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_valorunit_ = $this->valorunit_;
-   $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
-   $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
-
-   $nm_comando = "SELECT f.idsa, t.tamaño FROM saborxproducto f left join tallas t on f.idsa=t.idtallas where idpr=$this->idpro_ and tallasabor='S' ORDER BY f.idsa";
-
-   $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
-   $this->cantidad_ = $old_value_cantidad_;
-   $this->valorunit_ = $old_value_valorunit_;
-   $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
-   $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['Lookup_sabor_'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
    $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
    $todo  = explode("?@?", $todox) ; 
    return $todo;
@@ -13812,44 +9538,32 @@ else
     }
 
    $old_value_iddet_ = $this->iddet_;
-   $old_value_stockubica_ = $this->stockubica_;
+   $old_value_idpedid_ = $this->idpedid_;
    $old_value_cantidad_ = $this->cantidad_;
    $old_value_valorunit_ = $this->valorunit_;
    $old_value_valorpar_ = $this->valorpar_;
-   $old_value_descuento_ = $this->descuento_;
-   $old_value_adicional_ = $this->adicional_;
-   $old_value_adicional1_ = $this->adicional1_;
-   $old_value_factor_ = $this->factor_;
    $old_value_iva_ = $this->iva_;
-   $old_value_costop_ = $this->costop_;
+   $old_value_adicional_ = $this->adicional_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_iddet_ = $this->iddet_;
-   $unformatted_value_stockubica_ = $this->stockubica_;
+   $unformatted_value_idpedid_ = $this->idpedid_;
    $unformatted_value_cantidad_ = $this->cantidad_;
    $unformatted_value_valorunit_ = $this->valorunit_;
    $unformatted_value_valorpar_ = $this->valorpar_;
-   $unformatted_value_descuento_ = $this->descuento_;
-   $unformatted_value_adicional_ = $this->adicional_;
-   $unformatted_value_adicional1_ = $this->adicional1_;
-   $unformatted_value_factor_ = $this->factor_;
    $unformatted_value_iva_ = $this->iva_;
-   $unformatted_value_costop_ = $this->costop_;
+   $unformatted_value_adicional_ = $this->adicional_;
 
-   $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY bodega";
+   $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY idbodega DESC";
 
    $this->iddet_ = $old_value_iddet_;
-   $this->stockubica_ = $old_value_stockubica_;
+   $this->idpedid_ = $old_value_idpedid_;
    $this->cantidad_ = $old_value_cantidad_;
    $this->valorunit_ = $old_value_valorunit_;
    $this->valorpar_ = $old_value_valorpar_;
-   $this->descuento_ = $old_value_descuento_;
-   $this->adicional_ = $old_value_adicional_;
-   $this->adicional1_ = $old_value_adicional1_;
-   $this->factor_ = $old_value_factor_;
    $this->iva_ = $old_value_iva_;
-   $this->costop_ = $old_value_costop_;
+   $this->adicional_ = $old_value_adicional_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -13876,15 +9590,6 @@ else
    $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
    $todo  = explode("?@?", $todox) ; 
    return $todo;
-
-   }
-   function Form_lookup_unidadmayor_()
-   {
-       $nmgp_def_dados  = "";
-       $nmgp_def_dados .= "NO?#?NO?#??@?";
-       $nmgp_def_dados .= "SI?#?SI?#??@?";
-       $todo = explode("?@?", $nmgp_def_dados);
-       return $todo;
 
    }
    function SC_fast_search($in_fields, $arg_search, $data_search)
@@ -13922,7 +9627,15 @@ else
           }
           if ($field == "SC_all_Cmp") 
           {
+              $this->SC_monta_condicao($comando, "idpedid", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
               $this->SC_monta_condicao($comando, "numfac", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "remision", $arg_search, str_replace(",", ".", $data_search));
           }
           if ($field == "SC_all_Cmp") 
           {
@@ -13934,11 +9647,23 @@ else
           }
           if ($field == "SC_all_Cmp") 
           {
+              $this->SC_monta_condicao($comando, "unidadmayor", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "factor", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
               $data_lookup = $this->SC_lookup_idbod_($arg_search, $data_search);
               if (is_array($data_lookup) && !empty($data_lookup)) 
               {
                   $this->SC_monta_condicao($comando, "idbod", $arg_search, $data_lookup);
               }
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "costop", $arg_search, str_replace(",", ".", $data_search));
           }
           if ($field == "SC_all_Cmp") 
           {
@@ -13967,6 +9692,58 @@ else
           if ($field == "SC_all_Cmp") 
           {
               $this->SC_monta_condicao($comando, "adicional1", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "devuelto", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "colores", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "tallas", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "sabor", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "estado_comanda", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "usuario_comanda", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "tercero_comanda", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "hora_inicio", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "hora_final", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "observ", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "cerrado", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "obs", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "descr", $arg_search, $data_search);
           }
       }
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['where_detal']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['where_detal']) && !empty($comando)) 
@@ -14025,7 +9802,7 @@ else
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "iddet";$nm_numeric[] = "idpedid";$nm_numeric[] = "numfac";$nm_numeric[] = "remision";$nm_numeric[] = "idpro";$nm_numeric[] = "factor";$nm_numeric[] = "idbod";$nm_numeric[] = "costop";$nm_numeric[] = "cantidad";$nm_numeric[] = "valorunit";$nm_numeric[] = "valorpar";$nm_numeric[] = "iva";$nm_numeric[] = "descuento";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional1";$nm_numeric[] = "devuelto";$nm_numeric[] = "colores";$nm_numeric[] = "tallas";$nm_numeric[] = "sabor";$nm_numeric[] = "tercero_comanda";$nm_numeric[] = "";
+      $nm_numeric[] = "iddet";$nm_numeric[] = "idpedid";$nm_numeric[] = "numfac";$nm_numeric[] = "remision";$nm_numeric[] = "idpro";$nm_numeric[] = "factor";$nm_numeric[] = "idbod";$nm_numeric[] = "costop";$nm_numeric[] = "cantidad";$nm_numeric[] = "valorunit";$nm_numeric[] = "valorpar";$nm_numeric[] = "iva";$nm_numeric[] = "descuento";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional1";$nm_numeric[] = "devuelto";$nm_numeric[] = "colores";$nm_numeric[] = "tallas";$nm_numeric[] = "sabor";$nm_numeric[] = "tercero_comanda";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallepedido_CW']['decimal_db'] == ".")
@@ -14206,34 +9983,7 @@ else
        $result = array();
        $campo_orig = $campo;
        $campo  = substr($this->Db->qstr($campo), 1, -1);
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-          $nm_comando = "SELECT codigobar + \" - \" + nompro, idprod FROM productos WHERE (codigobar + \" - \" + nompro LIKE '%$campo%') AND (activo like 'SI')" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-      { 
-          $nm_comando = "SELECT concat(codigobar,\" - \",nompro), idprod FROM productos WHERE (concat(codigobar,\" - \",nompro) LIKE '%$campo%') AND (activo like 'SI')" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-      { 
-          $nm_comando = "SELECT codigobar&\" - \"&nompro, idprod FROM productos WHERE (codigobar&\" - \"&nompro LIKE '%$campo%') AND (activo like 'SI')" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-      { 
-          $nm_comando = "SELECT codigobar||\" - \"||nompro, idprod FROM productos WHERE (codigobar||\" - \"||nompro LIKE '%$campo%') AND (activo like 'SI')" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-          $nm_comando = "SELECT codigobar + \" - \" + nompro, idprod FROM productos WHERE (codigobar + \" - \" + nompro LIKE '%$campo%') AND (activo like 'SI')" ; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-      { 
-          $nm_comando = "SELECT codigobar||\" - \"||nompro, idprod FROM productos WHERE (codigobar||\" - \"||nompro LIKE '%$campo%') AND (activo like 'SI')" ; 
-      } 
-      else 
-      { 
-          $nm_comando = "SELECT codigobar||\" - \"||nompro, idprod FROM productos WHERE (codigobar||\" - \"||nompro LIKE '%$campo%') AND (activo like 'SI')" ; 
-      } 
+       $nm_comando = "SELECT concat(codigobar,' - ',nompro), idprod FROM productos WHERE (concat(codigobar,' - ',nompro) LIKE '%$campo%')" ; 
        if ($condicao == "ii")
        {
            $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
@@ -14544,43 +10294,6 @@ if (parent && parent.scAjaxDetailValue)
 <?php
   exit;
 }
-    function sc_set_focus($sFieldName)
-    {
-        $sFieldName = strtolower($sFieldName);
-        $aFocus = array(
-                        'iddet' => 'iddet_',
-                        'cod_barras_' => 'cod_barras_',
-                        'idpro' => 'idpro_',
-                        'colores' => 'colores_',
-                        'tallas' => 'tallas_',
-                        'sabor' => 'sabor_',
-                        'idbod' => 'idbod_',
-                        'observ' => 'observ_',
-                        'unidadmayor' => 'unidadmayor_',
-                        'stockubica_' => 'stockubica_',
-                        'unidad_' => 'unidad_',
-                        'cantidad' => 'cantidad_',
-                        'valorunit' => 'valorunit_',
-                        'valorpar' => 'valorpar_',
-                        'descuento' => 'descuento_',
-                        'adicional' => 'adicional_',
-                        'adicional1' => 'adicional1_',
-                        'factor' => 'factor_',
-                        'iva' => 'iva_',
-                        'costop' => 'costop_',
-                       );
-        if (isset($aFocus[$sFieldName]))
-        {
-            if (isset($this->nmgp_refresh_row) && '' != $this->nmgp_refresh_row)
-            {
-                $this->NM_ajax_info['focus'] = $aFocus[$sFieldName] . $this->nmgp_refresh_row;
-            }
-            else
-            {
-                $this->NM_ajax_info['focus'] = $aFocus[$sFieldName] . 1;
-            }
-        }
-    } // sc_set_focus
     function sc_master_value($sIndex, $sValue)
     {
         $sIndex = strtolower($sIndex);
@@ -14638,6 +10351,44 @@ if (parent && parent.scAjaxDetailValue)
         }
         return $image_param;
     } // sc_ajax_alert_image
+    function sc_ajax_message($sMessage, $sTitle = '', $sParam = '', $sRedirPar = '')
+    {
+        if ($this->NM_ajax_flag)
+        {
+            $this->NM_ajax_info['ajaxMessage'] = array();
+            if ('' != $sParam)
+            {
+                $aParamList = explode('&', $sParam);
+                foreach ($aParamList as $sParamItem)
+                {
+                    $aParamData = explode('=', $sParamItem);
+                    if (2 == sizeof($aParamData) &&
+                        in_array($aParamData[0], array('modal', 'timeout', 'button', 'button_label', 'top', 'left', 'width', 'height', 'redir', 'redir_target', 'show_close', 'body_icon', 'toast', 'toast_pos', 'type')))
+                    {
+                        $this->NM_ajax_info['ajaxMessage'][$aParamData[0]] = NM_charset_to_utf8($aParamData[1]);
+                    }
+                }
+            }
+            if (isset($this->NM_ajax_info['ajaxMessage']['redir']) && '' != $this->NM_ajax_info['ajaxMessage']['redir'] && '.php' == substr($this->NM_ajax_info['ajaxMessage']['redir'], -4) && 'http' != substr($this->NM_ajax_info['ajaxMessage']['redir'], 0, 4))
+            {
+                $this->NM_ajax_info['ajaxMessage']['redir'] = $this->Ini->path_link . SC_dir_app_name(substr($this->NM_ajax_info['ajaxMessage']['redir'], 0, -4)) . '/' . $this->NM_ajax_info['ajaxMessage']['redir'];
+            }
+            if ('' != $sRedirPar)
+            {
+                $this->NM_ajax_info['ajaxMessage']['redir_par'] = str_replace('=', '?#?', str_replace(';', '?@?', $sRedirPar));
+            }
+            else
+            {
+                $this->NM_ajax_info['ajaxMessage']['redir_par'] = '';
+            }
+            $this->NM_ajax_info['ajaxMessage']['message'] = NM_charset_to_utf8($sMessage);
+            $this->NM_ajax_info['ajaxMessage']['title']   = NM_charset_to_utf8($sTitle);
+            if (!isset($this->NM_ajax_info['ajaxMessage']['button']))
+            {
+                $this->NM_ajax_info['ajaxMessage']['button'] = 'Y';
+            }
+        }
+    } // sc_ajax_message
     function sc_field_readonly($sField, $sStatus, $iSeq = '')
     {
         if ('on' != $sStatus && 'off' != $sStatus)
@@ -14681,32 +10432,29 @@ if (parent && parent.scAjaxDetailValue)
             case "bcancelar":
                 return array("sc_b_sai_t.sc-unique-btn-4");
                 break;
-            case "balterarsel":
+            case "update":
                 return array("sc_b_upd_t.sc-unique-btn-5");
-                break;
-            case "bexcluirsel":
-                return array("sc_b_del_t.sc-unique-btn-6");
                 break;
             case "help":
                 return array("sc_b_hlp_t");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11");
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10");
                 break;
             case "birpara":
                 return array("brec_b");
                 break;
             case "first":
-                return array("sc_b_ini_b.sc-unique-btn-12");
+                return array("sc_b_ini_b.sc-unique-btn-11");
                 break;
             case "back":
-                return array("sc_b_ret_b.sc-unique-btn-13");
+                return array("sc_b_ret_b.sc-unique-btn-12");
                 break;
             case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-14");
+                return array("sc_b_avc_b.sc-unique-btn-13");
                 break;
             case "last":
-                return array("sc_b_fim_b.sc-unique-btn-15");
+                return array("sc_b_fim_b.sc-unique-btn-14");
                 break;
         }
 

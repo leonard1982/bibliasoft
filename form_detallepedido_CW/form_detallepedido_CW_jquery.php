@@ -52,25 +52,16 @@ function scSetFocusOnField($oField) {
 
 function scEventControl_init(iSeqRow) {
   scEventControl_data["iddet_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["cod_barras_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["idpedid_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["codbarra_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idpro_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["colores_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["tallas_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["sabor_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idbod_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["observ_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["unidadmayor_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["stockubica_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["unidad_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["cantidad_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["valorunit_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["valorpar_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["descuento_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["adicional_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["adicional1_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["factor_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["iva_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["costop_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["adicional_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -80,34 +71,22 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["iddet_" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["cod_barras_" + iSeqRow]["blur"]) {
+  if (scEventControl_data["idpedid_" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["cod_barras_" + iSeqRow]["change"]) {
+  if (scEventControl_data["idpedid_" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["codbarra_" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["codbarra_" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["idpro_" + iSeqRow]["blur"]) {
     return true;
   }
   if (scEventControl_data["idpro_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["colores_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["colores_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["tallas_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["tallas_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["sabor_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["sabor_" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["idbod_" + iSeqRow]["blur"]) {
@@ -120,24 +99,6 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["observ_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["unidadmayor_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["unidadmayor_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["stockubica_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["stockubica_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["unidad_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["unidad_" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["cantidad_" + iSeqRow]["blur"]) {
@@ -158,43 +119,16 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["valorpar_" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["descuento_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["descuento_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["adicional_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["adicional_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["adicional1_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["adicional1_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["factor_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["factor_" + iSeqRow]["change"]) {
-    return true;
-  }
   if (scEventControl_data["iva_" + iSeqRow]["blur"]) {
     return true;
   }
   if (scEventControl_data["iva_" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["costop_" + iSeqRow]["blur"]) {
+  if (scEventControl_data["adicional_" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["costop_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["idpro_" + iSeqRow]["autocomp"]) {
+  if (scEventControl_data["adicional_" + iSeqRow]["change"]) {
     return true;
   }
   return false;
@@ -214,20 +148,17 @@ function scEventControl_onFocus(oField, iSeq) {
   fieldId = $(oField).attr("id");
   fieldName = fieldId.substr(12);
   scEventControl_data[fieldName]["blur"] = true;
-  if ("colores_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["blur"] = false;
-  }
-  if ("tallas_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["blur"] = false;
-  }
-  if ("sabor_" + iSeq == fieldName) {
+  if ("idpro_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("idbod_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
-  if ("unidadmayor_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["blur"] = false;
+  if ("adicional_" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
   }
   if ("cantidad_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
@@ -235,49 +166,13 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["calculated"] = $(oField).val();
     return;
   }
-  if ("cod_barras_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["change"]   = true;
-    scEventControl_data[fieldName]["original"] = $(oField).val();
-    scEventControl_data[fieldName]["calculated"] = $(oField).val();
-    return;
-  }
-  if ("colores_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["change"]   = true;
-    scEventControl_data[fieldName]["original"] = $(oField).val();
-    scEventControl_data[fieldName]["calculated"] = $(oField).val();
-    return;
-  }
-  if ("idbod_" + iSeq == fieldName) {
+  if ("codbarra_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
     scEventControl_data[fieldName]["calculated"] = $(oField).val();
     return;
   }
   if ("idpro_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["change"]   = true;
-    scEventControl_data[fieldName]["original"] = $(oField).val();
-    scEventControl_data[fieldName]["calculated"] = $(oField).val();
-    return;
-  }
-  if ("observ_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["change"]   = true;
-    scEventControl_data[fieldName]["original"] = $(oField).val();
-    scEventControl_data[fieldName]["calculated"] = $(oField).val();
-    return;
-  }
-  if ("sabor_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["change"]   = true;
-    scEventControl_data[fieldName]["original"] = $(oField).val();
-    scEventControl_data[fieldName]["calculated"] = $(oField).val();
-    return;
-  }
-  if ("tallas_" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["change"]   = true;
-    scEventControl_data[fieldName]["original"] = $(oField).val();
-    scEventControl_data[fieldName]["calculated"] = $(oField).val();
-    return;
-  }
-  if ("unidadmayor_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
     scEventControl_data[fieldName]["calculated"] = $(oField).val();
@@ -315,24 +210,20 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_iddet_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_iddet__onblur(this, iSeqRow) })
                                     .bind('change', function() { sc_form_detallepedido_CW_iddet__onchange(this, iSeqRow) })
                                     .bind('focus', function() { sc_form_detallepedido_CW_iddet__onfocus(this, iSeqRow) });
-  $('#id_sc_field_idpedid_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_idpedid__onchange(this, iSeqRow) });
+  $('#id_sc_field_idpedid_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_idpedid__onblur(this, iSeqRow) })
+                                      .bind('change', function() { sc_form_detallepedido_CW_idpedid__onchange(this, iSeqRow) })
+                                      .bind('focus', function() { sc_form_detallepedido_CW_idpedid__onfocus(this, iSeqRow) });
   $('#id_sc_field_numfac_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_numfac__onchange(this, iSeqRow) });
   $('#id_sc_field_remision_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_remision__onchange(this, iSeqRow) });
   $('#id_sc_field_idpro_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_idpro__onblur(this, iSeqRow) })
                                     .bind('change', function() { sc_form_detallepedido_CW_idpro__onchange(this, iSeqRow) })
                                     .bind('focus', function() { sc_form_detallepedido_CW_idpro__onfocus(this, iSeqRow) });
-  $('#id_sc_field_unidadmayor_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_unidadmayor__onblur(this, iSeqRow) })
-                                          .bind('change', function() { sc_form_detallepedido_CW_unidadmayor__onchange(this, iSeqRow) })
-                                          .bind('focus', function() { sc_form_detallepedido_CW_unidadmayor__onfocus(this, iSeqRow) });
-  $('#id_sc_field_factor_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_factor__onblur(this, iSeqRow) })
-                                     .bind('change', function() { sc_form_detallepedido_CW_factor__onchange(this, iSeqRow) })
-                                     .bind('focus', function() { sc_form_detallepedido_CW_factor__onfocus(this, iSeqRow) });
+  $('#id_sc_field_unidadmayor_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_unidadmayor__onchange(this, iSeqRow) });
+  $('#id_sc_field_factor_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_factor__onchange(this, iSeqRow) });
   $('#id_sc_field_idbod_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_idbod__onblur(this, iSeqRow) })
                                     .bind('change', function() { sc_form_detallepedido_CW_idbod__onchange(this, iSeqRow) })
                                     .bind('focus', function() { sc_form_detallepedido_CW_idbod__onfocus(this, iSeqRow) });
-  $('#id_sc_field_costop_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_costop__onblur(this, iSeqRow) })
-                                     .bind('change', function() { sc_form_detallepedido_CW_costop__onchange(this, iSeqRow) })
-                                     .bind('focus', function() { sc_form_detallepedido_CW_costop__onfocus(this, iSeqRow) });
+  $('#id_sc_field_costop_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_costop__onchange(this, iSeqRow) });
   $('#id_sc_field_cantidad_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_cantidad__onblur(this, iSeqRow) })
                                        .bind('change', function() { sc_form_detallepedido_CW_cantidad__onchange(this, iSeqRow) })
                                        .bind('focus', function() { sc_form_detallepedido_CW_cantidad__onfocus(this, iSeqRow) });
@@ -345,25 +236,15 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_iva_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_iva__onblur(this, iSeqRow) })
                                   .bind('change', function() { sc_form_detallepedido_CW_iva__onchange(this, iSeqRow) })
                                   .bind('focus', function() { sc_form_detallepedido_CW_iva__onfocus(this, iSeqRow) });
-  $('#id_sc_field_descuento_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_descuento__onblur(this, iSeqRow) })
-                                        .bind('change', function() { sc_form_detallepedido_CW_descuento__onchange(this, iSeqRow) })
-                                        .bind('focus', function() { sc_form_detallepedido_CW_descuento__onfocus(this, iSeqRow) });
+  $('#id_sc_field_descuento_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_descuento__onchange(this, iSeqRow) });
   $('#id_sc_field_adicional_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_adicional__onblur(this, iSeqRow) })
                                         .bind('change', function() { sc_form_detallepedido_CW_adicional__onchange(this, iSeqRow) })
                                         .bind('focus', function() { sc_form_detallepedido_CW_adicional__onfocus(this, iSeqRow) });
-  $('#id_sc_field_adicional1_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_adicional1__onblur(this, iSeqRow) })
-                                         .bind('change', function() { sc_form_detallepedido_CW_adicional1__onchange(this, iSeqRow) })
-                                         .bind('focus', function() { sc_form_detallepedido_CW_adicional1__onfocus(this, iSeqRow) });
+  $('#id_sc_field_adicional1_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_adicional1__onchange(this, iSeqRow) });
   $('#id_sc_field_devuelto_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_devuelto__onchange(this, iSeqRow) });
-  $('#id_sc_field_colores_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_colores__onblur(this, iSeqRow) })
-                                      .bind('change', function() { sc_form_detallepedido_CW_colores__onchange(this, iSeqRow) })
-                                      .bind('focus', function() { sc_form_detallepedido_CW_colores__onfocus(this, iSeqRow) });
-  $('#id_sc_field_tallas_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_tallas__onblur(this, iSeqRow) })
-                                     .bind('change', function() { sc_form_detallepedido_CW_tallas__onchange(this, iSeqRow) })
-                                     .bind('focus', function() { sc_form_detallepedido_CW_tallas__onfocus(this, iSeqRow) });
-  $('#id_sc_field_sabor_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_sabor__onblur(this, iSeqRow) })
-                                    .bind('change', function() { sc_form_detallepedido_CW_sabor__onchange(this, iSeqRow) })
-                                    .bind('focus', function() { sc_form_detallepedido_CW_sabor__onfocus(this, iSeqRow) });
+  $('#id_sc_field_colores_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_colores__onchange(this, iSeqRow) });
+  $('#id_sc_field_tallas_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_tallas__onchange(this, iSeqRow) });
+  $('#id_sc_field_sabor_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_sabor__onchange(this, iSeqRow) });
   $('#id_sc_field_estado_comanda_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_estado_comanda__onchange(this, iSeqRow) });
   $('#id_sc_field_usuario_comanda_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_usuario_comanda__onchange(this, iSeqRow) });
   $('#id_sc_field_tercero_comanda_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_tercero_comanda__onchange(this, iSeqRow) });
@@ -375,16 +256,11 @@ function scJQEventsAdd(iSeqRow) {
                                      .bind('change', function() { sc_form_detallepedido_CW_observ__onchange(this, iSeqRow) })
                                      .bind('focus', function() { sc_form_detallepedido_CW_observ__onfocus(this, iSeqRow) });
   $('#id_sc_field_cerrado_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_cerrado__onchange(this, iSeqRow) });
-  $('#id_sc_field_codbarra_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_codbarra__onchange(this, iSeqRow) });
-  $('#id_sc_field_stockubica_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_stockubica__onblur(this, iSeqRow) })
-                                         .bind('change', function() { sc_form_detallepedido_CW_stockubica__onchange(this, iSeqRow) })
-                                         .bind('focus', function() { sc_form_detallepedido_CW_stockubica__onfocus(this, iSeqRow) });
-  $('#id_sc_field_unidad_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_unidad__onblur(this, iSeqRow) })
-                                     .bind('change', function() { sc_form_detallepedido_CW_unidad__onchange(this, iSeqRow) })
-                                     .bind('focus', function() { sc_form_detallepedido_CW_unidad__onfocus(this, iSeqRow) });
-  $('#id_sc_field_cod_barras_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_cod_barras__onblur(this, iSeqRow) })
-                                         .bind('change', function() { sc_form_detallepedido_CW_cod_barras__onchange(this, iSeqRow) })
-                                         .bind('focus', function() { sc_form_detallepedido_CW_cod_barras__onfocus(this, iSeqRow) });
+  $('#id_sc_field_obs_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_obs__onchange(this, iSeqRow) });
+  $('#id_sc_field_descr_' + iSeqRow).bind('change', function() { sc_form_detallepedido_CW_descr__onchange(this, iSeqRow) });
+  $('#id_sc_field_codbarra_' + iSeqRow).bind('blur', function() { sc_form_detallepedido_CW_codbarra__onblur(this, iSeqRow) })
+                                       .bind('change', function() { sc_form_detallepedido_CW_codbarra__onchange(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_detallepedido_CW_codbarra__onfocus(this, iSeqRow) });
 } // scJQEventsAdd
 
 function sc_form_detallepedido_CW_iddet__onblur(oThis, iSeqRow) {
@@ -402,8 +278,19 @@ function sc_form_detallepedido_CW_iddet__onfocus(oThis, iSeqRow) {
   scCssFocus(oThis, iSeqRow);
 }
 
+function sc_form_detallepedido_CW_idpedid__onblur(oThis, iSeqRow) {
+  do_ajax_form_detallepedido_CW_validate_idpedid_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
 function sc_form_detallepedido_CW_idpedid__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  nm_check_insert(iSeqRow);
+}
+
+function sc_form_detallepedido_CW_idpedid__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_numfac__onchange(oThis, iSeqRow) {
@@ -426,49 +313,25 @@ function sc_form_detallepedido_CW_idpro__onchange(oThis, iSeqRow) {
 }
 
 function sc_form_detallepedido_CW_idpro__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_unidadmayor__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_unidadmayor_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_unidadmayor__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  do_ajax_form_detallepedido_CW_event_unidadmayor__onchange(iSeqRow);
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_unidadmayor__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_factor__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_factor_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_factor__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_factor__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_idbod__onblur(oThis, iSeqRow) {
   do_ajax_form_detallepedido_CW_validate_idbod_(iSeqRow);
   scCssBlur(oThis, iSeqRow);
-  do_ajax_form_detallepedido_CW_event_idbod__onblur(iSeqRow);
 }
 
 function sc_form_detallepedido_CW_idbod__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  do_ajax_form_detallepedido_CW_event_idbod__onchange(iSeqRow);
   nm_check_insert(iSeqRow);
 }
 
@@ -477,25 +340,13 @@ function sc_form_detallepedido_CW_idbod__onfocus(oThis, iSeqRow) {
   scCssFocus(oThis, iSeqRow);
 }
 
-function sc_form_detallepedido_CW_costop__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_costop_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
 function sc_form_detallepedido_CW_costop__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_costop__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_cantidad__onblur(oThis, iSeqRow) {
   do_ajax_form_detallepedido_CW_validate_cantidad_(iSeqRow);
   scCssBlur(oThis, iSeqRow);
-  do_ajax_form_detallepedido_CW_event_cantidad__onblur(iSeqRow);
 }
 
 function sc_form_detallepedido_CW_cantidad__onchange(oThis, iSeqRow) {
@@ -507,13 +358,11 @@ function sc_form_detallepedido_CW_cantidad__onchange(oThis, iSeqRow) {
 function sc_form_detallepedido_CW_cantidad__onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis, iSeqRow);
-  do_ajax_form_detallepedido_CW_event_cantidad__onfocus(iSeqRow);
 }
 
 function sc_form_detallepedido_CW_valorunit__onblur(oThis, iSeqRow) {
   do_ajax_form_detallepedido_CW_validate_valorunit_(iSeqRow);
   scCssBlur(oThis, iSeqRow);
-  do_ajax_form_detallepedido_CW_event_valorunit__onblur(iSeqRow);
 }
 
 function sc_form_detallepedido_CW_valorunit__onchange(oThis, iSeqRow) {
@@ -557,19 +406,8 @@ function sc_form_detallepedido_CW_iva__onfocus(oThis, iSeqRow) {
   scCssFocus(oThis, iSeqRow);
 }
 
-function sc_form_detallepedido_CW_descuento__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_descuento_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
 function sc_form_detallepedido_CW_descuento__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_descuento__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_adicional__onblur(oThis, iSeqRow) {
@@ -579,6 +417,7 @@ function sc_form_detallepedido_CW_adicional__onblur(oThis, iSeqRow) {
 
 function sc_form_detallepedido_CW_adicional__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  do_ajax_form_detallepedido_CW_event_adicional__onchange(iSeqRow);
   nm_check_insert(iSeqRow);
 }
 
@@ -587,71 +426,24 @@ function sc_form_detallepedido_CW_adicional__onfocus(oThis, iSeqRow) {
   scCssFocus(oThis, iSeqRow);
 }
 
-function sc_form_detallepedido_CW_adicional1__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_adicional1_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
 function sc_form_detallepedido_CW_adicional1__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_adicional1__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_devuelto__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
-function sc_form_detallepedido_CW_colores__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_colores_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
 function sc_form_detallepedido_CW_colores__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  do_ajax_form_detallepedido_CW_event_colores__onchange(iSeqRow);
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_colores__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_tallas__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_tallas_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_tallas__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  do_ajax_form_detallepedido_CW_event_tallas__onchange(iSeqRow);
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_tallas__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_sabor__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_sabor_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_sabor__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  do_ajax_form_detallepedido_CW_event_sabor__onchange(iSeqRow);
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_sabor__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_detallepedido_CW_estado_comanda__onchange(oThis, iSeqRow) {
@@ -685,12 +477,10 @@ function sc_form_detallepedido_CW_hora_final__hora_onchange(oThis, iSeqRow) {
 function sc_form_detallepedido_CW_observ__onblur(oThis, iSeqRow) {
   do_ajax_form_detallepedido_CW_validate_observ_(iSeqRow);
   scCssBlur(oThis, iSeqRow);
-  do_ajax_form_detallepedido_CW_event_observ__onblur(iSeqRow);
 }
 
 function sc_form_detallepedido_CW_observ__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  do_ajax_form_detallepedido_CW_event_observ__onchange(iSeqRow);
   nm_check_insert(iSeqRow);
 }
 
@@ -703,53 +493,26 @@ function sc_form_detallepedido_CW_cerrado__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
+function sc_form_detallepedido_CW_obs__onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_detallepedido_CW_descr__onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_detallepedido_CW_codbarra__onblur(oThis, iSeqRow) {
+  do_ajax_form_detallepedido_CW_validate_codbarra_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
 function sc_form_detallepedido_CW_codbarra__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-}
-
-function sc_form_detallepedido_CW_stockubica__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_stockubica_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_stockubica__onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
+  do_ajax_form_detallepedido_CW_event_codbarra__onchange(iSeqRow);
   nm_check_insert(iSeqRow);
 }
 
-function sc_form_detallepedido_CW_stockubica__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_unidad__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_unidad_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_unidad__onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_unidad__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_cod_barras__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallepedido_CW_validate_cod_barras_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
-function sc_form_detallepedido_CW_cod_barras__onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-  lookup_cod_barras_(iSeqRow);
-  do_ajax_form_detallepedido_CW_event_cod_barras__onchange(iSeqRow);
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallepedido_CW_cod_barras__onfocus(oThis, iSeqRow) {
+function sc_form_detallepedido_CW_codbarra__onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis, iSeqRow);
 }
@@ -762,83 +525,50 @@ function displayChange_block(block, status) {
 
 function displayChange_block_0(status) {
 	displayChange_field("iddet_", "", status);
-	displayChange_field("cod_barras_", "", status);
+	displayChange_field("idpedid_", "", status);
+	displayChange_field("codbarra_", "", status);
 	displayChange_field("idpro_", "", status);
-	displayChange_field("colores_", "", status);
-	displayChange_field("tallas_", "", status);
-	displayChange_field("sabor_", "", status);
 	displayChange_field("idbod_", "", status);
 	displayChange_field("observ_", "", status);
-	displayChange_field("unidadmayor_", "", status);
-	displayChange_field("stockubica_", "", status);
-	displayChange_field("unidad_", "", status);
 	displayChange_field("cantidad_", "", status);
 	displayChange_field("valorunit_", "", status);
 	displayChange_field("valorpar_", "", status);
-	displayChange_field("descuento_", "", status);
-	displayChange_field("adicional_", "", status);
-	displayChange_field("adicional1_", "", status);
-	displayChange_field("factor_", "", status);
 	displayChange_field("iva_", "", status);
-	displayChange_field("costop_", "", status);
+	displayChange_field("adicional_", "", status);
 }
 
 function displayChange_row(row, status) {
 	displayChange_field_iddet_(row, status);
-	displayChange_field_cod_barras_(row, status);
+	displayChange_field_idpedid_(row, status);
+	displayChange_field_codbarra_(row, status);
 	displayChange_field_idpro_(row, status);
-	displayChange_field_colores_(row, status);
-	displayChange_field_tallas_(row, status);
-	displayChange_field_sabor_(row, status);
 	displayChange_field_idbod_(row, status);
 	displayChange_field_observ_(row, status);
-	displayChange_field_unidadmayor_(row, status);
-	displayChange_field_stockubica_(row, status);
-	displayChange_field_unidad_(row, status);
 	displayChange_field_cantidad_(row, status);
 	displayChange_field_valorunit_(row, status);
 	displayChange_field_valorpar_(row, status);
-	displayChange_field_descuento_(row, status);
-	displayChange_field_adicional_(row, status);
-	displayChange_field_adicional1_(row, status);
-	displayChange_field_factor_(row, status);
 	displayChange_field_iva_(row, status);
-	displayChange_field_costop_(row, status);
+	displayChange_field_adicional_(row, status);
 }
 
 function displayChange_field(field, row, status) {
 	if ("iddet_" == field) {
 		displayChange_field_iddet_(row, status);
 	}
-	if ("cod_barras_" == field) {
-		displayChange_field_cod_barras_(row, status);
+	if ("idpedid_" == field) {
+		displayChange_field_idpedid_(row, status);
+	}
+	if ("codbarra_" == field) {
+		displayChange_field_codbarra_(row, status);
 	}
 	if ("idpro_" == field) {
 		displayChange_field_idpro_(row, status);
-	}
-	if ("colores_" == field) {
-		displayChange_field_colores_(row, status);
-	}
-	if ("tallas_" == field) {
-		displayChange_field_tallas_(row, status);
-	}
-	if ("sabor_" == field) {
-		displayChange_field_sabor_(row, status);
 	}
 	if ("idbod_" == field) {
 		displayChange_field_idbod_(row, status);
 	}
 	if ("observ_" == field) {
 		displayChange_field_observ_(row, status);
-	}
-	if ("unidadmayor_" == field) {
-		displayChange_field_unidadmayor_(row, status);
-	}
-	if ("stockubica_" == field) {
-		displayChange_field_stockubica_(row, status);
-	}
-	if ("unidad_" == field) {
-		displayChange_field_unidad_(row, status);
 	}
 	if ("cantidad_" == field) {
 		displayChange_field_cantidad_(row, status);
@@ -849,77 +579,35 @@ function displayChange_field(field, row, status) {
 	if ("valorpar_" == field) {
 		displayChange_field_valorpar_(row, status);
 	}
-	if ("descuento_" == field) {
-		displayChange_field_descuento_(row, status);
-	}
-	if ("adicional_" == field) {
-		displayChange_field_adicional_(row, status);
-	}
-	if ("adicional1_" == field) {
-		displayChange_field_adicional1_(row, status);
-	}
-	if ("factor_" == field) {
-		displayChange_field_factor_(row, status);
-	}
 	if ("iva_" == field) {
 		displayChange_field_iva_(row, status);
 	}
-	if ("costop_" == field) {
-		displayChange_field_costop_(row, status);
+	if ("adicional_" == field) {
+		displayChange_field_adicional_(row, status);
 	}
 }
 
 function displayChange_field_iddet_(row, status) {
 }
 
-function displayChange_field_cod_barras_(row, status) {
+function displayChange_field_idpedid_(row, status) {
+}
+
+function displayChange_field_codbarra_(row, status) {
 }
 
 function displayChange_field_idpro_(row, status) {
-}
-
-function displayChange_field_colores_(row, status) {
 	if ("on" == status) {
 		if ("all" == row) {
-			var fieldList = $(".css_colores___obj");
+			var fieldList = $(".css_idpro___obj");
 			for (var i = 0; i < fieldList.length; i++) {
 				$($(fieldList[i]).attr("id")).select2("destroy");
 			}
 		}
 		else {
-			$("#id_sc_field_colores_" + row).select2("destroy");
+			$("#id_sc_field_idpro_" + row).select2("destroy");
 		}
-		scJQSelect2Add(row, "colores_");
-	}
-}
-
-function displayChange_field_tallas_(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_tallas___obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_tallas_" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "tallas_");
-	}
-}
-
-function displayChange_field_sabor_(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_sabor___obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_sabor_" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "sabor_");
+		scJQSelect2Add(row, "idpro_");
 	}
 }
 
@@ -941,27 +629,6 @@ function displayChange_field_idbod_(row, status) {
 function displayChange_field_observ_(row, status) {
 }
 
-function displayChange_field_unidadmayor_(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_unidadmayor___obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_unidadmayor_" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "unidadmayor_");
-	}
-}
-
-function displayChange_field_stockubica_(row, status) {
-}
-
-function displayChange_field_unidad_(row, status) {
-}
-
 function displayChange_field_cantidad_(row, status) {
 }
 
@@ -971,30 +638,15 @@ function displayChange_field_valorunit_(row, status) {
 function displayChange_field_valorpar_(row, status) {
 }
 
-function displayChange_field_descuento_(row, status) {
+function displayChange_field_iva_(row, status) {
 }
 
 function displayChange_field_adicional_(row, status) {
 }
 
-function displayChange_field_adicional1_(row, status) {
-}
-
-function displayChange_field_factor_(row, status) {
-}
-
-function displayChange_field_iva_(row, status) {
-}
-
-function displayChange_field_costop_(row, status) {
-}
-
 function scRecreateSelect2() {
-	displayChange_field_colores_("all", "on");
-	displayChange_field_tallas_("all", "on");
-	displayChange_field_sabor_("all", "on");
+	displayChange_field_idpro_("all", "on");
 	displayChange_field_idbod_("all", "on");
-	displayChange_field_unidadmayor_("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -1009,6 +661,114 @@ function scCheckNoPageSelected() {
 		var inactiveTabs = $(".sc-form-page").filter(".scTabInactive").filter(":visible");
 		if (inactiveTabs.length) {
 			var tabNo = $(inactiveTabs[0]).attr("id").substr(29);
+		}
+	}
+}
+<?php
+
+$formWidthCorrection = '';
+if (false !== strpos($this->Ini->form_table_width, 'calc')) {
+	$formWidthCalc = substr($this->Ini->form_table_width, strpos($this->Ini->form_table_width, '(') + 1);
+	$formWidthCalc = substr($formWidthCalc, 0, strpos($formWidthCalc, ')'));
+	$formWidthParts = explode(' ', $formWidthCalc);
+	if (3 == count($formWidthParts) && 'px' == substr($formWidthParts[2], -2)) {
+		$formWidthParts[2] = substr($formWidthParts[2], 0, -2) / 2;
+		$formWidthCorrection = $formWidthParts[1] . ' ' . $formWidthParts[2];
+	}
+}
+
+?>
+
+$(window).scroll(function() {
+	scSetFixedHeaders();
+});
+
+var rerunHeaderDisplay = 1;
+
+function scSetFixedHeaders(forceDisplay) {
+	if (null == forceDisplay) {
+		forceDisplay = false;
+	}
+	var divScroll, formHeaders, headerPlaceholder;
+	formHeaders = scGetHeaderRow();
+	headerPlaceholder = $("#sc-id-fixedheaders-placeholder");
+	if (!formHeaders) {
+		headerPlaceholder.hide();
+	}
+	else {
+		if (scIsHeaderVisible(formHeaders)) {
+			headerPlaceholder.hide();
+		}
+		else {
+			if (!headerPlaceholder.filter(":visible").length || forceDisplay) {
+				scSetFixedHeadersContents(formHeaders, headerPlaceholder);
+				scSetFixedHeadersSize(formHeaders);
+				headerPlaceholder.show();
+			}
+			scSetFixedHeadersPosition(formHeaders, headerPlaceholder);
+			if (0 < rerunHeaderDisplay) {
+				rerunHeaderDisplay--;
+				setTimeout(function() {
+					scSetFixedHeadersContents(formHeaders, headerPlaceholder);
+					scSetFixedHeadersSize(formHeaders);
+					headerPlaceholder.show();
+					scSetFixedHeadersPosition(formHeaders, headerPlaceholder);
+				}, 5);
+			}
+		}
+	}
+}
+
+function scSetFixedHeadersPosition(formHeaders, headerPlaceholder) {
+	if (formHeaders) {
+		headerPlaceholder.css({"top": 0<?php echo $formWidthCorrection ?>, "left": (Math.floor(formHeaders.offset().left) - $(document).scrollLeft()<?php echo $formWidthCorrection ?>) + "px"});
+	}
+}
+
+function scIsHeaderVisible(formHeaders) {
+	if (typeof(scIsHeaderVisibleMobile) === typeof(function(){})) { return scIsHeaderVisibleMobile(formHeaders); }
+	return formHeaders.offset().top > $(document).scrollTop();
+}
+
+function scGetHeaderRow() {
+	var formHeaders = $(".sc-ui-header-row").filter(":visible");
+	if (!formHeaders.length) {
+		formHeaders = false;
+	}
+	return formHeaders;
+}
+
+function scSetFixedHeadersContents(formHeaders, headerPlaceholder) {
+	var i, htmlContent;
+	htmlContent = "<table id=\"sc-id-fixed-headers\" class=\"scFormTable\">";
+	for (i = 0; i < formHeaders.length; i++) {
+		htmlContent += "<tr class=\"scFormLabelOddMult\" id=\"sc-id-headers-row-" + i + "\">" + $(formHeaders[i]).html() + "</tr>";
+	}
+	htmlContent += "</table>";
+	headerPlaceholder.html(htmlContent);
+}
+
+function scSetFixedHeadersSize(formHeaders) {
+	var i, j, headerColumns, formColumns, cellHeight, cellWidth, tableOriginal, tableHeaders;
+	tableOriginal = $("#hidden_bloco_0");
+	tableHeaders = document.getElementById("sc-id-fixed-headers");
+	$(tableHeaders).css("width", $(tableOriginal).outerWidth());
+	for (i = 0; i < formHeaders.length; i++) {
+		headerColumns = $("#sc-id-fixed-headers-row-" + i).find("td");
+		formColumns = $(formHeaders[i]).find("td");
+		for (j = 0; j < formColumns.length; j++) {
+			if (window.getComputedStyle(formColumns[j])) {
+				cellWidth = window.getComputedStyle(formColumns[j]).width;
+				cellHeight = window.getComputedStyle(formColumns[j]).height;
+			}
+			else {
+				cellWidth = $(formColumns[j]).width() + "px";
+				cellHeight = $(formColumns[j]).height() + "px";
+			}
+			$(headerColumns[j]).css({
+				"width": cellWidth,
+				"height": cellHeight
+			});
 		}
 	}
 }
@@ -1282,65 +1042,20 @@ function scJQPasswordToggleAdd(seqRow) {
 } // scJQPasswordToggleAdd
 
 function scJQSelect2Add(seqRow, specificField) {
-  if (null == specificField || "colores_" == specificField) {
-    scJQSelect2Add_colores_(seqRow);
-  }
-  if (null == specificField || "tallas_" == specificField) {
-    scJQSelect2Add_tallas_(seqRow);
-  }
-  if (null == specificField || "sabor_" == specificField) {
-    scJQSelect2Add_sabor_(seqRow);
+  if (null == specificField || "idpro_" == specificField) {
+    scJQSelect2Add_idpro_(seqRow);
   }
   if (null == specificField || "idbod_" == specificField) {
     scJQSelect2Add_idbod_(seqRow);
   }
-  if (null == specificField || "unidadmayor_" == specificField) {
-    scJQSelect2Add_unidadmayor_(seqRow);
-  }
 } // scJQSelect2Add
 
-function scJQSelect2Add_colores_(seqRow) {
-  var elemSelector = "all" == seqRow ? ".css_colores__obj" : "#id_sc_field_colores_" + seqRow;
+function scJQSelect2Add_idpro_(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_idpro__obj" : "#id_sc_field_idpro_" + seqRow;
   $(elemSelector).select2(
     {
-      containerCssClass: 'css_colores__obj',
-      dropdownCssClass: 'css_colores__obj',
-      language: {
-        noResults: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
-        },
-        searching: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
-        }
-      }
-    }
-  );
-} // scJQSelect2Add
-
-function scJQSelect2Add_tallas_(seqRow) {
-  var elemSelector = "all" == seqRow ? ".css_tallas__obj" : "#id_sc_field_tallas_" + seqRow;
-  $(elemSelector).select2(
-    {
-      containerCssClass: 'css_tallas__obj',
-      dropdownCssClass: 'css_tallas__obj',
-      language: {
-        noResults: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
-        },
-        searching: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
-        }
-      }
-    }
-  );
-} // scJQSelect2Add
-
-function scJQSelect2Add_sabor_(seqRow) {
-  var elemSelector = "all" == seqRow ? ".css_sabor__obj" : "#id_sc_field_sabor_" + seqRow;
-  $(elemSelector).select2(
-    {
-      containerCssClass: 'css_sabor__obj',
-      dropdownCssClass: 'css_sabor__obj',
+      containerCssClass: 'css_idpro__obj',
+      dropdownCssClass: 'css_idpro__obj',
       language: {
         noResults: function() {
           return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
@@ -1371,24 +1086,6 @@ function scJQSelect2Add_idbod_(seqRow) {
   );
 } // scJQSelect2Add
 
-function scJQSelect2Add_unidadmayor_(seqRow) {
-  var elemSelector = "all" == seqRow ? ".css_unidadmayor__obj" : "#id_sc_field_unidadmayor_" + seqRow;
-  $(elemSelector).select2(
-    {
-      containerCssClass: 'css_unidadmayor__obj',
-      dropdownCssClass: 'css_unidadmayor__obj',
-      language: {
-        noResults: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
-        },
-        searching: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
-        }
-      }
-    }
-  );
-} // scJQSelect2Add
-
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -1397,11 +1094,8 @@ function scJQElementsAdd(iLine) {
   scJQUploadAdd(iLine);
   scJQPasswordToggleAdd(iLine);
   scJQSelect2Add(iLine);
-  setTimeout(function () { if ('function' == typeof displayChange_field_colores_) { displayChange_field_colores_(iLine, "on"); } }, 150);
-  setTimeout(function () { if ('function' == typeof displayChange_field_tallas_) { displayChange_field_tallas_(iLine, "on"); } }, 150);
-  setTimeout(function () { if ('function' == typeof displayChange_field_sabor_) { displayChange_field_sabor_(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_idpro_) { displayChange_field_idpro_(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_idbod_) { displayChange_field_idbod_(iLine, "on"); } }, 150);
-  setTimeout(function () { if ('function' == typeof displayChange_field_unidadmayor_) { displayChange_field_unidadmayor_(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)

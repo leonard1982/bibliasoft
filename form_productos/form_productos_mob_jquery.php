@@ -2260,7 +2260,7 @@ function scJQUploadAdd(iSeqRow) {
   $("#id_sc_field_imagen" + iSeqRow).fileupload({
     datatype: "json",
     url: "form_productos_mob_ul_save.php",
-    dropZone: $("#hidden_field_data_imagen" + iSeqRow),
+    dropZone: "",
     formData: function() {
       return [
         {name: 'param_field', value: 'imagen'},
@@ -2369,7 +2369,7 @@ function scJQUploadAdd(iSeqRow) {
   $("#id_sc_field_imagenprod" + iSeqRow).fileupload({
     datatype: "json",
     url: "form_productos_mob_ul_save.php",
-    dropZone: $("#hidden_field_data_imagenprod" + iSeqRow),
+    dropZone: "",
     formData: function() {
       return [
         {name: 'param_field', value: 'imagenprod'},

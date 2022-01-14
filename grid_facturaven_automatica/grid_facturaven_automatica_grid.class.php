@@ -158,6 +158,8 @@ class grid_facturaven_automatica_grid
    var $idcli;
    var $direccion2;
    var $total;
+   var $clasificacion;
+   var $id_clasificacion;
    var $fechaven;
    var $fechavenc;
    var $subtotal;
@@ -237,13 +239,11 @@ class grid_facturaven_automatica_grid
        if ($nmgrp_apl_opcao != "pdf")
        { 
            $this->nmgp_barra_top();
-           $this->nmgp_embbed_placeholder_top();
        } 
        unset ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['save_grid']);
        $this->grid();
        if ($nmgrp_apl_opcao != "pdf")
        { 
-           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot();
        } 
        $nm_saida->saida("   </table>\r\n");
@@ -481,7 +481,7 @@ class grid_facturaven_automatica_grid
    $this->nmgp_botoes['group_1'] = "on";
    $this->nmgp_botoes['group_2'] = "on";
    $this->nmgp_botoes['group_1'] = "on";
-   $this->nmgp_botoes['exit'] = "off";
+   $this->nmgp_botoes['exit'] = "on";
    $this->nmgp_botoes['first'] = "on";
    $this->nmgp_botoes['back'] = "on";
    $this->nmgp_botoes['forward'] = "on";
@@ -512,6 +512,22 @@ class grid_facturaven_automatica_grid
    $this->nmgp_botoes['Eliminar'] = "on";
    $this->nmgp_botoes['btn_copiar_rango'] = "on";
    $this->nmgp_botoes['btn_generar'] = "on";
+   $this->Cmps_ord_def['numfacven'] = " desc";
+   $this->Cmps_ord_def['resolucion'] = " desc";
+   $this->Cmps_ord_def['credito'] = " desc";
+   $this->Cmps_ord_def['idcli'] = " desc";
+   $this->Cmps_ord_def['direccion2'] = " asc";
+   $this->Cmps_ord_def['total'] = " desc";
+   $this->Cmps_ord_def['clasificacion'] = " desc";
+   $this->Cmps_ord_def['id_clasificacion'] = " desc";
+   $this->Cmps_ord_def['fechaven'] = " desc";
+   $this->Cmps_ord_def['fechavenc'] = " desc";
+   $this->Cmps_ord_def['subtotal'] = " desc";
+   $this->Cmps_ord_def['valoriva'] = " desc";
+   $this->Cmps_ord_def['observaciones'] = " asc";
+   $this->Cmps_ord_def['vendedor'] = " desc";
+   $this->Cmps_ord_def['banco'] = " desc";
+   $this->Cmps_ord_def['dias_decredito'] = " desc";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_automatica']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_automatica']['btn_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven_automatica']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
@@ -1143,7 +1159,7 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
    $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['tot_geral'][1];
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_resumo'])) 
    { 
-       $nmgp_select = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
        $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_pesq']; 
        if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_pesq'])) 
        { 
@@ -1224,27 +1240,27 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, convert(char(23),fechaven,121), convert(char(23),fechavenc,121), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, convert(char(23),fechaven,121), convert(char(23),fechavenc,121), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, EXTEND(fechaven, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, EXTEND(fechaven, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_resumo'])) 
@@ -1348,31 +1364,35 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
        $this->total = $this->rs_grid->fields[5] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
-       $this->fechaven = $this->rs_grid->fields[6] ;  
-       $this->fechavenc = $this->rs_grid->fields[7] ;  
-       $this->subtotal = $this->rs_grid->fields[8] ;  
+       $this->clasificacion = $this->rs_grid->fields[6] ;  
+       $this->clasificacion = (string)$this->clasificacion;
+       $this->id_clasificacion = $this->rs_grid->fields[7] ;  
+       $this->id_clasificacion = (string)$this->id_clasificacion;
+       $this->fechaven = $this->rs_grid->fields[8] ;  
+       $this->fechavenc = $this->rs_grid->fields[9] ;  
+       $this->subtotal = $this->rs_grid->fields[10] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[9] ;  
+       $this->valoriva = $this->rs_grid->fields[11] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->observaciones = $this->rs_grid->fields[10] ;  
-       $this->vendedor = $this->rs_grid->fields[11] ;  
+       $this->observaciones = $this->rs_grid->fields[12] ;  
+       $this->vendedor = $this->rs_grid->fields[13] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->banco = $this->rs_grid->fields[12] ;  
+       $this->banco = $this->rs_grid->fields[14] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[13] ;  
+       $this->dias_decredito = $this->rs_grid->fields[15] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->idfacven = $this->rs_grid->fields[14] ;  
+       $this->idfacven = $this->rs_grid->fields[16] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->pagada = $this->rs_grid->fields[15] ;  
-       $this->asentada = $this->rs_grid->fields[16] ;  
+       $this->pagada = $this->rs_grid->fields[17] ;  
+       $this->asentada = $this->rs_grid->fields[18] ;  
        $this->asentada = (string)$this->asentada;
-       $this->adicional = $this->rs_grid->fields[17] ;  
+       $this->adicional = $this->rs_grid->fields[19] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->tipo = $this->rs_grid->fields[18] ;  
-       $this->nomcliente = $this->rs_grid->fields[19] ;  
+       $this->tipo = $this->rs_grid->fields[20] ;  
+       $this->nomcliente = $this->rs_grid->fields[21] ;  
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig']))
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1405,9 +1425,13 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
        $GLOBALS["resolucion"] = (string)$GLOBALS["resolucion"] ;
        $GLOBALS["idcli"] = $this->rs_grid->fields[3] ;  
        $GLOBALS["idcli"] = (string)$GLOBALS["idcli"] ;
-       $GLOBALS["vendedor"] = $this->rs_grid->fields[11] ;  
+       $GLOBALS["clasificacion"] = $this->rs_grid->fields[6] ;  
+       $GLOBALS["clasificacion"] = (string)$GLOBALS["clasificacion"] ;
+       $GLOBALS["id_clasificacion"] = $this->rs_grid->fields[7] ;  
+       $GLOBALS["id_clasificacion"] = (string)$GLOBALS["id_clasificacion"] ;
+       $GLOBALS["vendedor"] = $this->rs_grid->fields[13] ;  
        $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"] ;
-       $GLOBALS["banco"] = $this->rs_grid->fields[12] ;  
+       $GLOBALS["banco"] = $this->rs_grid->fields[14] ;  
        $GLOBALS["banco"] = (string)$GLOBALS["banco"] ;
        $this->arg_sum_resolucion = ($this->resolucion == "") ? " is null " : " = " . $this->resolucion;
        $this->arg_sum_credito = ($this->credito == "") ? " is null " : " = " . $this->credito;
@@ -1571,20 +1595,22 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
            $this->idcli = $this->rs_grid->fields[3] ;  
            $this->direccion2 = $this->rs_grid->fields[4] ;  
            $this->total = $this->rs_grid->fields[5] ;  
-           $this->fechaven = $this->rs_grid->fields[6] ;  
-           $this->fechavenc = $this->rs_grid->fields[7] ;  
-           $this->subtotal = $this->rs_grid->fields[8] ;  
-           $this->valoriva = $this->rs_grid->fields[9] ;  
-           $this->observaciones = $this->rs_grid->fields[10] ;  
-           $this->vendedor = $this->rs_grid->fields[11] ;  
-           $this->banco = $this->rs_grid->fields[12] ;  
-           $this->dias_decredito = $this->rs_grid->fields[13] ;  
-           $this->idfacven = $this->rs_grid->fields[14] ;  
-           $this->pagada = $this->rs_grid->fields[15] ;  
-           $this->asentada = $this->rs_grid->fields[16] ;  
-           $this->adicional = $this->rs_grid->fields[17] ;  
-           $this->tipo = $this->rs_grid->fields[18] ;  
-           $this->nomcliente = $this->rs_grid->fields[19] ;  
+           $this->clasificacion = $this->rs_grid->fields[6] ;  
+           $this->id_clasificacion = $this->rs_grid->fields[7] ;  
+           $this->fechaven = $this->rs_grid->fields[8] ;  
+           $this->fechavenc = $this->rs_grid->fields[9] ;  
+           $this->subtotal = $this->rs_grid->fields[10] ;  
+           $this->valoriva = $this->rs_grid->fields[11] ;  
+           $this->observaciones = $this->rs_grid->fields[12] ;  
+           $this->vendedor = $this->rs_grid->fields[13] ;  
+           $this->banco = $this->rs_grid->fields[14] ;  
+           $this->dias_decredito = $this->rs_grid->fields[15] ;  
+           $this->idfacven = $this->rs_grid->fields[16] ;  
+           $this->pagada = $this->rs_grid->fields[17] ;  
+           $this->asentada = $this->rs_grid->fields[18] ;  
+           $this->adicional = $this->rs_grid->fields[19] ;  
+           $this->tipo = $this->rs_grid->fields[20] ;  
+           $this->nomcliente = $this->rs_grid->fields[21] ;  
            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig']))
            {
                foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1665,10 +1691,10 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
+                    <meta name="msapplication-TileColor" content="#61678C">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#009B60<?php if (isset($str_grid_header_bg)) echo $str_grid_header_bg; ?>">
+                    <meta name="theme-color" content="#61678C">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#61678C">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1761,10 +1787,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#009061\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#61678C\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#009061\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#009061\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#61678C\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#61678C\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['doc_word'])
@@ -2799,6 +2825,10 @@ $nm_saida->saida("}\r\n");
    $this->css_direccion2_grid_line = $compl_css_emb . "css_direccion2_grid_line";
    $this->css_total_label = $compl_css_emb . "css_total_label";
    $this->css_total_grid_line = $compl_css_emb . "css_total_grid_line";
+   $this->css_clasificacion_label = $compl_css_emb . "css_clasificacion_label";
+   $this->css_clasificacion_grid_line = $compl_css_emb . "css_clasificacion_grid_line";
+   $this->css_id_clasificacion_label = $compl_css_emb . "css_id_clasificacion_label";
+   $this->css_id_clasificacion_grid_line = $compl_css_emb . "css_id_clasificacion_grid_line";
    $this->css_copiar_label = $compl_css_emb . "css_copiar_label";
    $this->css_copiar_grid_line = $compl_css_emb . "css_copiar_grid_line";
    $this->css_fechaven_label = $compl_css_emb . "css_fechaven_label";
@@ -3106,7 +3136,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['numfacven'])) ? $this->New_label['numfacven'] : "No"; 
    if (!isset($this->NM_cmp_hidden['numfacven']) || $this->NM_cmp_hidden['numfacven'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numfacven_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numfacven_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numfacven_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numfacven_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'numfacven')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('numfacven')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_resolucion()
@@ -3114,7 +3192,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['resolucion'])) ? $this->New_label['resolucion'] : "Prefijo"; 
    if (!isset($this->NM_cmp_hidden['resolucion']) || $this->NM_cmp_hidden['resolucion'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_resolucion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_resolucion_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_resolucion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_resolucion_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'resolucion')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('resolucion')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_credito()
@@ -3122,7 +3248,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['credito'])) ? $this->New_label['credito'] : "Forma Pago"; 
    if (!isset($this->NM_cmp_hidden['credito']) || $this->NM_cmp_hidden['credito'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_credito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_credito_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_credito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_credito_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'credito')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('credito')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_idcli()
@@ -3130,7 +3304,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['idcli'])) ? $this->New_label['idcli'] : "Cliente"; 
    if (!isset($this->NM_cmp_hidden['idcli']) || $this->NM_cmp_hidden['idcli'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idcli_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idcli_label'] . "\" NOWRAP WIDTH=\"200px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idcli_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idcli_label'] . "\" NOWRAP WIDTH=\"200px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'idcli')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('idcli')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_direccion2()
@@ -3138,7 +3360,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['direccion2'])) ? $this->New_label['direccion2'] : "Dirección"; 
    if (!isset($this->NM_cmp_hidden['direccion2']) || $this->NM_cmp_hidden['direccion2'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_direccion2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_direccion2_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_direccion2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_direccion2_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'direccion2')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('direccion2')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_total()
@@ -3146,7 +3416,167 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['total'])) ? $this->New_label['total'] : "Total"; 
    if (!isset($this->NM_cmp_hidden['total']) || $this->NM_cmp_hidden['total'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_total_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_total_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_total_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_total_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'total')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('total')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
+ function NM_label_clasificacion()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['clasificacion'])) ? $this->New_label['clasificacion'] : "Clasificacion"; 
+   if (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_clasificacion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_clasificacion_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'clasificacion')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('clasificacion')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
+ function NM_label_id_clasificacion()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['id_clasificacion'])) ? $this->New_label['id_clasificacion'] : "Tipo"; 
+   if (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_id_clasificacion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_id_clasificacion_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'id_clasificacion')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('id_clasificacion')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_copiar()
@@ -3162,7 +3592,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['fechaven'])) ? $this->New_label['fechaven'] : "Fecha"; 
    if (!isset($this->NM_cmp_hidden['fechaven']) || $this->NM_cmp_hidden['fechaven'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechaven_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechaven_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechaven_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechaven_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'fechaven')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('fechaven')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_fechavenc()
@@ -3170,7 +3648,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['fechavenc'])) ? $this->New_label['fechavenc'] : "Fechavenc"; 
    if (!isset($this->NM_cmp_hidden['fechavenc']) || $this->NM_cmp_hidden['fechavenc'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechavenc_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechavenc_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechavenc_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechavenc_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'fechavenc')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('fechavenc')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_subtotal()
@@ -3178,7 +3704,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['subtotal'])) ? $this->New_label['subtotal'] : "SubTotal"; 
    if (!isset($this->NM_cmp_hidden['subtotal']) || $this->NM_cmp_hidden['subtotal'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_subtotal_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_subtotal_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_subtotal_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_subtotal_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'subtotal')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('subtotal')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_valoriva()
@@ -3186,7 +3760,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['valoriva'])) ? $this->New_label['valoriva'] : "IVA"; 
    if (!isset($this->NM_cmp_hidden['valoriva']) || $this->NM_cmp_hidden['valoriva'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_valoriva_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_valoriva_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_valoriva_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_valoriva_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'valoriva')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('valoriva')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_observaciones()
@@ -3194,7 +3816,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Observaciones"; 
    if (!isset($this->NM_cmp_hidden['observaciones']) || $this->NM_cmp_hidden['observaciones'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_observaciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_observaciones_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_observaciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_observaciones_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'observaciones')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('observaciones')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_vendedor()
@@ -3202,7 +3872,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['vendedor'])) ? $this->New_label['vendedor'] : " Vendedor"; 
    if (!isset($this->NM_cmp_hidden['vendedor']) || $this->NM_cmp_hidden['vendedor'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_vendedor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_vendedor_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_vendedor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_vendedor_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'vendedor')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('vendedor')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_banco()
@@ -3210,7 +3928,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['banco'])) ? $this->New_label['banco'] : "Caja"; 
    if (!isset($this->NM_cmp_hidden['banco']) || $this->NM_cmp_hidden['banco'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_banco_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_banco_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_banco_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_banco_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'banco')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('banco')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_dias_decredito()
@@ -3218,7 +3984,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['dias_decredito'])) ? $this->New_label['dias_decredito'] : "Dias Decredito"; 
    if (!isset($this->NM_cmp_hidden['dias_decredito']) || $this->NM_cmp_hidden['dias_decredito'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_dias_decredito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_dias_decredito_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_dias_decredito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_dias_decredito_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_cmp'] == 'dias_decredito')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('dias_decredito')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
 // 
@@ -3263,6 +4077,10 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['direccion2'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['total'])) ? $this->New_label['total'] : "Total"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['total'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['clasificacion'])) ? $this->New_label['clasificacion'] : "Clasificacion"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['clasificacion'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['id_clasificacion'])) ? $this->New_label['id_clasificacion'] : "Tipo"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['id_clasificacion'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['copiar'])) ? $this->New_label['copiar'] : "Duplicar"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['copiar'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['fechaven'])) ? $this->New_label['fechaven'] : "Fecha"; 
@@ -3706,31 +4524,35 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
           $this->total = $this->rs_grid->fields[5] ;  
           $this->total =  str_replace(",", ".", $this->total);
           $this->total = (string)$this->total;
-          $this->fechaven = $this->rs_grid->fields[6] ;  
-          $this->fechavenc = $this->rs_grid->fields[7] ;  
-          $this->subtotal = $this->rs_grid->fields[8] ;  
+          $this->clasificacion = $this->rs_grid->fields[6] ;  
+          $this->clasificacion = (string)$this->clasificacion;
+          $this->id_clasificacion = $this->rs_grid->fields[7] ;  
+          $this->id_clasificacion = (string)$this->id_clasificacion;
+          $this->fechaven = $this->rs_grid->fields[8] ;  
+          $this->fechavenc = $this->rs_grid->fields[9] ;  
+          $this->subtotal = $this->rs_grid->fields[10] ;  
           $this->subtotal =  str_replace(",", ".", $this->subtotal);
           $this->subtotal = (string)$this->subtotal;
-          $this->valoriva = $this->rs_grid->fields[9] ;  
+          $this->valoriva = $this->rs_grid->fields[11] ;  
           $this->valoriva =  str_replace(",", ".", $this->valoriva);
           $this->valoriva = (string)$this->valoriva;
-          $this->observaciones = $this->rs_grid->fields[10] ;  
-          $this->vendedor = $this->rs_grid->fields[11] ;  
+          $this->observaciones = $this->rs_grid->fields[12] ;  
+          $this->vendedor = $this->rs_grid->fields[13] ;  
           $this->vendedor = (string)$this->vendedor;
-          $this->banco = $this->rs_grid->fields[12] ;  
+          $this->banco = $this->rs_grid->fields[14] ;  
           $this->banco = (string)$this->banco;
-          $this->dias_decredito = $this->rs_grid->fields[13] ;  
+          $this->dias_decredito = $this->rs_grid->fields[15] ;  
           $this->dias_decredito = (string)$this->dias_decredito;
-          $this->idfacven = $this->rs_grid->fields[14] ;  
+          $this->idfacven = $this->rs_grid->fields[16] ;  
           $this->idfacven = (string)$this->idfacven;
-          $this->pagada = $this->rs_grid->fields[15] ;  
-          $this->asentada = $this->rs_grid->fields[16] ;  
+          $this->pagada = $this->rs_grid->fields[17] ;  
+          $this->asentada = $this->rs_grid->fields[18] ;  
           $this->asentada = (string)$this->asentada;
-          $this->adicional = $this->rs_grid->fields[17] ;  
+          $this->adicional = $this->rs_grid->fields[19] ;  
           $this->adicional =  str_replace(",", ".", $this->adicional);
           $this->adicional = (string)$this->adicional;
-          $this->tipo = $this->rs_grid->fields[18] ;  
-          $this->nomcliente = $this->rs_grid->fields[19] ;  
+          $this->tipo = $this->rs_grid->fields[20] ;  
+          $this->nomcliente = $this->rs_grid->fields[21] ;  
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig']))
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -3763,9 +4585,13 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
           $GLOBALS["resolucion"] = (string)$GLOBALS["resolucion"];
           $GLOBALS["idcli"] = $this->rs_grid->fields[3] ;  
           $GLOBALS["idcli"] = (string)$GLOBALS["idcli"];
-          $GLOBALS["vendedor"] = $this->rs_grid->fields[11] ;  
+          $GLOBALS["clasificacion"] = $this->rs_grid->fields[6] ;  
+          $GLOBALS["clasificacion"] = (string)$GLOBALS["clasificacion"];
+          $GLOBALS["id_clasificacion"] = $this->rs_grid->fields[7] ;  
+          $GLOBALS["id_clasificacion"] = (string)$GLOBALS["id_clasificacion"];
+          $GLOBALS["vendedor"] = $this->rs_grid->fields[13] ;  
           $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"];
-          $GLOBALS["banco"] = $this->rs_grid->fields[12] ;  
+          $GLOBALS["banco"] = $this->rs_grid->fields[14] ;  
           $GLOBALS["banco"] = (string)$GLOBALS["banco"];
           $this->arg_sum_resolucion = ($this->resolucion == "") ? " is null " : " = " . $this->resolucion;
           $this->arg_sum_credito = ($this->credito == "") ? " is null " : " = " . $this->credito;
@@ -4617,6 +5443,66 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_total_grid_line . "\"  style=\"" . $this->Css_Cmp['css_total_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_total_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_clasificacion()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off") { 
+          $conteudo = sc_strip_script($this->clasificacion); 
+          $conteudo_original = sc_strip_script($this->clasificacion); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $this->Lookup->lookup_clasificacion($conteudo , $this->clasificacion) ; 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'clasificacion', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'clasificacion', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_clasificacion_grid_line . "\"  style=\"" . $this->Css_Cmp['css_clasificacion_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_clasificacion_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_id_clasificacion()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off") { 
+          $conteudo = sc_strip_script($this->id_clasificacion); 
+          $conteudo_original = sc_strip_script($this->id_clasificacion); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $this->Lookup->lookup_id_clasificacion($conteudo , $this->id_clasificacion) ; 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'id_clasificacion', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'id_clasificacion', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_id_clasificacion_grid_line . "\"  style=\"" . $this->Css_Cmp['css_id_clasificacion_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_id_clasificacion_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_copiar()
  {
       global $nm_saida;
@@ -4954,7 +5840,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 17;
+   $this->NM_colspan  = 19;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -5726,6 +6612,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -5910,6 +6804,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -6094,6 +6996,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -6278,6 +7188,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -6462,6 +7380,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -6646,6 +7572,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -6828,6 +7762,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7010,6 +7952,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7192,6 +8142,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7374,6 +8332,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7547,6 +8513,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7720,6 +8694,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7893,6 +8875,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8066,6 +9056,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8239,6 +9237,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8412,6 +9418,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8585,6 +9599,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8758,6 +9780,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_total_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8895,6 +9925,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -9027,6 +10065,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -9159,6 +10205,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -9291,6 +10345,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -9423,6 +10485,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -9555,6 +10625,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -9687,6 +10765,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -9819,6 +10905,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -9951,6 +11045,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -10083,6 +11185,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -10215,6 +11325,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       nmgp_Form_Num_Val($conteudo, ",", ".", "2", "S", "2", "$", "V:3:12", "-"); 
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_total_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
+    if ($Cada_cmp == "clasificacion" && (!isset($this->NM_cmp_hidden['clasificacion']) || $this->NM_cmp_hidden['clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -10661,12 +11779,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
       } 
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
-      if (!$this->Ini->SC_Link_View && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['sc_modal'])
-      {
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-            $nm_saida->saida("           $Cod_Btn \r\n");
-            $NM_btn = true;
-      }
           if (is_file("grid_facturaven_automatica_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_facturaven_automatica_help.txt"); 
@@ -11300,6 +12412,39 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
                  }
              }
           }
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['b_sair'] || $this->grid_emb_form || $this->grid_emb_form_full || (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['dashboard_info']['under_dashboard']))
+      {
+         $this->nmgp_botoes['exit'] = "off"; 
+      }
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opc_psq'])
+      {
+          $this->nm_btn_exist['exit'][] = "sai_top";
+         if ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") 
+         { 
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+            $nm_saida->saida("           $Cod_Btn \r\n");
+            $NM_btn = true;
+         } 
+         elseif (!$this->Ini->SC_Link_View && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") 
+         { 
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+            $nm_saida->saida("           $Cod_Btn \r\n");
+            $NM_btn = true;
+         } 
+      }
+      elseif ($this->nmgp_botoes['exit'] == "on")
+      {
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['sc_modal'])
+        {
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+        }
+        else
+        {
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+        }
+         $nm_saida->saida("           $Cod_Btn \r\n");
+         $NM_btn = true;
+      }
       }
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
@@ -11542,23 +12687,27 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
    }
    function nmgp_barra_top()
    {
-       if(isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
        {
            $this->nmgp_barra_top_mobile();
+           $this->nmgp_embbed_placeholder_top();
        }
-       else
+       if (!isset($_SESSION['scriptcase']['proc_mobile']) || !$_SESSION['scriptcase']['proc_mobile'])
        {
            $this->nmgp_barra_top_normal();
+           $this->nmgp_embbed_placeholder_top();
        }
    }
    function nmgp_barra_bot()
    {
-       if(isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
+       if (isset($_SESSION['scriptcase']['proc_mobile']) && $_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot_mobile();
        }
-       else
+       if (!isset($_SESSION['scriptcase']['proc_mobile']) || !$_SESSION['scriptcase']['proc_mobile'])
        {
+           $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot_normal();
        }
    }
@@ -13603,15 +14752,15 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'on';
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20),str_replace (convert(char(10),f.creado,102), '.', '-') + ' ' + convert(char(8),f.creado,20),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,convert(char(23),f.fechaven,121),convert(char(23),f.creado,121),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,f.creado,f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
