@@ -65,7 +65,7 @@ class grid_terceros_contratos_generar_fv_total
    //---- 
    function quebra_geral_sc_free_group_by($res_limit=false)
    {
-      global $nada, $nm_lang , $cliente, $zona;
+      global $nada, $nm_lang , $cliente, $zona, $estado;
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['contr_total_geral'] == "OK") 
       { 
           return; 
@@ -99,7 +99,7 @@ class grid_terceros_contratos_generar_fv_total
    function quebra_cliente_sc_free_group_by($cliente, $Where_qb, $Cmp_Name) 
    {
       $Var_name_gb = "SC_tot_" . $Cmp_Name;
-      global $$Var_name_gb, $cliente, $zona;
+      global $$Var_name_gb, $cliente, $zona, $estado;
       $tot_cliente = array() ;  
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
@@ -136,7 +136,7 @@ class grid_terceros_contratos_generar_fv_total
    function quebra_fecha_contrato_sc_free_group_by($fecha_contrato, $Where_qb, $Cmp_Name) 
    {
       $Var_name_gb = "SC_tot_" . $Cmp_Name;
-      global $$Var_name_gb, $cliente, $zona;
+      global $$Var_name_gb, $cliente, $zona, $estado;
       $tot_fecha_contrato = array() ;  
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
@@ -173,7 +173,7 @@ class grid_terceros_contratos_generar_fv_total
    function quebra_fecha_inicio_sc_free_group_by($fecha_inicio, $Where_qb, $Cmp_Name) 
    {
       $Var_name_gb = "SC_tot_" . $Cmp_Name;
-      global $$Var_name_gb, $cliente, $zona;
+      global $$Var_name_gb, $cliente, $zona, $estado;
       $tot_fecha_inicio = array() ;  
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
@@ -210,7 +210,7 @@ class grid_terceros_contratos_generar_fv_total
    function quebra_estado_sc_free_group_by($estado, $Where_qb, $Cmp_Name) 
    {
       $Var_name_gb = "SC_tot_" . $Cmp_Name;
-      global $$Var_name_gb, $cliente, $zona;
+      global $$Var_name_gb, $cliente, $zona, $estado;
       $tot_estado = array() ;  
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
@@ -247,7 +247,7 @@ class grid_terceros_contratos_generar_fv_total
    function quebra_zona_sc_free_group_by($zona, $Where_qb, $Cmp_Name) 
    {
       $Var_name_gb = "SC_tot_" . $Cmp_Name;
-      global $$Var_name_gb, $cliente, $zona;
+      global $$Var_name_gb, $cliente, $zona, $estado;
       $tot_zona = array() ;  
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
@@ -284,7 +284,7 @@ class grid_terceros_contratos_generar_fv_total
    function quebra_barrio_sc_free_group_by($barrio, $Where_qb, $Cmp_Name) 
    {
       $Var_name_gb = "SC_tot_" . $Cmp_Name;
-      global $$Var_name_gb, $cliente, $zona;
+      global $$Var_name_gb, $cliente, $zona, $estado;
       $tot_barrio = array() ;  
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
@@ -321,7 +321,7 @@ class grid_terceros_contratos_generar_fv_total
    function quebra_precinto_sc_free_group_by($precinto, $Where_qb, $Cmp_Name) 
    {
       $Var_name_gb = "SC_tot_" . $Cmp_Name;
-      global $$Var_name_gb, $cliente, $zona;
+      global $$Var_name_gb, $cliente, $zona, $estado;
       $tot_precinto = array() ;  
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 

@@ -426,6 +426,10 @@ class grid_terceros_contratos_generar_fv_json
          $this->look_zona = $this->zona; 
          $this->Lookup->lookup_zona($this->look_zona, $this->zona) ; 
          $this->look_zona = ($this->look_zona == "&nbsp;") ? "" : $this->look_zona; 
+         //----- lookup - estado
+         $this->look_estado = $this->estado; 
+         $this->Lookup->lookup_estado($this->look_estado, $this->estado) ; 
+         $this->look_estado = ($this->look_estado == "&nbsp;") ? "" : $this->look_estado; 
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'on';
  if($this->fecha_factura >0)
@@ -642,7 +646,7 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
    //----- estado
    function NM_export_estado()
    {
-         $this->estado = NM_charset_to_utf8($this->estado);
+         $this->look_estado = NM_charset_to_utf8($this->look_estado);
          if ($this->Json_use_label)
          {
              $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Estado"; 
@@ -652,7 +656,7 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
              $SC_Label = "estado"; 
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->estado;
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_estado;
    }
    //----- mensualidad
    function NM_export_mensualidad()

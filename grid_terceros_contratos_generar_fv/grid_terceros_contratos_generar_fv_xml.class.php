@@ -470,6 +470,10 @@ class grid_terceros_contratos_generar_fv_xml
          $this->look_zona = $this->zona; 
          $this->Lookup->lookup_zona($this->look_zona, $this->zona) ; 
          $this->look_zona = ($this->look_zona == "&nbsp;") ? "" : $this->look_zona; 
+         //----- lookup - estado
+         $this->look_estado = $this->estado; 
+         $this->Lookup->lookup_estado($this->look_estado, $this->estado) ; 
+         $this->look_estado = ($this->look_estado == "&nbsp;") ? "" : $this->look_estado; 
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'on';
  if($this->fecha_factura >0)
@@ -815,9 +819,9 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
    //----- estado
    function NM_export_estado()
    {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->estado))
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_estado))
          {
-             $this->estado = sc_convert_encoding($this->estado, "UTF-8", $_SESSION['scriptcase']['charset']);
+             $this->look_estado = sc_convert_encoding($this->look_estado, "UTF-8", $_SESSION['scriptcase']['charset']);
          }
          if ($this->Xml_tag_label)
          {
@@ -830,11 +834,11 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
          $this->clear_tag($SC_Label); 
          if ($this->New_Format)
          {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->estado) . "</" . $SC_Label . ">\r\n";
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_estado) . "</" . $SC_Label . ">\r\n";
          }
          else
          {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->estado) . "\"";
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_estado) . "\"";
          }
    }
    //----- mensualidad

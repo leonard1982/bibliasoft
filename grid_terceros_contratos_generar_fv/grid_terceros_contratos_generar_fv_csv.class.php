@@ -658,6 +658,10 @@ class grid_terceros_contratos_generar_fv_csv
          $this->look_zona = $this->zona; 
          $this->Lookup->lookup_zona($this->look_zona, $this->zona) ; 
          $this->look_zona = ($this->look_zona == "&nbsp;") ? "" : $this->look_zona; 
+         //----- lookup - estado
+         $this->look_estado = $this->estado; 
+         $this->Lookup->lookup_estado($this->look_estado, $this->estado) ; 
+         $this->look_estado = ($this->look_estado == "&nbsp;") ? "" : $this->look_estado; 
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'on';
  if($this->fecha_factura >0)
@@ -830,7 +834,7 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
    function NM_export_estado()
    {
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->estado);
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->look_estado);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }

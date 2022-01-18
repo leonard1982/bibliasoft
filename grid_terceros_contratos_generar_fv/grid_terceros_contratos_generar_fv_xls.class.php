@@ -724,6 +724,10 @@ class grid_terceros_contratos_generar_fv_xls
          $this->look_zona = $this->zona; 
          $this->Lookup->lookup_zona($this->look_zona, $this->zona) ; 
          $this->look_zona = ($this->look_zona == "&nbsp;") ? "" : $this->look_zona; 
+         //----- lookup - estado
+         $this->look_estado = $this->estado; 
+         $this->Lookup->lookup_estado($this->look_estado, $this->estado) ; 
+         $this->look_estado = ($this->look_estado == "&nbsp;") ? "" : $this->look_estado; 
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'on';
  if($this->fecha_factura >0)
@@ -1773,14 +1777,14 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
              $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->estado = html_entity_decode($this->estado, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->estado = strip_tags($this->estado);
-         $this->estado = NM_charset_to_utf8($this->estado);
+         $this->look_estado = html_entity_decode($this->look_estado, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_estado = strip_tags($this->look_estado);
+         $this->look_estado = NM_charset_to_utf8($this->look_estado);
          if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->estado, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_estado, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
          }
          else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->estado, PHPExcel_Cell_DataType::TYPE_STRING);
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_estado, PHPExcel_Cell_DataType::TYPE_STRING);
          }
          $this->Xls_col++;
    }
@@ -2279,11 +2283,11 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
    //----- estado
    function NM_sub_cons_estado()
    {
-         $this->estado = html_entity_decode($this->estado, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->estado = strip_tags($this->estado);
-         $this->estado = NM_charset_to_utf8($this->estado);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->estado;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->look_estado = html_entity_decode($this->look_estado, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_estado = strip_tags($this->look_estado);
+         $this->look_estado = NM_charset_to_utf8($this->look_estado);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_estado;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;

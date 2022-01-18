@@ -596,6 +596,10 @@ class grid_terceros_contratos_generar_fv_rtf
          $this->look_zona = $this->zona; 
          $this->Lookup->lookup_zona($this->look_zona, $this->zona) ; 
          $this->look_zona = ($this->look_zona == "&nbsp;") ? "" : $this->look_zona; 
+         //----- lookup - estado
+         $this->look_estado = $this->estado; 
+         $this->Lookup->lookup_estado($this->look_estado, $this->estado) ; 
+         $this->look_estado = ($this->look_estado == "&nbsp;") ? "" : $this->look_estado; 
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'on';
  if($this->fecha_factura >0)
@@ -674,12 +678,12 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
    //----- estado
    function NM_export_estado()
    {
-         $this->estado = html_entity_decode($this->estado, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->estado = strip_tags($this->estado);
-         $this->estado = NM_charset_to_utf8($this->estado);
-         $this->estado = str_replace('<', '&lt;', $this->estado);
-         $this->estado = str_replace('>', '&gt;', $this->estado);
-         $this->Texto_tag .= "<td>" . $this->estado . "</td>\r\n";
+         $this->look_estado = html_entity_decode($this->look_estado, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->look_estado = strip_tags($this->look_estado);
+         $this->look_estado = NM_charset_to_utf8($this->look_estado);
+         $this->look_estado = str_replace('<', '&lt;', $this->look_estado);
+         $this->look_estado = str_replace('>', '&gt;', $this->look_estado);
+         $this->Texto_tag .= "<td>" . $this->look_estado . "</td>\r\n";
    }
    //----- mensualidad
    function NM_export_mensualidad()

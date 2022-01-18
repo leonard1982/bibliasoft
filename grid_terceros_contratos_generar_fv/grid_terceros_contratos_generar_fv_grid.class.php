@@ -1083,6 +1083,7 @@ class grid_terceros_contratos_generar_fv_grid
        if (!isset($this->precinto)) { $this->precinto = ""; }
        $GLOBALS["cliente"] = $this->rs_grid->fields[1] ;  
        $GLOBALS["zona"] = $this->rs_grid->fields[3] ;  
+       $GLOBALS["estado"] = $this->rs_grid->fields[4] ;  
        $this->arg_sum_cliente = " = " . $this->Db->qstr($this->cliente);
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['SC_Ind_Groupby'] == "sc_free_group_by")
        {
@@ -4695,6 +4696,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_genera
           if (!isset($this->precinto)) { $this->precinto = ""; }
           $GLOBALS["cliente"] = $this->rs_grid->fields[1] ;  
           $GLOBALS["zona"] = $this->rs_grid->fields[3] ;  
+          $GLOBALS["estado"] = $this->rs_grid->fields[4] ;  
           $this->arg_sum_cliente = " = " . $this->Db->qstr($this->cliente);
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['SC_Ind_Groupby'] == "sc_free_group_by")
           {
@@ -5234,6 +5236,7 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
               $conteudo = "&nbsp;" ;  
               $graf = "" ;  
           } 
+          $this->Lookup->lookup_estado($conteudo , $this->estado) ; 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['embutida'] && !empty($conteudo)) 
           { 
