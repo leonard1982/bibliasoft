@@ -2118,7 +2118,7 @@ function scJQCalendarAdd() {
   str_out += 'SC_cliente#NMF#' + search_get_text('SC_cliente') + '@NMF@';
   str_out += 'id_ac_cliente#NMF#' + search_get_text('id_ac_cliente') + '@NMF@';
   str_out += 'SC_estado_cond#NMF#' + search_get_sel_txt('SC_estado_cond') + '@NMF@';
-  str_out += 'SC_estado#NMF#' + search_get_selmult('SC_estado') + '@NMF@';
+  str_out += 'SC_estado#NMF#' + search_get_select('SC_estado') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2538,35 +2538,6 @@ function nm_open_popup(parms)
       $str_display_cliente = ('bw' == $cliente_cond) ? $display_aberto : $display_fechado;
       $str_display_estado = ('bw' == $estado_cond) ? $display_aberto : $display_fechado;
 
-      // estado
-      if (is_array($estado) && !empty($estado))
-      {
-         $tmp_array = array();
-         $estado_val_str = "";
-         foreach ($estado as $tmp_val_cmp)
-         {
-            if ("" != $estado_val_str)
-            {
-               $estado_val_str .= ",";
-            }
-            $tmp_pos = strpos($tmp_val_cmp, "##@@");
-            if ($tmp_pos === false)
-            {
-                $tmp_array[] = $tmp_val_cmp;
-            }
-            else
-            {
-                $tmp_val_cmp = substr($tmp_val_cmp, 0, $tmp_pos);
-                $tmp_array[] = $tmp_val_cmp;
-            }
-            $estado_val_str .= "'$tmp_val_cmp'";
-         }
-         $estado = $tmp_array;
-      }
-      else
-      {
-         $estado_val_str = "''";
-      }
       if (!isset($zona) || $zona == "")
       {
           $zona = "";
@@ -2639,7 +2610,17 @@ function nm_open_popup(parms)
       }
       if (!isset($estado) || $estado == "")
       {
-          $estado = array();
+          $estado = "";
+      }
+      if (isset($estado) && !empty($estado))
+      {
+         $tmp_pos = strpos($estado, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $estado = substr($estado, 0, $tmp_pos);
+         }
       }
 ?>
  <TR align="center">
@@ -3186,7 +3167,7 @@ foreach ($Arr_format as $Part_date)
       } 
 ?>
    <span id="idAjaxSelect_estado">
-      <SELECT class="scFilterObjectEven" id="SC_estado" name="estado[]"  size="7" multiple>
+      <SELECT class="scFilterObjectEven" id="SC_estado" name="estado"  size="1">
        <OPTION value="">TODOS</OPTION>
 <?php
       $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
@@ -3198,17 +3179,9 @@ foreach ($Arr_format as $Part_date)
             $temp_bug_list = explode("?#?", $nm_opcao);
             list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
             if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
-            if (is_array($estado) && !empty($estado))
+            if ("" != $estado)
             {
-               $estado_sel = "";
-               foreach ($estado as $Dados)
-               {
-                   if ($Dados === $nm_opc_cod)
-                   {
-                       $estado_sel = "selected";
-                       break;
-                   }
-               }
+                    $estado_sel = ($nm_opc_cod === $estado) ? "selected" : "";
             }
             else
             {
@@ -3564,17 +3537,7 @@ foreach ($Arr_format as $Part_date)
    document.F1.cliente_autocomp.value = "";
    document.F1.estado_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_estado'), document.F1.estado_cond, 'estado');
-   for (i = 0; i < document.F1.elements.length; i++)
-   {
-      if (document.F1.elements[i].name == 'estado[]')
-      {
-          while (document.F1.elements[i].selectedIndex != -1)
-          {
-              aa = document.F1.elements[i].selectedIndex;
-              document.F1.elements[i].options[aa].selected = false;
-          }
-      }
-   }
+   document.F1.estado.value = "";
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -3780,7 +3743,7 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_cliente'] = 'text_aut';
       $tp_fields['id_ac_cliente'] = 'text_aut';
       $tp_fields['SC_estado_cond'] = 'cond';
-      $tp_fields['SC_estado'] = 'selmult';
+      $tp_fields['SC_estado'] = 'select';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -4015,20 +3978,15 @@ foreach ($Arr_format as $Part_date)
       {
           nm_limpa_numero($numero_contrato, $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
       }
-      if (is_array($estado)) {
-          foreach ($estado as $I => $Val) {
-              $tmp_pos = strpos($Val, "##@@");
-              if ($tmp_pos === false) {
-                  $L_lookup = $Val;
-              }
-              else {
-                  $L_lookup = substr($Val, 0, $tmp_pos);
-              }
-              if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && trim($L_lookup) != '' && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['psq_check_ret']['estado'])) {
-                  if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Estado : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                  break;
-              }
-          }
+      $tmp_pos = strpos($estado, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $estado;
+      }
+      else {
+          $L_lookup = substr($estado, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['psq_check_ret']['estado'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Estado : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['campos_busca']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['campos_busca']['zona'] = $zona; 
@@ -4075,6 +4033,13 @@ foreach ($Arr_format as $Part_date)
       {
           $zona = substr($zona, 0, $Tmp_pos);
           $zona_LKP = $zona;
+      }
+      $estado_LKP = $estado;
+      $Tmp_pos = strpos($estado, "##@@");
+      if ($Tmp_pos !== false)
+      {
+          $estado = substr($estado, 0, $Tmp_pos);
+          $estado_LKP = $estado;
       }
       $fecha_documento_day   = $fecha_documento_dia; 
       $fecha_documento_month = $fecha_documento_mes; 
@@ -4207,6 +4172,10 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
       if ($zona_LKP == $zona)
       {
           $zona = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['campos_busca']['zona'];
+      }
+      if ($estado_LKP == $estado)
+      {
+          $estado = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['campos_busca']['estado'];
       }
       if ($fecha_documento_day != $fecha_documento_diaSv)
       {
@@ -4452,8 +4421,12 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
       {
           $this->cmp_formatado['cliente'] = $cliente;
       }
-      $this->cmp_formatado['estado'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['campos_busca']['estado'];
-      $this->cmp_formatado['estado_input_2'] = $estado_input_2;
+      $Conteudo = $estado;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['estado'] = $Conteudo;
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['campos_busca_ant']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['campos_busca_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['campos_busca'];
@@ -4590,77 +4563,7 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
 
       //----- $estado
       $this->Date_part = false;
-      $nm_aspas = "'";
-      if ($estado_cond == "nu" || $estado_cond == "nn" || $estado_cond == "ep" || $estado_cond == "ne")
-      {
-          $estado = array();
-      }
-      if (is_array($estado) && count($estado) != 0)
-      {
-         foreach ($estado as $i => $dados)
-         {
-            $tmp_pos = strpos($dados, "##@@");
-            if (($tmp_pos === false && $dados == "") || $tmp_pos == 0)
-            {
-                unset($estado[$i]);
-            }
-         }
-      }
-      if (is_array($estado) && count($estado) != 0)
-      {
-         $this->and_or();
-         if ($estado_cond == "df" || $estado_cond == "np")
-         {
-             $this->comando        .= " estado not in (";
-             $this->comando_sum    .= " terceros_contratos.estado not in (";
-             $this->comando_filtro .= " estado not in (";
-         }
-         else
-         {
-             $this->comando        .= " estado in (";
-             $this->comando_sum    .= " terceros_contratos.estado in (";
-             $this->comando_filtro .= " estado in (";
-         }
-         $x                     = count($estado);
-         $xx                    = 0;
-         $nm_cond               = "";
-         foreach ($estado as $i => $dados)
-         {
-            $tmp_pos = strpos($dados, "##@@");
-            if ($tmp_pos === false)
-            {
-               $res_lookup = $dados;
-            }
-            else
-            {
-                $res_lookup = substr($dados, $tmp_pos + 4);
-                $dados = substr($dados, 0, $tmp_pos);
-            }
-            $dados  = substr($this->Db->qstr($dados), 1, -1);
-            $this->comando        .= "" . $nm_aspas . $dados . $nm_aspas . "";
-            $this->comando_sum    .= "" . $nm_aspas . $dados . $nm_aspas . "";
-            $this->comando_filtro .= "" . $nm_aspas . $dados . $nm_aspas . "";
-            $nm_cond              .= $res_lookup;
-            if ($xx != ($x - 1))
-            {
-               $this->comando        .= ",";
-               $this->comando_sum    .= ",";
-               $this->comando_filtro .= ",";
-               $nm_cond              .= " " . $this->Ini->Nm_lang['lang_srch_orr_cond'] . " ";
-            }
-            $xx++;
-         }
-         $this->comando        .= ")";
-         $this->comando_sum    .= ")";
-         $this->comando_filtro .= ")";
-         $Lang_descr = array();
-         $Lang_descr['eq'] = $this->Ini->Nm_lang['lang_srch_equl'];
-         $Lang_descr['df'] = $this->Ini->Nm_lang['lang_srch_diff'];
-         $Lang_descr['np'] = $this->Ini->Nm_lang['lang_srch_not_like'];
-         $Lang_descr_final = isset($Lang_descr[$estado_cond]) ? $Lang_descr[$estado_cond] : $this->Ini->Nm_lang['lang_srch_like'];
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['cond_pesq'] .= $nmgp_tab_label['estado'] . " " . $this->Ini->Nm_lang['lang_srch_like'] . " " . $nm_cond . "##*@@";
-      }
-      elseif (isset($estado) || $estado_cond == "nu" || $estado_cond == "nn" || $estado_cond == "ep" || $estado_cond == "ne")
+      if (isset($estado))
       {
          $this->monta_condicao("estado", $estado_cond, $estado, "", "estado");
       }
