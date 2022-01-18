@@ -1784,239 +1784,6 @@ $vertical_center = '';
  </script>
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_calendar.css" />
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_calendar<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
-<script type="text/javascript"> 
- var nm_quant_pack;
- // Adiciona um elemento
- //----------------------
- function nm_add_sel(sOrig, sDest, Saida, Order)
- {
-  // Recupera objetos
-  oOrig = document.F1.elements[sOrig];
-  oDest = document.F1.elements[sDest];
-  if (Order == 'S')
-  {
-     Order = '+';
-  }
-  // Varre itens da origem
-  for (i = 0; i < oOrig.length; i++)
-  {
-   // Item na origem selecionado e valido
-   if (oOrig.options[i].selected && !oOrig.options[i].disabled)
-   {
-    // Recupera valores da origem
-    sText  = Order + oOrig.options[i].text;
-    sValue = Order + oOrig.options[i].value;
-    // Cria item no destino
-    oDest.options[oDest.length] = new Option(sText, sValue);
-    // Desabilita item na origem
-    oOrig.options[i].style.color = "#A0A0A0";
-    oOrig.options[i].disabled    = true;
-    oOrig.options[i].selected    = false;
-   }
-  }
-  // Reset combos
-  oOrig.selectedIndex = -1;
-  oDest.selectedIndex = -1;
-  if (Saida == "R")
-  {
-      nm_refresh_form();
-  }
-  if (Saida == "S")
-  {
-      nm_submit_form();
-  }
- }
- // Adiciona todos os elementos
- //-----------------------------
- function nm_add_all(sOrig, sDest, Saida, Order)
- {
-  // Recupera objetos
-  oOrig = document.F1.elements[sOrig];
-  oDest = document.F1.elements[sDest];
-  if (Order == 'S')
-  {
-     Order = '+';
-  }
-  // Varre itens da origem
-  for (i = 0; i < oOrig.length; i++)
-  {
-   // Item na origem valido
-   if (!oOrig.options[i].disabled)
-   {
-    // Recupera valores da origem
-    sText  = Order + oOrig.options[i].text;
-    sValue = Order + oOrig.options[i].value;
-    // Cria item no destino
-    oDest.options[oDest.length] = new Option(sText, sValue);
-    // Desabilita item na origem
-    oOrig.options[i].style.color = "#A0A0A0";
-    oOrig.options[i].disabled    = true;
-    oOrig.options[i].selected    = false;
-   }
-  }
-  // Reset combos
-  oOrig.selectedIndex = -1;
-  oDest.selectedIndex = -1;
-  if (Saida == "R")
-  {
-      nm_refresh_form();
-  }
-  if (Saida == "S")
-  {
-      nm_submit_form();
-  }
- }
- // Remove um elemento
- //--------------------
- function nm_del_sel(sOrig, sDest, Saida, Order)
- {
-  // Recupera objetos
-  oOrig = document.F1.elements[sOrig];
-  oDest = document.F1.elements[sDest];
-  aSel  = new Array();
-  atxt  = new Array();
-  solt  = new Array();
-  j     = 0;
-  z     = 0;
-  // Remove itens selecionados na origem
-  for (i = oOrig.length - 1; i >= 0; i--)
-  {
-   // Item na origem selecionado
-   if (oOrig.options[i].selected)
-   {
-   if (Order == 'S')
-   {
-      aSel[j] = oOrig.options[i].value.substring(1);
-      atxt[j] = oOrig.options[i].text.substring(1);
-   }
-   else
-   {
-      aSel[j] = oOrig.options[i].value;
-      atxt[j] = oOrig.options[i].text;
-   }
-    j++;
-    oOrig.options[i] = null;
-   }
-  }
-  // Habilita itens no destino
-  for (i = 0; i < oDest.length; i++)
-  {
-   if (oDest.options[i].disabled && in_array(aSel, oDest.options[i].value))
-   {
-    oDest.options[i].disabled    = false;
-    oDest.options[i].style.color = "";
-    solt[z] = oDest.options[i].value;
-    z++;
-   }
-  }
-  for (i = 0; i < aSel.length; i++)
-  {
-   if (!in_array(solt, aSel[i]))
-   {
-    oDest.options[oDest.length] = new Option(atxt[i], aSel[i]);
-   }
-  }
-  // Reset combos
-  oOrig.selectedIndex = -1;
-  oDest.selectedIndex = -1;
-  if (Saida == "R")
-  {
-      nm_refresh_form();
-  }
-  if (Saida == "S")
-  {
-      nm_submit_form();
-  }
- }
- // Remove todos os elementos
- //---------------------------
- function nm_del_all(sOrig, sDest, Saida, Order)
- {
-  // Recupera objetos
-  oOrig = document.F1.elements[sOrig];
-  oDest = document.F1.elements[sDest];
-  aSel  = new Array();
-  atxt  = new Array();
-  solt  = new Array();
-  j     = 0;
-  z     = 0;
-  // Remove todos os itens na origem
-  while (0 < oOrig.length)
-  {
-   i       = oOrig.length - 1;
-   if (Order == 'S')
-   {
-      aSel[j] = oOrig.options[i].value.substring(1);
-      atxt[j] = oOrig.options[i].text.substring(1);
-   }
-   else
-   {
-      aSel[j] = oOrig.options[i].value;
-      atxt[j] = oOrig.options[i].text;
-   }
-   j++;
-   oOrig.options[i] = null;
-  }
-  // Habilita itens no destino
-  for (i = 0; i < oDest.length; i++)
-  {
-   if (oDest.options[i].disabled && in_array(aSel, oDest.options[i].value))
-   {
-    oDest.options[i].disabled    = false;
-    oDest.options[i].style.color = "";
-    solt[z] = oDest.options[i].value;
-    z++;
-   }
-  }
-  for (i = 0; i < aSel.length; i++)
-  {
-   if (!in_array(solt, aSel[i]))
-   {
-    oDest.options[oDest.length] = new Option(atxt[i], aSel[i]);
-   }
-  }
-  // Reset combos
-  oOrig.selectedIndex = -1;
-  oDest.selectedIndex = -1;
-  if (Saida == "R")
-  {
-      nm_refresh_form();
-  }
-  if (Saida == "S")
-  {
-      nm_submit_form();
-  }
- }
- function nm_pack(sOrig, sDest)
- {
-    obj_sel = document.F1.elements[sOrig];
-    str_val = "";
-    nm_quant_pack = 0;
-    for (i = 0; i < obj_sel.length; i++)
-    {
-         if ("" != str_val)
-         {
-             str_val += "@?@";
-             nm_quant_pack++;
-         }
-         str_val += obj_sel.options[i].value;
-    }
-    document.F1.elements[sDest].value = str_val;
- }
- // Teste se elemento pertence ao array
- //-------------------------------------
- function in_array(aArray, sElem)
- {
-  for (iCount = 0; iCount < aArray.length; iCount++)
-  {
-   if (sElem == aArray[iCount])
-   {
-    return true;
-   }
-  }
-  return false;
- }
- </script>
 <?php
 $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
@@ -2351,7 +2118,7 @@ function scJQCalendarAdd() {
   str_out += 'SC_cliente#NMF#' + search_get_text('SC_cliente') + '@NMF@';
   str_out += 'id_ac_cliente#NMF#' + search_get_text('id_ac_cliente') + '@NMF@';
   str_out += 'SC_estado_cond#NMF#' + search_get_sel_txt('SC_estado_cond') + '@NMF@';
-  str_out += 'SC_estado#NMF#' + search_get_Dselelect('SC_estado_dest') + '@NMF@';
+  str_out += 'SC_estado#NMF#' + search_get_selmult('SC_estado') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2673,17 +2440,6 @@ function nm_open_popup(parms)
              $estado_cond, $estado,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
-      if (isset($bprocessa) && ($bprocessa == "recarga" || $bprocessa == "save_form" || $bprocessa == "filter_delete"))
-      {
-          if (!empty($estado))
-          {
-              $estado = explode("@?@", $estado);
-          }
-          else
-          {
-              $estado = array();
-          }
-      }
       $this->nmgp_botoes['clear'] = "on";
       $this->nmgp_botoes['save'] = "on";
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_contratos_generar_fv']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_contratos_generar_fv']['btn_display']))
@@ -3429,8 +3185,9 @@ foreach ($Arr_format as $Part_date)
          exit; 
       } 
 ?>
-   <table style="padding: 0px; spacing: 0px; border-width: 0px;"><tr><td>
-    <SELECT class="scFilterObjectEven" id="SC_estado_orig" name="estado_orig" size=7 multiple onDblClick="nm_add_sel('estado_orig', 'estado_dest', 'N' , '')">
+   <span id="idAjaxSelect_estado">
+      <SELECT class="scFilterObjectEven" id="SC_estado" name="estado[]"  size="7" multiple>
+       <OPTION value="">TODOS</OPTION>
 <?php
       $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
       $nm_opcoes  = explode("?@?", $nm_opcoesx);
@@ -3448,7 +3205,7 @@ foreach ($Arr_format as $Part_date)
                {
                    if ($Dados === $nm_opc_cod)
                    {
-                       $estado_sel = " disabled =\"disabled\" style=\"color: #A0A0A0\"";
+                       $estado_sel = "selected";
                        break;
                    }
                }
@@ -3467,54 +3224,6 @@ foreach ($Arr_format as $Part_date)
 ?>
       </SELECT>
    </span>
-   </td>
-   <td align="center">
-<?php
-      echo "   <div class='scBtnPassField'>\r\n";
-      echo nmButtonOutput($this->arr_buttons, "bpassfld_rightall", "nm_add_all('estado_orig', 'estado_dest', 'N', '');", "nm_add_all('estado_orig', 'estado_dest', 'N', '');", "Bbpassfld_rightall", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-      echo "   </div>\r\n";
-      echo "   <div class='scBtnPassField'>\r\n";
-      echo nmButtonOutput($this->arr_buttons, "bpassfld_right", "nm_add_sel('estado_orig', 'estado_dest', 'N', '');", "nm_add_sel('estado_orig', 'estado_dest', 'N', '');", "Bbpassfld_righ", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-      echo "   </div>\r\n";
-      echo "   <div class='scBtnPassField'>\r\n";
-      echo nmButtonOutput($this->arr_buttons, "bpassfld_left", "nm_del_sel('estado_dest', 'estado_orig', 'N', '');", "nm_del_sel('estado_dest', 'estado_orig', 'N', '');", "Bbpassfld_left", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-      echo "   </div>\r\n";
-      echo "   <div class='scBtnPassField'>\r\n";
-      echo nmButtonOutput($this->arr_buttons, "bpassfld_leftall", "nm_del_all('estado_dest', 'estado_orig', 'N', '');", "nm_del_all('estado_dest', 'estado_orig', 'N', '');", "Bbpassfld_leftall", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-      echo "   </div>\r\n";
-?>
-   </td>
-   <td>
-    <SELECT class="scFilterObjectEven" id="SC_estado_dest" name="estado_dest" size=7 multiple  onDblClick="nm_del_sel('estado_dest', 'estado_orig', 'N' , '')">"
-<?php
-      $nm_opcoesx = str_replace("?#?@?#?", "?#?@ ?#?", $nmgp_def_dados);
-      $nm_opcoes  = explode("?@?", $nm_opcoesx);
-      foreach ($nm_opcoes as $nm_opcao)
-      {
-         if (!empty($nm_opcao))
-         {
-            $temp_bug_list = explode("?#?", $nm_opcao);
-            list($nm_opc_val, $nm_opc_cod, $nm_opc_sel) = $temp_bug_list;
-            if ($nm_opc_cod == "@ ") {$nm_opc_cod = trim($nm_opc_cod); }
-            if (is_array($estado) && !empty($estado))
-            {
-               foreach ($estado as $Dados)
-               {
-                   if ($Dados === $nm_opc_cod)
-                   {
-?>
-       <OPTION value="<?php echo $nm_opc_cod . $delimitador . $nm_opc_val; ?>" ><?php echo $nm_opc_val; ?></OPTION>
-<?php
-                   }
-               }
-            }
-         }
-      }
-?>
-    </select>
-    <input type="hidden" id="SC_estado" name="estado" value="">
-   </td></tr></table>
-   <script type="text/javascript">document.F1.estado_dest.selectedIndex = -1;</script>
 <?php
 ?>
         
@@ -3818,7 +3527,6 @@ foreach ($Arr_format as $Part_date)
  }
  function nm_submit_form()
  {
-   nm_pack('estado_dest', 'estado');
     document.F1.submit();
  }
  function limpa_form()
@@ -3856,7 +3564,17 @@ foreach ($Arr_format as $Part_date)
    document.F1.cliente_autocomp.value = "";
    document.F1.estado_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_estado'), document.F1.estado_cond, 'estado');
-   nm_del_all('estado_dest', 'estado_orig', 'N', '');
+   for (i = 0; i < document.F1.elements.length; i++)
+   {
+      if (document.F1.elements[i].name == 'estado[]')
+      {
+          while (document.F1.elements[i].selectedIndex != -1)
+          {
+              aa = document.F1.elements[i].selectedIndex;
+              document.F1.elements[i].options[aa].selected = false;
+          }
+      }
+   }
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -4062,7 +3780,7 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_cliente'] = 'text_aut';
       $tp_fields['id_ac_cliente'] = 'text_aut';
       $tp_fields['SC_estado_cond'] = 'cond';
-      $tp_fields['SC_estado'] = 'dselect';
+      $tp_fields['SC_estado'] = 'selmult';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -4224,14 +3942,6 @@ foreach ($Arr_format as $Part_date)
       if (!empty($cliente_autocomp) && empty($cliente))
       {
           $cliente = $cliente_autocomp;
-      }
-      if (!empty($estado))
-      {
-          $estado = explode("@?@", $estado);
-      }
-      else
-      {
-          $estado = array();
       }
       $zona_cond_salva = $zona_cond; 
       if (!isset($zona_input_2) || $zona_input_2 == "")
@@ -5025,6 +4735,7 @@ $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'o
       switch ($Obj)
       {
          case "zona" : return ('class="scFilterObjectOdd"'); break;
+         case "estado" : return ('class="scFilterObjectEven"'); break;
          default       : return ("");
       }
    }

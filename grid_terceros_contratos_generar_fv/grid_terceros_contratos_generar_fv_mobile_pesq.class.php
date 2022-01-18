@@ -2118,7 +2118,7 @@ function scJQCalendarAdd() {
   str_out += 'SC_cliente#NMF#' + search_get_text('SC_cliente') + '@NMF@';
   str_out += 'id_ac_cliente#NMF#' + search_get_text('id_ac_cliente') + '@NMF@';
   str_out += 'SC_estado_cond#NMF#' + search_get_sel_txt('SC_estado_cond') + '@NMF@';
-  str_out += 'SC_estado#NMF#' + search_get_Dselelect('SC_estado_dest') + '@NMF@';
+  str_out += 'SC_estado#NMF#' + search_get_selmult('SC_estado') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -3731,7 +3731,7 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_cliente'] = 'text_aut';
       $tp_fields['id_ac_cliente'] = 'text_aut';
       $tp_fields['SC_estado_cond'] = 'cond';
-      $tp_fields['SC_estado'] = 'dselect';
+      $tp_fields['SC_estado'] = 'selmult';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
