@@ -2656,7 +2656,7 @@ function nm_open_popup(parms)
       <INPUT type="hidden" id="SC_zona_cond" name="zona_cond" value="eq">
 
     <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
- $SC_Label = (isset($this->New_label['zona'])) ? $this->New_label['zona'] : "Zona";
+ $SC_Label = (isset($this->New_label['zona'])) ? $this->New_label['zona'] : "Seleccione la Zona";
  $nmgp_tab_label .= "zona?#?" . $SC_Label . "?@?";
  $date_sep_bw = " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
@@ -3103,7 +3103,7 @@ foreach ($Arr_format as $Part_date)
       <INPUT type="hidden" id="SC_estado_cond" name="estado_cond" value="eq">
 
     <TD nowrap class="scFilterLabelEven" style="vertical-align: top" > <?php
- $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Estado";
+ $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Seleccione el Estado";
  $nmgp_tab_label .= "estado?#?" . $SC_Label . "?@?";
  $date_sep_bw = " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
@@ -3938,7 +3938,7 @@ foreach ($Arr_format as $Part_date)
           {
               if ($zona == "")
               {
-                  if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Zona : " . $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+                  if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Seleccione la Zona : " . $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
               }
           }
       }
@@ -3950,7 +3950,7 @@ foreach ($Arr_format as $Part_date)
           $L_lookup = substr($zona, 0, $tmp_pos);
       }
       if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['psq_check_ret']['zona'])) {
-          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Zona : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Seleccione la Zona : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
       }
       if (!$this->NM_ajax_flag || $this->NM_ajax_opcao != "ajax_grid_search")
       {
@@ -3976,7 +3976,7 @@ foreach ($Arr_format as $Part_date)
                   $L_lookup = substr($Val, 0, $tmp_pos);
               }
               if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && trim($L_lookup) != '' && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['psq_check_ret']['estado'])) {
-                  if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Estado : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                  if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Seleccione el Estado : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
                   break;
               }
           }
