@@ -165,13 +165,10 @@ function Sel_cmp_process()
       $tab_ger_campos['fecha_inicio'] = "on";
       $tab_ger_campos['zona'] = "on";
       $tab_ger_campos['barrio2'] = "on";
-      $tab_blk_campos[] = "barrio2";
       $tab_ger_campos['estado'] = "on";
       $tab_ger_campos['mensualidad'] = "on";
       $tab_ger_campos['detalle'] = "on";
-      $tab_blk_campos[] = "detalle";
       $tab_ger_campos['novedades'] = "on";
-      $tab_blk_campos[] = "novedades";
       $tab_ger_campos['fecha_factura'] = "on";
       $tab_ger_campos['id_ter_cont'] = "on";
       $tab_ger_campos['fecha_contrato'] = "on";
@@ -191,6 +188,8 @@ function Sel_cmp_process()
       $tab_ger_campos['valor_ultimafactura'] = "on";
       $tab_ger_campos['precinto'] = "on";
       $tab_ger_campos['correo'] = "on";
+      $tab_ger_campos['anio'] = "on";
+      $tab_ger_campos['periodo'] = "on";
 
 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_contratos_generar_fv']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_contratos_generar_fv']['field_display']))

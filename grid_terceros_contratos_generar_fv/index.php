@@ -230,7 +230,7 @@ class grid_terceros_contratos_generar_fv_ini
       $this->nm_hr_criacao   = "151455"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20220118"; 
-      $this->nm_hr_ult_alt   = "103603"; 
+      $this->nm_hr_ult_alt   = "104249"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -378,7 +378,9 @@ class grid_terceros_contratos_generar_fv_ini
             if(!empty($img_width) && !empty($img_height)){
                 $sc_obj_img->setWidth($img_width);
                 $sc_obj_img->setHeight($img_height);
-            }            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            }
+                $sc_obj_img->setManterAspecto(true);
+            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
             echo $out1_img_cache;
                exit;
             }
@@ -1007,7 +1009,7 @@ class grid_terceros_contratos_generar_fv_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_contratos_generar_fv']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_contratos_generar_fv']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDQBOZ1zGV5BqHuzGDkBsDWF/DoXGDcNwH9BOHIBeHuBqHgrKZSJ3DWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHEBUH5F/HMFaDcBiDQJsHIvsVWJeHgrYDkBOHEFYDoBiD9XOZ1rqHAN7HQX7HgNOHEFiHEFqDoBqDcXGH9FGHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDuFaDoJeD9JKDQX7D1veV5raHuBYVcFKDWFYVoX7DcBqH9B/HArYD5XGDEBOZSJGH5FYDoFUDcJeZSX7Z1rwD5NUHuBYVcrsDWJeVoB/D9BiZ1F7Z1BeD5JeDMNKZSXeDuFaVoB/D9XsH9X7HABYV5BOHgvsVcFCDWJeVoJwDcJUZSFaHAvmV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNwZSBqDSBOD5JeDErKZSJqHEB7DoXGHQXOZSBiHIrKV5FUDMzGVIBsV5FYHMXGHQFYZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNmZkBiHAzGZMXGHgBeHEFiV5B3DoF7D9XsDuFaHAveV5X7HuBOVcXKDWFYVoF7HQNwH9B/DSBeZMBOHgvCHEXeV5FqVoJwD9NwZSFUDSN7HQJeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiZSFUDSN7HQBqHuNOVcFKDWrmVEraHQBsVINUHArYHQBqDMBYVkXeDWFqDoXGDcXGDuFaZ1N7HQJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWFGZuBOD9NmZSBiHIrwV5BqHuNOV9FiV5FYHMX7HQNmH9BOHIveZMXGHgNKHErsDWB3ZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaZuFaDcBwDQFGHANOV5FGHgrKVcFCDWJeVoraD9XOH9BOZ1BeD5rqDEBOZSXeV5XCZuFaD9NwH9X7HArYVWJsHuNODkFCH5FqVoJwDcJUH9B/HArYV5FUDMzGHEJGDWr/DoraD9NwH9FUZ1rwD5JeHuBYZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiDcNmZ1F7HAN7HuB/HgBeHEJqDuJeHMJsDcBiDQJwHAN7HuNUDMvOV9FeDWFaHIFUD9BiZSFaHIveHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsD5BOHgveHArsDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5FYHMraD9BsZkFGHABYHuX7DMzGZSJqDuFaZuJeD9NmDuBqHANOHQBODMBYVcFeH5XCHIFUDcJUZ1F7D1rwHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4520,6 +4522,8 @@ class grid_terceros_contratos_generar_fv_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['field_order'][] = "valor_ultimafactura";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['field_order'][] = "precinto";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['field_order'][] = "correo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['field_order'][] = "anio";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['field_order'][] = "periodo";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['field_order'];
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['usr_cmp_sel']))
           { 
@@ -4543,6 +4547,8 @@ class grid_terceros_contratos_generar_fv_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['usr_cmp_sel']['valor_ultimafactura'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['usr_cmp_sel']['precinto'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['usr_cmp_sel']['correo'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['usr_cmp_sel']['anio'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['usr_cmp_sel']['periodo'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['usr_cmp_sel'];
       } 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_contratos_generar_fv']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_contratos_generar_fv']['exit'] != '')
@@ -5602,6 +5608,10 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos
        $this->valor_ultimafactura = (string)$this->valor_ultimafactura;
        $this->precinto = $this->rs_grid->fields[24] ;  
        $this->correo = $this->rs_grid->fields[25] ;  
+       $this->anio = $this->rs_grid->fields[26] ;  
+       $this->anio = (string)$this->anio;
+       $this->periodo = $this->rs_grid->fields[27] ;  
+       $this->periodo = (string)$this->periodo;
       $_SESSION['scriptcase']['grid_terceros_contratos_generar_fv']['contr_erro'] = 'on';
 if (!isset($_SESSION['gprefijo'])) {$_SESSION['gprefijo'] = "";}
 if (!isset($this->sc_temp_gprefijo)) {$this->sc_temp_gprefijo = (isset($_SESSION['gprefijo'])) ? $_SESSION['gprefijo'] : "";}

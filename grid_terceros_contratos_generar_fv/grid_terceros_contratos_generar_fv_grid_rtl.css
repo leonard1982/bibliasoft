@@ -56,3 +56,7 @@
 .css_precinto_grid_line {vertical-align: top;text-align: right;}
 .css_correo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_correo_grid_line {vertical-align: top;text-align: right;}
+.css_anio_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_anio_grid_line {vertical-align: top;text-align: right;}
+.css_periodo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_periodo_grid_line {vertical-align: top;text-align: right;}
